@@ -1,0 +1,161 @@
+{
+  "file": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/data/raw/ztf_bts_all_2026-09-16.csv",
+  "sha256": "61415979b75f96bcf2532439109b35f923c5fa1aadfacc5d6013235187ebe570",
+  "rows": 11217,
+  "unique_ZTFID": 11217,
+  "rows_with_IAUID": 11110,
+  "unique_IAUID": 11097,
+  "IAUID_shared_by_multiple_ZTFID_rows": 26,
+  "IAUID_values_shared": 13,
+  "distinct_objects_by_IAUID_collapse": 11204,
+  "raw_over_distinct_overstatement_pct": 0.116,
+  "peakt_min": 242.77,
+  "peakt_max": 3251.89,
+  "peakt_zero_point_tests": {
+    "JD-2400000.5 (MJD)": {
+      "frac_peak_year_in_{IAU_year, IAU_year+1}": 0.0,
+      "frac_peak_between_2018-03-01_and_fetch_date": 0.0,
+      "n": 11110
+    },
+    "JD-2450000": {
+      "frac_peak_year_in_{IAU_year, IAU_year+1}": 0.0,
+      "frac_peak_between_2018-03-01_and_fetch_date": 0.0,
+      "n": 11110
+    },
+    "JD-2458000": {
+      "frac_peak_year_in_{IAU_year, IAU_year+1}": 0.9627,
+      "frac_peak_between_2018-03-01_and_fetch_date": 1.0,
+      "n": 11110
+    },
+    "JD-2458000.5": {
+      "frac_peak_year_in_{IAU_year, IAU_year+1}": 0.9627,
+      "frac_peak_between_2018-03-01_and_fetch_date": 1.0,
+      "n": 11110
+    },
+    "JD-2459000": {
+      "frac_peak_year_in_{IAU_year, IAU_year+1}": 0.0006,
+      "frac_peak_between_2018-03-01_and_fetch_date": 0.7123,
+      "n": 11110
+    }
+  },
+  "peakt_zero_point_adopted": "JD - 2458000",
+  "peakt_min_utc": "2018-05-04 06:28:48.000",
+  "peakt_max_utc": "2026-07-30 09:21:36.000",
+  "zero_point_note": "A half-day shift (JD vs MJD-style 2458000.5) cannot be separated by the year test; only the documented definition separates them.",
+  "per_calendar_year_peak_rates": {
+    "2018": {
+      "rows": 394,
+      "rows_per_calendar_night": 1.079,
+      "classified_transients": 298,
+      "classified_transients_per_calendar_night": 0.816,
+      "rows_peakmag_le_18.5": 240,
+      "rows_peakmag_le_18.5_per_calendar_night": 0.658
+    },
+    "2019": {
+      "rows": 1639,
+      "rows_per_calendar_night": 4.49,
+      "classified_transients": 1061,
+      "classified_transients_per_calendar_night": 2.907,
+      "rows_peakmag_le_18.5": 913,
+      "rows_peakmag_le_18.5_per_calendar_night": 2.501
+    },
+    "2020": {
+      "rows": 1771,
+      "rows_per_calendar_night": 4.839,
+      "classified_transients": 1150,
+      "classified_transients_per_calendar_night": 3.142,
+      "rows_peakmag_le_18.5": 952,
+      "rows_peakmag_le_18.5_per_calendar_night": 2.601
+    },
+    "2021": {
+      "rows": 1729,
+      "rows_per_calendar_night": 4.737,
+      "classified_transients": 1181,
+      "classified_transients_per_calendar_night": 3.236,
+      "rows_peakmag_le_18.5": 907,
+      "rows_peakmag_le_18.5_per_calendar_night": 2.485
+    },
+    "2022": {
+      "rows": 1308,
+      "rows_per_calendar_night": 3.584,
+      "classified_transients": 872,
+      "classified_transients_per_calendar_night": 2.389,
+      "rows_peakmag_le_18.5": 689,
+      "rows_peakmag_le_18.5_per_calendar_night": 1.888
+    },
+    "2023": {
+      "rows": 1188,
+      "rows_per_calendar_night": 3.255,
+      "classified_transients": 763,
+      "classified_transients_per_calendar_night": 2.09,
+      "rows_peakmag_le_18.5": 647,
+      "rows_peakmag_le_18.5_per_calendar_night": 1.773
+    },
+    "2024": {
+      "rows": 1379,
+      "rows_per_calendar_night": 3.768,
+      "classified_transients": 920,
+      "classified_transients_per_calendar_night": 2.514,
+      "rows_peakmag_le_18.5": 758,
+      "rows_peakmag_le_18.5_per_calendar_night": 2.071
+    },
+    "2025": {
+      "rows": 1422,
+      "rows_per_calendar_night": 3.896,
+      "classified_transients": 869,
+      "classified_transients_per_calendar_night": 2.381,
+      "rows_peakmag_le_18.5": 752,
+      "rows_peakmag_le_18.5_per_calendar_night": 2.06
+    },
+    "2026": {
+      "rows": 387,
+      "rows_per_calendar_night": 1.06,
+      "classified_transients": 29,
+      "classified_transients_per_calendar_night": 0.079,
+      "rows_peakmag_le_18.5": 207,
+      "rows_peakmag_le_18.5_per_calendar_night": 0.567
+    }
+  },
+  "full_years_2019_2025": {
+    "rows": 10436,
+    "calendar_nights": 2553,
+    "mean_peaks_per_calendar_night": 4.088,
+    "median_peaks_per_calendar_night": 3.0,
+    "p10_p90_peaks_per_calendar_night": [
+      0.0,
+      10.0
+    ],
+    "fraction_nights_zero_peaks": 0.3087
+  },
+  "rows_peaking_on_or_after_cutoff_plus_one_day": {
+    "2025-01-31 (Gemini 3 family domain-limited, card text)": {
+      "rows": 1648,
+      "classified_transients": 804
+    },
+    "2026-01-31 (Claude Sonnet 5)": {
+      "rows": 265,
+      "classified_transients": 9
+    },
+    "2026-02-16 (GPT-5.6 Sol/Terra/Luna)": {
+      "rows": 251,
+      "classified_transients": 9
+    },
+    "2026-03-31 (Gemini 3.8 Flash)": {
+      "rows": 206,
+      "classified_transients": 6
+    },
+    "2026-04-30 (GPT-6 Astra)": {
+      "rows": 130,
+      "classified_transients": 4
+    },
+    "2026-05-31 (Claude Opus 5)": {
+      "rows": 78,
+      "classified_transients": 3
+    },
+    "2026-06-30 (Claude Fable 5.1, reliable-knowledge cutoff)": {
+      "rows": 30,
+      "classified_transients": 1
+    }
+  },
+  "completeness": "rows, unique ZTFID/IAUID, IAU-collapse object count, five candidate zero points, per-year and 2019-2025 per-night peak rates, post-cutoff counts; NOT covered: trigger nights, candidates passing the alert filter (not in this file), save dates"
+}

@@ -1,0 +1,487 @@
+{
+  "agent": "agent5_resolution_replay",
+  "seeds": [
+    {
+      "id": "fremling2020",
+      "identifier": "arXiv:1910.12973v1 (Fremling et al., ZTF BTS I)",
+      "raw_file": "sources/1910.12973.pdf",
+      "raw_sha256": "666377161c0c9208f57e7bdb9d160c7de5df898276741bb31eff25143d76ea40",
+      "text_file": "sources/1910.12973.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": true,
+      "contribution": "k corroboration, 2018 filter candidates, peakt zero point, SEDM exposure cost",
+      "facts": [
+        {
+          "fact": "5-15 SN candidates per night assigned for spectroscopic follow-up (2018); strongly weather dependent",
+          "locator": "section 2.2 lines 258-265, footnote 9 lines 308-311"
+        },
+        {
+          "fact": "a few hundred alerts per night passed the 2018 BTS filter",
+          "locator": "section 2.2 line 219"
+        },
+        {
+          "fact": "SEDM capable of classifying >10 SNe in the 18.5-19 mag range every night",
+          "locator": "section 1 lines 135-137"
+        },
+        {
+          "fact": "typical SEDM exposure 1800 s at m about 18.5",
+          "locator": "section 2.3 lines 336-337"
+        },
+        {
+          "fact": "JD0 = JD - 2,458,000 for times of maximum",
+          "locator": "Table 1 note d line 476"
+        },
+        {
+          "fact": "761 SNe classified 2018 Apr 1 - Dec 31; 503 with SEDM",
+          "locator": "section 3.2 lines 422-427"
+        },
+        {
+          "fact": "ePESSTO agreement on 24 of 26 common sources",
+          "locator": "section 3.2 lines 573-588"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "perley2020",
+      "identifier": "arXiv:2009.01242v2 (Perley et al., ZTF BTS II)",
+      "raw_file": "sources/2009.01242.pdf",
+      "raw_sha256": "d5afed266c124b5c7f2479bf9ce51b68e4d9b189445f55bf11ed8ea8ca7b2fca",
+      "text_file": "sources/2009.01242.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": true,
+      "contribution": "k corroboration, candidate counts by filter version, peakt zero point",
+      "facts": [
+        {
+          "fact": "typically 5-10 candidates saved on an average clear night",
+          "locator": "section 2.1 lines 147-148"
+        },
+        {
+          "fact": "first-year filter reduced ~10^6 alert packets per night to ~500 viable candidates; 2019 filter reduced false positives from several hundred per night to <=50",
+          "locator": "section 2.1 lines 133-137, 159-161"
+        },
+        {
+          "fact": "3147 spectroscopically classified transients in 25.5 months",
+          "locator": "section 3 lines 477-478"
+        },
+        {
+          "fact": "observed peak time axis in JD-2458000",
+          "locator": "Figure 13 line 1952"
+        }
+      ],
+      "note": "reference list (lines 1445-1660) scanned, not read line by line"
+    },
+    {
+      "id": "blagorodnova2018",
+      "identifier": "arXiv:1710.02917v2 (Blagorodnova et al., SED Machine)",
+      "raw_file": "sources/1710.02917.pdf",
+      "raw_sha256": "2ab0c0cc3d1921928d942f7299e4889f57f404678ff34763d85ee32de56e9fed",
+      "text_file": "sources/1710.02917.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": true,
+      "contribution": "k corroboration (capacity)",
+      "facts": [
+        {
+          "fact": "the dozen or so spectroscopic targets for SEDM are specified on a nightly basis",
+          "locator": "section 6 line 1046"
+        },
+        {
+          "fact": "average rate of 10 spectra per night",
+          "locator": "section 7 line 1076"
+        },
+        {
+          "fact": "1660 objects observed in 10 months, 465 iPTF transients",
+          "locator": "section 6 lines 1039-1042"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "fremling2021",
+      "identifier": "arXiv:2104.12980v2 (Fremling et al., SNIascore)",
+      "raw_file": "sources/2104.12980.pdf",
+      "raw_sha256": "524407042cf9a34b85c3ad1e9bdc77eac7b7e935f3d9257ea4a1439dc4d6cfcc",
+      "text_file": "sources/2104.12980.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": true,
+      "contribution": "delta candidate (adjacent referent); tool-card threshold disagreement",
+      "facts": [
+        {
+          "fact": "TPR 0.90 (SNIascore) versus 0.53 (SNID) at FPR < 1% on BTS18 validation",
+          "locator": "Table 2 lines 387-407"
+        },
+        {
+          "fact": "BTS18 validation: 1,016 spectra of 648 SNe",
+          "locator": "section 2 lines 190-196"
+        },
+        {
+          "fact": "FPR < 1% is a hard requirement for autonomous classification",
+          "locator": "section 4.1 lines 298-299"
+        },
+        {
+          "fact": "deployed 2021 April 15; TNS reports initially use threshold 0.9, not the recommended 0.6 or 0.8 cuts",
+          "locator": "section 7 lines 523-546"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "rehemtulla2024",
+      "identifier": "arXiv:2401.15167v1 (Rehemtulla et al., ZTF BTS III BTSbot)",
+      "raw_file": "sources/2401.15167.pdf",
+      "raw_sha256": "756c6074c4998317b5cda5f16bf41a9c8fc93bc53306e82c2141c78490fc441e",
+      "text_file": "sources/2401.15167.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": true,
+      "contribution": "k (primary), candidates per round, chance, delta prior (primary), replay cases",
+      "facts": [
+        {
+          "fact": "~50 new candidate BTS sources per night, ~7 new real bright transients",
+          "locator": "section 1 lines 94-95"
+        },
+        {
+          "fact": "scanners saved 266 and sent SEDM IFU requests for 327 unique sources (11 non-extragalactic) with 2460175.5 < JD < 2460216.5",
+          "locator": "section 4.1 lines 757-766"
+        },
+        {
+          "fact": "the window is 41 nights; 184 sources satisfied bts_p1, median ~4.5 per night",
+          "locator": "section 4.2 lines 953-958"
+        },
+        {
+          "fact": "present-day window: 4,031 alerts from 251 bright transients and 15,159 alerts from 1,652 non-bright transients",
+          "locator": "section 4.2 lines 898-902"
+        },
+        {
+          "fact": "bts_p2 purity MM-CNN 93.0%, NN 91.2%, UM-CNN 92.5% on the test split; 'even small boosts in purity are valuable'",
+          "locator": "Appendix B Table 6 lines 1323-1335, lines 1360-1364"
+        },
+        {
+          "fact": "scanner triggering purity stated as 96.7% and as 95.6% in the same section",
+          "locator": "lines 765-766 and line 806"
+        },
+        {
+          "fact": "test split 512 bright-transient sources, 1,489 others",
+          "locator": "Figure 4 line 420"
+        },
+        {
+          "fact": "BTSbot v1.0 ran in production in October 2023; the paper's model is v1.0.1",
+          "locator": "footnote 17 lines 1019-1023"
+        },
+        {
+          "fact": "initial training queries: 19,735 sources, 1,115,395 alerts",
+          "locator": "Table 1 line 276"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "frohmaier2025",
+      "identifier": "arXiv:2501.16311v2 (Frohmaier et al., TiDES on 4MOST; arXiv id verified by arXiv API query ti:TiDES AND au:Frohmaier)",
+      "raw_file": "sources/2501.16311.pdf",
+      "raw_sha256": "2285a4f3e27d341b48a4024c4ddd58b9e51a85d678099ef42d2c5ca52501c822",
+      "text_file": "sources/2501.16311.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": true,
+      "contribution": "Rubin-era capacity; disagreement that TiDES is not a k-of-n selection",
+      "facts": [
+        {
+          "fact": ">30,000 live transients over 5 years, ~250,000 fibre-hours",
+          "locator": "abstract lines 40-46, section 1 line 105"
+        },
+        {
+          "fact": "TiDES averages 30-35 LRS fibres per pointing",
+          "locator": "section 2 lines 138-140"
+        },
+        {
+          "fact": "TiDES cannot operate target-of-opportunity; has access to sufficient fibres to observe all live transients in a field",
+          "locator": "section 3.4-3.5 lines 559-565"
+        },
+        {
+          "fact": "~12 live transients per 4MOST field pass selection in well-sampled LSST fields",
+          "locator": "footnote 20 line 630"
+        },
+        {
+          "fact": "at best ~3% of LSST SNe Ia observed in a redshift bin",
+          "locator": "Figure 9 caption line 1074"
+        }
+      ],
+      "note": "figures and reference list scanned"
+    },
+    {
+      "id": "claudi2018",
+      "identifier": "arXiv:1812.07401v1 (Claudi et al., SOXS)",
+      "raw_file": "sources/1812.07401.pdf",
+      "raw_sha256": "851f58124e9fa2b32ca56878148b1be5754b817655d074506352dfb61e3181a3",
+      "text_file": "sources/1812.07401.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": true,
+      "contribution": "zero contribution to k: no per-night target count stated",
+      "facts": [
+        {
+          "fact": "SOXS consortium remunerated with 900 NTT nights over 5 years",
+          "locator": "section 1 line 126"
+        },
+        {
+          "fact": "PESSTO 150 nights per year; ePESSTO 200 nights over two years",
+          "locator": "section 1 lines 94-95"
+        },
+        {
+          "fact": "online pipeline sized for one typical night of 15-30 min exposures",
+          "locator": "TLR_09 line 392"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "leoni2022",
+      "identifier": "arXiv:2111.11438v2 (Leoni et al., Fink early SN Ia)",
+      "raw_file": "sources/2111.11438.pdf",
+      "raw_sha256": "3b8a435aebea2c9f91bc9958f70c6f571c6961a71863edb1cf768f5e7f01002c",
+      "text_file": "sources/2111.11438.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": true,
+      "contribution": "delta candidate (population FAIL); internal count disagreement",
+      "facts": [
+        {
+          "fact": "uncertainty sampling efficiency 0.54 vs random 0.24, purity 0.89 vs 0.87",
+          "locator": "Table 2 lines 437-460"
+        },
+        {
+          "fact": "test sample reported as 23,530 (abstract), 23,425 (section 4) and 23,465 (section 6) alerts",
+          "locator": "lines 40, 540, 679"
+        },
+        {
+          "fact": "809 early SN Ia candidates reported Nov 2020 - Oct 2021; 535 spectroscopically classified, 459 (86%) SNe Ia",
+          "locator": "section 5 lines 580-585"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "bts_explorer_info",
+      "identifier": "https://sites.astro.caltech.edu/ztf/bts/explorer_info.html",
+      "raw_file": "sources/bts_explorer_info.html",
+      "raw_sha256": "1c2933331632d1d281a091b5ffe84f8144fe13b8dc99a84177dc238dffca4907",
+      "text_file": "sources/bts_explorer_info.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": true,
+      "contribution": "peakt zero point (documented)",
+      "facts": [
+        {
+          "fact": "column 'time': Time of peak, expressed as JD-2458000",
+          "locator": "line 102"
+        },
+        {
+          "fact": "quality cut includes objects which peaked after 2018 May 1st",
+          "locator": "lines 15-16"
+        },
+        {
+          "fact": "Saved date column exists in the explorer but not in the local CSV",
+          "locator": "lines 51-52, 94-95"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "anthropic_models_overview",
+      "identifier": "https://platform.claude.com/docs/en/models/overview (redirect target of docs.claude.com)",
+      "raw_file": "sources/anthropic_models_overview.html",
+      "raw_sha256": "b5ae1dd840dead6b389043e326554d7dc55eb90bc1f745e8e348e6beb09e7b43",
+      "text_file": "sources/anthropic_models_overview.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": true,
+      "contribution": "subject set",
+      "facts": [
+        {
+          "fact": "current models Claude Fable 5.1, Opus 5, Sonnet 5, Haiku 4.5; reliable knowledge cutoff Jun 2026, May 2026, Jan 2026, Feb 2025",
+          "locator": "lines 37-40, 77-81"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "anthropic_transparency",
+      "identifier": "https://www.anthropic.com/transparency (Model Report dated August 17, 2026)",
+      "raw_file": "sources/anthropic_transparency.html",
+      "raw_sha256": "253cf1896d698e6d7f85b16b002cbeefca931ac3418e0e89f0977e8844b80512",
+      "text_file": "sources/anthropic_transparency.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": false,
+      "contribution": "subject set cutoffs for Opus 5 and Sonnet 5; absence of Fable 5.1",
+      "facts": [
+        {
+          "fact": "Claude Opus 5 knowledge cutoff May 2026",
+          "locator": "lines 41-42"
+        },
+        {
+          "fact": "Claude Sonnet 5 knowledge cutoff January 2026",
+          "locator": "lines 88-89"
+        },
+        {
+          "fact": "model list contains Claude Fable 5 but not Fable 5.1",
+          "locator": "line 20"
+        }
+      ],
+      "note": "read lines 1-180 (Opus 5, Sonnet 5, Fable 5 sections); sections for older models not read. Blocks nothing used here: only the three sections read enter the ledger"
+    },
+    {
+      "id": "openai_models",
+      "identifier": "https://developers.openai.com/api/docs/models (redirect target of platform.openai.com/docs/models)",
+      "raw_file": "sources/openai_models.html",
+      "raw_sha256": "2396d31db399e69187f4007d9ae44893f4fd8b688e3a1e7fa4ef399e71a84425",
+      "text_file": "sources/openai_models.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": true,
+      "contribution": "subject set",
+      "facts": [
+        {
+          "fact": "GPT-6 Astra knowledge cutoff Apr 30, 2026",
+          "locator": "lines 658-674"
+        },
+        {
+          "fact": "GPT-5.6 Sol, Terra, Luna knowledge cutoff Feb 16, 2026",
+          "locator": "lines 676-731"
+        }
+      ],
+      "note": "lines 1-650 are site navigation"
+    },
+    {
+      "id": "openai_gpt-6-astra",
+      "identifier": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+      "raw_file": "sources/openai_gpt-6-astra.html",
+      "raw_sha256": "706b6a28fe50d184c6cbeaa1403682650684e42afa98a857d971cd167198f980",
+      "text_file": "sources/openai_gpt-6-astra.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": false,
+      "contribution": "corroborates GPT-6 Astra cutoff",
+      "facts": [
+        {
+          "fact": "Apr 30, 2026 knowledge cutoff",
+          "locator": "line 673"
+        }
+      ],
+      "note": "searched for cutoff only; the models page read in full carries the same value"
+    },
+    {
+      "id": "google_gemini_models",
+      "identifier": "https://ai.google.dev/gemini-api/docs/models",
+      "raw_file": "sources/google_gemini_models.html",
+      "raw_sha256": "0a2f85ba98e5be3b658200c1708e39db14bc028d6d884a684221079383df7755",
+      "text_file": "sources/google_gemini_models.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": true,
+      "contribution": "subject set availability (no cutoffs on this page)",
+      "facts": [
+        {
+          "fact": "Gemini 3.8 Flash stable; Gemini 3.1 Pro preview",
+          "locator": "lines 187-242"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "google_gemini-3.8-flash",
+      "identifier": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+      "raw_file": "sources/google_gemini-3.8-flash.html",
+      "raw_sha256": "3b79a778b9a9b9fe35b7e52dd0d25d992e30fca40ff7566109da195714808882",
+      "text_file": "sources/google_gemini-3.8-flash.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": true,
+      "contribution": "zero contribution to cutoff ('Latest update' is not a cutoff)",
+      "facts": [
+        {
+          "fact": "Latest update September 2026",
+          "locator": "lines 242-243"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "google_gemini-3.1-pro-preview",
+      "identifier": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+      "raw_file": "sources/google_gemini-3.1-pro-preview.html",
+      "raw_sha256": "a5945dad00cbbd52a79b445ae74d061023de366492a7806aebff2eaab278ba04",
+      "text_file": "sources/google_gemini-3.1-pro-preview.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": true,
+      "contribution": "zero contribution to cutoff",
+      "facts": [
+        {
+          "fact": "Latest update February 2026",
+          "locator": "lines 244-245"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "deepmind_card_3.8_flash",
+      "identifier": "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+      "raw_file": "sources/deepmind_modelcard_gemini-3-8-flash.html",
+      "raw_sha256": "c09779a8eac8babcee393031fd1644cded00f7ee6f076224c87374271692f369",
+      "text_file": "sources/deepmind_modelcard_gemini-3-8-flash.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": true,
+      "contribution": "subject set cutoff",
+      "facts": [
+        {
+          "fact": "knowledge cutoff March 2026; some domains limited to January 2025",
+          "locator": "line 352"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "deepmind_card_3.7_flash",
+      "identifier": "https://deepmind.google/models/model-cards/gemini-3-7-flash/",
+      "raw_file": "sources/deepmind_modelcard_gemini-3-7-flash.html",
+      "raw_sha256": "1765b182604ab26522d4c8d7cde9f6c53bd5cfcc2c5b690189fe6b9f17fe9a4b",
+      "text_file": "sources/deepmind_modelcard_gemini-3-7-flash.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": false,
+      "contribution": "none used (3.7 Flash not in subject set)",
+      "facts": [
+        {
+          "fact": "knowledge cutoff March 2026; some domains January 2025",
+          "locator": "line 371"
+        }
+      ],
+      "note": "searched only"
+    },
+    {
+      "id": "deepmind_card_3.1_pro",
+      "identifier": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+      "raw_file": "sources/deepmind_modelcard_gemini-3-1-pro.html",
+      "raw_sha256": "7a18b367056f43ad9270b1e8d6917667e0c223d737171ecc5302bc4094c82ddc",
+      "text_file": "sources/deepmind_modelcard_gemini-3-1-pro.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": false,
+      "contribution": "absence of a cutoff statement (by search)",
+      "facts": [
+        {
+          "fact": "training dataset deferred to the Gemini 3 Pro card",
+          "locator": "line 197"
+        }
+      ],
+      "note": "searched for cutoff; Gemini 3.1 Pro cutoff recorded UNDEMONSTRATED, so no decision rests on this partial read"
+    },
+    {
+      "id": "deepmind_card_3_pro",
+      "identifier": "https://deepmind.google/models/model-cards/gemini-3-pro/",
+      "raw_file": "sources/deepmind_modelcard_gemini-3-pro.html",
+      "raw_sha256": "9a1734bc3aa310691772d1756990b01383dc7732d4f9cb0a2888e2e06a7f84d8",
+      "text_file": "sources/deepmind_modelcard_gemini-3-pro.txt",
+      "fetched": "2026-09-16",
+      "read_in_full": false,
+      "contribution": "zero contribution",
+      "facts": [],
+      "note": "4,972 extracted lines; searched for 'cutoff' and 'knowledge is limited' with no hit; not read in full; blocks the Gemini 3.1 Pro cutoff, which stays UNDEMONSTRATED"
+    }
+  ],
+  "searches_without_a_seed": [
+    "arXiv API abs:ePESSTO+ returned no ePESSTO+ survey paper (top hits 2602.03638, 2602.13036, 2503.21874, none about ePESSTO+ operations)"
+  ],
+  "not_verified": [
+    "PANEL_BRIEF.md rule 10 dates (Rubin alerts to brokers February 2026; LSST start 2026-06-30): not verified by agent5 and not used in any agent5 number"
+  ],
+  "completeness": "20 sources fetched; 14 read in full, 6 partially with the partial reads named and no decision resting on their unread parts; inventory, not a completeness claim"
+}

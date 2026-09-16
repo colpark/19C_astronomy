@@ -1,0 +1,94 @@
+{
+  "slot": "k",
+  "value": 8,
+  "status": "DERIVED",
+  "provenance": {
+    "referent": "number of candidate transients committed to spectroscopic follow-up (unique sources with an SEDM IFU request created by BTS scanners) per round, where a round is one observing night of the ZTF Bright Transient Survey under its post-2020 alert filter",
+    "source": "arXiv:2401.15167v1 section 4.1, sources/2401.15167.txt lines 757-766 (327 unique sources triggered by scanners with 2460175.5 < JD < 2460216.5) and section 4.2 lines 883-887, 953-958 (the same window is 41 nights); k_exact = 327/41 computed in scripts/build_slots.py; integer proposal by nearest-integer rounding of k_exact, recorded here as an amendment candidate for D5",
+    "population": "rounds = 41 consecutive calendar nights (JD 2460175.5 to 2460216.5, 2023-08-19 to 2023-09-29); 327 unique sources committed; not candidates, not alerts",
+    "adjudicator": "the other seed statements of per-night commitment: 5-15 assigned per night in 2018 (arXiv:1910.12973 section 2.2, lines 258-265), 5-10 saved on an average clear night (arXiv:2009.01242 section 2.1, lines 147-148), median 4.5 per night for the automated bts_p1 policy (arXiv:2401.15167 section 4.2, lines 953-958), about 10 SEDM spectra per night capacity (arXiv:1710.02917 section 7, line 1076)",
+    "falsifier": "a BTS trigger log (Fritz SEDM request timestamps) for any other contiguous window of 30 or more nights whose unique-source triggers per night fall outside 4.5 to 10, or a window where more than half of the triggered sources are not in that window's candidate list, would show k differs from 8 or is not a per-round commitment"
+  },
+  "id": "slot-k",
+  "referent": "number of candidate transients committed to spectroscopic follow-up (unique sources with an SEDM IFU request created by BTS scanners) per round, where a round is one observing night of the ZTF Bright Transient Survey under its post-2020 alert filter",
+  "source": "arXiv:2401.15167v1 section 4.1, sources/2401.15167.txt lines 757-766 (327 unique sources triggered by scanners with 2460175.5 < JD < 2460216.5) and section 4.2 lines 883-887, 953-958 (the same window is 41 nights); k_exact = 327/41 computed in scripts/build_slots.py; integer proposal by nearest-integer rounding of k_exact, recorded here as an amendment candidate for D5",
+  "population": "rounds = 41 consecutive calendar nights (JD 2460175.5 to 2460216.5, 2023-08-19 to 2023-09-29); 327 unique sources committed; not candidates, not alerts",
+  "adjudicator": "the other seed statements of per-night commitment: 5-15 assigned per night in 2018 (arXiv:1910.12973 section 2.2, lines 258-265), 5-10 saved on an average clear night (arXiv:2009.01242 section 2.1, lines 147-148), median 4.5 per night for the automated bts_p1 policy (arXiv:2401.15167 section 4.2, lines 953-958), about 10 SEDM spectra per night capacity (arXiv:1710.02917 section 7, line 1076)",
+  "falsifier": "a BTS trigger log (Fritz SEDM request timestamps) for any other contiguous window of 30 or more nights whose unique-source triggers per night fall outside 4.5 to 10, or a window where more than half of the triggered sources are not in that window's candidate list, would show k differs from 8 or is not a per-round commitment",
+  "population_unit": "rounds (observing nights)",
+  "candidates_per_round": 46.41,
+  "chance": 0.1718,
+  "supporting_records": [
+    {
+      "id": "slot-k-candidates-per-round",
+      "value": 46.41,
+      "referent": "number of distinct candidate sources available to the per-night commitment (sources with at least one public alert passing the BTS alert filter and BTSbot cleaning cuts inside the round window), per night",
+      "source": "arXiv:2401.15167v1 section 4.2, sources/2401.15167.txt lines 898-902 (4,031 alerts from 251 bright transients and 15,159 alerts from 1,652 non-bright transients, 2460175.5 < JD < 2460216.5); divided by 41 nights in scripts/build_slots.py",
+      "population": "1,903 distinct sources over the same 41 nights as slot-k; alerts (19,190) are not the unit",
+      "adjudicator": "the per-night statement in the same paper, about 50 new candidate BTS sources per night of which about 7 are new real bright transients (arXiv:2401.15167 section 1, lines 94-95); earlier filters passed about 500 (arXiv:2009.01242 section 2.1, lines 159-161) or a few hundred alerts per night (arXiv:1910.12973 section 2.2, line 219)",
+      "falsifier": "a nightly count of sources passing the current BTS filter in a different 30-night window that differs from 46 by more than a factor of two, or evidence that the 327 triggered sources are not a subset of the 1,903"
+    },
+    {
+      "id": "slot-k-chance",
+      "value": 0.1718,
+      "referent": "chance precision of a random k-of-candidates commitment per round, k over candidates per item",
+      "source": "scripts/build_slots.py: 327 / 1903 from arXiv:2401.15167v1 section 4.1 lines 757-766 and section 4.2 lines 898-902 (same 41-night window); references/manifest.md 'Derived later' table defines chance as k over candidates per item",
+      "population": "the 41-night window of slot-k; ratio of two counts over the same rounds",
+      "adjudicator": "the stated per-night figures give 7/50 = 0.14 (arXiv:2401.15167 section 1, lines 94-95)",
+      "falsifier": "a recount in which the triggered set is not contained in the candidate set, which would make the ratio exceed the fraction a random picker can reach and invalidate it as a chance level"
+    }
+  ],
+  "bts_csv_proxy": {
+    "what": "peaks per calendar night in the local BTS explorer file, a proxy only: peak night is not trigger night",
+    "source": "scripts/bts_rounds.py -> out/bts_rounds.json, file sha256 61415979b75f96bcf2532439109b35f923c5fa1aadfacc5d6013235187ebe570",
+    "mean_peaks_per_calendar_night_2019_2025": 4.088,
+    "median": 3.0,
+    "p10_p90": [
+      0.0,
+      10.0
+    ],
+    "fraction_nights_zero_peaks": 0.3087,
+    "candidates_per_night_from_this_file": "UNDEMONSTRATED: the file holds saved sources only; filter-passing rejects and save/trigger dates are absent"
+  },
+  "peakt_zero_point": {
+    "value": "JD - 2458000",
+    "derivation": [
+      "documented: sources/bts_explorer_info.txt line 102 ('time: Time of peak, expressed as JD-2458000'), column named 'peakt' in the CSV header",
+      "documented independently: arXiv:1910.12973 Table 1 note d, line 476 (JD0 = JD - 2,458,000); arXiv:2009.01242 Figure 13 axis, line 1952",
+      "measured: with JD-2458000 the peak calendar year equals the IAU designation year or the next year for 96.27% of 11,110 named rows and 100% fall between 2018-03-01 and the fetch date; MJD, JD-2450000 and JD-2459000 give 0.00%, 0.00% and 0.06%",
+      "not separable by the data: JD-2458000.5 scores identically; only the documentation fixes the half day",
+      "range: 2018-05-04 to 2026-07-30 UTC, consistent with the explorer's 'peaked after 2018 May 1st' quality-cut text (line 16)"
+    ],
+    "source": "scripts/bts_rounds.py::main peakt_zero_point_tests, out/bts_rounds.json"
+  },
+  "disagreements": [
+    "per-night commitment differs across seeds and eras: 5-15 (2018 filter), 5-10 saved on clear nights (2019-2020), 7.98 triggered per calendar night (2023 window), median 4.5 (automated policy), about 10 spectra per night (SEDM, 2016-2017, iPTF). Not reconciled.",
+    "candidates per round: 46.4 measured sources per night (window) versus 'about 50 new candidates per night' stated; the measured figure counts sources active in the window, the stated one counts new sources.",
+    "chance: 0.172 (window counts) versus 0.14 (stated per-night figures).",
+    "k is not fixed per round in practice: 30.9% of calendar nights in 2019-2025 have zero peaks in the BTS file, and weather dominates (arXiv:1910.12973 footnote 9, lines 308-311).",
+    "Rubin era: TiDES does not select k of n within a round; 4MOST fibres are not binding (about 12 live transients per field pass selection versus 30-35 LRS fibres per pointing; arXiv:2501.16311 section 3.5 lines 559-565 and footnote 20 line 630, section 2 lines 138-140) and it cannot operate target-of-opportunity. The k-of-candidates decision shape holds for single-object robotic spectrographs (SEDM), not for TiDES.",
+    "the local BTS file has 11,217 data rows; data/raw/FETCH.md and PANEL_BRIEF.md state 11,218.",
+    "the explorer documentation names the column 'time'; the CSV header names it 'peakt'."
+  ],
+  "undemonstrated": [
+    {
+      "what": "k and candidates per round for the Rubin LSST alert stream",
+      "why": "no seed read in full reports a per-night commitment or candidate count for LSST-era spectroscopic follow-up; TiDES reports a 5-year total and per-field selection counts from simulation",
+      "blocks": [
+        "P6 chance for any LSST-stream item",
+        "P7 N_min for an LSST-stream cohort"
+      ]
+    },
+    {
+      "what": "ePESSTO+ per-night commitment",
+      "why": "no arXiv survey paper for ePESSTO+ found by arXiv API query (abs:ePESSTO+); PESSTO/ePESSTO night allocations are stated in arXiv:1812.07401 line 94 but not per-night target counts",
+      "blocks": []
+    },
+    {
+      "what": "SOXS per-night commitment",
+      "why": "arXiv:1812.07401 read in full states 900 NTT nights over 5 years (line 126) and a pipeline sized for 'one typical night (series of 15-30 min exposures)' (line 392) but no target count",
+      "blocks": []
+    }
+  ],
+  "completeness": "k from one 41-night trigger count with four corroborating seed statements; candidates per round and chance from the same window; LSST-era k, candidates and chance not demonstrated"
+}

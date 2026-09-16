@@ -1,0 +1,33 @@
+label,family,unit,sigma_d_basis,sigma_d_target,sigma_d_realised_by_power_py,discordance_q_realised,N_units,nights_equivalent,MDE_alpha0.05_power0.80,chance_k_over_candidates,N_min_at_delta_0.018,MDE_below_delta_0.018,N_min_at_delta_0.037,MDE_below_delta_0.037,N_min_at_delta_0.3,MDE_below_delta_0.3,N_min_at_delta_0.37,MDE_below_delta_0.37
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.930;rho=0.9,0.0403,0.040342,,50,50,0.015984,0.172377,40,yes,10,yes,1,yes,1,yes
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.930;rho=0.9,0.0403,0.040342,,150,150,0.009228,0.172377,40,yes,10,yes,1,yes,1,yes
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.930;rho=0.9,0.0403,0.040342,,500,500,0.005055,0.172377,40,yes,10,yes,1,yes,1,yes
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.930;rho=0.9,0.0403,0.040342,,2000,2000,0.002527,0.172377,40,yes,10,yes,1,yes,1,yes
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.930;rho=0.0,0.1276,0.127574,,50,50,0.050545,0.172377,395,no,94,no,2,yes,1,yes
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.930;rho=0.0,0.1276,0.127574,,150,150,0.029182,0.172377,395,no,94,yes,2,yes,1,yes
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.930;rho=0.0,0.1276,0.127574,,500,500,0.015984,0.172377,395,yes,94,yes,2,yes,1,yes
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.930;rho=0.0,0.1276,0.127574,,2000,2000,0.007992,0.172377,395,yes,94,yes,2,yes,1,yes
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.5;rho=0.5,0.1768,0.176777,,50,50,0.07004,0.172377,758,no,180,no,3,yes,2,yes
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.5;rho=0.5,0.1768,0.176777,,150,150,0.040438,0.172377,758,no,180,no,3,yes,2,yes
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.5;rho=0.5,0.1768,0.176777,,500,500,0.022149,0.172377,758,no,180,yes,3,yes,2,yes
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.5;rho=0.5,0.1768,0.176777,,2000,2000,0.011074,0.172377,758,yes,180,yes,3,yes,2,yes
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.5;rho=0.0,0.25,0.25,,50,50,0.099052,0.172377,1515,no,359,no,6,yes,4,yes
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.5;rho=0.0,0.25,0.25,,150,150,0.057187,0.172377,1515,no,359,no,6,yes,4,yes
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.5;rho=0.0,0.25,0.25,,500,500,0.031323,0.172377,1515,no,359,yes,6,yes,4,yes
+PLANNING-ONLY / not a P7 record,A,round (night); precision@8,p=0.5;rho=0.0,0.25,0.25,,2000,2000,0.015661,0.172377,1515,yes,359,yes,6,yes,4,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.02,0.1414,0.202031,0.04,50,1.1,0.080046,0.172377,989,no,235,no,4,yes,3,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.02,0.1414,0.163846,0.0267,150,3.2,0.03748,0.172377,651,no,154,no,3,yes,2,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.02,0.1414,0.141563,0.02,500,10.8,0.017737,0.172377,486,yes,115,yes,2,yes,2,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.02,0.1414,0.141457,0.02,2000,43.1,0.008862,0.172377,485,yes,115,yes,2,yes,2,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.1,0.3162,0.349927,0.12,50,1.1,0.138643,0.172377,2967,no,703,no,11,yes,8,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.1,0.3162,0.327693,0.1067,150,3.2,0.07496,0.172377,2602,no,616,no,10,yes,7,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.1,0.3162,0.316544,0.1,500,10.8,0.03966,0.172377,2428,no,575,no,9,yes,6,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.1,0.3162,0.316307,0.1,2000,43.1,0.019815,0.172377,2424,no,574,yes,9,yes,6,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.25,0.5,0.494872,0.24,50,1.1,0.196071,0.172377,5933,no,1405,no,22,yes,15,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.25,0.5,0.505008,0.2533,150,3.2,0.115521,0.172377,6179,no,1463,no,23,yes,15,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.25,0.5,0.502499,0.252,500,10.8,0.062959,0.172377,6117,no,1448,no,23,yes,15,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.25,0.5,0.500125,0.25,2000,43.1,0.031331,0.172377,6060,no,1435,yes,22,yes,15,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.5,0.7071,0.728431,0.52,50,1.1,0.288609,0.172377,12855,no,3043,no,47,yes,31,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.5,0.7071,0.71419,0.5067,150,3.2,0.163371,0.172377,12357,no,2925,no,45,yes,30,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.5,0.7071,0.707815,0.5,500,10.8,0.088683,0.172377,12137,no,2873,no,44,yes,29,yes
+PLANNING-ONLY / not a P7 record,B,distinct object; binary decision correctness,q=0.5,0.7071,0.707284,0.5,2000,43.1,0.044308,0.172377,12119,no,2869,no,44,yes,29,yes

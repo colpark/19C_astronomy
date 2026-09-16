@@ -1,0 +1,65 @@
+{
+  "label": "PLANNING-ONLY / SYNTHETIC / NOT A P7 RECORD",
+  "runs": {
+    "0.018": {
+      "k": 8,
+      "candidates_per_item": 46.41,
+      "chance": 0.172377,
+      "delta": 0.018,
+      "alpha": 0.05,
+      "power": 0.8,
+      "n": 50,
+      "mean_paired_difference": 0.0,
+      "sigma_d": 0.202031,
+      "mde": 0.080046,
+      "n_min": 989,
+      "ruling": "CLOSE_UNRESOLVABLE",
+      "completeness": "chance, sigma_d, MDE and N_min over 50 clustered units at alpha 0.05, power 0.8"
+    },
+    "0.037": {
+      "k": 8,
+      "candidates_per_item": 46.41,
+      "chance": 0.172377,
+      "delta": 0.037,
+      "alpha": 0.05,
+      "power": 0.8,
+      "n": 50,
+      "mean_paired_difference": 0.0,
+      "sigma_d": 0.202031,
+      "mde": 0.080046,
+      "n_min": 235,
+      "ruling": "CLOSE_UNRESOLVABLE",
+      "completeness": "chance, sigma_d, MDE and N_min over 50 clustered units at alpha 0.05, power 0.8"
+    },
+    "0.3": {
+      "k": 8,
+      "candidates_per_item": 46.41,
+      "chance": 0.172377,
+      "delta": 0.3,
+      "alpha": 0.05,
+      "power": 0.8,
+      "n": 50,
+      "mean_paired_difference": 0.0,
+      "sigma_d": 0.202031,
+      "mde": 0.080046,
+      "n_min": 4,
+      "ruling": "RESOLVABLE",
+      "completeness": "chance, sigma_d, MDE and N_min over 50 clustered units at alpha 0.05, power 0.8"
+    },
+    "0.37": {
+      "k": 8,
+      "candidates_per_item": 46.41,
+      "chance": 0.172377,
+      "delta": 0.37,
+      "alpha": 0.05,
+      "power": 0.8,
+      "n": 50,
+      "mean_paired_difference": 0.0,
+      "sigma_d": 0.202031,
+      "mde": 0.080046,
+      "n_min": 3,
+      "ruling": "RESOLVABLE",
+      "completeness": "chance, sigma_d, MDE and N_min over 50 clustered units at alpha 0.05, power 0.8"
+    }
+  }
+}

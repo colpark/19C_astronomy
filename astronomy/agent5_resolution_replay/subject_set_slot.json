@@ -1,0 +1,153 @@
+{
+  "slot": "subject_set",
+  "value": [
+    "claude-fable-5-1",
+    "claude-opus-5",
+    "claude-sonnet-5",
+    "gpt-6-astra",
+    "gpt-5.6-sol",
+    "gemini-3.8-flash",
+    "gemini-3.1-pro-preview"
+  ],
+  "status": "DERIVED",
+  "provenance": {
+    "referent": "frontier general-purpose models available through first-party APIs on 2026-09-16, with the training cutoff each provider states, for use as agent subjects",
+    "source": "first-party documentation fetched 2026-09-16: sources/anthropic_models_overview.txt, sources/anthropic_transparency.txt, sources/openai_models.txt, sources/openai_gpt-6-astra.txt, sources/google_gemini_models.txt, sources/deepmind_modelcard_gemini-3-8-flash.txt, sources/deepmind_modelcard_gemini-3-7-flash.txt, sources/deepmind_modelcard_gemini-3-1-pro.txt, sources/deepmind_modelcard_gemini-3-pro.txt (raw HTML beside each .txt)",
+    "population": "7 models from 3 providers (flagship and next tier per provider as each provider's own models page ranks them); open-weight models not surveyed",
+    "adjudicator": "no required rung is stated by any seed or by the panel brief, so availability is the only criterion; the strongest alternative subject is the best classical-tool arm, which is a composition, not a model",
+    "falsifier": "a first-party page, model card or system card dated on or before 2026-09-16 stating a different cutoff for any member, or listing a more capable generally available model from these providers that is missing here"
+  },
+  "id": "slot-subject-set",
+  "referent": "frontier general-purpose models available through first-party APIs on 2026-09-16, with the training cutoff each provider states, for use as agent subjects",
+  "source": "first-party documentation fetched 2026-09-16: sources/anthropic_models_overview.txt, sources/anthropic_transparency.txt, sources/openai_models.txt, sources/openai_gpt-6-astra.txt, sources/google_gemini_models.txt, sources/deepmind_modelcard_gemini-3-8-flash.txt, sources/deepmind_modelcard_gemini-3-7-flash.txt, sources/deepmind_modelcard_gemini-3-1-pro.txt, sources/deepmind_modelcard_gemini-3-pro.txt (raw HTML beside each .txt)",
+  "population": "7 models from 3 providers (flagship and next tier per provider as each provider's own models page ranks them); open-weight models not surveyed",
+  "adjudicator": "no required rung is stated by any seed or by the panel brief, so availability is the only criterion; the strongest alternative subject is the best classical-tool arm, which is a composition, not a model",
+  "falsifier": "a first-party page, model card or system card dated on or before 2026-09-16 stating a different cutoff for any member, or listing a more capable generally available model from these providers that is missing here",
+  "members": [
+    {
+      "model": "Claude Fable 5.1",
+      "api_id": "claude-fable-5-1",
+      "cutoff": "2026-06",
+      "cutoff_kind": "reliable knowledge cutoff",
+      "cutoff_status": "DERIVED (reliable-knowledge only); training-data cutoff UNDEMONSTRATED",
+      "source": "https://platform.claude.com/docs/en/models/overview fetched 2026-09-16, sources/anthropic_models_overview.txt lines 37 and 77-78",
+      "note": "Anthropic Transparency Hub (sources/anthropic_transparency.txt line 20) lists Claude Fable 5, not 5.1; no training-data cutoff for 5.1 found"
+    },
+    {
+      "model": "Claude Opus 5",
+      "api_id": "claude-opus-5",
+      "cutoff": "2026-05",
+      "cutoff_kind": "reliable knowledge cutoff / knowledge cutoff date",
+      "cutoff_status": "DERIVED",
+      "source": "sources/anthropic_models_overview.txt lines 38 and 77-79; sources/anthropic_transparency.txt lines 41-42",
+      "note": "same model family as the agents running this panel"
+    },
+    {
+      "model": "Claude Sonnet 5",
+      "api_id": "claude-sonnet-5",
+      "cutoff": "2026-01",
+      "cutoff_kind": "reliable knowledge cutoff / knowledge cutoff date",
+      "cutoff_status": "DERIVED",
+      "source": "sources/anthropic_models_overview.txt lines 39 and 77-80; sources/anthropic_transparency.txt lines 88-89",
+      "note": ""
+    },
+    {
+      "model": "GPT-6 Astra",
+      "api_id": "gpt-6-astra",
+      "cutoff": "2026-04-30",
+      "cutoff_kind": "knowledge cutoff",
+      "cutoff_status": "DERIVED",
+      "source": "https://developers.openai.com/api/docs/models fetched 2026-09-16, sources/openai_models.txt lines 658-674; sources/openai_gpt-6-astra.txt line 673",
+      "note": ""
+    },
+    {
+      "model": "GPT-5.6 Sol",
+      "api_id": "gpt-5.6-sol",
+      "cutoff": "2026-02-16",
+      "cutoff_kind": "knowledge cutoff",
+      "cutoff_status": "DERIVED",
+      "source": "sources/openai_models.txt lines 676-694",
+      "note": ""
+    },
+    {
+      "model": "Gemini 3.8 Flash",
+      "api_id": "gemini-3.8-flash",
+      "cutoff": "2026-03 (some domains 2025-01)",
+      "cutoff_kind": "knowledge cutoff date, stated with a domain-dependent earlier limit",
+      "cutoff_status": "DERIVED with internal disagreement",
+      "source": "https://deepmind.google/models/model-cards/gemini-3-8-flash/ fetched 2026-09-16, sources/deepmind_modelcard_gemini-3-8-flash.txt line 352",
+      "note": "the API model page (sources/google_gemini-3.8-flash.txt lines 241-243) gives only 'Latest update September 2026', which is not a cutoff"
+    },
+    {
+      "model": "Gemini 3.1 Pro (preview)",
+      "api_id": "gemini-3.1-pro-preview",
+      "cutoff": null,
+      "cutoff_kind": null,
+      "cutoff_status": "UNDEMONSTRATED",
+      "source": "sources/google_gemini-3.1-pro-preview.txt lines 242-245 (Latest update February 2026, not a cutoff); sources/deepmind_modelcard_gemini-3-1-pro.txt (no cutoff statement; defers training data to Gemini 3 Pro card line 197); sources/deepmind_modelcard_gemini-3-pro.txt (no cutoff statement found by search)",
+      "note": "preview status; Gemini API models page lists no stable Pro model in the Gemini 3 family (sources/google_gemini_models.txt lines 234-242)"
+    }
+  ],
+  "required_rung": "none stated in any seed read or in PANEL_BRIEF.md",
+  "exposure_consequence": {
+    "what": "BTS explorer rows peaking after each cutoff (supporting count; exposure is agent3's axis)",
+    "source": "scripts/bts_rounds.py -> out/bts_rounds.json rows_peaking_on_or_after_cutoff_plus_one_day",
+    "counts": {
+      "2025-01-31 (Gemini 3 family domain-limited, card text)": {
+        "rows": 1648,
+        "classified_transients": 804
+      },
+      "2026-01-31 (Claude Sonnet 5)": {
+        "rows": 265,
+        "classified_transients": 9
+      },
+      "2026-02-16 (GPT-5.6 Sol/Terra/Luna)": {
+        "rows": 251,
+        "classified_transients": 9
+      },
+      "2026-03-31 (Gemini 3.8 Flash)": {
+        "rows": 206,
+        "classified_transients": 6
+      },
+      "2026-04-30 (GPT-6 Astra)": {
+        "rows": 130,
+        "classified_transients": 4
+      },
+      "2026-05-31 (Claude Opus 5)": {
+        "rows": 78,
+        "classified_transients": 3
+      },
+      "2026-06-30 (Claude Fable 5.1, reliable-knowledge cutoff)": {
+        "rows": 30,
+        "classified_transients": 1
+      }
+    },
+    "reading": "if every member's cutoff binds, only rows peaking after 2026-06-30 are unexposed to all: 30 rows, 1 classified transient in the file fetched 2026-09-16"
+  },
+  "disagreements": [
+    "cutoff referent differs by provider: Anthropic states 'reliable knowledge cutoff', OpenAI 'knowledge cutoff', Google a 'knowledge cutoff date' with an earlier domain-dependent limit. None states the last date of training data, which is what an exposure key needs.",
+    "Claude Fable 5.1 appears on the models overview with a June 2026 reliable-knowledge cutoff, but the Transparency Hub lists only Claude Fable 5 (January 2026).",
+    "Gemini 3.8 Flash: March 2026 and January 2025 in one sentence of its model card."
+  ],
+  "undemonstrated": [
+    {
+      "what": "training-data cutoff (as opposed to knowledge cutoff) for every member",
+      "blocks": [
+        "exposure key ruling at D2/P3 for items peaking between a member's knowledge cutoff and its true training-data end"
+      ]
+    },
+    {
+      "what": "Gemini 3.1 Pro cutoff",
+      "blocks": [
+        "including Gemini 3.1 Pro in any contamination-controlled arm"
+      ]
+    },
+    {
+      "what": "open-weight frontier models",
+      "blocks": [
+        "subject-set completeness claim; recorded as an inventory of three providers only"
+      ]
+    }
+  ],
+  "completeness": "three first-party providers surveyed from their own documentation on 2026-09-16; open-weight and other providers not surveyed; cutoffs are knowledge cutoffs, not training-data ends"
+}
