@@ -1,0 +1,63 @@
+HTTP/2 302 
+date: Wed, 16 Sep 2026 18:52:59 GMT
+content-type: text/html; charset=utf-8
+content-length: 0
+location: https://pitt-broker.readthedocs.io/en/latest/
+set-cookie: __cf_bm=xITw.W5l9dVVt9suT0NyTE5WwU85eSgeFmcSnPLAv8c-1789584779.3427353-1.0.1.1-17ZgmHiNHhCv1Qf2LulsQ3Lhppd7z_eaRgHGj.Gled448B9Km0xDHAvnvPIK3bjvwp.VPhRS00iprWeTlVHZw4hH.Emp2yI9dmz9SftG8a0A7rIcEnX0ZdHT6F4h9Nxx; HttpOnly; SameSite=None; Secure; Path=/; Domain=readthedocs.io; Expires=Wed, 16 Sep 2026 19:22:59 GMT
+set-cookie: _cfuvid=FpwBZ0OyFC_G7ND.heVy0szJdQq8Foj4mYNCzayW4wk-1789584779.3427353-1.0.1.1-TgMKPsrxgrZUKK9Epab8eMnKTmFetfwEJIUD3luS6ok; HttpOnly; SameSite=None; Secure; Path=/; Domain=readthedocs.io
+cf-ray: a3c21246ec417ad5-BOS
+cf-cache-status: EXPIRED
+cache-control: max-age=1200
+content-language: en
+server: cloudflare
+x-served: Django-Proxito
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept-Language, accept-encoding
+cdn-cache-control: public, max-age=1200
+cross-origin-opener-policy: same-origin
+referrer-policy: no-referrer-when-downgrade
+x-backend: web-i-0b0d5f567366691fa
+x-content-type-options: nosniff
+x-rtd-domain: pitt-broker.readthedocs.io
+x-rtd-force-addons: true
+x-rtd-project: pitt-broker
+x-rtd-project-method: public_domain
+x-rtd-redirect: system
+x-rtd-version-method: path
+alt-svc: h3=":443"; ma=86400
+
+HTTP/2 200 
+date: Wed, 16 Sep 2026 18:52:59 GMT
+content-type: text/html; charset=utf-8
+cf-ray: a3c212479e517ad5-BOS
+cf-cache-status: HIT
+access-control-allow-origin: *
+cache-control: max-age=1800, stale-if-error=86400, public
+set-cookie: __cf_bm=qimHcI7KT2p7GqYjOvhpgJb7yut5DMy1nI7fz2j5eSY-1789584779.458149-1.0.1.1-nZ6aKah5urA05WceHeLSFPco8k9mlq1xTUJbjuS1d2dRsgB7i5snKIDcVJLe37QZmR3qLAhDH7af15tRvZ.TMMylCJQ2cGPr2WID70_R7eeHgQ.WGzRYK6kljHLKLxuv; HttpOnly; SameSite=None; Secure; Path=/; Domain=readthedocs.io; Expires=Wed, 16 Sep 2026 19:22:59 GMT
+x-served: Nginx-Proxito-Sendfile
+expires: Wed, 16 Sep 2026 19:22:59 GMT
+last-modified: Fri, 25 Oct 2024 23:56:33 GMT
+server: cloudflare
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept-Encoding
+access-control-allow-methods: HEAD, OPTIONS, GET
+cdn-cache-control: public, max-age=1800, stale-if-error=86400
+cross-origin-opener-policy: same-origin
+referrer-policy: no-referrer-when-downgrade
+x-amz-id-2: CA97SrfCNpOOkrYF+as0igvgJ4hdaFpbYThsQ9Qw9y8FDUno9utZP1PvSIXWr/dz+/kd/1SwCXKc3n5bnN6nIRUbTfic0cka
+x-amz-meta-mtime: 1729900584.849922339
+x-amz-request-id: 2ESZ08Z1V7VZMGSR
+x-amz-server-side-encryption: AES256
+x-backend: web-i-0b2bd1c6bac00a1f1
+x-content-type-options: nosniff
+x-rtd-domain: pitt-broker.readthedocs.io
+x-rtd-force-addons: true
+x-rtd-path: /proxito/html/pitt-broker/latest/index.html
+x-rtd-project: pitt-broker
+x-rtd-project-method: public_domain
+x-rtd-resolver-filename: /
+x-rtd-version: latest
+x-rtd-version-method: path
+etag: W/"280e7221329107e2d960058b268350a5"
+alt-svc: h3=":443"; ma=86400
+

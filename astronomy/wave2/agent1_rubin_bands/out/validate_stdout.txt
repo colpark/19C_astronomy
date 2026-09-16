@@ -1,0 +1,5 @@
+FAIL axis_ledger_rubin.json
+  - missing or empty 'ruling'
+exit 1
+PASS rubin_cohort_count.json
+exit 0

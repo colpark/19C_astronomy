@@ -1,0 +1,20 @@
+[
+ {
+  "time_utc": "2026-09-16T19:19:42.854282+00:00",
+  "status": 200,
+  "url": "https://api-lsst.alerce.online/object_api/list_objects?survey=lsst&firstmjd=61228.000428&firstmjd=61229.000428&page_size=1&page=1",
+  "raw_bytes": 548
+ },
+ {
+  "time_utc": "2026-09-16T19:18:28.208250+00:00",
+  "status": 504,
+  "url": "https://api-lsst.alerce.online/object_api/list_objects?survey=lsst&firstmjd=61223.000428&firstmjd=61224.000428&page_size=1&page=1",
+  "raw_bytes": 167
+ },
+ {
+  "time_utc": "2026-09-16T19:19:56.836507+00:00",
+  "status": 200,
+  "url": "https://api-lsst.alerce.online/object_api/list_objects?survey=lsst&firstmjd=61231.000428&firstmjd=61232.000428&page_size=1&page=1",
+  "raw_bytes": 534
+ }
+]

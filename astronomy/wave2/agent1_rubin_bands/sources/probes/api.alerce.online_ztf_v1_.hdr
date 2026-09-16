@@ -1,0 +1,8 @@
+HTTP/2 200 
+date: Wed, 16 Sep 2026 18:54:42 GMT
+content-type: text/html; charset=utf-8
+content-length: 3861
+server: nginx/1.31.3
+vary: Accept-Encoding
+access-control-allow-origin: *
+

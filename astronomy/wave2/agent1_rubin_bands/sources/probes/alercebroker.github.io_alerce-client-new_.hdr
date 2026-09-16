@@ -1,0 +1,19 @@
+HTTP/2 404 
+server: GitHub.com
+content-type: text/html; charset=utf-8
+etag: "6aa9b47d-239b"
+content-security-policy: default-src 'none'; style-src 'unsafe-inline'; img-src data:; connect-src 'self'
+x-github-request-id: 48BA:2A796C:1CDEB7:1F9F17:6AAAE631
+x-github-edge-region: iad
+accept-ranges: bytes
+age: 0
+date: Wed, 16 Sep 2026 18:55:45 GMT
+via: 1.1 varnish
+x-served-by: cache-chi-klot8100110-CHI
+x-cache: MISS
+x-cache-hits: 0
+x-timer: S1789584946.662311,VS0,VE37
+vary: Accept-Encoding
+x-fastly-request-id: 385a25e01651616bcb6eced9f989f8bcf6bb6538
+content-length: 9115
+

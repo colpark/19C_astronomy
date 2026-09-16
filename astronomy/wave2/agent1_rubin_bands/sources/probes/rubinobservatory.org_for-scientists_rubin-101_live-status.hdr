@@ -1,0 +1,15 @@
+HTTP/2 200 
+date: Wed, 16 Sep 2026 18:53:00 GMT
+server: Apache/2.4.68 (Unix) OpenSSL/3.5.6
+x-rsc-cache-enabled: false
+link: <http://rubinobservatory.org/for-scientists/rubin-101/live-status>; rel="alternate"; hreflang="en", <http://rubinobservatory.org/es/for-scientists/rubin-101/live-status>; rel="alternate"; hreflang="es", <http://rubinobservatory.org/for-scientists/rubin-101/live-status>; rel="alternate"; hreflang="x-default"
+link: </_next/static/media/9cf9c6e84ed13b5e-s.p.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2", </_next/static/media/a4a78f32e6d6bdeb-s.p.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2"
+x-middleware-rewrite: /en/for-scientists/rubin-101/live-status
+vary: RSC,Next-Router-State-Tree,Next-Router-Prefetch,Accept-Encoding
+x-powered-by: Next.js
+cache-control: private, no-cache, no-store, max-age=0, must-revalidate
+content-type: text/html; charset=utf-8
+set-cookie: NEXT_LOCALE=en; Path=/; SameSite=lax
+via: 1.1 google
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+

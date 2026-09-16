@@ -1,0 +1,109 @@
+[
+ {
+  "id": "rc-01",
+  "value": {
+   "O_lo": 1773044,
+   "O_hi": 2018299
+  },
+  "referent": "distinct Rubin DIAObjects first detected at or after 2026-07-01T00:00 UTC (MJD TAI 61222.000428), whole alert stream, as new-object alerts",
+  "source": "scripts/count_c1_fink.py over POST https://api.lsst.fink-portal.org/api/v1/statistics (out/raw/fink_stats_2026.json sha256 eff15a9f5d6bf094e4b72bbd83b5759bdf14b64466df17c5dc3ef1699eebd59f), sum of f:is_first (minus f:is_sso for O_lo) over Fink nights >= 20260701; sealed/rubin_counts_SEALED.json sha256 fd8646847fa219cb251b7f22b4938d0a0be9632b4d496fcd0c172fe615e9c1df",
+  "population": "9 Fink nights (UTC dates 20260701, 0706, 0707, 0709-0714) = dayObs 20260630 (part after T0) plus 0705, 0706, 0708-0713; unit = first-detection alert = one new DIAObject",
+  "adjudicator": "ANTARES locus count on the same boundary, 1,908,703 (rc-02), which lies inside [O_lo, O_hi]; an enumerated diaObjectId count (ALeRCE C3) was interrupted at >= 189,641",
+  "falsifier": "a complete enumeration of diaObjectIds with firstDiaSourceMjdTai >= 61222.000428 (PPDB, expected Sep-Oct 2026) returning a count outside [1,773,044, 2,018,299], or a rerun of the statistics query returning different sums"
+ },
+ {
+  "id": "rc-02",
+  "value": 1908703,
+  "referent": "ANTARES loci carrying an LSST dia_object_id whose oldest alert is at or after MJD 61222.000428",
+  "source": "scripts/count_c2_antares.py (amendment AM1) bisection over meta.count of GET https://api.antares.noirlab.edu/v1/loci; out/c2_antares.json sha256 0c0f119bed0b8f68acf05199b1d10d2753a609476c0d0eaa1522469cb374ee63; sealed/rubin_counts_SEALED.json sha256 fd8646847fa219cb251b7f22b4938d0a0be9632b4d496fcd0c172fe615e9c1df",
+  "population": "loci (ANTARES positional merge of ZTF and LSST alerts), not diaObjectIds; loci with a pre-boundary ZTF alert are excluded by construction",
+  "adjudicator": "Fink first-detection bracket [1,773,044, 2,018,299] (rc-01); declared sample check C4 found 3000/3000 sampled ALeRCE oids in ANTARES with one locus each and no ZTF member",
+  "falsifier": "a rerun of the bisection returning a different total, or a locus-level enumeration showing loci with multiple dia_object_ids at a rate that moves the diaObjectId count outside the Fink bracket"
+ },
+ {
+  "id": "rc-03",
+  "value": {
+   "raw_alerts": 3511022,
+   "overstatement_pct_range": [
+    74.0,
+    98.0
+   ]
+  },
+  "referent": "raw alerts on post-boundary nights beside distinct new objects, overstatement (raw-distinct)/distinct",
+  "source": "scripts/count_c1_fink.py f:alerts sum, Fink nights >= 20260701; sealed/rubin_counts_SEALED.json sha256 fd8646847fa219cb251b7f22b4938d0a0be9632b4d496fcd0c172fe615e9c1df",
+  "population": "all alerts issued on those nights, including alerts of objects first detected before the boundary, so an upper bound for the cohort",
+  "adjudicator": "object-level sample C4 (3000 oids first detected in the first 0.25 d): sum n_det 3386 over 3000 objects = 12.9 percent, a within-window figure far below the whole-window one because young objects have few detections",
+  "falsifier": "an enumerated cohort table whose summed nDiaSources gives an overstatement outside 74-98 percent after removing alerts of pre-boundary objects"
+ },
+ {
+  "id": "rc-04",
+  "value": 10,
+  "referent": "LSSTCam nights (dayObs >= 20260629) with at least one science visit, the survey-night supply bound M_obs",
+  "source": "scripts/nights_observed.py over https://s3df.slac.stanford.edu/data/rubin/sim-data/schedview/reports/schedview_reports_toc.html (sha256 031f003022fe4606636bd9ca6d5715316e1aa4e7d751609d83977053d8c11775), LSST observing with lsstcam table",
+  "population": "dayObs 20260629-20260824 rows of the LSST lsstcam table; 7267 science visits; last science night 20260713; no rows with science visits after 20260714; reports suspended during storm recovery",
+  "adjudicator": "Fink statistics nights with alerts (11 UTC dates) match scheduler dayObs shifted by +1 day one-for-one, plus Fink night 20260629 which is pre-LSST dayObs 20260628; Rubin community post 2026-07-17 states 2669 science visits for dayObs 0710-0716, matching the scheduler sum 407+822+761+679+0",
+  "falsifier": "a Rubin nightly summary or rerun measuring a count that differs, e.g. science visits on any dayObs between 20260715 and 20260916, or on 20260701-20260704 or 20260707"
+ },
+ {
+  "id": "rc-05",
+  "value": {
+   "C3_alerce_distinct_lower_bound": 189641,
+   "status": "UNDEMONSTRATED (interrupted)"
+  },
+  "referent": "ALeRCE enumerated distinct LSST oids with firstmjd >= T0",
+  "source": "scripts/count_c3_alerce.py (AM2, AM3), interrupted at 1018 requests, 82 of about 450 slices; out/c3_alerce.json, out/c3_progress.txt",
+  "population": "ALeRCE object rows; 0.02 d slices on the 9 Fink alert dates",
+  "adjudicator": "Fink and ANTARES whole-stream counts (rc-01, rc-02)",
+  "falsifier": "a completed rerun of scripts/count_c3_alerce.py returning a distinct count below 189,641 would show a paging defect"
+ },
+ {
+  "id": "rc-06",
+  "value": {
+   "S1_straddlers_lower_bound": 21126,
+   "status": "UNDEMONSTRATED (interrupted, 2 incomplete slices)"
+  },
+  "referent": "objects first detected before T0 with a detection at or after T0 (excluded from cohort by definition)",
+  "source": "scripts/count_c5_straddlers.py (AM5), ALeRCE lastmjd filter verified by probe (997/997 rows lastmjd >= T0); interrupted through date 20260523",
+  "population": "ALeRCE oids, firstmjd 2026-02-24..T0",
+  "adjudicator": "C4 sample: 0 of 3000 cohort oids placed before T0 by Fink or ANTARES",
+  "falsifier": "a completed rerun returning fewer than 21,126 straddlers, or any returned row with lastmjd < T0"
+ },
+ {
+  "id": "rc-07",
+  "value": 112990,
+  "referent": "stratum S0: ANTARES LSST loci with oldest alert in [survey start 2026-06-29T12:00 UTC, T0), LSST objects not after every cutoff",
+  "source": "scripts/count_c2_antares.py; out/c2_antares.json sha256 0c0f119bed0b8f68acf05199b1d10d2753a609476c0d0eaa1522469cb374ee63",
+  "population": "loci, as rc-02",
+  "adjudicator": "Fink first detections on Fink nights 20260629-20260630: 171,559 (is_first 49,772+121,787), a different window edge (Fink 20260629 is pre-LSST dayObs 20260628)",
+  "falsifier": "a rerun returning a different count"
+ },
+ {
+  "id": "rc-08",
+  "value": {
+   "sampled": 3000,
+   "in_all_three": 3000,
+   "first_detection_disagree": 0,
+   "ndet_disagree_fink_vs_alerce": 159,
+   "sum_n_det_alerce": 3386,
+   "sum_nDiaSources_fink": 3227,
+   "sum_num_alerts_antares": 3386,
+   "S3_n_det_eq_1": 2693,
+   "S4_n_det_ge_2": 307,
+   "unprocessable": 0
+  },
+  "referent": "object-level cross-broker agreement on the declared sample W (first 3000 of 4841 ALeRCE oids first detected in [T0, T0+0.25 d))",
+  "source": "scripts/count_c4_crossbroker.py (AM4); out/c4_crossbroker.json sha256 d20cec863aac61ee51e0b9611cc351efed22e390fe048b1a49258dd5b7f9d16f",
+  "population": "3000 diaObjectIds, one row each",
+  "adjudicator": "none stronger available; PPDB DiaObject table not public",
+  "falsifier": "a rerun giving a different presence or nDiaSources disagreement count, or PPDB nDiaSources matching neither broker"
+ },
+ {
+  "id": "rc-09",
+  "value": "UNDEMONSTRATED",
+  "referent": "P and Ng: cohort objects with a measured (spectroscopic, non-bot) positive or negative label",
+  "source": "TNS API POST https://www.wis-tns.org/api/get/search -> HTTP 401 {\"id_code\":401,\"id_message\":\"Unauthorized\"}; search CSV and public objects zip also 401 (out/raw/tns_*.body); read after seal step 7 in order_of_operations.log",
+  "population": "cohort objects (rc-01)",
+  "adjudicator": "Fink statistics f:in_tns: 5,173 alerts on cohort nights have a TNS counterpart; alerts not objects, no reporter or class, so not a measured-label count",
+  "falsifier": "TNS classification reports read with credentials returning a measured-label count; any count at all resolves this record"
+ }
+]

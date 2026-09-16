@@ -1,0 +1,38 @@
+{
+ "bracket_file": "astronomy/agent5_resolution_replay/planning_mde_bracket.csv",
+ "bracket_sha256": "c00718b7440664c6c41c90d93645d5fb68cb397414a7822c29897fe28031ad43",
+ "A": {
+  "unit": "nights",
+  "rows": 16,
+  "N_min_at_delta_0.018_min": 40,
+  "N_min_at_delta_0.018_max": 1515,
+  "sigma_d_range": [
+   0.040342,
+   0.25
+  ],
+  "chance": [
+   "0.172377"
+  ]
+ },
+ "B": {
+  "unit": "objects",
+  "rows": 16,
+  "N_min_at_delta_0.018_min": 485,
+  "N_min_at_delta_0.018_max": 12855,
+  "sigma_d_range": [
+   0.141457,
+   0.728431
+  ],
+  "chance": [
+   "0.172377"
+  ]
+ },
+ "k_slot.json": {
+  "sha256": "8980cc629123f0feee6e6c7cb98acaa67f2e20ef5c063bbc92e74706ddbb4611",
+  "value": 8
+ },
+ "delta_slot.json": {
+  "sha256": "435589df327ab3814aafb21e2fbe944be3205b62eda242788af4ef20a76ee99a",
+  "value": 0.018
+ }
+}

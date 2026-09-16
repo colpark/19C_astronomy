@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Fink/LSST Science Portal</title>
+        <link rel="icon" type="image/x-icon" href="/assets/favicon.ico?m=1772050538.7487025">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/spacelab/bootstrap.min.css">
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.7.2/css/all.css">
+<link rel="stylesheet" href="/assets/aladin_custom.css?m=1763534060.3602822">
+<link rel="stylesheet" href="/assets/card_id_left.css?m=1772050538.7487025">
+<link rel="stylesheet" href="/assets/footer.css?m=1763534060.3622823">
+<link rel="stylesheet" href="/assets/glass.css?m=1783489370.732822">
+<link rel="stylesheet" href="/assets/home.css?m=1769513940.217272">
+<link rel="stylesheet" href="/assets/navbar_fink.css?m=1764160806.8897278">
+<link rel="stylesheet" href="/assets/theme.css?m=1769513940.218272">
+    </head>
+    <body>
+        <!--[if IE]><script>
+        alert("Dash v2.7+ does not support Internet Explorer. Please use a newer browser.");
+        </script><![endif]-->
+        
+<div id="react-entry-point">
+    <div class="_dash-loading">
+        Loading...
+    </div>
+</div>
+
+        <footer>
+            <script id="_dash-config" type="application/json">{"url_base_pathname":null,"requests_pathname_prefix":"\u002f","ui":false,"props_check":false,"disable_version_check":false,"show_undo_redo":false,"suppress_callback_exceptions":true,"update_title":null,"children_props":{"dash_core_components":{"Checklist":["options[].label"],"Clipboard":[],"ConfirmDialog":[],"ConfirmDialogProvider":[],"DatePickerRange":[],"DatePickerSingle":[],"Download":[],"Dropdown":["options[].label"],"Geolocation":[],"Graph":[],"Input":[],"Interval":[],"Link":[],"Loading":["custom_spinner"],"Location":[],"Markdown":[],"RadioItems":["options[].label"],"RangeSlider":[],"Slider":[],"Store":[],"Tab":[],"Tabs":[],"Textarea":[],"Tooltip":[],"Upload":[]},"dash_html_components":{"A":[],"Abbr":[],"Acronym":[],"Address":[],"Area":[],"Article":[],"Aside":[],"Audio":[],"B":[],"Base":[],"Basefont":[],"Bdi":[],"Bdo":[],"Big":[],"Blink":[],"Blockquote":[],"Br":[],"Button":[],"Canvas":[],"Caption":[],"Center":[],"Cite":[],"Code":[],"Col":[],"Colgroup":[],"Content":[],"Data":[],"Datalist":[],"Dd":[],"Del":[],"Details":[],"Dfn":[],"Dialog":[],"Div":[],"Dl":[],"Dt":[],"Em":[],"Embed":[],"Fieldset":[],"Figcaption":[],"Figure":[],"Font":[],"Footer":[],"Form":[],"Frame":[],"Frameset":[],"H1":[],"H2":[],"H3":[],"H4":[],"H5":[],"H6":[],"Header":[],"Hgroup":[],"Hr":[],"I":[],"Iframe":[],"Img":[],"Ins":[],"Kbd":[],"Keygen":[],"Label":[],"Legend":[],"Li":[],"Link":[],"Main":[],"MapEl":[],"Mark":[],"Marquee":[],"Meta":[],"Meter":[],"Nav":[],"Nobr":[],"Noscript":[],"ObjectEl":[],"Ol":[],"Optgroup":[],"Option":[],"Output":[],"P":[],"Param":[],"Picture":[],"Plaintext":[],"Pre":[],"Progress":[],"Q":[],"Rb":[],"Rp":[],"Rt":[],"Rtc":[],"Ruby":[],"S":[],"Samp":[],"Script":[],"Section":[],"Select":[],"Shadow":[],"Slot":[],"Small":[],"Source":[],"Spacer":[],"Span":[],"Strike":[],"Strong":[],"Sub":[],"Summary":[],"Sup":[],"Table":[],"Tbody":[],"Td":[],"Template":[],"Textarea":[],"Tfoot":[],"Th":[],"Thead":[],"Time":[],"Title":[],"Tr":[],"Track":[],"U":[],"Ul":[],"Var":[],"Video":[],"Wbr":[],"Xmp":[]},"dash_table":{"DataTable":[]},"dash_bootstrap_components":{"Accordion":[],"AccordionItem":["title"],"Alert":[],"Badge":[],"Breadcrumb":[],"Button":[],"ButtonGroup":[],"Card":[],"CardBody":[],"CardFooter":[],"CardGroup":[],"CardHeader":[],"CardImg":[],"CardImgOverlay":[],"CardLink":[],"Carousel":[],"Collapse":[],"DropdownMenu":["label"],"DropdownMenuItem":[],"Fade":[],"Form":[],"FormFeedback":[],"FormFloating":[],"FormText":[],"Label":[],"Checkbox":["label"],"Checklist":["options[].label"],"Input":[],"InputGroup":[],"InputGroupText":[],"RadioButton":["label"],"RadioItems":["options[].label"],"Select":[],"Switch":["label"],"Textarea":[],"Col":[],"Container":[],"Row":[],"Stack":[],"ListGroup":[],"ListGroupItem":[],"Modal":[],"ModalBody":[],"ModalFooter":[],"ModalHeader":[],"ModalTitle":[],"Nav":[],"NavItem":[],"NavLink":[],"Navbar":[],"NavbarBrand":[],"NavbarSimple":["brand"],"NavbarToggler":[],"Offcanvas":["title"],"Pagination":[],"Placeholder":[],"Popover":[],"PopoverBody":[],"PopoverHeader":[],"Progress":[],"Spinner":[],"Table":[],"Tab":[],"Tabs":[],"Toast":["header"],"Tooltip":[]},"dash_mantine_components":{"AreaChart":[],"BarChart":[],"BubbleChart":[],"CompositeChart":[],"DonutChart":[],"LineChart":[],"PieChart":[],"RadarChart":[],"ScatterChart":[],"Sparkline":[],"Accordion":["chevron"],"AccordionControl":["chevron","icon"],"AccordionItem":[],"AccordionPanel":[],"AppShell":[],"AppShellAside":[],"AppShellFooter":[],"AppShellHeader":[],"AppShellMain":[],"AppShellNavbar":[],"AppShellSection":[],"Avatar":[],"AvatarGroup":[],"ActionIcon":["loaderProps.children"],"ActionIconGroup":[],"Button":["leftSection","rightSection","loaderProps.children"],"ButtonGroup":[],"UnstyledButton":[],"Card":[],"CardSection":[],"Checkbox":["label","description","error","icon","indeterminateIcon"],"CheckboxCard":[],"CheckboxGroup":["label","description","error"],"CheckboxIndicator":["icon","indeterminateIcon"],"Chip":["icon"],"ChipGroup":[],"ChipGroupContext":[],"ColorInput":["popoverProps.children","popoverProps.middlewares.flip.boundary","eyeDropperIcon","label","description","error","leftSection","rightSection"],"ColorPicker":[],"Autocomplete":["clearButtonProps.children","clearButtonProps.icon","label","description","error","leftSection","rightSection","comboboxProps.children","comboboxProps.middlewares.flip.boundary"],"MultiSelect":["nothingFoundMessage","clearButtonProps.children","clearButtonProps.icon","label","description","error","leftSection","rightSection","comboboxProps.children","comboboxProps.middlewares.flip.boundary"],"Select":["nothingFoundMessage","clearButtonProps.children","clearButtonProps.icon","label","description","error","leftSection","rightSection","comboboxProps.children","comboboxProps.middlewares.flip.boundary"],"TagsInput":["clearButtonProps.children","clearButtonProps.icon","label","description","error","leftSection","rightSection","comboboxProps.children","comboboxProps.middlewares.flip.boundary"],"Drawer":["title","overlayProps.children"],"DrawerStack":[],"ManagedDrawer":["title","overlayProps.children"],"Grid":[],"GridCol":[],"HoverCard":["middlewares.flip.boundary"],"HoverCardDropdown":[],"HoverCardTarget":[],"BackgroundImage":[],"Image":[],"InputWrapper":["label","description","error"],"JsonInput":["validationError","label","description","error","leftSection","rightSection"],"NumberInput":["label","description","error","leftSection","rightSection"],"PasswordInput":["label","description","error","leftSection","rightSection"],"PinInput":[],"TextInput":["label","description","error","leftSection","rightSection"],"Textarea":["label","description","error","leftSection","rightSection"],"List":["icon"],"ListItem":["icon"],"Menu":["middlewares.flip.boundary"],"MenuDivider":[],"MenuDropdown":[],"MenuItem":["leftSection","rightSection"],"MenuLabel":[],"MenuTarget":[],"SubMenu":["middlewares.flip.boundary"],"SubMenuDropdown":[],"SubMenuItem":["leftSection","rightSection"],"SubMenuTarget":[],"ManagedModal":["title","overlayProps.children","closeButtonProps.children","closeButtonProps.icon"],"Modal":["title","overlayProps.children","closeButtonProps.children","closeButtonProps.icon"],"ModalStack":[],"Popover":["middlewares.flip.boundary"],"PopoverDropdown":[],"PopoverTarget":[],"Progress":[],"ProgressLabel":[],"ProgressRoot":[],"ProgressSection":[],"Radio":["label","description","error"],"RadioCard":[],"RadioGroup":["label","description","error"],"RadioGroupContext":[],"RadioIndicator":[],"RangeSlider":["marks[].label","label","thumbChildren"],"Slider":["marks[].label","label","thumbChildren"],"Stepper":["icon","completedIcon","progressIcon"],"StepperCompleted":[],"StepperStep":["icon","completedIcon","progressIcon","label","description"],"Table":["data.head","data.foot"],"TableCaption":[],"TableScrollContainer":[],"TableTbody":[],"TableTd":[],"TableTfoot":[],"TableTh":[],"TableThead":[],"TableTr":[],"Tabs":[],"TabsList":[],"TabsPanel":[],"TabsTab":["rightSection","leftSection"],"Timeline":[],"TimelineItem":["title","bullet"],"FloatingTooltip":["label"],"Tooltip":["label"],"Affix":[],"Alert":["title","icon"],"Anchor":[],"AspectRatio":[],"Badge":["leftSection","rightSection"],"Blockquote":["icon","cite"],"Box":[],"Breadcrumbs":["separator"],"Burger":[],"Center":[],"Code":[],"Collapse":[],"Container":[],"Divider":["label"],"Fieldset":["legend"],"Flex":[],"Group":[],"Highlight":[],"Indicator":["label"],"Kbd":[],"Loader":[],"LoadingOverlay":["loaderProps.children","overlayProps.children"],"Mark":[],"NavLink":["label","description","leftSection","rightSection"],"NumberFormatter":[],"Overlay":[],"Pagination":[],"Paper":[],"Rating":["emptySymbol","fullSymbol"],"RingProgress":["label","sections[].tooltip"],"ScrollArea":[],"SegmentedControl":[],"SemiCircleProgress":["label"],"SimpleGrid":[],"Skeleton":[],"Space":[],"Spoiler":["hideLabel","showLabel"],"Stack":[],"Switch":["label","offLabel","onLabel","thumbIcon","description","error"],"Text":[],"ThemeIcon":[],"Title":[],"Tree":["data[].label","expandedIcon","collapsedIcon"],"VisuallyHidden":[],"DateInput":["popoverProps.middlewares.flip.boundary","clearButtonProps.children","clearButtonProps.icon","leftSection","rightSection","label","description","error","nextIcon","previousIcon"],"DatePicker":["nextIcon","previousIcon"],"DatePickerInput":["popoverProps.middlewares.flip.boundary","modalProps.overlayProps.children","modalProps.title","modalProps.closeButtonProps.children","modalProps.closeButtonProps.icon","clearButtonProps.children","clearButtonProps.icon","leftSection","rightSection","label","description","error","nextIcon","previousIcon"],"DateTimePicker":["leftSection","rightSection","label","description","error","popoverProps.middlewares.flip.boundary","clearButtonProps.children","clearButtonProps.icon","modalProps.overlayProps.children","modalProps.title","modalProps.closeButtonProps.children","modalProps.closeButtonProps.icon","nextIcon","previousIcon"],"DatesProvider":[],"MonthPickerInput":["popoverProps.middlewares.flip.boundary","modalProps.overlayProps.children","modalProps.title","modalProps.closeButtonProps.children","modalProps.closeButtonProps.icon","clearButtonProps.children","clearButtonProps.icon","leftSection","rightSection","label","description","error","nextIcon","previousIcon"],"TimeGrid":[],"TimeInput":["label","description","error","leftSection","rightSection"],"TimePicker":["popoverProps.children","popoverProps.middlewares.flip.boundary","label","description","error","leftSection","rightSection"],"YearPickerInput":["popoverProps.middlewares.flip.boundary","modalProps.overlayProps.children","modalProps.title","modalProps.closeButtonProps.children","modalProps.closeButtonProps.icon","clearButtonProps.children","clearButtonProps.icon","leftSection","rightSection","label","description","error"],"Carousel":["nextControlIcon","previousControlIcon"],"CarouselSlide":[],"CodeHighlight":[],"CodeHighlightTabs":[],"InlineCodeHighlight":[],"Notification":["icon","title","message"],"NotificationContainer":[],"NotificationProvider":[],"NavigationProgress":[],"NavigationProgressProvider":[],"RichTextEditor":[],"MantineProvider":[],"TypographyStylesProvider":[]},"dash_iconify":{"DashIconify":null},"dash_autocomplete_input":{"AutocompleteInput":[]},"visdcc":{"DataTable":[],"Network":[],"Run_js":[]}},"serve_locally":true,"dash_version":"3.1.1","python_version":"3.12.13 (main, Jul 10 2026, 00:00:00) [GCC 11.5.0 20240719 (Red Hat 11.5.0-14)]","dash_version_url":"https:\u002f\u002fdash-version.plotly.com:8080\u002fcurrent_version","ddk_version":null,"plotly_version":"5.24.1"}</script>
+            <script src="/_dash-component-suites/dash/deps/polyfill@7.v3_1_1m1763534301.12.1.min.js"></script>
+<script src="/_dash-component-suites/dash/deps/react@18.v3_1_1m1763534301.3.1.min.js"></script>
+<script src="/_dash-component-suites/dash/deps/react-dom@18.v3_1_1m1763534301.3.1.min.js"></script>
+<script src="/_dash-component-suites/dash/deps/prop-types@15.v3_1_1m1763534301.8.1.min.js"></script>
+<script src="//aladin.u-strasbg.fr/AladinLite/api/v3/3.2.0/aladin.js"></script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="/_dash-component-suites/dash_bootstrap_components/_components/dash_bootstrap_components.v2_0_4m1763534303.min.js"></script>
+<script src="/_dash-component-suites/dash_mantine_components/dash_mantine_components.v2_1_0m1763534302.js"></script>
+<script src="/_dash-component-suites/dash_iconify/dash_iconify.v0_1_2m1763534261.min.js"></script>
+<script src="/_dash-component-suites/dash_autocomplete_input/dash_autocomplete_input.v0_0_7m1763534261.min.js"></script>
+<script src="/_dash-component-suites/visdcc/visdcc.v0_0_60m1763534302.min.js"></script>
+<script src="/_dash-component-suites/dash/dash-renderer/build/dash_renderer.v3_1_1m1763534301.min.js"></script>
+<script src="/_dash-component-suites/dash/dcc/dash_core_components.v3_1_0m1763534301.js"></script>
+<script src="/_dash-component-suites/dash/dcc/dash_core_components-shared.v3_1_0m1763534301.js"></script>
+<script src="/_dash-component-suites/dash/html/dash_html_components.v3_0_3m1763534301.min.js"></script>
+<script src="/_dash-component-suites/dash/dash_table/bundle.v6_0_3m1763534301.js"></script>
+<script>
+(function() {
+    var clientside = window.dash_clientside = window.dash_clientside || {};
+    var ns = clientside["_dashprivate_clientside_funcs"] = clientside["_dashprivate_clientside_funcs"] || {};
+    ns["b3c968abd1049831908cfe49e46a6a4b8fa51b145d9cc16b431406216ace7c2e"] = 
+function(n_clicks, name, apiurl){
+    if(n_clicks > 0){
+        fetch(apiurl + '/api/v1/sources', {
+            method: 'POST',
+            body: JSON.stringify({
+                 'diaObjectId': name,
+                 'output-format': 'json'
+            }),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(function(response) {
+            return response.blob();
+        }).then(function(data) {
+            window.saveAs(data, name + '.json');
+        }).catch(error => console.error('Error:', error));
+    };
+    return true;
+}
+;
+})();
+</script>
+<script>
+(function() {
+    var clientside = window.dash_clientside = window.dash_clientside || {};
+    var ns = clientside["_dashprivate_clientside_funcs"] = clientside["_dashprivate_clientside_funcs"] || {};
+    ns["f772091da5f3c0067316041b40545da2b1562d32f629e13cb54902f9aaa24807"] = 
+function(n_clicks, name, apiurl){
+    if(n_clicks > 0){
+        fetch(apiurl + '/api/v1/sources', {
+            method: 'POST',
+            body: JSON.stringify({
+                 'diaObjectId': name,
+                 'output-format': 'csv'
+            }),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(function(response) {
+            return response.blob();
+        }).then(function(data) {
+            window.saveAs(data, name + '.csv');
+        }).catch(error => console.error('Error:', error));
+    };
+    return true;
+}
+;
+})();
+</script>
+<script>
+(function() {
+    var clientside = window.dash_clientside = window.dash_clientside || {};
+    var ns = clientside["_dashprivate_clientside_funcs"] = clientside["_dashprivate_clientside_funcs"] || {};
+    ns["a2ca2806568939b5326c06836a5a07f8ca605d7e90117e8198ffc0715835136d"] = 
+function(n_clicks, name, apiurl){
+    if(n_clicks > 0){
+        fetch(apiurl + '/api/v1/sources', {
+            method: 'POST',
+            body: JSON.stringify({
+                 'diaObjectId': name,
+                 'output-format': 'votable'
+            }),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(function(response) {
+            return response.blob();
+        }).then(function(data) {
+            window.saveAs(data, name + '.vot');
+        }).catch(error => console.error('Error:', error));
+    };
+    return true;
+}
+;
+})();
+</script>
+<script>
+(function() {
+    var clientside = window.dash_clientside = window.dash_clientside || {};
+    var ns = clientside["_dashprivate_clientside_funcs"] = clientside["_dashprivate_clientside_funcs"] || {};
+    ns["15030892aece4061eb8cf77ec0822c60667121b41c176f1a1d54488c17eb47b5"] = 
+function(n_clicks, name, apiurl){
+    if(n_clicks > 0){
+        fetch(apiurl + '/api/v1/sso', {
+            method: 'POST',
+            body: JSON.stringify({
+                 'n_or_d': name,
+                 'withEphem': true,
+                 'withResiduals': true,
+                 'output-format': 'json'
+            }),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(function(response) {
+            return response.blob();
+        }).then(function(data) {
+            window.saveAs(data, name + '.json');
+        }).catch(error => console.error('Error:', error));
+    };
+    return true;
+}
+;
+})();
+</script>
+<script>
+(function() {
+    var clientside = window.dash_clientside = window.dash_clientside || {};
+    var ns = clientside["_dashprivate_clientside_funcs"] = clientside["_dashprivate_clientside_funcs"] || {};
+    ns["794d3d6fc03bd7f7b469dcf64418471b2eac7de1d1f1f53bec19e262c7453c6f"] = 
+function(n_clicks, name, apiurl){
+    if(n_clicks > 0){
+        fetch(apiurl + '/api/v1/sso', {
+            method: 'POST',
+            body: JSON.stringify({
+                 'n_or_d': name,
+                 'withEphem': true,
+                 'withResiduals': true,
+                 'output-format': 'csv'
+            }),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(function(response) {
+            return response.blob();
+        }).then(function(data) {
+            window.saveAs(data, name + '.csv');
+        }).catch(error => console.error('Error:', error));
+    };
+    return true;
+}
+;
+})();
+</script>
+<script>
+(function() {
+    var clientside = window.dash_clientside = window.dash_clientside || {};
+    var ns = clientside["_dashprivate_clientside_funcs"] = clientside["_dashprivate_clientside_funcs"] || {};
+    ns["140130b8cfa497e61684070ee42ff4cc77a0f8eaaf88cd2dbbf12f7f575c4b6e"] = 
+function(n_clicks, name, apiurl){
+    if(n_clicks > 0){
+        fetch(apiurl + '/api/v1/sso', {
+            method: 'POST',
+            body: JSON.stringify({
+                 'n_or_d': name,
+                 'withEphem': true,
+                 'withResiduals': true,
+                 'output-format': 'votable'
+            }),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(function(response) {
+            return response.blob();
+        }).then(function(data) {
+            window.saveAs(data, name + '.vot');
+        }).catch(error => console.error('Error:', error));
+    };
+    return true;
+}
+;
+})();
+</script>
+<script>
+(function() {
+    var clientside = window.dash_clientside = window.dash_clientside || {};
+    var ns = clientside["_dashprivate_clientside_funcs"] = clientside["_dashprivate_clientside_funcs"] || {};
+    ns["45825859309a498e4bb0b2cecc61319184555a1230f6172301a180bf38e9e5ca"] = 
+    function toggle_stamps_modal(n_clicks, is_open) {
+        return !is_open;
+    }
+    ;
+})();
+</script>
+<script>
+(function() {
+    var clientside = window.dash_clientside = window.dash_clientside || {};
+    var ns = clientside["_dashprivate_clientside_funcs"] = clientside["_dashprivate_clientside_funcs"] || {};
+    ns["f6d86b99a85868996f23fc603d20e624126706dd63a22e4d6c5f154f9b2be3a3"] = 
+    function stamps_prev_next(n_clicks_prev, n_clicks_next, clickData, value, data) {
+        let id = data.findIndex((x) => x.value === value);
+        let step = 1;
+
+        const triggered = dash_clientside.callback_context.triggered.map(t => t.prop_id);
+
+        if (triggered == 'lightcurve_object_page.clickData')
+            return clickData.points[0].x;
+
+        if (triggered == 'stamps_prev.n_clicks')
+            step = -1;
+
+        id += step;
+        if (step > 0 && id >= data.length)
+            id = 0;
+        if (step < 0 && id < 0)
+            id = data.length - 1;
+
+        return data[id].value;
+    }
+    ;
+})();
+</script>
+<script>
+(function() {
+    var clientside = window.dash_clientside = window.dash_clientside || {};
+    var ns = clientside["_dashprivate_clientside_funcs"] = clientside["_dashprivate_clientside_funcs"] || {};
+    ns["0d3808b5c4e82f8326404d3c954863bda9ebaa5bef28c987464788d9c4d5950c"] = 
+    function toggle_modal_skymap(n1, n2, is_open) {
+        if (n1 || n2)
+            return ~is_open;
+        else
+            return is_open;
+    }
+    ;
+})();
+</script>
+<script>
+(function() {
+    var clientside = window.dash_clientside = window.dash_clientside || {};
+    var ns = clientside["_dashprivate_clientside_funcs"] = clientside["_dashprivate_clientside_funcs"] || {};
+    ns["3ba32e36d9aecec50f1bd41d9fc3ea4506f161c24fae756d2953f177f3c5f6e4"] = 
+    function scroll_top(value) {
+        document.querySelector('#search_bar').scrollIntoView({behavior: "smooth"})
+        return dash_clientside.no_update;
+    }
+    ;
+})();
+</script>
+<script>
+(function() {
+    var clientside = window.dash_clientside = window.dash_clientside || {};
+    var ns = clientside["_dashprivate_clientside_funcs"] = clientside["_dashprivate_clientside_funcs"] || {};
+    ns["b13f2720af092a66067ad0d973b82411c3d7643734daca08724c935250a2e14a"] = 
+    function on_completion(n_clicks) {
+        const ctx = dash_clientside.callback_context;
+        let triggered_id = ctx.triggered[0].prop_id;
+
+        if (!ctx.triggered[0].value)
+            return dash_clientside.no_update;
+
+        if (triggered_id.search('.n_clicks') > 0) {
+            triggered_id = JSON.parse(triggered_id.substr(0, triggered_id.indexOf('.n_clicks')));
+            return triggered_id.text + ' ';
+        }
+        return dash_clientside.no_update;
+    }
+    ;
+})();
+</script>
+<script>
+(function() {
+    var clientside = window.dash_clientside = window.dash_clientside || {};
+    var ns = clientside["_dashprivate_clientside_funcs"] = clientside["_dashprivate_clientside_funcs"] || {};
+    ns["adc33fe589252b0d177c0d4a6461d6e9e848954da963a8caa5589277b3d67284"] = 
+    function on_quickfield(n_clicks, value) {
+        const ctx = dash_clientside.callback_context;
+        let triggered_id = ctx.triggered[0].prop_id;
+
+        if (!ctx.triggered[0].value)
+            return dash_clientside.no_update;
+
+        if (triggered_id.search('.n_clicks') > 0) {
+            triggered_id = JSON.parse(triggered_id.substr(0, triggered_id.indexOf('.n_clicks')));
+            if (value)
+                return value + ' ' + triggered_id.text + '=';
+            else
+                return triggered_id.text + '=';
+        }
+        return dash_clientside.no_update;
+    }
+    ;
+})();
+</script>
+<script>
+(function() {
+    var clientside = window.dash_clientside = window.dash_clientside || {};
+    var ns = clientside["_dashprivate_clientside_funcs"] = clientside["_dashprivate_clientside_funcs"] || {};
+    ns["54461220addf3a741f4980a9cdd6c1a4dafb33de23ee8691257c3c2ef2d46309"] = 
+    function on_clear(n_clicks) {
+        return '';
+    }
+    ;
+})();
+</script>
+            <script id="_dash-renderer" type="application/javascript">var renderer = new DashRenderer();</script>
+        </footer>
+    </body>
+</html>

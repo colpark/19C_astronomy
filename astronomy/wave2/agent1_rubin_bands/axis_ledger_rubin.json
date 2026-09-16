@@ -1,0 +1,145 @@
+{
+ "candidate": "live time-domain astronomy: Rubin LSST prospective cohort (first detection >= 2026-07-01T00:00 UTC)",
+ "branch": "prediction",
+ "bands": "bands_FROZEN.md sha256 8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2",
+ "sealed_counts": "sealed/rubin_counts_SEALED.json sha256 fd8646847fa219cb251b7f22b4938d0a0be9632b4d496fcd0c172fe615e9c1df",
+ "ruling": null,
+ "ruling_refused_because": [
+  "precondition (a): positive_supply and negative_supply carry no number (measured labels unreadable, TNS HTTP 401)",
+  "precondition (b): tool_coverage band was declared after its only count (wave-1 0/25); no recount",
+  "precondition (c): label source not ratified at D5",
+  "split_integrity and unprocessable_units counts interrupted"
+ ],
+ "binding_axis": "positive_supply (measured labels): needs TNS credentials (external input) and survey time (off sky since 2026-07-14, no return date as of 2026-09-11; BTS-side label collapse ruled POLICY, calibration only); second: contamination x supply (subject without cutoff)",
+ "label_collapse_ruling_calibration_only": "POLICY",
+ "definition_widened": false,
+ "axes": [
+  {
+   "axis": "positive_supply",
+   "disposition": "UNDEMONSTRATED",
+   "band": "UNDEMONSTRATED (P uncomputable); CLOSE excluded because optimistic bound O >= 485",
+   "value": {
+    "P_measured_positive": "UNDEMONSTRATED",
+    "O_optimistic_bound": [
+     1773044,
+     2018299
+    ],
+    "O_antares_loci": 1908703,
+    "M_obs": 10,
+    "M_obs_cohort": "9 (8 whole dayObs + dayObs 20260630 after 00:00 UTC)",
+    "M_sc": "UNDEMONSTRATED",
+    "PROCEED_threshold": {
+     "L": 12855,
+     "M_sc": 1515
+    }
+   },
+   "provenance": [
+    "rc-01",
+    "rc-02",
+    "rc-04",
+    "rc-09"
+   ]
+  },
+  {
+   "axis": "negative_supply",
+   "disposition": "UNDEMONSTRATED",
+   "band": "UNDEMONSTRATED (Ng uncomputable); CLOSE excluded because O >= 485",
+   "value": {
+    "Ng_measured_negative": "UNDEMONSTRATED",
+    "negB": "UNDEMONSTRATED",
+    "unlabelled_counted_as_negative": 0
+   },
+   "provenance": [
+    "rc-09"
+   ]
+  },
+  {
+   "axis": "contamination_exposure",
+   "disposition": "PASS (counted)",
+   "band": "ESCALATE",
+   "value": {
+    "E_first_detected_after_every_demonstrated_cutoff": [
+     1773044,
+     2018299
+    ],
+    "E_labelled": "UNDEMONSTRATED",
+    "subjects_without_cutoff": [
+     "Gemini 3.1 Pro (preview)"
+    ],
+    "S0_not_after_every_cutoff_loci": 112990,
+    "sample_loci_with_prior_ZTF_alert": "0 of 3000"
+   },
+   "note": "ESCALATE because a subject lacks a published cutoff (band section 6); leaks host-z, archival variability, IAU prefix, web access to TNS listed, not banded",
+   "provenance": [
+    "rc-01",
+    "rc-07",
+    "rc-08"
+   ]
+  },
+  {
+   "axis": "tool_coverage",
+   "disposition": "PASS (counted, wave 1)",
+   "band": "NOT RULABLE: band declared after the wave-1 count; no recount after bands hash",
+   "value": {
+    "verified_on_rubin": "0 of 25 (agent4 wave1 REPORT section 3)"
+   },
+   "provenance": [
+    "astronomy/agent4_tools_instrument/REPORT.md section 3"
+   ]
+  },
+  {
+   "axis": "cluster_structure",
+   "disposition": "PASS",
+   "band": "PROCEED",
+   "value": {
+    "raw_alerts": 3511022,
+    "distinct_first_detections": [
+     1773044,
+     2018299
+    ],
+    "overstatement_pct": [
+     74.0,
+     98.0
+    ],
+    "antares_loci": 1908703,
+    "alerce_distinct_lower_bound": 189641,
+    "per_night_unique_objects_summed_NOT_distinct": 2965148,
+    "sample_W_sum_ndet_over_objects": "3386/3000"
+   },
+   "note": "brokers that serve counts place O in the same band (all >= 485); Fink O is an aggregate of first-detection alerts, not enumerated ids",
+   "provenance": [
+    "rc-01",
+    "rc-02",
+    "rc-03",
+    "rc-05",
+    "rc-08"
+   ]
+  },
+  {
+   "axis": "split_integrity",
+   "disposition": "UNDEMONSTRATED",
+   "band": "UNDEMONSTRATED (count interrupted); any value <= O-485 would give PROCEED",
+   "value": {
+    "S1_straddlers_lower_bound": 21126,
+    "sample_cross_broker_before_T0": "0 of 3000"
+   },
+   "provenance": [
+    "rc-06",
+    "rc-08"
+   ]
+  },
+  {
+   "axis": "unprocessable_units",
+   "disposition": "UNDEMONSTRATED",
+   "band": "UNDEMONSTRATED (whole-cohort table not obtained)",
+   "value": {
+    "U_sample_W": 0,
+    "sample_size": 3000
+   },
+   "provenance": [
+    "rc-08"
+   ]
+  }
+ ],
+ "completeness": "Seven axes listed for the Rubin cohort. Numbers: contamination (E=1.77-2.02M objects after every demonstrated cutoff), cluster structure (3.51M alerts vs 1.77-2.02M objects; ANTARES 1.91M loci), tool coverage (wave-1 0/25, not rulable). UNDEMONSTRATED: positive and negative measured supply (TNS 401), split integrity (C5 interrupted, >=21,126 straddlers), unprocessable units (sample 0/3000 only). Brokers not covered: Lasair (outage), Pitt-Google (credentials). P4 ruling refused; ruling field null by design."
+}

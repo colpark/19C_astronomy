@@ -1,0 +1,13 @@
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+content-length: 3863
+last-modified: Fri, 03 Oct 2025 17:44:26 GMT
+server: AmazonS3
+date: Wed, 16 Sep 2026 12:39:00 GMT
+etag: "6678a9ef6ded15b6c70eac35507ac73c"
+x-cache: Hit from cloudfront
+via: 1.1 2032fc652efa8b24e72db743fa879d26.cloudfront.net (CloudFront)
+x-amz-cf-pop: BOS50-P3
+x-amz-cf-id: asgFVVXbYLGpIfKrPCUXSbni-rgy6BBa-oC66XamCxbmW7QM7CLD3g==
+age: 22438
+

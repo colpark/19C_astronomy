@@ -1,0 +1,23 @@
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Length: 26970
+x-amz-id-2: PqMANvHEaNTOUFB/5o1rQeesIBitNS7qGLlr6XzzyxDdjUAgpHH5tbV+x8TMHGEiRxGJ9bfDl6YvWmt1hE103HJWR93eVqKA
+x-amz-request-id: EAM22GCP3V3EY735
+Last-Modified: Mon, 10 Aug 2026 19:40:29 GMT
+ETag: "14cc6da30fa5dea68da57d36da8f21b7"
+x-amz-server-side-encryption: AES256
+Cache-Control: no-cache
+x-amz-meta-surrogate-control: max-age=31536000
+x-amz-meta-surrogate-key: 604a1bc72540440eab3b62f409c0547a
+Content-Type: text/html
+Server: AmazonS3
+Accept-Ranges: bytes
+Age: 0
+Date: Wed, 16 Sep 2026 18:53:01 GMT
+Via: 1.1 varnish
+X-Served-By: cache-chi-klot8100051-CHI
+X-Cache: MISS
+X-Cache-Hits: 0
+X-Timer: S1789584781.166033,VS0,VE154
+Vary: Accept-Encoding
+

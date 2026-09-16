@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>Lasair Status</title>
+  </head>
+  <body>
+    <h1>Lasair Status</h1>
+    <p>Due to scheduled maintenance, both Lasair-ZTF and Lasair-LSST will be fully offline from Monday morning Sept 14 through Wednesday Sept 16, and operating &#34;at-risk&#34; on Sept 17-18. 
+</p>
+    <p>Message updated at: 2026-09-10 14:17:59 UTC</p>
+    <p>
+      <a href="https://lasair-ztf.lsst.ac.uk/">Lasair ZTF</a>: Down
+      <ul>
+        <li>Detail: HTTPSConnectionPool(host=&#39;192.41.122.132&#39;, port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(&lt;urllib3.connection.HTTPSConnection object at 0x7149fa3ce6c0&gt;, &#39;Connection to 192.41.122.132 timed out. (connect timeout=2)&#39;))</li>
+        <li>Last updated: 2026-09-16 18:52:03 UTC)</li>
+      </ul>
+    </p>
+    <p>
+      <a href="https://lasair.lsst.ac.uk/">Lasair LSST</a>: Down
+      <ul>
+        <li>Detail: HTTPSConnectionPool(host=&#39;192.41.122.98&#39;, port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(&lt;urllib3.connection.HTTPSConnection object at 0x7149f986d040&gt;, &#39;Connection to 192.41.122.98 timed out. (connect timeout=2)&#39;))</li>
+        <li>Last updated: 2026-09-16 18:52:05 UTC)</li>
+      </ul>
+    </p>
+  </body>
+</html>

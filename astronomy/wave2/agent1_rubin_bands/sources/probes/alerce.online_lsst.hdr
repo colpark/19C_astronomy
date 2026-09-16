@@ -1,0 +1,14 @@
+HTTP/2 403 
+content-type: text/html; charset=utf-8
+content-length: 3863
+last-modified: Fri, 03 Oct 2025 17:44:26 GMT
+etag: "6678a9ef6ded15b6c70eac35507ac73c"
+x-amz-error-code: AccessDenied
+x-amz-error-message: Access Denied
+date: Wed, 16 Sep 2026 18:55:42 GMT
+server: AmazonS3
+x-cache: Error from cloudfront
+via: 1.1 665aacf5369b3dd562d74779bc60b708.cloudfront.net (CloudFront)
+x-amz-cf-pop: BOS50-P3
+x-amz-cf-id: jn5UED3s7x_v1EeeZ-aC-Mp42saSv3bolsJSMo5ucJHRB3Yr5ysOFw==
+

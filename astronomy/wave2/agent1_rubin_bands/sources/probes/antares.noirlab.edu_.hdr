@@ -1,0 +1,11 @@
+HTTP/2 200 
+server: nginx/1.30.4
+date: Wed, 16 Sep 2026 18:52:59 GMT
+content-type: text/html
+content-length: 974
+last-modified: Mon, 14 Sep 2026 21:38:51 GMT
+etag: "6aa8696b-3ce"
+accept-ranges: bytes
+via: 1.1 google
+alt-svc: h3=":443"; ma=2592000
+

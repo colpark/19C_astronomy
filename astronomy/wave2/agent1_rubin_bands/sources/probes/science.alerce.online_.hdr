@@ -1,0 +1,9 @@
+HTTP/1.1 200 OK
+Date: Wed, 16 Sep 2026 18:55:43 GMT
+Server: Apache
+No-Vary-Search: params=("PageSpeed")
+Link: <https://science.alerce.online/>; rel=shortlink
+Vary: Accept-Encoding
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+

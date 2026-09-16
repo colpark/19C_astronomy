@@ -1,0 +1,24 @@
+{
+ "sealed_by": "agent1 wave2 (Claude Opus 5, itself a subject; reliable knowledge cutoff May 2026)",
+ "sealed_before": "any broker API/page, any TNS page, any Rubin status/progress page opened in this session",
+ "governing_bands": "bands_FROZEN.md sha256 8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2",
+ "basis_of_predictions": "wave-1 ledgers only (agent3 rubin_community posts: 1.4e6 DIA sources over 337 processed visits in dayObs 20260710-20260716; evacuation 2026-07-14/15; off sky through 2026-09-11) plus model prior knowledge, which predates LSST start",
+ "predictions": {
+  "P1_brokers_serving_LSST_objects_publicly_without_credentials": {
+   "Fink_LSST": "yes, a REST API returning diaObject-level records",
+   "ALeRCE_LSST": "yes or partial (API with survey selector); uncertain",
+   "Lasair_LSST": "web pages public, API needs a token -> object query likely needs credentials",
+   "ANTARES": "uncertain whether LSST ingested publicly by 2026-09",
+   "Pitt_Google": "needs Google Cloud credentials -> not public without account"
+  },
+  "P2_nights_observed_dayObs_ge_20260629": {"point": 14, "bracket": [9, 16], "nights_after_2026_07_15_through_2026_09_16": 0},
+  "P3_nights_observed_in_cohort_window_dayObs_ge_20260701": {"point": 12, "bracket": [7, 14]},
+  "P4_distinct_cohort_objects_O_full_stream_broker": {"point": 1.0e6, "bracket": [1.0e5, 5.0e6]},
+  "P5_raw_diaSources_or_alerts_over_distinct_objects_overstatement_pct": {"point": 150, "bracket": [30, 1000]},
+  "P6_share_of_cohort_with_nDiaSources_eq_1": {"point": 0.6, "bracket": [0.3, 0.85]},
+  "P7_broker_disagreement_in_O": "counts differ by more than 10 percent between any two brokers that both serve counts",
+  "P8_measured_labels_P_and_Ng": "UNDEMONSTRATED (TNS requires credentials); if readable, P below 100 and Ng below 20",
+  "P9_label_collapse_ruling": "POLICY-leaning: predicted UNDEMONSTRATED or POLICY; old 2026 objects (age >120 d) labelled well below pre-2026 capture rates",
+  "P10_P4": "no ruling; preconditions unmet (tool_coverage band post-hoc, P/Ng UNDEMONSTRATED); binding axis positive_supply (measured labels) with contamination x supply second; if forced, ESCALATE"
+ }
+}

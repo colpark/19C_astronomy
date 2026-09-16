@@ -1,0 +1,23 @@
+{
+ "name": "alerce_timing_p500",
+ "time_utc": "2026-09-16T18:58:56.358752+00:00",
+ "method": "GET",
+ "url": "https://api-lsst.alerce.online/object_api/list_objects?survey=lsst&firstmjd=61222.000428&firstmjd=61300&page_size=1000&page=500",
+ "body": null,
+ "status": 200,
+ "headers": {
+  "Date": "Wed, 16 Sep 2026 18:59:26 GMT",
+  "Content-Type": "application/json",
+  "Server": "nginx/1.31.3"
+ },
+ "raw_sha256": "989a0c7dbd10279e0f2d68f32d6ec9b286278d8a17e04467a82bf0813d176f2c",
+ "raw_bytes": 429683,
+ "kind": "json",
+ "dropped_keys": [
+  "class_name",
+  "classifier_name",
+  "classifier_version",
+  "probability",
+  "ranking"
+ ]
+}
