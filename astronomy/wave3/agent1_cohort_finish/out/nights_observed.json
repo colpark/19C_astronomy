@@ -1,0 +1,343 @@
+{
+ "toc_file": "sources/rubin_status/schedview_reports_toc.html",
+ "toc_sha256": "031f003022fe4606636bd9ca6d5715316e1aa4e7d751609d83977053d8c11775",
+ "tables": [
+  {
+   "i": 0,
+   "columns": [
+    "Unnamed: 0_level_0 night",
+    "report instrument",
+    "prenight Unnamed: 2_level_1",
+    "multiprenight Unnamed: 3_level_1",
+    "nightsum Unnamed: 4_level_1",
+    "compareprenight Unnamed: 5_level_1",
+    "Total Unnamed: 6_level_1",
+    "science Unnamed: 7_level_1",
+    "night_hours Unnamed: 8_level_1",
+    "median FWHM Unnamed: 9_level_1",
+    "total eff_time/total exp_time Unnamed: 10_level_1"
+   ],
+   "rows": 30
+  },
+  {
+   "i": 1,
+   "columns": [
+    "Unnamed: 0_level_0 night",
+    "report instrument",
+    "prenight Unnamed: 2_level_1",
+    "multiprenight Unnamed: 3_level_1",
+    "nightsum Unnamed: 4_level_1",
+    "compareprenight Unnamed: 5_level_1",
+    "Total Unnamed: 6_level_1",
+    "science Unnamed: 7_level_1",
+    "night_hours Unnamed: 8_level_1",
+    "median FWHM Unnamed: 9_level_1",
+    "total eff_time/total exp_time Unnamed: 10_level_1"
+   ],
+   "rows": 28
+  },
+  {
+   "i": 2,
+   "columns": [
+    "Unnamed: 0_level_0 night",
+    "report instrument",
+    "prenight Unnamed: 2_level_1",
+    "multiprenight Unnamed: 3_level_1",
+    "nightsum Unnamed: 4_level_1",
+    "compareprenight Unnamed: 5_level_1",
+    "Total Unnamed: 6_level_1",
+    "science Unnamed: 7_level_1",
+    "night_hours Unnamed: 8_level_1",
+    "median FWHM Unnamed: 9_level_1",
+    "total eff_time/total exp_time Unnamed: 10_level_1"
+   ],
+   "rows": 375
+  },
+  {
+   "i": 3,
+   "columns": [
+    "Unnamed: 0_level_0 night",
+    "report instrument",
+    "prenight Unnamed: 2_level_1",
+    "multiprenight Unnamed: 3_level_1",
+    "nightsum Unnamed: 4_level_1",
+    "compareprenight Unnamed: 5_level_1",
+    "Total Unnamed: 6_level_1",
+    "science Unnamed: 7_level_1",
+    "night_hours Unnamed: 8_level_1",
+    "median FWHM Unnamed: 9_level_1",
+    "total eff_time/total exp_time Unnamed: 10_level_1"
+   ],
+   "rows": 375
+  }
+ ],
+ "rows": [
+  {
+   "night": "2026-06-29",
+   "total_visits": 885,
+   "science_visits": 875,
+   "fink_alerts": 62794,
+   "fink_visits": 42
+  },
+  {
+   "night": "2026-06-30",
+   "total_visits": 710,
+   "science_visits": 700,
+   "fink_alerts": 254984,
+   "fink_visits": 165
+  },
+  {
+   "night": "2026-07-01",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 36224,
+   "fink_visits": 27
+  },
+  {
+   "night": "2026-07-02",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-03",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-04",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-05",
+   "total_visits": 916,
+   "science_visits": 836,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-06",
+   "total_visits": 913,
+   "science_visits": 899,
+   "fink_alerts": 543950,
+   "fink_visits": 128
+  },
+  {
+   "night": "2026-07-07",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 623292,
+   "fink_visits": 156
+  },
+  {
+   "night": "2026-07-08",
+   "total_visits": 569,
+   "science_visits": 559,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-09",
+   "total_visits": 810,
+   "science_visits": 729,
+   "fink_alerts": 664612,
+   "fink_visits": 223
+  },
+  {
+   "night": "2026-07-10",
+   "total_visits": 433,
+   "science_visits": 407,
+   "fink_alerts": 227916,
+   "fink_visits": 89
+  },
+  {
+   "night": "2026-07-11",
+   "total_visits": 892,
+   "science_visits": 822,
+   "fink_alerts": 125442,
+   "fink_visits": 87
+  },
+  {
+   "night": "2026-07-12",
+   "total_visits": 771,
+   "science_visits": 761,
+   "fink_alerts": 71683,
+   "fink_visits": 38
+  },
+  {
+   "night": "2026-07-13",
+   "total_visits": 860,
+   "science_visits": 679,
+   "fink_alerts": 744559,
+   "fink_visits": 82
+  },
+  {
+   "night": "2026-07-14",
+   "total_visits": 3,
+   "science_visits": 0,
+   "fink_alerts": 473344,
+   "fink_visits": 129
+  },
+  {
+   "night": "2026-07-15",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-16",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-17",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-18",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-19",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-20",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-21",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-22",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-23",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-24",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-26",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-07-27",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-08-23",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  },
+  {
+   "night": "2026-08-24",
+   "total_visits": null,
+   "science_visits": null,
+   "fink_alerts": 0,
+   "fink_visits": 0
+  }
+ ],
+ "nights_with_science_visits_scheduler": [
+  "2026-06-29",
+  "2026-06-30",
+  "2026-07-05",
+  "2026-07-06",
+  "2026-07-08",
+  "2026-07-09",
+  "2026-07-10",
+  "2026-07-11",
+  "2026-07-12",
+  "2026-07-13"
+ ],
+ "n_scheduler": 10,
+ "nights_with_alerts_fink": [
+  "2026-06-29",
+  "2026-06-30",
+  "2026-07-01",
+  "2026-07-06",
+  "2026-07-07",
+  "2026-07-09",
+  "2026-07-10",
+  "2026-07-11",
+  "2026-07-12",
+  "2026-07-13",
+  "2026-07-14"
+ ],
+ "n_fink": 11,
+ "cohort_nights_ge_20260701_scheduler": [
+  "2026-07-05",
+  "2026-07-06",
+  "2026-07-08",
+  "2026-07-09",
+  "2026-07-10",
+  "2026-07-11",
+  "2026-07-12",
+  "2026-07-13"
+ ],
+ "cohort_nights_ge_20260701_fink": [
+  "2026-07-01",
+  "2026-07-06",
+  "2026-07-07",
+  "2026-07-09",
+  "2026-07-10",
+  "2026-07-11",
+  "2026-07-12",
+  "2026-07-13",
+  "2026-07-14"
+ ],
+ "disagreement_nights": [
+  "2026-07-01",
+  "2026-07-05",
+  "2026-07-07",
+  "2026-07-08",
+  "2026-07-14"
+ ],
+ "science_visits_total_ge_20260629": 7267,
+ "last_scheduler_night_with_science": "2026-07-13"
+}

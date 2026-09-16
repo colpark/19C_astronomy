@@ -1,0 +1,34 @@
+{
+ "checked_utc": "2026-09-16T20:17-20:18Z",
+ "ppdb_status": "NOT RELEASED as of 2026-09-16",
+ "evidence": [
+  "rtn-011.lsst.io landing page: current revision '2026-07-01 v9.0' (sources/ppdb/rtn-011.lsst.io_); v9.0 text: PPDB 'expected to become publicly available in the Sep - Oct 2026 time range' (astronomy/agent3_labels_exposure/sources/RTN-011.txt line 2597)",
+  "rubinobservatory.org Early Science page: 'Prompt Products Database (PPDB) Target: Sep-Oct 2026' (sources/ppdb/rubin_early_science.txt)",
+  "community.lsst.org topic 12345 (2026-07-27, RSP release notes): 'Services built on our prompt products database (PPDB) will be our next major release' (sources/ppdb/topic_12345.raw.md)",
+  "community.lsst.org topic 12346 (2026-07-27): PPDB 'expected by the end of 2026' (sources/ppdb/topic_12346.raw.md)",
+  "community.lsst.org News category listing fetched 2026-09-16T20:17Z: newest topics 12695 (2026-09-15, forum migration), 12676 (2026-09-11, summit); no PPDB release topic (sources/ppdb/community.lsst.org_c_news_7.json)"
+ ],
+ "what_ppdb_adds_documented": [
+  "'Yes, all DIASources become alerts and appear in the PPDB.' and 'There may be additional forced photometry measurements in the PPDB for a given DIAObject' (E. Bellm, community.lsst.org topic 11546 post #2, 2026-02-06; sources/ppdb/topic_11546.raw.md)",
+  "Goal of comprehensive history back to the start of the survey (topic 11546 post #4)",
+  "PPDB tables closely mirror the cumulative alert stream, though some precovery data will be available only in the PPDB (RTN-011 v9.0 line 2575)",
+  "Precovery forced photometry: within 24 h of discovery, PSF forced photometry over the previous 30 days, stored as DIAForcedSource, no alerts (LSE-163 lines 950-955)",
+  "Alert packets carry DIASources and DIAForcedSources from the previous 12 months (LDM-612 lines 473-477)"
+ ],
+ "precovery_consequence_for_cohort_bound": {
+  "rule": "bands_FROZEN.md section 3: forced photometry is not detection; only a pre-T0 DIASource makes an object a straddler",
+  "forced_only_precovery": "cannot move any cohort object into S1 under the frozen definition; reported as stratum S2 when the PPDB exists (S2 count UNDEMONSTRATED until then)",
+  "diasource_precovery_bound": "alert stream began 2026-02-24, 127.5 d before T0, inside the 12-month prvDiaSources depth; Rubin states every DIASource becomes an alert. A pre-T0 DIASource of a cohort diaObjectId would therefore already appear in the alert history brokers hold. Documented residual: DIASources that exist only in the PPDB are not described by any primary source read; their count is UNDEMONSTRATED, and the direction of any change is downward only (cohort -> S1).",
+  "empirical_alert_history_check": {
+   "sample": 9000,
+   "in_fink": 8986,
+   "fink_alert_history_first_before_T0": 0,
+   "fink_first_earlier_than_alerce_gt_1s": 0,
+   "fink_first_later_than_alerce_gt_1s": 209,
+   "rubin_apdb_firstDiaSourceMjdTai_served_null": 8986
+  },
+  "upper_bound_on_cohort": 1937669,
+  "lower_bound_on_cohort": "UNDEMONSTRATED until PPDB (only a PPDB DIASource enumeration can move objects out)",
+  "band_consequence": "a PPDB-induced move of up to O_merged - 12,855 = 1924814 objects leaves the cohort in the same O band; only the loss of >= 1924815 of 1937669 objects (99.34%) could cross the 12,855 edge"
+ }
+}

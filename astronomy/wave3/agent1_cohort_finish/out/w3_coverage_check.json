@@ -1,0 +1,17 @@
+{
+ "status": "UNDEMONSTRATED (stopped 2026-09-16T21:25Z after ~13 min; day-level ALeRCE queries return HTTP 504 Gateway Time-out, as in wave-2 AM3)",
+ "last_request": {
+  "time_utc": "2026-09-16T21:24:25.720235+00:00",
+  "status": 504,
+  "url": "https://api-lsst.alerce.online/object_api/list_objects?survey=lsst&firstmjd=61226.00042824074&firstmjd=61227.00042824074&page_size=1&page=1",
+  "headers": {
+   "Date": "Wed, 16 Sep 2026 21:25:25 GMT",
+   "Content-Type": "text/html",
+   "Content-Length": "167",
+   "Server": "nginx/1.31.3"
+  }
+ },
+ "dates_attempted_through": "UTC date with firstmjd 61226.000428 (2026-07-05) of 69 non-Fink dates 2026-07-02..2026-09-16",
+ "independent_evidence_no_observation": "Fink statistics: no alerts on these UTC dates; Rubin scheduler reports: no LSSTCam science visits on dayObs 20260701-20260704, 20260707, >=20260714 (out/nights_observed.json copied from wave 2)",
+ "consequence": "the ALeRCE cohort count covers the 9 Fink alert dates; any ALeRCE-held object first detected on another date is not counted (coverage limit, not a zero)"
+}

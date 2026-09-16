@@ -1,0 +1,23 @@
+{
+ "name": "w3_p60_279625001726336",
+ "time_utc": "2026-09-16T20:51:47.074929+00:00",
+ "method": "GET",
+ "url": "https://api-lsst.alerce.online/object_api/list_objects?survey=lsst&firstmjd=61221.940428&firstmjd=61221.960428&page_size=5000&page=1",
+ "body": null,
+ "status": 200,
+ "headers": {
+  "Date": "Wed, 16 Sep 2026 20:51:48 GMT",
+  "Content-Type": "application/json",
+  "Server": "nginx/1.31.6"
+ },
+ "raw_sha256": "3a6bd2e4352fb97fd6b5c468411dd12701e9472780ecc2fb16dbb85d8c3cb8d9",
+ "raw_bytes": 55199,
+ "kind": "json",
+ "dropped_keys": [
+  "class_name",
+  "classifier_name",
+  "classifier_version",
+  "probability",
+  "ranking"
+ ]
+}

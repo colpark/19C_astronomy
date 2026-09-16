@@ -1,0 +1,35 @@
+{
+  "label": "PLANNING-ONLY / SYNTHETIC / NOT A P7 RECORD",
+  "runs": {
+    "0.018": {
+      "k": 8,
+      "candidates_per_item": 46.41,
+      "chance": 0.172377,
+      "delta": 0.018,
+      "alpha": 0.05,
+      "power": 0.8,
+      "n": 150,
+      "mean_paired_difference": -0.0,
+      "sigma_d": 0.176777,
+      "mde": 0.040438,
+      "n_min": 758,
+      "ruling": "CLOSE_UNRESOLVABLE",
+      "completeness": "chance, sigma_d, MDE and N_min over 150 clustered units at alpha 0.05, power 0.8"
+    },
+    "0.05": {
+      "k": 8,
+      "candidates_per_item": 46.41,
+      "chance": 0.172377,
+      "delta": 0.05,
+      "alpha": 0.05,
+      "power": 0.8,
+      "n": 150,
+      "mean_paired_difference": -0.0,
+      "sigma_d": 0.176777,
+      "mde": 0.040438,
+      "n_min": 99,
+      "ruling": "RESOLVABLE",
+      "completeness": "chance, sigma_d, MDE and N_min over 150 clustered units at alpha 0.05, power 0.8"
+    }
+  }
+}

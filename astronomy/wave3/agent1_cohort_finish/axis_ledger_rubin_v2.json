@@ -1,0 +1,136 @@
+{
+ "candidate": "live time-domain astronomy: Rubin LSST prospective cohort (first detection >= 2026-07-01T00:00 UTC)",
+ "branch": "prediction",
+ "version": "v2 (wave 3)",
+ "bands": "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md sha256 8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2",
+ "sealed_counts": "sealed/rubin_counts_w3_SEALED.json sha256 737fc0be68d70c32d9a1b548aac0c8ba441f435e0cec33c2c1903916485df4c7",
+ "ruling": null,
+ "ruling_refused_because": [
+  "precondition (a) unmet: positive_supply and negative_supply carry no number (measured labels not read by this agent; TNS BLOCKED)",
+  "precondition (b) unmet in this ledger: tool_coverage recount after the band hash (agent 4, wave 3) not landed",
+  "precondition (c) unmet: label source not ratified (manifest freeze v2 pending, agent 3)"
+ ],
+ "preconditions_cleared_this_wave": [
+  "split_integrity, unprocessable_units and cluster_structure now carry complete numbers against frozen bands"
+ ],
+ "binding_axis": "positive_supply at measured labels: frozen bands (delta 0.018) need L >= 12,855 or 1,515 scoreable nights; PLANNING-ONLY at the PI override delta 0.05 the upper bracket is 1666 objects or 197 nights; the cohort holds 1937669 unlabelled-to-this-agent objects over 9 nights, off sky since 2026-07-14",
+ "delta_note": "bands are frozen at delta 0.018; the PI override 0.05 is carried beside, planning-only, and a re-band at 0.05 is a new hashed registration for D5/agent 3, not made here",
+ "definition_widened": false,
+ "axes": [
+  {
+   "axis": "positive_supply",
+   "disposition": "UNDEMONSTRATED",
+   "band_frozen_delta_0p018": "UNDEMONSTRATED (P unread); CLOSE excluded (O >= 485)",
+   "at_delta_0p05_planning_only": "PROCEED would need P >= 1 and L >= 1666 or M_sc >= 197; CLOSE would need O < 63 and M_obs < 6; not a band",
+   "value": {
+    "P_measured": "UNDEMONSTRATED (labels are agent 2's; TNS BLOCKED per coordinator preamble)",
+    "O_optimistic_bound": 1937669,
+    "M_obs": 10,
+    "cohort_nights": 9,
+    "M_sc": "UNDEMONSTRATED",
+    "PROCEED_threshold_frozen": {
+     "L": 12855,
+     "M_sc": 1515
+    }
+   },
+   "provenance": [
+    "w3-02",
+    "w3-09"
+   ]
+  },
+  {
+   "axis": "negative_supply",
+   "disposition": "UNDEMONSTRATED",
+   "band_frozen_delta_0p018": "UNDEMONSTRATED (Ng unread); CLOSE excluded (O >= 485)",
+   "value": {
+    "Ng_measured": "UNDEMONSTRATED",
+    "unlabelled_counted_as_negative": 0
+   },
+   "provenance": [
+    "w3-02"
+   ]
+  },
+  {
+   "axis": "contamination_exposure",
+   "disposition": "PASS (counted)",
+   "band_frozen_delta_0p018": "ESCALATE (a subject lacks a published cutoff: Gemini 3.1 Pro)",
+   "value": {
+    "E_first_detected_after_every_demonstrated_cutoff": 1937669,
+    "S0_excluded_loci": 112990,
+    "S1_excluded": 521920,
+    "sample_loci_with_alert_history_before_T0_at_position_ANTARES": "193/9000 (gaps 11.97-2942.82 d; 3 within 60 d)"
+   },
+   "note": "the ANTARES older-alert loci are a listed leak (public alerts at the position before the cutoff), not S1 under the Rubin-diaObject definition",
+   "provenance": [
+    "w3-02",
+    "w3-05",
+    "w3-07"
+   ]
+  },
+  {
+   "axis": "tool_coverage",
+   "disposition": "UNDEMONSTRATED for this ledger",
+   "band_frozen_delta_0p018": "NOT RULABLE here: the only count (wave-1 0/25) predates the band; agent 4's wave-3 recount had not landed when this ledger was built",
+   "value": {
+    "verified_on_rubin_wave1": "0 of 25"
+   },
+   "provenance": [
+    "astronomy/agent4_tools_instrument/REPORT.md section 3"
+   ]
+  },
+  {
+   "axis": "cluster_structure",
+   "disposition": "PASS",
+   "band_frozen_delta_0p018": "PROCEED",
+   "value": {
+    "alerce_oids": 1937720,
+    "merged_objects": 1937669,
+    "raw_detections": 2418954,
+    "detections_overstatement_pct": 24.84,
+    "fink_raw_alerts": 3511022,
+    "fink_first_detection_bracket": [
+     1773044,
+     2018299
+    ],
+    "antares_loci": 1908703
+   },
+   "note": "every broker count lies in the same band (O >= 485 and >= 12,855)",
+   "provenance": [
+    "w3-01",
+    "w3-02",
+    "w3-03"
+   ]
+  },
+  {
+   "axis": "split_integrity",
+   "disposition": "PASS",
+   "band_frozen_delta_0p018": "PROCEED",
+   "value": {
+    "S1_total": 521920,
+    "S1_merge": 1,
+    "fink_alert_history_first_before_T0_sample": "0/8986",
+    "O_minus_all_listed_worst_case": 1896117
+   },
+   "note": "S1 objects are outside O by definition; O minus the sample-scaled ANTARES older-locus share is still >= 12,855, so the band is unchanged. PPDB-only DIASources UNDEMONSTRATED (can only lower O; >= 99.34 percent would be needed to change band)",
+   "provenance": [
+    "w3-05",
+    "w3-07",
+    "w3-08"
+   ]
+  },
+  {
+   "axis": "unprocessable_units",
+   "disposition": "PASS",
+   "band_frozen_delta_0p018": "PROCEED",
+   "value": {
+    "U": 0,
+    "rows_checked": 3527572,
+    "coverage_limit_non_fink_dates": "UNDEMONSTRATED (HTTP 504), independent sources show no observations"
+   },
+   "provenance": [
+    "w3-06"
+   ]
+  }
+ ],
+ "completeness": "All seven axes listed for the Rubin cohort. Complete numbers: cluster_structure (1,937,720 oids, 1,937,669 merged, 2,418,954 detections), split_integrity (S1 521,920), unprocessable_units (U 0), contamination (E 1,937,669). UNDEMONSTRATED: positive and negative measured supply (labels, agent 2), tool_coverage recount (agent 4), PPDB-only DIASources, ALeRCE holdings on non-Fink dates (HTTP 504). Lasair and Pitt-Google not re-attempted this wave. P4 refused; ruling null by design."
+}

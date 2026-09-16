@@ -1,0 +1,667 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Vera C. Rubin Observatory Data Preview 1 (DP1)" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://dp1.lsst.io/index.html" />
+<meta property="og:site_name" content="DP1" />
+<meta property="og:description" content="The Data Preview 1 dataset is based on images from the Vera C. Rubin Observatory’s Commissioning Camera." />
+<meta property="og:image" content="https://dp1.lsst.io/_images/doi.png" />
+<meta property="og:image:alt" content="DOI Logo" />
+<meta name="description" content="Release date: Mon Jun 30 2025 Update: Tue Jan 8 2026, to correct an issue with the WCS FITS approximation. Data Preview 1 contains image and catalog products from Rubin Science Pipelines v29 proces..." />
+    <link href="_static/rubin-favicon-transparent-32px.png" rel="icon" sizes="32x32" type="image/png">
+    <link href="_static/rubin-favicon.svg" rel="icon" type="image/svg+xml">
+<meta property="article:modified_time" content="2026-08-10T22:26:09+00:00" />
+<meta name="dcterms.modified" content="2026-08-10T22:26:09+00:00" />
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "dateModified": "2026-08-10T22:26:09+00:00", "@id": "https://dp1.lsst.io/index.html", "url": "https://dp1.lsst.io/index.html"}</script>
+    <title>Vera C. Rubin Observatory Data Preview 1 (DP1) &#8212; DP1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/rubin-pydata-theme.css?v=08553452" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/jquery.js?v=5d32c60e"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="_static/documentation_options.js?v=594aee19"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="lsst.io" defer="defer" src="https://plausible.io/js/script.file-downloads.hash.outbound-links.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script src="_static/rubin-last-modified.js?v=3b2c0701"></script>
+    <link rel="canonical" href="https://dp1.lsst.io/index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Overview of Data Preview 1" href="overview/index.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="Current" />
+    <meta name="docbuild:last-update" content="Aug 10, 2026"/>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  
+  <link rel="sitemap" type="application/xml" href="https://dp1.lsst.io/sitemap.xml">
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/rubin-titlebar-imagotype-light.svg" class="logo__image only-light" alt=""/>
+    <img src="_static/rubin-titlebar-imagotype-dark.svg" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">DP1</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="overview/index.html">
+    Overview
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="products/index.html">
+    Data products
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="processing/index.html">
+    Data processing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="access/index.html">
+    Data access
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="tutorials/index.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="citedp1.html">
+    How to cite Data Preview 1
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.lsst.io">
+    Rubin docs
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/lsst/dp1_lsst_io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github-square fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="overview/index.html">
+    Overview
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="products/index.html">
+    Data products
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="processing/index.html">
+    Data processing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="access/index.html">
+    Data access
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="tutorials/index.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="citedp1.html">
+    How to cite Data Preview 1
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.lsst.io">
+    Rubin docs
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/lsst/dp1_lsst_io" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github-square fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="vera-c-rubin-observatory-data-preview-1-dp1">
+<h1>Vera C. Rubin Observatory Data Preview 1 (DP1)<a class="headerlink" href="#vera-c-rubin-observatory-data-preview-1-dp1" title="Link to this heading">#</a></h1>
+<p><strong>Release date</strong>: Mon Jun 30 2025</p>
+<p><strong>Update</strong>: Tue Jan 8 2026, to correct an <a class="reference internal" href="overview/known_issues_and_subtleties.html#products-wcs-known-issues"><span class="std std-ref">issue with the WCS FITS approximation</span></a>.</p>
+<p>Data Preview 1 contains image and catalog products from Rubin Science Pipelines v29 processing of observations obtained with the LSST Commissioning Camera of seven ~1 square degree fields over seven weeks in late 2024.</p>
+<p><em>Dataset</em> <em>Citation</em>: <strong>NSF-DOE Vera C. Rubin Observatory</strong> (2025); Legacy Survey of Space and Time Data Preview 1 <a class="reference internal" href="_images/doi.png"><img alt="DOI Logo" src="_images/doi.png" style="width: 15px;" /></a> <a class="reference external" href="https://doi.org/10.71929/rubin/2570308">https://doi.org/10.71929/rubin/2570308</a> [<a class="reference download internal" download="" href="_downloads/ec3d47a16815fe5a9685455206309cc2/dataset.bib"><code class="xref download docutils literal notranslate"><span class="pre">BibTeX</span></code></a>] to be used when citing the DP1 dataset and this documentation (the link is self-referential).</p>
+<p><em>Paper</em> <em>Citation</em>: <strong>NSF-DOE Vera C. Rubin Observatory</strong> (2025); The Vera C. Rubin Observatory Data Preview 1 <a class="reference internal" href="_images/doi.png"><img alt="DOI Logo" src="_images/doi.png" style="width: 15px;" /></a> <a class="reference external" href="https://doi.org/10.3847/1538-3881/ae521f">https://doi.org/10.3847/1538-3881/ae521f</a> [<a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2026AJ....171..360V/exportcitation">BibTeX</a>]</p>
+<p><strong>Data Policy:</strong> Only Rubin data rights holders may have an account in the Rubin Science Platform (RSP) and access to Data Preview 1.
+All scientists and students in the US and Chile, plus named members of international in-kind teams, have Rubin data rights.
+<a class="reference external" href="https://rubinobservatory.org/for-scientists/data-products/data-policy">Learn more about the Rubin data policy</a>.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>General information about the observations, image quality, and known issues.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview/index.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview/index.html#lsst-commissioning-camera">LSST Commissioning Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/index.html#observations">Observations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/index.html#image-quality">Image quality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/index.html#image-artifacts">Image artifacts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/index.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="data-products">
+<h2>Data products<a class="headerlink" href="#data-products" title="Link to this heading">#</a></h2>
+<p>Descriptions and schema for the images and catalogs.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="products/index.html">Data products</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="products/index.html#catalogs">Catalogs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="products/index.html#images">Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="products/index.html#maps">Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="products/index.html#additional-data-products-and-information">Additional data products and information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="products/index.html#user-generated-products">User-generated products</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="data-processing">
+<h2>Data processing<a class="headerlink" href="#data-processing" title="Link to this heading">#</a></h2>
+<p>Summaries of the data processing steps that generated the data products.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="processing/index.html">Data processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="processing/index.html#summary">Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processing/index.html#instrument-signature-removal-isr">Instrument signature removal (ISR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processing/index.html#calibration">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processing/index.html#coaddition">Coaddition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processing/index.html#source-detection-and-measurement">Source detection and measurement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processing/index.html#difference-image-analysis">Difference image analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processing/index.html#moving-objects-processing">Moving objects processing</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="data-access">
+<h2>Data access<a class="headerlink" href="#data-access" title="Link to this heading">#</a></h2>
+<p>Services and tools for data access.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="access/index.html">Data access</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="access/index.html#rubin-science-platform-rsp">Rubin Science Platform (RSP)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading">#</a></h2>
+<p>Tutorials demonstrating how to access and analyze the data products.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/index.html#portal-aspect">Portal Aspect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/index.html#notebook-aspect">Notebook Aspect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/index.html#api-aspect">API Aspect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/index.html#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/index.html#citing">Citing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/index.html#log-of-major-updates">Log of major updates</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="cite">
+<span id="overview-citedp1"></span><h2>Cite<a class="headerlink" href="#cite" title="Link to this heading">#</a></h2>
+<p>How to cite Rubin Observatory and Data Preview 1.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="citedp1.html">How to cite Data Preview 1</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><p class="last-updated">
+  This page was last modified on
+  <time datetime="2026-08-10T22:26:09+00:00"
+        class="documenteer-last-modified"
+        data-documenteer-last-modified>2026-08-10</time>.
+</p></div>
+  
+</div>
+                </footer>
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="overview/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Overview of Data Preview 1</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-products">Data products</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing">Data processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-access">Data access</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorials">Tutorials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cite">Cite</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/lsst/dp1_lsst_io/edit/main/docs/index.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025 Association of Universities for Research in Astronomy, Inc. (AURA).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

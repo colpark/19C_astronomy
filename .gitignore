@@ -12,3 +12,5 @@ astronomy/**/sources/**/*.pdf
 # Opaque-id maps stay local until a rulings holder takes custody (their hashes are in transfer_record.json)
 astronomy/wave2/agent5_skill_maintenance/holder_handover/
 astronomy/wave3/agent5_integrity/holder_handover/
+# Wave-3 cohort slice dumps (~350MB): hashed in out/SLICES_SHA256SUMS and kept local
+astronomy/wave3/agent1_cohort_finish/out/w3_*_slices/

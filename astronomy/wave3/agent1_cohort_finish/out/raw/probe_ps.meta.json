@@ -1,0 +1,23 @@
+{
+ "name": "probe_ps",
+ "time_utc": "2026-09-16T20:15:29.190534+00:00",
+ "method": "GET",
+ "url": "https://api-lsst.alerce.online/object_api/list_objects?survey=lsst&firstmjd=61227.1904&firstmjd=61227.1917&page_size=5000&page=1",
+ "body": null,
+ "status": 200,
+ "headers": {
+  "Date": "Wed, 16 Sep 2026 20:15:37 GMT",
+  "Content-Type": "application/json",
+  "Server": "nginx/1.31.3"
+ },
+ "raw_sha256": "080111b45d1c5cd19a4d6a3b6982bcfc79e88d04fcdf0cf1b27315a04ddcd20b",
+ "raw_bytes": 2162040,
+ "kind": "json",
+ "dropped_keys": [
+  "class_name",
+  "classifier_name",
+  "classifier_version",
+  "probability",
+  "ranking"
+ ]
+}

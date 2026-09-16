@@ -1,0 +1,261 @@
+{
+ "sealed_note": "wave-3 non-label counts; sealed before any label field is read (none is planned in wave 3)",
+ "governing_bands": "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md sha256 8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2",
+ "protocol": "count_protocol_w3_FROZEN.md sha256 de241fc93a0568af2c0d26634b1d5d4e2b198ebf40ddbe59b27ec9a7acd1b649",
+ "amendments": "amendments_w3.md sha256 024a9609352b38696a0e811da4d9a23b5242a1d48991c61cf443cdfecc70f9c6",
+ "merge": {
+  "inputs": {
+   "w3_c3": {
+    "slices": 450,
+    "rows_sha256": "bdab23f0cafaa26018e3f51b1db3824113c9887ae9da786a383a902b8ec97503",
+    "summary": {
+     "name": "w3_c3",
+     "dates": [
+      20260701,
+      20260706,
+      20260707,
+      20260709,
+      20260710,
+      20260711,
+      20260712,
+      20260713,
+      20260714
+     ],
+     "lastmjd_ge": null,
+     "slices_planned": 450,
+     "slices_done": 450,
+     "complete": true,
+     "requests": 117,
+     "errors": [],
+     "wall_s": 409
+    },
+    "distinct": 1937720
+   },
+   "w3_p60": {
+    "slices": 1551,
+    "rows_sha256": "bfbac97ccc0ac52de2b4d01659cf992cb7f1d4fdab13c94b4bc8821a04c74a88",
+    "summary": {
+     "name": "w3_p60",
+     "dates": [
+      20260501,
+      20260502,
+      20260512,
+      20260513,
+      20260517,
+      20260518,
+      20260519,
+      20260520,
+      20260522,
+      20260523,
+      20260524,
+      20260525,
+      20260526,
+      20260527,
+      20260529,
+      20260530,
+      20260531,
+      20260601,
+      20260604,
+      20260605,
+      20260607,
+      20260608,
+      20260612,
+      20260613,
+      20260614,
+      20260615,
+      20260620,
+      20260626,
+      20260627,
+      20260628,
+      20260629,
+      20260630,
+      20260701
+     ],
+     "lastmjd_ge": null,
+     "slices_planned": 1551,
+     "slices_done": 1551,
+     "complete": true,
+     "requests": 123,
+     "errors": [],
+     "wall_s": 483
+    },
+    "distinct": 1589852
+   },
+   "w3_c5": {
+    "slices": 1500,
+    "rows_sha256": "b9ec31e7eacd9cde33c234bff1ba14a7e19a36b9be5eafede1253ad13702b324",
+    "summary": {
+     "name": "w3_c5",
+     "dates": [
+      20260224,
+      20260225,
+      20260226,
+      20260227,
+      20260228,
+      20260301,
+      20260302,
+      20260303,
+      20260304,
+      20260306,
+      20260307,
+      20260308,
+      20260309,
+      20260310,
+      20260405,
+      20260406,
+      20260407,
+      20260408,
+      20260409,
+      20260410,
+      20260411,
+      20260412,
+      20260413,
+      20260414,
+      20260415,
+      20260416,
+      20260421,
+      20260422,
+      20260430,
+      20260501,
+      20260502
+     ],
+     "lastmjd_ge": 61222.000428,
+     "slices_planned": 1500,
+     "slices_done": 1500,
+     "complete": true,
+     "requests": 24,
+     "errors": [],
+     "wall_s": 28
+    },
+    "distinct": 471
+   },
+   "c3_p60_oid_overlap": 0
+  },
+  "cohort_oids": 1937720,
+  "cohort_raw_detections_sum_n_det": 2418954,
+  "overstatement_pct_detections_vs_oids": 24.84,
+  "S3_one_detection_oids": 1566024,
+  "S3_share_oids": 0.8082,
+  "X2_pairs_joined": 92,
+  "X3_same_position_distinct_pairs": 0,
+  "O_merged": 1937669,
+  "merged_overstatement_pct_oids_vs_merged": 0.003,
+  "S3_one_detection_share_merged": 0.8082,
+  "S1_merge_oids": 1,
+  "S1_merge_groups": 1,
+  "S1_direct_firstmjd_T0minus60_to_T0": 521448,
+  "S1_direct_firstmjd_20260224_to_T0minus60": 471,
+  "S1_total_direct_plus_merge_oids": 521920,
+  "unprocessable_U": 0,
+  "unprocessable_examples": [],
+  "c5_rows_violating_filter": 0
+ },
+ "crosscheck_AM7": {
+  "sample": 9000,
+  "in_fink": 8986,
+  "fink_first_null": 0,
+  "rubin_first_served_null": 8986,
+  "fink_first_before_T0": 0,
+  "fink_first_earlier_than_alerce_gt_1s": 0,
+  "fink_first_later_than_alerce_gt_1s": 209,
+  "in_antares": 9000,
+  "antares_oldest_before_T0": 193,
+  "antares_gap_days_quantiles": [
+   11.97,
+   320.09,
+   1842.93,
+   2802.1,
+   2942.82
+  ],
+  "antares_gap_le_60d": 3,
+  "nDiaSources_ne_alerce_ndet": 409,
+  "not_in_fink": 14
+ },
+ "coverage_check": {
+  "status": "UNDEMONSTRATED (stopped 2026-09-16T21:25Z after ~13 min; day-level ALeRCE queries return HTTP 504 Gateway Time-out, as in wave-2 AM3)",
+  "last_request": {
+   "time_utc": "2026-09-16T21:24:25.720235+00:00",
+   "status": 504,
+   "url": "https://api-lsst.alerce.online/object_api/list_objects?survey=lsst&firstmjd=61226.00042824074&firstmjd=61227.00042824074&page_size=1&page=1",
+   "headers": {
+    "Date": "Wed, 16 Sep 2026 21:25:25 GMT",
+    "Content-Type": "text/html",
+    "Content-Length": "167",
+    "Server": "nginx/1.31.3"
+   }
+  },
+  "dates_attempted_through": "UTC date with firstmjd 61226.000428 (2026-07-05) of 69 non-Fink dates 2026-07-02..2026-09-16",
+  "independent_evidence_no_observation": "Fink statistics: no alerts on these UTC dates; Rubin scheduler reports: no LSSTCam science visits on dayObs 20260701-20260704, 20260707, >=20260714 (out/nights_observed.json copied from wave 2)",
+  "consequence": "the ALeRCE cohort count covers the 9 Fink alert dates; any ALeRCE-held object first detected on another date is not counted (coverage limit, not a zero)"
+ },
+ "ppdb": {
+  "checked_utc": "2026-09-16T20:17-20:18Z",
+  "ppdb_status": "NOT RELEASED as of 2026-09-16",
+  "evidence": [
+   "rtn-011.lsst.io landing page: current revision '2026-07-01 v9.0' (sources/ppdb/rtn-011.lsst.io_); v9.0 text: PPDB 'expected to become publicly available in the Sep - Oct 2026 time range' (astronomy/agent3_labels_exposure/sources/RTN-011.txt line 2597)",
+   "rubinobservatory.org Early Science page: 'Prompt Products Database (PPDB) Target: Sep-Oct 2026' (sources/ppdb/rubin_early_science.txt)",
+   "community.lsst.org topic 12345 (2026-07-27, RSP release notes): 'Services built on our prompt products database (PPDB) will be our next major release' (sources/ppdb/topic_12345.raw.md)",
+   "community.lsst.org topic 12346 (2026-07-27): PPDB 'expected by the end of 2026' (sources/ppdb/topic_12346.raw.md)",
+   "community.lsst.org News category listing fetched 2026-09-16T20:17Z: newest topics 12695 (2026-09-15, forum migration), 12676 (2026-09-11, summit); no PPDB release topic (sources/ppdb/community.lsst.org_c_news_7.json)"
+  ],
+  "what_ppdb_adds_documented": [
+   "'Yes, all DIASources become alerts and appear in the PPDB.' and 'There may be additional forced photometry measurements in the PPDB for a given DIAObject' (E. Bellm, community.lsst.org topic 11546 post #2, 2026-02-06; sources/ppdb/topic_11546.raw.md)",
+   "Goal of comprehensive history back to the start of the survey (topic 11546 post #4)",
+   "PPDB tables closely mirror the cumulative alert stream, though some precovery data will be available only in the PPDB (RTN-011 v9.0 line 2575)",
+   "Precovery forced photometry: within 24 h of discovery, PSF forced photometry over the previous 30 days, stored as DIAForcedSource, no alerts (LSE-163 lines 950-955)",
+   "Alert packets carry DIASources and DIAForcedSources from the previous 12 months (LDM-612 lines 473-477)"
+  ],
+  "precovery_consequence_for_cohort_bound": {
+   "rule": "bands_FROZEN.md section 3: forced photometry is not detection; only a pre-T0 DIASource makes an object a straddler",
+   "forced_only_precovery": "cannot move any cohort object into S1 under the frozen definition; reported as stratum S2 when the PPDB exists (S2 count UNDEMONSTRATED until then)",
+   "diasource_precovery_bound": "alert stream began 2026-02-24, 127.5 d before T0, inside the 12-month prvDiaSources depth; Rubin states every DIASource becomes an alert. A pre-T0 DIASource of a cohort diaObjectId would therefore already appear in the alert history brokers hold. Documented residual: DIASources that exist only in the PPDB are not described by any primary source read; their count is UNDEMONSTRATED, and the direction of any change is downward only (cohort -> S1).",
+   "empirical_alert_history_check": {
+    "sample": 9000,
+    "in_fink": 8986,
+    "fink_alert_history_first_before_T0": 0,
+    "fink_first_earlier_than_alerce_gt_1s": 0,
+    "fink_first_later_than_alerce_gt_1s": 209,
+    "rubin_apdb_firstDiaSourceMjdTai_served_null": 8986
+   },
+   "upper_bound_on_cohort": 1937669,
+   "lower_bound_on_cohort": "UNDEMONSTRATED until PPDB (only a PPDB DIASource enumeration can move objects out)",
+   "band_consequence": "a PPDB-induced move of up to O_merged - 12,855 = 1924814 objects leaves the cohort in the same O band; only the loss of >= 1924815 of 1937669 objects (99.34%) could cross the 12,855 edge"
+  }
+ },
+ "planning_thresholds_PLANNING_ONLY": {
+  "file": "planning_mde_bracket_w3.csv sha256 362130b15d4fe093052b16fcbbe300d391e5b977007bd8f917d893f5cc687667",
+  "nights_family_A": {
+   "0.018": [
+    40,
+    1515
+   ],
+   "0.05": [
+    6,
+    197
+   ]
+  },
+  "objects_family_B": {
+   "0.018": [
+    485,
+    12855
+   ],
+   "0.05": [
+    63,
+    1666
+   ]
+  },
+  "reproduces_wave1_0p018": "yes, 0 differences over 32 rows"
+ },
+ "carried_from_wave2": {
+  "fink_first_detections_bracket": [
+   1773044,
+   2018299
+  ],
+  "fink_raw_alerts": 3511022,
+  "antares_cohort_loci": 1908703,
+  "antares_S0_loci": 112990,
+  "M_obs": 10,
+  "cohort_nights": 9,
+  "correction": "wave-2 C4 Fink first-time fields were null for 3000/3000; its 'fink_places_before_T0 = 0' and 'first_detection_disagree = 0' were vacuous (AM7)"
+ }
+}

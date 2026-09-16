@@ -1,0 +1,155 @@
+{
+ "sealed_note": "non-label counts only; sealed before any classification or TNS field is read",
+ "bands": "bands_FROZEN.md sha256 8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2",
+ "protocol": "count_protocol_FROZEN.md sha256 5a5de4c8f668cf4b2cdcdaeac8b9e6a4e8706f8f0c640605511fe05fd155ed82",
+ "amendments": "amendments.md sha256 e370fcd400b2b09cbfcacf006a3089fece13e896a373eb9e62af982145e107bd",
+ "C1_fink": {
+  "file_sha256": "eff15a9f5d6bf094e4b72bbd83b5759bdf14b64466df17c5dc3ef1699eebd59f",
+  "lower": {
+   "nights": [
+    20260701,
+    20260706,
+    20260707,
+    20260709,
+    20260710,
+    20260711,
+    20260712,
+    20260713,
+    20260714
+   ],
+   "n_nights": 9,
+   "alerts": 3511022,
+   "is_first": 2018299,
+   "is_sso": 245255,
+   "objects_night_summed": 2965148,
+   "visits": 959,
+   "O_hi": 2018299,
+   "O_lo": 1773044,
+   "overstatement_pct_vs_O_hi": 74.0,
+   "overstatement_pct_vs_O_lo": 98.0
+  },
+  "upper": {
+   "nights": [
+    20260630,
+    20260701,
+    20260706,
+    20260707,
+    20260709,
+    20260710,
+    20260711,
+    20260712,
+    20260713,
+    20260714
+   ],
+   "n_nights": 10,
+   "alerts": 3766006,
+   "is_first": 2140086,
+   "is_sso": 299121,
+   "objects_night_summed": 3143910,
+   "visits": 1124,
+   "O_hi": 2140086,
+   "O_lo": 1840965,
+   "overstatement_pct_vs_O_hi": 76.0,
+   "overstatement_pct_vs_O_lo": 104.6
+  },
+  "last_night_with_alerts": 20260714,
+  "night_convention_inferred": "Fink night = UTC date = dayObs+1 (scheduler nights shifted +1 equal Fink alert nights; Fink visits for dayObs 0710-0714 = 336 vs Rubin '337 processed visits')"
+ },
+ "C2_antares": {
+  "cohort_T0_to_61300": {
+   "loci": 1908703,
+   "complete": true
+  },
+  "S0_TS_to_T0": {
+   "loci": 112990,
+   "complete": true
+  },
+  "requests": 1907,
+  "slices_file_sha256": "0c0f119bed0b8f68acf05199b1d10d2753a609476c0d0eaa1522469cb374ee63"
+ },
+ "C3_alerce": {
+  "status": "UNDEMONSTRATED (interrupted by agent at 2026-09-16T19:50Z on coordinator instruction; never zero)",
+  "complete": false,
+  "requests": 1018,
+  "cap": 4000,
+  "slices_completed_of_planned": "82 of ~450 (9 UTC dates x 50 slices of 0.02 d)",
+  "distinct_oids_lower_bound": 189641,
+  "last_progress": "61227.2204 61227.2404 pages=14 rows=13894 req=1018 distinct=189641",
+  "object_table": "not written (script writes out/c3_alerce_objects.csv only at completion)",
+  "errors": [],
+  "slices": [],
+  "rerun": "scripts/count_c3_alerce.py -> out/c3_alerce.json, out/c3_alerce_objects.csv, out/c3_progress.txt"
+ },
+ "C4_crossbroker": {
+  "W_total_in_alerce": 4841,
+  "sampled": 3000,
+  "errors": [],
+  "in_fink": 3000,
+  "in_antares": 3000,
+  "in_both": 3000,
+  "fink_places_before_T0": 0,
+  "antares_oldest_before_T0": 0,
+  "first_detection_disagree_gt_1s": 0,
+  "ndet_disagree_fink_vs_alerce": 159,
+  "antares_locus_with_ztf": 0,
+  "antares_locus_multi_lsst_ids": 0,
+  "antares_multi_loci_per_oid": 0,
+  "unprocessable_missing_first_or_pos": 0,
+  "sum_alerce_n_det": 3386,
+  "sum_fink_nDiaSources": 3227,
+  "sum_antares_num_alerts": 3386,
+  "file_sha256": "d20cec863aac61ee51e0b9611cc351efed22e390fe048b1a49258dd5b7f9d16f"
+ },
+ "nights": {
+  "M_obs_scheduler_dayObs_ge_20260629": 10,
+  "nights": [
+   "2026-06-29",
+   "2026-06-30",
+   "2026-07-05",
+   "2026-07-06",
+   "2026-07-08",
+   "2026-07-09",
+   "2026-07-10",
+   "2026-07-11",
+   "2026-07-12",
+   "2026-07-13"
+  ],
+  "cohort_nights_after_T0": [
+   "2026-07-05",
+   "2026-07-06",
+   "2026-07-08",
+   "2026-07-09",
+   "2026-07-10",
+   "2026-07-11",
+   "2026-07-12",
+   "2026-07-13"
+  ],
+  "fink_alert_nights": [
+   "2026-06-29",
+   "2026-06-30",
+   "2026-07-01",
+   "2026-07-06",
+   "2026-07-07",
+   "2026-07-09",
+   "2026-07-10",
+   "2026-07-11",
+   "2026-07-12",
+   "2026-07-13",
+   "2026-07-14"
+  ],
+  "science_visits_total": 7267,
+  "last_night_with_science": "2026-07-13",
+  "toc_sha256": "031f003022fe4606636bd9ca6d5715316e1aa4e7d751609d83977053d8c11775"
+ },
+ "lasair": "UNDEMONSTRATED: status page 'fully offline from Monday morning Sept 14 through Wednesday Sept 16'; https://lasair.lsst.ac.uk/api/ HTTP 404; Lasair LSST: Down (ConnectTimeoutError to 192.41.122.98:443)",
+ "pitt_google": "UNDEMONSTRATED: BigQuery REST unauthenticated -> HTTP 401 UNAUTHENTICATED 'Request is missing required authentication credential' (CREDENTIALS_MISSING); client requires GOOGLE_CLOUD_PROJECT and GOOGLE_APPLICATION_CREDENTIALS",
+ "C5_straddlers": {
+  "status": "UNDEMONSTRATED (interrupted at 2026-09-16T19:50Z; 2 slices already incomplete; never zero)",
+  "complete": false,
+  "requests_at_last_progress": 130,
+  "S1_straddlers_lower_bound": 21126,
+  "last_progress": "20260523 req=130 straddlers=21126 incomplete=2",
+  "dates_done_through": "20260523 (of dates 20260224..20260701)",
+  "rerun": "scripts/count_c5_straddlers.py -> out/c5_straddlers.json, out/c5_progress.txt"
+ }
+}
