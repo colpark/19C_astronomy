@@ -1,0 +1,1074 @@
+=== PAGE 1 ===
+MNRAS 000, 1–13 (2024)
+Preprint 16 October 2024
+Compiled using MNRAS LATEX style file v3.0
+arXiv:2410.10963v1 [astro-ph.IM] 14 Oct 2024
+How accurate are transient spectral classification tools?
+- A study using 4,646 SEDMachine spectra
+Young-Lo Kim1 ⋆ , Isobel Hook1 , Andrew Milligan1 , Lluís Galbany2,3 , Jesper Sollerman4 ,
+Umut Burgaz5 , Georgios Dimitriadis5 , Christoffer Fremling6,7 , Joel Johansson8 ,
+Tomás E. Müller-Bravo2,3 , James D. Neill7 , Jakob Nordin9 , Peter Nugent10,11 , Josiah Purdum6 ,
+Yu-Jing Qin7 , Philippe Rosnet12 , Yashvi Sharma7
+1 Department of Physics, Lancaster University, Lancs LA1 4YB, UK
+2 Institute of SpaceSciences (ICE,CSIC), Campus UAB, Carrer de Can Magrans, s/n, E-08193 Barcelona, Spain
+3 Institut d’Estudis Espacials de Catalunya (IEEC), E-08034 Barcelona, Spain
+4 The Oskar Klein Centre, Department of Astronomy, Stockholm University, AlbaNova, SE-106 91 Stockholm, Sweden
+5 School of Physics, Trinity College Dublin, College Green, Dublin 2, Ireland
+6 Caltech Optical Observatories, California Institute of Technology, Pasadena, CA 91125, USA
+7 Division of Physics, Mathematics and Astronomy, California Institute of Technology, Pasadena, CA 91125, USA
+8 The Oskar Klein Centre, Department of Physics, Stockholm University, AlbaNova, SE-106 91 Stockholm, Sweden
+9 Institut für Physik, Humboldt-Universität zu Berlin, Newtonstr. 15, 12489 Berlin, Germany
+10 Lawrence Berkeley National Laboratory, 1 Cyclotron Road MS 50B-4206, Berkeley, CA, 94720, USA
+11 Department of Astronomy, University of California, Berkeley, 501 Campbell Hall, Berkeley, CA 94720, USA
+12 Université Clermont Auvergne, CNRS/IN2P3, LPCA, F-63000 Clermont-Ferrand, France
+Accepted XXX. Received YYY; in original form ZZZ
+ABSTRACT
+Accurate classification of transients obtained from spectroscopic data are important to understand their nature and discover
+new classes of astronomical objects. For supernovae (SNe), SNID, NGSF (a Python version of SuperFit), and DASH are widely
+used in the community. Each tool provides its own metric to help determine classification, such as rlap of SNID, chi2/dof
+of NGSF, and Probability of DASH. However, we do not know how accurate these tools are, and they have not been tested
+with a large homogeneous dataset. Thus, in this work, we study the accuracy of these spectral classification tools using 4,646
+SEDMachine spectra, which have accurate classifications obtained from the Zwicky Transient Facility Bright Transient Survey
+(BTS). Comparing our classifications with those from BTS, we have tested the classification accuracy in various ways. We find
+that NGSF has the best performance (overall Accuracy 87.6% when samples are split into SNe Ia and Non-Ia types), while SNID
+and DASH have similar performance with overall Accuracy of 79.3% and 76.2%, respectively. Specifically for SNe Ia, SNID can
+accurately classify them when rlap > 15 without contamination from other types, such as Ibc, II, SLSN, and other objects that
+are not SNe (Purity > 98%). For other types, determining their classification is often uncertain. We conclude that it is difficult to
+obtain an accurate classification from these tools alone. This results in additional human visual inspection effort being required
+in order to confirm the classification. To reduce this human visual inspection and to support the classification process for future
+large-scale surveys, this work provides supporting information, such as the accuracy of each tool as a function of its metric.
+Key words: Astronomy data analysis (1858); Astronomical methods (1043); Time domain astronomy (2109); Spectroscopy
+(1558); Surveys (1671); Supernovae (1668);
+1 INTRODUCTION
+Spectroscopy provides the most unambiguous classification of transients, and indeed the main classification schemes are based on the
+presence and absence of certain features that are visible in the spectrum (see Filippenko 1997, for a review of transient classification).
+From accurate classification, we can understand their nature, detect
+⋆
+E-mail: y.kim9@lancaster.ac.uk
+© 2024 The Authors
+new classes of astronomical objects, and estimate unbiased cosmological parameters from Type Ia supernovae (SNe Ia) by removing
+contamination from non-Ia types. In modern data-intensive timedomain astronomy, classification for the ever-increasing number of
+new transients is one of the main challenges. Current surveys, such
+as the Zwicky Transient Facility (ZTF; Bellm et al. 2019; Graham
+et al. 2019; Masci et al. 2019; Dekany et al. 2020), the All-Sky
+Automated Survey for Supernovae (Shappee et al. 2014), and the
+Asteroid Terrestrial Last-Alert System (Tonry et al. 2018), are discov-
+=== PAGE 2 ===
+2
+Young-Lo Kim et al.
+ering O(103 ) interesting transients among O(106 ) alerts every night.
+Furthermore, the Rubin Observatory’s Legacy Survey of Space and
+Time (LSST) will soon detect ten times more transients than current surveys (LSST Science Collaboration et al. 2009). However, due
+to a shortage of spectroscopic follow-up resources, Kulkarni (2020)
+reported that only about 10 per cent of transients were classified
+spectroscopically, based on analysis of the demographics of astronomical transients and SN classifications reported to the Transient
+Name Server (TNS)1 in 2019.
+In recent years, a major effort has been underway to develop classification methods using photometric data, which are easier to obtain
+than spectroscopic data, based on machine-learning algorithms (e.g.,
+Möller & de Boissière 2020; Miranda et al. 2022; Gagliano et al.
+2023). These tools are fast and efficient, and currently reach quite
+high accuracy (∼90%). However, they remain in their infancy (see
+Gagliano et al. 2023, for a discussion) and need to prove their reliability with more observational data (see, e.g., Fremling et al. 2021).
+On the other hand, efforts are being made to obtain more spectra
+of transients, which can provide accurate classification. One example
+is the Spectral Energy Distribution Machine (SEDM; Blagorodnova
+et al. 2018), a spectroscopic follow-up instrument dedicated to ZTFdiscovered transients. SEDM is a very low-resolution (R ∼ 100)
+integral field unit spectrograph with a 28 x 28 arcsec2 field-of view,
+mounted on the Palomar 60-inch telescope. The main aim of SEDM
+is to classify ZTF-discovered transients spectroscopically. pysedm
+is a pipeline that calibrates and extracts SEDM spectra within minutes of the exposure completion. With this pipeline, SEDM is fully
+automated, and hence a flux-calibrated spectrum in the wavelength
+range between 3500Å and 9500Å is available within 5 minutes after
+the end of the exposure. In this way, 15 transient spectra are typically obtained every night. Since early August 2018, SEDM with
+pysedm has been in production, obtaining several thousand spectra
+per year (see Tab. 1). For LSST discovered transients, the TimeDomain Extragalactic Survey (TiDES; Swann et al. 2019) conducted
+on the 4-metre Multi-Object Spectrograph Telescope (4MOST; de
+Jong et al. 2019) plans to perform spectroscopic follow-up observations, expecting to obtain spectra of more than 35,000 live transients
+(C. Frohmaier et al., in preparation).
+Spectra of transients are usually classified through spectral classification tools. Based on the template matching technique, the Supernova Identification code (SNID; Blondin & Tonry 2007), SuperFit
+(Howell et al. 2005), and the GEneric cLAssification TOol (GELATO;
+Harutyunyan et al. 2008) are widely used in the community. In addition, there are deep-learning-based tools that are often utilized:
+Deep Automated Supernova and Host classifier (DASH; Muthukrishna, Parkinson, & Tucker 2019) and SNIascore (Fremling et al.
+2021). Each tool has its own metric to help determine classification:
+rlap of SNID, chi2/dof of SuperFit, QoF of GELATO, Probability of
+DASH, and score of SNIascore. Even though those tools are widely
+adopted in the community for the spectroscopic classifications of
+transients, their performance has not been studied based on confusion
+matrix and performance evaluation metrics, except for SNIascore,
+which was specifically designed for spectroscopic classification for
+SNe Ia discovered by ZTF. Thus, we do not know how accurate those
+tools and their metrics are. This might be due to the fact that there
+has not been a sufficient number of accurately classified and homogeneous transient spectroscopic data to perform quantitative studies
+thus far. If their performance is tested with such data and from this,
+if we can provide supporting information for spectroscopic classifi-
+cation (e.g., the accuracy of each tool as a function of its metric), it
+would be helpful for future spectroscopic follow-up surveys that will
+observe an order of magnitude more transients than current surveys.
+The Bright Transient Survey (BTS; Fremling et al. 2020; Perley et al. 2020), one of the ZTF sub-surveys, has the primary goal
+of spectroscopically classifying and publicly reporting every extragalactic transient brighter than 18.5 mag in the r-band in the Northern
+sky detected by the ZTF public survey. BTS uses transients’ spectra obtained from SEDM and from various larger telescopes, e.g.,
+the Palomar 200-inch telescope, Keck I, the Liverpool Telescope,
+Apache Point Observatory, and the Nordic Optical Telescope. Preliminary classifications are made via SNID and human visual inspection.
+Then, the BTS team revisits each preliminary classification through
+a homogeneous process they developed. For each SN spectrum, the
+team identifies the top 15 matched templates from SNID and produces plots showing a comparison between the observed spectrum
+and the SNID template spectrum. These plots are visually inspected
+by a member of the BTS team to identify the best matching templates.
+In cases where all 15 SNID templates report the same classification,
+the SNID type is recorded. Otherwise, the BTS team selects the best
+classification based on the SN spectral features. If the top 15 matches
+prove ambiguous, they use additional information, such as the lightcurve or alternative spectra. If a classification is still uncertain, then
+this SN spectrum is examined by another member of the team. For
+consistency, a final check is performed by two members of the team.
+From this substantial additional effort, BTS provides a large number
+of accurate spectroscopic classifications for ZTF-detected transients.
+We refer the reader to Fremling et al. (2020) for details of the BTS
+program.
+In this work, we use a large sample of homogeneous transients’
+spectra from SEDM and their classifications from BTS to test the
+classification accuracy of SNID, SuperFit, and DASH2 . Then, based
+on this test, we provide supporting metrics for spectroscopic classifications.
+2 METHOD
+2.1 Sample
+Tab. 1 shows the sample size of SEDM spectra used in this work. We
+begin with 10,822 SEDM spectra observed between August 2018
+and June 2022.
+From these, we selected 9,926 spectra extracted by the default
+pysedm pipeline with two modules, namely byecr and contsep,
+developed by Kim et al. (2022, hereafter K22). The byecr module
+removes contamination from cosmic rays, and contsep removes
+non-target contamination from the host galaxy and other nearby
+sources. K22 defined this combination as byecont: pysedm + byecr
++ contsep. The contsep module requires an astrometry solution
+from SEDM and a reference image, centred at the target coordinate,
+to draw isomagnitude contours. Then, the contsep module tries to
+find the faintest contour to separate the target from other sources.
+If we have an inaccurate astrometry solution due to a SEDM pointing failure, a reference image issue (e.g., saturation), or a target that
+is too close to the host core, the contsep module does not work.
+This means the byecont method has fewer extracted spectra than the
+default pysedm pipeline. However, the byecont method showed improvements in the classification rate and accuracy over the default
+2
+1
+https://wis-tns.weizmann.ac.il/
+MNRAS 000, 1–13 (2024)
+We select those three tools, because they are easily implemented with
+Python. See Sec. 2.2.
+=== PAGE 3 ===
+Accuracy of transient spectral classification tools
+3
+Table 1. The sample size of SEDM spectra between August 2018 and June 2022. Aug2018-2020 data are taken from K22.
+Aug2018-2020
+2021
+Jan-Jun2022
+Total
+all observed spectra
+6784
+2884
+1154
+10822
++ extraction with the byecont method
+6656
+2328
+942
+9926
++ S/N > 3
+5852
+2120
+828
+8800
++ classification from BTS (final sample)
+3025
+1284
+337
+4646
+The lower number of significant figures for some spectra results in
+vertical structures in the figure. However, Fremling et al. (2020) discussed that the redshift of the transients is a good estimator of the
+host galaxy redshift (see Fremling et al. 2020, for a full description
+of redshift measurements). We note that since we do not use zBT S
+when running the spectral classification tools below, this does not
+affect our analysis.
+2.2 Spectral classification tools: SNID, NGSF, and DASH
+Figure 1. S/N and BTS redshift (zBT S ) distribution of our sample of 4,646
+SEDM spectra. The median of S/N and zBT S are indicated with red dotted
+and solid lines, respectively. Note that vertical structures shown in the figure
+are due to redshifts estimated from transients’ spectra (see Fremling et al.
+2020, for a full description of redshift measurements).
+pysedm pipeline (see K22 for a discussion). Therefore, we selected
+the byecont extraction method to test the accuracy of spectral classification tools.
+Next, we apply a cut based on the signal-to-noise ratio (S/N),
+following the method of K22. The S/N (per ∼25 Å bin) is calculated
+as the median S/N in the wavelength range between 4000 and 8000
+Å that will be adopted for spectroscopic classification. We selected
+all the 8,800 (out of 9,926) SEDM spectra that have S/N > 3.
+Lastly, we need true classifications for our sample to test the classification accuracy. This true classification is from BTS. Matching our
+8,800 spectra to the BTS sample returned 4,646 spectra (for 2,986
+individual targets) with their classification and redshift (zBT S ). We
+use this sample of 4,646 spectra as our final sample for testing the
+accuracy of spectral classification tools.
+Fig. 1 shows the S/N and zBT S distributions of our final sample of
+4,646 SEDM spectra. The median zBT S is 0.05, and the median S/N
+is 8.8. In the figure, some vertical structures are shown. We found
+that this is due to redshifts that were estimated from transients’ spectra with SNID. That method provided up to two significant figures,
+whereas redshift from host spectra returned more significant figures.
+This work will test the classification accuracy of three widely used
+spectral classification tools: SNID3 , SuperFit, and DASH4 . For SNID,
+we use its Python wrapper pysnid5 , and for SuperFit, we use its
+Python version, NGSF6 (Next Generation SuperFit; Goldwasser et
+al. 2022).
+When running the spectral classification tools, we set a wavelength
+range parameter to use from 4000 and 8000 Å, where the quantum
+efficiency of the SEDM CCD is over 60 per cent and which includes
+most of the important spectral features of the transients, as in K22.
+We employed default input values provided by each tool, except for
+values for the extinction law in NGSF, for which we use ‘Alam_high’
+: 3 and ‘Alam_low’ : –3, instead of the default values of ‘Alam_high’
+: 2 and ‘Alam_low’ : –2. We put a redshift range between 0.0 and 0.2,
+considering the redshift range of ZTF7 (e.g., see Fig. 1 for BTS).
+Regarding the templates, we used the default templates for NGSF
+and DASH, while SNID templates were taken from K22. The templates
+used are collected from a training set for DASH (which combines the
+spectra from SNID Templates 2.0, the Berkeley SN Ia program v7.0
+(Silverman et al. 2012), SN Ib/c from Liu & Modjaz (2014), Liu et
+al. (2016), and Modjaz et al. (2016)), as well as SN IIP templates
+from Gutiérrez et al. (2017), SLSN-Ic from Liu, Modjaz, & Bianco
+(2017), and several SLSN-I, SLSN-IIn and TDE added by J.D.Neill.
+Based on the types and sub-types in the templates of each tool, we
+create broad categories for the transients: ‘2 Categories’ for ‘Ia’ and
+‘NonIa’, and ‘5 Categories’ for ‘Ia’, ‘II’, ‘Ibc’, ‘SLSN’, and ‘NotSN’
+(Tab. 2). This category scheme will be adopted when testing the
+accuracy of spectral classifications in this work. We note that DASH
+does not have ‘SLSN’ and ‘NotSN’ categories.
+MNRAS 000, 1–13 (2024)
+=== PAGE 4 ===
+4
+Young-Lo Kim et al.
+Table 2. Types and sub-types in each category.
+2 Categories
+5 Categories
+(sub-types)
+Ia
+Ia
+(Ia,Ia-norm,Ia-91T,Ia-91bg,Ia-csm,Ia-pec,Ia-99aa,Ia-02cx,SN Ia,SN Ia-91T,SN Ia-91bg,SN Ia-CSM,SN Ia-pec,SN Iax)
+NonIa
+Ibc
+(Ib,Ib-norm,Ib-pec,IIb,Ibn,SN Ib,SN Ib-pec,SN Ib/c,SN Ibn,SN IIb,Ic,Ic-norm,Ic-pec,Ic-broad,SN Ic,SN Ic-BL,SN Icn,Ca-rich)
+II
+(II,IIP,II-pec,IIn,IIL,SN II,SN II-pec,SN IIP,SN IIn)
+SNID
+SLSN
+(SLSN,SLSN-I,SLSN-Ic,SLSN-IIn,SLSN-II)
+NotSN
+(NotSN,AGN,Gal,LBV,M-star,QSO,C-star,TDE,-,ILRT,LRN,Other,nova,other)
+Ia
+Ia
+(Ia 02es-like,Ia 91T-like,Ia 91bg-like,Ia 99aa-like,Ia-02cx like,Ia-CSM,Ia-CSM-(ambigious),Ia-norm,Ia-pec,Ia-rapid,Ca-Ia,super chandra)
+NonIa
+Ibc
+(Ib,Ibn,IIb,IIb-flash,Ic,Ic-BL,Ic-pec,Ca-Ib)
+II
+(II,II-flash,IIn)
+NGSF
+SLSN
+(SLSN-I,SLSN-II,SLSN-IIb,SLSN-IIn,SLSN-Ib)
+NotSN
+(FBOT,ILRT,SN - Imposter,TDE H,TDE H+He,TDE He)
+Ia
+Ia
+(Ia,Ia-02cx,Ia-91T,Ia-91bg,Ia-csm,Ia-norm,Ia-pec)
+NonIa
+Ibc
+(Ib,Ib-norm,Ib-pec,Ibn,IIb,Ic,Ic-broad,Ic-norm,Ic-pec)
+II
+(II,II-pec,IIP,IIn,IIL)
+Ia
+Ia
+(SN Ia,SN Ia-91T,SN Ia-91bg,SN Ia-CSM,SN Ia-pec,SN Iax,SN Ia-SC)
+NonIa
+Ibc
+(SN Ib,SN Ib-pec,SN Ib/c,SN Ibn,SN Ic,SN Ic-BL,SN Icn,SN IIb,Ca-rich)
+II
+(SN II,SN IIP,SN IIn,SN II-pec)
+DASH
+BTS
+SLSN
+(SLSN-I,SLSN-II)
+NotSN
+(ILRT,LBV,TDE,nova,other,Other)
+Table 3. The size of successfully classified samples for each classification
+tool split by our category scheme.
+SNID
+NGSF
+DASH
+BTS
+Total
+4538
+4646
+4646
+4646
+SN Ia
+2798
+2561
+2446
+2831
+NonIa
+1740
+2085
+2200
+1815
+SN Ibc
+1014
+660
+1784
+596
+SN II
+354
+931
+416
+1069
+SLSN
+142
+408
+-
+95
+NotSN
+230
+86
+-
+55
+108
+0
+0
+-)
+(Failed Classification
+3 RUN RESULTS OF SNID, NGSF, AND DASH
+Tab. 3 shows the output sample size of each classification tool split
+by our category scheme after running SNID, NGSF, and DASH. There
+are 108 failed cases (3.9%) where SNID could not find a correlation.
+We flagged these cases as rlap = –1 for further inspection (see the
+top panel of Fig. 2).
+For the analysis below, we employ the primary metric for each
+tool: rlap of SNID, chi2/dof of NGSF, and Probability of DASH. The
+SNID rlap value is a measurement of the strength of the correlation
+between a template spectrum and the input spectrum. Thus, a higher
+rlap value means a more secure classification. chi2/dof of NGSF is a
+useful measure of goodness of fit. NGSF returns the best-fitted classification based on finding the minimum χ2 value by comparing the
+observed spectrum to the library of templates. During this χ2 fitting process, NGSF tries to separate the contributions to the spectrum
+from the transient and its host galaxy by fitting them simultaneously. DASH Probability provides a relative probability of a particular
+classification compared to other types. Thus, a higher value of Probability means a specific classification is more likely than other types.
+Considering the definition of each primary metric, we select a classification with the highest rlap value for SNID, the lowest chi2/dof
+for NGSF, and the highest Probability for DASH as our classification
+in the analysis below.
+In Fig. 2, we plot distributions of each primary metric as a function
+of zBT S and the S/N of the SEDM spectrum. Solid lines indicate the
+median of each metric. Dashed lines represent the criteria for the
+goodness of fit with templates, in other words, the classification
+quality criteria: chi2/dof = 1.0 for NGSF and Probability = 1.0 for
+DASH. For SNID, rlap = 5 for SNID is the minimum value for reliable
+classification, as suggested by Blondin & Tonry (2007). With zBT S ,
+no trends are found, while some trends are observed with S/N. We
+find that high S/N spectra appear to converge to chi2/dof = 1.0 and
+Probability = 1.0. However, high S/N does not guarantee high rlap
+values. Note that in the figures below, we use different colours to
+easily distinguish each tool: red for SNID, blue for NGSF, and orange
+for DASH.
+Fig. 3 shows the correlation between the primary metrics of pairs
+of tools. We find that high rlap values of SNID tend to converge to
+NGSF chi2/dof ∼ 1.0 and DASH Probability ∼ 1.0. Between NGSF and
+DASH, a cluster is formed around chi2/dof ∼ 1 and Probability ∼ 1.0.
+However, there are many cases where a classification has a value of
+chi2/dof ∼ 1, but with a low Probability value.
+3
+https://people.lam.fr/blondin.stephane/index.html
+https://github.com/daniel-muthukrishna/astrodash
+5 https://github.com/MickaelRigault/pysnid
+6 https://github.com/oyaron/NGSF
+7 In this work, we do not use redshift (e.g., z
+BT S ) when running the tools
+to reflect the actual observation situation, such as SEDM working with its
+pysedm pipeline.
+4
+MNRAS 000, 1–13 (2024)
+4 COMPARISON WITH BTS CLASSIFICATION
+In order to test the classification accuracy determined in this work,
+we need true (or accurate) classification. As we described in Sec. 1,
+BTS provides an accurate spectroscopic classification of transients
+=== PAGE 5 ===
+Accuracy of transient spectral classification tools
+5
+Figure 2. Distributions of each tool’s primary metric as a function of zBT S (left panel) and the S/N of the SEDM spectrum (right). Solid lines indicate the median
+of each metric, and dashed lines represent the classification quality criteria. For SNID, rlap = 5 is the minimum value for a reliable classification, as suggested by
+Blondin & Tonry (2007). For NGSF and DASH, chi2/dof = 1.0 and Probability = 1.0 mean the best-fitted and relatively more likely classification with a specific
+template, respectively. 108 failed SNID classifications (3.9%) are presented with rlap = –1 (top panel). High S/N spectra appear to converge around chi2/dof =
+1.0 and Probability = 1.0, while high S/N does not guarantee high rlap values. No trends are found with zBT S . We note that we use different colours to easily
+distinguish each tool: red for SNID, blue for NGSF, and orange for DASH.
+based on human visual inspection and spectra from various larger
+telescopes. Therefore, for the analysis below, we assume that the
+BTS classification is correct.
+4.1 Matching with the BTS classification
+match/non-match between our classifications and the BTS classifications in 2 or 5 categories (see Tab. 2). The result for 2 categories
+shows, on average, a ∼14% better match rate than the result of 5 categories. Among the three spectral classification tools, NGSF shows
+the best match rate in both categories. SNID and DASH have similar
+match and non-match rates.
+We first investigate whether our classification is matched with
+the BTS classification. Tab. 4 presents a summary of the overall
+Then, we examine the distribution of match/non-match between
+our classifications and the BTS classifications as functions of each
+MNRAS 000, 1–13 (2024)
+=== PAGE 6 ===
+6
+Young-Lo Kim et al.
+Figure 3. Correlation between the primary metrics of pairs of tools. Dashed lines with different colours represent the classification quality criteria (same as
+dashed lines in Fig. 2): SNID rlap = 5 (red), NGSF chi2/dof = 1.0 (blue), and DASH Probability = 1.0 (orange). 108 failed SNID classifications (3.9%) are presented
+with rlap = –1. High rlap values of SNID tend to converge to NGSF chi2/dof ∼ 1.0 (left panel) and DASH Probability ∼ 1.0 (right). Between NGSF and DASH
+(middle panel), a cluster is formed around chi2/dof ∼ 1 and Probability ∼ 1.0.
+Table 4. Summary of the match/non-match between our classification and
+the BTS classification in each category.
+2 Categories
+Match : Non-match
+5 Categories
+Match : Non-match
+SNID
+3599 (79%) : 939 (21%)
+2875 (63%) :1663 (37%)
+NGSF
+4068 (88%) : 578 (12%)
+3476 (75%) : 1170 (25%)
+DASH
+3541 (76%) : 1105 (24%)
+2872 (62%) : 1774 (38%)
+tool’s primary metric and the S/N of the SEDM spectrum in Fig. 4.
+As NGSF and DASH metrics approach a value of 1.0 or the SNID
+rlap value has a greater value, the fraction of the matched spectra
+increases. Notably, for SNID, our classifications match very well with
+those of BTS when rlap > 20. We find some matched classifications
+from NGSF, even though their value of chi2/dof is very high. This
+may be because, by chance, the best-fitted classification with a high
+chi2/dof value matches the BTS classification, even though there are
+no well-fitted templates. Similarly, we see in the DASH result that
+many matched classifications have low Probability values. As DASH
+Probability is the relative probability, this value may seem low if
+DASH has several similar classifications and it spreads its Probability
+evenly across them.
+With S/N, the three classifiers show similar distributions. The
+shape of the distribution follows that of S/N (see Fig. 1). There are
+some unmatched spectra with high S/N values.
+No difference in each tool’s primary metric and S/N distributions
+is observed between the distributions of 2 and 5 categories.
+The results of this section suggest that the primary metric of each
+tool appears to be a more important factor than the S/N of spectra
+(i.e., quality of spectra) when it comes to classification accuracy.
+MNRAS 000, 1–13 (2024)
+4.2 Overall confusion matrix and performance evaluation
+metrics
+For a more detailed analysis of classification performance, we illustrate the confusion matrices in Fig. 5 and then derive evaluation
+metrics in Tab 5. For the performance evaluation metrics, we use ‘Accuracy’, ‘Purity’, ‘True Positive Rate (TPR)’, and ‘False Positive Rate
+(FPR)’. Accuracy is calculated as the number of correctly classified
+spectra against the total number of spectra. Purity is the fraction of
+correctly classified spectra among all classified spectra in the same
+type. TPR, also called classification efficiency, shows the probability
+of true classification, while FPR presents the probability of false
+classification in each type. Each evaluation metric is calculated as
+follows:
+Accuracy =
+=
+(1)
+Total number of true positive
+for 5 categories;
+Total number of spectra
+(2)
+TP
+;
+TP + FP
+(3)
+TP
+;
+TP + FN
+(4)
+Purity =
+TPR =
+TP + TN
+for 2 categories;
+TP + TN + FP + FN
+FP
+;
+(5)
+FP + TN
+where TP and TN are the numbers of true positives and true
+negatives, respectively, and FP and FN are false positive and false
+negative, respectively. In the analysis below, we calculate a separate
+Purity, TPR, and FPR for each classification.
+When the predicted classification from this work is consistent
+with the true BTS classification, the diagonal elements in the confusion matrix, which indicate correctly classified in this work, will
+FPR =
+=== PAGE 7 ===
+Accuracy of transient spectral classification tools
+7
+Figure 4. Distributions of match/non-match between our classification and the BTS classification as functions of each tool’s primary metric and SEDM S/N.
+Darker-coloured histograms represent spectra in 5 categories, while normal colours are for 2 categories. Dashed lines in the left panels are the classification
+quality criteria: SNID rlap = 5 (red), NGSF chi2/dof = 1.0 (blue), and DASH Probability = 1.0 (orange). The primary metric of each tool appears to be a more
+important factor than the S/N of spectra (i.e., quality of spectra) when it comes to classification accuracy.
+be coloured darker, while the off-diagonal elements, which indicate
+misclassification, will be coloured close to white in the normalized
+confusion matrix (right plots in each panel). In this respect, at first
+glance, the normalized confusion matrices of NGSF follow this diagonal trend, while those of SNID and DASH do not. When we consider
+the confusion matrices of the 2 categories, they also seem to follow the diagonal trend. However, those of the 5 categories appear
+scattered, except for the NGSF one.
+Broadly speaking, in the results of the 2 categories, all tools show
+similar Accuracy (∼81%) in the classification of SNe Ia and NonIa.
+However, considering the Purity, which is strongly correlated to
+TPR and anti-correlated to FPR, all tools show better results for SN
+Ia classification. Notably, NGSF shows the best result with Purity =
+94% and FPR = 8.5%.
+Regarding the results of the 5 categories, NGSF shows the best
+performance when evaluating based on the confusion matrix and
+performance evaluation metrics. The well-distributed dark colours
+in SNID and DASH normalized confusion matrices indicate that SNID
+and DASH classify most of the spectra into SNe Ia (62% and 53%,
+respectively) and Ibc (22% and 38%) types. In total, 84% of SNID
+and 91% of DASH results are classified as SNe Ia and Ibc (cf. 69%
+for NGSF), compared to 72% for the true BTS types. This shows the
+so-called “type attractor” issue (see Blondin & Tonry 2007; Muthukrishna, Parkinson, & Tucker 2019; K22). The imbalance of templates
+biases the classification toward a type that has more templates, when
+the S/N of spectra is low. In the templates of SNID and DASH, ∼63%
+are SNe Ia and ∼20% are SNe Ibc, while the NGSF templates have
+∼29% and ∼31%, respectively.
+From this section, we find that NGSF shows the best performance
+among the three spectral classification tools when evaluating based
+on the confusion matrix and performance evaluation metrics. SNID
+and DASH have similar performance, even though DASH has no SLSN
+and NotSN types. In addition, we can say that splitting a sample into
+2 categories gives a more accurate classification than when splitting a
+sample into 5 categories. This is because classifying transients other
+than SNe Ia is more uncertain than classifying SNe Ia from spectral
+classification tools alone.
+MNRAS 000, 1–13 (2024)
+=== PAGE 8 ===
+8
+Young-Lo Kim et al.
+Figure 5. Confusion matrices for each classification tool split by 2 (left panel) and 5 (right) categories. In each panel, the left plot shows an absolute number of
+each classification, while the right plot presents the normalized confusion matrix, i.e. the fraction of each BTS classification (the True label; y-axis) that was
+classified from this work (the Predicted label; x-axis). This normalized confusion matrix is normalized to 1 along rows. The diagonal elements indicate correctly
+classified spectra, while off-diagonal elements are the spectra that are misclassified by this work. NGSF has the best performance, while SNID and DASH have
+similar performance. We note that DASH does not have the option to classify an object as SNLS or NotSN types.
+4.3 Performance evaluation metrics split by each tool’s primary
+metric
+Additionally, we examine the accuracy of each tool’s primary metric.
+For this, we split the sample by each tool’s primary metric (Tab. 6) and
+separately calculate performance evaluation metrics for the sample
+in each bin. When we split the sample, we use smaller step sizes
+for denser bins, e.g., ∆chi2/dof = 0.25 for NGSF chi2/dof between
+0.50 and 2.50, and ∆Probability = 0.01 or 0.02 for DASH Probability
+between 0.90 and 1.00. We note that the sample size in some types,
+particularly the NotSN type in 5 categories, is small.
+Fig. 6 shows this calculation: performance evaluation metrics for
+each tool split by its primary metric.
+-SNID: Approaching the higher value of rlap improves all the evaluation metrics. The most populated range of rlap is between 5 and
+10, with a median of 8.0 (see the top panel of Fig. 2). In this region,
+Accuracy, Purity, and TPR are between 60% and 80%, while FPR
+is between 20% and 40% for 2 categories. The evaluation metrics
+of the 5 categories are worse. Notably, when rlap > 15, SNID can
+accurately classify SNe Ia without contamination from other types
+MNRAS 000, 1–13 (2024)
+(Purity > 98%), similar to the result of Sec. 4.1. SNe Ibc and II are
+also classified accurately, but it is most likely to be driven by the
+small number of objects (< 10) when rlap > 15. Classifying SLSNe
+seems to be very inaccurate with SNID.
+-NGSF: As chi2/dof approaches 1.0, all evaluation metrics show
+improvement with a peak at the [0.75, 1.00) bin. chi2/dof between
+0.5 and 2, the most populated region (see the middle panel of Fig. 2),
+gives a reasonable accuracy of classification: Accuracy of ∼90% for
+2 categories and ∼80% for 5 categories. Especially, FPR for all types
+in both categories has a low value of ∼10%. NGSF can classify SNe
+Ia well when considering all the metrics, while that is not the case
+for NonIa types. SLSNe cannot be classified by NGSF.
+-DASH: As Probability approaches 1.0, all the evaluation values
+show improvement. Notably, Purity of SNe Ibc is especially low
+compared to other types (see also Tab. 5). This is because DASH has
+classified a lot of spectra into the SN Ibc type, especially for the true
+BTS SLSN and NotSN types, for which there are no templates in the
+current version of DASH (see the rightmost corner plot of Fig. 5).
+=== PAGE 9 ===
+Accuracy of transient spectral classification tools
+9
+Figure 6. Performance evaluation metrics for each tool split by its primary metric: SNID by rlap (top panel), NGSF by chi2/dof (middle), and DASH by Probability
+(bottom).
+MNRAS 000, 1–13 (2024)
+=== PAGE 10 ===
+10
+Young-Lo Kim et al.
+Table 5. Overall performance evaluation metrics for each classification tool split by type in each category.
+2 Categories
+Ia
+NonIa
+Accuracy
+SNID
+79.3%
+82.1%
+74.8%
+82.1%
+29.9%
+73.7%
+4.2%
+3.0%
+84.0%
+72.2%
+84.0%
+51.1%
+24.6%
+6.3%
+13.0%
+FPR
+27.8%
+16.0%
+27.8%
+18.0%
+12.7%
+3.1%
+5.0%
+87.6%
+74.8%
+Purity
+94.0%
+79.7%
+94.0%
+53.0%
+70.7%
+11.8%
+15.1%
+TPR
+85.0%
+91.5%
+85.0%
+58.7%
+61.6%
+50.5%
+23.6%
+FPR
+8.5%
+15.0%
+8.5%
+7.7%
+7.6%
+7.9%
+1.6%
+76.2%
+61.8%
+Purity
+85.3%
+66.1%
+85.3%
+26.6%
+75.0%
+-
+-
+TPR
+73.7%
+80.2%
+73.7%
+79.5%
+29.2%
+-
+-
+FPR
+19.8%
+26.3%
+19.8%
+32.3%
+2.9%
+-
+-
+N
+NGSF
+chi2/dof
+N
+DASH
+Probability
+N
+[0, 4)
+81
+[0.00, 0.50)
+152
+[0.00, 0.30)
+268
+[4, 5)
+304
+[0.50, 0.75)
+298
+[0.30, 0.40)
+249
+[5, 6)
+613
+[0.75, 1.00)
+471
+[0.40, 0.50)
+290
+[6, 7)
+676
+[1.00, 1.25)
+582
+[0.50, 0.60)
+275
+[7, 8)
+590
+[1.25, 1.50)
+561
+[0.60, 0.70)
+282
+[8, 9)
+486
+[1.50, 1.75)
+501
+[0.70, 0.80)
+308
+[9, 10)
+366
+[1.75, 2.00)
+339
+[0.80, 0.90)
+413
+[11, 12)
+268
+[2.00, 2.25)
+295
+[0.90, 0.92)
+114
+[12, 13)
+160
+[2.25, 2.50)
+258
+[0.92, 0.94)
+135
+[13, 14)
+127
+[2.50, 3.00)
+353
+[0.94, 0.96)
+151
+[14, 15)
+119
+[3.00, 3.50)
+212
+[0.96, 0.98)
+252
+[15, 16)
+88
+[3.50, 4.00)
+174
+[0.98, 0.99)
+193
+[16, 17)
+88
+[4.00, 4.50)
+118
+[0.99, 1.00)
+1058
+[17, 18)
+59
+[4.50, 5.00)
+88
+[1.00]
+658
+[18, 19)
+50
+[5.00, inf)
+244
+[19, 20)
+49
+[20, inf)
+125
+5 APPLICATION: SUPPORTING METRICS FOR
+SPECTROSCOPIC CLASSIFICATION OF TRANSIENTS
+The performance test results in this work show that it is difficult
+to obtain an accurate classification from spectral classification tools
+alone. Thus, for example, the BTS team, which used SNID as a
+preliminary classification tool, used visual inspection to securely
+classify the spectra manually. However, this approach is very timeconsuming when classifying thousands of transients and requires
+human resources to do it on a daily basis.
+In an attempt to address this, the BTS team have developed and
+implemented SNIascore, a deep-leaning-based tool optimized for
+classifying only SNe Ia from SEDM spectra, to reduce human visual
+MNRAS 000, 1–13 (2024)
+NotSN
+63.4%
+Table 6. The sample size split by each tool’s primary metric.
+SNID
+rlap
+5 Categories
+II
+SLSN
+TPR
+Accuracy
+DASH
+Ibc
+Purity
+Accuracy
+NGSF
+Ia
+inspection by ∼60% (see Fremling et al. 2021, for a discussion in
+detail). In the current situation, we expect that our work can also contribute to reducing human visual inspection by providing supporting
+metrics for future spectroscopic follow-up surveys.
+When a spectrum of a new transient is classified by one of the
+spectral classification tools, the tool will return a type with its primary
+metric. For example, if SNID gives ‘Ia’ with rlap = 5.5, from our
+performance evaluation metrics for 2 Categories, we can evaluate the
+accuracy of the SNID classification, to be Accuracy = 61%, Purity
+= 55%, TPR = 61%, and FPR = 38%. By combining these SNID
+metrics with other tools’ metrics, we can determine which targets
+require visual inspection.
+Our suggestion is that for real observations, a high Purity (i.e., minimising contamination) would be the most important factor when we
+do not know the true classification. Since Purity is strongly correlated
+to TPR and anti-correlated to FPR, Purity can provide a balanced
+measure between them. Therefore, for example, the determined type
+is most likely accurate when all three tools give the same transient
+type and Purity > 90%. Another suggestion is low enough FPR (<1%)
+so that the classification determined by tools does not require human
+visual inspection, as discussed by Fremling et al. (2021).
+6 DISCUSSION
+In this work, we have examined the accuracy of classification for
+widely used spectral classification tools, such as SNID, NGSF (a
+Python version of SuperFit), and DASH, in various ways. For this,
+we used 4,646 SEDM spectra (of 2,986 individual targets) that have
+accurate classifications from BTS. Comparing our classification with
+that of BTS, we have presented 1) the match/non-match distributions
+as functions of each tool’s primary metric (SNID rlap, NGSF chi2/dof ,
+and DASH Probability) and the S/N of the SEDM spectrum, 2) the
+confusion matrices together with performance evaluation metrics,
+and 3) performance evaluation metrics split by each tool’s primary
+metric for each tool.
+We found that:
+• The primary metric of the spectral classification tool is a more
+=== PAGE 11 ===
+Accuracy of transient spectral classification tools
+important factor than S/N of spectra when considering the classification accuracy.
+• Among the three tools, NGSF provides the best overall classification (overall Accuracy up to 87.6%).
+• SNID and DASH have similar performance with overall Accuracy
+of up to 79.3% and 76.2%, respectively.
+• For SNe Ia, SNID can accurately classify them when rlap > 15
+with Purity > 98%.
+• For other types, determining their type is uncertain when using
+any of these spectral classification tools alone.
+SNID, NGSF, and DASH provide helpful information on the classification of newly discovered transients. However, this work shows
+that it is difficult to obtain an accurate classification from those tools
+alone. Because of this, visual inspection is needed to confirm the
+classification from the tools (e.g., see Fremling et al. 2021 for BTS
+and Smith et al. 2020 for the Dark Energy Survey SN Program).
+To reduce this human visual inspection, this work provides supporting metrics for a classification, which are constructed based on the
+performance evaluation metrics split by each tool’s primary metric.
+One concern may arise about the impact of different spectral resolutions of the instruments when referring to our supporting metrics,
+which are calculated based on SEDM spectra (R ∼ 100). SN spectral features are the key factor in classifying a transient’s spectrum.
+Those features have typical widths of ∼100–150 Å, due to the large
+expansion velocities of the SN ejecta (∼10,000 km/s; Blondin &
+Tonry 2007). Rigault et al. (2019) showed that by comparing SEDM
+spectra with higher resolution spectra obtained with different instruments, the main characteristic features, such as Si II λ6500 for the
+SNe Ia and the P-Cygni Hα shape for the SNe II, are clearly visible
+in the SEDM spectra. In addition, the overall shape of the spectra
+matches well between SEDM and other higher-resolution spectra.
+Furthermore, for SNID and DASH, when running the tools, the input
+spectrum has been preprocessed to ensure that the input spectrum
+has the same wavelength range with the same number of bins as
+the templates, making it easy to compare and classify them. During
+this preprocessing, including a logarithmic wavelength binning and
+a band pass filtering, most of the narrower features are smoothed
+out (see Blondin & Tonry 2007; Muthukrishna, Parkinson, & Tucker
+2019, for examples). In the case of NGSF, the algorithm fits the observed spectra using binned templates (the default value is 10 Å, and
+20 and 30 Å binned templates are also provided), which could remove
+narrower features. Therefore, we expect that the effect of resolution is
+not significant. Because of the low-resolution of SEDM, we cannot
+test this effect in this work. However, it will be an interesting test
+with a larger sample of higher-resolution spectra in the future (e.g.,
+∼35,000 live transients spectra from 4MOST-TiDES with R ∼ 6, 500)
+and testing with 4MOST-simulated spectra is ongoing (A. Milligan
+et al., in preparation).
+There may also be some impact on the classification performance
+from having different templates in each tool. SNID and DASH in this
+work share ∼93% of their templates (4869 out of 5250 template
+spectra), because the SNID templates collected by K22 were based
+on a training set for DASH. Most of the NGSF templates overlap with
+SNID templates, while the number of templates is lower (999 spectra
+from 187 objects) than other tools. Therefore, we expect that there is
+no impact of different templates on classification between SNID and
+DASH, but there may be some impact between NGSF and the other
+two classification tools. In this work, we used the publicly available
+tools for accessibility. We suggest that it would be beneficial to have
+consistent templates used in all spectral classification tools.
+As noted in Sec. 4.3, the sample sizes of some types, mainly NonIa
+11
+types, are small. We need more spectra, especially for NonIa types,
+to calculate and use the performance evaluation metrics as more
+powerful supporting metrics for spectral classification.
+In addition, updating current tools with recent data is required.
+For SNID and NGSF, more diverse templates across all types from
+SEDM and the Australian Dark Energy Survey (Lidman et al. 2020)
+will help to classify transients more accurately and also to resolve
+“type attractor” issues. For DASH, the model needs to be re-trained,
+for example, with the spectra available from the Weizmann Interactive Supernova Data Repository8 (WISeREP; Yaron & Gal-Yam
+2012) and to include SLSN and NotSN types to improve the overall
+performance evaluation metrics.
+NGSF shows the best performance among the three different tools,
+despite having fewer templates. We believe that this is because NGSF
+tries to separate SN light from host galaxy light by fitting them
+simultaneously. Implementing this technique into SNID and DASH9
+would probably improve their classification accuracy. On the other
+hand, more effort on separating between the SN and the host galaxy
+at the data level (e.g., a contsep module in SEDM developed by
+K22) are required.
+Another way to improve the classification accuracy is to use photometric information, such as light-curve shape and phase or host
+galaxy morphology and stellar mass. Particularly, host galaxy information is known to be helpful in classifying transients, hence some
+studies are underway to implement this host information into photometric classification tools (Gagliano et al. 2021, 2023). However,
+there are no such efforts on the spectral classification tool side. Future
+spectroscopic surveys would benefit from the development of new
+tools that combine photometric information.
+Lastly, one obvious way to improve the classification accuracy
+is to use a host galaxy redshift, ideally a spectroscopic one, in the
+classification process. The redshift data will be taken from publicly
+available galaxy catalogues, such as the Sloan Digital Sky Survey’s
+extended Baryon Oscillation Spectroscopic Survey (Dawson et al.
+2016) and the Dark Energy Spectroscopic Instrument’s MOST Hosts
+Survey (Soumagnac et al. 2024). Developing an efficient algorithm
+to implement this redshift information in the classification process is
+required.
+Combining these various efforts will provide an accurate classification for newly discovered transients. From this accurate classification, we can discover new types of astronomical objects and widen
+our understanding of the nature of those transients. For SN Ia cosmology, we can estimate unbiased cosmological parameters without
+contamination from NonIa types in the LSST-era.
+ACKNOWLEDGEMENTS
+We thank the anonymous referee for constructive suggestions and
+careful reading to clarify the manuscript.
+Y.-L.K. acknowledges support from the Science and Technology
+Facilities Council [grant number ST/V000713/1].
+I.H. is supported by the Science and Technology Facilities Council
+(STFC) research grants ST/V000713/1 and ST/Y001230/1 and from
+the Leverhulme Trust in the form of an International Fellowship,
+reference IF-2023-027.
+L.G. acknowledges financial support from AGAUR, CSIC,
+8
+https://www.wiserep.org/
+The current version of DASH can classify an SN and a host galaxy simultaneously only when the redshift is known.
+9
+MNRAS 000, 1–13 (2024)
+=== PAGE 12 ===
+12
+Young-Lo Kim et al.
+MCIN and AEI 10.13039/501100011033 under projects PID2020115253GA-I00, PIE 20215AT016, CEX2020-001058-M, and 2021SGR-01270.
+U.B. and G.D. are supported by the H2020 European Research
+Council grant no. 758638.
+T.E.M.B. acknowledges financial support from the Spanish Ministerio de Ciencia e Innovación (MCIN), the Agencia Estatal de
+Investigación (AEI) 10.13039/501100011033, and the European
+Union Next Generation EU/PRTR funds under the 2021 Juan de
+la Cierva program FJC2021-047124-I and the PID2020-115253GAI00 HOSTFLOWS project, from Centro Superior de Investigaciones
+Científicas (CSIC) under the PIE project 20215AT016, and the program Unidad de Excelencia María de Maeztu CEX2020-001058-M.
+Based on observations obtained with the Samuel Oschin Telescope 48-inch and the 60-inch Telescope at the Palomar Observatory as part of the Zwicky Transient Facility project. ZTF is supported by the National Science Foundation under Grants No. AST1440341 and AST-2034437 and a collaboration including current
+partners Caltech, IPAC, the Weizmann Institute of Science, the Oskar Klein Center at Stockholm University, the University of Maryland, Deutsches Elektronen-Synchrotron and Humboldt University,
+the TANGO Consortium of Taiwan, the University of Wisconsin
+at Milwaukee, Trinity College Dublin, Lawrence Livermore National Laboratories, IN2P3, University of Warwick, Ruhr University
+Bochum, Northwestern University and former partners the University
+of Washington, Los Alamos National Laboratories, and Lawrence
+Berkeley National Laboratories. Operations are conducted by COO,
+IPAC, and UW.
+SED Machine is based upon work supported by the National Science Foundation under Grant No. 1106171.
+This analysis used pandas (McKinney 2010), numpy (Harris et
+al. 2020), scipy (Virtanen et al. 2020), and matplotlib (Hunter
+2007).
+DATA AVAILABILITY
+Performance evaluation metrics used for Fig. 6 are available on the
+zenodo webpage: https://doi.org/10.5281/zenodo.13144566.
+SNID templates used in this work are also provided upon request.
+REFERENCES
+Bellm E. C., Kulkarni S. R., Graham M. J., Dekany R., Smith R. M., Riddle
+R., Masci F. J., et al., 2019, PASP, 131, 018002. doi:10.1088/15383873/aaecbe
+Blagorodnova N., Neill J. D., Walters R., Kulkarni S. R., Fremling C., BenAmi S., Dekany R. G., et al., 2018, PASP, 130, 035003. doi:10.1088/15383873/aaa53f
+Blondin S., Tonry J. L., 2007, ApJ, 666, 1024. doi:10.1086/520494
+Dawson K. S., Kneib J.-P., Percival W. J., Alam S., Albareti F. D., Anderson S. F., Armengaud E., et al., 2016, AJ, 151, 44. doi:10.3847/00046256/151/2/44
+de Jong R. S., Agertz O., Berbel A. A., Aird J., Alexander D. A., Amarsi A.,
+Anders F., et al., 2019, Msngr, 175, 3. doi:10.18727/0722-6691/5117
+Dekany R., Smith R. M., Riddle R., Feeney M., Porter M., Hale D., Zolkower
+J., et al., 2020, PASP, 132, 038001. doi:10.1088/1538-3873/ab4ca2
+Filippenko
+A.
+V.,
+1997,
+ARA&A,
+35,
+309.
+doi:10.1146/annurev.astro.35.1.309
+Fremling C., Miller A. A., Sharma Y., Dugas A., Perley D. A., Taggart K.,
+Sollerman J., et al., 2020, ApJ, 895, 32. doi:10.3847/1538-4357/ab8943
+Fremling C., Hall X. J., Coughlin M. W., Dahiwale A. S., Duev D. A., Graham
+MNRAS 000, 1–13 (2024)
+M. J., Kasliwal M. M., et al., 2021, ApJL, 917, L2. doi:10.3847/20418213/ac116f
+Gagliano A., Narayan G., Engel A., Carrasco Kind M., LSST Dark Energy Science Collaboration, 2021, ApJ, 908, 170. doi:10.3847/15384357/abd02b
+Gagliano A., Contardo G., Foreman-Mackey D., Malz A. I., Aleo P. D., 2023,
+ApJ, 954, 6. doi:10.3847/1538-4357/ace326
+Goldwasser S., Yaron O., Sass A., Irani I., Gal-Yam A., Howell D. A., 2022,
+TNSAN, 191
+Graham M. J., Kulkarni S. R., Bellm E. C., Adams S. M., Barbarino
+C., Blagorodnova N., Bodewits D., et al., 2019, PASP, 131, 078001.
+doi:10.1088/1538-3873/ab006c
+Gutiérrez C. P., Anderson J. P., Hamuy M., Morrell N., González-Gaitan
+S., Stritzinger M. D., Phillips M. M., et al., 2017, ApJ, 850, 89.
+doi:10.3847/1538-4357/aa8f52
+Harris C. R., Millman K. J., van der Walt S. J., Gommers R., Virtanen P., Cournapeau D., Wieser E., et al., 2020, Natur, 585, 357. doi:10.1038/s41586020-2649-2
+Harutyunyan A. H., Pfahler P., Pastorello A., Taubenberger S., Turatto M.,
+Cappellaro E., Benetti S., et al., 2008, A&A, 488, 383. doi:10.1051/00046361:20078859
+Howell D. A., Sullivan M., Perrett K., Bronder T. J., Hook I. M., Astier P.,
+Aubourg E., et al., 2005, ApJ, 634, 1190. doi:10.1086/497119
+Hunter J. D., 2007, CSE, 9, 90. doi:10.1109/MCSE.2007.55
+Kim Y.-L., Rigault M., Neill J. D., Briday M., Copin Y., Lezmy J., Nicolas
+N., et al., 2022, PASP, 134, 024505. doi:10.1088/1538-3873/ac50a0
+Kulkarni
+S.
+R.,
+2020,
+arXiv,
+arXiv:2004.03511.
+doi:10.48550/arXiv.2004.03511
+Lidman C., Tucker B. E., Davis T. M., Uddin S. A., Asorey J., Bolejko K.,
+Brout D., et al., 2020, MNRAS, 496, 19. doi:10.1093/mnras/staa1341
+Liu
+Y.,
+Modjaz
+M.,
+2014,
+arXiv,
+arXiv:1405.1437.
+doi:10.48550/arXiv.1405.1437
+Liu Y.-Q., Modjaz M., Bianco F. B., Graur O., 2016, ApJ, 827, 90.
+doi:10.3847/0004-637X/827/2/90
+Liu Y.-Q., Modjaz M., Bianco F. B., 2017, ApJ, 845, 85. doi:10.3847/15384357/aa7f74
+LSST Science Collaboration, Abell P. A., Allison J., Anderson S. F., Andrew
+J. R., Angel J. R. P., Armus L., et al., 2009, arXiv, arXiv:0912.0201
+Masci F. J., Laher R. R., Rusholme B., Shupe D. L., Groom S., Surace J., Jackson E., et al., 2019, PASP, 131, 018003. doi:10.1088/1538-3873/aae8ac
+McKinney W., 2010, in Proceedings of the 9th Python in Science Conference.
+pp 51–56
+Miranda N., Freytag J. C., Nordin J., Biswas R., Brinnel V., Fremling
+C., Kowalski M., et al., 2022, A&A, 665, A99. doi:10.1051/00046361/202243668
+Modjaz M., Liu Y. Q., Bianco F. B., Graur O., 2016, ApJ, 832, 108.
+doi:10.3847/0004-637X/832/2/108
+Möller A., de Boissière T., 2020, MNRAS, 491, 4277.
+doi:10.1093/mnras/stz3312
+Muthukrishna D., Parkinson D., Tucker B. E., 2019, ApJ, 885, 85.
+doi:10.3847/1538-4357/ab48f4
+Perley D. A., Fremling C., Sollerman J., Miller A. A., Dahiwale A. S., Sharma
+Y., Bellm E. C., et al., 2020, ApJ, 904, 35. doi:10.3847/1538-4357/abbd98
+Rigault M., Neill J. D., Blagorodnova N., Dugas A., Feeney M., Walters R., Brinnel V., et al., 2019, A&A, 627, A115. doi:10.1051/00046361/201935344
+Shappee B. J., Prieto J. L., Grupe D., Kochanek C. S., Stanek K. Z.,
+De Rosa G., Mathur S., et al., 2014, ApJ, 788, 48. doi:10.1088/0004637X/788/1/48
+Silverman J. M., Foley R. J., Filippenko A. V., Ganeshalingam M., Barth
+A. J., Chornock R., Griffith C. V., et al., 2012, MNRAS, 425, 1789.
+doi:10.1111/j.1365-2966.2012.21270.x
+Smith M., D’Andrea C. B., Sullivan M., Möller A., Nichol R. C., Thomas
+R. C., Kim A. G., et al., 2020, AJ, 160, 267. doi:10.3847/15383881/abc01b
+Soumagnac M. T., Nugent P., Knop R. A., Ho A. Y. Q., Hohensee
+W., Awbrey A., Andersen A., et al., 2024, arXiv, arXiv:2405.03857.
+doi:10.48550/arXiv.2405.03857
+=== PAGE 13 ===
+Accuracy of transient spectral classification tools
+13
+Swann E., Sullivan M., Carrick J., Hoenig S., Hook I., Kotak R., Maguire K.,
+et al., 2019, Msngr, 175, 58. doi:10.18727/0722-6691/5129
+Tonry J. L., Denneau L., Heinze A. N., Stalder B., Smith K. W., Smartt
+S. J., Stubbs C. W., et al., 2018, PASP, 130, 064505. doi:10.1088/15383873/aabadf
+Virtanen P., Gommers R., Oliphant T. E., Haberland M., Reddy T., Cournapeau D., Burovski E., et al., 2020, NatMe, 17, 261. doi:10.1038/s41592019-0686-2
+Yaron O., Gal-Yam A., 2012, PASP, 124, 668. doi:10.1086/666656
+This paper has been typeset from a TEX/LATEX file prepared by the author.
+MNRAS 000, 1–13 (2024)
+=== PAGE 14 ===

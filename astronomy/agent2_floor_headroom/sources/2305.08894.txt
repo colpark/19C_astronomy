@@ -1,0 +1,1954 @@
+=== PAGE 1 ===
+Draft version July 6, 2023
+Typeset using LATEX twocolumn style in AASTeX63
+First Impressions: Early-Time Classification of Supernovae using Host Galaxy Information and Shallow Learning
+,1, 2, 3, 4, 5 Gabriella Contardo ,3 Daniel Foreman Mackey
+Patrick D. Aleo 1, 2, 4
+Alexander Gagliano
+,3 Alex I. Malz
+,6 and
+1 Department of Astronomy, University of Illinois at Urbana-Champaign, 1002 W. Green St., IL 61801, USA
+2 National Center for Supercomputing Applications, Urbana, IL, 61801, USA
+3 Flatiron Institute Center for Computational Astrophysics, New York City, NY 10010, USA
+4 Center for Astrophysical Surveys, Urbana, IL, 61801, USA
+5 National Science Foundation Graduate Research Fellow
+arXiv:2305.08894v3 [astro-ph.IM] 3 Jul 2023
+6 McWilliams Center for Cosmology, Department of Physics, Carnegie Mellon University, Pittsburgh, PA, USA
+ABSTRACT
+Substantial effort has been devoted to the characterization of transient phenomena from photometric information. Automated approaches to this problem have taken advantage of complete phase-coverage of an event,
+limiting their use for triggering rapid follow-up of ongoing phenomena. In this work, we introduce a neural
+network with a single recurrent layer designed explicitly for early photometric classification of supernovae. Our
+algorithm leverages transfer learning to account for model misspecification, host galaxy photometry to solve the
+data scarcity problem soon after discovery, and a custom weighted loss to prioritize accurate early classification.
+We first train our algorithm using state-of-the-art transient and host galaxy simulations, then adapt its weights
+and validate it on the spectroscopically-confirmed SNe Ia, SNe II, and SNe Ib/c from the Zwicky Transient
+Facility Bright Transient Survey. On observed data, our method achieves an overall accuracy of 82 ± 2% within
+3 days of an event’s discovery, and an accuracy of 87 ± 5% within 30 days of discovery. At both early and
+late phases, our method achieves comparable or superior results to the leading classification algorithms with a
+simpler network architecture. These results help pave the way for rapid photometric and spectroscopic follow-up
+of scientifically-valuable transients discovered in massive synoptic surveys.
+Keywords: supernovae(1668), light curve classification(1954), neural networks(1933)
+1. INTRODUCTION
+Decades of spectroscopic insights have motivated the construction of a hierarchical classification taxonomy for the
+death knells of stars as supernovae (SNe; Filippenko 1997;
+Gal-Yam 2017). At its core are the four most commonlyobserved classes: Type-Ia (SNe Ia); Type-II (SNe II); and
+Type-Ib and Type-Ic (collectively SNe Ib/c). SNe Ia, signposts for the thermonuclear detonations of carbon-oxygen
+white dwarfs, are defined by the early presence of strong Si II
+features. SNe II, the explosions of young, massive stars (with
+a Zero-Age-Main-Sequence mass of 𝑀ZAMS > 8 𝑀⊙ ) following core collapse, are events whose spectra exhibit strong
+hydrogen lines with P-Cygni profiles. The less-common
+SNe Ib/c (comprising, together with the transitional SNe IIb,
+∼30% of all core-collapse events; Shivvers et al. 2017) exhibit spectra devoid of both hydrogen and Si II features; these
+events result from the core-collapse of young stars that have
+undergone envelope stripping.
+Corresponding author: Alex Gagliano
+gaglian2@illinois.edu
+Despite together comprising the vast majority of observed
+terminal explosions, SNe Ia, II, and Ib/c remain poorly understood in both their detonation mechanisms and the physics
+driving their observed diversity (Laplace et al. 2021). SNe Ia
+are likely triggered by either the runaway burning of an accreting white dwarf pushed beyond the Chandrasekhar limit
+by a close-in massive companion (with significant uncertainty
+surrounding the nature of the companion; see Hachisu et al.
+1999), or the merger of two white dwarfs (Pakmor et al.
+2012). Significant heterogeneity exists among SNe II in both
+their photometric evolution (Arcavi et al. 2012) and spectroscopic characterization (Taddia et al. 2013) that has yet to be
+connected definitively to the nature or pre-explosion behavior of their progenitors. Stripped-envelope SN (SN Ib/c/IIb)
+progenitors likely arise preferentially in binaries with some
+degree of mass transfer (Podsiadlowski et al. 1992), although
+some are believed to lose their envelopes in isolation through
+eruptive mass-loss and metallicity-driven stellar winds (Kuncarayakti et al. 2018). Further, observations have been unable
+to clarify whether SNe Ib, whose spectra contain clear helium
+signatures, and SNe Ic, whose spectra lack them, arise from
+=== PAGE 2 ===
+2
+distinct stripping channels or instead reflect extremes along a
+continuum in stripping degree.
+Although their underlying physics remain unclear, we are
+now discovering these transients in abundance. Time-domain
+surveys, in an attempt to balance sky coverage and depth, can
+be broadly distinguished between those that are low-redshift
+and wide-field, such as the Nearby SN Factory (SNFactory;
+Aldering et al. 2002), the Texas SN Search (Quimby 2006),
+the Pan-STARRS Survey for Transients (PSST; Huber et al.
+2015), the All-Sky Automated Survey for SNe (ASAS-SN;
+Kochanek et al. 2017), the Asteroid Terrestrial-impact Last
+Alert System (ATLAS; Tonry et al. 2018), the Zwicky Transient Facility (ZTF; Bellm et al. 2019), and the Young SN Experiment (YSE; Jones et al. 2021); and those that are targeted,
+high-redshift, and narrow-field, including the Sloan Digital
+Sky Survey-II SN Survey (Sako et al. 2008), SN Cosmology
+project (Perlmutter et al. 1999), Deep Lens Survey (Becker
+et al. 2004), and the Pan-STARRS Medium Deep survey
+(MDS; Villar et al. 2019); among others. These complementary searches have contributed to an exponentially-increasing
+(O(104 yr −1 )) SN discovery rate. The Vera Rubin Observatory (Vera Rubin Obs; Ivezić et al. 2019), with its synoptic
+coverage (completely covering the Southern sky each 3 − 4
+days in its Wide-Fast-Deep mode) and its unprecedented survey depths (𝑟 ∼ 24.5 in a single visit), is slated to annually
+discovery 106 transients1, single-handedly surpassing the current exponential scaling of SN discovery.
+SNe occur at the interface between a dying progenitor star
+and its post-explosion remnant. While we are unable to witness the exact moment of this metamorphosis, at best we
+can deepen our understanding by tightening our observations
+in both temporal directions: in other words, by observing
+and connecting the final moments of the progenitor star’s life
+and the earliest moments of its destruction. Following this
+approach, recent high-cadence imaging has revealed multiple serendipitous detections of pre-cursor emission in the
+weeks to months preceding the explosions of core-collapse
+SNe (e.g., 2009ip, 2010mc, 2020tlf; Mauerhan et al. 2013,
+Ofek et al. 2013, and Jacobson-Galán et al. 2022, respectively). The depth of LSST imaging offers a promising avenue for detecting progenitor emission at some pre-explosion
+phase, but the synoptic coverage of this and other upcoming
+surveys comes at the expense of sparse phase coverage of
+both any pre-explosion activity and of the terminal explosion.
+Our capacity to classify discovered events is further thwarted
+by our lack of complementary spectroscopic resources. Data
+from LSST and other upcoming surveys must be rapidly augmented by additional follow-up from targeted instruments to
+fully characterize the photometric and spectroscopic evolu1 https://www.lsst.org/sites/default/files/docs/sciencebook/SB˙11.pdf
+tion of an event and link an explosion to its pre-cursor activity,
+particularly at early phases when the physics of an explosion
+is most directly encoded onto its light curve.
+To consolidate photometrically pure samples, and to facilitate the follow-up of scientifically valuable events, light
+curve classifiers have appeared on the scene en masse. Some
+of these require matching observed light curves to archival
+templates (e.g., Sako et al. 2011); others classify on features extracted from light curves (either properties of the
+rise, peak, and decline as estimated with parametric fits, or
+reduced-dimensionality representations of the full light curve;
+see Lochner et al. 2016 and Villar et al. 2019 for reviews of
+multiple popular techniques). Several of these algorithms are
+founded upon principles directly relevant to solving the earlytime classification problem. These principles include: speed,
+with 15M light curve classifications per second processed
+with the neural network SuperNNova (Möller & de Boissière
+2020); flexibility, with the auto-encoder and recurrent neural
+network SuperRAENN (Villar et al. 2020b) able to develop
+realistic light curve representations for classification without
+complete phase coverage; and adaptive prediction, first shown
+as a proof-of-concept by Muthukrishna et al. (2019) with their
+recurrent network RAPID and more recently extended to more
+sophisticated network architectures in Qu & Sako (2022) and
+Pimentel et al. (2022).
+Despite these early successes, real-time transient classification remains in its infancy. Success in practice has been
+limited by two factors. First, to satiate the data-starved machine learning classifiers currently in use, it has become
+standard practice to generate and train on a large sample
+of synthetic light curves. Due to our limited understanding
+of the underlying physical systems involved, these transient
+models are driven by observed phenomenology, and so are
+necessarily simplified. This limits the performance of these
+classifiers on observed samples, particularly those containing
+out-of-distribution behavior. Second, the question of earlytime classification has to date been explored post-hoc through
+modifications to networks originally developed for full-phase
+classification. A classifier has yet to be designed explicitly
+to classify early and to bridge the divide spanning simulation
+and observation.
+The insights to be gleaned from high-cadence early-time
+coverage of SNe, even common ones, are vast. Early-time
+brightness variations can reveal interactions with a companion star in a binary, a surrounding progenitor envelope, or
+circumstellar material shed by the progenitor pre-explosion
+(e.g., Kasen 2010; Gezari et al. 2008; Dimitriadis et al. 2019;
+Shappee et al. 2019; Gagliano et al. 2022), and comparisons
+with analytic models of 56 Ni decay can reveal tantalizing evidence for additional engines powering an explosion (as is
+the case for SLSNe-I and, recently, SNe Ic; see Hosseinzadeh et al. 2022 and Afsariardchi et al. 2021, respectively).
+=== PAGE 3 ===
+3
+The evolution of an explosion’s color in the first few days,
+as discrete tracers of its underlying spectral energy distribution (SED), can even unveil an asymmetric distribution of
+nucleosynthetic products, such as an overabundance of heavy
+elements on the surface of the progenitor star (Ni et al. 2022).
+Real-time classification will also help enable the discovery of a greater number of rare and rapidly-evolving transients that have eluded discovery within previous surveys.
+Serendipitous detections among massive survey streams have
+already revealed multiple transients in this region of parameter space, including Rapidly-Evolving Transients (RETs; Pursiainen et al. 2018); Fast Blue Optical Transients (FBOTs;
+Perley et al. 2019); and Fast-Evolving Luminous Transients
+(FELTs; Rest et al. 2018). Because the emission timescales
+of most SNe are determined by the radioactive half-life of
+56 Ni, events evolving more rapidly than this hint at distinct
+explosion physics and central engines (such as a relativistic
+jet that interacts with a cloud of dense circumstellar material,
+as with FBOTs; Gottlieb et al. 2022). Increasing our sample
+sizes of these events is essential for constructing a complete
+picture of stellar death and the nature of the compact remnant
+that these doomed systems leave behind.
+In this work, we introduce a recurrent neural network designed end-to-end for early classification of explosive transients. In contrast to the rise of deep-learning methods that
+introduce complex networks at the expense of model interpretability, our model consists of a single recurrent layer and
+leverages physical information about the explosion site to improve early performance. Because of the simplified architecture and the emphasis on classification with incomplete light
+curve information, we deem this approach ‘shallow learning’. Our framework extends the initial real-time classification system developed by Muthukrishna et al. (2019) in four
+key respects:
+1. We implement a temporally-weighted categorical
+cross-entropy loss function such that early classification is prioritized over full-phase classification.
+2. We adopt a flexible Gaussian Process model parameterized by the correlation between filter passbands and observations in time to realistically interpolate observed
+transient photometry.
+3. We utilize a two-component training strategy where the
+network is first trained on a large sample of simulated
+light curves, and then re-trained on a curated subset of
+real observations.
+Mandel (2013) verified using the Lick Observatory SN Search
+sample (Filippenko et al. 2001) that host galaxy morphology
+and color could be used to construct photometric SN Ia samples as pure as those constructed using the then-leading light
+curve methods. Baldeschi et al. (2020) extended this work
+with a random forest classifier to distinguish between low
+and highly star-forming host galaxies, finding that this metric
+could serve as an indicator of transient type in the two-class
+scenario (SNe II versus SNe Ia). A postage-stamp classifier
+constructed by Carrasco-Davis et al. (2021) uses a convolutional neural network to distinguish between SNe, asteroids,
+variable stars, and bogus alerts with a single detection image
+(in the case of SNe, this necessarily includes host galaxy information). Gagliano et al. (2021) found that a random forest
+classifier trained directly on the photometric features of transient host galaxies achieved ∼ 70% accuracy distinguishing
+between SNe II and SNe Ia. FLEET, a random-forest classifier used to recover SLSNe-I from survey streams, combines
+a set of full-phase parametric light curve features with host
+galaxy properties and reports 20 SLSN-I discovered per year
+with an overall detection purity of 85% (Gomez et al. 2020).
+More recent work has extended these insights to additional
+sub-classes of SNe (Kisley et al. 2022). None of these methods leverage both host-galaxy and light curve information for
+real-time, adaptive photometric classification.
+We leverage the photometric information from two surveys
+in this work, mimicking the realistic scenario in which heterogeneous data (potentially with observations collected in distinct filter systems) are consolidated from multiple sources.
+We consider SN photometry in ZTF-𝑔𝑟 and 𝑔𝑟𝑖𝑧𝑦 host-galaxy
+photometry from the Pan-STARRS 3-𝜋 survey (Chambers
+et al. 2016), both in our simulated and observed samples.
+We provide an overview of our analysis, which mimics
+the structure of this paper, in Fig. 1. In §2, we introduce
+the simulated and observational datasets used in this work.
+We outline our prescription for pre-processing each of the
+transient light curves in §3, and introduce our recurrent neural
+network architecture in §4. We then describe our training
+of the model in §5. We provide results from our recurrent
+classification tests and place them in the context of light curve
+only classification, and of other recently-released photometric
+classifiers, in §6. We conclude with a discussion of science
+applications and future work in §7.
+2. DATA
+4. We include photometry from the galaxy where a transient occurred (its ‘host galaxy’) to reduce the reliance
+on sparse transient photometry at early phases.
+2.1. Simulated Transients and their Host Galaxies
+Host galaxy information is increasingly being considered for
+its value in early SN classification. The initial work of Foley &
+We first outline the pipeline used to generate the primary
+training set for our classification network. Our strategy lever-
+2.1.1. Modeling Transient Photometry with SNANA
+=== PAGE 4 ===
+4
+Transient
+Generation with
+SNANA
+Phase
+Jitter
+Galactic
+De-Reddening
+§3.1
+§2.1
+Network Training §5
+E(B − V )MW
+Light Curve
+Truncation
+(0 < tn < 30)
++
+Simulated
+Segments
+Early Weight
+Photo-z
+Sampling
+§3.3
++
+Classification
+Results
+LSTM
+B
+A
+C
+Padding & Gaussian
+Process Fitting
+BTS
+§3.2
+Observed
+Segments
+Weighted
+Loss §4.2
+§2.2
++
+Class Weight
+§6
++
+Early Weight
+Luminosity Normalization
+LSTM
+Figure 1. Overview of our analysis pipeline, with relevant sections in this paper labeled. Data are outlined in blue, while analysis steps are
+given in green.
+ages the popular simulation code SNANA2 (Kessler et al. 2009),
+which constructs a forward model for a transient event starting
+from a rest-frame SED and ending with synthetic observations matching the cadence and depth of a survey of interest.
+The simulation considers atmospheric distortions, instrument
+efficiency, and photometric calibration in estimating the uncertainty of each simulated observation. A common set of SN
+SED models used to train the current generation of photometric classifiers are those constructed for the Photometric LSST
+Astronomical Time-Series Classification Challenge (PLAsTiCC; Kessler et al. 2019). Since the challenge was first run,
+the models associated with SNe Ia, SNe II, and SNe Ib/c
+have all been updated, and will soon be released in an updated iteration of the challenge. We adopt these updated SED
+templates for our simulations.
+Using SNANA, we simulate the properties of four classes
+of SNe: SNe Ia, SNe II, SNe Ib, and SNe Ic. We assume
+a flat ΛCDM cosmology with 𝐻0 = 70 km s−1 Mpc−1 , Ω 𝑀
+= 0.3, ΩΛ = 0.7, and 𝑤 = −1. To parameterize the rise,
+stretch, and color of SNe Ia as a function of their rest-frame
+SEDs, we use the recently-released SALT3 model (Kenworthy
+et al. 2021), an update of the commonly-used SALT2 model
+(Guy et al. 2007). For SNe II, SNe Ib, and SNe Ic, we
+use the spectrophotometric templates provided by Vincenzi
+et al. (2019). These templates have been constructed from
+observed events of multiple sub-types; we consolidate the
+templates provided for SNe IIP/IIL, SNe IIn, and SNe IIb as
+“SNe II” to reflect the observational diversity of this class.
+We generate synthetic light curves in ZTF-𝑔 and ZTF-𝑟
+for each transient class over the redshift range 0 < 𝑧 < 0.2
+to match the photometric properties of the data publicly re2 https://github.com/RickKessler/SNANA/tree/master
+ported in the alert stream of the Zwicky Transient Facility
+(ZTF; Bellm et al. 2019)3. Because we aim to apply our
+trained network to the ZTF Bright Transient Survey (ZTF
+BTS), which is magnitude-limited to ZTF-𝑟 < 18.5 (additional detail on the catalog is provided in §2.2), we cut from
+our simulations any transients without at least a single observation brighter than this limit. We also remove observations
+with a signal-to-noise ratio (S/N) of less than 4 (determined
+empirically to match the S/N distribution of observations reported in the ZTF BTS). The sky locations of transients in
+the simulated sample, which convolves a uniform distribution
+where they occur with the ZTF footprint where they are detected, are then used to calculate the expected line-of-sight
+Galactic extinction assuming 𝑅𝑉 = 3.1, an intrinsic scatter of
+𝜎𝐸(𝐵−𝑉) = 0.16, and the dust law from Cardelli et al. (1989).
+Because the simulation represents a forward model imposing observational cuts on an underlying ‘true’ transient sample, the final number of transients ‘observed’ is unknown a
+priori. We simulate 50,000 events of each class so that at least
+20,000 remain after these cuts. Once we have a dataset of ‘observed’ ZTF SNe, we combine SNe Ib and SNe Ic into a single
+“SN Ib/c” class (due to the uncertainty surrounding their classification as distinct sub-types) and under-sample the dominant classes with the Python package imbalanced-learn
+(Lemaı̂tre et al. 2017) so that the full dataset has the same
+number of events per class. This results in a sample containing 20,000 ZTF light curves per transient class (SN Ia, SN II,
+and SN Ib/c), or 60,000 in total.
+We have simulated our transients using 10 Intel Xeon
+“Haswell” processor nodes on the Cray XC40 “Cori” system at the National Energy Research Scientific Computing
+3 http://ztf.caltech.edu
+=== PAGE 5 ===
+5
+(NERSC). The full simulation took a total wall time of 5.2
+hours.
+2.1.2. Simulated Host-Galaxy Properties with Normalizing Flows
+Our goal is to leverage host-galaxy properties to predict a
+transient’s class when explosion photometry is limited and
+spectroscopy is absent. Our neural network needs to be
+trained on data comprising only what is available at test-time,
+and should be informed by extant SN samples.
+Significant effort has been devoted to expanding the SNANA
+simulation code to simultaneously model samples of observed
+transients and their host galaxies (Brout et al. 2019; Vincenzi et al. 2021; Lokken et al. 2022); however, this approach
+has several limitations for our use case. First, the generation of realistic photometric redshifts demands that both the
+survey-specific photometry and colors of synthetic galaxies
+be well-calibrated against observations (a non-trivial problem; Korytov et al. 2019). Second, we wish to generate a
+large, balanced training sample spanning the same redshift
+range as the test set. This would likely require scaling up
+the number of low-redshift galaxies in existing synthetic or
+observed catalogs, which can introduce artificial structure if
+properties are repeated. Finally, as ZTF photometry does
+not exist for galaxies, our framework needs to match SNe
+observed in one survey to galaxies observed in another.
+We bypass these limitations by proposing a simple datadriven model trained to reproduce the class-specific photometric properties (PS1-𝑔𝑟𝑖𝑧𝑦 and photometric redshift) of
+observed SN host galaxies. By conditioning these properties
+on the true redshifts of our generated transients, we can ensure that the host galaxy properties are consistent with the
+redshift range simulated without repeating values or demanding that they be observed in the same survey. To this end,
+we train separate conditional normalizing flows for the hostgalaxy properties of each transient class in our sample (SN Ia,
+SN Ib/c, and SN II).
+Normalizing flows (Jimenez Rezende & Mohamed 2015)
+are generative models constructed to approximate and draw
+from a joint probability density function (PDF) associated
+with a complex multi-dimensional dataset. They are parameterized by an invertible bijective function (or bijector) that
+maps a simple distribution (e.g., a multi-dimensional Uniform
+distribution) to the observed data distribution. New samples
+can then be drawn from the data distribution by sampling the
+simple distribution and applying the learned bijective function. A flow can also be constructed to predict multiple
+parameters of the dataset conditioned on a separate parameter, as is done here. When trained on observed events, this
+approach allows us to generate realistic host-galaxy properties without an underlying galaxy model or an encoding of
+the observing systematics limiting their identification. We
+use the PZFlow4 package (Crenshaw et al. 2022) to build our
+conditional normalizing flow.
+We first consolidate PS1 best-fit Kron magnitudes in PanSTARRS 𝑔𝑟𝑖𝑧𝑦-passbands for the galaxies within the GHOST
+(Gagliano et al. 2021) catalog. After excluding events from
+the ZTF BTS sample (described in the following section),
+those without spectroscopic redshift information, and those
+without complete PS1-𝑔𝑟𝑖𝑧𝑦 photometry, we are left with
+∼ 8, 000 events. The PS1 photometry for each galaxy is corrected for Galactic extinction using the total reddening values at each location derived from Planck observations of the
+cosmic microwave background (Planck Collaboration et al.
+2014). We further consolidate photometric redshifts for each
+host galaxy from the neural-network-produced ‘PS1-STRM’
+catalog (Beck et al. 2021), and separate ‘SNe Ia’, ’SNe II’,
+and ‘SNe Ib/c’ hosts.
+We then train a conditional flow to generate extinctioncorrected PS1-𝑔𝑟𝑖𝑧𝑦 photometry and photometric redshifts
+for each transient type given the transient’s spectroscopic redshift. Our bijective function is a Rational-Quadratic Neural
+Spline Coupling (Durkan et al. 2019), and our target distribution is a multi-dimensional Uniform distribution. We train for
+100 epochs and confirm convergence of the log-probability.
+We then condition our learned flow on the spectroscopic redshift of each SNANA-simulated transient to generate a posterior
+PDF for its host galaxy properties: 𝑝(𝑔, 𝑟, 𝑖, 𝑧, 𝑦, 𝑧phot |𝑧spec ).
+We draw from this joint PDF to simultaneously generate point
+estimates for each of these properties. We note that uncertainties for these properties can be estimated by repeatedly
+drawing from this conditional flow, or the full posterior can
+be used instead; for this work we limit ourselves to the single
+estimate of each property.
+We emphasize that we have not implemented any hostgalaxy association technique, as no positional information
+exists: our simulated hosts are fully described by the properties we have generated with the normalizing flow. In practice, SNe observed within 𝑧 < 0.6 may be misassociated at
+the 3-5% level using traditional techniques (Gagliano et al.
+2021); reproducing this contamination rate using simulations
+requires an all-sky galaxy catalog with realistic number densities, far beyond the scope of this work. Because this contamination induces additional scatter in the observed hostgalaxy correlations for each SN class, our normalizing flow
+trained on observations naturally encodes the effects of these
+misassociations in our simulated galaxy photometry (though
+misassociations are less likely within our considered redshift
+range of 𝑧 < 0.2).
+Next, we divide our simulated sample into training and test
+sets comprising 75% and 25% of the original dataset, respec4 https://github.com/jfcrenshaw/pzflow
+=== PAGE 6 ===
+6
+tively. We maintain the even class balance in the training set;
+however, we re-balance the test set to have the approximate
+class proportions as exist in the ZTF BTS after quality cuts:
+80% SNe Ia, 15% SNe II, and 5% SNe Ib/c (where we assume equal proportions of SNe Ib and SNe Ic in the combined
+SN Ib/c class). This allows us to track the performance of
+the network on a BTS-like sample of events as it trains. We
+achieve these proportions by undersampling our SN II and
+SN Ib/c light curves using imbalanced-learn. Our final
+simulated training set contains 10,000 events of each class,
+while our simulated test set contains 8,000 SNe Ia, 1,500
+SNe II, and 500 SNe Ib/c.
+2.2. Observed Transients from The ZTF Bright Transient
+Survey (ZTF BTS)
+To evaluate the performance of our network on real observations, we use the set of 4,020 high-quality5 SNe from the ZTF
+BTS6 (Fremling et al. 2020; Perley et al. 2020), the largest
+spectroscopic sample of SNe constructed to date. Data from
+the ZTF public stream are collected using the 47 deg2 fieldof-view camera mounted atop the Palomar 48-inch Schmidt
+telescope, which observes in three passbands: ZTF-𝑔, ZTF𝑟, and ZTF-𝑖. The data collected, which now include forced
+photometry at the locations of identified events (Masci et al.
+2019), are then processed at the Infrared Processing and Analysis Center (IPAC) to produce public alerts ∼4 minutes from
+the time of observation. Now in the second phase of its public survey, which comprises half of its total time on-sky, ZTF
+scans the entire northern sky with a cadence of ∼2 nights in
+ZTF-𝑔 and ZTF-𝑟.
+The ZTF BTS is magnitude-limited to ZTF-𝑟 < 18.5 and
+nearly spectroscopically-complete, containing spectroscopic
+classifications for 93% of discovered SNe. The catalog (at
+the time of download on March 16th, 2023) consists of 3,275
+SNe Ia, 563 SNe II, and 182 SNe Ib/c, whose photometry
+was released to alert brokers in near real-time and whose
+spectra were made public on the Transient Name Server7
+within a day of observation. The catalog also contains multiple events belonging to rarer classes (including SLSNe-I); we
+do not consider these additional classes in this study, but note
+that significant host-galaxy correlations have been identified
+among these other classes (Lokken et al. 2022) and our model
+can easily be extended to include them.
+We identify the most likely host galaxies of these transients
+in Pan-STARRS (PS1) using the modified directional lightradius (Gupta et al. 2016) method implemented in the GHOST
+5 See https://sites.astro.caltech.edu/ztf/bts/explorer info.html for a description of quality and purity cuts.
+6 https://sites.astro.caltech.edu/ztf/bts/bts.php
+7 https://www.wis-tns.org
+(Gagliano et al. 2021) software8. The host galaxies of 866
+SNe could not be found using this method and were dropped.
+Through visual inspection, another 76 were found to have
+erroneous or ambiguous associations and were manually reassociated.
+For the identified hosts, PS1 best-fit Kron magnitudes
+in 𝑔𝑟𝑖𝑧𝑦-passbands were retrieved. 301 systems had unreported host galaxy photometry in at least one PS1 band
+and were dropped at this stage, leaving 2,853 events. We
+then downloaded the photometry of these transients using the
+ANTARES alert broker local client9 (Matheson et al. 2021).
+Photometry for 2 transients could not be found and these
+events were removed.
+Extensive prior work has been done to construct and validate photometric redshift estimators for specific surveys and
+galaxy datasets. Due to the lack of generalizability of these
+methods, many surveys report neural-network generated photometric redshifts for each galaxy but not the associated code
+used to generate them. To bypass this issue, we have constructed a simple emulator for the photometric redshifts reported in Beck et al. (2021) for transient host galaxies. This
+allows us to recover redshifts with comparable statistical properties to those predicted by fine-tuned models.
+Similar to the approach for the simulated sample, we train
+a conditional flow to generate data with comparable statistical properties to our observed sample. Whereas our previous
+flow was used to generate both host-galaxy photometry and
+photometric redshifts for the simulated sample, this model
+leverages observed host-galaxy photometry to predict only
+the Beck et al. (2021)-reported photometric redshifts. We
+condition our flow on PS1-𝑟 and the colors of galaxies within
+the GHOST (Gagliano et al. 2021) sample, which correlate
+more strongly with redshift than galaxy brightness alone. As
+a result, our normalizing flow predicts the conditional distribution 𝑝(𝑧phot |𝑟, 𝑔 − 𝑟, 𝑟 − 𝑖, 𝑖 − 𝑧, 𝑧 − 𝑦). As before, we
+train the flow for 100 epochs and verify convergence of the
+log-probability.
+After training, we apply our normalizing flow to our ZTF
+BTS host galaxy photometry to recover photometric redshift
+point estimates. We use these values to normalize our light
+curves as described in the following section. We similarly use
+the PS1 zero-points and photometric redshifts to convert the
+host galaxy apparent magnitudes to host galaxy luminosities,
+which we normalize to near unity.
+We plot the distribution of photometric redshifts for both
+the simulated and observed samples as a function of their
+spectroscopic redshifts in Fig. 2. Qualitatively, the scatter
+in photometric redshifts between the two samples is similar.
+8 https://pypi.org/project/astro-ghost/
+9 https://nsf-noirlab.gitlab.io/csdc/antares/client/installation.html
+=== PAGE 7 ===
+7
+Processing Cut
+SNe Remaining
+Fraction Cut
+Initial Sample
+Missing/Incorrect Host
+Unreported Host Phot.
+SN Light Curve Retrieval
+Light Curve Truncation
+Final SN Sample
+4,020
+3,154
+2,853
+2,851
+2,807
+2,807
+–
+21.5%
+9.6%
+< 0.1%
+1.5%
+30.2%
+Table 1. Number of SNe from the ZTF BTS remaining, and fraction
+removed, after each step in the processing pipeline.
+Figure 2. Photometric versus spectroscopic redshifts for the galaxies in our simulated and observed samples. ZTF BTS host galaxies
+are shown as black points, and synthetic host galaxies are shown
+as the two-dimensional histogram in blue. The discreteness in observed spectroscopic redshifts is an artifact of the template-matching
+algorithm through which they were determined.
+Quantitatively, we can measure the number of photometric
+redshift outliers as (Hildebrandt et al. 2010)
+|𝑧 phot − 𝑧spec |
+> 0.15
+1 + 𝑧spec
+(1)
+By this metric, we measure an outlier fraction of 4.5% for the
+observed sample and 1.5% for the simulated sample (compared to 2.5% for the Beck et al. (2021)-reported photometric
+redshifts for the GHOST training sample).
+We note that the use of 𝑢-band photometry from the Sloan
+Digital Sky Survey (SDSS; York et al. 2000) would likely
+decrease this scatter, but the increased depth of PS1 results
+in higher-S/N host-galaxy photometry for use in our network.
+Further, redshift is a key feature used to estimate the absolute brightness of an explosion, and therefore a key discriminator between SNe Ia and core-collapse events. The
+reliability of photometric redshifts in the era of the Vera
+C. Rubin Observatory is an area of active research, and we
+avoid fine-tuning these estimates further so as not to report
+overly-optimistic performance. Our approach represents a
+significant advancement over previous light curve simulations that estimate photo-zs by interpolating look-up tables of
+host galaxy colors (see e.g., Graham et al. 2018).
+Our observed sample before pre-processing contains 2,851
+SNe. An additional 44 were dropped during the light curve
+truncation stage described in §3, leaving us with a final observed sample size of 2,807 SNe. While this is a fraction of
+the initial number in the ZTF BTS (∼70%), we note that only
+a small fraction of the discovered SNe in upcoming surveys
+will be classified and selected for follow-up observations. By
+constructing a curated observational dataset, we optimize our
+classifier’s ability to discover events for which we will be able
+to extract meaningful scientific insights. We compare the
+distributions of peak apparent magnitude, redshift, and host
+galaxy photometry after each of these preprocessing steps to
+ensure that we do not encode an additional observational bias
+into our observed sample with these cuts. We summarize our
+sample sizes after each of these cuts in Table 1.
+We divide our final spectroscopic sample into a 75% training set and a 25% test set without changing the relative proportions of classes. As a result, our spectroscopic training set
+consists of 1,704 SNe Ia, 280 SNe II, and 121 SNe Ib/c; our
+spectroscopic test set consists of 569 SNe Ia, 95 SNe II, and
+38 SNe Ib/c.
+3. DATA PRE-PROCESSING
+3.1. Phase Jitter of Synthetic Light Curves
+In our model, the date at which ZTF ‘discovers’ an SN
+(deemed the trigger date, or 𝑇trigger ) is the epoch when a second observation is taken with 𝑆/𝑁 ≥ 5. Because the date
+at which a transient is discovered is determined by the combination of a transient’s brightness evolution and the survey
+cadence, this date should not be assumed to be either the date
+of the start of the explosion or a constant offset relative to it.
+Nevertheless, the simplicity of SN simulations may lead a machine learning model to over-train on unrealistic correlations
+in the trigger dates of the training set instead of the properties
+of the light curve. This will limit its use when applied to data
+collected from a survey with more restrictive, or relaxed, trigger criteria. To mitigate this issue, we remove observations
+from the first 𝑑 days of each transient light curve, where 𝑑 is
+a number randomly sampled from a truncated Normal distribution with 𝑑 ∼ N (𝑇trigger , 0.252 ) and 𝑑 ≥ 𝑇trigger . We then
+re-define the trigger date of each event as the epoch of the
+first observation in this new truncated light curve. For each
+light curve in both the simulated and spectroscopic sample,
+we calculate the phase of each observation relative to trigger
+in days. We correct these phases for time dilation using the
+photometric redshifts calculated above and correct light curve
+flux values for Galactic extinction. We then remove observations from each light curve obtained greater than 30 days
+after this new trigger date (as we are interested in this work in
+=== PAGE 8 ===
+8
+SNIa
+91,938
+Simulated Sample
+Train
+Test
+(10,000)
+SNIbc
+93,482
+SNII
+95,236
+280,656
+92,663
+(10,000)
+(30,000)
+(10,000)
+SNII
+14,169 (1,500)
+SNIbc
+4,831 (500)
+SNIa
+73,663
+(8,000)
+(10,000)
+SNIbc
+1,757 (121)
+SNIa
+30,497
+(1,704)
+SNII
+4,631 (280)
+36,885
+(2,105)
+12,058
+(702)
+SNIa
+9,786
+SNII
+1,750 (95)
+SNIbc
+522 (38)
+(569)
+Observed (Spec.) Sample
+Figure 3. The training and testing datasets used in this work. Above: The composition of simulated events used in phase 1 of training the
+network. The total number of light curve segments in each sample are listed, and the number of unique transient events in each sample are given
+in parentheses. Below: The composition of spectroscopic events from the ZTF Bright Transient Survey used in the re-training stage (see text
+for details).
+early classification). We do not k-correct our photometry, as
+this would encode assumptions about the shape of the SED
+of each transient class (and further encode the reliance on
+accurately determined redshifts).
+Our classifier consists of a recurrent neural network, and
+these networks were initially constructed to process arrays
+of uniform length. To prepare irregularly-sampled light
+curves across multiple passbands for processing, common
+approaches include padding light curves to a fixed length and
+masking zero-valued observations in training (e.g., Charnock
+& Moss 2017); or interpolating observations onto a grid of
+uniform length (e.g., Villar et al. 2020b). We adopt both approaches, using a Gaussian Process model described in the
+following section.
+3.2. Gaussian Process Interpolation and Padding
+We use Gaussian Process Regression (GPR; Rasmussen
+2006) to construct a light curve model for each transient event
+and interpolate observations in apparent magnitudes onto an
+evenly-spaced grid in time. In GPR, observations are considered to be realizations of a latent function with Gaussian
+noise. A function describing the covariance between observations, called the kernel, is constructed and its parameters
+are chosen to minimize the loss function (and maximize the
+likelihood of the obtained observations). This results in a
+continuous posterior distribution for a class of models that
+describe the data. GPR can additionally consider a mean
+model for the observations, and this further conditions the
+subsequent model predictions.
+Our model, which is implemented in the lightweight code
+tinygp10, uses a Matérn kernel with 𝜈 = 3/2 that quantifies
+the correlation in time between observations 𝑡 𝑖 and 𝑡 𝑗 as
+√
+√
+𝑘(𝑡𝑖 , 𝑡 𝑗 ) = (1 + 3𝑟)𝑒 − 3𝑟
+𝑡 −𝑡
+(2)
+In the above equation, 𝑟 = || 𝑖 𝑙 𝑗 || 1 parameterizes the time
+between observations and the scale factor 𝑙 is a free parameter. In addition to modeling the correlation between singleband observations in time, we model the correlations between
+bands. We construct a 𝑝 × 𝑝 symmetric correlation matrix,
+where in this case 𝑝 = 2 is the number of passbands considered. The diagonal and off-diagonal terms (2 and 1 terms,
+respectively) are free parameters to be fit.
+We use a constant value in each band as our mean model
+(𝑔,
+¯ 𝑟),
+¯ and add the uncertainty in each band to the diagonal
+of the covariance matrix along with additional free terms 𝑗 𝑔 ,
+𝑗𝑟 to capture any remaining measurement error. In total,
+our model consists of 8 free parameters. We transform our
+data from flux to magnitude space and minimize the negative
+marginal log probability of the model (our loss function) to
+determine the best-fit parameters for each event. We optimize
+our Gaussian Process fit with the Scipy package.
+There is precedent to a Gaussian Process (GP) light
+curve model parameterized by the correlation in both wavelength/frequency and time. A similar method was first in10 https://tinygp.readthedocs.io/en/stable/
+=== PAGE 9 ===
+9
+troduced by Boone (2019) with the photometric classifier
+Avocado, the winning submission of the Photometric LSST
+Astronomical Time-Series Classification Challenge (PLAsTiCC; Kessler et al. 2019). In Avocado, the central wavelength of each passband was used as the coordinates of the
+wavelength dimension of the GP. Villar et al. (2020a) also
+used a custom GP model described by a kernel in both wavelength and time, where the distance metric in wavelength
+space was the Wasserstein-1 distance between each filter’s
+normalized throughput. Because these two GP methods place
+physical constraints on the covariance in wavelength, they are
+specialized cases of our model. A physically-motivated construction of the GP covariance matrix may be desirable when
+photometry is sparse; however, in this work we opt instead for
+a model with greater flexibility to fully characterize both the
+long-duration and short-duration behavior of each transient.
+We show the best-fit GP model for one simulated transient
+event across three phases of its light curve, in additional to
+the best-fit passband kernel at that phase, in Fig. 4. With
+few observations, minimal correlation is detected between
+passbands (left plot). As more data is obtained (middle and
+right plots), the correlation increases and is used to improve
+the posterior light curve fits across both passbands. This
+learned correlation also ensures that the model in each band
+is robust against low-S/N observations (not shown).
+Although a GP model whose hyperparameters are optimized based on a full-phase light curve would best characterize an event’s evolution in time and across passbands, this
+information will not be available in real-time. We decompose
+each transient light curve into segments to realistically simulate constructing a model at different phases of observation.
+From a light curve with 𝑁 total observations in the simulated
+sample, we construct a series of 𝑁/2 segments from the first 𝑛
+observations, where 𝑛 = 2, 4...𝑁. In other words, we generate
+a unique segment every two observations of the light curve.
+This cadence was chosen to reduce the volumes of training
+data without decreasing the number of transient events they
+contain (and the associated photometric diversity).
+Multiple strategies have been proposed to pre-process
+unevenly-sampled and multi-variate time-series datasets for
+use in recurrent neural networks, and it remains unclear which
+strategy yields the best performance for SN classification.
+With this in mind, we construct three different data representations of our light segments:
+1. Raw and Pad Model: In the first approach, we construct an array directly from the light curve observations. This photometry has been corrected for distance, extinction, and time dilation but has not been
+interpolated using our GP model. In this method, our
+temporal array contains the (jittered) phases at which
+observations were obtained in any band; the magnitude
+and magnitude uncertainty arrays are filled with ze-
+ros where a given band was unobserved. These arrays
+are then padded with zeros at the tail end so that the
+matrices for all events have equal length.
+2. 100-Timestep Model: In the second approach, we construct a GP fit for each light curve segment and compute
+the mean and standard deviation of the GP posterior distribution at 100 independently-spaced phases spanning
+the full extent of the segment. We then convert these
+interpolated observations and their uncertainties from
+magnitude space back to flux space. We note that, in
+contrast to prior light curve methods, this interpolation scheme does not maintain uniform spacing in time
+across light curve segments. One partial-phase segment may consist of 10 observations spanning 5 days,
+in which case it will be interpolated onto a uniform
+grid with 𝛿𝑡 = 0.05 days; if 10 additional observations
+span another 5 days, the full 10-day segment would be
+interpolated onto a grid with 𝛿𝑡 = 0.1 days.
+3. 0.2-Day Spacing Model: In the third approach, we
+construct a GP fit as above and evaluate the GP model
+at phases beginning at the time of trigger and occurring
+every 𝛿𝑡 = 0.2 days until the end of the segment. We
+then convert these interpolated observations to flux.
+While this approach preserves consistent spacing in
+time, the interpolated light curves will not be equal in
+length. As in method 1, we pad each light curve array
+to a consistent length after interpolation.
+We have adopted a flexible GP model over a physical light
+curve model to capture the observed diversity in SN photometry, which allows unexpected phenomenology to be expressed
+in the interpolated data. When an SN is young, however, this
+flexibility can be detrimental: with very few observations,
+the best-fit GP model may not reflect expected early-time SN
+behavior. To bypass this limitation, we only interpolate our
+observations after 5 or more total observations have been obtained. Before this phase, we pad the photometry with zeros
+to a uniform length in all three of our models and pass these
+arrays directly into the neural network (as with our ‘Rad and
+Pad’ model above). We note that a more sophisticated approach may be to integrate a physically-motivated light curve
+model at early times, then transition to a more flexible GP
+model as more data is obtained. We leave this implementation to future work.
+After obtaining the interpolated or padded representations
+of each light curve segment, we convert its flux to normalized
+luminosity using the equation
+𝐿 Norm =
+4𝜋𝑑 2 𝐹
+𝛼
+(3)
+where 𝐹 is the GP-interpolated flux in each band; 𝑑 is the
+luminosity distance to the transient in parsec, estimated from
+=== PAGE 10 ===
+10
+ZTF-g
+ZTF-g
+ZTF-g
+ZTF-r
+ZTF-r
+ZTF-r
+ZTF-g
+ZTF-r
+SN II
+ZTF-g
+ZTF-r
+ZTF-g
+ZTF-r
+ZTF-g
+ZTF-r
+T − Ttrigger (Days)
+T − Ttrigger (Days)
+T − Ttrigger (Days)
+Figure 4. Best-fit Gaussian Process model for one simulated light curve in ZTF passbands (ZTF-𝑔 in green and ZTF-𝑟 in red) at three phases
+in its evolution from the time of trigger (bottom). The best-fit band-wise covariance matrix associated with each fit is shown at top. Because
+our model is parameterized by the covariance between observations in both time and wavelength, observations taken in a single band inform the
+model in the other.
+the photometric redshift of the host galaxy; and 𝛼 = 1023
+is a normalization constant used to keep the computed luminosities near unity (as neural network performance is often
+better if the input range is constrained). Photometric uncertainties extracted from the GP fit are similarly converted as
+𝜎L,Norm = 𝐿 Norm 𝜎𝐹 /𝐹.
+Each interpolated or padded transient light curve segment is
+represented in our dataset as an 𝑁pad × 𝑝 matrix, where 𝑁pad is
+the full length of each light curve segment, including padded
+values (this value is different for each of the three methods)
+and 𝑝 = 2 is the number of passbands (ZTF-𝑔, 𝑟). To this
+matrix, we add the array of interpolated phases 𝑡 = 𝑇 −𝑇trigger ;
+the GP-derived photometric uncertainties in each band; and
+𝑁pad -length arrays contains the fixed repeated values of
+𝐸(𝐵 − 𝑉) 𝑀𝑊 , 𝑧 phot , and host galaxy normalized luminosity
+in PS1-𝑔𝑟𝑖𝑧𝑦 filters. This results in a data matrix containing
+arrays of dimensionality 𝑁pad × (2𝑝 + 8) that are used to both
+train and validate the network.
+We consolidate our 𝑁pad ×(2𝑝+8) arrays for all SN segments
+associated with the SNe in our training samples described in
+2.1; this forms our training set. The segment arrays associated
+with the test SNe similarly form our test set. Our target array
+for prediction is a one-hot encoded representation of our three
+classes: SNe II are encoded as ‘0’, SNe Ia as ‘1’, and SNe Ib/c
+as ‘2’. We report the number of unique transient events across
+the simulated and spectroscopic training and test set, along
+with the number of light curve segments in each sample, in
+Fig. 3.
+4. MODEL ARCHITECTURE
+4.1. Overview
+To take advantage of the temporal correlations embedded
+within our partial-phase time-series samples, we design a
+recurrent neural network for photometric classification.
+A recurrent neural network (RNN) is comprised of multiple
+connected and directed “units” that are trained to learn a data
+representation from both the internal states of earlier units as
+well as a component of the input array. Because gradients
+propagate through the network, RNNs have traditionally suffered from vanishing and exploding gradients (those tending
+toward 0 and infinity, respectively) in training. This issue
+can be alleviated by the use of recurrent units that modulate
+information flow through the network; for example, Gated
+Recurrent Units (GRUs; Cho et al. 2014) feature coupled ‘update’ and ‘reset’ gates. We have selected the more conventional Long-Short Term Memory cells (LSTM; Hochreiter
+& Schmidhuber 1997) as our RNN units. LSTMs contain
+three gates: a ‘forget’ gate that removes information from the
+cell state; an ‘input’ gate that regulates the adding of new
+information from the data sequence into the cell state; and
+an ‘output’, which regulates the output of the cell state into
+a subsequent unit. We use LSTMs for their ability to retain
+insights from the long-term behavior of complex time-series
+data, where they often achieve superior performance to GRUs
+(e.g., Cahuantzi et al. 2021).
+The architecture of our neural network is illustrated in
+Fig. 5. It consists of a single LSTM layer of 60 units, with a
+=== PAGE 11 ===
+11
+Npad
+A common choice for the loss function used to train multiclass classification networks is the sparse categorical crossentropy. For an event belong to true class 𝑎, the categorical
+cross-entropy is calculated as
+t
+SN LZTF−g,r
+SN σZTF−g,r
+2p + 8
+zphot
+E(B − V )MW
+𝐿(𝑦, 𝑦ˆ ) = −
+Host LPS1−grizy
+𝑀 ∑︁
+𝐶
+∑︁
+𝑦 𝑖 𝑗 × log 𝑦ˆ 𝑖 𝑗
+
+(5)
+𝑗=0 𝑖=0
+where 𝐶 is the number of transient classes (in this work
+𝐶 = 3), 𝑀 is the number of events in a training batch, 𝑦 𝑖 𝑗 is
+the true class of event 𝑗 after one-hot-encoding (with 𝑦 𝑖 𝑗 = 1
+where 𝑗 = 𝑎, else 𝑦 𝑖 𝑗 = 0), and 𝑦ˆ 𝑖 𝑗 is the set of predicted
+normalized probabilities output from the softmax layer of the
+network. The cross-entropy for all events in a given batch are
+summed at each training epoch to compute the network loss.
+We modify this framework to weight the contributions of
+particular segments over others. The modified cross-entropy
+loss is constructed as:
+Masking
+LSTM Layer
+(60 Units)
+Dense Layer
+Softmax
+PtN
+𝐿(𝑦, 𝑦ˆ ) = −
+Figure 5. Architecture for our RNN, which is composed of a single
+LSTM layer of 60 units. The photometry in each band (interpolated,
+padded, or both) is stacked with the photometric redshift, extinction,
+and host galaxy photometry, which are repeated at each phase. This
+combined array serves as the input to our RNN, and the network
+returns a single classification prediction corresponding to the light
+curve segment processed.
+sigmoid activation function defined as
+1
+𝑆(𝑥) =
+1 + 𝑒 −𝑥
+(4)
+where 𝑥 is the input tensor to the gate. The next layer is
+a masking layer, which constructs a boolean mask of equal
+dimensionality to the input data. This mask, which is propagated through successive layers along with the data, is constructed to flag and ignore padded values in training. This
+layer is followed by a dense layer to consolidate model outputs
+into a set of normalized probability scores corresponding to
+the likelihood of the light curve to belong to the three transient
+classes considered (SN Ia, SN II, SN Ib/c).
+Many previous RNN architectures for photometric classification have applied dropout layers that deactivate randomlyselected neurons during training to ensure that all neurons
+are used; batch normalization is also common to decrease the
+number of training epochs needed to achieve accurate classification results. We have found that neither modification
+significantly increases the accuracy of our model when applied to real data, and so have excluded them. Our network
+is implemented in TensorFlow (Abadi et al. 2015) using the
+Keras (Chollet et al. 2015) interface.
+4.2. Class-Weighted Loss For Accurate Early Predictions
+𝑀 ∑︁
+𝐶
+∑︁
+𝛽𝑖 𝑗 𝑦 𝑖 𝑗 × log 𝑦ˆ 𝑖 𝑗
+
+(6)
+𝑗=0 𝑖=0
+We calculate the weight of each light curve segment as a function of 𝑡 𝑁 , the final phase covered by the segment (ignoring
+padded values):
+
+
+10,
+
+
+
+
+𝛽𝑖 𝑗 (𝑡 𝑁 ) = 5,
+
+
+
+ 1,
+
+for 𝑡 𝑁 ≤ 3 days
+for 𝑡 𝑁 > 3 days and 𝑡 𝑁 ≤ 15 days (7)
+otherwise
+These weights are constructed so that the network minimizes
+the loss by prioritizing the classification of SNe using only
+photometry provided in the first three days following detection. In the re-training stage using observed ZTF light curves
+(see §5 for details), we modulate these values by an additional
+weight according to the class of the transient associated with
+the segment:
+
+
+𝛽𝑖 𝑗 (𝑡 𝑁 ) × 2,
+
+
+
+
+𝛽𝑖 𝑗 (𝑡 𝑁 ) = 𝛽𝑖 𝑗 (𝑡 𝑁 ) × 1,
+
+
+
+ 𝛽 (𝑡 ) × 5,
+ 𝑖𝑗 𝑁
+for 𝑗 = 0
+for 𝑗 = 1
+(8)
+for 𝑗 = 2
+The multiplicative factors are added to make the network
+more sensitive to identifying SNe II and SNe Ib/c, which
+are poorly represented in our re-training dataset. SNe II
+events are more photometrically heterogeneous than SNe Ia,
+and SNe Ib/c are more easily confused with SNe Ia; the
+network learns to classify these more challenging minority
+classes only through explicit weighting. We note that we
+have tested the performance of the network after using these
+class weights in the primary training stage (on synthetic data
+before re-training). We find no significant improvement in
+=== PAGE 12 ===
+12
+performance relative to the early-weighted cross-entropy loss.
+The same principle we have applied here can be used to adapt
+publicly-available classifiers for specific science cases (e.g., to
+prioritize SN Ia classification for cosmological studies, or to
+prioritize late classification for nebular-phase spectroscopic
+follow-up).
+5. PRIMARY AND ADAPTIVE TRAINING
+Because of the inherent complexity of observational data,
+classification models trained on simulated data typically
+under-perform on more realistic datasets. We have attempted
+to reduce the discrepancy between synthetic and observed
+samples by simulating realistic photometric redshifts and jittering the early photometry of simulated light curves. We
+further prepare our trained network for real-time operation
+with a domain-adaptation step in the training process. There
+are two primary motivations for this:
+• Encoding a weak dependence on class imbalance
+and survey systematics: If the network was fully
+trained using realistic relative class rates, it may prioritize accurate classification of some classes over
+others (e.g., only classifying SNe Ia, the most common SN class in observed samples); conversely, a network trained on evenly balanced datasets may predict
+unrealistically-large numbers of minority classes. A retraining stage allows a reasonably flexible architecture
+to consider both pieces of information. After learning
+the underlying phenomenological differences between
+the light curves of each SN class from the balanced
+simulated sample, the network in its re-training stage
+additionally considers the observed distribution of real
+events in a given survey.
+• Increasing the Realism of Estimated Photo-𝑧s:
+Given the reliance of photometric classifiers on the
+predicted distance to the transient, it is imperative that
+our model is trained on a set of photometric redshifts
+with statistical properties comparable to those derived
+from observed photometry. While the overall scatter
+of the simulated and observed samples appears similar, re-training prevents the network from relying upon
+unphysical artifacts within the simulation for its prediction.
+First, we train our network on the simulated training sample for 200 epochs. We use the stochastic gradient descent
+optimizer Adam (Kingma & Ba 2014), with a learning rate
+of 𝑙 = 10−4 . We then re-train this model for 200 additional
+epochs and the same learning rate on the observed training
+sample. The temporal weights used in both training stages
+are identical; however, we have only used the class weights in
+the re-training stage, to account for the class imbalance. We
+use a training batch size of 32 in the simulated training stage
+and 12 in the spectroscopic training stage to account for the
+smaller data volumes of the latter dataset. We conducted the
+primary and secondary training for each of the three models
+across 24 CPUs of a node of the Flatiron Institute Scientific
+Computing Hub. The primary training stage was completed
+in a wall time of 31.2 - 32.1 hours per model, while the secondary training stage was conducted in 9.7 - 11.6 hours of
+wall time per model.
+6. RESULTS
+In the following section, we evaluate the performance of
+our three models as a function of phase. We construct ROC
+curves and PRC curves for each model, and report balanced
+metrics across the SN classes in our sample.
+6.1. Receiver Operator Characteristic and Precision-Recall
+Curves
+For both the simulated and the observed samples, we bin
+our light curve segments into early (𝑡 𝑁 < 3 days), intermediate (3 < 𝑡 𝑁 < 15 days), and late (15 > 𝑡 𝑁 > 30 days) epochs
+depending on the phase of the final observation in the segment. The vast majority of events within the ‘early’ bin will
+still be brightening, while the late events will predominantly
+be dimming after peak.
+For a given phase bin, events correctly classified as belonging to a class 𝑎 are called True Positives (𝑇 𝑃). Events
+incorrectly classified as belonging to class 𝑎 are called False
+Positives (𝐹𝑃). Conversely, events correctly and incorrectly
+classified as not belonging to class 𝑎 are deemed True Negatives (𝑇 𝑁) and False Negatives (𝐹 𝑁), respectively. Then, the
+classification precision, also known as its purity, is calculated
+as
+𝑇 𝑃𝑎
+𝑝𝑎 =
+(9)
+𝑇 𝑃 𝑎 + 𝐹𝑃 𝑎
+The classification recall, also known as its completeness, is
+calculated by
+𝑇 𝑃𝑎
+𝑟𝑎 =
+(10)
+𝑇 𝑃𝑎 + 𝐹 𝑁𝑎
+A common method to evaluate the performance of a binary
+classifier is to consider the false positive rate 𝐹𝑃 𝑎 as a function of the true positive rate 𝑇 𝑃 𝑎 ; a well-trained classifier
+should be able to maximally increase the rate at which they
+recover events from class 𝑎 while minimizing the rate at which
+they mistakenly identify the alternative class as belonging to
+class 𝑎. The ideal behavior of this 𝑇 𝑃 − 𝐹𝑃 curve, also known
+as a Receiver Operator Characteristic Curve (ROC; Peterson
+et al. 1954), is to rapidly increase toward a true positive rate of
+unity with minimal false positives. We quantify this behavior
+by calculating the Area Under the ROC (AUROC; Pepe et al.
+2006), which is unity in the limit of perfect classification and
+0.5 in the case of random guessing.
+Another common metric is to plot the recall of the model
+as a function of its precision; a well-performing classifier
+=== PAGE 13 ===
+13
+exhibits a Precision-Recall (PR) curve with high recall rates
+(the fraction of recovered events from class 𝑎) even as the demanded model precision increases. As in the ROC curve, this
+trade-off can be quantified by the area under the precisionrecall curve (AUPRC; Saito & Rehmsmeier 2015), with
+AUPRC = 1 for perfect classification and AUC = 𝑓 𝑎 , the
+fraction of the test data consisting of class 𝑎, for random
+guessing. The AUROC and the AUPRC provide complementary views of a classifier’s performance.
+Our work is motivated by the need for rapid characterization
+of common events to conduct follow-up with highly limited
+resources. We will be unable to study the vast majority of
+discovered transient events in detail, but we must ensure that
+we do not waste precious resources when we do. For this
+reason, this and other upcoming SN classifiers will need to
+optimize a method’s precision over its recall. We note that if
+an event is intrinsically rare, a classifier’s recall rate may be
+prioritized over its precision.
+We use the StratifiedKFold module in sklearn to
+generate five evenly-sized random splits of the test datasets.
+These data subsets are mutually exclusive: no events are repeated between them. Next, we binarize our classification
+predictions for each split using the one-versus-all approach
+(in which the true class 𝑎 is assigned a value of 1 and the
+other two classes are assigned a value of 0). We then generate
+ROC and PR Curves for each data split and each phase range
+(‘early’, ‘intermediate’, and ‘late’). Finally, we calculate the
+mean and standard deviation of the curves across all splits.
+The ROC and PR curves for the ‘Raw with Pad’, ‘100Timestep GP’, and ‘0.2-Day GP’ models are shown in Figures
+6, 7, and 8, respectively. We show these curves applied to
+both the simulated test segments after the first training stage
+and on the observed test segments after the retraining stage.
+We report the class-specific AUC and AUPRC values in the
+figure legends.
+On the simulated sample, we achieve near-perfect classification for both SNe II and SNe Ia at late phases (15 < 𝑡 𝑁 <
+30): Our mean AUROC values for the two classes are ≥ 98%
+across all three models, and the mean AUPRC values are
+≥ 95%. We observe substantially worse results at late phases
+for SNe Ib/c: in the worst case, we observe an AUROC of
+94 ± 1% for the 100-Timestep GP model but an associated
+AUPRC of 54 ± 11%. We attribute this to the class imbalance of the test set, to which the the AUPRC is particularly
+sensitive: ∼ 5% of the sample is SN Ib/c.
+At late phases, we also observe the largest difference between the three classifiers tested on the simulated transients.
+Despite generally comparable performance for all models, we
+find the lowest metrics with the 100-Timestep GP model, with
+AUPRC values of 99 ± < 1%, 95 ± 1%, and 54 ± 11% for
+SNe Ia, SNe II, and SNe Ib/c, respectively. It is possible that
+this is a reflection of the loss of physically-relevant timescales
+in pre-processing these light curves: because 100 observations are generated independent of the duration of the light
+curve segment, the same rise and decline times could comprise half of one processed array and span the full extent of
+another. Although we also pass the phase information explicitly to the network, we propose that the physically-motivated
+spacing between array elements aids the network in learning
+the temporal evolution of an event. Further, we note that the
+first five observations were passed in directly (without interpolation) for each of the models. Because ZTF observations
+are taken with a median cadence of ∼2 days, these observations encode physical information about the phase of the
+event in the number of array elements. The network trained
+to leverage this information from raw data (the ‘Raw and Pad’
+model) is better-adapted to process this early data, evidenced
+by the highest early-phase precision for simulated SNe Ib/c
+(24 ±1%).
+We now consider the performance of our three models on
+the spectroscopically-confirmed sample of SNe from the ZTF
+BTS. For the dominant class in the sample, SN Ia, we note
+surprisingly consistent results when transitioning from simulations to observations: the late-phase classification achieves
+an AUROC of 85±4% and an AUPRC of 94±3% in the worst
+case (with the ‘Raw and Pad’ model). The performance on
+the other two classes is appreciably worse: we observe significantly greater variance among the performance results between the five cross-validation folds for each the three models,
+particularly for SNe Ib/c. In the worst case, our mean AUROC metric for late-phase classification decreases by 36% for
+SNe Ib/c and 34% for SNe II with the ‘Raw and Pad’ model.
+Our AUROC and AUPRC values increase roughly monotonically with phase for each classifier applied to both the simulated and observed SN samples. There is a single exception:
+the mean SN Ib/c AUROC decreases from intermediate to
+late phase with the ‘Raw and Pad’ model, although the difference is not statistically significant. The ‘0.2-Day GP’ model
+achieves marginally superior performance at late-phase, and
+we conclude that this representation may be slightly better
+able to incorporate the long-term evolution of each light
+curve. We note that, in an earlier iteration of this work,
+the inclusion of ZTF SNe that did not pass the ZTF-imposed
+quality and purity cuts caused this performance increase with
+phase to disappear for the the ‘Raw and Pad’ model. The
+fact that our simplified network architecture is able to reasonably fit the temporal behavior of the real data across all three
+light curve representations suggests that, for sufficient-quality
+observations, interpolation onto an evenly-spaced grid (as is
+commonplace in present-day photometric classifiers) may not
+be a required pre-processing step for accurate RNN classification.
+Finally, we find that all three models are able to achieve
+classification performance in the first three days better than
+=== PAGE 14 ===
+14
+random guessing across all SN classes. For the ‘0.2-Day
+GP’ model, we find mean AUROC values of > 72% across
+all classes, and an AUPRC value of 90% for SNe Ia. We
+additionally find AUPRC values of 22 ± 7% for SNe Ib/c and
+38±2% for SNe II. These are encouraging results that the light
+curve rise of an SN, coupled with its host galaxy photometry,
+can be used for real-time early classification. Our results also
+suggest that the application of machine-learning solutions to
+simulated SN samples alone may suggest overly optimistic
+performance, and may not be reflective of their performance
+on real data.
+6.2. Comparison to Light Curve-Only Classification
+Next, we quantify the impact of each component of our
+classification framework on our final results. Due to the
+slightly superior late-time performance of the ‘0.2-Day GP’
+model described in the previous section, we use this as our
+baseline for comparison.
+To facilitate this analysis, we have trained three additional
+models using the ‘0.2-Day GP’ interpolation method. In the
+first, we remove host-galaxy photometry and consider only the
+transient’s light curve, photometric redshift, and the Galactic
+extinction along the line of sight. In the second, we remove
+our primary training stage, and train our network exclusively
+on the imbalanced training set from the ZTF BTS. In the third,
+we remove our adaptive training stage and train our network
+exclusively on the balanced simulated sample.
+To better facilitate a comparison between these models, we
+consider the macro-average of the AUROC, AUPRC, precision, and recall between the three classes. These metrics
+consider the contributions of each class equally, and consequently are not dominated by the network’s performance on
+the most populous class in the observed sample (SN Ia). This
+is in contrast to the micro-average, in which a weighted average is computed using the number of events of each class.
+Our macro-averaged balanced metrics are denoted with a ‘b-’
+prefix. We also introduce an additional metric to our comparison: the balanced-F1 score, defined as the harmonic mean
+between the precision and recall of a classifier averaged between classes:
+𝐶
+1 ∑︁
+2𝑟 𝑖 𝑝 𝑖
+𝐹1 =
+(11)
+𝐶 𝑖=0 𝑟 𝑖 + 𝑝 𝑖
+The balanced-𝐹1 score consolidates multiple performance
+metrics into a single value for directly comparing classifiers.
+We report this and our other metrics for the above models
+evaluated on the early-phase (< 3 day) light curves of the
+observed ZTF BTS sample. We report our results in Table 2.
+We find that removing any component of our training sequence decreases the mean value of every metric. The largest
+decrease in every metric comes from removing the adaptive
+training stage. Interestingly, removing the primary training
+stage results in a nearly comparable mean sample accuracy
+to our baseline classifier (81% compared to 82%). Removing the adaptive training stage results in a substantial drop in
+mean accuracy (66% compared to 82%), although these two
+truncated-training networks have comparable precision. This
+can be understood in the context of the class breakdown in
+each training set: Training only on the fully balanced simulated sample results in inaccurate predictions on a sample
+comprised primarily of SNe Ia, while the opposite holds true
+for a training set dominated by SNe Ia. The smallest decrease comes from the removal of host-galaxy information.
+Although the uncertainties are large, the systematic decrease
+in every property suggests the benefit of including this photometry in early classification efforts.
+6.3. Comparison to Previous Classifiers
+We now compare our classifier to pre-existing methods in
+its design. Because we have sought to overcome existing
+barriers to real-time classification using physically-motivated
+information instead of model complexity, our classifier is
+simpler in architecture to the majority of comparative leading
+methods. Earlier RNN methods for photometric classification (e.g., superNNova; Möller & de Boissière 2020) had
+considered two layers of bi-directional GRUs, in which the
+RNN representation of the light curve at each unit is informed
+by information from both earlier and later phases. These
+architectures are suited for full-phase classification but are
+ill-suited for classification with an incomplete light curve.
+RAPID, the first recurrent neural network to be constructed
+for real-time classification, consisted of two layers of 100
+uni-directional GRUs to avoid leaking information from later
+phases. It was later updated to use Temporal-Convolutional
+Neural units (TCNs; Bai et al. 2018). Our method uses a
+single LSTM layer consisting of 60 uni-directional units. To
+interpolate observations onto a uniform grid, Muthukrishna
+et al. (2019) interpolated synthetic ZTF observations onto a
+grid of 50 observations spanning −70 < 𝑇 −𝑇trigger < 80 days
+at a 3-day cadence. Model predictions were then wrapped in
+a TimeDistributed layer to provide a classification output
+at each interval in phase. In contrast, we process segments of
+the light curve separately through our network and interpolate each segment independently with a flexible GP. We have
+chosen this approach so that our light curve representation improves as additional observations are obtained, contrary to the
+stationary interpolation scheme considered by Muthukrishna
+et al. (2019). This mimics model construction in real-time:
+as additional observations are obtained, our understanding of
+the shape and evolution of the light curve improves. Muthukrishna et al. (2019) also define a pseudo-class to distinguish
+pre-explosion from post-explosion phases, and use a parametric fit to each light curve in training to estimate the time of
+explosion relative to trigger. We avoid this framework so that
+the network does not need to estimate the time of explosion,
+=== PAGE 15 ===
+15
+Raw and Pad Model
+Early Phase
+(tN < 3 days)
+Intermediate Phase
+(3 < tN < 15 days)
+Late Phase
+(15 days < tN < 30 days)
+Synthetic
+ZTF BTS
+Synthetic
+ZTF BTS
+Figure 6. First Row: Receiver Operator Characteristic (ROC) Curves for the network trained and tested directly on transient and host photometry
+(without using a GP interpolation scheme). The performance has been evaluated on light curve segments truncated at early, intermediate, and
+late times. The mean AUROC are reported with 1-𝜎 uncertainties in the legend of each panel. Third Row: The Precision-Recall Curves for the
+same model applied to synthetic photometry. The AUPRC with 1-𝜎 uncertainties are given in the corresponding legends. Second and Fourth
+Rows: ROC Curves, and Precision-Recall Curves, for the same model after 200 epochs of re-training on observed light curve segments (see
+text for details).
+=== PAGE 16 ===
+16
+100-Timestep GP Model
+Early Phase
+(tN < 3 days)
+Intermediate Phase
+(3 < tN < 15 days)
+Late Phase
+(15 days < tN < 30 days)
+Synthetic
+ZTF BTS
+Synthetic
+ZTF BTS
+Figure 7. Same plot as Fig. 6 for the 100-Timestep GP model.
+=== PAGE 17 ===
+17
+0.2-Day GP Model
+Early Phase
+(tN < 3 days)
+Intermediate Phase
+(3 < tN < 15 days)
+Late Phase
+(15 days < tN < 30 days)
+Synthetic
+ZTF BTS
+Synthetic
+ZTF BTS
+Figure 8. Same plot as Fig. 6 for the 0.2-Day GP model.
+=== PAGE 18 ===
+18
+which in the case of sparse light curves is non-trivial and nonessential for classification. We note that our model can easily
+be modified to incorporate pre-explosion non-detections, as is
+done in (Muthukrishna et al. 2019); this may further improve
+its performance.
+Two years after the development of RAPID, the real-time
+classifier SCONE (Qu et al. 2021) was developed. SCONE
+uses a convolutional neural network applied to 2-dimensional
+‘flux-heatmap’ representations of transient light curves for
+classification, after GP interpolation in wavelength and time.
+The model consists of 22,606 free parameters for multi-class
+classification, whereas ours consists of 17,463. We note,
+however, that our model has only been constructed to distinguish three classes of SNe, whereas theirs includes SNe Iax,
+SNe 91bg, and SLSNe-I for a total of six possible SN classes.
+During the writing of this work, Pimentel et al. (2022) released a Deep Attention Model for photometric classification
+of transients discovered by ZTF. Attention Models (Mnih
+et al. 2014) are secondary neural networks added to a primary network and tasked with learning the input features
+most relevant to the output of the primary network. Using a custom time-modulated attention component (called
+‘TimeModAttn’), Pimentel et al. (2022) uses an auto-encoder
+to learn a continuous representation of a light curve from discrete observations. Two model approaches are considered: a
+serial one in which an auto-encoder simultaneously encodes
+the light curves in ZTF-𝑔 and ZTF-𝑟 into a single latent vector; and a parallel one in which the light curves of an event in
+each band are encoded separately, combined, and then compressed with a linear projection to arrive at a dimensionality
+comparable to that of the serial model. After the partial light
+curve is encoded, it is processed by a Multi-Layered Perceptron (MLP; Murtagh 1991) model with two layers, a dropout
+fraction of 50%, a batch normalization component, and a final
+softmax layer to convert the output of the model to a series of
+classification probabilities. We note that this requires more
+pre-processing than our model, and we require no dropout,
+batch normalization, or attention component. Nevertheless,
+the inclusion of the attention component allows for the network to predict the specific observations most relevant for
+classification by the model, a major advancement in the interpretability of machine learning models used for photometric
+classification.
+We now compare the performance of our classifier to prior
+methods. We list our balanced performance metrics at each
+phase bin for the simulated and observed SN samples classified with the 0.2-Day GP model in Table 3. We acknowledge
+that few commonly-reported classification metrics are intuitive; for clarity, we also provide the overall accuracy of the
+network at each phase, although we caution that this is equal
+to the micro-averaged precision and so is sensitive to the class
+imbalance of the dataset (∼80% SNe Ia).
+In Pimentel et al. (2022), the authors report the performance of their TimeModAttn models relative to a traditional
+RNN with LSTM units and a Balanced Random Forest algorithm constructed from 144 features extracted from the
+light curves. They evaluate these classifiers on a sample of
+spectroscopically-confirmed SNe from ZTF comparable to
+that used in this work. We note that these metrics are computed 100 days after detection, 70 days after our longest light
+curve segment, and so denote them as Full-Phase. Using the
+results from their parallel TimeModAttn network with synthetic pre-training and zero data augmentation, we provide
+these balanced metrics in Table 3.
+We find no statistically significant difference between the
+balanced precision, F1 score, AUROC, or AUPRC of our classifier at late-phase (15 < 𝑡 𝑁 < 30) and those reported for the
+TimeModAttn model 100 days from trigger, although their
+mean balanced precision falls below the uncertainty range for
+ours. It is likely that our results represent lower limits for
+the performance of our classifier following 30 days. We find
+the TimeModAttn model to be superior to our method only
+in terms of balanced recall, and we emphasize that this metric is less important than precision for triggering follow-up
+spectroscopy on targeted events (except in the case of rare,
+high-value transients). We find the mean AUROC, AUPRC,
+precision, and F1 score of our method at late-phase to be superior to the baseline random forest (BRF) model considered;
+however, we caution that our statistical uncertainties across
+samples are larger than each of their considered methods, and
+this limits our ability to directly compare them. In addition,
+Pimentel et al. (2022) considered four SN classes (SNe Ia,
+SNe Ib/c, SNe II, and SLSNe-I), whereas we have excluded
+SLSNe-I from our sample. Although the light curve and host
+galaxy photometry of these events are reasonably distinct
+from the other classes (and performance is often significantly
+worse on SNe Ib/c and SNe II; these were the two SN classes
+with the lowest performance across twelve classes considered
+in Muthukrishna et al. 2019, while SLSNe achieved the highest late-phase AUROC values in Pimentel et al. 2022), our
+results may differ when applied to the four-class problem.
+Next, we compare the performance of our network to earlier
+methods at partial-phase classification. The number of classifiers that report early-time performance on real data is low;
+as a result, we will begin by comparing to the early performance of RAPID and SCONE on synthetic samples. We caution
+that both of these classifiers considered more SN classes than
+this work; in addition, whereas RAPID simulated ZTF light
+curves, the SCONE framework was tested on LSST-simulated
+photometry from PLAsTiCC (Kessler et al. 2019). The impact to classification of the increased spectral coverage but
+=== PAGE 19 ===
+19
+Model
+b-AUROC
+b-AUPRC
+b-Precision
+b-Recall
+b-F1 Score
+Accuracy
+Baseline
+No Host
+No Primary Training
+No Adaptive Training
+0.74 ± 0.04
+0.72 ± 0.08
+0.71 ± 0.04
+0.65 ± 0.03
+0.52 ± 0.07
+0.48 ± 0.09
+0.45 ± 0.02
+0.43 ± 0.02
+0.58 ± 0.13
+0.48 ± 0.12
+0.40 ± 0.18
+0.41 ± 0.02
+0.46 ± 0.09
+0.41 ± 0.09
+0.34 ± < 0.01
+0.39 ± 0.05
+0.48 ± 0.11
+0.40 ± 0.08
+0.30 ± 0.01
+0.39 ± 0.03
+0.82 ± 0.02
+0.78 ± 0.02
+0.81 ± < 0.01
+0.66 ± 0.02
+Table 2. Early-phase (< 3 day) classification metrics for the observed ZTF BTS Sample, with 0.2-day GP-interpolation scheme, for three cases:
+no host photometry with the baseline training scheme, host photometry with no primary training, and host photometry with no adaptive training
+(see text for details). Removing any of these components results in an average decrease in classifier performance across every metric considered.
+Model
+Data
+Phase
+b-AUROC
+b-AUPRC
+b-Precision
+b-Recall
+b-F1 Score
+Accuracy
+0.2-Day GP
+Synthetic
+Early
+Intermediate
+Late
+Early
+Intermediate
+Late
+0.82 ± 0.01
+0.94 ± 0.02
+0.98 ± 0.01
+0.74 ± 0.04
+0.86 ± 0.06
+0.91 ± 0.04
+0.55 ± 0.02
+0.78 ± 0.04
+0.90 ± 0.02
+0.52 ± 0.07
+0.59 ± 0.06
+0.72 ± 0.10
+0.51 ± 0.01
+0.65 ± 0.02
+0.77 ± 0.04
+0.58 ± 0.13
+0.65 ± 0.07
+0.72 ± 0.11
+0.61 ± 0.03
+0.78 ± 0.03
+0.90 ± 0.02
+0.46 ± 0.09
+0.58 ± 0.07
+0.65 ± 0.10
+0.54 ± 0.02
+0.70 ± 0.03
+0.82 ± 0.03
+0.48 ± 0.11
+0.60 ± 0.07
+0.67 ± 0.10
+0.74 ±< 0.01
+0.85 ± 0.01
+0.92 ± 0.02
+0.82 ± 0.02
+0.84 ± 0.04
+0.87 ± 0.05
+Late
+Full
+Full
+Full
+0.91 ± 0.04
+0.87 ± 0.02
+0.88 ± 0.03
+0.90 ± 0.02
+0.72 ± 0.10
+0.60 ± 0.05
+0.65 ± 0.05
+0.68 ± 0.06
+0.72 ± 0.11
+0.53 ± 0.03
+0.57 ± 0.03
+0.59 ± 0.02
+0.65 ± 0.10
+0.69 ± 0.05
+0.68 ± 0.04
+0.73 ± 0.04
+0.67 ± 0.10
+0.53 ± 0.04
+0.58 ± 0.04
+0.61 ± 0.03
+0.87 ± 0.05
+-
+ZTF BTS
+0.2-Day GP
+BRF
+LSTM RNN
+TimeModAttn
+ZTF BTS
+ZTF
+ZTF
+ZTF
+Table 3. Classification metrics for the 0.2-Day GP RNN model evaluated on synthetic and observed (ZTF BTS) light curves at early (𝑡 𝑁 < 3
+days), intermediate (3 days < 𝑡 𝑁 < 15 days), and late phases (15 days < 𝑡 𝑁 < 30 days). Upper rows indicate the performance of the model
+in this work, whereas the lower rows indicate only its late-phase performance in comparison with the same metrics at full-phase (𝑡 𝑁 = 100
+days) for the BRF, LSTM RNN, and TimeModAttn models from Pimentel et al. (2022). The bolded row highlights the early performance of
+the classifier on the observed ZTF sample. The three models from literature are evaluated on observed ZTF light curves, but the specific SNe
+considered may vary.
+lower cadence of LSST relative to ZTF is an open question,
+and should be investigated further.
+Figure 7 of Muthukrishna et al. (2019) shows the recall of
+the model across all 12 considered transient classes 2 days
+since trigger. The performance on SNe II and SNe Ib/c is
+the worst across all classes. Combining these classes into a
+balanced-recall score, we calculate a value of 0.36, compared
+to our value of 0.61 ± 0.03. Figure 8 presents these values
+40 days from trigger, when the model achieves a balancedrecall of 0.57 across SNe Ia, II, and SNe Ib/c. Our late-phase
+balanced recall on synthetic ZTF samples is 0.90 ± 0.02,
+evaluated at least ten days earlier in phase. The confusion
+matrices shown in Muthukrishna et al. (2019) indicate that
+Calcium-rich transients and SNe Iax are significant contaminants for classifying SNe Ib/c; our superior performance is
+likely partially attributed to not considering these classes.
+Nevertheless, we find significantly improved performance on
+the partial-phase light curves of dominant SN classes relative
+to RAPID.
+Next, we consider the partial-phase performance of SCONE
+(Qu et al. 2021) on simulated LSST light curves. Fig. 4
+of Qu & Sako (2022) indicates that their model achieves
+(when using redshift) a balanced-recall of 0.75 ± 0.03 across
+SNe Ia, SNe II, and SNe Ib/c 5 days from trigger, compared
+to our lower recall of 0.61 ± 0.03 within the first 3 days.
+50 days following trigger, they report a balanced recall of
+0.86 ± 0.03, compared to our value of 0.90 ± 0.02 in the first 30
+days. Although these results are encouraging, Table 3 reveals
+the degradation in results when transitioning from synthetic
+to real samples. We strongly encourage the validation of
+RAPID, SCONE, and other early-time photometric classifiers on
+spectroscopic SN samples to better understand the advantages
+of each approach.
+In addition to the full-phase metrics reported by Pimentel
+et al. (2022), plots are provided for the b-AUROC values of
+their models as a function of phase. At the earliest observation (approximately three days from trigger), they note a
+maximum b-AUROC of ∼ 50% across all of their models
+on observed ZTF SNe. Our model achieves a significantly
+higher b-AUROC of 74 ± 4% within the first 3 days. They
+report a b-AUROC of ∼ 75% for their BRF and LSTM RNN
+models, and ∼ 85% for their TimeModAttn model at ∼ 30
+days from trigger, compared to our 91 ± 4%. We conclude
+that a simple architecture is able to achieve comparable or
+superior performance to more complex methods, both in distinguishing between SNe Ia, II, and Ib/c at early phases and
+in improving performance as more observations are obtained.
+=== PAGE 20 ===
+20
+7. CONCLUSIONS & FUTURE WORK
+We have shown that an SN classifier leveraging both transient and host-galaxy photometry can achieve comparable
+performance to machine learning methods with complex architectures. Our algorithm represents one of the first attempts
+to prepare for real-time SN classification at every stage of the
+design and implementation pipeline. Below, we outline our
+primary conclusions:
+1. Between the three light curve pre-processing methods we considered (‘Raw and Pad’, ‘0.2-Day GP’, and
+‘100-Timestep GP’), the ‘0.2-Day GP’ model performs
+marginally better in late-phase classification. The three
+classifiers achieve comparable early and time-evolving
+classification when applied to the ZTF BTS data. This
+suggests that the temporal evolution of the photometry
+can be equally well-captured by an RNN trained on an
+interpolated representation of the light curve and the
+raw photometry itself, if the photometry is high-S/N
+and suffers from minimal Galactic extinction (as is the
+case with our high-quality sample).
+2. Our late-time classification performance (between 15
+and 30 days from trigger) is comparable to the leading
+methods (the balanced random-forest, LSTM RNN, and
+TimeModAttn networks given in Pimentel et al. 2022)
+100 days from trigger. The mean balanced-recall of our
+method is worse than that of the other methods considered, but this is of secondary importance for prioritizing
+follow-up of common SN classes for upcoming surveys.
+3. Our method, with only a single LSTM layer of 60 gated
+units, achieves ∼ 25% higher balanced-AUROC than
+prior methods within the first three days of observation. Table 2 suggests that this is due to a combination
+of host-galaxy photometry and early light curve photometry. The decrease in performance from excluding
+host-galaxy information was within the uncertainties of
+the baseline results; other host galaxy properties, such
+as color, may be more informative.
+4. The uncertainty in each metric (estimated with 5-fold
+cross-validation) is higher with our model applied to the
+ZTF BTS than on synthetic data, and also higher than
+that reported by Pimentel et al. (2022) for a comparable
+observational dataset. This may reflect the variation
+in the GP model of a single event as more data is
+collected. If this is indeed the case, it reflects the
+realistic stochasticity of light curve fitting in real-time.
+5. There remains a fundamental mismatch between the
+performance of simulations and observations. All three
+models achieve impressive performance on the synthetic light curves, and suffer a degredation in performance when applied to real observations. This could be
+due to overly simplistic host-galaxy correlations and/or
+overly optimistic redshifts in the simulations, but we
+predict that classification methods developed with simulated samples (e.g., those for PLAsTiCC and ELAsTiCC) will face an adaptation step to ensure reliable
+classification on observed samples.
+By constructing a normalizing flow to generate redshifts
+and host-galaxy photometry for every transient in our synthetic sample, we have increased the realism of the current
+generation of transient simulations. We have used point estimates for photometric redshifts, but our probabilistic approach provides full posterior distributions for each galaxy.
+These distributions can reveal bimodalities and other complex behavior not captured by a point estimate, and future
+work should be devoted to developing classification methods that incorporate this information (e.g., by drawing from
+the redshift distribution multiple times and quantifying how
+classification results change with each point estimate, or by
+passing in a discretized form of the full posterior distribution).
+We have found that classification performance suffered
+when applying our RNN models directly to the observational
+data after training with synthetic samples. The performance
+of our network after re-training suggests that transfer learning
+can improve the network’s robustness to realistically complex datasets. Transfer learning is rapidly becoming a critical
+component of photometric classification architectures (with
+Pimentel et al. 2022 and Burhanudin & Maund 2022 released
+while our network was being developed), and will become
+increasingly valuable in the initial years of upcoming surveys
+such as LSST.
+Our GP interpolation model is implemented in the
+lightweight and GPU-accelerated code tinyGP; as a result,
+it is competitive with the fastest GP models in the literature.
+When implementing our network for classification directly
+on the ZTF or LSST alert streams, our architecture can be
+further optimized to ensure rapid inference. We leave this
+model refinement to future work.
+We have avoided using our GP to interpolate early phases of
+our transient light curves, except where enough data has been
+collected to construct a reasonable model for its evolution.
+The growth of physics-informed machine learning in recent
+years (Wu et al. 2018; Rao et al. 2020; Karpov et al. 2022) represents a promising direction for balancing model flexibility
+and physically-motivated constraints. Multiple models exist
+for the photometric evolution of SNe (particularly for SNe Ia;
+Kenworthy et al. 2021; Mandel et al. 2022), and future work
+could incorporate one of these models into the mean model of
+the GP or into a distinct interpolation scheme that is only used
+at early phases, where limited data is available to condition a
+model.
+The principles explored in this work have immediate utility for surveys whose science goals include the discovery of
+=== PAGE 21 ===
+21
+young SNe. One of these is the Young SN Experiment (YSE;
+Jones et al. 2021), a 1500 deg2 survey that began in 2019 and
+that uses the Pan-STARRS telescopes to obtain well-sampled
+𝑔𝑟𝑖𝑧 light curves of low-redshift SNe. A primary goal of this
+survey is the characterization of early-time flux excesses in
+young SNe and the construction of the low-redshift SN Ia
+anchor sample for upcoming cosmological analyses with the
+Vera C. Rubin Observatory. Simulations suggest that this
+survey at full operation will discover ≥2 SNe within 3 days
+of explosion per month, when they can be classified with
+∼ 82% accuracy using our method. We aim to re-train our
+classifier using simulated YSE light curves and adapt the network using the light curves consolidated as part of the First
+Data Release for YSE (Aleo et al. 2023). We predict that the
+increased wavelength coverage and higher cadence achieved
+by augmenting ZTF light curves with YSE observations will
+result in superior early classification results to the ones shown
+in this work.
+Although we have considered only the three dominant
+classes of SNe in training and testing our network at low𝑧, the problem faced by classifiers operating directly on an
+alert stream such as that served by LSST will be more difficult: they will have to classify from among the full diversity
+of observed transient classes spanning 0 < 𝑧 < 3. For this
+goal, the SCOTCH framework Lokken et al. (2022) will be a
+valuable resource. SCOTCH encodes observed correlations
+for rarer classes, including Tidal Disruption Events (TDEs;
+French et al. 2017, 2020; Zabludoff et al. 2021), HydrogenPoor Superluminous SNe (SLSNe-I; Leloudas et al. 2015;
+Perley et al. 2016; Angus et al. 2016), and Kilonovae (KNe;
+Prochaska et al. 2006; Berger 2009). These events will represent a fraction of the full stream, but high-cadence coverage of
+the early-time behavior of even a few events of these classes
+will be a significant contribution to the literature. Consequently, additional work should be dedicated to extending
+our classification schema to include these events.
+The broad-band photometry of a galaxy in optical passbands is, at best, a limited indicator of its underlying spectral
+energy distribution. Multiple degeneracies exist between, for
+example, the distance to the galaxy and the color of its average stellar population, particularly across wide ranges in
+redshift. We have limited our analysis to the approximate
+redshift range spanned by the ZTF BTS (𝑧 < 0.2) in order
+to validate our methods on observed data, and it is likely
+that this has allowed us to largely avoid this drawback (although at these low distances, peculiar velocities introduce
+additional scatter). LSST will dramatically increase our sample of high-redshift (𝑧 < 1) SNe, and at these distances it is
+unlikely that optical host galaxy photometry alone will have
+high discriminating power. We have begun investigating the
+value of host galaxy star-formation rate and stellar mass in
+simulated samples, but additional work should be devoted
+to rapid estimation of these parameters from host galaxies
+imaged with LSST (e.g., using Bayesian SED-fitting codes
+such as Prospector; Johnson et al. 2021). Further, our simulations considered only the photometry of transient hosts in
+PS1-𝑔𝑟𝑖𝑧𝑦; for high-redshift systems discovered by the Vera
+C. Rubin Obs., the Nancy Grace Roman Space Telescope
+(Spergel et al. 2015), and the James Webb Space Telescope
+(Gardner et al. 2006), infrared photometry will play an increasing role in precise galaxy characterization, as it more
+precisely traces a galaxy’s stellar mass. Observed transient
+host galaxy catalogs are increasingly incorporating photometry spanning ultraviolet and infrared wavelengths (Qin et al.
+2022), and future work should be dedicated to reproducing
+these observations in a simulated host galaxy sample.
+8. ACKNOWLEDGEMENTS
+We wish to thank G. Narayan, V. Ashley Villar, R. Kessler,
+J. F. Crenshaw, A. Rest, and J. Pierel for conversations that
+improved this work. The authors further thank the anonymous referee for their thorough review, which has significantly strengthened this paper.
+A.G. acknowledges support from the Flatiron Institute Center for Computational Astrophysics Pre-Doctoral Fellowship
+Program in Spring 2022. A.G. is also supported by the Illinois Distinguished Fellowship, the National Science Foundation Graduate Research Fellowship Program under Grant No.
+DGE – 1746047, and the Center for Astrophysical Surveys
+Graduate Fellowship at the University of Illinois. A.I.M. acknowledges support during this work from the Max Planck
+Society and the Alexander von Humboldt Foundation in the
+framework of the Max Planck-Humboldt Research Award endowed by the Federal Ministry of Education and Research.
+AIM is a member of the LSST Interdisciplinary Network for
+Collaboration and Computing (LINCC) Frameworks team;
+LINCC Frameworks is supported by Schmidt Futures, a philanthropic initiative founded by Eric and Wendy Schmidt, as
+part of the Virtual Institute of Astrophysics (VIA). P.D.A.
+is supported by the Center for Astrophysical Surveys at the
+National Center for Supercomputing Applications (NCSA) as
+an Illinois Survey Science Graduate Fellow.
+This research used resources of the National Energy Research Scientific Computing Center (NERSC), a U.S. Department of Energy Office of Science User Facility located
+at Lawrence Berkeley National Laboratory, operated under
+Contract No. DE-AC02-05CH11231.
+The ANTARES project has been supported by the National Science Foundation through a cooperative agreement
+with the Association of Universities for Research in Astronomy (AURA) for the operation of NOIRLab, through an NSF
+INSPIRE grant to the University of Arizona (CISE AST1344024, PI: R. Snodgrass), and through a grant from the
+Heising-Simons Foundation.
+=== PAGE 22 ===
+22
+ZTF is supported by National Science Foundation grant
+AST-1440341 and a collaboration including Caltech, IPAC,
+the Weizmann Institute for Science, the Oskar Klein Center at
+Stockholm University, the University of Maryland, the University of Washington, Deutsches Elektronen-Synchrotron
+and Humboldt University, Los Alamos National Laboratories, the TANGO Consortium of Taiwan, the University of
+Wisconsin at Milwaukee, and Lawrence Berkeley National
+Laboratories. Operations are conducted by COO, IPAC, and
+UW.
+The ZTF forced-photometry service was funded under the
+Heising-Simons Foundation grant #12540303 (PI: Graham).
+This research made use of the Cori system associated with
+the National Energy Research Scientific Computing Center
+(NERSC), a U.S. Department of Energy Office of Science
+User Facility located at Lawrence Berkeley National Laboratory and operated under Contract No. DE-AC02-05CH11231.
+Software: ANTARES (Matheson et al. 2021), Astropy (Astropy Collaboration et al. 2013; Price-Whelan et al. 2018),
+imbalanced-learn (Lemaı̂tre et al. 2017), Keras (Chollet
+et al. 2015), Matplotlib (Hunter 2007), numpy (Walt et al.
+2011), Pandas (pandas development team 2020), PZFlow
+(Crenshaw et al. 2022), Seaborn (Waskom et al. 2014),
+Scikit-Learn (Pedregosa et al. 2011), Tensorflow (Abadi
+et al. 2015), tinygp11.
+REFERENCES
+Abadi, M., Agarwal, A., Barham, P., et al. 2015, TensorFlow:
+Large-Scale Machine Learning on Heterogeneous Systems.
+https://www.tensorflow.org/
+Afsariardchi, N., Drout, M. R., Khatami, D. K., et al. 2021, ApJ,
+918, 89, doi: 10.3847/1538-4357/ac0aeb
+Aldering, G., Adam, G., Antilogus, P., et al. 2002, in Society of
+Photo-Optical Instrumentation Engineers (SPIE) Conference
+Series, Vol. 4836, Survey and Other Telescope Technologies and
+Discoveries, ed. J. A. Tyson & S. Wolff, 61–72,
+doi: 10.1117/12.458107
+Aleo, P. D., Malanchev, K., Sharief, S., et al. 2023, Astrophysical
+Journal, Supplement, 266, 9, doi: 10.3847/1538-4365/acbfba
+Angus, C. R., Levan, A. J., Perley, D. A., et al. 2016, MNRAS,
+458, 84, doi: 10.1093/mnras/stw063
+Arcavi, I., Gal-Yam, A., Cenko, S. B., et al. 2012, ApJL, 756, L30,
+doi: 10.1088/2041-8205/756/2/L30
+Astropy Collaboration, Robitaille, T. P., Tollerud, E. J., et al. 2013,
+A&A, 558, A33, doi: 10.1051/0004-6361/201322068
+Bai, S., Zico Kolter, J., & Koltun, V. 2018, arXiv e-prints,
+arXiv:1803.01271. https://arxiv.org/abs/1803.01271
+Baldeschi, A., Miller, A., Stroh, M., Margutti, R., & Coppejans,
+D. L. 2020, ApJ, 902, 60, doi: 10.3847/1538-4357/abb1c0
+Beck, R., Szapudi, I., Flewelling, H., et al. 2021, MNRAS, 500,
+1633, doi: 10.1093/mnras/staa2587
+Becker, A. C., Wittman, D. M., Boeshaar, P. C., et al. 2004, ApJ,
+611, 418, doi: 10.1086/421994
+Bellm, E. C., Kulkarni, S. R., Barlow, T., et al. 2019, PASP, 131,
+068003, doi: 10.1088/1538-3873/ab0c2a
+Berger, E. 2009, ApJ, 690, 231,
+doi: 10.1088/0004-637X/690/1/231
+Boone, K. 2019, AJ, 158, 257, doi: 10.3847/1538-3881/ab5182
+11 https://tinygp.readthedocs.io/en/stable/
+Brout, D., Scolnic, D., Kessler, R., et al. 2019, ApJ, 874, 150,
+doi: 10.3847/1538-4357/ab08a0
+Burhanudin, U. F., & Maund, J. R. 2022, arXiv e-prints,
+arXiv:2208.01328. https://arxiv.org/abs/2208.01328
+Cahuantzi, R., Chen, X., & Güttel, S. 2021, arXiv e-prints,
+arXiv:2107.02248. https://arxiv.org/abs/2107.02248
+Cardelli, J. A., Clayton, G. C., & Mathis, J. S. 1989, ApJ, 345, 245,
+doi: 10.1086/167900
+Carrasco-Davis, R., Reyes, E., Valenzuela, C., et al. 2021, AJ, 162,
+231, doi: 10.3847/1538-3881/ac0ef1
+Chambers, K. C., Magnier, E. A., Metcalfe, N., et al. 2016, arXiv
+e-prints, arXiv:1612.05560. https://arxiv.org/abs/1612.05560
+Charnock, T., & Moss, A. 2017, ApJL, 837, L28,
+doi: 10.3847/2041-8213/aa603d
+Cho, K., van Merriënboer, B., Gulcehre, C., et al. 2014, in
+Proceedings of the 2014 Conference on Empirical Methods in
+Natural Language Processing (EMNLP) (Doha, Qatar:
+Association for Computational Linguistics), 1724–1734,
+doi: 10.3115/v1/D14-1179
+Chollet, F., et al. 2015, Keras, https://keras.io
+Crenshaw, J. F., Kalmbach, J., Malz, A., et al. 2022, in prep.
+Dimitriadis, G., Foley, R. J., Rest, A., et al. 2019, ApJL, 870, L1,
+doi: 10.3847/2041-8213/aaedb0
+Durkan, C., Bekasov, A., Murray, I., & Papamakarios, G. 2019,
+arXiv e-prints, arXiv:1906.04032.
+https://arxiv.org/abs/1906.04032
+Filippenko, A. V. 1997, ARA&A, 35, 309,
+doi: 10.1146/annurev.astro.35.1.309
+Filippenko, A. V., Li, W. D., Treffers, R. R., & Modjaz, M. 2001, in
+Astronomical Society of the Pacific Conference Series, Vol. 246,
+IAU Colloq. 183: Small Telescope Astronomy on Global Scales,
+ed. B. Paczynski, W.-P. Chen, & C. Lemme, 121
+Foley, R. J., & Mandel, K. 2013, The Astrophysical Journal, 778,
+167
+=== PAGE 23 ===
+23
+Fremling, C., Miller, A. A., Sharma, Y., et al. 2020, ApJ, 895, 32,
+doi: 10.3847/1538-4357/ab8943
+French, K. D., Arcavi, I., & Zabludoff, A. 2017, ApJ, 835, 176,
+doi: 10.3847/1538-4357/835/2/176
+French, K. D., Wevers, T., Law-Smith, J., Graur, O., & Zabludoff,
+A. I. 2020, SSRv, 216, 32, doi: 10.1007/s11214-020-00657-y
+Gagliano, A., Narayan, G., Engel, A., Carrasco Kind, M., & LSST
+Dark Energy Science Collaboration. 2021, ApJ, 908, 170,
+doi: 10.3847/1538-4357/abd02b
+Gagliano, A., Izzo, L., Kilpatrick, C. D., et al. 2022, ApJ, 924, 55,
+doi: 10.3847/1538-4357/ac35ec
+Gal-Yam, A. 2017, in Handbook of Supernovae, ed. A. W. Alsabti
+& P. Murdin, 195, doi: 10.1007/978-3-319-21846-5 35
+Gardner, J. P., Mather, J. C., Clampin, M., et al. 2006, SSRv, 123,
+485, doi: 10.1007/s11214-006-8315-7
+Gezari, S., Dessart, L., Basa, S., et al. 2008, ApJL, 683, L131,
+doi: 10.1086/591647
+Gomez, S., Berger, E., Blanchard, P. K., et al. 2020, ApJ, 904, 74,
+doi: 10.3847/1538-4357/abbf49
+Gottlieb, O., Tchekhovskoy, A., & Margutti, R. 2022, MNRAS,
+513, 3810, doi: 10.1093/mnras/stac910
+Graham, M. L., Connolly, A. J., Ivezić, Ž., et al. 2018, AJ, 155, 1,
+doi: 10.3847/1538-3881/aa99d4
+Gupta, R. R., Kuhlmann, S., Kovacs, E., et al. 2016, The
+Astronomical Journal, 152, 154
+Guy, J., Astier, P., Baumont, S., et al. 2007, A&A, 466, 11,
+doi: 10.1051/0004-6361:20066930
+Hachisu, I., Kato, M., & Nomoto, K. 1999, ApJ, 522, 487,
+doi: 10.1086/307608
+Hildebrandt, H., Arnouts, S., Capak, P., et al. 2010, Astronomy and
+Astrophysics, 523, A31, doi: 10.1051/0004-6361/201014885
+Hochreiter, S., & Schmidhuber, J. 1997, Neural computation, 9,
+1735
+Hosseinzadeh, G., Berger, E., Metzger, B. D., et al. 2022, ApJ, 933,
+14, doi: 10.3847/1538-4357/ac67dd
+Huber, M., Chambers, K. C., Flewelling, H., et al. 2015, The
+Astronomer’s Telegram, 7153, 1
+Hunter, J. D. 2007, Computing in science & engineering, 9, 90
+Ivezić, Ž., Kahn, S. M., Tyson, J. A., et al. 2019, ApJ, 873, 111,
+doi: 10.3847/1538-4357/ab042c
+Jacobson-Galán, W. V., Dessart, L., Jones, D. O., et al. 2022, ApJ,
+924, 15, doi: 10.3847/1538-4357/ac3f3a
+Jimenez Rezende, D., & Mohamed, S. 2015, arXiv e-prints,
+arXiv:1505.05770. https://arxiv.org/abs/1505.05770
+Johnson, B. D., Leja, J., Conroy, C., & Speagle, J. S. 2021, ApJS,
+254, 22, doi: 10.3847/1538-4365/abef67
+Jones, D. O., Foley, R. J., Narayan, G., et al. 2021, ApJ, 908, 143,
+doi: 10.3847/1538-4357/abd7f5
+Karpov, P. I., Huang, C., Sitdikov, I., et al. 2022, arXiv e-prints,
+arXiv:2205.08663. https://arxiv.org/abs/2205.08663
+Kasen, D. 2010, ApJ, 708, 1025,
+doi: 10.1088/0004-637X/708/2/1025
+Kenworthy, W. D., Jones, D. O., Dai, M., et al. 2021, ApJ, 923,
+265, doi: 10.3847/1538-4357/ac30d8
+Kessler, R., Bernstein, J. P., Cinabro, D., et al. 2009, PASP, 121,
+1028, doi: 10.1086/605984
+Kessler, R., Narayan, G., Avelino, A., et al. 2019, PASP, 131,
+094501, doi: 10.1088/1538-3873/ab26f1
+Kingma, D. P., & Ba, J. 2014, arXiv e-prints, arXiv:1412.6980.
+https://arxiv.org/abs/1412.6980
+Kisley, M., Qin, Y.-J., Zabludoff, A., Barnard, K., & Ko, C.-L.
+2022, arXiv e-prints, arXiv:2209.02784.
+https://arxiv.org/abs/2209.02784
+Kochanek, C. S., Shappee, B. J., Stanek, K. Z., et al. 2017, PASP,
+129, 104502, doi: 10.1088/1538-3873/aa80d9
+Korytov, D., Hearin, A., Kovacs, E., et al. 2019, ApJS, 245, 26,
+doi: 10.3847/1538-4365/ab510c
+Kuncarayakti, H., Anderson, J. P., Galbany, L., et al. 2018, A&A,
+613, A35, doi: 10.1051/0004-6361/201731923
+Laplace, E., Justham, S., Renzo, M., et al. 2021, A&A, 656, A58,
+doi: 10.1051/0004-6361/202140506
+Leloudas, G., Schulze, S., Krühler, T., et al. 2015, MNRAS, 449,
+917, doi: 10.1093/mnras/stv320
+Lemaı̂tre, G., Nogueira, F., & Aridas, C. K. 2017, Journal of
+Machine Learning Research, 18, 1.
+http://jmlr.org/papers/v18/16-365.html
+Lochner, M., McEwen, J. D., Peiris, H. V., Lahav, O., & Winter,
+M. K. 2016, ApJS, 225, 31, doi: 10.3847/0067-0049/225/2/31
+Lokken, M., Gagliano, A., Narayan, G., et al. 2022, arXiv e-prints,
+arXiv:2206.02815. https://arxiv.org/abs/2206.02815
+Mandel, K. S., Thorp, S., Narayan, G., Friedman, A. S., & Avelino,
+A. 2022, MNRAS, 510, 3939, doi: 10.1093/mnras/stab3496
+Masci, F. J., Laher, R. R., Rusholme, B., et al. 2019, PASP, 131,
+018003, doi: 10.1088/1538-3873/aae8ac
+Matheson, T., Stubens, C., Wolf, N., et al. 2021, AJ, 161, 107,
+doi: 10.3847/1538-3881/abd703
+Mauerhan, J. C., Smith, N., Filippenko, A. V., et al. 2013, MNRAS,
+430, 1801, doi: 10.1093/mnras/stt009
+Mnih, V., Heess, N., Graves, A., & Kavukcuoglu, K. 2014, arXiv
+e-prints, arXiv:1406.6247. https://arxiv.org/abs/1406.6247
+Möller, A., & de Boissière, T. 2020, Monthly Notices of the Royal
+Astronomical Society, 491, 4277
+Murtagh, F. 1991, Neurocomputing, 2, 183,
+doi: https://doi.org/10.1016/0925-2312(91)90023-5
+Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R., &
+Hložek, R. 2019, Publications of the Astronomical Society of the
+Pacific, 131, 118002
+Ni, Y. Q., Moon, D.-S., Drout, M. R., et al. 2022, Nature
+Astronomy, 6, 568, doi: 10.1038/s41550-022-01603-4
+=== PAGE 24 ===
+24
+Ofek, E. O., Sullivan, M., Cenko, S. B., et al. 2013, Nature, 494,
+65, doi: 10.1038/nature11877
+Pakmor, R., Kromer, M., Taubenberger, S., et al. 2012, ApJL, 747,
+L10, doi: 10.1088/2041-8205/747/1/L10
+pandas development team, T. 2020, pandas-dev/pandas: Pandas,
+latest, Zenodo, doi: 10.5281/zenodo.3509134
+Pedregosa, F., Varoquaux, G., Gramfort, A., et al. 2011, Journal of
+Machine Learning Research, 12, 2825
+Pepe, M. S., Cai, T., & Longton, G. 2006, Biometrics, 62, 221
+Perley, D. A., Quimby, R. M., Yan, L., et al. 2016, ApJ, 830, 13,
+doi: 10.3847/0004-637X/830/1/13
+Perley, D. A., Mazzali, P. A., Yan, L., et al. 2019, MNRAS, 484,
+1031, doi: 10.1093/mnras/sty3420
+Perley, D. A., Fremling, C., Sollerman, J., et al. 2020, ApJ, 904, 35,
+doi: 10.3847/1538-4357/abbd98
+Perlmutter, S., Aldering, G., Goldhaber, G., et al. 1999, ApJ, 517,
+565, doi: 10.1086/307221
+Peterson, W., Birdsall, T., & Fox, W. 1954, Transactions of the IRE
+professional group on information theory, 4, 171
+Pimentel, Ó., Estévez, P. A., & Förster, F. 2022, arXiv e-prints,
+arXiv:2201.08482. https://arxiv.org/abs/2201.08482
+Planck Collaboration, Ade, P. A. R., Aghanim, N., et al. 2014,
+A&A, 571, A16, doi: 10.1051/0004-6361/201321591
+Podsiadlowski, P., Joss, P. C., & Hsu, J. J. L. 1992, ApJ, 391, 246,
+doi: 10.1086/171341
+Price-Whelan, A. M., Sipőcz, B. M., Günther, H. M., et al. 2018,
+AJ, 156, 123, doi: 10.3847/1538-3881/aabc4f
+Prochaska, J. X., Bloom, J. S., Chen, H. W., et al. 2006, ApJ, 642,
+989, doi: 10.1086/501160
+Pursiainen, M., Childress, M., Smith, M., et al. 2018, MNRAS,
+481, 894, doi: 10.1093/mnras/sty2309
+Qin, Y.-J., Zabludoff, A., Kisley, M., et al. 2022, ApJS, 259, 13,
+doi: 10.3847/1538-4365/ac2fa1
+Qu, H., & Sako, M. 2022, AJ, 163, 57,
+doi: 10.3847/1538-3881/ac39a1
+Qu, H., Sako, M., Möller, A., & Doux, C. 2021, AJ, 162, 67,
+doi: 10.3847/1538-3881/ac0824
+Quimby, R. M. 2006, PhD thesis, University of Texas, Austin
+Rao, C., Sun, H., & Liu, Y. 2020, arXiv e-prints,
+arXiv:2002.10558. https://arxiv.org/abs/2002.10558
+Rasmussen, C. E. 2006, in (MIT Press)
+Rest, A., Garnavich, P. M., Khatami, D., et al. 2018, Nature
+Astronomy, 2, 307, doi: 10.1038/s41550-018-0423-2
+Saito, T., & Rehmsmeier, M. 2015, PloS one, 10, e0118432
+Sako, M., Bassett, B., Becker, A., et al. 2008, AJ, 135, 348,
+doi: 10.1088/0004-6256/135/1/348
+Sako, M., Bassett, B., Connolly, B., et al. 2011, ApJ, 738, 162,
+doi: 10.1088/0004-637X/738/2/162
+Shappee, B. J., Holoien, T. W. S., Drout, M. R., et al. 2019, ApJ,
+870, 13, doi: 10.3847/1538-4357/aaec79
+Shivvers, I., Modjaz, M., Zheng, W., et al. 2017, PASP, 129,
+054201, doi: 10.1088/1538-3873/aa54a6
+Spergel, D., Gehrels, N., Baltay, C., et al. 2015, arXiv e-prints,
+arXiv:1503.03757. https://arxiv.org/abs/1503.03757
+Taddia, F., Stritzinger, M. D., Sollerman, J., et al. 2013, A&A, 555,
+A10, doi: 10.1051/0004-6361/201321180
+Tonry, J. L., Denneau, L., Heinze, A. N., et al. 2018, PASP, 130,
+064505, doi: 10.1088/1538-3873/aabadf
+Villar, V. A., Cranmer, M., Contardo, G., Ho, S., & Yao-Yu Lin, J.
+2020a, arXiv e-prints, arXiv:2010.11194.
+https://arxiv.org/abs/2010.11194
+Villar, V. A., Berger, E., Miller, G., et al. 2019, ApJ, 884, 83,
+doi: 10.3847/1538-4357/ab418c
+Villar, V. A., Hosseinzadeh, G., Berger, E., et al. 2020b, ApJ, 905,
+94, doi: 10.3847/1538-4357/abc6fd
+Vincenzi, M., Sullivan, M., Firth, R. E., et al. 2019, MNRAS, 489,
+5802, doi: 10.1093/mnras/stz2448
+Vincenzi, M., Sullivan, M., Graur, O., et al. 2021, MNRAS, 505,
+2819, doi: 10.1093/mnras/stab1353
+Walt, S. v. d., Colbert, S. C., & Varoquaux, G. 2011, Computing in
+Science & Engineering, 13, 22
+Waskom, M., Botvinnik, O., Hobson, P., et al. 2014, seaborn: v0.5.0
+(November 2014), v0.5.0, Zenodo, doi: 10.5281/zenodo.12710
+Wu, J.-L., Xiao, H., & Paterson, E. 2018, Physical Review Fluids,
+3, 074602, doi: 10.1103/PhysRevFluids.3.074602
+York, D. G., Adelman, J., Anderson, John E., J., et al. 2000, AJ,
+120, 1579, doi: 10.1086/301513
+Zabludoff, A., Arcavi, I., La Massa, S., et al. 2021, SSRv, 217, 54,
+doi: 10.1007/s11214-021-00829-4
+=== PAGE 25 ===

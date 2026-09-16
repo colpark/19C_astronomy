@@ -1,0 +1,1692 @@
+=== PAGE 1 ===
+Astro-MoE: Mixture of Experts for Multiband Astronomical Time Series
+Martina Cádiz-Leyton 1 Guillermo Cabrera-Vives 2 3 4 5 Pavlos Protopapas 6 Daniel Moreno-Cartagena 2
+Ignacio Becker 6
+arXiv:2507.12611v1 [astro-ph.IM] 16 Jul 2025
+Abstract
+representation learning for astronomical time series (e.g.
+Protopapas 2017; Charnock & Moss 2017; Naul et al. 2018;
+Park et al. 2021; Donoso-Oliva et al. 2023; Pan et al. 2024;
+Becker et al. 2025). Transformer architectures (Vaswani
+et al., 2017) have shown particular promise for modeling
+such irregular sequential data, achieving state-of-the-art
+results within astronomy across tasks such as denoising
+(Morvan et al., 2022), classification (Pimentel et al., 2022;
+Allam Jr & McEwen, 2024), regression (Zhang et al., 2024),
+and uncertainty estimation (Cádiz-Leyton et al., 2024), even
+in data-scarce scenarios (Moreno-Cartagena et al., 2023;
+Donoso-Oliva et al., 2025). A core challenge in this domain is learning unified embeddings that compactly encode
+both temporal evolution and spectral characteristics across
+photometric bands. Such representations not only enhance
+performance on fundamental astronomical tasks (e.g., variable star classification, redshift regression) but also enable
+effective integration into multimodal frameworks (Rizhko &
+Bloom, 2024; Lanusse et al., 2023; Parker et al., 2024). For
+instance, recent models such as ATAT (Cabrera-Vives et al.,
+2024) demonstrate how combining light curve embeddings
+with auxiliary metadata can accelerate scientific discovery.
+Multiband astronomical time series exhibit heterogeneous variability patterns, sampling cadences,
+and signal characteristics across bands. Standard
+transformers apply shared parameters to all bands,
+potentially limiting their ability to model this rich
+structure. In this work, we introduce Astro-MoE,
+a foundational transformer architecture that enables dynamic processing via a Mixture of Experts module. We validate our model on both
+simulated (ELAsTiCC-1) and real-world datasets
+(Pan-STARRS1).
+1. Introduction
+After a decade of breakthroughs enabled by single-epoch
+surveys, astronomy is transitioning toward a new era defined by multi-epoch observations. This shift has fueled the
+rapid growth of time-domain astronomy, which focuses on
+studying celestial objects and phenomena whose properties
+evolve over time through wide-field surveys that repeatedly
+image large areas of the sky (Graham et al., 2012; Kasliwal
+et al., 2019). The upcoming Legacy Survey of Space and
+Time (LSST; Ivezić et al. 2019), beginning full operations
+by the end of 2025, will accelerate this trend by generating multiband time series data for approximately 20 billion
+sources with unprecedented depth, cadence, and volume.
+However, conventional transformer-based architectures face
+fundamental limitations when processing multiband time
+series. Transformers apply homogeneous processing to all
+inputs (i.e., reuse the same parameters for all inputs), which
+is suboptimal for astronomical data where each photometric band probes distinct astrophysical processes, exhibits
+unique sampling characteristics, and manifests independent
+variability behaviors. This diversity suggests that uniform
+weight-sharing mechanisms may not adequately capture
+band-specific features and complex inter-band interactions.
+Mixture of Experts (MoE) architectures offer a compelling
+solution through dynamic, input-dependent routing to specialized subnetworks (Masoudnia & Ebrahimpour, 2014;
+Shazeer et al., 2017). MoE-based models select different
+parameters for each example, resulting in sparsely-activated
+models with more parameters but constant computational
+cost. This capability is ideally suited to multiband astronomical data, where experts can learn band-specific representations while maintaining shared temporal knowledge.
+While recent works like Time-MoE (Shi et al., 2024) and
+Moirai-MoE (Liu et al., 2024) highlight the potential of ex-
+The intrinsic complexity of time-domain data (characterized
+by heterogeneous sampling, irregular cadences, and interband dependencies) has motivated significant advances in
+1
+Edinburgh Futures Institute, University of Edinburgh, UK
+Department of Computer Science, Universidad de Concepción,
+Edmundo Larenas 219, Concepción, Chile 3 Center for Data and
+Artificial Intelligence, Universidad de Concepción, Edmundo Larenas 310, Concepción, Chile 4 Heidelberg Institute for Theoretical
+Studies, Heidelberg, Baden-Württemberg, Germany 5 Millennium
+Institute of Astrophysics (MAS), Nuncio Monseñor Sotero Sanz
+100, Of. 104, Providencia, Santiago, Chile 6 John A. Paulson
+School of Engineering and Applied Sciences, Harvard University,
+Boston, MA, USA. Correspondence to: Martina Cádiz-Leyton
+<m.a.cadiz@sms.ed.ac.uk>, Guillermo Cabrera-Vives <guillecabrera@inf.udec.cl>.
+2
+ML4Astro 2025, Vancouver, CA. Copyright 2025 by the author(s).
+1
+=== PAGE 2 ===
+Astro-MoE: Mixture of Experts for Multiband Astronomical Time Series
+pert routing in temporal data, their adaptation to the specific
+challenges of irregular, multiband astronomical time series
+remains an area of ongoing interest, with opportunities for
+further methodological development.
+Embedding
+MoE
+Layer Norm
+Mixture-of-Experts (MoE)
+In this work, we introduce Astro-MoE, a pretrained transformer that incorporates sparsely-gated MoE modules in the
+architecture. This design enables the processing of multiband time series, producing embeddings that are both robust
+and informative for downstream tasks. Our architecture
+addresses the challenges of astronomical time series by allowing different experts to specialize in different variability
+patterns while maintaining the ability to model complex
+inter-band correlations.
+Router
+Encoder
+Layer Norm
+Multi-head Attention
+Input Embedding
+PE
+MoE
+2. Methods
+Figure 1. Astro-MoE architecture diagram with the traditional positional encoding.
+The Astro-MoE model extends the Astromer framework (Donoso-Oliva et al., 2023), a self-supervised light
+curve transformer originally designed for single-band data,
+to a multiband setting. Each astronomical object is represented as a sequence of observations across multiple photometric bands. For each band b and time step j, the input
+includes a flux measurement µj,b and its associated uncertainty σj,b . These values are combined into an input vector
+xj,b = (µj,b , σj,b ), which represents the brightness and its
+error at time j in band b. To construct the model input,
+each band is encoded as a fixed-length sequence of xj,b
+vectors, with zero-padding applied as needed. The resulting
+sequences are then concatenated across bands to form a
+unified representation x, which preserves temporal ordering
+and captures band-specific information.
+is applied to compute normalized selection weights:
+G(x) = softmax(TopK(g(x), k)),
+where k is the number of experts selected per input. The operator TopK(v, k)i retains the top-k values in v and masks
+the rest with −∞:
+(
+vi ,
+if vi is among the top-k elements,
+TopK(v, k)i =
+−∞, otherwise.
+This yields a sparse selection vector G(x) ∈ RNexperts with
+nonzero weights only for the selected experts (i.e., G(x)e ̸=
+0 if and only if expert e is selected). The final MoE output
+is then computed as:
+X
+MoE(x) =
+G(x)e · E (e) (x),
+(3)
+2.1. Mixture of Experts
+As illustrated in Figure 1, our model adopts an encoder-only
+transformer architecture enhanced with sparse Mixture-ofExperts (MoE) layers (Shazeer et al., 2017; Mu & Lin,
+2025). The MoE module is integrated into two key components: (1) the input embedding stage, and (2) the attention
+blocks, where it replaces the standard feedforward network
+(FFN) sublayer. Each MoE layer contains Nexperts parallel
+experts, with sparse routing controlled by a learnable gating
+function. Here, Nexperts denotes the number of experts in
+the layer, which can differ between components.
+e∈Top-k
+where E (e) (x) is the output of expert e.
+In the input embedding stage, each expert E (e) is implemented as a linear transformation:
+E (e) (x) = W (e) x,
+g : Rdin → RNexperts ,
+W (e) ∈ Rdmodel ×din .
+(4)
+where dmodel is the internal model dimension used by the
+transformer. Unlike prior approaches that apply a uniform transformation across all bands (Donoso-Oliva et al.,
+2023; Cabrera-Vives et al., 2024), we project the brightnessuncertainty pairs (xj,b , σj,b ) ∈ R2 into dmodel using a MoE
+module. We set Nexperts = 6 (one per photometric band)
+and k = 2, matching the six-band pretraining setup. This
+configuration promotes expert specialization across different
+observational regimes.
+Given an input vector x ∈ Rdin , where din is the dimensionality of the input (e.g., 2 for brightness and uncertainty
+pairs), the gating network computes a score for each expert:
+g(x) = Wg x + bg ,
+(2)
+(1)
+where Wg and bg are the learnable weights and bias of the
+gating network. To induce sparsity, only the top-k scoring
+experts are selected using a TopK operator, and a softmax
+Within the attention blocks, each expert is implemented as a
+two-layer FFN, replacing the standard FFN sublayer. This
+2
+=== PAGE 3 ===
+Astro-MoE: Mixture of Experts for Multiband Astronomical Time Series
+choice is inspired by prior large-scale MoE transformer models (Lepikhin et al., 2020; Fedus et al., 2022), which demonstrate that FFN layers often exhibit sparse and task-specific
+activation patterns, making them well-suited for expertbased specialization. In this setting, we use Nexperts = 8
+and select the top-k = 2 experts per token.
+time-dependent Fourier functions:
+(1)
+(2)
+TM(xj,b , tj,b ) = MoE(xj,b ) ⊙ γb (tj,b ) + γb (tj,b ), (7)
+(1)
+(2)
+where γb and γb are learnable band-specific Fourier series. The operator ⊙ denotes element-wise (Hadamard)
+multiplication.
+To encourage balanced expert utilization and avoid expert
+collapse, we incorporate a simplified version of the load
+balancing loss from Shazeer et al. (2017):
+3. Experiments
+3.1. Data description
+Nexperts
+Laux = Nexperts ·
+X
+p̄e · f¯e ,
+For pretraining and classification, we use data from the first
+round of the Extended LSST Astronomical Time-series Classification Challenge (ELAsTiCC-1), a large-scale simulation
+designed to emulate the observational characteristics of the
+Vera C. Rubin Observatory’s LSST. The dataset contains
+1,845,146 multiband light curves spanning 32 astrophysical classes, including both periodic variables and transient
+events. Each light curve is observed in six optical bands
+(ugrizy) with realistic cadences, noise levels, and detection
+limits. Following Cabrera-Vives et al. (2024), we regroup
+the classes into 20 categories, discard poor-quality measurements using PHOTFLAG, and extract forced photometry
+ranging from 30 days before the first alert to the final detection. Additionally, each object is associated with 64
+metadata columns describing contextual and observational
+properties. These include redshift estimates, sky coordinates, host galaxy characteristics, and summary statistics of
+the light curves. As in previous work, these metadata are incorporated as complementary inputs for classification. The
+test set contains 1,000 objects per class, ensuring balance
+across categories, while the remaining data are split into five
+class-stratified folds with an 80/20 training-validation ratio.
+(5)
+e=1
+where p̄e is the mean routing probability assigned to expert
+e, and f¯e is the empirical fraction of tokens routed to that
+expert. This auxiliary loss is computed independently for
+each MoE layer and summed across all such layers. The
+total auxiliary loss is then scaled by a fixed coefficient λ =
+0.01 and added to the main task loss (e.g., classification or
+regression). The scaling factor ensures that the auxiliary
+term promotes expert diversity without overpowering the
+primary learning objective.
+2.2. Positional Embedding
+Encoding temporal information is a crucial component in
+modeling light curves, as observations are irregularly spaced
+in time. Recent work has shown that the choice of positional encoding (PE) can significantly affect the performance of transformer-based models for time series (MorenoCartagena et al., 2023). Therefore, we explore two temporal
+encoding strategies, both integrated at the input embedding
+stage, before the self-attention layers.
+To evaluate our approach on an alternative classification
+task, we use photometric light curves from the second
+data release of Pan-STARRS1 (PS1), which offers observations in five optical bands: gP1 , rP1 , iP1 , zP1 , and yP1 .
+Following the methodology of Becker et al. (2025), we retrieve the PS1 photometry from the Detections table via
+MAST CasJobs, convert fluxes to AB magnitudes using
+the standard zero-point of 3631 Jy, and apply quality filters (e.g., psfQfPerfect, infoFlags, infoFlags2,
+infoFlags3) to ensure clean photometry. We require a
+minimum of four observations per band. As in Becker et al.
+(2025), we apply class balancing by limiting the maximum
+number of objects per class to 10,000, mitigating overfitting
+due to the strong class imbalance, particularly for RR Lyrae
+stars. Our final dataset includes six variable star classes.
+The data are split into seven folds, stratified by class, using
+70% for training, 10% for validation, and 20% for testing,
+with the test set kept fixed across all folds. Appendix A
+shows the classes and number of objects in ELAsTiCC-1
+and PS1, grouped as transients, stochastic variables, and
+periodic variables.
+The first approach follows the original transformer formulation (Vaswani et al., 2017), in which observation times are
+encoded using fixed sine and cosine functions at varying
+frequencies:
+(
+sin(tj,b · ωi ), i even,
+PEi (tj,b ) =
+cos(tj,b · ωi ), i odd,
+1
+,
+10002i/dpe
+(6)
+where i is the dimension index, and dpe is the total number
+of positional encoding dimensions.
+ωi =
+As an alternative, we adopt the learnable Time Modulation
+(TM) approach proposed by Cabrera-Vives et al. (2024),
+which incorporates temporal information directly into the
+input features. Instead of using a fixed linear projection, we
+pass each input vector xj,b through a MoE layer to obtain an
+adaptive representation. The resulting vector is then modulated using band-specific, time-dependent Fourier functions:
+The resulting vector is then modulated using band-specific,
+3
+=== PAGE 4 ===
+Astro-MoE: Mixture of Experts for Multiband Astronomical Time Series
+Table 1. Pretraining performance on the ELAsTiCC-1 test set.
+Table 3. Classification performance on the Pan-STARRS1 test set.
+M ODEL
+TE
+R2
+RMSE
+M ODEL
+M ULTIBAND -A STROMER
+PE
+0.349
+2.511
+M O E-A STRO
+M O E-A STRO
+PE
+TM
+0.403
+0.438
+2.398
+2.327
+M O E-A STRO (TM)
+M O E-A STRO (TM)
+All model variants are based on an encoder-only transformer
+architecture with three self-attention blocks. Pretraining is
+performed using a masked reconstruction objective, following the strategy introduced by Donoso-Oliva et al. (2023).
+In each training step, 90% of the light curves are randomly
+selected for training. Within each selected light curve, 30%
+of the input tokens are masked, 30% are replaced with random values, and the remaining 40% are left unchanged. A
+dropout rate of 0.1 is applied throughout the network. For
+ELAsTiCC-1 classification, we concatenate the light curve
+embeddings with tabular embeddings extracted from a tabular transformer, following the ATAT architecture proposed
+by Cabrera-Vives et al. (2024). For the PS1 classification
+task, we apply a linear classifier directly on the light curve
+embeddings, without incorporating metadata. In both tasks,
+models are trained using a cross-entropy loss. Training is
+performed with the Adam optimizer, using a batch size of
+256 and a learning rate of 1 × 10−4 .
+Table 1 reports the mean and standard deviation of pretraining scores for our model configurations on the ELAsTiCC-1
+test set. As a baseline, we consider a multiband extension
+of Astromer, in which brightness vectors are ordered by
+observation time and projected via a shared linear layer.
+Comparing this baseline with our proposed Astro-MoE architecture, we observe improvements when incorporating
+MoE modules for both the brightness encoder and the FFN
+within the attention blocks. Specifically, this configuration
+achieves an R2 of 0.403 and an RMSE of 2.398. When
+replacing the PE with the TM encoder, performance fur-
+M ULTIBAND A STROMER
+Y ES
+NO
+0.727 ± 0.034
+0.786 ± 0.013
+ATAT
+NO
+0.826 ± 0.005
+M O E-A STRO (PE)
+M O E-A STRO (TM)
+M O E-A STRO (TM)
+Y ES
+Y ES
+NO
+0.822 ± 0.008
+0.832 ± 0.015
+0.860 ± 0.003
+0.373 ± 0.007
+0.542 ± 0.023
+To assess the transferability of the best pretrained model
+(Astro-MoE with TM), we evaluate it on the challenging and
+imbalanced PS1 dataset. As shown in Table 3, pretraining
+improves performance from an F1 score of 0.373 to 0.542,
+suggesting that Astro-MoE is capable of generalizing to new
+domains. This preliminary result highlights its potential for
+cross-survey applications and motivates further exploration
+across diverse real-world datasets.
+Table 2. Classification performance on the ELAsTiCC-1 test set
+using both light curve and metadata information.
+F1- SCORE
+NO
+Y ES
+After pretraining, we evaluate the models in a classification setting. Table 2 reports the mean and standard deviation of macro F1 -scores on the ELAsTiCC-1 dataset using a multimodal approach that integrates both light curve
+and metadata features. The pretrained Multiband-Astromer
+baseline underperforms compared to its non-pretrained version (F1 = 0.727 ± 0.034 vs. F1 = 0.786 ± 0.013),
+suggesting that pretraining on the same dataset may result in early convergence and reduced adaptability during
+downstream fine-tuning. We also include ATAT (CabreraVives et al., 2024), a non-pretrained transformer tailored
+for multimodal inputs, which achieves a competitive score
+of (F1 = 0.826 ± 0.005) under identical evaluation conditions. Our MoE-Astro model, which incorporates sparse
+expert routing in place of standard transformer components,
+yields consistent performance improvements. Specifically,
+the pretrained MoE-Astro with positional encoding (PE)
+reaches (F1 = 0.822 ± 0.008), while its variant with time
+modulation improves to (F1 = 0.832 ± 0.015). Notably,
+when trained from scratch, MoE-Astro (TM) achieves the
+highest performance with (F1 = 0.860 ± 0.003). These
+results suggest that MoE-based architectures can provide
+enhanced capacity allocation and generalization (see Appendix B). While the benefits of pretraining may depend on
+task similarity and dataset diversity, our approach currently
+achieves state-of-the-art performance on ELAsTiCC-1.
+4. Results
+P RETRAINED
+F1- SCORE
+ther improves by approximately 3%, reaching an R2 of
+0.438 and reducing RMSE to 2.327. Overall, these results
+indicate that the combination of sparse MoE-based representations and temporally adaptive encoding may enhance the
+expressiveness and accuracy of light curve models. It is also
+important to note that ELAsTiCC-1 is a complex dataset,
+featuring a maximum sequence length of 65 per band and
+comprising a wide diversity of astronomical object classes.
+3.2. Training details
+M ODEL
+P RETRAINED
+5. Conclusion
+We have empirically found evidence that sparse MoE models offer clear benefits for multiband astronomical time se4
+=== PAGE 5 ===
+Astro-MoE: Mixture of Experts for Multiband Astronomical Time Series
+ries analysis, with advantages observable even at initial
+scales. Their ability to allocate capacity dynamically, combined with efficient computation, makes them well-suited
+for large-scale pretraining on the heterogeneous and growing datasets of time-domain astronomy. Beyond improving
+performance, these architectures also offer practical benefits: by activating only a subset of experts per input, they reduce the computational cost during inference. This property
+makes them particularly attractive for real-time applications,
+such as transient classification in astronomical alert streams.
+Overall, Astro-MoE represents a promising direction for
+developing scalable and adaptive models to support the next
+generation of astronomical discovery.
+Donoso-Oliva, C., Becker, I., Protopapas, P., Cabrera-Vives,
+G., Cádiz-Leyton, M., and Moreno-Cartagena, D. Astromer 2. arXiv preprint arXiv:2502.02717, 2025.
+Fedus, W., Zoph, B., and Shazeer, N. Switch transformers:
+Scaling to trillion parameter models with simple and efficient sparsity. Journal of Machine Learning Research,
+23(120):1–39, 2022.
+Graham, M. J., Djorgovski, S. G., Mahabal, A., Donalek,
+C., Drake, A., and Longo, G. Data challenges of time
+domain astronomy. Distributed and Parallel Databases,
+30:371–384, 2012.
+Ivezić, Ž., Kahn, S. M., Tyson, J. A., Abel, B., Acosta, E.,
+Allsman, R., Alonso, D., AlSayyad, Y., Anderson, S. F.,
+Andrew, J., et al. Lsst: from science drivers to reference
+design and anticipated data products. The Astrophysical
+Journal, 873(2):111, 2019.
+Acknowledgments
+The authors acknowledge support from the National Agency
+for Research and Development (ANID) grants: FONDECYT regular 1231877 (GCV, DMC); Millennium Science
+Initiative Program ICN12 009 (GCV). The computations in
+this paper were run on the FASRC Cannon cluster supported
+by the FAS Division of Science Research Computing Group
+at Harvard University.
+Kasliwal, M., Cannella, C., Bagdasaryan, A., Hung, T.,
+Feindt, U., Singer, L., Coughlin, M., Fremling, C., Walters, R., Duev, D., et al. The growth marshal: a dynamic science portal for time-domain astronomy. Publications of the Astronomical Society of the Pacific, 131
+(997):038003, 2019.
+References
+Lanusse, F., Parker, L. H., Golkar, S., Bietti, A., Cranmer,
+M., Eickenberg, M., Krawezik, G., McCabe, M., Ohana,
+R., Pettee, M., et al. Astroclip: Cross-modal pre-training
+for astronomical foundation models. In NeurIPS 2023 AI
+for Science Workshop, 2023.
+Allam Jr, T. and McEwen, J. D. Paying attention to astronomical transients: introducing the time-series transformer for photometric classification. RAS Techniques
+and Instruments, 3(1):209–223, 2024.
+Becker, I., Protopapas, P., Catelan, M., and Pichara, K.
+Multiband embeddings of light curves. Astronomy &
+Astrophysics, 694:A183, 2025.
+Lepikhin, D., Lee, H., Xu, Y., Chen, D., Firat, O., Huang, Y.,
+Krikun, M., Shazeer, N., and Chen, Z. Gshard: Scaling
+giant models with conditional computation and automatic
+sharding. arXiv preprint arXiv:2006.16668, 2020.
+Cabrera-Vives, G., Moreno-Cartagena, D., Astorga, N.,
+Reyes-Jainaga, I., Förster, F., Huijse, P., Arredondo, J.,
+Arancibia, A. M., Bayo, A., Catelan, M., et al. Atat:
+Astronomical transformer for time series and tabular data.
+Astronomy & Astrophysics, 689:A289, 2024.
+Liu, X., Liu, J., Woo, G., Aksu, T., Liu, C., Savarese, S.,
+Xiong, C., and Sahoo, D. Mixture of experts for time
+series foundation models. In NeurIPS Workshop on Time
+Series in the Age of Large Models, 2024.
+Cádiz-Leyton, M., Cabrera-Vives, G., Protopapas, P.,
+Moreno-Cartagena, D., Donoso-Oliva, C., and Becker, I.
+Uncertainty estimation for time series classification: Exploring predictive uncertainty in transformer-based models for variable stars. arXiv preprint arXiv:2412.10528,
+2024.
+Masoudnia, S. and Ebrahimpour, R. Mixture of experts:
+a literature survey. Artificial Intelligence Review, 42:
+275–293, 2014.
+Moreno-Cartagena, D., Cabrera-Vives, G., Protopapas, P.,
+Donoso-Oliva, C., Pérez-Carrasco, M., and Cádiz-Leyton,
+M. Positional encodings for light curve transformers:
+Playing with positions and attention. In Machine Learning for Astrophysics Workshop, 40th International Conference on Machine Learning (ICML), PMLR 202, Honolulu,
+Hawaii, USA, 2023.
+Charnock, T. and Moss, A. Deep recurrent neural networks
+for supernovae classification. The Astrophysical Journal
+Letters, 837(2):L28, 2017.
+Donoso-Oliva, C., Becker, I., Protopapas, P., Cabrera-Vives,
+G., Vishnu, M., and Vardhan, H. Astromer-a transformerbased embedding for the representation of light curves.
+Astronomy & Astrophysics, 670:A54, 2023.
+Morvan, M., Nikolaou, N., Yip, K., and Waldmann, I. Don’t
+pay attention to the noise: Learning self-supervised representations of light curves with a denoising time series
+5
+=== PAGE 6 ===
+Astro-MoE: Mixture of Experts for Multiband Astronomical Time Series
+transformer. Machine Learning for Astrophysics, pp. 11,
+2022.
+Workshop on Time Series in the Age of Large Models,
+2024.
+Mu, S. and Lin, S. A comprehensive survey of mixtureof-experts: Algorithms, theory, and applications. arXiv
+preprint arXiv:2503.07137, 2025.
+Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones,
+L., Gomez, A. N., Kaiser, Ł., and Polosukhin, I. Attention is all you need. Advances in neural information
+processing systems, 30, 2017.
+Naul, B., Bloom, J. S., Pérez, F., and van der Walt, S. A
+recurrent neural network for classification of unevenly
+sampled variable stars. Nature Astronomy, 2(2):151–155,
+2018.
+Zhang, M., Wu, F., Bu, Y., Li, S., Yi, Z., Liu, M., and Kong,
+X. Spt: Spectral transformer for age and mass estimations
+of red giant stars. Astronomy & Astrophysics, 683:A163,
+2024.
+Pan, J.-S., Ting, Y.-S., and Yu, J. Astroconformer:
+The prospects of analysing stellar light curves with
+transformer-based deep learning models. Monthly Notices
+of the Royal Astronomical Society, 528(4):5890–5903,
+2024.
+Park, J. W., Villar, A., Li, Y., Jiang, Y.-F., Ho, S., Lin, J.
+Y.-Y., Marshall, P. J., and Roodman, A. Inferring black
+hole properties from astronomical multivariate time series
+with bayesian attentive neural processes. In Uncertainty
+and Robustness in Deep Learning Workshop, 38th International Conference on Machine Learning (ICML),
+PMLR 139, 2021.
+Parker, L., Lanusse, F., Golkar, S., Sarra, L., Cranmer, M.,
+Bietti, A., Eickenberg, M., Krawezik, G., McCabe, M.,
+Morel, R., Ohana, R., Pettee, M., Régaldo-Saint Blancard, B., Cho, K., Ho, S., and Collaboration, T. P. A.
+AstroCLIP: a cross-modal foundation model for galaxies. Monthly Notices of the Royal Astronomical Society, 531(4):4990–5011, 06 2024. ISSN 0035-8711. doi:
+10.1093/mnras/stae1450. URL https://doi.org/
+10.1093/mnras/stae1450.
+Pimentel, Ó., Estévez, P. A., and Förster, F. Deep attentionbased supernovae classification of multiband light curves.
+The Astronomical Journal, 165(1):18, 2022.
+Protopapas, P. Recurrent neural network applications for
+astronomical time series. In American Astronomical Society Meeting Abstracts# 230, volume 230, pp. 104–03,
+2017.
+Rizhko, M. and Bloom, J. S. Self-supervised multimodal
+model for astronomy. In Neurips 2024 Workshop Foundation Models for Science: Progress, Opportunities, and
+Challenges, 2024.
+Shazeer, N., Mirhoseini, A., Maziarz, K., Davis, A., Le,
+Q., Hinton, G., and Dean, J. Outrageously large neural
+networks: The sparsely-gated mixture-of-experts layer.
+arXiv preprint arXiv:1701.06538, 2017.
+Shi, X., Wang, S., Nie, Y., Li, D., Ye, Z., Wen, Q., and
+Jin, M. Scaling to billion parameters for time series
+foundation models with mixture of experts. In NeurIPS
+6
+=== PAGE 7 ===
+Astro-MoE: Mixture of Experts for Multiband Astronomical Time Series
+A. Classification scheme
+Table 4 provides an overview of the classification taxonomy used in our work, summarizing the number of objects per class
+across two datasets: ELAsTiCC-1 and Pan-STARRS1 (PS1). The ELAsTiCC-1 taxonomy is structured into three primary
+variability types (transient, stochastic, and periodic) encompassing a wide range of astrophysical phenomena including
+supernovae subtypes (e.g., Ia, II, Iax), cataclysmic variables (e.g., Dwarf Novae), and pulsating stars (e.g., Delta Scuti,
+RR Lyrae). The PS1 dataset, by contrast, focuses exclusively on periodic variables, reflecting its strengths in long-term
+monitoring of the sky. The pronounced class imbalance poses challenges for training robust machine learning classifiers and
+underscores the importance of methods capable of handling skewed data distributions.
+Table 4. Number of objects per class in ELAsTiCC-1 and PS1, grouped by variability type. Each group lists the included classes and the
+number of objects in parentheses.
+Group
+Classes (number of objects)
+ELAsTiCC-1
+Transient (12)
+CART (15,719), Iax (53,727)
+91bg (53,414), Ia (211,892)
+Ib/c (310,328), II (445,419)
+SN-like/Other (103,683), SLSN (105,238)
+PISN (105,446), TDE (103,067)
+ILOT (14,253), KN (8,122)
+ELAsTiCC-1
+Stochastic (4)
+M-dwarf Flare (2,640), uLens (27,263)
+Dwarf Novae (12,385), AGN (99,461)
+ELAsTiCC-1
+Periodic (4)
+Delta Scuti (29,840), RR Lyrae (21,100)
+Cepheid (25,371), EB (96,778)
+Pan-STARRS1
+Periodic (6)
+RRab (10,000), RRc (10,000)
+RRd (266), MIRA SR (3,937)
+DSCT SXPHE (1,906), T2CEP (189)
+B. Astro-MoE confusion matrices
+Figures 2, 3, and 4 present detailed visualizations of our proposed sparse MoE model’s classification performance across
+various astronomical object types. To ensure robust and interpretable insights, we analyze confusion matrices aggregated
+over multiple evaluation runs. Each matrix is row-normalized so that each row sums to 100%, reflecting the distribution of
+predicted classes for each true class label. We report the median values across runs to provide a stable central estimate, which
+is less affected by outliers compared to the mean. To capture variability, we also compute the 25th and 95th percentiles,
+offering a clear view of the range in classification performance.
+Each cell in the visualization conveys three metrics: the median prediction percentage (center), the 95th percentile (top right),
+and the 25th percentile (bottom right). Diagonal cells represent correct classifications, while off-diagonal cells indicate
+misclassifications. The color intensity encodes the prediction percentage, with darker green denoting higher accuracy. For
+visual clarity, cells with values below 0.05% are left blank.
+C. Parameter count comparison
+We introduce a Mixture-of-Experts variant of our model to enable dynamic routing through specialized feedforward layers.
+This architecture substantially increases model capacity, with approximately 3× more total parameters (4.9M vs. 1.5M).
+However, thanks to its sparse activation mechanism, the GPU inference time per batch increases only modestly, from 5.3ms
+to 7.1ms.
+Critically, the MoE model activates only a subset of experts per forward pass, specifically, 2 out of 8 experts in the
+feedforward network and 6 in the positional embedding layer. This sparsity allows the model to retain high expressiveness
+without incurring the full computational cost of using all parameters. Moreover, this design opens up avenues for further
+7
+=== PAGE 8 ===
+Astro-MoE: Mixture of Experts for Multiband Astronomical Time Series
+0.2
+2.9
+3.2
+0.2
+Iax
+91bg
+Ia
+Ib/c
+II
+SN-like/Other
+SLSN
+2.2
+0.2
+0.5
+4.2 2.3
+0.4
+0.2
+7.4
+0.3
+1.2
+0.7
+0.5
+0.5
+0.9
+0.2
+0.3
+3.1 51.7 0.7 6.9 21.7 9.5 0.9
+4.6 0.4 0.5
+0.3
+1.5
+0.1
+1.3
+1.4
+2.0
+0.1
+1.2
+0.2
+0.1
+0.6
+2.0
+7.5
+0.8
+1.8
+0.4
+0.4
+0.1
+0.4
+0.1
+0.5 0.6 81.6 1.0 12.3 0.9 0.3
+0.2 1.6 0.1 0.2
+0.1
+0.1
+1.0
+0.3
+5.3
+0.4
+0.2
+0.1
+0.1
+0.1
+0.4
+0.1
+2.3
+2.0
+1.8
+0.4
+0.1
+0.1 1.1 0.1 75.2 14.1 7.7 0.5 0.3 0.3 0.6
+0.1
+0.1
+0.2
+1.9
+0.2
+0.1
+0.1
+0.1
+0.1
+0.1
+0.7
+0.4
+0.6
+2.4
+1.2
+0.3
+0.2
+0.2
+0.2
+0.4 2.0 1.0 11.1 73.3 8.5 2.1 0.7 0.5 0.4 0.1 0.1
+0.2
+0.1
+0.4
+1.1
+0.1
+0.9
+0.2
+0.2
+0.1
+0.1
+0.2
+0.2
+0.9
+0.2
+1.4
+0.7
+0.2
+0.1
+0.1
+0.1 0.5
+3.0 3.9 85.4 4.0 1.6 0.4 0.6 0.1
+0.1
+0.2
+0.4
+0.1
+0.1
+0.2
+0.1
+0.8
+0.1
+0.8
+1.4
+7.5
+2.5
+0.1
+0.1
+0.1
+0.1 1.5 0.8 3.8 15.4 36.3 41.0 0.1 0.1 0.1 0.1
+0.2
+0.1
+0.1
+2.6
+1.0
+0.1
+0.1
+0.1
+0.1
+0.4
+1.4
+0.7
+0.1
+0.2
+0.1
+0.5 1.4 5.8
+90.3 1.3 0.1
+0.3
+0.1
+0.1
+0.1
+0.5
+0.1
+0.1
+0.1
+0.1
+0.1
+0.1
+0.6
+0.2
+0.3
+1.8
+0.2
+0.1
+0.1 0.2 0.1 0.5 0.8 0.6
+1.6 95.6 0.4 0.1
+0.1
+0.1
+0.2
+0.4
+0.1
+0.3
+0.3
+0.3
+0.4
+2.0
+0.1
+0.2
+2.1
+0.1
+1.2 2.3 1.6 1.1 1.6 5.5
+0.1 0.4 84.9 0.5
+0.1
+0.2
+0.2
+0.1
+0.3
+0.2
+0.1
+0.8
+0.5
+0.2
+0.4
+0.2
+1.1
+2.0
+0.2
+1.1
+0.8
+0.1
+2.6 1.9 1.0 0.4 3.3 1.1
+0.4 3.6 84.5 0.4
+0.3
+0.1
+0.3
+0.4
+0.2
+0.1
+0.6
+0.8
+1.0
+1.2
+1.8
+0.2
+0.1
+0.6
+0.4
+0.8
+1.7 2.2 0.5
+6.1 1.1 0.1
+0.9 0.3 86.8
+0.5
+0.6
+0.1
+0.1
+0.1
+1.5
+0.1
+2.4
+1.7
+3.0
+0.3
+75.1 6.5 13.4
+0.1
+0.2
+0.6
+0.2
+0.1
+0.3
+0.4
+0.8
+0.4
+0.2 93.6 4.8
+0.1
+0.1
+0.3
+1.0
+1.7
+0.1
+0.7 5.6 93.2
+0.1
+1.0
+0.6
+TDE
+ILOT
+KN
+M-dwarf Flare
+uLens
+Dwarf Novae
+0.1
+0.1
+0.1
+0.1
+0.5
+7.2
+0.1
+0.1
+0.1
+0.5
+0.1
+0.1
+0.1
+0.1
+0.3
+0.2
+0.3
+0.3
+0.1 0.1
+0.1
+0.5
+0.2
+0.1
+4.5
+0.3
+0.2
+0.1
+0.1
+0.1
+AGN
+99.9
+1.2
+0.6
+4.7
+2.2
+1.0
+0.3
+Delta Scuti
+RR Lyrae
+Cepheid
+0.5
+0.1
+96.7
+0.2
+0.1
+1.1
+0.1
+0.4
+0.1
+1.3
+1.7
+0.3
+2.4
+0.1
+1.0
+2.9
+3.4 92.1
+1.6
+2.1
+0.9
+0.2
+EB
+Figure 2. Pretrained Astro-MoE (PE) confusion matrix.
+8
+vae
+s
+Dwa
+rf No
+uLen
+lare
+KN
+arf F
+M-dw
+ILOT
+TDE
+PISN
+SLSN
+ther
+II
+ike/O
+Ib/c
+SN-l
+Predicted Label
+1.9
+0.4
+3.2
+1.0
+0.5
+0.2
+99.2
+1.2
+0.6
+0.1
+0.1
+0.1
+0.1
+Ia
+CAR
+T
+Iax
+91bg
+True Label
+PISN
+(a) Pretrained Astro-MoE (PE)
+0.1
+0.7
+0.2
+0.5
+2.1
+0.8
+0.7
+1.1
+0.1
+0.2
+99.6
+EB
+1.5
+AGN
+a Sc
+uti
+RR L
+yrae
+Cep
+heid
+2.0
+Delt
+2.2
+CART 44.34.0 13.20.5 2.80.1 0.10.1 14.10.3 10.21.7 0.4
+=== PAGE 9 ===
+Astro-MoE: Mixture of Experts for Multiband Astronomical Time Series
+0.1
+Iax
+91bg
+Ia
+Ib/c
+II
+SN-like/Other
+SLSN
+TDE
+ILOT
+KN
+M-dwarf Flare
+uLens
+Dwarf Novae
+AGN
+0.1
+0.1
+0.1
+0.1
+0.1
+0.1
+0.1
+0.1
+0.5
+0.2
+0.6
+0.3
+0.1
+0.4
+0.1
+0.1
+0.8
+4.6
+0.5
+0.1
+1.0
+0.3
+0.2
+0.9
+0.2
+0.2
+0.3
+0.3
+0.8
+1.7
+0.4
+0.2
+0.1
+100.0
+Delta Scuti
+99.1
+0.4
+0.1
+0.2
+0.1
+0.1
+RR Lyrae
+0.2
+1.2
+98.0 0.1
+0.6
+0.1
+0.2
+0.2
+0.1
+99.8
+0.1
+0.2
+0.2
+0.1
+Cepheid
+0.1
+0.1
+0.2
+Predicted Label
+Figure 3. Pretrained Astro-MoE (TM) confusion matrix.
+9
+vae
+s
+rf No
+uLen
+lare
+KN
+arf F
+M-dw
+ILOT
+TDE
+0.1
+PISN
+SLSN
+ther
+II
+0.2
+SN-l
+ike/O
+Ib/c
+Ia
+0.1
+1.2
+Dwa
+EB
+CAR
+T
+Iax
+91bg
+True Label
+PISN
+(b) Pretrained Astro-MoE (TM)
+1.5
+1.8
+0.4
+0.3
+1.4
+2.0
+0.2
+0.4
+0.4 7.6 6.4 2.1
+2.5
+1.4
+0.1
+1.3
+0.8
+0.8
+6.1
+0.5
+2.5
+3.1
+1.3
+0.1
+0.2
+0.2
+0.2
+0.1
+2.4 51.8 0.7 5.3 25.3 7.8 1.8
+0.2 2.0 0.9 0.5
+0.2
+2.9
+0.6
+0.7
+0.9
+0.4
+0.1
+0.2
+0.2
+0.2
+0.3
+6.0
+0.3
+13.8 0.5
+0.3
+0.3
+0.1
+0.7 0.2 87.1 0.4 9.9 0.3 0.2
+0.1 0.9
+0.2
+0.3
+0.1
+2.1
+0.1
+2.6
+0.1
+0.1
+0.2
+0.1
+1.1
+0.2
+5.3
+2.2
+2.7
+0.4
+0.3
+0.3
+0.1
+0.1 1.4 0.2 72.4 19.9 4.7 0.5 0.3 0.2 0.4
+0.1
+0.1
+0.1
+2.0
+3.5
+0.2
+0.2
+0.2
+0.1
+0.2
+0.3
+0.2
+1.8
+1.5
+2.0
+0.8
+0.5
+0.6
+0.2
+0.3
+0.5 1.2 1.0 8.2 76.5 7.6 2.3 0.5 0.8 0.2 0.1
+0.1
+0.3
+0.1
+0.5
+0.8
+0.1
+0.2
+0.1
+0.1
+0.1
+0.2
+0.8
+2.6
+1.3
+0.3
+0.3
+0.1
+0.4 0.6
+3.4 3.8 85.5 3.1 2.2 0.3 1.0 0.1
+0.3
+0.1
+0.1
+0.8
+0.8
+0.5
+0.2
+0.3
+0.4
+0.4
+0.2
+0.3
+4.7
+4.2
+6.9
+0.3
+0.2
+0.1 1.3 0.3 3.3 17.4 36.1 41.6 0.2 0.1
+0.2
+0.1
+0.7
+3.2
+6.1
+0.1
+0.1
+0.1
+0.6
+0.8
+0.2
+0.1
+0.1
+0.3 1.7 5.1
+91.0 1.9
+0.3
+0.1
+0.1
+0.9
+0.2
+0.1
+0.2
+0.2
+0.2
+0.2
+0.2
+0.2
+0.4
+0.1 0.1 0.1 0.5 1.1 0.5
+0.6 96.9
+0.1
+0.1
+0.2
+0.2
+0.3
+0.8
+0.3
+0.3
+1.2
+0.2
+0.1
+1.4
+0.3
+0.6 1.5 0.8 0.6 1.6 4.6
+0.2 0.1 89.2 0.5
+0.1
+0.1
+0.4
+0.1
+1.3
+0.9
+0.1
+0.3
+0.3
+0.1
+0.2
+0.2
+1.4
+3.3
+0.1
+1.8 2.0 0.3 0.1 3.4 1.7
+0.2 4.3 85.8 0.4
+0.6
+0.4
+0.1
+0.7
+0.2
+0.8
+0.1
+1.3
+1.7
+0.4
+9.7
+0.5
+0.5
+1.1
+2.5 2.2 0.6
+7.0 1.1
+0.5 0.5 85.3
+0.4
+0.1
+0.8
+0.6
+0.3
+0.1
+2.3
+0.1
+2.1
+2.1
+0.5
+0.4
+78.5 6.1 11.0
+0.1
+1.0
+0.9
+1.3
+0.1
+0.1
+1.8
+0.8
+0.2
+0.2 93.6 4.1
+0.1
+0.1
+0.8
+0.2
+0.3
+2.3
+2.2
+0.1
+0.4 6.2 93.0
+0.2
+1.7
+0.8
+15.5 10.8
+0.1
+0.2
+0.2
+0.4
+0.2
+99.4
+EB
+0.3
+AGN
+a Sc
+uti
+RR L
+yrae
+Cep
+heid
+2.9
+Delt
+3.8
+CART 44.22.6 11.30.2 2.90.6 0.1
+=== PAGE 10 ===
+Astro-MoE: Mixture of Experts for Multiband Astronomical Time Series
+(c) No pretrained Astro-MoE (TM)
+0.3
+4.2
+4.2
+0.8
+0.5
+0.9
+0.7
+1.1
+9.4 0.5
+0.3 6.7 3.8 2.1
+3.9
+0.5
+1.0
+0.1
+1.0
+0.7
+0.2
+0.9
+1.3
+1.7
+0.8
+1.2
+0.3
+0.2
+1.9 58.7 0.8 4.9 22.6 7.4 1.0 0.1
+2.6 0.4 0.5
+0.3
+1.3
+0.2
+0.3
+1.2
+0.8
+0.1
+0.1
+0.1
+0.1
+0.3
+0.4
+1.3
+0.3
+3.3
+0.1
+0.3
+0.2
+0.2
+0.4 0.3 92.9 0.7 4.1 0.2 0.1
+1.2
+0.1
+0.1
+2.7
+0.3
+1.1
+0.1
+0.4
+0.2
+0.3
+1.7
+1.1
+0.3
+0.1
+0.1
+1.3 0.2 82.6 10.4 5.9 0.4 0.1 0.1 0.5
+0.2
+0.1
+2.2
+1.4
+1.3
+0.1
+0.2
+0.6
+0.5
+0.3
+0.7
+5.2
+1.7
+0.9
+0.2
+0.2
+0.1
+0.1
+0.7 1.4 1.5 8.8 76.5 7.5 1.9 0.1 0.3 0.1 0.1
+0.4
+0.1
+0.4
+0.6
+1.4
+1.7
+0.3
+0.1
+0.1
+0.1
+0.2
+0.2
+0.6
+0.5
+0.3
+0.3
+0.2
+0.2
+0.1 0.4
+2.8 3.0 89.9 2.6 0.8 0.3 0.6 0.1
+0.1
+0.5
+0.1
+1.2
+0.7
+0.1
+0.1
+0.1
+0.3
+0.8
+0.2
+0.3
+2.0
+2.0
+3.6
+0.1
+0.1
+0.2 1.1 0.5 3.1 18.0 29.3 46.7
+0.1 0.1
+0.1
+0.1
+0.4
+2.3
+0.7
+0.3
+0.1
+0.2
+0.3
+1.3
+1.7
+0.3
+0.2 1.3 5.3
+91.2 1.4
+0.1
+0.6
+0.2
+0.2
+0.1
+0.1
+0.2
+0.4
+1.2
+0.7
+0.1
+0.1
+0.1 0.1
+0.5 0.7 0.5
+0.5 97.3 0.1 0.1
+0.1
+0.1
+0.2
+0.1
+0.6
+0.1
+0.1
+0.3
+0.5
+0.3
+0.4
+0.3
+0.7
+1.0
+0.1
+0.4 1.2 0.4 0.4 1.3 4.4
+91.2 0.1
+0.1
+0.1
+0.2
+0.1
+0.4
+0.5
+0.9
+0.6
+0.1
+0.6
+0.4
+0.6
+1.2
+1.5
+0.3
+1.5 1.5 0.5 0.2 2.6 1.8
+0.2 3.5 87.2 0.6
+0.4
+0.1
+0.1
+0.6
+0.3
+0.4
+0.3
+0.2
+0.1
+0.6
+0.6
+0.7
+0.6
+0.4
+0.3
+2.9
+1.3 1.1 0.4
+4.4 0.4 0.1
+0.2 0.3 91.8
+0.2
+0.5
+0.3
+1.4
+0.1
+0.1
+0.1
+0.5
+0.1
+3.0
+0.8
+0.6
+0.3
+82.7 4.6 8.3
+0.1
+0.7
+0.1
+0.1
+0.1
+0.4
+0.9
+0.2
+0.1 94.6 4.3
+0.1
+1.5
+0.2
+0.2
+0.3
+0.1
+0.2
+0.1
+0.5 4.1 95.4
+0.1
+0.8
+91bg
+Ia
+Ib/c
+II
+SN-like/Other
+SLSN
+TDE
+ILOT
+KN
+M-dwarf Flare
+uLens
+Dwarf Novae
+0.1
+0.1
+0.2
+3.3
+0.2
+0.1
+0.2
+0.1
+0.1
+0.4
+0.1
+0.6
+0.5
+0.4
+1.1
+0.1
+1.5
+0.8
+0.3 98.4
+0.1
+1.7
+1.0
+5.9
+0.7
+4.9
+0.6
+0.6
+0.1
+0.4
+0.2
+0.4
+0.3
+3.6
+0.3
+0.3
+0.1
+AGN
+99.9
+Delta Scuti
+98.5
+RR Lyrae
+Cepheid
+0.1
+10
+vae
+s
+Dwa
+rf No
+uLen
+lare
+KN
+arf F
+M-dw
+ILOT
+TDE
+PISN
+SLSN
+ther
+II
+SN-l
+ike/O
+Ib/c
+Ia
+Figure 4. Non-pretrained Astro-MoE (TM) confusion matrix.
+0.1
+0.1
+0.5
+0.4
+0.2
+0.1
+0.1
+0.1
+Predicted Label
+0.2
+99.9
+0.1
+EB
+CAR
+T
+Iax
+91bg
+True Label
+PISN
+0.1
+0.2
+0.2
+99.6
+EB
+Iax
+14.7
+AGN
+a Sc
+uti
+RR L
+yrae
+Cep
+heid
+3.4
+Delt
+7.3
+CART 47.00.6 9.90.2 2.10.3
+=== PAGE 11 ===
+Astro-MoE: Mixture of Experts for Multiband Astronomical Time Series
+Table 5. Comparison of model capacity and inference efficiency across variants for the ELAsTiCC classification task.
+M ODEL
+TE
+PARAMS
+I NFERENCE TIME ( MS )
+M ULTIBAND -A STROMER
+PE
+1.5M
+5.3 MS
+M O E-A STRO
+M O E-A STRO
+PE
+TM
+4.6M
+4.9M
+6.8 MS
+7.1 MS
+optimization: reducing the number of active experts, for instance, could further lower inference time without necessarily
+compromising performance.
+This tradeoff highlights a core advantage of MoE architectures; their ability to scale capacity without a linear increase in
+computation or latency. In the context of ELAsTiCC, where classification involves a wide range of astrophysical phenomena
+and complex temporal dynamics, such additional representational power is beneficial. Overall, our results suggest that the
+increased capacity of the MoE model justifies the minor overhead, providing a scalable and efficient solution for modeling
+heterogeneous multiband time series data.
+11
+=== PAGE 12 ===
