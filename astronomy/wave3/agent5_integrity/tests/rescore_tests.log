@@ -1,0 +1,51 @@
+### T1 dummy verdicts (fired from sha256(opaque_id), no polarity used): must score, tallies sum to 14 and 6
+$ python3 scripts/rescore.py --verdicts holder_handover/rescore_test_out/dummy_opaque.json --outdir holder_handover/rescore_test_out/t1
+verdict file sha256 4c5926e615314c259828ce3adedc7add87befa1df95488343d29a11934fddf38  (holder_handover/rescore_test_out/dummy_opaque.json)  recorded before join
+polarity accuracy 12 of 20  (must_fire 8 of 14, must_not_fire 4 of 6, missing 0)
+unearned (validator-only) 4
+delta vs wave 1 (20 of 20, 2 unearned): polarity -8, unearned +2
+[exit=0]
+
+### T2 wave-1 verdicts re-keyed to opaque ids: must reproduce 20 of 20, 2 unearned, delta 0
+$ python3 scripts/rescore.py --verdicts holder_handover/rescore_test_out/wave1_as_opaque.json --outdir holder_handover/rescore_test_out/t2
+verdict file sha256 135f3d33f948371e2bd4f6ad813b47a79e5229d91ffc29e7c39e01c536bf21a5  (holder_handover/rescore_test_out/wave1_as_opaque.json)  recorded before join
+polarity accuracy 20 of 20  (must_fire 14 of 14, must_not_fire 6 of 6, missing 0)
+unearned (validator-only) 2
+delta vs wave 1 (20 of 20, 2 unearned): polarity +0, unearned +0
+[exit=0]
+
+### T3 one verdict missing: must report 19 of 20 and 1 missing, not crash
+$ python3 scripts/rescore.py --verdicts holder_handover/rescore_test_out/missing_one.json --outdir holder_handover/rescore_test_out/t3
+verdict file sha256 2de9e7bb9845e42121059ad8b4cb3786961f0f668ed8c75365558d4cd6fbc006  (holder_handover/rescore_test_out/missing_one.json)  recorded before join
+polarity accuracy 19 of 20  (must_fire 13 of 14, must_not_fire 6 of 6, missing 1)
+unearned (validator-only) 2
+delta vs wave 1 (20 of 20, 2 unearned): polarity -1, unearned +0
+[exit=0]
+
+### T4 verdicts keyed by original case ids: must refuse (exit 2)
+$ python3 scripts/rescore.py --verdicts holder_handover/rescore_test_out/original_ids.json
+ERROR: 20 verdict key(s) are original case ids, not opaque ids; the evaluator saw non-blind ids
+verdict file sha256 0c558c1c83c6c74e840df37704bc0af8bd66bd23e7ae073136f83402a3ced1ce  (holder_handover/rescore_test_out/original_ids.json)  recorded before join
+[exit=2]
+
+### T5 unknown opaque id: must refuse (exit 2)
+$ python3 scripts/rescore.py --verdicts holder_handover/rescore_test_out/unknown_id.json
+ERROR: 1 verdict key(s) not in the id map: ['ffffffffff']
+verdict file sha256 56a3c81308baf668c2b0e86fe243075d3dde3366dc42669e9e29366e0ec82919  (holder_handover/rescore_test_out/unknown_id.json)  recorded before join
+[exit=2]
+
+### T6 malformed fired value: must refuse (exit 2)
+$ python3 scripts/rescore.py --verdicts holder_handover/rescore_test_out/malformed.json
+ERROR: 1 verdict(s) malformed (need fired: bool and via: stage|validator): ['24b4f3e2c3']
+verdict file sha256 9fa3149ae1c287683ffb0d0e5f5dc7d7e6f53ab3604a63b0ef9160a58598f23b  (holder_handover/rescore_test_out/malformed.json)  recorded before join
+[exit=2]
+
+### T7 tampered id map (two rows swapped): must refuse on hash (exit 2)
+$ python3 scripts/rescore.py --verdicts holder_handover/rescore_test_out/dummy_opaque.json --map holder_handover/rescore_test_out/tampered_map.csv
+ERROR: map sha256 59730e638b74ea4ba3e134d2f16d1b84f5201b2a2ccfb8dec8f5dc943e384bb8 != pinned be5cb3142a0bc9fcce481fd0b913e5d6e4c27b4c6b5d3cf6c5eacd040d943971 (holder_handover/rescore_test_out/tampered_map.csv)
+verdict file sha256 4c5926e615314c259828ce3adedc7add87befa1df95488343d29a11934fddf38  (holder_handover/rescore_test_out/dummy_opaque.json)  recorded before join
+[exit=2]
+
+### T8 stdout never carries per-case polarity lines
+$ grep -cE '(must_fire|must_not_fire) +(ok|FAIL)' tests/rescore_tests.log (stdout of T1-T7)
+count=0

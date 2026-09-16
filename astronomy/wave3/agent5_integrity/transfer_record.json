@@ -1,0 +1,105 @@
+{
+ "record": "rulings_transfer",
+ "ruling": "PI ruling 4, astronomy/wave3/PANEL_BRIEF_WAVE3.md line 21",
+ "brief_sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+ "prepared_by": "wave3 agent 5 (integrity)",
+ "prepared_utc": "2026-09-16",
+ "status": "PENDING_RECEIPT",
+ "receipt_hash": "",
+ "receipt_hash_definition": "sha256 of the completed transfer/RECEIPT_TEMPLATE.txt as returned by the holder. Written here by the coordinator, never by an agent. Status becomes COMPLETE only when this field is filled and the receipt's sha256sum -c lines all read OK.",
+ "why_not_complete": "Coordinator preamble item 2: an out-of-band handover to a human holder is outside any agent's reach. No file has been handed over, moved or deleted by agent 5.",
+ "holder": {
+  "role": "19C program coordinator",
+  "name": null,
+  "authorship_check": {
+   "assertion_by": "PI",
+   "assertion": "The rulings holder is the 19C program coordinator, confirmed as a non-author of the skill and the cases by checking authorship records before handover (PANEL_BRIEF_WAVE3.md ruling 4).",
+   "verified_by_coordinator": false,
+   "verified_by_agent5": false,
+   "note": "Coordinator preamble item 2: 'The coordinator verified none of the holder's authorship checks. The PI asserts them.' Recorded as asserted, not demonstrated."
+  }
+ },
+ "package_manifest": "astronomy/wave3/agent5_integrity/transfer/PACKAGE_SHA256SUMS",
+ "package_manifest_sha256": "f2576e622174fc711c2040bc06deb1858d25535d582e1c00779896a9a8dfc237",
+ "package": [
+  {
+   "item": "astronomy suite rulings",
+   "path": "astronomy/replay/cases/RULINGS_SEALED.csv",
+   "sha256": "6041714a30b9143ef6ea74edd3ed35dca86c51317d42a56d2b5204f559f2e2fc",
+   "bytes": 8780,
+   "handling": "hash only; agent 5 never opened it. Matches astronomy/replay/SEAL_SHA256SUMS and wave-2 transfer_record.json."
+  },
+  {
+   "item": "source suite rulings",
+   "path": "fm-advantage-benchmark/cases/RULINGS_SEALED.csv",
+   "sha256": "69a30ccffb4500135cad78e4c03ae7345aefd1583c0ac7dfd802db2eb8e1c312",
+   "bytes": 10437,
+   "handling": "hash only; never opened. Matches the first recorded hash in wave-2 transfer_record.json."
+  },
+  {
+   "item": "astronomy suite polarity column",
+   "path": "astronomy/wave3/agent5_integrity/holder_handover/polarity_astronomy_replay.csv",
+   "sha256": "ff84a2407103db595ecde1cae6c36f989941f2925a43d20b7b1cc618e28af35f",
+   "extracted_from": "astronomy/replay/cases/cases.csv",
+   "extracted_from_sha256": "60782b6b097dd505ed7242c7fb84b7c16323f4204c7d6fb6c4615954c4b6ca74",
+   "canonical_form": "UTF-8 'case_id,polarity\\n' then '<case_id>,<polarity>\\n' per row in cases.csv order",
+   "matches_wave2_canonical_hash": true,
+   "gitignored": true
+  },
+  {
+   "item": "source suite polarity column",
+   "path": "astronomy/wave3/agent5_integrity/holder_handover/polarity_fm-advantage-benchmark.csv",
+   "sha256": "d0f89b30a42678f53dd122d642708659f1174de86c4f1cfb58779287988a853d",
+   "extracted_from": "fm-advantage-benchmark/cases/cases.csv",
+   "extracted_from_sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+   "canonical_form": "as above",
+   "matches_wave2_canonical_hash": true,
+   "gitignored": true
+  },
+  {
+   "item": "astronomy suite opaque-id map (wave 3)",
+   "path": "astronomy/wave3/agent5_integrity/holder_handover/id_map_astronomy_replay.csv",
+   "sha256": "be5cb3142a0bc9fcce481fd0b913e5d6e4c27b4c6b5d3cf6c5eacd040d943971",
+   "gitignored": true,
+   "rule": "astronomy/wave3/agent5_integrity/OPAQUE_ID_RULE.md",
+   "rule_sha256": "1c1688c29114e6d076d317a8ff067ff7406d7ffd5823fb365a6c1e31ff45523a"
+  },
+  {
+   "item": "source suite opaque-id map (wave 3)",
+   "path": "astronomy/wave3/agent5_integrity/holder_handover/id_map_fm-advantage-benchmark.csv",
+   "sha256": "5612759991d337fc26ebdda77a94199154efe62f8166106552b507d28fb0ebc6",
+   "gitignored": true,
+   "rule": "astronomy/wave3/agent5_integrity/OPAQUE_ID_RULE.md",
+   "rule_sha256": "1c1688c29114e6d076d317a8ff067ff7406d7ffd5823fb365a6c1e31ff45523a"
+  }
+ ],
+ "superseded_not_in_package": [
+  {
+   "path": "astronomy/wave2/agent5_skill_maintenance/holder_handover/id_map_fm-advantage-benchmark.csv",
+   "sha256": "3ea299629fce0975611e5356ff0797f9a8a9677e7d486a005b18da2575acde44",
+   "reason": "prefixed row-counter ids, agent-chosen seed (logs/wave2_blind_idcheck.txt); superseded by the wave-3 map. Holder decides whether to take custody or have it deleted."
+  },
+  {
+   "path": "astronomy/wave2/agent5_skill_maintenance/holder_handover/id_map_astronomy_replay.csv",
+   "sha256": "a613cbac924228b037f2f2edfb6fddd61a6e82a0feb643bb4b34d0528f937c85",
+   "reason": "as above"
+  }
+ ],
+ "holder_verification_steps": [
+  "1. Before accepting: record in writing which authorship records you checked (skill files; every replay_cases.csv and cases.csv listed in RECEIPT_TEMPLATE item 4) and that you authored none of them. The PI's assertion does not replace your own statement.",
+  "2. Receive the six files and PACKAGE_SHA256SUMS out of band from someone who can read the working tree (not from a panel agent). Check sha256 of PACKAGE_SHA256SUMS against package_manifest_sha256 above, then run `sha256sum -c PACKAGE_SHA256SUMS` from the repository root or on your copies with the same relative paths. Every line must read OK; any mismatch voids the corresponding seal and must be reported, not repaired.",
+  "3. Recompute each polarity file from its cases.csv in the canonical form above and confirm byte equality. Confirm each cases.csv still has the extracted_from_sha256 above.",
+  "4. Optionally recompute each id map from OPAQUE_ID_RULE.md (python3 astronomy/wave3/agent5_integrity/scripts/make_opaque.py in a scratch copy) and confirm byte equality; the rule is deterministic from the brief hash.",
+  "5. Complete RECEIPT_TEMPLATE.txt, return it; the coordinator writes its sha256 into receipt_hash and sets status COMPLETE.",
+  "6. After receipt: have the coordinator remove from anything the stage under test can read both RULINGS_SEALED.csv files, the polarity columns (cases.csv and the committed astronomy/replay/evaluator/score_*.txt, which list polarity per case), and all id maps; record the commit at which that happened. Until then the seal is procedural.",
+  "7. Run scripts/rescore.py yourself (optionally --with-rulings) on the evaluator's verdict file only after its sha256 is in the order-of-operations log.",
+  "8. For a seal that carries weight, write new sealed cases no panel agent has seen (references/replay.md, 'The limit that matters')."
+ ],
+ "known_leaks_not_closed_by_this_package": [
+  "cases.csv of both suites still carries polarity in the working tree and in git history.",
+  "astronomy/replay/evaluator/score_all.txt, score_development.txt and score_sealed.txt list every astronomy case with its polarity (committed).",
+  "The source-suite K/N id prefixes remain in fm-advantage-benchmark/cases/cases.csv and RULINGS_SEALED.csv (issue 09); only the blind files are re-keyed.",
+  "Inputs in the blind files are verbatim cases.csv text, so any reader of cases.csv can map them back. The opaque ids only help an evaluator confined to the blind file."
+ ],
+ "completeness": "Package lists both rulings files (hash only), both polarity columns and both wave-3 id maps with sha256, the manifest to check them, the receipt template, the PI assertion and the holder steps. Not done and not doable by an agent: the handover, the holder's authorship check, the receipt, and removal of polarity sources from the tree."
+}

@@ -1,0 +1,67 @@
+{
+ "brief_sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+ "rule_file_sha256": "1c1688c29114e6d076d317a8ff067ff7406d7ffd5823fb365a6c1e31ff45523a",
+ "suites": {
+  "fm-advantage-benchmark": {
+   "source": "fm-advantage-benchmark/cases/cases.csv",
+   "source_sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+   "rows": 38,
+   "attempts": [
+    {
+     "attempt": 0,
+     "seed_derivation": "int(sha256(\"a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6:fm-advantage-benchmark:0\").hexdigest(),16)",
+     "checks": {
+      "n": 38,
+      "distinct_non_digit_prefixes": 13,
+      "ids_share_one_alpha_prefix": false,
+      "ids_are_row_counters": false,
+      "ids_sorted_equals_row_order": true,
+      "p_polarity_vs_position": 0.7823,
+      "p_original_index_vs_position": 0.2129,
+      "first_char_groups_all_single_polarity": false
+     },
+     "accepted": true
+    }
+   ],
+   "cases_opaque": "suites/fm-advantage-benchmark/cases_opaque.csv",
+   "cases_opaque_sha256": "9fe1e3d48ded7db4d37d631a31242747a89792459b7818c87ba8863604202c76",
+   "id_map": "holder_handover/id_map_fm-advantage-benchmark.csv",
+   "id_map_sha256": "5612759991d337fc26ebdda77a94199154efe62f8166106552b507d28fb0ebc6",
+   "polarity_file": "holder_handover/polarity_fm-advantage-benchmark.csv",
+   "polarity_sha256": "d0f89b30a42678f53dd122d642708659f1174de86c4f1cfb58779287988a853d",
+   "polarity_sha256_matches_wave2_canonical": true
+  },
+  "astronomy_replay": {
+   "source": "astronomy/replay/cases/cases.csv",
+   "source_sha256": "60782b6b097dd505ed7242c7fb84b7c16323f4204c7d6fb6c4615954c4b6ca74",
+   "rows": 20,
+   "attempts": [
+    {
+     "attempt": 0,
+     "seed_derivation": "int(sha256(\"a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6:astronomy_replay:0\").hexdigest(),16)",
+     "checks": {
+      "n": 20,
+      "distinct_non_digit_prefixes": 5,
+      "ids_share_one_alpha_prefix": false,
+      "ids_are_row_counters": false,
+      "ids_sorted_equals_row_order": true,
+      "p_polarity_vs_position": 0.8983,
+      "p_original_index_vs_position": 0.2207,
+      "p_author_vs_position": 0.1067,
+      "first_char_groups_all_single_polarity": false
+     },
+     "accepted": true
+    }
+   ],
+   "cases_opaque": "suites/astronomy_replay/cases_opaque.csv",
+   "cases_opaque_sha256": "5a6991e4a62446bfb325b1789910a2852484ab62320f6a3bd894ff935e55c128",
+   "id_map": "holder_handover/id_map_astronomy_replay.csv",
+   "id_map_sha256": "be5cb3142a0bc9fcce481fd0b913e5d6e4c27b4c6b5d3cf6c5eacd040d943971",
+   "polarity_file": "holder_handover/polarity_astronomy_replay.csv",
+   "polarity_sha256": "ff84a2407103db595ecde1cae6c36f989941f2925a43d20b7b1cc618e28af35f",
+   "polarity_sha256_matches_wave2_canonical": true,
+   "evaluator_file": "evaluator/blind_inputs_opaque.csv",
+   "evaluator_file_sha256": "c02f6bf134c05327d4c311649246d18bf60ebafef9298689bbdfcdf3c49bd47b"
+  }
+ }
+}

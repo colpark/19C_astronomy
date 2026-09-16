@@ -1,0 +1,13 @@
+logs/generation.json: OK
+suites/astronomy_replay/cases_opaque.csv: OK
+suites/fm-advantage-benchmark/cases_opaque.csv: OK
+evaluator/blind_inputs_opaque.csv: OK
+holder_handover/id_map_astronomy_replay.csv: OK
+holder_handover/id_map_fm-advantage-benchmark.csv: OK
+holder_handover/polarity_astronomy_replay.csv: OK
+holder_handover/polarity_fm-advantage-benchmark.csv: OK
+suites/fm-advantage-benchmark/cases_opaque.csv rows 38 columns ['opaque_id', 'stage', 'sealed', 'input'] | ids 10 lowercase hex: True | unique: True | inputs with polarity words: 0 | inputs with original-style ids: 0
+suites/astronomy_replay/cases_opaque.csv rows 20 columns ['opaque_id', 'stage', 'sealed', 'input'] | ids 10 lowercase hex: True | unique: True | inputs with polarity words: 0 | inputs with original-style ids: 0
+evaluator/blind_inputs_opaque.csv rows 20 columns ['opaque_id', 'stage', 'input'] | ids 10 lowercase hex: True | unique: True | inputs with polarity words: 0 | inputs with original-style ids: 0
+ids shared across suites: 0
+evaluator file ids equal astronomy suite ids in same order: True

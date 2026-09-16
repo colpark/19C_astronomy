@@ -1,0 +1,21 @@
+RULINGS HOLDER RECEIPT, fm-advantage-benchmark replay suites (astronomy panel, ruling 4)
+
+Holder: ______________________ (19C program coordinator)
+Received on (UTC date): __________   Received from: ______________________   Channel: ______________________
+
+1. PACKAGE_SHA256SUMS I checked has sha256: ________________________________________________________________
+   (expected: see transfer_record.json field package_manifest_sha256)
+2. Output of `sha256sum -c PACKAGE_SHA256SUMS` run on the files as I received them (paste all six lines):
+
+
+
+3. Polarity files: I recomputed each canonical polarity hash from the matching cases.csv as described in
+   transfer_record.json and it matched: yes / no
+4. I did not write any part of fm-advantage-benchmark/ and I did not write any replay case in
+   fm-advantage-benchmark/cases/, astronomy/replay/cases/, astronomy/agent*/, astronomy/wave2/*/ or astronomy/wave3/*/.
+   Authorship records I checked: ______________________________________________
+5. From receipt onward I hold these files; I will not take part in producing verdicts.
+
+Signature / initials: __________
+
+The receipt hash written into transfer_record.json is the sha256 of this completed file as the holder returns it.

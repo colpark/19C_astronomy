@@ -1,0 +1,24 @@
+## wave-2 blind files checked against issue 09 (scripts/idcheck.py; aggregate output only)
+### fm-advantage-benchmark
+{
+ "n": 38,
+ "distinct_non_digit_prefixes": 1,
+ "ids_share_one_alpha_prefix": true,
+ "ids_are_row_counters": true,
+ "ids_sorted_equals_row_order": true,
+ "p_polarity_vs_position": 0.311,
+ "p_original_index_vs_position": 0.5898,
+ "first_char_groups_all_single_polarity": false
+}
+### astronomy_replay
+{
+ "n": 20,
+ "distinct_non_digit_prefixes": 1,
+ "ids_share_one_alpha_prefix": true,
+ "ids_are_row_counters": true,
+ "ids_sorted_equals_row_order": true,
+ "p_polarity_vs_position": 0.5403,
+ "p_original_index_vs_position": 0.9337,
+ "p_author_vs_position": 0.9801,
+ "first_char_groups_all_single_polarity": false
+}

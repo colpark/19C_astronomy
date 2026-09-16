@@ -1,0 +1,232 @@
+{
+ "agent": "wave3 agent 5 (integrity)",
+ "date": "2026-09-16",
+ "seeds": [
+  {
+   "id": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+   "read": "full",
+   "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+   "lines": 75,
+   "contribution": "brief incl. coordinator preamble; sha256 verified; seed source for opaque ids"
+  },
+  {
+   "id": "astronomy/wave3/BRIEF_SHA256",
+   "read": "full",
+   "sha256": "8be69f57330bfe481d5dec41cb83f238b25fab35b30db497177d3c09e30f7c8e",
+   "lines": 1,
+   "contribution": "hash check"
+  },
+  {
+   "id": "astronomy/replay/cases/cases.csv",
+   "read": "programmatic",
+   "sha256": "60782b6b097dd505ed7242c7fb84b7c16323f4204c7d6fb6c4615954c4b6ca74",
+   "lines": 21,
+   "contribution": "source of the astronomy opaque suite and polarity file; polarity handled only in code, aggregates printed"
+  },
+  {
+   "id": "fm-advantage-benchmark/cases/cases.csv",
+   "read": "programmatic",
+   "sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+   "lines": 39,
+   "contribution": "source of the source-suite opaque suite and polarity file; same handling"
+  },
+  {
+   "id": "astronomy/replay/evaluator/verdicts.json",
+   "read": "partial (first 1.5 kB printed) + programmatic",
+   "sha256": "c2a6d4904b17f4c11ce7b4e240cbc58d39feb2c4441a83f37443cf2aa93a1dcc",
+   "lines": 22,
+   "contribution": "wave-1 verdict format; re-keyed into rescore test T2"
+  },
+  {
+   "id": "astronomy/replay/evaluator/score_all.txt",
+   "read": "full",
+   "sha256": "d36137f1207ea4b4ebfc8d2776ee8a0711c36d0c04594f2c86261aea53649a05",
+   "lines": 32,
+   "contribution": "wave-1 baseline 20 of 20, 2 unearned; lists polarity per case (disclosed, log step 0c)"
+  },
+  {
+   "id": "astronomy/replay/evaluator/blind_inputs.csv",
+   "read": "first 3 lines",
+   "sha256": "6b97a4bcf6834cce8cb2f233716b41cdfad79fa5e73af3317d63e549f298bdd2",
+   "lines": 21,
+   "contribution": "wave-1 blind layout (case_id, stage, input)"
+  },
+  {
+   "id": "astronomy/replay/RESULT.md",
+   "read": "full (read in wave 2)",
+   "sha256": "66d7757582ba67f0a719997f5af10a0f0446418c4ea73602baf1c4c62aee5aa6",
+   "lines": 35,
+   "contribution": "wave-1 evaluator read-only rules; baseline"
+  },
+  {
+   "id": "astronomy/replay/cases/EXCLUDED.csv",
+   "read": "full",
+   "sha256": "1a1460d0288f718494cda445e1083c32d39f7ac91a31e2fa0972ceb3c75b6683",
+   "lines": 3,
+   "contribution": "AST5-03/AST5-04 excluded; not in the 20"
+  },
+  {
+   "id": "astronomy/replay/scripts/replay.py",
+   "read": "hash",
+   "sha256": "d63459c3b9b377480f0fdba7f612a1f156b94eec121d41259303cc23f14b0ce6",
+   "lines": 116,
+   "contribution": "byte-identical to vendored replay.py"
+  },
+  {
+   "id": "fm-advantage-benchmark/scripts/replay.py",
+   "read": "full (wave 2)",
+   "sha256": "d63459c3b9b377480f0fdba7f612a1f156b94eec121d41259303cc23f14b0ce6",
+   "lines": 116,
+   "contribution": "called unchanged by rescore.py"
+  },
+  {
+   "id": "astronomy/agent5_resolution_replay/REPLAY_PLAN.md",
+   "read": "grep lines + wave-2 full read",
+   "sha256": "395d956b1d4cb5457f032ec14c8405d3d6495cb4ac38dc5b20fc17d11e9fc458",
+   "lines": 117,
+   "contribution": "stage-under-test access rules 4.1/4.2"
+  },
+  {
+   "id": "astronomy/wave2/agent5_skill_maintenance/transfer_record.json",
+   "read": "own wave-2 record",
+   "sha256": "5dbb32a7b3342f84288eaf3aa68ad401d7e31a3587134414fe0ca9f7be47c82b",
+   "lines": 105,
+   "contribution": "canonical polarity hashes"
+  },
+  {
+   "id": "astronomy/wave2/agent5_skill_maintenance/blind/fm-advantage-benchmark/cases_blind.csv",
+   "read": "programmatic",
+   "sha256": "4f9d5aa9d179494b13d9c38bc58e9674b083cbeba3d4856252dffda63302e777",
+   "lines": 39,
+   "contribution": "checked against issue 09 (logs/wave2_blind_idcheck.txt)"
+  },
+  {
+   "id": "astronomy/wave2/agent5_skill_maintenance/blind/astronomy_replay/cases_blind.csv",
+   "read": "programmatic",
+   "sha256": "ae6b7cf5acc35411bd477986bcd54dd15772c2011b1b082bf7ecf28d365adc96",
+   "lines": 21,
+   "contribution": "same"
+  },
+  {
+   "id": "astronomy/wave2/agent5_skill_maintenance/holder_handover/id_map_fm-advantage-benchmark.csv",
+   "read": "programmatic",
+   "sha256": "3ea299629fce0975611e5356ff0797f9a8a9677e7d486a005b18da2575acde44",
+   "lines": 39,
+   "contribution": "same"
+  },
+  {
+   "id": "astronomy/wave2/agent5_skill_maintenance/holder_handover/id_map_astronomy_replay.csv",
+   "read": "programmatic",
+   "sha256": "a613cbac924228b037f2f2edfb6fddd61a6e82a0feb643bb4b34d0528f937c85",
+   "lines": 21,
+   "contribution": "same"
+  },
+  {
+   "id": "astronomy/SYNTHESIS.md",
+   "read": "grep line 126 (full in wave 2)",
+   "sha256": "fd749aec24839f6c668350119c96932c6ef5127753661f254e4287c471459137",
+   "lines": 138,
+   "contribution": "W3A5-R4 real event (history rewrite blocked)"
+  },
+  {
+   "id": "astronomy/wave2/agent1_rubin_bands/order_of_operations.log",
+   "read": "lines 13-24",
+   "sha256": "3e2d7aabeae48370b08ce7b8e62e97381ed46a734a3fee11e91de1b10d332c37",
+   "lines": 26,
+   "contribution": "C3/C5 background runs and STOP recorded UNDEMONSTRATED (context for ladder cases)"
+  },
+  {
+   "id": "astronomy/wave3/agent1_cohort_finish/checkpoints_from_wave2/c3_alerce.json",
+   "read": "first keys",
+   "sha256": "e216c055fe0f979ae0573c83b3b880041e33cfb5aa4aa9a11dd513caee5efd8f",
+   "lines": 1,
+   "contribution": "interrupted-count record"
+  },
+  {
+   "id": "astronomy/wave3/agent1_cohort_finish/order_of_operations.log",
+   "read": "lines 1-6",
+   "sha256": "adb1f4b821e786c813b884f1b58f61b7b1c17eccc977b60db0d2bf2987ab82bd",
+   "lines": 6,
+   "contribution": "log format"
+  },
+  {
+   "id": "astronomy/wave2/agent4_instrument/AMENDMENTS.md",
+   "read": "grep",
+   "sha256": "90984d3f3c6081f39dde64b4ea724aeb482f8614604c5c85b737ff83f5005ac1",
+   "lines": 22,
+   "contribution": "PRE-I1 labelling; fold-by-fold training (W3A5-L1, W3A5-R1)"
+  },
+  {
+   "id": "astronomy/wave2/agent4_instrument/compositions_FROZEN.md",
+   "read": "grep lines 4,49-50,82-128",
+   "sha256": "b2f72948de0b39682ff8bc01c3c3f13f931a0a96966ede90c50466a9d045427c",
+   "lines": 135,
+   "contribution": "PRE-I1 CALIBRATION label, folds (W3A5-R1)"
+  },
+  {
+   "id": "astronomy/wave2/agent4_instrument/r1_spec.md",
+   "read": "grep lines 4,16,55-57",
+   "sha256": "f278b0bb3818ad1de981ba14f0e331003138683ac1da5fe4b92e26ada579a07b",
+   "lines": 82,
+   "contribution": "R1 edge UNMET, dispositions declared (W3A5-R1)"
+  },
+  {
+   "id": "fm-advantage-benchmark/SKILL.md",
+   "read": "hash (full in wave 2)",
+   "sha256": "e673042d61499657bcebad3ba68c8910a518dd69478fcf06f830ef5a314eafba",
+   "lines": 125,
+   "contribution": "pinned in EVALUATOR_PROMPT.md; refusals cited in rulings"
+  },
+  {
+   "id": "fm-advantage-benchmark/references/loop.md",
+   "read": "hash (full in wave 2)",
+   "sha256": "bce6e18f23132355a293d1596a788c916b942b60917ce8ef80b5b37fa17665d4",
+   "lines": 57,
+   "contribution": "ladder rungs 2, 6, 7 cited"
+  },
+  {
+   "id": "fm-advantage-benchmark/references/graph.md",
+   "read": "hash (full in wave 2)",
+   "sha256": "03b495bff2535295591c5941be1a4126d29c7b486dc9f14f02040946409cdcee",
+   "lines": 34,
+   "contribution": "R1->I1 edge cited"
+  },
+  {
+   "id": "fm-advantage-benchmark/references/stages/runtime.md",
+   "read": "hash (full in wave 2)",
+   "sha256": "e109a57f1b8114d8f920806c1d40ed42457e50509b588d438e2acf0704172019",
+   "lines": 45,
+   "contribution": "R1, R4 cited"
+  },
+  {
+   "id": "fm-advantage-benchmark/references/stages/discovery.md",
+   "read": "hash (full in wave 2)",
+   "sha256": "0b707be2a10075d7312f6f7237f33907756a3aea16e4fb0d0e694dafa4da4fc2",
+   "lines": 66,
+   "contribution": "D5 cited"
+  },
+  {
+   "id": "astronomy/wave2/agent4_instrument/compositions/",
+   "read": "directory listing only",
+   "contribution": "parsnip_fold0-3 present, no fold 4 (corroborates W3A5-L1)"
+  },
+  {
+   "id": "astronomy/replay/cases/RULINGS_SEALED.csv",
+   "read": "not opened; sha256sum and sha256sum -c only",
+   "sha256": "6041714a30b9143ef6ea74edd3ed35dca86c51317d42a56d2b5204f559f2e2fc",
+   "contribution": "transfer package, hash only"
+  },
+  {
+   "id": "fm-advantage-benchmark/cases/RULINGS_SEALED.csv",
+   "read": "not opened; sha256sum and sha256sum -c only",
+   "sha256": "69a30ccffb4500135cad78e4c03ae7345aefd1583c0ac7dfd802db2eb8e1c312",
+   "contribution": "transfer package, hash only"
+  },
+  {
+   "id": "coordinator message to wave-3 agent 5 (not a file)",
+   "read": "full",
+   "contribution": "assignment; reports agents ending turns on 'waiting for fold 4' / 'waiting for C5' and being resumed (W3A5-L1). Not verifiable from repository files."
+  }
+ ],
+ "completeness": "Lists every file read or hashed for wave-3 work, with extent. Wave-2 full reads of the skill are in astronomy/wave2/agent5_skill_maintenance/seed_ledger.json and not repeated. Not read: either RULINGS_SEALED.csv; agent transcripts."
+}
