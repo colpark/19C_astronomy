@@ -1,0 +1,1288 @@
+                                                 Draft version December 24, 2020
+                                                 Preprint typeset using LATEX style emulateapj v. 01/23/15
+
+
+
+                                               RESULTS OF THE PHOTOMETRIC LSST ASTRONOMICAL TIME-SERIES CLASSIFICATION CHALLENGE
+                                                                                   (PLAsTiCC)
+                                                         R. Hložek,1, 2 K. A. Ponder,3, 4, 5 A.I. Malz,6 M. Dai,7, 8 G. Narayan,9 E.E.O. Ishida,10 T. Allam Jr,11
+                                                        A. Bahmanyar,2 R. Biswas,12 L. Galbany,13 S.W. Jha,8 D. O. Jones,14 R. Kessler,15 M. Lochner,16, 17, 18
+                                                         A.A. Mahabal,19, 20 K.S. Mandel,21, 22 J.R. Martı́nez-Galarza,23 J.D. McEwen,11 D. Muthukrishna,21
+                                                                                   H.V. Peiris,12, 24 C.M. Peters,2 and C.N. Setzer12
+                                                         (LSST Dark Energy Science Collaboration, LSST Transient and Variable Stars Collaboration)
+                                                        1   Department of Astronomy and Astrophysics, University of Toronto, 50 St. George St., Toronto, ON M5S 3H4, Canada
+                                                   2    Dunlap Institute for Astronomy and Astrophysics, University of Toronto, 50 St. George St., Toronto, ON M5S 3H4, Canada
+                                                       3 Berkeley Center for Cosmological Physics, Campbell Hall 341, University of California Berkeley, Berkeley, CA 94720, USA
+                                                                 4 Physics Division, Lawrence Berkeley National Laboratory, 1 Cyclotron Road, Berkeley, CA 94720, USA
+arXiv:2012.12392v1 [astro-ph.IM] 22 Dec 2020
+
+
+
+
+                                                                       5 SLAC National Accelerator Laboratory, 2575 Sand Hill Rd, Menlo Park, CA 94025, USA
+                                                         6 Ruhr University Bochum, German Centre of Cosmological Lensing, Universitaetsstraße 150, 44801 Bochum, Germany
+                                                                     7 Department of Physics and Astronomy, Johns Hopkins University, Baltimore, MD 21218, USA
+                                                                   8 Rutgers, the State University of New Jersey, 136 Frelinghuysen Road, Piscataway, NJ 08854 USA
+                                                                          9 Space Telescope Science Institute, 3700 San Martin Dr, Baltimore, MD 21218, USA
+                                                                        10 Université Clermont Auvergne, CNRS/IN2P3, LPC, F-63000 Clermont-Ferrand, France
+                                                                                 11 Mullard Space Science Laboratory, Department of Space and Climate
+                                                                              Physics, University College London, Holmbury Hill Rd, Dorking RH5 6NT, UK
+                                                                                  12 The Oskar Klein Centre for Cosmoparticle Physics, Department of
+                                                                                 Physics, Stockholm University, AlbaNova, Stockholm, SE-106 91, Sweden
+                                                                   13 Departamento de Fı́sica Teórica y del Cosmos, Universidad de Granada, E-18071 Granada, Spain
+                                                                     14 NASA Einstein Fellow, University of Santa Cruz, 1156 High St, Santa Cruz, CA 95064, USA
+                                                                                              15 KICP, 5640 S Ellis Ave, Chicago, IL 60637
+                                                           16 Department of Physics and Astronomy, University of the Western Cape, Bellville, Cape Town, 7535, South Africa
+                                                          17 South African Radio Astronomy Observatory (SARAO), 2 Fir Street, Observatory, Cape Town, 7925, South Africa
+                                                                     18 African Institute for Mathematical Sciences, 6 Melrose Road, Muizenberg, 7945, South Africa
+                                                            19 Division of Physics, Mathematics, and Astronomy, California Institute of Technology, Pasadena, CA 91125, USA
+                                                                   20 Center for Data Driven Discovery, California Institute of Technology, Pasadena, CA 91125, USA
+                                                                21 Institute of Astronomy and Kavli Institute for Cosmology, Madingley Road, Cambridge, CB3 0HA, UK
+                                                               22 Statistical Laboratory, DPMMS, University of Cambridge, Wilberforce Road, Cambridge, CB3 0WB, UK
+                                                              23 Center for Astrophysics — Harvard & Smithsonian, 60 Garden Street, Mail Stop 66 Cambridge, MA 02138
+                                                              24 Department of Physics and Astronomy, University College London, Gower Street, London, WC1E 6BT, UK
+
+                                                                                                     (Dated: December 24, 2020)
+                                                                                                    Draft version December 24, 2020
+
+                                                                                                         ABSTRACT
+                                                            Next-generation surveys like the Legacy Survey of Space and Time (LSST) on the Vera C. Rubin
+                                                            Observatory will generate orders of magnitude more discoveries of transients and variable stars than
+                                                            previous surveys. To prepare for this data deluge, we developed the Photometric LSST Astronom-
+                                                            ical Time-series Classification Challenge (PLAsTiCC), a competition which aimed to catalyze the
+                                                            development of robust classifiers under LSST-like conditions of a non-representative training set for a
+                                                            large photometric test set of imbalanced classes. Over 1,000 teams participated in PLAsTiCC, which
+                                                            was hosted in the Kaggle data science competition platform between Sep 28, 2018 and Dec 17, 2018,
+                                                            ultimately identifying three winners in February 2019. Participants produced classifiers employing a
+                                                            diverse set of machine learning techniques including hybrid combinations and ensemble averages of a
+                                                            range of approaches, among them boosted decision trees, neural networks, and multi-layer perceptrons.
+                                                            The strong performance of the top three classifiers on Type Ia supernovae and kilonovae represent a
+                                                            major improvement over the current state-of-the-art within astronomy. This paper summarizes the
+                                                            most promising methods and evaluates their results in detail, highlighting future directions both for
+                                                            classifier development and simulation needs for a next generation PLAsTiCC data set.
+
+                                                                      1. INTRODUCTION                                 various filters) for the transients and variable stars (Ivezić
+                                                  The Legacy Survey of Space and Time (LSST, LSST                     et al. 2019), whose brightness changes with time.
+                                               Science Collaboration et al. 2009) of the Vera C. Rubin                  This large and heterogeneous data set consisting of
+                                               Observatory will be a survey of the full sky observable                signals from different types of astronomical objects will
+                                               from its location in the deserts of northern Chile, with               need to be classified into different categories or types of
+                                               a combination of survey area and depth that is unprece-                transients and variables from the photometric light curve
+                                               dented. LSST will make a complete map of the sky ev-                   data. Only a small fraction of objects will be followed
+                                               ery few days. This repeated scanning of the sky will be                up spectroscopically to confirm their types. The need
+                                               used to generate difference images formed by subtracting               for accurate photometric classification of light curves is
+                                               that map from a reference template, leading to millions                therefore a longstanding goal in transient astrophysics.
+                                               of ‘alerts’ every night for objects (or detected sources)              Classification challenges have often been designed with a
+                                               changing flux. The repeated scanning will also build up                focus on correctly identifying one class from a given data
+                                               light curves (a time series of measured light observed in              set.
+2
+
+   Previous community efforts to simulate future surveys          1. Extragalactic models – including exploding super-
+included the Supernova Photometric Classification Chal-              novae (SNe) which have large variations in peak
+lenge (SNPCC, Kessler et al. 2010), which galvanized the             brightness, kilonova (KN) models which are the
+astronomy community to develop classification methods                electromagnetic output from two colliding neutron
+for three classes of supernovae given a smaller spectro-             stars, the emission from the tidal disruption events
+scopic training set. The SNPCC performance metric had                (TDE) of stars due to the supermassive black hole
+a strong emphasis on returning a sample that was both                at the center of a galaxy, and emission from gas
+pure (one which had a small number of False Positive                 falling onto the black hole creating an active galac-
+classifications) and complete (one which had a large frac-           tic nucleus (AGN). The supernova models repre-
+tion of True Positive classifications), and its performance          sent a wide variety of scenarios, from the explosion
+metric balanced those criteria. Classification challenges            of stars at the end of their lives (SNII, SNIbc),
+must often balance competing goals, with the balance                 exploding white dwarf progenitors (the SNIa mod-
+between the two axes often depending on spectroscopic                els including SNIa, SNIa-91bg and SNIax) and the
+resource efficiency and the brightness limit of any sur-             super-luminous supernovae (SLSN).
+vey, known as the photometric depth. While individual
+science groups have historically focused on their specific        2. Galactic models – which include variable stars
+science needs and generated individualized simulations,              and recurring transients such as Mira variables,
+any classification algorithm that will be run on real and            RR Lyrae and eclipsing binaries (EB), and non-
+heterogeneous data from LSST will need to be robust to               recurring models such as the single microlensing
+that heterogeneity.                                                  events (µlens-Single) and the M-dwarf flares.
+   The motivations behind PLAsTiCC were somewhat                  3. ‘Novel’ objects – Pair Instability Supernovae
+different than those of groups focused on one scien-                 (PISN), Calcium-rich transients (CaRTs), Interme-
+tific question. Given the heterogeneous types of ob-                 diate Luminosity Optical Transients (ILOTs), bi-
+jects that we expect LSST will provide, and the range                nary micro-lensing events (µlens-Binary).
+of science questions we will want to answer with these
+data, the PLAsTiCC team instead asked the question:            The simulation generated 100 million sources, and a sub-
+Can you classify a broad range of objects with a good          set of 3.5 million were predicted to be detected by LSST,
+overall/average classification of each type, and identify      and thus useful for classification and analysis. These data
+new objects that are not included in the training set?         were provided to participants in PLAsTiCC as 3.5 mil-
+The PLAsTiCC challenge was presented to the broader            lion light curves in the ugrizY filters containing over 453
+public through the Kaggle1 platform, a popular site            million observations. These data formed the ‘test’ sam-
+for data challenges and machine learning competitions.         ple that PLAsTiCC participants were asked to classify.
+While the participants in PLAsTiCC submitted classi-           The training set consisted of 8000 objects constructed
+fication methods that were often a combination of differ-      as a mock-spectroscopic subset of the full data, meant
+ent strategies, their metric performance was not tuned         to mimic the available data from current and near-term
+to any given type and allowed for comparison of classi-        spectroscopic surveys that will be available at the start
+fiers in cases of degeneracies between classes that had not    of LSST science operations. The differences in numbers
+been explored before.                                          and representation between the training and test data
+   The paper is organized as follows: In Section 2, we         sets can be seen in Figure 1.
+present a general PLAsTiCC overview including data                The PLAsTiCC data were simulated to mimic fu-
+simulation, validation, metric and information about the       ture LSST observations in both the Deep Drilling Fields
+competition. Section 3 details the top three submissions       (DDF), which are small patches of the sky that will be
+and more general aspects of the methods used in the top        sampled often to achieve enhanced depth, and a Wide-
+classifiers. We study alternative methods of exploring         Fast-Deep (WFD) survey that covers a larger part of the
+the performance of the classifiers in Section 4, and sum-      sky (at ≃ 18, 000 square degrees it is almost 400 times the
+marize the challenges presented by the data in Section 5.      DDF area) that will be observed less frequently. Com-
+We conclude with key insights from this challenge in Sec-      pared to DDF, WFD will include many more objects
+tion 6.                                                        but have lower signal-to-noise ratios. While the PLAs-
+                                                               TiCC simulation was performed for one particular sur-
+               2. OVERVIEW OF PLAsTiCC                         vey configuration that is not optimal for transients, clas-
+                  2.1. Data simulation
+                                                               sification performance can be used to evaluate survey
+                                                               design for LSST. We leave this to future work. The ex-
+  The PLAsTiCC data were simulated to mimic three              tragalactic models were simulated from the PLAsTiCC
+years of an LSST-type survey (which is slated to run for       models as described in Kessler et al. (2019a) (see Fig-
+a decade) using the SuperNova ANAlysis package (SNANA          ure 13 for the full simulation procedure) and Kessler
+Kessler et al. 2009). In May 2017, an initial call was put     et al. (2019b), by generating a spectral energy distribu-
+out to the astronomy community to develop models of            tion (SED) at each epoch for the source, simulating a cos-
+extragalactic transients, Galactic variables and novel as-     mological distance and peculiar velocity for the source,
+tronomical transients. In response to the call, 18 different   computing the lensing seen by that source, redshifting
+models were generated according to estimated rates and         the SED, and accounting for Galactic extinction. Each
+distributions on the sky. The models included                  extragalactic object was simulated with a unique red-
+                                                               shift, host-galaxy extinction, right ascension and decli-
+ 1 The PLAsTiCC challenge is found at the PLAsTiCC-2018
+                                                               nation, and cadence. The SED is integrated in each fil-
+Kaggle page.                                                   ter to produce a light curve for the object. The Galactic
+                                                                                                                                      3
+
+
+
+
+Figure 1. Relative numbers of objects of each class between the training (left) and test (right) data of PLAsTiCC. The size of the boxes
+are proportional to the relative numbers in each set and the absolute numbers are in parentheses. The simulated ≃ 8000 objects in the
+training set were distributed across the data classes in a different ratio compared to the test data of over 3.5 M objects.
+
+
+models are instead defined by 4-year time sequence of                                      2.2. Data validation
+true magnitudes in the ugrizY filter bands, which are                     One of the most critical parts of developing PLAs-
+then sampled to form a light curve. The rates for the                  TiCC was validating the data, to ensure that all light
+different objects were supplied by the modelers. For the               curves had been simulated without irregularities or too
+Galactic models, these rates included a dependence on                  large/small errors, and that unphysical correlations (e.g.,
+Galactic coordinates, while the extragalactic rates were               catalog ID number vs. declination) were not present. In
+assumed to be isotropic. Galactic and AGN models were                  addition, we validated the physical models that were in-
+simulated with unique initial phase, reference-image flux,             put to the simulations. We also validated and improved
+right ascension and declination and cadence.                           the SNANA simulation code. We list the validations per-
+  Once the ‘pure’ source model was obtained, it was com-               formed on the simulations below.
+bined with a noise model specific to the observational                    Unphysical artifacts – When processing light curves
+conditions of LSST (Biswas et al. 2020), including the                 and metadata (additional information on the objects in-
+cadence information, zero points, sky noise, and point                 cluding their sky position, redshift etc.) in order to clas-
+spread function (PSF) (Kessler et al. 2009). The objects               sify objects, unphysical artifacts or missing light curve
+have to be ‘detected’ in order to be included in PLAs-                 data can lead to leakage. As one example, modelers typ-
+TiCC. We required that each source be detected twice
+                                                                       ically provided SED information starting at 1000 Å or
+at roughly 5σ in the difference image between two nights
+– so sources must be bright and vary in brightness to be               2000 Å, which will cause the u-band (with central wave-
+valid PLAsTiCC objects. For detected events, a train-                  length around 3000 Å) to drop out at extreme redshift
+ing subset was tagged as spectroscopically identified, and             (z ≃ 3). To avoid UV drop-outs in the simulation, we ex-
+another subset was tagged as having a spectroscopically                trapolated the UV flux to 500 Å to ensure that all u-band
+measured redshift of the host galaxy.                                  observation were included (Kessler et al. 2019a). If left
+  LSST may well discover new transients that are not                   unchecked, classifiers might use this zero flux as a fea-
+captured by current models, and it may be sensitive to                 ture, however this is unphysical and should be ignored.
+theorized objects that have not yet been observed due to               If we were unable to debug or account for an artifact, the
+the limitations of current surveys. Thus the training data             affected data were removed.
+will not be fully representative of the larger test data that             Distribution tests – The PLAsTiCC data were sim-
+will probe fainter depths and larger redshifts than the                ulated from model objects at a given rate and from
+training data. To capture this non-representativity, four              SEDs that were redshifted, and then ‘observed’ in the
+of the models simulated in the PLAsTiCC test data,                     LSST bands with suitable noise properties and observ-
+namely the PISN, CaRTs, ILOT, µlens-Binary were not                    ing conditions. The first step in the validation procedure
+provided in the training set (see Kessler et al. 2019a,                was to perform tests of the distribution properties of the
+for individual model references). As part of the chal-                 objects to ensure that they matched those of known ob-
+lenge, participants were asked to classify objects in the              jects for models based on observations or expected dis-
+test set into a different class of previously unknown ob-              tributions for theoretically proposed models. We per-
+jects described also as the ‘Other’ class. Participants                formed checks of the distributions of the maximum and
+were not given any information about the ‘Other’ class or              minimum flux for the objects, their redshift distribution,
+the composite nature of this class, which is discussed in              and rates. These tests caught a host of minor issues in re-
+more detail in Section 3. The simulation procedure and                 ported rates; in many cases the model assumptions were
+the models involved are discussed in extensive detail in               revised for inclusion in the final suite of models. The
+Kessler et al. (2019a). The models are provided for use                real data from LSST will not be validated in exactly the
+by the community (PLAsTiCC-Modelers 2019).                             same way given that much of the initial classification will
+4
+
+
+                                                                         Extragalactic                                                         Galactic
+                                1.00                                                                                                                                              1.00
+                                                 id
+                                0.75         row                                                               row
+                                                                                                                      id                                                          0.75
+                                                                                                        . 00
+                                                 et
+                                0.50        targ                                                                      et                                                  +. 00   0.50
+                                                   d                                             . 00 +1.00    targ
+                                               obji
+      Correlation coefficient
+
+
+
+
+                                                                                                                                                                                         Correlation coefficient
+                                0.25                                                                                                                             +. 00    +1.00
+                                                                                                                                                                                  0.25
+                                                                                                                          d
+                                                                                                                   obji
+                                                 v                                         . 00 +. 03   . 00
+                                0.00       m web                                                                                                                                  0.00
+                                                                                   +. 03 +. 00   . 01 +. 00
+                                               _err                                                                    v                               . 00       . 11     . 00
+                                0.25   h   ostz                                                                m   web                                                             0.25
+                                                                           +. 25    . 04   . 00 +. 15   . 00
+                                                 tz
+                                0.50         hos                                                                                             +. 02     . 00       . 01     . 00    0.50
+                                                                      . 00 +. 01    . 03 +. 00 +. 00 +. 00          gall
+                                                gall
+                                0.75                                                                                                 +. 30   +. 13    +. 00       . 01    +. 00
+                                                                                                                                                                                   0.75
+                                               galb
+                                                              +. 35   . 02 +. 02 +. 29 +. 00 +. 01 +. 00
+                                                                                                                   galb
+                                1.00                                                                                                                                               1.00
+                                                       galb    gall hostz stz_err webv objid target rowid                     galb    gall      ebv   obji
+                                                                                                                                                             d
+                                                                                                                                                                 targ
+                                                                                                                                                                     et
+                                                                                                                                                                          row
+                                                                                                                                                                             id
+                                                                         ho      m                                                           mw
+Figure 2. Correlation tests for the simulated WFD PLAsTiCC data. We used this test to detect any spurious correlations between object
+ID and type and other properties provided to the contestants. We disambiguate Galactic and extragalactic sources and consider the WFD
+and DDF data separately as there are physical correlations that are introduced when aggregating these groups e.g. all Galactic variables
+will have a host redshift of z = 0, and all sources within the 4 DDF fields will show strongly-correlated values of the Milky Way reddening.
+proceed from the alert stream directly; however quality                                                        ified for correctness, the additional data about the ob-
+cuts on the data will ensure data quality for any light                                                        jects, or metadata (the redshifts, sky position, Galactic
+curves used for a specific scientific question.                                                                coordinates, extinction) were analyzed to ensure that the
+   Light curve tests – Once the average properties of                                                          data are simultaneously useful and exhaustive without
+the population were inspected, individual light curves                                                         rendering the challenge trivial. This involved iterating
+were plotted from the simulated populations. These tests                                                       on the form and description of the metadata, knowing
+were particularly relevant for models derived from ob-                                                         that the user interface/workbook provided to initiate the
+jects that had previously been observed (rather than ob-                                                       challenge would be the place where many participants
+jects simulated from purely theoretical models). The                                                           got their information. The metadata were also checked
+light curves were compared to databases of known ex-                                                           for consistency by, for example, plotting RA and Dec per
+amples to diagnose model inconsistencies and shape dis-                                                        target.
+continuities. This validation process led to decisions on                                                         Correlations between object variables – Related
+how the PLAsTiCC simulation would handle saturation                                                            to checks of the metadata, we tested for spurious or obvi-
+in the LSST bands for objects brighter than 16th magni-                                                        ous correlations between object metadata and classifica-
+tude. However, we did not want to introduce saturation                                                         tion type. A trivial example would be to ensure that the
+issues in the challenge, and instead simulated a satura-                                                       object ID was in fact randomly generated not only within
+tion level at 12th mag, or 4 mag brighter than nomi-                                                           a particular type but across various types. If the objects
+nal. The small number of saturated observations that                                                           are simulated in order then there would be a type-ID
+remained were removed.                                                                                         correlation which would render the classification chal-
+   Prior to generating the PLAsTiCC sample, we simu-                                                           lenge trivial. Some astrophysical correlations do exist,
+lated ‘perfect’ examples of each model type at high ca-                                                        for example the nature of the objects (Galactic vs. ex-
+dence and with no noise. These perfect light curves were                                                       tragalactic) is correlated with the redshift. A plot of the
+compared with the input observations used to generate                                                          correlation between training set metadata parameters is
+the model, and then with the results of small runs of the                                                      shown in Figure 2, where the simulated WFD sample has
+simulations in both the DDF (which would probe higher                                                          been split into Galactic and extragalactic objects. There
+redshift with higher signal-to-noise) and the WFD, to                                                          are correlations in the metadata, but they are expected.
+test the rates of objects more completely and whether                                                          For example, the redshift is correlated with the redshift
+or not there were objects that would not be detected                                                           error and the target is associated with the dust redden-
+given the cadence and brightness specifications of the                                                         ning of the Milky Way (Galactic objects will have more
+survey. Perfect simulations were used to validate the                                                          dust than extragalactic). We also do not see unphysical
+models while the WFD and DDF light curves were used                                                            correlations such as with object ID or row ID.
+to validate the realistic simulations.                                                                            Simple classification of objects – An additional
+   Specialized model tests – Depending on the type of                                                          test of the robustness of the training set was to train a
+transient or variable, specialized tests on object proper-                                                     ‘simple’ random forest classification algorithm (Narayan
+ties were carried out for individual models. For example                                                       et al. 2018; Ho 1995) on the PLAsTiCC data to ensure
+the period-luminosity relationship was tested for variable                                                     that the problem was not trivially solvable, and also pro-
+objects like the RR-Lyrae. These tests were typically                                                          vided a rough benchmark for comparing results through-
+performed with input from the model proposers directly,                                                        out the challenge. The 11 extracted features per pass-
+to ensure that the expected model relationships remained                                                       band are described in Table 2 of Narayan et al. (2018),
+intact in the PLAsTiCC simulations.                                                                            and included the autocorrelation length, the kurtosis and
+   Checks on metadata – Once the models were ver-                                                              skewness of the magnitude distribution. The classifier
+                                                                                                                                               5
+                                                                                     Class Name                         Class number          Weight
+was run on the DDF and the WFD separately during the
+                                                                               Point source µ-lensing                         6                 2
+validation phase and as such was not run on the complete                   Tidal disruption event (TDE)                       15                2
+data set after production. Given that some rare objects                    Eclipsing binary event (EBE)                       16                1
+such as the kilonovae were not found in the DDF, a di-                Core-collapse supernova Type II (SNII)                  42                1
+rect comparison of the performance of the simple clas-                     Supernova Type Ia-x (SNIax)                        52                1
+sifier to the competition entries is less straightforward;                         Mira Variable                              53                1
+however the simple classifier was merely testing for obvi-           Core-collapse Supernova Type Ibc (SNIbc)                 62                1
+ous problems in the simulated sample. In addition, the                             Kilonova (KN)                              64                2
+simple classifier was not run on the ‘Other’ class objects,                           M-dwarf                                 65                1
+as testing anomaly detection was not part of the vali-                 Supernova Type Ia-91bg (SNIa-91bg)                     67                1
+dation process. This classification testing (and the other                 Active galactic nucleus (AGN)                      88                1
+                                                                             Supernova Type Ia (SNIa)                         90                1
+model validation) was only performed by members of the
+                                                                                      RR Lyrae                                92                1
+PLAsTiCC team who had agreed not to submit an entry                     Super Luminous Supernova (SLSN)                       95                2
+to the challenge, and not to help challenge participants.                           ‘Other’ class                             99                2
+Each model type was validated by a subset of the PLAs-
+TiCC development team and was re-validated for each                                             Table 1
+new version of the simulated data.                                  Table of weights and target numbers for the various classification
+                                                                     types included in PLAsTiCC. Rare or interesting objects were
+                                                                     up-weighted to increase their contribution to the total metric.
+               2.3. The PLAsTiCC metric
+   The choice of metric for PLAsTiCC was motivated
+by two main drivers: the importance of classification un-                                 Astronomy
+certainties and the lack of a single, unifying science goal.                      Other STEM
+Unlike its predecessor, the SNPCC, which was motivated                                                 3.9%
+by SNe Ia cosmology, PLAsTiCC was motivated by                            Not Software          6.8%
+
+dozens of science drivers from Galactic population statis-                               4.9%
+tics to gravitational wave electromagnetic counterparts.
+The metric was designed to be sufficiently generic so that                                                                          Unknown
+                                                                                                                            39.9%
+it would disfavor classifiers that neglected any classes, es-
+pecially those that are rare in the Universe.
+   Because the data from LSST is anticipated to be in-
+herently noisy, the PLAsTiCC metric did not reduce the
+classification posteriors to deterministic class estimates,                          33.7%
+allowing it to include classification uncertainty. In con-            Data Science
+trast to traditional classification tasks that request a sin-
+gle estimated class m̂n for each classified object n, PLAs-                                                   10.7%
+TiCC required participants to submit tables of classi-                                                            Student
+fication posterior probabilities 0 ≤ p(m | dn ) ≤ 1 where
+object n = 1, . . . , N belongs to class m = 1, . . . , M , given
+the light curve data dn . The PLAsTiCC metric was a                 Figure 3. Demographic information for entrants to PLAsTiCC.
+                                                                    Only a small fraction of 1315 participants with known demograph-
+weighted log-loss                                                   ics were part of the astronomy community. Many of the partici-
+                   M         Nm                                     pants have some data science background. These data were deter-
+                   X         X                                      mined from the Kaggle entries or GitHub user pages of the entrants,
+           L≡−          wm           τn,m ln[p(m | dn )],    (1)    future studies will include self-identification information from par-
+                  m=1        n=1                                    ticipants.
+
+where                                                               (2019), along with an investigation of its assessment of
+                             
+                                 0    mn 6= m                       archetypal classification pathologies.
+                    τn,m ≡                                   (2)
+                                 1    mn = m                                     2.4. The PLAsTiCC competition
+is an indicator variable for the true class. This particular          PLAsTiCC ran from Sep 28, 2018 until Dec 17, 2018,
+metric strongly disfavors assigning very low probabilities          and received entries from 1094 teams around the world
+to the classes that the classifier thinks are not the cor-          from a variety of different groups. The demographic in-
+rect one, implying that very low entropy classifications            formation of the 1315 participants are summarized in
+(i.e. with lots of zeros/small values in the vector of class        Figure 3 and was determined from the Kaggle or GitHub
+probabilities) are disfavored.                                      profiles of the participants in each team. Some of the
+   The weights wm = J/NM , where J = 1 for most                     participants have subsequently deleted their accounts,
+classes, but J = 2 for rare objects, as shown in Table 1.           or do not have complete profiles, and so Figure 3 pro-
+These weights were chosen by the PLAsTiCC team to                   vides an estimate of the group demographics. While a
+discourage participants from classifying all objects as the         substantial fraction of participants have a background
+most populous class, ensuring that appropriate attention            in data science/software, only a fraction of entrants had
+was directed to the classification of rare classes that oth-        formal astronomy training. A reasonable subset of the
+erwise would not have much influence on a metric that               PLAsTiCC participants were students. These included
+gave equal weight to all objects. A detailed description            a group from the University of Warwick in the United
+of the PLAsTiCC metric may be found in Malz et al.                  Kingdom who entered PLAsTiCC as part of a class
+6
+
+
+
+
+Figure 4. The distribution of the submissions to PLAsTiCC and the log of the PLAsTiCC metric score as a function of time since the
+start of the challenge relative to the start of the challenge. The three colored lines indicate the performance of the three prize-winning
+entries. As the challenge neared completion, the scores started to asymptote to metric scores of near unity. Note that the competition
+remains ‘live’ to this day, hence the few submissions received after the closing deadline.
+
+
+project.                                                                terest in the challenge grew over time as more partici-
+   PLAsTiCC led to publications by participating                        pants joined. Kaggle restricts participating teams to a
+groups, including presentations of the winning avocado                  maximum of five submissions per day, a limitation that
+algorithm (Boone 2019) and that of the group ‘Day meets                 proved critical near the end of the challenge, when par-
+night’ (Gabruseva et al. 2020). The data set itself has                 ticipants had to be selective in making submissions that
+also been used for several publications on classification               would best inform final adjustments to their classifiers.
+methods and anomaly detection approaches (Ishida et al.                    The performance of the three winning solutions are
+2019; Soraisam et al. 2020; Sravan et al. 2020; Dobryakov               highlighted in the plot as colored lines. The horizon-
+et al. 2020; Chaini and Kumar 2020).                                    tal clustering of the PLAsTiCC metric near scores of
+   Though participants submitted their classifications on               log[weighted log-loss score] = 1, 1.6 (where the log-loss
+the full PLAsTiCC test data set, the metric was eval-                   score is given in Equation 1) can be seen in the 1-
+uated on representative subsets whose distinctions were                 dimensional histogram of scores on the right-hand panel
+not made known to participants. The metric computed                     of Figure 4 and could be a result of over-fitting (‘playing
+on one third of the full data set was posted to a “pub-                 the leader board’), particularly where weighted combina-
+lic leader board,” whereas the metric evaluated on the                  tions of classification probabilities for some objects are
+remaining two-thirds of the test data was the basis for                 used to determine the probabilities of other objects (e.g.
+the official ranking Kaggle used to award the cash prize.               the ‘Other’ class objects).
+This procedure could be applied to subsets of the data
+                                                                                        3. SOLUTIONS TO PLAsTiCC
+to determine a classification ‘error’, however Kaggle did
+not include any such error estimation in their application                PLAsTiCC ended on December 17, 2018. The com-
+of the PLAsTiCC metric.                                                 petition was won by Kyle Boone which is described in
+   This approach of keeping data hidden from partici-                   Boone (2019), with the second place prize awarded to
+pants is in place to discourage ‘probing the leader board’              Mike & Silogram2 and third place was awarded to “Ma-
+(hereafter LB probing), wherein one’s position on the LB                jor Tom, mamas & nyanp”3 . The top three teams were
+is used as a metric on its own to tweak a submitted al-                 selected to present their methods at a meeting with the
+gorithm until it is tuned to the LB performance. While                  PLAsTiCC team and the staff at Kaggle.
+this will lead to improved performance in one particular                  Figure 5 shows the performance of the top three entries
+challenge/realization of the data, this approach does not               according to the metrics considered in Malz et al. (2019),
+yield algorithms robust to changes in data simulation, or                 2 The second place solution is described in a Kaggle post.
+more general intuition-building about the problem.                        3 The third place solution is described in two separate posts, one
+   The distribution of submissions over time and their                  describing the CNN and another describing the model including
+corresponding metric values are shown in Figure 4. In-                  code repositories.
+                                                                                                                                                     7
+
+                                                                                                      Kyle Boone
+                                                                                                      Mike & Silogram
+                                1.05                                                                  Major Tom
+              Normalized Rank
+                                1.00
+
+
+
+                                0.95
+
+
+
+                                0.90
+                                       Including "Other" class                                     Excluding "Other" class
+
+                                0.85
+                    PLAsTiCC (0.6563)                 LogLoss (0.6791)   Brier (0.2210) PLAsTiCC ( 0.4668)       LogLoss (0.5075)   Brier (0.1526)
+
+Figure 5. The performance of the top three entrants to the PLAsTiCC across three different metrics. In each case a lower score indicates
+better performance of the classifier. The left panel shows the metrics for the full test data set including the unseen ‘Other’ class objects. All
+classifiers were asked to return probabilities for the ‘Other’ class objects. The right panel shows the scores on the test data set excluding the
+‘Other’ class objects. The scores have been normalized to the score of Kyle Boone, indicated in parenthesis on the x-axis label. This plot
+illustrates how close the first and second place finish was, and the importance of the unknown objects on the final classifier performance.
+In the case where the ‘Other’ class objects were not included, the first and second place positions would have been reversed.
+
+
+namely the weighted log-loss used in PLAsTiCC, an un-                                     performing template light curve fits to extract features,
+weighted log-loss, and the Brier score (Brier 1950, equiv-                                using known fitting software such as the SALT2 package
+alent to the mean square error of the prediciton), normal-                                (Guy et al. 2007) or the Bazin et al. (2011) model. Some
+ized to the Kyle Boone score. The left panel shows the                                    used the more time-consuming but less model-dependent
+metrics evaluated on the full test set (rather than the 1/3                               Gaussian process (GP) fitting. Originally developed in
+subset that formed the basis of the PLAsTiCC competi-                                     the context of mining surveying (Krige 1951), GP inter-
+tion results), while the right panel performance when the                                 polation relies on the assumption that the interpolated
+‘Other’ class objects were excluded from the test data.                                   values can be modeled by a Gaussian process, or one in
+The scores of the top three entries tighten in that case                                  which the process is defined by a prior covariance, or
+and the top two places are reversed, highlighting the im-                                 kernel. This interpolation allows one to easily map not
+portance of returning a classification probability for ob-                                only the interpolated values, but the uncertainty band
+jects whose class was not present in the training set. All                                around the interpolation without assuming any physical
+three top finishers were very close in score throughout the                               relationship between the variables. This makes it well-
+competition in both the public and the private LBs. We                                    suited to light curve fitting.
+summarize their solutions and their relative performance                                     A few groups described fitting for hundreds of features
+in the subsections that follow.                                                           and then using feature importance ranking to reduce the
+                                                                                          feature space over which classification was performed.
+                    3.1. Summary of methods used                                             Data augmentation – Central to the PLAs-
+                                                                                          TiCC challenge was data augmentation, the supplemen-
+  The Kaggle discussion board was an excellent forum
+                                                                                          tation of training data with new light curves derived
+for the dissemination and discussion of methods used to
+                                                                                          through small changes to the original training set, and
+provide solutions to PLAsTiCC. The entrants from the
+                                                                                          other approaches to mitigate non-representativity of the
+top 124 entrees discussed their solutions on the forum,
+                                                                                          training set and class imbalance in both the training and
+and here we briefly summarize the elements used in their
+                                                                                          test sets. Several groups tried a range of approaches to
+solutions in Table 2 and Table 3 shows the classification
+                                                                                          augment the data and rectify the class imbalance, which
+algorithms that were implemented.
+                                                                                          are discussed in more detail in Section 5, where we illus-
+  Combining multiple approaches – The unifying
+                                                                                          trate the degeneracies between the ‘Other’ class objects
+characteristic of the solutions is the fact that they em-
+                                                                                          and the rest of the classes).
+ployed a mixture of classification approaches from neu-
+                                                                                             The ‘Other’ class objects – One of the most pop-
+ral networks to gradient boosting. The entrants often
+                                                                                          ular methods of computing probabilities for the‘Other’
+tried different combinations of approaches and adjusted
+                                                                                          class was to probe the LB. All of the top models that pro-
+their mixture within different iterations, effectively play-
+                                                                                          vided information on their handling of ‘Other’ class ob-
+ing multiple classification methods ‘against’ each other
+                                                                                          jects used LB probing. One approach (‘Weighted Aver-
+internally before submitting their solutions at each step.
+                                                                                          age’) produced a ‘Other’ class probability formed from a
+We refer to this as ‘Ensemble’ in Table 2. Common
+                                                                                          weighted combination of the supernovae class probabili-
+among most solutions was the use of the LightGBM Ke
+                                                                                          ties, and then determined the best weights by optimizing
+et al. (2017). Approaches varied when it came to feature
+                                                                                          over their score or position on the LB. The ‘Tuned Com-
+selection. Some groups built on previous attempts by
+                                                                                          bination’ from the MTMN method (see Section 3.4) used
+  4 The 7th and 10th place entries did not provide their solutions
+                                                                                          a power law combination of supernovae probabilities and
+on the Kaggle forums so are not included here.                                            tuned the power and multiplicative factor using the LB.
+8
+
+ Final          Name            Public    Private     Class imbalance      Non-representativity        ‘Other’ class         Ensemble   Light curve
+ Rank                            score     score        mitigation             mitigation                                                   fit
+     1       Kyle Boone         0.6706    0.6850        Light curve         Data degradation        Weighted Average           No           GP
+                                                       augmentation
+     2     Mike & Silogram      0.6937    0.6993              -               Model spec-z,             Probability            Yes           -
+                                                                             Data degradation             Scaling
+     3   Major Tom, mamas       0.6804    0.7002              -               Model spec-z,               Tuned                Yes        SALT2
+             & nyanp                                                         Data degradation          Combination
+     4     Ahmet Erdem          0.6913    0.7042              -               Model spec-z           Weight based on           Yes        Bazin
+                                                                                                      top prediction
+     5      SKZ Lost in         0.7397    0.7523        Flux error           Removed photo-z            Probability            Yes           -
+             Translation                              augmentation                                        Scaling
+     6     Stefan Stefanov      0.7933    0.8017    Flux augmentation       Dropped light curve              -                 Yes           -
+                                                                              points, photo-z
+                                                                               augmentation
+     8         rapids.ai        0.7922    0.8091       Pseudo label                   -                      -                 Yes           -
+                                                       on test data                                                                          -
+     9    Three Musketeers      0.7921    0.8131             -             Dropped light curve p        Probability            Yes           -
+                                                                                  oints                   Scaling
+    11       Simon Chen         0.7948    0.8225              -                      -                       -                 No         SALT2
+    12       Go Spartans!       0.8112    0.8265              -                      -                  Probability            Yes         Bazin
+                                                                                                          Scaling
+
+
+                                                                      Table 2
+ Methods employed by classifiers in PLAsTiCC. The scores are taken from the Kaggle site, and illustrate how many methods were tuned
+  to the public data/scores, and performed worse on the private data. The class imbalance techniques were used to address the fact that
+ the different classes were present in very different numbers in the data set. Techniques include augmenting the light curve or fluxes, and
+ adding approximate/pseudo ‘labels’ to the test data to supplement the training data. The non-representativity techniques modified data
+ to account for the differences in the test and training data (e.g. that the test data were noisier and more sparse) by either degrading the
+data (error bars), removing light curve points and modelling the spectroscopic redshift (spec-z) from the photometric redshifts (photo-z).
+  The light curve fitting techniques included Gaussian Process (GP) interpolation and template fitting (using the Bazin et al. 2011; Guy
+  et al. 2007, light curve fits). As discussed in Section 3.1, the entrants used a range of methods listed here to derive a probability for the
+‘Other’ class objects, and then probed the LB to optimize their procedure. In all columns above, if there is no entry for a given column, it
+indicates either that the model did not address the column or that the information was not provided in the write-ups presented on Kaggle.
+
+
+                                Name                     Boosted Decision Trees                      Neural Nets
+                                                    LightGBM CatBoost XGBoost                 NN    CNN RNN            MLP
+                           Kyle Boone                   3          7            7              7     7       7          7
+                        Mike & Silogram                 3          7            7              7     7      3           7
+                   Major Tom, mamas & nyanp             3          3            7              7     3       7          7
+                          Ahmet Erdem                   3          7            7              3     7       7          7
+                    SKZ Lost in Translation             3          7            7              7     7      3           3
+                         Stefan Stefanov                7          7            7              3     7       7          7
+                             rapids.ai                  3          7            7              7     7      3           3
+                        Three Musketeers                3          3            3              7     3       7          7
+                           Simon Chen                   3          7            7              7     7       7          7
+                          Go Spartans!                  3          7            3              7     7       7          7
+
+                                                               Table 3
+   Classification algorithms of the top entrants to PLAsTiCC, sorted into common approaches. A key result of the challenge was the
+ observation of how different solutions combined various machine learning techniques. The various methods are summarized in Table 4.
+
+
+They also had two different functions for Galactic and                    particular cadence or observational strategy of a survey.
+extragalactic objects. Ahmet Erdem found which classes                    We leave a full investigation of classification performance
+that ‘Other’ class objects were not like (TDE, KN, AGN,                   for different observing cadences to future work. In the
+SNIa, SNIa-91bg) and applied a constant multiplication                    subsections below we summarize in more detail the win-
+factor found through LB probing depending on which                        ning solutions.
+class had the highest probability outside of those classes.
+Four of the top participants used a method that was                                                3.2. Kyle Boone
+shown on a kernel on Kaggle that involved scaling all the
+class probabilities with weights based on the LB probing                     The overall winner of PLAsTiCC was Kyle Boone,
+from another user (‘Probability Scaling’).                                then a graduate student at the University of California at
+  Dependence on simulated cadence – While the                             Berkeley. His method using GP light curve fitting, data
+PLAsTiCC data were simulated for one proposed ob-                         augmentation and a gradient boost (Friedman 2001) clas-
+serving strategy for the LSST, we note that the features                  sification strategy is described in detail in Boone (2019),
+themselves will in general be strongly dependent on the                   which presented a slightly improved version of his sub-
+                                                                          mission to the PLAsTiCC competition. For the dis-
+                                                                                                                                     9
+   Method                    Description                                                               Reference
+   Random Forest             Also known as random decision trees, random forests are a
+                             method of classification that constructs many decision trees
+                             between different classes. The mode of multiple trees
+                             is computed to obtain a final classification.                             Ho (1995)
+   Gradient Boosting         Gradient boosting produces a combined model from
+                             an ensemble of prediction models (often but not
+                             always comprised of decision trees). Each new tree is
+                             fit on a modified version of the original data set, and the weights of
+                             subsequent trees are adjusted according to which objects were difficult
+                             to classify by previous trees (upweighting difficult classifications).    Friedman (2001)
+   Light Gradient            LightGBM is a gradient boosting framework originally
+   Boosting Machine          developed by Microsoft, but now open source.
+   (LightGBM)                It is based on decision trees.                                            Ke et al. (2017)
+   CatBoost                  CatBoost is a popular open-source algorithm for gradient boosting
+                             on decision trees. It includes an implementation of
+                             ordered boosting, and an algorithm for
+                             processing categorical features in data.                                  Prokhorenkova et al. (2017)
+   XGBoost                   XGBoost is another Gradient Boosting algorithm,
+                             which performs tree boosting in parallel.                                 Chen and Guestrin (2016)
+   Neural Network            A neural network mimics the way the human brain operates by               See Schmidhuber (2015)
+   (NN)                      connecting a system of connected nodes (neurons) connected                for a recent
+                             by edges. The inputs to neurons are real numbers, and the output          review
+                             of each neuron is computed by some non-linear function
+                             of its inputs. The separate neurons are combined
+                             with different weights.
+   Recurrent Neural          This is a NN where node edges/connections have a direction to them
+   Network (RNN)             This means the RNN can display temporal dynamic behavior.                 Rumelhart et al. (1986)
+   Gated recurrent           A popular variant of RNN, GRU includes gating units which
+   unit (GRU)                control the amount of information flow inside each recurrent unit
+                             (controlling when the hidden state in a unit should be updated).          Cho et al. (2014)
+   Multilayer perceptrons    MLPs are NNs where each neuron in one layer
+   (MLP)                     is connected to all neurons in the next layer.                            Rosenblatt (1963)
+   Convolutional Neural      CNNs are regularized versions of MLPs
+   Network (CNN)             and are commonly used on images.                                          Fukushima (1980)
+
+                                                            Table 4
+                             A brief description of the methods used and acronyms in PLAsTiCC.
+
+
+cussion here, we focus on the version of avocado that               also increased the scatter in the data to make it more
+was submitted to PLAsTiCC. Boone was the only as-                   representative of the test data quality, as shown in Fig-
+tronomer in the top three finishers, and his astronomical           ure 6. In order to supplement the training data, Boone
+domain knowledge played a role in the choices he made               generated high-z light curves from low-z analogues by de-
+for feature selection. For example, Boone extracted the             grading the signal-to-noise ratio as a function of distance.
+color of the object at maximum light and computed the               This data augmentation greatly improved the accuracy
+time to decline to 20% of maximum light of the transient,           of his avocado. The change of light curve colors with
+which resulted in a greater accuracy of classification of           redshifting of the SED was not included in avocado.
+SNIa-like objects in avocado than other challenge en-
+tries.                                                                                 3.3. Mike & Silogram
+  Pre-maximum observations are a useful indicator of                  The second place winners of PLAsTiCC were from
+the type of a supernova. As a corollary, the lack of                a pair of competitors (Mike and Silogram) who joined
+pre-maximum observations can serve as a useful flag of              forces to produce an ensemble solution of seven Recurrent
+how discerning the data will be in separating out differ-           Neural Network classifiers (RNN, Rumelhart et al. 1986)
+ent classes, and hence are a measure of the accuracy in             and two Light Gradient Boosting Machine (LightGBM,
+classification of the simulations. avocado includes a flag          Ke et al. 2017) models. Rather than focus on select-
+for ‘incomplete’ simulated light curves, which can help             ing one classifier, the ensemble provided diversity across
+remove spurious classifications that might degrade the              model space, to avoid over fitting the training data.
+overall metric score.                                                 The RNN model was a one layer bi-directional Gated
+  Data augmentation also features strongly in Kyle                  Recurrent Unit (GRU, Cho et al. 2014). The 7 different
+Boone. The non-representativity of PLAsTiCC led to                  RNN models used between 80 and 160 units. The in-
+a pristine but small training data set and a large (3.5M-           put data for the RNN was the flux and its associated
+object sized) test data set, with much larger measure-              uncertainty, the intervals between the measurements,
+ment uncertainties. Boone focused on augmenting the                 the wavelength and passband, which were included with
+training data by shifting the data in time (without chang-          ‘one-hot’ encoding, where combinations of the data are
+ing the shape of any light curve features), removing or             only those with a single value at a time (see Harris and
+‘dropping’ observations at random time positions. Boone             Harris 2012, for details on this method). The models
+10
+
+                                                               Object ID:000002103                                                           Augment ID:yduxMeVzNQ
+                                                      u            i
+                                         200          g            z                                                       200
+                                                      r            y             z = 0.170                                                                       z = 0.294
+                                         150                                                                               150
+                Flux (counts)
+
+
+
+
+                                                                                                    Flux (counts)
+                                         100                                                                               100
+                                          50                                                                                   50
+                                           0                                                                                    0
+                                          50                                                                                   50
+                                                  00 0000 0200 0400 0600                                                                00         00        00
+                                               598   6    6      6   6                                                               598        600       602
+                                                          Time (MJD)                                                                             Time (MJD)
+                                           1                                                                                     1
+                                   CDF
+
+
+
+
+                                                                                                                         CDF
+                                           0                                                                                     0
+                                         104     Training Sample                                                               104    10% of Augmented Sample
+                                                 3990 objects                                                                         30173 objects
+                Max Flux in r (counts)
+
+
+
+
+                                                                                                      Max Flux in r (counts)
+                                         103                                                                                   103
+
+                                         102                                                                                   102
+
+                                         101                                                                                   101
+                                                     SNIa
+                                                     SNII
+                                                     SNIbc
+                                         100                                                                                   100
+                                                             10 1              100    0         1                                            10 1               100   0         1
+                                                              Host Photo-z                CDF                                                 Host Photo-z                CDF
+
+Figure 6. Data augmentation as part of the KB method. The light curves have been interpolated using GP interpolation, shown as
+shaded regions with largest spread where there is no data. The top panel shows the augmentation in light curve space, where points are
+removed, the object is moved to higher redshift and the errors on the light curve points are increased. The bottom panel illustrates the
+augmentation in feature space for a subset of the PLAsTiCC models. The augmented sample not only has a larger spread in the maximum
+r−band flux, one of the features used by the avocado classifier but extends each class to higher redshift and helps increase the sample.
+
+
+reduced the dimensionality by downsampling the layers                                                                    it is free of modeling errors. For both the RNN and
+and then combined the max pooled layer with light curve                                                                  the LightGBM models in this submission, the authors
+metadata, specifically the host galaxy photo-z and asso-                                                                 were able to build a separate model to predict the spec-
+ciated error, the Milky Way extinction, and flags for the                                                                z of the host galaxy from the other properties of the
+observational area/field.                                                                                                object. This approach is useful particularly to flag po-
+   As with the other solutions, the issues of data aug-                                                                  tential outliers in photo-z space (incorrectly predicted
+mentation and feature selection were perhaps the most                                                                    photo-z values)5 . This photo-z modeling will be one of
+pressing for Mike & Silogram. This method was supple-                                                                    the key systematic issues that the Rubin Observatory
+mented to include augmentation near the closing date for                                                                 will face, and any mitigation of this issue by classifiers
+submissions to the competition and so did not have the                                                                   is very valuable. The Mike & Silogram authors stated
+opportunity to retrain on a comprehensively augmented                                                                    that they converted all time and wavelength-related fea-
+data set. The Mike & Silogram method dropped 30%                                                                         tures to redshift-independent versions before training the
+of the measurements and adjusted the redshifts and the                                                                   RNN.
+flux of the training data.
+   In the LightGBM models, adjusting the flux values ac-                                                                            3.4. Major Tom, mamas & nyanp
+cording to the photometrically-derived redshift (photo-z)                                                                  The third place solution also went to a combination of
+value helped ‘normalize’ the flux, effectively correcting                                                                teams, ‘Major Tom’ and ‘mamas’, themselves made of in-
+for cosmological redshift of the object, which stretches                                                                 dividuals with different implementations that were com-
+spectrum of the object and dims its brightness. While
+the photo-z was provided in PLAsTiCC, the spectro-                                                                         5 This is described in a note on the Kaggle discussion board
+scopic redshift (spec-z) is the more useful quantity as                                                                  online.
+                                                                                                                             11
+
+bined. In addition, ‘nyamp’ provided feature engineering
+expertise to the combined group, hereafter known as the
+MTMN method. The final solution was a 1D Convo-
+lutional Neural Network (CNN) with 256 8,5,3 convolu-
+tion neurons followed by global max pooling as described
+above, with stride of unity. The inputs to the CNN in
+this case was a series of 128-long vectors over different
+‘channels’. Six of these channels were constructed out
+of linear interpolated flux values (as a function of time)
+in the 6 bands, while another six were made of linearly
+interpolated vectors of flux multiplied by time, which
+forms a crude integral in the band. The final 6 channels
+in the set described the distance of the current point (in
+time) from the true input, effectively providing a vector
+describing the interpolation error.
+  Three different CNNs were constructed based on differ-
+ent metadata features sent to the multilayer perceptron
+(MLP) which was the basis for the backpropagation: a
+minimal CNN based on using only the galaxy photo-z,
+distance modulus, MJD and flux error as metadata; a
+minimal CNN supplemented by the 16 best features ob-
+tained from features extracted in a separate CatBoost
+model framework; a minimal model supplemented by fea-
+tures obtained through template fitting from the Super-
+nova Cosmology package (sncosmo, Barbary et al. 2016).
+The models are described in more detail on the Kaggle
+discussion boards6 .
+
+  4. COMPARISON OF TOP-RANKED CLASSIFIERS BY
+                   ADDITIONAL METRICS
+   The PLAsTiCC metric was designed to evaluate
+submissions of classification probability mass functions
+(PMFs) without favoring any particular science case.
+For example, cosmological classification efforts have tra-
+ditionally focused on removing contamination of non-Ia
+objects to yield a ‘pure’ SNIa photometric sample, but
+metrics that reward only the purity of this class would
+be inappropriate for other science goals, such as novelty
+detection.
+   The caveats to the nominally science-agnostic global
+metric were twofold. The classification of rare and novel
+classes was encouraged by increasing the relative weight
+of the contribution of these classes to an overall met-
+ric that was otherwise evenly weighted across classes.
+This division into classes did not encode class hierarchy;
+had all supernova sub-classes been combined into a sin-
+gle class, or had galactic and extragalactic classes been
+evaluated separately, it is possible that a metric would
+have favored different classifiers.
+   While the Kaggle metric was required to be a scalar
+so that a cash prize could be awarded to an overall win-
+ner, the resulting classifications in the form of submitted
+PMF catalogs are a much richer data set. In this section,
+we compare the top-ranked classifiers by more nuanced
+and higher-dimensional metrics of estimated classifica-
+tion PMFs without investigating metrics tuned to any
+specific science goals. We leave such an exploration for
+future work.                                                    Figure 7. Pseudo-confusion matrices for the top three entries to
+                                                                PLAsTiCC. The metric score for these entries was 0.68503 (Kyle
+                                                                Boone), 0.69933 (Mike & Silogram), 0.70016 (Major Tom, mamas
+             4.1. Pseudo-Confusion Matrices                     & nyanp). The top entries are described fully in Tables 2 and 3.
+
+
+ 6 See e.g. the online links for the 3rd place CNN, 3rd place
+CatBoost, 3rd place sncosmo entries.
+12
+
+
+
+
+Figure 8. Similar to Figure 7, but in this case the probabilities assigned to ‘Other’ class objects in the test set are omitted and the
+remaining probabilities are renormalized in the test data set. This illustrates more clearly the degeneracies between the known and the
+‘Other’ class objects. The large ‘subsuming’ classification systematic visible in Figure 7 that arises since many classifiers provided a
+probability for ‘Other’ class objects based on a weighted sum of probabilities from the known objects is no longer present (consider the
+SNII-‘Other’ class subsuming systematic in the Kyle Boone entry of Figure 7). We also show the results from the ‘validation classifier’ run
+on the WFD data (without ‘Other’ class objects).
+
+
+   The confusion matrix is a classic metric of determin-                ner of the diagram. In addition, the degeneracy between
+istic classifications (see e.g. Lochner et al. 2016, for one            the classification of true ‘Other’ class objects (right col-
+such astronomical example). To put the PLAsTiCC re-                     umn) and Type II supernovae (fourth row of the matrix)
+sults into context for those familiar with the confusion                is shown in Figure 7. The degeneracy arises because
+matrix, we present an adaptation thereof to probabilis-                 three of the four novel objects included in the ‘Other’
+tic classifications. For each classifier, we assign each light          class had supernova-like light curves and were difficult
+curve a deterministic classification corresponding to the               to disentangle from the supernovae. In addition, some
+mode (maximum) of its PMF. To remove the visual dom-                    entrants formed a composite classification probability for
+ination of class imbalance, we normalize the rows (cor-                 this class from a weighted average combination of prob-
+responding to predicted classifications for a given true                abilities of the other classes (notably the SNIbcs and the
+class) of a standard confusion matrix, whose cells contain              SNIas), leading to correlation between the classification
+counts rather than proportions relative to the number of                probabilities of specific objects and the ‘Other’ class.
+objects in the true classes.                                              We show the confusion matrices considered without the
+   The pseudo-confusion matrices for the solutions of the               ‘Other’ class objects in Figure 8. The classifiers were not
+top three classifiers are shown in Figure 7. The matri-                 rerun without the ‘Other’ class objects. We removed the
+ces show a distinct difference in the performance of the                ‘Other’ class objects from the submissions and renormal-
+classifiers when distinguishing between different types of              ized the probabilities. None of the classifiers shown here
+supernovae, which are clustered in the top left-hand cor-               attempted to classify ‘Other’ class objects through their
+                                                                                                                                 13
+
+machine learning algorithms but instead combined the           PDF density at nonzero PMF values for SNII and SNIbc,
+probabilities from other classes. The validation classifier    meaning that they frequently allocated nontrivial prob-
+was also run without ‘Other’ class objects such that it        ability to the possibility that ‘Other’ class light curves
+is a better comparison to these confusion matrices than        were SNII and SNIbc.
+the ones in Figure 7.
+                                                                                4.2.1. Classifier disagreement
+4.2. Distributions of assigned classification probabilities       When comparing classifiers, it is useful to establish a
+   PLAsTiCC required submissions of posterior PMF              notion of general disagreement between the estimated
+vectors comprising a much richer set of resultant data         posterior PMFs across classifiers and classes on the ba-
+than solely deterministic metrics such as those related        sis of information content. If we had access to the true
+to the numbers of object classified as true/false pos-         PMF values corresponding to the PLAsTiCC data set,
+itives/negatives. The violin plots of Figure 9 depict          we could measure the loss of information due to using
+the probability density functions (PDFs) of estimated          an estimated PMF g(x) rather than the true PMF f (x)
+PMF values across all predicted classes for each true          using the discrete Kullback-Leibler divergence (dKLD)
+class’s light curves, illustrating more than just a sum-                          X
+mary statistic of the PDF of estimated posterior PMF               dKLD(f, g) =      f (x) (log[f (x)] − log[g(x)]) , (3)
+values, such as the mode or mean. Though the per-light                                x
+curve covariance is lost, such a visualization still conveys   where x takes categorical values corresponding to each
+some of the degeneracies between different true and pre-       class, and the sum is over the set of x values for which
+dicted classes, like an expanded form of each row in a         f (x) > 0. To summarize these per-light curve values, one
+confusion matrix.                                              can calculate the continuous Kullback-Leibler divergence
+   For a light curve of a given true class, one would hope     (cKLD) of the PDFs g(x), f (x) of approximating PMFs
+that a classifier would assign it a high probability for       relative to those of the true PMFs, respectively,
+being of that class and low probabilities for being all                          Z
+other classes. Two panels of Figure 9 show that the win-           cKLD(f, g) = f (x) (log[f (x)] − log[g(x)]) dx, (4)
+ning classifier exemplifies this desirable behavior for true
+SNIa and SNIbc by assigning high probabilities for their
+                                                               where x is now the set of real numbers between 0 and 1.
+true class and low probabilities for all other classes. The
+                                                               In either case, the KLD is measured in nats, the unit of
+degeneracies between classes can be seen as PDFs of the
+                                                               base-e information. The appendix of Malz et al. (2018)
+estimated posterior PMFs where there is substantial den-
+                                                               is a good primer on the KLD including a demonstration
+sity for a predicted class that is not the true class (i.e.
+                                                               to build intuition for the behavior of the KLD in limiting
+the peak of the PDF is skewed away from zero for a class
+                                                               cases. The true PMF is approximated from the Kaggle
+other than the true class). The remaining two panels of
+                                                               metric as follows. If we were to assume that the Kaggle
+Figure 9 provide illustrations of this undesirable effect:
+                                                               ranking metric correctly orders classifiers by how close
+objects with true SNIax and SNIa-91bg type are assigned
+                                                               their submitted PMFs are to the (unknown) true PMFs,
+comparable probabilities for several classes including the
+                                                               then this ordering is sufficient to define a directionality
+true class. Although the centering of the PDF density
+                                                               for evaluating the KLD.7
+around zero PMF for some mismatched classes indicates
+                                                                  To visualize the disagreements between classifiers, we
+that the winning classifier did indeed easily rule out those
+                                                               convert the KLD values computed per true class per each
+incorrect classes, there is also low PDF density at high
+                                                               predicted class and per light curve within a true-class.
+PMF for the true class (consider that the PDF drops off
+                                                               The cKLD of Equation 4 corresponds to the divergence
+sharply for probability > 0.15 for the SNIax in the top
+                                                               for one pair of true and predicted class. The per-true-
+right panel of Figure 9), meaning that the classifier was
+                                                               class sum of the cKLD over the PDFs of per-predicted-
+unable to distinguish between those SN sub-types.
+                                                               class PMFs is interpretable as a measure of the infor-
+   Figure 10 isolates the true KN to compare the perfor-
+                                                               mation about that true class. A final scalar value may
+mance of the top three classifiers to that of the naı̈ve
+                                                               be made by taking the weighted sum of these per-true-
+‘validation’ classifier, whose inclusion is facilitated by
+                                                               class cKLD terms using the per-true-class weights of the
+including only light curves evaluated by the validation
+                                                               original Kaggle metric (as defined in Table 1). This inte-
+classifier that also appeared in the PLAsTiCC data set
+                                                               grated KLD may then be interpreted as the value of the
+and omitting the probabilities assigned to the ‘Other’
+                                                               information loss due to using the approximating classi-
+class prior to renormalizing the probabilities assigned to
+                                                               fier rather than the one that is closer to the truth. The
+the remaining classes. All of the top three classifiers were
+                                                               results of a summation of the pairwise KLD between the
+able to classify the true KN objects, as they assigned high
+                                                               per-true class, per-predicted class PDFs of PMF values
+PMF values for the predicted KN class and low PMF val-
+                                                               of each classifier as an approximation to those of all clas-
+ues for all other classes. The validation classifier, on the
+                                                               sifiers ranked better is presented in Figure 12.
+other hand, assigns nonzero PMF values over all the SN
+                                                                  The scalar KLD values of the pairs span three or-
+sub-types, effectively mis-classifying KN as SN without
+                                                               ders of base-e magnitude; however, if we exclude the 8th
+being able to distinguish the SN sub-type.
+                                                               ranked classifier, then the pairwise information losses in
+   Figure 11 shows the performance of the top three clas-
+                                                               the PDFs of PMFs only span two base-e orders of mag-
+sifiers on the ‘Other’ class. All three top classifiers suc-
+                                                               nitude.
+cessfully isolated the ‘Other’ class light curves from most
+of the named classes and for the most part successfully           7 The validity of this assumption is equivalent to KLD[i + 1; i −
+assigned a higher posterior PMF value for the correct          1] = KLD[i + 1; i] + KLD[i; i − 1], which is formally untrue for this
+class. However, all three top classifiers also had high        data set, but the assumption is useful in this context.
+14
+
+
+
+
+Figure 9. The estimated posterior probabilities (violins) for each predicted class (columns) among a given true class (panels) for the Kyle
+Boone method, where the assigned class corresponding to the true class is highlighted in color. Top row: The estimated probabilities for
+well-classified SNIa and those of the less well-classified SNIax. The assigned probability of being the true class for SNIa has a long tail but
+a high mode of ∼ 0.8, whereas SNIax are degenerate with the ‘Other’ class type, whose mode is ∼ 0.2. Bottom row: The classification
+probabilities for SNIa-91bg and SNIbc (core-collapse SN). The estimated classification probabilities for true SNIa-91bg objects reflects
+uncertainty; while roughly two thirds of the true SNIa-91bg objects have a mode corresponding to the predicted SNIa-91bg class, their
+classification probabilities span the entire range of probability. The uncertainty of estimated probabilities for SNIbc objects manifests
+differently; the probability for predicted class SNIbc has a less pronounced tail, but there is considerable probability mass assigned to
+predicted ‘Other’ class. This is not surprising given that the Kyle Boone classifier determined the ‘Other’ class classification probability
+from a combination of the probabilities of the SNIa, SNIbc, and SNII.
+
+
+                                                                          ministic classifications to the M-dwarf class, meaning the
+                                                                          PMF values tended to be approximately 1 for one pre-
+                                                                          dicted class and approximately 0 for all other predicted
+                                                                          classes. This choice induced long tails in the per-assigned
+                                                                          class PDFs of true M-dwarf PMF values, to which the
+                                                                          KLD is known to be sensitive, particularly when the PDF
+                                                                          taken as closer to truth is affected.
+                                                                             Figure 12 illustrates a few additional trends. The top
+                                                                          two classifiers disagree more strongly with all other clas-
+                                                                          sifiers than the other classifiers do with one another. The
+                                                                          class for which the discrepancy is greatest varies quite a
+                                                                          bit among classifier pairs, but aside from the outlier clas-
+                                                                          sifier discussed above, the KN and Mira objects appear
+                                                                          most discrepant often, indicating that the other ranked
+                                                                          classifiers’ strategies resulted in very different classifica-
+Figure 10. Performance of the ‘validation’ classifier compared            tion performance on those classes in particular.
+to the top three entries to PLAsTiCC. The naı̈ve classifier does
+not correctly classify the rare KN objects, while a classifier more                         4.3. Precision-Recall Plots
+optimized to find rare objects through data augmentation is a very
+accurate classifier of these bright transients.                             Deterministic classifiers are often evaluated using func-
+                                                                          tions of the true and false positive and negative rates.
+                                                                          The true positive (TP) rate is the ratio of TP classifi-
+  The reason for this large range in KLD values is that                   cations to the sum of both the TP and false negative
+the affected classifier (‘8 rapidsai’) assigned nearly deter-             (FN) classifications NTP /(NTP + NFN ). The false posi-
+                                                                                                                                  15
+
+                                                                         sifications. As the threshold value increases (needed to
+                                                                         improve the precision performance), the recall (true pos-
+                                                                         itives relative to true positives and false negatives) drops
+                                                                         relatively slowly as the number of false negatives is high
+                                                                         for the KN class. The greatest contaminants to KN clas-
+                                                                         sification are SNIa and SNII, which is seen in both the
+                                                                         PLAsTiCC simulations and in the Dark Energy Survey
+                                                                         observations (Doctor et al. 2017; Morgan et al. 2020).
+                                                                         The MTMN and MS methods have a poor performance
+                                                                         on this class throughout the plot whereas the KB method
+                                                                         has good early “retrieval”.
+                                                                            The SLSN have high values of recall for a range of
+                                                                         thresholds, with P > 0.9 for all thresholds > 0.7, indi-
+                                                                         cating it is a well-classified object. TDE require a high
+                                                                         threshold to be correctly classified, but then plateau at
+Figure 11. Performance of the top three classifiers for the ‘Other’      constant P for threshold & 0.9 for all classifiers. For the
+class. The predicted probability distributions for the 13087 true        SLSN, the validation classifier performed significantly
+type ‘Other’ class objects. The numbers in different colors re-          better than the top three classifiers, reaching P ≃ 1 for
+flect how many objects were incorrectly classified as a given type       thresholds & 0.25.
+by each of the three classifiers, and the shaded regions show the
+predicted probability distributions for each class. Note how the
+‘Other’ class is most often confused with SNII and SNIbc. This oc-                   4.3.1. Redshift evolution of metrics
+curred as a result of many of the classifiers generating their ‘Other’      While the global precision-recall plots for various clas-
+class probability as a combination of probabilities from the other
+classes.                                                                 sifiers and types are shown in Figure 13, it is worth con-
+                                                                         sidering the evolution of the classifier performance with
+                                                                         redshift. In Figure 14, we show the precision and re-
+tive (FP) rate is the ratio of the FPs to the sum of both                call of the top three classifiers as a function of redshift
+FP and true negative (TN) rate. One example of such                      for given threshold value of ∼ 0.6 for two object types,
+a function is the receiver operating characteristic (ROC)                namely SNeIa and TDEs. Also shown are the redshift
+curve, the TP rate as a function of the FP rate for a                    distributions of the transients. The relative numbers of
+given classifier.                                                        TDE peak at lower redshift (while there are still greater
+  Another is the precision-recall (also referred to                      total numbers of SNIa than TDE at all redshifts), lead-
+as ‘completeness-purity’) plot of the precision P =                      ing to a peak in recall. The precision of the classifier
+NTP /(NTP + NFP ) as a function of the recall R =                        peaks later, with the corresponding drop in the recall.
+NTP /(NTP + NFN ). Recall is a performance measure                       This behavior is also seen in Figure 13 which shows the
+of the TP compared to total actual positives, whether                    precision-recall curves as a function of threshold value
+TP or FN, whereas precision is a performance measure of                  rather than redshift. The ability to classify objects well
+TP predictions compared to the total positive predictions                with increasing redshift is driven in part by the redshift
+(whether true or false). We choose to use precision-recall               distribution of the sources themselves, and by the qual-
+plots over ROC curves because they are appropriate for                   ity of data augmentation of the training set. As noted in
+imbalanced data sets (see e.g. Saito and Rehmsmeier                      Boone (2019), prioritization of completeness of a given
+2015). The precision and recall are calculated for dif-                  survey as a function of redshift will lead to rather differ-
+ferent values of the threshold of the classifier to map                  ent tuning of classifier performance.
+the performance of both as a function of threshold. We
+require higher classification confidence with increasing                         5. DISCUSSION OF CHALLENGES IN THE
+threshold values. As the threshold increases, our preci-                                        PLAsTiCC DATA
+sion increases and recall (akin to sensitivity) decreases.                  The PLAsTiCC data set was rich in complexity and
+Good performance on these plots would be indicated by                    highly non-representative.
+having high precision and high recall, which would indi-                    Detection of novel objects – An additional class in
+cate that the classifiers are returning a lot of labels that             the test set but not present in the training set, named the
+are accurate.                                                            ‘Other’ class, added the task of anomaly detection to the
+  A perfect classifier in these plots would have a precision             challenge. This unseen class proved challenging and led
+of one for all recall. A bad classifier will output scores               to confusion classifications that exhibit the ‘subsumed-
+whose values are only slightly associated with the true                  to’ behavior as described in Malz et al. (2019), where a
+outcome, and so will achieve high recall for low values of               first class is consistently mistaken for a second, but the
+precision. Figure 13 shows examples of precision-recall                  second class is not commonly mistaken for the first. In
+plots for three different objects classified by the top three            Figure 8 we show the confusion matrices for the same
+classifiers and the validation classifier. For the top three             entries as in Figure 7. In this case while the ‘Other’
+participants, SLSN are more well-classified than KN or                   class objects were included in the test set, the classifiers
+TDE but are not perfectly classified.                                    did not return a classification for the objects (hence the
+  The classifiers also did approximately the same in pre-                predicted probabilities are set to zero for these objects).
+cision and recall for TDEs. Of the transient events shown                Hence while the true ‘Other’ class objects have predicted
+in this example, the KN are the most easily misclassified.               probabilities of the other classes by construction, the
+This object has low precision, meaning that true positive                subsuming probability systematic where true objects are
+classifications are a small fraction of total positive clas-             confused for ‘Other’ class objects is reduced. This can
+16
+
+
+
+
+Figure 12. The disagreement matrix for the top classifiers. Colors indicate the disagreement metric between each classifier (x-axis) and
+all classifiers ranked better than it (y-axis), where darker cells correspond to lower Kullback-Leibler Divergence from the worse-ranked
+classifiers’ probability densities of assigned posterior classification probabilities to those of the better-ranked classifier. The higher- and
+lower-ranked classifier pairs’ cells are labeled with the class that was most different between the two classifiers and percentage of the total
+disagreement between the two classifiers for which that class is responsible. The methods used by each classifier are summarized in Table 2.
+
+
+
+be most easily observed for the SNII objects in e.g. the                  TiCC challenge were unanimous that the biggest chal-
+Kyle Boone classifier. We do not investigate separately                   lenge they faced was the extraction of features from the
+the confusion between the four sub-classes that made up                   large training and test sets of PLAsTiCC. Feature ex-
+the ‘Other’ class, however future work and larger sim-                    traction is often the limiting factor in these classification
+ulations could tease out the relative confusion of these                  challenges. Given the existence and use of the Bazin
+interesting objects with well-known types.                                et al. (2011) light curve fitting model (which is a four-
+   This confusion between the other classes and the                       parameter model that tends to zero flux as t → ±∞)
+‘Other’ class objects is illustrated in Figure 9 through                  which is in many commonly-used astronomical codes,
+violin plots of probability density of the posterior prob-                many groups started with fits to the model, and trained
+ability assigned to each predicted class, for a given true                their classifiers on the fit parameters. Consistently one of
+class. There are a few things worth noting in the vio-                    the top features was either the host galaxy photometric
+lin plots. First, the distribution of probability extends                 redshift or a proxy for the spectroscopic redshift modeled
+to zero for some true objects, like the SNIa-91bg which                   from the photometric redshift. Only two of the top ten
+is shown in the bottom left panel of Figure 9, indicat-                   PLAsTiCC entries did not include an estimate of the
+ing that this true type is intrinsically uncertain. For the               redshift or the distance modulus. The maximum flux
+true type SNIbc, the violin plots are even more interest-                 was also frequently used as a feature for classification.
+ing. Here the violin plot for the ‘Other’ class has a peak                The Kyle Boone classifier included many signal-to-noise
+at P(type) = 0.4 significantly away from zero. This arises                features whereas most other submissions traced the time-
+from the fact that the assigned probability of the ‘Other’                dependent movements of the light curves between the
+class in Boone’s solution was derived as a combination                    maximum and minimum flux. Many people used some
+of probabilities from SNIa, SNIbc and SNII.                               form of the ratios of flux in different filters (essentially a
+   Feature selection – The participants in the PLAs-                      ‘color’) as classification features.
+                                                                                                                                             17
+
+
+
+
+Figure 13. The precision-recall plots for the top three classifiers and the ‘validation’ classifier as a function of threshold (color) for three
+classes of interest: KN, TDE, and SLSN.
+
+
+   GP regression proved a more model-independent ap-                       objects and provide a sample for anomaly detection, as
+proach, but added the complexity of ensuring the correct                   discussed above.
+choice of kernel to do the regression.                                        A small fraction of the 3 million test objects included
+   Non-representativity of the PLAsTiCC test                               spectroscopic ‘confirmation’ and therefore had a small
+data – LSST will map out the sky to a co-added mag-                        redshift error, while others had their redshifts assigned
+nitude depth of 27 − 28 and a single-visit depth of 24 in                  according to an example of the projected LSST photo-
+the various bands. This depth will yield a survey that                     metric redshift performance. A small bias to the photo-z
+has orders of magnitude more objects than current wide-                    values is introduced as a result of the broad band data
+field surveys. No current survey will be capable of pro-                   and training process. Many groups used the photo-z
+viding distributions of classes as a function of redshift                  and/or the flux information to determine a proxy for
+that will be representative for LSST. Any classifications                  the more informative spectroscopic redshift, which was
+performed based on low-z training sets will by definition                  used to determine an effective distance for the objects.
+be incomplete. To emphasize the importance of devel-                       These are labeled as ‘Model spec-z’ in Table 2. We leave
+oping classifiers robust to this, the PLAsTiCC training                    it to future work to investigate the impact the photo-z
+set is non-representative by design. The training set of                   bias had on classification performance explicitly. Several
+7486 objects were chosen to represent a probable spectro-                  groups performed data augmentation to address some of
+scopic survey made from a combination of objects from                      the issues with non-representativity of the data by re-
+the Dark Energy Survey (DES) and other low-redshift                        sampling in time to match the cadence of the test data,
+surveys like the Foundations survey (Foley et al. 2018).                   and adding noise to the training data that was similar
+The procedure for determining the spectroscopic training                   to the (larger) scatter in the test data, as summarized in
+sample is outlined in Section 6.4 of Kessler et al. (2019a).               Table 2.
+The roughly 3 million objects in the test set not only had                    Class imbalance in PLAsTiCC – In addition to the
+a different redshift distribution, but included the ‘Other’                test data being non-representative of the training data
+class as a way to test robustness of classifiers to new                    set, the classes within the training and test data sets
+18
+
+                                                                          ing objects without a unifying science application and to
+                                                                          prepare for future data that will contain novel/unknown
+                                                                          objects that require classification and flagging for obser-
+                                                                          vational follow-up.
+                                                                             Accurate classification of transients in future surveys
+                                                                          remains one of the key challenges for time-domain obser-
+                                                                          vational astrophysics. While astronomers with domain
+                                                                          knowledge are able to develop classification/selection
+                                                                          methods tailored to individual science cases, the creativ-
+                                                                          ity and flexibility of the data science entries to PLAs-
+                                                                          TiCC suggests a collaborative future across disciplines
+                                                                          will be key to making progress.
+                                                                             The PLAsTiCC challenge yielded a few key insights:
+                                                                             • data augmentation of sparse non-representative
+                                                                               training data are key to accurate performance on
+                                                                               the full test set;
+                                                                             • a metric weighted by the number of objects in a
+                                                                               class ensures that classification performance on the
+                                                                               most populous class does not dominate overall per-
+                                                                               formance;
+                                                                             • data fitting and feature selection are the most com-
+                                                                               putationally time-consuming parts of any classifi-
+                                                                               cation challenge;
+                                                                             • one successful approach is pulling out a larger set
+                                                                               of features over which to train, and then determin-
+                                                                               ing the feature importance before classifying the
+                                                                               objects on the smaller subset of features;
+                                                                             • objects with similar light curve shapes are broadly
+                                                                               degenerate (e.g. SNIax and SNIa) and may present
+                                                                               challenges to future surveys, motivating the in-
+                                                                               clusion of additional information about the host
+                                                                               galaxy, where applicable;
+Figure 14. The precision and recall as a function of redshift for
+the SNIa objects (top panels) and TDE (bottom panels). The                   • no strong preference for any one machine learn-
+average value of the threshold used across the classifiers is indicated        ing architecture was found; successful classification
+in text on the figure. The shaded distributions in each panel show
+the fractional distribution of the numbers of the transients as a              procedures often combine a range of methods from
+function of redshift. The total number of transients in the sample is          neural networks to tree-based approaches;
+also indicated. The evolution with redshift of the metrics depends
+both on the redshift distribution of the objects and the evolution           • domain knowledge helped mainly in identifying
+of the light curves with changing redshift.                                    more useful features over which to train, which was
+                                                                               an asset, given that this was often the most time-
+had significantly different proportions relative to the to-                    consuming part of the classification;
+tal population of objects. This class imbalance reflects                     • all classifiers struggled to classify objects with low
+true imbalances in nature, and was hence a designed fea-                       frequency in the training data, or novel (unknown)
+ture of PLAsTiCC. Successful classifiers accounted for                         objects
+these imbalances by oversampling rare light curves, aug-
+menting fluxes and errors or including test data with                     Classifying objects from their photometric information
+pseudo labels. The approaches employed by the various                     alone will unlock the potential of using these interesting
+classifiers are shown in Table 2.                                         objects in a range of science applications.
+                                                                            This challenge assumed that the full light curves for
+                         6. CONCLUSION                                    the objects were available. Long-lived transients can be
+   The PLAsTiCC studies evaluate the classification                       followed up with ground-based resources within a few
+probabilities derived by a range of methods for classi-                   days of detection in a photometric survey. For some of
+fying a heterogeneous assortment of astronomical tran-                    the most interesting objects, however, waiting even a few
+sients and variables. While previous challenges and data                  days will mean losing valuable information about the evo-
+sets have focused on classifier performance related to one                lution of the transient. As such, early classification of
+type of object or science case, PLAsTiCC represents                       these bright objects becomes essential. We did not focus
+the most complete simulation of future photometric sur-                   on the problem of early classification in PLAsTiCC, but
+veys to date and challenged the community to take into                    the next step in using these simulations to prepare for
+account degeneracies between different types of interest-                 LSST will be to provide an extra performance score to
+                                                                                                                      19
+
+classifiers capable of rapidly classifying transient sources,   Stars Science Collaboration. These models are described
+based on both their light curves and any additional data        in Kessler et al. (2019a). We are grateful to Federica
+about their environment and location. This may prove            Bianco and staff at NYU for hosting the PLAsTiCC team
+more challenging or prone to bias than classification us-       meeting. The awards for PLAsTiCC contest were gen-
+ing the full light curve.                                       erously supported by Kaggle. We thank staff at Kaggle,
+                                                                particularly Elizabeth Park, Maggie Demkin and Sohier
+                 ACKNOWLEDGMENTS                                Dane, for their help making the contest a success. We
+  This paper has undergone internal review in the               thank Federica Bianco, Francisco Förster Burón, Chad
+LSST Dark Energy Science Collaboration.                         Schafer and Melissa Graham for providing internal re-
+  Author contributions are listed below.                        view of this document for the DESC and TVS collab-
+R. Hložek: data curation, formal analysis, funding             orations, and thank Seth Digel for comments on this
+acquisition, investigation, project administration, soft-       draft. This work was supported by an LSST Corporation
+ware, supervision, validation, visualization, writing -         Enabling Science grant. The financial assistance of the
+editing, lead writing - original draft                          National Research Foundation (NRF) towards this re-
+K. Ponder: software development and implementation              search is hereby acknowledged. Opinions expressed and
+for validation, testing, visualization and analysis of          conclusions arrived at, are those of the authors and are
+results, writing - editing, writing - original draft            not necessarily to be attributed to the NRF. UK au-
+A.I. Malz: conceptualization, formal analysis, investi-         thors acknowledge funding from the Science and Tech-
+gation, methodology, visualization, writing - editing,          nology Funding Council. Canadian co-authors acknowl-
+writing - original draft                                        edge support from the Natural Sciences and Engineering
+M. Dai: software development and implementation for             Research Council of Canada. The Dunlap Institute is
+validation, testing, analysis of results, writing - editing     funded through an endowment established by the David
+G. Narayan: simulation, software, example kit, valida-          Dunlap family and the University of Toronto. The au-
+tion, visualization, writing - editing, writing - original      thors at the University of Toronto acknowledge that the
+draft                                                           land on which the University of Toronto is built is the
+E.E.O. Ishida: software development and implementa-             traditional territory of the Haudenosaunee, and most
+tion for validation, testing, Kaggle liason, analysis of        recently, the territory of the Mississaugas of the New
+results, writing - editing                                      Credit First Nation. They are grateful to have the op-
+T. Allam Jr: investigation, development of software for         portunity to work in the community, on this territory.
+simulation validation                                           R. H. acknowledges support from CIFAR, and the Azrieli
+A. Bahmanyar: investigation, implementation of metric           and Alfred. P. Sloan foundations. K. A .P. acknowl-
+methodology and software                                        edges support from the Berkeley Center for Cosmological
+R. Biswas: conceptualization, methodology, software for         Physics; the Director, Office of Science, Office of High
+validation and testing, writing - editing                       Energy Physics of the U.S. Department of Energy un-
+L. Galbany: implementation of validation software,              der Contract No. DE-AC02-05CH11231; and U.S. De-
+writing - editing                                               partment of Energy Office of Science under Contract
+S.W. Jha: conceptualization, simulation validation              No.DE-AC02-76SF00515. E. E. O. I. acknowledges sup-
+D. Jones: conceptualization, simulation validation,             port from CNRS 2017 MOMENTUM grant. A. I. M
+writing - editing                                               acknowledges support from the Max Planck Society and
+R. Kessler: simulation development and validation               the Alexander von Humboldt Foundation in the frame-
+testing, data generation, writing - editing                     work of the Max Planck-Humboldt Research Award en-
+M. Lochner: conceptualization, simulation validation,           dowed by the Federal Ministry of Education and Re-
+writing - editing                                               search. L. G. was funded by the European Union’s Hori-
+A.A. Mahabal: conceptualization, simulation validation          zon 2020 research and innovation programme under the
+K.S. Mandel: conceptualization, simulation validation,          Marie Sklodowska-Curie grant agreement No. 839090.
+writing - editing                                               D. O. J acknowledges support provided by NASA Hub-
+J.R. Martı́nez-Galarza: conceptualization, simulation           ble Fellowship grant HST-HF2-51462.001 awarded by
+validation, writing - editing                                   the Space Telescope Science Institute, which is operated
+J.D. McEwen: conceptualization, simulation validation           by the Association of Universities for Research in As-
+D. Muthukrishna: conceptualization, simulation valida-          tronomy, Inc., for NASA, under contract NAS5-26555.
+tion, results analysis and testing, writing - editing           D.O.J. also acknowledges support from the Gordon &
+H.V. Peiris: conceptualization, supervision, funding            Betty Moore Foundation. This work has been partially
+acquisition, writing - editing                                  supported by the Spanish grant PGC2018-095317-B-C21
+C.M. Peters: conceptualization, simulation validation           within the European Funds for Regional Development
+C.N. Setzer: conceptualization, simulation validation           (FEDER). C. N. S., R. B. and H. V. P. were partially
+                                                                supported by the research environment grant “Grav-
+  The Photometric LSST Astronomical Time Series                 itational Radiation and Electromagnetic Astrophysical
+Classification Challenge data set generation relied on          Transients (GREAT)” funded by the Swedish Research
+numerous members of the astronomical community to               Council (VR) under Dnr 2016-06012. RB and HVP
+provide models of astronomical transients and variables.        were additionally supported by the research project grant
+Photometric LSST Astronomical Time Series Classifi-             “Understanding the Dynamic Universe” funded by the
+cation Challenge is made possible through an inter-             Knut and Alice Wallenberg Foundation under Dnr KAW
+collaboration agreement between LSST’s Dark Energy              2018.0067. M. D. acknowledges support from the Hori-
+Science Collaboration and the Transient and Variable            zon Fellowship at the Johns Hopkins University. At Rut-
+20
+
+gers University (M. D., S. W. J.), this research was sup-            N. Sravan, D. Milisavljevic, J. M. Reynolds, G. Lentner, and
+ported by NSF award AST-1615455 and DOE award DE-                       M. Linvill, ApJ 893, 127 (2020), 2003.08943.
+SC0011636. The DESC acknowledges ongoing support                     S. Dobryakov, K. Malanchev, D. Derkach, and M. Hushchyn,
+                                                                        arXiv e-prints arXiv:2006.10489 (2020), 2006.10489.
+from the Institut National de Physique Nucléaire et de              S. Chaini and S. S. Kumar, arXiv e-prints arXiv:2006.12333
+Physique des Particules in France; the Science & Tech-                  (2020), 2006.12333.
+nology Facilities Council in the United Kingdom; and the             G. W. Brier, Monthly Weather Review 78, 1 (1950), ISSN
+Department of Energy, the National Science Foundation,                  0027-0644, URL
+and the LSST Corporation in the United States. DESC                     https://doi.org/10.1175/1520-0493(1950)078<0001:
+uses resources of the IN2P3 Computing Center (CC-                       VOFEIT>2.0.CO;2.
+                                                                     G. Bazin, V. Ruhlmann-Kleider, N. Palanque-Delabrouille,
+IN2P3–Lyon/Villeurbanne - France) funded by the Cen-                    J. Rich, E. Aubourg, P. Astier, C. Balland, S. Basa, R. G.
+tre National de la Recherche Scientifique; the National                 Carlberg, A. Conley, et al., A&A 534, A43 (2011).
+Energy Research Scientific Computing Center, a DOE                   J. Guy, P. Astier, S. Baumont, D. Hardin, R. Pain, N. Regnault,
+Office of Science User Facility supported by the Office                 S. Basa, R. G. Carlberg, A. Conley, S. Fabbro, et al., A&A
+                                                                        466, 11 (2007), astro-ph/0701828.
+of Science of the U.S. Department of Energy under Con-               G. Ke, Q. Meng, T. Finley, T. Wang, W. Chen, W. Ma, Q. Ye,
+tract No. DE-AC02-05CH11231; STFC DiRAC HPC Fa-                         and T.-Y. Liu, in Advances in Neural Information Processing
+cilities, funded by UK BIS National E-infrastructure cap-               Systems 30, edited by I. Guyon, U. V. Luxburg, S. Bengio,
+ital grants; and the UK particle physics grid, supported                H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett
+by the GridPP Collaboration. This work was performed                    (Curran Associates, Inc., 2017), pp. 3146–3154.
+                                                                     D. G. Krige, Master’s thesis, University of Witwatersrand,
+in part under DOE Contract DE-AC02-76SF00515.                           Witwatersrand, South Africa (1951).
+                                                                     J. H. Friedman, The Annals of Statistics 29, 1189 (2001), ISSN
+                        REFERENCES                                      00905364, URL http://www.jstor.org/stable/2699986.
+                                                                     L. Prokhorenkova, G. Gusev, A. Vorobev, A. Veronika Dorogush,
+LSST Science Collaboration, P. A. Abell, J. Allison, S. F.              and A. Gulin, arXiv e-prints arXiv:1706.09516 (2017),
+   Anderson, J. R. Andrew, J. R. P. Angel, L. Armus, D. Arnett,         1706.09516.
+   S. J. Asztalos, T. S. Axelrod, et al., arXiv e-prints             T. Chen and C. Guestrin, arXiv e-prints arXiv:1603.02754 (2016),
+   arXiv:0912.0201 (2009), 0912.0201.                                   1603.02754.
+Ž. Ivezić, S. M. Kahn, J. A. Tyson, B. Abel, E. Acosta,            J. Schmidhuber, Neural Networks 61, 85 (2015), ISSN
+   R. Allsman, D. Alonso, Y. AlSayyad, S. F. Anderson,                  0893-6080, URL http://www.sciencedirect.com/science/
+   J. Andrew, et al., ApJ 873, 111 (2019), 0805.2366.                   article/pii/S0893608014002135.
+R. Kessler, B. Bassett, P. Belov, V. Bhatnagar, H. Campbell,         D. E. Rumelhart, G. E. Hinton, and R. J. Williams, Nature 323,
+   A. Conley, J. A. Frieman, A. Glazov, S. González-Gaitán,           533 (1986).
+   R. Hlozek, et al., PASP 122, 1415 (2010), 1008.1024.              K. Cho, B. van Merrienboer, C. Gulcehre, D. Bahdanau,
+R. Kessler, J. P. Bernstein, D. Cinabro, B. Dilday, J. A. Frieman,      F. Bougares, H. Schwenk, and Y. Bengio, arXiv e-prints
+   S. Jha, S. Kuhlmann, G. Miknaitis, M. Sako, M. Taylor, et al.,       arXiv:1406.1078 (2014), 1406.1078.
+   PASP 121, 1028 (2009), 0908.4280.                                 F. Rosenblatt, American Journal of Psychology 76, 705 (1963).
+R. Kessler, G. Narayan, A. Avelino, E. Bachelet, R. Biswas, P. J.    K. Fukushima, Biological cybernetics 36, 193—202 (1980), ISSN
+   Brown, D. F. Chernoff, A. J. Connolly, M. Dai, S. Daniel,            0340-1200, URL https://doi.org/10.1007/bf00344251.
+   et al., PASP 131, 094501 (2019a), 1903.11756.                     D. Harris and S. Harris, Digital design and computer architecture
+R. Kessler, D. Brout, C. B. D’Andrea, T. M. Davis, S. R. Hinton,        (Morgan Kaufmann, San Francisco, CA, 2012), ISBN
+   A. G. Kim, J. Lasker, C. Lidman, E. Macaulay, A. Möller,            978-0-12-394424-5.
+   et al., MNRAS 485, 1171 (2019b), 1811.02379.                      K. Barbary, T. Barclay, R. Biswas, M. Craig, U. Feindt,
+R. Biswas, S. F. Daniel, R. Hložek, A. G. Kim, P. Yoachim, and         B. Friesen, D. Goldstein, S. Jha, S. Rodney, C. Sofiatti, et al.,
+   LSST Dark Energy Science Collaboration, ApJS 247, 60                 SNCosmo: Python library for supernova cosmology (2016),
+   (2020), 1905.02887.                                                  1611.017.
+PLAsTiCC-Modelers, Libraries & Recommended Citations for             M. Lochner, J. D. McEwen, H. V. Peiris, O. Lahav, and M. K.
+   using PLAsTiCC Models (2019), URL                                    Winter, ApJS 225, 31 (2016), 1603.00882.
+   https://doi.org/10.5281/zenodo.2612896.                           A. I. Malz, P. J. Marshall, J. DeRose, M. L. Graham, S. J.
+G. Narayan, T. Zaidi, M. D. Soraisam, Z. Wang, M. Lochner,              Schmidt, and R. W. and, The Astronomical Journal 156, 35
+   T. Matheson, A. Saha, S. Yang, Z. Zhao, J. Kececioglu, et al.,       (2018), URL https://doi.org/10.3847/1538-3881/aac6b5.
+   ApJS 236, 9 (2018), 1801.07323.                                   T. Saito and M. Rehmsmeier, PLoS ONE 10 (2015).
+T. K. Ho, in Proceedings of 3rd International Conference on          Z. Doctor, R. Kessler, H. Y. Chen, B. Farr, D. A. Finley, R. J.
+   Document Analysis and Recognition (IEEE Computer Society,            Foley, D. A. Goldstein, D. E. Holz, A. G. Kim, E. Morganson,
+   Los Alamitos, CA, USA, 1995), vol. 1, p. 278, URL https:             et al., ApJ 837, 57 (2017), 1611.08052.
+   //doi.ieeecomputersociety.org/10.1109/ICDAR.1995.598994.          R. Morgan, M. Soares-Santos, J. Annis, K. Herner, A. Garcia,
+A. I. Malz, R. Hložek, J. Allam, T., A. Bahmanyar, R. Biswas,          A. Palmese, A. Drlica-Wagner, R. Kessler, J. Garcia-Bellido,
+   M. Dai, L. Galbany, E. E. O. Ishida, S. W. Jha, D. O. Jones,         T. G. B. N. Sherman, et al., arXiv e-prints arXiv:2006.07385
+   et al., AJ 158, 171 (2019), 1809.11145.                              (2020), 2006.07385.
+K. Boone, AJ 158, 257 (2019), 1907.04690.                            R. J. Foley, D. Scolnic, A. Rest, S. W. Jha, Y. C. Pan, A. G.
+T. Gabruseva, S. Zlobin, and P. Wang, Journal of Astronomical           Riess, P. Challis, K. C. Chambers, D. A. Coulter, K. G.
+   Instrumentation 9, 2050005-3986 (2020), 1909.05032.                  Dettman, et al., MNRAS 475, 193 (2018), 1711.02474.
+E. E. O. Ishida, M. V. Kornilov, K. L. Malanchev, M. V.
+   Pruzhinskaya, A. A. Volnova, V. S. Korolev, F. Mondon,
+   S. Sreejith, A. Malancheva, and S. Das, arXiv e-prints
+   arXiv:1909.13260 (2019), 1909.13260.
+M. D. Soraisam, A. Saha, T. Matheson, C.-H. Lee, G. Narayan,
+   A. K. Vivas, C. Scheidegger, N. Oppermann, E. W. Olszewski,
+   S. Sinha, et al., ApJ 892, 112 (2020), 2002.11225.
+
