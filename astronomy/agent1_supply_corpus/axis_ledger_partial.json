@@ -1,0 +1,240 @@
+{
+ "candidate": "live time-domain astronomy (ZTF BTS label base; Rubin LSST alert stream)",
+ "branch": "prediction",
+ "partial": true,
+ "owner": "Agent 1 (supply and corpus)",
+ "axes": [
+  {
+   "axis": "positive_supply",
+   "disposition": "PASS",
+   "value": {
+    "posA_clusters": 7154,
+    "posB_clusters": 1839,
+    "posA_raw_rows": 7158,
+    "posB_raw_rows": 1839,
+    "posA_bright_18p5_clusters": 4819,
+    "posB_bright_18p5_clusters": 1210,
+    "after_S1_2026-02-24_posA_clusters": 9,
+    "after_S1_posB_clusters": 4,
+    "after_S2_2026-06-30_posA_clusters": 1,
+    "per_type_clusters": {
+     "SN Ia": 5051,
+     "SN II": 900,
+     "CV": 388,
+     "SN IIn": 178,
+     "AGN": 170,
+     "SN Ic": 153,
+     "SN Ia-91T": 148,
+     "SN Ib": 114,
+     "SN IIb": 108,
+     "CV?": 91,
+     "SN Ic-BL": 69,
+     "SLSN-I": 65,
+     "SN IIP": 61,
+     "SN Ia-91bg": 41,
+     "SN Ia-pec": 35,
+     "TDE": 34,
+     "nova": 34,
+     "SLSN-II": 32,
+     "SN Ibn": 32,
+     "SN Iax": 19,
+     "SN Ib/c": 17,
+     "AGN?": 13,
+     "SN Ia-CSM": 11,
+     "SN Ia-SC": 10,
+     "SN II-pec": 7,
+     "SN Icn": 6,
+     "Other": 6,
+     "SN Ib-pec": 4,
+     "LRN": 3,
+     "LBV": 3,
+     "TDE-He": 3,
+     "other": 2,
+     "ILRT": 2,
+     "TDE-H-He": 2,
+     "Ca-rich": 1,
+     "SN Ic-pec": 1,
+     "SN Ca-rich-Ca": 1,
+     "TDE-featureless": 1
+    }
+   },
+   "note": "PASS means counted at the clustered unit with provenance, not that supply clears a band; no bands were declared (P4 not in scope). Post-S1 positive supply is 9 clusters and post-S2 is 1: whatever Agent 3 rules on exposure, a split at the Rubin era leaves almost no labelled positives."
+  },
+  {
+   "axis": "negative_supply",
+   "disposition": "PASS",
+   "value": {
+    "neg_clusters": 663,
+    "neg_raw_rows": 665,
+    "neg_bright_18p5_clusters": 576,
+    "tentative_CV?_AGN?_clusters": 104,
+    "after_S1_neg_clusters": 9,
+    "posA_Ia_as_negative_under_posB_clusters": 5315
+   },
+   "note": "Negatives are structurally truncated: the file holds only candidates saved by scanners (explorer doc 'Classification'; Perley 2.1: ~10^6 packets/night -> 5-10 saved). The non-target population a Rubin allocator faces (variables, AGN, artifacts, asteroids) is mostly absent. Under posB, SN Ia clusters (5315) are the negatives."
+  },
+  {
+   "axis": "contamination_exposure",
+   "disposition": "UNDEMONSTRATED",
+   "value": null,
+   "owner": "Agent 3 (agent3_labels_exposure)",
+   "note": "owned elsewhere. Agent 1 supplies only: 98 corpus objects whose class appears in the text of seeds 1910.12973/2009.01242 (corpus_ledger.answer_in_own_source), and post-split positive counts above."
+  },
+  {
+   "axis": "tool_coverage",
+   "disposition": "UNDEMONSTRATED",
+   "value": null,
+   "owner": "Agent 4 (agent4_tools_instrument)",
+   "note": "owned elsewhere"
+  },
+  {
+   "axis": "cluster_structure",
+   "disposition": "PASS",
+   "value": {
+    "bts_rows": 11193,
+    "bts_objects_1arcsec": 11183,
+    "bts_row_overstatement_pct": 0.089,
+    "bts_objects_range_0p5_to_60arcsec": [
+     11104,
+     11183
+    ],
+    "sibling_groups": 51,
+    "units_if_host_group_were_unit": 11130,
+    "ztf_packets_per_saved_candidate_doc": "~10^6 packets/night / 5-10 saved per clear night = 1e5-2e5 (Perley 2020 s2.1)",
+    "rubin_SN_alerts_per_SN_DIAObject_doc": 60.0,
+    "rubin_SN_alert_overstatement_pct_doc": 5900.0,
+    "rubin_all_alerts_per_SN_doc": 2000.0,
+    "rubin_all_alert_overstatement_vs_SN_pct_doc": 199900.0,
+    "rubin_alerts_per_DIAObject_all_classes": "UNDEMONSTRATED (no seed gives a DIAObject count)"
+   },
+   "note": "Inside the BTS label base, rows are already object-level (0.089% overstatement). The overstatement the brief warns about lives upstream in the alert stream: doc-derived 60 SN alerts per SN DIAObject (5900%) and ~2000 alerts in the whole stream per SN (199,900%)."
+  },
+  {
+   "axis": "split_integrity",
+   "disposition": "PASS",
+   "value": {
+    "split_key": "peakt (JD-2458000)",
+    "S1": "2026-02-24",
+    "S2": "2026-06-30",
+    "straddlers_at_1arcsec": {
+     "S1": 0,
+     "S2": 0
+    },
+    "straddlers_at_10arcsec": {
+     "S1": 2,
+     "S2": 1
+    },
+    "sibling_groups_straddling": {
+     "S1": 0,
+     "S2": 0
+    },
+    "clusters_after_S1": {
+     "total": 250,
+     "unlabeled": 232,
+     "neg": 9,
+     "posA_Ia": 5,
+     "posB": 4,
+     "label_immature_all_members": 0
+    },
+    "clusters_after_S2": {
+     "total": 30,
+     "unlabeled": 29,
+     "posB": 1,
+     "label_immature_all_members": 0
+    },
+    "same_position_long_gap_pairs_within_corpus": 4
+   },
+   "note": "No object or sibling group straddles either split at the chosen cut. Straddlers appear only at >=10 arcsec. Integrity passes, but the test side after S1 holds 250 objects of which 232 are unlabelled."
+  },
+  {
+   "axis": "unprocessable_units",
+   "disposition": "PASS",
+   "value": {
+    "F5_censored_timescale": {
+     "rows": 3905
+    },
+    "F6_no_redshift": {
+     "rows": 4054
+    },
+    "F7_no_peakabs": {
+     "rows": 4055
+    },
+    "F3_low_b": {
+     "rows": 0
+    },
+    "F4_label_immature": {
+     "rows": 0
+    },
+    "gt_censored_duration": {
+     "rows": 3905
+    },
+    "gt_censored_rise": {
+     "rows": 2938
+    },
+    "gt_censored_fade": {
+     "rows": 2060
+    },
+    "type_dash_rows": 3370,
+    "IAUID_dash_rows": 107,
+    "peakabs_dash_but_redshift_present": 1,
+    "posA_rows_no_redshift": 20,
+    "peakmag_upper_limit_flag_available": false,
+    "excluded_rows_E5": 24
+   },
+   "note": "documented, not repaired. '>' marks lower limits on timescales (3905 rows censored in duration); '-' redshift in 4054 rows (20 of them posA); peakabs '-' in 4055; type '-' in 3370; peakmag may be an upper limit with no flag."
+  }
+ ],
+ "ruling": null,
+ "binding_axis": null,
+ "definition_widened": false,
+ "p4_status": "NOT ISSUED. P4 refuses while contamination_exposure and tool_coverage carry no number; no bands were declared; this is a pre-P1 sketch.",
+ "p5_sketch": "see REPORT.md section P5; out/queue_stdout.txt",
+ "completeness": "Agent 1 counted 5 of 7 axes (positive_supply, negative_supply, cluster_structure, split_integrity, unprocessable_units) on the frozen BTS corpus at the 1-arcsec clustered unit; contamination_exposure (Agent 3) and tool_coverage (Agent 4) are UNDEMONSTRATED here; Rubin-stream supply is doc-derived only, no Rubin labelled units counted",
+ "provenance": [
+  {
+   "id": "a1-posA",
+   "value": 7154,
+   "referent": "clusters whose labelled members all map to posA (genuine extragalactic transient classes)",
+   "source": "astronomy/agent1_supply_corpus/scripts/count_supply.py::supply; label map corpus_rules_FROZEN.md sha aa4e8d216d5bb53600608e7ad3ddb42940123505f9baadb1c39565789d2aa41a",
+   "population": "11183 distinct objects at 1 arcsec",
+   "adjudicator": "raw posA rows 7158; Perley 2020 Table 1: 3147 classified transients to 2020-07-15 as an order-of-magnitude cross-check on a 25.5-month window",
+   "falsifier": "a rerun on the same hashes returning a different count, or a type string found mapped outside the frozen map"
+  },
+  {
+   "id": "a1-posB",
+   "value": 1839,
+   "referent": "clusters of non-SN-Ia extragalactic transient classes",
+   "source": "astronomy/agent1_supply_corpus/scripts/count_supply.py::supply",
+   "population": "11183 distinct objects at 1 arcsec",
+   "adjudicator": "posA_Ia clusters 5315 on the same rows",
+   "falsifier": "rerun differs, or an SN Ia-family string counted in posB"
+  },
+  {
+   "id": "a1-neg",
+   "value": 663,
+   "referent": "clusters labelled CV/AGN (including tentative '?')",
+   "source": "astronomy/agent1_supply_corpus/scripts/count_supply.py::supply",
+   "population": "11183 distinct objects at 1 arcsec; saved candidates only",
+   "adjudicator": "Perley 2020 s2.1 ~10^6 packets/night with several hundred to <~50 false positives passing the filter nightly: the unsaved negative population",
+   "falsifier": "rerun differs; or explorer 'All' export shows negatives not present in this file"
+  },
+  {
+   "id": "a1-rubin-sn-alerts-per-object",
+   "value": 60.0,
+   "referent": "Rubin alerts per supernova DIAObject per year, from design key numbers",
+   "source": "DMTN-102 section 2.2 bullet Supernovae (200 SN alerts/visit; 1e6 SNe/yr), section 2.2 (1000 visits/night), section 2.6 (300 nights/yr); arithmetic in scripts/make_records.py",
+   "population": "LSST SNe per year (design estimate), not measured DIAObjects",
+   "adjudicator": "whole-stream ratio 2000 alerts per SN (NOIRLab sci26008 20e9 alerts/10 yr over DMTN-102 1e7 SNe/10 yr)",
+   "falsifier": "PPDB DiaObject.nDiaSources median for SN-classified DIAObjects measured outside 20-200"
+  },
+  {
+   "id": "a1-after-S1-labelled",
+   "value": 18,
+   "referent": "labelled objects peaking on or after 2026-02-24",
+   "source": "astronomy/agent1_supply_corpus/scripts/count_supply.py clusters_after_S1",
+   "population": "250 objects with all members peaking after S1",
+   "adjudicator": "25-35% unlabelled per year 2019-2025 in the same corpus",
+   "falsifier": "a re-fetch of the explorer CSV with the same rules showing the 2026 unlabelled fraction below 50%"
+  }
+ ]
+}

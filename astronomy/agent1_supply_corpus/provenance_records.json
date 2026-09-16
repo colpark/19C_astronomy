@@ -1,0 +1,74 @@
+[
+ {
+  "id": "a1-posA",
+  "value": 7154,
+  "referent": "clusters whose labelled members all map to posA (genuine extragalactic transient classes)",
+  "source": "astronomy/agent1_supply_corpus/scripts/count_supply.py::supply; label map corpus_rules_FROZEN.md sha aa4e8d216d5bb53600608e7ad3ddb42940123505f9baadb1c39565789d2aa41a",
+  "population": "11183 distinct objects at 1 arcsec",
+  "adjudicator": "raw posA rows 7158; Perley 2020 Table 1: 3147 classified transients to 2020-07-15 as an order-of-magnitude cross-check on a 25.5-month window",
+  "falsifier": "a rerun on the same hashes returning a different count, or a type string found mapped outside the frozen map"
+ },
+ {
+  "id": "a1-posB",
+  "value": 1839,
+  "referent": "clusters of non-SN-Ia extragalactic transient classes",
+  "source": "astronomy/agent1_supply_corpus/scripts/count_supply.py::supply",
+  "population": "11183 distinct objects at 1 arcsec",
+  "adjudicator": "posA_Ia clusters 5315 on the same rows",
+  "falsifier": "rerun differs, or an SN Ia-family string counted in posB"
+ },
+ {
+  "id": "a1-neg",
+  "value": 663,
+  "referent": "clusters labelled CV/AGN (including tentative '?')",
+  "source": "astronomy/agent1_supply_corpus/scripts/count_supply.py::supply",
+  "population": "11183 distinct objects at 1 arcsec; saved candidates only",
+  "adjudicator": "Perley 2020 s2.1 ~10^6 packets/night with several hundred to <~50 false positives passing the filter nightly: the unsaved negative population",
+  "falsifier": "rerun differs; or explorer 'All' export shows negatives not present in this file"
+ },
+ {
+  "id": "a1-rubin-sn-alerts-per-object",
+  "value": 60.0,
+  "referent": "Rubin alerts per supernova DIAObject per year, from design key numbers",
+  "source": "DMTN-102 section 2.2 bullet Supernovae (200 SN alerts/visit; 1e6 SNe/yr), section 2.2 (1000 visits/night), section 2.6 (300 nights/yr); arithmetic in scripts/make_records.py",
+  "population": "LSST SNe per year (design estimate), not measured DIAObjects",
+  "adjudicator": "whole-stream ratio 2000 alerts per SN (NOIRLab sci26008 20e9 alerts/10 yr over DMTN-102 1e7 SNe/10 yr)",
+  "falsifier": "PPDB DiaObject.nDiaSources median for SN-classified DIAObjects measured outside 20-200"
+ },
+ {
+  "id": "a1-after-S1-labelled",
+  "value": 18,
+  "referent": "labelled objects peaking on or after 2026-02-24",
+  "source": "astronomy/agent1_supply_corpus/scripts/count_supply.py clusters_after_S1",
+  "population": "250 objects with all members peaking after S1",
+  "adjudicator": "25-35% unlabelled per year 2019-2025 in the same corpus",
+  "falsifier": "a re-fetch of the explorer CSV with the same rules showing the 2026 unlabelled fraction below 50%"
+ },
+ {
+  "id": "a1-corpus-objects",
+  "value": 11183,
+  "referent": "distinct astrophysical objects (positional friends-of-friends clusters at 1 arcsec) in the frozen BTS corpus",
+  "source": "astronomy/agent1_supply_corpus/scripts/build_corpus.py::fof + count_supply.py::supply; raw sha 61415979b75f96bcf2532439109b35f923c5fa1aadfacc5d6013235187ebe570; rules sha aa4e8d216d5bb53600608e7ad3ddb42940123505f9baadb1c39565789d2aa41a",
+  "population": "11193 included rows after 24 E5 exclusions from 11217 data rows",
+  "adjudicator": "raw row count 11193 (overstatement 0.089%) and the full sweep 11104-11183 across 0.5-60 arcsec",
+  "falsifier": "a rerun on the same sha that returns a different cluster count, or a must-join re-trigger pair found above 1 arcsec"
+ },
+ {
+  "id": "a1-excluded",
+  "value": 24,
+  "referent": "rows excluded by frozen rules",
+  "source": "astronomy/agent1_supply_corpus/scripts/build_corpus.py::main rule E5; corpus_rules_FROZEN.md section Inclusion rules",
+  "population": "11217 data rows of the raw CSV",
+  "adjudicator": "FETCH.md states no filter at fetch time",
+  "falsifier": "a re-read that returns any listed row with peakt inside [270.5, 3299.5]"
+ },
+ {
+  "id": "a1-tau-plateau",
+  "value": 11183,
+  "referent": "cluster count on the control-bounded plateau 0.5-1.5 arcsec",
+  "source": "astronomy/agent1_supply_corpus/scripts/build_corpus.py::fof over corpus rows; out/sweep.json per_cut",
+  "population": "11193 included corpus rows",
+  "adjudicator": "tau.py choice at 30 arcsec gives 11116 and fails the must-not-join control 39 times",
+  "falsifier": "a re-trigger pair (same object, |dpeak|<=60 d) measured at >1.5 arcsec, or two distinct SNe measured at <=1.5 arcsec"
+ }
+]

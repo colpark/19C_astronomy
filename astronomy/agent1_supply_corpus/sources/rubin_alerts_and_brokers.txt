@@ -1,0 +1,55 @@
+Alerts and brokers | Rubin Observatory
+Localize site contentSpanish
+Toggle search
+Search the websiteSubmit searchToggle navigation menu
+Alerts and brokers
+Date last updated: 03 Jul 2026 15:27 (MST)
+Alerts
+A product of the Prompt Processing pipeline, alert packets contain measurements associated with the detection of time-variable sources in difference images. They are world public and have no proprietary period.
+Learn more about alerts in the Prompt Products documentation.
+Alert brokers
+Software systems that ingest and process astronomical alerts from the LSST and other surveys, and serve them to the scientific community.
+Typical broker functionality includes filtering, cross-match, photometric classification, and prioritization for follow-up observations, all available in a web-based user interface for scientific analysis.
+Alert filter: a set of rules that an alert packet either passes or fails. For example, "if brighter than 21st magnitude, and if discovered less than 6 days ago, and if two previous detections exist, then pass" can be expressed as a set of constraints in a code script. This is a very simple filter.
+Full-stream brokers: Seven "full-stream" brokers will receive and process the full LSST alert stream: ALeRCE, AMPEL, ANTARES, Babamul, Fink Lasair, and Pitt-Google.
+Down-stream brokers: Two "down-stream" brokers, SNAPS and POI Broker, have science goals that do not require ingestion of the full LSST alert stream. They have partnered with one of the full-stream brokers to receive a subset of the alerts.
+ALeRCE: Automatic Learning for the Rapid Classification of Events
+Website: science.alerce.online
+ALeRCE enhances the scientific return from Rubin alerts by providing a dynamic catalog of aggregated, cross-matched, annotated, and classified light curves. We prioritize delivering carefully curated machine learning classification probabilities across a broad taxonomy, supporting the time-domain community in the study of stochastic, transient, and periodic objects. ALeRCE also offers web interfaces for general object exploration, early supernova identification (including reporting to the Transient Name Server), and a watchlist system for monitoring objects of interest. Astronomers can easily access ALeRCE’s services through web portals, a Python client, APIs, or direct database queries, with access to the Rubin Science Platform. This enables rapid target prioritization, efficient follow-up, and deeper scientific analysis. By using ALeRCE, astronomers gain a comprehensive, scalable platform that accelerates discovery and drives impactful science in the time-domain era.AMPEL: Alert Management, Photometry, and Evaluation of Light Curves
+Website: ampelproject.github.io
+Description to be added soon.ANTARES: Arizona-NOIRLab Temporal Analysis and Response to Events System
+Website: antares.noirlab.edu
+ANTARES is a full-service, real-time broker that adds contextual value to ingested alerts from multiwavelength astronomical catalogs (e.g, Gaia, Sloan, WISE, Chandra) as well as the past history of the event. Users can write their own filters in Python to identify specific classes of objects, create watch lists for direct notification, or develop catalogs for large-scale comparisons. Filters can range from something as simple as a magnitude limit to one that compares to a machine-learning based light-curve shape model. Users can interact with the system via a web portal, API, or substreams of alerts from filters.Babamul: an open-source, lightweight, easily deployable broker
+Website: babamul.caltech.edu
+Babamul transforms the massive and heterogenous LSST data stream into smaller, focused channels organized by astronomical event properties (e.g. fast, blue, ...). Each channel delivers lightweight, science-ready alerts enriched with context from real-time surveys including ZTF. By dramatically reducing the data volume and splitting the stream in its different parts, you can subscribe only to events relevant to your research and filter them further using minimal hardware and familiar tools (e.g. astropy, numpy, astroquery) while also allowing for fast and local ML-based workflows. To lower the barrier of entry and jump-start projects, we also provide a number of open-sourced modules, ML models, example pipelines, and data management systems (with candidate vetting and follow-up UIs) inheriting from 7+ years of experience discovering transients in the ZTF alert stream.Fink: a personalizable community-driven broker for Rubin
+Website: fink-broker.org
+Fink is a community driven project that processes time-domain alert streams and connects them with follow-up facilities and science teams. To enrich and filter the data we use catalogue and stream cross-matches, feature engineering and Machine Learning algorithms. Fink was designed to be modular and to facilitate the inclusion of personalized science modules and filters. All tools already deployed can be accessed via our webportal, API or through a kafka stream. If you have a specific science case you would like to be developed, contact us at contact@fink-broker.org.Lasair: build your own filter with SQL, crossmatch, and lightcurve features
+Website: lasair.lsst.ac.uk
+Users make simple or complex alert filters with SQL, using webpage or API. A filter can run in real-time as alerts come in, with machine-readable output. Filters can be based on lightcurve features, intelligent crossmatch, and geometry. To get supernovae from Lasair, filter for high-temperature fast risers that have a host galaxy. The Sherlock intelligent crossmatch allows filters based on sky context: galaxy catalogues, known CV, variable star, etc. Users can work with ready-made public resources such as Gaia white dwarfs, galaxies within 5 Mpc, etc, then duplicate, modify, share, and annotate.Pitt-Google: a scalable, cloud-based alert distribution service
+Website: pitt-broker.readthedocs.io
+The Pitt-Google Alert Broker is a scalable, low-latency alert distribution service that will enable broad public access to, and scientific analysis of, LSST’s full alert stream with a low barrier to entry. Our broker’s cloud-native model uses Google Cloud Platform (GCP) to facilitate access to the data products we serve, and our Python library (pittgoogle-client) simplifies the way users can interact with our broker’s services and alert data. To learn more about how we can support your science, explore our demos page and open an issue if you have any questions.SNAPS: Solar System Notification Alert Processing System
+Website: snaps.nau.edu
+SNAPS -- the Solar System Notification Alert Processing System -- is a downstream broker that ingests Solar System observations from ZTF, LSST, and several other surveys (Trilling et al. 2023). For each Solar System object we derive a number of properties (color, lightcurve, etc.), and serve both the collected observations and these derived properties. We search for both individual and population outliers, and will issue alerts about those unusual objects. The community can interact with our database through our web portal, where users can designate their "favorite" objects, and (coming soon) an API.POI Broker: a broker for analyzing variable star alerts
+Website: poibroker.uantof.cl
+Point of Interest is a downstream broker from ANTARES. It receives variable star alerts and carries out feature calculation, while keeping and analyzing the feature history. In this way, it is well suited for tracking the behavior of variable stars and aiding especially in the detection of RR Lyrae with Blazhko effect as well as anomalies.
+How to get started with alert brokers
+The first step in choosing a broker is to browse the brokers' documentation and web-based user interfaces, linked above. Several brokers are already processing and serving alerts from current surveys.
+Test out the various interfaces and tools that brokers offer. Use the broker to identify subsets of current alerts that would be relevant for your science goals. Engage with the broker teams via their contacts and help services if you have any questions.
+Integrating a broker's services into your scientific analysis can take a significant time investment. We recommend to start simple to learn about a broker's tools, interfaces, and science applications, and then iteratively build up your scientific analysis of LSST alerts.
+Community filters
+Up to 20 community alert filters will be defined, implemented, validated, and maintained by Rubin staff with input from the broad Rubin science community, and with support from the ANTARES broker. These community filters will be designed to serve a variety of common time-domain science goals, and lower the barrier to entry into alert-based science. Everyone will be welcome to use them.
+See the "Roadmap for Community Alert Filters with the ANTARES Broker", RTN-090.
+Additional resources
+Section 3.5 of the Data Products Definitions Document, LSE-163
+"LSST Alerts: Key Numbers", DMTN-102
+"The Zwicky Transient Facility Alert Distribution System", Patterson et al. (2019)
+"Plans and Policies for LSST Alert Distribution", LDM-612
+ZTF Alert Archive
+Sample alerts provided by Rubin Data Management
+Questions?
+Let's Connect
+Visit the Rubin Observatory on Facebook
+Visit the Rubin Observatory on Instagram
+Visit the Rubin Observatory on LinkedIn
+Visit the Rubin Observatory on Twitter
+Visit the Rubin Observatory on YouTube

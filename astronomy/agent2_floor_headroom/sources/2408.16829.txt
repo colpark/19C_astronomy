@@ -1,77 +1,56 @@
-                                                 Draft version September 2, 2024
-                                                 Typeset using LATEX default style in AASTeX631
-
-
-
-
-                                                                        Maven: A Multimodal Foundation Model for Supernova Science
-                                                                     1, 2, ∗
-                                                   Gemma Zhang,                Thomas Helfer,3, ∗ Alexander T. Gagliano,1, 4, 5 Siddharth Mishra-Sharma,1, 6, 2, † and
-                                                                                                    V. Ashley Villar5, 1
-                                                                               1 The NSF AI Institute for Artificial Intelligence and Fundamental Interactions
-                                                                                 2 Department of Physics, Harvard University, Cambridge, MA 02138, USA
+=== PAGE 1 ===
+Draft version September 2, 2024
+Typeset using LATEX default style in AASTeX631
+Maven: A Multimodal Foundation Model for Supernova Science
+1, 2, ∗
+Gemma Zhang,
+Thomas Helfer,3, ∗ Alexander T. Gagliano,1, 4, 5 Siddharth Mishra-Sharma,1, 6, 2, † and
+V. Ashley Villar5, 1
+1 The NSF AI Institute for Artificial Intelligence and Fundamental Interactions
 arXiv:2408.16829v1 [astro-ph.HE] 29 Aug 2024
-
-
-
-
-                                                               3 Institute for Advanced Computational Science, Stony Brook University, Stony Brook, NY 11794 USA
-                                                                   4 Department of Physics, Massachusetts Institute of Technology, Cambridge, MA 02139, USA
-                                                           5 Center for Astrophysics — Harvard & Smithsonian, 60 Garden Street, MS-16, Cambridge, MA 02138, USA
-                                                               6 Center for Theoretical Physics, Massachusetts Institute of Technology, Cambridge, MA 02139, USA
-
-
-
-                                                                                                               ABSTRACT
-                                                       A common setting in astronomy is the availability of a small number of high-quality observations, and
-                                                       larger amounts of either lower-quality observations or synthetic data from simplified models. Time-
-                                                       domain astrophysics is a canonical example of this imbalance, with the number of supernovae observed
-                                                       photometrically outpacing the number observed spectroscopically by multiple orders of magnitude.
-                                                       At the same time, no data-driven models exist to understand these photometric and spectroscopic
-                                                       observables in a common context. Contrastive learning objectives, which have grown in popularity for
-                                                       aligning distinct data modalities in a shared embedding space, provide a potential solution to extract
-                                                       information from these modalities. We present Maven, the first foundation model for supernova science.
-                                                       To construct Maven, we first pre-train our model to align photometry and spectroscopy from 0.5M
-                                                       synthetic supernovae using a constrastive objective. We then fine-tune the model on 4,702 observed
-                                                       supernovae from the Zwicky Transient Facility. Maven reaches state-of-the-art performance on both
-                                                       classification and redshift estimation, despite the embeddings not being explicitly optimized for these
-                                                       tasks. Through ablation studies, we show that pre-training with synthetic data improves overall per-
-                                                       formance. In the upcoming era of the Vera C. Rubin Observatory, Maven serves as a Rosetta Stone
-                                                       for leveraging large, unlabeled and multimodal time-domain datasets.
-
-
-                                                       Keywords: Astrostatistics techniques (1886) –Supernovae (1668)
-
-                                                                                                          1. INTRODUCTION
-                                                  The discovery rate of supernovae (SNe) has grown exponentially over the past four decades, thanks in large part
-                                               to wide-field, untargeted optical surveys (e.g., All Sky Automated Survey for SuperNovae (ASAS-SN; Shappee et al.
-                                               2014), ATLAS (Tonry et al. 2018), the Zwicky Transient Facility (ZTF; Bellm et al. 2018) and the Young Supernova
-                                               Experiment (YSE; Jones et al. 2021). Today, well over ten-thousand SNe are discovered annually. The upcoming Legacy
-                                               Survey of Space and Time (LSST; Ivezić et al. 2019), conducted by the Vera C. Rubin Observatory, is expected to
-                                               commence in 2025 and will continue for ten years. LSST will enable the photometric discovery of over one million
-                                               SNe annually, in addition to millions of other non-SN variable phenomena (including flaring stars and active galactic
-                                               nuclei). We expect a small fraction of LSST SNe–no more than 1%–to be observed spectroscopically.
-                                                  SNe can be characterized by a spectral energy distribution (SED), the energy emitted by the event over wavelength
-                                               and time. Data from this SED at a fixed time is observed as spectroscopy, and for a fixed wavelength range is observed
-                                               as photometry. This photometry is collected over time to construct a SN’s light curve (see Fig. 1). While photometry
-                                               is easily obtained, spectroscopy is significantly more time-consuming to acquire (long integration times are needed to
-
-
-                                               yzhang7@g.harvard.edu and thomashelfer@live.de
-                                               ∗ Both authors contributed equally to this work. Authors may be listed in either order.
-                                               † Currently at Anthropic; work performed while at MIT/IAIFI.
-2                                                Helfer, Zhang, et al
-
-
-
-
-Figure 1. Illustration of the mutual information between modalities considered in this work. Supernovae are character-
-ized by a spectral energy distribution (SED) varying in wavelength and time. Photons are collected through broad-band filters
+2 Department of Physics, Harvard University, Cambridge, MA 02138, USA
+3 Institute for Advanced Computational Science, Stony Brook University, Stony Brook, NY 11794 USA
+4 Department of Physics, Massachusetts Institute of Technology, Cambridge, MA 02139, USA
+5 Center for Astrophysics — Harvard & Smithsonian, 60 Garden Street, MS-16, Cambridge, MA 02138, USA
+6 Center for Theoretical Physics, Massachusetts Institute of Technology, Cambridge, MA 02139, USA
+ABSTRACT
+A common setting in astronomy is the availability of a small number of high-quality observations, and
+larger amounts of either lower-quality observations or synthetic data from simplified models. Timedomain astrophysics is a canonical example of this imbalance, with the number of supernovae observed
+photometrically outpacing the number observed spectroscopically by multiple orders of magnitude.
+At the same time, no data-driven models exist to understand these photometric and spectroscopic
+observables in a common context. Contrastive learning objectives, which have grown in popularity for
+aligning distinct data modalities in a shared embedding space, provide a potential solution to extract
+information from these modalities. We present Maven, the first foundation model for supernova science.
+To construct Maven, we first pre-train our model to align photometry and spectroscopy from 0.5M
+synthetic supernovae using a constrastive objective. We then fine-tune the model on 4,702 observed
+supernovae from the Zwicky Transient Facility. Maven reaches state-of-the-art performance on both
+classification and redshift estimation, despite the embeddings not being explicitly optimized for these
+tasks. Through ablation studies, we show that pre-training with synthetic data improves overall performance. In the upcoming era of the Vera C. Rubin Observatory, Maven serves as a Rosetta Stone
+for leveraging large, unlabeled and multimodal time-domain datasets.
+Keywords: Astrostatistics techniques (1886) –Supernovae (1668)
+1. INTRODUCTION
+The discovery rate of supernovae (SNe) has grown exponentially over the past four decades, thanks in large part
+to wide-field, untargeted optical surveys (e.g., All Sky Automated Survey for SuperNovae (ASAS-SN; Shappee et al.
+2014), ATLAS (Tonry et al. 2018), the Zwicky Transient Facility (ZTF; Bellm et al. 2018) and the Young Supernova
+Experiment (YSE; Jones et al. 2021). Today, well over ten-thousand SNe are discovered annually. The upcoming Legacy
+Survey of Space and Time (LSST; Ivezić et al. 2019), conducted by the Vera C. Rubin Observatory, is expected to
+commence in 2025 and will continue for ten years. LSST will enable the photometric discovery of over one million
+SNe annually, in addition to millions of other non-SN variable phenomena (including flaring stars and active galactic
+nuclei). We expect a small fraction of LSST SNe–no more than 1%–to be observed spectroscopically.
+SNe can be characterized by a spectral energy distribution (SED), the energy emitted by the event over wavelength
+and time. Data from this SED at a fixed time is observed as spectroscopy, and for a fixed wavelength range is observed
+as photometry. This photometry is collected over time to construct a SN’s light curve (see Fig. 1). While photometry
+is easily obtained, spectroscopy is significantly more time-consuming to acquire (long integration times are needed to
+yzhang7@g.harvard.edu and thomashelfer@live.de
+∗ Both authors contributed equally to this work. Authors may be listed in either order.
+† Currently at Anthropic; work performed while at MIT/IAIFI.
+=== PAGE 2 ===
+2
+Helfer, Zhang, et al
+Figure 1. Illustration of the mutual information between modalities considered in this work. Supernovae are characterized by a spectral energy distribution (SED) varying in wavelength and time. Photons are collected through broad-band filters
 (ZTF-g and ZTF-r with transmission curves shown in the top left) at multiple epochs during explosion to construct multi-band
 light curves (bottom right). At a single epoch, supernova light can also dispersed with a spectrograph (SEDM in this work) to
 obtain a spectrum (top right). Both modalities offer a complementary, but limited, view of an SN’s underlying SED.
-
-
 build up sufficient signal across a spectrograph). This challenge has catalyzed research into techniques to infer the
 underlying physics of an explosion directly from photometric observations, including the classification of SN types
 (e.g., Muthukrishna et al. 2019a; Villar et al. 2019; Möller & de Boissière 2020; Boone 2021; Gagliano et al. 2023;
@@ -82,7 +61,7 @@ spectroscopic datasets for sufficient model performance. To overcome this issue,
 self-supervised learning to leverage the structure of unlabeled photometric datasets, by training a feature extraction
 network and generating a low-dimensional latent space (Richards et al. 2012; Villar et al. 2020). The learned latent
 space can then be used to classify events using supervised methods.
-  Self-supervised representation learning for time-domain astrophysics is appealing for multiple reasons. Pre-trained
+Self-supervised representation learning for time-domain astrophysics is appealing for multiple reasons. Pre-trained
 models have been shown to produce latent data representations that are more robust against distribution shifts than
 their supervised counterparts (Shi et al. 2022; Goyal et al. 2022). Distribution shift is a common obstacle when applying
 models trained on bright, spectroscopically-confirmed low-redshift transients to fainter, more distant phenomena that
@@ -91,43 +70,42 @@ observed in transient science (Yang & Xu 2020): labeled SN samples are dominated
 luminosities relative to other classes. The generalizability of learned representations (Kim et al. 2021; Ericsson et al.
 2022) also offers the potential for using a pre-trained model for multiple inference tasks and across diverse time-domain
 surveys, with only minimal fine-tuning.
-  Contrastive learning has emerged as an effective pre-training objective for combining multiple data modalities.
+Contrastive learning has emerged as an effective pre-training objective for combining multiple data modalities.
 Radford et al. (2021) present an embedding scheme called Contrastive Language–Image Pre-training (CLIP) for aligning
 natural language and associated images in a shared latent space. Following this example, domain-specific ‘foundation
 models’ are beginning to appear in the literature. Parker et al. (2024) recently introduced a cross-modal foundation
-                       Maven: A Multimodal Foundation Model for Supernova Science                                         3
-
-model using galaxy spectroscopy and images. After independently embedding galaxy images and spectra into low-
-dimensional latent spaces, they use contrastive training to align the embeddings into a joint latent space. They find
+=== PAGE 3 ===
+Maven: A Multimodal Foundation Model for Supernova Science
+3
+model using galaxy spectroscopy and images. After independently embedding galaxy images and spectra into lowdimensional latent spaces, they use contrastive training to align the embeddings into a joint latent space. They find
 that such a model can achieve state-of-the-art performance on the inference of various physical properties (including
 redshift, mass, and age). Similarly, Slijepcevic et al. (2024) leveraged contrastive learning with instance differentiation,
 and created a foundational model for radio galaxies by augmenting and aligning unimodal data instances via simple
 transforms such as rotations. Their resulting model is able to perform accurate morphological classification with fewer
 labels than supervised methods.
-  Here, we present Maven, the first multimodal foundation model for SNe. In contrast to previous models for SN
-classification and redshift inference, our model is constructed using spectroscopic and photometric information si-
-multaneously. Motivated by previous work in synthetic pre-training, we first train Maven by aligning simulated light
+Here, we present Maven, the first multimodal foundation model for SNe. In contrast to previous models for SN
+classification and redshift inference, our model is constructed using spectroscopic and photometric information simultaneously. Motivated by previous work in synthetic pre-training, we first train Maven by aligning simulated light
 curve-spectrum pairs via contrastive learning, and fine-tune it on a small sample of observed data using the same
 approach. Our final model achieves state-of-the-art performance on multiple downstream tasks. We also train a model
 with only observed data, called Maven-lite, to quantify the impact of synthetic pre-training. Though we limit our
 analysis to classification and redshift (two popular inference tasks in SN science), the model is a milestone toward
 general-purpose training for a range of downstream tasks.
-  Our paper is organized as follows. In Section 2, we describe the simulated and observed data used in this work. In
+Our paper is organized as follows. In Section 2, we describe the simulated and observed data used in this work. In
 Section 3, we describe the architectures of our photometric and spectroscopic encoder models, the contrastive learning
 objective used to pre-train and fine-tune Maven, and the downstream tasks we use to evaluate Maven’s performance.
 We present our results in Section 4, and compare our model to baseline transformer models optimized explicitly for the
 explored tasks. We further compare our results to existing transformer-based models from the literature. We conclude
 by discussing the value of contrastive pre-training in astronomy and potential future research directions in Sections 5
 and 6.
-                                             2. DATASETS AND SIMULATIONS
-   In this study, we utilize two datasets: a simulated dataset for pre-training and a dataset of observations for subsequent
+2. DATASETS AND SIMULATIONS
+In this study, we utilize two datasets: a simulated dataset for pre-training and a dataset of observations for subsequent
 fine-tuning and validation1 . We describe the details of each below.
-                               2.1. Simulating Supernovae with the SNANA Simulation Code
-   We generate synthetic SN samples using the SNANA simulation code (Kessler et al. 2009). SNANA mimics the
+2.1. Simulating Supernovae with the SNANA Simulation Code
+We generate synthetic SN samples using the SNANA simulation code (Kessler et al. 2009). SNANA mimics the
 observing process beginning from a rest-frame spectral energy distribution (SED) of an astrophysical transient. A
 volumetric rate is chosen and the sky is populated at random with transients. A survey strategy, detection efficiency,
 and the survey’s estimated noise properties (zeropoint and sky noise) are provided to construct synthetic observations.
-   We simulate observations of the Zwicky Transient Facility (Bellm et al. 2018) using the framework described in Aleo
+We simulate observations of the Zwicky Transient Facility (Bellm et al. 2018) using the framework described in Aleo
 et al. (2023), which approximately matches the redshift distribution of the SNe in our observed sample (described in
 the following section 2.2). We simulate 500,000 total events evenly split between five different SN classes, using SED
 models from the Photometric LSST Astronomical Time-Series Classification Challenge (Kessler et al. 2019): SNe Ia
@@ -141,51 +119,42 @@ filter transmissions, and reported sky noise. This results in a similar selectio
 SNe as our observed sample, although we do not explicitly define a brightness threshold for photometry as is done with
 the BTS sample (Fremling et al. 2020) and our sole quality cut is removing events with fewer than 4 total photometric
 observations. As a result, our simulated events are intrinsically fainter and lower-quality than our observed events.
-   In addition to the previously-developed simulations, we define a spectrograph object in SNANA with wavelength
+In addition to the previously-developed simulations, we define a spectrograph object in SNANA with wavelength
 bins corresponding to the wavelength coverage of the ZTF SED machine (Blagorodnova et al. 2018), with which the
 vast majority of our observed SNe were classified. To mimic the stochasticity inherent to SN classification in practice,
 we allow synthetic spectra to be obtained randomly from explosion to peak light, and with sufficient exposure time
-
-  1 All data are available at https://huggingface.co/datasets/thelfer/multimodal supernovae
-4                                                 Helfer, Zhang, et al
-
-
-
-                                                                           Contrastive
-     Pre-training
-     (simulated data)
-                                                                                           Maven
-
-
-                                                                      Contrastive
-         Training
-        (observed data)
-
-
-                                                       Maven-lite
-
-
-     Downstream                                    Classification                                   Regression
-        Task                                           SVC/kNN                                       Linear/kNN
-        (observed data)
-
-
+1 All data are available at https://huggingface.co/datasets/thelfer/multimodal supernovae
+=== PAGE 4 ===
+4
+Helfer, Zhang, et al
+Contrastive
+Pre-training
+(simulated data)
+Maven
+Contrastive
+Training
+(observed data)
+Maven-lite
+Downstream
+Task
+(observed data)
+Classification
+Regression
+SVC/kNN
+Linear/kNN
 Figure 2. Overview of our training workflows. We first pre-train on a large simulated data set using contrastive methods
 (using light curves and spectra). We follow up by training on the observational ZTF dataset and then use a simple model
 to translate these embedding to downstream tasks. Different colors indicate different first training steps and their subsequent
 arrows indicate subsequent training steps.
-
-
 to achieve S/N of 5 within an arbitrary wavelength window. Galactic extinction is applied to both modalities at the
 simulated SN location following the extinction law from Cardelli et al. (1989).
-   We then pre-process all spectra in the same manner as in Muthukrishna et al. (2019b): we apply low-pass median
+We then pre-process all spectra in the same manner as in Muthukrishna et al. (2019b): we apply low-pass median
 filtering to remove high-frequency noise, re-bin the data to log-wavelength space, and estimate the flux continuum
 using a polynomial fit and divide it out. While this continuum-division step removes color information, it has been
 shown that it has a negligible impact on redshift estimation (Blondin & Tonry 2007). The spectra are kept in the
 observer frame (not redshift-corrected).
-
-                               2.2. The Zwicky Transient Facility Bright Transient Survey
-  Since 2019, the Zwicky Transient Facility (ZTF; Bellm et al. 2018) has conducted a wide-field public survey consisting
+2.2. The Zwicky Transient Facility Bright Transient Survey
+Since 2019, the Zwicky Transient Facility (ZTF; Bellm et al. 2018) has conducted a wide-field public survey consisting
 of photometry obtained with the Palomar 48-inch Schmidt telescope at a cadence of roughly 2 nights. The telescope
 observes in three photometric filters: ZTF-g, ZTF-r, and ZTF-i. Photometry is promptly reduced and streamed to alert
 brokers including ANTARES (the Arizona-NOIRLab Temporal Analysis and Response to Events System; Matheson
@@ -195,237 +164,225 @@ Ben-Ami et al. 2012; Blagorodnova et al. 2018; Rigault et al. 2019), a low-resol
 Palomar 60-inch telescope (Cenko et al. 2006). SEDM spectra are then uploaded to the Transient Name Server and
 the Weizmann Interactive Supernova Data Repository (WISeREP; Yaron & Gal-Yam 2012). 5,377 SNe have been
 spectroscopically confirmed at the time of writing as part of this Bright Transient Survey.
-                        Maven: A Multimodal Foundation Model for Supernova Science                                                  5
-
-   We obtain metadata for 4,702 spectroscopically-classified SNe on June 18th, 2024 from the ZTF Bright Transient
+=== PAGE 5 ===
+Maven: A Multimodal Foundation Model for Supernova Science
+5
+We obtain metadata for 4,702 spectroscopically-classified SNe on June 18th, 2024 from the ZTF Bright Transient
 Survey (Fremling et al. 2020) after applying all quality and purity cuts available on the ZTF BTS webpage2 (described
 in detail in Perley et al. 2020). The subsequent SNe have photometric coverage before and after peak light, good
 visibility throughout the photospheric phase, an uncontaminated reference image, and occurred in low extinction
 fields. We consolidate our resulting sample to only include events spectroscopically classified as “normal” SN Ia,
 SN Ib/c, SN II, SLSN-I, and SN IIn.
-   Next, we use the Python client of the antares alert broker (Matheson et al. 2021) to consolidate difference photometry
+Next, we use the Python client of the antares alert broker (Matheson et al. 2021) to consolidate difference photometry
 for all SNe in ZTF-g and ZTF-r (ZTF-i observations are mainly private, comprising ∼10% of all observations; Aleo
 et al. 2023), and download their associated SEDM spectra from the Transient Name Server3 and WISEReP4 5 . We
 pre-process the observed spectra following the same procedure as our synthetic ones.
-   Next, we augment our observational data with noise. In each training iteration, we apply Gaussian noise to the
+Next, we augment our observational data with noise. In each training iteration, we apply Gaussian noise to the
 photometric and spectroscopic observations with mean zero and standard deviation equal to the magnitude of the
 reported observational errors. This acts to both increase our training set and to make our model more robust to
 typical observational noise.
-                                                            3. METHODOLOGY
-                                             3.1. Contrastive Representation Learning
-   Contrastive learning is a type of self-supervised learning based on the existence of associations between data sam-
-ples. It encourages corresponding data pairs to develop similar representations while separating unassociated pairs in
+3. METHODOLOGY
+3.1. Contrastive Representation Learning
+Contrastive learning is a type of self-supervised learning based on the existence of associations between data samples. It encourages corresponding data pairs to develop similar representations while separating unassociated pairs in
 representation space. For multimodal datasets, contrastive learning has been a common approach for aligning data
 pairs across modalities. Here, our goal is to build a shared representation space using photometric and spectroscopic
 data from the same event, and to explore the predictive properties of these representations for downstream tasks.
-   For both pre-training and fine-tuning, we use the standard softmax-based bidirectional variant of the InfoNCE (Oord
-                                                                                                                         |B|
+For both pre-training and fine-tuning, we use the standard softmax-based bidirectional variant of the InfoNCE (Oord
+|B|
 et al. 2018) contrastive loss function introduced for training . Given a minibatch B of |B| associated pairs {(Xi , Yi )}i=1
 (light curves and spectra in this work), the goal is to align the learned representations of corresponding (positive) pairs
 (Xi , Yi ) (here, the spectrum and light curve of a single SN) while repelling the representations of unaligned (negative)
 pairs (Xi , Yj̸=i ):
-                                                      |B|
-                                                                                                  !
-                                            1 X           exi ·yi /τ             exi ·yi /τ
-                                  L(B) = −          log P|B|             + log P|B|                                               (1)
-                                           2|B| i=1           exi ·yj /τ             exj ·yi /τ
-                                                                   j=1               j=1
+|B|
+1 X
+exi ·yi /τ
+exi ·yi /τ
+L(B) = −
+log P|B|
++ log P|B|
+2|B| i=1
+exi ·yj /τ
+exj ·yi /τ
+j=1
+!
+(1)
+j=1
 where xi = f (Xi )/∥f (Xi )∥ and yi = g (Yi )/∥g (Yi )∥ are the normalized representations of the i-th data pairs associated
 with each other, and τ is a learnable hyperparameter. Encoders f : I → Rdemb and g : T → Rdemb map the two
 modalities to an embedding space of dimension demb . Transformer-based encoders are chosen to capture and aggregate
 the temporal correlations of our light curve data and the wavelength correlations of our spectroscopic data. We describe
 these encoders in more detail in the next section. This loss treats the two representations symmetrically, thus ensuring
 that the two modalities are equally weighted.
-                                                            3.2. Modality Encoders
-                               demb                   demb
-  The encoders f : I → R        and g : T → R      are designed to efficiently extract information from high-dimensional
-data for the two considered modalities. Both light curve and spectrum encoders are based on the transformer archi-
-tecture (Vaswani et al. 2017). In this Section, we describe the architecture and explore how common representation /
+3.2. Modality Encoders
+demb
+demb
+are designed to efficiently extract information from high-dimensional
+The encoders f : I → R
+and g : T → R
+data for the two considered modalities. Both light curve and spectrum encoders are based on the transformer architecture (Vaswani et al. 2017). In this Section, we describe the architecture and explore how common representation /
 pre-training approaches impact downstream task performance (see Fig. 3 for an overview).
-  The transformer-based light curve encoder processes magnitude measurements and their corresponding observation
+The transformer-based light curve encoder processes magnitude measurements and their corresponding observation
 times. Given an input sequence of magnitude-time pairs X = ((m1 , t1 ), ..., (mn , tn )), where ti is defined as the number
 of days from the first observation, the normalized magnitudes are initially linearly projected to the dmodel -dimensional
 embedding space of the transformer. Each transformer layer applies multi-head self-attention (with nheads heads acting
-
-  2 https://sites.astro.caltech.edu/ztf/bts/bts.php
-  3 https://www.wis-tns.org/
-  4 https://www.wiserep.org/
-
-  5 Despite spectroscopic classifications being available on the ZTF website for all listed SNe, SEDM spectra could not be found for a few
-
-   objects. When an SEDM spectrum is not available, we instead use the first reported spectrum. A positional encoding is used for the
-   wavelengths of each spectrum, so in principle our spectrum encoder has the capacity to generalize to multiple spectrographs.
-6                                                     Helfer, Zhang, et al
-
-
-
-       D=1                    D = 32
-                                                                       Transformer block
-               Linear Layer
-
-
-
-
-                                                                                                                             Norm dropout
-                                                                                             Norm dropout
-
-
-                                                                                                             Feed-forward
-                                                                           Self-attention
-                                                                                                                                                                             Modality x
-
-
-
-
-        time
-                                                                                                                                                                        Contrastive
-                               Sinusoidal                                                                                                    Reducing token to one
-                                                                                                                                                                         Learning
-                              embeddings      Learned     Embedding     Repeated 5-13x                                                      using mean/self-attention
-                                                                                                                                                                           ℒ(𝐵)
-        wavelength                          0000000000011111111111
-                                             0/1 Indicating r/g band
-               Linear Layer
-
-
-
-
-                                                                                                                            Norm dropout
-                                                                                            Norm dropout
-
-
-                                                                                                            Feed-forward
-                                                                          Self-attention
-                                                                                                                                                                              Modality y
-
-
-
-                                                                       Transformer block
-      D=1                     D = 64
+2 https://sites.astro.caltech.edu/ztf/bts/bts.php
+3 https://www.wis-tns.org/
+4 https://www.wiserep.org/
+5 Despite spectroscopic classifications being available on the ZTF website for all listed SNe, SEDM spectra could not be found for a few
+objects. When an SEDM spectrum is not available, we instead use the first reported spectrum. A positional encoding is used for the
+wavelengths of each spectrum, so in principle our spectrum encoder has the capacity to generalize to multiple spectrographs.
+=== PAGE 6 ===
+6
+Helfer, Zhang, et al
+D = 32
+D=1
+Transformer block
+Norm dropout
+Feed-forward
+Norm dropout
+Self-attention
+Linear Layer
+Modality x
+time
+wavelength
+Sinusoidal
+embeddings
+Repeated 5-13x
+Feed-forward
+Norm dropout
+D = 64
+Norm dropout
+Self-attention
+Linear Layer
+D=1
+Learned
+Embedding
+0000000000011111111111
+0/1 Indicating r/g band
+Reducing token to one
+using mean/self-attention
+Contrastive
+Learning
+ℒ(𝐵)
+Modality y
+Transformer block
 Figure 3. Overview over model architecture. We start by using a linear layer to increase the dimensionality of the features
 from one to the chosen embedding dimension. Next, we encode both time and wavelength using sinusoidal embeddings. For
 light curves specifically, we additionally include embeddings to represent the band information. These combined tokens are then
 processed through a series of transformer blocks. To reduce the output to a single token, we use a simple mean or self-attention
 mechanism. Finally, we project this token to match the desired length of the embedding space.
-
-                                                                       √ 
+√ 
 separately). Here we define Attention(Q, K, V ) = softmax QK T / dk V where Q, K, and V are linear projections
 of the input representing queries, keys, and values, and dk = dmodel /nheads . A 2-layer feedforward network, FFN(x) =
 max(0, xW1 + b1 )W2 + b2 , is applied to each sequence element (a magnitude-time pair) separately. Layer normalization
 and residual connections are applied after attention as well as the feedforward layer.
-  To account for the temporal nature of light curves, we use sinusoidal time encodings to project the times ti to a
-higher-dimensional space,                          
-                                                   sin(t /n2j/dmodel ) if i is even
-                                                         i  t
-                                      TE(ti , j) =                                   ,                             (2)
-                                                   cos(t /n2j/dmodel ) if i is odd
-                                                         i  t
-
+To account for the temporal nature of light curves, we use sinusoidal time encodings to project the times ti to a
+higher-dimensional space,
+
+sin(t /n2j/dmodel ) if i is even
+i
+t
+TE(ti , j) =
+,
+(2)
+cos(t /n2j/dmodel ) if i is odd
+i
+t
 where j is the time embedding index, ti are the input times, and nt is a hyperparameter governing the periodicity
 of the time encodings. This encoding allows the model to capture both absolute and relative timing of observations
 across a wide range of timescales.
-   To incorporate light curve measurements from multiple photometric filters, we concatenate all measurements for
+To incorporate light curve measurements from multiple photometric filters, we concatenate all measurements for
 each SN and add an additional band encoding. Different bands are one-hot encoded with integers and then added to
 light curve magnitude embeddings before being passed into the transformer encoder.
-   In contrast, the spectrum encoder processes flux measurements across multiple wavelengths. It utilizes a sim-
-ilar transformer-based architecture to that of the light curve encoder, but interprets the input sequence as
-((f1 , λ1 ), ..., (fn , λn )), where fi represents the flux at observer-frame wavelength λi . The positional encoding for wave-
-lengths follows the same sinusoidal pattern as the light curve encoder, but with λ in place of t. This approach allows
+In contrast, the spectrum encoder processes flux measurements across multiple wavelengths. It utilizes a similar transformer-based architecture to that of the light curve encoder, but interprets the input sequence as
+((f1 , λ1 ), ..., (fn , λn )), where fi represents the flux at observer-frame wavelength λi . The positional encoding for wavelengths follows the same sinusoidal pattern as the light curve encoder, but with λ in place of t. This approach allows
 the model to capture both local and global spectral correlations.
-   For both the light curve and spectrum encoders, in addition to deterministic aggregate e.g., mean or max pool-
-ing, we consider attention-based learnable aggregation to convert the per-sequence representation to a 1-D represen-
-tation vector. This enables the model to learn a data-dependent aggregation scheme, potentially better capturing
-                     Maven: A Multimodal Foundation Model for Supernova Science                                          7
-
-correlations in the data. We initialize a learnable query vector Qlearned ∈ Rdemb , where demb is the embedding di-
-mension. A projection of the encoded sequence after the final transformer layer, Xfinal ∈ Rnseq ×dseq gives the keys
+For both the light curve and spectrum encoders, in addition to deterministic aggregate e.g., mean or max pooling, we consider attention-based learnable aggregation to convert the per-sequence representation to a 1-D representation vector. This enables the model to learn a data-dependent aggregation scheme, potentially better capturing
+=== PAGE 7 ===
+Maven: A Multimodal Foundation Model for Supernova Science
+7
+correlations in the data. We initialize a learnable query vector Qlearned ∈ Rdemb , where demb is the embedding dimension. A projection of the encoded sequence after the final transformer layer, Xfinal ∈ Rnseq ×dseq gives the keys
 and values for the attention mechanism. We use a multi-head attention architecture with two heads to then get
 xagg = Attention(Qlearned , Kfinal , Vfinal ) ∈ Rdemb as desired. This attention-based pooling allows the model to focus on
-the most relevant parts of the sequence when creating the final embedding. We treat the aggregation method as a hyper-
-parameter: in the hyperparameter tuning process discussed in section 3.5, we consider both mean and attention-based
+the most relevant parts of the sequence when creating the final embedding. We treat the aggregation method as a hyperparameter: in the hyperparameter tuning process discussed in section 3.5, we consider both mean and attention-based
 aggregation.
-
-                                         3.3. Transfer Learning and Fine-Tuning
-   After pre-training some of our models on the simulations discussed in section 2.1, we fine-tune on the small set of
+3.3. Transfer Learning and Fine-Tuning
+After pre-training some of our models on the simulations discussed in section 2.1, we fine-tune on the small set of
 ZTF BTS measurements discussed in section 2.2.
-   We explore two different transfer learning approaches. First, we begin with the pre-trained model and continue
+We explore two different transfer learning approaches. First, we begin with the pre-trained model and continue
 training all of its weights using the observed data. In the second approach, we again begin with the pre-trained model,
 but we instead allow only the weights in the first transformer block to be learnable and freeze all other weights during
 fine-tuning. We find that the first approach leads to better performance on downstream tasks compared to the second
 approach. Therefore, we only show results from the first approach hereafter. We note that both methods converged
 within a much smaller number of epochs than end-to-end models, despite the two-stage approach.
-   We define our hyperparameter-optimized pre-trained model as ‘Maven’, and our CLIP model without pre-training
+We define our hyperparameter-optimized pre-trained model as ‘Maven’, and our CLIP model without pre-training
 as ‘Maven-lite’ (see Fig. 2).
-
-                                          3.4. Stratified k-fold Cross-Validation
-  To quantify uncertainties for both end-to-end and fine-tuned models, we perform a 5-fold cross-validation, in which
+3.4. Stratified k-fold Cross-Validation
+To quantify uncertainties for both end-to-end and fine-tuned models, we perform a 5-fold cross-validation, in which
 we split the ZTF dataset into five unique train-test splits. All five folds share the same distribution of SN classes. The
 results in subsequent sections are the mean and standard deviation from these runs. To avoid added computational
 overhead, we do not perform it on the much larger simulation-based pre-training dataset.
-
-                                            3.5. Hyperparameter Optimization
-  To determine hyperparameter values for model architecture and training, we perform a hyperparameter search for
+3.5. Hyperparameter Optimization
+To determine hyperparameter values for model architecture and training, we perform a hyperparameter search for
 our end-to-end baseline and CLIP models using Weights & Biases (Biewald 2020). Table 1 provides a summary of the
 hyperparameters tuned in this process. A list of parameter values in our search are provided in configuration files in
 our public code repository.6
-  In each hyperparameter sweep, we choose the set of parameter values that result in the lowest validation loss on our
+In each hyperparameter sweep, we choose the set of parameter values that result in the lowest validation loss on our
 holdout dataset. Due to the high computational cost associated with hyperparameter tuning, we employ a random
-train-test split on our dataset instead of carrying out k-fold cross-validation. In addition, we reuse the optimal hyper-
-parameters of the Maven-lite model for CLIP pre-training instead of performing a separate hyperparameter search. In
+train-test split on our dataset instead of carrying out k-fold cross-validation. In addition, we reuse the optimal hyperparameters of the Maven-lite model for CLIP pre-training instead of performing a separate hyperparameter search. In
 the transfer learning stage of the pre-trained models discussed in section 3.3, we only tune the hyperparameters shown
 in the rightmost column of Table 1, while other hyperparameters are fixed to their pre-train values.
-
-
-
-                                                  3.6. Downstream Tasks
-  We evaluate the performance of Maven and Maven-lite on two primary downstream tasks: classification and regres-
-sion.
-  Classification of SNe from photometry alone has been an area of active study due to the long integration times
+3.6. Downstream Tasks
+We evaluate the performance of Maven and Maven-lite on two primary downstream tasks: classification and regression.
+Classification of SNe from photometry alone has been an area of active study due to the long integration times
 required to build up sufficient signal-to-noise with spectroscopy and the subsequent rise of wide-field photometric
 surveys. SN classes are highly imbalanced in observed samples, due to a combination of different intrinsic volumetric
 rates and a steep selection function toward brighter classes (SNe Ia). We separately consider both five-way (SN Ia,
 SN II, SN Ib/c, SLSN-I, SN IIn) and three-way classification (SN Ia, SN II, SN Ib/c), considering in the latter case
 only the three most commonly-observed classes.
-
-  6 https://github.com/ThomasHelfer/multimodal-supernovae
-8                                                   Helfer, Zhang, et al
-
-    Table 1. Table of hyperparameters that were optimized in a random hyperparameter search. Parameters in the leftmost
-    column were optimized for end-to-end models while parameters in the rightmost column were optimized for all models
-    (including end-to-end training and finetuning).
-
-        Light curve / spectrum encoder                   Metadata encodera                   Optimizer and training
-          Number of transformer blocks             Dimension of class label embedding             Learning rate
-            Number of attention heads                  Number of layers in MLP                    Dropout rate
-     Normalization factor in time encoding (nt )     MLP hidden layer dimension                   Weight decay
-               Aggregation method                                                       Logit temperature in CLIP loss (τ )
-          Embedding vector dimension                                                               Batch size
-    a In addition to light curve and spectra, we explored using metadata as an additional modality. Details about the metadata
-     encoder and results are shown in Appendix A.
-
-
-
-
-   In addition to classification, we attempt to predict the redshift of each SN (which we call our “regression” task).
+6 https://github.com/ThomasHelfer/multimodal-supernovae
+=== PAGE 8 ===
+8
+Helfer, Zhang, et al
+Table 1. Table of hyperparameters that were optimized in a random hyperparameter search. Parameters in the leftmost
+column were optimized for end-to-end models while parameters in the rightmost column were optimized for all models
+(including end-to-end training and finetuning).
+Metadata encodera
+Light curve / spectrum encoder
+Number of transformer blocks
+Number of attention heads
+Normalization factor in time encoding (nt )
+Aggregation method
+Embedding vector dimension
+Dimension of class label embedding
+Number of layers in MLP
+MLP hidden layer dimension
+Optimizer and training
+Learning rate
+Dropout rate
+Weight decay
+Logit temperature in CLIP loss (τ )
+Batch size
+a In addition to light curve and spectra, we explored using metadata as an additional modality. Details about the metadata
+encoder and results are shown in Appendix A.
+In addition to classification, we attempt to predict the redshift of each SN (which we call our “regression” task).
 Redshift estimation using spectroscopic and photometric SNe Ia is a fundamental tool for cosmological analyses.
 Although non-Ia classes are significantly more observationally diverse (e.g., Modjaz et al. 2019), estimating SN redshift
 remains critical for estimating the intrinsic properties of an explosion (luminosity from photometry and chemical
 composition from spectroscopy).
-   To transform our contrastive-trained light curve embeddings into classification predictions, we explore both support
+To transform our contrastive-trained light curve embeddings into classification predictions, we explore both support
 vector classification (SVC) and k-Nearest Neighbors classification (kNN). SVC works by finding an optimal hyperplane
 to separate classes. Here, we use a linear kernel with scikit-learn default parameters. kNN classification, in contrast,
 classifies SNe based on the similarity of their feature embedding to other latent-space neighbors.
-   For redshift regression, we explore both linear regression and kNN regression. The former uses linear transformation
+For redshift regression, we explore both linear regression and kNN regression. The former uses linear transformation
 of the embeddings to estimate redshift, while the latter estimates redshift based on the average (or median) redshift
 of closest training examples in the latent space.
-   Lastly, we train supervised models directly on the observational ZTF dataset as our baseline models. For the clas-
-sification baseline model, we optimize for the multi-class cross-entropy loss and take the class with highest pseudo-
-probability score as the prediction for each event in the validation set. The regression baseline model outputs a single
+Lastly, we train supervised models directly on the observational ZTF dataset as our baseline models. For the classification baseline model, we optimize for the multi-class cross-entropy loss and take the class with highest pseudoprobability score as the prediction for each event in the validation set. The regression baseline model outputs a single
 value and is optimized using the mean squared error (MSE) loss.
-                                                         4. RESULTS
-    In this Section, we present results from Maven, Maven-lite, and our baseline models on the downstream tasks.
-                                          4.1. t-SNE Visualization of Latent Spaces
-  To explore the impact of CLIP-style pre-training on the latent space of our Maven models, we first visualize a
+4. RESULTS
+In this Section, we present results from Maven, Maven-lite, and our baseline models on the downstream tasks.
+4.1. t-SNE Visualization of Latent Spaces
+To explore the impact of CLIP-style pre-training on the latent space of our Maven models, we first visualize a
 sample of embedded light curves. We compute Maven and Maven-lite embeddings of our five dominant classes for
 both the synthetic and observed samples: SNe Ia, SNe II, SNe Ib/c, SLSNe I, and SNe IIn. We further reduce the
 dimensionality of our latent space using principal component analysis from the encoder output of 128 features to 50
@@ -434,154 +391,211 @@ original embeddings. Finally, we produce two-dimensional representations of thes
 stochastic neighbor embedding tool (t-SNE; Van der Maaten & Hinton 2008). Our results are presented in Fig. 4 for
 Maven-lite (left column) and Maven (right column), where the embeddings are colored by class in the top row and
 shaded by redshift in the bottom row.
-  Significant differences are visible between the two latent spaces. Considering the Maven-lite embeddings, only the
+Significant differences are visible between the two latent spaces. Considering the Maven-lite embeddings, only the
 synthetic SLSN-I light curves (blue) are well-separated from the other classes; the core-collapse (SN Ib/c, II, IIn) and
 thermonuclear (Ia) events show significant overlap. Observed Ia and II light curves (outlined in black) show similar
 embeddings independent of class, and little consistency with the synthetic embeddings: the majority of observed SN Ia
 and SN II lie at the boundary between synthetic SLSN-I and SN II/SN IIn embeddings.
-  In our Maven embeddings, we observe both clear separation of classes and consistent redshift gradients across our
+In our Maven embeddings, we observe both clear separation of classes and consistent redshift gradients across our
 embedded light curves. The simulated SNe Ia appear best-organized by redshift, consistent with their photometric
-                     Maven: A Multimodal Foundation Model for Supernova Science                                        9
-
-
-                                                 /
-
-
-
-
+=== PAGE 9 ===
+Maven: A Multimodal Foundation Model for Supernova Science
+9
+/
 Figure 4. Visualization of synthetic and observed light curves embedded by Maven-lite (left column) and Maven
 (right column). Points in top row are colored by SN class, and points in bottom row are shaded by spectroscopic redshift.
 Observed data are outlined in black.
-
 homogeneity. The redshift gradient across observed SNe Ia is also well-aligned with that of the synthetic sample,
 whereas a similar distribution is not observed in the Maven-lite embeddings. Synthetic SNe Ib/c appear strongly
 mixed with both SNe Ia and SNe II, indicative of the photometric degeneracies between these classes.
-  Interestingly, although observed SN Ia and SN II embeddings lie closest to the synthetic events of the same class,
+Interestingly, although observed SN Ia and SN II embeddings lie closest to the synthetic events of the same class,
 the overlap between synthetic and observed data remains low. We attribute this to a distributional shift between
 synthetic and observed data. Observed events are prioritized for spectroscopic confirmation if they are brighter than
 (or expected to brighten above) m < 18.5th magnitude, and additional quality and purity cuts are imposed (see
 Section 3 for details). While a detailed comparison between synthetic and observed events is beyond the scope of this
 work, this separation may also reflect the simplistic nature of our simulations relative to reality, and emphasizes the
 need for significantly larger observed SN samples for effective pre-training.
-10                                                            Helfer, Zhang, et al
-
-                                                                   Recall
-                                  Maven                             baseline                        Maven-lite
-                                                                                                                        1.0
-              SN II    0.79        0.19         0.02      0.74        0.17         0.10    0.74        0.23      0.03   0.8
-
-                                                                                                                        0.6
-          True Label
-             SN Ia
-
-
-
-                       0.01        0.99         0.00      0.02        0.91         0.07    0.03        0.96      0.01
-                                                                                                                        0.4
-
-                                                                                                                        0.2
-              SN Ibc
-
-
-
-
-                       0.18        0.64         0.18      0.08        0.31         0.61    0.29        0.57      0.13
-
-                       SN II        SN Ia      SN Ibc     SN II        SN Ia      SN Ibc   SN II        SN Ia SN Ibc    0.0
-                               Predicted Label                    Predicted Label                  Predicted Label
-
-                                                                  Precision
-                                  Maven                             baseline                        Maven-lite
-                                                                                                                        1.0
-                       0.89        0.03         0.23      0.84        0.03         0.15    0.76        0.04      0.23
-              SN II
-
-
-
-
-                                                                                                                        0.8
-
-                                                                                                                        0.6
-          True Label
-             SN Ia
-
-
-
-
-                       0.06        0.94         0.19      0.13        0.95         0.57    0.15        0.93      0.48
-                                                                                                                        0.4
-
-                                                                                                                        0.2
-              SN Ibc
-
-
-
-
-                       0.06        0.03         0.58      0.03        0.02         0.28    0.09        0.03      0.29
-
-                       SN II        SN Ia      SN Ibc     SN II        SN Ia      SN Ibc   SN II        SN Ia SN Ibc    0.0
-                               Predicted Label                    Predicted Label                  Predicted Label
-
+=== PAGE 10 ===
+10
+Helfer, Zhang, et al
+Recall
+Maven-lite
+SN II
+1.0
+0.79
+0.19
+0.02
+0.74
+0.17
+0.10
+0.74
+0.23
+0.03
+True Label
+SN Ia
+baseline
+0.01
+0.99
+0.00
+0.02
+0.91
+0.07
+0.03
+0.96
+0.01
+SN Ibc
+Maven
+0.18
+0.8
+0.6
+0.4
+SN II
+0.64
+0.18
+0.08
+SN Ia
+SN Ibc
+Predicted Label
+SN II
+0.31
+0.61
+0.29
+SN Ia
+SN Ibc
+Predicted Label
+SN II
+0.13
+0.2
+SN Ia SN Ibc
+Predicted Label
+0.0
+0.57
+Precision
+Maven-lite
+SN II
+1.0
+0.89
+0.03
+0.23
+0.84
+0.03
+0.15
+0.76
+0.04
+0.23
+True Label
+SN Ia
+baseline
+0.06
+0.94
+0.19
+0.13
+0.95
+0.57
+0.15
+0.93
+0.48
+SN Ibc
+Maven
+0.06
+0.8
+0.6
+0.4
+SN II
+0.03
+0.58
+0.03
+SN Ia
+SN Ibc
+Predicted Label
+SN II
+0.02
+0.28
+0.09
+SN Ia
+SN Ibc
+Predicted Label
+SN II
+0.29
+0.2
+SN Ia SN Ibc
+Predicted Label
+0.0
+0.03
 Figure 5. Normalized precision and recall confusion matrices for supernova classification across different models and
 modalities. The models compared are: (a) CLIP with simulation pre-training (Maven), (b) baseline using a supervised model
 approach, and (c) CLIP without simulation pre-training (Maven-lite). The classes included are SN II, SN Ia, and SN Ib/c.
-
-
-                                                        4.2. Classification Performance
-  Our results are visualized using a set of confusion matrices for our three-way classification task in Fig. 5. We show the
+4.2. Classification Performance
+Our results are visualized using a set of confusion matrices for our three-way classification task in Fig. 5. We show the
 confusion matrices for precision (normalized by predicted class) and recall (normalized by true class) for our models.
 We note higher recall by Maven on the two dominant classes in our sample: 0.79 for SNe II and 0.99 for SNe Ia,
 compared to 0.74 for SNe II and 0.91 for SNe Ia with the baseline model. We observe poorer recall with the minority
 SN Ib/c class, which comprises ∼5% of the observed sample: 0.18 with simulated pre-training compared to 0.61 for
 the baseline. We predict that the baseline model is better able to outline the decision boundaries for this class.
-  We observe the opposite results on the minority class when considering class precision. Our two-stage pre-training
+We observe the opposite results on the minority class when considering class precision. Our two-stage pre-training
 model achieves comparable precision to the baseline for SNe II and SNe Ia but substantially higher precision for
 SNe Ib/c, 0.58 compared to 0.28. We note that, with substantially higher discovery rates of rare classes anticipated with
 the Vera C. Rubin Observatory, classification precision is essential for obtaining spectroscopic follow-up observations
 of relevant events. We have explored the misassociation rate as a function of event peak brightness, but identify no
 obvious correlations.
-  A common metric in classification tasks is the F1 score, which increases to 1 in the limit of perfect classification. For
+A common metric in classification tasks is the F1 score, which increases to 1 in the limit of perfect classification. For
 a class C, F1 is defined as the harmonic mean between the class’s recall r and precision p:
-                                                                               pC × rC
-                                                                  F1,C := 2                                                   (3)
-                                                                               pC + rC
-  We calculate for each model both the micro-averaged F1 score, which averages performance across all events ir-
-respective of class; and the macro-averaged F1 score, which averages the F1 score computed independently for each
+F1,C := 2
+pC × rC
+pC + rC
+(3)
+We calculate for each model both the micro-averaged F1 score, which averages performance across all events irrespective of class; and the macro-averaged F1 score, which averages the F1 score computed independently for each
 class. The macro-averaged F1 score is a valuable indicator for our use case given the significant class imbalance, as the
 micro-F1 can approach unity when all events are labeled as the dominant class. We present these results, along with
-                    Maven: A Multimodal Foundation Model for Supernova Science                                               11
-
-  Table 2. Overview of classification model performance. We present three classification models: the baseline only
-  trained on the ZTF dataset, Maven-lite without synthetic pre-training, and Maven with synthetic pretraining and observed
-  fine-tuning. A more comprehensive overview over the runs performed in this paper can be found in Table 4.
-
-     Name       Pre-trained    kNN          mac-F1               mic-F1               mac-p                mac-r
-    baseline        no           –     0.7011 ± 0.0303       0.8728 ± 0.0205     0.6934 ± 0.0360     0.7527 ± 0.0247
-     Maven         CLIP          8      0.6874 ± 0.0342     0.9247 ± 0.0070     0.8041 ± 0.0833       0.6516 ± 0.0216
-   Maven-lite       no           3      0.6265 ± 0.0231      0.8943 ± 0.0110     0.6670 ± 0.0532      0.6119 ± 0.0121
-
-
-
-
+=== PAGE 11 ===
+11
+Maven: A Multimodal Foundation Model for Supernova Science
+Table 2. Overview of classification model performance. We present three classification models: the baseline only
+trained on the ZTF dataset, Maven-lite without synthetic pre-training, and Maven with synthetic pretraining and observed
+fine-tuning. A more comprehensive overview over the runs performed in this paper can be found in Table 4.
+Name
+Pre-trained
+kNN
+mac-F1
+mic-F1
+mac-p
+mac-r
+baseline
+Maven
+Maven-lite
+no
+CLIP
+no
+–
+8
+3
+0.7011 ± 0.0303
+0.6874 ± 0.0342
+0.6265 ± 0.0231
+0.8728 ± 0.0205
+0.9247 ± 0.0070
+0.8943 ± 0.0110
+0.6934 ± 0.0360
+0.8041 ± 0.0833
+0.6670 ± 0.0532
+0.7527 ± 0.0247
+0.6516 ± 0.0216
+0.6119 ± 0.0121
 the macro-averaged precision and recall (‘mac-p’ and ‘mac-r’) in Table 2. We further show the macro-F1 score of each
 model as a bar plot in Fig. 7.
-
-
-  We observe macro-F1 scores within 1-σ of the baseline model for the majority of our pre-trained kNN classifiers,
+We observe macro-F1 scores within 1-σ of the baseline model for the majority of our pre-trained kNN classifiers,
 from a score of 0.6874 ± 0.0342 for Maven compared to a baseline of 0.7011 ± 0.0303. The scores for these models are
 systematically higher than both Maven-lite and the majority of CLIP kNN classifiers without pre-training: the average
 F1 score is 0.68 for all pre-trained kNN classifiers compared with an average of 0.63 for the kNN classifiers trained
 with only observed data.
-  We have also calculated the performance of our models for the five-way classification task, which additionally
+We have also calculated the performance of our models for the five-way classification task, which additionally
 considers the rarer classes SN IIn and SLSN I. Here, we observe a marginally higher average F1 score for the synthetic
 pre-trained CLIP models than the baseline, though the results are consistent to within one standard deviation (0.50 ±
 0.03 for the best model compared to 0.49 ± 0.04). As with the three-way classification results, the macro-averaged
 precision of the pre-trained models is on average higher than the end-to-end baseline, with the best model achieving
 a score of 0.58 ± 0.03 compared to the baseline of 0.50 ± 0.09.
-
-                                4.3. Comparison to Transformer-Based SN Classifiers
-  Next, we compare our multimodal model to photometric classifiers in the literature with transformer-based architec-
-tures. Cabrera-Vives et al. (2024) apply a custom transformer model (ATAT) to synthetic photometry and metadata
+4.3. Comparison to Transformer-Based SN Classifiers
+Next, we compare our multimodal model to photometric classifiers in the literature with transformer-based architectures. Cabrera-Vives et al. (2024) apply a custom transformer model (ATAT) to synthetic photometry and metadata
 from the Extended LSST Astronomical Time-Series Classification Challenge (ELAsTiCC7 ). The ATAT model consists
 of separate transformers, one which encodes light curves with a temporal encoding based on Fourier series and a
 quantile tokenizer for extracted photometric features (including the number and phases of non-detections and the flux
@@ -592,7 +606,7 @@ across the three classes, compared with 0.70 for our end-to-end baseline and 0.6
 and spectra-aligned models. They report an average recall of 0.71 for these classes, compared to 0.75 for our end-to-end
 baseline and 0.65 for Maven; and an average precision of 0.63, compared to 0.69 for our baseline and 0.80 for Maven.
 We caution that these datasets are distinct, limiting further comparison.
-  The results of Pimentel et al. (2023) are more directly comparable to this work. Pimentel et al. (2023) present
+The results of Pimentel et al. (2023) are more directly comparable to this work. Pimentel et al. (2023) present
 a transformer model for ZTF photometry in which the time of each observation is encoded as the phase from first
 detection using a Fourier decomposition-based temporal modulation, with noise added to the values in training to
 prevent overfitting. In a two-stage pre-training scheme with both synthetic and observed events, the optimization
@@ -601,39 +615,22 @@ the encoded light curves. The resulting ‘S-TimeModAttn’ model is trained and
 from the Zwicky Transient Facility, with presumably substantial overlap with the observational dataset considered
 in this work. Pimentel et al. (2023) report a macro-F1 of 0.614 ± 0.036 in the task of four-way classification (Ia, II,
 Ib/c, and SLSN), compared to our 0.6874 ± 0.0342 for three-way classification; and a macro-precision of 0.598 ± 0.030
-
- 7 https://portal.nersc.gov/cfs/lsst/DESC TD PUBLIC/ELASTICC/
-12                                                Helfer, Zhang, et al
-
-
-
-                                                                            SN II
-
-
-
-
-                                                                           SN Ia
-
-
-
-
-                                                                        SN Ib/c
-
-
-
-
+7 https://portal.nersc.gov/cfs/lsst/DESC TD PUBLIC/ELASTICC/
+=== PAGE 12 ===
+12
+Helfer, Zhang, et al
+SN II
+SN Ia
+SN Ib/c
 Figure 6. Predicted versus true redshift for three different models: our pre-trained Maven (left), a baseline model using
 supervised methods, and our Maven-lite model trained end-to-end on the observed ZTF data. The data is segregated into
 different SN classes. The transparent points in the background represent all other classes. The SNe classes are displayed in
 separate columns, and the models are shown in separate rows for clear comparison.
-
-
 compared to our 0.804±0.083. A macro-recall (also referred to as completeness) score of 0.72 for three-way classification
 can be inferred from their confusion matrices in Fig. 5, compared to our lower 0.6516 ± 0.0216. Class-specific F1 scores
 and precisions (also referred to as purity) are not reported.
-
-                                              4.4. Regression Performance
-  We next consider the task of redshift estimation. We quantify the performance of our models with the coefficient of
+4.4. Regression Performance
+We next consider the task of redshift estimation. We quantify the performance of our models with the coefficient of
 determination R2 , the L1 and L2 error, and the outlier fraction ‘OLF’, defined as |zpred − ztrue |/(1 + ztrue ) > 0.15. We
 report these values for contrastive pre-trained models in Table 3. We also present a bar plot of the R2 values in Fig. 7,
 and the predicted versus true redshifts for each SN class in Fig. 6. As expected, we observe the highest correlation
@@ -643,39 +640,54 @@ R2 = 0.6129 ± 0.0245. The L1 and L2 errors are also lower on average for Maven 
 the outlier fraction is comparable. We conclude that, on average, Maven outperforms the baseline regression model.
 Maven-lite, our model without pre-training, achieves an R2 value of 0.6078 ± 0.0408, lower than both Maven and the
 baseline model.
-  Though a comparable photometric redshift model for low-redshift ZTF SNe does not exist in literature, an outlier
+Though a comparable photometric redshift model for low-redshift ZTF SNe does not exist in literature, an outlier
 fraction of 0.004 is reported for 289 photometric SNe Ia in the Supernova Legacy Survey (SNLS), nearly an order
-of magnitude higher than our best model but with a substantially higher maximum redshift z < 1.0 (Palanque-
-Delabrouille et al. 2010). Another analytic photometric redshift estimator proposed by Wang et al. (2015) for SNe Ia
+of magnitude higher than our best model but with a substantially higher maximum redshift z < 1.0 (PalanqueDelabrouille et al. 2010). Another analytic photometric redshift estimator proposed by Wang et al. (2015) for SNe Ia
 discovered by LSST finds an outlier fraction of 0.0023 over z < 1.0, compared to our 0.0002.
-
-
-
-                                                    5. DISCUSSION
-   We have explored the value of constrastive pre-training in constructing a foundational model for SN science. By
+5. DISCUSSION
+We have explored the value of constrastive pre-training in constructing a foundational model for SN science. By
 first training with synthetic events and fine-tuning with observed events, we have constructed a model, Maven, whose
 performance on the downstream tasks of photometric classification and redshift is on par with models optimized
 end-to-end for these tasks. Maven outperforms our classification baseline model, with a micro-averaged-F 1 score of
-                           Maven: A Multimodal Foundation Model for Supernova Science                                                       13
-
-   Table 3. Overview of regression model performance. We present three regression models: the baseline only trained
-   on the ZTF dataset, a CLIP model trained only on the ZTF dataset (Maven-lite) and a CLIP model pre-trained on
-   simulated data (Maven) and then subsequently trained on ZTF. A more comprehensive overview over the runs performed
-   in this paper can be found in Table 5.
-
-              Name     Pre-trained     kNN              R2                        L1                  L2                   OLF
-         Maven              CLIP         9      0.6496 ± 0.0398          0.0095 ± 0.0004        0.0152 ± 0.0014       0.0002 ± 0.0005
-        baseline             no                  0.6129 ± 0.0245          0.0104 ± 0.0004        0.0160 ± 0.0010      0.0002 ± 0.0005
-       Maven-lite            no          9       0.6078 ± 0.0408          0.0103 ± 0.0006        0.0161 ± 0.0014      0.0002 ± 0.0005
-
-
-
-
+=== PAGE 13 ===
+13
+Maven: A Multimodal Foundation Model for Supernova Science
+Table 3. Overview of regression model performance. We present three regression models: the baseline only trained
+on the ZTF dataset, a CLIP model trained only on the ZTF dataset (Maven-lite) and a CLIP model pre-trained on
+simulated data (Maven) and then subsequently trained on ZTF. A more comprehensive overview over the runs performed
+in this paper can be found in Table 5.
+Name
+Pre-trained
+kNN
+R2
+L1
+L2
+OLF
+Maven
+baseline
+Maven-lite
+CLIP
+no
+no
+9
+0.6496 ± 0.0398
+0.6129 ± 0.0245
+0.6078 ± 0.0408
+0.0095 ± 0.0004
+0.0104 ± 0.0004
+0.0103 ± 0.0006
+0.0152 ± 0.0014
+0.0160 ± 0.0010
+0.0161 ± 0.0014
+0.0002 ± 0.0005
+0.0002 ± 0.0005
+0.0002 ± 0.0005
+9
 0.92. Similarly, Maven outperforms our baseline for redshift regression, with an L2-loss of 0.015 and minimal outlier
 fraction. While we have limited our study to ZTF data, adapting Maven to incorporate additional photometric filters
 and classes of astronomical transients would allow us to repurpose it for diverse time-domain studies with the Vera C.
 Rubin Observatory using fewer computational resources than building multiple specialized models.
-  CLIP-style pre-training has been proposed as a simple and effective mechanism for extracting information from
+CLIP-style pre-training has been proposed as a simple and effective mechanism for extracting information from
 multiple modalities in a single model. The following conditions need to be met for multimodal constrastive learning
 to be effective: that significant information content is shared across these modalities; that the mutual information is
 relevant for the downstream tasks; and that the shared information is the maximal information in each modality relevant
@@ -692,68 +704,65 @@ bring significant performance gains beyond end-to-end optimized models. This beh
 modalities directly with the relevant downstream information (metadata of an event’s spectroscopic classification and
 redshift, as discussed in Appendix A): the least-informative modality sets an upper limit on the mutual information
 that can be extracted.
-
-                                   Classification                                                     Regression
-                     CLIP Models     Baseline Models       Pre-trained         0.70    CLIP Models      Baseline Models       Pre-trained
-
-
-              0.70                                                             0.65
-   macro-f1
-
-
-
-
-                                                                          R2
-
-
-
-
-              0.65                                                             0.60
-
-
-                                                                               0.55
-              0.60
-
-                     baseline          Maven           Maven-lite                       Maven           baseline          Maven-lite
-
+Classification
+CLIP Models
+Baseline Models
+Regression
+Pre-trained
+0.70
+Baseline Models
+Maven
+baseline
+Pre-trained
+0.65
+R2
+macro-f1
+0.70
+CLIP Models
+0.65
+0.60
+0.55
+0.60
+baseline
+Maven
+Maven-lite
+Maven-lite
 Figure 7. Final performance metrics for Maven, Maven-lite, and baseline models for on downstream classification and
 regression tasks.
-14                                                Helfer, Zhang, et al
-
-  Seen from this perspective, it is surprising that we do not observe substantial drops in performance relative to our
+=== PAGE 14 ===
+14
+Helfer, Zhang, et al
+Seen from this perspective, it is surprising that we do not observe substantial drops in performance relative to our
 baseline models. We attribute this to systematic hyperparameter tuning and additional synthetic pre-training, through
 which we are able to mitigate the negative effects of constrastive alignment. We therefore advise caution in the use
 of multimodal constrastive pre-training, which should be specialized for the input modalities and the anticipated
 downstream tasks. In our case, additional improvements may be possible with a pre-training scheme designed to
 preserve both mutual and unique information content relevant for classification and redshift estimation (as is proposed
 in Liang et al. 2023).
-                                                    6. CONCLUSION
-  We conclude by summarizing our key findings:
-     1. We train Maven through self-supervised contrastive learning on SN spectra and light curves. Maven is able to
-        achieve state-of-the-art performance on both redshift estimation and SN classification.
-     2. We find that pre-training on a large simulated dataset significantly improves Maven’s performance on downstream
-        tasks over a contrastively-trained model on solely the observed data.
-     3. Maven does not dramatically outperform supervised models optimized directly for each downstream task. We
-        hypothesize that this is due to the light curve being an information-poor modality, which limits the amount of
-        information our unsupervised objective is able to extract.
-   Starting in 2025, the Vera C. Rubin Observatory will initiate the 10-year Legacy Survey for Space and Time, and
+6. CONCLUSION
+We conclude by summarizing our key findings:
+1. We train Maven through self-supervised contrastive learning on SN spectra and light curves. Maven is able to
+achieve state-of-the-art performance on both redshift estimation and SN classification.
+2. We find that pre-training on a large simulated dataset significantly improves Maven’s performance on downstream
+tasks over a contrastively-trained model on solely the observed data.
+3. Maven does not dramatically outperform supervised models optimized directly for each downstream task. We
+hypothesize that this is due to the light curve being an information-poor modality, which limits the amount of
+information our unsupervised objective is able to extract.
+Starting in 2025, the Vera C. Rubin Observatory will initiate the 10-year Legacy Survey for Space and Time, and
 detect ∼1M SNe yr−1 in ugrizY filters. This consistently-calibrated photometric dataset will enable self-supervised
 pre-training for time-domain foundation models (including variable stars, lensing events, active galactic nuclei, and
 other non-SN phenomena) at an unprecedented scale. However, without spectroscopy for the vast majority of detected
 events, the self-supervised tasks that can be applied with this data will be limited to a single modality.
-   On the other hand, traditional multimodal models have considered distinct representations of a single astronomical
+On the other hand, traditional multimodal models have considered distinct representations of a single astronomical
 object (photometry and spectroscopy of a supernova). Where spectroscopic and photometric information for a transient
 is sparse, however, broad physical properties can be inferred from the event’s host galaxy (Hakobyan et al. 2012;
 Kang et al. 2020; Schulze et al. 2021; Chakraborty et al. 2024). Early efforts have emphasized the value of these
 data for photometric classification (Gomez et al. 2020; Carrasco-Davis et al. 2021; Gagliano et al. 2023; Sheng et al.
-2024). LSST data will contain photometry for tens of billions of galaxies, millions of which will be spectroscopically-
-confirmed through the Dark Energy Spectroscopic Instrument (DESI; Levi et al. 2019) or 4MOST (Dumayne et al.
+2024). LSST data will contain photometry for tens of billions of galaxies, millions of which will be spectroscopicallyconfirmed through the Dark Energy Spectroscopic Instrument (DESI; Levi et al. 2019) or 4MOST (Dumayne et al.
 2023). Additional work should be dedicated to exploring the linking of modalities spanning distinct lengthscales, which
 would allow for both supernova and host-galaxy data to be consolidated in a single pre-training scheme.
-
 This work was initiated at the IAIFI AstroML Hackathon, held at MIT in January 2024. This work is supported by the
-National Science Foundation under Cooperative Agreement PHY-2019786 (The NSF AI Institute for Artificial Intelli-
-gence and Fundamental Interactions, http://iaifi.org/) and AST-2108676. This material is based upon work supported
+National Science Foundation under Cooperative Agreement PHY-2019786 (The NSF AI Institute for Artificial Intelligence and Fundamental Interactions, http://iaifi.org/) and AST-2108676. This material is based upon work supported
 by the U.S. Department of Energy, Office of Science, Office of High Energy Physics of U.S. Department of Energy
 under grant Contract Number DE-SC0012567. This work was performed in part at the Aspen Center for Physics,
 which is supported by National Science Foundation grant PHY-2210452. Research reported in this publication was
@@ -761,204 +770,437 @@ supported by a Postdoctoral Fellowship at the Institute for Advanced Computation
 This work was carried out at the Advanced Research Computing at Hopkins (ARCH) core facility (rockfish.jhu.edu),
 which is supported by the National Science Foundation (NSF) grant number OAC1920103, as well as the FASRC
 Cannon cluster supported by the FAS Division of Science Research Computing Group at Harvard University.
-
-  Software: Jupyter (Kluyver et al. 2016), Matplotlib (Hunter 2007), Numpy (Harris et al. 2020), PyTorch (Paszke
+Software: Jupyter (Kluyver et al. 2016), Matplotlib (Hunter 2007), Numpy (Harris et al. 2020), PyTorch (Paszke
 et al. 2019), PyTorch lightning (Falcon & The PyTorch Lightning team 2019), Astropy (Astropy Collaboration et al.
 2013, 2018, 2022), Einops (Rogozhnikov 2022) Pandas (pandas development team 2020), scikit-learn (Pedregosa et al.
 2011) and wandb (Biewald 2020).
-
-
-                                                      REFERENCES
-Aleo, P. D., Malanchev, K., Sharief, S., et al. 2023, ApJS,    Astropy Collaboration, Robitaille, T. P., Tollerud, E. J.,
-  266, 9, arXiv: 2211.07128, doi: 10.3847/1538-4365/acbfba       et al. 2013, A&A, 558, A33, arXiv: 1307.6212,
-                                                                 doi: 10.1051/0004-6361/201322068
-                     Maven: A Multimodal Foundation Model for Supernova Science                                            15
-
-Astropy Collaboration, Price-Whelan, A. M., Sipőcz, B. M.,    Gagliano, A., Contardo, G., Foreman-Mackey, D., Malz,
-  et al. 2018, AJ, 156, 123, arXiv: 1801.02634,                  A. I., & Aleo, P. D. 2023, ApJ, 954, 6, arXiv: 2305.08894,
-  doi: 10.3847/1538-3881/aabc4f                                  doi: 10.3847/1538-4357/ace326
-Astropy Collaboration, Price-Whelan, A. M., Lim, P. L.,        Gomez, S., Berger, E., Blanchard, P. K., et al. 2020, ApJ,
-  et al. 2022, ApJ, 935, 167, arXiv: 2206.14220,                 904, 74, arXiv: 2009.01853,
-  doi: 10.3847/1538-4357/ac7c74                                  doi: 10.3847/1538-4357/abbf49
-Bellm, E. C., Kulkarni, S. R., Graham, M. J., et al. 2018,     Goyal, P., Duval, Q., Seessel, I., et al. 2022, arXiv e-prints,
-  Publications of the Astronomical Society of the Pacific,       arXiv:2202.08360, arXiv: 2202.08360,
-  131, 018002                                                    doi: 10.48550/arXiv.2202.08360
-Ben-Ami, S., Konidaris, N., Quimby, R., et al. 2012, in        Guy, J., Astier, P., Baumont, S., et al. 2007, A&A, 466, 11,
-  Ground-based and Airborne Instrumentation for                  arXiv: astro-ph/0701828,
-  Astronomy IV, Vol. 8446, SPIE, 1044–1052                       doi: 10.1051/0004-6361:20066930
-Biewald, L. 2020, Experiment Tracking with Weights and         Hakobyan, A. A., Adibekyan, V. Z., Aramyan, L. S., et al.
-  Biases. https://www.wandb.com/                                 2012, A&A, 544, A81, arXiv: 1206.5016,
-Blagorodnova, N., Neill, J. D., Walters, R., et al. 2018,        doi: 10.1051/0004-6361/201219541
-  PASP, 130, 035003, arXiv: 1710.02917,                        Harris, C. R., Millman, K. J., van der Walt, S. J., et al.
-  doi: 10.1088/1538-3873/aaa53f                                  2020, Nature, 585, 357, doi: 10.1038/s41586-020-2649-2
-Blagorodnova, N., Neill, J. D., Walters, R., et al. 2018,      Hounsell, R., Scolnic, D., Foley, R. J., et al. 2018, ApJ, 867,
-  Publications of the Astronomical Society of the Pacific,       23, arXiv: 1702.01747, doi: 10.3847/1538-4357/aac08b
-  130, 035003                                                  Hunter, J. D. 2007, Computing in Science & Engineering, 9,
-Blondin, S., & Tonry, J. L. 2007, ApJ, 666, 1024,                90, doi: 10.1109/MCSE.2007.55
-  arXiv: 0709.4488, doi: 10.1086/520494                        Ivezić, Ž., Kahn, S. M., Tyson, J. A., et al. 2019, ApJ, 873,
-Boone, K. 2021, AJ, 162, 275, arXiv: 2109.13999,                 111, arXiv: 0805.2366, doi: 10.3847/1538-4357/ab042c
-  doi: 10.3847/1538-3881/ac2a2d                                Jones, D., Foley, R., Narayan, G., et al. 2021, The
-Cabrera-Vives, G., Moreno-Cartagena, D., Astorga, N.,            Astrophysical Journal, 908, 143
-  et al. 2024, arXiv e-prints, arXiv:2405.03078,               Kang, Y., Lee, Y.-W., Kim, Y.-L., Chung, C., & Ree, C. H.
-  arXiv: 2405.03078, doi: 10.48550/arXiv.2405.03078              2020, ApJ, 889, 8, arXiv: 1912.04903,
-Cardelli, J. A., Clayton, G. C., & Mathis, J. S. 1989, ApJ,      doi: 10.3847/1538-4357/ab5afc
-  345, 245, doi: 10.1086/167900                                Kessler, R., Bernstein, J. P., Cinabro, D., et al. 2009,
-Carrasco-Davis, R., Reyes, E., Valenzuela, C., et al. 2021,      PASP, 121, 1028, arXiv: 0908.4280, doi: 10.1086/605984
-  AJ, 162, 231, arXiv: 2008.03309,                             Kessler, R., Bassett, B., Belov, P., et al. 2010, Publications
-  doi: 10.3847/1538-3881/ac0ef1                                  of the Astronomical Society of the Pacific, 122, 1415
-Cenko, S. B., Fox, D. B., Moon, D.-S., et al. 2006,            Kessler, R., Narayan, G., Avelino, A., et al. 2019, PASP,
-  Publications of the Astronomical Society of the Pacific,       131, 094501, arXiv: 1903.11756,
-  118, 1396                                                      doi: 10.1088/1538-3873/ab26f1
-Chakraborty, S., Sadler, B., Hoeflich, P., et al. 2024, ApJ,   Kim, D., Park, S., Kim, J., & Lee, J. 2021, arXiv e-prints,
-  969, 80, arXiv: 2311.03473,                                    arXiv:2104.09841, arXiv: 2104.09841,
-  doi: 10.3847/1538-4357/ad4702                                  doi: 10.48550/arXiv.2104.09841
-Dumayne, J., Hook, I. M., Williams, S. C., et al. 2023, RAS    Kluyver, T., Ragan-Kelley, B., Pérez, F., et al. 2016, in
-  Techniques and Instruments, 2, 453, arXiv: 2308.04863,         Positioning and Power in Academic Publishing: Players,
-  doi: 10.1093/rasti/rzad036                                     Agents and Agendas, ed. F. Loizides & B. Schmidt, IOS
-Ericsson, L., Gouk, H., Loy, C. C., & Hospedales, T. M.          Press, 87 – 90
-  2022, IEEE Signal Processing Magazine, 39, 42,               Levi, M., Allen, L. E., Raichoor, A., et al. 2019, in Bulletin
-  arXiv: 2110.09327, doi: 10.1109/MSP.2021.3134634               of the American Astronomical Society, Vol. 51, 57
-Falcon, W., & The PyTorch Lightning team. 2019, PyTorch        Liang, P. P., Deng, Z., Ma, M., et al. 2023, arXiv e-prints,
-  Lightning, 1.4, doi: 10.5281/zenodo.3828935.                   arXiv:2306.05268, arXiv: 2306.05268,
-  https://github.com/Lightning-AI/lightning                      doi: 10.48550/arXiv.2306.05268
-Fremling, C., Miller, A. A., Sharma, Y., et al. 2020, ApJ,     Madau, P., & Dickinson, M. 2014, ARA&A, 52, 415,
-  895, 32, arXiv: 1910.12973,                                    arXiv: 1403.0007,
-  doi: 10.3847/1538-4357/ab8943                                  doi: 10.1146/annurev-astro-081811-125615
-16                                                 Helfer, Zhang, et al
-
-Matheson, T., Stubens, C., Wolf, N., et al. 2021, AJ, 161,      Richards, J. W., Homrighausen, D., Freeman, P. E.,
-  107, arXiv: 2011.12385, doi: 10.3847/1538-3881/abd703            Schafer, C. M., & Poznanski, D. 2012, MNRAS, 419,
-Mitra, A., Kessler, R., More, S., Hlozek, R., & LSST Dark          1121, arXiv: 1103.6034,
-  Energy Science Collaboration. 2023, ApJ, 944, 212,               doi: 10.1111/j.1365-2966.2011.19768.x
-  arXiv: 2210.07560, doi: 10.3847/1538-4357/acb057              Rigault, M., Neill, J., Blagorodnova, N., et al. 2019,
-Modjaz, M., Gutiérrez, C. P., & Arcavi, I. 2019, Nature           Astronomy & Astrophysics, 627, A115
-  Astronomy, 3, 717, arXiv: 1908.02476,                         Rogozhnikov, A. 2022, in International Conference on
-  doi: 10.1038/s41550-019-0856-2                                   Learning Representations.
-Möller, A., & de Boissière, T. 2020, MNRAS, 491, 4277,           https://openreview.net/forum?id=oapKSVM2bcj
-  arXiv: 1901.06384, doi: 10.1093/mnras/stz3312                 Schulze,   S., Yaron, O., Sollerman, J., et al. 2021, ApJS, 255,
-Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R.,          29, arXiv: 2008.05988, doi: 10.3847/1538-4365/abff5e
-  & Hložek, R. 2019a, PASP, 131, 118002,                       Shappee, B., Prieto, J., Stanek, K., et al. 2014, in American
-  arXiv: 1904.00014, doi: 10.1088/1538-3873/ab1609                 Astronomical Society Meeting Abstracts# 223, Vol. 223,
-Muthukrishna, D., Parkinson, D., & Tucker, B. E. 2019b,            236–03
-  ApJ, 885, 85, arXiv: 1903.02557,                              Sheng,   X., Nicholl, M., Smith, K. W., et al. 2024, MNRAS,
-  doi: 10.3847/1538-4357/ab48f4                                    531, 2474, arXiv: 2312.04968,
-Oord, A. v. d., Li, Y., & Vinyals, O. 2018, arXiv preprint         doi: 10.1093/mnras/stae1253
-  arXiv:1807.03748                                              Shi,  Y., Daunhawer, I., Vogt, J. E., Torr, P., & Sanyal, A.
-Palanque-Delabrouille, N., Ruhlmann-Kleider, V., Pascal,           2022,  in ICML 2022: Workshop on Spurious Correlations,
-  S., et al. 2010, A&A, 514, A63, arXiv: 0911.1629,                Invariance and Stability
-  doi: 10.1051/0004-6361/200913283                              Shivvers,   I., Modjaz, M., Zheng, W., et al. 2017, PASP,
-pandas development team, T. 2020, pandas-dev/pandas:               129, 054201,   arXiv: 1609.02922,
-  Pandas, latest, Zenodo, doi: 10.5281/zenodo.3509134.             doi: 10.1088/1538-3873/aa54a6
-  https://doi.org/10.5281/zenodo.3509134                        Slijepcevic, I. V., Scaife, A. M. M., Walmsley, M., et al.
-Parker, L., Lanusse, F., Golkar, S., et al. 2024, Monthly          2024, RAS Techniques and Instruments, 3, 19,
-  Notices of the Royal Astronomical Society, 531, 4990             arXiv: 2305.16127, doi: 10.1093/rasti/rzad055
-Paszke, A., Gross, S., Massa, F., et al. 2019, in Advances in   Strolger,  L.-G., Dahlen, T., Rodney, S. A., et al. 2015, ApJ,
-  Neural Information Processing Systems 32, ed.                    813, 93, arXiv: 1509.06574,
-  H. Wallach, H. Larochelle, A. Beygelzimer,                       doi: 10.1088/0004-637X/813/2/93
-  F. d'Alché-Buc, E. Fox, & R. Garnett (Curran                 Tonry,  J., Denneau, L., Heinze, A., et al. 2018, Publications
-  Associates, Inc.), 8024–8035.                                    of the  Astronomical Society of the Pacific, 130, 064505
-  http://papers.neurips.cc/paper/                               Van der Maaten, L., & Hinton, G. 2008, Journal of machine
-                                                                   learning research, 9
-  9015-pytorch-an-imperative-style-high-performance-deep-learning-library.
-  pdf                                                           Vaswani,    A., Shazeer, N., Parmar, N., et al. 2017, arXiv
-Pedregosa, F., Varoquaux, G., Gramfort, A., et al. 2011,           e-prints,  arXiv:1706.03762, arXiv: 1706.03762,
-  Journal of Machine Learning Research, 12, 2825                   doi: 10.48550/arXiv.1706.03762
-Perley, D. A., Fremling, C., Sollerman, J., et al. 2020, ApJ,   Villar, V., Berger, E., Miller, G., et al. 2019, The
-                                                                   Astrophysical Journal, 884, 83
-  904, 35, arXiv: 2009.01242,
-                                                                Villar, V. A., Berger, E., Metzger, B. D., & Guillochon, J.
-  doi: 10.3847/1538-4357/abbd98
-                                                                   2017, The Astrophysical Journal, 849, 70
+REFERENCES
+Aleo, P. D., Malanchev, K., Sharief, S., et al. 2023, ApJS,
+266, 9, arXiv: 2211.07128, doi: 10.3847/1538-4365/acbfba
+Astropy Collaboration, Robitaille, T. P., Tollerud, E. J.,
+et al. 2013, A&A, 558, A33, arXiv: 1307.6212,
+doi: 10.1051/0004-6361/201322068
+=== PAGE 15 ===
+Maven: A Multimodal Foundation Model for Supernova Science
+Astropy Collaboration, Price-Whelan, A. M., Sipőcz, B. M.,
+et al. 2018, AJ, 156, 123, arXiv: 1801.02634,
+doi: 10.3847/1538-3881/aabc4f
+Astropy Collaboration, Price-Whelan, A. M., Lim, P. L.,
+et al. 2022, ApJ, 935, 167, arXiv: 2206.14220,
+doi: 10.3847/1538-4357/ac7c74
+Bellm, E. C., Kulkarni, S. R., Graham, M. J., et al. 2018,
+Publications of the Astronomical Society of the Pacific,
+131, 018002
+Ben-Ami, S., Konidaris, N., Quimby, R., et al. 2012, in
+Ground-based and Airborne Instrumentation for
+Astronomy IV, Vol. 8446, SPIE, 1044–1052
+Biewald, L. 2020, Experiment Tracking with Weights and
+Biases. https://www.wandb.com/
+Blagorodnova, N., Neill, J. D., Walters, R., et al. 2018,
+PASP, 130, 035003, arXiv: 1710.02917,
+doi: 10.1088/1538-3873/aaa53f
+Blagorodnova, N., Neill, J. D., Walters, R., et al. 2018,
+Publications of the Astronomical Society of the Pacific,
+130, 035003
+Blondin, S., & Tonry, J. L. 2007, ApJ, 666, 1024,
+arXiv: 0709.4488, doi: 10.1086/520494
+Boone, K. 2021, AJ, 162, 275, arXiv: 2109.13999,
+doi: 10.3847/1538-3881/ac2a2d
+Cabrera-Vives, G., Moreno-Cartagena, D., Astorga, N.,
+et al. 2024, arXiv e-prints, arXiv:2405.03078,
+arXiv: 2405.03078, doi: 10.48550/arXiv.2405.03078
+Cardelli, J. A., Clayton, G. C., & Mathis, J. S. 1989, ApJ,
+345, 245, doi: 10.1086/167900
+Carrasco-Davis, R., Reyes, E., Valenzuela, C., et al. 2021,
+AJ, 162, 231, arXiv: 2008.03309,
+doi: 10.3847/1538-3881/ac0ef1
+Cenko, S. B., Fox, D. B., Moon, D.-S., et al. 2006,
+Publications of the Astronomical Society of the Pacific,
+118, 1396
+Chakraborty, S., Sadler, B., Hoeflich, P., et al. 2024, ApJ,
+969, 80, arXiv: 2311.03473,
+doi: 10.3847/1538-4357/ad4702
+Dumayne, J., Hook, I. M., Williams, S. C., et al. 2023, RAS
+Techniques and Instruments, 2, 453, arXiv: 2308.04863,
+doi: 10.1093/rasti/rzad036
+Ericsson, L., Gouk, H., Loy, C. C., & Hospedales, T. M.
+2022, IEEE Signal Processing Magazine, 39, 42,
+arXiv: 2110.09327, doi: 10.1109/MSP.2021.3134634
+Falcon, W., & The PyTorch Lightning team. 2019, PyTorch
+Lightning, 1.4, doi: 10.5281/zenodo.3828935.
+https://github.com/Lightning-AI/lightning
+Fremling, C., Miller, A. A., Sharma, Y., et al. 2020, ApJ,
+895, 32, arXiv: 1910.12973,
+doi: 10.3847/1538-4357/ab8943
+15
+Gagliano, A., Contardo, G., Foreman-Mackey, D., Malz,
+A. I., & Aleo, P. D. 2023, ApJ, 954, 6, arXiv: 2305.08894,
+doi: 10.3847/1538-4357/ace326
+Gomez, S., Berger, E., Blanchard, P. K., et al. 2020, ApJ,
+904, 74, arXiv: 2009.01853,
+doi: 10.3847/1538-4357/abbf49
+Goyal, P., Duval, Q., Seessel, I., et al. 2022, arXiv e-prints,
+arXiv:2202.08360, arXiv: 2202.08360,
+doi: 10.48550/arXiv.2202.08360
+Guy, J., Astier, P., Baumont, S., et al. 2007, A&A, 466, 11,
+arXiv: astro-ph/0701828,
+doi: 10.1051/0004-6361:20066930
+Hakobyan, A. A., Adibekyan, V. Z., Aramyan, L. S., et al.
+2012, A&A, 544, A81, arXiv: 1206.5016,
+doi: 10.1051/0004-6361/201219541
+Harris, C. R., Millman, K. J., van der Walt, S. J., et al.
+2020, Nature, 585, 357, doi: 10.1038/s41586-020-2649-2
+Hounsell, R., Scolnic, D., Foley, R. J., et al. 2018, ApJ, 867,
+23, arXiv: 1702.01747, doi: 10.3847/1538-4357/aac08b
+Hunter, J. D. 2007, Computing in Science & Engineering, 9,
+90, doi: 10.1109/MCSE.2007.55
+Ivezić, Ž., Kahn, S. M., Tyson, J. A., et al. 2019, ApJ, 873,
+111, arXiv: 0805.2366, doi: 10.3847/1538-4357/ab042c
+Jones, D., Foley, R., Narayan, G., et al. 2021, The
+Astrophysical Journal, 908, 143
+Kang, Y., Lee, Y.-W., Kim, Y.-L., Chung, C., & Ree, C. H.
+2020, ApJ, 889, 8, arXiv: 1912.04903,
+doi: 10.3847/1538-4357/ab5afc
+Kessler, R., Bernstein, J. P., Cinabro, D., et al. 2009,
+PASP, 121, 1028, arXiv: 0908.4280, doi: 10.1086/605984
+Kessler, R., Bassett, B., Belov, P., et al. 2010, Publications
+of the Astronomical Society of the Pacific, 122, 1415
+Kessler, R., Narayan, G., Avelino, A., et al. 2019, PASP,
+131, 094501, arXiv: 1903.11756,
+doi: 10.1088/1538-3873/ab26f1
+Kim, D., Park, S., Kim, J., & Lee, J. 2021, arXiv e-prints,
+arXiv:2104.09841, arXiv: 2104.09841,
+doi: 10.48550/arXiv.2104.09841
+Kluyver, T., Ragan-Kelley, B., Pérez, F., et al. 2016, in
+Positioning and Power in Academic Publishing: Players,
+Agents and Agendas, ed. F. Loizides & B. Schmidt, IOS
+Press, 87 – 90
+Levi, M., Allen, L. E., Raichoor, A., et al. 2019, in Bulletin
+of the American Astronomical Society, Vol. 51, 57
+Liang, P. P., Deng, Z., Ma, M., et al. 2023, arXiv e-prints,
+arXiv:2306.05268, arXiv: 2306.05268,
+doi: 10.48550/arXiv.2306.05268
+Madau, P., & Dickinson, M. 2014, ARA&A, 52, 415,
+arXiv: 1403.0007,
+doi: 10.1146/annurev-astro-081811-125615
+=== PAGE 16 ===
+16
+Helfer, Zhang, et al
+Richards, J. W., Homrighausen, D., Freeman, P. E.,
+Matheson, T., Stubens, C., Wolf, N., et al. 2021, AJ, 161,
+Schafer, C. M., & Poznanski, D. 2012, MNRAS, 419,
+107, arXiv: 2011.12385, doi: 10.3847/1538-3881/abd703
+1121, arXiv: 1103.6034,
+Mitra, A., Kessler, R., More, S., Hlozek, R., & LSST Dark
+doi: 10.1111/j.1365-2966.2011.19768.x
+Energy Science Collaboration. 2023, ApJ, 944, 212,
+Rigault, M., Neill, J., Blagorodnova, N., et al. 2019,
+arXiv: 2210.07560, doi: 10.3847/1538-4357/acb057
+Astronomy & Astrophysics, 627, A115
+Modjaz, M., Gutiérrez, C. P., & Arcavi, I. 2019, Nature
+Rogozhnikov, A. 2022, in International Conference on
+Astronomy, 3, 717, arXiv: 1908.02476,
+Learning Representations.
+doi: 10.1038/s41550-019-0856-2
+https://openreview.net/forum?id=oapKSVM2bcj
+Möller, A., & de Boissière, T. 2020, MNRAS, 491, 4277,
+Schulze,
+S., Yaron, O., Sollerman, J., et al. 2021, ApJS, 255,
+arXiv: 1901.06384, doi: 10.1093/mnras/stz3312
+29, arXiv: 2008.05988, doi: 10.3847/1538-4365/abff5e
+Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R.,
+Shappee, B., Prieto, J., Stanek, K., et al. 2014, in American
+& Hložek, R. 2019a, PASP, 131, 118002,
+Astronomical Society Meeting Abstracts# 223, Vol. 223,
+arXiv: 1904.00014, doi: 10.1088/1538-3873/ab1609
+236–03
+Muthukrishna, D., Parkinson, D., & Tucker, B. E. 2019b,
+Sheng,
+X., Nicholl, M., Smith, K. W., et al. 2024, MNRAS,
+ApJ, 885, 85, arXiv: 1903.02557,
+531, 2474, arXiv: 2312.04968,
+doi: 10.3847/1538-4357/ab48f4
+doi: 10.1093/mnras/stae1253
+Oord, A. v. d., Li, Y., & Vinyals, O. 2018, arXiv preprint
+Shi,
+Y., Daunhawer, I., Vogt, J. E., Torr, P., & Sanyal, A.
+arXiv:1807.03748
+2022,
+in ICML 2022: Workshop on Spurious Correlations,
+Palanque-Delabrouille, N., Ruhlmann-Kleider, V., Pascal,
+Invariance and Stability
+S., et al. 2010, A&A, 514, A63, arXiv: 0911.1629,
+Shivvers,
+I., Modjaz, M., Zheng, W., et al. 2017, PASP,
+doi: 10.1051/0004-6361/200913283
+129,
+054201,
+arXiv: 1609.02922,
+pandas development team, T. 2020, pandas-dev/pandas:
+doi:
+10.1088/1538-3873/aa54a6
+Pandas, latest, Zenodo, doi: 10.5281/zenodo.3509134.
+Slijepcevic, I. V., Scaife, A. M. M., Walmsley, M., et al.
+https://doi.org/10.5281/zenodo.3509134
+2024, RAS Techniques and Instruments, 3, 19,
+Parker, L., Lanusse, F., Golkar, S., et al. 2024, Monthly
+arXiv: 2305.16127, doi: 10.1093/rasti/rzad055
+Notices of the Royal Astronomical Society, 531, 4990
+Strolger,
+L.-G., Dahlen, T., Rodney, S. A., et al. 2015, ApJ,
+Paszke, A., Gross, S., Massa, F., et al. 2019, in Advances in
+813, 93, arXiv: 1509.06574,
+Neural Information Processing Systems 32, ed.
+doi: 10.1088/0004-637X/813/2/93
+H. Wallach, H. Larochelle, A. Beygelzimer,
+Tonry,
+J., Denneau, L., Heinze, A., et al. 2018, Publications
+F. d'Alché-Buc, E. Fox, & R. Garnett (Curran
+of
+the
+Astronomical Society of the Pacific, 130, 064505
+Associates, Inc.), 8024–8035.
+Van der Maaten, L., & Hinton, G. 2008, Journal of machine
+http://papers.neurips.cc/paper/
+learning research, 9
+9015-pytorch-an-imperative-style-high-performance-deep-learning-library.
+Vaswani,
+A., Shazeer, N., Parmar, N., et al. 2017, arXiv
+pdf
+e-prints,
+arXiv:1706.03762, arXiv: 1706.03762,
+Pedregosa, F., Varoquaux, G., Gramfort, A., et al. 2011,
+doi:
+10.48550/arXiv.1706.03762
+Journal of Machine Learning Research, 12, 2825
+Villar, V., Berger, E., Miller, G., et al. 2019, The
+Perley, D. A., Fremling, C., Sollerman, J., et al. 2020, ApJ,
+Astrophysical Journal, 884, 83
+904, 35, arXiv: 2009.01242,
+Villar, V. A., Berger, E., Metzger, B. D., & Guillochon, J.
+doi: 10.3847/1538-4357/abbd98
+2017, The Astrophysical Journal, 849, 70
 Pimentel, Ó., Estévez, P. A., & Förster, F. 2023, AJ, 165,
-                                                                Villar, V. A., Hosseinzadeh, G., Berger, E., et al. 2020,
-  18, arXiv: 2201.08482, doi: 10.3847/1538-3881/ac9ab4
-                                                                   ApJ, 905, 94, arXiv: 2008.04921,
+Villar, V. A., Hosseinzadeh, G., Berger, E., et al. 2020,
+18, arXiv: 2201.08482, doi: 10.3847/1538-3881/ac9ab4
+ApJ, 905, 94, arXiv: 2008.04921,
 Qu, H., & Sako, M. 2023, ApJ, 954, 201, arXiv: 2305.11869,
-                                                                   doi: 10.3847/1538-4357/abc6fd
-  doi: 10.3847/1538-4357/aceafa
-                                                                Wang, Y., Gjergo, E., & Kuhlmann, S. 2015, MNRAS, 451,
+doi: 10.3847/1538-4357/abc6fd
+doi: 10.3847/1538-4357/aceafa
+Wang, Y., Gjergo, E., & Kuhlmann, S. 2015, MNRAS, 451,
 Radford, A., Kim, J. W., Hallacy, C., et al. 2021, in
-                                                                   1955, arXiv: 1501.06839, doi: 10.1093/mnras/stv1090
-  International conference on machine learning, PMLR,
-                                                                Yang, Y., & Xu, Z. 2020, arXiv e-prints, arXiv:2006.07529,
-  8748–8763
-                                                                   arXiv: 2006.07529, doi: 10.48550/arXiv.2006.07529
+1955, arXiv: 1501.06839, doi: 10.1093/mnras/stv1090
+International conference on machine learning, PMLR,
+Yang, Y., & Xu, Z. 2020, arXiv e-prints, arXiv:2006.07529,
+8748–8763
+arXiv: 2006.07529, doi: 10.48550/arXiv.2006.07529
 Rehemtulla, N., Miller, A. A., Jegou Du Laz, T., et al.
-                                                                Yaron, O., & Gal-Yam, A. 2012, PASP, 124, 668,
-  2024, arXiv e-prints, arXiv:2401.15167,
-                                                                   arXiv: 1204.1891, doi: 10.1086/666656
-  arXiv: 2401.15167, doi: 10.48550/arXiv.2401.15167
-                    Maven: A Multimodal Foundation Model for Supernova Science                                     17
-
-
-                                                       APPENDIX
-
-
-                                                 A. METADATA CLIP
-  In addition to SN spectrum and light curve measurements, we also considered SN metadata as an additional modality
+Yaron, O., & Gal-Yam, A. 2012, PASP, 124, 668,
+2024, arXiv e-prints, arXiv:2401.15167,
+arXiv: 1204.1891, doi: 10.1086/666656
+arXiv: 2401.15167, doi: 10.48550/arXiv.2401.15167
+=== PAGE 17 ===
+Maven: A Multimodal Foundation Model for Supernova Science
+17
+APPENDIX
+A. METADATA CLIP
+In addition to SN spectrum and light curve measurements, we also considered SN metadata as an additional modality
 for training a CLIP model. The metadata modality used in our training includes supernovae redshifts and class labels.
-We encode each class label with a learnable embedding vector. The metadata encoder consists of a multilayer percep-
-tron (MLP) that takes in the concatenated vector of class embedding and redshift and outputs the final embedding.
+We encode each class label with a learnable embedding vector. The metadata encoder consists of a multilayer perceptron (MLP) that takes in the concatenated vector of class embedding and redshift and outputs the final embedding.
 The number of hidden layers and the hidden layer dimension in the MLP were chosen from a hyperparameter search,
 as discussed in Sec 3.5.
-  The models which directly align event photometry with relevant metadata (redshift and class) in pre-training do
+The models which directly align event photometry with relevant metadata (redshift and class) in pre-training do
 not significantly outperform the models in which photometry and spectroscopy alone are aligned. Considering only
 pre-trained models for the task of classification, we observe comparable three-way macro-F1 scores when aligning light
 curves with metadata (0.692 ± 0.022), light curves with spectra (0.687 ± 0.034), and light curves with both spectra
 and metadata (0.685 ± 0.019). Each of our CLIP objectives featured photometry as a modality, and we predict that
 this more information-poor modality is driving the observed performance across each of these models, as we discuss
 in additional detail in section 6.
-
-              Table 4. Classification performance for three classes by model configuration : This
-              table presents the classification performance of various models using light curve data from the
-              ZTF dataset. The models are categorized based on whether they utilized simulation pre-training
-              (‘pre-trained’), the type of last layer added to embedding models (‘last-layer’). The modalities
-              taken into account when training on the real ZTF dataset are indicated in ‘real-pre’ (lc - light
-              curve, sp - spectrum, m - metadata) as well as whether a SVC or kNN. Performance metrics
-              include macro-F1 (mac-f1), micro-F1 (mic-f1), macro-precision (mac-p), and macro-recall (mac-
-              r). The results are presented as mean ± standard deviation, calculated over five folds. Baseline
-              models, trained in an end-to-end supervised fashion using only the ZTF data, are included for
-              comparison.
-
-               pre-trained    last-layer   real-pre        mac-f1            mac-p              mac-r
-                     no         end-to-end baseline    0.7011 ± 0.0303   0.6934 ± 0.0360   0.7527 ± 0.0247
-                    clip         kNN          lc-m     0.6920 ± 0.0217   0.7286 ± 0.0377   0.6721 ± 0.0183
-                    clip         kNN          lc-sp    0.6874 ± 0.0342   0.8041 ± 0.0833   0.6516 ± 0.0216
-                    clip         kNN        lc-sp-m    0.6849 ± 0.0194   0.7280 ± 0.0334   0.6643 ± 0.0161
-                    clip          SVC         lc-m     0.6747 ± 0.0297   0.8026 ± 0.0257   0.6435 ± 0.0257
-                    clip          SVC       lc-sp-m    0.6522 ± 0.0237   0.7892 ± 0.0975   0.6247 ± 0.0215
-                     no          kNN        lc-sp-m    0.6268 ± 0.0251   0.7204 ± 0.0701   0.6000 ± 0.0199
-                     no          kNN          lc-sp    0.6265 ± 0.0231   0.6670 ± 0.0532   0.6119 ± 0.0121
-                     no          kNN          lc-m     0.6249 ± 0.0228   0.7309 ± 0.0661   0.6035 ± 0.0184
-                    clip          SVC         lc-sp    0.6195 ± 0.0190   0.7753 ± 0.0994   0.6056 ± 0.0172
-                     no           SVC         lc-m     0.5971 ± 0.0220   0.7871 ± 0.1858   0.5842 ± 0.0163
-                     no           SVC       lc-sp-m    0.5938 ± 0.0156   0.7892 ± 0.1873   0.5802 ± 0.0077
-                     no           SVC         lc-sp    0.5749 ± 0.0099   0.5857 ± 0.0126   0.5686 ± 0.0102
-18                                        Helfer, Zhang, et al
-
-     Table 5. Regression Performance by Model Configuration: This table presents the regres-
-     sion performance of various models using light curve data from the ZTF dataset. The models are
-     categorized based on whether they utilized simulation pre-training (‘pre-trained’), the type of last
-     layer added to embedding models (‘last-layer’). The modalities taken into account when training
-     on the real ZTF dataset is indicated in ‘real-pre’ (lc - light curve, sp - spectrum, m - metadata)
-     as well weather we use a linear or kNN layer to translate our embedding to a redshift prediction
-     (‘last-layer‘). Performance metrics include the coefficient of determination (R2 ), L1 loss, and L2
-     loss. The results are presented as mean ± standard deviation, calculated over five folds. Baseline
-     models, trained in an end-to-end supervised fashion using only the ZTF data, are included for
-     comparison.
-
-      pre-trained     last-layer   real-pre           R2                 L1                 L2
-           clip          kNN         lc-m      0.6543 ± 0.0280    0.0094 ± 0.0005    0.0152 ± 0.0010
-           clip         Linear     lc-sp-m     0.6513 ± 0.0440    0.0096 ± 0.0005    0.0152 ± 0.0016
-           clip          kNN         lc-sp     0.6496 ± 0.0398    0.0095 ± 0.0004    0.0152 ± 0.0014
-           clip          kNN       lc-sp-m     0.6470 ± 0.0422    0.0094 ± 0.0006    0.0152 ± 0.0012
-           clip         Linear       lc-sp     0.6386 ± 0.0447    0.0099 ± 0.0003    0.0155 ± 0.0016
-           clip         Linear       lc-m      0.6345 ± 0.0444    0.0100 ± 0.0006    0.0156 ± 0.0014
-            no           kNN         lc-m      0.6150 ± 0.0294    0.0103 ± 0.0003    0.0160 ± 0.0012
-            no         end-to-end baseline     0.6129 ± 0.0245    0.0104 ± 0.0004    0.0160 ± 0.0010
-            no           kNN       lc-sp-m     0.6090 ± 0.0464    0.0102 ± 0.0005    0.0161 ± 0.0015
-            no           kNN         lc-sp     0.6078 ± 0.0408    0.0103 ± 0.0006    0.0161 ± 0.0014
-            no          Linear       lc-sp     0.5948 ± 0.0402    0.0107 ± 0.0007    0.0164 ± 0.0015
-            no          Linear     lc-sp-m     0.5938 ± 0.0450    0.0108 ± 0.0004    0.0164 ± 0.0016
-            no          Linear       lc-m      0.5927 ± 0.0399    0.0107 ± 0.0004    0.0165 ± 0.0015
-
+Table 4. Classification performance for three classes by model configuration : This
+table presents the classification performance of various models using light curve data from the
+ZTF dataset. The models are categorized based on whether they utilized simulation pre-training
+(‘pre-trained’), the type of last layer added to embedding models (‘last-layer’). The modalities
+taken into account when training on the real ZTF dataset are indicated in ‘real-pre’ (lc - light
+curve, sp - spectrum, m - metadata) as well as whether a SVC or kNN. Performance metrics
+include macro-F1 (mac-f1), micro-F1 (mic-f1), macro-precision (mac-p), and macro-recall (macr). The results are presented as mean ± standard deviation, calculated over five folds. Baseline
+models, trained in an end-to-end supervised fashion using only the ZTF data, are included for
+comparison.
+pre-trained
+no
+clip
+clip
+clip
+clip
+clip
+no
+no
+no
+clip
+no
+no
+no
+last-layer
+real-pre
+end-to-end baseline
+kNN
+lc-m
+kNN
+lc-sp
+kNN
+lc-sp-m
+SVC
+lc-m
+SVC
+lc-sp-m
+kNN
+lc-sp-m
+kNN
+lc-sp
+kNN
+lc-m
+SVC
+lc-sp
+SVC
+lc-m
+SVC
+lc-sp-m
+SVC
+lc-sp
+mac-f1
+mac-p
+mac-r
+0.7011 ± 0.0303
+0.6920 ± 0.0217
+0.6874 ± 0.0342
+0.6849 ± 0.0194
+0.6747 ± 0.0297
+0.6522 ± 0.0237
+0.6268 ± 0.0251
+0.6265 ± 0.0231
+0.6249 ± 0.0228
+0.6195 ± 0.0190
+0.5971 ± 0.0220
+0.5938 ± 0.0156
+0.5749 ± 0.0099
+0.6934 ± 0.0360
+0.7286 ± 0.0377
+0.8041 ± 0.0833
+0.7280 ± 0.0334
+0.8026 ± 0.0257
+0.7892 ± 0.0975
+0.7204 ± 0.0701
+0.6670 ± 0.0532
+0.7309 ± 0.0661
+0.7753 ± 0.0994
+0.7871 ± 0.1858
+0.7892 ± 0.1873
+0.5857 ± 0.0126
+0.7527 ± 0.0247
+0.6721 ± 0.0183
+0.6516 ± 0.0216
+0.6643 ± 0.0161
+0.6435 ± 0.0257
+0.6247 ± 0.0215
+0.6000 ± 0.0199
+0.6119 ± 0.0121
+0.6035 ± 0.0184
+0.6056 ± 0.0172
+0.5842 ± 0.0163
+0.5802 ± 0.0077
+0.5686 ± 0.0102
+=== PAGE 18 ===
+18
+Helfer, Zhang, et al
+Table 5. Regression Performance by Model Configuration: This table presents the regression performance of various models using light curve data from the ZTF dataset. The models are
+categorized based on whether they utilized simulation pre-training (‘pre-trained’), the type of last
+layer added to embedding models (‘last-layer’). The modalities taken into account when training
+on the real ZTF dataset is indicated in ‘real-pre’ (lc - light curve, sp - spectrum, m - metadata)
+as well weather we use a linear or kNN layer to translate our embedding to a redshift prediction
+(‘last-layer‘). Performance metrics include the coefficient of determination (R2 ), L1 loss, and L2
+loss. The results are presented as mean ± standard deviation, calculated over five folds. Baseline
+models, trained in an end-to-end supervised fashion using only the ZTF data, are included for
+comparison.
+pre-trained
+clip
+clip
+clip
+clip
+clip
+clip
+no
+no
+no
+no
+no
+no
+no
+last-layer
+real-pre
+kNN
+lc-m
+Linear
+lc-sp-m
+kNN
+lc-sp
+kNN
+lc-sp-m
+Linear
+lc-sp
+Linear
+lc-m
+kNN
+lc-m
+end-to-end baseline
+kNN
+lc-sp-m
+kNN
+lc-sp
+Linear
+lc-sp
+Linear
+lc-sp-m
+Linear
+lc-m
+R2
+L1
+L2
+0.6543 ± 0.0280
+0.6513 ± 0.0440
+0.6496 ± 0.0398
+0.6470 ± 0.0422
+0.6386 ± 0.0447
+0.6345 ± 0.0444
+0.6150 ± 0.0294
+0.6129 ± 0.0245
+0.6090 ± 0.0464
+0.6078 ± 0.0408
+0.5948 ± 0.0402
+0.5938 ± 0.0450
+0.5927 ± 0.0399
+0.0094 ± 0.0005
+0.0096 ± 0.0005
+0.0095 ± 0.0004
+0.0094 ± 0.0006
+0.0099 ± 0.0003
+0.0100 ± 0.0006
+0.0103 ± 0.0003
+0.0104 ± 0.0004
+0.0102 ± 0.0005
+0.0103 ± 0.0006
+0.0107 ± 0.0007
+0.0108 ± 0.0004
+0.0107 ± 0.0004
+0.0152 ± 0.0010
+0.0152 ± 0.0016
+0.0152 ± 0.0014
+0.0152 ± 0.0012
+0.0155 ± 0.0016
+0.0156 ± 0.0014
+0.0160 ± 0.0012
+0.0160 ± 0.0010
+0.0161 ± 0.0015
+0.0161 ± 0.0014
+0.0164 ± 0.0015
+0.0164 ± 0.0016
+0.0165 ± 0.0015
+=== PAGE 19 ===

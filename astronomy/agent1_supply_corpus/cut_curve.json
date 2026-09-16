@@ -1,0 +1,154 @@
+{
+ "chosen_cut": 1.0,
+ "chosen_radius_arcsec": 1.0,
+ "D3_disposition": "REFUSE tau.py's choice; cut bounded by controls instead; separation-collapse signal UNDEMONSTRATED (needs I1 compositions)",
+ "tau_py_output": {
+  "chosen_cut": 0.03333333333333333,
+  "chosen_radius_arcsec": 30.0,
+  "justification": "cluster gain falls below 5% at 0.03333333333333333; separation not supplied",
+  "exit_code": 0,
+  "stdout_file": "out/tau_stdout.txt"
+ },
+ "why_tau_choice_refused": "tau.py returned cut 0.0333 (30 arcsec). Its only signal is fractional cluster gain <5%, and every step of this curve gains <0.3% (total span 11104-11183, 0.71%), so the first step always 'saturates' and the choice is an artefact of the grid's second point. The 30 arcsec cut merges 39 pairs of distinct supernovae with different IAU names (must-not-join control) and 14 clusters with conflicting posA subclasses. Separation between two compositions was not supplied, so the collapse bound does not exist. The curve therefore does not bound a cut under tau.py's two-signal criterion.",
+ "justification": "Controls bound the cut. Must-join (re-trigger duplicates: same IAUID, |dpeak|<=60 d, amendment A1): 9 pairs, max separation 0.494 arcsec, all joined at >=0.5 arcsec. Must-not-join (different IAUIDs, both SN): 0 violations at 0.5, 1, 1.5 arcsec; first violation at 2 arcsec (SN2023ghl/SN2024gyr, 1.92 arcsec). Cluster count is flat at 11183 across 0.5-1.5 arcsec. 1 arcsec is the plateau midpoint; the count is identical at the looser and tighter sensitivity cuts, so the unit count does not depend on the choice within the bound. Chosen on controls, not on unit count (the tighter end of the bound gives the same count).",
+ "curve": [
+  {
+   "radius_arcsec": 0.5,
+   "cut": 2.0,
+   "n_clusters": 11183,
+   "multi_member_clusters": 10,
+   "must_join_sameIAU_joined": "10/13",
+   "must_not_join_distinct_SN_violations": 0,
+   "straddle_S1": 0,
+   "straddle_S2": 0
+  },
+  {
+   "radius_arcsec": 1,
+   "cut": 1.0,
+   "n_clusters": 11183,
+   "multi_member_clusters": 10,
+   "must_join_sameIAU_joined": "10/13",
+   "must_not_join_distinct_SN_violations": 0,
+   "straddle_S1": 0,
+   "straddle_S2": 0
+  },
+  {
+   "radius_arcsec": 1.5,
+   "cut": 0.6666666666666666,
+   "n_clusters": 11183,
+   "multi_member_clusters": 10,
+   "must_join_sameIAU_joined": "10/13",
+   "must_not_join_distinct_SN_violations": 0,
+   "straddle_S1": 0,
+   "straddle_S2": 0
+  },
+  {
+   "radius_arcsec": 2,
+   "cut": 0.5,
+   "n_clusters": 11179,
+   "multi_member_clusters": 14,
+   "must_join_sameIAU_joined": "13/13",
+   "must_not_join_distinct_SN_violations": 1,
+   "straddle_S1": 0,
+   "straddle_S2": 0
+  },
+  {
+   "radius_arcsec": 3,
+   "cut": 0.3333333333333333,
+   "n_clusters": 11174,
+   "multi_member_clusters": 19,
+   "must_join_sameIAU_joined": "13/13",
+   "must_not_join_distinct_SN_violations": 3,
+   "straddle_S1": 0,
+   "straddle_S2": 0
+  },
+  {
+   "radius_arcsec": 5,
+   "cut": 0.2,
+   "n_clusters": 11164,
+   "multi_member_clusters": 29,
+   "must_join_sameIAU_joined": "13/13",
+   "must_not_join_distinct_SN_violations": 9,
+   "straddle_S1": 0,
+   "straddle_S2": 0
+  },
+  {
+   "radius_arcsec": 10,
+   "cut": 0.1,
+   "n_clusters": 11143,
+   "multi_member_clusters": 50,
+   "must_join_sameIAU_joined": "13/13",
+   "must_not_join_distinct_SN_violations": 19,
+   "straddle_S1": 2,
+   "straddle_S2": 1
+  },
+  {
+   "radius_arcsec": 20,
+   "cut": 0.05,
+   "n_clusters": 11126,
+   "multi_member_clusters": 65,
+   "must_join_sameIAU_joined": "13/13",
+   "must_not_join_distinct_SN_violations": 32,
+   "straddle_S1": 3,
+   "straddle_S2": 1
+  },
+  {
+   "radius_arcsec": 30,
+   "cut": 0.03333333333333333,
+   "n_clusters": 11116,
+   "multi_member_clusters": 75,
+   "must_join_sameIAU_joined": "13/13",
+   "must_not_join_distinct_SN_violations": 39,
+   "straddle_S1": 4,
+   "straddle_S2": 1
+  },
+  {
+   "radius_arcsec": 60,
+   "cut": 0.016666666666666666,
+   "n_clusters": 11104,
+   "multi_member_clusters": 86,
+   "must_join_sameIAU_joined": "13/13",
+   "must_not_join_distinct_SN_violations": 45,
+   "straddle_S1": 4,
+   "straddle_S2": 1
+  }
+ ],
+ "sensitivity": {
+  "looser": 0.6666666666666666,
+  "looser_radius_arcsec": 1.5,
+  "looser_n_clusters": 11183,
+  "tighter": 2.0,
+  "tighter_radius_arcsec": 0.5,
+  "tighter_n_clusters": 11183,
+  "at_2arcsec_n_clusters": 11179,
+  "at_3arcsec_n_clusters": 11174
+ },
+ "saturation_cut": 0.03333333333333333,
+ "collapse_cut": null,
+ "chosen_to_increase_unit_count": false,
+ "sibling_association": {
+  "rule": "different 1-arcsec clusters, sep<=90 arcsec, both numeric z, |dz|<=0.005",
+  "pairs": 55,
+  "groups": 51,
+  "clusters_in_groups": 104,
+  "units_if_host_group_were_unit": 11130,
+  "label_pairs": {
+   "('posB', 'posB')": 20,
+   "('posA_Ia', 'posB')": 17,
+   "('posA_Ia', 'posA_Ia')": 17,
+   "('neg', 'posA_Ia')": 1
+  }
+ },
+ "completeness": "swept 10 radii 0.5-60 arcsec (cut=1/radius); cluster counts, both controls and split straddlers measured at each; separation between compositions not measured (I1 not run); sibling association measured once at 1 arcsec; recurrent-variable vs distinct-event ambiguity at identical positions not resolvable positionally",
+ "provenance": [
+  {
+   "id": "a1-tau-plateau",
+   "value": 11183,
+   "referent": "cluster count on the control-bounded plateau 0.5-1.5 arcsec",
+   "source": "astronomy/agent1_supply_corpus/scripts/build_corpus.py::fof over corpus rows; out/sweep.json per_cut",
+   "population": "11193 included corpus rows",
+   "adjudicator": "tau.py choice at 30 arcsec gives 11116 and fails the must-not-join control 39 times",
+   "falsifier": "a re-trigger pair (same object, |dpeak|<=60 d) measured at >1.5 arcsec, or two distinct SNe measured at <=1.5 arcsec"
+  }
+ ]
+}

@@ -1,0 +1,2459 @@
+=== PAGE 1 ===
+Astronomy & Astrophysics manuscript no. aa54289-25
+November 5, 2025
+©ESO 2025
+Leveraging pre-trained vision Transformers for multi-band
+photometric light curve classification
+⋆
+D. Moreno-Cartagena1, 2 , P. Protopapas3 , G. Cabrera-Vives1, 2, 4, 5 , M. Cádiz-Leyton1, 7 , I. Becker3 , and C.
+Donoso-Oliva1, 6
+1
+Department of Computer Science, Universidad de Concepción, Edmundo Larenas 219, Concepción, Chile
+Center for Data and Artificial Intelligence, Universidad de Concepción, Edmundo Larenas 310, Concepción, Chile
+3
+John A. Paulson School of Engineering and Applied Science, Harvard University, Cambridge, MA, 02138
+4
+Heidelberg Institute for Theoretical Studies, Heidelberg, Baden-Württemberg, Germany
+5
+Millennium Institute of Astrophysics (MAS), Nuncio Monseñor Sotero Sanz 100, Of. 104, Providencia, Santiago, Chile
+6
+Millennium Nucleus on Young Exoplanets and their Moons (YEMS), Chile
+7
+Edinburgh Futures Institute, University of Edinburgh, 1 Lauriston Pl, Edinburgh EH3 9EF, UK
+arXiv:2502.20479v4 [astro-ph.IM] 4 Nov 2025
+2
+Received September 15, 1996; accepted March 16, 1997
+ABSTRACT
+Context. The advent of large-scale sky surveys, such as the Vera C. Rubin Observatory Legacy Survey of Space and Time (LSST),
+will generate vast volumes of photometric data, necessitating automatic classification of light curves to identify variable stars and
+transient events. However, challenges such as irregular sampling, multi-band observations, and diverse flux distributions across bands
+demand advanced models for accurate classification.
+Aims. This study investigates the potential of a pre-trained vision Transformer (VT) model, specifically the Swin Transformer V2
+(SwinV2), to classify photometric light curves without the need for feature extraction or multi-band preprocessing. The goal is to
+assess whether this image-based approach can accurately differentiate astronomical phenomena and if it can serve as a viable option
+for working with multi-band photometric light curves.
+Methods. We transformed each multi-band light curve into an image. These images served as input to the SwinV2 model, which was
+pre-trained on ImageNet-21K. The datasets employed include the public Catalog of Variable Stars from the Massive Compact Halo
+Object (MACHO) survey, using both one and two bands, and the first round of the recent Extended LSST Astronomical Time-Series
+Classification Challenge (ELAsTiCC), which includes six bands. The model’s performance was evaluated based on six classes for the
+MACHO dataset and 20 distinct classes of variable stars and transient events for the ELAsTiCC dataset.
+Results. The fine-tuned SwinV2 model achieved a better performance than models specifically designed for light curves, such as
+Astromer and the Astronomical Transformer for time series And Tabular data (ATAT). When trained on the “full dataset” of MACHO,
+it attained a macro F1-score of 80.2% and outperformed Astromer in single-band experiments. Incorporating a second band further
+improved performance, increasing the F1-score to 84.1%. In the ELAsTiCC dataset, SwinV2 achieved a macro F1-score of 65.5%,
+slightly surpassing ATAT by 1.3%.
+Conclusions. SwinV2, a pre-trained VT model, effectively classifies photometric light curves. It outperforms traditional models and
+offers a promising approach for large-scale surveys. This highlights the potential of using visual representations of light curves, with
+future prospects including the integration of tabular data, textual information, and multi-modal learning to enhance analysis and
+classification in time-domain astronomy.
+Key words. Methods: statistical – Methods: data analysis – Techniques: photometric – Stars: variables: general
+1. Introduction
+The Vera C. Rubin Observatory’s Legacy Survey of Space and
+Time (LSST; Ivezić et al. 2019) is set to revolutionize our understanding of the Universe by capturing an unprecedented volume
+of data, with an average of 10 million alerts and ∼ 20 TB of raw
+data every night (Hambleton et al. 2023). This vast dataset covers
+a range of celestial phenomena, including transient events and
+stellar variability, and will provide astronomers with a unique
+opportunity to study the physical properties and evolution of
+a diverse array of astronomical objects. However, the scale
+of these observations necessitates the development of efficient
+and accurate classification tools, as spectroscopic follow-up will
+be limited. Automatic classification methods, particularly those
+based on photometric data, will be essential for distinguishing
+⋆
+e-mail: dmoreno2016@inf.udec.cl
+between different types of variable stars and transient phenomena, ensuring that the scientific potential of the LSST data is
+fully realized (Fraga et al. 2024).
+Machine learning and deep learning techniques have played
+a central role in advancing the classification of light curves
+(Pichara et al. 2012; Kim et al. 2011; Villar et al. 2019; Becker
+et al. 2020; Cabrera-Vives et al. 2024). Traditional machine
+learning approaches have been highly effective in classifying
+variable stars and transient events by relying on hand-engineered
+features extracted from light curves. For example, Richards et al.
+(2011) and Kim et al. (2014) employed statistical and timedomain features to enhance classification accuracy. Karpenka
+et al. (2013) combined parametric functional fitting of supernova light curves with a machine learning algorithm, yielding accurate and robust classifications. Lochner et al. (2016)
+developed a multi-stage pipeline that evaluates feature extracArticle number, page 1 of 13
+=== PAGE 2 ===
+A&A proofs: manuscript no. aa54289-25
+tion techniques and machine learning models. Boone (2019)
+improved classification by training a boosted decision tree on
+features extracted from the augmented light curves, achieving
+state-of-the-art performance in the LSST Astronomical TimeSeries Classification Challenge (PLAsTiCC; Kessler et al. 2019).
+However, this feature engineering process is resource-intensive
+and requires domain knowledge to be applied (Donalek et al.
+2013; Graham et al. 2014; Nun et al. 2017; Sánchez-Sáez et al.
+2021). Deep learning addresses these limitations by automatically learning relevant representations directly from light curves,
+removing the need for manual feature extraction. This advantage
+has led to the widespread adoption of recurrent neural networks
+(RNNs; Rumelhart et al. 1986), long short-term memory networks (LSTMs; Hochreiter & Schmidhuber 1997), and gated recurrent units (GRUs; Cho et al. 2014) (Charnock & Moss 2017;
+Naul et al. 2018; Muthukrishna et al. 2019; Carrasco-Davis et al.
+2019; Möller & de Boissière 2020; Becker et al. 2020; Jamal
+& Bloom 2020; Gómez et al. 2020; Donoso-Oliva et al. 2021)
+as well as transformer-based models, which have shown great
+promise in handling astronomical time series data (Morvan et al.
+2022; Pan et al. 2022; Pimentel et al. 2022; Donoso-Oliva et al.
+2023; Moreno-Cartagena et al. 2023; Cádiz-Leyton et al. 2024,
+2025; Allam Jr & McEwen 2024; Cabrera-Vives et al. 2024),
+making them increasingly popular for astronomical classification tasks.
+Nevertheless, even with deep learning models in the time
+domain, careful preprocessing is required when dealing with
+multi-band observations and irregular time sampling, as each
+band is often observed at different non-uniform time intervals.
+Various techniques have been developed to address these challenges, such as uniform sampling imputation between previous
+and subsequent observations (Charnock & Moss 2017), linear
+interpolation on a regular time grid across all bands (Muthukrishna et al. 2019), Gaussian process (GP) interpolation (Boone
+2019; Villar et al. 2020; Jamal & Bloom 2020), masking mechanisms to indicate the availability of each band during observations (Möller & de Boissière 2020; Pimentel et al. 2022;
+Cabrera-Vives et al. 2024), and ensembles of RNNs that integrate information from different bands into a single representation (Becker, I. et al. 2025). While these methods have been evaluated on various datasets, their generalization across different
+surveys and observational conditions remains an open question
+(Moreno-Cartagena et al. 2023). Additionally, many of these approaches require training from scratch and hyperparameter tuning to search for the optimal architecture for a given task.
+Foundational models, which are trained only once on massive datasets in a self-supervised manner (pre-training) to learn
+general domain representations and later adapted for specific
+tasks (fine-tuning), have demonstrated exceptional generalization across diverse downstream applications in natural language
+processing and computer vision, such as text generation (Brown
+et al. 2020), machine translation (Vaswani et al. 2017), image
+classification (Dosovitskiy et al. 2021), and object detection
+(Carion et al. 2020), among others. Notable examples include
+GPT (Radford et al. 2018) and BERT (Devlin et al. 2019) for
+text as well as Vision Transformer (ViT; Dosovitskiy et al. 2021)
+for images, with each model specializing in a single modality. In
+the context of astronomical time series data, Astromer (DonosoOliva et al. 2023) represents an early effort to pre-train a transformer on large-scale real-world light curve data, positioning it
+as a potential foundational model for time-domain astronomy.
+However, such pre-training requires significant computational
+resources, optimized architectural design, and carefully curated
+datasets, often taking several days to converge.
+Article number, page 2 of 13
+Given these constraints, we propose leveraging the knowledge embedded in pre-trained vision Transformer (VT) models for the analysis and classification of multi-band photometric light curves. These models have demonstrated the ability to
+capture fine details in images across various tasks (Han et al.
+2023; Khan et al. 2022). By using the informative representations learned from extensive pre-training on large-scale datasets
+conducted on powerful GPU clusters, we can establish a starting point for fine-tuning the model on light curve images, bypassing the need to use significant computational resources for
+pre-training and searching for an optimal architecture. Moreover,
+these models can directly process raw multi-band light curves as
+images, offering a straightforward yet highly effective approach
+to handling the data while avoiding complex feature engineering
+or multi-band preprocessing.
+A few studies have considered light curves in the time domain for visual models. Mahabal et al. (2017) transformed light
+curves from the Catalina Real-time Transient Survey (CRTS;
+Drake et al. 2012) into 2D images by creating magnitude differences and time differences between pairs of points as input
+for a convolutional neural network (CNN; LeCun et al. 1998).
+Pasquet-Itam & Pasquet (2018) and Pasquet et al. (2019) used
+CNNs for the classification of astronomical events, representing
+light curves as images, where the vertical axis corresponds to the
+number of photometric bands and the horizontal axis represents
+the number of days in the first study and the number of observations in the second. Qu et al. (2021) and Qu & Sako (2022)
+transformed multi-band light curves into 2D heatmaps using GPs
+to represent flux and its uncertainties over time and wavelength.
+These heatmaps were stacked into 32×180×2 tensors and fed
+into a CNN for supernova classification. Szklenár et al. (2020,
+2022) explored the classification of phase-folded light curves
+using the Optical Gravitational Lensing Experiment (OGLE)III and -IV databases (Udalski et al. 2008, 2015), representing them as 128×128 monochromatic pixel images with brightness measurements plotted as white dots on a black background.
+Similarly, Monsalves et al. (2024) transformed light curves into
+32×32 pixel 2D histograms, where phase and magnitude bins
+were used as inputs to a CNN to classify different types of variable stars. However, all of these studies depended on a prior level
+of preprocessing and did not use pre-trained VT models.
+In this work, we present the use of a pre-trained VT model
+called Swin Transformer V2 (SwinV2; Liu et al. 2022), which
+we evaluate on two datasets: the public Catalog of Variable Stars
+(Alcock et al. 2003), derived from the Massive Compact Halo
+Object (MACHO; Alcock et al. 2000) survey, and the first round
+of the recent Extended LSST Astronomical Time-Series Classification Challenge (ELAsTiCC1 ; Narayan & Team 2023), a
+multi-band dataset of photometric light curves for variable stars
+and supernovae designed to simulate the observations of the future LSST. Our work builds on the methodology proposed by Li
+et al. (2024), which focuses on benchmark datasets for time series. We applied this method to light curves, performed hyperparameter tuning, and evaluated its performance using both singleand multi-band configurations for the MACHO dataset and six
+bands for the ELAsTiCC dataset. Additionally, we assessed its
+performance in scenarios with a limited number of astronomical
+objects per class and imbalanced datasets. To our knowledge,
+this is the first study to apply a pre-trained VT to raw multi-band
+light curves in the time domain.
+This paper is organized as follows: In Section 2, we describe
+the methodology for converting multi-band light curves into im1
+The DESC ELAsTiCC Challenge.
+=== PAGE 3 ===
+D. Moreno-Cartagena et al.: Leveraging pre-trained vision Transformers for multi-band photometric light curve classification
+(a) Grid approach
+Two-bands
+Six-bands
+(b) Overlay approach
+Single-band
+Two-bands
+Six-bands
+Fig. 1. Comparison of visualization strategies. Panel (a) illustrates the
+“Grid” approach, while panel (b) depicts the “Overlay” approach. Each
+image was generated using the best hyperparameters identified for its
+respective method. The single-band and two-band example is a LongPeriod Variable (LPV) (ID: 24.3466.13) from the MACHO dataset,
+whereas the six-band example is a Pair-Instability Supernova (PISN)
+(ID: 41820707) from the ELAsTiCC dataset.
+ages and present the architecture of the SwinV2 vision Transformer model. Section 3 provides details of the datasets and experimental setup. In Section 4, we present the results of our classification experiments on the MACHO and ELAsTiCC datasets,
+including comparisons with established methods. Finally, in Section 5 we summarize the main conclusions of this work and suggest directions for future research.
+2. Methods
+2.1. Multi-band light curves to images
+Transforming time series into images is crucial for applying VT
+models, which have proven effective in analyzing complex visual data (Dosovitskiy et al. 2021; Liu et al. 2021, 2023). In
+this study, we evaluate two approaches for converting multiband light curves into images: “Grid” and “Overlay”. Figure 1
+(a) shows the input for the “Grid” approach, while (b) illustrates
+the input for the “Overlay” approach.
+In the “Grid” approach, light curves from different bands are
+arranged in a grid, with each band displayed in a separate panel,
+following a similar methodology to Li et al. (2024). We use a
+square layout that adjusts to the number of bands present in each
+light curve, leaving empty panels when there are no observations for a particular band. This arrangement facilitates a clear
+comparison between bands by keeping them visually distinct. In
+the “Overlay” approach, all bands of a light curve are plotted
+together within the same space. This approach allows us to examine how interactions among observations from different bands
+influence the visual representation and model performance.
+To ensure that all light curve images are on the same scale
+and maintain consistent x- and y-limits across different images,
+we applied min-max normalization to each entire light curve
+(considering all bands). This approach preserves the relative differences among bands within each light curve while scaling time
+and flux values across all light curves to the range [0, 1]. As a
+consequence, the global temporal and brightness context across
+light curves is removed, which encourages the model to focus
+on light curve shape to discriminate between astronomical objects. Global normalization was avoided, as it suppressed lowamplitude variability and negatively affected classification performance. Axis labels and ticks are also removed before saving the plots. Additionally, the flux errors are scaled using the
+same Min-Max factor applied to the flux, maintaining the relative uncertainty information. This method ensures that all images are visually comparable, with uniform axis limits and scale
+throughout the dataset. Visual examples of these representation
+approaches applied to randomly selected light curves from the
+test set are provided in Appendix A, in Fig. A.1 and Fig. A.2, offering a broader view of the differences between the One-band,
+“Overlay”, and “Grid” methods across both the MACHO and
+ELAsTiCC datasets.
+Since pre-trained VT models are trained on RGB images, the
+input must conform to this expected format, requiring a threechannel representation. In the “Grid” approach, the specific color
+assigned to each band is inconsequential, as each band occupies
+a distinct spatial position. However, in the “Overlay” approach,
+where all bands are combined into the same visual space, color
+selection becomes crucial to avoid introducing visual biases that
+could affect the model’s performance. To mitigate this issue and
+ensure that all bands contribute equally to the final representation, we assign colors that approximate distinct RGB components, maintaining a perceptually balanced distribution across
+the spectrum. For datasets with six bands, we allocate two bands
+to the red spectrum with the RGB values (255, 0, 127) and (255,
+127, 0), two bands to the green spectrum with (0, 255, 127) and
+(127, 255, 0), and the remaining two to the blue spectrum with
+(0, 127, 255) and (127, 0, 255). This selection ensures an even
+distribution of color intensity, preventing any single band from
+dominating the representation. For datasets containing only two
+bands, each is mapped to a primary RGB component to preserve
+visual balance and maintain interpretability.
+Additionally, in both approaches, we consider visual properties as hyperparameters to be adjusted during the conversion of
+light curves to images. These include marker size (markersize),
+line width (linewidth), and the inclusion or exclusion of flux uncertainties in the images (yerr). These plot properties influence
+not only the visualization but also the model’s ability to extract
+relevant features effectively. The visual hyperparameters were
+optimized to maximize classification performance, as detailed in
+the implementation subsection.
+2.2. Vision Transformer models
+Vision Transformer models represent a significant evolution in
+deep learning architectures for image processing. Unlike conventional approaches based on convolutions, such as CNNs, VTs
+employ self-attention mechanisms to capture long-range relationships between different regions of an image (Dosovitskiy
+et al. 2021). This methodology enables VTs to capture intricate
+structures within images, achieving robust performance in various tasks, such as classification (Liu et al. 2021), object detection (Carion et al. 2020), semantic and instance segmentation
+(Wang et al. 2021; Cheng et al. 2021), object tracking (Chen
+et al. 2021b), image generation (Jiang et al. 2021), and image
+enhancement (Chen et al. 2021a), among others. Furthermore,
+VT models that are pre-trained can use the prior knowledge
+gained from extensive datasets, making them adaptable to particular tasks via a fine-tuning process.
+SwinV2 is a hierarchical VT architecture designed for efficient and scalable image processing (Liu et al. 2022). Unlike
+Article number, page 3 of 13
+=== PAGE 4 ===
+A&A proofs: manuscript no. aa54289-25
+ViT (Dosovitskiy et al. 2021), which partitions an image into
+non-overlapping segments called patches, applying global selfattention to all of them simultaneously, the first Swin Transformer paper (Liu et al. 2021) introduces two key innovations
+that allow it to manage both local and global self-attention:
+shifted windows and hierarchical feature representation. These
+features enable the model to handle high-resolution images with
+greater computational efficiency. Furthermore, SwinV2 incorporates scaled cosine attention and logarithmic continuous position
+bias, improving both training stability and performance in tasks
+such as image classification, object detection, semantic segmentation, and video action classification. We selected this model as
+the foundation of our approach because its hierarchical structure
+is particularly effective at capturing detailed information at the
+pixel level, which is essential for interpreting points and lines
+within the light curve image. Figure 2 illustrates the model’s architecture and hierarchical processing. The key stages of this architecture are detailed below.
+The first step in the SwinV2 architecture converts the input image into a sequence of tokens through patch splitting and
+tokenization. This process begins by partitioning the input image into non-overlapping patches, similar to ViT. However, unlike ViT, Swin progressively reduces the patch size as the image
+propagates through the Swin Transformer block. Given an input
+image of 256×256 pixels with 3 color channels (e.g., RGB) and
+a patch size of 4×4, the patch partitioning process yields 64×64
+patches. This is equivalent to applying a convolutional kernel of
+size 4×4 with a stride of 4×4. Each patch contains 4×4×3=48
+values that represent the RGB pixel intensities within that region. These values are then flattened and projected into a higher-
+Images
+Patch Partition
+Linear Embedding
+C
+Blocks
+Blocks
+Patch Merging
+Distribution of objects by class in MACHO labeled
+Fig. 2. SwinV2 architecture. The rounded rectangle in light blue highlights the components where the model changes the dimensions of the
+information, while the regular rectangles indicate where they remain
+fixed.
+Article number, page 4 of 13
+Training
+Validation
+4000
+2000
+V
+LP
+EC
+C
+ep
+0
+ep
+1
+0
+ab
+Embedding
+6000
+RR
+Swin Transformer
+Block
+Blocks
+Number of objects
+C
+C
+C
+Swin Transformer
+Patch Merging
+Block
+Swin Transformer
+Patch Merging
+Block
+c
+C
+Blocks
+RR
+Swin Transformer
+Block
+dimensional space via a linear transformation, producing a token
+map of dimensions 64×64×C, where C is the embedding dimension. In this context, a token refers to the vector representation of
+a patch after the linear transformation. This process is functionally analogous to applying a two-dimensional convolution layer
+(Conv2d). The resulting token map is then processed through the
+Swin Transformer block for hierarchical processing.
+The window multi-head self-attention (W-MSA) step partitions the tokens into non-overlapping windows of size M × M.
+Unlike traditional multi-head self-attention (MSA), which computes attention globally with quadratic complexity, W-MSA restricts attention to local windows. This reduces the computational complexity from O(N 2 ) in global attention to O(M 2 N) in
+W-MSA, where N denotes the total number of tokens in the image. Since M is fixed, W-MSA maintains linear complexity with
+respect to N, significantly reducing computational cost while ensuring that each window effectively captures local dependencies,
+making the approach scalable for high-resolution images.
+To address the limited cross-window interactions in WMSA, the Shifted Window Multi-head Self-Attention (SWMSA) mechanism shifts the windows from the W-MSA step,
+allowing tokens at the edges of one window to be included in
+the centers of overlapping windows. This process enables information exchange between neighboring windows. By alternating W-MSA and SW-MSA within each Swin Transformer block,
+the model captures global context while preserving the computational advantages of local attention. For a more detailed explanation of the W-MSA and SW-MSA mechanisms, please refer to
+the first Swin Transformer paper (Liu et al. 2021).
+Most VT models, including the original Swin Transformer,
+apply layer normalization before the attention mechanism. However, as model depth increases, deeper layers develop larger activation magnitudes due to residual connections, leading to training instability. To address this, SwinV2 adopts residual postnormalization, where normalization is applied after the attention
+mechanism and the output of the Swin Transformer block, preventing the accumulation of large activations. Additionally, traditional dot-product attention in large models can cause certain
+heads to focus excessively on a few pixel pairs, particularly in
+the residual post-normalization setting. To mitigate this, SwinV2
+introduces scaled cosine attention, which replaces dot-product
+similarity with cosine similarity, normalizing attention scores
+and improving training stability.
+SwinV2 also replaces the relative position bias with a logspaced continuous position bias. This approach is particularly
+relevant in hierarchical models such as SwinV2, where the patch
+merging operation, detailed in the following paragraph, changes
+the token resolution at each stage of the network. The log-spaced
+continuous position bias provides a flexible encoding of spatial
+Class
+Fig. 3. Distribution of periodic variable star classes in the training and
+validation sets for the MACHO dataset.
+=== PAGE 5 ===
+D. Moreno-Cartagena et al.: Leveraging pre-trained vision Transformers for multi-band photometric light curve classification
+relationships that adapts naturally as the resolution changes, allowing the model to maintain meaningful attention patterns at
+multiple scales. In practice, this helps the model assign more
+attention to neighboring regions (where fine details or local patterns often reside) while remaining robust to global variations in
+the visual structure of different light curves.
+Following these operations, the model applies patch merging to create a hierarchical representation. This reduces the spatial resolution of the token map while increasing its embedding
+dimension, inspired by how CNNs progressively downsample
+feature maps while enriching feature abstraction. During patch
+merging, each group of 2 × 2 neighboring tokens is concatenated
+to form a single new token, halving the height and width of the
+token map and multiplying the embedding dimension by four.
+A linear layer then projects these concatenated features into a
+lower-dimensional space, typically doubling the previous embedding size (e.g., from 64 × 64 × 96 to 32 × 32 × 192). By
+repeating this process across network stages, the model builds
+a multi-scale or hierarchical representation: early layers retain
+fine-grained spatial details, while deeper layers encode more abstract and global patterns. This hierarchical structure is designed
+to enable the model to capture features at different temporal
+scales, which, in the context of light curves, could correspond
+to both short-term variations and longer-term trends.
+After the hierarchical stages, the final token representations
+undergo adaptive average pooling, which computes the mean
+H
+W
+across all tokens of size 32
+× 32
+, preserving their aggregated embedding information (8C). This process allows each image to be
+represented as a vector of dimension 8C, which is then passed
+through a fully connected linear layer for classification or other
+downstream tasks.
+served variable stars in the Large Magellanic Cloud (LMC) and
+the Galactic bulge over multiple years, capturing their photometric variability in the B and R bands. These light curves are represented in magnitude space. The catalog labels were assigned
+through automated classification procedures based on statistical properties of the light curve morphology, such as period,
+amplitude, and Fourier decomposition coefficients. While visual
+verification was commonly employed in some of the MACHO
+team’s publications (Alcock et al. 1996, 1997a,b, 1999, 2002),
+there is no evidence in the literature confirming that a systematic
+visual inspection was performed for the full catalog used in this
+work. Therefore, we assume that the classification relied solely
+on the extracted features. It is important to note that we do not
+use any auxiliary features or pre-computed variables at any stage
+of the preprocessing or training pipeline, which could otherwise
+lead to a trivial classification task. This dataset also has a median cadence of 0.75 days with a standard deviation of 5.03 days,
+considering both bands. The labeled portion we use corresponds
+to the same one used in Donoso-Oliva et al. (2023), which was
+categorized into six distinct classes, comprising 20 894 variable
+stars. We refer to this as the “full dataset”.
+Following the approach in Donoso-Oliva et al. (2023), we
+used scenarios with a few samples per class (spc) to train the
+model and assess its ability to learn from limited labeled data
+while keeping the test set unchanged. From the “full dataset”,
+we extracted 20 spc and 500 spc as our new training datasets.
+As in the referenced study, the IDs for each fold were selected
+randomly from the “full dataset”. For example, the IDs for 20
+and 500 spc in the first fold differ from those in the second fold.
+Our training, validation, and test sets in each fold use the same
+IDs that were used in the referenced study. The test set contains
+100 light curves per class and remains fixed across all scenarios (20 spc, 500 spc, and “full dataset”). The training dataset is
+divided into three stratified folds, maintaining an 80/20 split for
+training and validation. This results in 96 and 24 light curves for
+the 20 spc scenario, 2 400 and 600 for the 500 spc scenario, and
+16 232 and 4 062 for the “full dataset”. Figure 3 illustrates the
+class distribution in the training and validation sets for the “full
+dataset”.
+It is worth mentioning that the referenced paper used only the
+R band. However, in our work, we tested both cases: one using
+3. Experimental setup
+3.1. Data description
+3.1.1. MACHO labeled
+The public Catalog of Variable Stars2 (Alcock et al. 2003) contains labeled light curves from the MACHO survey, which ob2
+MACHO Labeled Data of the Variable Stars.
+Distribution of objects by class in ELAsTiCC dataset
+350000
+20000
+300000
+15000
+250000
+ae
+s
+M
+N
+D
+-d
+w
+w
+ar
+f
+ar
+f
+ov
+en
+ar
+e
+K
+O
+100000
+uL
+0
+Fl
+150000
+T
+5000
+N
+10000
+200000
+IL
+Number of objects
+Training
+Validation
+50000
+M
+EB
+id
+he
+ae
+ep
+Sc
+Ly
+r
+C
+RR
+ut
+i
+G
+N
+D
+el
+ta
+A
+ov
+ae
+s
+en
+fN
+ar
+w
+D
+re
+la
+w
+-d
+-li
+SN
+uL
+N
+K
+fF
+ar
+E
+T
+O
+IL
+N
+TD
+PI
+S
+SN
+SL
+II
+th
+er
+/O
+ke
+Ia
+/c
+Ib
+bg
+x
+Ia
+91
+C
+A
+RT
+0
+Class
+Fig. 4. Distribution of transients, stochastic variables, and periodic variable star classes in the training and validation sets for the first round of the
+ELAsTiCC dataset.
+Article number, page 5 of 13
+=== PAGE 6 ===
+A&A proofs: manuscript no. aa54289-25
+only the R band to provide a direct comparison with Astromer
+(Donoso-Oliva et al. 2023), a transformer model specifically designed for single-band light curve data, and another incorporating both bands to demonstrate the effectiveness of the multi-band
+approach.
+Table 1. Summary of the hyperparameters used for model optimization.
+3.1.2. ELAsTiCC
+The second dataset used in this study comes from the ELAsTiCC3 challenge (Narayan & Team 2023), which is designed
+to simulate the observations of the future LSST at the Vera C.
+Rubin Observatory. It contains 1 845 146 simulated light curves,
+and each is represented across six bands (u, g, r, i, z, and Y)
+covering the visible and near-infrared spectrum. The data includes multiple observations of each object spread over several
+simulated years. ELAsTiCC spans a diverse array of transient
+and variable stellar events, categorized into 32 distinct classes,
+with a median cadence of 0.93 days and a standard deviation
+of 16.18 days, considering all six bands. Specifically, we used
+the first ELAsTiCC campaign, which was used in Cabrera-Vives
+et al. (2024), and adopted the same class distribution as their
+study, encompassing 20 different categories. Additionally, similar to the approach outlined in the referenced study, we used
+the light curves in flux space and applied the PHOTFLAG4 key
+to filter out saturated data, which also helps exclude spurious detections outside the main event, particularly for transient objects.
+For clarity, we note that no derived features from the light curves
+or metadata were used at any stage of the training process. For
+each light curve, we also considered both alerts and forced photometry points, beginning 30 days prior to the first alert up to the
+final detection. Non-detections following the last detection were
+omitted from the dataset.
+Our training, validation, and test sets were the same as those
+used in Cabrera-Vives et al. (2024). The test set contains 1 000
+light curves from each class, ensuring a balanced representation.
+The remaining data is divided into five stratified folds, maintaining an 80/20 ratio for training and validation. This results in
+1 460 117 and 365 029 light curves in the training and validation
+sets, respectively. Figure 4 shows the distribution of the classes
+in the training and validation sets.
+3.2. Implementation details
+The conversion of light curves to images was performed using
+the Matplotlib Python package, and the images were directly
+transformed into tensors with RGB channels. We generated images with dimensions of 256×256, as this is the size for which
+the VT model was pre-trained. In both the “Grid” and “Overlay”
+approaches, the images were adjusted to minimize extra space,
+and in the “Grid” approach, borders were added to separate the
+bands (see Fig. 1 for an illustration of these representations).
+In our experiments, we used the SwinV2 model pre-trained
+on the ImageNet-21K dataset, available through the Hugging
+Face Python library5 . Image processing was performed using
+the AutoImageProcessor class associated with the pre-trained
+model, which included resizing to 256×256 pixels, rescaling
+pixel values to the range [0, 1], and normalizing them using the
+mean and standard deviation from ImageNet-21K. This process
+ensured the proper adaptation of the input data to the format required by the SwinV2. The model operates on input images of
+3
+ELAsTiCC Challenge Data Portal.
+Description of the data variables from the first round of ELAsTiCC.
+5
+Pre-trained Hugging Face model used.
+4
+Article number, page 6 of 13
+Hyperparameter
+Values
+Marker size
+Line width
+Flux errors
+Input format
+Learning rate
+{1, 2, 3, 4, 5}
+{0.5, 1.0, 1.5, 2.0}
+{True, False}
+{Grid, Overlay}
+{5 · 10−5 , 5 · 10−6 }
+size 256×256×3 pixels, divides them into patches of 4×4 pixels,
+uses an embedding dimension of C = 96, and performs selfattention within windows of 16×16 patches. The training was
+conducted on an NVIDIA A100 GPU.
+We experimented with varying key hyperparameters during
+the conversion of light curves into images to identify the best
+visual representation that enhances classification performance,
+as measured by the F1-score, which balances how accurately
+the model identifies light curves of a given class (precision)
+and its ability to recognize all light curves that truly belong
+to that class (recall). Table 1 summarizes the hyperparameters
+used. Since the MACHO labeled dataset contains a limited number of light curves and to assess the model’s ability to learn
+from datasets with small to medium sample sizes per class, we
+performed hyperparameter tuning using grid search and k-fold
+cross-validation for each scenario (20 spc, 500 spc, and “full
+dataset”). This means that for each fold, a total of 160 combinations were tested for the 20 spc, 500 spc, and “full dataset”. In
+contrast, due to the considerable size of the ELAsTiCC dataset,
+we opted to execute hyperparameter tuning with just one validation fold. This decision stemmed from the high computational
+expense associated with evaluating multiple folds and the anticipated low variance across folds in large-scale datasets. As
+before, a total of 160 combinations were tested, but only in
+one fold. The lower and upper bounds for the hyperparameters
+marker size and line width were determined based on the degree of visual overlap between the observations and lines in the
+images. Figure 1 (a) and (b) present images generated using the
+best hyperparameters identified for the “Grid” and “Overlay” approaches, respectively.
+To mitigate class imbalance, we employed a weighted sampling strategy6 that adjusted the selection probability of each
+class according to its relative frequency, promoting a more balanced representation in training and improving model generalization. Additionally, we optimized the model using Adam and
+applied early stopping with a patience of 10 epochs for the MACHO datasets and 5 epochs for ELAsTiCC, based on the validation F1-score.
+4. Results
+We evaluated the classification performance of the SwinV2
+model on two previously mentioned datasets: MACHO and
+ELAsTiCC. These datasets exhibit distinct characteristics, particularly in terms of the number of observations per light curve,
+the number of bands, and their cadences and taxonomies, which
+influenced both hyperparameter choices and classification performance. We initiate our analysis with the MACHO dataset,
+exploring both single-band and two-band experiments, before
+expanding our assessment to the ELAsTiCC dataset, which in6
+PyTorch’s WeightedRandomSampler.
+=== PAGE 7 ===
+D. Moreno-Cartagena et al.: Leveraging pre-trained vision Transformers for multi-band photometric light curve classification
+Single-band
+cludes six bands. We trained a separate model for each fold and
+report the macro F1-score as the mean and standard deviation
+computed across the models evaluated on the test set, referred to
+in the text as simply the F1-score.
+Model
+Astromer - F
+Astromer - T
+SwinV2 - T
+20 spc
+500 spc
+Full dataset
+56.0 ± 2.5
+44.0 ± 5.0
+60.1 ± 4.6
+71.0 ± 1.8
+73.0 ± 3.0
+77.4 ± 1.3
+79.8 ± 2.2
+Notes. F denotes a frozen transformer, where only the classifier is updated. T represents a trainable transformer, where both the transformer
+and classifier are updated during training.
+Test F1-score (%)
+SwinV2’s performance on different MACHO datasets
+90%
+80%
+70%
+One-band
+Two-band (Overlay)
+81.7%
+80.6%
+Two-band (Grid)
+77.4%
+60.1%
+79.8%
+82.3%
+84.3%
+66.9% 64.3%
+60%
+20 samples per class
+500 samples per class
+Full dataset
+Dataset Size
+Fig. 5. SwinV2 classification performance on the MACHO test set using
+single- and multi-band data trained on varying sample sizes. The figure
+presents the best results from the hyperparameter search for both the
+“Overlay” and “Grid” approaches.
+0.04
+0.12
+±0.09
+0.01
+0.7
+0.26
+±0.14 ±0.13
+0.0
+0.02
+0.01
+0.0
+RRc
+0.25
+±0.18
+0.59
+±0.1
+0.01
+0.01
+0.14
+±0.07
+0.0
+0.44 0.53
+±0.15 ±0.16
+0.0
+0.01
+0.02
+0.0
+Cep 0
+0.02
+0.02
+0.68 0.26
+±0.07 ±0.08
+0.02
+0.0
+0.02
+0.01
+0.58
+±0.2
+0.38
+±0.21
+0.01
+0.0
+0.04
+0.28 0.55
+0.1
+±0.08 ±0.03 ±0.05
+0.01
+0.05
+±0.01
+0.03
+0.16 0.72
+±0.09 ±0.07
+0.03
+0.0
+True Label
+Cep 1
+0.02
+0.05 0.18
+±0.03 ±0.03
+0.02
+0.12 0.56 0.07
+±0.05 ±0.07 ±0.01
+0.12 0.08
+±0.05 ±0.04
+0.02
+0.08 0.59 0.11
+±0.02 ±0.06 ±0.05
+LPV
+0.0
+0.0
+0.06 0.05 0.88
+±0.05 ±0.03 ±0.06
+0.0
+0.01
+0.01
+0.06 0.92
+±0.05 ±0.05
+RRab
+0.76 0.19
+±0.07 ±0.04
+0.0
+0.01
+0.05
+0.0
+0.88 0.09
+±0.03 ±0.03
+0.0
+0.0
+0.03
+0.0
+RRc
+0.16 0.79
+±0.03 ±0.01
+0.0
+0.0
+0.06
+±0.02
+0.0
+0.24 0.72
+±0.06 ±0.06
+0.0
+0.01
+0.03
+0.0
+0.02
+0.0
+0.72 0.25
+±0.05 ±0.05
+0.01
+0.0
+0.01
+0.0
+0.82 0.16
+±0.01 ±0.02
+0.02
+0.17 0.74
+±0.07 ±0.08
+0.01
+0.0
+0.01
+0.16 0.77
+±0.04 ±0.03
+0.02
+0.0
+0.07 0.07
+±0.03 ±0.03
+0.02
+0.05
+0.73 0.06
+±0.04 ±0.04
+0.0
+0.0
+0.0
+0.01
+0.99
+±0.01
+0.01
+0.0
+(b) 500 samples per class
+Cep 0
+Cep 1
+0.02
+0.04
+0.0
+0.04
+0.06 0.09
+±0.04 ±0.03
+0.03
+0.06
+0.7
+0.06
+±0.02 ±0.04 ±0.03
+LPV
+0.0
+0.0
+0.0
+RRab
+0.9
+0.07
+±0.02 ±0.02
+0.0
+0.0
+0.03
+0.0
+0.89 0.08
+±0.02 ±0.02
+0.0
+0.0
+0.03
+0.0
+RRc
+0.25 0.66
+±0.03 ±0.06
+0.0
+0.0
+0.08
+±0.02
+0.0
+0.2
+0.78
+±0.02 ±0.02
+0.0
+0.0
+0.02
+0.0
+0.01
+0.0
+0.82 0.14
+±0.03 ±0.03
+0.03
+0.0
+0.0
+0.0
+0.88
+0.1
+±0.04 ±0.04
+0.01
+0.0
+0.01
+0.2
+0.65 0.09
+±0.03 ±0.02 ±0.02
+0.17
+±0.0
+0.72 0.07
+±0.02 ±0.01
+0.0
+EC
+0.0
+0.05
+0.95
+±0.04
+0.0
+0.0
+0.04
+0.96
+±0.02
+0.0
+0.0
+0.0
+0.0
+0.02
+0.98
+±0.01
+1
+EC
+LP
+V
+ep
+C
+c
+ep
+C
+Predicted Label
+0
+0.02
+ep
+0.0
+0.02
+C
+0.0
+0.04
+c
+0.0
+0.02
+0.81 0.05
+±0.05 ±0.03
+ep
+LPV
+0.0
+C
+0.02
+0.0
+0.05
+±0.01
+RR
+0.04
+0.03
+0.81 0.05
+±0.02 ±0.03
+RR
+ab
+EC
+0.07
+±0.02
+LP
+V
+0.04
+0
+Cep 1
+RR
+Cep 0
+1
+EC
+(c) Full dataset
+RR
+ab
+Table 2. F1-score (%) on the MACHO test set for models trained with
+20 and 500 samples per class (spc), and the “full dataset” comprising
+20 294 labeled light curves used for training.
+0.0
+EC
+True Label
+To evaluate the classification performance of our approach using
+a single band, we compared SwinV2 with Astromer. Our initial
+experiments focused on the R band of the MACHO dataset to
+ensure direct comparability with the results reported in the referenced study. We conducted hyperparameter tuning to optimize
+the model’s performance and to assess its ability to learn from
+datasets with small to medium sample sizes per class. The best
+combination of hyperparameters, using one band, for the 20 and
+500 spc used to train the model, as well as the “full dataset”, can
+be found at the top of Table B.1 in Appendix B. These combinations were then used to generate the SwinV2 results presented in
+Table 2.
+Table 2 presents the single-band classification results on
+the MACHO dataset in the R band for SwinV2 and Astromer.
+The table reports the F1-scores along with their standard deviations for SwinV2 (in trainable configurations) and Astromer (in
+both frozen and trainable configurations) across different dataset
+sizes. In this context, a trainable model refers to one in which
+both the transformer and classifier layers are updated during
+training, whereas a frozen model retains the transformer’s pretrained weights and only updates the classifier. Since results for
+the “full dataset” were not available for Astromer, we compared
+it only in the limited-data scenarios (20 and 500 spc). However,
+the “full dataset” results provide a basis for evaluating our multi-
+0.4
+0.42
+±0.26 ±0.14
+RRab
+True Label
+4.1. Model performance in single- and multi-band light
+curves
+Multi-band
+(a) 20 samples per class
+Predicted Label
+Fig. 6. Confusion matrices for the best classification results obtained using SwinV2 with single-band and two-band inputs on different subsets
+of the MACHO dataset. Standard deviations are displayed for values
+greater than or equal to 0.05.
+band method. As shown in Table 2, SwinV2 consistently outperformed Astromer across all configurations and dataset sizes.
+For 20 spc, SwinV2 achieved an F1-score of 60.1%, which is
+4.1% points higher than Astromer’s best result of 56.0%. For
+500 spc, SwinV2 attained 77.4%, surpassing Astromer by 4.4%
+points. These results demonstrate the robustness and adaptability of the VT model in achieving high classification performance
+on light curves, particularly in low-data scenarios. When tested
+on the unbalanced dataset (i.e., the “full dataset”, as illustrated
+in Fig. 3), SwinV2 achieved an F1-score of 79.8%, surpassing
+its performance on the balanced dataset with 500 spc (77.4%).
+This result highlights the VT model’s ability to maintain strong
+performance even in the presence of data imbalance.
+To demonstrate the impact of the multi-band approach, we
+extended our analysis to incorporate both the R and B bands
+from the MACHO dataset, employing two distinct plotting
+strategies: “Grid” and “Overlay”. As before, we performed hyperparameter tuning on each scenario. The best combination
+of hyperparameters using two bands can be seen in the middle of Table B.1 in Appendix B. The results in Fig. 5 show
+Article number, page 7 of 13
+=== PAGE 8 ===
+A&A proofs: manuscript no. aa54289-25
+Article number, page 8 of 13
+F1-score distribution in MACHO hyperparameter tuning
+Test F1-score (%)
+that incorporating multi-band inputs improves F1-scores compared to single-band experiments. Using two bands led to performance improvements of 6.8%, 4.3%, and 4.5% for the 20,
+500, and “full dataset” settings, respectively, relative to the best
+multi-band approach in each case. These improvements highlight the model’s ability to effectively leverage the additional information provided by multiple bands, reinforcing the value of
+multi-band configurations for capturing the complex behavior of
+light curves through image-based representations. For 20 spc,
+“Overlay” outperformed “Grid” (F1-score: 66.9% vs. 64.3%).
+With 500 spc, “Grid” achieved an F1-score of 81.7%, marginally
+surpassing “Overlay” (80.6%). When using the “full dataset”,
+“Grid” attained a higher F1-score of 84.3%, slightly outperforming “Overlay” (82.3%). These results indicate that “Grid”
+achieved better performance in two configurations. However, the
+differences were minimal.
+The confusion matrices for the best-performing SwinV2
+models across different dataset sizes, for both single- and multiband settings, are shown on the left and right of Fig. 6, respectively. These matrices illustrate the recall per class, providing
+insight into how well the model correctly identifies each category. For the subset with 20 spc, using two bands instead of one
+improved recall in 4 out of 6 classes (RRab, Cep_1, EC, and
+LPV) but decreased it for RRc and Cep_0. For the subset with
+500 spc, recall increased in 5 out of 6 classes (RRab, Cep_0,
+Cep_1, EC, and LPV) but decreased by 7% for RRc. For the
+“full dataset”, a similar pattern was observed. Recall improved
+in 4 out of 6 classes (RRc, Cep_0, Cep_1, and LPV), remained
+unchanged for EC, and decreased by 1% for RRab. The consistent improvement observed in Cep_1, EC, and LPV suggests that
+these classes benefit from the additional spectral information. In
+contrast, RRab, RRc, and Cep_0 exhibit mixed results, indicating that while multi-band inputs are beneficial in most cases,
+they do not always provide a clear advantage, especially for certain classes that remain challenging to distinguish due to their
+similar flux variations in both bands. This is particularly evident
+in RRc and RRab, as well as Cep_0 and Cep_1.
+Figure 7 shows the distribution of F1-scores obtained during
+the hyperparameter tuning process for the MACHO dataset, considering both single-band and two-band approaches for each scenario (20 spc, 500 spc, and the “full dataset”). In general, the median F1-score values across all combinations remain consistent
+with those of the best combinations presented in Fig. 5, where
+the “Overlay” approach performed better for 20 spc, while the
+“Grid” approach was superior for 500 spc and the “full dataset”.
+In particular, the F1-score for 500 spc and the “full dataset” exhibited little variation, regardless of the hyperparameter combinations used. The exception is the 20 spc scenario, where a
+poor choice of hyperparameters can lead to low performance due
+to the limited amount of data, which restricts the model’s ability to extract sufficient discriminative information from the light
+curves.
+Evaluating model performance under realistic observational
+constraints is important to understand how models behave beyond controlled experimental settings. In our earlier experiments (see Fig. 5), we used randomly sampled subsets of the
+MACHO dataset with 20 and 500 samples per class to compare SwinV2 with Astromer. These results showed that SwinV2
+reached higher F1-scores across different training sizes. However, those experiments did not reflect the sampling biases often found in real spectroscopic follow-up observations, where
+brighter sources tend to be prioritized.
+To explore this aspect, we conducted a complementary experiment using a brightness-biased sampling strategy. Specifi-
+80%
+70%
+60%
+50%
+One-band
+Two-band (Overlay)
+Two-band (Grid)
+40%
+30%
+20 samples per class
+500 samples per class
+Full dataset
+Dataset Size
+Fig. 7. Distribution of F1-scores obtained during hyperparameter tuning
+for the MACHO dataset comparing single-band and two-band (“Overlay” and “Grid”) approaches across different dataset sizes (20 spc, 500
+spc, and the “full dataset”).
+cally, we modified only the training set by selecting the brightest
+objects of each class from the “full dataset”, based on their median magnitudes, while maintaining the 20 and 500 samples per
+class configurations. We refer to these settings as 20 spc-b and
+500 spc-b, where the suffix -b denotes brightness-biased sampling. The test set remained unchanged from previous experiments. This introduces a distribution shift between training and
+testing, as the training set includes only the brightest sources,
+while the test set covers the full magnitude range. The results,
+presented in Table 3, show lower F1-scores compared to those
+obtained with randomly sampled training data. For 20 spc-b, the
+F1-score dropped from 60.1% to 48.9% in the one-band configuration, from 66.9% to 55.8% in the “Overlay” approach, and
+from 64.3% to 51.6% in the “Grid” approach. For 500 spc-b,
+the F1-score decreased from 77.4% to 69.5% in one-band, from
+80.6% to 72.9% in “Overlay”, and from 81.7% to 74.7% in
+“Grid”. Despite these differences, the model still achieves relatively high scores, particularly with two-band inputs. Among
+the visual strategies, “Overlay” performs better under smaller
+training sizes, while “Grid” yields the highest performance with
+500 spc-b. These findings indicate that the model remains effective even under sampling conditions that reflect realistic observational biases.
+4.2. Model performance in ELAsTiCC
+To assess the model’s performance on a large-scale dataset, we
+used ELAsTiCC, which includes six bands. In line with prior
+datasets, we fine-tuned hyperparameters to enhance the model’s
+effectiveness. The best hyperparameter combination for “Grid”
+and “Overlay” can be found at the bottom of Table B.1 in Appendix B.
+Table 4 presents the F1-scores along with their standard deviations for SwinV2’s best results, compared to the Astronomical
+Transformer for time series And Tabular data (ATAT; CabreraTable 3. F1-score (%) on the MACHO test set using the best SwinV2
+model, evaluated under brightness-biased sampling in the 20 spc-b and
+500 spc-b settings. The test set remains unchanged.
+Approach
+20 spc-b
+500 spc-b
+One-band
+Two-band (Overlay)
+Two-band (Grid)
+48.9 ± 1.4
+55.8 ± 4.9
+51.6 ± 7.0
+69.5 ± 1.8
+72.9 ± 1.5
+74.7 ± 1.2
+=== PAGE 9 ===
+D. Moreno-Cartagena et al.: Leveraging pre-trained vision Transformers for multi-band photometric light curve classification
+Table 4. F1-score (%) on the ELAsTiCC test set for ATAT using only
+light curves and for SwinV2 with the “Overlay” and “Grid” approaches.
+Model
+F1-score
+ATAT (LC)
+SwinV2 (Overlay)
+SwinV2 (Grid)
+64.2 ± 0.69
+65.5 ± 0.28
+64.6 ± 0.22
+same classes and correctly identify light curves in similar proportions. Both primarily struggle to differentiate between various supernova types and achieve high recall in the stochastic
+group (ATAT: ≥ 82%, SwinV2: ≥ 84%, both except for M-dwarf
+Flare) and the periodic group (ATAT: ≥ 93%, SwinV2: ≥ 97%).
+SwinV2 (Overlay) slightly outperformed ATAT (LC) in 13 out
+of 20 classes, obtained the same results in 2 classes, and showed
+a slight decrease in 5 classes. Specifically, SwinV2 (Overlay)
+demonstrated higher recall in 8 out of 12 supernova subclasses,
+namely: CART, Iax, 91bg, Ia, II, SN-like/Other, SLSN, and
+PISN, with improvements of more than 4% in the Iax, 91bg,
+II, and PISN types. Additionally, SwinV2 (Overlay) performed
+equally well or better in 3 out of 4 stochastic subclasses and in
+all 4 periodic subclasses, where its recall improved by more than
+4% for the Delta Scuti and RR Lyrae classes.
+Vives et al. 2024), a specialized time domain model designed
+for multi-band light curves. Since ATAT provides results that
+combine light curves with metadata and additional features, we
+focused on its light curve-based results to ensure a fair comparison and demonstrate the effectiveness of our approach on
+equal footing. We refer to this as ATAT (LC). The results show
+that SwinV2 slightly outperformed ATAT (LC) in both configurations, with the “Overlay” approach achieving the highest F1score of 65.5%, followed by the “Grid” approach with 64.6%,
+while ATAT (LC) obtained 64.2%. Although the 1.3% improvement of SwinV2 (Overlay) over ATAT (LC) is moderate, it underscores the model’s ability to effectively distinguish between
+20 transient and variable star classes in a more complex classification task.
+Figure 8 presents the confusion matrices for the ATAT (LC)
+model and the SwinV2 (Overlay) model, which achieved the best
+performance on the ELAsTiCC dataset. Since the confusion matrix for ATAT (LC) was not directly available, we generated it
+using the publicly available prediction files from the referenced
+study7 . In general terms, a similar pattern can be observed in
+Fig. 8 (a) and (b), where both models tend to misclassify the
+In comparison to MACHO, which consists primarily of periodic stars, ELAsTiCC presents a more complex taxonomy, making the classification task more challenging. In both datasets,
+SwinV2 demonstrated strong performance in distinguishing periodic stars, and in ELAsTiCC, it also proved effective at identifying stochastic stars. As mentioned earlier, the main difficulty arises in the classification of supernovae, where both
+Files with the results of the ATAT paper.
+(a) ATAT (LC)
+CART
+0.03
+0.02
+0.0
+0.0
+0.0
+0.0
+0.01
+0.0
+0.0
+0.0
+0.0
+0.17 0.14
+0.08 0.09 0.22 0.08 0.08
+0.04
+0.02
+±0.02 ±0.02
+±0.01 ±0.0 ±0.01 ±0.02 ±0.01
+0.04
+0.01
+0.0
+0.0
+0.0
+0.02
+0.01
+0.0
+0.0
+0.0
+0.0
+0.01
+0.02
+0.01
+0.0
+0.0
+0.0
+0.01
+0.01
+0.0
+0.0
+0.0
+0.0
+Iax
+0.05
+0.39
+0.18 0.07 0.11 0.1
+0.02
+0.03
+±0.04
+±0.02 ±0.02 ±0.02 ±0.03
+0.01
+0.02
+0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.03
+0.44
+0.18 0.07 0.1 0.07
+0.03
+0.02
+±0.03
+±0.02 ±0.01 ±0.02 ±0.02
+91bg
+0.01
+0.03
+0.63 0.09 0.1
+0.08
+0.01
+0.01
+±0.04 ±0.01 ±0.03
+±0.02
+0.01
+0.0
+0.0
+0.02
+0.0
+0.01
+0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+0.03
+Ia
+0.02
+0.12 0.06 0.57 0.06
+0.08
+0.04
+0.02
+±0.02 ±0.01 ±0.01 ±0.02
+±0.02
+0.01
+0.01
+0.01
+0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.02
+0.12 0.06 0.6
+0.04
+±0.02 ±0.01 ±0.03
+Ib/c
+0.04
+0.11 0.1 0.14 0.29 0.07 0.14
+0.05
+±0.02 ±0.01 ±0.02 ±0.04 ±0.02 ±0.02
+0.02
+0.01
+0.01
+0.01
+0.0
+0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.05 0.08
+0.05
+0.5 0.07 0.06
+0.07
+0.02
+0.04
+0.01
+0.02
+±0.02 ±0.02
+±0.01
+±0.04 ±0.01 ±0.01
+±0.02
+0.01
+0.0
+0.0
+0.0
+0.02
+0.0
+0.0
+0.0
+0.0
+0.01
+0.0
+0.01
+0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.04
+0.08
+0.06
+0.54 0.05
+0.02
+0.03
+0.04
+±0.01
+±0.01
+±0.02 ±0.02
+0.01
+0.08
+0.01
+±0.01
+0.0
+0.0
+0.0
+0.01
+0.02
+0.0
+0.0
+0.0
+0.0
+0.01
+0.01
+0.01
+0.01
+0.0
+0.0
+0.02
+0.0
+0.0
+0.0
+0.0
+0.0
+0.03
+0.13 0.12 0.13 0.13 0.1 0.26
+0.02
+±0.01 ±0.02 ±0.02 ±0.01 ±0.02 ±0.02
+0.02
+0.67 0.08
+0.01
+±0.01 ±0.01
+0.03
+0.0
+0.0
+0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.02
+0.03
+0.01
+0.04
+0.03
+0.03
+0.02
+0.68 0.09
+0.01
+±0.02 ±0.01
+0.02
+0.0
+0.0
+0.01
+0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+0.07 0.81
+±0.01 ±0.02
+0.0
+0.05
+0.0
+0.0
+0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+0.01
+0.02
+0.01
+0.0
+0.01
+0.05
+0.87
+±0.01
+0.0
+0.02
+0.0
+0.0
+0.0
+0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.06
+0.01
+±0.01
+0.01
+0.78
+0.02
+±0.02
+0.0
+0.0
+0.0
+0.0
+0.05
+0.0
+0.0
+0.0
+0.0
+0.01
+0.03
+0.01
+0.02
+0.0
+0.06
+0.01
+±0.01
+0.01
+0.0
+0.77
+0.01
+±0.02
+0.0
+0.0
+0.0
+0.01
+0.06
+±0.01
+0.0
+0.0
+0.0
+0.0
+0.02
+0.05
+0.14 0.15 0.07 0.43
+±0.02 ±0.03 ±0.01 ±0.08
+0.0
+0.0
+0.0
+0.0
+0.04
+0.0
+0.0
+0.0
+0.0
+0.01
+0.04
+0.01
+0.03
+0.01
+0.05
+0.13 0.18 0.06 0.41
+±0.02 ±0.02 ±0.01 ±0.02
+0.0
+0.0
+0.0
+0.01
+0.04
+0.0
+0.0
+0.0
+0.0
+0.1
+0.04
+±0.02
+0.04
+0.08 0.13
+±0.02 ±0.03
+0.0
+0.0
+0.01
+0.0
+0.48
+0.02
+±0.05
+0.01
+0.04
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+0.03
+0.12
+0.05
+±0.02
+0.03
+0.08 0.14
+±0.01 ±0.03
+0.0
+0.0
+0.01
+0.0
+0.43
+0.01
+±0.03
+0.02
+0.04
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+0.02
+0.02
+0.03
+0.06
+0.04
+±0.01
+0.0
+0.0
+0.01
+0.0
+0.18 0.57
+0.02
+±0.03 ±0.02
+0.03
+0.0
+0.0
+0.0
+0.0
+0.01
+0.0
+0.01
+0.03
+0.02
+0.03
+0.08 0.06
+±0.01 ±0.02
+0.0
+0.0
+0.01
+0.0
+0.15 0.56
+0.01
+±0.02 ±0.01
+0.03
+0.0
+0.0
+0.0
+0.0
+0.0
+uLens
+0.0
+0.0
+0.03
+0.02
+0.02
+0.0
+0.01
+0.02
+0.02
+0.0
+0.0
+0.01
+0.0
+0.82
+0.03
+±0.02
+0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+0.04
+0.02
+0.02
+0.0
+0.01
+0.01
+0.01
+0.0
+0.0
+0.01
+0.0
+0.84
+±0.0
+0.03
+0.0
+0.0
+0.0
+0.0
+0.0
+Dwarf Novae
+0.01
+0.0
+0.02
+0.01
+0.01
+0.01
+0.01
+0.0
+0.0
+0.01
+0.0
+0.03
+0.0
+0.04
+0.85
+±0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.03
+0.01
+0.01
+0.01
+0.01
+0.0
+0.0
+0.0
+0.0
+0.02
+0.0
+0.03
+0.88
+±0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+AGN
+0.0
+0.01
+0.0
+0.0
+0.0
+0.02
+0.0
+0.01
+0.0
+0.08
+±0.0
+0.01
+0.0
+0.0
+0.0
+0.0
+0.86
+±0.01
+0.0
+0.0
+0.0
+0.01
+0.0
+0.01
+0.0
+0.0
+0.0
+0.02
+0.0
+0.0
+0.0
+0.09
+0.01
+±0.01
+0.0
+0.0
+0.0
+0.0
+0.86
+±0.01
+0.0
+0.0
+0.0
+0.0
+Delta Scuti
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.93
+0.03
+±0.01
+0.02
+0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.98
+±0.0
+0.01
+0.0
+0.0
+RR Lyrae
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.03
+0.94
+±0.01
+0.0
+0.02
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+0.98
+±0.0
+0.0
+0.01
+Cepheid
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.02
+0.0
+0.97
+±0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.99
+±0.0
+0.0
+0.0
+0.97
+±0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+0.0
+0.0
+0.0
+0.0
+0.01
+0.0
+0.0
+0.0
+0.0
+0.97
+±0.0
+Predicted Label
+0.0
+0.0
+ar
+0.01
+w
+0.0
+re
+0.0
+D
+w
+-d
+M
+-li
+SN
+0.0
+K
+0.0
+la
+0.0
+0.01
+fF
+0.0
+ar
+PI
+SN
+0.0
+ke
+SL
+II
+0.0
+er
+Ia
+0.0
+th
+x
+bg
+0.0
+/O
+RT
+0.0
+/c
+0.0
+Ib
+0.0
+91
+0.0
+C
+A
+0.0
+Ia
+EB
+0.02
+0.0
+EB
+0.0
+uL
+en
+fN s
+ov
+ae
+A
+G
+D
+N
+el
+ta
+Sc
+RR uti
+Ly
+r
+C ae
+ep
+he
+id
+0.0
+N
+0.0
+ar
+0.0
+0.01
+w
+M-dwarf Flare
+0.03
+-d
+0.02
+0.12 0.12 0.15 0.28 0.07 0.11
+0.05
+±0.01 ±0.02 ±0.01 ±0.01 ±0.01 ±0.02
+M
+0.02
+0.0
+0.02
+SN
+TD
+E
+IL
+O
+T
+KN
+0.0
+SN
+0.02
+0.0
+SL
+0.01
+0.0
+II
+0.03
+0.0
+er
+0.03
+0.02
+th
+ILOT
+0.0
+/O
+0.0
+0.0
+ke
+0.02
+0.0
+-li
+0.0
+0.0
+SN
+0.02
+0.02
+Ia
+0.01
+0.01
+/c
+TDE
+0.02
+Ib
+0.01
+0.0
+0.04
+0.03
+x
+0.01
+0.0
+bg
+0.02
+0.0
+91
+0.01
+0.0
+RT
+0.01
+0.0
+Ia
+0.0
+0.02
+C
+A
+PISN
+0.01
+0.0
+uL
+en
+fN s
+ov
+ae
+A
+G
+D
+N
+el
+ta
+Sc
+RR uti
+Ly
+r
+C ae
+ep
+he
+id
+0.04
+0.0
+0.0
+ar
+0.03
+0.01
+0.0
+w
+0.03
+0.0
+0.01
+D
+0.01
+0.0
+0.0
+N
+0.03
+0.01
+0.02
+re
+0.02
+0.01
+0.01
+K
+SLSN
+0.05
+0.01
+0.01
+la
+0.11 0.11 0.14 0.15 0.12 0.25
+0.02
+±0.02 ±0.01 ±0.01 ±0.03 ±0.02 ±0.02
+fF
+0.04
+SN
+TD
+E
+IL
+O
+T
+SN-like/Other
+0.67 0.09 0.07
+0.01
+±0.04 ±0.02 ±0.01
+EB
+II
+True Label
+(b) SwinV2 (Overlay)
+0.16 0.11
+0.06 0.1 0.27 0.1 0.08
+0.03
+0.02
+±0.04 ±0.03
+±0.01 ±0.03 ±0.04 ±0.02 ±0.01
+PI
+7
+Figure 9 illustrates the distribution of F1-scores obtained
+during the hyperparameter tuning process for the ELAsTiCC
+dataset, comparing the “Overlay” and “Grid” approaches. As before, the median F1-score values across all tested hyperparameter combinations remain consistent with those of the best configurations reported in Table 4, where SwinV2 (Overlay) slightly
+outperforms SwinV2 (Grid). The F1-score variations across different hyperparameter settings fall within a narrow range of 61%
+to 67%, indicating that classification performance remains relatively stable regardless of the chosen hyperparameters.
+Predicted Label
+Fig. 8. Confusion matrices for the ATAT model trained exclusively on light curves and the best-performing SwinV2 model, both of which use
+the ELAsTiCC dataset. The black lines delineate the three main groups of objects used in the ATAT paper: the transient, stochastic, and periodic
+groups, from left to right, respectively. Standard deviations are displayed for values greater than or equal to 0.05.
+Article number, page 9 of 13
+=== PAGE 10 ===
+A&A proofs: manuscript no. aa54289-25
+Test F1-score (%)
+F1-score distribution in ELAsTiCC hyperparameter tuning
+66%
+65%
+64%
+63%
+62%
+SwinV2 (Overlay)
+SwinV2 (Grid)
+Multi-band approach
+Fig. 9. Distribution of F1-scores obtained during hyperparameter tuning
+for the ELAsTiCC dataset comparing the “Overlay” and “Grid” multiband approaches.
+SwinV2 and ATAT struggled to differentiate between subclasses.
+In Cabrera-Vives et al. (2024), ATAT was also evaluated in a
+configuration that incorporated both light curves and metadata
+(tabular information provided in the alert stream), referred to
+as ATAT (LC + MD). The inclusion of metadata significantly
+improved its performance, increasing the F1-score from 64.2%
+(LC) to 82.6% (LC + MD), which emphasizes the importance of
+metadata or additional features in improving supernova classification. Exploring the integration of tabular data in SwinV2 is left
+for future work, as it could yield similar improvements to those
+observed in ATAT.
+5. Conclusions
+We have introduced a simple and effective method for classifying
+photometric light curves using a pre-trained VT model without
+the need for complex feature engineering or multi-band preprocessing to handle multi-band observations. We demonstrated the
+capability and effectiveness of this method using one, two, and
+six bands of light curves as well as scenarios involving imbalanced datasets, limited data, and the classification of both transient and variable stars.
+Our results show that leveraging the knowledge acquired
+from pre-training SwinV2 on a large dataset and fine-tuning it
+for a specific task can lead to better performance than models
+specifically designed for light curve data. When using a single
+band in the MACHO dataset, we demonstrated that, compared
+to Astromer, our method improves the F1-score by 4.1% in a
+dataset with 20 spc used to train the model and by 4.4% in a
+dataset with 500 spc. Additionally, we showed that it is possible to maintain a high performance (79.8%) of F1-score on the
+unbalanced “full dataset”. When incorporating a second band in
+the same dataset, we observed further improvements compared
+to SwinV2 with one band: an additional 6.8% in the F1-score
+for 20 spc, 4.3% for 500 spc, and 4.5% in the “full dataset”. Finally, when evaluating our method on the ELAsTiCC dataset,
+we demonstrated that it achieves an F1-score of 65.5%, which
+is 1.2% higher than the score obtained in ATAT using only light
+curves.
+This study highlights the discriminative power of pre-trained
+VT models and demonstrates their ability to adapt to datasets
+that differ entirely from those on which they were originally
+trained. By analyzing images of light curves, the model successfully distinguished between astronomical objects across datasets
+with distinct observational characteristics, such as the MACHO survey and ELAsTiCC. A key factor in this success is
+the model’s ability to capture the temporal behavior of light
+Article number, page 10 of 13
+curves, which is primarily achieved through the positional embedding. This embedding provides a structured representation of
+the light curve’s spatial arrangement within the image, allowing
+the model to implicitly encode ordering information. As a result, it delivers competitive performance against models specifically designed to process sequential light curves and account
+for the distances between observations. This capability not only
+underscores the model’s versatility but also suggests a promising direction for developing a more generalizable approach. In
+particular, it could serve as a foundation for a model capable of
+adapting to any type of survey with minimal fine-tuning using
+only a few light curves. However, further investigation is necessary to fully validate this potential.
+A direct extension of our approach would be to incorporate
+metadata alongside light curves to provide additional context and
+enhance classification performance, which should align with the
+improvements observed in ATAT when using both light curves
+and metadata (LC + MD). Additionally, pre-training the model
+on light curves could be explored to assess its ability to extract
+general information from astronomical time series using a selfsupervised task. Future work could explore integrating descriptive information, such as textual captions for each light curve. If
+such data were available, we could extend our method to visionlanguage transformers (VLTs), enabling tasks such as image retrieval (IR) with CLIP (Radford et al. 2021), visual question
+answering (VQA) with BLIP-2 (Li et al. 2023), and even light
+curve image deblurring using Stable Diffusion (Rombach et al.
+2022). Given the potential computational cost of these models, knowledge distillation could be employed to improve inference efficiency while maintaining accuracy. These advancements
+would further refine the classification of photometric light curves
+and open new avenues for multi-modal astronomical analysis in
+the time domain.
+Code and data availability
+The code used in this study, along with instructions on how to
+access the data, is available at GitHub repository. Detailed information on how to obtain and use the dataset is provided in the
+README file.
+Acknowledgements. The computations in this paper were run on the FASRC
+Cannon cluster supported by the FAS Division of Science Research Computing Group at Harvard University. The authors acknowledge support from the
+National Agency for Research and Development (ANID) grants: Millennium
+Science Initiative ICN12_009 and AIM23-0001 (GCV), NCN2021_080 (GCV,
+CDO), and FONDECYT Regular 1231877 (DMC, GCV, MCL, CDO).
+References
+Alcock, C., Allsman, R., Alves, D., et al. 1997a, AJ, 114, 326
+Alcock, C., Allsman, R., Alves, D., et al. 1999, ApJ, 511, 185
+Alcock, C., Allsman, R., Alves, D., et al. 2003, VizieR Online Data Catalog:
+Variable Stars in the Large Magellanic Clouds (MACHO, 2001), VizieR Online Data Catalog: II/247
+Alcock, C., Allsman, R., Alves, D. R., et al. 2002, ApJ, 573, 338
+Alcock, C., Allsman, R., Axelrod, T., et al. 1996, AJ, 111, 1146
+Alcock, C., Allsman, R. A., Alves, D., et al. 1997b, ApJ, 482, 89
+Alcock, C., Allsman, R. A., Alves, D. R., et al. 2000, ApJ, 542, 281
+Allam Jr, T. & McEwen, J. D. 2024, RASTI, 3, 209
+Becker, I., Pichara, K., Catelan, M., et al. 2020, MNRAS, 493, 2981
+Becker, I., Protopapas, P., Catelan, M., & Pichara, K. 2025, A&A, 694, A183
+Boone, K. 2019, AJ, 158, 257
+Brown, T., Mann, B., Ryder, N., et al. 2020, Adv. Neural Inf. Process. Syst., 33,
+1877
+Cabrera-Vives, G., Moreno-Cartagena, D., Astorga, N., et al. 2024, A&A, 689,
+A289
+=== PAGE 11 ===
+D. Moreno-Cartagena et al.: Leveraging pre-trained vision Transformers for multi-band photometric light curve classification
+Cádiz-Leyton, M., Cabrera-Vives, G., Protopapas, P., Moreno-Cartagena, D., &
+Donoso-Oliva, C. 2024, in Proc. Int. Conf. Mach. Learn. (ICML) Workshop
+Cádiz-Leyton, M., Cabrera-Vives, G., Protopapas, P., et al. 2025, A&A, 699,
+A168
+Carion, N., Massa, F., Synnaeve, G., et al. 2020, in Proc. Eur. Conf. Comput. Vis.
+(ECCV), 213–229
+Carrasco-Davis, R., Cabrera-Vives, G., Förster, F., et al. 2019, PASP, 131,
+108006
+Charnock, T. & Moss, A. 2017, ApJ, 837, L28
+Chen, H., Wang, Y., Guo, T., et al. 2021a, in Proc. IEEE/CVF Conf. Comput.
+Vis. Pattern Recognit. (CVPR), 12299–12310
+Chen, X., Yan, B., Zhu, J., et al. 2021b, in Proc. IEEE/CVF Conf. Comput. Vis.
+Pattern Recognit. (CVPR), 8126–8135
+Cheng, B., Schwing, A., & Kirillov, A. 2021, Adv. Neural Inf. Process. Syst., 34,
+17864
+Cho, K., van Merriënboer, B., Gulcehre, C., et al. 2014, in Proc. Conf. Empirical
+Methods in Natural Language Processing (EMNLP), 1724–1734
+Devlin, J., Chang, M.-W., Lee, K., & Toutanova, K. 2019, in Proc. NAACL-HLT,
+4171–4186
+Donalek, C., Djorgovski, S. G., Mahabal, A. A., et al. 2013, in Proc. IEEE Int.
+Conf. Big Data, 35–41
+Donoso-Oliva, C., Becker, I., Protopapas, P., et al. 2023, A&A, 670, A54
+Donoso-Oliva, C., Cabrera-Vives, G., Protopapas, P., Carrasco-Davis, R., & Estévez, P. A. 2021, MNRAS, 505, 6069
+Dosovitskiy, A., Beyer, L., Kolesnikov, A., et al. 2021, in Proc. Int. Conf. Learn.
+Represent. (ICLR)
+Drake, A. J., Djorgovski, S. G., Mahabal, A., et al. 2012, in Proc. IAU Symp.
+285: New Horizons in Time-Domain Astronomy, 306–308
+Fraga, B. M. O., Bom, C. R., Santos, A., et al. 2024, A&A, 689, A208
+Gómez, C., Neira, M., Hernández Hoyos, M., Arbeláez, P., & Forero-Romero,
+J. E. 2020, MNRAS, 499, 3130
+Graham, M. J., Djorgovski, S., Drake, A. J., et al. 2014, MNRAS, 439, 703
+Hambleton, K. M. et al. 2023, PASP, 135, 105002
+Han, K., Wang, Y., Chen, H., et al. 2023, IEEE Trans. Pattern Anal. Mach. Intell.,
+45, 87
+Hochreiter, S. & Schmidhuber, J. 1997, Neural Comput., 9, 1735
+Ivezić, Ž., Kahn, S. M., Tyson, J. A., et al. 2019, ApJ, 873, 111
+Jamal, S. & Bloom, J. S. 2020, ApJS, 250, 30
+Jiang, Y., Chang, S., & Wang, Z. 2021, Adv. Neural Inf. Process. Syst., 34, 14745
+Karpenka, N. V., Feroz, F., & Hobson, M. 2013, MNRAS, 429, 1278
+Kessler, R., Narayan, G., Avelino, A., et al. 2019, PASP, 131, 094501
+Khan, S., Naseer, M., Hayat, M., et al. 2022, ACM Comput. Surv., 54
+Kim, D.-W., Protopapas, P., Bailer-Jones, C. A., et al. 2014, A&A, 566, A43
+Kim, D.-W., Protopapas, P., Byun, Y.-I., et al. 2011, ApJ, 735, 68
+LeCun, Y., Bottou, L., Bengio, Y., & Haffner, P. 1998, Proc. IEEE, 86, 2278
+Li, J., Li, D., Savarese, S., & Hoi, S. 2023, in Proc. Int. Conf. Mach. Learn.
+(ICML), 19730–19742
+Li, Z., Li, S., & Yan, X. 2024, Adv. Neural Inf. Process. Syst., 36
+Liu, Y., Zhang, Y., Wang, Y., et al. 2023, IEEE Trans. Neural Netw. Learn. Syst.,
+35, 7478
+Liu, Z., Hu, H., Lin, Y., et al. 2022, in Proc. IEEE/CVF Conf. Comput. Vis.
+Pattern Recognit. (CVPR), 12009–12019
+Liu, Z., Lin, Y., Cao, Y., et al. 2021, in Proc. IEEE/CVF Int. Conf. Comput. Vis.
+(ICCV), 10012–10022
+Lochner, M., McEwen, J. D., Peiris, H. V., Lahav, O., & Winter, M. K. 2016,
+ApJS, 225, 31
+Mahabal, A., Sheth, K., Gieseke, F., et al. 2017, in Proc. IEEE Symp. Ser. Comput. Intell. (SSCI), 1–8
+Möller, A. & de Boissière, T. 2020, MNRAS, 491, 4277
+Monsalves, N., Jaque Arancibia, M., Bayo, A., et al. 2024, A&A, 691, A106
+Moreno-Cartagena, D., Cabrera-Vives, G., Protopapas, P., et al. 2023, in Proc.
+Int. Conf. Mach. Learn. (ICML) Workshop
+Morvan, M., Nikolaou, N., Yip, K. H., & Waldmann, I. 2022, in Proc. Int. Conf.
+Mach. Learn. (ICML) Workshop
+Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R., & Hložek, R. 2019,
+PASP, 131, 118002
+Narayan, G. & Team, T. E. 2023, BAAS, 55
+Naul, B., Bloom, J. S., Pérez, F., & Van Der Walt, S. 2018, Nat. Astron., 2, 151
+Nun, I., Protopapas, P., Sim, B., et al. 2017, Astrophysics Source Code Library
+[ascl:1711.017]
+Pan, J., Ting, Y.-S., & Yu, J. 2022, in Proc. Int. Conf. Mach. Learn. (ICML)
+Workshop
+Pasquet, J., Pasquet, J., Chaumont, M., & Fouchez, D. 2019, A&A, 627, A21
+Pasquet-Itam, J. & Pasquet, J. 2018, A&A, 611, A97
+Pichara, K., Protopapas, P., Kim, D.-W., Marquette, J.-B., & Tisserand, P. 2012,
+MNRAS, 427, 1284
+Pimentel, Ó., Estévez, P. A., & Förster, F. 2022, AJ, 165, 18
+Qu, H. & Sako, M. 2022, AJ, 163, 57
+Qu, H., Sako, M., Möller, A., & Doux, C. 2021, AJ, 162, 67
+Radford, A., Kim, J. W., Hallacy, C., et al. 2021, in Proc. Int. Conf. Mach. Learn.
+(ICML), 8748–8763
+Radford, A., Narasimhan, K., Salimans, T., & Sutskever, I. 2018, Improving language understanding by generative pre-training, openAI Blog
+Richards, J. W., Starr, D. L., Butler, N. R., et al. 2011, ApJ, 733, 10
+Rombach, R., Blattmann, A., Lorenz, D., Esser, P., & Ommer, B. 2022, in Proc.
+IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), 10684–10695
+Rumelhart, D. E., Hinton, G. E., & Williams, R. J. 1986, Nat, 323, 533
+Sánchez-Sáez, P., Reyes, I., Valenzuela, C., et al. 2021, AJ, 161, 141
+Szklenár, T., Bódi, A., Tarczay-Nehéz, D., et al. 2020, ApJ, 897, L12
+Szklenár, T., Bódi, A., Tarczay-Nehéz, D., et al. 2022, ApJ, 938, 37
+Udalski, A., Szymański, M. K., Soszyński, I., & Poleski, R. 2008, Acta Astron.,
+58, 69
+Udalski, A., Szymański, M. K., & Szymański, G. 2015, Acta Astron., 65, 1
+Vaswani, A., Shazeer, N., Parmar, N., et al. 2017, Adv. Neural Inf. Process. Syst.,
+30
+Villar, V., Berger, E., Miller, G., et al. 2019, ApJ, 884, 83
+Villar, V. A., Hosseinzadeh, G., Berger, E., et al. 2020, ApJ, 905, 94
+Wang, H., Zhu, Y., Adam, H., Yuille, A., & Chen, L.-C. 2021, in Proc. IEEE/CVF
+Conf. Comput. Vis. Pattern Recognit. (CVPR), 5463–5474
+Article number, page 11 of 13
+=== PAGE 12 ===
+A&A proofs: manuscript no. aa54289-25
+Appendix A: Visual representations of MACHO and ELAsTiCC light curves
+MACHO
+ID: 2.4906.77
+Class: EC
+ID: 6.6937.46
+Class: Cep 1
+ID: 81.8514.38
+Class: Cep 0
+ID: 79.4777.15
+Class: LPV
+ID: 9.5487.974
+Class: RRab
+Two-band (Grid)
+Two-band (Overlay)
+One-band
+ID: 7.7179.1130
+Class: RRc
+Fig. A.1. Examples from the MACHO dataset illustrating six objects from different classes. Each object is shown in three formats: the original
+single-band light curve and two-band representations generated using the “Overlay” and “Grid” approaches.
+ELAsTiCC
+ID: 10973888
+Class: II
+ID: 1000000234984
+Class: Cepheid
+ID: 69048388
+Class: AGN
+ID: 54320504
+Class: M-dwarf Flare
+ID: 63098855
+Class: RR Lyrae
+Six-band (Grid)
+Six-band (Overlay)
+ID: 989123
+Class: CART
+Fig. A.2. Examples from the ELAsTiCC dataset showing six-band light curves for six objects from different classes. Each object is represented
+using both the “Overlay” and “Grid” approaches.
+Figures A.1 and A.2 present randomly selected examples from the MACHO and ELAsTiCC datasets to illustrate the visual
+characteristics of the light curves used in our experiments. Each figure shows six objects from different classes, represented using
+the approaches evaluated in our pipeline and visualized with the hyperparameters that yielded the best classification performance.
+For MACHO, we include three visual representations per object: the single-band light curve (One-band), and the two-band inputs
+constructed using the “Overlay” and “Grid” approaches. For ELAsTiCC, which contains six-band light curves, we show the corresponding “Overlay” and “Grid” representations. Within each dataset, the same objects and class labels are used across approaches
+to enable direct visual comparison of how different methods encode temporal and spectral information.
+Article number, page 12 of 13
+=== PAGE 13 ===
+D. Moreno-Cartagena et al.: Leveraging pre-trained vision Transformers for multi-band photometric light curve classification
+Appendix B: Hyperparameters
+Table B.1 presents the best hyperparameters obtained for marker size, line width, flux errors, input format, and learning rate for the
+MACHO dataset (single-band and two-band) in the scenarios of 20 spc, 500 spc, and the “full dataset”, as well as for the ELASTiCC
+dataset (six-band). Hyperparameter tuning was conducted using a grid search over the values listed in Table 1.
+The results reveal a few key patterns: the optimal marker size and line width depend on both the number of bands and the
+approach used to represent multi-band observations. When using the “Grid” approach, a larger marker size is necessary because
+each light curve band is represented on a lower-resolution grid, requiring larger observation markers for better visibility. This effect
+is particularly evident in ELAsTiCC, where the grid is divided into six sections. The same pattern is observed in the “full dataset” of
+MACHO (two-band) but not in the 20 spc and 500 spc scenarios, where the limited number of observations increases the likelihood
+of weak data representation. Conversely, the “Overlay” approach generally exhibits less variation in the marker size and line width
+hyperparameters across the different “full datasets”, including MACHO single-band, MACHO two-band, and ELAsTiCC, remaining
+within a marker size range of 1.0 to 2.0 and a line width range of 0.5 to 2.0. This consistency occurs because the resolution at which
+bands are represented remains fixed at 256 × 256. In the same context, flux errors appear to be important in almost all cases, except
+in the 500 spc scenario for MACHO (two-band). Additionally, higher learning rates performed better for smaller datasets, while
+lower learning rates were more effective for larger datasets. This trend likely occurs because higher learning rates help escape local
+optima when data is scarce, whereas lower learning rates enable more stable updates when training on larger datasets.
+Table B.1. Summary of the best hyperparameters found for the SwinV2 model across single- and multi-band cases and varying dataset sizes.
+MACHO (single-band)
+20 spc
+500 spc
+Full dataset
+MACHO (two-band)
+20 spc
+20 spc
+500 spc
+500 spc
+Full dataset
+Full dataset
+ELAsTiCC (six-band)
+Full dataset
+Full dataset
+Marker size
+Line width
+Flux errors
+Input format
+Learning rate
+5.0
+1.0
+1.0
+1.5
+1.0
+2.0
+True
+True
+True
+Overlay
+Overlay
+Overlay
+5 · 10−5
+5 · 10−6
+5 · 10−6
+Marker size
+Line width
+Flux errors
+Input format
+Learning rate
+1.0
+2.0
+2.0
+3.0
+3.0
+1.0
+2.0
+0.5
+1.0
+1.0
+1.5
+2.0
+True
+True
+False
+True
+True
+True
+Grid
+Overlay
+Grid
+Overlay
+Grid
+Overlay
+5 · 10−5
+5 · 10−5
+5 · 10−5
+5 · 10−5
+5 · 10−6
+5 · 10−6
+Marker size
+Line width
+Flux errors
+Input format
+Learning rate
+5.0
+2.0
+2.0
+0.5
+True
+True
+Grid
+Overlay
+5 · 10−6
+5 · 10−6
+Article number, page 13 of 13
+=== PAGE 14 ===

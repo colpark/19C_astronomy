@@ -1,0 +1,16 @@
+PASS label_source_slot.json
+PASS exposure_key_slot.json
+PASS contamination_axis.json
+stub domain_manifest (expected to fail on slots owned by other agents):
+FAIL /home/aid1/Documents/4_19C_astronomy/repo/astronomy/agent3_labels_exposure/scripts/_manifest_stub_domain_manifest.json
+  - missing or empty 'tau'
+  - missing or empty 'k'
+  - missing or empty 'tool_inventory'
+  - missing or empty 'delta'
+  - missing or empty 'S'
+  - missing or empty 'subject_set'
+  - missing or empty 'frozen_hash'
+  - completeness assertion too thin to name what was covered and what was not
+
+PASS /home/aid1/Documents/4_19C_astronomy/repo/astronomy/agent3_labels_exposure/provenance_records.json
+

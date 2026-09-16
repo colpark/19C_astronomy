@@ -1,0 +1,2786 @@
+=== PAGE 1 ===
+Astronomy & Astrophysics manuscript no. ATAT_AA
+May 20, 2024
+©ESO 2024
+ATAT: Astronomical Transformer for time series And Tabular data
+⋆
+G. Cabrera-Vives1, 2, 3 , D. Moreno-Cartagena1, 2 , N. Astorga3, 4, 5 , I. Reyes-Jainaga3, 4 , F. Förster6, 3 , P. Huijse7, 8, 3 ,
+J. Arredondo3, 4 , A. M. Muñoz Arancibia3, 4 , A. Bayo9, 10 , M. Catelan11, 3 , P. A. Estévez5, 3 , P.
+Sánchez-Sáez9, 3 , A. Álvarez3, 4 , P. Castellanos2 , P. Gallardo2, 3, 4 , A. Moya3, 4 , D. Rodriguez-Mancini12
+1
+Department of Computer Science, Universidad de Concepción, Chile
+Center for Data and Artificial Intelligence, Universidad de Concepción, Edmundo Larenas 310, Concepción, Chile
+3
+Millennium Institute of Astrophysics (MAS), Nuncio Monseñor Sotero Sanz 100, Of. 104, Providencia, Santiago, Chile
+4
+Center for Mathematical Modeling (CMM), Universidad de Chile, Beauchef 851, Santiago 8320000, Chile
+5
+Department of Electrical Engineering, Universidad de Chile, Av. Tupper 2007, Santiago 8320000, Chile
+6
+Data and Artificial Intelligence Initiative (ID&IA), University of Chile, Santiago, Chile
+7
+Institute of Astronomy (IvS), Department of Physics and Astronomy, KU Leuven, Celestijnenlaan 200D, 3001 Leuven, Belgium
+8
+Instituto de Informática, Facultad de Ciencias de la Ingeniería, Universidad Austral de Chile, General Lagos 2086, Valdivia, Chile
+9
+European Southern Observatory, Karl-Schwarzschild-Strasse 2, 85748 Garching bei München, Germany
+10
+Instituto de Física y Astronomía, Universidad de Valparaíso, Av. Gran Bretaña 1111, Playa Ancha, Casilla 5030, Chile
+11
+Centro de Astroingeniería, Pontificia Universidad Católica de Chile, Av. Vicuña Mackenna 4860, 7820436 Macul, Santiago, Chile
+12
+Data Observatory Foundation, Diagonal Las Torres N°2640, edificio E, Peñalolén, Santiago, Chile
+arXiv:2405.03078v2 [astro-ph.IM] 16 May 2024
+2
+Received September 15, 1996; accepted March 16, 1997
+ABSTRACT
+Context. The advent of next-generation survey instruments, such as the Vera C. Rubin Observatory and its Legacy Survey of Space
+and Time (LSST), is opening a window for new research in time-domain astronomy. The Extended LSST Astronomical Time-Series
+Classification Challenge (ELAsTiCC) was created to test the capacity of brokers to deal with a simulated LSST stream.
+Aims. We aim to develop a next-generation model for classification of variable astronomical objects. We describe ATAT, the Astronomical Transformer for time series And Tabular data, a classification model conceived by the ALeRCE alert broker to classify
+light-curves from next-generation alert streams. ATAT was tested in production during the first round of the ELAsTiCC campaigns.
+Methods. ATAT consists of two Transformer models that encode light curves and features using novel time modulation and quantile feature tokenizer mechanisms, respectively. ATAT was trained on different combinations of light curves, metadata, and features
+calculated over the light curves. We compare ATAT against the current ALeRCE classifier, a Balanced Hierarchical Random Forest
+(BHRF) trained on human-engineered features derived from light curves and metadata.
+Results. When trained on light curves and metadata, ATAT achieves a macro F1-score of 82.9 ± 0.4 in 20 classes, outperforming the
+BHRF model trained on 429 features, which achieves a macro F1-score of 79.4 ± 0.1.
+Conclusions. The use of Transformer multimodal architectures, combining light curves and tabular data, opens new possibilities for
+classifying alerts from a new generation of large etendue telescopes, such as the Vera C. Rubin Observatory, in real-world brokering
+scenarios.
+Key words. transformers – stars: variables: general – supernovae: general – surveys – methods: statistical – methods: data analysis
+1. Introduction
+A new generation of synoptic telescopes are carrying out dataintensive observation campaigns. An emblematic example is the
+Vera C. Rubin Observatory and its Legacy Survey of Space and
+Time (LSST) (Ivezić et al. 2019). Starting in 2025, the Rubin
+Observatory will generate an average of 10 million alerts and
+∼20 TB of raw data every night. The massive data-stream of
+LSST is to be distributed to Community Brokers1 that will be
+in charge of ingesting, processing and serving the annotated
+alerts to the astronomical community. Collaboration between
+astronomers, computer scientists, statisticians and engineers is
+key to solve the rising astronomical big-data challenges (Borne
+2010; Huijse et al. 2014).
+Automatic data processing based on Feature Engineering
+(FE, e.g., Nun et al. 2015) and Machine learning (ML), including
+⋆
+1
+e-mail: guillecabrera@inf.udec.cl
+https://www.lsst.org/scientists/alert-brokers
+Deep Learning (DL) have been applied extensively in astronomical data applications, such as light-curve and image-based classification (e.g., Dieleman et al. 2015; Cabrera-Vives et al. 2016,
+2017; Carrasco-Davis et al. 2021; Russeil et al. 2022), clustering
+(Mackenzie et al. 2016; Astorga et al. 2018), physical parameter estimation (Förster et al. 2018; Sánchez et al. 2021; Villar 2022), and outlier detection (Nun et al. 2016; Pruzhinskaya
+et al. 2019; Sánchez-Sáez et al. 2021; Ishida et al. 2021; PérezCarrasco et al. 2023; Perez-Carrasco et al. 2023). The Vera C.
+Rubin Community Brokers: ALeRCE (Förster et al. 2021), AMPEL (Nordin et al. 2019), ANTARES (Matheson et al. 2021),
+BABAMUL, Fink (Möller et al. 2021), Lasair (Smith et al.
+2019), and Pitt-Google2 are processing or will process massive
+amounts of data that is annotated with cross-matches, ML model
+predictions, and/or other information that is distributed to the
+community. These scientific products allow astronomers to study
+transient and variable objects in almost real-time or in an offline
+2
+https://pitt-broker.readthedocs.io/en/latest/
+Article number, page 1 of 12
+=== PAGE 2 ===
+A&A proofs: manuscript no. ATAT_AA
+fashion for a systematic analysis of large numbers of objects.
+To enable the former, ML models should be integrated into a
+complex infrastructure and allow for accurate, rapid and scalable
+evaluation of tens of thousands of alerts received every minute
+(Narayan et al. 2018; Rodriguez-Mancini et al. 2022; CabreraVives et al. 2022). In the past, the most common choices have
+been decision tree-based ensembles (e.g., Random Forest, RF,
+or Light Gradient Boosting Machine, LightGBM), models with
+high predictive performance, but high resource usage, due to the
+FE step. Several efforts have applied faster DL-based approaches
+to the problem of classifying astronomical time series (e.g., Recurrent Neural Networks, RNN, Charnock & Moss (2017); Naul
+et al. (2018); Carrasco-Davis et al. (2019); Muthukrishna et al.
+(2019); Becker et al. (2020); Gómez et al. (2020); Jamal &
+Bloom (2020); Donoso-Oliva et al. (2021)). These approaches
+usually focus on a specific type of object, e.g. variable stars
+(Naul et al. 2018; Becker et al. 2020; Jamal & Bloom 2020) or
+transients (Charnock & Moss 2017; Muthukrishna et al. 2019;
+Möller & de Boissière 2019; Fraga et al. 2024). Until this work,
+ALeRCE had not been able to outperform tree-based ensembles
+(Boone 2019; Hložek et al. 2020; Neira et al. 2020; SánchezSáez et al. 2021; Sánchez-Sáez, P. et al. 2023) with deep learning
+approaches for real-time alert classification across a broad taxonomy encompassing transient, stochastic, and periodic variable
+objects simultaneously.
+More recently, Multi-Head Attention (MHA; Vaswani et al.
+2017) and Transformers have appeared as promising alternatives to time series encoders in astronomy (Allam & McEwen
+2021; Pimentel et al. 2022; Donoso-Oliva et al. 2022; MorenoCartagena et al. 2023). These models are faster than RNNs since
+they have access to all the input simultaneously and not sequentially. The above mentioned attention-based models have not explored training with multiple data sources (time series, metadata
+and human-engineered features) simultaneously.
+The astronomical community has made great efforts to create realistic scenarios to test ML models (Hložek et al. 2020), but
+none of them have contemplated an end-to-end ML pipeline, i.e.
+from the data ingestion to the ML model’s outputs. The recent
+Extended LSST Astronomical Time-Series Classification Challenge (ELAsTiCC3,4 , see Methods) has appeared as a unique opportunity to test broker’s pipelines and ML models in production. ELAsTiCC is a challenge created by the Dark Energy Science Collaboration (DESC) that simulates LSST-like astronomical alerts with the goal of connecting the LSST project, brokers, and DESC by testing end-to-end pipelines in real-time. To
+fulfill this objective, ELAsTiCC started an official data stream
+on September 28th, 2022. Additionally, ELAsTiCC provided a
+dataset to train ML models.
+In this work, we present the methods that ALeRCE used for
+the first round of ELAsTiCC. We propose ATAT, an Astronomical Transformer for time series And Tabular data, a model that
+is based on a Transformer architecture. ATAT is trained with the
+dataset provided by ELAsTiCC previous to the start of the realtime infrastructure challenge and implemented as an end-to-end
+pipeline within the ALeRCE (Förster et al. 2021) broker. ATAT
+can use time series information and all the available metadata
+and/or features obtained from other pre-processing steps (see
+Figure 1). In summary, our contributions are:
+– A new state-of-the-art Transformer model called ATAT,
+which encodes multivariate, variable length, and irregularly-
+sampled light-curves in combination with metadata and/or
+extracted features.
+– A thorough comparison between ATAT and a RF-based baseline (historically the most competitive model of ALeRCE
+when applied to real data streams) in the ELAsTiCC dataset.
+The code for replicating our experiments will be made publicly available once this article is accepted 5 . Our code uses the
+publicly available ELAsTiCC dataset6 .
+2. ELAsTiCC Overview and Machine Learning
+Approaches
+2.1. ELAsTiCC
+The ELAsTiCC dataset contains 1,845,146 light-curves in six
+bands (ugrizY) from simulated astronomical objects distributed
+in 32 classes as shown in Figure 2 (a). This work uses the training
+dataset from the first ELAsTiCC campaign. We use the same
+taxonomy as the ELAsTiCC broker’s taxonomy, except for the
+SN-like/other class that includes only SNe IIb (see Figure 2 b).
+We consider 64 attributes from the metadata provided in the
+alert stream of ELAsTiCC. These attributes include the best heliocentric redshift, Milky Way extinction between the blue and
+visual (and its error), and for the first and second galaxy host
+match: ellipticity, magnitudes on each band (and their error),
+transient-host separation, radius, photometric redshift (and its
+error), deciles of the estimated photometric redshift probability
+density function, and spectroscopic redshift if available (and its
+error).
+We split the ELAsTiCC dataset into training, validation, and
+test sets. The test set contains one-thousand light-curves of each
+class, ensuring a balanced representation. The remaining data is
+further stratified into five folds, from which we train five separate
+models (same folds for all neural networks and random forest).
+In each training iteration, one fold serves as a validation set for
+hyperparameter tuning and early stopping. All the metrics presented in this paper are derived from evaluations performed on
+the test set.
+Additionally, the ELAsTiCC dataset was modified by discarding information that is not available in the ELAsTiCC alert
+stream. For this purpose, we use the PHOTFLAG7 key to select
+only non-saturated data. We consider alerts and forced photometry points in each light-curve spanning from thirty days prior to
+the initial alert (forced photometry data for the first alert) to the
+final detection. If there are non-detections after the last detection,
+these are not included.
+2.2. ATAT
+Here we describe our proposed transformed-based model, ATAT,
+and the techniques developed to process time series information
+(light-curves) and tabular data information (metadata and/or processed features). For the rest of the paper, we will call these
+models ATAT’s variants since different input combinations can
+be used.
+For each astronomical source, we consider two types of data:
+the light-curve and tabular data composed of static metadata
+(e.g., host galaxy redshifts, if any) and features calculated from
+the light-curves (e.g., the period of a periodic source). For a particular source, an observation j in band b of its light-curve is
+5
+3
+ELAsTiCC Challenge, link 1
+4
+ELAsTiCC Challenge, link 2
+Article number, page 2 of 12
+https://github.com/alercebroker/ATAT
+ELAsTiCC dataset
+7
+Specific format information for the ELAsTiCC dataset.
+6
+=== PAGE 3 ===
+G. Cabrera-Vives et al.: ATAT: Astronomical Transformer for time series And Tabular data
+Add token as first
+element of seq.
+Take first element of seq.
+Take first element of seq.
+Add token as first
+element of seq.
+Fig. 1. Diagram of ATAT, which consists of two branches: 1) on top a Transformer to process light-curves (matrices x, t and M) and 2) at the
+bottom a Transformer to process tabular data (matrix f ). Both information sources are processed by Time Modulation (TM) and Quantile Feature
+Tokenizer (QFT), respectively, represented as white rectangles. In both cases, the results of this processing are sequences. Subsequently, a learnable
+token is added as the first element of the sequence. These sequences are processed by the Transformer architectures T lc (light-curves) and T tab
+(tabular data). Finally, the processed token is transformed linearly and used for label prediction (ŷlc or ŷtab ). In training we use cross-entropy
+H(·, y) to optimize the model (purple rectangle). If both light-curves and tabular information are used at the same time, we additionally minimize
+the cross-entropy of the prediction ŷmix resulted from the concatenation of both processed tokens. In the diagram MLP, LL and CAT refers to
+Multi-Layer Perceptron, Linear Layer and concatenation in the embedding dimension, respectively. For more details see Methods.
+described by the observation time t j,b and by the photometric
+data x j,b = (µ j,b , σ j,b ), where µ j,b represents the difference flux8 ,
+and σ j,b the flux error. Not all light-curves have the same number of observations. In order to represent this in the model input,
+we consider fixed size light-curves of the length of the largest
+light-curve in the dataset, consisting of 65 observations, and perform zero padding (add zeros for observations after the maximum time in each band, both for x j,b and t j,b ). At the same time,
+not all bands are observed simultaneously. This is represented by
+adding zeros to µ j,b and σ j,b of the unobserved bands of observation j. In order to mask attention for these unobserved values,
+we use a binary mask M j,b such that M j,b = 1 if observation j
+is observed at band b, and M j,b = 0 if not (Vaswani et al. 2017;
+Devlin et al. 2018). For each source, tabular data consists of K
+features fk , k ∈ {1, . . . , K} which, as explained above, may be
+metadata or features calculated from the light-curves.
+As a first step, time series and tabular data are processed using Time Modulation and a Quantile Feature Tokenizer, respectively. These steps return sequences that can be used as inputs
+for common Transformer architectures. Figure 1 shows a general scheme of ATAT. Its hyperparameters are further specified in
+Implementation details section. We noted larger models showed
+better performance, but we limited their size to reduce the memory requirements in production. For the rest of the paper we will
+denote a linear layer as LL.
+2.2.1. Time Modulation
+Time Modulation (TM) incorporates time information of observation j and band b, t j,b , into the difference flux µ j,b and flux
+error σ j,b . Previous works have successfully applied TM in attention models, using processes similar to positional encoding
+(Vaswani et al. 2017). We construct a variant of the time modulation proposed by Pimentel et al. (2022), which is based on
+8
+Source flux density measured from a difference image.
+a Fourier decomposition. For each observation j and band b of
+the light-curve we perform a linear transformation on the input
+vector, transforming x j,b = (µ j,b , σ j,b ) to a vector LLTM (x j,b ) of
+dimension ETM 9 . We modulate this vector by doing an elementwise product with the output of a vector function γb1 (t j,b ) and add
+the output of a second vector function γb2 (t j,b ):
+TM(x j,b , t j,b ) = LLTM (x j,b ) ⊙ γb1 (t j,b ) + γb2 (t j,b ).
+(1)
+We define the functions γb1 (t j,b ) and γb2 (t j,b ) as Fourier series
+H
+X
+!
+!
+2πh
+2πh
+1
+t + βb,h cos
+t ,
+T max
+T max
+h=1
+!
+!
+H
+X
+2πh
+2πh
+γb2 (t) =
+α2b,h sin
+t + β2b,h cos
+t ,
+T max
+T max
+h=1
+γb1 (t) =
+α1b,h sin
+(2)
+where T max is an hyperparameter that is set higher than the maximum timespan of the longest light-curve in the dataset, H is the
+number of harmonics in the Fourier series, and α1b,h , β1b,h , α2b,h ,
+and β2b,h are learnable Fourier coefficients. In this work, t is the
+number of days since the first forced photometry point in the
+light curve.
+Eq. (1) applies a linear transformation to x j,b , expanding its
+dimension. After that, a scale and bias are created as Fourier series (Eq. 2) using time t j,b . Note that a Fourier series can have
+enough expressive power for large H. Eq. (1) is applied separately for each band, and their output vectors are later concatenated in the sequence dimension. Consequently, the output of
+TM for a light-curve is a matrix of dimension L · B × ETM , where
+B is the number of bands, and L is the maximum number of observations that a band can have for all bands and light-curves in
+the dataset.
+9
+LLTM (x) = WTM x, where WTM is a ETM × 2 matrix.
+Article number, page 3 of 12
+=== PAGE 4 ===
+A&A proofs: manuscript no. ATAT_AA
+103,683 (5.62%)
+211,892 (11.48%)
+102,883 (5.58%)
+40,065 (2.17%)
+103,885 (5.63%)
+20,617 (1.12%)
+42,878 (2.32%)
+103,189 (5.59%)
+102,251 (5.54%)
+103,536 (5.61%)
+105,281 (5.71%)
+31,162 (1.69%)
+53,727 (2.91%)
+53,414 (2.89%)
+SNIIb+HostXT V19 (SN-like/Other)
+SNIa-SALT2 (Ia)
+SNIb+HostXT V19 (Ib/c)
+SNIb-Templates (Ib/c)
+SNIc+HostXT V19 (Ib/c)
+SNIc-Templates (Ib/c)
+SNIcBL+HostXT V19 (Ib/c)
+SNII+HostXT V19 (II)
+SNII-NMF (II)
+SNII-Templates (II)
+SNIIn+HostXT V19 (II)
+SNIIn-MOSFIT (II)
+SNIax (Iax)
+SNIa-91bg (91bg)
+KN B19 (KN)
+KN K17 (KN)
+Mdwarf-flare (M-dwarf Flare)
+dwarf-nova (Dwarf Novae)
+uLens-Binary (uLens)
+uLens-Single-GenLens (uLens)
+uLens-Single PyLIMA (uLens)
+SLSN-I+host (SLSN)
+SLSN-I no host (SLSN)
+TDE (TDE)
+ILOT (ILOT)
+CART (CART)
+PISN (PISN)
+Cepheid (Cepheid)
+RRL (RR Lyrae)
+d-Sct (Delta Scuti)
+EB (EB)
+AGN (AGN)
+104
+105
+Iax
+53,727 (2.91%)
+91bg
+53,414 (2.89%)
+211,892 (11.48%)
+Ia
+310,328 (16.82%)
+Ib/c
+445,419 (24.14%)
+II
+2,091 (0.11%)
+6,031 (0.33%)
+2,640 (0.14%)
+12,385 (0.67%)
+5,626 (0.30%)
+10,143 (0.55%)
+11,494 (0.62%)
+100,977 (5.47%)
+4,261 (0.23%)
+103,067 (5.59%)
+14,253 (0.77%)
+15,719 (0.85%)
+105,446 (5.71%)
+25,371 (1.38%)
+21,100 (1.14%)
+29,840 (1.62%)
+96,778 (5.25%)
+99,461 (5.39%)
+103
+15,719 (0.85%)
+CART
+SN-like/Other
+103,683 (5.62%)
+SLSN
+105,238 (5.70%)
+PISN
+105,446 (5.71%)
+TDE
+103,067 (5.59%)
+14,253 (0.77%)
+ILOT
+8,122 (0.44%)
+KN
+2,640 (0.14%)
+M-dwarf Flare
+27,263 (1.48%)
+uLens
+12,385 (0.67%)
+Dwarf Novae
+99,461 (5.39%)
+AGN
+29,840 (1.62%)
+Delta Scuti
+RR Lyrae
+21,100 (1.14%)
+Cepheid
+25,371 (1.38%)
+96,778 (5.25%)
+EB
+106
+103
+104
+105
+106
+Number of samples
+Number of samples
+(a) Original data class distribution
+(b) Modified data class distribution
+107
+Fig. 2. ELAsTiCC dataset class histogram. In (a) the original taxonomy class distribution is shown. In (b) the taxonomy class distribution selected
+by Vera Rubin’s brokers is shown. Note that we use the SN-like/Other class to include SNe IIb.
+2.2.2. Quantile Feature Tokenizer
+Tabular data in ELAsTiCC may include processed light-curve
+features, static metadata, or a concatenation of both. We process this data before feeding it into a Transformer. We call this
+process Quantile Feature Tokenizer (QFT) and it comprises two
+steps. First, a quantile transformation10 QTk ( fk ) is applied to
+each feature fk of the tabular data of each object, to normalize
+them as a way to deal with complex distributions (e.g. skewed)
+and help the predictive model perform better. Second, an affine
+transformation is used to vectorize each scalar value of the attributes recorded in the tabular data
+QFTk ( fk ) = Wk · QTk ( fk ) + bk ,
+(3)
+where · stands for matrix multiplication, k refers to the index feature, and Wk and bk are vectors of learnable parameters with dimensions EQFT . In other words, the kth scalar feature fk is transformed by QTk and then vectorized by multiplying it by Wk and
+adding bk . Notice that a different transformation is applied to
+10
+A quantile transformation transforms features into a desired distribution (a normal distribution in this work) by mapping the cumulative
+distribution function of the features to the quantile function of the desired distribution.
+Article number, page 4 of 12
+each feature of the tabular data. The output dimension EQFT is
+an hyperparameter to be chosen. This methodology is similar to
+Gorishniy et al. (2021), but we additionally apply the quantile
+transformation to each feature that is fitted before training the
+model.
+2.2.3. Transformers
+The Transformer architecture is based on Bidirectional Encoder
+Representations from Transformers (BERT, Devlin et al. 2018)
+and Vision Transformers (Dosovitskiy et al. 2021) which aim at
+processing sequential information. The architecture consists of a
+multi-head attention (MHA) step and a forward fully-connected
+(FF) neural network step with skip connections.
+The transformer architecture used in this work can be described as follows: consider a layer l which receives as input the
+output of layer l − 1. Then, our transformer can be described as
+hl∗ = MHAl−1 (hl−1 ) + hl−1 ,
+h = FF
+l
+l−1
+(hl∗ ) + hl∗ ,
+(4)
+(5)
+where l ∈ [1 . . . nlayers ] (nlayers being the number of layers of
+the Transformer), hl is the output of layer l, and hl∗ is the output
+=== PAGE 5 ===
+G. Cabrera-Vives et al.: ATAT: Astronomical Transformer for time series And Tabular data
+of the MHA step which includes a skip connection. Notice hl∗
+serves as input to a feed-forward network with a skip connection which outputs hl . Relevant Transformer hyperparameters
+include the number of heads nheads and the embedding dimensionality ET , which are specified in Section 2.2.5. Additionally,
+we use a learnable classification token of dimension ET that is
+concatenated at the beginning of the input sequence. This token
+representation after the Transformer is fed into an output layer
+that performs the classification task. The dimension number of
+ET is equal to ETM for the light-curve Transformer and EQFT for
+the tabular data Transformer (equal to their input).
+When only a single data source is considered (e.g., only
+light-curves data), we take the first element of the Transformer’s
+output sequence, and apply a linear layer plus a softmax activation function. When two data sources are considered, two Transformers T lc and T tab are used to process light-curve and tabular
+data information, respectively. The first output elements of both
+sequences are concatenated, and a multilayer perceptron plus a
+softmax activation function are applied to produce the label prediction (see Figure 1).
+2.2.4. Mask temporal augmentation
+To improve early classification performance, we train ATAT on
+light-curves reduced up to a randomly selected time instant. During training, a day t∗ ∈ {8, 128, 2048} is randomly selected for
+each light-curve, and the values of mask M corresponding to
+times t > t∗ are set to zero. Note that t∗ = 2048 is equivalent to using the complete light-curves. Times are selected from
+a limited discrete set since it is unfeasible to compute the features at arbitrary times. Hereafter, we refer to this augmentation
+method as Masked Temporal Augmentation (MTA). Considering the lengths of the light-curves during training is a standard
+procedure that has been used in the past (Möller & de Boissière
+2019; Donoso-Oliva et al. 2021; Gagliano et al. 2023).
+2.2.5. Implementation details
+ATAT variants are evaluated every twenty-thousand iterations,
+and early stopping with a patience of three evaluations is used.
+Models are trained using the Adam optimizer Kingma & Ba
+(2014) until early stopping with learning rate of 2 · 10−4 and a
+batch size of 256. We use class balanced batches. The fully connected neural network of Eq. 5 consists of two layers. The first
+layer employs a Gaussian Error Linear Unit (GELU; Hendrycks
+& Gimpel 2016) while the second layer is a linear layer. For both
+T lc and T tab , nheads = 4 and nlayers = 3. For T lc /T tab all input and
+output dimensions of linear layers are 48/32 with the exception
+of the hidden layers of FF (Eq. 5) which are 96/64. Note that this
+implies that ETM = 48 · 4 = 192 and ETT = 36 · 4 = 144. We
+select T max = 1500 days and H = 64. We use a dropout of 0.2
+for training. All Nans, inf and − inf in features and metadata are
+replaced by -9999.
+2.3. Features
+The ELAsTiCC dataset has six bands and its light-curves contain difference fluxes. In comparison, the alert stream from ZTF
+(Bellm et al. 2018; Graham et al. 2019) classified by the original
+Balanced Hierarchical Random Forest model from ALeRCE has
+only two fully-public bands and it offers light-curves in difference magnitudes. In order to deal with this, we modified some of
+the original features from Sánchez-Sáez et al. (2021). All light-
+curve based features were modified to use fluxes as input instead of magnitudes. The supernova parametric model (SPM)
+from Sánchez-Sáez et al. (2021) was modified to better handle
+the six bands available and the extra information of redshift and
+Milky Way dust extinction. The fluxes were scaled using the redshift information available and the WMAP5 cosmological model
+(Komatsu et al. 2009; Astropy Collaboration et al. 2022), and
+also deattenuated using the extinction information and the model
+from O’Donnell (1994). This means that some of metadata information was used in the computation of features. We remove
+some features from Sánchez-Sáez et al. (2021) that were not simulated by ELAsTiCC, e.g., the star-galaxy score from the ZTF
+stream and the color information from ALLWISE. The coordinates of the objects are not used because they were not simulated in a realistic way for each of the astrophysical classes. We
+ended up with a total of 429 features: 69 features per band plus
+15 multi-band (e.g. colors, multi-band periodogram, among others). These engineered features are also used for ATAT in Section
+3. In Appendix A we give a comprehensive list of the modified
+features.
+We calculate features for all light-curves with a total of more
+than 5 points across all bands. Since we are using forced photometry, the source with fewer observations has 11 points. Consequently, we calculate features for all objects.
+2.4. Balanced Hierarchical Random Forest
+We compare our Transformer models against the Balanced Hierarchical Random Forest (BHRF) model of Sánchez-Sáez et al.
+(2021) adapted for the ELAsTiCC dataset. This section describes
+the differences between the original BHRF and its ELAsTiCC
+adaptation.
+The original BHRF described in Sánchez-Sáez et al. (2021)
+is composed of four balanced random forest models (Chen et al.
+2004) that are used in a hierarchical structure. The top model
+classifies each light-curve into Transient, Stochastic and Periodic classes. Then each one of these three groups is further
+classified using its own Balanced Random Forest model. In
+this work, the Transient group includes the following classes:
+Calcium Rich Transients (CART), SNe Iax (Iax), SNe 91bglike (91bg), SNe Ia (Ia), SNe Ib/c (Ib/c), SNe II (II), SNe IIb
+(SN-like/Other), Superluminous SNe (SLSN), Pair Instability
+SNe (PISN), Tidal Disruption Events (TDE), Intermediate Luminosity Optical Transients (ILOT), and Kilonovae (KN). The
+Stochastic group includes the following classes: M-dwarf flare,
+Dwarf novae, active galactic nuclei (AGN), and gravitational micro lensing events (uLens). The Periodic group includes the following classes: Delta Scuti, RR Lyrae, Cepheid, and Eclipsing
+Binary.
+During training, the balanced random forest models draw
+bootstrap samples from the minority class and sample with replacement the same number of samples from the other classes
+for each tree. In order to be consistent with ATAT, the balanced
+random forest models were trained using light-curves trimmed
+to 8, 128 and 2048 days long. We sampled 15,000, 9,000, and
+3,900 light-curves from each class to train each tree of the transient, periodic, and stochastic balanced random forests, respectively. Notice that all data was fed to the model during training,
+but each tree only uses a randomly sampled balanced subset of
+the data. We performed a hyperparameter grid search for the split
+criterion (Gini impurity, entropy), number of trees (10, 100, 350,
+500), and maximum depth (10, 100, and no maximum depth).
+The best combination of hyperparameters in terms of the mean
+macro F1-score over predictions for the full light-curves were
+Article number, page 5 of 12
+=== PAGE 6 ===
+A&A proofs: manuscript no. ATAT_AA
+obtained for an entropy split criterion, 350 trees, and a maximum depth of 100. We also calculated the feature importance
+on the random forest and used only 100 features for each forest
+which lead to a statistically similar macro F1-score (within one
+standard deviation). These decisions were made to diminish the
+final size of the model in order to facilitate deployment.
+3. Results
+3.1. Comparison between ATAT and BHRF
+We calculate measures of classification performance by averaging predictions for each object. Figure 3 (a) shows the testset F1-score of two selected ATAT variants using different data
+sources with MTA and the BHRF as a function of the number
+of days after the first alert. The analysis begins on the day of
+the first detection and progressively increases in powers of two
+until reaching the maximum duration of the longest light-curve,
+which spans 1,104 days. These ATAT variants outperform the
+BHRF model for all light-curve lengths, specially for shorter
+light-curves. We further compare these models by measuring the
+F1-score, recall and precision in a per-class basis as shown in Table 1. The labels indicate whether the models were trained using
+the light-curve (LC) data, metadata (MD), engineered features
+(Features), or combinations of these. MD is the data coming together with the alerts (e.g., host galaxies redshift), while features
+are extracted from the light curves (e.g., period). The ATAT’s
+variants surpass the BHRF in 16 out of 20 classes. In particular,
+the ATAT variant based on LC and MD performs better in the SN
+subclasses, but the ATAT variants that use all data sources obtain
+better scores in the periodic sub-classes. Three of the four classes
+where the BHRF outperforms (F1-Score) ATAT, namely KN,
+CART and M-dwarf flares are also the ones with fewer examples in the dataset (see Figure 2). This may be explained by the
+differences in the class-balancing strategies, with the BHRF being more robust to overfitting in the minority classes. The BHRF
+model also outperforms ATAT in terms of the F1-Score for the
+Eclipsing Binaries (EBs), primarily because ATAT achieves a
+relatively low precision for this class. As illustrated in Figure 4,
+about 10% of the M-dwarf flares are classified as EBs by ATAT,
+which can be explained by the low support of M-dwarf flares in
+our dataset.
+3.2. Classification performance of ATAT variants
+To explore the influence of the number and type of data sources
+on the classification performance, eleven ATAT variants are compared in Figures 3 (b), (c) and (d). In all figures the dashed lines
+correspond to the cases where the MTA strategy is used.
+Figure 3 (b) shows the performance of the ATAT variants
+using only the light-curve as input source, with and without the
+MTA strategy. The MTA strategy significantly improves the classifier performance at early times, saturating at about 128 days
+and after that having only marginal increments. This could be
+related with the majority of the classes in the dataset being transients and with the absence of longer timescales variable objects
+(e.g., Miras and other LPVs).
+Figure 3 (c) shows the performance of the ATAT variants
+trained using only tabular data information. This includes metadata from the first alert and features that are a function of the
+available light-curve data, where a strategy similar to MTA can
+also be applied. Note that the feature-based model (orange line)
+outperforms the LC-based model (grey line in Figure 3 b). We
+can also observe that the performance of the feature-based model
+Article number, page 6 of 12
+increases considerably when metadata is incorporated (purple
+line), and even outperforms the RF-based baseline (red line)
+when considering MTA after ∼32 days. Before 32 days, the RF
+model outperforms all other ATAT models that only use tabular
+data. The ATAT model that uses only MD (cyan line) outperforms the ATAT that use only features for light-curves shorter
+than ∼8 days. The MTA strategy applied to feature computation has a positive effect in early classification performance in
+all cases.
+Figure 3 (d) shows the performance of four ATAT variants
+trained with both the light-curves and the metadata, with and
+without features, and with and without the MTA strategy. This
+figure suggests a low synergy between the light-curve and feature data and that ATAT can extract the most relevant class information using only the light-curve and metadata. Moreover, a
+comparison with Figure 3 (b) suggests a high synergy between
+the light-curve and metadata, where adding metadata yields a
+performance improvement between 20% and 30% depending on
+the length of light-curves. The ATAT variant that uses all information sources (blue solid-line) without the MTA strategy has a
+worse performance for light-curves shorter than 128 days than
+the model that uses only light-curve and metadata information
+(green solid-line). When the MTA strategy is applied, the model
+that uses all the data sources is only marginally superior after
+∼32 days. Before ∼ 32 days, not using features leads to a higher
+macro F1-score.
+Summarizing, models combining light-curves and metadata
+information yield the highest performance (highest synergy).
+The addition of features to ATAT marginally improves the macro
+F1-score when calculated over the entire light-curves when using the MTA strategy. Additionally, applying the MTA strategy
+is always beneficial for early classification in the models using
+light-curves and/or feature data. The two ATAT variants that use
+light-curves plus metadata and MTA shown in Figure 3 (a) were
+put into production within the pipeline that processes the ELAsTiCC stream.
+Figure 4 shows the confusion matrices of: (a) the ATAT variant that uses LC, metadata and MTA; (b) the ATAT variant that
+uses LC, features, metadata, and MTA; and (c) the RF-based
+baseline. These results where obtained by evaluating the lightcurves at their maximum length. The ATAT (LC + MD + Features + MTA) model outperformed the RF in 15 out of 20 classes
+in the dataset. In particular the ATAT performs better in all the
+SNe subclasses, namely: Iax, 91bg, Ia, Ib/c, II, SLSN, PISN
+and SN-like/Other. This is specially noticeable for types Ib/c
+and II where the difference in recall is 26% and 23%, respectively. In the case of transient types, besides the aforementioned
+SNe subclasses, noticeable differences between the models arise.
+For example the RF-based baseline outperforms ATAT by 13%
+and 16% in the case of KN and CART, respectively. The former
+model confused these classes mainly with SNe types Ib/c and
+Iax. The baseline is also 10% better at detecting ILOT. ATAT
+confuses this class mainly with TDEs, whereas the baseline does
+not present such confusion. On the other hand, ATAT outperforms the baseline by 16% and 13% in the case of TDE and
+uLens, respectively. Cataclysmic types also present interesting
+differences between models. For example the ATAT outperforms
+the baseline by 10% for the Dwarf-novae class. On the other
+hand, the RF-based baseline outperforms the ATAT model by
+10% in the case of M-dwarf flares. The latter model has 9% confusion between this class and the EB periodic subtype, whereas
+the baseline does not present such confusion. Finally, the confusion matrices show that both models achieve almost perfect
+detection for periodic variable star classes and for the stochas-
+=== PAGE 7 ===
+G. Cabrera-Vives et al.: ATAT: Astronomical Transformer for time series And Tabular data
+(a) Comparison between two ATAT variants
+and RF baseline
+90
+80
+70
+F1-Score
+60
+50
+40
+30
+20
+ATAT (LC + MD + MTA)
+ATAT (LC + MD + Features + MTA)
+RF (Features + MD)
+10
+0
+1
+2
+4
+8
+16
+32
+64
+128 256 512 1024
+Evaluated time (days after first alert)
+(b) Light-curve only ATAT variants
+(c) Tabular data only ATAT variants
+plus RF baseline
+90
+(d) Combined Light-curve and tabular
+data ATAT variants
+80
+70
+F1-Score
+60
+50
+40
+ATAT (Features)
+ATAT (Features + MTA)
+ATAT (Features + MD)
+ATAT (Features + MD + MTA)
+ATAT (MD)
+RF (Features + MD)
+30
+20
+ATAT (LC)
+ATAT (LC + MTA)
+10
+0
+1
+2
+4
+8
+16
+32
+64 128 256 512 1024
+Evaluated time (days after first alert)
+1
+2
+4
+8
+16
+32
+64 128 256 512 1024
+Evaluated time (days after first alert)
+ATAT (LC + MD)
+ATAT (LC + MD + MTA)
+ATAT (LC + MD + Features)
+ATAT (LC + MD + Features + MTA)
+1
+2
+4
+8
+16
+32
+64 128 256 512 1024
+Evaluated time (days after first alert)
+Fig. 3. F1-score vs time since first alert for a selection of models. We show the better performing ATAT variants and the RF-based baseline (a),
+the light-curve only ATAT variants (b), the tabular data only ATAT variants (c), and the combined light-curve and tabular data ATAT variants (d).
+LC/MD/Features refers to models that are optimized using the light-curve, metadata and feature information, respectively. Models can use more
+than one information source, e.g., LC + MD + Features. Dotted lines refer to models that are optimized with MTA (see Section 2.2.4).
+tic AGN class, with the proposed model being marginally superior than the baseline. It is worth noting that in three of the
+four classes where the RF-based baseline outperforms ATAT,
+namely KN, CART and M-dwarf are also the ones with fewer
+examples in the dataset (see Figure 2). This suggests that the
+RF is more efficient for highly class-imbalanced datasets than
+the Transformer-based approach. Additional data-augmentation
+strategies may be required to improve the performance of ATAT
+in these data-scarce classes. The ATAT variant that does not use
+features (LC + MD + MTA) shows a similar performance than
+the ATAT variant that uses them (LC + MD + Features + MTA),
+except for periodic classes where the feature-based variant is
+consistently better.
+3.3. Ablation study
+In this Section, we test the different design choices introduced
+in ATAT. Table 2 shows the F1-Scores (mean and standard deviation) for combinations of positional encodings (PE) and tokenizers used in the feature transformer for the metadata. For the
+PE we consider our proposed time modulation (TM), the origi-
+nal fixed sinusoidal Vaswani et al. (2017), and not using the light
+curves at all (hence, no light curve transformer). For the tabular
+data transformer we consider our proposed Quantile Feature Tokenizer (QFT), the original feature tokenizer from Gorishniy et
+al. Gorishniy et al. (2021), and using no tabular metadata. For the
+tabular data we consider the metadata and not the features, given
+that there is not more than 2σ difference in the F1-Score with
+and without the features as shown in Figure 3. All experiments
+include the MTA described in Section 2.2.4. The combination
+of the TM and the QFT outperform other experiments. By using
+our proposed TM we increase the F1-Scores significantly (over
+5%) as compared to the sinusoidal PE, while our proposed QFT
+is able to increase the performance of our model by over 2%.
+Figure 5 shows the performance of the models as a function
+of the days since the first alert for each of the combinations of
+PEs and tokenizers. This Figure shows the superiority of TM
+and QFT over the models that use a fixed sinusoidal PE or a
+non-quantile tabular data tokenizer. We conclude that there is a
+significant contribution of our proposed modification to the light
+curves and tabular data transformers for the classification of astronomical data streams from the ELAsTiCC challenge.
+Article number, page 7 of 12
+=== PAGE 8 ===
+A&A proofs: manuscript no. ATAT_AA
+ATAT (LC + MD)
+Classnames
+ATAT (LC + MD + Features)
+RF (MD + Features)
+Precision
+Recall
+F1-Score
+Precision
+Recall
+F1-Score
+Precision
+Recall
+F1-Score
+CART
+Iax
+91bg
+Ia
+Ib/c
+II
+SN-like/Other
+SLSN
+PISN
+TDE
+ILOT
+KN
+M-dwarf Flare
+uLens
+Dwarf Novae
+AGN
+Delta Scuti
+RR Lyrae
+Cepheid
+EB
+72.8 ± 2.9
+59.8 ± 1.3
+89.4 ± 0.4
+75.7 ± 1.6
+53.8 ± 3.1
+65.8 ± 2.3
+66.7 ± 1.5
+89.0 ± 1.1
+93.1 ± 1.1
+77.2 ± 2.9
+89.6 ± 0.8
+97.7 ± 0.3
+98.9 ± 0.4
+85.8 ± 1.8
+87.9 ± 1.8
+99.8 ± 0.0
+92.3 ± 0.7
+93.5 ± 1.0
+96.0 ± 0.8
+87.0 ± 0.3
+40.3 ± 3.8
+70.1 ± 2.2
+92.4 ± 1.1
+84.0 ± 1.7
+63.9 ± 1.9
+65.2 ± 1.0
+62.9 ± 2.4
+95.3 ± 0.3
+97.5 ± 0.5
+92.7 ± 0.8
+85.9 ± 2.9
+71.5 ± 2.6
+67.5 ± 1.2
+95.3 ± 0.9
+86.3 ± 0.9
+100.0 ± 0.0
+95.0 ± 0.4
+96.0 ± 0.9
+97.9 ± 0.3
+98.8 ± 0.3
+51.7 ± 2.9
+64.5 ± 1.2
+90.9 ± 0.4
+79.6 ± 0.6
+58.3 ± 1.3
+65.5 ± 1.3
+64.7 ± 1.7
+92.0 ± 0.5
+95.2 ± 0.4
+84.2 ± 1.6
+87.7 ± 1.1
+82.6 ± 1.7
+80.2 ± 0.8
+90.3 ± 0.8
+87.1 ± 0.7
+99.9 ± 0.0
+93.6 ± 0.3
+94.7 ± 0.3
+97.0 ± 0.4
+92.5 ± 0.1
+75.3 ± 2.5
+59.8 ± 2.1
+88.8 ± 2.2
+76.3 ± 1.2
+50.0 ± 3.8
+63.9 ± 3.5
+64.3 ± 2.2
+89.6 ± 0.9
+95.9 ± 0.4
+79.0 ± 4.9
+92.1 ± 0.9
+97.1 ± 0.4
+99.1 ± 0.3
+86.8 ± 1.7
+86.2 ± 1.8
+99.7 ± 0.1
+98.7 ± 0.3
+99.5 ± 0.2
+99.2 ± 0.3
+90.4 ± 1.7
+40.0 ± 4.6
+65.1 ± 5.4
+92.5 ± 1.9
+81.4 ± 1.7
+65.8 ± 3.4
+66.4 ± 2.8
+60.5 ± 2.9
+95.4 ± 0.4
+96.7 ± 0.9
+92.5 ± 1.0
+84.0 ± 3.1
+77.1 ± 2.5
+70.4 ± 1.9
+95.6 ± 0.7
+92.0 ± 0.9
+100.0 ± 0.0
+99.5 ± 0.1
+99.1 ± 0.2
+99.5 ± 0.1
+99.6 ± 0.1
+52.0 ± 3.3
+62.2 ± 1.9
+90.5 ± 0.6
+78.8 ± 0.7
+56.6 ± 1.2
+65.0 ± 1.3
+62.3 ± 1.5
+92.4 ± 0.4
+96.3 ± 0.4
+85.1 ± 2.6
+87.8 ± 1.3
+85.9 ± 1.4
+82.3 ± 1.3
+91.0 ± 0.7
+89.0 ± 0.9
+99.8 ± 0.1
+99.1 ± 0.1
+99.3 ± 0.1
+99.3 ± 0.1
+94.8 ± 0.9
+59.2 ± 0.4
+57.6 ± 0.5
+75.2 ± 0.4
+61.4 ± 0.4
+58.0 ± 0.3
+66.8 ± 0.6
+59.0 ± 0.5
+90.3 ± 0.1
+85.6 ± 0.1
+83.2 ± 0.4
+76.3 ± 0.3
+86.8 ± 0.2
+95.0 ± 0.3
+96.9 ± 0.4
+78.5 ± 0.2
+95.4 ± 0.4
+90.8 ± 0.3
+91.6 ± 0.4
+92.6 ± 0.5
+93.5 ± 0.3
+56.2 ± 0.6
+55.9 ± 0.6
+90.2 ± 0.2
+76.7 ± 0.2
+39.6 ± 0.4
+42.7 ± 0.5
+54.1 ± 0.8
+90.0 ± 0.1
+96.7 ± 0.1
+76.8 ± 0.3
+93.6 ± 0.2
+90.3 ± 0.1
+79.4 ± 0.3
+82.8 ± 0.2
+82.9 ± 0.3
+99.9 ± 0.1
+98.9 ± 0.0
+98.9 ± 0.1
+98.9 ± 0.1
+97.5 ± 0.1
+57.6 ± 0.5
+56.8 ± 0.5
+82.0 ± 0.2
+68.2 ± 0.3
+47.1 ± 0.2
+52.1 ± 0.5
+56.5 ± 0.6
+90.2 ± 0.1
+90.8 ± 0.0
+79.9 ± 0.2
+84.1 ± 0.2
+88.5 ± 0.1
+86.5 ± 0.3
+89.3 ± 0.3
+80.6 ± 0.2
+97.6 ± 0.2
+94.7 ± 0.2
+95.1 ± 0.2
+95.6 ± 0.3
+95.5 ± 0.2
+Macro avg
+83.6 ± 0.4
+82.9 ± 0.5
+82.6 ± 0.5
+84.6 ± 0.3
+83.7 ± 0.6
+83.5 ± 0.6
+79.7 ± 0.1
+80.1 ± 0.1
+79.4 ± 0.1
+Table 1. Classification precision, recall and F1-score per class and macro average of the models put into production. We include the two bestperforming ATAT variants (with MTA) and the RF-based baseline.
+PE
+Tab. tokenizer
+No tabular data
+FT
+QFT (this work)
+no lightcurve
+fixed sinusoidal Vaswani et al. (2017)
+time modulation
+(this work)
+36.10 ± 0.28
+39.44 ± 0.50
+52.56 ± 0.62
+73.67 ± 0.33
+76.77 ± 0.45
+62.70 ± 0.38
+79.99 ± 0.63
+82.61 ± 0.59
+Table 2. Ablation study F1-Scores. Each row represents a different feature tokenizer used for the tabular transformer. Each column represents a
+different positional encoder.
+3.4. Computational time performance
+Table 3 shows the average computational time to predict the class
+of a single light-curve11 with the selected ATAT variants and the
+RF-based baseline. The table also shows the average time per
+light-curve to compute the complete set of engineered features.
+Note that only the RF-based baseline and ATAT (LC + MD +
+Features + MTA) require features to be computed. In light of the
+LSST emitting millions of alerts per night, evaluating inference
+times in batches is essential for assessing the practical feasibility of our approach. Inference times for ATAT on the GPU are
+shown for both a batch of 2,000 light-curves and one light-curve
+at a time (averaged over 20,000 batches of one light-curve each).
+From Table 3, we observe that the computational time required to perform inference with any of the models is negligible in comparison with the time required to compute features.
+This means that in total, the ATAT (LC + MD + MTA) variant, is orders of magnitude faster than the RF-based baseline and
+feature-based ATAT variants. This sets the LC + MD + MTA
+variant as a very interesting trade-off, reducing computational
+time in 99.75% with only a 0.3% decrease in F1-score. We note,
+however, that some classes are more affected when features are
+excluded, e.g., periodic variables. As future work we plan to
+explore which subset of features are more synergistic with the
+11
+Averages are estimated using the whole dataset and full-length lightcurves.
+Article number, page 8 of 12
+ATAT (LC + MD + MTA) variant. The selection of the best
+trade-off may also need to be reevaluated as future surveys such
+as LSST are expected to incorporate some features (e.g., period)
+in the alert stream.
+Inference step
+Average time [s]
+CPU
+Feature computation
+RF (MD + Features)
+ATAT (LC + MD + MTA)
+ATAT (LC + MD + Features + MTA)
+1.88 · 10−1
+2.15 · 10−4
+6.44 · 10−3
+1.34 · 10−2
+GPU (2,000 light-curves per batch)
+ATAT (LC + MD + MTA)
+ATAT (LC + MD + Features + MTA)
+4.75 · 10−4
+8.29 · 10−4
+GPU (1 light-curve per batch)
+ATAT (LC + MD + MTA)
+ATAT (LC + MD + Features + MTA)
+8.14 · 10−3
+8.45 · 10−3
+Table 3. Average computational time per light-curve in seconds required to perform the inference step for selected classification models.
+We used a single core of an AMD EPYC 7662 processor and a NVIDIA
+A100 GPU for these experiments.
+=== PAGE 9 ===
+G. Cabrera-Vives et al.: ATAT: Astronomical Transformer for time series And Tabular data
+(a) ATAT (LC + MD + MTA)
+0.4
+0.2
+0.03
+0.03
+0.7
+0.01
+CART ±0.04 ±0.02 ±0.0
+Iax ±0.01 ±0.02 ±0.0
+0.0
+0.01 0.1 0.06 0.01
+±0.0 ±0.02 ±0.01 ±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.4 0.19 0.03
+±0.05 ±0.03 ±0.01
+0.12 0.06 0.04
+±0.03 ±0.02 ±0.01
+0.0
+0.0
+0.09 0.04 0.01
+±0.03 ±0.01 ±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.04 0.1 0.02 0.04
+±0.0 ±0.01 ±0.01 ±0.01
+0.0
+0.01 0.03 0.01
+±0.0 ±0.01 ±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.04 0.65 0.02 0.05 0.12 0.03 0.04
+±0.01 ±0.05 ±0.0 ±0.01 ±0.03 ±0.02 ±0.01
+0.0
+0.0
+0.04 0.01
+±0.01 ±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.81 0.07 0.03 0.02
+±0.02 ±0.01 ±0.01 ±0.01
+0.01 0.01 0.92 0.01
+±0.0 ±0.01 ±0.01 ±0.0
+0.02
+±0.0
+0.0
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.01 0.92 0.01 0.03
+±0.0 ±0.02 ±0.0 ±0.01
+0.84 0.06 0.03
+±0.02 ±0.01 ±0.0
+0.02
+±0.0
+0.04
+±0.01
+0.0
+Ia
+0.0
+0.04
+±0.0
+0.0
+0.0
+0.01
+±0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+Ib/c
+0.01
+±0.0
+0.06
+±0.0
+0.02 0.12 0.64 0.05 0.09 0.01
+±0.0 ±0.01 ±0.02 ±0.01 ±0.01 ±0.0
+0.01
+±0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01 0.05 0.02 0.1 0.66 0.05 0.09 0.01
+±0.0 ±0.01 ±0.0 ±0.01 ±0.03 ±0.01 ±0.01 ±0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+II
+0.0
+0.02
+±0.0
+0.0
+0.05 0.05 0.65 0.11 0.08 0.01
+±0.01 ±0.01 ±0.01 ±0.0 ±0.01 ±0.0
+0.03
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.02
+±0.0
+0.04 0.06 0.66 0.11 0.07
+±0.01 ±0.01 ±0.03 ±0.01 ±0.01
+0.0
+0.03
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+SN-like/Other
+0.0
+0.04 0.01 0.04 0.11 0.16 0.63
+±0.01 ±0.0 ±0.01 ±0.02 ±0.02 ±0.02
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+SLSN
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.01
+±0.0
+0.0
+PISN
+0.0
+0.0
+0.0
+0.0
+0.0
+TDE
+0.01
+±0.0
+0.02
+±0.0
+0.01
+±0.0
+0.0
+ILOT ±0.01 ±0.0
+0.03
+0.03
+0.01
+±0.0
+0.06
+0.06
+0.02
+M-dwarf Flare
+0.0
+0.0
+uLens
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.04 0.01
+±0.01 ±0.0
+0.04 0.14 0.15 0.61
+±0.0 ±0.02 ±0.02 ±0.03
+0.0
+0.95
+±0.0
+0.02
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.01
+±0.0
+0.0
+0.95
+±0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.97
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.01 0.97
+±0.01 ±0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.01
+±0.0
+0.0
+0.0
+0.01 0.93
+±0.0 ±0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.02
+±0.0
+0.01
+±0.0
+0.0
+0.01
+±0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.93
+±0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.02
+±0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.04 0.86
+±0.01 ±0.03
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.03
+±0.0
+0.03
+±0.0
+0.01
+±0.0
+0.0
+0.02 0.01 0.01
+±0.01 ±0.01 ±0.0
+0.0
+0.0
+0.05 0.84
+±0.02 ±0.03
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.07
+±0.01
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.03 0.02 0.72
+±0.01 ±0.0 ±0.03
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.04 0.05 0.02
+±0.01 ±0.01 ±0.01
+0.0
+0.08 0.0
+±0.02 ±0.0
+0.01
+±0.0
+0.0
+0.0
+0.02 0.01 0.77
+±0.01 ±0.0 ±0.02
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.68 0.07 0.09
+±0.01 ±0.01 ±0.02
+0.0
+0.02
+±0.0
+0.01
+±0.0
+0.01 0.11
+±0.0 ±0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.7 0.07 0.11
+±0.02 ±0.02 ±0.02
+0.0
+0.01
+±0.0
+0.0
+0.01 0.09
+±0.0 ±0.02
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.95 0.02
+±0.01 ±0.0
+0.0
+0.0
+0.0
+±0.0
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.96 0.04
+±0.01 ±0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.02 0.01 0.01
+±0.0 ±0.01 ±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0 0.07 0.92
+±0.0 ±0.01 ±0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+1.0
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+1.0
+±0.0
+0.0
+0.0
+0.0
+Delta Scuti
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.95 0.02 0.02 0.01
+±0.0 ±0.01 ±0.0 ±0.01
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.99
+±0.0
+0.0
+0.0
+0.0
+RR Lyrae
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.02 0.96
+±0.0 ±0.01
+0.0
+0.02
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.99
+±0.0
+0.0
+0.01
+±0.0
+Cepheid
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.02
+±0.0
+0.0
+0.98
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.99
+±0.0
+0.0
+0.0
+±0.0
+0.0
+0.99
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+1.0
+±0.0
+Cepheid
+Iax
+91bg
+Ia
+Ib/c
+II
+SN-like/Other
+SLSN
+PISN
+TDE
+ILOT
+KN
+M-dwarf Flare
+uLens
+Dwarf Novae
+AGN
+Delta Scuti
+RR Lyrae
+Cepheid
+0.0
+CART
+EB
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+Predicted Label
+EB
+0.0
+CART
+0.0
+AGN
+0.0
+Delta Scuti
+AGN
+uLens
+0.0
+Dwarf Novae
+0.0
+KN
+0.0
+M-dwarf Flare
+0.0
+TDE
+0.0
+ILOT
+0.0
+PISN
+0.0
+SLSN
+0.0
+II
+0.0
+SN-like/Other
+0.0
+Ia
+0.0
+Ib/c
+0.0
+Iax
+0.0
+91bg
+Dwarf Novae
+0.08 0.86
+±0.01 ±0.01
+RR Lyrae
+KN ±0.02 ±0.01 ±0.0
+EB
+True Label
+91bg
+(b) ATAT (LC + MD + Features + MTA)
+0.1 0.05 0.04
+±0.02 ±0.01 ±0.0
+0.0
+Predicted Label
+(c) RF (MD + Features)
+0.56
+±0.0
+0.1
+±0.0
+0.06
+±0.0
+0.0
+0.03
+±0.0
+0.01
+±0.0
+0.01
+±0.0
+0.0
+0.01
+±0.0
+0.04
+±0.0
+0.11
+±0.0
+0.06
+±0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+Iax
+0.13
+±0.0
+0.55
+±0.0
+0.05
+±0.0
+0.08
+±0.0
+0.06
+±0.0
+0.0
+±0.0
+0.02
+±0.0
+0.0
+0.02
+±0.0
+0.02
+±0.0
+0.04
+±0.0
+0.03
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+91bg
+0.03
+±0.0
+0.01
+±0.0
+0.9
+±0.0
+0.0
+0.01
+±0.0
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.01
+±0.0
+0.01
+±0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+Ia
+0.0
+0.04
+±0.0
+0.02
+±0.0
+0.77
+±0.0
+0.06
+±0.0
+0.03
+±0.0
+0.02
+±0.0
+0.01
+±0.0
+0.03
+±0.0
+0.01
+±0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+Ib/c
+0.05
+±0.0
+0.08
+±0.0
+0.07
+±0.0
+0.18
+±0.0
+0.4
+±0.0
+0.04
+±0.0
+0.12
+±0.0
+0.01
+±0.0
+0.02
+±0.0
+0.0
+0.01
+±0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+±0.0
+0.0
+0.0
+0.0
+0.0
+II
+0.03
+±0.0
+0.05
+±0.0
+0.01
+±0.0
+0.11
+±0.0
+0.02
+±0.0
+0.43
+±0.0
+0.19
+±0.0
+0.06
+±0.0
+0.02
+±0.0
+0.05
+±0.0
+0.03
+±0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+SN-like/Other
+0.04
+±0.0
+0.09
+±0.0
+0.05
+±0.0
+0.09
+±0.0
+0.06
+±0.0
+0.1
+±0.0
+0.54
+±0.0
+0.0
+0.01
+±0.0
+0.01
+±0.0
+0.01
+±0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+SLSN
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.01
+±0.0
+0.02
+±0.0
+0.0
+0.9
+±0.0
+0.04
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+PISN
+0.0
+0.0
+0.0
+0.0
+±0.0
+0.0
+±0.0
+0.0
+0.0
+0.01
+±0.0
+0.97
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+TDE
+0.04
+±0.0
+0.04
+±0.0
+0.03
+±0.0
+0.02
+±0.0
+0.01
+±0.0
+0.02
+±0.0
+0.0
+0.01
+±0.0
+0.03
+±0.0
+0.77
+±0.0
+0.03
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+ILOT
+0.03
+±0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.94
+±0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+KN
+0.02
+±0.0
+0.0
+±0.0
+0.01
+±0.0
+0.0
+0.01
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.05
+±0.0
+0.9
+±0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+M-dwarf Flare
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.8
+±0.0
+0.0
+0.11
+±0.0
+0.0
+0.02
+±0.0
+0.03
+±0.0
+0.02
+±0.0
+0.02
+±0.0
+uLens
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.83
+±0.0
+0.11
+±0.0
+0.0
+0.02
+±0.0
+0.01
+±0.0
+0.02
+±0.0
+0.01
+±0.0
+Dwarf Novae
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.02
+±0.0
+0.01
+±0.0
+0.82
+±0.0
+0.0
+0.06
+±0.0
+0.04
+±0.0
+0.03
+±0.0
+0.01
+±0.0
+AGN
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+1.0
+±0.0
+0.0
+0.0
+0.0
+0.0
+Delta Scuti
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.99
+±0.0
+0.0
+0.0
+0.0
+RR Lyrae
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.99
+±0.0
+0.0
+0.01
+±0.0
+Cepheid
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.99
+±0.0
+0.0
+EB
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.0
+0.01
+±0.0
+0.01
+±0.0
+0.01
+±0.0
+0.98
+±0.0
+CART
+Iax
+91bg
+Ia
+Ib/c
+II
+SN-like/Other
+SLSN
+PISN
+TDE
+ILOT
+KN
+M-dwarf Flare
+uLens
+Dwarf Novae
+AGN
+Delta Scuti
+RR Lyrae
+Cepheid
+EB
+True Label
+CART
+Predicted Label
+Fig. 4. Confusion matrix of two ATAT variants, and the Random Forest (RF) baseline. ATAT (LC + MD + MTA) has an F1-Score of 82.6%, ATAT
+(LC + MD + Features + MTA) has an F1-Score of 83.5%, and RF (MD + Features) has an F1-Score of 79.4%.
+4. Discussion and Conclusions
+We presented the models used by the ALeRCE team during the
+first round of ELAsTiCC. We introduced ATAT, a novel Deep
+Learning Transformer model that combines time series and tabular data information. The proposed model was developed for
+the ELAsTiCC challenge that simulates an LSST-like stream,
+with the objective of testing end-to-end alert stream pipelines.
+We were able to evaluate both classification and infrastructure
+performance metrics in the training set provided by ELAsTiCC.
+Our model was put into production within the ALeRCE broker
+in preparation for the real-time classification of the LSST alert
+stream.
+Our results show that, using the ELAsTiCC dataset, ATAT
+outperforms a Balanced Hierarchical RF model similar to
+the current ALeRCE’s light-curve classifier. This RF obtains
+a macro precision/recall/f1-score of 0.777/0.782/0.772, while
+ATAT achieves 0.841/0.827/0.825 when using light-curves,
+Article number, page 9 of 12
+=== PAGE 10 ===
+A&A proofs: manuscript no. ATAT_AA
+90
+We acknowledge support from REUNA Chile. This work has been possible
+thanks to the use of Amazon Web Services (AWS) credits managed by the Data
+Observatory. ELAsTiCC is a project of the U.S. Department of Energy-supported
+Dark Energy Science Collaboration. ELAsTiCC used resources of the National
+Energy Research Scientific Computing Center (NERSC), a U.S. Department
+of Energy Office of Science User Facility located at Lawrence Berkeley National Laboratory. We are grateful to the team that created the public ELAsTiCC
+challenge: Gautham Narayan, Alex Gagliano, Alex Malz, Catarina Alves, Deep
+Chatterjee, Emille Ishida, Heather Kelly, John Franklin Crenshaw, Konstantin
+Malanchev, Laura Salo, Maria Vincenzi, Martine Lokken, Qifeng Cheng, Rahul
+Biswas, Renée Holžek, Rick Kessler, Robert Knop, Ved Shah Gautam.
+80
+70
+F1-Score
+60
+50
+40
+TM (LC) + QFT (MD)
+TM (LC) + FT (MD)
+FS (LC) + QFT (MD)
+FS (LC) + FT (MD)
+TM (LC)
+FS (LC)
+30
+20
+10
+0
+1
+2
+4
+8
+16
+32
+64
+128 256 512 1024
+Evaluated time (days after first alert)
+Fig. 5. Ablation study in time. We compare combinations of our proposed time modulation (TM) and quantile feature tokenizer (QFT) as
+compared to a fixed sinusoid (FS) positional encoding (PE) and nonquantile feature tokenizer (FT). The combination of TM and QFT outperforms other combinations of PEs and tabular tokenizers independent
+of the time the models are evaluated.
+metadata and features calculated over the light-curves. Furthermore, if only the light-curves and metadata are considered for
+ATAT, we achieved values of 0.838/0.825/0.823 for the previous metrics, and, when performing inference in batches of 2,000
+light-curves, about 400 times faster inference times than with
+the RF. Importantly, our work suggests that it is possible to classify light-curves excluding human-engineered features with no
+significant loss in performance, and highlights the importance
+of including metadata information such as the properties of the
+host galaxy (e.g., Förster et al. (2022)). These results may be
+improved for data-scarce classes by class-weighting and/or additional data-augmentation strategies (Boone 2019). We plan to
+explore these alternatives in the future.
+The metrics presented in this work, e.g., in Table 1 or Figure 3, are representative of the dataset provided by ELAsTiCC
+to prepare machine learning models previous to the end-to-end
+challenge. The ELAsTiCC simulated data may not representative of the real LSST alert stream, and this may result in different performance metrics than those reported in this work. In
+order to tackle these differences, we suggest the application of
+fine-tuning and domain adaptation techniques.
+ATAT has proven to be competitive against feature-based tree
+ensembles in a large, complex and multi-class alerts light-curve
+classification setting, including very different variability classes.
+Transformer-based models represent a paradigm shift and we believe that more astronomical applications based on these models
+will be developed. Particularly, ATAT opens the door for more
+multi-modal applications, e.g., a third branch for stamps in Fig
+1.
+Acknowledgements. The authors acknowledge support from the Chilean Ministry of Economy, Development, and Tourism’s Millennium Science Initiative through grant ICN12_009, awarded to the Millennium Institute of Astrophysics, and from the National Agency for Research and Development (ANID)
+grants: BASAL Center of Mathematical Modeling Grant PAI AFB-170001
+(NA, IRJ, FF, JA, AMA, AA), BASAL projects ACE210002 and FB210003
+(AB, MC), FONDEQUIP Patagón supercomputer of Universidad Austral de
+Chile EQM180042 (NA, GCV, PH), FONDECYT Iniciación 11191130 (GCV),
+FONDECYT Regular 1200710 (FF), FONDECYT Regular 1211374 (PH),
+FONDECYT Regular 1220829 (PAE), and infrastructure fund QUIMAL190012.
+Article number, page 10 of 12
+References
+Allam, T. & McEwen, J. D. 2021, Paying Attention to Astronomical Transients:
+Photometric Classification with the Time-Series Transformer
+Astorga, N., Huijse, P., Estévez, P. A., & Förster, F. 2018, in 2018 International
+Joint Conference on Neural Networks (IJCNN), 1–8
+Astropy Collaboration, Price-Whelan, A. M., Lim, P. L., et al. 2022, ApJ, 935,
+167
+Becker, I., Pichara, K., Catelan, M., et al. 2020, Monthly Notices of the Royal
+Astronomical Society, 493, 2981
+Bellm, E. C., Kulkarni, S. R., Graham, M. J., et al. 2018, Publications of the
+Astronomical Society of the Pacific, 131, 018002
+Boone, K. 2019, The Astronomical Journal, 158, 257
+Borne, K. D. 2010, Earth Science Informatics, 3, 5
+Cabrera-Vives, G., Li, Z., Rainer, A., et al. 2022, in International Conference on
+Product-Focused Software Process Improvement, Springer, 21–36
+Cabrera-Vives, G., Reyes, I., Förster, F., Estévez, P. A., & Maureira, J.-C. 2016,
+in 2016 International Joint Conference on Neural Networks (IJCNN), IEEE,
+251–258
+Cabrera-Vives, G., Reyes, I., Förster, F., Estévez, P. A., & Maureira, J.-C. 2017,
+The Astrophysical Journal, 836, 97
+Carrasco-Davis, R., Cabrera-Vives, G., Förster, F., et al. 2019, Publications of
+the Astronomical Society of the Pacific, 131, 108006
+Carrasco-Davis, R., Reyes, E., Valenzuela, C., et al. 2021, The Astronomical
+Journal, 162, 231
+Charnock, T. & Moss, A. 2017, The Astrophysical Journal Letters, 837, L28
+Chen, C., Liaw, A., Breiman, L., et al. 2004, University of California, Berkeley,
+110, 24
+Devlin, J., Chang, M.-W., Lee, K., & Toutanova, K. 2018, BERT: Pretraining of Deep Bidirectional Transformers for Language Understanding,
+cite arxiv:1810.04805Comment: 13 pages
+Dieleman, S., Willett, K. W., & Dambre, J. 2015, Monthly notices of the royal
+astronomical society, 450, 1441
+Donoso-Oliva, C., Becker, I., Protopapas, P., et al. 2022, ASTROMER: A
+transformer-based embedding for the representation of light curves
+Donoso-Oliva, C., Cabrera-Vives, G., Protopapas, P., Carrasco-Davis, R., & Estévez, P. A. 2021, Monthly Notices of the Royal Astronomical Society, 505,
+6069
+Dosovitskiy, A., Beyer, L., Kolesnikov, A., et al. 2021, ICLR
+Förster, F., Moriya, T., Maureira, J., et al. 2018, Nature Astronomy, 2, 808
+Förster, F., Muñoz Arancibia, A. M., Reyes-Jainaga, I., et al. 2022, AJ, 164, 195
+Fraga, B. M. O., Bom, C. R., Santos, A., et al. 2024, Transient Classifiers for
+Fink: Benchmarks for LSST
+Förster, F., Cabrera-Vives, G., Castillo-Navarrete, E., et al. 2021, The Astronomical Journal, 161, 242
+Gagliano, A., Contardo, G., Foreman-Mackey, D., Malz, A. I., & Aleo, P. D.
+2023, The Astrophysical Journal, 954, 6
+Gómez, C., Neira, M., Hernández Hoyos, M., Arbeláez, P., & Forero-Romero,
+J. E. 2020, Monthly Notices of the Royal Astronomical Society, 499, 3130
+Gorishniy, Y., Rubachev, I., Khrulkov, V., & Babenko, A. 2021, in Advances
+in Neural Information Processing Systems, ed. M. Ranzato, A. Beygelzimer,
+Y. Dauphin, P. Liang, & J. W. Vaughan, Vol. 34 (Curran Associates, Inc.),
+18932–18943
+Graham, M. J., Kulkarni, S., Bellm, E. C., et al. 2019, Publications of the Astronomical Society of the Pacific, 131, 078001
+Hendrycks, D. & Gimpel, K. 2016, arXiv preprint arXiv:1606.08415
+Hložek, R., Ponder, K., Malz, A., et al. 2020, arXiv preprint arXiv:2012.12392
+Huijse, P., Estevez, P. A., Protopapas, P., Principe, J. C., & Zegers, P. 2014, IEEE
+Computational Intelligence Magazine, 9, 27
+Ishida, E., Mondon, F., Sreejith, S., et al. 2021, Astronomy and Astrophysics,
+650, A195
+Ivezić, Ž., Kahn, S. M., Tyson, J. A., et al. 2019, The Astrophysical Journal, 873,
+111
+Jamal, S. & Bloom, J. S. 2020, The Astrophysical Journal Supplement Series,
+250, 30
+=== PAGE 11 ===
+G. Cabrera-Vives et al.: ATAT: Astronomical Transformer for time series And Tabular data
+Kingma, D. P. & Ba, J. 2014, Adam: A Method for Stochastic Optimization,
+cite arxiv:1412.6980Comment: Published as a conference paper at the 3rd
+International Conference for Learning Representations, San Diego, 2015
+Komatsu, E., Dunkley, J., Nolta, M., et al. 2009, The Astrophysical Journal Supplement Series, 180, 330
+Mackenzie, C., Pichara, K., & Protopapas, P. 2016, The Astrophysical Journal,
+820
+Matheson, T., Stubens, C., Wolf, N., et al. 2021, The Astronomical Journal, 161,
+107
+Möller, A., Peloton, J., Ishida, E. E. O., et al. 2021, MNRAS, 501, 3272
+Moreno-Cartagena, D. A., Cabrera-Vives, G., Protopapas, P., et al. 2023, in Machine Learning for Astrophysics. Workshop at the Fortieth International Conference on Machine Learning (ICML 2023), 23
+Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R., & Hložek, R. 2019,
+Publications of the Astronomical Society of the Pacific, 131, 118002
+Möller, A. & de Boissière, T. 2019, Monthly Notices of the Royal Astronomical
+Society, 491, 4277
+Narayan, G., Zaidi, T., Soraisam, M. D., et al. 2018, ApJS, 236, 9
+Naul, B., Bloom, J., Perez, F., & van der Walt, S. 2018, Nature Astronomy, 2
+Neira, M., Gómez, C., Suárez-Pérez, J. F., et al. 2020, The Astrophysical Journal
+Supplement Series, 250, 11
+Nordin, J., Brinnel, V., van Santen, J., et al. 2019, A&A, 631, A147
+Nun, I., Protopapas, P., Sim, B., & Chen, W. 2016, The Astronomical Journal,
+152, 71
+Nun, I., Protopapas, P., Sim, B., et al. 2015, arXiv e-prints, arXiv:1506.00010
+O’Donnell, J. E. 1994, The Astrophysical Journal, 422, 158
+Pérez-Carrasco, M., Cabrera-Vives, G., Hernández-Garcıa, L., et al. 2023, in
+Machine Learning for Astrophysics. Workshop at the Fortieth International
+Conference on Machine Learning (ICML 2023), 23
+Perez-Carrasco, M., Cabrera-Vives, G., Hernandez-García, L., et al. 2023, The
+Astronomical Journal, 166, 151
+Pimentel, O., Estévez, P. A., & Forster, F. 2022, Deep Attention-Based Supernovae Classification of Multi-Band Light-Curves
+Pruzhinskaya, M. V., Malanchev, K. L., Kornilov, M. V., et al. 2019, Monthly
+Notices of the Royal Astronomical Society, 489, 3591
+Rodriguez-Mancini, D., Li, Z., Valenzuela, C., Cabrera-Vives, G., & Förster, F.
+2022, IEEE Software, 39, 28
+Russeil, E., Ishida, E., Peloton, J., Anais, M., & Le Montagner, R. 2022, in
+Machine Learning and the Physical Sciences Workshop, 36th Conference on
+Neural Information Processing Systems (NeurIPS)
+Sánchez, A., Cabrera, G., Huijse, P., & Förster, F. 2021, in Machine Learning
+and the Physical Sciences Workshop, 35th Conference on Neural Information
+Processing Systems (NeurIPS)
+Sánchez-Sáez, P., Lira, H., Martí, L., et al. 2021, The Astronomical Journal, 162,
+206
+Smith, K. W., Williams, R. D., Young, D. R., et al. 2019, Research Notes of the
+American Astronomical Society, 3, 26
+Sánchez-Sáez, P., Reyes, I., Valenzuela, C., et al. 2021, The Astronomical Journal, 161, 141
+Sánchez-Sáez, P., Arredondo, J., Bayo, A., et al. 2023, A&A, 675, A195
+Vaswani, A., Shazeer, N., Parmar, N., et al. 2017, in Advances in Neural Information Processing Systems, ed. I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach,
+R. Fergus, S. Vishwanathan, & R. Garnett, Vol. 30 (Curran Associates, Inc.)
+Villar, V. A. 2022, arXiv preprint arXiv:2211.04480
+Article number, page 11 of 12
+=== PAGE 12 ===
+A&A proofs: manuscript no. ATAT_AA
+Appendix A: Processed features details
+To extract color information from the difference light-curves, on
+each band we take the absolute value of the flux, compute the
+percentile 90 and save that value. Following the order ugrizY, we
+take the value of the percentile 90 previously saved for one band
+and divide it by the value of the next band. To avoid dividing by
+zero, we add 1 to the denominator.
+Most differences in the features used are related to extracting
+information from supernova-like light-curves. This is the list of
+supernova features, which are computed for each band:
+using the JAX library 12 . The initial guess and the boundaries for
+the parameter optimization were tuned for the range of values in
+the ELAsTiCC dataset.
+– positive_fraction: fraction of observations with a positive flux value.
+– dflux_first_det_band: difference between the flux of the
+first detection (in any band) and the last non-detection (in the
+same selected band) just before the first detection.
+– dflux_non_det_band: same as dflux_first_det_band,
+but instead of using the last non-detection before the first detection, we take all the non-detections before the first detection and compute the median. Later, this median is subtracted
+from the flux of the first detection (in any band).
+– last_flux_before_band: flux of the last non-detection (in
+the selected band) before the first detection (in any band).
+– max_flux_before_band: maximum flux of the nondetections (in the selected band) before the first detection (in
+any band).
+– max_flux_after_band: maximum flux of the nondetections (in the selected band) after the first detection (in
+any band).
+– median_flux_before_band: median flux of the nondetections (in the selected band) before the first detection (in
+any band).
+– median_flux_after_band: median flux of the nondetections (in the selected band) after the first detection (in
+any band).
+– n_non_det_before_band: number of non-detections (in
+the selected band) before the first detection (in any band).
+– n_non_det_after_band: number of non-detections (in the
+selected band) after the first detection (in any band).
+As we were not sure if the ELAsTiCC stream would indicate if the observations were alerts or forced photometry (i.e. if
+the signal was strong enough compared with the noise), for the
+supernova features we considered an observation as a detection
+if the absolute value of the difference flux was at least 3 times
+larger than the observation error.
+With respect to the Supernova Parametric Model (SPM,
+Sánchez-Sáez et al. 2021), one SPM model per band was fitted to the data, but the optimization was done simultaneously
+and penalizing the dispersion between the parameters on different bands. The extra term added to the cost function is
+ d
+
+ Var(A) + 1   0.0 
+
+ d
+ 
+
+
+* Var(t0 ) + 0.05   1.0 +
+ Var(γ)
+  0.1 
+d
++
+0.05
+
+
+ 
+(A.1)
+d + 0.005  , 20.0
+ Var(β)
+
+  0.7 
+ d
+
+
+Var(trise ) + 0.05 0.01
+d
+Var(t f all ) + 0.05
+where the variances are estimated over the different bands and
+the coefficients were found experimentally. The original SPM
+code was modified to avoid numerical instabilities. To speed up
+the optimization, the gradient of the cost function is computed
+Article number, page 12 of 12
+12
+http://github.com/google/jax
+=== PAGE 13 ===

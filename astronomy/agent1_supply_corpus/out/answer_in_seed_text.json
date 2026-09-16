@@ -1,0 +1,502 @@
+{
+ "sources/1910.12973.raw.txt": [
+  {
+   "ZTFID": "ZTF18aayjyub",
+   "IAUID": "SN2018cod",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF18abcfcoo",
+   "IAUID": "AT2018cow",
+   "type": "other"
+  },
+  {
+   "ZTFID": "ZTF18abmrhom",
+   "IAUID": "SN2018ffi",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF18aceqrrs",
+   "IAUID": "SN2018ijp",
+   "type": "SN Ic"
+  },
+  {
+   "ZTFID": "ZTF18acrknyn",
+   "IAUID": "SN2018jef",
+   "type": "SN Ia"
+  }
+ ],
+ "sources/2009.01242.raw.txt": [
+  {
+   "ZTFID": "ZTF18abcfcoo",
+   "IAUID": "AT2018cow",
+   "type": "other"
+  },
+  {
+   "ZTFID": "ZTF18abffyqp",
+   "IAUID": "SN2018dfi",
+   "type": "SN II"
+  },
+  {
+   "ZTFID": "ZTF18actuhrs",
+   "IAUID": "SN2018evt",
+   "type": "SN Ia-CSM"
+  },
+  {
+   "ZTFID": "ZTF18abukavn",
+   "IAUID": "SN2018gep",
+   "type": "SN Ic-BL"
+  },
+  {
+   "ZTFID": "ZTF18abvkmgw",
+   "IAUID": "SN2018ghd",
+   "type": "SN Ib"
+  },
+  {
+   "ZTFID": "ZTF18acqxyiq",
+   "IAUID": "SN2018jak",
+   "type": "SN IIb"
+  },
+  {
+   "ZTFID": "ZTF18acrheel",
+   "IAUID": "SN2018jbs",
+   "type": "SN Ibn"
+  },
+  {
+   "ZTFID": "ZTF18aczbkqp",
+   "IAUID": "AT2018kle",
+   "type": "LBV"
+  },
+  {
+   "ZTFID": "ZTF18adaykvg",
+   "IAUID": "SN2018kzr",
+   "type": "SN Ic"
+  },
+  {
+   "ZTFID": "ZTF19aadnwvc",
+   "IAUID": "AT2019ye",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19aadyppr",
+   "IAUID": "AT2019abn",
+   "type": "ILRT"
+  },
+  {
+   "ZTFID": "ZTF19aailcgs",
+   "IAUID": "SN2019ape",
+   "type": "SN Ic"
+  },
+  {
+   "ZTFID": "ZTF19aaniqrr",
+   "IAUID": "AT2019cmw",
+   "type": "other"
+  },
+  {
+   "ZTFID": "ZTF19aatubsj",
+   "IAUID": "SN2019fdr",
+   "type": "-"
+  },
+  {
+   "ZTFID": "ZTF19aavxfib",
+   "IAUID": "AT2019gte",
+   "type": "-"
+  },
+  {
+   "ZTFID": "ZTF19aaznwze",
+   "IAUID": "SN2019hty",
+   "type": "Ca-rich"
+  },
+  {
+   "ZTFID": "ZTF19abiszzn",
+   "IAUID": "SN2019lud",
+   "type": "SN II"
+  },
+  {
+   "ZTFID": "ZTF19abiqfxi",
+   "IAUID": "SN2019ltz",
+   "type": "SN II"
+  },
+  {
+   "ZTFID": "ZTF19abpbopt",
+   "IAUID": "SN2019neq",
+   "type": "SLSN-I"
+  },
+  {
+   "ZTFID": "ZTF19abnacvf",
+   "IAUID": "SN2019nhs",
+   "type": "SLSN-I"
+  },
+  {
+   "ZTFID": "ZTF19abpxcaf",
+   "IAUID": "SN2019one",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abpvbzf",
+   "IAUID": "SN2019npx",
+   "type": "SLSN-II"
+  },
+  {
+   "ZTFID": "ZTF19abqanpy",
+   "IAUID": "SN2019nuc",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abqykei",
+   "IAUID": "SN2019obh",
+   "type": "SN IIb"
+  },
+  {
+   "ZTFID": "ZTF19abqhikf",
+   "IAUID": "SN2019nvv",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abqqmui",
+   "IAUID": "SN2019ojv",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abpzuzd",
+   "IAUID": "SN2019okb",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abqrrto",
+   "IAUID": "SN2019oci",
+   "type": "SN Ia-91T"
+  },
+  {
+   "ZTFID": "ZTF19abqsvgf",
+   "IAUID": "SN2019odh",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abqrhvy",
+   "IAUID": "SN2019odf",
+   "type": "SN II"
+  },
+  {
+   "ZTFID": "ZTF19abqwtfu",
+   "IAUID": "SN2019odp",
+   "type": "SN Ib"
+  },
+  {
+   "ZTFID": "ZTF19abqqvhd",
+   "IAUID": "SN2019ocu",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abqysic",
+   "IAUID": "SN2019omz",
+   "type": "SN Ia-pec"
+  },
+  {
+   "ZTFID": "ZTF19abqyoxt",
+   "IAUID": "SN2019oyt",
+   "type": "SN II"
+  },
+  {
+   "ZTFID": "ZTF19abrirmk",
+   "IAUID": "SN2019oli",
+   "type": "SN Ib"
+  },
+  {
+   "ZTFID": "ZTF19abqykyd",
+   "IAUID": "SN2019oln",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abqmsbk",
+   "IAUID": "SN2019orb",
+   "type": "SN Ic"
+  },
+  {
+   "ZTFID": "ZTF19abrmlxu",
+   "IAUID": "SN2019oym",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abqxibq",
+   "IAUID": "SN2019omd",
+   "type": "SN Ib"
+  },
+  {
+   "ZTFID": "ZTF19abrogbl",
+   "IAUID": "SN2019omi",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abqshry",
+   "IAUID": "SN2019oqp",
+   "type": "SN Ic-BL"
+  },
+  {
+   "ZTFID": "ZTF19abrsssx",
+   "IAUID": "SN2019ons",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19absfopz",
+   "IAUID": "SN2019ovi",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abrvagn",
+   "IAUID": "SN2019plb",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abudlps",
+   "IAUID": "SN2019ovr",
+   "type": "SN II"
+  },
+  {
+   "ZTFID": "ZTF19abtsrup",
+   "IAUID": "SN2019owu",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abuclhk",
+   "IAUID": "SN2019pgv",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abrcvzz",
+   "IAUID": "SN2019pjw",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abwsecm",
+   "IAUID": "SN2019pmd",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abuxhqc",
+   "IAUID": "SN2019pkd",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abuhlxk",
+   "IAUID": "SN2019pdx",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abucvgu",
+   "IAUID": "SN2019pbp",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abujhgm",
+   "IAUID": "SN2019pfl",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abvanim",
+   "IAUID": "SN2019pff",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abvalfd",
+   "IAUID": "SN2019pfe",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abvdbyx",
+   "IAUID": "SN2019pfd",
+   "type": "SN II"
+  },
+  {
+   "ZTFID": "ZTF19abvdgqo",
+   "IAUID": "SN2019pfb",
+   "type": "SN Ib"
+  },
+  {
+   "ZTFID": "ZTF19abvhkst",
+   "IAUID": "SN2019pki",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abvhduf",
+   "IAUID": "SN2019phj",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abupned",
+   "IAUID": "SN2019pgo",
+   "type": "SN Ic-BL"
+  },
+  {
+   "ZTFID": "ZTF19aburnqh",
+   "IAUID": "SN2019phs",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abwztsb",
+   "IAUID": "SN2019pjs",
+   "type": "SN II"
+  },
+  {
+   "ZTFID": "ZTF19abwaohs",
+   "IAUID": "SN2019pnw",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abwouqp",
+   "IAUID": "SN2019poc",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abwswzb",
+   "IAUID": "SN2019pkg",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abxfunp",
+   "IAUID": "SN2019ptv",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abxihut",
+   "IAUID": "SN2019pmy",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abwsagv",
+   "IAUID": "SN2019pnl",
+   "type": "SN II"
+  },
+  {
+   "ZTFID": "ZTF19abvjcii",
+   "IAUID": "SN2019pny",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abxfhrq",
+   "IAUID": "SN2019prw",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abwscog",
+   "IAUID": "SN2019poe",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abxtcio",
+   "IAUID": "SN2019pof",
+   "type": "SN IIb"
+  },
+  {
+   "ZTFID": "ZTF19abxvles",
+   "IAUID": "SN2019ppe",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abxdnzt",
+   "IAUID": "SN2019pru",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abxdnhr",
+   "IAUID": "SN2019prt",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abyigib",
+   "IAUID": "SN2019qff",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abyjjxp",
+   "IAUID": "SN2019qcj",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abxjimu",
+   "IAUID": "SN2019pxo",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abyfbik",
+   "IAUID": "SN2019pyt",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19abwamby",
+   "IAUID": "SN2019pzt",
+   "type": "SN II"
+  },
+  {
+   "ZTFID": "ZTF19abylxyt",
+   "IAUID": "SN2019qid",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19accjfgv",
+   "IAUID": "SN2019rta",
+   "type": "SN IIb"
+  },
+  {
+   "ZTFID": "ZTF19acdsqir",
+   "IAUID": "SN2019sxd",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF19acoaiub",
+   "IAUID": "AT2019udc",
+   "type": "ILRT"
+  },
+  {
+   "ZTFID": "ZTF19acnfsij",
+   "IAUID": "AT2019uiz",
+   "type": "nova"
+  },
+  {
+   "ZTFID": "ZTF19acrwyyb",
+   "IAUID": "SN2019uqu",
+   "type": "SN Ibn"
+  },
+  {
+   "ZTFID": "ZTF19adakuos",
+   "IAUID": "AT2019wvf",
+   "type": "nova"
+  },
+  {
+   "ZTFID": "ZTF20aaertpj",
+   "IAUID": "AT2020pv",
+   "type": "SN Ib"
+  },
+  {
+   "ZTFID": "ZTF20aaeuxqk",
+   "IAUID": "SN2020ut",
+   "type": "SN Ia"
+  },
+  {
+   "ZTFID": "ZTF20aamttiw",
+   "IAUID": "SN2020cpa",
+   "type": "SN II"
+  },
+  {
+   "ZTFID": "ZTF20aapchqy",
+   "IAUID": "SN2020cxd",
+   "type": "SN II"
+  },
+  {
+   "ZTFID": "ZTF20abfhyil",
+   "IAUID": "SN2020mrf",
+   "type": "-"
+  },
+  {
+   "ZTFID": "ZTF20abjbgjj",
+   "IAUID": "SN2020ntt",
+   "type": "SN II"
+  },
+  {
+   "ZTFID": "ZTF20abkiarz",
+   "IAUID": "SN2020oce",
+   "type": "SN Ic"
+  }
+ ],
+ "sources/rubin_news_first_alerts.txt": []
+}

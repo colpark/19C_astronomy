@@ -1,0 +1,1324 @@
+Accepted for Publication in PASP
+Preprint typeset using LATEX style emulateapj v. 08/22/09
+
+SNANA: A PUBLIC SOFTWARE PACKAGE FOR SUPERNOVA ANALYSIS
+Richard Kessler,1,2 Joseph P. Bernstein,3 David Cinabro,5 Benjamin Dilday,4 Joshua A. Frieman,2,1,6
+Saurabh Jha,4 Stephen Kuhlmann,3 Gajus Miknaitis,7,6 Masao Sako,8 Matt Taylor,5 Jake Vanderplas9
+
+arXiv:0908.4280v1 [astro-ph.CO] 28 Aug 2009
+
+Accepted for Publication in PASP
+
+ABSTRACT
+We describe a general analysis package for supernova (SN) light curves, called SNANA, that contains
+a simulation, light curve fitter, and cosmology fitter. The software is designed with the primary goal
+of using SNe Ia as distance indicators for the determination of cosmological parameters, but it can
+also be used to study efficiencies for analyses of SN rates, estimate contamination from non-Ia SNe,
+and optimize future surveys. Several SN models are available within the same software architecture,
+allowing technical features such as K-corrections to be consistently used among multiple models, and
+thus making it easier to make detailed comparisons between models. New and improved light-curve
+models can be easily added. The software works with arbitrary surveys and telescopes and has already
+been used by several collaborations, leading to more robust and easy-to-use code. This software is not
+intended as a final product release, but rather it is designed to undergo continual improvements from
+the community as more is learned about SNe. We give an overview of the SNANA capabilities, as well
+as some of its limitations. Interested users can find software downloads and more detailed information
+from the manuals at http://www.sdss.org/supernova/SNANA.html.
+Subject headings: supernova software
+1. INTRODUCTION
+
+It has long been recognized that type Ia supernovae
+(SN Ia) are a reasonably homogeneous class of events,
+with similar light curves, colors, and spectra. After
+accounting for correlations between light-curve shape
+(usually the width or decline-rate), color, and luminosity, SNe Ia provide relative distance modulus estimates
+with a dispersion of only ∼ 15% (Phillips 1993). There
+are many approaches to characterizing the correlations
+that are used in fitting observed light curves, and the
+most commonly used methods are shown in Table 1. A
+typical model includes a combination of template light
+curves and spectra, along with variable parameters (e.g.,
+stretch and color) that modify the templates to match
+the observed light curve. The model templates themselves are derived by a “training” procedure involving
+well-observed SNe. Each light-curve fitting method has
+been implemented with different software, making comparisons between the models difficult. Comparison of
+light-curve simulations based on the different models is
+even more of a challenge, since there are no standard
+Electronic address: kessler@kicp.uchicago.edu
+1 Department of Astronomy and Astrophysics, The University
+of Chicago, 5640 South Ellis Avenue, Chicago, IL 60637
+2 Kavli Institute for Cosmological Physics, The University of
+Chicago, 5640 South Ellis Avenue Chicago, IL 60637
+3 Argonne National Laboratory, 9700 S. Cass Avenue, Lemont,
+IL 60437
+4 Department of Physics and Astronomy, Rutgers University,
+136 Frelinghuysen Road, Piscataway, NJ 08854
+5 Department of Physics, Wayne State University, Detroit, MI
+48202
+6 Center for Particle Astrophysics, Fermi National Accelerator
+Laboratory, P.O. Box 500, Batavia, IL 60510
+7 Center for Neighborhood Technology 2125 W. North Ave,
+Chicago IL 60647
+8 Department of Physics and Astronomy, University of Pennsylvania, 203 South 33rd Street, Philadelphia, PA 19104
+9 Department of Astronomy, University of Washington, Box
+351580, Seattle, WA 98195
+
+codes or methods.
+The analysis of recent SN Ia survey data has shown
+that the determination of cosmological parameters is now
+limited by systematic uncertainties (Astier et al. 2006;
+Wood-Vasey et al. 2007; Kessler et al. 2009) associated
+with the light-curve fitting methods. To make progress in
+overcoming these limitations, there is a need for reliable
+and reproducible analysis software that can be shared
+among different SN groups aiming to improve or replace
+these methods. Even in cases where different groups use
+the same light-curve fitting method, they may use different versions of the software, again complicating comparisons. Moreover, a comparison of different analysis methods can be complicated by subtle differences in analysis
+details such as the treatment of selection criteria and Kcorrections. Unraveling these differences calls for a single, well-documented analysis framework with clear software version control. In addition, such a framework can
+naturally incorporate detailed Monte Carlo simulations
+that are required to quantify the impact of survey selection efficiencies on light-curve fitting and cosmological
+inference. Such simulations can also be used to investigate sources of intrinsic SN Ia brightness fluctuations
+that result in scatter in the Hubble diagram beyond that
+caused by photometric errors.
+To address these issues and thereby improve the availability, quality, and reproducibility of SN analyses, we
+have developed a publicly available analysis software
+package called SNANA. This package contains a light-curve
+fitter, Monte Carlo simulation, and cosmology fitter.
+These tools incorporate existing SN light-curve models
+(Table 1), and are easily adaptable to new or improved
+models. A description and comparison of the mlcs2k2
+and salt–ii methods is given in § 5 of Kessler et al.
+(2009). The stretch-templates can represent Ia or non-Ia
+SNe, and can therefore be applied to any type of SN.
+The SNANA software package was originally developed
+
+2
+and used for the analysis of the SDSS-II SN sample (Frieman et al. 2008; Kessler et al. 2009), but the need to plan
+for future SN surveys, such as the Dark Energy Survey
+(DES10 ) and Large Synoptic Survey Telescope (LSST11 ),
+led to a publicly available package. Additional motivation for public-use software is described in Weiner et al.
+(2009). This paper describes the capabilities of SNANA,
+which are rapidly evolving with the needs of larger SN
+samples. A manual, installation instructions, and the
+software are available from our website.12
+There are three basic principles in the design of SNANA.
+First, each light-curve model is defined in a separate
+function that is used in both the light-curve fitter and
+in the simulation. This ensures that the fitter and simulation are synchronized with the same underlying model,
+and it also allows for anyone to provide a new SN model
+by simply providing a new function. If the underlying
+model describes SNe Ia in the rest-frame, then a standard K-correction utility is used based on the choice of
+spectral template and filter bandpasses. The underlying SN model can also describe SNe Ia in the observer
+frame, and thus bypass the K-correction utility. The second principle allows for the simulation of any survey by
+using a standard “observing conditions” library (§ 2) that
+describes the cadence, seeing, atmospheric transparency,
+and readout noise. The third principle is to allow a new
+survey to be added without making code modifications.
+TABLE 1
+SN models available in SNANA.
+
+model (reference)
+mlcs2k2 (Jha et al. 2007)
+mlcs2k2-IR (this paper)
+salt–ii (Guy et al. 2007)
+∆m15 (Prieto et al. 2006)
+stretch (Goldhaber et al. 2001)
+two-stretcha (Hayden et al. 2009)
+non-Ia (this paper)
+
+comment
+U BV RI + K-corr
+U BV RIY JHK + K-corr
+rest-frame flux vs. λ & epoch
+BV RI + K-correction
+rest-frame mags + K-corr
+rest-frame mags + K-corr
+II(P,L,n), Ib, Ibc
+
+a Two-stretch splits the template at peak brightness, and stretches
+each part separately.
+
+2. SIMULATING SN LIGHT CURVES
+
+Ideally, survey simulations would be based on artificial SNe embedded into survey images at the pixel level.
+While survey images are available within a collaboration,
+they are typically not available to the community. Even if
+survey images were available, full image-level simulations
+would require a large amount of computing to perform
+the many variations that are needed to study systematic uncertainties or to optimize a future survey. We
+have instead developed a fast light-curve simulation that
+is based upon actual survey conditions and that therefore accounts for non-photometric conditions and varying
+time intervals between observations due to bad weather.
+At each survey epoch and sky location, the simulation
+uses the measured observing conditions to generate realistic light curves that can be analyzed in exactly the
+10 http://www.darkenergysurvey.org
+11 http://www.lsst.org/lsst
+12 http://www.sdss.org/supernova/SNANA.html
+
+same way as the data.
+The observing conditions for a survey is stored in a text
+file called a “SIMLIB,” an example of which is shown in
+Fig. 1. A simulated SN flux is generated for each “MJD”
+corresponding to an observation. The quantity ZPTAVG
+relates the magnitude (m) to observed flux (F ) in CCD
+counts by the relation F = 10−0.4(m−ZPTAVG) ; ZPTAVG
+therefore accounts for the atmospheric transparency, exposure time, and the efficiency of the telescope, CCDs,
+and filters. To optimize a future survey, the exposure
+time can be independently varied to avoid re-making the
+SIMLIB with different ZPTAVG values.
+The CCD readout noise and sky-noise are determined
+by the CDD-NOISE and SKYSIG parameters (per pixel)
+summed in quadrature over an effective aperture (A)
+based on PSF-fitting,
+R
+2
+P SF (r)rdr
+A = 2π R
+.
+[P SF (r)]2 rdr
+
+(1)
+
+For a PSF described by a Gaussian (σ = PSF1 in
+Fig. 1), the effective aperture is 4πσ 2 . The simulation
+accounts for non-Guassian tails in the PSF by including
+a second Gaussian function parametrized by PSF2 and
+PSF2/1-RATIO. For the SDSS-II SN simulation, the inclusion of non-Gaussian tails increases the total noise by
+about 10% compared to the single-Gaussian approximation for the PSF. The quantity ZPTSIG reflects the spread
+in zeropoints from an ensemble of standard stars, and is
+used to introduce additional photometric dispersion.
+For a small survey field, the SIMLIB needs just one sequence of observations since the conditions within a small
+field are likely to be uniform. For a large field, such as
+the 300 square degree field of stripe 82 in the SDSS-II SN
+Survey (Frieman et al. 2008), a SIMLIB can contain thousands of observation sequences to account for the variations across the field. Whether SN collaborations use
+SNANA or not, it would be useful if all SN survey teams
+create appropriate SIMLIB files and make them available
+along with data releases. The current SNANA package
+includes SIMLIBs for the SDSS-II (Kessler et al. 2009),
+ESSENCE (Wood-Vasey et al. 2007), SNLS (Astier et al.
+2006), and HST (Riess et al. 2007) surveys, as well as estimates for future surveys including the DES (Bernstein
+et al. 2009) and LSST surveys. For completed SN surveys, the generation of a SIMLIB is straightforward to
+extract from the observations. To study future surveys,
+the SIMLIB generation is typically based on extrapolating
+previous observations at a similar site, and including observing gaps due to the moon and telescope operations.
+The reliability in predicting a SIMLIB for a future survey
+is crucial to the reliability of the simulation results.
+The simulation begins with the generation of SN properties based on the selected model from Table 1, typically choosing a shape-luminosity and color parameter.
+The color parameter can represent host-galaxy extinction (AV ) for models such as mlcs2k2, or it can reflect
+an agnostic relation between the supernova color and its
+peak brightness (i.e, for models like salt–ii). The parent
+distributions of these parameters are currently based on
+a nearly complete sample of SDSS-II SNe as described
+in §7 of Kessler et al. (2009). The shape and color parameters, along with other internal model (training) pa-
+
+3
+
+SURVEY: SDSS
+FILTERS: ugriz
+TELESCOPE: SDSS
+USER: John Q SN
+HOST: sdssdp47.fnal.gov
+COMMENT: ’Extract random RA,DECL : year=2005’
+BEGIN LIBGEN Tue Jul 22 15:08:41 2008
+# −−−−−−−−−
+LIBID: 1
+RA: 26.430172
+MJD
+S: 53616.383
+S: 53616.383
+S: 53616.383
+S: 53616.383
+S: 53616.383
+S: 53622.395
+S: 53622.395
+S: 53622.395
+S: 53622.395
+S: 53622.395
+S: 53626.359
+S: 53626.359
+S: 53626.359
+S: 53626.359
+S: 53626.359
+etc ...
+
+DECL: 0.844033
+
+NOBS: 42
+
+MWEBV: 0.026
+
+PIXSIZE: 0.40
+
+CCD CCD
+PSF1 PSF2 PSF2/1
+ID FLT GAIN NOISE SKYSIG (pixels) RATIO ZPTAVG ZPTSIG
+405 u 1.47 4.48
+4.83 1.89 3.69 0.225 27.42 0.018
+405 g 4.05 4.25
+4.04 1.85 3.61 0.247 28.29 0.023
+405 r 4.72 4.25
+5.28 1.64 3.62 0.142 28.17 0.012
+405 i 4.64 12.99
+6.95 1.60 3.81 0.103 27.80 0.038
+405 z 3.48 4.70
+6.91 1.74 3.75 0.131 26.48 0.013
+552 u 2.17 5.75
+3.26 1.66 3.42 0.146 26.95 0.016
+552 g 4.03 5.45
+4.09 1.58 3.31 0.107 28.38 0.021
+552 r 4.89 4.65
+5.00 1.46 3.55 0.065 28.14 0.011
+552 i 4.76 10.71
+6.43 1.53 3.65 0.075 27.83 0.036
+552 z 4.69 5.16
+4.91 1.43 3.35 0.068 26.10 0.009
+625 u 1.47 4.48
+4.60 1.71 3.62 0.116 27.49 0.033
+625 g 4.05 4.25
+4.40 1.83 3.50 0.282 28.22 0.095
+625 r 4.72 4.25
+5.87 1.64 3.65 0.112 28.18 0.042
+625 i 4.64 12.99
+6.54 1.47 3.56 0.070 27.82 0.040
+625 z 3.48 4.70
+6.73 1.64 3.88 0.110 26.49 0.012
+
+Fig. 1.— Example excerpt from a SIMLIB for the SDSS-II SN Survey.
+
+rameters such as light curve templates and spectral surfaces, are used by the light curve model to determine
+the rest-frame magnitude at each epoch. To study potential biases from evolving SN properties, an arbitrary
+redshift dependence can be assigned to the parent distributions of the shape and color parameters, as well as
+to the model parameters that relate shape and color to
+intrinsic brightness (e.g., salt–ii α, β, and host-galaxy
+dust parameter RV ). The simulation also includes “intrinsic smearing” options to introduce additional scatter
+in the Hubble diagram residuals.
+K-corrections similar to the method in Nugent et al.
+(2002) are used to transform rest-frame model magnitudes to observer-frame magnitudes in the telescope
+system. For most applications the spectral templates
+from Hsiao et al. (2007) are used to determine the Kcorrections, but the SNANA software allows for using any
+spectral template. For the final step in the simulation, the SIMLIB is used to translate the ideal aboveatmosphere magnitudes into observed fluxes and uncertainties. As explained in §6 of Kessler et al. (2009), the
+simulation for each survey accounts for search-related
+efficiencies; in particular, the spectroscopic efficiency is
+based on the discrepancy between the observed and simulated redshift distribution. The quality and flexibility
+of the simulation is illustrated in Figs. 2-3, which show
+data-simulation comparisons for the measured flux and
+its uncertainty for four different surveys. For the fluxuncertainty comparison (Fig. 3), there are some discrepancies that may be due to a mis-interpretation of the
+noise determination from the image-subtraction pipeline.
+Although supernova-based cosmology results have all
+used rest-frame SN Ia models of optical (U BV RI) light
+curves, there is a growing interest in obtaining infrared
+
+light curves in order to reduce the effect of host-galaxy
+extinction. To study such possibilities in future surveys,
+rest-frame infrared light curves can be simulated using
+an extended version of mlcs2k2 in which light curve
+templates for Y JHK have been constructed based on
+recent observations from PAIRITEL (Wood-Vasey et al.
+2008).
+To study the determination of SN Ia photometric redshifts (photo-Z), the simulation includes a host-galaxy
+photo-Z library (HOSTLIB) so that the host-galaxy photoZ can be used as a prior in a photo-Z fit. The HOSTLIB
+is not created by SNANA, and therefore the HOSTLIB must
+be created externally from either another simulation, or
+from a photo-Z analysis of host-galaxies with spectroscopic redshifts. The SNANA simulation simply finds a
+host galaxy with a redshift matching the SN redshift,
+and stores the host-galaxy photo-Z to be used by the
+light curve fitter.
+To estimate SN Ia sample contamination, the simulation can generate non-Ia SN light curves. While the Type
+Ia light curve models are based on a parametric equation
+or photometric templates, there are no such models for
+non-Ia types. To allow for a large diversity of non-Ia
+SNe, the simulation uses a library of spectral templates
+that specify the SN flux as a function of epoch and wavelength. A spectral template can be a smoothed average
+based on an ensemble of SNe, or a template can correspond to a particular (well-observed) supernova where
+a composite spectrum is warped to match the observed
+photometric colors. Since the spectral templates are interpolated to cover all wavelengths and epochs, only wellsampled photometric light curves are used. The current
+library contains composite and individual templates for
+types IIP, IIn, Ib, and Ibc. The simulation of the non-Ia
+
+4
+
+10
+
+Entries
+
+10
+
+r
+Entries
+
+1
+3
+10
+
+10
+
+10
+
+10
+
+10
+
+2
+
+1
+
+10
+
+-1
+
+10
+
+I
+
+10
+
+i
+
+i
+
+2
+
+1
+
+z
+
+-1
+
+10
+
+-2
+
+1000
+
+2000
+
+3000
+
+0
+
+500
+
+calibrated flux
+
+1000
+
+-1
+
+1
+
+1
+10
+
+1
+10
+
+-1
+
+2
+
+-1
+
+4
+
+1500
+
+10
+1
+10
+10
+
+10
+
+10
+0
+
+0
+
+10
+
+-1
+
+1
+
+-1
+
+10
+
+10
+
+2
+
+10
+10
+
+Entries
+
+r
+
+-1
+
+10
+
+2
+
+2
+
+10
+1
+
+1
+
+10
+
+Entries
+
+R
+
+-1
+
+g
+
+-1
+
+Entries
+
+2
+
+1
+
+data
+sim
+
+10
+
+Entries
+
+10
+
+1
+
+Entries
+
+Entries
+
+3
+
+HST
+data
+sim
+
+10
+
+10
+
+10
+
+g
+
+1
+10
+
+data
+sim
+
+2
+
+SNLS
+
+2
+
+Entries
+
+10
+
+10
+
+Entries
+
+2
+
+10
+
+Entries
+
+10
+
+ESSENCE
+data
+sim
+
+Entries
+
+3
+
+Entries
+
+Entries
+
+SDSS
+10
+
+-100
+
+0
+
+100
+
+calibrated flux
+
+200
+
+300
+
+2
+
+10
+1
+
+6
+
+-1
+
+10
+
+400
+
+0
+
+50
+
+calibrated flux
+
+100
+
+150
+
+200
+
+calibrated flux
+
+Fig. 2.— Comparison of flux distributions for data (dots) and simulations (histograms) for SDSS-II, ESSENCE, SNLS, and HST. The
+observer-frame passband is indicated on each plot (HST filter symbols are 0 =NIC-F110W, 1 =NIC-F160W, 2 =ACS-F606W, 4 =ACSF775W, 6 =ACS-F850LP). Each simulated distribution is scaled to have the same total number of entries as the data. The calibrated flux
+is 10−0.4·mag+11 .
+
+2
+
+1
+-1
+
+g
+
+Entries
+
+10
+
+3
+
+R
+
+1
+
+2
+
+10
+
+g
+
+2
+
+-1
+
+10
+-2
+
+r
+
+10
+1
+10
+
+-1
+-2
+
+10
+
+10
+
+i
+0
+
+50
+
+I
+
+1
+
+100
+
+150
+
+calibrated fluxerr
+
+200
+
+i
+
+10 2
+10
+
+10
+
+2
+
+Entries
+
+2
+
+2
+
+10
+1
+-1
+
+10
+0
+
+20
+
+40
+
+60
+
+calibrated fluxerr
+
+80
+
+1
+
+0
+
+z
+10
+
+0
+1
+
+1
+10
+
+20
+
+30
+
+calibrated fluxerr
+
+40
+
+-1
+
+2
+
+10
+1
+10
+10
+
+Entries
+
+3
+
+10
+
+Entries
+
+10
+
+r
+
+10
+
+-1
+
+10
+
+10
+
+3
+10
+10
+
+10
+
+1
+
+10
+
+10
+1
+
+data
+sim
+
+10
+
+Entries
+
+10
+
+10
+3
+10
+
+HST
+data
+sim
+
+Entries
+
+2
+
+Entries
+
+Entries
+
+10
+
+10
+
+data
+sim
+
+Entries
+
+10
+
+10
+
+SNLS
+10
+
+Entries
+
+2
+
+1
+
+Entries
+
+data
+sim
+
+Entries
+
+Entries
+
+10
+
+ESSENCE
+
+3
+
+Entries
+
+SDSS
+10
+
+-1
+
+4
+
+2
+
+10
+1
+-1
+
+6
+
+0
+
+1
+
+10
+
+2
+
+3
+
+4
+
+5
+
+6
+
+calibrated fluxerr
+
+Fig. 3.— Data-simulation comparison of the flux uncertainty. See Fig. 2 caption for details.
+
+diversity will gradually improve as more well-observed
+non-Ia light curves become available. A limitation of
+SNANA is that there is currently no utility to convert nonIa light curves into spectral surfaces.
+A trigger simulation is included to mimic algorithms
+that are used to discover SNe Ia in real time. Although
+the offline selection criteria should in principle be more
+stringent than the search trigger, it may be useful to
+use the simulation to make more rigorous crosschecks.
+The trigger simulation is also useful to anticipate SN
+discovery rates in the design of future surveys. The trigger simulation is based on user-supplied efficiency tables
+that depend either on observed magnitudes or on the
+signal-to-noise ratio (SNR). These efficiency tables could
+be made, for example, by injecting fake SNe into real images, and then passing these images through the objectfinding pipeline. Since a discovery typically requires observations in multiple filters and/or multiple epochs, one
+can specify arbitrary detection logic. For example, the
+SDSS-II SN Survey required a detection in at least two
+
+of the gri filters, and required a detection at two or more
+epochs; this logic is simulated by specifying the trigger
+to be “2 gr+ri+gi.”
+A more difficult aspect of the trigger is the target selection for spectroscopic observations. Since spectroscopic
+selection is based on human decisions and telescope availability, there is no clear software algorithm to describe
+this part of the efficiency. As described in § 6.2.1 of
+Kessler et al. (2009), the observed and simulated redshift
+distributions can be used to empirically determine the
+spectroscopic selection efficiency. After all quantifiable
+sources of inefficiency are included in the simulation, the
+simulated redshift distribution will typically not match
+that of the data. In the specific case of Kessler et al.
+(2009), the observed redshift distribution always has a
+deficit at higher redshifts compared to the simulation,
+and this deficit is assumed to be a result of the spectroscopic efficiency (ǫspec ). In general, ǫspec depends on
+two types of parameters. The first set of parameters are
+those determined by the simulation (denoted ~xsim ), such
+
+5
+as intrinsic or observed brightness, host-galaxy extinction, and host-SN separation. The second set of parameters (denoted ~xmodel ) are those introduced by the analysis team based on their knowledge of survey operations,
+or in some cases based on a guess. A simple example is
+ǫspec = exp[−(r − r0 )/τr ], where ~xsim = r is the observed
+r-band magnitude, and ~xmodel = {r0 , τr } are the model
+parameters. The ~xmodel parameters are determined by
+solving
+Z
+d~xsim [NSIM (zi , ~xsim )ǫspec (zi , ~xsim , ~xmodel )]
+= NDATA (zi ) ,
+
+nosity of the SN corresponds to a particular cosmology:
+µ = µ(z, ΩM , ΩΛ , w) where ΩM , ΩΛ , w are fixed by the
+user. The second method, called a “cosmology-photoZ”
+DES TESTDES SN 40006 z=0.4838 griz
+AV = 1.037 ± 0.161
+µ = 42.425 ± 0.146
+
+∆ = 0.052 ± 0.125
+2
+χ /dof = 43.2/64
+
+7.5
+
+6
+
+5
+
+χ diag/N = 14.5/17
+2
+
+4
+
+2.5
+
+g
+
+0
+
+2
+0
+3
+
+(2)
+
+χ diag/N =
+
+9.3/17
+
+χ diag/N =
+
+6.2/17
+
+10
+1
+
+r
+
+0
+
+0
+30
+
+1.5
+
+20
+
+1
+
+2
+
+10
+
+i
+
+0.5
+
+χ2 per Epoch
+
+Flux
+
+0
+40
+
+20
+
+z
+
+0
+
+0
+2
+2
+
+1.5
+1
+0.5
+0
+
+0
+
+50
+
+100
+
+0
+
+Tobs − 52938
+
+50
+
+100
+
+Tobs − 52938
+
+Fig. 4.— As part of a study to optimize the DES-SN Survey,
+SNANA-mlcs2k2 light curve fits (left) are shown for a simulated
+SN Ia at redshift z = 0.48 with host-galaxy extinction AV ∼ 1. The
+observer filter (g, r, i, z) is indicated on each panel. Solid dots with
+error bars are the measurements and uncertainties, stars indicates
+measurements outside the specified epoch range, solid curve is the
+best-fit model, and dashed curve indicates the model uncertainty.
+The right panels show the residual χ2 maps that are useful for
+identifying outliers.
+SN 40001 z=0.0922
+
+SN 40005 z=0.3825
+
+1600
+
+120
+
+1400
+100
+
+1200
+1000
+
+80
+
+800
+
+60
+
+600
+
+40
+
+400
+20
+
+200
+
+Y
+
+0
+
+Y
+
+0
+
+-200
+1000
+
+-20
+
+relative flux
+
+3. LIGHT CURVE FITTING
+
+The light curve fitting program is appended to an underlying program that reads SN light curves and applies
+user-defined criteria to select a subset of SNe and epochs.
+Users can append other fitters or other analysis programs
+to the underlying program. This structure ensures a
+uniform definition of selection requirements that can be
+shared among users.
+The SNANA light curve fitter treats data and simulated
+samples in exactly the same way. Available models are
+shown in Table 1. Models that describe SNe in the restframe all use the same algorithms for host-galaxy extinction and K-corrections. The standard fit assumes a
+well-known spectroscopic redshift, and then fits for shape
+and color parameters. For the mlcs2k2 model, each fit
+returns four parameters: epoch of peak brightness (t0 ),
+shape-parameter (∆), host-galaxy extinction (AV ), and
+a distance modulus (µ). For other similar models, the
+shape-parameter ∆ is replaced by the corresponding parameter, such as stretch or ∆m15 . Observer-frame infrared light curves (Y JHK, HST, etc ...) can be fit with
+any model at redshifts that correspond to the rest-frame
+optical region of the model. For mlcs2k2, the restframe model includes Y JHK. Example light curve fits
+in the optical and infrared (using the mlcs2k2 model)
+are shown in Figs. 4-5.
+For surveys that cannot obtain a spectrum for all SNe,
+there are two photo-Z fit options. The mlcs2k2 model
+is used here for illustration. The first method, called a
+“constrained photo-Z fit,” is designed to identify SN Ia
+that do not have a spectroscopic redshift: uses include
+SN rate measurements and targeting host-galaxy redshifts for unconfirmed SNe Ia. In this 4-parameter fit,
+the redshift is a fitted parameter and the distance modulus is constrained (calculated) so that the observed lumi-
+
+7.3/17
+
+2
+
+relative flux
+
+where NDATA (zi ) is the number of observed SNe, after
+all selection criteria, in the redshift bin centered at zi ,
+and NSIM (zi , ~xsim ) is the number of simulated SNe in the
+same redshift bin and within the integration cell denoted
+by d~xsim . SNANA can be used to determine NSIM (z, ~xsim )
+and NDATA (z), but the extraction of ~xmodel requires specific software that is currently not part of SNANA. It may
+be convenient to determine the model parameters in redshfit bins, ~xmodel (zi ), and then fit each parameter to a
+smooth function of redshift. With each new definition of
+~xmodel parameters, the SNANA simulation is easily modified to compute ǫspec (z, ~xsim , ~xmodel ). Finally, we note
+that the precision in determining ǫspec is limited by the
+precision in the SN rate as a function of redshift.
+
+χ diag/N =
+2
+
+20
+
+800
+600
+
+120
+100
+80
+60
+
+400
+40
+200
+
+20
+
+J
+
+0
+
+J
+
+0
+-20
+
+-200
+-20
+
+0
+
+20
+
+40
+
+60
+
+80
+
+Tobs − 53227.2
+
+-20
+
+0
+
+20
+
+40
+
+60
+
+80
+
+Tobs − 53225.6
+
+Fig. 5.— As part of a study to observe DES-supernova fields in
+the infrared with VISTA (Visible and Infrared Survey Telescope for
+Astronomy: www.vista.ac.uk), SNANA-mlcs2k2 light curve fits are
+shown for simulated SNe Ia at redshifts shown above each panel.
+The observer filter (Y, J) is indicated on each panel. Symbols and
+curves are defined in the Fig. 4 caption.
+
+6
+
+Entries per 0.04
+
+fit, involves fitting for both the redshift and distance
+modulus: the five fitted parameters are µ, z, t0 , ∆, AV .
+A potential difficulty with the 5-parameter cosmologyphotoZ fit is CPU time: the marginalization (see § 5)
+takes a few minutes per fit, so studying a sample of
+104 SNe Ia requires about a CPU-month of resources.13
+In addition to these photo-Z methods, the host-galaxy
+photo-Z can be used as a prior to help constrain the redshift. For simulated SNe Ia in the Dark Energy Survey
+(DES), Fig. 6 shows the difference between the fitted
+photo-Z (Zphot ) and true redshift (Ztrue ). As expected,
+including the host-galaxy photo-Z as a prior results in a
+smaller scatter in Zphot − Ztrue .
+
+SNANA includes a basic cosmology fitter that reads
+a table of redshifts and distance moduli generated by
+the light curve fitter, and then determines cosmological parameters w and ΩM within the framework of the
+Friedmann-Robertson-Walker model. Priors on the cosmology parameters can be included from measurements
+of Baryon Acoustic Oscillations and the Cosmic Microwave Background. Covariances from peculiar velocities (Hui & Greene 2006) can be incorporated into the fitter, which effectively downweights the most nearby SNe.
+To study more exotic cosmology models, such as timedependent dark energy and non-zero curvature, there is
+another fitter based on Monte Carlo Markov Chains.
+5. SOFTWARE OVERVIEW
+
+10
+
+3
+
+10
+
+2
+
+SN+HOST
+SN-only
+
+10
+
+1
+-1
+
+-0.8
+
+-0.6
+
+-0.4
+
+-0.2
+
+0
+
+0.2
+
+Zphot − Ztrue
+
+0.4
+
+0.6
+
+0.8
+
+1
+
+Fig. 6.— Distribution of Zphot − Ztrue from a study of the DESSN Survey in a scenario in which spectroscopic redshifts are not
+available. Zphot is the SN photometric redshift obtained with the
+mlcs2k2 method. Dashed histogram is based solely on the SN
+photometric light curve, and the solid histogram includes the hostgalaxy photo-Z as a prior.
+
+All fitting methods use minuit14 to obtain parameter
+values that minimize the data-model χ2 . There is also
+an option to obtain marginalized parameter estimates15
+at the expense of taking more CPU time, particularly for
+the 5-parameter cosmology-photoZ fit. The interaction
+between fitting and selection requirements introduces a
+subtle caveat in selecting measurements within a specific
+epoch range relative to the time (t0 ) of maximum brightness. The epoch range is not well defined before the fit,
+making the epoch selection ambiguous. The SNANA light
+curve fitter handles this situation by performing two fit
+iterations. In the first iteration, the epoch range is very
+wide. The first estimate of t0 is then used to define the
+epoch-window for the second iteration. The star in Fig. 4
+indicates a measurement that was rejected in the second
+iteration because it is outside the user-specified epoch
+window.
+The light-curve fitter includes the capability to determine interpolated fluxes and uncertainties at any
+epoch. The uncertainty accounts for covariances among
+the model parameters. This interpolation is useful to
+compare observed magnitudes with synthetic magnitudes
+based on spectra, and to compare magnitudes from multiple telescopes that observe the same SN at different
+times.
+
+The SNANA software is written primarily in C and
+fortran, and makes extensive use of the CERN library
+(CERNLIB) for fitting, creating plots, and for a graphical
+interface. For analysis features that appear to be specific
+to a particular data sample or light curve model, there
+is always an effort to integrate such features in a general
+manner that can be used more broadly. For example,
+the use of priors and marginalization that are associated with the mlcs2k2 method have been integrated into
+SNANA so that they can be used on any light curve model.
+In addition to the SNANA simulation and fitters, there is
+an increasing library of software tools for comparing results, translating formats, plotting, sorting, generating a
+SIMLIB, and converting χ2 grids into contours. Although
+the code is stored in a CVS repository for the developers,
+the public code is released in incremental versions (e.g.,
+v7 07) with release notes documenting the changes.
+In anticipation of very large SN surveys in the near
+future, significant attention has been paid to processing speed. The simulation generates more than 10 light
+curves per second. The light curve fitter takes about
+1 second per light curve for the minimization, but the
+marginalization can take 10-100 seconds depending on
+the number of fit parameters and the number of integration bins.
+6. CONCLUSION
+
+There are currently about a dozen SN-related analyses
+that make use of SNANA, and users include students, postdocs, and faculty. This broad usage has greatly helped
+to improve the reliability and usability of the software
+package. Experts, nonexperts, and small groups can participate using software that they could not write on their
+own, and new ideas can be tested with minimal overhead. Since the current SN fitting models are based on
+externally performed training procedures that cannot be
+duplicated, there is an urgent need to develop turn-key
+SN training programs. Scientists interested in studying
+SN light curves are invited to use and make contributions
+to SNANA.
+
+4. COSMOLOGY FITTER
+13 Processing times are based on an Intel i686 2.8 GHz processor.
+14 http://wwwasdoc.web.cern.ch/wwwasdoc/minuit/minmain.html
+15 http://pdg.lbl.gov/2009/reviews/rpp2009-rev-probability.pdf
+
+7
+REFERENCES
+Astier, P. et al. 2006, A&A, 447, 31
+Bernstein, J. P., Kessler, R., Kuhlmann, S., & Spinka, H. 2009,
+ArXiv:0906.2955
+Frieman, J. A. et al. 2008, AJ, 135, 338
+Goldhaber, G. et al. 2001, ApJ, 558, 359
+Guy, J. et al. 2007, A&A, 466, 11
+Hayden, B., Garnavich, P., & SDSS-SN Survey. 2009, Bulletin of
+the American Astronomical Society, 41, 254
+Hsiao, E. et al. 2007, ApJ, 663, 1187
+Hui, L. & Greene, P. B. 2006, Phys. Rev., 73, 123526
+Jha, S., Riess, A. G., & Kirshner, R. P. 2007, AJ, 659, 122
+Kessler, R. et al. 2009, ApJS, accepted for publication
+(arXiv:astro-ph/0908.4274)
+
+Nugent, P. et al. 2002, PASP, 114, 803
+Phillips, M. M. 1993, ApJ, 413, L105
+Prieto, J. et al. 2006, AJ, 647, 501
+Riess, A. G. et al. 2007, ApJ, 659, 98
+Weiner, B. J. et al. 2009, White Paper for 2010 Decadal Survey arXiv:astro-ph/0903.3971
+Wood-Vasey, W. M. et al. 2007, ApJ, 666, 694
+—. 2008, ApJ, 689, 377
+
+

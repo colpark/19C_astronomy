@@ -1,0 +1,1317 @@
+{
+ "candidate": "live time-domain astronomy: ZTF BTS label base (Rubin LSST alert stream as the target decision surface)",
+ "seeds": [
+  {
+   "id": "Fremling2020_arXiv1910.12973",
+   "file": "sources/1910.12973.pdf (+ .raw.txt)",
+   "read_in_full": true,
+   "contribution": "BTS survey design, filter, follow-up priority scheme, nightly volumes, per-night follow-up commitment, position definition",
+   "facts": [
+    {
+     "assertion": "BTS goal: spectroscopically classify all extragalactic transients brighter than 18.5 mag at peak in g or r",
+     "locator": "abstract; section 1 para 'The primary goal of the BTS'"
+    },
+    {
+     "assertion": "On a typical night in 2018 a few hundred alerts passed the BTS filter",
+     "locator": "section 2.2 first para"
+    },
+    {
+     "assertion": "5-15 SN candidates per night are identified by scanners and assigned for spectroscopic follow-up",
+     "locator": "section 2.2 para 'Among the passing alerts'"
+    },
+    {
+     "assertion": "SEDM priorities P3 (<18.5), P2 (18.5-18.75), P1 (>18.75); triggers active 7 d",
+     "locator": "section 2.3"
+    },
+    {
+     "assertion": "SEDM can classify >10 SNe in the 18.5-19 mag range every night",
+     "locator": "section 1 para 'With the Zwicky Transient Facility'"
+    },
+    {
+     "assertion": "Catalog positions are the weighted average over every alert associated with the SN",
+     "locator": "section 3.1 last para"
+    },
+    {
+     "assertion": "761 SNe classified Apr-Dec 2018: 547 Ia, 155 II, 40 Ib/c, 19 SLSN",
+     "locator": "section 3.2; Table 2"
+    },
+    {
+     "assertion": "Filter rejects |b|<=7 deg, rbscore<0.2, known stars, moving objects, negative subtractions",
+     "locator": "section 2.1 bullet list"
+    },
+    {
+     "assertion": "Spectroscopic completeness ~96% (visual) / 93.6% to mpeak<18.5 (automated) for 2018",
+     "locator": "section 2.3.1"
+    }
+   ]
+  },
+  {
+   "id": "Perley2020_arXiv2009.01242",
+   "file": "sources/2009.01242.pdf (+ .raw.txt)",
+   "read_in_full": true,
+   "contribution": "BTS alert volume, saved-candidate rate, quality/purity cuts, false-positive classes, class totals, redshift uncertainty, host search radius, public start date",
+   "facts": [
+    {
+     "assertion": "Filter reduced ~10^6 Avro alert packets per night to ~500 viable candidates (first-year filter)",
+     "locator": "section 2.1 para 'Our first-year in-stream software filter'"
+    },
+    {
+     "assertion": "2019 filter changes cut false positives from several hundred per night to <~50",
+     "locator": "section 2.1"
+    },
+    {
+     "assertion": "Typically 5-10 candidates saved on an average clear night",
+     "locator": "section 2.1 last para"
+    },
+    {
+     "assertion": "AGNs and CVs pass the filter routinely but are not part of the project; scarce spectroscopic resources reserved for genuine extragalactic transients",
+     "locator": "section 2.4 first para"
+    },
+    {
+     "assertion": "Public start of BTS survey 2018-06-01",
+     "locator": "section 2.3 para after cut list"
+    },
+    {
+     "assertion": "SN-feature redshifts have dz~0.005 uncertainty",
+     "locator": "section 2.2 para 'the distance modulus'"
+    },
+    {
+     "assertion": "Host cross-match search limited to <90 arcsec and <30 kpc",
+     "locator": "section 2.2 para 'To provide additional counterpart photometry'"
+    },
+    {
+     "assertion": "3147 classified transients in 25.5 months, 1865 pass quality+purity cuts, 1206 also m<18.5",
+     "locator": "section 3; Table 1"
+    },
+    {
+     "assertion": "Statistical sample 93% complete at <18.5, 97% at <18, 75% at <19",
+     "locator": "abstract; section 3"
+    },
+    {
+     "assertion": "Classification success depends on season/weather (winter losses)",
+     "locator": "Appendix D, Figure 13"
+    },
+    {
+     "assertion": "Classifications are the most recent TNS classification, some subtypes removed",
+     "locator": "Appendix E"
+    }
+   ]
+  },
+  {
+   "id": "BTS_explorer_info",
+   "file": "sources/bts_explorer_info.html",
+   "url": "https://sites.astro.caltech.edu/ztf/bts/explorer_info.html",
+   "read_in_full": true,
+   "contribution": "CSV column semantics, non-completeness for Galactic/non-transient events, TNS mismatch warning, peak-mag upper-limit caveat",
+   "facts": [
+    {
+     "assertion": "BTS makes no attempt to be complete to Galactic events and non-transients: most are removed by the alert filter or scanners",
+     "locator": "section 'Classification'"
+    },
+    {
+     "assertion": "time: time of peak expressed as JD-2458000",
+     "locator": "section 'Data Columns', item time"
+    },
+    {
+     "assertion": "mag: peak P48 magnitude; if the true peak was missed this is an upper limit",
+     "locator": "section 'Data Columns', item mag"
+    },
+    {
+     "assertion": "Rise/Fade given as a limit when no detections deeper than 0.75 mag below peak exist",
+     "locator": "section 'Data Columns', items Rise and Fade"
+    },
+    {
+     "assertion": "TNS ID: a few transients are wrongly matched on TNS",
+     "locator": "section 'Data Columns', item TNS ID"
+    },
+    {
+     "assertion": "Redshift: often approximate",
+     "locator": "section 'Data Columns', item Redshift"
+    }
+   ]
+  },
+  {
+   "id": "LDM-612_v1.4",
+   "file": "sources/LDM-612.pdf",
+   "url": "https://ldm-612.lsst.io/",
+   "read_in_full": true,
+   "contribution": "alert-to-DIASource-to-DIAObject mapping, nightly alert scale",
+   "facts": [
+    {
+     "assertion": "LSST expects up to about ten million alerts nightly",
+     "locator": "section 1 para 2"
+    },
+    {
+     "assertion": "Every SNR>5 difference-image source is a DIASource and causes an alert; every DIASource has one unique match to a DIAObject or SSObject; a new DIAObject is created when no association is possible",
+     "locator": "section 2.2.1 para 'All sources in a difference image'"
+    },
+    {
+     "assertion": "Alert packet contains the triggering DIASource, the entire DIAObject/SSObject record, and 12 months of prior DIASource/DIAForcedSource records",
+     "locator": "section 2.3.1 items I-VI"
+    },
+    {
+     "assertion": "Alert generation in crowded fields may exceed the maximum of 10,000 alerts per visit required",
+     "locator": "section 2.2.1 footnote 2"
+    }
+   ]
+  },
+  {
+   "id": "DMTN-102_2024-04-24",
+   "file": "sources/DMTN-102.pdf",
+   "url": "https://dmtn-102.lsst.io/",
+   "read_in_full": true,
+   "contribution": "alert key numbers used to derive alert-per-SN overstatement",
+   "facts": [
+    {
+     "assertion": "DMS supports >=10,000 alerts per standard visit on average and >=40,000 per single visit; long-term average 10^7 alerts per night assuming 1,000 visits per night",
+     "locator": "section 2.2 first two paras"
+    },
+    {
+     "assertion": "~10 million SNe in 10 years (~1 million per year); ~200 SN alerts per visit",
+     "locator": "section 2.2 bullet Supernovae"
+    },
+    {
+     "assertion": "300 observing nights per year",
+     "locator": "section 2.6"
+    },
+    {
+     "assertion": "Alert packet <=~82 KB",
+     "locator": "section 2.3"
+    }
+   ]
+  },
+  {
+   "id": "LSE-163_DPDD_v3.9.1",
+   "file": "sources/LSE-163.pdf",
+   "url": "https://lse-163.lsst.io/",
+   "read_in_full": true,
+   "contribution": "DIAObject/DIASource definitions, association procedure, false-positive rate",
+   "facts": [
+    {
+     "assertion": "Clusters of DIASources at different times are associated with a DIAObject or SSObject to represent the underlying astrophysical phenomenon",
+     "locator": "section 3.1 para 3"
+    },
+    {
+     "assertion": "~one background-fluctuation false positive per CCD at transSNR=5, order 200,000 per typical night",
+     "locator": "section 3.1 para 2"
+    },
+    {
+     "assertion": "Up to ~10,000 astrophysical DIASources per visit (~10M per night)",
+     "locator": "section 3.3.1 first para"
+    },
+    {
+     "assertion": "Alert issued for each detected DIASource within 60 s; includes entire DIAObject record",
+     "locator": "section 3.5.1"
+    },
+    {
+     "assertion": "Orphaned DIAObjects are deleted when their DIASources are relinked to SSObjects",
+     "locator": "section 3.2.2 step 3"
+    },
+    {
+     "assertion": "Alerts issued in VOEvent format",
+     "locator": "section 3.5.1, section 3.5.2"
+    }
+   ]
+  },
+  {
+   "id": "sdm_schemas_apdb.yaml_v10.0.0",
+   "file": "sources/sdm_schemas_apdb.yaml",
+   "url": "https://github.com/lsst/sdm_schemas/blob/main/python/lsst/sdm/schemas/apdb.yaml (main at 5499df17769416b7a26b50e11c5ef5d17ff4e361, 2026-09-14)",
+   "read_in_full": true,
+   "contribution": "as-built DiaObject/DiaSource tables; nDiaSources column makes alerts-per-object measurable in the PPDB",
+   "facts": [
+    {
+     "assertion": "DiaObject: astronomical objects detected on one or more difference images; has nDiaSources",
+     "locator": "table DiaObject, columns diaObjectId, nDiaSources"
+    },
+    {
+     "assertion": "Each diaSource is associated with either a diaObject or an ssObject",
+     "locator": "table DiaSource, column diaObjectId description"
+    }
+   ]
+  },
+  {
+   "id": "alert_packet_lsst.v11_1",
+   "file": "sources/alert_packet_lsst.v11_1.alert.avsc",
+   "url": "https://github.com/lsst/alert_packet (main at 1362a8d7f1db4014cbd419390580a707141c683a; latest.txt=11.1)",
+   "read_in_full": true,
+   "contribution": "alert = one triggering diaSource + optional diaObject + history arrays",
+   "facts": [
+    {
+     "assertion": "Alert record keyed by diaSourceId with one diaSource, prvDiaSources array, optional diaObject",
+     "locator": "lsst.v11_1.alert.avsc fields"
+    }
+   ]
+  },
+  {
+   "id": "Rubin_news_first_alerts_2026-02-25",
+   "file": "sources/rubin_news_first_alerts.html",
+   "url": "https://rubinobservatory.org/news/first-alerts",
+   "read_in_full": true,
+   "contribution": "verifies first alerts 24 Feb 2026; 800,000 alerts that night; up to seven million per night",
+   "facts": [
+    {
+     "assertion": "Rubin issued 800,000 alerts the night of 24 February (2026)",
+     "locator": "article body para 1 (txt line 20)"
+    },
+    {
+     "assertion": "system expected to eventually produce up to seven million alerts per night",
+     "locator": "article body para 1 (txt line 20)"
+    },
+    {
+     "assertion": "Each change triggers an alert within two minutes of image capture",
+     "locator": "section 'Capturing the Changing Cosmos' (txt line 29)"
+    }
+   ]
+  },
+  {
+   "id": "NOIRLab_sci26008",
+   "file": "sources/noirlab_sci26008.html",
+   "url": "https://noirlab.edu/science/news/announcements/sci26008",
+   "read_in_full": true,
+   "contribution": "first alerts arrived at brokers 24 Feb 2026; ~20 billion alerts over 10 years",
+   "facts": [
+    {
+     "assertion": "First world-public alerts arrived at community brokers on the night of 24 February 2026",
+     "locator": "announcement para 1"
+    },
+    {
+     "assertion": "about 20 billion alerts in total over the ten-year LSST",
+     "locator": "announcement para 2"
+    }
+   ]
+  },
+  {
+   "id": "Rubin_news_LSST_begins_2026-06-30",
+   "file": "sources/rubin_news_action_lsst_begins.html",
+   "url": "https://rubinobservatory.org/news/action-rubin-lsst-begins",
+   "read_in_full": true,
+   "contribution": "verifies LSST formal start 2026-06-30; about a thousand images per night; as many as seven million alerts per night",
+   "facts": [
+    {
+     "assertion": "The 10-year LSST has officially started, dated June 30, 2026",
+     "locator": "article header (txt line 32)"
+    },
+    {
+     "assertion": "producing as many as seven million alerts of changes in the night sky each night",
+     "locator": "article body (txt line 47)"
+    }
+   ]
+  },
+  {
+   "id": "Rubin_alerts_and_brokers_page",
+   "file": "sources/rubin_alerts_and_brokers.html",
+   "url": "https://rubinobservatory.org/for-scientists/data-products/alerts-and-brokers",
+   "read_in_full": true,
+   "contribution": "zero decision contribution beyond broker list (seven full-stream, two downstream); read with zero contribution to counts",
+   "facts": [
+    {
+     "assertion": "Seven full-stream brokers and two downstream brokers",
+     "locator": "section 'Alert brokers' (txt lines 14-15)"
+    }
+   ]
+  }
+ ],
+ "inclusion_rules": [
+  "I0 raw sha256 must equal 61415979b75f96bcf2532439109b35f923c5fa1aadfacc5d6013235187ebe570",
+  "I1 ZTFID matches ^ZTF\\d{2}[a-z]{7}$ (else E1)",
+  "I2 RA/Dec parse as sexagesimal (else E2)",
+  "I3 peakt numeric (else E3)",
+  "I4 peakmag numeric (else E4)",
+  "I5 peakt in [270.5, 3299.5] = 2018-06-01..2026-09-16 (else E5)",
+  "Flags F1-F7 are strata, never exclusions",
+  "Label map posA/posB/neg/unlabeled frozen in corpus_rules_FROZEN.md"
+ ],
+ "rules_file": "corpus_rules_FROZEN.md",
+ "rules_sha256": "aa4e8d216d5bb53600608e7ad3ddb42940123505f9baadb1c39565789d2aa41a",
+ "rules_frozen_before_count": true,
+ "rules_frozen_disclosure": "schema-level inspection (column names, '-' and '>' token counts, distinct type strings, duplicate-ID counts) preceded freezing; no inclusion/label/cluster/split count was computed before the hash",
+ "input": {
+  "file": "astronomy/data/raw/ztf_bts_all_2026-09-16.csv",
+  "sha256": "61415979b75f96bcf2532439109b35f923c5fa1aadfacc5d6013235187ebe570",
+  "data_rows": 11217
+ },
+ "corpus": {
+  "file": "corpus.csv",
+  "sha256": "b059acf0656ed79fc743944b560aa3fd358096963067d96e144850403c3d8442",
+  "rows": 11193,
+  "distinct_objects_at_1arcsec": 11183
+ },
+ "exclusion_ledger": [
+  {
+   "unit": "ZTF18aajpjdi",
+   "rule": "E5",
+   "peakt": "245.71",
+   "type": "SN Ia"
+  },
+  {
+   "unit": "ZTF18aarcchg",
+   "rule": "E5",
+   "peakt": "266.73",
+   "type": "-"
+  },
+  {
+   "unit": "ZTF18aaqedfj",
+   "rule": "E5",
+   "peakt": "242.77",
+   "type": "SN Ia"
+  },
+  {
+   "unit": "ZTF18aapictz",
+   "rule": "E5",
+   "peakt": "254.69",
+   "type": "SN Ia-91T"
+  },
+  {
+   "unit": "ZTF18aaqjovh",
+   "rule": "E5",
+   "peakt": "248.74",
+   "type": "SN Ic-BL"
+  },
+  {
+   "unit": "ZTF18aaqkqxi",
+   "rule": "E5",
+   "peakt": "248.74",
+   "type": "SN Ia"
+  },
+  {
+   "unit": "ZTF18aarbgdn",
+   "rule": "E5",
+   "peakt": "245.65",
+   "type": "SN Ia"
+  },
+  {
+   "unit": "ZTF18aaqqoqs",
+   "rule": "E5",
+   "peakt": "261.74",
+   "type": "SN Ia-91T"
+  },
+  {
+   "unit": "ZTF18aaqkoyr",
+   "rule": "E5",
+   "peakt": "266.75",
+   "type": "SN II"
+  },
+  {
+   "unit": "ZTF18aarbixk",
+   "rule": "E5",
+   "peakt": "245.66",
+   "type": "-"
+  },
+  {
+   "unit": "ZTF18aarcypa",
+   "rule": "E5",
+   "peakt": "257.71",
+   "type": "SN Ia"
+  },
+  {
+   "unit": "ZTF18aabdjmb",
+   "rule": "E5",
+   "peakt": "260.70",
+   "type": "-"
+  },
+  {
+   "unit": "ZTF18aahjdnz",
+   "rule": "E5",
+   "peakt": "245.69",
+   "type": "AGN"
+  },
+  {
+   "unit": "ZTF18aaqskoy",
+   "rule": "E5",
+   "peakt": "255.92",
+   "type": "SN Ia"
+  },
+  {
+   "unit": "ZTF18aaqqhis",
+   "rule": "E5",
+   "peakt": "257.72",
+   "type": "SN Ia"
+  },
+  {
+   "unit": "ZTF18aasdted",
+   "rule": "E5",
+   "peakt": "266.82",
+   "type": "SN Ia"
+  },
+  {
+   "unit": "ZTF18aaumeys",
+   "rule": "E5",
+   "peakt": "266.70",
+   "type": "SN Ia-91T"
+  },
+  {
+   "unit": "ZTF18aauizcr",
+   "rule": "E5",
+   "peakt": "269.68",
+   "type": "SN Ia"
+  },
+  {
+   "unit": "ZTF18aaunfqq",
+   "rule": "E5",
+   "peakt": "269.77",
+   "type": "SN Ia"
+  },
+  {
+   "unit": "ZTF18aasxvsg",
+   "rule": "E5",
+   "peakt": "266.77",
+   "type": "SN II"
+  },
+  {
+   "unit": "ZTF18aauuqrh",
+   "rule": "E5",
+   "peakt": "267.79",
+   "type": "-"
+  },
+  {
+   "unit": "ZTF18aaqcqvr",
+   "rule": "E5",
+   "peakt": "257.78",
+   "type": "SN Ia"
+  },
+  {
+   "unit": "ZTF18aavrzxp",
+   "rule": "E5",
+   "peakt": "269.76",
+   "type": "SN Ia"
+  },
+  {
+   "unit": "ZTF18aatlfus",
+   "rule": "E5",
+   "peakt": "252.92",
+   "type": "SN IIP"
+  }
+ ],
+ "exclusion_rule_counts": {
+  "E5": 24
+ },
+ "answer_in_own_source": [
+  {
+   "item": "ZTF18aayjyub",
+   "iau": "SN2018cod",
+   "label_in_text_of": "sources/1910.12973.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF18abcfcoo",
+   "iau": "AT2018cow",
+   "label_in_text_of": "sources/1910.12973.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF18abmrhom",
+   "iau": "SN2018ffi",
+   "label_in_text_of": "sources/1910.12973.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF18aceqrrs",
+   "iau": "SN2018ijp",
+   "label_in_text_of": "sources/1910.12973.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF18acrknyn",
+   "iau": "SN2018jef",
+   "label_in_text_of": "sources/1910.12973.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF18abffyqp",
+   "iau": "SN2018dfi",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF18actuhrs",
+   "iau": "SN2018evt",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF18abukavn",
+   "iau": "SN2018gep",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF18abvkmgw",
+   "iau": "SN2018ghd",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF18acqxyiq",
+   "iau": "SN2018jak",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF18acrheel",
+   "iau": "SN2018jbs",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF18aczbkqp",
+   "iau": "AT2018kle",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF18adaykvg",
+   "iau": "SN2018kzr",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19aadnwvc",
+   "iau": "AT2019ye",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19aadyppr",
+   "iau": "AT2019abn",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19aailcgs",
+   "iau": "SN2019ape",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19aaniqrr",
+   "iau": "AT2019cmw",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19aatubsj",
+   "iau": "SN2019fdr",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19aavxfib",
+   "iau": "AT2019gte",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19aaznwze",
+   "iau": "SN2019hty",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abiszzn",
+   "iau": "SN2019lud",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abiqfxi",
+   "iau": "SN2019ltz",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abpbopt",
+   "iau": "SN2019neq",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abnacvf",
+   "iau": "SN2019nhs",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abpxcaf",
+   "iau": "SN2019one",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abpvbzf",
+   "iau": "SN2019npx",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abqanpy",
+   "iau": "SN2019nuc",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abqykei",
+   "iau": "SN2019obh",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abqhikf",
+   "iau": "SN2019nvv",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abqqmui",
+   "iau": "SN2019ojv",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abpzuzd",
+   "iau": "SN2019okb",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abqrrto",
+   "iau": "SN2019oci",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abqsvgf",
+   "iau": "SN2019odh",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abqrhvy",
+   "iau": "SN2019odf",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abqwtfu",
+   "iau": "SN2019odp",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abqqvhd",
+   "iau": "SN2019ocu",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abqysic",
+   "iau": "SN2019omz",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abqyoxt",
+   "iau": "SN2019oyt",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abrirmk",
+   "iau": "SN2019oli",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abqykyd",
+   "iau": "SN2019oln",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abqmsbk",
+   "iau": "SN2019orb",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abrmlxu",
+   "iau": "SN2019oym",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abqxibq",
+   "iau": "SN2019omd",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abrogbl",
+   "iau": "SN2019omi",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abqshry",
+   "iau": "SN2019oqp",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abrsssx",
+   "iau": "SN2019ons",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19absfopz",
+   "iau": "SN2019ovi",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abrvagn",
+   "iau": "SN2019plb",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abudlps",
+   "iau": "SN2019ovr",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abtsrup",
+   "iau": "SN2019owu",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abuclhk",
+   "iau": "SN2019pgv",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abrcvzz",
+   "iau": "SN2019pjw",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abwsecm",
+   "iau": "SN2019pmd",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abuxhqc",
+   "iau": "SN2019pkd",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abuhlxk",
+   "iau": "SN2019pdx",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abucvgu",
+   "iau": "SN2019pbp",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abujhgm",
+   "iau": "SN2019pfl",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abvanim",
+   "iau": "SN2019pff",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abvalfd",
+   "iau": "SN2019pfe",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abvdbyx",
+   "iau": "SN2019pfd",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abvdgqo",
+   "iau": "SN2019pfb",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abvhkst",
+   "iau": "SN2019pki",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abvhduf",
+   "iau": "SN2019phj",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abupned",
+   "iau": "SN2019pgo",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19aburnqh",
+   "iau": "SN2019phs",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abwztsb",
+   "iau": "SN2019pjs",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abwaohs",
+   "iau": "SN2019pnw",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abwouqp",
+   "iau": "SN2019poc",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abwswzb",
+   "iau": "SN2019pkg",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abxfunp",
+   "iau": "SN2019ptv",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abxihut",
+   "iau": "SN2019pmy",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abwsagv",
+   "iau": "SN2019pnl",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abvjcii",
+   "iau": "SN2019pny",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abxfhrq",
+   "iau": "SN2019prw",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abwscog",
+   "iau": "SN2019poe",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abxtcio",
+   "iau": "SN2019pof",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abxvles",
+   "iau": "SN2019ppe",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abxdnzt",
+   "iau": "SN2019pru",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abxdnhr",
+   "iau": "SN2019prt",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abyigib",
+   "iau": "SN2019qff",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abyjjxp",
+   "iau": "SN2019qcj",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abxjimu",
+   "iau": "SN2019pxo",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abyfbik",
+   "iau": "SN2019pyt",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abwamby",
+   "iau": "SN2019pzt",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19abylxyt",
+   "iau": "SN2019qid",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19accjfgv",
+   "iau": "SN2019rta",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19acdsqir",
+   "iau": "SN2019sxd",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19acoaiub",
+   "iau": "AT2019udc",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19acnfsij",
+   "iau": "AT2019uiz",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19acrwyyb",
+   "iau": "SN2019uqu",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF19adakuos",
+   "iau": "AT2019wvf",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF20aaertpj",
+   "iau": "AT2020pv",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF20aaeuxqk",
+   "iau": "SN2020ut",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF20aamttiw",
+   "iau": "SN2020cpa",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF20aapchqy",
+   "iau": "SN2020cxd",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF20abfhyil",
+   "iau": "SN2020mrf",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF20abjbgjj",
+   "iau": "SN2020ntt",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  },
+  {
+   "item": "ZTF20abkiarz",
+   "iau": "SN2020oce",
+   "label_in_text_of": "sources/2009.01242.raw.txt",
+   "admitted": false,
+   "counted_in_P3_supply": true,
+   "note": "classification stated in seed text read by this panel; admission to any benchmark item set refused pending Agent 3 exposure ruling"
+  }
+ ],
+ "amendments": [
+  {
+   "id": "A1",
+   "changes": "D3 must-join control interpreted as re-trigger duplicates only (same IAUID and |dpeak|<=60 d)",
+   "cause": "4 same-IAUID pairs have |dpeak| 485-1598 d (3 of them SNe at 1.62-1.92 arcsec); explorer doc says some TNS matches are wrong; SN2023ghl/SN2024gyr prove two distinct SNe at 1.92 arcsec",
+   "affects_counts": false,
+   "affects_inclusion_rules": false
+  }
+ ],
+ "coverage": {
+  "seeds_read": 12,
+  "seeds_read_in_full": 12,
+  "unresolved": [
+   "Total number of distinct DIAObjects per night or per year in the Rubin stream: no seed states it; alerts-per-DIAObject for the whole stream is UNDEMONSTRATED (measurable from PPDB DiaObject.nDiaSources, which requires data rights not held here).",
+   "Why BTS labels collapse for peaks after 2026-01 (2026 peaks 89.4% unlabeled vs 25-35% in 2019-2025): no seed read explains it.",
+   "Whether peakmag is an upper limit (missed peak) for any given row: the CSV carries no flag (explorer doc, 'mag').",
+   "Which same-IAUID pairs are TNS mismatches vs re-triggers vs recurrent events: explorer doc says 'a few' are wrongly matched; not enumerated.",
+   "Rubin-stream labelled supply for the governed decision (Rubin DIAObjects with spectroscopic classes): not in any local file.",
+   "Budget and cost of action (D5 inputs): not supplied; S UNDEMONSTRATED."
+  ]
+ },
+ "completeness": "inventory: 12 seeds read whole; corpus built from one explorer CSV (11217 data rows, 24 excluded under E5, 0 under E1-E4); negatives limited to scanner-saved candidates; Rubin-stream units not in corpus; unresolved questions listed in coverage.unresolved; not a completeness claim",
+ "provenance": [
+  {
+   "id": "a1-corpus-objects",
+   "value": 11183,
+   "referent": "distinct astrophysical objects (positional friends-of-friends clusters at 1 arcsec) in the frozen BTS corpus",
+   "source": "astronomy/agent1_supply_corpus/scripts/build_corpus.py::fof + count_supply.py::supply; raw sha 61415979b75f96bcf2532439109b35f923c5fa1aadfacc5d6013235187ebe570; rules sha aa4e8d216d5bb53600608e7ad3ddb42940123505f9baadb1c39565789d2aa41a",
+   "population": "11193 included rows after 24 E5 exclusions from 11217 data rows",
+   "adjudicator": "raw row count 11193 (overstatement 0.089%) and the full sweep 11104-11183 across 0.5-60 arcsec",
+   "falsifier": "a rerun on the same sha that returns a different cluster count, or a must-join re-trigger pair found above 1 arcsec"
+  },
+  {
+   "id": "a1-excluded",
+   "value": 24,
+   "referent": "rows excluded by frozen rules",
+   "source": "astronomy/agent1_supply_corpus/scripts/build_corpus.py::main rule E5; corpus_rules_FROZEN.md section Inclusion rules",
+   "population": "11217 data rows of the raw CSV",
+   "adjudicator": "FETCH.md states no filter at fetch time",
+   "falsifier": "a re-read that returns any listed row with peakt inside [270.5, 3299.5]"
+  }
+ ]
+}

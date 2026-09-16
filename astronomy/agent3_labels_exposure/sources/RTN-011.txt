@@ -1,0 +1,3415 @@
+Vera C. Rubin Observatory
+Data Management
+
+Rubin Observatory Plans for an Early
+Science Program
+
+Leanne P. Guy, Yusra AlSayyad, Keith Bechtol, Eric C. Bellm,
+Robert D. Blum, Gregory P. Dubois-Felsmann, Frossie Economou,
+Melissa L. Graham, Željko Ivezić, R. Lynne Jones, Robert H. Lupton,
+Phil Marshall, William O’Mullane, Colin T. Slater, and
+Michael A. Strauss
+RTN-011
+https://doi.org/10.71929/rubin/2584021
+Latest Revision: 2026-07-01
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+Abstract
+This document presents Rubin Observatory’s plan for an Early Science Program designed to enable high-impact science prior to the first annual Data Release of the
+Legacy Survey of Space and Time (LSST). The program includes the release of data
+products based on a reprocessing of science-grade commissioning data through a
+series of Data Previews, a progressive ramp-up of the transient alert stream beginning in the late commissioning phase, and an incremental template-generation strategy to support early alert production. Additional components include the release of
+nightly Processed Visit Images (PVIs) and associated Source catalogs during the first
+2 years of the survey, leading up to Data Release 1 (DR1), which will be based on the
+first year of LSST observations. A detailed schedule of expected data products and
+milestones is provided. Developed in close collaboration with the science community, this living plan will continue to evolve through the start of LSST operations and
+DR1 in response to early system performance and community feedback.
+
+ii
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+Change Record
+Version
+
+Date
+
+Description
+
+Owner name
+
+1
+
+2020-10-30
+
+First draft
+
+Leanne Guy
+
+2
+
+2020-12-16
+
+Draft 1.1
+
+Bob Blum
+
+3
+
+2021-10-08
+
+Rework structure
+
+Leanne Guy
+
+4
+
+2021-10-21
+
+Add timeline
+
+Leanne Guy
+
+5
+
+2021-11-05
+
+Edits throughout
+
+Eric Bellm
+
+6
+
+2021-11-09
+
+Global edits and consolidation
+
+Leanne Guy
+
+7
+
+2022-10-14
+
+Data Preview content, and incremental tem-
+
+Phil Marshall & Leanne
+
+plates, revision of Early Science scenarios, ad-
+
+Guy
+
+dress feedback from PCW 2022
+8
+
+2022-10-21
+
+Release version 2.0
+
+Leanne Guy
+
+9
+
+2022-10-24
+
+Changes to SCOC and survey text. Release ver-
+
+Leanne Guy
+
+10
+
+2022-11-16
+
+sion 2.1
+Clarifications on alert production during com-
+
+Leanne Guy
+
+missioning. Release version 2.2
+11
+
+2023-01-10
+
+Updates following the construction project re-
+
+Leanne Guy
+
+plan, refactoring of document to remove duplication. Release version 3.
+12
+13
+
+2023-01-12
+2023-06-01
+
+Correct Table 1 DP1 data products, Release
+
+Leanne Guy, Phil Mar-
+
+version 3.1
+
+shall
+
+Updates following April schedule workshop;
+
+Leanne Guy
+
+revision of early science scenarios; additional
+details on the data access environment
+14
+
+2023-06-21
+
+Release version 4.0
+
+Leanne Guy
+
+15
+
+2023-10-31
+
+Updates following October schedule work-
+
+Leanne Guy
+
+shop
+16
+
+2023-10-31
+
+Release version 5.0
+
+Leanne Guy
+
+17
+
+2024-05-02
+
+Added statement on non-sidereal tracking.
+
+Leanne Guy
+
+18
+
+2024-05-03
+
+Release version 5.1
+
+Leanne Guy
+
+19
+
+2025-02-10
+
+Major updates to the plans and data products
+
+Leanne Guy
+
+for DP1. Revision of the Alert Production section. Release version 6.0
+20
+
+2025-02-24
+
+Minor updates to add more information on
+
+Leanne Guy
+
+DP1 data products. Release version 6.1
+21
+
+2025-05-30
+
+Updates to DP1 data products, release time-
+
+Melissa
+
+Graham,
+
+line and moving object alert packet, Release
+
+Leanne Guy, Eric Bellm
+
+version 6.2
+Continued on next page
+
+iii
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+Version
+
+Date
+
+Description
+
+Owner name
+
+22
+
+2025-08-19
+
+Create Rubin DOI
+
+T. Jenness
+
+23
+
+2025-11-07
+
+Updates to LSSTCam commissioning release
+
+Leanne Guy, Eric Bellm,
+
+timeline.
+
+Lynne Jones.
+
+24
+
+2025-11-10
+
+Release V7.0
+
+Leanne Guy
+
+25
+
+2025-11-11
+
+Fix minor typos, Release v7.1
+
+Leanne Guy
+
+26
+
+2026-01-07
+
+Revise and update projected release dates,
+
+Leanne Guy
+
+Release v7.2
+27
+
+2026-01-21
+
+Update start of alerts date, Release v7.3
+
+Leanne Guy
+
+28
+
+2026-02-02
+
+Update start of alerts date, Release v7.4
+
+Leanne Guy
+
+29
+
+2026-04-15
+
+Update DP2 description, alerts and schedule
+
+Eric Bellm, Melissa Gra-
+
+forrelease of PPDB, nightly images and cata-
+
+ham, Leanne Guy
+
+logs. Release v8.0
+30
+
+2026-07-01
+
+Add EDP2 and release date; update PPDB and
+
+Eric
+
+Bellm,
+
+Gregory
+
+direct image schedule; include LSST start date.
+
+Dubois-Felsmann,
+
+Release v9.0
+
+Lynne Jones, Leanne
+Guy
+
+Document curator: Leanne P. Guy
+Document source location: https://github.com/rubin-observatory/rtn-011
+
+Cite as: Leanne P. Guy, et al. Rubin Observatory Plans for an Early Science Program. NSF-DOE
+Vera C. Rubin Observatory RTN-011, https://doi.org/10.71929/rubin/2584021.
+
+iv
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+Contents
+1 Rubin Early Science Program
+
+1
+
+1.1 Early Science Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+1
+
+1.2 Motivation for an Early Science Program . . . . . . . . . . . . . . . . . . . . . . . .
+
+1
+
+1.3 Elements of the Early Science Program . . . . . . . . . . . . . . . . . . . . . . . . .
+
+2
+
+1.4 Transition to Operations and Early Science . . . . . . . . . . . . . . . . . . . . . . .
+
+2
+
+1.5 Factors Impacting the Early Science Program . . . . . . . . . . . . . . . . . . . . . .
+
+3
+
+2 Rubin Construction Commissioning and Early System Optimization
+
+4
+
+2.1 Summary of Commissioning Activities . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+5
+
+2.2 LSSTComCam Commissioning . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+6
+
+2.3 LSSTCam Commissioning . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+6
+
+2.4 Start of Operations and the Start of the LSST . . . . . . . . . . . . . . . . . . . . . .
+
+13
+
+3 Data Previews and Data Release 1
+
+13
+
+3.1 Data Preview 0 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+15
+
+3.2 Data Preview 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+17
+
+3.3 Data Preview 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+19
+
+3.4 Data Release 1
+
+25
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+4 Prompt Data Products
+
+26
+
+4.1 Alert Production in Early Operations . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+26
+
+4.2 Prompt Images . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+29
+
+4.3 Prompt Catalogs and the Prompt Products Database . . . . . . . . . . . . . . . . .
+
+30
+
+4.4 Prompt Direct Catalogs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+31
+
+5 Data Access Environment
+
+31
+
+5.1 Data Access Centers . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+31
+
+5.2 Rubin Science Platform . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+32
+
+5.3 Community Brokers . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+36
+
+v
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+6 Science Considerations for Optimizing Early Science
+
+36
+
+6.1 Time Domain . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+37
+
+6.2 Solar System . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+37
+
+6.3 Static Science . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+37
+
+6.4 Target of Opportunity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+38
+
+7 Roadmap and Timeline
+
+38
+
+8 Community
+
+39
+
+8.1 Survey Cadence Optimization Committee . . . . . . . . . . . . . . . . . . . . . . . .
+
+39
+
+8.2 Community Forum . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+39
+
+A References
+
+40
+
+B Acronyms
+
+42
+
+vi
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+Rubin Observatory Plans for an Early Science Program
+1
+
+Rubin Early Science Program
+
+Community expectations for early science with Rubin are high due to the transformative nature of the LSST data and the densely-sampled observations obtained during the commissioning period. Rubin Observatory’s Early Science Program was established to provide the Rubin community with early access to the data products and services needed to produce highimpact science during the period spanning commissioning through Data Release 1 (DR1).
+
+1.1
+
+Early Science Definitions
+
+The following terms and their definitions are used in this document:
+
+• Commissioning: The Rubin Construction Commissioning period, from LSSTComCam
+First Photon on 2024-10-24 through the end of Construction, 2025-10-24.
+• Early Operations: The period from the start of Rubin Operations, 2025-10-25, through
+the first Data Release, DR1.
+• Rubin Operations Early Optimization Phase: The period from the start of Rubin Operations, 2025-10-25, through the start of the LSST, 2026-06-29.
+• Early Science: Any science enabled by Rubin for its community during the period from
+the beginning of Commissioning through the first Data Release, DR1.
+
+1.2
+
+Motivation for an Early Science Program
+
+The Early Science program is motivated by the desire to:
+
+• enable high-impact science with Rubin Observatory data as early as possible;
+• provide early access to both static-sky and time-domain science-ready data products to
+support the community to prepare for science with the LSST;
+• enable early time-domain astronomy via early Alert Production; and
+
+1
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+• help drive the development of Rubin operations capabilities prior to survey start and
+prepare the team to be operations-ready.
+
+1.3
+
+Elements of the Early Science Program
+
+The Early Science Program consists of the following elements:
+
+• A series of three Data Previews (DP), DP0, DP1 and DP2, based on either simulated
+LSST-like data or data taken during the Rubin Observatory Commissioning period and
+Early Optimization Phase.
+• A world-public Stream of Alerts from transient, variable, and moving sources, which will
+be scaled up continuously during Commissioning and the Early Optimization Phase, and
+then continue throughout Operations.
+• Template generation, beginning before regular survey operations based on data collected during Commissioning and the Early Optimization Phase with LSSTCam, and then
+continuing as needed until DRP templates are available for the entire sky. The aim is to
+maximize the number of templates available for Alert Production in year 1 of the LSST.
+• Nightly Processed Visit Images (PVIs) and associated direct-image Source catalogs of
+detections up until Data Release 1.
+• LSST Data Release 1 (DR1), which will be derived from the Data Release Processing
+(DRP) of the first year of LSST data, following the baseline survey strategy.
+
+1.4
+
+Transition to Operations and Early Science
+
+The Rubin Construction Project was declared substantially complete on 2025-10-24, marking the delivery of an integrated system capable of capturing, transferring, and processing
+science-grade images consistent with the Rubin/LSST Science Requirements Document (SRD;
+Ivezić & The LSST Science Collaboration LPM-17). The following night, the observatory began
+on-sky operations and entered the Rubin Operations Early Optimization Phase. Commissioning demonstrated that the as-built system could meet the LSST science requirements; from
+the start of Rubin Operations through the start of the LSST survey, 2026-06-29, the Operations team focused on achieving stable, repeatable nightly performance while coordinating
+remaining activities with the Construction team.
+
+2
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+Data collected during Commissioning (§ 2) and Early Operations provide the foundation for
+many Early Science data products, offering the community an exceptional early dataset as the
+survey begins systematic sky coverage leading up to Data Release 1 (DR1). While the Operations team aims to deliver the broadest feasible range of early data products and services,
+the contents and timelines for Data Previews, the early Alert Stream, and supporting services
+remain subject to change and reflect the best available estimates at the time of publication.
+
+1.5
+
+Factors Impacting the Early Science Program
+
+Factors affecting the schedule and contents of the Early Science program can be broadly
+grouped into technical considerations and policy considerations. Technical considerations
+include:
+
+• The operational status of the observatory during Commissioning and the Early Optimization Phase;
+• The nature and quality of the data collected during Commissioning and the Early Optimization Phase;
+• The readiness of the data processing pipelines, and data distribution and access services.
+
+Policy factors include:
+
+• The 30-day embargo on all pixel data during Commissioning (concluded);
+• The 80-hour embargo on all pixel data throughout the full duration of Operations and
+the LSST (current);
+• The construction security review, which must be successfully completed prior to the release of any Prompt data products (successfully completed);
+• The Rubin First Look (RFL) media event (Aguirre et al., RTN-083), before which no Rubin
+image data could be released (concluded).
+
+Of the above policy factors, only the 80-hour embargo on all pixel data still remains active,
+and will continue to be, for the duration of Rubin Operations.
+
+3
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+In this document, the term “stretch goal” will be used to describe cases where any uncertainty
+is due to a technical or scientific consideration and “TBD” (To Be Decided) will be used when
+the influencing factor is of a policy nature.
+
+2
+
+Rubin Construction Commissioning and Early System Optimization
+
+Rubin Construction Commissioning was completed on 2025-10-24, and the Observatory is
+now in the Rubin Operations Early Optimization Phase. Figure 1 presents the detailed schedule of completed commissioning and ongoing Early Science activities relative to the start of
+Operations.
+LSSTCam
+First Photon
+
+Rubin First
+Light
+
+Start of
+Operations
+
+15 April 2025
+
+23 June 2025
+
+25 Oct 2025
+
+On-sky Engineering;
+Active Optics System
+Commissioning
+
+~12 weeks
+
+Science Validation
+Surveys
+
+Engineering
+Shutdown
+
+~ 12 weeks
+
+~1 month
+
+Start of
+LSST
+
+Start LSST
+Year 2
+
+12 months
+LSST DR1 DRP
+
+DP2 Processing + Science Validation
+Incremental Template Generation
+Higher latency alerts
+
+Increasing Live Alert Stream
+
+Community Alert
+Broker Integration
+
+Data Preview 1
+30 June 2025
+LSSTComCam
+commissioning data
+
+Nightly Processed Visit
+Images ( 80hr embargo)
+
+Early Data Preview 2
+LSSTCam Commissioning
+Science validation data
+Coadds & Catalogs
+
+Data Preview 2
+PPDB available
+DIA catalogs, Solar
+System Catalogs
+
+LSSTCam Commissioning
+Science validation data
+All data products
+
+Vera C. Rubin Observatory | DESC Meeting | 2025-02-19
+
+Acronyms & Glossary
+
+Figure 1: Schematic showing the completed commissioning and ongoing Early Operations
+activities relative to the start of Operations, 2025-10-25.
+
+As of July 2026, Data Preview 2 (DP2) has been split into Early Data Preview 2 (EDP2), which will
+release the coadded images and all catalogs, and Data Preview (DP2), which adds the visit-level
+data products, completing the full DP2 release. This is discussed in detail in § 3.3.
+
+4
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+2.1
+
+Summary of Commissioning Activities
+
+The completion of Rubin Construction was marked by a series of key milestones, which are
+included here for completeness.
+LSSTComCam First Photon: The first image of the night sky produced by photons passing
+through the Rubin optical system and detected by the Commissioning Camera (LSSTComCam).
+This milestone was achieved on 2025-10-24.
+LSSTCam First Photon: The first image of the night sky produced by photons passing through
+the Rubin optical system and detected by the LSST Science Camera (LSSTCam). This milestone
+was achieved on 2025-04-15.
+Rubin First Light: The point at which Rubin routinely began to acquire science-grade imaging
+across the LSSTCam full focal plane. This milestone was achieved on 2025-06-23.
+Rubin Construction Complete: The point at which Rubin Observatory was deemed sufficiently complete and functional to be handed over from Construction to Operations for early
+system optimization and preparation for the start of the LSST survey. This milestone was
+achieved on 2025-10-24.
+Commissioning data collection was carried out in a sequence of planned phases, shown in Figure 2, beginning with on-sky engineering using LSSTComCam and concluding with LSSTCam.
+The System Optimization and Science Validation (SV) phases, both conducted with LSSTCam,
+focused on refining system performance and verifying scientific readiness through targeted
+observations. These observations adopted many of the design elements of the standard LSST
+cadence, with modifications to increase the likelihood of delivering a stand-alone high-impact
+dataset to enhance opportunities for Early Science. Field selection was guided by commissioning priorities and community input, balancing technical constraints with scientific opportunity.
+Collectively, these efforts validated the end-to-end performance of the as-built system, confirmed its ability to deliver seeing-limited image quality, and demonstrated substantial construction completeness
+
+5
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+Figure 2: High-level plan that guided the collection of commissioning data.
+
+2.2
+
+LSSTComCam Commissioning
+
+LSSTComCam is Rubin’s engineering camera that was used for testing and validating the observatory’s systems and processes prior to the installation of the LSST Science Camera. The
+LSSTComCam focal plane has single raft with a 3×3 mosaic of 4K×4K ITL science sensors, giving a total of 144Mpix, LSSTComCam has the same plate scale as LSSTCam (0.′′ 2 / pixel), with
+a field of view of 40 × 40 arcmin. The LSSTComCam filter exchanger holds only three physical
+filters at a time.
+The Rubin on-sky commissioning campaign using LSSTComCam began on 2024-10-24 and
+ended on 2024-12-11, lasting a total of 7 weeks, and included observations to support both
+engineering and science pipelines commissioning. This highly successful campaign included
+a first series of on-sky engineering tests demonstrating the end-to-end functionality of the
+Simonyi Survey Telescope’s hardware and software systems. The median delivered image
+quality for commanded in-focus images collected during the campaign, quantified in terms
+of the PSF FWHM, was ≈ 1.1 arcseconds. The best images have delivered PSF FWHM of ≈ 0.7
+arcseconds. A full report on the LSSTComCam on-sky commissioning campaign is available at
+SITCOMTN-149.
+
+2.3
+
+LSSTCam Commissioning
+
+LSSTCam was installed on the Simonyi Survey Telescope on 2025-03-05. Following initial engineering and integration work and the achievement of the LSSTCam First Photon milestone,
+on-sky commissioning campaign using the LSSTCam began on 2025-04-15 and ran through
+2025-09-21.
+
+6
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+The acquisition of science images1 with LSSTCam began on 2025-04-17. Early observations
+consisted of observations to support the Rubin First Look milestone followed by small-field
+survey visits dithered over small areas around a central boresight. The small-field survey visits
+were typically acquired in sequences of at least 10 visits per bandpass, cycling through the
+available filters, in a manner similar to the small-field survey science visits acquired during
+LSSTComCam commissioning and included in DP1.
+The Science Validation (SV) surveys began on 2025-06-20, acquiring visits in a manner consistent with the planned LSST operations cadence. While based on the baseline LSST survey
+design, the SV surveys incorporated several modifications to maximize the likelihood of producing a stand-alone, high-impact dataset that would enhance opportunities for Early Science.
+They covered a more limited sky area to achieve greater depth within the SV time frame, resulting in a temporal sampling distribution that differs from the LSST baseline.
+The SV surveys were executed using the Feature based Scheduler (FBS) and comprised two
+primary components, interleaved within a single FBS configuration.
+
+• Wide Survey: Designed to test template generation and Prompt Processing with difference image analysis at data rates representative of the first year of the LSST. This
+provided a sustained full-scale test of the Data Facility;
+• Deep Survey: Designed to test the production of deep coadds with integrated exposures equivalent to or exceeding those of the LSST 10-year survey. These observations
+achieved a rapid temporal sampling in the selected deep fields and validated the observing strategy for the LSST Deep Drilling Fields (DDFs).
+
+The Wide Survey traced the ecliptic plane from dense regions of the Galactic Bulge through
+low-dust regions within the planned LSST Wide-Fast-Deep (WFD) footprint. Four of the planned
+LSST Deep Drilling Fields (DDFs) were observed as part of the Deep Survey. A secondary area
+within the low-dust WFD footprint was included to provide alternate targets when the primary
+or DDF fields were unavailable, supporting early template generation in higher-decl. areas.
+A total of 21,647 science visits were acquired during the SV surveys. This total excludes known
+bad visits (as of 2025-09-30) but includes exposures spanning a broad range of data quality,
+reflecting variations in cloud extinction, delivered image quality, and engineering issues. Of
+1
+
+As opposed to images taken for engineering or Active Optics System (AOS) testing.
+
+7
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+these, 7,194 were obtained in small-field survey mode, 908 were targeted at the Deep Drilling
+Fields (DDFs), and 13,240 covered the primary wide SV area. Additionally, 194 visits acquired
+for Target of Opportunity (ToO) testing purposes Most of the visits were acquired between
+2025-04-17 and 2025-07-24, with interruptions due to weather and engineering activities required to improve delivered image quality. Figure 3 shows the temporal distribution LSSTCam
+SV survey visit acquisition.
+
+Figure 3: Timeline of LSSTCam commissioning science visit acquisition.
+
+Image quality proved challenging throughout the SV period This is evidenced in part as a pointspread function (PSF) larger than expected given estimates of the atmospheric contribution,
+and partly as spatial variations in the PSF across the field of view. While the median-per-visit
+PSF width at FWHM reported for the SV images is not substantially larger than typical seasonal values, the shape and variability of the PSF do not meet the performance requirements
+expected for full survey operations.
+Figure 4 shows a sky map of all the science visits acquired during LSSTCam commissioning.
+
+8
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+As full summary of the SV data obtained during LSSTCam commissioning can be found at
+
+Figure 4: All science visits acquired during LSSTCam commissioning.
+https://survey-strategy.lsst.io/progress/sv_status/sv_20250930.html. A full report on the
+LSSTCam on-sky commissioning campaign is in preparation at SITCOMTN-170.
+2.3.1
+
+Small Field Surveys
+
+Several small fields were observed prior to the start of the SV surveys, with some overlapping
+the early portion of the SV survey period. A subset of these observations formed part of the
+Rubin First Look campaign. A summary of the data collected during the small-field surveys is
+provided in Table 1. The median Image Quality (IQ) is expressed in terms of the width of the
+PSF at FWHM.
+2.3.2
+
+SV Wide Area
+
+The SV wide-area survey was conducted over a footprint that contracted progressively over
+the commissioning period, necessitated by limited observing time rather than reflecting the
+
+9
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+Field
+
+N
+Visits
+
+Median IQ
+(arcseconds)
+
+Carina (NGC 3372)
+Rubin_SV_280_48
+ELAIS_S1
+Rubin_SV_320_15
+New_Horizons
+Rubin_SV_216_17
+Rubin_SV_212_7
+Prawn
+COSMOS
+Triffid (M20) & Lagoon (M8)
+M49
+Rubin_SV_225_40
+
+124
+148
+166
+273
+360
+386
+498
+632
+664
+668
+1173
+2052
+
+—
+1.52
+1.38
+1.22
+1.05
+1.29
+1.21
+1.37
+1.22
+1.14
+1.29
+1.36
+
+Timespan
+(days)
+4
+1
+17
+6
+62
+8
+7
+79
+15
+10
+13
+97
+
+Table 1: Summary of selected small-field observations showing the number of visits, median
+delivered image quality (PSF FWHM), and total timespan of observations.
+original survey design. The survey began with an initial area of approximately 3,000 deg2
+(the “3K” or “wide SV” region), following the ecliptic plane from dense regions of the Galactic
+Bulge through low-dust regions of the planned LSST Wide-Fast-Deep footprint. Approximately
+halfway through the SV period, the footprint was consolidated to ∼ 750 deg2 to concentrate
+visits and improve coadd depth; in the final week of commissioning it was further reduced to
+∼ 300 deg2 to achieve the visit density required for difference-image testing. As a result, the
+visit count and coadded depth increase substantially toward the inner regions of the footprint:
+the wide SV (3K) 3,000 deg2 region reaches a median of 38 visits across all bands and an
+estimated coadded depth of 𝑚5 ≈ 25.0, the 750 deg2 subset reaches 56 visits and 𝑚5 ≈ 25.8,
+and the 300 deg2 core reaches 64 visits and 𝑚5 ≈25.7 (Table 2). For comparison, the LSST Year 1
+WFD baseline predicts a median of 13 visits per pointing per band and 𝑚5 ≈ 25.0 over the full
+footprint. The 300 deg2 DP2 core approaches Year 1 depth in all bands, and the 3,000 deg2
+wide SV region reaches or exceeds Year 1 depth in some bands. Table 2 provides the median
+numbers of visits and estimated 𝑚5 coadded depths within each of the subsets of the Wide SV
+area. The median image quality expressed in terms of the width of the PSF at FWHM is also
+provided per band across all subset areas in the SV Wide Area survey.
+Figure 5 shows distributions of the image quality and depth for the SV Wide Area Survey data
+
+10
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+Field
+
+Band
+
+Total
+
+𝑢
+
+𝑔
+
+𝑟
+
+𝑖
+
+𝑧
+
+𝑦
+
+N visits
+
+3k deg2
+
+2
+24.2
+
+4
+25.0
+
+7
+24.9
+
+8
+24.5
+
+7
+23.8
+
+5
+22.6
+
+38
+
+750 deg2
+
+2
+24.4
+
+4
+25.2
+
+12
+25.2
+
+16
+24.8
+
+11
+24.0
+
+9
+23.0
+
+56
+
+300 deg2
+
+2
+24.5
+
+5
+25.2
+
+11
+25.0
+
+18
+24.9
+
+15
+24.1
+
+10
+23.0
+
+64
+
+1.18
+
+1.26
+
+1.26
+
+1.24
+
+1.17
+
+1.25
+
+Median FWHM
+(arcseconds)
+
+Table 2: Median number of visits per pointing and estimated 𝑚5 coadded depths per band
+within each subset of the wide-area SV survey. The final row gives the median FWHM of the
+point spread function in arcseconds.
+The individual image depth across the SV wide-area survey is slightly shallower than predicted
+
+(a) Delivered image quality.
+
+(b) Estimated individual image depth.
+
+Figure 5: Summary of the delivered image quality per visit and estimated individual image
+depth per visit for visits in the SV Wide Area survey.
+by baseline survey simulations, which model the full LSST footprint over the 10 years of operations. This difference can be attributed to poorer delivered image quality and slightly higher
+mean cloud extinction during the SV surveys. Under favorable conditions, the measured median zeropoints for individual images were consistent with predicted values, indicating that
+the overall system sensitivity was generally as expected.
+
+11
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+2.3.3
+
+Deep Drilling Fields
+
+Each of the LSST Deep Drilling Fields were observed during commissioning, although the
+depth and completeness varied between fields. Table 3 lists the number of visits obtained
+during LSSTCam commissioning, including observations acquired during the small-field and
+SV surveys, within each Deep Drilling Field (DDF). For each field, the first row gives the number of visits per band, while the second row reports the corresponding estimated coadded 5𝜎
+depths (𝑚5 ). The total number of visits, the timespan over which observations were collected,
+and the median image quality, expressed in terms of the PSF at FWHM are also provided.
+Field
+
+Timespan
+
+Median FWHM
+
+Band
+
+Total
+
+(days)
+
+(arcseconds)
+
+𝑢
+
+𝑔
+
+𝑟
+
+𝑖
+
+𝑧
+
+𝑦
+
+N visits
+
+XMM_LSS
+
+10
+
+1.47
+
+30
+25.3
+
+—
+—
+
+—
+—
+
+—
+—
+
+—
+—
+
+—
+—
+
+30
+
+EDFS_A
+
+55
+
+1.32
+
+—
+—
+
+20
+25.3
+
+21
+25.2
+
+28
+25.0
+
+18
+24.1
+
+—
+—
+
+87
+
+EDFS_B
+
+55
+
+1.37
+
+—
+—
+
+23
+25.4
+
+21
+25.1
+
+29
+25.0
+
+18
+24.1
+
+—
+—
+
+91
+
+ECDFS
+
+57
+
+1.51
+
+—
+—
+
+36
+25.8
+
+39
+25.5
+
+41
+25.3
+
+43
+24.7
+
+—
+—
+
+159
+
+ELAISS1
+
+84
+
+1.40
+
+39
+25.6
+
+101
+26.6
+
+103
+26.1
+
+168
+26.2
+
+112
+25.1
+
+16
+22.7
+
+539
+
+COSMOS
+
+15
+
+1.22
+
+100
+26.0
+
+82
+26.8
+
+166
+26.3
+
+139
+26.1
+
+111
+25.3
+
+66
+23.9
+
+664
+
+Table 3: Summary of Deep Drilling Field observations from LSSTCam on-sky commissioning
+data, including SV and small-field campaigns. For each field, the first row lists the number of
+visits per band and total, and the second row lists the corresponding coadded 5𝜎 depths (𝑚5 ).
+The observation timespan and median image FWHM are also indicated.
+
+The SV surveys occurred relatively early in the observing season for all Deep Drilling Fields,
+and COSMOS was entirely unavailable for inclusion. The COSMOS data in Table 3 therefore
+originate exclusively from the Small Fields Surveys (§ 2.3.1). The remaining DDFs became observable toward the end of the night beginning in July, with ELAISS1 rising first. Consequently,
+ELAISS1 received the largest number of visits, while the other DDFs were observed less ex-
+
+12
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+tensively due to limited SV on-sky time. ELAISS1 was the only field observed in all six bands,
+𝑢𝑔𝑟𝑖𝑧𝑦, during the SV survey; COSMOS also received observations in all bands as part of the
+Small Fields Surveys. Most of the others were observed only in 𝑔𝑟𝑖𝑧, as these were the only
+available filters after 2025-08-10 due to hardware issues with the filter exchanger. The XMMLSS field received visits only in 𝑢, owing to a combination of factors including the compressed
+observing cadence, competition for observing time between the DDFs, azimuth constraints at
+the end of the night, patchiness of SV observing time, and periodic unavailability caused by
+moon avoidance.
+The dither pattern used for the DDFs evolved over the course of the SV Surveys. Initially,
+only small dithers were used, and no intra-night dithering was used. This configuration led
+to challenges with scattered light and the absence of intra-night dithers limited the ability to
+construct high-quality template images. Later in the campaign, both translational and rotational dithers were introduced within a night, while inter-night dithering was maintained. The
+optimal dither pattern for LSST DDF observations is the subject of ongoing investigations, but
+will likely include both intra-night and inter-night dithering components.
+
+2.4
+
+Start of Operations and the Start of the LSST
+
+The Start of Rubin Operations and the Start of the LSST are two distinct milestones separated by
+the Rubin Operations Early Optimization Phase. Understanding the distinction between these
+two milestones, and what is required to transition from one to the other, is essential context
+for the Early Science Program.
+Following Rubin Construction substantial completeness (§2.1) on 2025-10-24, Rubin Operations began the following day on 2025-10-25. This milestone marked the formal handover
+of Rubin Observatory from the Construction project to the Operations team. The Start of the
+LSST is the milestone at which Rubin Observatory begins executing the LSST, as defined by the
+baseline survey strategy (Rubin’s Survey Cadence Optimization Committee et al., PSTN-056).
+The start of the LSST was formally declared on 2026-06-29.
+
+3
+
+Data Previews and Data Release 1
+
+A series of three Data Previews (DP) and one Data Release (DR) are planned:
+
+13
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+• Data Preview 0 (DP0): Based on simulated LSST-like data.
+• Data Preview 1 (DP1): Based on a subset of early science-grade commissioning data
+taken with LSSTComCam during commissioning.
+• Data Preview 2 (DP2): Based on a full reprocessing of science-grade data taken with
+LSSTCam during commissioning and the Early Optimization phase until the DP2 cutoff
+date, 2026-01-06. DP2 will be delivered in two phases, EDP2 and DP2, as discussed in
+§ 3.3.
+• Data Release 1 (DR1): Based on the first year of LSST data.
+
+Each successive Data Preview will demonstrate increasing levels of functionality and product
+maturity, progressively building toward the first full Data Release (DR1). Because the commissioning observation period is relatively short (§ 1.4), the Data Previews will necessarily cover
+smaller areas and shorter timescales than a standard Data Release.
+Successive data previews will exercise more and more functionality and products building up
+towards Data Release 1. Due to the relatively short time periods available for commissioning
+observations (§ 1.4), the Data Previews will necessarily be limited in their area and temporal
+coverage relative to a full Data Release.
+The data products that comprise the Data Previews and Data Releases are produced by the
+LSST Science Pipelines (Bosch et al., 2019, 2018). For an introduction to the LSST data products, see Graham (2022) and for a detailed description, see the LSST Data Products Definition
+Document (DPDD), LSE-163. Each Data Preview and LSST Data Release will be accompanied
+by its own release-specific documentation2 , giving e.g. the database schema for the catalogs
+included in that dataset. Table 4 provides a summary of the expected early science data products available in DP0, DP1, DP2 and the LSST Data Release 1. Prior to DR1, not all columns
+described in the DPDD may be produced, depending on the quality and volume of the data
+from commissioning, and the maturity of the science pipelines. All LSST data products will be
+subject to the embargo periods described in DMTN-199; 30 days during commissioning and
+80 hours during operations for pixel data.
+The following sections outline which data products can be expected in each planned Data
+Preview and Data Release, and on what timescale. Table 8 in § 7 provides a combined view of
+2
+
+For an example, see the online DP0.2 documentation https://dp0-2.lsst.io/data-products-dp0-2/.
+
+14
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+Jun 2023
+
+Jun 2025
+
+Jul 2026
+
+Oct –
+Dec 2026
+
+LSST start
++ 1 yr
+
+DP0.1
+
+DP0.2
+
+DP0.3
+
+DP1
+
+EDP2
+
+DP2
+
+DR1
+
+LSST
+ComCam
+Science
+Validation
+Data
+
+LSSTCam
+Science
+Validation
+Data
+
+LSSTCam
+Science
+Validation
+Data
+
+LSST
+Year 1
+Data
+
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+
+Reprocessed
+DC2
+Sky Survey
+
+Jun 2022
+
+DC2
+Simulated
+Sky Survey
+
+Jun 2021
+
+Solar
+System
+PPDB
+Simulation
+
+Rubin Early Science – Data Release Scenario
+
+DRP Deep Coadded Images
+
+•
+•
+•
+
+DRP Difference Images
+
+–
+
+DRP Template Coadd Images
+
+–
+
+•
+•
+•
+•
+•
+•
+•
+•
+
+Data Product
+Raw Images
+DRP Processed Visit Images
+
+–
+
+•
+•
+•
+•
+
+–
+
+–
+
+–
+
+•
+•
+•
+
+•
+•
+•
+•
+•
+•
+•
+
+–
+–
+–
+
+DRP ForcedSource Catalogs
+
+•
+•
+•
+
+DRP ShearObject Catalog
+
+–
+
+–
+
+–
+
+DRP DIA Catalogs
+
+–
+
+•
+
+–
+
+DRP SSP Catalogs
+
+–
+
+–
+
+•
+
+MPC Orbits Catalog
+
+–
+
+–
+
+–
+
+DRP Source Catalogs
+DRP Object Catalogs
+
+–
+–
+–
+
+–
+
+•
+•
+•
+
+–
+–
+
+•
+–
+
+Table 4: Summary of the main data products expected in each data preview and early LSST
+data releases. A dark teal dot denotes confirmed data products whereas a gray dot denotes
+data products that currently remain a stretch goal.
+the expected data preview schedule and associated uncertainties.
+
+3.1
+
+Data Preview 0
+
+Data Preview 0 (DP0) was the first of three Data Previews to be released during the period
+leading up to the start of Rubin Observatory Operations. Data Preview 0 contained three
+stages, all based on simulated LSST-like data products. DP0 was intended to serve as an early
+integration test of the LSST Science Pipelines and the Rubin Science Platform (RSP), and to
+enable a limited number of astronomers and students to begin early preparations for science
+with the LSST.
+
+3.1.1
+
+Data Preview 0.1
+
+Data Preview 0.1 (DP0.1) was released to a group, approximately 300, of early adopters from
+the community in June 2021. It is based on simulated LSST-like images generated by the Dark
+Energy Science Collaboration (DESC) for their Data Challenge 2 (DC2), (LSST Dark Energy Sci-
+
+15
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+ence Collaboration (LSST DESC) et al., 2021). DP0.1 used the 300 deg2 of DC2 images that
+were simulated for five years of the LSST’s wide-fast-deep component (WFD) using a baseline
+cadence, PSTN-055. The DESC processed the simulated DC2 images with Version 19 of the
+LSST Science Pipelines, producing calibrated images and catalogs. DP0.1 made the DESC’s
+DC2 images and catalogs available to users through an early version of the Rubin Science
+Platform (RSP) running at the US DAC. DP0.1 has now been retired from the publicly available
+RSP instance.
+For full details on DP0.1 including an exact description of the data products that were served,
+see the documentation at https://dp0-1.lsst.io/.
+
+3.1.2
+
+Data Preview 0.2
+
+Data Preview 0.2 (DP0.2) was released to approximately 600 early adopters from the community in June 2022, exactly 1 year after DP0.1. The input simulated image dataset, DESC’s
+“DC2,” used for DP0.2 was the same as that used for DP0.1. In this case, the Rubin team itself
+processed the simulated DC2 images with Version 23 of the LSST Science Pipelines. DP0.2
+makes the Rubin reprocessed DESC DC2 images and catalogs available to users through an
+early version the Rubin Science Platform (RSP) running at the US DAC.
+For full details on DP0.2 including an exact description of the data products served, see the
+documentation at https://dp0-2.lsst.io/ .
+
+3.1.3
+
+Data Preview 0.3
+
+Delivered in June 2023, DP0.3 is the last in the DP0 series of Data Previews based on simulated
+LSST-like data. DP0.3 supports the Solar System Science Collaboration by hosting their simulated 1-year and 10-year Prompt Products Database (PPDB) catalog to enable moving object
+analysis development in the RSP at the US DAC. DP0.3 is based on an entirely independent
+simulation and has no data in common with DP0.2.
+For full details on DP0.3 including an exact description of the data products served, see the
+documentation at https://dp0-3.lsst.io/
+
+16
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+Table 5: ComCam target fields and pointing centers that are to be included in the DP1 dataset.
+ICRS coordinates are shared in units of decimal degrees.
+Field Code
+
+Field Name
+
+47 Tuc
+Rubin SV 38 7
+Fornax dSph
+ECDFS
+EDFS
+Rubin SV 95 -25
+Seagull
+
+47 Tuc Globular Cluster
+Low Ecliptic Latitude Field
+Fornax Dwarf Spheroidal Galaxy
+Extended Chandra Deep Field South
+Euclid Deep Field South
+Low Galactic Latitude Field
+Seagull Nebula Seagull
+
+3.2
+
+Right Ascension
+deg
+
+Declination
+deg
+
+6.02
+37.86
+40.00
+53.13
+59.10
+95.00
+106.23
+
+-72.08
+6.98
+-34.45
+-28.10
+-48.73
+-25.00
+-10.51
+
+Data Preview 1
+
+Delivered in June 2025, Data Preview 1 (DP1) serves data products generated from a subset
+of science-grade astronomically useful images taken during the LSSTComCam on-sky commissioning campaign (§ 2.2), to enable the community to prepare to work with LSST data,
+(NSF-DOE Vera C. Rubin Observatory, 2025)
+Seven target fields observed as part of the LSSTComCam on-sky observing campaign have
+been selected as the basis for DP1 due to their quality and scientific usefulness. These seven
+fields, listed in Table 5 together with their central pointing coordinates, span a range of stellar
+densities, have good overlap with external reference datasets, and span the breadth of the
+four primary LSST science themes.
+Table 6 provides a summary of the band coverage for the fields used as a basis for DP1. Figure 6 shows the resulting integrated depth, expressed in terms of the flux of an unresolved
+source that would be measured with signal-to-noise ratio 𝑆/𝑁 = 5, using the 𝑟 band as an example. 47 Tuc and Fornax dSph are both dense star fields, and the core of 47 Tuc is saturated
+in the LSSTComCam commissioning images. No coadds were produced for these regions during the on-sky commissioning campaign, hence the holes in the center of the figures. A typical
+observing epoch on a given target field consisted of 5-20 visits in each of the three loaded filters. Nearly all the visits were taken with one single 1x30 second exposure time and not 2x15
+second snaps3 . Only 1x30 second exposure images are included in DP1.
+3
+At this time, studies as to whether the LSST will use a 1x30 single exposure or 2x15 snaps as the default
+standard visit are ongoing with LSSTCam data, and a decision will be made prior to starting the LSST.
+
+17
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+47 Tuc
+
+Rubin SV 38 7
+3
+
+38.5
+
+8.0
+
+38.0
+
+Fornax dSph
+
+37.5
+
+37.0
+
+41.0
+
+72.5
+
+24.2
+
+24.8
+7.0
+
+24.6
+24.4
+
+6.5
+
+7
+
+5
+
+Right Ascension
+
+54.0
+
+37.5
+
+52.5
+
+52.0
+
+60.5
+
+Right Ascension
+
+28.0
+
+25.5
+25.0
+
+28.5
+
+24.5
+53.5
+
+53.0
+
+52.5
+
+52.0
+
+59.5
+
+40.0
+
+39.5
+
+Right Ascension
+
+39.0
+
+(c) Fornax dSph
+
+58.5
+
+58.0
+
+24.0
+
+96.0
+
+95.5
+
+95.0
+
+94.5
+
+94.0
+
+26.0
+
+48.5
+
+25.0
+49.0
+
+24.0
+
+40.5
+
+Rubin SV 95 -25
+
+59.0
+
+24.5
+
+26.0
+
+24.5
+
+25.5
+25.0
+
+25.0
+25.5
+
+24.5
+
+24.0
+
+49.5
+
+29.0
+
+Right Ascension
+
+24.50
+
+25.5
+
+Declination
+
+26.0
+
+60.0
+
+48.0
+
+26.5
+
+24.75
+
+41.0
+
+EDFS
+
+53.0
+
+25.00
+
+37.0
+
+(b) Rubin SV 38 7
+
+PSF Maglim (r-band)
+
+Declination
+
+38.0
+
+ECDFS
+
+27.5
+
+54.0
+
+38.5
+
+(a) 47 Tuc
+53.5
+
+25.25
+
+34.5
+
+24.0
+
+6.0
+
+23.8
+
+3
+
+25.50
+
+35.0
+
+PSF Maglim (r-band)
+
+9
+
+34.0
+
+24.2
+
+24.0
+73.0
+
+26.00
+
+PSF Maglim (r-band)
+
+24.4
+
+39.0
+
+25.75
+
+25.0
+PSF Maglim (r-band)
+
+24.6
+
+7.5
+
+Declination
+
+PSF Maglim (r-band)
+
+Declination
+
+72.0
+
+39.5
+
+25.2
+
+25.0
+24.8
+
+40.0
+
+33.5
+
+25.2
+71.5
+
+40.5
+
+PSF Maglim (r-band)
+
+5
+
+Declination
+
+7
+
+9
+
+Declination
+
+71.0
+
+60.5
+
+(d) ECDFS
+
+60.0
+
+59.5
+
+59.0
+
+58.5
+
+Right Ascension
+
+58.0
+
+57.5
+
+23.5
+
+(e) EDFS
+
+26.0
+
+96.0
+
+95.5
+
+95.0
+
+94.5
+
+Right Ascension
+
+94.0
+
+24.0
+
+(f) Rubin SV 95 -25
+
+Seagull
+9.5
+
+107.0
+
+106.5
+
+106.0
+
+105.5
+
+25.5
+25.0
+24.5
+
+PSF Maglim (r-band)
+
+Declination
+
+10.0
+
+10.5
+
+24.0
+23.5
+
+11.0
+
+23.0
+11.5
+
+107.0
+
+106.5
+
+106.0
+
+Right Ascension
+
+105.5
+
+(g) Seagull
+
+Figure 6: Cumulative imaging depth expressed in terms of the 𝑆/𝑁 = 5 limiting magnitude for
+unresolved sources for seven LSSTComCam Fields.
+
+18
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+Table 6: Band coverage for seven fields observed during the ComCam on-sky observing campaign that are to be included in the DP1 dataset.
+Target
+
+u
+
+g
+
+r
+
+i
+
+z
+
+y
+
+47 Tuc
+Rubin SV 38 7
+Fornax dSph
+ECDFS
+EDFS ComCam
+Rubin SV 95 -25
+Seagull
+
+6
+0
+0
+53
+20
+33
+10
+
+10
+44
+5
+230
+61
+86
+37
+
+33
+55
+26
+257
+90
+97
+49
+
+19
+57
+13
+177
+42
+29
+3
+
+0
+27
+0
+177
+42
+60
+13
+
+5
+0
+0
+30
+20
+11
+0
+
+The processing and preparation of LSSTComCam data for DP1 took place during the first half
+of 2025. The delivered data products for DP1 are presented in Table 4. DP1 included approximately 2000 exposures. The processing of crowded fields in the centers of 47 Tuc and Fornax
+was on a best-effort basis. The center of 47 Tuc is saturated and so no coadd images were produced for this region. Solar System catalogs contained observations of known objects from
+the MPC Orbit Catalog (MPCORB) tables as well as any new discoveries. The snapshot of the
+MPCORB Catalog tables included in DP1 was taken from around the time of DRP processing
+for DP1.
+Individual exposures taken during the commissioning campaign that did not meet the quality
+control standard of being “science-grade, astronomically useful” images, were not be included
+in the DP1 release, and consequently, the exact number of exposures and coadd depths in
+DP1 was different to what was seen during the commissioning campaign. Additionally, some
+columns were missing from some catalogs due to the small data sets involved in DP1. There
+were no cell-based coadds in DP1, nor ShearObject catalog.
+
+3.3
+
+Data Preview 2
+
+Data Preview 2 (DP2) will provide the first large-area, multiband dataset generated from a
+subset of science-grade astronomically useful images taken during the LSSTCam on-sky commissioning campaign between 2025-04-17 and 2025-09-21 (§ 2.3), supplemented by observations taken between 2025-10-25 and 2026-01-06 during the Early Optimization Phase. This
+commissioning and early operations dataset was reprocessed during late 2025 and early 2026
+to produce the DP2 data products. Data processing completed in April 2026 and the products
+are currently undergoing detailed validation and preparation for release via the RSP (§ 5.2).
+
+19
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+The full definition and production plan for DP2 is described in RTN-111.
+DP2 will be delivered in two phases in the Jul – Dec 2026 window. The first phase, Early DP2
+(EDP2), comprises the deep coadd images and all catalogs, with a target release date of 202607-27. The second phase, DP2, adds the visit-level data products, completing the full release,
+with a expected release date in the range Oct – Dec 2026. The data products released as EDP2
+will be incorporated unchanged into DP2 with no additional processing. Rubin will provide at
+least 4 weeks advance notice before each phase goes live.
+This phased delivery reflects the development of Rubin’s hybrid cloud architecture, in which
+data are stored at the USDF and served to users via the US DAC in Google Cloud. Scalability
+testing shows that available USDF–Google Cloud network bandwidth is currently insufficient
+to serve visit-level images at LSST scale. Engineering work to address this, including installation of new network switches at the USDF, is underway but introduces timing uncertainty.
+Deep coadd images are unaffected as they are hosted directly in Google Cloud4 and can be
+delivered in EDP2 without reliance on hybrid cloud readiness. Visit-level images, which must
+be streamed from the USDF, will follow once sufficient performance is confirmed.
+EDP2 is scheduled for release on 2026-07-27, with DP2 expected to follow in the Oct – Dec
+2026 range.
+
+3.3.1
+
+Dataset Definition
+
+The DP2 dataset comprises science visits acquired between 2025-04-17 and 2026-01-06: approximately 30,000 in total, of which ∼ 16,900 meet the quality thresholds for coadd inclusion. Coadds are restricted to the footprint established during LSSTCam on-sky commissioning (through 2025-09-21); visits from the subsequent early operations period that fall outside
+this footprint lack sufficient depth for coaddition and are provided as single-epoch images
+only. Visit-level exclusions include engineering frames, out-of-focus sequences from Active
+Optics System (AOS) commissioning, stray-light scans, and visits in the excluded_visits list
+(typically images affected by focus errors or anomalous mount or hexapod motion). See RTN111 Tables 1 and 4 for a full accounting of visit-level exclusions.
+4
+
+As will be the case for all future Data Releases.
+
+20
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+3.3.2
+
+Sky Coverage and depth
+
+DP2 covers ∼ 15,000 deg2 in at least one filter, of which ∼ 3,000 deg2 were coadded across all
+six filters. The coadded footprint encompasses the Wide-Fast-Deep, Small Field Survey, and
+Deep Drilling Field regions; visits within these areas are included in the coadds if they meet
+image quality requirements. Visits outside this footprint are available as single-epoch images
+only. Figure 7 shows the on-sky distribution of DP2 visits across all filters.
+
+180
+
+120
+
+60
+
+0
+
+300
+
+240
+
+180
+
+60
+50
+
+number of visits
+
+Declination
+
+30
+0
+
+40
+30
+
+30
+
+20
+
+60
+180
+
+60
+
+300
+
+180
+
+Right Ascension
+
+10
+0
+
+Figure 7: On-sky distribution of DP2 visits, summed over all filters. Coadded data include
+the Small Field Surveys, Deep Drilling Fields and the wide SV (3K) region (∼ 3,000 deg2 ) following the ecliptic plane; the 3K region is further subdivided into a consolidated SV footprint
+(∼ 750 deg2 ) and the core (∼ 300 deg2 ).
+
+Wide-area survey regions reach median coadded depths broadly comparable to those reported for the Science Validation surveys (§ 2.3). The Deep Drilling Fields achieve substantially
+greater depth; ELAISS1 and COSMOS are the most extensively observed, with coverage in all
+six bands. Visits are included in the coadds if the visit-level median PSF FWHM is better than
+1.′′ 7, each detector has a PSF FWHM better than 1.′′ 8, and the atmospheric transparency is at
+least 0.75. An additional ∼ 15% of otherwise qualifying inputs were excluded on the basis
+of PSF ellipticity 𝑒 > 0.2. Figure 8 shows the 5𝜎 PSF magnitude limit across the DP2 coadded
+footprint for each of the six LSST bands.
+An initial tutorial notebook for exploring and visualizing the DP2 visit and tract metadata (e.g.,
+coordinates, filters, dates) is available in the Rubin Science Platform under the “Tutorials –
+DP2” drop-down menu, and can be used to interactively generate and explore figures such as
+
+21
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+(a) 𝑢 band
+
+(b) 𝑔 band
+
+(c) 𝑟 band
+
+(d) 𝑖 band
+
+(e) 𝑧 band
+
+(f) 𝑦 band
+
+Figure 8: The 5𝜎 PSF magnitude limit for point sources across the DP2 footprint, shown for
+each of the six LSST bands (𝑢, 𝑔, 𝑟, 𝑖, 𝑧, 𝑦). Depth is computed from the coadded images in the
+DP2 dataset.
+
+22
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+Table 7: DP1 fields included in the DP2 dataset and the number of visits per band contributing
+to the deep coadds.
+Field
+
+u
+
+g
+
+r
+
+i
+
+z
+
+y
+
+Total
+
+47 Tuc Globular Cluster
+Low Ecliptic Latitude Field
+Fornax Dwarf Spheroidal Galaxy
+Extended Chandra Deep Field South
+Euclid Deep Field South
+Low Galactic Latitude Field
+Seagull Nebula
+
+0
+0
+0
+10
+7
+0
+0
+
+0
+0
+0
+61
+31
+0
+0
+
+0
+0
+0
+50
+33
+0
+0
+
+4
+0
+1
+100
+59
+6
+2
+
+2
+0
+1
+62
+34
+1
+1
+
+2
+0
+1
+11
+11
+4
+0
+
+8
+0
+3
+294
+175
+11
+3
+
+Figure 7.
+
+3.3.3
+
+DP2 Fields
+
+The DP2 dataset encompasses the Science Validation wide-area survey, Deep Drilling Fields
+(ECDFS, EDFS_a, EDFS_b, and ELAISS1, COSMOS), and a number of targeted small-field regions
+including the Trifid–Lagoon, Prawn, M49, and New Horizons fields that were part of the Rubin
+First Look campaign (see table 1). Table 7 details the number of visits in DP2 that overlap the
+DP1 fields with a breakdown by band.
+
+3.3.4
+
+Early DP2 Data Products
+
+EDP2 includes all catalog data products derived from the DRP reprocessing of the DP2 dataset,
+plus the deep coadd images; visit-level images and template coadds are not available until
+DP2 (§ 3.3.5). Deep coadd images will be distributed in a new LSST images FITS-based format,
+which enables more efficient bulk data access and embeds WCS, PSF models, and photometric
+calibration metadata in a manner that is independent of details of the LSST science pipelines,
+supporting long-term archival use.
+New in DP2 are cell-based coadds (Bosch, DMTN-015; Gorsuch & Kannawadi, SITCOMTN-137;
+Gorsuch et al., SITCOMTN-162), a Rubin/LSST image coaddition product in which a survey
+patch is subdivided into small spatial cells, and each cell is independently coadded using only
+fully overlapping input exposures to ensure a well-defined, spatially uniform PSF and weighting within the cell. The driving motivation for cell-based coadds is to improve the accuracy and
+
+23
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+stability of precision measurements by controlling PSF variation and edge effects that arise in
+standard coadds. Together with cell-based coadds, EDP2 will deliver the first version of the
+ShearObject catalog, a shape-measurement catalog designed to support weak gravitational
+lensing measurements Data Products Definition Document (DPDD), LSE-163.
+Solar System processing in DP2 follows the same simplified approach as for DP1 relative to
+the full Rubin DRP Solar System Processing (SSP) framework. In its full form, SSP is designed to
+produce a Rubin-only product, beginning without reliance on the Minor Planet Center (MPC)
+catalog used in Prompt Processing. Instead, it constructs a self-contained “Rubin-only solar
+system orbit catalog,” which, although less complete, can be more rigorously debiased than
+catalogs produced in Prompt mode. However, for DP2, as in DP1, the available data are insufficient to support robust orbit-based association at this level. Therefore, solar system products
+in DP2 will instead be generated via positional crossmatching of Rubin difference-image detections (DiaSources) with predicted ephemerides of known objects from the MPCORB catalog.
+Table 4 presents a summary of the data products expected in EDP2.
+
+3.3.5
+
+DP2 Data Products
+
+In addition to the data products in EDP2 (Section 3.3.4), the DP2 release includes all visit-level
+image data products, as well as the template coadds constructed from DP2 data, completing
+the DP2 dataset. The visit-level image data products comprise the single-visit images contributing to the coadds, as well as those from approximately ∼ 4, 000 additional visits that did
+not meet the coadd quality criteria (Section 3.3.1), together with corresponding difference images. An additional ∼ 12,000 deg2 of sky are covered by DP2 with the inclusion of these further
+images.
+
+3.3.6
+
+Limitations
+
+DP2 is based on commissioning data and users should be aware of certain limitations relative
+to future Data Releases. The temporal baseline is short (approximately five months for the
+primary dataset) and the sky coverage, while substantial, does not span the full LSST footprint.
+Image quality during the Science Validation surveys was variable, and the PSF exhibits spatial
+structure that does not yet meet full LSST requirements. Some catalog columns described in
+the Data Products Definition Document (DPDD), LSE-163 may not be populated depending on
+
+24
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+the quality and volume of the input data and the maturity of the relevant pipeline algorithms.
+DP2-specific documentation, including the catalog schema and known issues, accompanies
+the release and can be found at dp-2.lsst.io
+
+3.4
+
+Data Release 1
+
+LSST Data Release 1 (DR1) will be the first Data Release in which all data products, as described
+in the Data Products Definition Document (DPDD), LSE-163, are provided for the full LSST
+footprint (Rubin’s Survey Cadence Optimization Committee et al., PSTN-056). Table 4 presents
+a summary of the data products expected in DR1.
+DR1 is currently envisaged as being based on approximately the first year of data taken as
+part of the LSST 10-year survey. However, the exact definition of the DR1 dataset remains an
+open topic of discussion, particularly in light of the early system optimization phase described
+in §2.4. Because this optimization is expected to continue beyond the formal start of the LSST,
+the data quality and survey performance during early operations may not be fully representative of nominal survey conditions. In this context, it may be advantageous to define the start
+date for the DR1 dataset independently of the formal start of the LSST, particularly if the survey begins in a non-representative mode. This flexibility would enable the construction of a
+DR1 dataset that is optimally suited to early static and non-time-critical time-domain science.
+The criteria used to define (“cut”) the DR1 dataset are currently under active discussion. A proposal currently under consideration at Rubin advocates for a science-driven definition of DR1,
+rather than one based solely on an arbitrary calendar boundary. In this approach, the DR1
+dataset is defined by the achievement of key survey milestones, such as reaching the nominal
+Year 1 depth across the survey footprint, acquiring sufficient observations to enable robust
+photometric and astrometric calibration, and generating adequate template coverage over
+the full sky area. Within this framework, the temporal span of DR1 would be approximately
+one year, however the exact boundaries would be determined by survey performance and scientific readiness rather than a fixed calendar date, ensuring a more scientifically meaningful
+Data Release.
+Data Release Processing of one year of LSST data is estimated to require approximately one
+year. This implies an expected DR1 delivery approximately two years after the effective start
+date for the DR1 dataset.
+
+25
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+4
+
+Prompt Data Products
+
+Prompt Data Products are generated by the Prompt Processing pipelines and released on
+timescales ranging from 120 seconds to 80 hours after each observation. Their primary purpose is to enable the rapid discovery and characterization of transient, variable, and moving
+objects, supporting timely community follow-up of time-domain events. They complement
+the annually produced Data Release Products by providing near real-time access to timedomain information during nightly operations.
+These products include single-visit images, difference images, and catalogs of detections in
+difference images (DiaSources), their associated astrophysical objects (DiaObjects), and solar system objects (SSObjects). Alerts for newly detected DiaSources are issued within 120
+seconds of observation using community-standard formats and distributed to Community
+Brokers to facilitate rapid follow-up.
+The DPDD summarizes the pipelines used to generate the Prompt Data Products. Rubin plans
+to progressively scale up access to these products during Early Operations.
+
+4.1
+
+Alert Production in Early Operations
+
+Alert Production depends on the existence of template images. During steady-state operations, these templates will be constructed during the annual Data Releases and will be built
+from the best available subset of images. To enable alert production to proceed during Early
+Operations, prior to DR1, it will be necessary to build templates incrementally as data become available, as recommended by the study described in DMTN-107. Because we have
+a smaller set of input images to choose from and uncertain knowledge about future observations, incremental template generation necessarily must balance the trade-off of earlier
+template availability against template quality and spatial completeness. Validation will be required to determine when to build incremental templates to maximize the net throughput of
+Early Science.
+Scientifically it is important that once a template is constructed for a given region of sky, it is
+used exclusively until it can be updated in the next Data Release. Repeated changes to the
+template make it extremely difficult to construct usable lightcurves for objects from individual difference image sources: transient objects such as supernovae will be contaminated by
+
+26
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+changing flux levels from the evolving template, and variable objects such as variable stars
+and AGN will require repeated corrections for different template flux levels as well.
+During commissioning, templates were generated incrementally based on the available observations. Due to a slower-than-expected rate of data taking, this yielded usable templates
+for several Deep Drilling fields and several hundred deg2 of the wide SV survey.
+The first Rubin alerts began 2026-02-24 and initially used templates derived solely from the
+DDFs, which remained observable through the end of 2025. Rubin is scaling up alert production during 2026 over a progressively increasing fraction of the sky, as additional incremental templates become available. The template coverage map can be found at ls.st/
+template-coverage. Alerts generated during Early Operations may be produced with higher
+latency. Access to images (§4.2) and the PPDB (§4.3) were not available initially when the alert
+stream became active, but will be phased in during 2026 as discussed below.
+During the Commissioning and Early Operations periods, alert packets for moving objects may
+not include the associated historical source records, and parameters such as phase curve
+slope (G) will be empty (null) until sufficient detections exist to derive them. Solar System
+discoveries will be reported to the Minor Planet Center on an ad-hoc basis during Early Operations, with a goal of increased automation as alert production becomes routine.
+
+4.1.1
+
+Specifics of template generation in year 1
+
+In Year 1 (Y1), Rubin LSST will adopt an incremental and opportunistic approach to template
+generation. Templates will be constructed once sufficient high-quality visits have been accumulated at a given sky position and will be deployed for image differencing upon validation.
+However, the production and scientific use of these templates must be understood within the
+broader operational realities of early survey execution.
+The guiding principle for Y1 is that system calibration and survey integrity take precedence
+over alert production. Following the guidance of the SCOC in Section 3.8 of PSTN-056, stating
+that releasing some alerts in Y1 is an important goal, but that this objective must not override
+the priority of delivering a fully calibrated and stable system by the end of Y1.
+Templates will be generated once a field has accumulated a sufficient number of visits of adequate image quality with stable and validated calibration and passing defined quality thresh-
+
+27
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+olds.
+Once these conditions are met, templates will be built and activated without waiting for full
+annual data reprocessing. In principle, this allows templates to be used within the same observing season in which they are created.
+In practice, however, incremental template generation is effectively a race between data acquisition, processing, and seasonal visibility. If sufficient visits are not accumulated and processed before a field sets, alerts for that field will not be issued until the next seasonal revisit.
+Given realistic Y1 conditions, this outcome is expected to be common.
+Operational Constraints in Year 1 include several factors that limit the likelihood of widespread
+same-season template use, including
+
+• Survey speed and observing efficiency. Template construction requires reaching a minimum density of high-quality visits. Reduced observing efficiency—whether due to commissioning constraints or operational overhead—directly slows template readiness.
+• Planned and unplanned downtime. Instrumental issues, maintenance periods, and commissioning activities reduce usable observing time and may delay the accumulation of
+template-quality data.
+• Image quality performance. Deviations from expected image quality affect template
+depth, subtraction fidelity, and the reliability of early alert streams.
+• Survey strategy and calibration integrity. Altering the survey cadence or footprint to
+accelerate template formation risks compromising photometric calibration, survey uniformity, and Data Release 1 (DR1) quality. Y1 strategy will not be significantly distorted
+solely to increase early alert production.
+
+These factors collectively make it unlikely that Y1 will achieve uniform, full-footprint template
+coverage suitable for steady-state alert production.
+Alert generation in Y1 should therefore be viewed as opportunistic and demonstrative, not
+representative of steady-state LSST operations. Limited regions may produce alerts once templates are available, potentially resulting in early bursts of alerts in specific areas. As coverage
+evolves, alert rates may fluctuate significantly.
+
+28
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+The objective of Y1 alert release is to:
+
+• Exercise the end-to-end alert system under realistic conditions,
+• Enable community preparation and pipeline testing,
+• Demonstrate operational capability ahead of full survey scale.
+
+Full-volume, uniform alert streams remain a goal for subsequent years.
+In summary, LSST will actively pursue incremental template generation during Year 1 and will
+deploy templates as soon as they meet defined quality standards. However, realistic operational constraints make widespread same-season template use unlikely. Alert production in
+Y1 will be limited and opportunistic, with calibration stability and survey quality remaining the
+overriding priorities.
+
+4.1.2
+
+Using external templates
+
+Some new external drivers, including the upcoming six-month LIGO-Virgo-KAGRA (LVK) run
+“IR1,” provide motivation to consider deploying DECam-based templates in Alert Production.
+These would allow the alert system to build operational history, validate performance, and
+demonstrate readiness ahead of full LSST alert volumes. This approach is under investigation;
+deployment depends on demonstrating an acceptably low rate of false positives.
+
+4.2
+
+Prompt Images
+
+Prompt images comprise raw images, Processed Visit Images (PVIs), and difference images.
+Difference image releases will each be accompanied by the template used to produce them;
+templates are not themselves prompt products but are required to interpret difference images. Rubin plans to release PVIs and raw images from each night’s observations, with difference images following as incremental templates are built and validated.
+PVIs and difference images are subject to the standard 80-hour embargo period (§ 1.5). Template images are formally subject to the same embargo, although in practice all constituent
+science images will have long since cleared the 80-hour window by the time a template is
+
+29
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+available. During the first six months of LSST operations, and throughout the preceding Early
+Optimization Phase, these products may be released with somewhat higher latency as Rubin
+scales up its data services.
+Delivering prompt images requires sufficient hybrid cloud bandwidth between the USDF and
+Google Cloud, the same constraint driving the EDP2/DP2 split. As a result, prompt image
+delivery has been deprioritized relative to EDP2 and the PPDB, neither of which depends on
+hybrid cloud bandwidth. Prompt images are expected to become publicly available in the Oct
+– Dec 2026 time range, following delivery of EDP2 (§ 3.3) and the PPDB (§ 4.3).
+
+4.3
+
+Prompt Catalogs and the Prompt Products Database
+
+The Prompt Products Database (PPDB) serves as Rubin’s real-time catalog of transient, variable, and moving-object detections, storing all prompt catalog data products and observation
+metadata and providing efficient access for scientific analysis.
+Upon initial release, the PPDB will include the DiaObject, DiaSource, and DiaForcedSource catalogs (LSE-163) arising from detections in difference image analysis. The contents of these
+tables closely mirror the cumulative alert stream, though some precovery data will be available only in the PPDB.
+In addition, the initial public release of the PPDB will contain information on Solar System
+object observations and discoveries arising from the Rubin data. The key tables provided will
+be the following:
+
+• mpc_orbits: a clone of the master table maintained by the Minor Planet Center, one row
+per SSO;
+• SSObject: one row per SSO for those MPC-confirmed objects to which Rubin has contributed observations; and
+• SSSource: one row per Rubin observation submitted to and accepted by the MPC. This
+table will include data arising from multiple sources, including nightly AP-derived observations that are also represented in the PPDB in the DiaSource table, and observations
+arising from Data Release-style processing of Rubin data, most notably DP2.
+
+30
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+The overall data model and the schemas of these tables have evolved somewhat from the
+version presented in the DPDD and those in previous Data Previews; the updated data model
+has not yet been released, but will be available on the Rubin schema browser in advance of
+the initial PPDB release.
+Query services for PPDB catalogs are described in § 5. The PPDB is prioritized as the second
+delivery milestone after EDP2 (§ 3.3.4) and before DP2 (§ 3.3), and is expected to become
+publicly available in the Sep – Oct 2026 time range.
+
+4.4
+
+Prompt Direct Catalogs
+
+Starting in Early Operations and continuing until Data Release 1 (DR1), Rubin will additionally
+provide prompt_direct_source catalogs for each PVI (§ 4.2). These direct-image Source-like catalogs of detections in PVIs are analogous to the Source catalogs of future Data Releases and
+distinct from the difference-image DiaSource catalogs produced by Alert Production. They are
+an interim measure until DR1 catalog coverage supersedes them and are distributed only
+as per-image Butler datasets and will not be accessible via database queries. Although not
+strictly embargoed, for the sake of self-consistency, they will be released with their corresponding PVIs after the 80-hour embargo expires.
+
+5
+
+Data Access Environment
+
+The Rubin data access environment provides data rights holders with access to all Rubin data
+products and services. The Rubin data rights policy is described in RDO-013. Prior to the first
+full LSST Data Release, DR1, all services for data access are under active development and are
+provided on a shared-risk basis.
+
+5.1
+
+Data Access Centers
+
+Rubin data products will be served to the community from the US Data Access Center (US DAC)
+hosted in the Google Cloud.5 . A number of Rubin Independent Data Access Centers (IDAC) are
+also under construction to provide additional user computing resources to LSST users around
+the globe RTN-003.
+5
+
+data.lsst.cloud
+
+31
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+Rubin employs a hybrid cloud architecture in which science data products are stored at the
+USDF and made accessible to users via the US DAC in Google Cloud, (O’Mullane et al., 2024).
+The deep coadd data products are an exception: because there is one coadd per sky region
+per band (a relatively small and slowly-growing dataset), coadd images are hosted directly in
+Google Cloud, independently of USDF storage. This architectural distinction has implications
+for the DP2 delivery timeline: products served directly from Google Cloud (deep coadds and
+catalogs) can be released as Early DP2 ahead of products that require real-time data transfer
+from the USDF (visit-level images), which depend on full hybrid cloud US DAC readiness. See
+§ 3.3 for the phased DP2 release schedule and the engineering work underway.
+
+5.2
+
+Rubin Science Platform
+
+The Rubin Science Platform (RSP), described in LSE-319, is a set of integrated web-based applications, services, and tools that provides access to the Rubin data products and enables nextto-the-data analysis. The RSP comprises three different “Aspects”: a Portal Aspect designed
+to provide an environment for data discovery, query, filtering, and visualization; a Notebook
+Aspect to enable next-to-the-data analysis; and an API Aspect for programmatic access to the
+Rubin data products via Virtual Observatory (VO) interfaces. The Portal and Notebook Aspects
+of the RSP make use of the same APIs as the API Aspect to internally access the LSST datasets.
+The RSP is currently under active development and a fully functional RSP is not expected to
+be available until DR1. The current version of the RSP is deployed at the US DAC and will be
+used to host the Early Science datasets. New functionality will be deployed incrementally, as
+it becomes available.
+RSP functionality already deployed and operational:
+
+• TAP and Butler access to catalogs and images;
+• DataLink annotations in TAP query results for access to light curves and other related
+information;
+• ObsCore data model for image metadata;
+• IVOA-compatible SIAv2 and ObsTAP image metadata query services;
+• IVOA SODA service for cutouts from individual single-epoch images and coadded image
+
+32
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+tiles6 ;
+• DataLink annotations to the ObsTAP and SIAv2 services for access to the full images as
+well as the SODA service;
+• Authenticated HiPS data service for seamless pan-and-zoom access to coadded data;
+• Some Portal-Notebook integration features such as seeding a notebook with a query
+that was executed in the Portal, and retrieving results in the Portal from a query executed
+from a notebook;
+• Initial user query-history capabilities; and
+• Temporary-table uploads for TAP queries, providing multi-object query capabilities, supported for both Qserv (DP1) and Postgres (DP0.3).
+
+RSP functionality not yet available but that is expected by DP2:
+
+• Expanded user query-history and query-status capabilities;
+• Context-aware documentation, e.g., pop-ups in the portal, documentation in-context
+such as “click on the column name and go to the page that explains it in detail;”
+• Support for the ADQL spatial INTERSECTS() operation.
+
+Most of the functionality that is expected by DP2 will be rolled out incrementally between DP1
+and DP2.
+Initial functionality for prompt-products data access in the RSP will be similar to that provided
+for DP1, but with Google BigQuery as the back end for the catalog data.
+RSP functionality not yet available but that is expected by DR1:
+
+• Bulk cutout services, both for individual targets across a range of epochs, and for lists of
+multiple targets;
+6
+
+At this time, the cutout service can only process requests for one cutout at a time, meaning to create and
+retrieve 10 cutouts will require 10 independent synchronous calls to the cutout service. A bulk cutout service is
+under development and expected to be available by DR1.
+
+33
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+• PSF retrieval service;
+• Forced photometry on-demand service;
+• Data product recreation services;
+• Parallel computing;
+• Batch processing;
+• Support for persistent user-created databases, and their federation with the projectprovided databases;
+• Support for collaborative work;
+• WebDAV service to edit files on their RSP from their preferred device;
+• Dask for parallel computing;
+• Full LSSTCam focal-plane visualizations.
+
+Again, it is likely that a number of these features will be rolled out incrementally before DR1.
+RSP functionality that is under consideration for post-DR1:
+
+• Access to GPUs;
+• Bringing individual resources to the RSP, e.g., additional compute paid for by individuals.
+
+5.2.1
+
+Prompt Catalog Data Services
+
+The PPDB is under active development and represents a significant technical challenge. At
+least initially, full query capabilities on all tables will not be available; instead, a more limited
+set of targeted services will be provided. These restrictions arise from our process of learning
+how to work with the underlying database (Google BigQuery) in a cost-effective, scalable way.
+For the difference image analysis catalogs, Rubin expects to provide an IVOA TAP service supporting full property-based ADQL queries over the current versions of all DiaObjects, and the
+full contents of the mpc_orbits and SSObject catalogs.
+
+34
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+In order to support early prompt solar system and time-domain science, Rubin will additionally
+support dedicated query services for:
+
+• Retrieval of all DiaSource or DiaForcedSource data associated with a given DiaObject, i.e.,
+the data for a light curve;
+• Retrieval of all SSSource records for a given SSO, by its MPC designation or its Rubin ID;
+and
+• Retrieval of nearby-SSO data for a given DiaSource ID.
+
+These additional query services will be linked to the results of DiaObject queries via the IVOA
+DataLink mechanism for service discovery and easy access to light curves in the RSP Portal and
+elsewhere. A query service for the history of DiaObject record evolution is a stretch goal for
+the first release of the PPDB. The PPDB will initially be configured to support these particular
+query patterns with efficient data clustering. Experience with these query services will then
+inform further engineering effort on the PPDB and future expansion to more general query
+capabilities.
+Additional mechanisms will be provided that provide users with information on the presence
+of known SSOs near detected transients, so that overlap between moving-object orbits and
+static astrophysical transients can be understood, and expand on the linkages between Rubin
+SSO data and the MPC’s own databases.
+Note that several brokers are planning to aggregate the alert stream and offer query services;
+Rubin expects this will cover many PPDB use cases in the interim before the PPDB is available.
+The PPDB is prioritized as the second delivery milestone after EDP2 (§ 3.3.4) and before DP2
+(§ 3.3), and is expected to become publicly available in the Sep – Oct 2026 time range.
+The Rubin team is also working with partners in the community to provide access to key
+prompt catalog data products in the evolving community “HATS” format.
+
+35
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+5.3
+
+Community Brokers
+
+Alerts are fully world-public and are accessible through one or more of the nine Rubin-endorsed
+Community Brokers7 . During the commissioning period, Rubin collaborated with the Community Brokers to integrate them RTN-010, ensuring that the alert stream could be efficiently
+distributed to the community. Since the release of Rubin First Alerts on 2026-02-24, the seven
+full-stream brokers have been receiving the early Rubin alert stream from data collected during the Early Optimization Phase, providing added-value analyses such as crossmatches with
+existing catalogs, light curve characterizations, and preliminary classifications of transient and
+variable sources.
+These first pre-LSST alerts, while not yet reaching the velocity, latency, nor fidelity expected
+for full operations, represent the initial operational demonstration of Rubin’s alert production
+pipeline. The early release provided the Community Brokers with real-time data, enabling
+valuable feedback on pipeline performance and broker integration, and helping to validate
+the end-to-end alert distribution architecture prior to full survey operations. Alerts to the
+brokers will continue on a best-effort basis during the Early Science period, depending on
+template availability, gradually ramping up toward full-scale operations.
+
+6
+
+Science Considerations for Optimizing Early Science
+
+It will not be possible to survey the whole sky in all filters and generate templates by the end
+of the commissioning period. A strategy for template generation in the early phases of the
+survey, which will require balancing a tradeoff between various factors such as smaller area
+with multiple filters vs a single filter over a large area, must be devised.
+There is no non-sidereal observing in the Rubin baseline survey plan and consequently there
+will be no non-sidereal tracking available during the early science era.
+Different science drivers naturally lead to different prioritization strategies, e.g., Milky Way science would prefer templates that cover the Galactic Plane, time domain science would prefer
+templates in multiple bands rather than a single band for a larger area. Supernova, transient
+and variable science strongly advocate for templates for all bands in the Deep Drilling Fields
+to be prioritized. Rubin Operations will work closely with the science community to develop
+7
+
+See https://www.lsst.org/scientists/alert-brokers
+
+36
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+a science-driven approach to template generation in the early phases of the survey that will
+benefit the maximum number of science cases.
+
+6.1
+
+Time Domain
+
+The Transients and Variable Stars Science Collaboration (TVSSC) reviewed the opportunities
+for Early Science for non time-critical and time-critical science cases in Hambleton et al. (2020)
+and Street et al. (2020) respectively. In both cases, they recommend the prioritization of template acquisition in multiple bands as the preferred strategy rather than single-band coverage
+over a larger area of sky.
+
+6.2
+
+Solar System
+
+The Solar System Science Collaboration (SSSC) reviewed opportunities for Early Science in
+Schwamb et al. (2021) for several high impact solar system science opportunities that would
+be enabled by accelerated template generation and alert production in year 1. They find that
+template generation options that maximize the sky coverage in year 1 where LSST Solar System Processing can run daily are strongly preferred, even if the templates result in noisier
+image subtraction compared to later years.
+
+6.3
+
+Static Science
+
+Datasets for static science will flow from the SV Surveys carried out during commissioning and
+released as Data Preview 2 (DP2). The commissioning team are planning to acquire on-sky
+observations that would enable science validation studies for the four LSST science drivers.
+Guidance is being sought from the community to enhance opportunities for science validation
+and early science based on commissioning data. Rubin Obs SIT-Com collected “Commissioning Notes” from the community in 2020–2021 that are being considered as part of the planning
+for the on-sky observing strategy during commissioning. 8
+8
+
+See https://community.lsst.org/t/community-input-to-the-on-sky-observing-strategy-during-commissioning/
+4406
+
+37
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+Rubin Operations Survey and Data Release Timeline
+Event
+
+Key
+
+Date or Range
+
+Data Preview 0.1/2/3
+
+DP0
+
+Jun 2023
+
+Data Preview 1
+
+DP1
+
+Jun 2025
+
+Early Data Preview 2
+
+EDP2
+
+Jul 2026
+
+Data Preview 2
+
+DP2
+
+Oct – Dec 2026
+
+Data Release 1
+
+DR1
+
+TBD
+
+Rubin First Alerts
+
+RFA
+
+Feb 2026
+
+Nightly PVIs & Direct-Image Catalogs
+
+NPC
+
+Oct – Dec 2026
+
+PPDB Release
+
+PPDB
+
+Sep – Oct 2026
+
+2025
+
+J
+
+F M A M J
+
+J
+
+2026
+
+A S O N D J
+
+F M A M J
+
+J
+
+2027
+
+A S O N D J
+
+F M A M J
+
+J
+
+2028
+
+A S O N D J
+
+F M A M J
+
+J
+
+A S O N D
+
+Table 8: Rubin Operations Key Milestones for Early Science
+
+6.4
+
+Target of Opportunity
+
+Rubin Observatory will be prepared to take advantage of Targets of Opportunities (TOO) in the
+first year of operations (and hopefully SIT-Com). RTN-008 describes potential data processing
+scenarios for TOO observations in the early operations era.
+
+7
+
+Roadmap and Timeline
+
+Table 8 presents the Operations timeline, including nominal date ranges for the various elements of the Early Science Program. For completed milestones, the actual delivery dates
+are listed. Milestone dates are expressed as minimum–maximum ranges to reflect the associated uncertainty. The early date typically corresponds to the early forecast, including any
+additional operational uncertainty, while the late date approximately reflects the current late
+date plus any additional operational uncertainty. As a release date approaches, we expect
+these ranges to narrow as our understanding of the remaining uncertainties improves. Nevertheless, there remains the possibility that the assumptions underlying these estimates are
+incorrect; the dates presented therefore represent our best current assessment.
+Table 8 will continue to be refined and updated in future versions of this document as the
+Early Science Program progresses.
+
+38
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+8
+
+Community
+
+Rubin Observatory will work closely with the Survey Cadence Optimization Committee (SCOC)
+and Community on the detailed design of the Early Science Program.
+
+8.1
+
+Survey Cadence Optimization Committee
+
+The Rubin Survey Cadence Optimization Committee (SCOC)9 is an advisory committee to the
+Rubin Observatory Operations Director consisting of 10 members drawn almost entirely from
+the science community. Convened in 2020, the SCOC will be a standing committee throughout the lifetime of Rubin Observatory operations and will be involved in all aspects of the
+development of the Early Science Program.
+The SCOC will work with the Rubin Operations team and the Community to establish the best
+strategy for Early Science, including making specific recommendations in terms of, for example, the prioritization of sky coverage, filters, and other specific choices. Recommendations
+will take into account the plans for commissioning and the realized performance of the telescope and software, and should align as closely as possible with those of the main survey and
+ultimate long-term science goals. Optimizing the LSST Year 1 observing schedule for early
+science may mean that the time sampling looks somewhat different to that in subsequent
+years.
+The SCOC has published its Phase 1, 2 and 3 survey cadence recommendations in PSTN-053,
+PSTN-055 and PSTN-056 respectively. The SCOC will solicit input from the community on the
+specific observing strategy in year 1 to optimize early science. Several science collaborations
+have already been proactive in providing input, both the community forum and as research
+notes (Schwamb et al., 2021; Hambleton et al., 2020; Street et al., 2020).
+
+8.2
+
+Community Forum
+
+The Rubin Observatory Community Platform has a dedicated category for Early Science10 ,
+where community members are encouraged to open discussions on the topic of early science.
+Community feedback on the Early Science data products is welcomed and will help the Rubin
+9
+10
+
+See https://www.lsst.org/content/charge-survey-cadence-optimization-committee-scoc
+See https://community.lsst.org/t/about-the-early-science-category/5775
+
+39
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+to improve its data products and services.
+
+A
+
+References
+
+[RTN-083], Aguirre, L.M., Bechtol, K., Blum, B., et al., 2024, Rubin First Look Public Announcement Strategy, Technical Note RTN-083, NSF-DOE Vera C. Rubin Observatory, URL https:
+//rtn-083.lsst.io/
+[RTN-111], AlSayyad, Y., O’Mullane, W., 2026, Data Preview 2: Definition and planning, Technical
+Note RTN-111, NSF-DOE Vera C. Rubin Observatory, URL https://rtn-111.lsst.io/
+[SITCOMTN-170], Bechtol, K., 2025, An Interim Report on the On-Sky Commissioning Campaign
+with LSSTCam, Commissioning Technical Note SITCOMTN-170, NSF-DOE Vera C. Rubin Observatory, URL https://sitcomtn-170.lsst.io/
+[RTN-010], Bellm, E., 2023, Pre-operations Alert Distribution Integration Exercises, Technical Note
+RTN-010, NSF-DOE Vera C. Rubin Observatory, URL https://rtn-010.lsst.io/
+[RTN-008], Bellm, E.C., 2022, Rubin Observatory Processing of Gravitational Wave TOO Data in
+the Early Operations Era, Technical Note RTN-008, NSF-DOE Vera C. Rubin Observatory, URL
+https://rtn-008.lsst.io/, doi:10.71929/rubin/2997564
+[RDO-013], Blum, R., the Rubin Operations Team, 2020, Vera C. Rubin Observatory Data Policy, Data Management Operations Controlled Document RDO-013, NSF-DOE Vera C. Rubin
+Observatory, URL https://ls.st/RDO-013
+Bosch, J., Armstrong, R., Bickerton, S., et al., 2018, PASJ, 70, S5 (arXiv:1705.06766),
+doi:10.1093/pasj/psx080, ADS Link
+Bosch, J., AlSayyad, Y., Armstrong, R., et al., 2019, In: Teuben, P.J., Pound, M.W., Thomas,
+B.A., Warner, E.M. (eds.) Astronomical Data Analysis Software and Systems XXVII, vol.
+523 of Astronomical Society of the Pacific Conference Series, 521 (arXiv:1812.03248),
+doi:10.48550/arXiv.1812.03248, ADS Link
+[DMTN-015], Bosch, J.F., 2025,
+
+Flavors of Coadds, Data Management Technical Note
+
+DMTN-015, NSF-DOE Vera C. Rubin Observatory, URL https://dmtn-015.lsst.io/,
+doi:10.71929/rubin/2583432
+
+40
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+[SITCOMTN-137], Gorsuch, M.R., Kannawadi, A., 2026, Getting Started with Cell-Based Coadds,
+Commissioning Technical Note SITCOMTN-137, NSF-DOE Vera C. Rubin Observatory, URL
+https://sitcomtn-137.lsst.io/
+[SITCOMTN-162], Gorsuch, M.R., Kannawadi, A., Adari, P., et al., 2025, Testing the implementation of Metadetection and Cell-Based Coadds on Abell 360 LSSTComCam data, Commissioning Technical Note SITCOMTN-162, NSF-DOE Vera C. Rubin Observatory, URL https:
+//sitcomtn-162.lsst.io/, doi:10.71929/rubin/3000578
+Graham, M., 2022, The Rubin Data Products, Abridged. Zenodo, doi:10.5281/zenodo.7011229
+[DMTN-107], Graham, M.L., Bellm, E.C., Slater, C.T., Guy, L.P., Rubin Observatory Data Management System Science Team, 2020, Options for Alert Production in LSST Operations Year
+1, Data Management Technical Note DMTN-107, NSF-DOE Vera C. Rubin Observatory, URL
+https://dmtn-107.lsst.io/, doi:10.71929/rubin/2997867
+Hambleton, K., Bianco, F., Clementini, G., et al., 2020, Research Notes of the American Astronomical Society, 4, 40, doi:10.3847/2515-5172/ab8129, ADS Link
+[LPM-17], Ivezić, Ž., The LSST Science Collaboration, 2018, LSST Science Requirements Document, Project Controlled Document LPM-17, NSF-DOE Vera C. Rubin Observatory, URL
+https://ls.st/LPM-17
+[LSE-319], Jurić, M., Ciardi, D., Dubois-Felsmann, G., Guy, L., 2019, LSST Science Platform Vision Document, Systems Engineering Controlled Document LSE-319, NSF-DOE Vera C. Rubin
+Observatory, URL https://lse-319.lsst.io/, doi:10.71929/rubin/2587242
+[LSE-163], Jurić, M., Axelrod, T.S., Becker, A.C., et al., 2023, Data Products Definition Document,
+Systems Engineering Controlled Document LSE-163, NSF-DOE Vera C. Rubin Observatory,
+URL https://lse-163.lsst.io/, doi:10.71929/rubin/2587118
+LSST Dark Energy Science Collaboration (LSST DESC), Abolfathi, B., Alonso, D., et al., 2021, ApJS,
+253, 31 (arXiv:2010.05926), doi:10.3847/1538-4365/abd62c, ADS Link
+NSF-DOE Vera C. Rubin Observatory,
+Data
+
+Preview
+
+1
+
+[Data
+
+set],
+
+URL
+
+2025,
+
+Legacy Survey of Space and Time
+
+https://www.osti.gov//servlets/purl/2570308,
+
+doi:10.71929/RUBIN/2570308
+[RTN-003], O’Mullane, W., Willman, B., Graham, M., et al., 2021, Guidelines for Rubin Independent Data Access Centers, Technical Note RTN-003, NSF-DOE Vera C. Rubin Observatory, URL
+https://rtn-003.lsst.io/
+
+41
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+[DMTN-199], O’Mullane, W., Allbery, R., AlSayyad, Y., et al., 2024, Rubin Observatory Data Security Standards Implementation, Data Management Technical Note DMTN-199, NSF-DOE Vera
+C. Rubin Observatory, URL https://dmtn-199.lsst.io/, doi:10.71929/rubin/2586668
+O’Mullane, W., AlSayyad, Y., Chiang, J., et al., 2024, In: Ibsen, J., Chiozzi, G. (eds.) Software and
+Cyberinfrastructure for Astronomy VIII, vol. 13101 of Society of Photo-Optical Instrumentation Engineers (SPIE) Conference Series, 131012B, doi:10.1117/12.3018005, ADS Link
+[PSTN-053], Rubin’s Survey Cadence Optimization Committee, Bauer, F.E., Brough, S., et al.,
+2022, Survey Cadence Optimization Committee’s Phase 1 Recommendation, Project Science
+Technical Note PSTN-053, NSF-DOE Vera C. Rubin Observatory, URL https://pstn-053.lsst.
+io/, doi:10.71929/rubin/2584276
+[PSTN-055], Rubin’s Survey Cadence Optimization Committee, Bauer, F.E., Bianco, F.B., et al.,
+2023, Survey Cadence Optimization Committee’s Phase 2 Recommendations, Project Science
+Technical Note PSTN-055, NSF-DOE Vera C. Rubin Observatory, URL https://pstn-055.lsst.
+io/, doi:10.71929/rubin/2585249
+[PSTN-056], Rubin’s Survey Cadence Optimization Committee, Bianco, F.B., Jones, R.L., et al.,
+2025, Survey Cadence Optimization Committee’s Phase 3 Recommendations, Project Science
+Technical Note PSTN-056, NSF-DOE Vera C. Rubin Observatory, URL https://pstn-056.lsst.
+io/, doi:10.71929/rubin/2585402
+Schwamb, M.E., Jurić, M., Bolin, B.T., et al., 2021, Research Notes of the American Astronomical
+Society, 5, 143, doi:10.3847/2515-5172/ac090f, ADS Link
+Street, R.A., Bianco, F.B., Bonito, R., et al., 2020, Research Notes of the American Astronomical
+Society, 4, 41, doi:10.3847/2515-5172/ab812a, ADS Link
+[SITCOMTN-149], Vera C. Rubin Observatory, 2025, An Interim Report on the LSSTComCam
+On-Sky Campaign, Commissioning Technical Note SITCOMTN-149, NSF-DOE Vera C. Rubin
+Observatory, URL https://sitcomtn-149.lsst.io/, doi:10.71929/rubin/2574402
+
+B
+
+Acronyms
+
+Acronym
+
+Description
+
+ADQL
+
+Astronomical Data Query Language (IVOA standard)
+
+AGN
+
+Active Galactic Nuclei
+
+42
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+AOS
+
+Active Optics System
+
+AP
+
+Alert Production
+
+API
+
+Application Programming Interface
+
+COSMOS
+
+Cosmic Evolution Survey
+
+DAC
+
+Data Access Center
+
+DC2
+
+Data Challenge 2 (DESC)
+
+DDF
+
+Deep Drilling Field
+
+DECam
+
+Dark Energy Camera
+
+DESC
+
+Dark Energy Science Collaboration
+
+DMTN
+
+DM Technical Note
+
+DOE
+
+Department of Energy
+
+DOI
+
+Digital Object Identifier
+
+DP0
+
+Data Preview 0
+
+DP1
+
+Data Preview 1
+
+DP2
+
+Data Preview 2
+
+DPDD
+
+Data Product Definition Document
+
+DR
+
+Data Release
+
+DR1
+
+Data Release 1
+
+DRP
+
+Data Release Processing
+
+ECDFS
+
+Extended Chandra Deep Field-South Survey
+
+EDFS
+
+Euclid Deep Field South
+
+FBS
+
+Feature-Based Scheduler
+
+FITS
+
+Flexible Image Transport System
+
+FWHM
+
+Full Width at Half-Maximum
+
+HiPS
+
+Hierarchical Progressive Survey (IVOA standard)
+
+IDAC
+
+Independent Data Access Center
+
+ITL
+
+Imaging Technology Laboratory (UA)
+
+IVOA
+
+International Virtual Observatory Alliance
+
+KAGRA
+
+Kamioka Gravitational Wave Detector
+
+LIGO
+
+Laser Interferometer Gravitational-Wave Observatory
+
+LPM
+
+LSST Project Management (Document Handle)
+
+LSE
+
+LSST Systems Engineering (Document Handle)
+
+LSS
+
+Large Scale Structure
+
+LSST
+
+Legacy Survey of Space and Time
+
+43
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+LSSTCam
+
+LSST Science Camera
+
+LSSTComCam Rubin Commissioning Camera
+LVK
+
+LIGO-Virgo-KAGRA
+
+MPC
+
+Minor Planet Center
+
+MPCORB
+
+Minor Planet Center Orbit database
+
+NGC
+
+New General Catalogue
+
+NSF
+
+National Science Foundation
+
+ObsCore
+
+Observation Data Model Core Components (IVOA standard)
+
+ObsTAP
+
+Observation (metadata) Table Access Protocol (part of IVOA ObsCore standard)
+
+PCW
+
+Project Community Workshop
+
+PPDB
+
+Prompt Products DataBase
+
+PSF
+
+Point Spread Function
+
+PSTN
+
+Project Science Technical Note
+
+PVI
+
+Processed Visit Image
+
+RDO
+
+Rubin Directors Office
+
+RSP
+
+Rubin Science Platform
+
+RTN
+
+Rubin Technical Note
+
+SCOC
+
+Survey Cadence Optimization Committee
+
+SIT
+
+System Integration, Test
+
+SODA
+
+Server-side Operations for Data Access (IVOA standard)
+
+SRD
+
+LSST Science Requirements; LPM-17
+
+SSO
+
+Solar System Object
+
+SSP
+
+Solar System Processing
+
+SV
+
+Science Validation
+
+TAP
+
+Table Access Protocol (IVOA standard)
+
+TBD
+
+To Be Defined (Determined)
+
+TOO
+
+Target of Opportunity
+
+ToO
+
+Target of Opportunity
+
+US
+
+United States
+
+USDF
+
+United States Data Facility
+
+VO
+
+Virtual Observatory
+
+WCS
+
+World Coordinate System
+
+WFD
+
+Wide-Fast-Deep
+
+44
+
+Rubin Observatory Plans for an Early Science Program | RTN-011 | Latest Revision 2026-07-01
+
+XMM
+
+ESA X-ray Multi-mirror Mission
+
+45
+
+

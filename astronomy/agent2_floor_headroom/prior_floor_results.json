@@ -1,0 +1,478 @@
+{
+ "label": "P2 PRIOR FLOOR ESTIMATE (not an I1 composition)",
+ "script": "agent2_floor_headroom/floor_prior.py",
+ "csv": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/data/raw/ztf_bts_all_2026-09-16.csv",
+ "csv_sha256_expected": "61415979b75f96bcf2532439109b35f923c5fa1aadfacc5d6013235187ebe570",
+ "csv_sha256_measured": "61415979b75f96bcf2532439109b35f923c5fa1aadfacc5d6013235187ebe570",
+ "sha_match": true,
+ "raw_rows_excluding_header": 11217,
+ "distinct_ztfid": 11217,
+ "distinct_groups_all_rows": 11198,
+ "sky_pairs_within_3arcsec": 19,
+ "classified_rows": 7843,
+ "unclassified_rows_type_dash": 3374,
+ "classified_missing_redshift": 685,
+ "classified_missing_peakabs": 686,
+ "routine_set_task_B": [
+  "AGN",
+  "AGN?",
+  "CV",
+  "CV?",
+  "Other",
+  "SN II",
+  "SN IIP",
+  "SN Ia",
+  "SN Ia-91T",
+  "nova",
+  "other"
+ ],
+ "versions": {
+  "numpy": "2.5.3",
+  "pandas": "3.0.5",
+  "sklearn": "1.9.1"
+ },
+ "task_A_SNIa_vs_nonIa": {
+  "n_objects": 7843,
+  "n_groups": 7830,
+  "n_positive": 5334,
+  "prevalence": 0.6800969016957796,
+  "chance_auc": 0.5,
+  "chance_ap": 0.6800969016957796,
+  "tiers": {
+   "T1_full_post_spectroscopy": {
+    "hgb": {
+     "auc": 0.9674019424335608,
+     "ap": 0.9790238855047328
+    },
+    "logreg": {
+     "auc": 0.9259967454247574,
+     "ap": 0.9285931166091403
+    },
+    "floor_learner": "hgb",
+    "floor_auc_ci95_group_bootstrap": [
+     0.9632296270317785,
+     0.9720349402342948
+    ],
+    "floor_ap_ci95_group_bootstrap": [
+     0.974818316964356,
+     0.983413648785943
+    ],
+    "auc_above_chance": 0.4674019424335608,
+    "share_of_T1_signal_above_chance": 1.0
+   },
+   "T2_photometric_retrospective": {
+    "hgb": {
+     "auc": 0.8675268471074437,
+     "ap": 0.9052917864127856
+    },
+    "logreg": {
+     "auc": 0.702043920476461,
+     "ap": 0.7626126366165678
+    },
+    "floor_learner": "hgb",
+    "floor_auc_ci95_group_bootstrap": [
+     0.8577114447808888,
+     0.8770933536920593
+    ],
+    "floor_ap_ci95_group_bootstrap": [
+     0.8959159549631897,
+     0.9152377626376318
+    ],
+    "auc_above_chance": 0.36752684710744365,
+    "share_of_T1_signal_above_chance": 0.7863186130418918
+   },
+   "T3_at_peak": {
+    "hgb": {
+     "auc": 0.7976600697929898,
+     "ap": 0.85111980179356
+    },
+    "logreg": {
+     "auc": 0.656782116065703,
+     "ap": 0.746990009583117
+    },
+    "floor_learner": "hgb",
+    "floor_auc_ci95_group_bootstrap": [
+     0.786849563666796,
+     0.8090743803214953
+    ],
+    "floor_ap_ci95_group_bootstrap": [
+     0.8399056618223143,
+     0.863939118005232
+    ],
+    "auc_above_chance": 0.29766006979298976,
+    "share_of_T1_signal_above_chance": 0.6368396079896499
+   },
+   "T4_at_first_alert": {
+    "hgb": {
+     "auc": 0.5365564731869656,
+     "ap": 0.7005402802884779
+    },
+    "logreg": {
+     "auc": 0.509791559534532,
+     "ap": 0.6869967393651815
+    },
+    "floor_learner": "hgb",
+    "floor_auc_ci95_group_bootstrap": [
+     0.523514227758107,
+     0.5515716667606879
+    ],
+    "floor_ap_ci95_group_bootstrap": [
+     0.6866098696887613,
+     0.7154490482410659
+    ],
+    "auc_above_chance": 0.03655647318696564,
+    "share_of_T1_signal_above_chance": 0.07821206945917215
+   },
+   "T2_plus_redshift": {
+    "hgb": {
+     "auc": 0.9636964221640489,
+     "ap": 0.9746796879285797
+    },
+    "logreg": {
+     "auc": 0.8987414337257265,
+     "ap": 0.8909726324941221
+    },
+    "floor_learner": "hgb",
+    "floor_auc_ci95_group_bootstrap": [
+     0.9589785535138242,
+     0.9683559837068904
+    ],
+    "floor_ap_ci95_group_bootstrap": [
+     0.9698766131391132,
+     0.9797895249571302
+    ],
+    "auc_above_chance": 0.46369642216404894,
+    "share_of_T1_signal_above_chance": 0.9920720905646673
+   }
+  },
+  "control_label_permutation_T1_auc": 0.48632287843254346,
+  "temporal_split": {
+   "n_train": 5098,
+   "n_test": 2745,
+   "rule": "train peakt < 1945.5 (JD-2458000; before 2023-01-01), test otherwise",
+   "tiers": {
+    "T1_full_post_spectroscopy": {
+     "auc": 0.9660625,
+     "ap": 0.9829086047078197,
+     "prevalence_test": 0.6994535519125683
+    },
+    "T2_photometric_retrospective": {
+     "auc": 0.8428295454545454,
+     "ap": 0.8953457355841248,
+     "prevalence_test": 0.6994535519125683
+    },
+    "T3_at_peak": {
+     "auc": 0.7869621212121213,
+     "ap": 0.8565211928585171,
+     "prevalence_test": 0.6994535519125683
+    },
+    "T4_at_first_alert": {
+     "auc": 0.530136994949495,
+     "ap": 0.7181456404964508,
+     "prevalence_test": 0.6994535519125683
+    },
+    "T2_plus_redshift": {
+     "auc": 0.9624349747474747,
+     "ap": 0.9809637557542431,
+     "prevalence_test": 0.6994535519125683
+    }
+   }
+  }
+ },
+ "task_B_nonroutine_proxy": {
+  "n_objects": 7843,
+  "n_groups": 7830,
+  "n_positive": 953,
+  "prevalence": 0.12150962641846233,
+  "chance_auc": 0.5,
+  "chance_ap": 0.12150962641846233,
+  "tiers": {
+   "T1_full_post_spectroscopy": {
+    "hgb": {
+     "auc": 0.9013156832674147,
+     "ap": 0.6413810903803261
+    },
+    "logreg": {
+     "auc": 0.7559668726213303,
+     "ap": 0.2855408353538293
+    },
+    "floor_learner": "hgb",
+    "floor_auc_ci95_group_bootstrap": [
+     0.8903456954801325,
+     0.9121778007249702
+    ],
+    "floor_ap_ci95_group_bootstrap": [
+     0.6101528240072599,
+     0.6735732492553236
+    ],
+    "auc_above_chance": 0.40131568326741474,
+    "share_of_T1_signal_above_chance": 1.0
+   },
+   "T2_photometric_retrospective": {
+    "hgb": {
+     "auc": 0.7302520342909185,
+     "ap": 0.29899225077623626
+    },
+    "logreg": {
+     "auc": 0.5246544027949323,
+     "ap": 0.13200108897032653
+    },
+    "floor_learner": "hgb",
+    "floor_auc_ci95_group_bootstrap": [
+     0.7126986456458726,
+     0.7477849153431382
+    ],
+    "floor_ap_ci95_group_bootstrap": [
+     0.2752431522333476,
+     0.32923017799118515
+    ],
+    "auc_above_chance": 0.23025203429091845,
+    "share_of_T1_signal_above_chance": 0.5737429258090847
+   },
+   "T3_at_peak": {
+    "hgb": {
+     "auc": 0.6723959324842336,
+     "ap": 0.2643181445911466
+    },
+    "logreg": {
+     "auc": 0.5143295102015331,
+     "ap": 0.12580799457922723
+    },
+    "floor_learner": "hgb",
+    "floor_auc_ci95_group_bootstrap": [
+     0.6522757159284495,
+     0.6911686268474011
+    ],
+    "floor_ap_ci95_group_bootstrap": [
+     0.23917418513734112,
+     0.2935413392822761
+    ],
+    "auc_above_chance": 0.17239593248423357,
+    "share_of_T1_signal_above_chance": 0.4295768634822038
+   },
+   "T4_at_first_alert": {
+    "hgb": {
+     "auc": 0.5243978605488435,
+     "ap": 0.13019808772123662
+    },
+    "logreg": {
+     "auc": 0.5154127139565379,
+     "ap": 0.12698790123249717
+    },
+    "floor_learner": "hgb",
+    "floor_auc_ci95_group_bootstrap": [
+     0.5051763730260693,
+     0.5425392078857826
+    ],
+    "floor_ap_ci95_group_bootstrap": [
+     0.11964418651966047,
+     0.14199472822321077
+    ],
+    "auc_above_chance": 0.02439786054884352,
+    "share_of_T1_signal_above_chance": 0.06079468499761103
+   },
+   "T2_plus_redshift": {
+    "hgb": {
+     "auc": 0.8924767406265751,
+     "ap": 0.6196768284455333
+    },
+    "logreg": {
+     "auc": 0.5946114706137673,
+     "ap": 0.18350547084038904
+    },
+    "floor_learner": "hgb",
+    "floor_auc_ci95_group_bootstrap": [
+     0.8814766093213084,
+     0.9030036652300266
+    ],
+    "floor_ap_ci95_group_bootstrap": [
+     0.5875910186146392,
+     0.653651381590305
+    ],
+    "auc_above_chance": 0.3924767406265751,
+    "share_of_T1_signal_above_chance": 0.9779750879186303
+   }
+  },
+  "control_label_permutation_T1_auc": 0.4910718120304531,
+  "temporal_split": {
+   "n_train": 5098,
+   "n_test": 2745,
+   "rule": "train peakt < 1945.5 (JD-2458000; before 2023-01-01), test otherwise",
+   "tiers": {
+    "T1_full_post_spectroscopy": {
+     "auc": 0.8956002121515705,
+     "ap": 0.644392667640821,
+     "prevalence_test": 0.12932604735883424
+    },
+    "T2_photometric_retrospective": {
+     "auc": 0.7142542282986623,
+     "ap": 0.30658911162978175,
+     "prevalence_test": 0.12932604735883424
+    },
+    "T3_at_peak": {
+     "auc": 0.6574459308150157,
+     "ap": 0.2660753723234456,
+     "prevalence_test": 0.12932604735883424
+    },
+    "T4_at_first_alert": {
+     "auc": 0.5002822794507632,
+     "ap": 0.128894054479087,
+     "prevalence_test": 0.12932604735883424
+    },
+    "T2_plus_redshift": {
+     "auc": 0.8863480464376216,
+     "ap": 0.620420092715464,
+     "prevalence_test": 0.12932604735883424
+    }
+   }
+  }
+ },
+ "task_A_within_SNe_only": {
+  "n_objects": 6989,
+  "n_groups": 6979,
+  "n_positive": 5334,
+  "prevalence": 0.7631993132064673,
+  "chance_auc": 0.5,
+  "chance_ap": 0.7631993132064673,
+  "tiers": {
+   "T1_full_post_spectroscopy": {
+    "hgb": {
+     "auc": 0.9505906927797168,
+     "ap": 0.9792239870729011
+    },
+    "logreg": {
+     "auc": 0.9110936284021898,
+     "ap": 0.9412665265092204
+    },
+    "floor_learner": "hgb",
+    "floor_auc_ci95_group_bootstrap": [
+     0.9447086593030594,
+     0.957157028243693
+    ],
+    "floor_ap_ci95_group_bootstrap": [
+     0.9747842653787906,
+     0.983144210725469
+    ],
+    "auc_above_chance": 0.45059069277971675,
+    "share_of_T1_signal_above_chance": 1.0
+   },
+   "T2_photometric_retrospective": {
+    "hgb": {
+     "auc": 0.8176904246485807,
+     "ap": 0.9115348186082673
+    },
+    "logreg": {
+     "auc": 0.7266042273416728,
+     "ap": 0.835828116162052
+    },
+    "floor_learner": "hgb",
+    "floor_auc_ci95_group_bootstrap": [
+     0.8053261491153548,
+     0.830393682739099
+    ],
+    "floor_ap_ci95_group_bootstrap": [
+     0.9020403969868115,
+     0.9206318523456756
+    ],
+    "auc_above_chance": 0.31769042464858066,
+    "share_of_T1_signal_above_chance": 0.7050532328768985
+   },
+   "T3_at_peak": {
+    "hgb": {
+     "auc": 0.7263910364678735,
+     "ap": 0.8621972596006735
+    },
+    "logreg": {
+     "auc": 0.6522683531628033,
+     "ap": 0.798992045774103
+    },
+    "floor_learner": "hgb",
+    "floor_auc_ci95_group_bootstrap": [
+     0.7113668938154205,
+     0.7416095707476619
+    ],
+    "floor_ap_ci95_group_bootstrap": [
+     0.8495957522401936,
+     0.8734939175736525
+    ],
+    "auc_above_chance": 0.2263910364678735,
+    "share_of_T1_signal_above_chance": 0.502431674900464
+   },
+   "T4_at_first_alert": {
+    "hgb": {
+     "auc": 0.5030954589890765,
+     "ap": 0.7626710307776494
+    },
+    "logreg": {
+     "auc": 0.5059398353151475,
+     "ap": 0.7643291386493483
+    },
+    "floor_learner": "logreg",
+    "floor_auc_ci95_group_bootstrap": [
+     0.4912467899486249,
+     0.5215300817186883
+    ],
+    "floor_ap_ci95_group_bootstrap": [
+     0.7501212890129447,
+     0.7790326863219663
+    ],
+    "auc_above_chance": 0.005939835315147524,
+    "share_of_T1_signal_above_chance": 0.013182330239678009
+   },
+   "T2_plus_redshift": {
+    "hgb": {
+     "auc": 0.9491693825280902,
+     "ap": 0.9784130114765597
+    },
+    "logreg": {
+     "auc": 0.9026713428193076,
+     "ap": 0.938784067630035
+    },
+    "floor_learner": "hgb",
+    "floor_auc_ci95_group_bootstrap": [
+     0.9428950801841637,
+     0.9557242926270515
+    ],
+    "floor_ap_ci95_group_bootstrap": [
+     0.9737037130848664,
+     0.9825960025936764
+    ],
+    "auc_above_chance": 0.44916938252809024,
+    "share_of_T1_signal_above_chance": 0.9968456733030627
+   }
+  },
+  "control_label_permutation_T1_auc": 0.505988488599046,
+  "temporal_split": {
+   "n_train": 4473,
+   "n_test": 2516,
+   "rule": "train peakt < 1945.5 (JD-2458000; before 2023-01-01), test otherwise",
+   "tiers": {
+    "T1_full_post_spectroscopy": {
+     "auc": 0.9557545092281878,
+     "ap": 0.9836772800438258,
+     "prevalence_test": 0.7631160572337043
+    },
+    "T2_photometric_retrospective": {
+     "auc": 0.7950826691834452,
+     "ap": 0.9003907935361366,
+     "prevalence_test": 0.7631160572337043
+    },
+    "T3_at_peak": {
+     "auc": 0.7159846022091723,
+     "ap": 0.8616840534646737,
+     "prevalence_test": 0.7631160572337043
+    },
+    "T4_at_first_alert": {
+     "auc": 0.49170511744966444,
+     "ap": 0.7660400072101599,
+     "prevalence_test": 0.7631160572337043
+    },
+    "T2_plus_redshift": {
+     "auc": 0.9495420861297539,
+     "ap": 0.9792141592436534,
+     "prevalence_test": 0.7631160572337043
+    }
+   }
+  }
+ }
+}

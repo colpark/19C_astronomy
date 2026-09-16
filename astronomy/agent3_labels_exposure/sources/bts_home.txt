@@ -1,0 +1,345 @@
+ZTF Bright Transient Survey 
+ The ZTF Bright Transient Survey
+ Sample Summary • 
+ Latest Transients •
+ Unclassified SN Candidates •
+ Completeness Statistics •
+ Papers •
+ Team •
+ Sample Explorer 
+ The Zwicky Transient Facility ( ZTF ) Bright Transient Survey is by far the largest spectroscopic supernova survey ever conducted. 
+Since June of 2018 we have been surveying the entire nighttime Northern sky every 2-3 nights in two filters 
+and acquiring spectra of (almost) every time-varying, nonmoving object brighter than 18.5 mag that is not a Galactic source or an AGN, providing a complete and unbiased view of the dynamic optical sky. 
+Transients down to 19.0 mag are also targeted when possible (given available spectroscopic resources). Between 2017 and 2024 we catalogued over 10000 supernovae and hundreds of "exotic" transients: tidal disruption events, superluminous supernovae, and the like.
+ While the prime survey is completed, the BTS continues in modified form into 2025: we
+are continuing to survey the ZTF public fields and classify all transients brighter than 18.0 mag, and all transients coincident with known galaxies within 150 Mpc are targeted for observations down to the survey limit of about 20 mag ( CATS150 ).
+ So far, our efforts have detected 11580 spectroscopically-confirmed transients brighter than 19 mag (11431 supernovae and 149 transients of other types). The large majority of these classifications were provided by our programs.
+ Alert data (including preliminary photometry) is released in real time via ZTF Alert Brokers ( 1 , 2 , 3 , 4 ) and spectra and classifications are announced nightly via TNS .
+ Cumulative properties of the sample are compiled here and in our papers . Some properties of the current sample can be explored in detail using the BTS Sample Explorer .
+ Sample Summary
+ The statistics below (by class and limiting peak magnitude) are updated daily: 
+numbers in each cell provide the total of publicly-available TNS classifications of each type.
+Classifications come mostly from our own programs, but also use reports from other groups via TNS.
+Not all classifications are final and statistics do not include transients with non-public classifications.
+The table on the right includes every ZTF Northern Sky Survey transient above 19.0 magnitude; 
+the table on the left is specific to events passing a variety of cuts to establish a high-quality statistical sample: 
+see below for details. Plots show a skymap of all confirmed extragalactic transients,
+and a preliminary luminosity-duration plot for sample transients.
+ SN-like events passing sample cuts:
+ mag ≤ 19.0 18.5 18.0 17.5 17.0 
+ All typed 7144 4819 2473 1313 651 
+ All SNe 7063 4757 2432 1287 634 
+ Ia 5322 3616 1827 964 478 
+ Ia-CSM 11 9 4 3 3 
+ Iax 19 13 9 8 5 
+ Ib/c 396 262 141 68 34 
+ Ibn 32 24 16 5 1 
+ Ic-BL 70 54 26 14 8 
+ SLSN-I 64 35 19 12 4 
+ II 1281 844 445 243 118 
+ IIb 108 70 39 22 12 
+ IIn 176 123 68 38 17 
+ SLSN-II 30 14 6 2 1 
+ TDE 40 25 15 8 6 
+ Gap 9 8 5 4 2 
+ Ca-rich 1 0 0 0 0 
+ LRN 3 3 1 1 0 
+ ILRT 2 2 2 2 1 
+ LBV 3 3 2 1 1 
+ Novae 30 27 20 13 8 
+ Other 2 2 1 1 1 
+ All events:
+ mag ≤ 19.0 18.5 18.0 17.5 17.0 
+ All typed 11580 8046 4300 2315 1170 
+ All SNe 11431 7931 4226 2270 1144 
+ Ia 8330 5836 3091 1669 855 
+ Ia-CSM 24 17 8 5 5 
+ Iax 33 25 18 13 9 
+ Ib/c 604 427 242 116 55 
+ Ibn 41 32 20 8 3 
+ Ic-BL 96 77 41 20 10 
+ SLSN-I 110 62 34 19 8 
+ II 2387 1606 859 466 226 
+ IIb 161 105 64 35 19 
+ IIn 301 211 118 65 28 
+ SLSN-II 56 32 11 4 2 
+ TDE 78 52 28 14 8 
+ Gap 19 17 10 6 4 
+ Ca-rich 6 4 1 1 1 
+ LRN 4 4 2 1 0 
+ ILRT 3 3 3 2 1 
+ LBV 6 6 4 2 2 
+ Novae 50 44 35 24 13 
+ Other 2 2 1 1 1 
+Note: the classes above are not all independent (e.g. the total for Ib/c includes Ibn and Ic-BL; the total for II includes IIb, IIn, and SLSN-II) so the sum of the individual SN counts is greater than the "All SNe" count. 
+BTS classifications are based on low-resolution 2m-class spectra and while basic type classifications are reliable,
+we are not complete in assigning subtypes (II vs. IIb, Ib vs. Ic, etc.).
+The table on the left is restricted to events with P48 coverage before and after peak, good visibility, and "SN-like" behavior (a light curve slower than typical CV's or a host association, and faster evolution than AGNs). 
+See completeness for classification completeness statistics.
+Magnitudes are at the observed peak (in either filter) - for poorly sampled light curves this may underestimate the flux of the true peak.
+ Survey Design
+ Transients are provided by the Northern Sky Survey, a 3-night-cadence g+r survey of the whole extragalactic sky that is ZTF's primary public data stream. A software filter scans the ~1 million nightly "alerts" from this stream and identifies real, non-stellar, non-AGN sources above our magnitude cut, generating ~100 supernova candidates per night. A team of human scanners (mostly students, based around the world) examines the output to remove any remaining false positives and assigns the remaining targets for spectroscopy at robotic telescopes at Palomar (P60/SEDM) or La Palma.
+ Spectrum requests are inserted into a queue and typically observed within a few days, and reduced automatically. A combination of classification software and expert inspection are used to determine the redshifts and classifications. If the type is ambiguous, the object is re-inserted into the queue for observations. Classical runs at larger telescopes bolster the effort. Numerous automatic checkers and cross-checkers operate as a fail-safe to ensure nothing fades away before it is classified.
+ Our goal is to classify every target that is plausibly a supernova and reaches a recorded peak magnitude brighter than 18.5 mag. Other transients (fainter transients, and SNe whose peak was not captured) are classified as well when sufficient spectroscopic resources are available. Statistics on our success rate are provided in the below links.
+ All new SN classifications are sent to TNS within 24 hours and the associated spectra are also provided (with rare exceptions, generally for classifications based on proprietary data from other ZTF partners not associated with our effort). An interactive tool to search our entire sample is also made available below.
+-->
+ Latest Transients
+ The following list shows the most recent candidates saved to the program. No light curve or host-galaxy filtering has been applied, so this may include some false positives such as cataclysmic variables or AGNs.
+ ID TNSID saved RA dec Δt last m last type z 
+ ZTF26ablrlmp AT2026xcr 2026-08-09 20:55:17.77 -05:38:57.5 38.40 g = 19.89 - - 
+ Supernova Candidates Needing Classification
+ The following list shows older SN candidates still needing classification, and may be useful to observers with classification programs in need of targets (the most recent ZTF magnitude is provided below). A looser version of the sample cuts has been applied to this list to remove some false positives and poorly-observed SNe. Because the whole light curve is not available yet there may still be a few false positives in this list.
+ ID TNSID saved RA dec Δt last m last 
+ Completeness
+ Our goal is to be close to 100% spectroscopically complete for all genuine extragalactic transients brighter 
+than 18.5 magnitude
+that are detected in more than one imaging epoch in the survey footprint, for which the epoch of maximum light
+is clearly observed, and which do not set within about a month after maximum light. (Transients that do not
+meet these cuts are also observed when possible.) Our actual completeness for events meeting all these criteria is about 95%. 
+(The remaining 5% are mostly concentrated in periods of bad weather that affected our spectroscopic follow-up programs.)
+ The table at left below presents classification success statistics (by limiting magnitude) for events meeting these criteria (at left) and exhibiting 
+"SN-like behavior" (slow rise and/or fade time, or coincident with a galaxy). The month and peak magnitude are as observed
+(in either filter). These totals do include unreleased classifications, so they are slightly higher than the totals given
+in the type-specific table above. The table at right includes all events, including
+those with poor visibility which could not be classified (many of these are stars).
+ A visualization of this is also given in the figure at right: large points indicate classification successes (green circle) or failures (red X) for sample transients; small dots show other potential transients that fail our cuts.
+SN-like events passing sample cuts:
+ mag ≤19.0 ≤18.5 ≤18.0 ≤17.5 ≤17.0 
+ 2018 May 19/23 (82.6%) 19/21 (90.5%) 7/7 (100%) 4/4 (100%) 3/3 (100%) 
+ 2018 Jun 40/43 (93.0%) 22/22 (100%) 12/12 (100%) 7/7 (100%) 6/6 (100%) 
+ 2018 Jul 53/55 (96.4%) 30/31 (96.8%) 13/13 (100%) 4/4 (100%) 3/3 (100%) 
+ 2018 Aug 48/49 (98.0%) 27/27 (100%) 15/15 (100%) 6/6 (100%) 2/2 (100%) 
+ 2018 Sep 28/33 (84.8%) 18/20 (90.0%) 9/10 (90.0%) 4/4 (100%) 3/3 (100%) 
+ 2018 Oct 1/1 (100%) 0/0 0/0 0/0 0/0 
+ 2018 Nov 46/59 (78.0%) 26/30 (86.7%) 16/17 (94.1%) 10/10 (100%) 4/4 (100%) 
+ 2018 Dec 60/79 (75.9%) 44/47 (93.6%) 24/24 (100%) 14/14 (100%) 9/9 (100%) 
+ 2019 Jan 53/115 (46.1%) 42/67 (62.7%) 31/38 (81.6%) 24/25 (96.0%) 16/16 (100%) 
+ 2019 Feb 54/90 (60.0%) 40/53 (75.5%) 22/23 (95.7%) 11/11 (100%) 7/7 (100%) 
+ 2019 Mar 58/76 (76.3%) 34/36 (94.4%) 23/23 (100%) 17/17 (100%) 11/11 (100%) 
+ 2019 Apr 100/133 (75.2%) 70/74 (94.6%) 36/36 (100%) 13/13 (100%) 2/2 (100%) 
+ 2019 May 77/107 (72.0%) 55/59 (93.2%) 37/38 (97.4%) 17/17 (100%) 8/8 (100%) 
+ 2019 Jun 95/113 (84.1%) 58/59 (98.3%) 30/30 (100%) 15/15 (100%) 6/6 (100%) 
+ 2019 Jul 99/112 (88.4%) 54/54 (100%) 30/30 (100%) 12/12 (100%) 6/6 (100%) 
+ 2019 Aug 115/133 (86.5%) 60/60 (100%) 25/25 (100%) 13/13 (100%) 6/6 (100%) 
+ 2019 Sep 122/143 (85.3%) 80/81 (98.8%) 46/47 (97.9%) 22/23 (95.7%) 14/14 (100%) 
+ 2019 Oct 123/158 (77.8%) 68/71 (95.8%) 31/31 (100%) 15/15 (100%) 10/10 (100%) 
+ 2019 Nov 117/163 (71.8%) 80/87 (92.0%) 41/41 (100%) 17/17 (100%) 7/7 (100%) 
+ 2019 Dec 60/85 (70.6%) 45/47 (95.7%) 25/25 (100%) 14/14 (100%) 6/6 (100%) 
+ 2020 Jan 113/155 (72.9%) 79/83 (95.2%) 35/38 (92.1%) 15/16 (93.8%) 8/8 (100%) 
+ 2020 Feb 133/171 (77.8%) 83/86 (96.5%) 49/50 (98.0%) 22/22 (100%) 8/8 (100%) 
+ 2020 Mar 14/15 (93.3%) 13/13 (100%) 6/6 (100%) 2/2 (100%) 1/1 (100%) 
+ 2020 Apr 50/72 (69.4%) 38/38 (100%) 22/22 (100%) 10/10 (100%) 6/6 (100%) 
+ 2020 May 112/154 (72.7%) 75/75 (100%) 42/42 (100%) 22/22 (100%) 12/12 (100%) 
+ 2020 Jun 102/128 (79.7%) 60/61 (98.4%) 30/31 (96.8%) 20/20 (100%) 8/8 (100%) 
+ 2020 Jul 76/104 (73.1%) 42/43 (97.7%) 26/27 (96.3%) 12/12 (100%) 6/6 (100%) 
+ 2020 Aug 79/88 (89.8%) 44/45 (97.8%) 18/19 (94.7%) 10/11 (90.9%) 5/5 (100%) 
+ 2020 Sep 99/117 (84.6%) 58/58 (100%) 28/28 (100%) 18/18 (100%) 9/9 (100%) 
+ 2020 Oct 138/170 (81.2%) 82/83 (98.8%) 41/41 (100%) 24/24 (100%) 11/11 (100%) 
+ 2020 Nov 134/178 (75.3%) 82/84 (97.6%) 36/36 (100%) 22/22 (100%) 12/12 (100%) 
+ 2020 Dec 130/192 (67.7%) 95/95 (100%) 40/40 (100%) 24/24 (100%) 11/11 (100%) 
+ 2021 Jan 92/133 (69.2%) 68/69 (98.6%) 39/39 (100%) 24/24 (100%) 9/9 (100%) 
+ 2021 Feb 112/151 (74.2%) 75/76 (98.7%) 36/36 (100%) 20/20 (100%) 11/11 (100%) 
+ 2021 Mar 103/157 (65.6%) 76/76 (100%) 31/31 (100%) 13/13 (100%) 8/8 (100%) 
+ 2021 Apr 142/177 (80.2%) 94/95 (98.9%) 47/47 (100%) 32/32 (100%) 13/13 (100%) 
+ 2021 May 114/144 (79.2%) 59/60 (98.3%) 31/32 (96.9%) 15/16 (93.8%) 8/8 (100%) 
+ 2021 Jun 95/133 (71.4%) 64/67 (95.5%) 28/28 (100%) 16/16 (100%) 9/9 (100%) 
+ 2021 Jul 107/147 (72.8%) 74/81 (91.4%) 36/37 (97.3%) 18/18 (100%) 7/7 (100%) 
+ 2021 Aug 102/129 (79.1%) 59/61 (96.7%) 38/38 (100%) 21/21 (100%) 8/8 (100%) 
+ 2021 Sep 132/157 (84.1%) 74/79 (93.7%) 32/35 (91.4%) 17/17 (100%) 6/6 (100%) 
+ 2021 Oct 100/136 (73.5%) 62/68 (91.2%) 34/35 (97.1%) 26/27 (96.3%) 12/12 (100%) 
+ 2021 Nov 92/128 (71.9%) 55/57 (96.5%) 24/24 (100%) 13/13 (100%) 8/8 (100%) 
+ 2021 Dec 0/0 0/0 0/0 0/0 0/0 
+ 2022 Jan 0/0 0/0 0/0 0/0 0/0 
+ 2022 Feb 0/6 (0.0%) 0/1 (0.0%) 0/0 0/0 0/0 
+ 2022 Mar 0/0 0/0 0/0 0/0 0/0 
+ 2022 Apr 68/115 (59.1%) 52/54 (96.3%) 24/24 (100%) 17/17 (100%) 10/10 (100%) 
+ 2022 May 87/142 (61.3%) 65/66 (98.5%) 27/27 (100%) 11/11 (100%) 8/8 (100%) 
+ 2022 Jun 99/150 (66.0%) 62/71 (87.3%) 30/34 (88.2%) 17/18 (94.4%) 11/12 (91.7%) 
+ 2022 Jul 96/120 (80.0%) 55/58 (94.8%) 29/31 (93.5%) 16/17 (94.1%) 8/8 (100%) 
+ 2022 Aug 100/132 (75.8%) 56/60 (93.3%) 25/27 (92.6%) 17/18 (94.4%) 10/11 (90.9%) 
+ 2022 Sep 112/134 (83.6%) 73/74 (98.6%) 24/25 (96.0%) 13/13 (100%) 4/4 (100%) 
+ 2022 Oct 136/170 (80.0%) 93/97 (95.9%) 49/52 (94.2%) 24/25 (96.0%) 10/11 (90.9%) 
+ 2022 Nov 106/177 (59.9%) 80/88 (90.9%) 37/40 (92.5%) 27/28 (96.4%) 12/12 (100%) 
+ 2022 Dec 69/107 (64.5%) 53/56 (94.6%) 30/30 (100%) 15/15 (100%) 5/5 (100%) 
+ 2023 Jan 24/46 (52.2%) 20/27 (74.1%) 13/15 (86.7%) 7/8 (87.5%) 5/5 (100%) 
+ 2023 Feb 42/63 (66.7%) 37/40 (92.5%) 24/27 (88.9%) 14/16 (87.5%) 5/6 (83.3%) 
+ 2023 Mar 13/27 (48.1%) 12/14 (85.7%) 8/8 (100%) 5/5 (100%) 2/2 (100%) 
+ 2023 Apr 116/181 (64.1%) 83/87 (95.4%) 42/44 (95.5%) 22/24 (91.7%) 12/13 (92.3%) 
+ 2023 May 78/108 (72.2%) 60/65 (92.3%) 39/40 (97.5%) 24/24 (100%) 15/15 (100%) 
+ 2023 Jun 57/84 (67.9%) 43/46 (93.5%) 18/20 (90.0%) 11/11 (100%) 7/7 (100%) 
+ 2023 Jul 67/99 (67.7%) 48/54 (88.9%) 29/31 (93.5%) 12/13 (92.3%) 5/5 (100%) 
+ 2023 Aug 81/143 (56.6%) 67/70 (95.7%) 28/28 (100%) 11/11 (100%) 7/7 (100%) 
+ 2023 Sep 98/138 (71.0%) 65/72 (90.3%) 37/43 (86.0%) 18/23 (78.3%) 7/10 (70.0%) 
+ 2023 Oct 112/173 (64.7%) 76/85 (89.4%) 34/39 (87.2%) 13/17 (76.5%) 2/6 (33.3%) 
+ 2023 Nov 52/89 (58.4%) 40/41 (97.6%) 18/18 (100%) 9/9 (100%) 3/3 (100%) 
+ 2023 Dec 18/26 (69.2%) 10/13 (76.9%) 6/6 (100%) 4/4 (100%) 2/2 (100%) 
+ 2024 Jan 36/63 (57.1%) 27/31 (87.1%) 15/16 (93.8%) 6/7 (85.7%) 2/2 (100%) 
+ 2024 Feb 26/49 (53.1%) 23/28 (82.1%) 14/14 (100%) 6/6 (100%) 4/4 (100%) 
+ 2024 Mar 56/84 (66.7%) 39/42 (92.9%) 18/19 (94.7%) 10/10 (100%) 5/5 (100%) 
+ 2024 Apr 97/151 (64.2%) 76/81 (93.8%) 36/39 (92.3%) 22/24 (91.7%) 10/12 (83.3%) 
+ 2024 May 74/127 (58.3%) 60/65 (92.3%) 36/39 (92.3%) 21/22 (95.5%) 10/10 (100%) 
+ 2024 Jun 71/110 (64.5%) 50/54 (92.6%) 24/25 (96.0%) 14/15 (93.3%) 8/9 (88.9%) 
+ 2024 Jul 86/129 (66.7%) 55/63 (87.3%) 30/36 (83.3%) 15/17 (88.2%) 9/9 (100%) 
+ 2024 Aug 97/130 (74.6%) 61/68 (89.7%) 32/38 (84.2%) 12/14 (85.7%) 7/8 (87.5%) 
+ 2024 Sep 108/150 (72.0%) 75/81 (92.6%) 38/42 (90.5%) 24/25 (96.0%) 10/10 (100%) 
+ 2024 Oct 78/97 (80.4%) 52/56 (92.9%) 27/30 (90.0%) 14/16 (87.5%) 8/9 (88.9%) 
+ 2024 Nov 120/178 (67.4%) 81/93 (87.1%) 37/40 (92.5%) 10/12 (83.3%) 4/6 (66.7%) 
+ 2024 Dec 76/131 (58.0%) 56/65 (86.2%) 29/31 (93.5%) 21/22 (95.5%) 10/10 (100%) 
+ 2025 Jan 105/185 (56.8%) 82/93 (88.2%) 46/53 (86.8%) 23/26 (88.5%) 10/11 (90.9%) 
+ 2025 Feb 68/114 (59.6%) 57/65 (87.7%) 32/34 (94.1%) 13/14 (92.9%) 8/8 (100%) 
+ 2025 Mar 66/132 (50.0%) 56/68 (82.4%) 29/34 (85.3%) 18/20 (90.0%) 8/9 (88.9%) 
+ 2025 Apr 76/121 (62.8%) 54/58 (93.1%) 34/34 (100%) 18/18 (100%) 9/9 (100%) 
+ 2025 May 73/103 (70.9%) 48/54 (88.9%) 23/24 (95.8%) 5/6 (83.3%) 3/3 (100%) 
+ 2025 Jun 76/115 (66.1%) 46/50 (92.0%) 22/24 (91.7%) 16/17 (94.1%) 8/9 (88.9%) 
+ 2025 Jul 55/76 (72.4%) 38/39 (97.4%) 19/20 (95.0%) 12/13 (92.3%) 6/6 (100%) 
+ 2025 Aug 57/87 (65.5%) 32/36 (88.9%) 15/15 (100%) 5/5 (100%) 1/1 (100%) 
+ 2025 Sep 78/133 (58.6%) 64/72 (88.9%) 22/25 (88.0%) 8/9 (88.9%) 5/5 (100%) 
+ 2025 Oct 82/131 (62.6%) 64/73 (87.7%) 33/36 (91.7%) 19/22 (86.4%) 12/14 (85.7%) 
+ 2025 Nov 73/118 (61.9%) 54/63 (85.7%) 34/36 (94.4%) 21/23 (91.3%) 8/8 (100%) 
+ 2025 Dec 82/162 (50.6%) 58/77 (75.3%) 36/41 (87.8%) 9/13 (69.2%) 3/6 (50.0%) 
+ 2026 Jan 62/140 (44.3%) 51/65 (78.5%) 25/27 (92.6%) 13/14 (92.9%) 9/10 (90.0%) 
+ 2026 Feb 62/103 (60.2%) 46/50 (92.0%) 26/27 (96.3%) 16/17 (94.1%) 6/6 (100%) 
+ 2026 Mar 67/86 (77.9%) 39/42 (92.9%) 15/16 (93.8%) 7/7 (100%) 2/2 (100%) 
+ 2026 Apr 50/77 (64.9%) 30/34 (88.2%) 15/16 (93.8%) 7/8 (87.5%) 3/4 (75.0%) 
+ 2026 May 44/55 (80.0%) 18/23 (78.3%) 7/12 (58.3%) 1/3 (33.3%) 0/2 (0.0%) 
+ 2026 Jun 40/55 (72.7%) 22/27 (81.5%) 12/14 (85.7%) 6/7 (85.7%) 4/5 (80.0%) 
+ 2026 Jul 22/31 (71.0%) 12/18 (66.7%) 6/8 (75.0%) 3/4 (75.0%) 1/2 (50.0%) 
+ 2026 Aug 3/4 (75.0%) 0/0 0/0 0/0 0/0 
+ all 7536/10763
+ (70.0%) 5059/5472
+ (92.5%) 2580/2721
+ (94.8%) 1357/1424
+ (95.3%) 668/701
+ (95.3%) 
+All events (includes many unclassified variables):
+ mag ≤19.0 ≤18.5 ≤18.0 ≤17.5 ≤17.0 
+ 2018 May 61/67 (91.0%) 44/47 (93.6%) 22/22 (100%) 9/9 (100%) 7/7 (100%) 
+ 2018 Jun 80/91 (87.9%) 44/46 (95.7%) 21/22 (95.5%) 11/11 (100%) 8/8 (100%) 
+ 2018 Jul 85/93 (91.4%) 56/59 (94.9%) 27/27 (100%) 13/13 (100%) 6/6 (100%) 
+ 2018 Aug 82/88 (93.2%) 55/59 (93.2%) 31/34 (91.2%) 17/19 (89.5%) 7/7 (100%) 
+ 2018 Sep 137/162 (84.6%) 80/90 (88.9%) 37/42 (88.1%) 17/20 (85.0%) 8/10 (80.0%) 
+ 2018 Oct 19/21 (90.5%) 12/13 (92.3%) 7/8 (87.5%) 7/8 (87.5%) 3/3 (100%) 
+ 2018 Nov 170/211 (80.6%) 107/124 (86.3%) 66/77 (85.7%) 37/38 (97.4%) 18/19 (94.7%) 
+ 2018 Dec 134/195 (68.7%) 98/123 (79.7%) 50/59 (84.7%) 29/32 (90.6%) 20/20 (100%) 
+ 2019 Jan 84/178 (47.2%) 66/109 (60.6%) 46/60 (76.7%) 30/32 (93.8%) 17/17 (100%) 
+ 2019 Feb 106/179 (59.2%) 78/116 (67.2%) 44/51 (86.3%) 26/27 (96.3%) 13/14 (92.9%) 
+ 2019 Mar 115/160 (71.9%) 67/85 (78.8%) 39/48 (81.3%) 28/31 (90.3%) 18/20 (90.0%) 
+ 2019 Apr 127/190 (66.8%) 88/109 (80.7%) 41/47 (87.2%) 16/19 (84.2%) 4/6 (66.7%) 
+ 2019 May 115/176 (65.3%) 85/98 (86.7%) 48/51 (94.1%) 28/28 (100%) 13/13 (100%) 
+ 2019 Jun 163/208 (78.4%) 116/122 (95.1%) 55/57 (96.5%) 30/31 (96.8%) 14/14 (100%) 
+ 2019 Jul 144/176 (81.8%) 82/86 (95.3%) 42/43 (97.7%) 17/18 (94.4%) 9/10 (90.0%) 
+ 2019 Aug 150/192 (78.1%) 83/91 (91.2%) 37/41 (90.2%) 17/20 (85.0%) 6/9 (66.7%) 
+ 2019 Sep 143/196 (73.0%) 96/106 (90.6%) 56/62 (90.3%) 28/31 (90.3%) 17/17 (100%) 
+ 2019 Oct 167/254 (65.7%) 100/124 (80.6%) 48/57 (84.2%) 27/31 (87.1%) 17/20 (85.0%) 
+ 2019 Nov 171/270 (63.3%) 121/153 (79.1%) 64/78 (82.1%) 28/34 (82.4%) 14/18 (77.8%) 
+ 2019 Dec 119/181 (65.7%) 92/106 (86.8%) 50/54 (92.6%) 25/27 (92.6%) 11/12 (91.7%) 
+ 2020 Jan 175/262 (66.8%) 120/140 (85.7%) 56/66 (84.8%) 22/25 (88.0%) 12/13 (92.3%) 
+ 2020 Feb 177/256 (69.1%) 117/135 (86.7%) 69/75 (92.0%) 33/35 (94.3%) 13/15 (86.7%) 
+ 2020 Mar 78/120 (65.0%) 60/72 (83.3%) 33/34 (97.1%) 16/17 (94.1%) 11/11 (100%) 
+ 2020 Apr 107/219 (48.9%) 85/109 (78.0%) 51/65 (78.5%) 30/36 (83.3%) 20/25 (80.0%) 
+ 2020 May 137/219 (62.6%) 97/118 (82.2%) 53/63 (84.1%) 26/30 (86.7%) 15/18 (83.3%) 
+ 2020 Jun 129/197 (65.5%) 85/104 (81.7%) 47/56 (83.9%) 29/32 (90.6%) 10/12 (83.3%) 
+ 2020 Jul 121/197 (61.4%) 73/98 (74.5%) 39/52 (75.0%) 17/25 (68.0%) 10/12 (83.3%) 
+ 2020 Aug 103/134 (76.9%) 61/72 (84.7%) 27/32 (84.4%) 14/17 (82.4%) 6/7 (85.7%) 
+ 2020 Sep 135/192 (70.3%) 87/106 (82.1%) 46/58 (79.3%) 28/34 (82.4%) 16/19 (84.2%) 
+ 2020 Oct 177/267 (66.3%) 105/132 (79.5%) 61/75 (81.3%) 34/44 (77.3%) 18/25 (72.0%) 
+ 2020 Nov 167/277 (60.3%) 106/132 (80.3%) 53/63 (84.1%) 33/35 (94.3%) 21/22 (95.5%) 
+ 2020 Dec 171/292 (58.6%) 126/155 (81.3%) 56/70 (80.0%) 30/36 (83.3%) 13/17 (76.5%) 
+ 2021 Jan 162/271 (59.8%) 116/141 (82.3%) 64/74 (86.5%) 31/37 (83.8%) 14/16 (87.5%) 
+ 2021 Feb 187/309 (60.5%) 129/161 (80.1%) 70/81 (86.4%) 39/46 (84.8%) 20/24 (83.3%) 
+ 2021 Mar 131/236 (55.5%) 94/119 (79.0%) 40/52 (76.9%) 20/27 (74.1%) 9/12 (75.0%) 
+ 2021 Apr 160/235 (68.1%) 107/124 (86.3%) 56/65 (86.2%) 36/42 (85.7%) 15/18 (83.3%) 
+ 2021 May 153/231 (66.2%) 88/110 (80.0%) 50/60 (83.3%) 25/31 (80.6%) 13/16 (81.3%) 
+ 2021 Jun 131/209 (62.7%) 92/113 (81.4%) 43/49 (87.8%) 24/26 (92.3%) 14/15 (93.3%) 
+ 2021 Jul 136/205 (66.3%) 92/108 (85.2%) 48/56 (85.7%) 24/26 (92.3%) 9/10 (90.0%) 
+ 2021 Aug 144/195 (73.8%) 83/94 (88.3%) 51/54 (94.4%) 23/23 (100%) 9/9 (100%) 
+ 2021 Sep 157/209 (75.1%) 90/101 (89.1%) 43/46 (93.5%) 22/22 (100%) 9/9 (100%) 
+ 2021 Oct 136/228 (59.6%) 89/114 (78.1%) 55/65 (84.6%) 40/43 (93.0%) 20/22 (90.9%) 
+ 2021 Nov 160/261 (61.3%) 101/130 (77.7%) 48/62 (77.4%) 28/34 (82.4%) 13/17 (76.5%) 
+ 2021 Dec 30/44 (68.2%) 17/24 (70.8%) 12/17 (70.6%) 6/9 (66.7%) 3/4 (75.0%) 
+ 2022 Jan 25/37 (67.6%) 13/15 (86.7%) 8/8 (100%) 3/3 (100%) 0/0 
+ 2022 Feb 153/267 (57.3%) 110/143 (76.9%) 58/71 (81.7%) 32/38 (84.2%) 12/14 (85.7%) 
+ 2022 Mar 49/74 (66.2%) 27/34 (79.4%) 10/13 (76.9%) 4/5 (80.0%) 1/2 (50.0%) 
+ 2022 Apr 151/294 (51.4%) 112/153 (73.2%) 53/68 (77.9%) 38/43 (88.4%) 21/24 (87.5%) 
+ 2022 May 117/225 (52.0%) 86/109 (78.9%) 40/49 (81.6%) 19/24 (79.2%) 14/17 (82.4%) 
+ 2022 Jun 138/213 (64.8%) 90/107 (84.1%) 45/54 (83.3%) 30/34 (88.2%) 15/16 (93.8%) 
+ 2022 Jul 130/169 (76.9%) 78/87 (89.7%) 39/43 (90.7%) 25/28 (89.3%) 14/16 (87.5%) 
+ 2022 Aug 122/182 (67.0%) 72/92 (78.3%) 32/41 (78.0%) 22/23 (95.7%) 13/13 (100%) 
+ 2022 Sep 172/233 (73.8%) 110/120 (91.7%) 46/49 (93.9%) 27/27 (100%) 10/10 (100%) 
+ 2022 Oct 164/261 (62.8%) 113/138 (81.9%) 62/72 (86.1%) 29/33 (87.9%) 14/16 (87.5%) 
+ 2022 Nov 158/313 (50.5%) 124/163 (76.1%) 65/79 (82.3%) 44/50 (88.0%) 22/25 (88.0%) 
+ 2022 Dec 129/263 (49.0%) 99/127 (78.0%) 63/69 (91.3%) 28/31 (90.3%) 11/12 (91.7%) 
+ 2023 Jan 106/216 (49.1%) 88/131 (67.2%) 59/79 (74.7%) 35/48 (72.9%) 19/26 (73.1%) 
+ 2023 Feb 104/188 (55.3%) 87/117 (74.4%) 54/66 (81.8%) 26/31 (83.9%) 12/14 (85.7%) 
+ 2023 Mar 81/144 (56.3%) 69/94 (73.4%) 37/48 (77.1%) 25/31 (80.6%) 14/17 (82.4%) 
+ 2023 Apr 142/254 (55.9%) 103/124 (83.1%) 54/64 (84.4%) 31/38 (81.6%) 17/22 (77.3%) 
+ 2023 May 120/210 (57.1%) 93/111 (83.8%) 55/61 (90.2%) 34/37 (91.9%) 22/23 (95.7%) 
+ 2023 Jun 113/195 (57.9%) 84/101 (83.2%) 44/52 (84.6%) 27/29 (93.1%) 14/15 (93.3%) 
+ 2023 Jul 111/171 (64.9%) 82/91 (90.1%) 44/46 (95.7%) 21/22 (95.5%) 8/9 (88.9%) 
+ 2023 Aug 115/198 (58.1%) 92/107 (86.0%) 44/45 (97.8%) 19/19 (100%) 9/9 (100%) 
+ 2023 Sep 132/214 (61.7%) 94/111 (84.7%) 55/56 (98.2%) 29/29 (100%) 15/15 (100%) 
+ 2023 Oct 134/240 (55.8%) 92/118 (78.0%) 43/51 (84.3%) 16/19 (84.2%) 5/8 (62.5%) 
+ 2023 Nov 91/180 (50.6%) 73/95 (76.8%) 38/46 (82.6%) 20/21 (95.2%) 12/12 (100%) 
+ 2023 Dec 111/186 (59.7%) 77/107 (72.0%) 41/46 (89.1%) 25/28 (89.3%) 15/15 (100%) 
+ 2024 Jan 95/195 (48.7%) 74/103 (71.8%) 42/53 (79.2%) 22/26 (84.6%) 8/11 (72.7%) 
+ 2024 Feb 94/204 (46.1%) 83/117 (70.9%) 54/65 (83.1%) 30/31 (96.8%) 20/20 (100%) 
+ 2024 Mar 117/194 (60.3%) 92/115 (80.0%) 52/64 (81.3%) 26/30 (86.7%) 14/16 (87.5%) 
+ 2024 Apr 119/206 (57.8%) 89/114 (78.1%) 43/55 (78.2%) 27/33 (81.8%) 12/14 (85.7%) 
+ 2024 May 93/175 (53.1%) 76/89 (85.4%) 46/50 (92.0%) 26/26 (100%) 13/13 (100%) 
+ 2024 Jun 112/180 (62.2%) 78/95 (82.1%) 42/45 (93.3%) 22/24 (91.7%) 13/15 (86.7%) 
+ 2024 Jul 116/164 (70.7%) 79/89 (88.8%) 43/48 (89.6%) 25/28 (89.3%) 12/14 (85.7%) 
+ 2024 Aug 120/165 (72.7%) 80/94 (85.1%) 41/46 (89.1%) 15/17 (88.2%) 9/9 (100%) 
+ 2024 Sep 148/218 (67.9%) 106/122 (86.9%) 52/59 (88.1%) 30/33 (90.9%) 14/15 (93.3%) 
+ 2024 Oct 151/197 (76.6%) 105/118 (89.0%) 56/61 (91.8%) 31/32 (96.9%) 14/15 (93.3%) 
+ 2024 Nov 146/235 (62.1%) 104/127 (81.9%) 49/55 (89.1%) 15/18 (83.3%) 7/8 (87.5%) 
+ 2024 Dec 112/197 (56.9%) 86/112 (76.8%) 50/56 (89.3%) 30/31 (96.8%) 12/12 (100%) 
+ 2025 Jan 149/253 (58.9%) 113/130 (86.9%) 65/71 (91.5%) 33/35 (94.3%) 13/14 (92.9%) 
+ 2025 Feb 144/236 (61.0%) 117/140 (83.6%) 74/79 (93.7%) 37/38 (97.4%) 26/26 (100%) 
+ 2025 Mar 91/179 (50.8%) 72/92 (78.3%) 43/45 (95.6%) 30/31 (96.8%) 11/11 (100%) 
+ 2025 Apr 109/175 (62.3%) 83/95 (87.4%) 48/51 (94.1%) 25/27 (92.6%) 12/13 (92.3%) 
+ 2025 May 127/199 (63.8%) 97/113 (85.8%) 53/55 (96.4%) 21/21 (100%) 12/12 (100%) 
+ 2025 Jun 128/194 (66.0%) 81/98 (82.7%) 40/45 (88.9%) 24/27 (88.9%) 12/12 (100%) 
+ 2025 Jul 93/133 (69.9%) 60/68 (88.2%) 30/35 (85.7%) 16/19 (84.2%) 8/10 (80.0%) 
+ 2025 Aug 120/172 (69.8%) 69/84 (82.1%) 34/36 (94.4%) 18/18 (100%) 7/7 (100%) 
+ 2025 Sep 101/173 (58.4%) 79/92 (85.9%) 32/35 (91.4%) 15/15 (100%) 6/6 (100%) 
+ 2025 Oct 117/206 (56.8%) 95/113 (84.1%) 50/52 (96.2%) 31/32 (96.9%) 16/17 (94.1%) 
+ 2025 Nov 106/190 (55.8%) 81/105 (77.1%) 52/57 (91.2%) 28/30 (93.3%) 13/14 (92.9%) 
+ 2025 Dec 135/269 (50.2%) 104/135 (77.0%) 66/71 (93.0%) 22/22 (100%) 11/11 (100%) 
+ 2026 Jan 51/227 (22.5%) 40/108 (37.0%) 25/46 (54.3%) 16/22 (72.7%) 12/14 (85.7%) 
+ 2026 Feb 2/68 (2.9%) 1/47 (2.1%) 1/32 (3.1%) 1/22 (4.5%) 0/10 (0.0%) 
+ 2026 Mar 3/46 (6.5%) 2/36 (5.6%) 1/20 (5.0%) 1/10 (10.0%) 0/4 (0.0%) 
+ 2026 Apr 2/121 (1.7%) 1/61 (1.6%) 0/33 (0.0%) 0/16 (0.0%) 0/8 (0.0%) 
+ 2026 May 1/101 (1.0%) 1/52 (1.9%) 1/23 (4.3%) 1/10 (10.0%) 0/6 (0.0%) 
+ 2026 Jun 2/134 (1.5%) 2/74 (2.7%) 1/43 (2.3%) 0/18 (0.0%) 0/9 (0.0%) 
+ 2026 Jul 1/88 (1.1%) 1/38 (2.6%) 0/15 (0.0%) 0/9 (0.0%) 0/5 (0.0%) 
+ 2026 Aug 0/26 (0.0%) 0/16 (0.0%) 0/7 (0.0%) 0/3 (0.0%) 0/2 (0.0%) 
+ all 11534/19026
+ (60.6%) 8029/10185
+ (78.8%) 4288/5125
+ (83.7%) 2306/2665
+ (86.5%) 1164/1346
+ (86.5%) 
+Note: Months correspond to equal divisions of the calendar year into 12 segments rather than standard calendar months. 
+Sky-area coverage during summer 2018 was much reduced due to reference-building. P48 was closed for maintenance for almost all of October 2018. 
+Most of March 2020 was lost due to weather (3 consecutive weeks of rain/cloud) and few events met the sample criteria. Extensive camera downtime between Dec 2021 and Apr 2022
+meant that no events had sufficient coverage to pass the sample criteria in this period.
+The most recent 1-2 months are generally undercounts, since classifications of declining objects are still being performed.
+These statistics include some events for which classifications have not yet been publicly released. The completeness estimates are lower limits at the bright end, as most unclassified transients brighter than 18 mag are (unconfirmed) CV's and not extragalactic.
+ BTS Papers
+ Paper I: Spectroscopic Classification and the Redshift Completeness of Local Galaxy Catalogs (Fremling et al. 2020, ApJ 895:32)
+ Paper II: A Public Statistical Sample for Exploring Supernova Demographics (Perley et al. 2020, ApJ 904:35 )
+ Paper III: BTSbot: Automated Identification and Follow-up of Bright Transients with Deep Learning (Rehemtulla et al. 2024, ApJ 972:7)
+ Key Team Members
+Christoffer Fremling (Caltech) 
+Daniel Perley (LJMU) 
+Yujing Qin (Caltech) 
+Don Neill (Caltech) 
+Adam Miller (Northwestern) 
+Nabeel Rehemtulla (Northwestern) 
+Jesper Sollerman (Stockholm) 
+Shri Kulkarni (Caltech) 
+K-Ryan Hinds (LJMU) 
+Aishwarya Dahiwale (Caltech) 
+Yashvi Sharma (Caltech) 
+ ZTF and the BTS are made possible by grants from the NSF and other agencies. 
+ Page developed by Daniel Perley : Send comments or queries to d.a.perley [at] ljmu.ac.uk

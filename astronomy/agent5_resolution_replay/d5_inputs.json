@@ -1,0 +1,57 @@
+[
+  {
+    "id": "d5-budget",
+    "value": null,
+    "referent": "hours or cells the programme can spend on this benchmark",
+    "source": "references/manifest.md 'Supplied by you at D5'; references/stages/discovery.md D5; not supplied as of 2026-09-16 per PANEL_BRIEF.md 'Status of this run'",
+    "population": "the human programme running the benchmark, not the corpus",
+    "adjudicator": "none: no budget has been proposed, so there is no weaker or stronger alternative to price against",
+    "falsifier": "a written budget from the human that differs from any figure later used to size the cohort would show the sizing was not grounded",
+    "status": "UNDEMONSTRATED",
+    "human_must_supply": "a number in agent-arm cells (one cell = one subject x one arm x one round) or wall-clock hours, with the arms counted (FM-tool agent, classical-tool agent, mechanical composition)",
+    "why_the_corpus_cannot_supply_it": "the seeds record what BTS, TiDES and SEDM spent (e.g. 900 NTT nights over 5 years for SOXS, arXiv:1812.07401 line 126; 250,000 fibre-hours for TiDES, arXiv:2501.16311 line 43), which are telescope budgets of other programmes, not the compute and review hours this programme has",
+    "blocks": [
+      "S",
+      "P5 queue loop escape",
+      "P7 N_min versus affordable N",
+      "R1 onward (no paid work on an unratified manifest)"
+    ],
+    "set_completeness": "budget, cost of action and S recorded UNDEMONSTRATED with what the human must supply; hours per workflow not measured (R1 not run)"
+  },
+  {
+    "id": "d5-cost-of-action",
+    "value": null,
+    "referent": "cost to this programme of committing one follow-up slot to a wrong candidate, and of missing a right one, expressed so a minimum decision-relevant effect can be read from it",
+    "source": "references/manifest.md 'Supplied by you at D5' ('the seeds show what others act on, not what you would act on'); not supplied as of 2026-09-16",
+    "population": "the human's own follow-up programme",
+    "adjudicator": "the delta prior (delta_slot.json, 0.018 on committed-set purity), which stands unless this overrides it",
+    "falsifier": "a supplied cost of action whose implied minimum effect falls below every MDE in a measured power record at the budgeted N would close the candidate at P7; until one is supplied that ruling is unmade",
+    "status": "UNDEMONSTRATED",
+    "human_must_supply": "either (a) the smallest improvement in committed-set precision (or the preregistered metric) that would change which tool the programme uses, or (b) the telescope time per spectrum and the value of a correct versus wrong classification from which (a) follows",
+    "why_the_corpus_cannot_supply_it": "the corpus gives other programmes' costs, such as a typical SEDM classification exposure of 1800 s at m about 18.5 (arXiv:1910.12973 section 2.3, lines 336-337), but not the value the human places on a slot or the effect that would change the human's decision",
+    "blocks": [
+      "delta override",
+      "P7 ruling",
+      "A4 claim threshold"
+    ],
+    "set_completeness": "budget, cost of action and S recorded UNDEMONSTRATED with what the human must supply; hours per workflow not measured (R1 not run)"
+  },
+  {
+    "id": "d5-S",
+    "value": null,
+    "referent": "survivor target S = budget / measured hours per workflow",
+    "source": "references/manifest.md ('S, the survivor target, is budget divided by measured hours per workflow'); references/graph.md D5 -> R1",
+    "population": "workflows (one scored item through all arms)",
+    "adjudicator": "none until hours per workflow are measured at R1; the source record repriced its cohort from about 17 to 37 hours (references/manifest.md)",
+    "falsifier": "a measured hours-per-workflow figure from an R1 control run that, divided into the supplied budget, disagrees with any S used earlier",
+    "status": "UNDEMONSTRATED",
+    "human_must_supply": "budget (above); hours per workflow is measured at R1, not supplied",
+    "why_the_corpus_cannot_supply_it": "S depends on this programme's budget and on its own harness speed, neither of which appears in any seed",
+    "blocks": [
+      "P5 escape condition",
+      "cohort sizing",
+      "the choice among N rows in planning_mde_bracket.csv"
+    ],
+    "set_completeness": "budget, cost of action and S recorded UNDEMONSTRATED with what the human must supply; hours per workflow not measured (R1 not run)"
+  }
+]

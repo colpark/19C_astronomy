@@ -1,0 +1,83 @@
+Action! NSF–DOE Vera C. Rubin Observatory Begins Capturing the Greatest Cosmic Movie Ever Made | Rubin Observatory
+Visit the Rubin Observatory on Facebook
+Visit the Rubin Observatory on Instagram
+Visit the Rubin Observatory on LinkedIn
+Visit the Rubin Observatory on Twitter
+Visit the Rubin Observatory on YouTube
+Media
+Ocean of Stars
+The depth of NSF–DOE Rubin’s LSST
+Ocean of Stars excerpts
+NSF–DOE Rubin’s LSST coverage
+NSF–DOE Vera C. Rubin Observatory by the numbers
+NSF–DOE Rubin’s Legacy Survey of Space and Time
+NSF–DOE Rubin’s Ocean of Stars field in the constellation Lupus
+NSF–DOE Vera C. Rubin Observatory by the numbers (Spanish)
+NSF–DOE Rubin’s Legacy Survey of Space and Time (Spanish)
+A Week in the Life of NSF–DOE Rubin LSST
+The depth of NSF–DOE Rubin’s LSST
+How NSF–DOE Rubin maps the Universe every night
+Pan on NSF–DOE Rubin’s Ocean of Stars
+A Week in the Life of NSF–DOE Rubin LSST (fulldome fisheye)
+A Week in the Life of NSF–DOE Rubin’s LSST (no annotations)
+Zooming into NSF–DOE Rubin’s Ocean of Stars
+A Week in the Life of NSF–DOE Rubin’s LSST (vertical)
+Tags
+#LSST
+#Legacy Survey of Space and Time
+Related News Posts
+Loading the News...
+Go Back to News Posts
+Action! NSF–DOE Vera C. Rubin Observatory Begins Capturing the Greatest Cosmic Movie Ever Made
+The 10-year Legacy Survey of Space and Time has officially started, marking the beginning of a new era in astronomy and astrophysicsJune 30, 2026
+The wait is over: NSF–DOE Rubin Observatory, funded by the U.S. National Science Foundation and the U.S. Department of Energy’s Office of Science, is now capturing the cosmos in unprecedented detail, transforming the way we study the dynamic Universe.
+Share
+From a mountaintop in Chile, under clear dark skies, NSF–DOE Vera C. Rubin Observatory has begun the revolutionary Legacy Survey of Space and Time (LSST). The ten-year survey is Rubin’s signature campaign to create the most comprehensive, cinematic record of the Universe in history.
+Rubin Observatory is a U.S. government facility jointly operated by NSF NOIRLab and DOE’s SLAC National Accelerator Laboratory. NOIRLab is managed by the Association of Universities for Research in Astronomy (AURA).
+Over the next ten years, Rubin will relentlessly observe the entire southern sky every few nights to create an ultra-wide, ultra-high-definition time-lapse record of our Universe. This long-awaited milestone is the culmination of years of effort by thousands of people around the world. It follows the celebratory Rubin First Look event that took place in June 2025, which was followed by final commissioning work, an operational readiness review, and the beginning of the alert stream.
+“Today, we begin filming the greatest cosmic movie ever made,” says Brian Stone, performing the duties of the NSF Director. “This moment reflects decades of vision, innovation, and the power of federal investment in science through the U.S. National Science Foundation and the Department of Energy. Every night, NSF–DOE Rubin Observatory will expand the frontiers of knowledge and strengthen America's global leadership in science and innovation.”
+“With the launch of the ten-year Legacy Survey of Space and Time, NSF–DOE Rubin Observatory is opening a new window on the Universe. It is embarking on a mission that will redefine modern cosmology and astrophysics,” says Darío Gil, Under Secretary for Science at the U.S. Department of Energy. “With its world-class design and tools, Rubin Observatory will capture the dynamic nature of our cosmos and reveal unimagined insights into our Universe’s biggest mysteries, from our own Solar System to the very structure of the Universe. By seeking to understand the enigmatic phenomena of dark energy and dark matter, we are not just observing the stars; we are striving to grasp the fundamental laws that govern our existence.”
+“It is amazing and humbling to be here at this time and place as we start the Legacy Survey of Space and Time, after more than two decades of incredible work by our dedicated team,” says Bob Blum, Director of Rubin Observatory at NSF NOIRLab. “Rubin Observatory is for everyone; the LSST will change how we do astronomy and astrophysics, allowing researchers anywhere to participate in cutting-edge science.”
+“It’s taken 20 years of hard science, engineering, and more to get to the point where we can call ‘action’ as we start rolling on this blockbuster movie of the Universe,” says Phil Marshall, Deputy Director of Rubin Operations for SLAC. “Millions of alerts in just the last couple of months show that Rubin is up and running as a discovery machine. Now we’re putting it all together.”
+“The decision to officially begin the LSST was made after a period of system optimization and a careful operational review of technical readiness, data system performance, and scientific validation,” says Željko Ivezić, Head of LSST. Important factors that played a role in this decision included image quality, effective survey speed, system uptime and reliability, and calibration accuracy.
+Rubin Observatory’s unique design combines enormous light-collecting power, the ability to move rapidly across the sky, and a wide field of view. Its 3200-megapixel camera — the largest digital camera in the world — is now capturing a new, detailed image approximately every 40 seconds. Operating with this speed and sensitivity, Rubin functions as a unified, well-tuned system capable of catching faint objects and fleeting events with remarkable reliability and consistency every night. Visit rubinobservatory.org to follow the status of the Rubin in real time (and visit the real-time Alert Dashboard).
+Rubin is bringing the Universe to life, illuminating a treasure trove of discoveries: pulsating stars, supernova explosions, the fossil record of galaxies, clues to the mysteries of dark energy and dark matter, and entirely new phenomena we’ve never seen before. Some cosmic processes unfold slowly, unpredictably, or incredibly rarely, which is why a ten-year survey is essential. By returning to each point in the sky about 800 times over a decade, Rubin data is providing the scientific community with deep, time-rich views needed to uncover subtle events, capture moving objects, and study the accelerating expansion of the Universe.
+Not only is Rubin helping to unlock the mysteries of the distant Universe, it is also the most powerful Solar System discovery machine ever built. By taking about a thousand images every night, Rubin is compiling an astonishingly detailed census of our Solar System, including millions of asteroids and comets. In just a month and a half, during early optimization surveys, Rubin discovered over 11,000 never-before-seen asteroids, including 33 near-Earth objects and 380 trans-Neptunian objects [1].
+Rubin will also advance opportunities for multi-messenger astronomy, which is the study of cosmic events using multiple signals such as light, gravitational waves, and cosmic rays. The observatory’s rapid, color-rich observations of transients such as stellar explosions, actively feeding black holes, and collisions between compact objects will guide telescopes around the world to follow up on these fleeting events.
+Each night, Rubin is collecting approximately ten terabytes of data and producing as many as seven million alerts of changes in the night sky. These alerts stream to alert brokers — automated systems that sort and classify these changes so scientists can act quickly.
+When the LSST is complete, the final dataset will contain billions of objects with trillions of measurements, all accessible through regular data releases. This is the first time so much astronomical data will be available to so many people, opening the door to new kinds of discovery by both scientists and the public. Rubin invites anyone in the world to engage with its data and explore the dynamic Universe in ways never before possible.
+More Information
+NSF–DOE Vera C. Rubin Observatory, funded by the U.S. National Science Foundation and the U.S. Department of Energy’s Office of Science, is a groundbreaking new astronomy and astrophysics observatory on Cerro Pachón in Chile. It is named after astronomer Vera Rubin, who provided the first convincing evidence for the existence of dark matter. Using the largest camera ever built, Rubin will repeatedly scan the sky for 10 years to create an ultra-wide, ultra-high-definition, time-lapse record of our Universe.
+NSF–DOE Vera C. Rubin Observatory is a joint initiative of the U.S. National Science Foundation (NSF) and the U.S. Department of Energy’s Office of Science (DOE/SC). Its primary mission is to carry out the Legacy Survey of Space and Time, providing an unprecedented data set for scientific research supported by both agencies. Rubin is operated jointly by NSF NOIRLab and SLAC National Accelerator Laboratory. NSF NOIRLab is managed by the Association of Universities for Research in Astronomy (AURA) and SLAC is operated by Stanford University for the DOE. France provides key support to the construction and operations of Rubin Observatory through contributions from CNRS/IN2P3. The Science and Technology Facilities Council supports the wide range of UK contributions to Rubin operations provided through the LSST:UK Science Centre programme. Rubin Observatory is privileged to conduct research in Chile and gratefully acknowledges additional contributions from more than 40 international organizations and teams.
+The U.S. National Science Foundation (NSF) is an independent federal agency created by Congress in 1950 to promote the progress of science. NSF supports basic research and people to create knowledge that transforms the future.
+The DOE’s Office of Science is the single largest supporter of basic research in the physical sciences in the United States and is working to address some of the most pressing challenges of our time.
+NSF NOIRLab, the U.S. National Science Foundation center for ground-based optical-infrared astronomy, operates the International Gemini Observatory (a facility of NSF, NRC–Canada, ANID–Chile, MCTIC–Brazil, MINCyT–Argentina, and KASI–Republic of Korea), NSF Kitt Peak National Observatory (KPNO), NSF Cerro Tololo Inter-American Observatory (CTIO), the Community Science and Data Center (CSDC), and NSF–DOE Vera C. Rubin Observatory (in cooperation with DOE’s SLAC National Accelerator Laboratory). It is managed by the Association of Universities for Research in Astronomy (AURA) under a cooperative agreement with NSF and is headquartered in Tucson, Arizona.
+The scientific community is honored to have the opportunity to conduct astronomical research on I’oligam Du’ag (Kitt Peak) in Arizona, on Maunakea in Hawai‘i, and on Cerro Tololo and Cerro Pachón in Chile. We recognize and acknowledge the very significant cultural role and reverence of I’oligam Du’ag to the Tohono O’odham Nation, and Maunakea to the Kanaka Maoli (Native Hawaiians) community.
+SLAC National Accelerator Laboratory explores how the Universe works at the biggest, smallest and fastest scales and invents powerful tools used by researchers around the globe. As world leaders in ultrafast science and bold explorers of the physics of the Universe, we forge new ground in understanding our origins and building a healthier and more sustainable future. Our discovery and innovation help develop new materials and chemical processes and open unprecedented views of the cosmos and life’s most delicate machinery. Building on more than 60 years of visionary research, we help shape the future by advancing areas such as quantum technology, scientific computing and the development of next-generation accelerators. SLAC is operated by Stanford University for the U.S. Department of Energy’s Office of Science.
+Forty-three international teams outside the U.S. and Chile are contributing to Rubin Observatory and LSST Science through the In-kind Program, in exchange for LSST data rights. These contributions are recognized in the International Data Rights Holder list, which includes all individuals nominated by their respective international programs.
+Learn more about this release on NOIRLab.edu
+Links
+Press release on rubinobservatory.org
+Press release from SLAC
+Vera C. Rubin Observatory website
+Vera C. Rubin Observatory image gallery
+More Rubin images
+More Rubin videos
+Check out other NOIRLab Organization Releases
+Contacts
+Bob Blum
+Director for Operations
+NSF–DOE Vera C. Rubin Observatory/NSF NOIRLab
+bob.blum@noirlab.edu
+Phil Marshall
+Deputy Director of Operations
+SLAC National Accelerator Laboratory
+pjm@slac.stanford.edu
+Lars Lindberg Christensen
+Head of Communications, Education & Engagement
+NSF NOIRLab
+lars.christensen@noirlab.edu
+Manuel Gnida
+Head of External Communications
+SLAC National Accelerator Laboratory
+mgnida@slac.stanford.edu

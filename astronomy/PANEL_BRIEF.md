@@ -19,7 +19,7 @@ This is a pre-P1 sketch and not a P4 ruling. The skill refuses a ruling until al
 6. **List disagreements, never reconcile them.** That covers disagreements between sources and between a source and the data.
 7. **Don't widen definitions after a low count, and don't filter on the outcome.**
 8. **Write only inside your own directory** under `astronomy/`. Do not run git. The coordinator commits.
-9. Local data: `astronomy/data/raw/ztf_bts_all_2026-09-16.csv` (11,218 BTS objects, sha256 in SHA256SUMS). Python with numpy, pandas, astropy, scipy and scikit-learn is at `/tmp/claude-1000/-home-aid1-Documents-4-19C-astronomy/addb1fc3-63d3-4989-8753-aa4c400b100e/scratchpad/venv/bin/python`. Put analysis scripts in your directory so every number is reproducible.
+9. Local data: `astronomy/data/raw/ztf_bts_all_2026-09-16.csv` (11,217 BTS data rows (corrected from 11,218), sha256 in SHA256SUMS). Python with numpy, pandas, astropy, scipy and scikit-learn is at `/tmp/claude-1000/-home-aid1-Documents-4-19C-astronomy/addb1fc3-63d3-4989-8753-aa4c400b100e/scratchpad/venv/bin/python`. Put analysis scripts in your directory so every number is reproducible.
 10. Today is 2026-09-16. Rubin alerts began streaming to brokers in February 2026, and the ten-year LSST formally started 2026-06-30. Verify these claims from primary sources rather than repeating them.
 
 ## Deliverables per agent

@@ -1,0 +1,1631 @@
+                                                  Draft version August 29, 2025
+                                                  Typeset using LATEX twocolumn style in AASTeX7
+
+
+
+
+                                                                            TiDES: The 4MOST Time Domain Extragalactic Survey
+                                                 C. Frohmaier ,1 M. Vincenzi ,2 M. Sullivan ,1 S.F. Hönig ,1 M. Smith ,3 H. Addison ,4 T. Collett ,5
+                                                    G. Dimitriadis ,3 R. S. Ellis ,6 P. Gandhi ,1 O. Graur ,5, 7 I. Hook ,3 L. Kelsey ,8 Y.-L. Kim ,3, 9
+                                                     C. Lidman ,10, 11 K. Maguire ,12 L. Makrygianni ,3 B. Martin ,10 A. Möller ,13 R. C. Nichol ,4
+                                                    M. Nicholl ,14 P. Schady ,15 B. D. Simmons ,3 S. J. Smartt ,2, 14 E. Tempel 16 And P. Wiseman 1
+                                                                                     and the LSST Dark Energy Science Collaboration
+
+
+                                                                   1 School of Physics and Astronomy, University of Southampton, Southampton, SO17 1BJ, UK
+arXiv:2501.16311v2 [astro-ph.HE] 28 Aug 2025
+
+
+
+
+                                                                         2 Department of Physics, University of Oxford, Keble Road, Oxford, OX1 3RH, UK
+                                                                             3 Department of Physics, Lancaster University, Lancaster, LA1 4YB, UK
+                                                                          4 School of Mathematics and Physics, University of Surrey, Guildford, GU2 7XH
+                                                                  5 Institute of Cosmology and Gravitation, University of Portsmouth, Portsmouth PO1 3FX, UK
+                                                                    6 Department of Physics & Astronomy, University College London, London WC1E 6BT, UK
+                                               7 Department of Astrophysics, American Museum of Natural History, Central Park West and 79th Street, New York, NY 10024-5192, USA
+                                                  8 Institute of Astronomy and Kavli Institute for Cosmology, University of Cambridge, Madingley Road, Cambridge CB3 0HA, UK
+                                                       9 Department of Astronomy & Center for Galaxy Evolution Research, Yonsei University, Seoul 03722, Republic of Korea
+                                                            10 The Research School of Astronomy and Astrophysics, Australian National University, ACT 2601, Australia
+                                                       11 Centre for Gravitational Astrophysics, College of Science, The Australian National University, ACT 2601, Australia
+                                                                      12 School of Physics, Trinity College Dublin, The University of Dublin, Dublin 2, Ireland
+                                                             13 Centre for Astrophysics & Supercomputing, Swinburne University of Technology, Victoria 3122, Australia
+                                                       14 Astrophysics Research Centre, School of Mathematics and Physics, Queens University Belfast, Belfast BT7 1NN, UK
+                                                                        15 Department of Physics, University of Bath, Claverton Down, Bath, BA2 7AY, UK
+                                                                      16 Tartu Observatory, University of Tartu, Observatooriumi 1, 61602 Tõravere, Estonia
+
+
+
+                                                                                                           ABSTRACT
+                                                           The Time Domain Extragalactic Survey (TiDES) conducted on the 4-metre Multi-Object Spectro-
+                                                        scopic Telescope (4MOST) will perform spectroscopic follow-up of extragalactic transients discovered
+                                                        in the era of the NSF-DOE Vera C. Rubin Observatory. TiDES will conduct a 5-year survey, cover-
+                                                        ing >14 000 square degrees, and use around 250 000 fibre hours to address three main science goals:
+                                                        (i) spectroscopic observations of >30 000 live transients, (ii) comprehensive follow-up of >200 000 host
+                                                        galaxies to obtain redshift measurements, and (iii) repeat spectroscopic observations of Active Galactic
+                                                        Nuclei to enable reverberation mapping studies. The live spectra from TiDES will be used to reveal
+                                                        the diversity and astrophysics of both normal and exotic supernovae across the luminosity-timescale
+                                                        plane. The extensive host-galaxy redshift campaign will allow exploitation of the larger sample of
+                                                        supernovae and improve photometric classification, providing the largest-ever sample of type Ia super-
+                                                        novae, capable of a sub-2 per cent measurement of the equation-of-state of dark energy. Finally, the
+                                                        TiDES reverberation mapping experiment of 700–1 000 AGN will complement the SN Ia sample and
+                                                        extend the Hubble diagram to z ∼ 2.5.
+
+
+                                                        Keywords: Surveys (167)) — Supernovae (1668) — Cosmology (343) — Active galaxies (17) — Redshift
+                                                                  surveys (1378) — Astronomy data analysis (1858)
+
+                                                                  1. INTRODUCTION                                     heralds a new era of transient discovery: LSST will
+                                                 The NSF-DOE Vera C. Rubin Observatory’s Legacy                       produce millions of transient alerts and photometric
+                                               Survey of Space and Time (LSST; Ž. Ivezić et al. 2019)               data for hundreds-of-thousands of supernovae (SNe) and
+                                                                                                                      other variable sources. While this discovery rate is ex-
+                                                                                                                      citing, the ability to obtain spectroscopic follow-up of
+                                                Corresponding author: C. Frohmaier                                    these transients must similarly scale to enable much of
+                                                Email: c.frohmaier@soton.ac.uk                                        the scientific exploitation. Follow-up spectra are critical
+2
+
+for extracting the full astrophysical potential of the ob-    samples measure the average dark energy equation-of-
+jects discovered, for example their classifications, rates,   state parameter w to ≃ 3 per cent (D. M. Scolnic et al.
+chemistry, redshifts, luminosities – and ultimately their     2018; D. Brout et al. 2022; DES Collaboration et al.
+physical nature. The capacity to assemble these spectro-      2024). This includes a systematic error budget that
+scopic samples presents a new challenge for the transient     is comparable to the statistical uncertainty, and show
+community, and to meet this, a next generation facility       w to be broadly consistent with a cosmological con-
+is needed.                                                    stant (w = −1), with the intriguing possibility of a
+   In this paper we present the Time Domain Extra-            time-varying w that motivates the need for larger sam-
+galactic Survey (TiDES), which is designed to meet the        ples of SNe Ia to higher-z. Using SNe Ia detected by
+spectroscopic requirements of the LSST-era for optical        LSST, TiDES will enable the creation of a Hubble Dia-
+transients, their host galaxies, and active galactic nu-      gram of >100 000 cosmologically-useful SNe Ia and make
+clei (AGN). TiDES will use the 4-metre Multi-Object           a <2 per cent measurement of w, when including a
+Spectroscopic Telescope (4MOST; R. S. de Jong et al.          CMB prior, and considering only statistical uncertain-
+2019), a fibre-fed spectroscopic survey facility on the       ties. These constraints are a factor 10 improvement com-
+European Southern Observatory (ESO) Visible and In-           pared to DES-SN5YR. Massive spectroscopic follow-up
+frared Survey Telescope for Astronomy (VISTA). This           of SNe Ia will also allow their use in different contexts,
+facility packs 2, 436 science fibres distributed over the     for example their brightnesses are lensed by structure,
+4.2 deg2 field-of-view, with each spine configurable by       tracing matter distributions along their line of sight (S.
+the AESOP fibre positioning system onto a target of in-       Refsdal 1964; D. E. Holz 1998; R. B. Metcalf 1999; J.
+terest. Throughout this work we refer to the concept of       Jönsson et al. 2010; M. Smith et al. 2014; E. Macaulay
+a fibre-hour. A fibre-hour is one hour of observing time,     et al. 2020; P. Shah et al. 2024a,b), and, with LSST, SNe
+including overheads, for one fibre. In total, 4MOST pro-      Ia will be used to trace peculiar velocities on large scales
+vides up to 2,436 fibre-hours per one hour of observa-        and constrain the growth rate of structure (C. Howlett
+tion. TiDES will exploit the fact that wherever 4MOST         et al. 2017).
+points over ∼18 000 deg2 of the extragalactic sky, there         The extragalactic time-domain universe is a far more
+will be known time-variable sources recently discovered       diverse environment than imagined only a decade ago,
+by Rubin or other surveys. These will include recently        and exploring the explosive timescale-luminosity phase-
+discovered transients, and older, faded events for which      space forms the second goal of TiDES. Objects such as:
+host galaxy spectroscopy will be obtained for measur-         superluminous supernovae (SLSNe; e.g., R. M. Quimby
+ing redshifts. The strategy takes inspiration from the        et al. 2011; C. Inserra et al. 2013; C. R. Angus et al.
+successful ‘OzDES’ survey (F. Yuan et al. 2015; C. Lid-       2019; T. Kangas et al. 2022; Z. H. Chen et al. 2023,
+man et al. 2020), conducted using the 2dF fibre posi-         for a review see A. Gal-Yam 2019), calcium-strong (-
+tioner and the AAOmega spectrograph on the Anglo-             rich) transients (interchangeably referred to as CaST or
+Australian Telescope, which secured live SN spectra and       CaRT in the literature e.g., M. M. Kasliwal et al. 2012;
+∼4,500 redshifts (M. Vincenzi et al. 2019) for SN host        K. De et al. 2020), exotic thermonuclear explosions (see
+galaxies over 27 deg2 of imaging from the Dark Energy         review by S. Taubenberger 2017), fast, blue optical tran-
+Survey (DES; Dark Energy Survey Collaboration et al.          sients (FBOTs; e.g., M. R. Drout et al. 2014; M. Pursi-
+2016).                                                        ainen et al. 2018; S. J. Prentice et al. 2018; R. Margutti
+   TiDES will use around 250 000 fibre-hours to tackle        et al. 2019; A. Y. Q. Ho et al. 2023), tidal disruption
+three key science goals. The first is the use of type Ia      events (TDEs; e.g., M. J. Rees 1988; S. Gezari et al.
+supernovae (SNe Ia) as a cosmological probe. SNe Ia           2012; T. W. S. Holoien et al. 2014; S. van Velzen et al.
+are an exceptionally mature and well-understood cos-          2021; S. Gezari 2021), other ambiguous nuclear tran-
+mological probe via their use as standardisable candles       sients (E. Kankare et al. 2017; B. Trakhtenbrot et al.
+(A. G. Riess et al. 1998; S. Perlmutter et al. 1999; M.       2019; P. Wiseman et al. 2023), and kilonovae (N. R.
+Betoule et al. 2014; DES Collaboration et al. 2024).          Tanvir et al. 2013; I. Arcavi et al. 2017; D. A. Coulter
+They remain a uniquely powerful distance-indicator in         et al. 2017; V. M. Lipunov et al. 2017; S. J. Smartt et al.
+the z < 0.5 Universe, and directly constrain the proper-      2017; M. Soares-Santos et al. 2017; N. R. Tanvir et al.
+ties of dark energy when combined with Planck Cosmic          2017; S. Valenti et al. 2017; A. J. Levan et al. 2024, for a
+Microwave Background (CMB) ( Planck Collaboration             review see R. Margutti & R. Chornock 2021), have each
+et al. 2020) and/or Baryon Acoustic Oscillation (BAO;         demonstrated how little is known about explosive tran-
+e.g., A. G. Adame et al. 2025) measurements. When             sient populations. TiDES will enlarge the population
+combined with these probes (CMB, BAO), current SN             of spectroscopically-confirmed transients by an order of
+                                                                                                                         3
+
+magnitude, and potentially uncover entirely new forms         egy overview in G. Guiglion et al. (2019). 4MOST has a
+of explosions. This will include ∼9 000 core collapse         large field-of-view of 4.2 deg2 with a high multiplex ca-
+SNe, ∼3 000 SLSNe for probing the z > 1 universe, and         pability: 1624 fibres feeding two low-resolution spectro-
+∼500 faint-and-fast SN Ia-like events for studying the        graphs (LRS), and 812 fibres feeding a high-resolution
+full range of thermonuclear white dwarf explosions.           spectrograph (HRS). The LRS offers ⟨R⟩ = 6 500 over
+   The third goal of TiDES is cosmology and galaxy evo-       3700–9500Å, and the HRS offers ⟨R⟩ = 20 000 in three
+lution with AGN. These are among the most energetic           400–600Å wide passbands. Within a 1-hour observa-
+sources in the Universe, showing variability in all wave-     tion, 4MOST has the sensitivity to obtain redshifts of
+bands when mass is accreted onto supermassive black           r = 22.5 mag galaxies or AGN using the LRS. TiDES
+holes in the centres of galaxies. The variability of the      will use the LRS fibres.
+optical continuum light from the accreting matter, to-          The 4MOST project as a whole consists of 25 con-
+gether with its delayed response mirrored in the broad        sortium and community surveys each with their specific
+emission lines of the surrounding material can be used        science goals. Each survey is characterised by a target
+i) to dynamically measure black hole masses (e.g., Y.         selection algorithm, but all surveys share the focal plane
+Shen et al. 2016) and identify sub-parsec-scale super-        and are observed in parallel, with individual targets for
+massive black hole binaries among the AGN population,         any given observation selected by a fibre-to-target as-
+and ii) as a standardisable candle to high redshifts (R. D.   signment algorithm (E. Tempel et al. 2020a). It is ex-
+Blandford & C. F. McKee 1982; B. M. Peterson 1993;            pected that TiDES will average around 30–35 LRS fibres
+M. Haas et al. 2011; D. Watson et al. 2011; S. Panda          in each extragalactic 4MOST pointing – around two per
+& P. Marziani 2023; B. Czerny et al. 2023a). TiDES            cent of the LRS fibres available.
+will establish an SNe-independent Hubble diagram of
+AGN and will deliver one of the, if not the, largest cata-              2.1. The TiDES science programme
+logue of dynamically measured supermassive black hole            The TiDES science programme comprises three inter-
+masses over redshifts 0.1 < z < 2.5. The expected ac-         locking surveys each arising from 4MOST’s ability to
+curacy of both the Hubble diagram as well as the black        conduct extensive spectroscopic follow-up of extragalac-
+hole masses will depend critically on the achieved season     tic transients located with LSST, whilst exploiting addi-
+lengths and total baseline of the survey (U. Malik et al.     tional diagnostic data from other facilities (e.g., Euclid ).
+2022) as well as characterisation of the objects in terms     In this section we describe each of the three surveys.
+of luminosity and accretion rate (e.g. P. Du et al. 2016;
+                                                                                  2.1.1. TiDES-Live
+G. Fonseca Alvarez et al. 2020; R. Prince et al. 2023; M.
+Zajaček et al. 2024b).                                         The first survey focuses on the spectroscopic study
+   This paper introduces the TiDES survey and demon-          of live transients (‘TiDES-Live’). This survey aims to
+strates its potential using simulations of the LSST and       observe more than 30 000 live transients discovered by
+4MOST survey strategy. In Section 2 we describe the           Rubin and other photometric surveys as soon as feasible
+4MOST spectrograph and the TiDES strategy. Sec-               after discovery. There are two main goals:
+tion 3 details our TiDES simulations, and Section 4
+                                                                 1. A systematic search and classification effort for
+presents sample statistics. Our expectation for the SN
+                                                                    the full range of extragalactic transients across the
+Ia cosmological analysis is detailed in Section 5. We
+                                                                    luminosity–timescale plane, leading to improved
+then summarise in Section 6. Throughout, we assume
+                                                                    rates and physical understanding of the various
+a baseline cosmology with a matter density ΩM = 0.315
+                                                                    events, and
+(e.g. Planck Collaboration et al. 2020) in a flat universe
+and a Hubble constant of H0 = 70 km s−1 Mpc−1 , and              2. The rapid follow-up of live SN Ia candidates, which
+use the AB photometric system (J. B. Oke & J. E. Gunn               will lead to a new Hubble diagram for cosmolog-
+1983).                                                              ical studies, while also serving as a critical spec-
+                                                                    tral training set for the larger LSST SN Ia sample
+    2. 4MOST AND THE TIDES PROGRAMME                                studied (and classified) photometrically.
+  4MOST is a new high-multiplex, wide-field spectro-            Work over the last decade has charted the luminosity–
+scopic facility under development for VISTA, located on       timescale plane for transients, and uncovered rare and
+the ‘NTT peak’ at the Cerro Paranal in northern Chile.        new classes of transients. TiDES-Live will conduct a
+A full overview can be found in R. S. de Jong et al.          systematic campaign of follow-up that will be both un-
+(2019), with the scientific operations model described in     biased and an order of magnitude larger in number
+C. J. Walcher et al. (2019), and the general survey strat-    than earlier efforts of this nature (e.g., C. Lidman et al.
+4
+
+2020), thereby providing improved rates for both new          over the key redshift range where dark energy becomes
+and well-understood phenomena with full photomet-             a dominant component.
+ric light curves. Early time spectra (<3–4 days post-            In this work we consider host galaxies from TiDES
+detection) for all classes of SNe will provide new insights   in isolation, but it is important to highlight the con-
+into the progenitor environment and the outer layers of       tribution of other surveys in 4MOST. There are several
+the ejecta, and, in 4MOST pointings with repeat visits,       participating surveys such as the Wide-Area VISTA Ex-
+multiple spectra will trace SN evolution into the nebular     tragalactic Survey (WAVES; S. P. Driver et al. 2019) and
+phase. TiDES will also collect the largest spectroscopic      the 4MOST Hemisphere Survey of the Nearby Universe
+sample of rare transients (e.g., calcium-strong fast tran-    (4HS; E. N. Taylor et al. 2023) that will observe mil-
+sients and TDEs) to comprehensively study their impor-        lions of galaxies over thousands-of-square-degrees. Nat-
+tant contributions to galactic chemical evolution.            urally, some of these galaxies will host supernovae, this
+   For SN Ia cosmology, TiDES-Live will create an             will benefit TiDES in two ways: i) TiDES will not need
+impressive Hubble diagram of more than 10 000                 to spend fibre-hours re-observing these galaxies, ii) If
+cosmologically-useful events over the redshift range 0 <      4MOST has completed its planned visits of any given
+z < 0.6 for which there will be associated Rubin deep         field, redshifts will be available from galaxies hosting
+imaging. A further goal is to explore the dispersion          future supernovae. These additional observations will
+in the Hubble diagram as a function of astrophysical          supplement the total number of available redshifts for
+properties (e.g., morphology, SN colour, SN spectral          any SN analysis.
+features), with the aim of improving the cosmological
+precision using SN Ia subsets. Moreover, as even the                              2.1.3. TiDES-RM
+most advanced machine-learning SN photometric clas-
+                                                                The final survey concerns repeat spectroscopic obser-
+sification techniques are dependent on large, homoge-
+                                                              vations of AGN for reverberation mapping (‘TiDES-
+neous and representative training samples (M. Lochner
+                                                              RM’). The survey will focus on long-term variability
+et al. 2016; A. Möller & T. de Boissière 2020; H. Qu &
+                                                              monitoring of AGN in the deep drilling fields (DDFs)
+M. Sako 2022), the TiDES sample will become an un-
+                                                              of LSST (A. B. Kovačević et al. 2022; B. Czerny et al.
+surpassed training sample for SN photometric classifiers
+                                                              2023b). Specifically, we will exploit AGN broad line
+(J. E. Carrick et al. 2021) unlocking the potential of the
+                                                              lags to measure dynamical masses of supermassive black
+entire LSST SN dataset.
+                                                              holes and construct a Hubble diagram out to redshift
+                                                              z = 2.5, i.e. into cosmic noon. In addition, the continu-
+                   2.1.2. TiDES-Hosts
+                                                              ous high-quality spectroscopic monitoring will enable us
+  The second survey is spectroscopy of SN host galaxies       to search for any unusual kinematics of the broad lines
+(‘TiDES-Hosts’). TiDES will secure the spectroscopic          that could indicate binary supermassive black holes (for
+redshifts for the host galaxies of SNe of all types for       a review see A. De Rosa et al. 2019). 4MOST will rou-
+which live SN spectroscopy was not possible, or for both      tinely visit the DDFs every 10-14 days to observe the
+SN and host in regions with dense 4MOST follow up.            high density of requested targets and satisfy the deep
+These redshifts, coupled with photometric classification      observing requirements from other surveys. TiDES-RM
+of the SN events themselves, will form a key component        will use each of the single epoch visits to sample the
+of the LSST SN Ia cosmology programme ( The LSST              expected lags of our AGN at a similar rate to past re-
+Dark Energy Science Collaboration et al. 2018). 4MOST         verberation mapping campaigns (e.g. A. J. Barth et al.
+should secure galaxy redshifts over the range 0 < z <         2011). The number of observations required for each
+1 in two hours, and to higher redshifts in fields where       object is determined by its lag length, with shorter lags
+multiple repeat exposures can be stacked.                     being recovered first. Generally, for a successful recovery
+  In addition to providing galaxy redshifts essential for     of the broad line lags, a single observing season should
+the LSST SN Ia Hubble Diagram, TiDES-Hosts will               be longer than a lag length, and an entire observing
+provide further diagnostics of the dispersion in SN Ia        campaign should be longer than 3 times the lag length.
+magnitudes, such as host galaxy metallicity and star-           As standardisable candles, AGN offer a complemen-
+formation rate (following techniques presented in e.g. J.     tary probe to SNe Ia with a reach to higher redshifts and
+Dumayne et al. 2023; L. Galbany et al. 2022). Red-            with different astrophysical systematics. Recent work
+shifts also enable the intrinsic properties of individual     suggests that current probes at low and high redshifts
+transients, like luminosity and evolution timescale, to       may provide inconsistent results, beyond the well-known
+be measured. TiDES-Hosts will provide the largest and         H0 tension, pointing either towards unknown systemat-
+most precise measure of the cosmological parameters           ics in the current methods or new physics (e.g. E. Di
+                                                                                                                         5
+
+Valentino et al. 2019; S. Cao et al. 2022; N. Khadka           are yet finalised. An end-to-end flowchart of our entire
+et al. 2023; S. Cao et al. 2024; M. Zajaček et al. 2024a).    simulation framework is shown in Fig. 1.
+TiDES will move forward with a unique test for remain-
+ing systematic uncertainties by using two independent                           3.1. Simulating transients
+standardisable candles, thereby increasing the reliabil-          The LSST Science Requirements Document (Ž..
+ity of the final results. By targeting around 930 AGN          Ivezić & the LSST Science Collaboration 2013) details
+over 0.1 < z < 2.5 we can improve the precision of con-        the survey specification but with enough room for op-
+straints based on reverberation mapped AGN by at least         timisation of the strategy to balance the different sci-
+a factor of two (A. L. King et al. 2015).                      ence goals (F. B. Bianco et al. 2022). LSST will have
+   Of equal importance in TiDES-RM will be dynamical           a ‘Wide, Fast, Deep’ (WFD) component coupled with
+mass measures of large numbers of supermassive black           deeper, more frequent observations in ‘Deep Drilling
+holes (SMBH) to z ∼ 2.5, i.e. into cosmic noon, the            Fields’ (DDFs). Significant work has been performed
+most active phase of galaxy and black hole growth. Su-         on the effects of different survey choices for transients
+permassive black hole masses represent a key parameter         (e.g., M. Lochner et al. 2022; C. S. Alves et al. 2023; P.
+in governing the assembly history of galaxies through as-      Gris et al. 2023), and we do not attempt to determine an
+sociated feedback processes. Most current SMBH mass            optimal LSST strategy for TiDES in this work. Instead,
+measurements outside the local Universe rely on indirect       we use established LSST simulations to create our mock
+methods, most notably the single-epoch method that             transient datasets, adopting the baseline v3.417 simula-
+takes the width of a broad line and infers the mass via        tion, the latest baseline release at the time of writing.
+a set of calibrations against local scaling relations. This    The comparisons with other LSST strategies are pre-
+method is prone to biases and uncertainties as a single        sented in the TiDES Cadence Note18 . Note that due to
+emission line width will be unable to capture the dynam-       the high cadence of repeat visits in the DDFs, all of our
+ical complexities of the underlying accretion and outflow      TiDES-RM targets are located there.
+processes and due to the intrinsic difference in AGN de-          The output from the LSST Operations Simulator (Op-
+mographics at low and high redshift (e.g. F. Shankar           Sim)19 is the input to our simulations. Based on a
+et al. 2016; J.-H. Woo et al. 2024). TiDES-RM will mea-        scheduling pattern, OpSim creates a catalogue-level out-
+sure dynamical SMBH masses at redshifts up to z ∼ 2.5          put of the LSST strategy using detailed observing qual-
+via reverberation-mapping, which is the technique un-          ity metrics based on weather models, maintenance re-
+derlying the calibration of local scaling relations (e.g. Y.   quirements, and telescope hardware constraints. Us-
+Shen et al. 2024). In addition, the spatio-kinematic in-       ing these observing characteristics, we then simulate
+formation from emission line lags can be used to trace         transients and their host galaxies using the SuperNova
+outliers, with the potential of exposing binary supermas-      ANAlysis software snana (R. Kessler et al. 2009) sim-
+sive black holes (e.g. Y.-Y. Songsheng et al. 2019).           ulation code. snana combines survey-specific metadata
+                                                               (e.g., from OpSim) with the known properties of a SN
+            3. SIMULATING LSST+TIDES                           population to generate a set of light curves as observed
+   We next describe our method for simulating a LSST-          by any survey strategy. The OpSim strategies are trans-
+like SN survey, and combining with a simulated 4MOST           lated into the appropriate snana format using the Op-
+observing strategy. Our simulations focus on LSST for          SimSummary package (R. Biswas et al. 2020). Note
+the transient discovery as we anticipate this will provide     that all of our simulations are ‘catalogue level’, i.e., we
+the majority of the TiDES targets. However, TiDES will         do not place transients and hosts into simulated images.
+be agnostic to the source of the photometric transient         We assume a saturation limit of 15 mag for the LSST
+feed and will include transients from any source pro-          CCD and exclude all points on a simulated light curve
+viding a public alert stream e.g. the Zwicky Transient         exceeding this brightness.
+Facility (ZTF; E. C. Bellm et al. 2019), the Young Super-         snana generates light curves by integrating a time-
+nova Experiment (YSE; D. O. Jones et al. 2021), Black-         evolving spectral energy distribution (‘template’) of a
+GEM (P. J. Groot et al. 2022), The Gravitational-wave          given SN through the survey’s filter-specific response
+Optical Transient Observer (GOTO; D. Steeghs et al.            function. Table 1 shows each spectral template we use in
+2022), and The La Silla Schmidt Southern Survey (LS4;
+A. A. Miller et al. 2025). Thus, this section is intended      17 https://survey-strategy.lsst.io/index.html
+to produce broad projections for the number and type of        18 https://docushare.lsst.org/docushare/dsweb/Get/Document-
+
+transients and hosts that 4MOST may observe, in par-             37640/Frohmeier TiDES.pdf
+                                                               19 https://www.lsst.org/scientists/simulations/opsim
+ticular noting that neither LSST nor 4MOST’s strategy
+6
+
+
+
+                                             OpSim                Galaxy                           SED
+                      LSST OpSim
+                                            Convert               Hostlib                      templates
+
+
+
+
+                                            SNANA
+                                                                               SNANA
+                                            SIMLIB
+
+
+
+                                                                                       TiDES target
+                         Transient
+                                                                                        selection
+                         metadata
+                                                                                         function
+                        Transient
+                       light curves
+
+                                                  Real-time
+                                                                         Host-galaxy
+                                                  transient
+                                                                          follow up              AGN Targets
+                                                  triggers
+
+                                                                                                      Other
+                                                                                                      4MOST
+                                                                                                     surveys
+                      TiDES Target Catalogue
+
+                                                                    4MOST
+                                                                  Facility
+                                                                  Simulator
+
+
+
+
+                                                                                 "Observed" Spectra
+                                                          4MOST
+                    Observed 4MOST targets                                     Object Classification
+                                                           ETC
+                                                                            Signal-to-noise calculation
+
+
+
+
+                           SN Cosmology                      Population Statistics            Other science
+
+
+
+
+Figure 1. Flowchart of our end-to-end simulation framework. We begin with a database input of a LSST OpSim realisation
+that is transformed into an snana SIMLIB file. Along with transient spectral templates and a host-galaxy library to draw
+from, we use snana to create realistic light curves of transient phenomena. The resulting database of events is then queried
+as if data were flowing in real-time, such that we can trigger for immediate follow up of live-transients or time-insensitive
+observations of galaxies. These observational requests are merged with our pre-determined AGN targets and ingested into
+the 4MOST Facility Simulator (4FS) – along with all other 4MOST member surveys. 4FS allocates fibre-time and scheduling
+during a mock 5-year survey, returning a description of all observations at the catalogue-level. This data product allows us to
+generate synthetic spectra with realistic observational effects. These spectra are then assessed for their quality and sent to their
+appropriate science channels. This allows us to perform a mock cosmology analysis of type Ia supernova cosmology, study our
+final population statistics, and enables other analyses to be performed.
+                                                                                                                         7
+
+
+
+
+                         Table 1. Transient classes simulated for LSST using snana.
+
+Transient Class         Description                                Source
+SN Ia                   Normal type Ia SNe following SALT2         R. Hounsell et al. (2018)
+SN Iax                  Type Iax peculiar SNe                      R. Kessler et al. (2019a)
+SN Ia-91bg              Peculiar SNe SN1991bg-like                 R. Kessler et al. (2019a)
+SN II, IIn              Hydrogen-rich core-collapse SNe            M. Vincenzi et al. (2019)
+SN IIb, Ib, Ic, Ic-BL   Hydrogen-poor stripped envelope SNe        M. Vincenzi et al. (2019)
+CaRT/CaST               Calcium-rich(-strong) faint and fast SNe   R. Kessler et al. (2019a)
+SLSN-I                  Hydrogen-poor super luminous SNe           M. Nicholl et al. (2017); R. Kessler et al. (2019a)
+TDE                     Tidal disruption events                    R. Kessler et al. (2019a); B. Mockler et al. (2019)
+8
+
+our simulations. Our method of generating light curves        Frohmaier et al. (2021) and extrapolate to higher red-
+from spectral templates using snana follows the Pho-          shifts assuming the rate follows the star formation his-
+tometric LSST Astronomical Time Series Classification         tory presented in P. Madau & M. Dickinson (2014). To
+Challenge (PLAsTiCC) (R. Kessler et al. 2019a), but           ensure the correct mix of different core collapse sub-
+we update the core collapse SN templates to those of M.       types we use the relative rates presented by I. Shiv-
+Vincenzi et al. (2019, hereafter V19).                        vers et al. (2017). The intrinsic brightness of simu-
+   On a technical note, snana precomputes a set of tran-      lated events are matched to the luminosity functions
+sient sky coordinates with a resolution of several arcmin-    presented in W. Li et al. (2011) and revised by V19. Re-
+utes. This leads to some simulated events sharing spatial     cently, updates have been made to models using different
+coordinates, which if left unaddressed would lead to ar-      rate assumptions for Type IIn SNe (C. L. Ransome &
+tificial fibre collisions in the 4MOST simulator. Increas-    V. A. Villar 2025) and templates for stripped-envelope
+ing this resolution in snana becomes computationally          (S. Khakpash et al. 2024), however, these updates do
+expensive, so we perform a post-processing stage to ap-       not affect the overall picture for TiDES compared to
+ply a small coordinate scatter on each transient and host     the models we have used.
+such that their distribution is uniform within an snana          We include two types of peculiar SNe Ia: SN1991bg-
+resolution element.                                           like events (A. V. Filippenko et al. 1992) and SNe Iax
+                                                              (R. J. Foley et al. 2013). SN1991T-like events are mod-
+               3.1.1. Simulation of SNe Ia                    elled within the normal-SN Ia events in Section 3.1.1.
+  We simulate SNe Ia using the SALT2 SED model (J.            The SED templates and volumetric rates used to simu-
+Guy et al. 2007, 2010) trained following M. Betoule et al.    late these classes of peculiar SNe Ia are those presented
+(2014). The SALT2 SED model is described by the SN            by R. Kessler et al. (2019a), applying the revisions in
+redshift z, the epoch of SN peak brightness tpeak , a (di-    M. Vincenzi et al. (2021, hereafter V21).
+mensionless) stretch-like parameter x1 , and a colour pa-        Tidal Disruption Events (TDEs), Calcium-Strong
+rameter c. The SN Ia apparent magnitude in the rest-          Transients (CaST) and hydrogen-poor Superluminous
+frame B-band mB is then simulated as                          SNe (SLSNe-I) are implemented following the same as-
+                                                              sumptions and modelling used in the PLASTICC chal-
+      mB = − αx1 + βc + MB                                    lenge (R. Kessler et al. 2019a).
+                                                       (1)
+             + 5 log10 (dL (z, Ω, w)/ 10 pc) + δmB ,
+                                                                      3.1.3. Simulation of AGN for TiDES-RM
+where the parameters α and β describe the stretch–
+luminosity and colour–luminosity relations and are set          The AGN that we will observe as part of the rever-
+in our simulations to α = 0.14, and β = 3.1. The ab-          beration mapping survey are already known and are lo-
+solute magnitude for a x1 = 0, c = 0 SN Ia (MB ) is           cated only in the LSST DDFs. The selection is based
+set to -19.365 and dL is the luminosity distance for red-     on two catalogues, the Million Quasar Catalogue Milli-
+shift z with our default cosmological parameters. The         quas (E. W. Flesch 2023) and the southern photometric
+term δmB is a randomised brightness offset that encap-        quasar catalogue based on Dark Energy Survey DR2 as
+sulates the intrinsic scatter observed in SN Ia standard-     presented by Q. Yang & Y. Shen (2023). First, both cat-
+ised brightness (see J. Guy et al. 2010, for details on the   alogues were cut down to the hexagonal footprints of the
+modelling of intrinsic scatter). The absolute number of       4MOST field-of-view centered on the defined 4MOST
+SN Ia events simulated and their redshift distribution is     deep field positions within the Elais South, COSMOS,
+calculated using the power-law evolution of the volumet-      ECDF-S, and XMM-LSS deep fields (Table 2). For
+ric rates presented by C. Frohmaier et al. (2019) (their      Milliquas, only sources with a Q or A type flag have
+Equation 6). The intrinsic distributions of SN stretch        been included, which selects against obscured AGN that
+x1 and colour c are taken from D. Scolnic & R. Kessler        are unfavourable to reverberation mapping. In a second
+(2016).                                                       step, sources from both catalogues were cross-matched.
+                                                              Those present in both catalogues are deemed the “gold
+      3.1.2. Simulation of other types of transients          sample” while objects only present in Milliquas are part
+  All simulated transient types are listed in Table 1. For    of the “silver sample.” The total number of identified
+core-collapse SNe, we use V19 templates and include           AGN varies with deep field, given how intensely the re-
+both hydrogen-rich core-collapse SN events (type II and       spective field has been monitored and in which wave-
+IIn SNe) and stripped envelope SNe (Type Ib/IIb/Ic/Ic-        bands. Given survey operational constraints, the max-
+BL SNe). For volumetric rates of core-collapse events,        imum number of TiDES-RM sources that can be ob-
+we normalise at low redshift to the measurement of C.         served per deep field is of the order of 250. To preserve
+                                                                                                                         9
+
+some comparability across the fields, we impose bright-         out the rest of this work. The catalogue is complete to
+ness cuts of r < 20.5 for the COSMOS and XMM-LSS                ≃ 24.5 mag in r-band, which is well-matched to the tran-
+fields and r < 21.5 for the Elais South and ECDF-S              sient hosts that LSST should detect (e.g., P. Wiseman
+fields.                                                         et al. 2020).
+   Finally, we want to exclude sources where the survey            Host galaxies are associated to simulated SNe Ia fol-
+length will not be able to recover a lag. This requires es-     lowing the observed rates as a function of the host-
+timating observed lag length of the cut down catalogues.        galaxy properties as measured by M. Sullivan et al.
+We use the lag-luminosity relation for the Hβ line pre-         (2006). Within each galaxy, we follow the standard
+sented in M. C. Bentz et al. (2009) and scale to Mg II          snana prescription of placing transients in the host fol-
+lags with a factor of 0.9. C IV lags are estimated from         lowing a Sérsic profile (J. L. Sérsic 1963). We also en-
+the lag-luminosity relation in A. Penton et al. (2022).         sure that the well-known correlation between the SN Ia
+Approximate luminosities are calculated from r band             x1 parameter and host galaxy stellar mass is reproduced
+magnitudes. The resulting estimated rest-frame lags             in the simulations (see section 4.5.1 in V21 for details),
+have been converted to observed lags by accounting for          but we do not include the more subtle relation between
+a cosmological time dilation factor of (1+z). We assume         SN Ia Hubble residuals and host galaxy properties, such
+that successful lag recovery requires lag lengths to be at      as stellar mass, colour, and specific star formation rate.
+least 3 times shorter than the survey length. As such,             For peculiar SNe Ia, we scale the SN Ia rate and as-
+we cut the target catalogue for AGN where the shortest          sign host galaxies so that SN1991bg-like events are only
+lag observed in the 4MOST wavelength range for the              associated to old stellar environments (e.g. W. Li et al.
+given redshift is >600 days. With the previously im-            2011; F. H. Panther et al. 2019) and SN Iax events are
+posed brightness limit, this primarily affects the bright-      placed in star forming galaxies (e.g. J. D. Lyman et al.
+est sources in the redshift range 0.6 < z < 1.6 and par-        2013, 2018; T. Takaro et al. 2020). For core-collapse
+ticularly those at the higher redshift end, where Mg II         SNe, we use the rates and host galaxy association mea-
+is the only one of the 3 main target lines present. For         surements presented by O. Graur et al. (2017a,b). For
+all four DDFs, this affects ≤1% of the pre-cut samples.         the remaining transients their relation to host galaxies is
+   The final sample numbers across the four DDFs are            not as extensively studied due to their rarer intrinsic and
+listed in Table 2. We highlight number of objects per           observational rates; we assign them to hosts randomly
+emission line as well as number of sources in those red-        and position them within the host following a Sérsic pro-
+shift regions where two lines overlap. These are particu-       file. This random host association for the sub-dominant
+larly interesting as they will allow for cross calibration of   populations has no significant effect on the TiDES host
+lag-luminosity relations as well as black hole mass esti-       galaxy statistics.
+mates. In total, 61 AGN are expected to have both Hβ
+and Mg II lags recovered and 117 to overlap in Mg II                             3.3. Simulating AGN
+and C IV.                                                          AGN simulations have been carried out based on prop-
+                                                                erties of the selected sample. Due to the nature of op-
+         3.2. Simulating transient host galaxies                tical selection in the target catalogues, the overwhelm-
+   SNe Ia, peculiar SNe Ia and core-collapse SNe are as-        ing majority of the sources will be broad line AGN, as
+sociated to host galaxies following the approach and as-        desired for a reverberation mapping experiment. We
+sumptions presented in V21. Host galaxies are selected          identify each selected source with a spectroscopic tem-
+from a ‘HOSTLIB’ library of 380 000 galaxies from the           plate of a type 1 AGN as provided by the 4MOST AGN
+DES Science Verification galaxy catalogues (A. Drlica-          survey (A. Merloni et al. 2019). The associated tem-
+Wagner et al. 2018). Each galaxy in the catalogue has           plate spectrum for each object has been redshifted and
+optical photometry from DES (griz) and – when avail-            flux scaled according to the catalogue r-band magnitude
+able – near infrared photometry from VISTA. To derive           and fed into the 4MOST operations simulator. Within
+properties of the galaxies, template SEDs were gener-           a 4MOST simulation, the AGN templates are used to
+ated using the PÉGASE.2 spectral synthesis code and            determine the required exposure times in the DDFs to
+fit to the observed galaxy fluxes through a χ2 minimisa-        meet the spectral success criteria (Section 4.2).
+tion; this routine is extensively described in M. Sullivan
+et al. (2010) and, in the context of DES galaxy cata-                           3.4. Simulating 4MOST
+logues, M. Smith et al. (2020). From the best fitting             Having generated a simulation of transient light curves
+templates, we adopt the associated parameters such as:          as observed by LSST, we next determine which are avail-
+redshift, stellar mass, and star formation rates through-       able to be observed by 4MOST. The 4MOST observ-
+10
+
+Table 2. The centres of the 4 DDFs that 4MOST will routinely observe during the 5-year survey. Within our TiDES-RM
+program (Section 3.1.3), these fields will be visited every 14 ± 4 days. Number of AGN observed in each DDF, including sample
+distribution across three prominent broad lines that will be monitored.
+
+
+                                          Field          R.A.      Dec.    AGN     Hβ    Mg II   C IV
+                                          ELAIS-S1       9.500   -43.950    191    23    128      80
+                                          XMM-LSS       35.875    -5.025    252    47    141     119
+                                          ECDF-S        53.125   -28.100    230    48    138      92
+                                          COSMOS       150.125     2.200    256    47    150      94
+
+Notes — Redshift ranges covered by individual lines are: Hβ: z < 0.64; Mg II: 0.43 < z < 1.85; C IV: 1.58 < z < 4.16. Spectra
+of some sources will include two broad lines that can be used to cross-calibrate lags: ELAIS-S1: Hβ/Mg II: 10, Mg II/C IV: 30;
+XMM-LSS: Hβ/Mg II: 17, Mg II/C IV: 38; ECDF-S: Hβ/Mg II: 20, Mg II/C IV: 28; COSMOS: Hβ/Mg II: 14, Mg II/C IV: 21.
+
+
+
+                                                                                                        LSST WFD Density
+                        60°
+                                                                                                        4MOST Footprint
+                                                                                                        4MOST Deep Fields
+
+              30°
+
+
+
+                          300°                240°                180°                120°                60°
+ decl.
+
+
+
+
+         0°
+
+
+
+
+              -30°
+
+
+
+                        -60°
+
+
+                                                                  R.A.
+
+Figure 2. The overlap in footprints of the 4MOST and LSST surveys. The heatmap represents the number of visits in the
+wide-fast-deep LSST program under the baseline v3.4 survey strategy during the overlap with 4MOST operations. Due to
+the non-uniform sky coverage of LSST over this time period, relics of the rolling cadence seasons can be see as density difference
+along declination stripes. The dashed blue lines represents the extent of the 4MOST footprint. Within this footprint, certain
+areas such as the WAVES fields (S. P. Driver et al. 2019) or LMC/SMC observations (M. . R. L. Cioni et al. 2019), are observed
+more frequently to meet the science requirements of the other 4MOST consortium surveys. The green circles show the location
+of the four DDFs in 4MOST that coincide with the LSST DDFs. 4MOST will observe these locations at a higher cadence – at
+least every 14 d for the TiDES-RM experiment.
+
+ing strategy fulfils a complex balance of science require-          print and the 4MOST union of observing tiles is shown
+ments from multiple different surveys focused on both               in Fig. 2.
+galactic and extra-galactic fields. To accommodate this,              There are two important considerations in the appar-
+4MOST will tile the entire southern-sky over the course             ent overlap between LSST and 4MOST. The first is that
+of its five-year lifetime (R. S. de Jong et al. 2019), with         only a small fraction of live LSST transients will ever be
+the density of targets and exposure time requirements               observed by 4MOST due to the significant difference in
+ultimately dictating the frequency of any returning vis-            the nightly sky coverage between the two surveys. The
+its. The overlap between the LSST wide-fast-deep foot-              second is that although TiDES does have priority fibre-
+                                                                    allocation on transient targets and their host galaxies in
+                                                                                                                           11
+
+any field that 4MOST observes, it does not (and can-            access to sufficient fibres to observe all live transients20
+not) operate in a ‘Target of Opportunity’ mode and force        in any field down to its limiting magnitude, and so is
+observations of the most interesting targets by changing        able to adopt a very straight forward selection of poten-
+the telescope pointing. The exact pointing of 4MOST             tial targets. This also has the advantage of a simpler
+is not known more than a few days in advance, and               calculation of the efficiency and selection function for
+can change according to predicted or actual observing           any subsequent TiDES population analysis, including
+conditions. Thus, at any one time, all possible LSST            for SN Ia cosmology.
+transient targets need to be available for insertion into         Our planned selection criteria for LSST transients,
+the 4MOST queue, depending on the exact observing               and those that we use in these simulations, are:
+pointings that are chosen on a given night.
+  4MOST has experimented with several mock strate-                 1. The transient must be detected to > 5σ in at least
+gies to establish its observing plan. The success of any              three bands over at least two nights,
+strategy is evaluated using a figure-of-merit for each
+4MOST survey, combined into a global figure of merit.              2. The object must be ≤ 22.5 mag in any griz filter
+We evaluate the success of TiDES using the total num-                 (Section 4.3 for justification).
+ber of objects observed and the quality of their result-
+ing spectra. Our simulations in this paper use a typical        We only consider griz data points, regardless of addi-
+4MOST mock strategy that has been optimised to a so-            tional observations in uY of the field. Clearly, different
+lution that tiles the sky with observations (E. Tempel          filter selection criteria would be adopted for transients
+et al. 2020b) using probabilistic fibre assignments (E.         that did not originate from the LSST alert stream.
+Tempel et al. 2020a). From the TiDES perspective, we               Once all criteria are met, the target is added to a
+can use these simulations to track which of our simulated       mock TiDES observing queue with a nominal lifetime of
+transients were observed and the exposure time on that          four days, after which the target is retired. Each object,
+epoch. For the host galaxies, we are able to assess the         however, is monitored so that each subsequent LSST
+total integrated time the target received over multiple         observation of the target that is brighter than 22.5 mag
+epochs.                                                         refreshes the target in the queue by extending its expiry
+                                                                date by an additional four days. This process ensures a
+          3.5. LSST-TiDES selection function                    high probability that any target selected by the 4MOST
+                                                                scheduler will be bright enough to have a successful spec-
+   We next describe the process of selecting transients
+                                                                troscopic observation (see our Spectral Success Criteria
+from the LSST simulations for 4MOST spectroscopic
+                                                                (SSC) in Section 4.2).
+follow-up. The aim is to reflect the ‘real-life’ operation of
+                                                                   The requirements for the TiDES-Hosts programme are
+TiDES, where live SNe are identified through difference
+                                                                similar to that of TiDES-Live, but with no magnitude
+imaging and distributed in alert packets in the LSST
+                                                                limit on the SN. We replace this with a requirement that
+data stream, we will identify suitable targets through
+                                                                the (now faded) SN light curve must have shown an in-
+custom filtering in community full-stream alert brokers
+                                                                crease in brightness followed by a decrease in brightness
+e.g. Lasair (K. W. Smith et al. 2019), ALeRCE (F.
+                                                                in at least two filters, followed by at least 50 days un-
+Förster et al. 2021), ANTARES (T. Matheson et al.
+                                                                detected in LSST data. This acts as a loose proxy for
+2021), AMPEL (J. Nordin et al. 2019), FINK (A. Möller
+                                                                estimating when the transient peaked in brightness and
+et al. 2021), Pitt-Google (W. M. Wood-Vasey 2024),
+                                                                faded below a detectable limit. We use this requirement
+and Babamul. This means that new targets must be
+                                                                as it ensures that the SNe in the selected hosts had both
+frequently added to the TiDES target list, and targets
+                                                                the pre- and post- maximum light data required for a re-
+that have faded must be removed.
+                                                                liable light-curve fit and photometric classification. This
+   The depth of LSST is fainter than the spectroscopic
+                                                                is needed for one of our primary science goals, construct-
+limiting magnitude of 4MOST, allowing us to track the
+                                                                ing a SN Ia cosmology sample using the host-galaxy red-
+rising brightness of a transient before submitting it to
+                                                                shift. Additionally, we require that the host galaxy has
+the 4MOST observing queue – resulting in a high pu-
+                                                                r ≤ 24, as targets fainter than this will never meet our
+rity of candidates. Significant advances have been made
+                                                                SSC. Finally, TiDES-Hosts targets have no expiry date
+in rapid real-time classification of transients and spec-
+                                                                in the 4MOST queue.
+troscopic follow-up recommendation algorithms (e.g., D.
+Muthukrishna et al. 2019a; N. Kennamer et al. 2020; H.
+Qu & M. Sako 2022; A. Gagliano et al. 2023; A. Möller          20 In well-sampled LSST fields, ∼12 live-transients in a 4MOST
+
+et al. 2024; X. Sheng et al. 2024). However, TiDES has            FoV pass our selection criteria
+12
+
+  It is possible to imagine different selection criteria     instrument-level signal, noise, sky background, and the
+and have several streams operating in parallel, each         efficiencies for each of the three arms on the LRS.
+optimised towards transients with differing properties.         An example spectrum for a peak-phase SN Ia, ob-
+Adapting some of our requirements may, for example,          served at different r-band magnitudes, is shown in Fig. 3.
+enable earlier triggering of young or rapid transients       The spectra for TiDES-Hosts (and TiDES-RM) are gen-
+at the risk of increasing contamination from spurious        erated in an similar way.
+events. The selection criteria presented in this work are
+the result of a conscious effort to maximise the quality                   4.2. Spectral success criteria
+of the targets we observe given our available fibre hours,
+                                                                Once our targets have been simulated and observed
+but these may be revised once LSST and 4MOST are
+                                                             by 4MOST, we use ‘Spectral Success Criteria’ (SSC) to
+operational.
+                                                             determine whether an observation was successful. Each
+  In the next section, we present the simulations, gen-
+                                                             of the three surveys in TiDES has its own SSC. By de-
+erate realistic spectra based on the observational meta-
+                                                             sign, objects that reach their SSC are not allocated any
+data, and evaluate the expected samples.
+                                                             further fibre-hours on repeat visits to that field. This
+ 4. EXPECTED RESULTS FROM 4MOST/TIDES                        constraint is only relevant to the TiDES-Hosts survey
+                                                             as our other programs require the SSC to be achieved in
+  The results from our simulations provide us with a
+                                                             a single visit.
+catalogue of SNe, their hosts, and AGN that were ‘ob-
+                                                                For TiDES-Live, our actual success will depend on
+served’ as part of the survey realisation. This includes
+                                                             the signal-to-noise ratio (SNR) in the 4MOST spectrum
+metadata for the observational conditions, including the
+                                                             and the transient type, due to the prominence of certain
+seeing, exposure time, and airmass. Combining all of
+                                                             spectral features that define the different classes. SN
+this, we are able to generate mock spectra for each of our
+                                                             spectra are typically dominated by broad features in the
+observed events, evaluate the quality of the mock spec-
+                                                             photospheric phases that are many tens-of-Angstroms
+tra, and then quantify the performance of the survey
+                                                             wide, and thus our SSC are defined using the mean
+simulation. We note that the conclusions we draw here
+                                                             SNR in 15Å bins – we denote this with the SNR15Å
+are demonstrated at the population-level, and we do not
+                                                             parameter. Our criteria are based on earlier studies of
+consider any individual object assessment or seek to de-
+                                                             high-redshift SNe Ia (C. Balland et al. 2009), where a ro-
+rive astrophysical properties from the spectra. Based on
+                                                             bust classification was achieved with a mean SNR15Å =
+the density of targets and signal-to-noise requirements
+                                                             5 over 4500–8000Å in the observer frame. This is a
+for each of our three science programmes, our fibre-
+                                                             conservative criterion as C. Balland et al. (2009) also
+hours are proportionally spent ∼10%, ∼75%, and ∼15%
+                                                             demonstrate probable classifications of transients with
+between TiDES-SN, TiDES-Hosts, and TiDES-RM re-
+                                                             a mean SNR15Å = 3.
+spectively.
+                                                                We have checked our likely classification limits for SNe
+                    4.1. Mock spectra                        Ia using the ETC based on simulated mock spectra with
+                                                             classifications based upon the machine-learning SN clas-
+  To generate mock spectra, template spectra for each
+                                                             sification tool dash (D. Muthukrishna et al. 2019b).
+observed event are used as inputs to the 4MOST
+                                                             dash can classify, with 95 per cent confidence, a SN
+exposure-time calculator (ETC)21 , with parameters
+                                                             Ia spectrum with SNR15Å = 5 without using the host
+matching the observing conditions from the simulations.
+                                                             redshift as a prior. These simulations were performed
+For the TiDES-Live survey, we generate phase-specific
+                                                             with SN spectra free of host galaxy contamination (e.g.,
+spectra based on the date of the 4MOST observation
+                                                             the SN Ia spectra in Fig. 3). An investigation into the
+using the same templates described in 3.1. Where the
+                                                             effect of host galaxy contamination on SN classification
+same SN is observed more than once, we do not stack
+                                                             in 4MOST will be presented in Milligan et al.(in prep).
+the spectra to improve the signal-to-noise due to evolu-
+                                                                For TiDES-Hosts, we require a mean SNR>3 per
+tion in the target spectrum. Conversely, for the TiDES-
+                                                             Å over 4500–8000Å (SNR1Å ) in the observer-frame.
+Hosts our targets can be repeatedly observed on mul-
+                                                             Galaxies with strong emission lines in real observations
+tiple occasions and are not expected to evolve, and we
+                                                             can have a redshift successfully measured before reach-
+take the total integrated exposure time over the survey
+                                                             ing this SNR criterion. In our simulation, however, we
+when generating our final spectra. The ETC returns the
+                                                             only obtain the final spectrum SNR rather than any in-
+                                                             termediate stages that would have contributed to the
+21 https://escience.aip.de/readthedocs/OpSys/etc/master/     stacked spectrum, we assume every galaxy reaching our
+     index.html                                              SSC has had a redshift sucessfully measured.
+                                                                                                                                                  13
+
+                  1.0                                               z = 0.1                                                         z = 0.2
+                  0.8                                               r = 19.0                                                        r = 20.6
+Normalised Flux
+
+
+
+                                                                    S/N = 61.2                                                      S/N = 17.9
+                  0.6
+                  0.4
+                  0.2
+                  0.0
+                  1.0                                               z = 0.4                                                         z = 0.5
+                  0.8                                               r = 22.3                                                        r = 22.9
+Normalised Flux
+
+
+
+
+                                                                    S/N = 3.4                                                       S/N = 1.8
+                  0.6
+                  0.4
+                  0.2
+                  0.0
+                   4000      5000      6000        7000      8000               4000      5000       6000        7000        8000               9000
+                                     Observed Wavelength Å                                         Observed Wavelength Å
+
+Figure 3. Mock 4MOST spectra based on the 4MOST ETC output. A typical maximum-light SN Ia template spectrum at
+several different redshifts (red line) and r-band magnitudes is shown. The template is ‘observed’ by 4MOST with the raw data
+shown in light grey and then rebinned to 15Å (black line). The mock spectra are calculated assuming a typical 4MOST exposure
+time of 2700s, conditions of seeing of 0.8”, airmass 1.4, in grey time. The mean S/N per 15Å bin over 4500-8000Å is also given.
+
+  For TiDES-RM, spectral success is defined by achiev-                             TiDES will observe, totalling around 18 000 objects with
+ing a SNR15Å =10 for an AGN spectrum. Just as for the                             a peak in the redshift distribution at z∼0.3. This re-
+TiDES-Live program, the spectra vary with time and,                                sults in the largest homogeneously collected SN Ia sam-
+therefore, cannot be stacked if observations are taken on                          ple from any spectroscopic survey. As expected, the
+significantly different epochs. Within 4MOST, the other                            SN1991bg-like and SN Iax under-luminous populations
+participating surveys have placed a high demand of time                            of SNe Ia are found at lower redshifts and are intrinsi-
+on the LSST DDFs. This necessitates many repeat visits                             cally rarer than the normal counterparts.
+that TiDES will exploit to routinely observe our AGN                                  SNe II are intrinsically the most common of all SN
+for a reverberation mapping experiment. To meet the                                sub-types (e.g., W. Li et al. 2011; O. Graur et al. 2017b)
+SSC, the TiDES-RM targets must reach SNR15Å =10 in                                and this is reflected in the first two redshift bins of
+a single visit every ∼14 d.                                                        the histogram in Fig. 4. However, their lower luminos-
+                                                                                   ity results in a lower peak redshift for the sample at
+                          4.3. Live supernova populations
+                                                                                   z∼0.15. Stripped-envelope SNe (SESNe) also belong to
+  Combining the mock spectra for all our targets and the                           the massive-star progenitor, core-collapse SN family, but
+SSC, we are able to construct an expected TiDES-Live                               occur at ∼ 24 per cent of the intrinsic rate of SNe II (C.
+sample. In many cases, we split our population statistics                          Frohmaier et al. 2021). In our sample, SESNe follow a
+into groups for objects satisfying the SNR15Å ≥5 and                              similar observed trend with a peak redshift of z∼0.15.
+≥3 criteria. As expected, LSST’s WFD survey program                                   SLSNe-I form a class of the brightest observed SNe
+provides the bulk of our transients, ∼95 per cent, due                             with a luminosity function ranging from −19 < M <
+to the much larger footprint compared to the DDFs.                                 −23 (C. R. Angus et al. 2019). As a result, they are
+  We begin with the most general overview metric for                               observable to the highest redshifts of any objects in
+any wide-field sky-survey – the redshift distribution.                             our simulated sample, and their intrinsically long (and
+Fig. 4 shows the redshift distribution split into the dif-                         time dilated) light curves increases the opportunities for
+ferent transient sub-samples from our simulations. Our                             TiDES to obtain a spectrum. We have truncated the
+results show that we can expect to observe around 30 000                           SLSN redshift distribution in Fig. 4 for visualisation pur-
+SNe with (SNR15Å ≥3) in total. Due to their intrinsic
+brightness, SNe Ia are the most common transient that
+14
+
+                                                 Type Ia: 13000 (18000)
+                                                 Type II: 4400 (6500)
+                                                                                         1.0
+                                                 SLSNe 2500 (3100)
+                                                 SESNe: 1600 (2300)
+                 103                             91bg/Iax: 500 (690)                     0.8
+                                                 TDE 160 (210)
+                                                 CaST 100 (140)
+ Number in bin
+
+
+
+
+                                                                                         0.6
+
+
+
+
+                                                                            Efficiency
+                      2
+                 10
+
+                                                                                         0.4
+
+
+                 101                                                                     0.2
+                                                                                               signal-to-noise   m50          τ
+                                                                                               ≥5 per 15Å      21.7        0.2
+                                                                                               ≥3 per 15Å      22.3        0.2
+                      0.0   0.2   0.4      0.6          0.8          1.0
+                                                                                         0.0
+                                    Redshift
+                                                                                               16        18             20         22   24
+Figure 4. The observed 4MOST redshift distribution for all                                            Magnitude (LSST r-band)
+simulated transient types after five years of 4MOST opera-
+tions. The solid lines show the expected number of transients              Figure 5. The spectroscopic efficiency of targeted objects
+with a SNR15Å ≥5, while the dashed lines show the expec-                  as a function of their observed magnitude. Our measure-
+tation for a SNR15Å ≥ 3 in the spectrum’s continuum. The                  ments are shown for objects meeting the SNR15Å ≥ 5 (pur-
+legend shows the total number of objects for each subclass                 ple diamonds) and ≥ 3 (green squares) parameter. 1σ sta-
+satisfying the SSC. Different science cases will require dif-              tistical-only uncertainties on efficiencies are calculated using
+ferent qualities of data, so these numbers are presented as a              Bayes Theorem following the method presented in M. Pa-
+guide to the final sample size.                                            terno (2004) and, in the context of supernova survey effi-
+                                                                           ciencies, C. Frohmaier et al. (2017). The table shows the
+poses, but note that we expect to obtain SLSNe-I up to                     best-fit parameters for Equation 2, m50 is the magnitude
+z∼2.                                                                       corresponding to a recovered fraction of 50 per cent, and τ
+   Given the intrinsic luminosity, rates, and light curve                  describes the steepness of the exponential fall off.
+evolution timescales of both Calcium-strong transients
+(CaST) and TDEs, it is unsurprising that these objects                     time of observation, m50 is the magnitude at which 50
+form the smallest populations of our samples. Further-                     per cent of the sample meet our SSC, and τ captures the
+more, as these are some of the least well understood                       exponential roll-off (smaller numbers describe a steeper
+transient classes, any recent updates to their observed                    drop).
+properties will not be reflected in our transient models                      For the SNR15Å ≥ 5 parameter, we find m50 = 21.7
+from PLAsTiCC. For example, a slightly brighter TDE                        and for SNR15Å ≥ 3, m50 = 22.3. In both cases, the
+luminosity function than the one we adopt is presented                     maximum efficiency is η0 = 1 and τ = 0.2. Live tran-
+in Y. Yao et al. (2023). Regardless, the TiDES sam-                        sient objects are added to, or removed from, the 4MOST
+ple of these transients will be a significant increase over                follow-up queue based, in part, on their observed LSST
+current sample sizes.                                                      magnitudes. Using the m50 = 22.5 result as our follow-
+   We analyse the efficiency of our survey as a function                   up limit ensures that we minimise observations resulting
+of the target object’s magnitude in Fig. 5. We define                      in spectra with a SNR too low for a classification.
+the efficiency as the fraction of objects meeting the SSC
+once a fibre has been placed on them. To estimate these
+efficiencies, we fit the following sigmoid of the functional                4.4. Observational efficiencies of type Ia supernovae
+form (K. Sharon et al. 2007; S. A. Rodney et al. 2014):                      One of the main objectives of TiDES is to perform a
+                                           −1                            SN Ia cosmology experiment, so we next examine various
+                                   m − m50
+                                
+          ε(m) = η0 1 + exp                        ,     (2)               survey performance metrics for SNe Ia. TiDES will ob-
+                                      τ
+                                                                           tain classification spectra for around 13 000 SNe Ia with
+where ε is the efficiency, η0 is the maximum efficiency, m                 SNR15Å ≥ 5 (and 18 000 SNe Ia SNR15Å ≥ 3). Ran-
+is the magnitude of the object in the LSST r-band at the                   domly selected example light curves are shown in Fig. 6
+                                                                                                                         15
+
+for the griz bands split into different redshift ranges of        In TiDES, the galaxy spectra can be obtained on mul-
+objects that were successfully observed by 4MOST.               tiple epochs and then stacked to increase the signal-to-
+   The phase at which spectra are obtained is an impor-         noise until the SSC in Section 4.2 is reached. During
+tant metric, as the ability to classify an object depends       4MOST operations, automatic and manual redshifting
+both on the phase and SNR of the spectrum. Objects              will be performed on the new or stacked data products.
+observed near peak-brightness will have the highest SNR         Galaxies with prominent emission lines in their spec-
+and classifiers will have large template libraries of histor-   tra can have their redshifts accurately determined be-
+ical observations to draw upon. In Fig. 7 we show the           fore the continuum-defined SNR SSC are satisfied. A
+phases (measured relative to rest-frame B-band peak)            feedback-loop in the 4MOST system will remove such
+when the SNe Ia are triggered for follow-up (Section 3.5)       targets before additional fibre-hours are unnecessarily
+and of their spectral observations. Most SNe are iden-          spent. However, this feedback is not incorporated in
+tified by LSST before they reach peak brightness, and           our simulations and instead observations are continued
+then typically observed by 4MOST a few days after peak          until the SSC is satisfied.
+brightness. A break down of the triggering and spectrum           We generate galaxy mock spectra as described in Sec-
+phases for all transient types are presented in Figure 14.      tion 4.1 and apply the technique to every galaxy (Sec-
+   In the violin plot of Fig. 8, we show the SNR15Å met-       tion 3.2) observed in the 4MOST-TiDES simulation. In
+ric in different redshift bins. We see broad distributions      total ∼400 000 galaxies were targeted by 4MOST but
+of SNR15Å in the lowest redshift bins that narrow with         not all satisfied our requirement of SNR1Å ≥ 3 (Sec-
+increasing redshift and fall to lower mean SNR15Å val-         tion 4.2) in the continuum. This is because the galaxies
+ues. This is explained by the light curve evolution of our      are injected during survey operations, resulting in fewer
+transients: at low redshifts the window-of-opportunity          opportunities to add observations into a stacked spec-
+to observe a transient is large and a spectrum can be ob-       trum as time progresses. In Figure 10, we show the
+tained over many phases and SN brightnesses and hence           redshift distribution split on both the total targeted by
+SNR15Å . At higher-z, objects are only observed around         4MOST those achieving SNR1Å ≥ 3. Of these, our sim-
+the peak of their light curves with a narrower range in         ulations show that ∼135 000 hosted SNe Ia. We assume
+brightnesses, and hence the SNR15Å distribution nar-           in later sections of our analysis, that all objects reaching
+rows with a smaller mean value.                                 our SSC will have a reliable redshift measured from the
+   Finally, we quantify the efficiency of obtaining a good-     host galaxy spectrum. Next, we demonstrate a cosmol-
+quality spectrum as a function of redshift. This metric         ogy analysis from our combined results of live SNe Ia
+analyses the success rate of the spectra meeting an SSC         (Section 4.3) and from their host galaxy spectra.
+criteria and is visualised in Fig. 9 (top panel). Objects
+at the lowest redshifts are almost always observed with                    5. SUPERNOVA COSMOLOGY
+SNR15Å ≥ 3, as these objects will be the brightest in
+the sample. Naturally, our SNR15Å ≥ 5 curve falls away           In this Section, we will present our expectations for
+more rapidly, as spectra of this quality become increas-        the constraints TiDES can place on cosmological param-
+ingly more difficult to obtain in a fixed exposure time.        eters following the methods employed by current genera-
+   The lower panel of Fig. 9 shows the fraction of good-        tion experiments such as the Dark Energy Survey ( DES
+quality spectra for all SNe Ia that we trigger spectro-         Collaboration et al. 2024). For this analysis, the spec-
+scopic follow-up requests for following the selection func-     troscopic classification and redshift measurement is as-
+tion in Section 3.5. As expected, the fraction of all LSST      sumed to be perfect from the TiDES-Live program, and
+transients that TiDES will observe is small, highlighting       objects without live-spectra but with host spectroscopic
+the number of transients that Rubin will discover.              redshifts are also assumed to have a perfect photometric
+                                                                typing based on the light curves.
+                                                                  The two SN Ia samples are based on the results of
+                                                                our LSST+TiDES simulations and are determined as
+                4.5. TiDES host galaxies                        follows:
+  TiDES-Hosts is focused on spectroscopy of SN host
+galaxies. At the most fundamental level we aim to ob-              • ‘TiDES spectroscopic SN sample’: the sample
+tain secure redshifts for these hosts but, as exposure               of spectroscopically confirmed SNe Ia, for which
+depth is built up for some targets, the increasing signal-           TiDES has obtained one or more live spectra with
+to-noise will enable us to measure additional properties             a signal-to-noise ratio of ≥3 per 15Å bin described
+(e.g., star formation rate, gas phase metallicity (J. Du-            in Section 4.2. Light curves for each SN are taken
+mayne et al. 2023)).                                                 from the LSST photometry (Section 3.1).
+16
+
+
+                                   g                r              i                     z                    4MOST limit
+
+                                                                                                                        z<0.2
+                        1000
+
+                         500
+  Counts (mzp = 27.5)
+
+
+
+
+                           0
+                                                                                                                    0.3<z<0.4
+                         200
+
+                         100
+
+                           0
+                                                                                                                        z>0.5
+
+                         100
+
+
+
+                           0
+                               0       50       0         50       0           50         0          50         0         50
+                                                    Observer frame days from peak
+Figure 6. Example observer-frame light curves of SNe Ia from LSST are shown. Each row presents light curves over different
+redshift ranges, with the dotted line showing the depth of 4MOST after 1-hour integrated exposure (the maximum exposure
+for a single visit). The pink arrows denote the epoch/phase at which the object met the triggering requirements detailed in
+Section 3.5, and the black arrow indicates when 4MOST obtained the spectrum in our simulations. Note that even in our
+highest redshift bin, the uncertainties on the LSST observations are small and constraining due to the superior depth of LSST
+(5σ detection, r = 24.3 Ž.. Ivezić & the LSST Science Collaboration 2013). A SALT2 light-curve model (Section 5.1) was also
+fit to the observed light curves and we show the best fit result here.
+
+           • ‘LSST+TiDES photometric SN sample’: the sam-              tions, even though TiDES is expected to conclude after
+             ple of photometrically identified SNe Ia from their       the first five years of LSST.
+             LSST light curves, for which the spectroscopic red-
+             shift of the SN host galaxy has been measured by                        5.1. Defining the SN sample
+             TiDES following the SNR1Å ≥ 3 in the continuum              We fit all simulated SNe Ia with the SALT2 light curve
+             cut.                                                      fitter (J. Guy et al. 2007) based on the simulated ob-
+                                                                       served photometry. To ensure meaningful light curve
+                                                                       fits, we follow standard requirements (e.g. D. Brout et al.
+  Following the forecasts presented in the Dark En-                    2019) of: i) observations in at least two different filters
+ergy Science Collaboration (DESC) Science Require-                     with SNR>5, ii) at least one data point before the time
+ment Document ( The LSST Dark Energy Science Col-                      of peak brightness, tpeak , and iii) at least one data point
+laboration et al. 2018), we also include an external low-              ten days after tpeak . The first of these are already sat-
+z sample in our cosmology analysis of 2 400 SNe Ia at                  isfied by the the spectroscopic triggering criteria in Sec-
+z<0.1. The low-z SNe in our analysis follows the simu-                 tion 3.5, and the final two are satisfied in the majority
+lations of the Foundation SN sample (R. J. Foley et al.                of cases due to the high cadence of WFD in LSST.
+2018) presented by D. O. Jones et al. (2019). The expec-                  Once the model has been fit to light curves, a final
+tation, however, is that this final sample size will only              subset of the SNe Ia is selected by applying the follow-
+be achieved towards the end of 10-years of LSST opera-                 ing SALT2-based cuts (e.g., M. Betoule et al. 2014; D.
+                                                                                                                                                          17
+
+                                                                                                           25
+                                                       Trigger Phase
+ Probability density
+
+
+                       0.03                            Spectrum Phase
+
+                                                                                                           20
+                       0.02
+
+
+
+
+                                                                                Signal-to-noise per 15Å
+                       0.01                                                                                15
+
+
+                       0.00
+                                 −20        0        20        40                                          10
+                                          SN Ia phase (days)
+
+Figure 7. For the live-SNe Ia observed by 4MOST, we                                                         5
+compare the phase at which we trigger follow-up requests
+to the phase the first spectrum was eventually taken in the
+rest-frame. In our simulations, the vast majority of our
+SNe Ia were identified and sent to 4MOST before maximum                                                     0
+brightness. The spectra were taken most frequently around                                                       0.10   0.20   0.30   0.40   0.50   0.60
+1 week after peak.                                                                                                             Redshift
+
+Brout et al. 2019): x1 ∈ [−3, 3], c ∈ [−0.3, 0.3], σx1 < 1,                   Figure 8. The distribution of the SNR15Å parameter for
+σpeak < 2 days, and fit probability >0.001. Those that                        SNe Ia is shown and split across several different redshifts
+pass this step are considered ‘cosmologically useful’ su-                     bins. The shape of the distribution is dictated both by the
+                                                                              supernova phase at which the spectrum was acquired and by
+pernovae. These selection criteria are generally adopted
+                                                                              the exposure time of the 4MOST observation. In the low-
+in SN Ia cosmology analyses to reduce contamination                           est redshift bin, supernovae can be observed at their peak
+from highly-reddened or other peculiar thermonuclear                          phases in longer exposures resulting in a higher SNR spec-
+SNe while ensuring a minimal loss of ‘cosmologically use-                     tra, they can also be observed at later and fainter phases to
+ful’ SN Ia events. We find ∼12 600 successful SALT2 fits                      produce the low SNR spectra. For the highest redshift bins,
+in the spectroscopic sample and ∼131 000 successful fits                      the SNe Ia are only observable at the peak brightness phase
+in the photometric SN sample. The redshift distribution                       in the longest 4MOST exposures. Given the known unifor-
+                                                                              mity of intrinsic brightness of SNe Ia at peak, this produces a
+for both samples and the low-z sample are shown in the
+                                                                              narrower distribution, albeit at the lowest SNR. The dotted
+top panel of Fig. 11.                                                         and dashed lines in each distribution represent the quartiles
+                                                                              of the distribution.
+               5.2. SN distance estimation and bias corrections
+  After light-curve fitting, we measure SN Ia distances                       survey to model and correct for selection effects while
+and build the redshift–distance relation (‘Hubble dia-                        simultaneously fitting for the nuisance parameters and
+gram’) from which cosmological parameters can be con-                         intrinsic SN scatter. For our analysis, corrections for
+strained. We estimate the SN distance modulus µobs ,                          selection effects are modelled as a function of redshift
+which is proportional to the logarithm of the SN lumi-                        only (so-called ‘1D’ corrections) and they are estimated
+nosity distance, by applying the Tripp formula (R. Tripp                      using the same LSST+TiDES simulated samples used
+1998)                                                                         to measure the cosmological constraints.
+                              µobs = mB + αx1 − βc − MB + µbias ,       (3)     The output of BBC is a redshift-binned Hubble dia-
+                                                                              gram corrected for selection effects, and the associated
+where symbols are as defined in Section 3.1.1. The nui-                       diagonal covariance matrix, Cstat , that includes statisti-
+sance parameters α, β and MB are determined following                         cal uncertainties only for each redshift bin.
+the approach presented in J. Marriner et al. (2011). We
+present our final Hubble diagram in Fig. 11.                                                                      5.3. Cosmological Parameters
+   The term µbias in Equation 3 is a bias correction term                       We use the output of the BBC fit and statisti-
+that is applied to each SN to correct for survey selection                    cal+systematic covariance matrix to estimate cosmolog-
+effects. In this work, bias corrections are measured using                    ical contours for a FlatwCDM model (i.e., assuming a
+the BEAMS with Bias Corrections (BBC; R. Kessler                              constant value of w), and for a Flatw0 wa CDM model,
+et al. 2019b) code. BBC uses large simulations of the                         where w(a) = w0 + (1 − a)wa and a is the scale factor.
+18
+
+                 0.0   0.1   0.2     0.3     0.4   0.5   0.6   0.7
+                                                                                                                       All Galaxies
+               1.0                                                                                                     SN Ia hosts
+                                                                                       35000                       SNR ≥ 3 per Å
+               0.8
+                                                                                                                       All Galaxies
+                                                                                       30000                           SN Ia hosts
+               0.6
+ Efficiency
+
+
+
+
+                                                                       Number in bin
+                                                                                       25000
+               0.4
+                                                                                       20000
+               0.2     ≥5 per 15Å
+                       ≥3 per 15Å                                                     15000
+               0.0
+                                                                                       10000
+              10−2
+              10−3
+                       All LSST Efficiency                                              5000
+              10−4
+                 0.0   0.1   0.2     0.3     0.4   0.5   0.6   0.7
+                                                                                           0
+                                     Redshift                                               0.0   0.2   0.4   0.6      0.8     1.0
+                                                                                                        Redshift
+Figure 9. The fraction of spectra, split by SNR15Å ≥ 3
+(red) and ≥ 5 (blue), as a function of the object’s redshift is
+shown for our SNe Ia sample. In the top panel, we show the           Figure 10. The redshift distribution of the host galaxies
+efficiency for all SNe Ia 4MOST attempted to observe. In             targeted by 4MOST-TiDES. The solid lines show the sam-
+the bottom panel we show the fraction of all LSST SNe Ia             ple receiving at least some fibre-hours of observation, while
+that 4MOST successfully observed. While 4MOST-TiDES                  the dashed lines show the sub-sample reaching SNR1Å ≥ 3.
+will provide a revolutionary sample of SNe Ia for cosmology,         Redshifts shown are the simulated galaxy redshifts.
+at best we will only be able to observe ∼ 3% of the SNe
+Ia that LSST discovers in any given redshift bin. Statisti-          z samples and a CMB prior ( Planck Collaboration et al.
+cal-only uncertainties are shown following the same method           2020) provide constrains on the Dark Energy Equation
+as Figure 5                                                          of State parameter, w, of 0.012, 10 times smaller com-
+                                                                     pared to DES-SN5YR. For a Flatw0 wa CDM model, the
+We estimate cosmological contours using wfit.exe χ2                  Figure of Merit obtained from LSST+TiDES SN sam-
+minimization code implemented in snana.                              ples combined with external low-z samples is 85, 15
+  The cosmological contours from our simulations are                 times larger than the FoM of DES-SN5YR. When fit-
+presented in Fig. 12 and Fig. 13.           We present               ting for a Flatw0 wa CDM model, we also combine SN
+constraints from the LSST+TiDES SN events (both                      data with a prior based on the recent Baryonic Acoustic
+spectroscopically-confirmed SNe Ia and SNe Ia with                   Oscillation (BAO) measurements published by the Dark
+host spec-z only) and the external low-z sample. We                  Energy Spectroscopic Instrument (DESI) Collaboration
+compare our results with constraints from a simulation               (A. G. Adame et al. 2025) using their first year of data.
+of the Dark Energy Survey 5 year SN sample (DES-                     The DESI-BAO-Y1 prior is applied assuming the same
+SN5YR, The DES Collaboration 2024). The DES-                         true cosmology used to generate the LSST and DES-
+SN5YR analysis constitutes the state-of-the-art of SN                SN5YR simulations. With the DESI-BAO-Y1 prior, the
+cosmological measurements and provides some of the                   LSST+TiDES FoM increases to 99 (7 times larger com-
+tightest constraints on the Dark Energy Equation of                  pared to DES-SN5YR combined with the same DESI-
+State. The DES-SN5YR simulation used in this work                    BAO-Y1 prior).
+is generating assuming the same cosmology used in
+our LSST simulations (i.e., FlatΛCDM cosmology with                                                 6. SUMMARY
+ΩM = 0.315) and reflects the statistical power and                     We have presented the Time-Domain Extragalactic
+data quality of the real DES-SN5YR data. While the                   Survey (TiDES) – a spectroscopic survey focused on
+published DES-SN5YR include statistical and system-                  understanding the extragalactic transient universe, and
+atic uncertainties, in Fig. 12 and Fig. 13 we only con-              conducted on the 4m Multi-Object Spectroscopic Tele-
+sider statistical uncertainties. For a FlatwCDM model,               scope (4MOST). TiDES will use 250 000 fibre-hours to
+LSST+TiDES SN samples combined with external low-                    address three key science goals: i) Create a Hubble Di-
+                                                                                                                                   19
+
+
+
+
+                  44
+
+                  42
+
+                  40
+             µ
+
+
+
+
+                                                                                                        Low-z
+                  38                                                                                    TiDES-Hosts: 131,000
+                36                                                                                      TiDES-Live: 12,600
+             0.025
+ Residual
+
+
+
+
+             0.000
+            −0.025
+                 0.0           0.1       0.2      0.3            0.4            0.5         0.6         0.7         0.8          0.9
+                                                                       z
+
+Figure 11. The TiDES Hubble Diagram made up of the final SN Ia sample presented in Section 5. The upper panel shows the
+redshift distribution of the TiDES-Live, TiDES-Hosts, and low-z sample (D. O. Jones et al. 2019). The lower panel shows the
+residuals in the redshift bins from the cosmological fit (Hubble residuals).
+              8
+            0.8
+
+
+
+
+                                                                            0.0
+              6
+            0.9
+
+
+
+
+                                                                            1.5
+                                                                           wa
+  w
+              4
+            1.0
+
+
+
+
+                                                                            3.0
+
+
+
+
+                                                                                                               DES-SN5YR(Sim)
+                       LSST+TIDES(Sim)
+              2
+
+
+
+
+                                                                                                   DES-SN5YR(Sim)+DESI-Y1(Sim)
+            1.1
+
+
+
+
+                        DES-SN5YR(Sim)                                                                        LSST+TiDES(Sim)
+                                                                            4.5
+
+
+
+
+                                                                                                  LSST+TiDES(Sim)+DESI-Y1(Sim)
+                         4
+
+
+
+                                     8
+
+
+
+                                          2
+
+
+
+                                                   6
+
+
+
+
+                                                                                      1.2
+
+
+                                                                                                  1.1
+
+
+                                                                                                         1.0
+
+
+                                                                                                                  0.9
+
+
+                                                                                                                           0.8
+                       0.2
+
+
+
+                                0.2
+
+
+
+                                         0.3
+
+
+
+                                                 0.3
+
+
+
+
+                                     OmegaM                                                               w0
+Figure 12.        ΩM − w contours for the simulated                    Figure 13. As Fig. 12, but showing constraints in the
+LSST+TiDES-Live and LSST+TiDES-Host combined (filled                   wa /w0 plane. Additionally, we show the contours com-
+contours). For comparison, we present the cosmological con-            bining SN data with a DESI-BAO-Y1-like prior, both
+tours from a DES-SN5YR-like simulation (dotted-dashed                  for DES-SN5YR-like simulation (red dashed line) and
+contours). Only statistical uncertainties are included in both         LSST+TiDES simulation (red solid line).
+the LSST+TiDES and DES-like contours.
+
+                                                                       ate realistic light curves for millions of LSST transients
+agram of >140 000 cosmologically-useful SNe Ia to con-
+                                                                       with mock spectra for the sub-set that 4MOST can ob-
+strain cosmological measurements, including the dark-
+                                                                       serve. Our results demonstrate that we will collate the
+energy equation-of-state, w, to sub-2 per cent precision;
+                                                                       largest homogeneous sample of supernovae and their
+ii) Map the diversity of the transient Universe by ob-
+                                                                       host-galaxies to-date. Our results are summarised as
+taining more than 30 000 spectra of supernovae from
+                                                                       follows:
+LSST; iii) Perform a reverberation mapping experiment
+on 700–1 000 AGN in the high-cadence Deep-Drilling
+Fields.                                                                    • We will obtain ∼30 000 SN spectra with a signal-
+   In this work, we have simulated both the Rubin LSST                       to-noise ratio ≥3 per 15Å (SNR15Å ). Of these,
+and 4MOST surveys using the latest assumptions on                            ∼12 600 will be type Ia supernovae with a light
+their respective strategies. This has allowed us to cre-                     curve quality suitable for a cosmological analysis.
+20
+
+     • TiDES will observe >9 000 core-collapse super-          ST/V002031/1 and ST/X00130X/1. MN is supported
+       novae and create a sample of rare faint-and-fast        by the European Research Council (ERC) under the
+       transients larger than currently exists from any        European Union’s Horizon 2020 research and innova-
+       other survey to-date.                                   tion programme (grant agreement No. 948381) and by
+                                                               UK Space Agency Grant No. ST/Y000692/1. SFH
+     • The TiDES-Hosts follow-up program will observe
+                                                               acknowledges funding from STFC Grant ST/Y001656/1
+       a sample of >200 000 galaxies, of which ∼131 000
+                                                               and from UK Research and Innovation (UKRI) under
+       will host SNe Ia suitable for cosmology.
+                                                               the UK government’s Horizon Europe funding Guar-
+     • Our cosmologically-useful sample, combining live-       antee (EP/Z533920/1).     SJS acknowledges funding
+       SNe Ia and photometrically identified SNe Ia with       from STFC Grants ST/Y001605/1, ST/X001253/1,
+       host galaxy redshifts, will be placed on a Hubble       ST/X006506/1, ST/T000198/1 and the a Royal Society
+       Diagram containing at-least 143 000 objects.            Research Professorship grant. AM is supported by
+                                                               the ARC Discovery Early Career Researcher Award
+     • We performed a cosmology analysis of the                (DECRA) project number DE230100055. Y.-L.K. has
+       LSST+TiDES sample, including a low-z sample             received funding from the Science and Technology
+       predicted by D. O. Jones et al. (2019). We are able     Facilities Council [grant number ST/V000713/1].
+       to constrain the dark energy equations-of-state pa-     Y.-L.K. was supported by the Lee Wonchul Fellowship,
+       rameter, w, to a sub-2 per cent statistical-only pre-   funded through the BK21 Fostering Outstanding
+       cision, this is 10 times smaller compared to the        Universities for Research (FOUR) Program (grant
+       current gold-standard ( DES Collaboration et al.        No. 4120200513819) and the National Research Foun-
+       2024).                                                  dation of Korea to the Center for Galaxy Evolution
+     • When we consider our constraints on a                   Research (RS-2022-NR070872, RS-2022-NR070525).
+       Flatw0 wa CDM model, our LSST+TiDES SN                  LK acknowledges support for an Early Career Fel-
+       sample produces a figure-of-merit value 15 times        lowship from the Leverhulme Trust through grant
+       larger than DES-SN5YR.                                  ECF-2024-054 and the Isaac Newton Trust through
+                                                               grant 24.08(w). ET acknowledges funding from the
+   The Rubin Observatory’s Legacy Survey of Space and          HTM (grant TK202), ETAg (grant PRG1006) and the
+Time will transform our understanding of the time-             EU Horizon Europe (EXCOSM, grant No. 101159513).
+domain Universe. Important in unlocking the potential
+of these data will be the spectroscopic follow-up of tran-        The DESC acknowledges ongoing support from the
+sients, their host galaxies, and of active galactic nuclei.    Institut National de Physique Nucléaire et de Physique
+TiDES is primed to address this challenge providing ded-       des Particules in France; the Science & Technology Fa-
+icated follow-up time across the 5-year survey. All data       cilities Council in the United Kingdom; and the Depart-
+collected by TiDES and other participating 4MOST sur-          ment of Energy, the National Science Foundation, and
+veys will be made public in periodic data releases on the      the LSST Corporation in the United States. DESC uses
+ESO Science Archive Facility.                                  resources of the IN2P3 Computing Center (CC-IN2P3–
+                                                               Lyon/Villeurbanne - France) funded by the Centre Na-
+  Software: NumPy (C. R. Harris et al. 2020), Pan-
+                                                               tional de la Recherche Scientifique; the National Energy
+das (T. pandas development team 2020; Wes McKinney
+                                                               Research Scientific Computing Center, a DOE Office
+2010), DuckDB (H. Mühleisen & M. Raasveldt 2024), As-
+                                                               of Science User Facility supported by the Office of Sci-
+troPy ( Astropy Collaboration et al. 2013, 2018, 2022),
+                                                               ence of the U.S. Department of Energy under Contract
+Matplotlib (J. D. Hunter 2007)
+                                                               No. DE-AC02-05CH11231; STFC DiRAC HPC Facili-
+                                                               ties, funded by UK BEIS National E-infrastructure cap-
+                ACKNOWLEDGMENTS                                ital grants; and the UK particle physics grid, supported
+                                                               by the GridPP Collaboration. This work was performed
+The authors would like to thank Ricardo Demarco
+                                                               in part under DOE Contract DE-AC02-76SF00515.
+and Swayamtrupta Panda for their comments on this
+manuscript.
+  This paper has undergone internal review in the LSST                     AUTHOR CONTRIBUTIONS
+Dark Energy Science Collaboration. The internal re-            CF led the analysis, performed the simulations, and
+viewers were Chris Lidman and Alex Gagliano.                   wrote the paper. MV and MSm performed the cosmol-
+  CF and MSu acknowledge support from STFC                     ogy analysis. MSu discussed the results, implications,
+funding for UK participation in LSST, through grants           and commented on the manuscript at all stages of the
+                                                                                                                                  21
+
+project. SFH is PI of the TiDES-RM program and wrote                  on this work.
+the relevant sections of this paper. All other co-authors
+are members of 4MOST/TiDES and have commented
+
+                                                                APPENDIX
+
+
+                                          A. TRIGGER AND SPECTRUM PHASES
+
+
+
+                                                           REFERENCES
+Adame, A. G., Aguilar, J., Ahlen, S., et al. 2025, JCAP,              Cao, S., Zajaček, M., Panda, S., et al. 2022, MNRAS, 516,
+ 2025, 021, doi: 10.1088/1475-7516/2025/02/021                          1721, doi: 10.1093/mnras/stac2325
+Alves, C. S., Peiris, H. V., Lochner, M., et al. 2023, ApJS,          Carrick, J. E., Hook, I. M., Swann, E., et al. 2021,
+  265, 43, doi: 10.3847/1538-4365/acbb09                                MNRAS, 508, 1, doi: 10.1093/mnras/stab2343
+Angus, C. R., Smith, M., Sullivan, M., et al. 2019,                   Chen, Z. H., Yan, L., Kangas, T., et al. 2023, ApJ, 943, 41,
+ MNRAS, 487, 2215, doi: 10.1093/mnras/stz1321                           doi: 10.3847/1538-4357/aca161
+Arcavi, I., Hosseinzadeh, G., Howell, D. A., et al. 2017,             Cioni, M. . R. L., Storm, J., Bell, C. P. M., et al. 2019, The
+  Nature, 551, 64, doi: 10.1038/nature24291                             Messenger, 175, 54, doi: 10.18727/0722-6691/5128
+Astropy Collaboration, Robitaille, T. P., Tollerud, E. J.,            Coulter, D. A., Foley, R. J., Kilpatrick, C. D., et al. 2017,
+  et al. 2013, A&A, 558, A33,                                           Science, 358, 1556, doi: 10.1126/science.aap9811
+  doi: 10.1051/0004-6361/201322068                                    Czerny, B., Cao, S., Jaiswal, V. K., et al. 2023a, Ap&SS,
+Astropy Collaboration, Price-Whelan, A. M., Sipőcz, B. M.,             368, 8, doi: 10.1007/s10509-023-04165-7
+  et al. 2018, AJ, 156, 123, doi: 10.3847/1538-3881/aabc4f            Czerny, B., Panda, S., Prince, R., et al. 2023b, A&A, 675,
+                                                                        A163, doi: 10.1051/0004-6361/202345844
+Astropy Collaboration, Price-Whelan, A. M., Lim, P. L.,
+                                                                      Dark Energy Survey Collaboration, Abbott, T., Abdalla,
+  et al. 2022, ApJ, 935, 167, doi: 10.3847/1538-4357/ac7c74
+                                                                        F. B., et al. 2016, MNRAS, 460, 1270,
+Balland, C., Baumont, S., Basa, S., et al. 2009, A&A, 507,
+                                                                        doi: 10.1093/mnras/stw641
+  85, doi: 10.1051/0004-6361/200912246
+                                                                      De, K., Kasliwal, M. M., Tzanidakis, A., et al. 2020, ApJ,
+Barth, A. J., Pancoast, A., Thorman, S. J., et al. 2011,
+                                                                        905, 58, doi: 10.3847/1538-4357/abb45c
+  ApJL, 743, L4, doi: 10.1088/2041-8205/743/1/L4
+                                                                      de Jong, R. S., Agertz, O., Berbel, A. A., et al. 2019, The
+Bellm, E. C., Kulkarni, S. R., Graham, M. J., et al. 2019,
+                                                                        Messenger, 175, 3, doi: 10.18727/0722-6691/5117
+  PASP, 131, 018002, doi: 10.1088/1538-3873/aaecbe
+                                                                      De Rosa, A., Vignali, C., Bogdanović, T., et al. 2019,
+Bentz, M. C., Peterson, B. M., Netzer, H., Pogge, R. W., &
+                                                                        NewAR, 86, 101525, doi: 10.1016/j.newar.2020.101525
+  Vestergaard, M. 2009, ApJ, 697, 160,
+                                                                      DES Collaboration, Abbott, T. M. C., Acevedo, M., et al.
+  doi: 10.1088/0004-637X/697/1/160
+                                                                        2024, ApJL, 973, L14, doi: 10.3847/2041-8213/ad6f9f
+Betoule, M., Kessler, R., Guy, J., et al. 2014, A&A, 568,
+                                                                      Di Valentino, E., Ferreira, R. Z., Visinelli, L., & Danielsson,
+  A22, doi: 10.1051/0004-6361/201423413
+                                                                        U. 2019, Physics of the Dark Universe, 26, 100385,
+Bianco, F. B., Ivezić, Ž., Jones, R. L., et al. 2022, ApJS,           doi: 10.1016/j.dark.2019.100385
+  258, 1, doi: 10.3847/1538-4365/ac3e72                               Driver, S. P., Liske, J., Davies, L. J. M., et al. 2019, The
+Biswas, R., Daniel, S. F., Hložek, R., et al. 2020, ApJS,              Messenger, 175, 46, doi: 10.18727/0722-6691/5126
+  247, 60, doi: 10.3847/1538-4365/ab72f2                              Drlica-Wagner, A., Sevilla-Noarbe, I., Rykoff, E. S., et al.
+Blandford, R. D., & McKee, C. F. 1982, ApJ, 255, 419,                   2018, ApJS, 235, 33, doi: 10.3847/1538-4365/aab4f5
+  doi: 10.1086/159843                                                 Drout, M. R., Chornock, R., Soderberg, A. M., et al. 2014,
+Brout, D., Scolnic, D., Kessler, R., et al. 2019, ApJ, 874,             ApJ, 794, 23, doi: 10.1088/0004-637X/794/1/23
+  150, doi: 10.3847/1538-4357/ab08a0                                  Du, P., Lu, K.-X., Zhang, Z.-X., et al. 2016, ApJ, 825, 126,
+Brout, D., Scolnic, D., Popovic, B., et al. 2022, ApJ, 938,             doi: 10.3847/0004-637X/825/2/126
+  110, doi: 10.3847/1538-4357/ac8e04                                  Dumayne, J., Hook, I. M., Williams, S. C., et al. 2023, RAS
+Cao, S., Zajaček, M., Czerny, B., Panda, S., & Ratra, B.               Techniques and Instruments, 2, 453,
+  2024, MNRAS, 528, 6444, doi: 10.1093/mnras/stae433                    doi: 10.1093/rasti/rzad036
+22
+
+
+                                                                    Trigger Phase            Spec Phase
+                                                              −20        0      20      40        60
+
+
+
+
+                                 Probability density
+                                                                                              Type Ia
+
+                                                       0.02
+
+
+                                                       0.00
+                                                                                              Type II
+
+                                                       0.02
+
+
+
+                                                       0.00
+                                                                                               SESNe
+                                                       0.02
+
+
+
+                                                       0.00
+                                                                                               SLSNe
+                                                 0.015
+
+                                                 0.010
+
+                                                 0.005
+
+
+                                                       0.04                                  91bg/Iax
+
+
+                                                       0.02
+
+
+                                                       0.00
+                                                                                                 TDE
+                                                       0.02
+
+                                                       0.01
+                                 Probability density
+
+
+
+
+                                                       0.00
+                                                                                                 CaST
+                                                       0.02
+
+                                                       0.01
+
+                                                       0.00
+                                                               −20       0      20     40        60
+                                                                     SN phase from peak (days)
+
+Figure 14. The distribution of light curve trigger phases and the phase of spectroscopic follow up by 4MOST is shown, broken
+down into transient sub-types. All phases are measured relative to the light curve peak. The methodology used to generate this
+figure is identical to that presented in Figure 7.
+                                                                                                                                23
+
+Filippenko, A. V., Richmond, M. W., Branch, D., et al.            Harris, C. R., Millman, K. J., van der Walt, S. J., et al.
+  1992, AJ, 104, 1543, doi: 10.1086/116339                          2020, Nature, 585, 357, doi: 10.1038/s41586-020-2649-2
+Flesch, E. W. 2023, The Open Journal of Astrophysics, 6,          Ho, A. Y. Q., Perley, D. A., Gal-Yam, A., et al. 2023, ApJ,
+  49, doi: 10.21105/astro.2308.01505                                949, 120, doi: 10.3847/1538-4357/acc533
+Foley, R. J., Challis, P. J., Chornock, R., et al. 2013, ApJ,     Holoien, T. W. S., Prieto, J. L., Bersier, D., et al. 2014,
+  767, 57, doi: 10.1088/0004-637X/767/1/57                          MNRAS, 445, 3263, doi: 10.1093/mnras/stu1922
+Foley, R. J., Scolnic, D., Rest, A., et al. 2018, MNRAS,          Holz, D. E. 1998, ApJL, 506, L1, doi: 10.1086/311631
+  475, 193, doi: 10.1093/mnras/stx3136                            Hounsell, R., Scolnic, D., Foley, R. J., et al. 2018, ApJ, 867,
+Fonseca Alvarez, G., Trump, J. R., Homayouni, Y., et al.            23, doi: 10.3847/1538-4357/aac08b
+  2020, ApJ, 899, 73, doi: 10.3847/1538-4357/aba001               Howlett, C., Robotham, A. S. G., Lagos, C. D. P., & Kim,
+Förster, F., Cabrera-Vives, G., Castillo-Navarrete, E., et al.     A. G. 2017, ApJ, 847, 128,
+  2021, AJ, 161, 242, doi: 10.3847/1538-3881/abe9bc                 doi: 10.3847/1538-4357/aa88c8
+Frohmaier, C., Sullivan, M., Nugent, P. E., Goldstein,            Hunter, J. D. 2007, Computing in Science & Engineering, 9,
+  D. A., & DeRose, J. 2017, ApJS, 230, 4,                          90, doi: 10.1109/MCSE.2007.55
+  doi: 10.3847/1538-4365/aa6d70                                   Inserra, C., Smartt, S. J., Jerkstrand, A., et al. 2013, ApJ,
+Frohmaier, C., Sullivan, M., Nugent, P. E., et al. 2019,            770, 128, doi: 10.1088/0004-637X/770/2/128
+  MNRAS, 486, 2308, doi: 10.1093/mnras/stz807                     Ivezić, Ž.., & the LSST Science Collaboration. 2013,
+Frohmaier, C., Angus, C. R., Vincenzi, M., et al. 2021,             http://ls.st/LPM-17
+  MNRAS, 500, 5142, doi: 10.1093/mnras/staa3607
+                                                                  Ivezić, Ž., Kahn, S. M., Tyson, J. A., et al. 2019, ApJ, 873,
+Gagliano, A., Contardo, G., Foreman-Mackey, D., Malz,
+                                                                    111, doi: 10.3847/1538-4357/ab042c
+  A. I., & Aleo, P. D. 2023, ApJ, 954, 6,
+                                                                  Jones, D. O., Scolnic, D. M., Foley, R. J., et al. 2019, ApJ,
+  doi: 10.3847/1538-4357/ace326
+                                                                    881, 19, doi: 10.3847/1538-4357/ab2bec
+Gal-Yam, A. 2019, ARA&A, 57, 305,
+                                                                  Jones, D. O., Foley, R. J., Narayan, G., et al. 2021, ApJ,
+  doi: 10.1146/annurev-astro-081817-051819
+                                                                    908, 143, doi: 10.3847/1538-4357/abd7f5
+Galbany, L., Smith, M., Duarte Puertas, S., et al. 2022,
+                                                                  Jönsson, J., Sullivan, M., Hook, I., et al. 2010, MNRAS,
+  A&A, 659, A89, doi: 10.1051/0004-6361/202141568
+                                                                     405, 535, doi: 10.1111/j.1365-2966.2010.16467.x
+Gezari, S. 2021, ARA&A, 59, 21,
+                                                                  Kangas, T., Yan, L., Schulze, S., et al. 2022, MNRAS, 516,
+  doi: 10.1146/annurev-astro-111720-030029
+                                                                   1193, doi: 10.1093/mnras/stac2218
+Gezari, S., Chornock, R., Rest, A., et al. 2012, Nature, 485,
+                                                                  Kankare, E., Kotak, R., Mattila, S., et al. 2017, Nature
+  217, doi: 10.1038/nature10990
+                                                                   Astronomy, 1, 865, doi: 10.1038/s41550-017-0290-2
+Graur, O., Bianco, F. B., Huang, S., et al. 2017a, ApJ, 837,
+                                                                  Kasliwal, M. M., Kulkarni, S. R., Gal-Yam, A., et al. 2012,
+  120, doi: 10.3847/1538-4357/aa5eb8
+                                                                   ApJ, 755, 161, doi: 10.1088/0004-637X/755/2/161
+Graur, O., Bianco, F. B., Modjaz, M., et al. 2017b, ApJ,
+  837, 121, doi: 10.3847/1538-4357/aa5eb7                         Kennamer, N., Ishida, E. E. O., Gonzalez-Gaitan, S., et al.
+Gris, P., Regnault, N., Awan, H., et al. 2023, ApJS, 264,           2020, arXiv e-prints, arXiv:2010.05941,
+  22, doi: 10.3847/1538-4365/ac9e58                                 doi: 10.48550/arXiv.2010.05941
+Groot, P. J., Bloemen, S., Vreeswijk, P. M., et al. 2022, in      Kessler, R., Bernstein, J. P., Cinabro, D., et al. 2009,
+  Society of Photo-Optical Instrumentation Engineers                PASP, 121, 1028, doi: 10.1086/605984
+  (SPIE) Conference Series, Vol. 12182, Ground-based and          Kessler, R., Narayan, G., Avelino, A., et al. 2019a, PASP,
+  Airborne Telescopes IX, ed. H. K. Marshall,                       131, 094501, doi: 10.1088/1538-3873/ab26f1
+  J. Spyromilio, & T. Usuda, 121821V,                             Kessler, R., Brout, D., D’Andrea, C. B., et al. 2019b,
+  doi: 10.1117/12.2630160                                           MNRAS, 485, 1171, doi: 10.1093/mnras/stz463
+Guiglion, G., Battistini, C., Bell, C. P. M., et al. 2019, The    Khadka, N., Zajaček, M., Prince, R., et al. 2023, MNRAS,
+  Messenger, 175, 17, doi: 10.18727/0722-6691/5119                 522, 1247, doi: 10.1093/mnras/stad1040
+Guy, J., Astier, P., Baumont, S., et al. 2007, A&A, 466, 11,      Khakpash, S., Bianco, F. B., Modjaz, M., et al. 2024, ApJS,
+  doi: 10.1051/0004-6361:20066930                                  275, 37, doi: 10.3847/1538-4365/ad7eaa
+Guy, J., Sullivan, M., Conley, A., et al. 2010, A&A, 523,         King, A. L., Martini, P., Davis, T. M., et al. 2015, MNRAS,
+  A7, doi: 10.1051/0004-6361/201014468                              453, 1701, doi: 10.1093/mnras/stv1718
+Haas, M., Chini, R., Ramolla, M., et al. 2011, A&A, 535,          Kovačević, A. B., Radović, V., Ilić, D., et al. 2022, ApJS,
+  A73, doi: 10.1051/0004-6361/201117325                            262, 49, doi: 10.3847/1538-4365/ac88ce
+24
+
+Levan, A. J., Gompertz, B. P., Salafia, O. S., et al. 2024,      Muthukrishna, D., Parkinson, D., & Tucker, B. E. 2019b,
+  Nature, 626, 737, doi: 10.1038/s41586-023-06759-1                ApJ, 885, 85, doi: 10.3847/1538-4357/ab48f4
+Li, W., Leaman, J., Chornock, R., et al. 2011, MNRAS,            Mühleisen, H., & Raasveldt, M. 2024, duckdb: DBI Package
+  412, 1441, doi: 10.1111/j.1365-2966.2011.18160.x                 for the DuckDB Database Management System.
+Lidman, C., Tucker, B. E., Davis, T. M., et al. 2020,              https://r.duckdb.org/
+  MNRAS, 496, 19, doi: 10.1093/mnras/staa1341                    Nicholl, M., Guillochon, J., & Berger, E. 2017, ApJ, 850,
+Lipunov, V. M., Gorbovskoy, E., Kornilov, V. G., et al.            55, doi: 10.3847/1538-4357/aa9334
+  2017, ApJL, 850, L1, doi: 10.3847/2041-8213/aa92c0             Nordin, J., Brinnel, V., van Santen, J., et al. 2019, A&A,
+Lochner, M., McEwen, J. D., Peiris, H. V., Lahav, O., &            631, A147, doi: 10.1051/0004-6361/201935634
+  Winter, M. K. 2016, ApJS, 225, 31,                             Oke, J. B., & Gunn, J. E. 1983, ApJ, 266, 713,
+  doi: 10.3847/0067-0049/225/2/31                                  doi: 10.1086/160817
+Lochner, M., Scolnic, D., Almoubayyed, H., et al. 2022,          Panda, S., & Marziani, P. 2023, Frontiers in Astronomy
+  ApJS, 259, 58, doi: 10.3847/1538-4365/ac5033                     and Space Sciences, 10, 1130103,
+Lyman, J. D., James, P. A., Perets, H. B., et al. 2013,            doi: 10.3389/fspas.2023.1130103
+  MNRAS, 434, 527, doi: 10.1093/mnras/stt1038                    pandas development team, T. 2020,, latest Zenodo,
+Lyman, J. D., Taddia, F., Stritzinger, M. D., et al. 2018,         doi: 10.5281/zenodo.3509134
+  MNRAS, 473, 1359, doi: 10.1093/mnras/stx2414                   Panther, F. H., Seitenzahl, I. R., Ruiter, A. J., et al. 2019,
+Macaulay, E., Bacon, D., Nichol, R. C., et al. 2020,               PASA, 36, e031, doi: 10.1017/pasa.2019.24
+  MNRAS, 496, 4051, doi: 10.1093/mnras/staa1852                  Paterno, M. 2004,, Tech. Rep. FERMILAB-TM-2286-CD,
+Madau, P., & Dickinson, M. 2014, ARA&A, 52, 415,                   Fermilab
+  doi: 10.1146/annurev-astro-081811-125615                       Penton, A., Malik, U., Davis, T. M., et al. 2022, MNRAS,
+Malik, U., Sharp, R., Martini, P., et al. 2022, MNRAS, 516,        509, 4008, doi: 10.1093/mnras/stab3027
+  3238, doi: 10.1093/mnras/stac2263                              Perlmutter, S., Aldering, G., Goldhaber, G., et al. 1999,
+Margutti, R., & Chornock, R. 2021, ARA&A, 59, 155,                 ApJ, 517, 565, doi: 10.1086/307221
+  doi: 10.1146/annurev-astro-112420-030742                       Peterson, B. M. 1993, PASP, 105, 247, doi: 10.1086/133140
+Margutti, R., Metzger, B. D., Chornock, R., et al. 2019,         Planck Collaboration, Aghanim, N., Akrami, Y., et al.
+  ApJ, 872, 18, doi: 10.3847/1538-4357/aafa01                      2020, A&A, 641, A6, doi: 10.1051/0004-6361/201833910
+Marriner, J., Bernstein, J. P., Kessler, R., et al. 2011, ApJ,   Prentice, S. J., Maguire, K., Smartt, S. J., et al. 2018,
+  740, 72, doi: 10.1088/0004-637X/740/2/72                         ApJL, 865, L3, doi: 10.3847/2041-8213/aadd90
+Matheson, T., Stubens, C., Wolf, N., et al. 2021, The            Prince, R., Zajaček, M., Panda, S., et al. 2023, A&A, 678,
+  Astronomical Journal, 161, 107,                                  A189, doi: 10.1051/0004-6361/202346738
+  doi: 10.3847/1538-3881/abd703                                  Pursiainen, M., Childress, M., Smith, M., et al. 2018,
+Merloni, A., Alexander, D. A., Banerji, M., et al. 2019, The       MNRAS, 481, 894, doi: 10.1093/mnras/sty2309
+  Messenger, 175, 42, doi: 10.18727/0722-6691/5125               Qu, H., & Sako, M. 2022, AJ, 163, 57,
+Metcalf, R. B. 1999, MNRAS, 305, 746,                              doi: 10.3847/1538-3881/ac39a1
+  doi: 10.1046/j.1365-8711.1999.02382.x                          Quimby, R. M., Kulkarni, S. R., Kasliwal, M. M., et al.
+Miller, A. A., Abrams, N. S., Aldering, G., et al. 2025,           2011, Nature, 474, 487, doi: 10.1038/nature10095
+  arXiv e-prints, arXiv:2503.14579,                              Ransome, C. L., & Villar, V. A. 2025, ApJ, 987, 13,
+  doi: 10.48550/arXiv.2503.14579                                   doi: 10.3847/1538-4357/adce03
+Mockler, B., Guillochon, J., & Ramirez-Ruiz, E. 2019, ApJ,       Rees, M. J. 1988, Nature, 333, 523, doi: 10.1038/333523a0
+  872, 151, doi: 10.3847/1538-4357/ab010f                        Refsdal, S. 1964, MNRAS, 128, 307,
+Möller, A., & de Boissière, T. 2020, MNRAS, 491, 4277,           doi: 10.1093/mnras/128.4.307
+  doi: 10.1093/mnras/stz3312                                     Riess, A. G., Filippenko, A. V., Challis, P., et al. 1998, AJ,
+Möller, A., Peloton, J., Ishida, E. E. O., et al. 2021,           116, 1009, doi: 10.1086/300499
+  MNRAS, 501, 3272, doi: 10.1093/mnras/staa3602                  Rodney, S. A., Riess, A. G., Strolger, L.-G., et al. 2014, AJ,
+Möller, A., Wiseman, P., Smith, M., et al. 2024, MNRAS,           148, 13, doi: 10.1088/0004-6256/148/1/13
+  533, 2073, doi: 10.1093/mnras/stae1953                         Scolnic, D., & Kessler, R. 2016, ApJL, 822, L35,
+Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R.,          doi: 10.3847/2041-8205/822/2/L35
+  & Hložek, R. 2019a, PASP, 131, 118002,                        Scolnic, D. M., Jones, D. O., Rest, A., et al. 2018, ApJ,
+  doi: 10.1088/1538-3873/ab1609                                    859, 101, doi: 10.3847/1538-4357/aab9bb
+                                                                                                                          25
+
+Sérsic, J. L. 1963, Boletin de la Asociacion Argentina de      Taylor, E. N., Cluver, M., Bell, E., et al. 2023, The
+   Astronomia La Plata Argentina, 6, 41                           Messenger, 190, 46, doi: 10.18727/0722-6691/5312
+Shah, P., Davis, T. M., Bacon, D., et al. 2024a, MNRAS,         Tempel, E., Norberg, P., Tuvikene, T., et al. 2020a, A&A,
+  532, 932, doi: 10.1093/mnras/stae1515                           635, A101, doi: 10.1051/0004-6361/201937228
+Shah, P., Davis, T. M., Vincenzi, M., et al. 2024b, MNRAS,      Tempel, E., Tuvikene, T., Muru, M. M., et al. 2020b,
+  doi: 10.1093/mnras/stae2614                                     MNRAS, 497, 4626, doi: 10.1093/mnras/staa2285
+Shankar, F., Bernardi, M., Sheth, R. K., et al. 2016,           The DES Collaboration. 2024, ApJL, 973, L14,
+  MNRAS, 460, 3119, doi: 10.1093/mnras/stw678                     doi: 10.3847/2041-8213/ad6f9f
+Sharon, K., Gal-Yam, A., Maoz, D., Filippenko, A. V., &         The LSST Dark Energy Science Collaboration,
+                                                                  Mandelbaum, R., Eifler, T., et al. 2018, arXiv e-prints,
+  Guhathakurta, P. 2007, ApJ, 660, 1165,
+                                                                  arXiv:1809.01669. https://arxiv.org/abs/1809.01669
+  doi: 10.1086/513266
+                                                                Trakhtenbrot, B., Arcavi, I., Ricci, C., et al. 2019, Nature
+Shen, Y., Horne, K., Grier, C. J., et al. 2016, ApJ, 818, 30,
+                                                                  Astronomy, 3, 242, doi: 10.1038/s41550-018-0661-3
+  doi: 10.3847/0004-637X/818/1/30
+                                                                Tripp, R. 1998, A&A, 331, 815
+Shen, Y., Grier, C. J., Horne, K., et al. 2024, ApJS, 272,
+                                                                Valenti, S., Sand, D. J., Yang, S., et al. 2017, ApJL, 848,
+  26, doi: 10.3847/1538-4365/ad3936
+                                                                  L24, doi: 10.3847/2041-8213/aa8edf
+Sheng, X., Nicholl, M., Smith, K. W., et al. 2024, MNRAS,       van Velzen, S., Gezari, S., Hammerstein, E., et al. 2021,
+  531, 2474, doi: 10.1093/mnras/stae1253                          ApJ, 908, 4, doi: 10.3847/1538-4357/abc258
+Shivvers, I., Modjaz, M., Zheng, W., et al. 2017, PASP,         Vincenzi, M., Sullivan, M., Firth, R. E., et al. 2019,
+  129, 054201, doi: 10.1088/1538-3873/aa54a6                      MNRAS, 489, 5802, doi: 10.1093/mnras/stz2448
+Smartt, S. J., Chen, T. W., Jerkstrand, A., et al. 2017,        Vincenzi, M., Sullivan, M., Graur, O., et al. 2021, MNRAS,
+  Nature, 551, 75, doi: 10.1038/nature24303                       505, 2819, doi: 10.1093/mnras/stab1353
+Smith, K. W., Williams, R. D., Young, D. R., et al. 2019,       Walcher, C. J., Banerji, M., Battistini, C., et al. 2019, The
+  Research Notes of the American Astronomical Society, 3,         Messenger, 175, 12, doi: 10.18727/0722-6691/5118
+  26, doi: 10.3847/2515-5172/ab020f                             Watson, D., Denney, K. D., Vestergaard, M., & Davis,
+Smith, M., Bacon, D. J., Nichol, R. C., et al. 2014, ApJ,         T. M. 2011, ApJL, 740, L49,
+  780, 24, doi: 10.1088/0004-637X/780/1/24                        doi: 10.1088/2041-8205/740/2/L49
+Smith, M., Sullivan, M., Wiseman, P., et al. 2020, MNRAS,       Wes McKinney. 2010, in Proceedings of the 9th Python in
+                                                                  Science Conference, ed. Stéfan van der Walt & Jarrod
+  494, 4426, doi: 10.1093/mnras/staa946
+                                                                  Millman, 56 – 61, doi: 10.25080/Majora-92bf1922-00a
+Soares-Santos, M., Holz, D. E., Annis, J., et al. 2017, ApJL,
+                                                                Wiseman, P., Smith, M., Childress, M., et al. 2020,
+  848, L16, doi: 10.3847/2041-8213/aa9059
+                                                                  MNRAS, 495, 4040, doi: 10.1093/mnras/staa1302
+Songsheng, Y.-Y., Wang, J.-M., Li, Y.-R., & Du, P. 2019,
+                                                                Wiseman, P., Wang, Y., Hönig, S., et al. 2023, MNRAS,
+  ApJ, 881, 140, doi: 10.3847/1538-4357/ab2e00
+                                                                  522, 3992, doi: 10.1093/mnras/stad1000
+Steeghs, D., Galloway, D. K., Ackley, K., et al. 2022,          Woo, J.-H., Wang, S., Rakshit, S., et al. 2024, ApJ, 962, 67,
+  MNRAS, 511, 2405, doi: 10.1093/mnras/stac013                    doi: 10.3847/1538-4357/ad132f
+Sullivan, M., Le Borgne, D., Pritchet, C. J., et al. 2006,      Wood-Vasey, W. M. 2024, in What Was That? - Planning
+  ApJ, 648, 868, doi: 10.1086/506137                              ESO Follow up for Transients, 13,
+Sullivan, M., Conley, A., Howell, D. A., et al. 2010,             doi: 10.5281/zenodo.10571807
+  MNRAS, 406, 782, doi: 10.1111/j.1365-2966.2010.16731.x        Yang, Q., & Shen, Y. 2023, ApJS, 264, 9,
+Takaro, T., Foley, R. J., McCully, C., et al. 2020, MNRAS,        doi: 10.3847/1538-4365/ac9ea8
+  493, 986, doi: 10.1093/mnras/staa294                          Yao, Y., Ravi, V., Gezari, S., et al. 2023, ApJL, 955, L6,
+Tanvir, N. R., Levan, A. J., Fruchter, A. S., et al. 2013,        doi: 10.3847/2041-8213/acf216
+  Nature, 500, 547, doi: 10.1038/nature12505                    Yuan, F., Lidman, C., Davis, T. M., et al. 2015, MNRAS,
+Tanvir, N. R., Levan, A. J., González-Fernández, C., et al.     452, 3047, doi: 10.1093/mnras/stv1507
+  2017, ApJL, 848, L27, doi: 10.3847/2041-8213/aa90b6           Zajaček, M., Czerny, B., Khadka, N., et al. 2024a, ApJ,
+                                                                  961, 229, doi: 10.3847/1538-4357/ad11dc
+Taubenberger, S. 2017, The Extremes of Thermonuclear
+                                                                Zajaček, M., Panda, S., Pandey, A., et al. 2024b, A&A,
+  Supernovae, ed. A. W. Alsabti & P. Murdin, 317,
+                                                                  683, A140, doi: 10.1051/0004-6361/202348172
+  doi: 10.1007/978-3-319-21846-5 37
+

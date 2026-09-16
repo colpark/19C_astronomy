@@ -1,0 +1,1840 @@
+Draft version October 24, 2024
+Typeset using LATEX twocolumn style in AASTeX63
+
+Blast: a Web Application for Characterizing the Host Galaxies of Astrophysical Transients
+D. O. Jones ,1, ∗ P. McGill ,2, 3, ∗ T. A. Manning ,4 A. Gagliano ,5, 6, 7 B. Wang (王冰洁) ,8, 9, 10
+D. A. Coulter ,11 R. J. Foley ,2 G. Narayan ,12, 13 V. A. Villar ,6, 5 L. Braff,2 A. W. Engel ,14
+D. Farias ,15 Z. Lai ,16 K. Loertscher,2 J. Kutcka ,2 S. Thorp ,17 and J. Vazquez 12
+1 Institute for Astronomy, University of Hawai‘i, 640 N. A‘ohoku Pl., Hilo, HI 96720, USA
+
+arXiv:2410.17322v1 [astro-ph.HE] 22 Oct 2024
+
+2 Department of Astronomy and Astrophysics, University of California, Santa Cruz, CA 93105, USA
+3 Space Science Institute, Lawrence Livermore National Laboratory, 7000 East Ave., Livermore, CA 94550, USA
+4 National Center for Supercomputing Applications, University of Illinois Urbana-Champaign, Urbana, IL 61801, USA
+5 The NSF AI Institute for Artificial Intelligence and Fundamental Interactions
+6 Center for Astrophysics | Harvard & Smithsonian, Cambridge, MA 02138, USA
+7 Department of Physics, Massachusetts Institute of Technology, Cambridge, MA 02139, USA
+8 Department of Astronomy & Astrophysics, The Pennsylvania State University, University Park, PA 16802, USA
+9 Institute for Computational & Data Sciences, The Pennsylvania State University, University Park, PA 16802, USA
+10 Institute for Gravitation and the Cosmos, The Pennsylvania State University, University Park, PA 16802, USA
+11 Space Telescope Science Institute, Baltimore, MD 21218, USA
+12 Department of Astronomy, University of Illinois Urbana-Champaign, Urbana, IL 61801, USA
+13 Center for Astrophysical Surveys, National Center for Supercomputing Applications, Urbana, IL, 61801, USA
+14 Pacific Northwest National Laboratory, 902 Battelle Blvd, Richland, WA 99354, USA
+15 DARK, Niels Bohr Institute, University of Copenhagen, Jagtvej 128, DK-2200 Copenhagen Ø Denmark
+16 Department of Astronomy and Astrophysics, San Francisco State University, San Francisco, CA 94132
+17 The Oskar Klein Centre, Department of Physics, Stockholm University, AlbaNova University Centre, SE 106 91 Stockholm, Sweden
+
+ABSTRACT
+Characterizing the host galaxies of astrophysical transients is important to many areas of astrophysics, including constraining the progenitor systems of core-collapse supernovae, correcting Type
+Ia supernova distances, and probabilistically classifying transients without photometric or spectroscopic data. Given the increasing transient discovery rate in the coming years, there is substantial
+utility in providing public, transparent, reproducible, and automatic characterization for large samples of transient host galaxies. Here we present Blast, a web application that ingests live streams
+of transient alerts, matches transients to their host galaxies, and performs photometry on coincident
+archival imaging data of the host galaxy. The photometry is then used to infer both global host-galaxy
+properties and galaxy properties within 2 kpc of the transient location by using the Prospector
+Bayesian inference framework, with an acceleration in evaluation speed achieved via simulation-based
+inference. Blast provides host-galaxy properties to users via a web browser or an application program interface. The software can be extended to support alternative photometric or SED-fitting
+algorithms, and can be scaled via an asynchronous worker queue across multiple compute nodes to
+handle the processing of large volumes of transient alerts for upcoming transient surveys. Blast has
+been ingesting newly discovered transients from the Transient Name Server since mid-2024, and has
+currently measured SED parameters for more than 6000 transients. The service is publicly available
+at https://blast.scimma.org/.
+1. INTRODUCTION
+
+The properties of transients are fundamentally linked
+with the characteristics of the galaxies in which their
+progenitor stars form and evolve (e.g., Timmes et al.
+2003; Sullivan et al. 2010; Rigault et al. 2013; Anderson
+et al. 2015; Moreno-Raya et al. 2016; Taggart & Perley
+∗ Joint first author contribution.
+
+2021; Qin & Zabludoff 2024). Therefore, characterizing and understanding the host galaxies of astrophysical transients can play a crucial role in understanding
+the transients themselves. Understanding the properties of transient host galaxies, both globally and near
+the location of the transient, can aid in understanding
+the progenitor systems of core collapse supernovae (SNe)
+(e.g., Anderson et al. 2012; Sanders et al. 2012; Anderson
+et al. 2015; Hosseinzadeh et al. 2019; Taggart & Perley
+
+2
+2021), probe rapidly evolving objects (Wiseman et al.
+2020a), and mitigate bias in Type Ia SN (SN Ia) distance measurements (Kelly et al. 2010; Lampeitl et al.
+2010; Sullivan et al. 2010) that are then incorporated in
+measurements of cosmological parameters (e.g., Scolnic
+et al. 2018; Abbott et al. 2019; Jones et al. 2019; Brout
+et al. 2022; Möller et al. 2024). Taking into account the
+correlations between host galaxy and transient properties is also an important step in planning upcoming transient surveys, including those using the Vera C. Rubin
+Observatory and the Nancy G. Roman Space Telescope
+(Lokken et al. 2023).
+Host-galaxy properties are also useful in classifying
+transients (e.g., Foley & Mandel 2013; Kisley et al. 2023)
+because they provide discriminating class information
+beyond approaches that solely use transient photometry
+(e.g., Boone 2019; Qu & Sako 2022). Real-time classification of SNe in the hours to days after explosion can be
+particularly vital for making decisions about subsequent
+spectroscopic and photometric followup (e.g., Kasliwal
+et al. 2019; Muthukrishna et al. 2019; Aleo et al. 2022;
+Coulter et al. 2022, 2023), in order to probe the SN progenitor star (e.g., Kilpatrick et al. 2021; Tinyanont et al.
+2022), or close-in circumstellar material (e.g., JacobsonGalán et al. 2022). At early times, when very little
+light curve data is available, the extra leverage gained
+from host information can be particularly important
+(Gagliano et al. 2023).
+Historically, optimally leveraging host-galaxy information has proven difficult for four main reasons.
+Firstly, obtaining the necessary sample sizes needed to
+fully understand host galaxies and transient correlations
+has been challenging, particularly for rare types (e.g.,
+Perley et al. 2016a,b). Secondly, biases in transient
+survey design have affected the measured host-galaxy
+demographics (for example, surveys that target preselected bright galaxies, e.g., Leaman et al. 2011; Li et al.
+2011). Thirdly, photometric/spectroscopic coverage of
+the host galaxy has often been limited to optical wavelengths (e.g., Jones et al. 2018). Finally, heterogeneous,
+and sometimes inconsistent, methods and models used
+to fit broad-band photometry of the host galaxy can in
+some cases lead to poor and biased estimation of host
+galaxy parameters and their uncertainties (Leja et al.
+2017, 2019a; Lower et al. 2020; Hand et al. 2022; Lower
+et al. 2022; Nagaraj et al. 2022; Wang et al. 2023b).
+The challenges relating to small transient samples
+and the design of transient surveys have been largely
+addressed with the recent transition from narrowfield galaxy-targeted surveys to wide-field time-domain
+surveys, including ASAS-SN (Shappee et al. 2014;
+Kochanek et al. 2017), ATLAS (Tonry et al. 2018), Gaia
+
+Photometric Science Alerts (Hodgkin et al. 2021), the
+Panoramic Survey Telescope and Rapid Response (PanSTARRS) Survey for Transients (PSST; Huber et al.
+2015), the Zwicky Transient Facility (ZTF; Bellm et al.
+2019), and the the Young Supernova Experiment (YSE;
+Jones et al. 2021), among others. These modern transient surveys have delivered a larger, more homogeneous
+and exponentially growing transient discovery rate over
+recent years with 20,713 transients reported in 2023
+alone.1 The discovery rate is expected to increase further still with the advent of the Vera Rubin Observatory’s Legacy Survey of Space and Time (LSST; LSST
+Science Collaboration et al. 2009).
+For all of these newly discovered transients, there exists coincident, readily-available archival imaging data.
+This multi-wavelength archival imaging data ranges
+from the infrared (2MASS; Skrutskie et al. 2006, WISE;
+Wright et al. 2010) through the optical (SDSS, York
+et al. 2000; Blanton et al. 2017; DESI Legacy Imaging Surveys, including the Dark Energy Camera Legacy
+Survey, Dey et al. 2019; Pan-STARRS, Chambers et al.
+2016a; Flewelling et al. 2020; Magnier et al. 2020) and
+the ultraviolet (GALEX; Martin et al. 2005). These
+data provide the means to consistently and robustly
+measure the host galaxy spectral energy distribution
+(SED; e.g., Müller-Bravo & Galbany 2022; Bradley et al.
+2022; Duarte et al. 2023; Meldorf et al. 2023) and, when
+combined with Bayesian fitting methods (Johnson et al.
+2021; Speagle 2020), infer the properties of the host
+galaxies of transients as they are discovered. These
+available host-galaxy characterization tools and archival
+imaging data make addressing the final two challenges
+outlined above possible, at least in theory. In practice, the characterization of transient host galaxies requires significant compute when performing photometry
+on archival images and fitting models to the resulting
+host-galaxy SEDs.
+In recent years the transient community has invested
+heavily in the development of transient alert brokers
+(e.g., MARS, Brown et al. 2013; ANTARES, Saha et al.
+2014; AMPEL, Nordin et al. 2019; Fink, Möller et al.
+2021; ALeRCE, Förster et al. 2021; Lasair; Smith et al.
+2019). These brokers provide a stream of alerts of transients to the community, along with some basic discovery
+information. This stream of alerts can then be ingested
+by Target and Observation Manager (TOM) platforms
+(e.g., YSE-PZ, Coulter et al. 2022, 2023; the RoboNet
+Microlensing System, Tsapras et al. 2009; the PESSTO
+Marshall, Smartt et al. 2015; the Supernova Exchange,
+1 https://www.wis-tns.org/stats-maps
+
+3
+
+blast
+Howell & Global Supernova Project 2017; the TOMtoolkit, Street et al. 2018; the Global Relay of Observatories Watching Transients Happen Marshall, Kasliwal
+et al. 2019; the Transient Science Server, Smith et al.
+2020; and the SNAD ZTF object viewer, Malanchev
+et al. 2023), where typically computationally inexpensive value-added services can be run on the transient
+(e.g., host-matching, Gagliano et al. 2021; light curve
+classification, Aleo et al. 2022) to track and manage followup decisions and data. However, none of the transient alert brokers of TOM platforms currently provide
+consistent and automatic host galaxy characterization.
+In this paper, we present Blast: an open-source web
+application that can ingest live streams of transient
+alerts and automatically measure the physical properties of its host galaxy stellar population globally and
+locally within 2 kpc of the transient location, using available archival imaging data. In Section 2 we describe the
+system architecture of Blast, user interface, and host
+galaxy characterization pipeline. In Section 3 we validate Blast’s pipeline against previous studies. In Section 4 we present brief statistics for Blast’s current set
+of transient events and discuss future challenges for transient host galaxy characterization in the era of upcoming
+large transient surveys. In Section 5 we conclude.
+2. BLAST
+2
+
+Blast is a web application that ingests, stores, and
+processes transients, transient metadata, and transient
+host-galaxy data. This data is available to users through
+a front end web application and via an Application Program Interface (API). In this section, we will first cover
+Blast’s underlying data model and architecture (Section 2.1). Then we will detail Blast’s tasks processing
+system and the specific processes that Blast uses to
+characterize transient host galaxies (Section 2.2). Finally, we will describe the details of the web application
+(Section 2.3) and its deployment (Section 2.4).
+2.1. Software Architecture
+Blast is built using the Django framework (Django
+Software Foundation 2018) and leverages its extensive
+ecosystem of available apps and integrations, including Celery and the Django REST Framework (Django
+REST Framework 2024). The Blast application is comprised of several components: (1) the Django webserver
+that runs both the frontend web app and the backend
+API server, (2) a database for primary data storage,
+(3) a pool of Celery workers, which are processes that
+2 Available at https://blast.scimma.org/ with documentation at
+
+https://blast.readthedocs.io/.
+
+execute asynchronous data processing tasks, (4) a Celery Beat instance for periodic task scheduling, and (5)
+a RabbitMQ message broker that provides a communication mechanism between the web app server and the
+Celery workers via the Advanced Message Queuing Protocol (AMQP). The overview of the Blast system architecture is shown in Figure 1.
+The Blast data model is shown in Figure 2. The goal
+of the data model is to store every astrophysical transient and its associated metadata (via the Transient
+table), and connect it to its associated host-galaxy information (Host), the photometry of both the host galaxy
+as a whole and a circular aperture near the transient
+location (Photometry), and its derived physical parameters (SED Parameter Inference). Simultaneously, it
+is connected to the data sets needed to provide that information (Aperture, Image Cutout, and Filter). Finally, the tasks are managed by Task and TaskRegister
+tables, which record for each transient the tasks that
+have been run and the status of those tasks.
+2.2. Processing Workflow
+Celery Beat periodically executes a task that polls the
+Transient Name Server,3 launching processing workflows
+for each newly detected transient. Each workflow is
+comprised of tasks that Celery schedules to run asynchronously across a pool of workers, maximizing utilization of the available compute resources and completing
+workflows as quickly as possible. The workflow is implemented using Celery’s native “canvas” system, which
+ensures that tasks in a workflow are executed according to the specified directed acyclic graph (DAG) of
+task dependencies (Figure 3). Augmenting the Celery
+workflow system is a custom state management system,
+whereby completed tasks are marked as “processed”
+such that subsequent executions of the same workflow
+do not waste time reprocessing the same data. This
+supports efficiently resuming prematurely aborted workflows. For example, a global host-galaxy SED-fitting
+task will be launched only if the status of that task
+is “unprocessed” and host-galaxy photometry has been
+performed successfully4 .
+2.2.1. Transient Data Ingestion
+Blast ingests new astrophysical transients by querying the Transient Name Server5 (TNS) API for tran3 http://wis-tns.org/.
+4 Note: The term “task” is overloaded. Sometimes the word “task”
+
+refers to a defined data processing type (e.g., Host SED fitting),
+and sometimes it refers to an instance of such a task’s execution.
+Hopefully context will make the distinction clear.
+5 https://www.wis-tns.org/.
+
+4
+
+Users
+Client-side
+interactions
+
+Celery
+Celery
+workers
+Celery
+workers
+
+workers
+
+API
+Web app
+
+RabbitMQ
+
+TNS ingest &
+other periodic tasks
+Transient
+Name Server
+
+Blast application
+
+Webserver
+
+Scripts
+
+Database
+Transient
+workflows
+Other
+Other
+Other
+Public
+Data
+Public
+Data
+Public Data
+Sources
+Sources
+Sources
+
+Figure 1. Schematic of the Blast system architecture. Arrows indicate the direction of data flow or interaction. Celery workers
+periodically execute tasks including one that polls the Transient Name Server API and stores new transient alert data in the
+database. Each alert triggers a transient processing workflow that executes as a set of Celery tasks across all available workers.
+The workflow tasks download required data from public online resources as needed and perform the necessary computation
+tasks. Users can view and download the resulting data via the web application or programmatically via the API.
+
+sients that have recently been discovered or updated.
+This query runs every few minutes by default, but can
+be modified to run at any cadence. Additional tasks
+can be defined by extending the TaskRunner class and
+appending the new class to the list of periodic tasks;
+thus a developer could add modules to query data from,
+for example, ZTF (likely via, e.g., the Alerce, Lasair,
+or ANTARES brokers; Sánchez-Sáez et al. 2021; Smith
+et al. 2019; Matheson et al. 2021) or the Rubin Observatory’s LSST.
+New transients may also be added manually by authenticated Blast users in one of two ways: the first is
+by entering the name of a TNS-reported transient, triggering a query of the TNS API to ingest that transient’s
+metadata and initialize the transient workflow; the second is by specifying the name, right ascension, declination, redshift, and class of a transient as an uploaded
+document. The second method supports a broader range
+of non-public transients or galaxy science.
+TNS data includes coordinates of the transient and
+redshifts derived from transient spectra, when available.
+
+We also obtain Milky Way reddening estimates from
+Schlafly & Finkbeiner (2011) via the dustmaps python
+package (Green 2018).
+2.2.2. Downloading Imaging Data
+The Blast architecture allows individual instruments
+and filters to be defined via a file that is ingested into
+the database on startup. The user must define image
+characteristics like the filter name, survey, units of the
+image (usually counts, or counts per second), effective
+wavelength, pixel size, zeropoint (when set to a standard
+value), and AB offset. With this information, Blast
+automatically downloads images, measures photometry,
+and performs SED fitting for these user-defined instruments6 .
+In this work we use GALEX (Martin et al. 2005),
+SDSS (York et al. 2000), Pan-STARRS (Chambers et al.
+6 In practice, adding new filters or instruments will also require
+
+re-training the SBI++ model for SED parameter estimation; see
+Section 2.2.5.
+
+5
+
+blast
+SED
+Parameter
+Inference
+
+Transient
+
+Aperture
+
+Photometry
+
+Host
+
+Image Cutout
+
+Filter
+
+Figure 2. Simplified schema showing how Blast connects
+transients to host galaxies, photometric apertures (local or
+global), filters, image cutouts, and ultimately SED inference.
+Each box represents a database table, with three lines connecting to a box indicating “many” and a single perpendicular line indicating “one”. For example, each filter can be
+associated with many image cutouts, while a given image
+cutout is associated with only one filter.
+
+2016b; Flewelling et al. 2020), DES (Dey et al. 2019),
+2MASS (Skrutskie et al. 2006), and WISE (Wright
+et al. 2010) imaging. Images are downloaded using astroquery (Ginsburg et al. 2019) via MAST for
+GALEX images, the Pan-STARRS image cutout service
+for Pan-STARRS data,7 IRSA for WISE and 2MASS,8
+NOIRLab’s Astro Data Lab for DES (Fitzpatrick et al.
+2014; Nikutta et al. 2020), and SDSS DR16 via https:
+//data.sdss.org/sas for SDSS imaging downloads (Ahumada et al. 2020). We require images that have accompanying exposure times or weight maps to estimate
+reliable photometric errors.
+Developers can add additional instruments/filters to
+the data model. Because there is no catch-all service for
+FITS images, developers need to also add a custom image download function to incorporate new instruments.9
+2.2.3. Transient–Host Galaxy Matching
+Transients are matched to their host galaxies using
+the Galaxies HOsting Supernova Transients (GHOST;
+Gagliano et al. 2021) software. By default, GHOST uses
+a modified directional light radius method (DLR; Gupta
+et al. 2016) to identify the most likely host galaxy in the
+Pan-STARRS 3π survey within 60′′ of the queried transient (if not found by name or coordinates in the associated GHOST catalog). SkyMapper at Siding Spring
+Observatory (Onken et al. 2024) is used to identify
+southern-hemisphere hosts, for its similar filter set and
+depth to Pan-STARRS (SkyMapper has a 5-σ singleepoch detection limit of mg ∼23, comparable to PS1’s
+stacked photometry). Candidate extended sources are
+pre-filtered using PS1 quality flags and a random-forest
+classifier optimized for star-galaxy separation. The PS1
+source from the stacked source catalog with the lowest
+DLR value is selected as the host galaxy; DLR computation uses the Kron radius of the source (Kron 1980),
+the elliptical radius computed from the first moment of
+the image, in the filter with the highest signal-to-noise
+ratio. If the closest source has DLR>1 (indicating that
+the transient is beyond the radius of any source), sources
+classified in the NASA/IPAC Extragalactic database10
+(NED) as galaxies are preferentially associated. We have
+found empirically that this update decreases the rate of
+misassociations.
+7 https://ps1images.stsci.edu/cgi-bin/ps1cutouts.
+8 https://irsa.ipac.caltech.edu/frontpage/.
+9 See the developer guide at https://blast.readthedocs.io for more
+
+information.
+
+Figure 3. Diagram of the transient workflow directed
+acyclic graph (DAG). Tasks are described in Section 2.2.
+
+10 The NASA/IPAC Extragalactic Database is funded by the Na-
+
+tional Aeronautics and Space Administration and operated by
+the California Institute of Technology.
+
+6
+To address the problem of source shredding (galaxies
+that become split into multiple resolved segments) for
+bright and extended low-redshift galaxies, the GHOST
+software has also been modified to first conduct a DLR
+association within the GLADE+ catalog (Dálya et al.
+2022), which contains 22.5M galaxies and is complete to
+a luminosity distance of 47 Mpc. If no association can
+be made to a GLADE+ source, the full pipeline is run
+among PS1 sources. This triaging approach significantly
+reduces runtime for local sources, from ∼60s per PS1 association to ∼10s per GLADE+ association (though we
+note that a significant fraction of the PS1 runtime is
+added overhead from remote queries that would be unnecessary if the catalogs existed on disk). GHOST also
+now takes advantage of hierarchical classifications provided by the SIMBAD astronomical database (Wenger
+et al. 2000) to ensure that final associations are not made
+to galaxy sub-structures.
+GHOST additionally provides photometric redshifts
+via Easy PhotoZ for each host galaxy estimated from
+a neural network (multilayer perceptron) and spectroscopic redshifts from NED, when available. See Appendix A of Aleo et al. (2022) for additional details on
+the model.
+2.2.4. Aperture photometry
+We perform aperture photometry by first constructing “local” and “global” apertures for each transient in
+Blast. For local apertures, we center a circular aperture with 2 kpc radius at the transient location. To
+compute the physical size of that radius we use the photometric or spectroscopic redshift to define the physical
+size of the aperture assuming a standard ΛCDM cosmology (H0 = 70 km s−1 Mpc−1 , Ωm = 0.315; Planck
+Collaboration et al. 2020). For transients without redshift information, we choose to not provide local hostgalaxy properties within some standard aperture as the
+interpretation of that information would be unclear (if
+an updated redshift is sent to TNS, all tasks are reprocessed).
+In a separate validation stage, we ensure that each
+filter/instrument has sufficient resolving power at the
+angular size of 2 kpc in a given galaxy. Conservatively,
+we require that the PSF FWHM of a given instrument is
+less than this 2 kpc radius. For this reason, we caution
+that the higher the redshift, the fewer the photometric
+filters that are used to compute local properties.
+For global apertures, we use the Astropy Photutils
+(Bradley et al. 2022) package to find and construct
+elliptical apertures for each host galaxy identified by
+GHOST. Photutils constructs an image segmentation
+map of detected sources (> 3σ from all connected pix-
+
+els) and constructs Kron apertures from that map. We
+use optical data (preferentially g or r bands from SDSS,
+Pan-STARRS, or DES, with 2MASS J as a last resort)
+to compute this global aperture. We require that an object have at least 10 connected pixels to be considered a
+distinct object (the “deblending” theshold), a relatively
+large value that results in more low-redshift galaxies being treated as a single object instead of being deblended
+into multiple sources. Despite this, we still have occasional difficulties with under-estimating the proper aperture size in the case of very bright, nearby galaxies.
+Because the PSF size of each filter and instrument
+varies significantly, we make an approximate adjustment
+to the Kron radius for a self-consistent flux measurement
+across all images (Figure 4). We increase or decrease
+each aperture by the difference in standard deviation of
+the seeing between the reference image used to compute
+the aperture (typically, g band) and the image of interest. While a perfect correction for the effect of the
+convolution of the galaxy light with each PSF would be
+morphology dependent, and therefore difficult in practice, this approach gives us an approximate adjustment
+that treats the outer edge of galaxy light approximately
+the same across wavelengths.
+The uncertainties on each image are assumed to be
+Poisson-noise dominated and we use the calibrated zeropoints for each image provided by its individual survey.
+For WISE filters, uncertainties are correlated pixel-topixel, and we therefore apply a noise correction term as
+a function of the number of pixels in an aperture.11
+For each aperture, we check whether neighboring
+sources are likely to contaminate a given photometric
+measurement. We first generate segmentation maps
+from both an optical image and the image on which photometry is being performed. If the segmentation map
+flags multiple objects within the aperture in either image then the photometry is considered to be “contaminated” and is not used in fitting the SED. Due to the
+complexity and intrinsic assumptions required to correct
+for contamination within an image, we do not attempt
+to model and correct for contaminating sources in the
+current work. The effect of this treatment is that images with larger PSFs (e.g., GALEX, WISE) are more
+likely to have contaminating sources and are frequently
+excluded from SED fitting.
+In rare cases, very low-redshift galaxies are deblended
+into multiple sources that overlap with our aperture,
+and therefore every global photometric detection is con11 Computed by the WISE team and described at https://wise2.
+
+ipac.caltech.edu/docs/release/prelim/expsup/sec2 3f.html.
+
+blast
+
+7
+
+Figure 4. An example of PSF-matched apertures (red ellipses) for SN 2010H for a selection of available cutouts from the UV
+to the NIR. Each image is 50′′ ×50′′ in size. The matched host galaxy and SN 2010H’s position are marked as a red and blue
+cross, respectively. The directional arrows in the left-most panel have lengths of 20′′ .
+
+sidered contaminated. In these cases, we check to see
+whether all photometric measurements are flagged as
+contaminated, and if so we consider this a likely case
+of a low-redshift galaxy that is not truly contaminated
+by neighboring objects. We then issue a warning to the
+user (visible via the web application results pages — see
+Section 2.3) and include all photometry in the SED fit.
+2.2.5. Host SED fitting
+SED fitting is performed using Prospector (Leja et al.
+2017; Johnson et al. 2021). Within Prospector, we use
+the MIST stellar isochrones (Choi et al. 2016; Dotter
+2016), and the MILES stellar spectral library (SánchezBlázquez et al. 2006) in the Fast Stellar Population
+Synthesis (FSPS) code (Conroy et al. 2009; Conroy &
+Gunn 2010a,b). A non-parametric SFH is characterized
+by mass formed in seven logarithmically spaced time
+bins (Leja et al. 2017), with a continuity prior to ensure smooth transitions between bins (Leja et al. 2019a).
+Nebular emission is accounted for using a pre-computed
+Cloudy grid (Byler et al. 2017). Dust is modeled by two
+components (Charlot & Fall 2000), with a power-law parameterization to a Calzetti et al. 2000 curve (Noll et al.
+2009). Emission from an AGN torus is parameterized
+as a simplified version of the CLUMPY model (Nenkova
+et al. 2008), adding the normalization and dust optical depth as two additional free parameters (Leja et al.
+2018). Dust emission (Draine & Li 2007) is incorporated
+into all fits. The full set of parameters are described in
+Appendix A and Wang et al. (2023a, their Table 1).12
+Adopting a full Bayesian approach means that when a
+parameter is not constrained by the available data, its
+uncertainty is propagated into the rest of the inferred
+parameters (i.e., it is essentially treated as a nuisance
+parameter and is marginalized over).
+12 They are also included in the Blast documentation:
+
+blast.readthedocs.io/en/latest/usage/sed params.html.
+
+https://
+
+In tests on our data we found that obtaining posteriors using the Prospector-α model with nested sampling
+(via dynesty; Speagle 2020) could typically take > 24
+core-hours of computation. Replacing the generation
+of stellar population models (Bruzual & Charlot 2003;
+Conroy & Gunn 2010b) with an emulator (Alsing et al.
+2020; Hahn et al. 2023; Mathews et al. 2023; Thorp et al.
+2024) decreases the computation time to ≳ 15 mins (for
+a large-scale application, see Wang et al. 2024). A number of other techniques have also been proposed, including gradient-based samplers (Duane et al. 1987; Hoffman
+& Gelman 2011), and samplers based on a normalizing
+flow (Karamanis et al. 2022; Wong et al. 2023). Here,
+we use the simulation-based inference (SBI) method presented in Wang et al. (2023a) as SBI++. SBI++ is a
+neural posterior estimator that quickly returns full posteriors on the full set of model parameters. SBI++ is
+constructed using Masked Auto-regressive Flow (Papamakarios et al. 2017), as implemented in the sbi Python
+package (Greenberg et al. 2019; Tejero-Cantero et al.
+2020). As described in Wang et al. (2023a), the model
+has 15 blocks, with each block having two hidden layers
+and 500 hidden units.
+The SBI++ method expands upon SBI by using
+Monte Carlo (MC) sampling to replace missing bands
+and out-of-distribution uncertainties. We train our
+model on 1.5 million simulated galaxies; 2/3 of galaxies
+have parameters randomly drawn from priors representing typical values for e.g., stellar mass, star formation
+history, metallicity, etc., while 1/3 use flat priors spanning a wide range of values. The full prior distributions
+are listed in Appendix A. Simulated redshift is drawn
+from a flat distribution spanning z = 0.0 to z = 0.2
+(note that redshift will be fixed to a spectroscopic or
+photometric redshift in the SED fitting stage as discussed below). This redshift range encompasses most
+bona fide SNe being discovered and reported by current
+surveys.
+
+8
+From these parameters, FSPS/Prospector produces
+model photometry. We add Gaussian noise to that photometry by using the mean signal-to-noise ratio (S/N) as
+a function of magnitude measured for each photometric
+filter in our data set. We then train a neural density estimator on the simulated training data, which will then
+be used to infer the host-galaxy parameters of our real
+data. Training each Blast model took approximately
+four days on a single Intel “Sapphire Rapids” CPU.
+In fitting the data, we use either a spectroscopic or
+photometric redshift, where available; if no spectroscopic or photometric redshift exists, we do not attempt
+to perform SED parameter estimation. Although future work will include a supplemental trained SBI++
+for simultaneously estimating photometric redshifts in
+Blast (e.g., Wang et al. 2023a), the current version uses
+the GHOST algorithm for photo-zs prior to SED fitting.
+While this means that the uncertainties on the redshift
+are not propagated into the inferred stellar population
+parameters, the most scientifically interesting transients
+tend to be spectroscopically classified (i.e., the uncertainties on these redshifts are small), and approximately
+30% of host galaxies ingested into Blast to date have
+reliable spectroscopic redshifts. We therefore employ a
+fixed-redshift version of SBI++ for the initial version of
+Blast.
+As is implemented in SBI++, if there are missing
+bands in the observed photometry, we find 50 nearest
+neighbors in the simulated training data to the real data.
+For each MC sample we draw 50 posterior samples (i.e.,
+2500 posterior samples are used in total). Although the
+fluxes of non-detections are measured and recorded, we
+do not use < 3σ detections for SED fitting in the current work because the SBI++ framework is trained on
+magnitudes to limit the dynamic range of the values.
+The full fitting process typically takes between 5 − 10
+core-minutes, and is capped at 2 core-hours for an occasional galaxy that may have poorly estimated photometry or have parameters not well-represented by the
+simulated training data. In practice, we find that this
+occurs just 2% of the time for global SED estimation,
+and 0.6% of the time for local estimation. We find that
+these failures are frequently the result of data quality
+issues that affect the photometry.
+
+2.3. Web Application
+The Blast web application is designed to provide each
+transient’s processing status, images, photometry, and
+SED parameters as transparently as possible. The home
+page provides a basic description of Blast and basic
+summary statistics of transients ingested and completed.
+
+Figure 5. An example of the Blast transient processing
+queue, using a subset of recent and archival transients. For
+each transient, basic information such as transient name, discovery date, sky position, redshift, transient class, and Blast
+live processing progress are shown. Users can search for transients by name or by some pre-loaded common filters such
+as transients with their host-galaxy spectral energy distribution (SED) fitting completed, as shown in this example
+screenshot.
+
+Figure 5 shows the “Transients” page, containing a
+table of all transients ingested into Blast. For each
+transient, the table gives coordinates, type and redshift
+(when available), and a status bar indicating progress of
+the transient processing workflow. It includes a search
+function and drop-down menu allowing the user to see
+transients with host-galaxy matches, transients with
+photometry, transients with SED fitting results, or transients that have successfully completed all stages.
+The transient “Results” page (Figure 6) summarizes
+all available information for a given transient. This includes the following:
+1. Basic transient information, including coordinates, type, and redshift.
+2. Basic host galaxy information, including name, coordinates, redshift, and photometric redshift (if
+available).
+3. The status of all tasks. Typical status messages
+are “unprocessed,” “processed,” “processing,” or
+“failed,” and occasionally more informative messages are used to explain why a stage did not complete; for example, “redshift too high,” or “no local
+phot” are typical errors when the redshift is out
+
+blast
+
+9
+
+Figure 6. The Blast transient results page for SN 2024fva, including basic information, task statuses, cutout images, photometry, best-fit SED models, and SED parameter estimation. The imaging data panel (top right) allows users to select from all
+available cutout images acquired for the transient. Both the imaging data and spectral energy distribution panel (middle right)
+are plotted using Bokeh (Bokeh Development Team 2018) which allows the user to interact with the data by means of panning,
+zooming, and downloading plots. The user can also download SED best-fit models and posterior parameter estimations from
+this page (lower right), and flag issues with blast processing via the report button in the processing status panel (left side).
+Finally, users can also download the entire Blast dataset for a transient by clicking the download data button in the top left
+corner.
+
+10
+of range for our trained SED-fitting model or the
+PSFs of all instruments are too broad to probe a
+2 kpc physical scale.
+4. Interactive plotting of each archival host-galaxy
+image (the default is Pan-STARRS g, with alternatives viewable using a drop-down menu). Figures include both the transient and host-galaxy
+location as well as the local and global apertures
+for which photometry is being measured.
+5. Local and global photometric measurements, including magnitude and flux (µJy).
+6. Interactive figures with the photometric data.
+SED model spectra corresponding to the
+16th/50th/84th percentiles from posteriors are
+shown with dashed lines.
+7. The 16th, 50th, and 84th percentile measurements
+of all Prospector-α parameters as well as the following derived parameters: surviving stellar mass,
+star formation rate (SFR) and specific star formation rate (sSFR) averaged over the last 100 Myr
+(the full star-formation history is also available),
+and mean mass-weighted stellar age.
+8. Options to download the data. The “Download data” button provides all metadata available for a given transient, including photometry
+and SED parameters. There are individual buttons for downloading the best-fit SED model, the
+16th/50th/84th percentile parameter values for
+every parameter in the Prospector-α model, and
+the full posterior chains. A Django Rest Framework API provides more fine-grained information
+to the user and can be accessed programatically as
+described in our documentation.
+
+accessed via the web interface as well as programmatically. Simple filters help the user sort through tables as
+specified in the documentation; for the Transient table this includes filters on transient name and redshift,
+and for most other tables, filters allow the user to easily select an associated transient or filter by filtering on
+foreign-key relationships as described in the documentation.
+2.4. Deployment
+There are two methods for deploying Blast: Docker
+Compose and Kubernetes.
+The Docker Compose
+method is ideal for local application development, although it would also suffice as a production instance on
+a single machine. In this mode of deployment, the system components described in Section 2.1 are deployed
+as local containers with network-based interactions that
+closely resemble the way the components are deployed
+and interact with one another in the Kubernetes environment. By aligning these two deployment methods
+as much as possible, there is minimal overhead involved
+in translating newly developed features and bug fixes
+from the development to the production environments.
+The production deployment is driven by a Helm chart
+crafted to exploit the scalability and high availability of
+a Kubernetes cluster.
+The public deployment of Blast can be found at http:
+//blast.scimma.org/ with full documentation at https:
+//blast.readthedocs.io/. Blast is deployed on resources
+provided by the NSF ACCESS program (Boerner et al.
+2023) as part of the Scalable Cyberinfrastructure to support Multi-Messenger Astrophysics (SCiMMA) project
+to aid in the characterization of the host galaxies of
+multi-messenger sources such as kilonovae. We welcome
+new developers and contributors; please read the developer guide in our documentation to get started.13
+3. SCIENCE VERIFICATION
+
+The uploads page allows users with a Blast account
+to upload transients not currently in the database either by IAU name or by a comma-separated list of object name, right ascension, declination and (optionally)
+redshift and transient type. For the former method, information is ingested from TNS and for the latter, no
+additional information is necessary before Blast can begin processing. We restrict this page to registered users
+to limit the rate of transients ingested to the database,
+but for both public and local installations, customizable uploads will make Blast more useful for both older
+transients and non-transient science cases that require
+galaxy characterization.
+Finally, the API provides access to all data associated
+with the data model. The Rest Framework API can be
+
+In this section, we present the results of several tests to
+ensure that Blast’s data products are reliable and consistent with previous results in the literature. These include host-galaxy matching, Kron aperture estimation,
+flux/magnitude measurements in each filter, and SED
+parameters.
+We note that Blast has occasional failures in each of
+these categories, and we attempt to describe potential
+failure modes below. Although these occasional issues
+might not be obvious if the user downloads data in bulk,
+they should all be apparent when viewing the individ13 https://blast.readthedocs.io/en/latest/developer guide/
+
+dev getting started.html.
+
+11
+
+blast
+ual web pages in the Blast application. Additionally,
+if a user has indicated that a given stage has failed to
+complete satisfactorily, this information can be obtained
+via the API. Users also have the option of “reporting”
+the result of a given stage as erroneous and, in the case
+of singular errors like a third-party service going offline,
+registered users can request to re-process the entire transient.
+3.1. Host Galaxy matching and Kron aperture
+determinations
+One of the first processing tasks that is run on
+transients ingested into Blast is finding a host-galaxy
+match. To perform this matching we use the GHOST
+software via the astro ghost python package14 .
+We validated GHOST’s performance against the hostgalaxy matches of the low redshift (z < 0.1) sample
+of 273 SNe Ia from Jones et al. (2018) (Figures 7 and
+8). GHOST identifies the same host galaxy in 93.4%
+of cases. Occasional failures result in cases where there
+is an extended, resolved source galaxy with individual
+bright components (SN 2000cn), or cases where there
+are several nearby bright sources (the Pan-STARRS SN
+420100). We note that it is possible that mismatches
+are more common in non-Ia hosts, especially for transients typically hosted by fainter/smaller galaxies, and
+we are working closely with the GHOST team to continue reducing the number of host-galaxy mismatches
+where possible.
+3.2. Kron Aperture Estimation
+Figure 4 shows an example of a typical aperture size
+across bandpasses (using SN 2010H). Figure 9 shows the
+result of our Kron aperture computation for a subset of
+Pan-STARRS images.
+Our Kron aperture estimation uses the astropy
+photutils detect sources algorithm with a 5σ
+threshold and a minimum of 10 connected pixels to
+find galaxies in an optical image (or 2MASS, in rare
+cases where no optical images are available). The
+detect sources algorithm constructs a segmentation
+map to determine the extent of the host galaxy, which
+we find to be robust in nearly all cases. We do not perform an additional step of deblending nearby sources,
+as galaxies are typically well-separated and deblending
+would result in large nearby star-forming galaxies being separated into multiple objects. The only failure
+case we find is that in rare cases involving large, nearby
+galaxies, the aperture is not always large enough to encompass faint, extended regions. One compounding fac14 https://github.com/uiucsn/astro ghost.
+
+Figure 7. Cumulative distribution of offsets between
+GHOST and the Jones et al. (2018) host galaxies from the
+sample of 273 SNe Ia that were checked by eye in Jones et al.
+(2018) (two ambiguous matches were removed). We note
+that Jones et al. (2018) ran SExtractor on an individual
+Pan-STARRS image to find host centroids for the best-fit ellipse (with by-eye verification), while GHOST uses the mean
+position from all Pan-STARRS images, resulting in typical
+centroid differences of ∼1-2 pixels that are unrelated to the
+quality of the choice in host. The vertical line indicates a
+2-arcsecond offset. Approximately 88% of SNe have consistent host-galaxy coordinates within 2 arcsec (denoted by the
+vertical line), and for an additional ∼5% GHOST has identified the same host galaxy as Jones et al. (2018) but has offset
+coordinates for the host center due an extended and/or irregular host galaxy. GHOST identifies a different host galaxy
+6.6% of the time (Figure 8).
+
+tor may be that Pan-STARRS images over-subtract the
+background near very bright extended sources.
+3.3. Global Galaxy Photometry
+Comparisons of galaxy photometry to catalog photometry are shown in Figures 10 and 11 for UV/optical
+and IR photometry, respectively. For each filter, survey, and telescope, we use publicly provided source catalogs (with the exception of WISE, as described below)
+and compare to a randomly selected subset of the hostgalaxy photometry available from Blast at the time of
+writing.
+The sigma-clipped means are in good agreement with
+the survey catalogs for GALEX, SDSS, and 2MASS,
+although 2MASS catalog magnitudes become systematically fainter for sources where 2MASS is unable
+to detect the wings of the galaxy (compared to the
+larger, optically-derived Blast aperture). Pan-STARRS
+is consistent in the i-band and slightly offset in the y
+band, with this offset likely due to the same reason as
+faint 2MASS magnitudes being systematically fainter:
+Blast apertures are derived from optical photometry
+and therefore better capture flux in the wings of ex-
+
+12
+
+Figure 8. Examples of GHOST (Gagliano et al. 2021) host-galaxy associations compared with Jones et al. (2018) (Jones+18).
+The top row shows associations where GHOST and Jones et al. (2018) disagree (host galaxy > 2.0 arcsecond offset), and bottom
+row shows agreement (host galaxy < 2.0 arcsecond offset). All images are Pan-STARRS 65×65 arcsecond g-band cutouts. Most
+associations shown on the top row are differences in centroids that will result in the same final host-galaxy apertures, but
+SN 2000cn shows a case where GHOST is definitely incorrect and SN 420100 shows a case where GHOST is likely incorrect.
+
+Figure 9. Examples of computed elliptical apertures for photometry from Blast using g-band images from Pan-STARRS. The
+SN position (blue) and the host-galaxy position (red) are shown along with the host-galaxy aperture used for photometry (red
+ellipses). Bars show the size of 10′′ in each image.
+
+tended sources. However, at faint magnitudes, Blast
+finds slightly fainter magnitudes than Pan-STARRS on
+average. Although we are not sure of the reason for the
+discrepancy, visual inspection of several outliers appears
+to indicate that the background in redder bands could
+be under-subtracted in the Pan-STARRS imaging causing artifically brighter catalog sources.
+For WISE, the catalog magnitudes use profile-fitting
+photometry, which is inaccurate for extended sources;
+the Blast photometry is ∼0.5 mag brighter than the
+catalog photometry. When we instead compare to WISE
+
+forced photometry at the location of SDSS galaxies from
+Lang et al. (2016), we find that Blast photometry is
+0.25 mag fainter on average than sources from the unWISE catalog, which could indicate a systematic difference in aperture between the two catalogs and may
+also impact the number of contaminating sources. For
+our baseline comparison, however, we use the method
+of Jarrett et al. (2019, 2023), which was performed by
+T. Jarrett (private comm.) on the Jones et al. (2018)
+sample (Figure 11). We see slightly fainter magnitudes
+in Blast (0.15 mag in W 1), which may indicate that the
+
+13
+
+blast
+WISE PSF size is slightly underestimated, but no trend
+as a function of magnitude.
+Upon visual inspection of the 3-σ outliers, which are
+∼5-10% of the measurements, we find that nearly all
+are due to complex host-galaxy environments with significant galaxy contamination. To eliminate these data,
+we generated segmentation maps to find contaminating
+objects within a given aperture and remove this contaminated photometry from the set used for SED parameter
+estimation. It is also possible that some significant IR
+emission is beyond the global aperture radius inferred
+from the optical data and causes systematic differences.
+3.4. SED Parameters
+We compare our transient host-galaxy results to several literature samples to ensure consistent and reliable
+SED fitting results. Although relatively few literature
+samples exist with a low-redshift Prospector-α model
+specifically, we searched for consistency in parameter
+measurements using the sources below. These predominantly use the SN Ia sample from Jones et al. (2018),
+who analyzed 273 SNe from datasets spanning 19902015, but also include a recent Prospector analysis from
+Ramsden et al. (2022). SED validation figures are presented in Appendix B, as described below:
+1. Global and local masses from Jones et al. (2018).
+This sample used Z-PEG (Le Borgne & RoccaVolmerange 2002) to measure global and local,
+2 kpc masses for archival SN Ia data.
+2. Global specific star formation rates (sSFRs) from
+Jones et al. (2018) using LePHARE (Arnouts &
+Ilbert 2011). We clip very low sSFRs as galaxies
+with negligible star formation unsurprisingly show
+exceptionally high sSFR scatter.
+3. WISE-based masses and sSFRs for the Jones et al.
+(2018) sample from T. Jarrett (private communication).
+4. Masses and sSFRs from the (Ramsden et al. 2022)
+tidal disruption event sample.
+Below, we briefly describe these comparisons between
+Blast masses, star formation rates, stellar metallicities,
+and dust parameters between Blast and other sources
+in the literature.
+3.5. Stellar Masses
+In global mass, there is good agreement between Jones
+et al. (2018) and Blast, with a median offset of 0.07 dex
+and a dispersion of 0.20 dex. For local mass, because
+Jones et al. (2018) uses a 1.5 kpc aperture and Blast
+
+uses 2 kpc, we apply a correction to the Jones et al.
+(2018) values that assumes the mass profile is unchanged
+between the two apertures; this is likely a poor approximation for the lowest-mass regions, which may be more
+concentrated, and can be seen for the departure from
+the y = x line at local log(M∗ /M⊙ ) < 8.5. The median
+offset in local mass is 0.37 dex with a scatter of 0.25 dex.
+We also compare to masses derived only from WISE
+infrared bands, following Jarrett et al. (2023). There
+is no obvious trend between Blast and WISE-derived
+masses, with a median offset of 0.060 dex and a dispersion of just 0.12 dex. We note that Leja et al. (2019b)
+found that using a non-parametric star-formation history leads to stellar masses that are larger by ∼0.1–
+0.3 dex as compared to simpler models, which may explain the offset. These larger masses are caused by systematically older SFHs inferred from the more flexible
+non-parametric model, and Leja et al. (2019b) argue
+that the improved flexibility in modeling the SFH resolves a long-standing tension between the cosmic SFR
+density and the stellar mass growth.
+The relatively small set of masses from Ramsden et al.
+(2022) have an offset of −0.043 dex and a scatter of
+0.19 dex compared to Blast15 ; while this difference is
+somewhat larger than may be expected given that Ramsden et al. (2022) use the same Prospector-α model as
+Blast, the photometry, aperture determination, and criteria for choosing which photometric bands are included
+are different. There are also likely somewhat different
+choices in parameters and priors, as well as different
+star-formation history bins.
+We note that additional mass comparisons between
+Blast and the scaling relation from Taylor et al. (2011)
+are published in Peterson et al. (2024, their Appendix
+A). These show largely consistent masses, with no obvious offset or bias across the full dynamic range.
+3.6. Star Formation Rates
+We compare the Blast sSFR to the Jones et al. (2018)derived sSFR from LePHARE as well as sSFRs derived
+from the WISE mid-infrared bands following Salim et al.
+(2016); Leroy et al. (2019).
+Blast measurements are consistent with measurements from Jones et al. (2018) and WISE-derived measurements, with comparison figures shown in Appendix
+B. Compared to Jones et al. (2018) the median offset in
+sSFR is 0.15 dex, although the scatter is a relatively high
+0.73 dex. As can be seen in Figure 16, Blast finds that
+SNe with the highest sSFR in Jones et al. (2018) appear
+15 We first convert the Blast-reported surviving stellar mass to the
+
+total formed stellar mass for this comparison.
+
+14
+
+Figure 10. Representative comparisons of Blast photometry compared to catalog magnitudes for GALEX, SDSS, and PanSTARRS (left to right). The σ-clipped mean and standard deviation are shown with the dashed black line and grey shaded
+region, respectively and the binned median is in orange. The median offset and percentage of 3σ outliers are labeled.
+
+Figure 11. Same as Figure 10. Statistics for 2MASS J include only objects with J < 15. WISE W 1 catalog magnitudes are
+using the method of Jarrett et al. (2023); there are significant discrepancies (0.5 mag or greater) with the default WISE catalog
+magnitudes because they assume unresolved sources.
+
+to be overestimated. As Jones et al. (2018) is based
+only upon ugrizy photometry, Blast is likely more robust. We note that the Jones et al. (2018) sSFRs were
+updated with an improved extinction treatment in Kim
+et al. (2024, also using LePHARE), and for these we
+find qualitatively the same results. The mean offset is
+somewhat increased to 0.37 dex and the slightly higher
+scatter of 0.87 dex is primarily driven by the low-sSFR
+end.
+For WISE, we find slightly lower sSFR from Blast,
+with a median offset of 0.11 dex and an improved scatter,
+compared to Jones et al. 2018, of 0.52 dex.
+3.7. Metallicity and Dust Parameters
+Most other Prospector-α parameters16 have larger uncertainties than stellar mass and sSFR. Although there
+are relatively few literature studies using Prospector-α
+16 A complete list is given in the Blast documentation at https:
+
+//blast.readthedocs.io/en/latest/usage/sed params.html.
+
+at the low redshifts where Blast is trained, we show
+comparisons with Ramsden et al. (2022) in Appendix
+B as a general consistency check. Because we use a
+full Bayesian approach, we note that in the case where
+these parameters are unconstrained by the data, Blast
+returns the priors as given in Appendix A and these priors are properly propagated into the uncertainties of the
+other inferred parameters.
+In their Table B1, Ramsden et al. (2022) report the
+stellar metallicity log(Z∗ /Z⊙ ), and the dust parameters
+τdust,2 , n, and τdust,1 /τdust,2 . The n parameter is the
+power-law index of a modified Calzetti et al. (2000) dust
+attenuation law (Noll et al. 2009), the τdust,2 parameter
+is the optical depth of diffuse dust, and τdust,1 /τdust,2 is
+the optical depth of stellar birth-cloud dust as a fraction
+of the diffuse-dust optical depth (this split is based on
+the Charlot & Fall 2000 model). The log(Z∗ /Z⊙ ) and
+τdust,2 comparisons are shown in Appendix B.
+The value of τdust,1 /τdust,2 is likely not well constrained and instead returns the prior, which has σ =
+
+15
+
+blast
+0.3; the scatter in measurements is just ∼0.06, but the
+uncertainty on most measurements is ∼0.3. The τdust,2
+parameter has an offset of −0.21 and a scatter of 0.27;
+the correlation coefficient between this work and the
+Ramsden et al. (2022) values is 0.30. The other two parameters (shown in Appendix B) agree relatively well,
+with outliers having slight differences in photometry or
+included bands, but with no obvious indications of poor
+photometry. There is general consistency in the n parameter, which has an average offset of ∼0.1 and a scatter of 0.52. The large outlier in n is 2019azh, which
+may be due to the fact that Blast does not include
+the 2MASS bands for this object (and both Blast and
+Ramsden et al. 2022 show poor fits to the WISE W3
+band). For the stellar metallicity, there appears to be a
+possible systematic disagreement at the high-metallicity
+end at the ∼ 1.5σ level for individual measurements.
+However, it is worth pointing out that stellar metallicity is not expected to be tightly constrained by broadband photometry alone, so we do not further explore the
+origin of such systematic offset.
+4. SCIENCE APPLICATIONS AND CURRENT
+
+STATISTICS
+Currently, Blast has ingested more than 13000 transients. For over 11,000 of these, GHOST has been able
+to identify likely host galaxies, with most of the remaining transients likely to be stellar flares or hostless SNe
+(limits on the environments of hostless SNe, e.g., Pessi
+et al. 2024; Qin et al. 2024, would be extremely interesting but are beyond the scope of the current work). For
+∼10,500, host-galaxy photometry was performed; most
+transients failing at this stage are either lacking redshifts, without which a 2kpc local aperture cannot be
+computed, and/or are lacking optical data in the Southern sky, which is often necessary to compute an aperture
+when the host galaxy is undetected in 2MASS.
+SED parameters have been successfully estimated for
+approximately 85% of recent transients, though we note
+that past software bugs have prevented SED estimation
+for some of our sample, with the result that only ∼50%
+of the full Blast database currently has estimated SEDs.
+Currently, the most common failure modes in SED
+parameter estimation are:
+1. Redshifts (spectroscopic or photometric) with z >
+0.2, which is beyond the limit of our training sample. Sometimes transients are too distant for our
+current Blast training, but more often the photometric redshifts are inaccurate. Future photo-z
+estimation within SBI++ itself would improve this
+issue and give more robust posterior estimation.
+
+Alternatively, a possible future avenue for extending or supplementing the redshift range and
+parameter space would be the use of emulated
+SPS (e.g., Alsing et al. 2020) in combination with
+conventional posterior sampling. This approach
+has been demonstrated on large galaxy catalogs
+(Thorp et al. 2024), and can be combined with
+a calibrated population prior (e.g., Alsing et al.
+2024) for improved parameter constraints.
+2. The redshift is too distant to resolve a 2 kpc radius
+for local photometry. As transients become farther
+away, we lose the ability to use WISE, GALEX,
+and 2MASS for SED parameter estimation.
+3. Relatively few photometric bands are available.
+Complex host-galaxy backgrounds can cause unreliable aperture photometry, which in turn may
+cause the photometry to fail our validation cuts.
+4. Extremely large or complex host backgrounds
+(Figure 14). Automated host identification and
+aperture estimation for large host galaxies with
+multiple resolved star clusters, mergers, or other
+complex morphologies is an ongoing challenge at
+the lowest redshifts.
+4.1. Science Applications
+The Blast application enables host-property inference
+for individual objects of interest or large-statistics studies of SN types or subtypes. We envision that key science
+applications for Blast will include:
+• The Progenitors of Astrophysical Transients. Comparing the environments in which different SN subtypes have been found has shown
+that stripped-envelope SNe likely originate from
+binary systems (Smith et al. 2011; Yoon 2015),
+that SN Ic progenitors are more massive than
+SNe Ib or II (Anderson et al. 2012), and provided
+strong evidence that the progenitors of interacting
+SN IIn maybe be more similar in mass to those
+of other SN II than previously thought (Anderson
+et al. 2015). Host galaxy studies have been also
+useful in deducing the nature of rapidly evolving
+transients (Wiseman et al. 2020a), Type Ibn supernovae (Hosseinzadeh et al. 2019), SNIc associated with gamma-ray bursts (Modjaz et al. 2020),
+superluminous supernovae (Lunnan et al. 2015),
+and fast blue optical transients (Drout et al. 2014;
+Ho et al. 2020). Blast unlocks unprecedented statistical leverage for answering many of these questions and provides simple, transparent parameter
+estimation for individual transients of interest.
+
+16
+
+Figure 12. Representative cumulative distribution functions of Blast-derived SED properties for SNe Ia, Ic, and II. Blast
+shows that SNe Ic prefer locally young regions and globally metal-poor galaxies compared to SNe II. SNe Ia are found in the
+oldest regions and most metal-rich environments on average. SNe Ib and SNe II have similar host-galaxy environments, implying
+similar progenitor properties.
+
+et al. 2023; Lokken et al. 2023). With real-time
+SED fitting, Blast makes detailed understanding
+of a transient’s host-galaxy properties available
+quickly. These SED properties can be used to
+inform transient follow-up decisions and to train
+classification algorithms.
+
+Figure 13. Local versus global sSFR for different subtypes
+in Blast, including SNe Ia (blue), Ib (orange), Ic (green), and
+II (red), with 95% confidence ellipses. While most CC SNe
+tend to have similar local and global properties, SNe Ia have
+a greater diversity.
+
+• Using Host-Galaxy Properties to Classify
+Astrophysical Transients. Given the thousands of transients discovered each month, classifying and selecting those transients for which
+additional followup would be scientifically valuable can be critical. Host galaxy based classifiers
+can provide independent contextual information
+compared to SN light curve-based classifications
+given the preferentially different host-galaxy environments of different SN types (Foley & Mandel
+2013; Gagliano et al. 2021; Qin et al. 2022; Kisley
+
+• Understanding Cosmological Parameter
+Measurements from Type Ia SNe. Distance
+measurements from SNe Ia can be used to measure the Hubble constant (H0 ; e.g., Freedman et al.
+2019; Riess et al. 2022), the dark energy equation
+of state (e.g., Brout et al. 2022; Vincenzi et al.
+2024), and the growth of structure in the nearby
+Universe (e.g., Boruah et al. 2020; Stahl et al.
+2021). However, interpreting these measurements
+is complicated by the fact that inferred distance
+measurements from SNe Ia have been shown to
+correlate with a number of the physical properties
+of their host galaxies (Kelly et al. 2010; Lampeitl
+et al. 2010; Sullivan et al. 2010; Rigault et al. 2013;
+Jones et al. 2018; Wiseman et al. 2020b; Brout &
+Scolnic 2021; Wiseman et al. 2023; Dixon et al.
+2024; Grayling et al. 2024; Popovic et al. 2024;
+Ye et al. 2024). In the absence of a consensus
+for which physical mechanisms are responsible for
+SN Ia–host-galaxy correlations, Blast provides a
+robust, transparent approach for measuring these
+host-galaxy properties and thereby controlling for
+the effects of host-galaxy properties on cosmological inference.
+
+blast
+In Figure 12, we show two representative cumulative
+distributions of SED parameters for different spectroscopically classified SNe currently processed by Blast:
+the mass-weighted stellar age at the location of each
+SN, and the stellar metallicity for the full host galaxy.
+Median uncertainties are ∼2 Gyr for the local stellar
+age and ∼0.28 dex for log(Z∗ /Z⊙ ). Using a K-S test
+we find at high significance that SN Ic are have younger
+stellar ages near their explosion sites than SNe Ia and
+that all core-collapse types have lower stellar metallicities than SNe Ia. While K–S tests for other comparisons
+indicate that the difference between CC SN subtype and
+SNe Ia distributions are not statistically significant, the
+difference between the medians are 2.4–6σ significant
+for global stellar metallicity and 1.4–3.8σ significant for
+all local age comparisons except for SNe Ib and SNe II,
+which are statistically identical. With the caveat that
+observed differences in the median local stellar age of
+CC SN types have marginal (1-2σ) significance, the distributions shown in Figure 12 broadly reproduce the expected results: the median SN Ic has a younger stellar age and lower host metallicity than SNe Ia or other
+CC SNe. The SNe Ib and SN II have similar distributions, which could imply (as pointed out by, e.g., Anderson et al. 2012, 2015) that SN Ib are stripped due
+to binary interactions and have similar progenitor systems to SN II. SNe Ia have the oldest stellar ages and
+the highest mean metallicities.
+This figure is just an illustration of Blast’s capabilities, and does not account for selection effects, nor does
+it attempt to use the full sample of available SED properties or the full set of recent SNe from TNS. Nevertheless, it shows that even some of the more difficult SED
+parameters to infer robustly can be used to meaningfully
+probe the nature of transient progenitor systems.
+In Figure 13 we also show local versus global sSFR
+for different SN subtypes in Blast. While SN Ib and Ic
+largely have similar local and global sSFR, SN Ia have
+a large amount of diversity. We find that a significant
+number of SNe Ia have higher local than global sSFR;
+though noise may play a role, we also see from visual
+inspection that several are in bulge-dominated, largely
+passive galaxies with residual star-formation activity in
+the disk (SN 2000B is one example in our dataset).
+As another illustration, we also searched for galaxies near the extremes of the mass and SFR distributions. We note that the current set of host galaxies in
+the Blast database includes host galaxies of transients
+reported to TNS beginning in early 2024 as well as transients of interest for certain science cases from our team’s
+collaborators, which may bias us toward unusual transients. Two of the lowest-mass host galaxies found are
+
+17
+
+Figure 14. Blast page for the merging starburst host of
+SN 2019lqo, as well as at least seven additional SNe over
+the last 20 years. A user has marked the global aperture
+photometry as spurious due to the difficulty in automated
+modeling of complex host-galaxy backgrounds.
+
+SN 2021adxl (Brennan et al. 2023), a Hydrogen-rich superluminous SN at z = 0.018 and SN 2021qvo, a 2003fglike SN Ia at z = 0.05 (Paniagua et al. in prep.). Both
+of these SN types tend to favor faint, low-metallicity
+hosts, and Blast reports that both have stellar masses
+log(M∗ /M⊙ ) ≲ 8 dex and metallicities ≲ −0.5Z⊙ .
+On the other hand, SN 2019lqo was hosted by
+NGC 3690, the most highly star-forming galaxy with
+mass >10 dex in the Blast database (Figure 14).
+NGC 3690 hosted at least six other core-collapse SNe in
+the last 20 years: SNe 2005U, 2010O, 2010P, 2020fkb,
+2022gnp, and 2024gzk, as well as the SN Ia 2023wrk.
+One of the other examples of a massive, star-forming
+galaxy was the host of 1991T-like SN 2024gpn, which
+also hosted the SN Ia 2018btm. One final interesting case is SN 2024crn, which is a SN Ia hosted by a
+galaxy cluster at z = 0.17 — possibly in the intracluster
+medium — but coincidentally happened to be 26′′ from
+the center of a low-redshift star-forming galaxy, which
+was spuriously identified as having log(M∗ /M⊙ ) >
+12 dex due to the incorrectly assigned redshift.
+As the Blast dataset expands over the coming years,
+we hope it will provide unprecedented statistical leverage on both rare and common SN subtypes. We hope
+
+18
+that the user community will help to expand its capabilities, and will benefit from Blast’s public, transparent
+SED fitting and host-galaxy photometry for the transient community.
+5. CONCLUSIONS
+
+Here we present Blast, a web application for characterizing transient host galaxies. The goal of Blast is
+to provide transparent, reproducible, public estimation
+of the physical properties of transient host galaxies and
+the local regions near where transients occur. This will
+help infer the nature of the diverse progenitor systems
+of astrophysical transients.
+Blast is constructed in the Django framework, implementing a web application and API server that orchestrates a pool of Celery workers to execute tasks including ingesting new transients, downloading archival
+images, matching transients to a probable host galaxy,
+computing global and local apertures for photometry,
+and performing SED-fitting with Prospector as implemented by the SBI++ neural posterior estimator (Leja
+et al. 2017; Johnson et al. 2021; Wang et al. 2023a).
+All tasks for a given transient are typically completed
+within 30 minutes after ingestion. The Blast webpages
+have interactive plots of cutout images and SED fitting
+results to aid transparency, as well as tables with SED
+parameters, photometry, and both transient and hostgalaxy metadata. All data are available via the API.
+Validation of the different Blast stages demonstrates
+that there are some failure modes at the few-percent
+level across host-galaxy identification, aperture estimation, photometry, and SED fitting. While these
+will continue to be improved in the coming years, we
+find that Blast is largely robust across the diverse
+set of transient/host-galaxy properties contained in our
+dataset. Blast’s web-based framework also allows users
+to easily evaluate whether a given measurement is erroneous and report it. We report good consistency with
+other photometric catalogs, and can accurately reproduce independent SED estimation performed in the literature.
+We hope to extend Blast in the future by incorporating a broader transient redshift range, host galaxy-based
+transient classifications, and potentially additional SEDfitting algorithms for alternative SPS models or parameter estimation methodologies. As the Vera Rubin Observatory and the Roman Space Telescope come online,
+and as future LIGO observing runs discover multimessenger objects, there is a novel opportunity for valueadded services such as this one to create new scientific
+opportunities and maximize the potential for discovery
+in the coming years.
+
+ACKNOWLEDGMENTS
+
+Dedicated to the memory of Tom Jarrett, who was
+invaluable in helping us to evaluate the success of our
+SED fitting and work with the WISE data during the
+preparation of this manuscript.
+D.O.J. and P.M. acknowledge support from NASA
+grant 80NSSC21K0834. P.M. also acknowledges that
+this work was partly performed under the auspices of
+the U.S. Department of Energy by Lawrence Livermore National Laboratory under Contract DE-AC5207NA27344. The document number is LLNL-JRNL870752. D.O.J. acknowledges support from HST grants
+HST-GO-17128.028 and HST-GO-16269.012, awarded
+by the Space Telescope Science Institute (STScI), which
+is operated by the Association of Universities for Research in Astronomy, Inc., for NASA, under contract NAS5-26555. D.O.J. also acknowledges support from NSF grant AST-2407632 and NASA grant
+80NSSC24M0023. ST was supported by funding from
+the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation
+programmes (grant agreement no. 101018897 CosmicExplorer). This work is supported by the National Science Foundation under Cooperative Agreement PHY2019786 (The NSF AI Institute for Artificial Intelligence
+and Fundamental Interactions, http://iaifi.org/).
+Blast’s public interface is operated by the Scalable
+Cyberinfrastructure for Multi-Messenger Astrophysics
+(SCiMMA) team under OAC-2311355, supporting the
+work of TAM and GN, GN also gratefully acknowledges NSF support from NSF CAREER grant AST2239364, supported in-part by funding from Charles Simonyi, NSF AST 2421845 and support from the Simons
+Foundation as part of the NSF-Simons SkAI Institute,
+AST 2432428, AST 2206195, and DOE support through
+the Department of Physics at the University of Illinois,
+Urbana-Champaign (# 13771275), and support from
+the HST Guest Observer Program through HST-GO16764. and HST-GO-17128 (PI: R. Foley).
+This research uses services or data provided by the Astro Data Lab, which is part of the Community Science
+and Data Center (CSDC) Program of NSF NOIRLab.
+NOIRLab is operated by the Association of Universities
+for Research in Astronomy (AURA), Inc. under a cooperative agreement with the U.S. National Science Foundation. This research has made use of the NASA/IPAC
+Infrared Science Archive, which is funded by the National Aeronautics and Space Administration and operated by the California Institute of Technology.
+
+blast
+This work used Jetstream2 at Indiana University
+and Open Storage Network at NCSA through allocation PHY240068 from the Advanced Cyberinfrastructure Coordination Ecosystem: Services & Support (ACCESS) program, which is supported by National Science
+Foundation grants #2138259, #2138286, #2138307,
+#2137603, and #2138296. The SBI++ model training
+was run on the FASRC Cannon cluster supported by the
+FAS Division of Science Research Computing Group at
+Harvard University.
+The Legacy Surveys consist of three individual and
+complementary projects: the Dark Energy Camera
+Legacy Survey (DECaLS; Proposal ID #2014B-0404;
+PIs: David Schlegel and Arjun Dey), the BeijingArizona Sky Survey (BASS; NOAO Prop. ID #2015A0801; PIs: Zhou Xu and Xiaohui Fan), and the Mayall
+z-band Legacy Survey (MzLS; Prop. ID #2016A-0453;
+PI: Arjun Dey). DECaLS, BASS and MzLS together
+include data obtained, respectively, at the Blanco telescope, Cerro Tololo Inter-American Observatory, NSF’s
+NOIRLab; the Bok telescope, Steward Observatory,
+University of Arizona; and the Mayall telescope, Kitt
+Peak National Observatory, NOIRLab. Pipeline processing and analyses of the data were supported by
+NOIRLab and the Lawrence Berkeley National Laboratory (LBNL). The Legacy Surveys project is honored
+to be permitted to conduct astronomical research on
+Iolkam Du’ag (Kitt Peak), a mountain with particular
+significance to the Tohono O’odham Nation.
+This project used data obtained with the Dark Energy Camera (DECam), which was constructed by the
+Dark Energy Survey (DES) collaboration. Funding for
+the DES Projects has been provided by the U.S. Department of Energy, the U.S. National Science Foundation, the Ministry of Science and Education of Spain,
+the Science and Technology Facilities Council of the
+United Kingdom, the Higher Education Funding Council for England, the National Center for Supercomputing Applications at the University of Illinois at UrbanaChampaign, the Kavli Institute of Cosmological Physics
+at the University of Chicago, Center for Cosmology
+and Astro-Particle Physics at the Ohio State University, the Mitchell Institute for Fundamental Physics and
+Astronomy at Texas A&M University, Financiadora de
+Estudos e Projetos, Fundacao Carlos Chagas Filho de
+Amparo, Financiadora de Estudos e Projetos, Fundacao Carlos Chagas Filho de Amparo a Pesquisa do Estado do Rio de Janeiro, Conselho Nacional de Desenvolvimento Cientifico e Tecnologico and the Ministerio da Ciencia, Tecnologia e Inovacao, the Deutsche
+Forschungsgemeinschaft and the Collaborating Institutions in the Dark Energy Survey. The Collaborat-
+
+19
+ing Institutions are Argonne National Laboratory, the
+University of California at Santa Cruz, the University
+of Cambridge, Centro de Investigaciones Energeticas,
+Medioambientales y Tecnologicas-Madrid, the University of Chicago, University College London, the DESBrazil Consortium, the University of Edinburgh, the
+Eidgenossische Technische Hochschule (ETH) Zurich,
+Fermi National Accelerator Laboratory, the University
+of Illinois at Urbana-Champaign, the Institut de Ciencies de l’Espai (IEEC/CSIC), the Institut de Fisica
+d’Altes Energies, Lawrence Berkeley National Laboratory, the Ludwig Maximilians Universitat Munchen and
+the associated Excellence Cluster Universe, the University of Michigan, NSF’s NOIRLab, the University of
+Nottingham, the Ohio State University, the University
+of Pennsylvania, the University of Portsmouth, SLAC
+National Accelerator Laboratory, Stanford University,
+the University of Sussex, and Texas A&M University.
+The Pan-STARRS1 Surveys (PS1) and the PS1 public
+science archive have been made possible through contributions by the Institute for Astronomy, the University
+of Hawaii, the Pan-STARRS Project Office, the MaxPlanck Society and its participating institutes, the Max
+Planck Institute for Astronomy, Heidelberg and the Max
+Planck Institute for Extraterrestrial Physics, Garching,
+The Johns Hopkins University, Durham University, the
+University of Edinburgh, the Queen’s University Belfast,
+the Harvard-Smithsonian Center for Astrophysics, the
+Las Cumbres Observatory Global Telescope Network
+Incorporated, the National Central University of Taiwan, the Space Telescope Science Institute, the National
+Aeronautics and Space Administration under Grant No.
+NNX08AR22G issued through the Planetary Science Division of the NASA Science Mission Directorate, the
+National Science Foundation Grant No. AST–1238877,
+the University of Maryland, Eotvos Lorand University
+(ELTE), the Los Alamos National Laboratory, and the
+Gordon and Betty Moore Foundation.
+Funding for the Sloan Digital Sky Survey IV has been
+provided by the Alfred P. Sloan Foundation, the U.S.
+Department of Energy Office of Science, and the Participating Institutions. SDSS acknowledges support and
+resources from the Center for High-Performance Computing at the University of Utah. The SDSS web site is
+www.sdss4.org.
+SDSS is managed by the Astrophysical Research
+Consortium for the Participating Institutions of the
+SDSS Collaboration including the Brazilian Participation Group, the Carnegie Institution for Science,
+Carnegie Mellon University, Center for Astrophysics —
+Harvard & Smithsonian (CfA), the Chilean Participation Group, the French Participation Group, Instituto
+
+20
+de Astrofı́sica de Canarias, The Johns Hopkins University, Kavli Institute for the Physics and Mathematics
+of the Universe (IPMU) / University of Tokyo, the Korean Participation Group, Lawrence Berkeley National
+Laboratory, Leibniz Institut für Astrophysik Potsdam
+(AIP), Max-Planck-Institut für Astronomie (MPIA Heidelberg), Max-Planck-Institut für Astrophysik (MPA
+Garching), Max-Planck-Institut für Extraterrestrische
+Physik (MPE), National Astronomical Observatories of
+China, New Mexico State University, New York University, University of Notre Dame, Observatório Nacional / MCTI, The Ohio State University, Pennsylvania State University, Shanghai Astronomical Observatory, United Kingdom Participation Group, Universidad
+Nacional Autónoma de México, University of Arizona,
+University of Colorado Boulder, University of Oxford,
+University of Portsmouth, University of Utah, University of Virginia, University of Washington, University of
+Wisconsin, Vanderbilt University, and Yale University.
+
+This publication makes use of data products from the
+Two Micron All Sky Survey, which is a joint project
+of the University of Massachusetts and the Infrared
+Processing and Analysis Center/California Institute of
+Technology, funded by the National Aeronautics and
+Space Administration and the National Science Foundation.
+This publication makes use of data products from the
+Wide-field Infrared Survey Explorer, which is a joint
+project of the University of California, Los Angeles, and
+the Jet Propulsion Laboratory/California Institute of
+Technology, funded by the National Aeronautics and
+Space Administration.
+
+Software: NumPy (Harris et al. 2020), Bokeh
+(Bokeh Development Team 2018), Astropy (Astropy
+Collaboration et al. 2013, 2018), Django (Django Software Foundation 2018), GHOST (Gagliano et al. 2021),
+MySQL (https://www.mysql.com/, Docker (Merkel
+2014), Sphinx (Brandl 2021)
+
+APPENDIX
+
+A. PROSPECTOR-α PRIORS
+
+In this section, we list the priors used to generate simulated galaxies for the training of SBI++. Two thirds of our
+simulated galaxies use the priors in Table 1, while the remaining third uses the same parameter ranges but with flat
+priors across those ranges. For the 2 kpc local regions, the allowed mass range is 5.5 to 11 dex, while all other priors
+remain the same. For additional details on the implementation of the Prospector-α model in SBI++, see Wang et al.
+(2023a).
+B. VALIDATION OF SED PARAMETERS
+
+This appendix contains several figures comparing Blast’s SED-fitting parameter estimation to those from other
+publications and methodologies. Figure 15 shows stellar mass, Figure 16 shows sSFR, Figure 17 shows stellar mass
+and sSFR compared to inferences from WISE IR data, and Figure 18 shows comparisons to stellar metallicity and
+dust power-law index using the small sample from Ramsden et al. (2022).
+
+21
+
+blast
+Table 1. Priors on the distribution of Prospector-α parameters
+Variablea
+log(M∗ /M⊙ )
+log(Z∗ /Z⊙ )
+log(Zgas /Z⊙ )
+SFH
+τdust,2
+n
+τdust,1 /τdust,2
+log(fagn )
+log(τagn )
+qpah
+Umin
+log(γe )
+a
+
+Prior
+
+Range
+
+flat
+Gallazzi et al. (2005)b
+flat
+t(µ = 0, σ = 5, ν = 2)c
+N (µ = 0.3, σ = 1.0)
+flat
+N (µ = 1.0, σ = 0.3)
+flat
+flat
+N (µ = 2.0, σ = 2.0)
+N (µ = 1.0, σ = 10.0)
+N (µ = −2.0, σ = 1.0)
+
+7, 12.5
+−1.98, 0.19
+−2, 0.5
+−5, 5
+0, 4
+−1, 0.4
+0, 2
+−5, 0.48
+0.70, 2.18
+0, 7
+0.1, 25
+−4, 0
+
+We use the same variables and notation as Wang et al.
+(2023b, their Table 1), with the addition of two variables:
+Umin , the minimum intensity of stellar radiation that dust
+grains are exposed to, and log(γe ), the fraction of dust
+mass exposed to at least this minimum intensity. All logarithms use base 10.
+b
+Priors are Gaussian with mean and standard deviation
+based on the mass-dependent metallicity distribution from
+Gallazzi et al. (2005).
+c
+Student’s t-distribution. For details on the adopted age
+bins, see Wang et al. (2023a), their Section 3.3.
+
+22
+
+Figure 15. SED parameter comparisons using Jones et al. (2018)-selected SNe for global (left) and local (right) galaxy
+properties. Local properties from Blast are reduced by 0.25 dex due to the approximate difference in aperture area between
+this work and J18 (2 kpc versus 1.5 kpc), which is likely responsible for the systematic offsets at the low-mass end.
+
+Figure 16. Global sSFR parameter comparisons between Blast and LePHARE ugrizy-derived quantities from Jones et al.
+(2018). Agreement is good overall, but Blast prefers lower sSFR for the most extreme star-forming objects in the sample.
+
+blast
+
+23
+
+Figure 17. Comparison between Blast and quantities derived from the WISE infrared bands following Jarrett et al. (2023).
+Mass agrees closely (a median difference of just 0.06 dex), while Blast reports slightly lower sSFR by 0.38 dex on average.
+
+Figure 18. Comparison between Ramsden et al. (2022) and Blast, for two of the more uncertain Prospector-α parameters:
+the stellar metallicity, log10 (Z∗ /Z⊙ ), and the dust power-law index, n. Agreeement is typically within the errors, and there is
+a median offset of 0.05 dex for stellar metallicity and ∼0.1 for the dust optical depth. Inspection of individual outliers shows
+slightly different photometry and photometric bands included in the fit.
+
+24
+REFERENCES
+Abbott, T. M. C., Allam, S., Andersen, P., et al. 2019,
+ApJL, 872, L30, doi: 10.3847/2041-8213/ab04fa
+Ahumada, R., Allende Prieto, C., Almeida, A., et al. 2020,
+ApJS, 249, 3, doi: 10.3847/1538-4365/ab929e
+Aleo, P. D., Malanchev, K., Sharief, S., et al. 2022, arXiv
+e-prints, arXiv:2211.07128,
+doi: 10.48550/arXiv.2211.07128
+Alsing, J., Thorp, S., Deger, S., et al. 2024, ApJS, 274, 12,
+doi: 10.3847/1538-4365/ad5c69
+Alsing, J., Peiris, H., Leja, J., et al. 2020, ApJS, 249, 5,
+doi: 10.3847/1538-4365/ab917f
+Anderson, J. P., Habergham, S. M., James, P. A., &
+Hamuy, M. 2012, MNRAS, 424, 1372,
+doi: 10.1111/j.1365-2966.2012.21324.x
+Anderson, J. P., James, P. A., Habergham, S. M., Galbany,
+L., & Kuncarayakti, H. 2015, PASA, 32, e019,
+doi: 10.1017/pasa.2015.19
+Arnouts, S., & Ilbert, O. 2011, LePHARE: Photometric
+Analysis for Redshift Estimate, Astrophysics Source
+Code Library, record ascl:1108.009
+Astropy Collaboration, Robitaille, T. P., Tollerud, E. J.,
+et al. 2013, A&A, 558, A33,
+doi: 10.1051/0004-6361/201322068
+Astropy Collaboration, Price-Whelan, A. M., Sipőcz, B. M.,
+et al. 2018, AJ, 156, 123, doi: 10.3847/1538-3881/aabc4f
+Bellm, E. C., Kulkarni, S. R., Graham, M. J., et al. 2019,
+PASP, 131, 018002, doi: 10.1088/1538-3873/aaecbe
+Blanton, M. R., Bershady, M. A., Abolfathi, B., et al. 2017,
+AJ, 154, 28, doi: 10.3847/1538-3881/aa7567
+Boerner, T. J., Deems, S., Furlani, T. R., Knuth, S. L., &
+Towns, J. 2023, in Practice and Experience in Advanced
+Research Computing 2023: Computing for the Common
+Good, PEARC ’23 (New York, NY, USA: Association for
+Computing Machinery), 173–176,
+doi: 10.1145/3569951.3597559
+Bokeh Development Team. 2018, Bokeh: Python library for
+interactive visualization.
+https://bokeh.pydata.org/en/latest/
+Boone, K. 2019, AJ, 158, 257,
+doi: 10.3847/1538-3881/ab5182
+Boruah, S. S., Hudson, M. J., & Lavaux, G. 2020, MNRAS,
+498, 2703, doi: 10.1093/mnras/staa2485
+Bradley, L., Sipőcz, B., Robitaille, T., et al. 2022,
+astropy/photutils:, 1.4.0, Zenodo, Zenodo,
+doi: 10.5281/zenodo.596036
+Brandl, G. 2021, URL http://sphinx-doc. org/sphinx. pdf
+Brennan, S. J., Schulze, S., Lunnan, R., et al. 2023, arXiv
+e-prints, arXiv:2312.13280,
+doi: 10.48550/arXiv.2312.13280
+
+Brout, D., & Scolnic, D. 2021, ApJ, 909, 26,
+doi: 10.3847/1538-4357/abd69b
+Brout, D., Scolnic, D., Popovic, B., et al. 2022, ApJ, 938,
+110, doi: 10.3847/1538-4357/ac8e04
+Brown, T. M., Baliber, N., Bianco, F. B., et al. 2013,
+PASP, 125, 1031, doi: 10.1086/673168
+Bruzual, G., & Charlot, S. 2003, MNRAS, 344, 1000,
+doi: 10.1046/j.1365-8711.2003.06897.x
+Byler, N., Dalcanton, J. J., Conroy, C., & Johnson, B. D.
+2017, ApJ, 840, 44, doi: 10.3847/1538-4357/aa6c66
+Calzetti, D., Armus, L., Bohlin, R. C., et al. 2000, ApJ,
+533, 682, doi: 10.1086/308692
+Chambers, K. C., Magnier, E. A., Metcalfe, N., et al.
+2016a, arXiv e-prints, arXiv:1612.05560,
+doi: 10.48550/arXiv.1612.05560
+—. 2016b, arXiv e-prints, arXiv:1612.05560,
+doi: 10.48550/arXiv.1612.05560
+Charlot, S., & Fall, S. M. 2000, ApJ, 539, 718,
+doi: 10.1086/309250
+Choi, J., Dotter, A., Conroy, C., et al. 2016, ApJ, 823, 102,
+doi: 10.3847/0004-637X/823/2/102
+Conroy, C., & Gunn, J. E. 2010a, FSPS: Flexible Stellar
+Population Synthesis, Astrophysics Source Code Library,
+record ascl:1010.043. http://ascl.net/1010.043
+—. 2010b, ApJ, 712, 833,
+doi: 10.1088/0004-637X/712/2/833
+Conroy, C., Gunn, J. E., & White, M. 2009, ApJ, 699, 486,
+doi: 10.1088/0004-637X/699/1/486
+Coulter, D. A., Jones, D. O., McGill, P., et al. 2022,
+YSE-PZ: An Open-source Target and Observation
+Management System, v0.3.0, Zenodo, Zenodo,
+doi: 10.5281/zenodo.7278430
+—. 2023, PASP, 135, 064501,
+doi: 10.1088/1538-3873/acd662
+Dálya, G., Dı́az, R., Bouchet, F. R., et al. 2022, MNRAS,
+514, 1403, doi: 10.1093/mnras/stac1443
+Dey, A., Schlegel, D. J., Lang, D., et al. 2019, AJ, 157, 168,
+doi: 10.3847/1538-3881/ab089d
+Dixon, M., Mould, J., Lidman, C., et al. 2024, arXiv
+e-prints, arXiv:2408.01001,
+doi: 10.48550/arXiv.2408.01001
+Django REST Framework. 2024, Django REST Framework,
+3.15. https://www.django-rest-framework.org/
+Django Software Foundation. 2018, Django, 2.2.
+https://djangoproject.com
+Dotter, A. 2016, ApJS, 222, 8,
+doi: 10.3847/0067-0049/222/1/8
+Draine, B. T., & Li, A. 2007, ApJ, 657, 810,
+doi: 10.1086/511055
+
+25
+
+blast
+Drout, M. R., Chornock, R., Soderberg, A. M., et al. 2014,
+ApJ, 794, 23, doi: 10.1088/0004-637X/794/1/23
+
+Hodgkin, S. T., Harrison, D. L., Breedt, E., et al. 2021,
+A&A, 652, A76, doi: 10.1051/0004-6361/202140735
+
+Duane, S., Kennedy, A. D., Pendleton, B. J., & Roweth, D.
+1987, Physics Letters B, 195, 216,
+doi: 10.1016/0370-2693(87)91197-X
+
+Hoffman, M. D., & Gelman, A. 2011, arXiv e-prints,
+arXiv:1111.4246, doi: 10.48550/arXiv.1111.4246
+
+Duarte, J., González-Gaitán, S., Mourão, A., et al. 2023,
+A&A, 680, A56, doi: 10.1051/0004-6361/202346534
+Fitzpatrick, M. J., Olsen, K., Economou, F., et al. 2014, in
+Society of Photo-Optical Instrumentation Engineers
+(SPIE) Conference Series, Vol. 9149, Observatory
+Operations: Strategies, Processes, and Systems V, ed.
+A. B. Peck, C. R. Benn, & R. L. Seaman, 91491T,
+doi: 10.1117/12.2057445
+Flewelling, H. A., Magnier, E. A., Chambers, K. C., et al.
+2020, ApJS, 251, 7, doi: 10.3847/1538-4365/abb82d
+Foley, R. J., & Mandel, K. 2013, ApJ, 778, 167,
+doi: 10.1088/0004-637X/778/2/167
+Förster, F., Cabrera-Vives, G., Castillo-Navarrete, E., et al.
+2021, AJ, 161, 242, doi: 10.3847/1538-3881/abe9bc
+Freedman, W. L., Madore, B. F., Hatt, D., et al. 2019, ApJ,
+882, 34, doi: 10.3847/1538-4357/ab2f73
+Gagliano, A., Contardo, G., Foreman-Mackey, D., Malz,
+A. I., & Aleo, P. D. 2023, ApJ, 954, 6,
+doi: 10.3847/1538-4357/ace326
+Gagliano, A., Narayan, G., Engel, A., Carrasco Kind, M., &
+LSST Dark Energy Science Collaboration. 2021, ApJ,
+908, 170, doi: 10.3847/1538-4357/abd02b
+Gallazzi, A., Charlot, S., Brinchmann, J., White, S. D. M.,
+& Tremonti, C. A. 2005, MNRAS, 362, 41,
+doi: 10.1111/j.1365-2966.2005.09321.x
+Ginsburg, A., Sipőcz, B. M., Brasseur, C. E., et al. 2019,
+AJ, 157, 98, doi: 10.3847/1538-3881/aafc33
+
+Hosseinzadeh, G., McCully, C., Zabludoff, A. I., et al. 2019,
+ApJL, 871, L9, doi: 10.3847/2041-8213/aafc61
+Howell, D. A., & Global Supernova Project. 2017, in
+American Astronomical Society Meeting Abstracts, Vol.
+230, American Astronomical Society Meeting Abstracts
+#230, 318.03
+Huber, M., Carter Chambers, K., Flewelling, H., et al.
+2015, in IAU General Assembly, Vol. 29, 2258303
+Jacobson-Galán, W. V., Dessart, L., Jones, D. O., et al.
+2022, ApJ, 924, 15, doi: 10.3847/1538-4357/ac3f3a
+Jarrett, T. H., Cluver, M. E., Brown, M. J. I., et al. 2019,
+ApJS, 245, 25, doi: 10.3847/1538-4365/ab521a
+Jarrett, T. H., Cluver, M. E., Taylor, E. N., et al. 2023,
+ApJ, 946, 95, doi: 10.3847/1538-4357/acb68f
+Johnson, B. D., Leja, J., Conroy, C., & Speagle, J. S. 2021,
+ApJS, 254, 22, doi: 10.3847/1538-4365/abef67
+Jones, D. O., Riess, A. G., Scolnic, D. M., et al. 2018, ApJ,
+867, 108, doi: 10.3847/1538-4357/aae2b9
+Jones, D. O., Scolnic, D. M., Foley, R. J., et al. 2019, ApJ,
+881, 19, doi: 10.3847/1538-4357/ab2bec
+Jones, D. O., Foley, R. J., Narayan, G., et al. 2021, ApJ,
+908, 143, doi: 10.3847/1538-4357/abd7f5
+Karamanis, M., Beutler, F., Peacock, J. A., Nabergoj, D.,
+& Seljak, U. 2022, MNRAS, 516, 1644,
+doi: 10.1093/mnras/stac2272
+Kasliwal, M. M., Cannella, C., Bagdasaryan, A., et al.
+2019, PASP, 131, 038003, doi: 10.1088/1538-3873/aafbc2
+
+Grayling, M., Thorp, S., Mandel, K. S., et al. 2024,
+MNRAS, 531, 953, doi: 10.1093/mnras/stae1202
+
+Kelly, P. L., Hicken, M., Burke, D. L., Mandel, K. S., &
+Kirshner, R. P. 2010, ApJ, 715, 743,
+doi: 10.1088/0004-637X/715/2/743
+
+Green, G. 2018, The Journal of Open Source Software, 3,
+695, doi: 10.21105/joss.00695
+
+Kilpatrick, C. D., Drout, M. R., Auchettl, K., et al. 2021,
+MNRAS, 504, 2073, doi: 10.1093/mnras/stab838
+
+Greenberg, D. S., Nonnenmacher, M., & Macke, J. H. 2019,
+arXiv e-prints, arXiv:1905.07488,
+doi: 10.48550/arXiv.1905.07488
+
+Kim, Y. L., Briday, M., Copin, Y., et al. 2024, MNRAS,
+527, 4359, doi: 10.1093/mnras/stad3501
+
+Gupta, R. R., Kuhlmann, S., Kovacs, E., et al. 2016, AJ,
+152, 154, doi: 10.3847/0004-6256/152/6/154
+Hahn, C., Kwon, K. J., Tojeiro, R., et al. 2023, ApJ, 945,
+16, doi: 10.3847/1538-4357/ac8983
+
+Kisley, M., Qin, Y.-J., Zabludoff, A., Barnard, K., & Ko,
+C.-L. 2023, ApJ, 942, 29, doi: 10.3847/1538-4357/aca532
+Kochanek, C. S., Shappee, B. J., Stanek, K. Z., et al. 2017,
+PASP, 129, 104502, doi: 10.1088/1538-3873/aa80d9
+Kron, R. G. 1980, ApJS, 43, 305, doi: 10.1086/190669
+
+Hand, J., Liu, S., Galbany, L., et al. 2022, ApJ, 925, 115,
+doi: 10.3847/1538-4357/ac389f
+
+Lampeitl, H., Smith, M., Nichol, R. C., et al. 2010, ApJ,
+722, 566, doi: 10.1088/0004-637X/722/1/566
+
+Harris, C. R., Millman, K. J., van der Walt, S. J., et al.
+2020, Nature, 585, 357, doi: 10.1038/s41586-020-2649-2
+
+Lang, D., Hogg, D. W., & Schlegel, D. J. 2016, AJ, 151, 36,
+doi: 10.3847/0004-6256/151/2/36
+
+Ho, A. Y. Q., Perley, D. A., Kulkarni, S. R., et al. 2020,
+ApJ, 895, 49, doi: 10.3847/1538-4357/ab8bcf
+
+Le Borgne, D., & Rocca-Volmerange, B. 2002, A&A, 386,
+446, doi: 10.1051/0004-6361:20020259
+
+26
+Leaman, J., Li, W., Chornock, R., & Filippenko, A. V.
+2011, MNRAS, 412, 1419,
+doi: 10.1111/j.1365-2966.2011.18158.x
+Leja, J., Carnall, A. C., Johnson, B. D., Conroy, C., &
+Speagle, J. S. 2019a, ApJ, 876, 3,
+doi: 10.3847/1538-4357/ab133c
+—. 2019b, ApJ, 876, 3, doi: 10.3847/1538-4357/ab133c
+Leja, J., Johnson, B. D., Conroy, C., & van Dokkum, P.
+2018, ApJ, 854, 62, doi: 10.3847/1538-4357/aaa8db
+Leja, J., Johnson, B. D., Conroy, C., van Dokkum, P. G., &
+Byler, N. 2017, ApJ, 837, 170,
+doi: 10.3847/1538-4357/aa5ffe
+Leroy, A. K., Sandstrom, K. M., Lang, D., et al. 2019,
+ApJS, 244, 24, doi: 10.3847/1538-4365/ab3925
+Li, W., Leaman, J., Chornock, R., et al. 2011, MNRAS,
+412, 1441, doi: 10.1111/j.1365-2966.2011.18160.x
+Lokken, M., Gagliano, A., Narayan, G., et al. 2023,
+MNRAS, 520, 2887, doi: 10.1093/mnras/stad302
+Lower, S., Narayanan, D., Leja, J., et al. 2020, ApJ, 904,
+33, doi: 10.3847/1538-4357/abbfa7
+—. 2022, ApJ, 931, 14, doi: 10.3847/1538-4357/ac6959
+LSST Science Collaboration, Abell, P. A., Allison, J., et al.
+2009, arXiv e-prints, arXiv:0912.0201,
+doi: 10.48550/arXiv.0912.0201
+Lunnan, R., Chornock, R., Berger, E., et al. 2015, ApJ,
+804, 90, doi: 10.1088/0004-637X/804/2/90
+Magnier, E. A., Schlafly, E. F., Finkbeiner, D. P., et al.
+2020, ApJS, 251, 6, doi: 10.3847/1538-4365/abb82a
+Malanchev, K., Kornilov, M. V., Pruzhinskaya, M. V., et al.
+2023, PASP, 135, 024503, doi: 10.1088/1538-3873/acb292
+Martin, D. C., Fanson, J., Schiminovich, D., et al. 2005,
+ApJL, 619, L1, doi: 10.1086/426387
+Matheson, T., Stubens, C., Wolf, N., et al. 2021, AJ, 161,
+107, doi: 10.3847/1538-3881/abd703
+Mathews, E. P., Leja, J., Speagle, J. S., et al. 2023, ApJ,
+954, 132, doi: 10.3847/1538-4357/ace720
+Meldorf, C., Palmese, A., Brout, D., et al. 2023, MNRAS,
+518, 1985, doi: 10.1093/mnras/stac3056
+Merkel, D. 2014, Linux journal, 2014, 2
+Modjaz, M., Bianco, F. B., Siwek, M., et al. 2020, ApJ,
+892, 153, doi: 10.3847/1538-4357/ab4185
+Möller, A., Peloton, J., Ishida, E. E. O., et al. 2021,
+MNRAS, 501, 3272, doi: 10.1093/mnras/staa3602
+Möller, A., Wiseman, P., Smith, M., et al. 2024, arXiv
+e-prints, arXiv:2402.18690,
+doi: 10.48550/arXiv.2402.18690
+Moreno-Raya, M. E., Mollá, M., López-Sánchez, Á. R.,
+et al. 2016, ApJL, 818, L19,
+doi: 10.3847/2041-8205/818/1/L19
+
+Müller-Bravo, T., & Galbany, L. 2022, The Journal of
+Open Source Software, 7, 4508, doi: 10.21105/joss.04508
+Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R.,
+& Hložek, R. 2019, PASP, 131, 118002,
+doi: 10.1088/1538-3873/ab1609
+Nagaraj, G., Forbes, J. C., Leja, J., Foreman-Mackey, D.,
+& Hayward, C. C. 2022, ApJ, 932, 54,
+doi: 10.3847/1538-4357/ac6c80
+Nenkova, M., Sirocky, M. M., Ivezić, Ž., & Elitzur, M.
+2008, ApJ, 685, 147, doi: 10.1086/590482
+Nikutta, R., Fitzpatrick, M., Scott, A., & Weaver, B. A.
+2020, Astronomy and Computing, 33, 100411,
+doi: 10.1016/j.ascom.2020.100411
+Noll, S., Burgarella, D., Giovannoli, E., et al. 2009, A&A,
+507, 1793, doi: 10.1051/0004-6361/200912497
+Nordin, J., Brinnel, V., van Santen, J., et al. 2019, A&A,
+631, A147, doi: 10.1051/0004-6361/201935634
+Onken, C. A., Wolf, C., Bessell, M. S., et al. 2024, arXiv
+e-prints, arXiv:2402.02015,
+doi: 10.48550/arXiv.2402.02015
+Papamakarios, G., Pavlakou, T., & Murray, I. 2017, arXiv
+e-prints, arXiv:1705.07057,
+doi: 10.48550/arXiv.1705.07057
+Perley, D. A., Quimby, R. M., Yan, L., et al. 2016a, ApJ,
+830, 13, doi: 10.3847/0004-637X/830/1/13
+Perley, D. A., Tanvir, N. R., Hjorth, J., et al. 2016b, ApJ,
+817, 8, doi: 10.3847/0004-637X/817/1/8
+Pessi, P. J., Durgesh, R., Nakazono, L., et al. 2024, arXiv
+e-prints, arXiv:2404.18165,
+doi: 10.48550/arXiv.2404.18165
+Peterson, E. R., Scolnic, D., Jones, D. O., et al. 2024, arXiv
+e-prints, arXiv:2403.13885,
+doi: 10.48550/arXiv.2403.13885
+Planck Collaboration, Aghanim, N., Akrami, Y., et al.
+2020, A&A, 641, A6, doi: 10.1051/0004-6361/201833910
+Popovic, B., Wiseman, P., Sullivan, M., et al. 2024, arXiv
+e-prints, arXiv:2406.05051,
+doi: 10.48550/arXiv.2406.05051
+Qin, Y.-J., & Zabludoff, A. 2024, MNRAS, 533, 3517,
+doi: 10.1093/mnras/stae1921
+Qin, Y.-J., Zabludoff, A., Arcavi, I., et al. 2024, arXiv
+e-prints, arXiv:2409.13804.
+https://arxiv.org/abs/2409.13804
+Qin, Y.-J., Zabludoff, A., Kisley, M., et al. 2022, ApJS,
+259, 13, doi: 10.3847/1538-4365/ac2fa1
+Qu, H., & Sako, M. 2022, AJ, 163, 57,
+doi: 10.3847/1538-3881/ac39a1
+Ramsden, P., Lanning, D., Nicholl, M., & McGee, S. L.
+2022, MNRAS, 515, 1146, doi: 10.1093/mnras/stac1810
+
+27
+
+blast
+Riess, A. G., Yuan, W., Macri, L. M., et al. 2022, ApJL,
+934, L7, doi: 10.3847/2041-8213/ac5c5b
+Rigault, M., Copin, Y., Aldering, G., et al. 2013, A&A,
+560, A66, doi: 10.1051/0004-6361/201322104
+Saha, A., Matheson, T., Snodgrass, R., et al. 2014, in
+Society of Photo-Optical Instrumentation Engineers
+(SPIE) Conference Series, Vol. 9149, Observatory
+Operations: Strategies, Processes, and Systems V, ed.
+A. B. Peck, C. R. Benn, & R. L. Seaman, 914908,
+doi: 10.1117/12.2056988
+Salim, S., Lee, J. C., Janowiecki, S., et al. 2016, ApJS, 227,
+2, doi: 10.3847/0067-0049/227/1/2
+Sánchez-Blázquez, P., Peletier, R. F., Jiménez-Vicente, J.,
+et al. 2006, MNRAS, 371, 703,
+doi: 10.1111/j.1365-2966.2006.10699.x
+Sánchez-Sáez, P., Reyes, I., Valenzuela, C., et al. 2021, AJ,
+161, 141, doi: 10.3847/1538-3881/abd5c1
+Sanders, N. E., Soderberg, A. M., Levesque, E. M., et al.
+2012, ApJ, 758, 132, doi: 10.1088/0004-637X/758/2/132
+Schlafly, E. F., & Finkbeiner, D. P. 2011, ApJ, 737, 103,
+doi: 10.1088/0004-637X/737/2/103
+Scolnic, D. M., Jones, D. O., Rest, A., et al. 2018, ApJ,
+859, 101, doi: 10.3847/1538-4357/aab9bb
+Shappee, B. J., Prieto, J. L., Grupe, D., et al. 2014, ApJ,
+788, 48, doi: 10.1088/0004-637X/788/1/48
+Skrutskie, M. F., Cutri, R. M., Stiening, R., et al. 2006, AJ,
+131, 1163, doi: 10.1086/498708
+Smartt, S. J., Valenti, S., Fraser, M., et al. 2015, A&A, 579,
+A40, doi: 10.1051/0004-6361/201425237
+Smith, K. W., Williams, R. D., Young, D. R., et al. 2019,
+Research Notes of the American Astronomical Society, 3,
+26, doi: 10.3847/2515-5172/ab020f
+Smith, K. W., Smartt, S. J., Young, D. R., et al. 2020,
+PASP, 132, 085002, doi: 10.1088/1538-3873/ab936e
+Smith, N., Li, W., Filippenko, A. V., & Chornock, R. 2011,
+MNRAS, 412, 1522,
+doi: 10.1111/j.1365-2966.2011.17229.x
+Speagle, J. S. 2020, MNRAS, 493, 3132,
+doi: 10.1093/mnras/staa278
+Stahl, B. E., de Jaeger, T., Boruah, S. S., et al. 2021,
+MNRAS, 505, 2349, doi: 10.1093/mnras/stab1446
+Street, R. A., Bowman, M., Saunders, E. S., & Boroson, T.
+2018, in Society of Photo-Optical Instrumentation
+Engineers (SPIE) Conference Series, Vol. 10707, Software
+and Cyberinfrastructure for Astronomy V, ed. J. C.
+Guzman & J. Ibsen, 1070711, doi: 10.1117/12.2312293
+Sullivan, M., Conley, A., Howell, D. A., et al. 2010,
+MNRAS, 406, 782, doi: 10.1111/j.1365-2966.2010.16731.x
+Taggart, K., & Perley, D. A. 2021, MNRAS, 503, 3931,
+doi: 10.1093/mnras/stab174
+
+Taylor, E. N., Hopkins, A. M., Baldry, I. K., et al. 2011,
+MNRAS, 418, 1587,
+doi: 10.1111/j.1365-2966.2011.19536.x
+Tejero-Cantero, A., Boelts, J., Deistler, M., et al. 2020, The
+Journal of Open Source Software, 5, 2505,
+doi: 10.21105/joss.02505
+Thorp, S., Alsing, J., Peiris, H. V., et al. 2024, arXiv
+e-prints, arXiv:2406.19437,
+doi: 10.48550/arXiv.2406.19437
+Timmes, F. X., Brown, E. F., & Truran, J. W. 2003, ApJL,
+590, L83, doi: 10.1086/376721
+Tinyanont, S., Ridden-Harper, R., Foley, R. J., et al. 2022,
+MNRAS, 512, 2777, doi: 10.1093/mnras/stab2887
+Tonry, J. L., Denneau, L., Heinze, A. N., et al. 2018, PASP,
+130, 064505, doi: 10.1088/1538-3873/aabadf
+Tsapras, Y., Street, R., Horne, K., et al. 2009,
+Astronomische Nachrichten, 330, 4,
+doi: 10.1002/asna.200811130
+Vincenzi, M., Brout, D., Armstrong, P., et al. 2024, arXiv
+e-prints, arXiv:2401.02945,
+doi: 10.48550/arXiv.2401.02945
+Wang, B., Leja, J., Villar, V. A., & Speagle, J. S. 2023a,
+ApJL, 952, L10, doi: 10.3847/2041-8213/ace361
+Wang, B., Leja, J., Bezanson, R., et al. 2023b, ApJL, 944,
+L58, doi: 10.3847/2041-8213/acba99
+Wang, B., Leja, J., Labbé, I., et al. 2024, ApJS, 270, 12,
+doi: 10.3847/1538-4365/ad0846
+Wenger, M., Ochsenbein, F., Egret, D., et al. 2000, A&AS,
+143, 9, doi: 10.1051/aas:2000332
+Wiseman, P., Sullivan, M., Smith, M., & Popovic, B. 2023,
+MNRAS, 520, 6214, doi: 10.1093/mnras/stad488
+Wiseman, P., Pursiainen, M., Childress, M., et al. 2020a,
+MNRAS, 498, 2575, doi: 10.1093/mnras/staa2474
+Wiseman, P., Smith, M., Childress, M., et al. 2020b,
+MNRAS, 495, 4040, doi: 10.1093/mnras/staa1302
+Wong, K. W. K., Gabrié, M., & Foreman-Mackey, D. 2023,
+The Journal of Open Source Software, 8, 5021,
+doi: 10.21105/joss.05021
+Wright, E. L., Eisenhardt, P. R. M., Mainzer, A. K., et al.
+2010, AJ, 140, 1868, doi: 10.1088/0004-6256/140/6/1868
+Ye, C., Jones, D. O., Hoogendam, W. B., et al. 2024, ApJ,
+974, 164, doi: 10.3847/1538-4357/ad6c3d
+Yoon, S.-C. 2015, PASA, 32, e015,
+doi: 10.1017/pasa.2015.16
+York, D. G., Adelman, J., Anderson, John E., J., et al.
+2000, AJ, 120, 1579, doi: 10.1086/301513
+
+
