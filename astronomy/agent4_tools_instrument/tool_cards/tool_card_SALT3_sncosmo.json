@@ -1,0 +1,68 @@
+{
+ "name": "SALT3 SN Ia spectral time-series model as served by sncosmo ('salt3' built-in source)",
+ "role": "scorer",
+ "roles_all_from_code": [
+  "scorer (sncosmo.fit_lc / sncosmo.chisq: chi2 and parameters of the SN Ia hypothesis at an agent-supplied or fitted redshift)",
+  "generator (Model.bandflux / sncosmo.realize_lcs at agent-set z, t0, x0, x1, c)"
+ ],
+ "written_from": "code",
+ "code_pin": "github.com/sncosmo/sncosmo commit a42c93634a472b2c80878cebc43976aadaff6d2b (2026-09-11), shallow clone at code/sncosmo_sncosmo; model training code github.com/djones1040/SALTShaker commit 5183c2dcd8f0a6fba61e5a2137bcf186120ef43f",
+ "quantity_returned": "SALT3Source (models.py L1009-1120) returns F(t,lambda) = x0 (M0 + x1 M1) x 10^(-0.4 CL(lambda) c) with M0/M1 read from salt3_template_0/1.dat and scaled by 1e-12. On the salt3-f22 grid, phase runs -20 to +50 days and wavelength 2000-11000 A (read from salt3_template_0.dat). The colour law is SALT2ColorLaw from salt3_color_correction.dat (5 coefficients, Salt2ExtinctionLaw min_lambda 2800 and max_lambda 8000). Relative model variance at the band effective wavelength comes from _bandflux_rvar_single (LCRV00/11/01) plus colour dispersion. fit_lc returns best-fit (z, t0, x0, x1, c), their covariance and chi2 under the SN Ia hypothesis only.",
+ "defining_paper": "Kenworthy et al. 2021, ApJ 923, 265, arXiv:2104.07795v1 (SALT3.K21); full text read (sources/arxiv_2104.07795.txt). The served 'salt3' source is the F22 recalibration, whose paper (Brout et al. 2022) was not read.",
+ "accuracy_against_scored_measurement": "UNDEMONSTRATED. K21 reports Hubble-residual RMS and distance differences for spectroscopically confirmed normal SNe Ia (Sec 5, Table 5), which is a distance-standardisation metric. There is no measurement of how well SALT3 chi2 or fit parameters separate SNe Ia from other classes, or predict follow-up value, on ZTF or Rubin photometry at decision time.",
+ "what_it_is_not": "Not a classifier: it has no model for non-Ia classes, so a good chi2 is consistency with an SN Ia template, not a class probability. Not a light-curve model for peculiar Ia: the K21 training sample is restricted to Branch-normal plus 1991T-like SNe Ia (Sec 4.4). Not trained on ZTF photometry: the K21 compilation (Table 4) lists CfA, CSP, SDSS, SNLS, Foundation, PS1-MDS and DES. Not calibrated to Rubin as-built throughputs: sncosmo's 'lsst' bandpasses are 2016 baseline v1.1 (builtins.py L372-376). Not valid outside -20..+50 d phase or 2000-11000 A rest frame: bandflux raises when a redshifted band leaves the model range.",
+ "conventions": [
+  "Default sncosmo 'salt3' = salt3-f22 version 2.0 ('Revised with Fragilistic calibration (Brout et al., 2022)'); 'salt3-nir' is a separate source (builtins.py L1022-1040)",
+  "fit_lc default modelcov=False: model variance and colour scatter are excluded from chi2 unless the caller sets modelcov=True (fitting.py L22, L465)",
+  "fit_lc defaults guess_amplitude, guess_t0 and guess_z True with minsnr=5.0; redshift must be bounded by the caller if varied",
+  "Relative variance forced to 0.0001 where interpolated variance < 0, and to 10000 where M0+x1*M1 <= 0 (models.py _bandflux_rvar_single, 'prescription of snfit')",
+  "Colour-law extrapolation outside [min_lambda, max_lambda] is linear (salt2utils.pyx SALT2ColorLaw docstring)",
+  "Model data downloaded at runtime from https://sncosmo.github.io/data (builtins.py DATADIR) unless cached; the tarball has no in-code checksum",
+  "Milky Way dust must be added by the caller as a PropagationEffect; SALT3Source itself carries none"
+ ],
+ "served_checkpoint": {
+  "identifier": "sncosmo built-in source 'salt3' version 2.0 -> https://sncosmo.github.io/data/models/salt3/salt3-f22.tar.gz",
+  "pin": "sha256 c7de53438761aeaacb5b28347fb0e9b00b5f5b1036843688e3d5d5edd4f7a37e (tarball downloaded 2026-09-16, extracted copy at code/_downloaded_artifacts/salt3-f22)"
+ },
+ "substitution": null,
+ "disagreements": [
+  {
+   "topic": "which model is served",
+   "paper": "defines and validates SALT3.K21, trained on the K21 compilation with Supercal calibration (Secs 4-5)",
+   "code": "the default 'salt3' registered in builtins.py L1033-1040 is salt3-f22 v2.0, a Fragilistic recalibration not described in the defining paper; its docstring still says 'Kenworthy et al., 2021, ApJ, submitted' while the meta note cites ApJ 923, 265K"
+  },
+  {
+   "topic": "colour term functional form",
+   "paper": "F(p,lambda) = x0[M0 + x1 M1] * exp(c * CL(lambda)) (Eq. 1)",
+   "code": "SALT3Source docstring and SALT2ColorLaw implement 10^(-0.4 * CL(lambda) * c), i.e. exp(-0.4 ln10 * c * CL) with CL the extinction in magnitudes for c=1; the sign and scale convention of CL differ between the two statements"
+  },
+  {
+   "topic": "colour-law polynomial order",
+   "paper": "K21 uses a fourth-order polynomial colour law up to 8000 A (Sec 5)",
+   "code": "salt3-f22 salt3_color_correction.dat carries 5 coefficients; SALT2ColorLaw builds the polynomial alpha*l + sum params(i)*l^(i+2) (salt2utils.pyx docstring), a degree-6 polynomial for 5 coefficients, and its buffer comment reads 'can store up to 6 coeffs (should be only 4)'"
+  },
+  {
+   "topic": "chi2 covariance",
+   "paper": "photometric chi2 uses Sigma_Total = diag(sigma_phot^2) + Sigma_Model, including colour scatter (Eqs. 4, 11)",
+   "code": "sncosmo.fit_lc and sncosmo.chisq default modelcov=False, so the default fit omits Sigma_Model"
+  },
+  {
+   "topic": "model uncertainty evaluation wavelength",
+   "paper": "in-sample variance defined at the filter central wavelength lambda_c (Eq. 3); the conclusion flags this as a systematic because observer-frame filters contract in the rest frame",
+   "code": "Model._bandflux_rcov shifts each band to the rest frame (b.shifted(1/(1+z)), models.py L1701-1714), then SALT3Source._bandflux_rvar_single evaluates LCRV00/11/01 at the rest-frame band.wave_eff, the transmission-weighted effective wavelength rather than a central wavelength, and integrates M0 and M1 over the full band for the normalisation"
+  },
+  {
+   "topic": "colour-law wavelength range",
+   "paper": "K21 extends the polynomial colour-law range to 8000 A (Sec 5); the lower limit is not stated in the extracted text",
+   "code": "_set_colorlaw_from_file defaults to [3000, 7000] A when the file has no range keywords; salt3-f22 overrides to 2800-8000 A"
+  },
+  {
+   "topic": "ZTF applicability",
+   "paper": "K21 training compilation contains no ZTF photometry (Table 4)",
+   "code": "ZTF bandpasses ztfg/ztfr/ztfi (P48 curves) and ztf::g/r/i versions are registered (builtins.py L448-457, L680-714), so fits run on ZTF data with no training-sample support in the defining paper"
+  }
+ ],
+ "construct_validity_I4": "UNDEMONSTRATED, with the referent recorded as adjacent. SALT3 returns SN Ia template consistency and standardisation parameters under a hypothesised redshift. The scored quantity is the spectroscopic class, and follow-up value, of the object chosen. The chi2 is evidence about one class and cannot score the others.",
+ "certification_I5": "UNDEMONSTRATED (out of scope)",
+ "completeness": "Covered from code: sncosmo builtins.py (SALT3, LSST and ZTF bandpass registration), models.py SALT3Source, Model._bandflux_rcov, salt2utils.pyx SALT2ColorLaw docstring, fitting.py fit_lc and chisq signatures; salt3-f22 tarball downloaded, hashed and grid ranges read. K21 paper read in full. Not covered: the F22 recalibration paper (Brout et al. 2022) and SALTShaker training code internals; no fit was executed."
+}

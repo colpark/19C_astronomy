@@ -1,0 +1,76 @@
+{
+ "name": "ParSNIP (Parameterization of SuperNova Intrinsic Properties)",
+ "role": "generator",
+ "roles_all_from_code": [
+  "encoder (ParsnipModel.encode / predict)",
+  "generator (decode, decode_spectra, predict_light_curve, predict_spectrum; ParsnipSncosmoSource)",
+  "scorer (predict_redshift_distribution; loss_function on agent-set latents; sncosmo fit via ParsnipSncosmoSource)"
+ ],
+ "written_from": "code",
+ "code_pin": "github.com/kboone/parsnip commit dcea62fe7afc72053abd6f183bc6acf7c8be1437 (2026-03-06), shallow clone at code/kboone_parsnip",
+ "quantity_returned": "Generator path: given an agent-set intrinsic latent (s1,s2,s3), color c, amplitude A, reference time t0 and redshift z, decode_spectra returns a rest-frame spectral time series on 300 log-spaced bins over 1000-11000 A (settings.py min_wave, max_wave, spectrum_bins) and decode returns synthetic photometry in the model's own bands only (band weights are built for settings['bands'] in _setup_band_weights). ParsnipSncosmoSource exposes (amplitude, color, s1..s3) as an sncosmo Source whose _flux can be integrated through any sncosmo-registered bandpass. Scorer path: predict_redshift_distribution evaluates the reconstruction NLL at the MAP latent for each redshift on an agent-chosen grid (default 0..max_redshift=4 in steps of 0.01) and returns a normalised p(z|y); the code docstring states this approximation 'is not correct'. Encoder path: predict_dataset returns reference_time, color, amplitude, s1..s3 with errors, luminosity via Planck18 distance modulus, and predicted_redshift for photo-z models.",
+ "defining_paper": "Boone 2021, AJ 162, 275, arXiv:2109.13999v1; full text read (sources/arxiv_2109.13999.txt)",
+ "accuracy_against_scored_measurement": "UNDEMONSTRATED. The paper reports out-of-sample model dispersion of ~0.06 mag (PS1) and ~0.04 mag (PLAsTiCC) (Sec 4.1), SN Ia AUC 0.977 on PLAsTiCC with true redshifts (Sec 5.3), and 89% five-way accuracy by 10-fold cross-validation on 557 labelled PS1 SNe (Sec 5.2). None of these is measured on the scored quantity: the spectroscopic class of real ZTF or Rubin transients at decision time, before any spectroscopic redshift exists.",
+ "what_it_is_not": "Not a classifier: classification in the paper is a separate LightGBM on 11 ParSNIP features (classifier.py::Classifier.keys) trained per dataset. Not usable as an encoder on a raw alert: the pretrained plasticc and ps1 models require meta['redshift'] (preprocess_light_curve raises 'No redshift available') and plasticc_photoz requires hostgal_photoz and hostgal_photoz_err; neither the ZTF alert nor the Rubin lsst.v11_1 alert carries these. Not trained on ZTF: no shipped model has ztfg/ztfr encoder bands. The ZTF BTS catalogue redshift is a post-follow-up spectroscopic quantity, so feeding it in leaks the outcome of the decision being scored. Not validated on real Rubin data: the LSST model was trained on PLAsTiCC simulations with 2016 baseline throughputs.",
+ "conventions": [
+  "Built-in model bands: plasticc = lsstu,lsstg,lsstr,lssti,lsstz,lssty (sncosmo 'lsst' v1.1 baseline throughputs retrieved 16 Nov 2016, sncosmo builtins.py L372-381); ps1 = ps1::g,r,i,z (strings extracted from the .pt pickles)",
+  "Time grid in sidereal days (SIDEREAL_SCALE = 86400/86164.0905), window 300 days, time_pad 100 (settings.py)",
+  "Background subtraction by biweight location for observations outside the window, applied for PS1 and LSST bands and not for ZTF bands (instruments.py band_info column 'Correct Background')",
+  "Milky Way extinction correction applied for PS1 and ZTF bands, not for LSST/PLAsTiCC bands (band_info), with FM07 R_V=3.1",
+  "Flux normalised by the brightest S/N>5 point, or by the brightest point if none has S/N>5 (light_curve.py::preprocess_light_curve)",
+  "Error floor 0.01 in normalised flux units (settings.py error_floor)",
+  "Zeropoint 25, AB magnitude system (settings.py)",
+  "Color prior N(0, 0.3^2) and reference-time prior N(0, 20 d^2) implemented as scaled N(0,1) encodings (settings.py color_sigma, time_sigma)",
+  "Spectroscopic-redshift prior width specz_error = 0.01 for version-2 models; update_settings_version sets 0.05 when loading model_version < 2"
+ ],
+ "served_checkpoint": {
+  "identifier": "parsnip/models/plasticc.pt (LSST bands); also ps1.pt and plasticc_photoz.pt",
+  "pin": "sha256 a164aefe6479753e0c9a4831ea1bb09e87d9659e22f86700ca6c662879607366 (plasticc.pt); 9ebf0a6e5a6981d487650b77dda0fa2ce98322371903bf4633f3cbc668861968 (ps1.pt); f41d06ce531ddac9af372717ecf75cbd19c471bf2cbd5977a3dfbbe491052452 (plasticc_photoz.pt); all at commit dcea62fe"
+ },
+ "substitution": null,
+ "disagreements": [
+  {
+   "topic": "redshift requirement",
+   "paper": "the analysis assumes redshifts of all transients are known (Sec 2); photometric redshifts are discussed only as a future possibility (Sec 6.3)",
+   "code": "settings.py has predict_redshift and a shipped plasticc_photoz.pt; docs/photoz.rst cites 'Boone et al. 2022 (in prep.)', a model and loss term (loss_function redshift_nll) that the defining paper does not describe"
+  },
+  {
+   "topic": "decoder band generality",
+   "paper": "the decoder 'can be used to predict the photometry for any instrument or bandpass without any modification to the architecture or neural network weights' (Sec 6.8)",
+   "code": "decode() takes band_indices into band weights built only for settings['bands'] at construction (_setup_band_weights), so the internal decoder is restricted to the model's bands; the sncosmo route (ParsnipSncosmoSource._flux) does return spectra integrable in any registered band"
+  },
+  {
+   "topic": "PS1 redshifts",
+   "paper": "the PS1 dataset 'contains 2,885 light curves with host-galaxy redshifts of which 557 have spectroscopically-confirmed types' (Sec 2)",
+   "code": "instruments.py::parse_ps1 comments that 'Light curves in the unsupervised set ... don't have valid redshifts' and then sets meta['redshift'] = NaN for rows where unsupervised is False, the opposite subset from the comment"
+  },
+  {
+   "topic": "redshift posterior",
+   "paper": "suggests evaluating posteriors directly with optimisers or MCMC (Sec 6.5)",
+   "code": "predict_redshift_distribution evaluates the NLL at the MAP latent per redshift, assumes p(s,z) constant, and its docstring states 'This is not correct, but should provide a reasonable approximation'"
+  },
+  {
+   "topic": "time-of-maximum estimate",
+   "paper": "rough time of maximum = median time of the five highest signal-to-noise observations (Sec 2.1)",
+   "code": "_determine_time_grid first aligns to a sidereal grid, then keeps only those of the top five with S/N>5 if any exist, and rounds the median to an integer grid day"
+  },
+  {
+   "topic": "normalisation fallback",
+   "paper": "normalise by maximum flux among observations with S/N of at least five (Sec 2.1)",
+   "code": "falls back to the maximum flux of all observations when no point has S/N>5 (preprocess_light_curve)"
+  },
+  {
+   "topic": "amplitude marginalisation",
+   "paper": "Jeffreys (flat) prior on A, integral estimated by importance sampling with a single sample (Sec 3.7)",
+   "code": "forward() draws A from N(amplitude_mu, exp(amplitude_logvar)) via _reparameterize and adds amp_prob = -0.5 (A - mu)^2 / var to the loss; with sample=False (used by predict_dataset and predict_redshift_distribution) A is set to its conditional mean, not integrated"
+  },
+  {
+   "topic": "instrument coverage",
+   "paper": "'Other than definitions of the bandpasses, there are no instrument-specific elements of the ParSNIP model' (Sec 5.3)",
+   "code": "instruments.py hard-codes per-instrument background and MW-extinction switches and dataset parsers (parse_ps1, parse_ztf, parse_plasticc), and _get_data reads PLAsTiCC-specific metadata keys (comment 'this uses the keys for PLAsTiCC and should be adapted')"
+  }
+ ],
+ "construct_validity_I4": "UNDEMONSTRATED. As a scorer, p(z|y) and the reconstruction NLL under an agent-set latent measure consistency of a light curve with a learned generative model. That is not the scored quantity (spectroscopic class of the chosen object). It is an input an agent could reason with, provided no post-follow-up redshift is supplied.",
+ "certification_I5": "UNDEMONSTRATED (out of scope)",
+ "completeness": "Covered from code: settings.py, instruments.py, light_curve.py, parsnip.py (model, preprocessing, loss, predict_dataset, redshift distribution), sncosmo.py, classifier.py keys, docs/photoz.rst; the three shipped .pt files hashed and their band strings extracted. Paper read in full. Not covered: plotting.py, scripts/*, augmentation internals beyond settings, lcdata parsing; no model was executed."
+}

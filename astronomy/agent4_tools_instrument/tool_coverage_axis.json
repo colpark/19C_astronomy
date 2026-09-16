@@ -1,0 +1,340 @@
+{
+ "id": "axis-tool_coverage-astronomy-2026-09-16",
+ "axis": "tool_coverage",
+ "stage": "P3 (pre-P1 sketch; one axis only)",
+ "value": {
+  "ztf_alert_or_bts": {
+   "fm_or_deep": {
+    "AVAILABLE_VERIFIED": 2,
+    "AVAILABLE_UNVERIFIED": 4,
+    "UNAVAILABLE": 9,
+    "UNDEMONSTRATED": 0
+   },
+   "classical": {
+    "AVAILABLE_VERIFIED": 1,
+    "AVAILABLE_UNVERIFIED": 6,
+    "UNAVAILABLE": 2,
+    "UNDEMONSTRATED": 1
+   },
+   "all": {
+    "AVAILABLE_VERIFIED": 3,
+    "AVAILABLE_UNVERIFIED": 10,
+    "UNAVAILABLE": 11,
+    "UNDEMONSTRATED": 1
+   }
+  },
+  "rubin_lsst_v11_1_alert": {
+   "fm_or_deep": {
+    "AVAILABLE_VERIFIED": 0,
+    "AVAILABLE_UNVERIFIED": 7,
+    "UNAVAILABLE": 8,
+    "UNDEMONSTRATED": 0
+   },
+   "classical": {
+    "AVAILABLE_VERIFIED": 0,
+    "AVAILABLE_UNVERIFIED": 5,
+    "UNAVAILABLE": 4,
+    "UNDEMONSTRATED": 1
+   },
+   "all": {
+    "AVAILABLE_VERIFIED": 0,
+    "AVAILABLE_UNVERIFIED": 12,
+    "UNAVAILABLE": 12,
+    "UNDEMONSTRATED": 1
+   }
+  },
+  "fm_verified_on_real_rubin": [],
+  "fm_verified_on_real_ztf": [
+   "BTSbot",
+   "Maven"
+  ],
+  "per_tool": [
+   {
+    "id": "ATAT",
+    "fm_channel": true,
+    "roles": [
+     "predictor"
+    ],
+    "ztf": "UNAVAILABLE",
+    "ztf_why": "no ZTF dataset entry in the ATAT repo (datasets.py channel_dict/seq_dict only ELASTICC, ELASTICC_STREAM); a ZTF ATAT training/inference path exists in alercebroker/pipeline@b58b866b training/lc_classifier_ztf/ATAT_ALeRCE but ships no weights",
+    "rubin": "AVAILABLE_UNVERIFIED",
+    "rubin_why": "LC branch consumes 6-band difference flux, mappable from DIASource psfFlux; metadata branch needs HOSTGAL_*/REDSHIFT_HELIO absent from lsst.v11_1 diaObject/diaSource; trained only on simulation; weights unpinned"
+   },
+   {
+    "id": "ORACLE",
+    "fm_channel": true,
+    "roles": [
+     "predictor"
+    ],
+    "ztf": "UNAVAILABLE",
+    "ztf_why": "bands u..Y only; no ZTF model",
+    "rubin": "AVAILABLE_UNVERIFIED",
+    "rubin_why": "ORACLE-lite (no_md) needs only time-series columns mappable from DIASource/DIAForcedSource; full model needs static host/redshift features absent from the Rubin alert packet; simulation-trained"
+   },
+   {
+    "id": "SuperNNova",
+    "fm_channel": true,
+    "roles": [
+     "predictor"
+    ],
+    "ztf": "AVAILABLE_UNVERIFIED",
+    "ztf_why": "ZTF science module and model exist; training data provenance of snn_snia_vs_nonia not established",
+    "rubin": "AVAILABLE_UNVERIFIED",
+    "rubin_why": "code ingests Rubin DIASource columns; doctest input is datasim/rubin_test_data_10_0.parquet (simulated); ELAsTiCC-trained"
+   },
+   {
+    "id": "CATS",
+    "fm_channel": true,
+    "roles": [
+     "predictor"
+    ],
+    "ztf": "UNAVAILABLE",
+    "ztf_why": "Rubin-only module",
+    "rubin": "AVAILABLE_UNVERIFIED",
+    "rubin_why": "ingests Rubin schema columns; simulation-trained; deployed model drops the metadata branch described in the paper"
+   },
+   {
+    "id": "RAPID",
+    "fm_channel": true,
+    "roles": [
+     "predictor"
+    ],
+    "ztf": "AVAILABLE_UNVERIFIED",
+    "ztf_why": "native g/r input; simulation-trained; known-redshift model needs a redshift not in the ZTF alert",
+    "rubin": "UNAVAILABLE",
+    "rubin_why": "no ugrizy weights"
+   },
+   {
+    "id": "SCONE",
+    "fm_channel": true,
+    "roles": [
+     "predictor"
+    ],
+    "ztf": "UNAVAILABLE",
+    "ztf_why": "no weights; input requires PEAKMJD from SNANA truth header",
+    "rubin": "UNAVAILABLE",
+    "rubin_why": "no weights; PEAKMJD not in the alert packet"
+   },
+   {
+    "id": "BTSbot",
+    "fm_channel": true,
+    "roles": [
+     "predictor"
+    ],
+    "ztf": "AVAILABLE_VERIFIED",
+    "ztf_why": "real ZTF alerts; label is the BTS follow-up decision itself (exposure/leakage flag)",
+    "rubin": "UNAVAILABLE",
+    "rubin_why": "sgscore1, distpsnr1, nmtchps, drb, chinr, sharpnr, scorr absent from lsst.v11_1 schema"
+   },
+   {
+    "id": "AppleCiDEr",
+    "fm_channel": true,
+    "roles": [
+     "predictor"
+    ],
+    "ztf": "UNAVAILABLE",
+    "ztf_why": "no pinned weights",
+    "rubin": "UNAVAILABLE",
+    "rubin_why": "ZTF-specific inputs; no weights"
+   },
+   {
+    "id": "Maven",
+    "fm_channel": true,
+    "roles": [
+     "encoder"
+    ],
+    "ztf": "AVAILABLE_VERIFIED",
+    "ztf_why": "real ZTF BTS photometry; fine-tuned on the BTS label base itself (exposure flag); spectral branch unavailable before follow-up",
+    "rubin": "UNAVAILABLE",
+    "rubin_why": "band embedding covers only ZTF r/g"
+   },
+   {
+    "id": "Astromer1",
+    "fm_channel": true,
+    "roles": [
+     "encoder"
+    ],
+    "ztf": "AVAILABLE_UNVERIFIED",
+    "ztf_why": "per-band magnitude series mappable; variable-star pretraining, no transient validation",
+    "rubin": "AVAILABLE_UNVERIFIED",
+    "rubin_why": "per-band series mappable from psfFlux; same caveat"
+   },
+   {
+    "id": "Astromer2",
+    "fm_channel": true,
+    "roles": [
+     "encoder"
+    ],
+    "ztf": "AVAILABLE_UNVERIFIED",
+    "ztf_why": "format mappable; unpinned; variable-star domain",
+    "rubin": "AVAILABLE_UNVERIFIED",
+    "rubin_why": "format mappable; unpinned; variable-star domain"
+   },
+   {
+    "id": "MultibandAstromer",
+    "fm_channel": true,
+    "roles": [
+     "encoder"
+    ],
+    "ztf": "UNAVAILABLE",
+    "ztf_why": "no weights",
+    "rubin": "UNAVAILABLE",
+    "rubin_why": "no weights"
+   },
+   {
+    "id": "AstroCLIP",
+    "fm_channel": true,
+    "roles": [
+     "encoder"
+    ],
+    "ztf": "UNAVAILABLE",
+    "ztf_why": "not in the alert; needs host association plus external Legacy Survey cutouts (footprint-limited)",
+    "rubin": "UNAVAILABLE",
+    "rubin_why": "same; Rubin alert carries no host identification"
+   },
+   {
+    "id": "AstroM3",
+    "fm_channel": true,
+    "roles": [
+     "encoder"
+    ],
+    "ztf": "UNAVAILABLE",
+    "ztf_why": "domain and inputs differ; no weights",
+    "rubin": "UNAVAILABLE",
+    "rubin_why": "same"
+   },
+   {
+    "id": "ParSNIP",
+    "fm_channel": true,
+    "roles": [
+     "encoder",
+     "generator",
+     "scorer"
+    ],
+    "ztf": "UNAVAILABLE",
+    "ztf_why": "no pretrained model with ztfg/ztfr encoder bands; internal decode restricted to model bands (sncosmo-source route can integrate any registered bandpass)",
+    "rubin": "AVAILABLE_UNVERIFIED",
+    "rubin_why": "plasticc model uses sncosmo 'lsst' v1.1 2016 throughputs; encoder needs redshift or hostgal_photoz not in the packet, but generator/scorer paths accept an agent-supplied redshift"
+   },
+   {
+    "id": "ALeRCE_BHRF",
+    "fm_channel": false,
+    "roles": [
+     "predictor"
+    ],
+    "ztf": "AVAILABLE_VERIFIED",
+    "ztf_why": "real ZTF alerts; needs AllWISE cross-match and >5 detections",
+    "rubin": "UNAVAILABLE",
+    "rubin_why": "no Rubin/ELAsTiCC weights: ElasticcRandomForest has no download URL, and the ATAT repo's results_rf_paper.zip (sha256 07ef884a...684b) holds predictions and stats only, no model; the ZTF model needs sgscore1, rb and g/r magnitudes"
+   },
+   {
+    "id": "SALT3_sncosmo",
+    "fm_channel": false,
+    "roles": [
+     "scorer",
+     "generator"
+    ],
+    "ztf": "AVAILABLE_UNVERIFIED",
+    "ztf_why": "ZTF bandpasses registered; K21 training compilation contains no ZTF data (paper Table 4)",
+    "rubin": "AVAILABLE_UNVERIFIED",
+    "rubin_why": "LSST bandpasses are 2016 baseline v1.1 throughputs, not as-built"
+   },
+   {
+    "id": "Superphot_plus",
+    "fm_channel": false,
+    "roles": [
+     "predictor",
+     "generator"
+    ],
+    "ztf": "AVAILABLE_UNVERIFIED",
+    "ztf_why": "ZTF priors and import path; model provenance unread",
+    "rubin": "UNAVAILABLE",
+    "rubin_why": "no LSST-band priors or model in repo"
+   },
+   {
+    "id": "Superphot",
+    "fm_channel": false,
+    "roles": [
+     "predictor"
+    ],
+    "ztf": "UNAVAILABLE",
+    "ztf_why": "no weights",
+    "rubin": "UNAVAILABLE",
+    "rubin_why": "no weights"
+   },
+   {
+    "id": "Fink_EarlySNIa_RF",
+    "fm_channel": false,
+    "roles": [
+     "predictor"
+    ],
+    "ztf": "AVAILABLE_UNVERIFIED",
+    "ztf_why": "ZTF module and default-model_sigmoid.obj exist; training provenance not read",
+    "rubin": "AVAILABLE_UNVERIFIED",
+    "rubin_why": "ingests Rubin columns; simulation-trained"
+   },
+   {
+    "id": "Fink_SLSN_RF",
+    "fm_channel": false,
+    "roles": [
+     "predictor"
+    ],
+    "ztf": "AVAILABLE_UNVERIFIED",
+    "ztf_why": "ztf/superluminous module exists; provenance not read",
+    "rubin": "AVAILABLE_UNVERIFIED",
+    "rubin_why": "no-MD model ingests Rubin columns; simulation-trained"
+   },
+   {
+    "id": "Sherlock",
+    "fm_channel": false,
+    "roles": [
+     "predictor"
+    ],
+    "ztf": "UNAVAILABLE",
+    "ztf_why": "catalogue DB not provisioned locally (runs as a Lasair service)",
+    "rubin": "UNAVAILABLE",
+    "rubin_why": "same; Rubin page (sources/rubin_for-scientists_data-products_alerts-and-brokers.txt) states Lasair runs Sherlock"
+   },
+   {
+    "id": "GHOST",
+    "fm_channel": false,
+    "roles": [
+     "predictor"
+    ],
+    "ztf": "AVAILABLE_UNVERIFIED",
+    "ztf_why": "PS1 covers ZTF sky; external queries at runtime",
+    "rubin": "AVAILABLE_UNVERIFIED",
+    "rubin_why": "coordinates available; PS1 coverage limited for southern LSST fields"
+   },
+   {
+    "id": "Blast",
+    "fm_channel": false,
+    "roles": [
+     "predictor"
+    ],
+    "ztf": "AVAILABLE_UNVERIFIED",
+    "ztf_why": "service-style; external survey queries",
+    "rubin": "AVAILABLE_UNVERIFIED",
+    "rubin_why": "same"
+   },
+   {
+    "id": "SNANA",
+    "fm_channel": false,
+    "roles": [
+     "simulator"
+    ],
+    "ztf": "UNDEMONSTRATED",
+    "ztf_why": "ZTF SIMLIB used by RAPID/Maven not public in the clones",
+    "rubin": "UNDEMONSTRATED",
+    "rubin_why": "ELAsTiCC inputs at NERSC not pinned"
+   }
+  ]
+ },
+ "referent": "number of tool channels that can structurally process each input source the task supplies, split by FM/deep vs classical, and how many are verified on real data from that source",
+ "source": "scripts/build_inventory.py::summary over the per-tool status fields; Rubin packet fields from lsst/alert_packet@1362a8d7 schema/11/1/lsst.v11_1.diaObject.avsc and diaSource.avsc; ZTF fields from ztf-avro-alert@75a9831c schema/candidate.avsc",
+ "population": "25 tool channels, one row per tool; statuses are per input source, not per alert or object",
+ "adjudicator": "classical channels scored under the same four-status rule on the same two sources",
+ "falsifier": "a Rubin-alert run of any AVAILABLE_UNVERIFIED FM channel whose outputs match the published simulation metrics would move it to AVAILABLE_VERIFIED; a Rubin alert schema release adding host/redshift fields would change ATAT, ORACLE and ParSNIP rows",
+ "definition_widened": false,
+ "completeness": "One of seven P3 axes. Counts are structural (format and weights), not functional: no channel was executed (I5 out of scope). Rows whose training provenance rests on README/code only are listed in tool_inventory_slot.json completeness."
+}

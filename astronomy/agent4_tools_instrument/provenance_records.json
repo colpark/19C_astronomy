@@ -1,0 +1,56 @@
+[
+ {
+  "id": "a4-pr-001",
+  "value": 25,
+  "referent": "number of decision-time tool channels enumerated for early transient classification / follow-up allocation",
+  "source": "scripts/build_inventory.py::summary n_channels over rows written from code/CLONE_PINS.tsv commits",
+  "population": "one row per tool (variants and checkpoints folded into their tool); 7 non-channel repositories excluded and listed in value.non_channels",
+  "adjudicator": "no prior census exists for this candidate; classical rows of the same inventory are the within-inventory comparator",
+  "falsifier": "a cloned repository shown to be a distinct decision-time tool not in the 25, or a row shown to be a dataset/schema, would change the count on rerun"
+ },
+ {
+  "id": "a4-pr-002",
+  "value": 0,
+  "referent": "FM/deep channels verified on real Rubin lsst.v11_1 alert data",
+  "source": "scripts/build_inventory.py::summary rubin.fm_or_deep; per-row rubin field; lsst/alert_packet@1362a8d7 schema/11/1",
+  "population": "15 FM/deep channels, one status each for the Rubin source",
+  "adjudicator": "classical channels on Rubin under the same rule: 0 verified (summary rubin.classical)",
+  "falsifier": "a rerun of the census that finds a released checkpoint trained or validated on real Rubin alerts with a pinned hash in any of the 15 repos or their model hubs would make this nonzero"
+ },
+ {
+  "id": "a4-pr-003",
+  "value": 7,
+  "referent": "FM/deep channels whose code or format mapping and weights exist for Rubin inputs but whose training is simulation or another survey",
+  "source": "scripts/build_inventory.py::summary rubin.fm_or_deep",
+  "population": "15 FM/deep channels",
+  "adjudicator": "classical: summary rubin.classical AVAILABLE_UNVERIFIED",
+  "falsifier": "an attempted load of any of these on a real lsst.v11_1 alert failing on a required field would move it to UNAVAILABLE"
+ },
+ {
+  "id": "a4-pr-004",
+  "value": 2,
+  "referent": "FM/deep channels verified on real ZTF alert/BTS data",
+  "source": "scripts/build_inventory.py::summary ztf.fm_or_deep (BTSbot, Maven)",
+  "population": "15 FM/deep channels",
+  "adjudicator": "classical ALeRCE_BHRF 1.1.1 is the one verified classical channel on ZTF",
+  "falsifier": "a train_config.json or train_filenames.txt that fails to match real ZTF data for either checkpoint (contradicting paper Sec 2) would reduce it"
+ },
+ {
+  "id": "a4-pr-005",
+  "value": 4,
+  "referent": "tools with at least one role below the encoder/predictor line (scorer, generator, simulator) by code-level input",
+  "source": "scripts/build_inventory.py::summary condition_b_tools_below_line; parsnip.py L856-949 and L1719; sncosmo fitting.py L465; SNANA genmag_*.c; superphot_plus data_generation/make_fake_spp_data.py",
+  "population": "25 channels, roles read from function signatures",
+  "adjudicator": "encoders/predictors in the same inventory (21 of 25 rows carry only those roles)",
+  "falsifier": "a reread of the cited functions that fails to find any accepting an agent-constructed hypothesis or condition would reduce the count"
+ },
+ {
+  "id": "a4-pr-006",
+  "value": 2,
+  "referent": "below-line tools structurally available on Rubin inputs with pinned artifacts",
+  "source": "scripts/build_inventory.py::summary condition_b_below_line_available_rubin (ParSNIP plasticc.pt sha256 a164aefe; SALT3 salt3-f22 sha256 c7de5343)",
+  "population": "4 below-line tools",
+  "adjudicator": "SNANA is UNDEMONSTRATED (SNDATA_ROOT not pinned)",
+  "falsifier": "failure of ParSNIP.predict_redshift_distribution or sncosmo.fit_lc on a real Rubin light curve converted from psfFlux would reduce it"
+ }
+]

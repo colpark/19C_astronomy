@@ -1,0 +1,59 @@
+{
+ "name": "ALeRCE light-curve classifier, balanced hierarchical random forest (lc_classifier HierarchicalRandomForest)",
+ "role": "predictor",
+ "written_from": "code",
+ "code_pin": "github.com/alercebroker/lc_classifier commit b8a85200ed5764cebd9288a935da2e7943b252a4 (2024-01-09; setup.py version 2.1.0), shallow clone at code/alercebroker_lc_classifier",
+ "quantity_returned": "HierarchicalRandomForest.predict_proba (classifier/models.py L250-289) returns a 15-column DataFrame: top-level probabilities (Periodic, Stochastic, Transient) multiplied by the matching bottom-level classifier's probabilities, with columns stochastic [AGN, Blazar, CV/Nova, QSO, YSO], periodic [CEP, DSCT, E, LPV, Periodic-Other, RRL] and transient [SLSN, SNII, SNIa, SNIbc]. All four levels are imblearn BalancedRandomForestClassifier, imported as RandomForestClassifier (models.py L9), with n_trees=500, max_depth=None, max_features 'sqrt' (0.2 for stochastic). Input is exactly the 152 named features in features_RF_model.pkl (downloaded list), computed by ZTFFeatureExtractor (features/custom/ztf_feature_extractor.py) from ZTF detections (fid 1/2, magpsf or magpsf_corr, sigmapsf, rb), non-detection diffmaglim, sgscore1, galactic coordinates and AllWISE W1-W3 cross-matches. predict_proba raises if any feature column is missing.",
+ "defining_paper": "Sanchez-Saez et al. 2021, AJ 161, 141, arXiv:2008.03311v2; full text read (sources/arxiv_2008.03311.txt)",
+ "accuracy_against_scored_measurement": "UNDEMONSTRATED. The paper reports bottom-level macro precision/recall/F1 0.57/0.76/0.59 over 20 random 80/20 splits of a catalogue-cross-matched ZTF labelled set (Table 4), and deployed-model transient-class confusion (Fig 12). Labels for the SN classes come from TNS spectroscopic classifications (Table 1). No measurement exists against the benchmark's scored quantity, follow-up value under a k-slot allocation, nor at the object's state when the decision is made (the >=6-detection gate means the classifier often does not exist yet at decision time).",
+ "what_it_is_not": "Not an early classifier: features are computed only for objects that pass the enough-alerts gate (>5 detections in code). Not a Rubin tool as pinned: the 1.1.1 pickles expect ZTF g/r feature names and ZTF-alert fields (sgscore1, rb). ElasticcRandomForest exists in code, but no weight URL is defined for it. Not host- or redshift-aware: the paper says distance information is absent and SN Ibc is over-predicted (Sec 5.3.2). Not a scorer of agent hypotheses. Not the same object as the model named in the paper: the paper describes version 1.0, and the code downloads hierarchical_rf_1.1.1.",
+ "conventions": [
+  "Band ids: fid 1 = g, 2 = r; i-band (fid 3) discarded (features/preprocess/preprocess_ztf.py discard_i_filter)",
+  "Real-bogus cut rb >= 0.55 before feature computation (preprocess_ztf.py rb_threshold = 0.55)",
+  "Detections with sigmapsf_ml outside (0, max_sigma) removed; duplicates at the same (oid, mjd) keep the highest rb",
+  "magpsf_corr used when available, else magpsf (preprocess_ztf.py::get_magpsf_ml)",
+  "Missing features set to -999 (paper Sec 3); FeaturePreprocessor in classifier/preprocessing.py applies the fill",
+  "Final class = argmax of the product probabilities (BaseClassifier.predict)",
+  "Pretrained artifacts fetched at runtime from https://assets.alerce.online/pipeline/hierarchical_rf_1.1.1/ via wget (models.py download_model), with no checksum in code"
+ ],
+ "served_checkpoint": {
+  "identifier": "https://assets.alerce.online/pipeline/hierarchical_rf_1.1.1/{features_RF_model.pkl, top_level_BRF_model.pkl, periodic_level_BRF_model.pkl, stochastic_level_BRF_model.pkl, transient_level_BRF_model.pkl} (MODEL_VERSION = '1.1.1', models.py L128)",
+  "pin": "sha256 features_RF_model.pkl 1e4d15cdf8cd7b553db9ae30f55f3662ddcb029b3c61cea4906ae6f2f54a00d3; top_level d160264a81736e98ffb7f879eb98fe4895d01c6a9fddfdeadb0aa6d21b23ae88; transient_level b77ca8cca6640bfd806ee72b435a69f3b11752b96f32611d9d83b85248640e29; periodic_level 8cb2f994f928e5c87e8ff6404fde4ed06a6f191b02f1d5eef3feda5ae5f3091b; stochastic_level 56b647a06e5b55c0ff4a8eb6a0da4a04c6f922909a0e398524b535ae5b08013e (downloaded 2026-09-16; unversioned HTTP host, content could change under the same URL)"
+ },
+ "substitution": null,
+ "disagreements": [
+  {
+   "topic": "minimum-detections gate",
+   "paper": ">= 6 detections in g OR >= 6 detections in r (abstract; Sec 2.2.1; Sec 6.1)",
+   "code": "preprocess_ztf.py::enough_alerts tests len(group.fid == 1) > min_dets with min_dets=5; len() of a boolean Series counts all detections, so the test passes on 6 detections in any combination of bands. ZTFFeatureExtractor.get_enough_alerts_mask likewise counts all detections (> 5)"
+  },
+  {
+   "topic": "model version",
+   "paper": "describes 'Version 1.0' of the classifier, archived as lc_classifier v1.0.1 on Zenodo 10.5281/zenodo.4279451 (Sec 6.1-6.2)",
+   "code": "setup.py version 2.1.0 downloads MODEL_VERSION 1.1.1 pickles; the training data and metrics of 1.1.1 are not documented in the repository"
+  },
+  {
+   "topic": "real-bogus threshold",
+   "paper": "preprocessing 'discard bogus' with no numeric threshold stated for the classifier (Sec 2.1 lists rb as input metadata only)",
+   "code": "rb_threshold = 0.55 hard-coded in preprocess_ztf.py, applied before features are computed"
+  },
+  {
+   "topic": "ELAsTiCC variant hyperparameters",
+   "paper": "ATAT paper (arXiv:2405.03078 Sec 2.4) describes the ELAsTiCC BHRF as bootstrap-sampled balanced forests with 350 trees, entropy criterion, max depth 100, 15,000/9,000/3,900 light curves per class per tree, and 100 features per forest",
+   "code": "ElasticcRandomForest (models.py L433-530) sets bootstrap=False, max_samples=None, sampling_strategy 'auto', max_depth=None, 500 trees for top/stochastic/periodic, 350 trees plus min_impurity_decrease=3e-5 for transient, and no criterion argument"
+  },
+  {
+   "topic": "feature count",
+   "paper": "152 features, of which 142 from ZTF g/r plus 10 extra (Sec 3)",
+   "code": "features_RF_model.pkl for 1.1.1 lists 152 names, including 'Con_1'/'Con_2' and 'rb' (median real-bogus) as a feature; consistent in count, recorded here because the list is served separately from the code"
+  },
+  {
+   "topic": "LSST readiness",
+   "paper": "'we expect that all these features would be measured using LSST data' (Sec 3), with non-detection features adaptable to DIAForcedSources (Sec 6.2)",
+   "code": "the 1.1.1 feature list includes sgscore1 and rb, which do not exist in the Rubin lsst.v11_1 alert (diaSource has 'reliability', not rb; no sgscore); no Rubin feature extractor or Rubin weights are shipped"
+  }
+ ],
+ "construct_validity_I4": "UNDEMONSTRATED. It returns a class posterior over the ALeRCE 15-class taxonomy for objects with >5 detections. That is adjacent to the scored quantity (spectroscopic class at decision time) but is available only after the gate, and SN-subclass confusion is documented (paper Fig 12).",
+ "certification_I5": "UNDEMONSTRATED (out of scope)",
+ "completeness": "Covered from code: classifier/models.py (HierarchicalRandomForest, ElasticcRandomForest, BaselineRandomForest), classifier/preprocessing.py, features/preprocess/preprocess_ztf.py, features/custom/ztf_feature_extractor.py; 1.1.1 pickles downloaded and hashed and the feature list read. Paper read in full. Not covered: individual feature extractor implementations (SPM, MHPS, IAR, GP-DRW) against paper Appendix A, the ELAsTiCC feature extractor, the MLP path; no prediction was executed."
+}

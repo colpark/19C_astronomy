@@ -1,0 +1,80 @@
+{
+ "name": "ATAT (Astronomical Transformer for time series And Tabular data), ALeRCE",
+ "role": "predictor",
+ "written_from": "code",
+ "code_pin": "github.com/alercebroker/ATAT commit 0db532f2fd317ae0426b996e22922c11a37984c0 (2026-06-03), shallow clone at code/alercebroker_ATAT",
+ "quantity_returned": "Per light curve, a 20-way log-softmax over the ELAsTiCC broker taxonomy (datasets.py::classes_names['ELASTICC']). With light curve plus tabular input, three heads are trained (lc token classifier, tab token classifier, MLP over concatenated tokens; layers/encoder_ellastic.py TokenClassifier and ClassifierFeedForward). Selection metric in scripts/general/ELASTICC.json is 'F1Score_MLPMix/val', so the mixed head is the one selected. Input: FLUXCAL difference flux on a padded grid of 65 epochs x 6 ELAsTiCC bands (datasets.py seq_dict=65, channel_dict=6) with alert masks and photometry times, plus optionally 64 header fields mapped in src/data/get_lc_md.py::feat_dict (HOSTGAL/HOSTGAL2 photo-z quantiles, magnitudes, snsep, REDSHIFT_HELIO, MWEBV) after a pretrained QuantileTransformer (joblib files QT-New/md_fold_*.joblib).",
+ "defining_paper": "Cabrera-Vives et al. 2024, A&A, arXiv:2405.03078v2; full text read (sources/arxiv_2405.03078.txt)",
+ "accuracy_against_scored_measurement": "UNDEMONSTRATED. The paper reports macro F1 = 82.6 +/- 0.5 (LC+MD+MTA) on a 1000-per-class balanced ELAsTiCC test set (Table 1, Fig 4), which is simulated data. No measurement exists against the benchmark's scored quantity, the spectroscopic class of real transients chosen for follow-up (ZTF BTS / Rubin), and none is possible from the pinned artifacts because the weights were not downloaded or hashed.",
+ "what_it_is_not": "Not a foundation model with a released embedding API: it is a supervised classifier trained end-to-end on labels. Not trained or validated on real survey data: ELAsTiCC simulation only (paper Sec 2.1 and Sec 4 caveat that ELAsTiCC 'may not [be] representative of the real LSST alert stream'). No ZTF path: no ZTF dataset key in datasets.py. The metadata branch is not a light-curve model: it consumes simulated host-galaxy photo-z quantiles and redshift fields that the Rubin lsst.v11_1 alert packet does not contain (schema/11/1/lsst.v11_1.diaObject.avsc has no host or redshift field). It is not a scorer and cannot take an agent's hypothesis.",
+ "conventions": [
+  "Band set ugrizY with capital Y (ELAsTiCC); the Rubin alert uses band 'y' in diaSource.band",
+  "Flux unit is SNANA FLUXCAL (zeropoint 27.5); Rubin psfFlux is in nJy, so a conversion factor is required (fink-science applies 10**(-(31.4-27.5)/2.5) in rubin/snn/processor.py L114; ATAT has no such converter)",
+  "Time axis: days since first forced-photometry point (paper Sec 2.2.1); code selects 'time_phot' via --use_time_phot in scripts/searching_e/spec.json",
+  "Forced photometry from 30 days before the first alert is included (src/data/get_lc_md.py L120 mask_final[time < t_min - 30.0] = 0)",
+  "NaN/inf in features and metadata replaced by -9999 before the quantile transform (src/data/get_qt_feat_and_h5_file.py L178-215)",
+  "Masked temporal augmentation draws t* from {8, 128, 2048} days (datasets.py::three_time_mask)",
+  "T_max = 1500 days (datasets.py T_max), M = 64 Fourier components (scripts/general/ELASTICC.json)",
+  "Class-balanced batches via BalancedBatchSampler oversampling (datasets.py) with --equally_sample"
+ ],
+ "served_checkpoint": {
+  "identifier": "results_paper.zip from Google Drive file id 1teIi3GfPbYOZXaIHRAa_OCPTY9QYXTU1 (get_important_files.sh); the Drive download page on 2026-09-16 reports it as 10G",
+  "pin": "UNPINNED: commit 0db532f2 pins only the download script. The 10G archive exceeds the 500MB download bound, so no sha256 was taken, and Google Drive offers no content-addressed revision"
+ },
+ "substitution": null,
+ "disagreements": [
+  {
+   "topic": "learning rate",
+   "paper": "Adam with learning rate 2e-4, batch size 256 (Sec 2.2.5)",
+   "code": "scripts/general/ELASTICC.json default_string sets --E_lr 0.001; parser_1.py default is 2e-4 but it is overridden by the JSON used in every README training command"
+  },
+  {
+   "topic": "photometric input vector",
+   "paper": "each observation is x=(mu, sigma), flux and flux error, linearly projected by W_TM with shape E_TM x 2 (Sec 2.2.1, footnote 9)",
+   "code": "encoder_ellastic.py sets input_dim = 1 unless cat_noise_to_E; parser_1.py L54 cat_noise_to_E default False and no config in scripts/ sets it, so only flux enters the light-curve branch and data_var is loaded but unused"
+  },
+  {
+   "topic": "dropout",
+   "paper": "dropout of 0.2 for training (Sec 2.2.5)",
+   "code": "parser_1.py dropout_first_mha and dropout_second_mha default 0.0 and --dropout default 0.0; no JSON in scripts/ sets any dropout"
+  },
+  {
+   "topic": "Fourier harmonics index",
+   "paper": "gamma functions sum h = 1..H (Eq. 2), H = 64",
+   "code": "layers/time_modulator.py registers ar = torch.arange(M), so harmonics run h = 0..M-1 and include a constant h=0 term"
+  },
+  {
+   "topic": "transformer normalisation",
+   "paper": "h* = MHA(h) + h; h = FF(h*) + h* with no normalisation stated (Eqs. 4-5)",
+   "code": "encoder_ellastic.py wraps MHA and FeedForward in PreNorm (LayerNorm applied before each block)"
+  },
+  {
+   "topic": "layer widths",
+   "paper": "all linear input and output dimensions 48/32 except FF hidden layers 96/64, while also stating E_TM = 48*4 = 192 (Sec 2.2.5)",
+   "code": "Transformer input_dim = head_dim*num_heads = 192 (light curve) and FeedForward hidden = 2*input_dim = 384 (encoder_ellastic.py L75, L84)"
+  },
+  {
+   "topic": "code and model availability",
+   "paper": "code 'will be made publicly available once this article is accepted' (Sec 1)",
+   "code": "code public at the pinned commit; trained models only via an unversioned Google Drive archive"
+  },
+  {
+   "topic": "stopping rule",
+   "paper": "evaluated every 20,000 iterations with early-stopping patience of three evaluations (Sec 2.2.5)",
+   "code": "train.py L126-144 matches the paper (EarlyStopping patience=3, val_check_interval=20000) and adds max_epochs 90 from ELASTICC.json; the fine-tuning path loading.py L89-105 uses patience=4"
+  },
+  {
+   "topic": "validity on Rubin alerts",
+   "paper": "'Our model was put into production within the ALeRCE broker in preparation for the real-time classification of the LSST alert stream' (Sec 4)",
+   "code": "inputs are ELAsTiCC SNANA FITS columns (get_lc_md.py reads FLUXCAL, FLUXCALERR, PHOTFLAG); no reader for lsst.v11_1 Avro alerts exists in the repository"
+  },
+  {
+   "topic": "baseline RF models",
+   "paper": "compares ATAT against a BHRF baseline trained on the same folds (Sec 2.4, Table 1)",
+   "code": "README says 'You can obtain the models used in the paper and the metrics' via results_paper and results_rf_paper; results_rf_paper.zip (Drive id 1tfiUvdFyTSJp_HPdEaUYkxq-QHdOBK9b, 8,965,599 bytes, sha256 07ef884ad689400402c92b1f0e466a4e7f1f3a9e2ab017b29d373391ffbc684b, downloaded 2026-09-16) lists 32 entries: per-horizon full_lc_stats.npy and test_predictions_proba_model_*.parquet, with no RF model file"
+  }
+ ],
+ "construct_validity_I4": "UNDEMONSTRATED. The scored quantity for spectroscopic follow-up allocation is the spectroscopic class (and follow-up value) of a real object. ATAT returns a class posterior under the ELAsTiCC simulation prior with 20 classes, which is adjacent to that quantity but calibrated to a simulated class mix. Its metadata branch cannot be fed from the Rubin packet.",
+ "certification_I5": "UNDEMONSTRATED (out of scope: no known-input test, negative control, reachability or receipt check was run)",
+ "completeness": "Covered from code: README, get_important_files.sh, train.py, loading.py, datasets.py, parser_1.py, scripts/general and scripts/searching*, layers/time_modulator.py, layers/encoder_ellastic.py, layers/classifier.py, src/data/get_lc_md.py and get_qt_feat_and_h5_file.py. Paper read in full. Not covered: main_model.py training loop in detail, get_metrics.py, notebooks; weights not downloaded, so the served checkpoint is unpinned and no card field was checked against executed output."
+}
