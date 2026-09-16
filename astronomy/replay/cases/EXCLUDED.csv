@@ -1,0 +1,3 @@
+case_id,reason
+AST5-03,"duplicate of AST3-01 (same BTS label-source fact, same ruling); kept AST3-01 as the fuller instance"
+AST5-04,"CONTESTED between panel agents: it treats all 13 same-IAU pairs as must-join, but Agent 1 found 4 of them peak 485-1,598 days apart and amended must-join to re-triggers within 60 days. Polarity cannot be sealed while the panel disagrees on the control"
