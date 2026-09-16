@@ -1,0 +1,258 @@
+{
+ "slot": "exposure_key",
+ "candidate": "live time-domain astronomy (Rubin LSST alerts + ZTF BTS labels)",
+ "status": "DERIVED",
+ "status_note": "key definition and brackets are derived from release metadata; exact classification-report dates are UNDEMONSTRATED for the unresolved objects listed; one candidate subject has no published cutoff",
+ "value": {
+  "key_definition": {
+   "input_public_date": {
+    "ztf": "alert issuance: ZTF alerts public in real time, public distribution began 2018-06-04 (sources/ztf_public_releases.txt lines 104, 301)",
+    "rubin": "alert issuance: alerts world-public (sources/RTN-011.txt lines 554, 2773); first Rubin alerts 2026-02-24 (line 2468); PPDB not public at alert start, expected Sep-Oct 2026 (lines 2471, 2597); no PPDB release post in the Rubin News category through 2026-09-15 (sources/rubin_community/news_category_topic_list_2026-09-16.json)"
+   },
+   "label_public_date": {
+    "lower_bound": "TNS discovery date (a classification report attaches to an existing TNS object)",
+    "upper_bound": "earliest archived public explorer capture showing the same type string; otherwise the fetch date 2026-09-16",
+    "exact": "TNS classification report date, UNDEMONSTRATED (TNS 403/401 without credentials)"
+   },
+   "peakt_zero_point": {
+    "value": "JD - 2458000",
+    "derivation": [
+     "sources/bts_explorer_info.txt line 79 'Time of peak, expressed as JD-2458000'",
+     "sources/1910.12973.raw.txt line 854 'JD0 = JD - 2,458,000'",
+     "sources/2009.01242.raw.txt line 3154 axis 'Observed peak time (JD-2458000)'",
+     {
+      "ZTF18aaxmhvk": {
+       "iau": "SN2018cne",
+       "paper_max_light": "2018-06-14",
+       "in_file": true,
+       "peakt": 290.83,
+       "date_if_jd_minus_2458000": "2018-06-21",
+       "date_if_days_since_2018_01_01": "2018-10-18",
+       "file_type": "SN Ia",
+       "paper_official_type": "SN Ic (arXiv:2104.12980 sec 6, Fremling & Sharma 2018 TNS report 2018-886)"
+      },
+      "ZTF20aatxryt": {
+       "iau": "SN2020eyj",
+       "paper_max_light": "2020-04-02",
+       "in_file": false
+      }
+     },
+     {
+      "JD-2458000 (explorer_info.txt line 79; Fremling+2020 Table 1 note d)": {
+       "n": 11110,
+       "peak_year_equals_iau_year_or_next": 0.9627,
+       "median_peak_minus_discdate_days": 11.0,
+       "share_peak_within_minus30_plus200_days_of_discdate": 0.9626
+      },
+      "days since 2018-01-01 (panel brief guess)": {
+       "n": 11110,
+       "peak_year_equals_iau_year_or_next": 0.9614,
+       "median_peak_minus_discdate_days": 130.0,
+       "share_peak_within_minus30_plus200_days_of_discdate": 0.9562
+      }
+     }
+    ],
+    "disagreement": "panel brief suggested days since 2018-01-01; that offset puts SN2018cne peak on 2018-10-18 against a stated maximum-light spectrum on 2018-06-14 and gives a median peak-minus-discovery lag of 130 d instead of 11 d"
+   }
+  },
+  "subject_cutoffs": [
+   {
+    "subject": "Claude Fable 5.1",
+    "published": "Jun 2026",
+    "first_day": "2026-06-01",
+    "last_day": "2026-06-30",
+    "kind": "reliable knowledge cutoff",
+    "locator": "sources/anthropic_models_overview.txt line 49",
+    "status": "DERIVED",
+    "note": "Transparency Hub (sources/anthropic_transparency.txt) has no Fable 5.1 entry; lists Claude Fable 5 at January 2026 (line 104). Disagreement listed, not reconciled."
+   },
+   {
+    "subject": "Claude Opus 5",
+    "published": "May 2026",
+    "first_day": "2026-05-01",
+    "last_day": "2026-05-31",
+    "kind": "reliable knowledge cutoff",
+    "locator": "sources/anthropic_models_overview.txt line 49; sources/anthropic_transparency.txt line 34",
+    "status": "DERIVED",
+    "note": "two Anthropic pages agree"
+   },
+   {
+    "subject": "Claude Sonnet 5",
+    "published": "Jan 2026",
+    "first_day": "2026-01-01",
+    "last_day": "2026-01-31",
+    "kind": "reliable knowledge cutoff",
+    "locator": "sources/anthropic_models_overview.txt line 49; sources/anthropic_transparency.txt line 69",
+    "status": "DERIVED",
+    "note": "two Anthropic pages agree"
+   },
+   {
+    "subject": "Claude Haiku 4.5",
+    "published": "Feb 2025",
+    "first_day": "2025-02-01",
+    "last_day": "2025-02-28",
+    "kind": "reliable knowledge cutoff",
+    "locator": "sources/anthropic_models_overview.txt line 49; sources/anthropic_transparency.txt line 348",
+    "status": "DERIVED",
+    "note": "two Anthropic pages agree"
+   },
+   {
+    "subject": "GPT-6 Astra",
+    "published": "Apr 30, 2026",
+    "first_day": "2026-04-30",
+    "last_day": "2026-04-30",
+    "kind": "knowledge cutoff",
+    "locator": "sources/openai_models.txt lines 660-673",
+    "status": "DERIVED",
+    "note": ""
+   },
+   {
+    "subject": "GPT-5.6 Sol",
+    "published": "Feb 16, 2026",
+    "first_day": "2026-02-16",
+    "last_day": "2026-02-16",
+    "kind": "knowledge cutoff",
+    "locator": "sources/openai_models.txt lines 678-693",
+    "status": "DERIVED",
+    "note": ""
+   },
+   {
+    "subject": "GPT-5.6 Terra",
+    "published": "Feb 16, 2026",
+    "first_day": "2026-02-16",
+    "last_day": "2026-02-16",
+    "kind": "knowledge cutoff",
+    "locator": "sources/openai_models.txt lines 698-711",
+    "status": "DERIVED",
+    "note": ""
+   },
+   {
+    "subject": "GPT-5.6 Luna",
+    "published": "Feb 16, 2026",
+    "first_day": "2026-02-16",
+    "last_day": "2026-02-16",
+    "kind": "knowledge cutoff",
+    "locator": "sources/openai_models.txt lines 716-729",
+    "status": "DERIVED",
+    "note": ""
+   },
+   {
+    "subject": "Gemini 3.8 Flash",
+    "published": "March 2026",
+    "first_day": "2026-03-01",
+    "last_day": "2026-03-31",
+    "kind": "knowledge cutoff",
+    "locator": "sources/deepmind_modelcard_gemini-3-8-flash.txt line 243",
+    "status": "DERIVED",
+    "note": "card adds that some domains are limited to January 2025"
+   },
+   {
+    "subject": "Gemini 3.1 Pro (preview)",
+    "published": null,
+    "first_day": null,
+    "last_day": null,
+    "kind": "none published on the pages read",
+    "locator": "sources/google_gemini-3.1-pro-preview.txt lines 244-245 (only 'Latest update February 2026'); sources/deepmind_modelcard_gemini-3-1-pro.txt (defers to Gemini 3 Pro card, not fetched)",
+    "status": "UNDEMONSTRATED",
+    "note": "no cutoff read from a primary page"
+   }
+  ],
+  "cutoff_bounds": {
+   "earliest_first_day": "2025-02-01",
+   "latest_last_day": "2026-06-30",
+   "earliest_first_day_excluding_haiku45": "2026-01-01",
+   "subjects_undemonstrated": [
+    "Gemini 3.1 Pro (preview)"
+   ]
+  },
+  "cutoff_caveats": [
+   "Anthropic pages state 'reliable knowledge cutoff'; no training-data cutoff was readable from a primary page, so 'after every cutoff' is an upper-bound claim on exposure, not proof of absence from training data",
+   "OpenAI 'knowledge cutoff' is not defined on the page read as a training-data end",
+   "Claude Fable 5.1 (Jun 2026) appears on the models overview but not in the Transparency Hub, which lists Claude Fable 5 at Jan 2026",
+   "Gemini 3.1 Pro has no cutoff on the pages read; any claim over 'every subject' that includes it is UNDEMONSTRATED",
+   "subjects with web search at inference read TNS directly; exposure then depends on the grant (R4), not the cutoff"
+  ],
+  "split_all_demonstrated_subjects": {
+   "capture": "2024-12-08T23:13:31",
+   "cutoff_window": [
+    "2025-02-01",
+    "2026-06-30"
+   ],
+   "labeled_objects": 7843,
+   "label_public_before_every_cutoff": 6166,
+   "label_public_after_every_cutoff": 0,
+   "unresolved": 1677,
+   "unresolved_breakdown": {
+    "absent_from_capture": 1647,
+    "unlabeled_in_capture": 25,
+    "label_changed_since_capture": 5,
+    "absent_and_discovered_after_capture": 902,
+    "absent_and_discovered_before_capture": 745
+   },
+   "unresolved_by_discovery_year": {
+    "2016": 19,
+    "2017": 16,
+    "2018": 143,
+    "2019": 232,
+    "2020": 130,
+    "2021": 86,
+    "2022": 44,
+    "2023": 14,
+    "2024": 157,
+    "2025": 834,
+    "2026": 2
+   },
+   "after_by_type": {},
+   "discovered_after_latest_cutoff_all_objects": 20,
+   "discovered_before_earliest_cutoff_labeled": 7072,
+   "discovered_inside_cutoff_window_labeled": 771
+  },
+  "split_excluding_claude_haiku_4_5": {
+   "capture": "2025-08-10T06:50:56",
+   "cutoff_window": [
+    "2026-01-01",
+    "2026-06-30"
+   ],
+   "labeled_objects": 7843,
+   "label_public_before_every_cutoff": 6729,
+   "label_public_after_every_cutoff": 0,
+   "unresolved": 1114,
+   "unresolved_breakdown": {
+    "absent_from_capture": 1065,
+    "unlabeled_in_capture": 45,
+    "label_changed_since_capture": 4,
+    "absent_and_discovered_after_capture": 346,
+    "absent_and_discovered_before_capture": 719
+   },
+   "unresolved_by_discovery_year": {
+    "2016": 19,
+    "2017": 16,
+    "2018": 143,
+    "2019": 231,
+    "2020": 129,
+    "2021": 82,
+    "2022": 41,
+    "2023": 14,
+    "2024": 12,
+    "2025": 425,
+    "2026": 2
+   },
+   "after_by_type": {},
+   "discovered_after_latest_cutoff_all_objects": 20,
+   "discovered_before_earliest_cutoff_labeled": 7841,
+   "discovered_inside_cutoff_window_labeled": 2
+  },
+  "rubin_dates": {
+   "first_alerts": "2026-02-24 (sources/RTN-011.txt line 2468)",
+   "lsst_start": "night of 2026-06-29 (sources/RTN-011.txt line 1288; sources/rubin_community/2026-07-10_2026-07-10-early-operations-update-start-of-lsst.md), announced 2026-06-30 (sources/rubin_community/2026-06-30_the-lsst-has-started.md)",
+   "off_sky": "summit evacuated 2026-07-14/15 for a winter storm; still off sky with no return-to-sky date as of 2026-09-11 (sources/rubin_community/2026-07-24_lsst-update-2026-07-24.md; 2026-09-11_summit-technical-progress-week-ending-2026-09-11.md)"
+  }
+ },
+ "provenance": {
+  "referent": "per-object date on which the BTS label became publicly readable, bracketed, compared with each candidate subject's published knowledge cutoff",
+  "source": "astronomy/agent3_labels_exposure/scripts/labels_exposure.py::main split(); lower bound = TNS discovery date (sources/bts_all_extracols_2026-09-16.csv sha256 7c08daf489bbf648cb798ceba9f5ecbf56abc9f94dc6b2e320f5aaa84ad35b63, 'discdate'); upper bound = Internet Archive capture of the public explorer showing the same type string (sources/wayback_bts_explorer_20241208231331.html sha256 96b9fe72714a7e3af4e9f2cc8e22b4b60b7a5078dd488e0c9b06c05bd6d2fc43, sources/wayback_bts_explorer_20250810065056.html sha256 ec0152effff8b3e4dfb538566ad998ab5e4dd33749c229c9f7518cefcbb373d6); input-data release: sources/ztf_public_releases.txt lines 104, 301; sources/RTN-011.txt lines 2468, 2773, 1288; cutoffs: sources/anthropic_models_overview.txt line 49, sources/anthropic_transparency.txt lines 34, 69, 104, 348, sources/openai_models.txt lines 660-729, sources/deepmind_modelcard_gemini-3-8-flash.txt line 243",
+  "population": "7843 labeled objects out of 11217 unique ZTFID (pre-clustering); subjects: 10 candidate models, 1 without a published cutoff",
+  "adjudicator": "TNS classification report dates per object (exact public date of each label), which would collapse the bracket to a point; not reachable without credentials",
+  "falsifier": "a TNS classification report dated after 2024-12-08 for an object counted 'before' with an unchanged type, or a subject whose training data (not reliable-knowledge cutoff) is documented to end before the object's label date, or a rerun on the same hashed files returning different counts"
+ }
+}
