@@ -1,455 +1,350 @@
-=== PAGE 1 ===
-Draft version August 4, 2022
-Typeset using LATEX twocolumn style in AASTeX63
-T
-Christoffer Fremling ,1 Xander J. Hall ,1 Michael W. Coughlin ,2 Aishwarya S. Dahiwale,1
-Dmitry A. Duev ,1 Matthew J. Graham,1 Mansi M. Kasliwal ,1 Erik C. Kool ,3 Ashish A. Mahabal ,1, 4
-Adam A. Miller ,5, 6 James D. Neill ,1 Daniel A. Perley ,7 Mickael Rigault ,8 Philippe Rosnet ,9
-Ben Rusholme ,10 Yashvi Sharma ,1 Kyung Min Shin ,1 David L. Shupe ,10 Jesper Sollerman ,3
-Richard S. Walters ,1 and S. R. Kulkarni 1
-1 Division of Physics, Mathematics, and Astronomy, California Institute of Technology, Pasadena, CA 91125, USA
-2 School of Physics and Astronomy, University of Minnesota, Minneapolis, Minnesota 55455, USA
-3 The Oskar Klein Centre, Department of Astronomy, Stockholm University, AlbaNova, SE-10691 Stockholm, Sweden
-4 Center for Data Driven Discovery, California Institute of Technology, Pasadena, CA 91125, USA
-5 Center for Interdisciplinary Exploration and Research in Astrophysics and Department of Physics and Astronomy, Northwestern
-AF
-University, 1800 Sherman Ave, Evanston, IL 60201, USA
-6 The Adler Planetarium, Chicago, IL 60605, USA
-7 Astrophysics Research Institute, Liverpool John Moores University, Liverpool Science Park, 146 Brownlow Hill, Liverpool L35RF, UK
-8 Univ Lyon, Univ Claude Bernard Lyon 1, CNRS, IP2I Lyon / IN2P3, IMR 5822, F-69622, Villeurbanne, France
-9 Université Clermont Auvergne, CNRS/IN2P3, Laboratoire de Physique de Clermont, F-63000 Clermont-Ferrand, France
-10 IPAC, California Institute of Technology, 1200 E. California Blvd, Pasadena, CA 91125, USA
-ABSTRACT
-We present SNIascore, a deep-learning based method for spectroscopic classification of thermonuclear supernovae (SNe Ia) based on very low-resolution (R∼ 100) data. The goal of SNIascore is fully
-automated classification of SNe Ia with a very low false-positive rate (FPR) so that human intervention
-can be greatly reduced in large-scale SN classification efforts, such as that undertaken by the public
-Zwicky Transient Facility (ZTF) Bright Transient Survey (BTS). We utilize a recurrent neural network
-(RNN) architecture with a combination of bidirectional long short-term memory and gated recurrent
-unit layers. SNIascore achieves a < 0.6% FPR while classifying up to 90% of the low-resolution SN
-Ia spectra obtained by the BTS. SNIascore simultaneously performs binary classification and predicts the redshifts of secure SNe Ia via regression (with a typical uncertainty of < 0.005 in the range
-from z = 0.01 to z = 0.12). For the magnitude-limited ZTF BTS survey (≈ 70% SNe Ia), deploying
-SNIascore reduces the amount of spectra in need of human classification or confirmation by ≈ 60%.
-Furthermore, SNIascore allows SN Ia classifications to be automatically announced in real-time to
-the public immediately following a finished observation during the night.
-DR
+                                                Draft version August 4, 2022
+                                                Typeset using LATEX twocolumn style in AASTeX63
+
+
+
+
+                                                            SNIascore: Deep Learning Classification of Low-Resolution Supernova Spectra
+                                                    Christoffer Fremling ,1 Xander J. Hall ,1 Michael W. Coughlin ,2 Aishwarya S. Dahiwale,1
+                                               Dmitry A. Duev ,1 Matthew J. Graham,1 Mansi M. Kasliwal ,1 Erik C. Kool ,3 Ashish A. Mahabal ,1, 4
+                                                Adam A. Miller ,5, 6 James D. Neill ,1 Daniel A. Perley ,7 Mickael Rigault ,8 Philippe Rosnet ,9
+                                                  Ben Rusholme ,10 Yashvi Sharma ,1 Kyung Min Shin ,1 David L. Shupe ,10 Jesper Sollerman ,3
+                                                                           Richard S. Walters ,1 and S. R. Kulkarni 1
 arXiv:2104.12980v2 [astro-ph.IM] 2 Aug 2022
-SNIascore: Deep Learning Classification of Low-Resolution Supernova Spectra
-Keywords: (stars:) supernovae: general — methods: data analysis — surveys
-1. INTRODUCTION
-Modern time-domain surveys, such as the Zwicky
-Transient Facility (ZTF; Bellm et al. 2019a,b; Graham
-et al. 2019; Masci et al. 2019; Dekany et al. 2020), the
-All-Sky Automated Survey for Supernovae (ASAS-SN;
-Shappee et al. 2014) and the Asteroid Terrestrial LastAlert System (ATLAS; Tonry et al. 2018b), are now
-finding tens of thousands of transients every year.
-Corresponding author: C. Fremling
-fremling@caltech.edu
-However, without spectroscopic classifications these
-discoveries are of limited value (Kulkarni 2020). The
-ZTF Bright Transient Survey (BTS; Fremling et al.
-2020; Perley et al. 2020) is addressing this through
-the deployment of a fully automated very-low-resolution
-spectrograph, the Spectral Energy Distribution Machine
-(SEDM; Blagorodnova et al. 2018; Rigault et al. 2019)
-mounted on the Palomar 60-inch telescope. SEDM is capable of obtaining spectra of several thousands of transients per year in the magnitude range between 18 and
-19 mag. Currently, the goal of the BTS is to maintain
-spectroscopic classification completeness for all extragalactic transients detected by the public ZTF survey
-=== PAGE 2 ===
-2
-Fremling et al.
-Table 1. Data summary
-Class
-All
-Training
-Validation
-Testing
-SNIa
-NotSNIa
-H-rich CC SN
-H-poor CC SN
-TDE
-CV
-Other
-2619
-2931
-1285
-585
-37
-325
-699
-1526
-1997
-751
-393
-35
-284
-534
-607
-409
-312
-94
-0
-0
-3
-486
-525
-222
-98
-2
-41
-162
+
+
+
+
+                                                                                                   T
+                                                       1 Division of Physics, Mathematics, and Astronomy, California Institute of Technology, Pasadena, CA 91125, USA
+                                                               2 School of Physics and Astronomy, University of Minnesota, Minneapolis, Minnesota 55455, USA
+                                                      3 The Oskar Klein Centre, Department of Astronomy, Stockholm University, AlbaNova, SE-10691 Stockholm, Sweden
+                                                               4 Center for Data Driven Discovery, California Institute of Technology, Pasadena, CA 91125, USA
+                                                5 Center for Interdisciplinary Exploration and Research in Astrophysics and Department of Physics and Astronomy, Northwestern
+
+                                                                                       University, 1800 Sherman Ave, Evanston, IL 60201, USA
+                                                                                          6 The Adler Planetarium, Chicago, IL 60605, USA
+                                                                           AF
+                                              7 Astrophysics Research Institute, Liverpool John Moores University, Liverpool Science Park, 146 Brownlow Hill, Liverpool L35RF, UK
+                                                         8 Univ Lyon, Univ Claude Bernard Lyon 1, CNRS, IP2I Lyon / IN2P3, IMR 5822, F-69622, Villeurbanne, France
+                                                     9 Université Clermont Auvergne, CNRS/IN2P3, Laboratoire de Physique de Clermont, F-63000 Clermont-Ferrand, France
+                                                                   10 IPAC, California Institute of Technology, 1200 E. California Blvd, Pasadena, CA 91125, USA
+
+
+
+                                                                                                        ABSTRACT
+                                                        We present SNIascore, a deep-learning based method for spectroscopic classification of thermonu-
+                                                      clear supernovae (SNe Ia) based on very low-resolution (R∼ 100) data. The goal of SNIascore is fully
+                                                      automated classification of SNe Ia with a very low false-positive rate (FPR) so that human intervention
+                                                      can be greatly reduced in large-scale SN classification efforts, such as that undertaken by the public
+                                                      Zwicky Transient Facility (ZTF) Bright Transient Survey (BTS). We utilize a recurrent neural network
+                                                      (RNN) architecture with a combination of bidirectional long short-term memory and gated recurrent
+                                                      unit layers. SNIascore achieves a < 0.6% FPR while classifying up to 90% of the low-resolution SN
+                                                DR
+
+                                                      Ia spectra obtained by the BTS. SNIascore simultaneously performs binary classification and pre-
+                                                      dicts the redshifts of secure SNe Ia via regression (with a typical uncertainty of < 0.005 in the range
+                                                      from z = 0.01 to z = 0.12). For the magnitude-limited ZTF BTS survey (≈ 70% SNe Ia), deploying
+                                                      SNIascore reduces the amount of spectra in need of human classification or confirmation by ≈ 60%.
+                                                      Furthermore, SNIascore allows SN Ia classifications to be automatically announced in real-time to
+                                                      the public immediately following a finished observation during the night.
+
+                                                      Keywords: (stars:) supernovae: general — methods: data analysis — surveys
+
+                                                                1. INTRODUCTION                                       However, without spectroscopic classifications these
+                                                 Modern time-domain surveys, such as the Zwicky                    discoveries are of limited value (Kulkarni 2020). The
+                                              Transient Facility (ZTF; Bellm et al. 2019a,b; Graham                ZTF Bright Transient Survey (BTS; Fremling et al.
+                                              et al. 2019; Masci et al. 2019; Dekany et al. 2020), the             2020; Perley et al. 2020) is addressing this through
+                                              All-Sky Automated Survey for Supernovae (ASAS-SN;                    the deployment of a fully automated very-low-resolution
+                                              Shappee et al. 2014) and the Asteroid Terrestrial Last-              spectrograph, the Spectral Energy Distribution Machine
+                                              Alert System (ATLAS; Tonry et al. 2018b), are now                    (SEDM; Blagorodnova et al. 2018; Rigault et al. 2019)
+                                              finding tens of thousands of transients every year.                  mounted on the Palomar 60-inch telescope. SEDM is ca-
+                                                                                                                   pable of obtaining spectra of several thousands of tran-
+                                                                                                                   sients per year in the magnitude range between 18 and
+                                              Corresponding author: C. Fremling                                    19 mag. Currently, the goal of the BTS is to maintain
+                                              fremling@caltech.edu                                                 spectroscopic classification completeness for all extra-
+                                                                                                                   galactic transients detected by the public ZTF survey
+2                                                             Fremling et al.
+
+                    Table 1. Data summary
+
+         Class              All    Training    Validation   Testing
+ SNIa                       2619        1526         607       486
+ NotSNIa                    2931        1997         409       525
+   H-rich CC SN             1285         751         312       222
+   H-poor CC SN              585         393          94        98
+   TDE                        37          35           0         2
+   CV                        325         284           0        41
+   Other                     699         534           3       162
+
 Note—All numbers refer to the number of unique spectra in each
-class. The “Other” class includes any spectra that does not
-fit the other classes, including galaxy spectra, active galactic
-nucleus (AGN) spectra, and spectra that BTS has been unable
-to classify as belonging to any known transient class.
-that become brighter than 18.5 mag (∼ 1000 SNe per
-year; Perley et al. 2020).
-The classifications from the BTS are made public on a
-daily basis via the Transient Name Server (TNS1 ). These
+ class. The “Other” class includes any spectra that does not
+ fit the other classes, including galaxy spectra, active galactic
+ nucleus (AGN) spectra, and spectra that BTS has been unable            Figure 1. Redshift (left) and spectral phase (right) distri-
+ to classify as belonging to any known transient class.                 butions for SNe Ia in the unaugmented SNIascore train-
+                                                                        ing (blue) and validation (red) datasets used to optimize
+                                                                        SNIascore for classification. The SN Ia distributions for the
+                                                                        testing dataset are shown in black. The blue line in the left
+                                                                        panel shows the redshift distribution of the training set after
+that become brighter than 18.5 mag (∼ 1000 SNe per                      augmentation (Section 2.1), which is used to train SNIascore
+year; Perley et al. 2020).                                              for redshift regression. The phase is relative to the time of
+   The classifications from the BTS are made public on a                maximum light in the g or r band, depending on which band
+daily basis via the Transient Name Server (TNS1 ). These                is brighter.
 classifications have up until now been based on manual
-matching of observed spectra to spectral templates using
-mainly the SuperNova IDentification (SNID; Blondin
-& Tonry 2007) code, along with careful inspection of
-each obtained spectrum. This makes classification of
-thousands of SNe a very time-consuming endeavor.
-Due to their inherent brightness, the majority of the
-extragalactic transients discovered by a magnitude limited survey will be thermonuclear supernovae2 (SNe
-Ia). Here we present SNIascore, a deep-learning based
-method optimized to identify SNe Ia using SEDM spectra and determine their redshifts without any human
-interaction. The intended use case for SNIascore is to
-provide live spectroscopic classification of SNe Ia during
+matching of observed spectra to spectral templates using                performed using data obtained between 2020 April and
+mainly the SuperNova IDentification (SNID; Blondin                      2020 August which were neither part of the training nor
+& Tonry 2007) code, along with careful inspection of                    validation datasets. Our datasets are described in de-
+each obtained spectrum. This makes classification of                    tail in Section 2. The network architecture is described
+thousands of SNe a very time-consuming endeavor.                        in Section 3, and the training and optimization proce-
+   Due to their inherent brightness, the majority of the                dure used for SNIascore is described in Section 4. The
+extragalactic transients discovered by a magnitude lim-                 performance is evaluated and compared to SNID and
+ited survey will be thermonuclear supernovae2 (SNe                      the previously published deep-learning method DASH
+Ia). Here we present SNIascore, a deep-learning based                   (Muthukrishna et al. 2019b) in Section 5. A discussion
+method optimized to identify SNe Ia using SEDM spec-                    on the most likely false positives can be found in Sec-
+tra and determine their redshifts without any human                     tion 6. The implementation of SNIascore as part of the
+interaction. The intended use case for SNIascore is to                  ZTF BTS is described in Section 7. Future development
+provide live spectroscopic classification of SNe Ia during              possibilities are also discussed in this section.
 the night when SEDM is observing for the BTS.
-SNIascore is based on a recurrent neural network
+   SNIascore is based on a recurrent neural network                                           2. DATASETS
 (RNN) architecture (see Sherstinsky 2020 for a review)
+                                                                           Our data consist of SEDM spectra of transients de-
 with a combination of bidirectional long short-term
-memory (BiLSTM) and gated recurrent unit (GRU) layers. SNIascore is able to classify > 80% of the SN Ia
+                                                                        tected by ZTF, which were followed up and classified by
+memory (BiLSTM) and gated recurrent unit (GRU) lay-
+                                                                        the BTS (Fremling et al. 2020; Perley et al. 2020) using
+ers. SNIascore is able to classify > 80% of the SN Ia
+                                                                        the GROWTH Marshal (Kasliwal et al. 2019). These spec-
 spectra that are observed by SEDM for the ZTF BTS
+                                                                        tra are of low resolution (R∼ 100), and cover a typical
 with a false-positive rate (FPR) of < 1%.
-SNIascore was trained on SEDM data obtained by
+                                                                        wavelength range of 3800 Å to 9150 Å within 209 wave-
+   SNIascore was trained on SEDM data obtained by
+                                                                        length bins (see Section 2.2). Although the BTS focuses
 the ZTF BTS between 2018 March and 2020 March,
-and validated and optimized with the BTS dataset published by Fremling et al. (2020). A final test run is
-1 https://wis-tns.org
-2 In the ZTF BTS ≈ 72.5% of the extragalactic transients detected
-are SNe Ia (Perley et al. 2020).
-Figure 1. Redshift (left) and spectral phase (right) distributions for SNe Ia in the unaugmented SNIascore training (blue) and validation (red) datasets used to optimize
-SNIascore for classification. The SN Ia distributions for the
-testing dataset are shown in black. The blue line in the left
-panel shows the redshift distribution of the training set after
-augmentation (Section 2.1), which is used to train SNIascore
-for redshift regression. The phase is relative to the time of
-maximum light in the g or r band, depending on which band
-is brighter.
-performed using data obtained between 2020 April and
-2020 August which were neither part of the training nor
-validation datasets. Our datasets are described in detail in Section 2. The network architecture is described
-in Section 3, and the training and optimization procedure used for SNIascore is described in Section 4. The
-performance is evaluated and compared to SNID and
-the previously published deep-learning method DASH
-(Muthukrishna et al. 2019b) in Section 5. A discussion
-on the most likely false positives can be found in Section 6. The implementation of SNIascore as part of the
-ZTF BTS is described in Section 7. Future development
-possibilities are also discussed in this section.
-2. DATASETS
-Our data consist of SEDM spectra of transients detected by ZTF, which were followed up and classified by
-the BTS (Fremling et al. 2020; Perley et al. 2020) using
-the GROWTH Marshal (Kasliwal et al. 2019). These spectra are of low resolution (R∼ 100), and cover a typical
-wavelength range of 3800 Å to 9150 Å within 209 wavelength bins (see Section 2.2). Although the BTS focuses
-on extragalactic transients, some spectra eventually turn
-out to be of Galactic sources (e.g., cataclysmic variables; CVs). We include both spectra of Galactic and
-extragalactic transients in our datasets. The dataset we
-use here contains 5550 SEDM spectra of 3463 individual transients obtained between 2018 March and 2020
-August. A breakdown of the various classes of transients included in our dataset can be found in Table 1.
-=== PAGE 3 ===
-3
-SNIascore
-3
-Median-normalized original spectrum
-Smoothed continuum
-2.5
-2
-1.5
-1
-0.5
-4000
-5000
-6000
-7000
-8000
-9000
-0.4
-Final preprocessed spectrum
-0.2
-0
--0.2
--0.4
--0.6
-4000
-5000
-6000
-7000
-8000
-9000
-Figure 2. Preprocessing procedure used in SNIascore. The
+                                                                        on extragalactic transients, some spectra eventually turn
+and validated and optimized with the BTS dataset pub-
+                                                                        out to be of Galactic sources (e.g., cataclysmic vari-
+lished by Fremling et al. (2020). A final test run is
+                                                                        ables; CVs). We include both spectra of Galactic and
+                                                                        extragalactic transients in our datasets. The dataset we
+    1 https://wis-tns.org                                               use here contains 5550 SEDM spectra of 3463 individ-
+    2 In the ZTF BTS ≈ 72.5% of the extragalactic transients detected
+                                                                        ual transients obtained between 2018 March and 2020
+     are SNe Ia (Perley et al. 2020).                                   August. A breakdown of the various classes of tran-
+                                                                        sients included in our dataset can be found in Table 1.
+                                                                        SNIascore                                                              3
+    3                                                                            For training SNIascore for redshift prediction we only
+                                  Median-normalized original spectrum
+   2.5                            Smoothed continuum                           use spectra of SNe Ia, and also impose a cut on the
+    2
+                                                                               quality of the known redshifts. We only use SNe Ia
+                                                                               where the redshift is known to three decimal places or
+   1.5
+                                                                               more4 . Both redshifts derived from broad SN features
+    1                                                                          and host galaxy emission lines are used. The training
+   0.5                                                                         set for redshift prediction consists of 891 spectra of 630
+         4000    5000      6000      7000          8000         9000
+                                                                               SNe Ia, which is increased to 12810 spectra through data
+                                                                               augmentation (Section 2.1).
+   0.4
+                                          Final preprocessed spectrum
+                                                                                 The properties of the training, validation and testing
+   0.2                                                                         datasets are illustrated in Figure 1. The redshift range
+    0                                                                          covered by our full dataset is z = 0.008 to z = 0.126.
+                                                                               However, 98% of our data fall within the range z = 0.01
+  -0.2
+                                                                               to z = 0.11. The phases of our spectra with respect
+  -0.4                                                                         to maximum light determined from the lightcurves of
+  -0.6                                                                         our transients fall within −20 days to +30 days, with
+         4000    5000      6000      7000          8000         9000
+                                                                               97% of the data within −20 days to +20 days. Thus,
+                                                                               the range we can expect SNIascore to perform reliably
+Figure 2. Preprocessing procedure used in SNIascore. The                       within is z = 0.01 to z = 0.11 for spectra obtained
 top panel shows an example SN Ia spectrum, normalized by
+                                                                               within ±20 days of maximum brightness. We use the
 the median value (black line). This normalized spectrum is
 divided by a smoothed continuum (computed with robust
-local polynomial regression; red line) to create the final preprocessed spectrum (black line, bottom panel), which is centered around zero by subtracting a constant value of one.
+                                                                               time of maximum light from the BTS Sample Explorer
+local polynomial regression; red line) to create the final pre-                (Perley et al. 2020), which records the brightest actual
+processed spectrum (black line, bottom panel), which is cen-                   measurement in the lightcurve of each transient. This
+tered around zero by subtracting a constant value of one.                      measurement can be in the g or r band, depending on
+                                                                               which band is brighter.
 We split our full dataset in three parts: training data,
-validation and optimization data, and final performance
+validation and optimization data, and final performance                                       2.1. Training set augmentation
 testing data.
-For the purpose of training SNIascore (Section 4) we
+                                                                                  For the classification component of SNIascore we can
+  For the purpose of training SNIascore (Section 4) we
+                                                                               achieve excellent performance without any need for data
 group the data into two classes: real SNe Ia (SNIa; 1526
+                                                                               augmentation (Section 5). We also do not need to de-
 spectra of 1090 SNe Ia), and everything else (NotSNIa;
+                                                                               redshift our spectra as part of the pre-processing pro-
 1997 spectra of 1121 transients). The training data were
+                                                                               cedure that is performed before training or when clas-
 collected between 2018 March 7 and 2020 March 1, but
+                                                                               sifying new data (Section 2.2). However, in order to
 we exclude any data that are part of our validation set
+                                                                               use regression to predict the redshifts of SNe Ia identi-
 which was also collected during 2018.
-To validate and optimize SNIascore (Section 4) we
+                                                                               fied by SNIascore without introducing systematic bias,
+  To validate and optimize SNIascore (Section 4) we
+                                                                               a weighting scheme, or data augmentation is needed.
 use 1016 spectra of 648 SNe which are part of the BTS
+                                                                               This is due to the shape of the redshift distribution of
 sample from 2018 published in Fremling et al. (2020)
+                                                                               our dataset (Fig. 1); there are very few spectra for SNe
 (hereafter the BTS18 sample). The BTS18 sample was
-chosen for validation since the classifications and redshifts of the SNe in this sample have been carefully vetted by humans.
-For final performance testing we use all BTS spectra
+                                                                               Ia at both z < 0.03 and z > 0.09.
+chosen for validation since the classifications and red-
+                                                                                  We have found that a simple augmentation procedure,
+shifts of the SNe in this sample have been carefully vet-
+                                                                               which equalizes the redshift distribution of the training
+ted by humans.
+                                                                               sample, can offer excellent redshift prediction perfor-
+  For final performance testing we use all BTS spectra
+                                                                               mance with negligible bias. We perform the following
 collected between 2020 Mar 2 and 2020 Aug 5 (1011
+                                                                               s.pdf: for each redshift bin of size 0.001 from zero to
 spectra of 632 transients). The classifications in this
+                                                                               0.13 we search for spectra in our unaugmented dataset
 testing sample are sufficiently accurate to evaluate the
-performance of SNIascore, but they are subject to minor future changes as work on the BTS proceeds.3
-For training SNIascore for redshift prediction we only
-use spectra of SNe Ia, and also impose a cut on the
-quality of the known redshifts. We only use SNe Ia
-where the redshift is known to three decimal places or
-more4 . Both redshifts derived from broad SN features
-and host galaxy emission lines are used. The training
-set for redshift prediction consists of 891 spectra of 630
-SNe Ia, which is increased to 12810 spectra through data
-augmentation (Section 2.1).
-The properties of the training, validation and testing
-datasets are illustrated in Figure 1. The redshift range
-covered by our full dataset is z = 0.008 to z = 0.126.
-However, 98% of our data fall within the range z = 0.01
-to z = 0.11. The phases of our spectra with respect
-to maximum light determined from the lightcurves of
-our transients fall within −20 days to +30 days, with
-97% of the data within −20 days to +20 days. Thus,
-the range we can expect SNIascore to perform reliably
-within is z = 0.01 to z = 0.11 for spectra obtained
-within ±20 days of maximum brightness. We use the
-time of maximum light from the BTS Sample Explorer
-(Perley et al. 2020), which records the brightest actual
-measurement in the lightcurve of each transient. This
-measurement can be in the g or r band, depending on
-which band is brighter.
-2.1. Training set augmentation
-For the classification component of SNIascore we can
-achieve excellent performance without any need for data
-augmentation (Section 5). We also do not need to deredshift our spectra as part of the pre-processing procedure that is performed before training or when classifying new data (Section 2.2). However, in order to
-use regression to predict the redshifts of SNe Ia identified by SNIascore without introducing systematic bias,
-a weighting scheme, or data augmentation is needed.
-This is due to the shape of the redshift distribution of
-our dataset (Fig. 1); there are very few spectra for SNe
-Ia at both z < 0.03 and z > 0.09.
-We have found that a simple augmentation procedure,
-which equalizes the redshift distribution of the training
-sample, can offer excellent redshift prediction performance with negligible bias. We perform the following
-s.pdf: for each redshift bin of size 0.001 from zero to
-0.13 we search for spectra in our unaugmented dataset
-with similar redshifts (within z − 0.005 to z + 0.01).
-4 This typically means that a spectrum of the host galaxy exists in
-3 The live BTS sample, which is updated daily, can be accessed
-through the BTS sample explorer at https://sites.astro.caltech.
-edu/ztf/bts/explorer.php.
-the literature (e.g., on NED), the SEDM spectrum was of very
-high SNR with very good SNID template matches or clear host
-galaxy lines, or that we have obtained a spectrum of the SN from
-a telescope that offers a higher resolution compared to SEDM.
-=== PAGE 4 ===
-4
-Fremling et al.
-Sequence
-Input
-Dropout
-0.40
-BiLSTM
-32 Hidden Units
-Dropout
-0.45
-GRU
-Dropout
-32 Hidden Units
-0.35
-BiLSTM
-32 Hidden Units
-Dropout
-0.25
-Fully
-Connected
-Softmax
-Classifcation
-Regression
+                                                                               with similar redshifts (within z − 0.005 to z + 0.01).
+performance of SNIascore, but they are subject to mi-
+nor future changes as work on the BTS proceeds.3
+                                                                                 4 This typically means that a spectrum of the host galaxy exists in
+
+                                                                                    the literature (e.g., on NED), the SEDM spectrum was of very
+  3 The live BTS sample, which is updated daily, can be accessed
+                                                                                    high SNR with very good SNID template matches or clear host
+   through the BTS sample explorer at https://sites.astro.caltech.                  galaxy lines, or that we have obtained a spectrum of the SN from
+   edu/ztf/bts/explorer.php.                                                        a telescope that offers a higher resolution compared to SEDM.
+4                                                                    Fremling et al.
+
+
+    Sequence       Dropout       BiLSTM          Dropout       GRU           Dropout         BiLSTM          Dropout     Fully
+                                                                                                                                     Softmax    Classifcation
+      Input          0.40      32 Hidden Units     0.45    32 Hidden Units     0.35        32 Hidden Units     0.25    Connected
+
+
+
+                                                                                                                                   Regression
+
+
+
+
 Figure 3. Network architecture of SNIascore. We utilize heavy dropout throughout the network and a combination of two
 BiLSTM layers surrounding one GRU layer. For regression the final softmax and classification layers are replaced by a regression
 layer.
-We then randomly pick spectra from the matches, apply
-new redshifts by shifting the wavelengths of the original
-spectra to randomly selected redshifts within ±0.001 of
-the redshift bin center (the spectra are not de-redshifted
-to the rest frame as part of this process to reduce loss
-off information at the edges of the spectra). We repeat
-this process until we have roughly 100 spectra in each
-redshift bin, for a total of 12810 spectra. To reduce
-overfitting, and lessen the impact of repeating a small
-number of spectra at the edges of the redshift distribution, we introduce noise from a normal distribution
-to each added spectrum.5 The final redshift distribution for our training data used for redshift regression is
-shown in Figure 1.
-2.2. Preprocessing of spectra
-Due to small variations in the final wavelength coverage of the SEDM spectra included in our dataset we interpolate all spectra to a uniform wavelength grid, which
-spans the largest possible wavelength range without a
-need for extrapolation for any individual spectrum. This
-range is 3800 Å to 9150 Å with 209 wavelength bins of
-size 25.6 Å.
-After interpolation we normalize each spectrum by division with its median value. The normalized spectrum
-is then divided by its continuum (a heavily smoothed
-version of the normalized spectrum computed with robust6 local polynomial regression using weighted linear
-least squares and a 2nd degree polynomial model). Finally, to center the preprocessed spectra around zero we
-subtract a constant value of one from each normalized
-and continuum divided spectrum. This process is illustrated in Figure 2.
-We have found that this pre-processing procedure significantly outperforms a simple division by the median,
-directly dividing by a smoothed continuum, or dividing
-5 We add between zero and one standard deviation of noise.
-The
-standard deviation is estimated as the standard deviation of each
-spectrum after subtraction of the broad features using a heavily
-smoothed spectrum.
-6 Lower weights are assigned to outliers in the regression; outliers
-at > 6σ are assigned zero weight.
-by the median and then subtracting the smoothed continuum. We have also investigated the effect of suppressing the bluest and reddest parts of the spectra (which
-can be very noisy in data from many instruments), as in
-Muthukrishna et al. (2019b). This decreases the overall
-performance and is not needed for SEDM data.
-Effectively our pre-processing procedure flattens the
-spectra (removes any temperature gradient or host
-galaxy continuum emission contribution), makes emission lines positive and absorption lines negative, and
-normalizes the strengths of the features.
-3. NEURAL NETWORK ARCHITECTURE
-For our final SNIascore network that we have arrived
-at after following the optimization procedure described
-in Section 4, we have used an RNN architecture (see
-e.g., Sherstinsky 2020) consisting of a combination of
-BiLSTM and GRU layers, with 32 hidden units in each
-layer (Fig. 3). We employ significant dropout both during training and prediction. We use a dropout of 40%
-immediately following the input layer. This is followed
-by a BiLSTM layer and 45% dropout. After this we use
-a GRU layer and 35% dropout and then another BiLSTM layer and 25% dropout. This last BiLSTM layer
-is followed by a fully connected layer with two outputs,
-a softmax layer and a classification layer which computes the cross-entropy loss for the SNIa and NotSNIa
-classes.
-For redshift regression the softmax and classification
-layers are replaced by a custom regression layer, which
-uses the root of the mean bias error (MBE; Eq. A2)
-squared as the forward loss function and the derivative
-of the mean absolute error (MAE; Eq. A4) as the backward loss function. We have found that this custom
-regression layer gives the least systematic bias and best
-overall performance among the loss functions we have
-tested (Section 4).
-To estimate uncertainties when predicting both the
-SNIascore (σSNIascore ) and redshift (σz ), we use a simple Monte-Carlo (MC) method. We re-run each prediction 100 times and adopt the standard deviation of the
-results as the uncertainty of the prediction.
-=== PAGE 5 ===
-5
-SNIascore
-4. TRAINING AND OPTIMIZATION
-4.1. Classification Optimization
-We have implemented the architecture for SNIascore
-described in Section 3 using the MATLAB Deep Learning
-ToolboxTM . For training we use the adaptive learning
-rate optimization algorithm Adam (Kingma & Ba 2014)
-with the following settings:
-• MiniBatchSize: 256
-• InitialLearnRate: 0.005
-• LearnRateSchedule: none
-• L2Regularization: 10−4
-• GradientThreshold: 2
-• Shuffle: every-epoch
-• SequenceLength: longest
-For validation and optimization we use the BTS18
-dataset. To arrive at the architecture described in Section 3 and the optimal hyperparameters listed above we
-have followed this procedure:
-• We construct a grid of networks with an initial
-dropout layer following the input layer and then
-one to five BiLSTM layers with dropout layers between each layer.
-• For each network we create a grid of subnetworks
-with a range of hyperparameters; dropout from
-0.15 to 0.45 for each dropout layer and hidden
-units from 8 to 128 for each BiLSTM layer.
-• We explore learning rates in the range 0.001 to
-0.01 and mini-batch sizes of 2n in the range 16 to
-512 for each network.
+
+We then randomly pick spectra from the matches, apply                                  by the median and then subtracting the smoothed con-
+new redshifts by shifting the wavelengths of the original                              tinuum. We have also investigated the effect of suppress-
+spectra to randomly selected redshifts within ±0.001 of                                ing the bluest and reddest parts of the spectra (which
+the redshift bin center (the spectra are not de-redshifted                             can be very noisy in data from many instruments), as in
+to the rest frame as part of this process to reduce loss                               Muthukrishna et al. (2019b). This decreases the overall
+off information at the edges of the spectra). We repeat                                performance and is not needed for SEDM data.
+this process until we have roughly 100 spectra in each                                   Effectively our pre-processing procedure flattens the
+redshift bin, for a total of 12810 spectra. To reduce                                  spectra (removes any temperature gradient or host
+overfitting, and lessen the impact of repeating a small                                galaxy continuum emission contribution), makes emis-
+number of spectra at the edges of the redshift distri-                                 sion lines positive and absorption lines negative, and
+bution, we introduce noise from a normal distribution                                  normalizes the strengths of the features.
+to each added spectrum.5 The final redshift distribu-
+tion for our training data used for redshift regression is
+shown in Figure 1.                                                                          3. NEURAL NETWORK ARCHITECTURE
+                                                                                          For our final SNIascore network that we have arrived
+                 2.2. Preprocessing of spectra                                         at after following the optimization procedure described
+   Due to small variations in the final wavelength cover-                              in Section 4, we have used an RNN architecture (see
+age of the SEDM spectra included in our dataset we in-                                 e.g., Sherstinsky 2020) consisting of a combination of
+terpolate all spectra to a uniform wavelength grid, which                              BiLSTM and GRU layers, with 32 hidden units in each
+spans the largest possible wavelength range without a                                  layer (Fig. 3). We employ significant dropout both dur-
+need for extrapolation for any individual spectrum. This                               ing training and prediction. We use a dropout of 40%
+range is 3800 Å to 9150 Å with 209 wavelength bins of                                immediately following the input layer. This is followed
+size 25.6 Å.                                                                          by a BiLSTM layer and 45% dropout. After this we use
+   After interpolation we normalize each spectrum by di-                               a GRU layer and 35% dropout and then another BiL-
+vision with its median value. The normalized spectrum                                  STM layer and 25% dropout. This last BiLSTM layer
+is then divided by its continuum (a heavily smoothed                                   is followed by a fully connected layer with two outputs,
+version of the normalized spectrum computed with ro-                                   a softmax layer and a classification layer which com-
+bust6 local polynomial regression using weighted linear                                putes the cross-entropy loss for the SNIa and NotSNIa
+least squares and a 2nd degree polynomial model). Fi-                                  classes.
+nally, to center the preprocessed spectra around zero we                                  For redshift regression the softmax and classification
+subtract a constant value of one from each normalized                                  layers are replaced by a custom regression layer, which
+and continuum divided spectrum. This process is illus-                                 uses the root of the mean bias error (MBE; Eq. A2)
+trated in Figure 2.                                                                    squared as the forward loss function and the derivative
+   We have found that this pre-processing procedure sig-                               of the mean absolute error (MAE; Eq. A4) as the back-
+nificantly outperforms a simple division by the median,                                ward loss function. We have found that this custom
+directly dividing by a smoothed continuum, or dividing                                 regression layer gives the least systematic bias and best
+                                                                                       overall performance among the loss functions we have
+                                                                                       tested (Section 4).
+    5 We add between zero and one standard deviation of noise.     The                    To estimate uncertainties when predicting both the
+      standard deviation is estimated as the standard deviation of each
+      spectrum after subtraction of the broad features using a heavily                 SNIascore (σSNIascore ) and redshift (σz ), we use a sim-
+      smoothed spectrum.                                                               ple Monte-Carlo (MC) method. We re-run each predic-
+    6 Lower weights are assigned to outliers in the regression; outliers
+                                                                                       tion 100 times and adopt the standard deviation of the
+      at > 6σ are assigned zero weight.                                                results as the uncertainty of the prediction.
+                                                      SNIascore                                                       5
+
+        4. TRAINING AND OPTIMIZATION                         for every individual network based on the performance
+            4.1. Classification Optimization                 on the BTS18 validation set, according to a combination
+                                                             of two metrics: (i) the total number of successful classi-
+  We have implemented the architecture for SNIascore         fications for a false-positive rate (FPR) of 0%, and (ii)
+described in Section 3 using the MATLAB Deep Learning        the total number of successful classifications for a FPR
+ToolboxTM . For training we use the adaptive learning        of 1%. To determine the optimal FPR and true-positive
+rate optimization algorithm Adam (Kingma & Ba 2014)          rate (TPR) of an individual network, all possible cuts on
+with the following settings:                                 SNIascore and σSNIascore are evaluated. These metrics
+   • MiniBatchSize: 256                                      direct the optimization procedure towards hyperparam-
+                                                             eters and a network structure that results in a low FPR,
+   • InitialLearnRate: 0.005
+                                                             with a high true-positive rate (TPR) being secondary.
+   • LearnRateSchedule: none                                 We consider FPR < 1% to be a hard requirement for
+   • L2Regularization: 10−4                                  autonomous spectroscopic classification. It also allows
+   • GradientThreshold: 2                                    all the trained networks to be quantitatively compared
+   • Shuffle: every-epoch                                    based on their optimal epochs and SNIascore cuts.
+   • SequenceLength: longest                                    The architecture that resulted from this optimization
+                                                             procedure was three BiLSTM layers with 32 hidden
+For validation and optimization we use the BTS18             units in each layer, in combination with heavy dropout
+dataset. To arrive at the architecture described in Sec-     (0.40, 0.45, 0.35, 0.25 for the four dropout layers from
+tion 3 and the optimal hyperparameters listed above we       first to last). As a final step, we investigated the effect
+have followed this procedure:                                of replacing the BiLSTM layers with GRU layers in all
+                                                             possible combinations, and eventually arrived at our fi-
+   • We construct a grid of networks with an initial
+                                                             nal SNIascore network described in Section 3, where
+     dropout layer following the input layer and then
+                                                             the middle BiLSTM layer is replaced by a GRU layer.
+     one to five BiLSTM layers with dropout layers be-
+                                                             The effect of this is a reduced number of false positives
+     tween each layer.
+                                                             with high SNIascore values.
+   • For each network we create a grid of subnetworks           For our optimized classification network, Figure 4
+     with a range of hyperparameters; dropout from           shows the SNIascore distribution for known SNe Ia and
+     0.15 to 0.45 for each dropout layer and hidden          other transients in the BTS18 validation sample. We
+     units from 8 to 128 for each BiLSTM layer.              find that 90% of the SNe Ia in this sample are identi-
+   • We explore learning rates in the range 0.001 to         fied by SNIascore with a 0.6% FPR. The performance
+     0.01 and mini-batch sizes of 2n in the range 16 to      of our final SNIascore network is investigated in detail
+     512 for each network.                                   and tested on independent data in Section 5.
 This optimization procedure showed that a constant
 learning rate of 0.005 and a mini-batch size of 256 seems
-to perform universally well on our data, regardless of the
-other hyperparameters. Changes to the learning rate
-(including introducing adaptive learning rate schemes),
-gradient threshold, and L2 regularization listed above
-have negligible impact on the final performance. As long
-as the network retains the ability to converge during
-training, it remains possible to pick an optimal epoch
-from the training sequence where the performance is
-very similar.
-We do not try to optimize for the required physical
-training time, or number of epochs required to achieve
-a good performance. We do not employ any stopping
-condition based on the loss. Instead, each network is
-trained well past the point of overfitting (at least 325
-epochs), and we save the state of each network at every
-training epoch. We then choose and compare the optimal epoch (typically found between epochs 200 and 300)
-for every individual network based on the performance
-on the BTS18 validation set, according to a combination
-of two metrics: (i) the total number of successful classifications for a false-positive rate (FPR) of 0%, and (ii)
-the total number of successful classifications for a FPR
-of 1%. To determine the optimal FPR and true-positive
-rate (TPR) of an individual network, all possible cuts on
-SNIascore and σSNIascore are evaluated. These metrics
-direct the optimization procedure towards hyperparameters and a network structure that results in a low FPR,
-with a high true-positive rate (TPR) being secondary.
-We consider FPR < 1% to be a hard requirement for
-autonomous spectroscopic classification. It also allows
-all the trained networks to be quantitatively compared
-based on their optimal epochs and SNIascore cuts.
-The architecture that resulted from this optimization
-procedure was three BiLSTM layers with 32 hidden
-units in each layer, in combination with heavy dropout
-(0.40, 0.45, 0.35, 0.25 for the four dropout layers from
-first to last). As a final step, we investigated the effect
-of replacing the BiLSTM layers with GRU layers in all
-possible combinations, and eventually arrived at our final SNIascore network described in Section 3, where
-the middle BiLSTM layer is replaced by a GRU layer.
-The effect of this is a reduced number of false positives
-with high SNIascore values.
-For our optimized classification network, Figure 4
-shows the SNIascore distribution for known SNe Ia and
-other transients in the BTS18 validation sample. We
-find that 90% of the SNe Ia in this sample are identified by SNIascore with a 0.6% FPR. The performance
-of our final SNIascore network is investigated in detail
-and tested on independent data in Section 5.
-4.2. Redshift Regression Optimization
-For redshift regression we use the same optimal
-SNIascore architecture found above with the softmax
-and classification layers replaced with a regression layer
-(Fig. 3). However, we have found that the standard
-deep-learning mean square error (MSE; Eq. A1) or MAE
-loss functions result in significant redshift-dependent
-systematic bias, even after data augmentation to equalize the redshift distribution of the training data (Section 2.1). Because of this, we perform an additional
-optimization step for the redshift regression network,
-which consists of an investigation of various forward and
-backward loss-functions in the final regression layer of
-the network.
-The forward loss functions that we have investigated
-are the MAE, the mean percentage error (MPE; Eq. A3),
-the MSE, the MBE, and all possible combinations of
-=== PAGE 6 ===
-6
-Fremling et al.
+to perform universally well on our data, regardless of the            4.2. Redshift Regression Optimization
+other hyperparameters. Changes to the learning rate            For redshift regression we use the same optimal
+(including introducing adaptive learning rate schemes),      SNIascore architecture found above with the softmax
+gradient threshold, and L2 regularization listed above       and classification layers replaced with a regression layer
+have negligible impact on the final performance. As long     (Fig. 3). However, we have found that the standard
+as the network retains the ability to converge during        deep-learning mean square error (MSE; Eq. A1) or MAE
+training, it remains possible to pick an optimal epoch       loss functions result in significant redshift-dependent
+from the training sequence where the performance is          systematic bias, even after data augmentation to equal-
+very similar.                                                ize the redshift distribution of the training data (Sec-
+  We do not try to optimize for the required physical        tion 2.1). Because of this, we perform an additional
+training time, or number of epochs required to achieve       optimization step for the redshift regression network,
+a good performance. We do not employ any stopping            which consists of an investigation of various forward and
+condition based on the loss. Instead, each network is        backward loss-functions in the final regression layer of
+trained well past the point of overfitting (at least 325     the network.
+epochs), and we save the state of each network at every        The forward loss functions that we have investigated
+training epoch. We then choose and compare the opti-         are the MAE, the mean percentage error (MPE; Eq. A3),
+mal epoch (typically found between epochs 200 and 300)       the MSE, the MBE, and all possible combinations of
+6                                                     Fremling et al.
+
+
+
+
 Figure 4. Classification performance of SNIascore on the BTS18 validation sample and on the testing dataset. Top left panel:
 The SNIascore distributions for both “Real SNe Ia” spectra (red) and spectra of “Other” transients (blue). The validation set
 is shown as solid bars and the testing dataset is shown as open bars. Ntot is the total for each class separately (i.e. the sum
@@ -459,188 +354,137 @@ roughly 0.5% and TPR of 90% on the validation dataset and 83% on the testing dat
 a FPR of zero on both the validation and testing datasets, with a TPR of 86% and 80%, respectively. Right panel: ROC curve
 for SNIascore on the validation dataset (red line) and the testing dataset (blue line). For comparison we also show ROC curves
 for SNID (solid black line) and DASH (dashed black line).
-these in pairs, with both the derivative of the MAE and
-MSE as the backwards loss.
-The MPE, MBE and the root square of these can all
+
+these in pairs, with both the derivative of the MAE and            (Blondin & Tonry 2007) and DASH (Muthukrishna et al.
+MSE as the backwards loss.                                         2019b) (Section 5.1). We also evaluate the accuracy
+   The MPE, MBE and the root square of these can all               of the associated redshift predictions for the SNe Ia
 give good results. Differences are minor,
-but we have
-√
-selected the root square bias error ( M BE 2 ) for our
-final network, based on optimizing (i) the percentage of
+                                        √     but we have          that are identified by SNIascore by comparison to host
+selected the root square bias error ( M BE 2 ) for our             galaxy redshifts and redshifts determined after manual
+final network, based on optimizing (i) the percentage of           inspection with SNID (Section 5.2).
 SNe with redshift residuals less than 0.005 and 0.01 for
-the BTS18 validation sample, and (ii) how close the predictions on the full validation set adhere to a linear relationship with respect to the known redshifts (y = ax + b
+the BTS18 validation sample, and (ii) how close the pre-                              5.1. Classifications
+dictions on the full validation set adhere to a linear rela-
+                                                                      Our goal with SNIascore is low enough FPR (< 1%)
+tionship with respect to the known redshifts (y = ax + b
+                                                                   so that the classifications do not require any human con-
 where a should be as close to 1 as possible and b as close
-to zero as possible). Each network was trained past overfitting (at least 525 epochs) and the optimal epoch (typically found between epochs 400 and 500) was selected
+                                                                   firmation. To achieve this, using the standard value of
+to zero as possible). Each network was trained past over-
+                                                                   SNIascore > 0.5 to classify a spectrum as that of a
+fitting (at least 525 epochs) and the optimal epoch (typ-
+                                                                   SN Ia is not adequate. Instead, we evaluate all possible
+ically found between epochs 400 and 500) was selected
+                                                                   cuts on SNIascore and σSNIascore to find a combination
 after the fact for comparison among the networks.
-5. PERFORMANCE
-In order to evaluate the classification performance
-of SNIascore we have performed comparisons to SNID
-(Blondin & Tonry 2007) and DASH (Muthukrishna et al.
-2019b) (Section 5.1). We also evaluate the accuracy
-of the associated redshift predictions for the SNe Ia
-that are identified by SNIascore by comparison to host
-galaxy redshifts and redshifts determined after manual
-inspection with SNID (Section 5.2).
-5.1. Classifications
-Our goal with SNIascore is low enough FPR (< 1%)
-so that the classifications do not require any human confirmation. To achieve this, using the standard value of
-SNIascore > 0.5 to classify a spectrum as that of a
-SN Ia is not adequate. Instead, we evaluate all possible
-cuts on SNIascore and σSNIascore to find a combination
-of cuts that result in the desired performance.
-Receiver operating characteristic (ROC) curves for
-SNIascore (computed by varying SNIascore and
-σSNIascore ), SNID (by varying the rlap parameter
-threshold) and DASH (by varying rlap and the soft-
-=== PAGE 7 ===
-7
-SNIascore
-Table 2. Performance comparison of SNIascore, SNID
-and DASH on the BTS18 validation dataset
-Method
-TPR
-FPR
-Cutsa
-SNIascore TPR
-SNIascore FPR
-SNID
-DASH
-0.90
-0.86
-0.53
-0.24
-0.006
-0.000
-0.009
-0.009
-score > 0.6, σ < 0.3
-score > 0.8, σ < 0.275
-rlap > 11.1
-rlap > 7.1, score > 0.5
+                                                                   of cuts that result in the desired performance.
+                                                                      Receiver operating characteristic (ROC) curves for
+                  5. PERFORMANCE                                   SNIascore (computed by varying SNIascore and
+  In order to evaluate the classification performance              σSNIascore ), SNID (by varying the rlap parameter
+of SNIascore we have performed comparisons to SNID                 threshold) and DASH (by varying rlap and the soft-
+                                                             SNIascore                                                       7
+
+Table 2. Performance comparison of SNIascore, SNID                  SNIascore cuts and the performance compared to SNID
+and DASH on the BTS18 validation dataset                            and DASH in Table 2.
+      Method         TPR      FPR             Cutsa
+                                                                       Finally, we note that a low SNIascore does not neces-
+                                                                    sarily mean that the transient being observed cannot be
+  SNIascore TPR       0.90    0.006      score > 0.6, σ < 0.3
+                                                                    a SN Ia. There are multiple reasons for low scores, for
+  SNIascore FPR       0.86   0.000     score > 0.8, σ < 0.275
+                                                                    example: low signal-to-noise, strong galaxy light con-
+  SNID                0.53    0.009               rlap > 11.1
+  DASH                0.24    0.009   rlap > 7.1, score > 0.5
+                                                                    tamination and significant contamination from cosmic
+                                                                    rays that failed to be removed during data reduction.
 a score refers to the softmax score for both SNIascore and DASH.
-For SNIascore, σ refers to σSNIascore .
-Note—For SNIascore TPR, SNID, and DASH we show the optimal TPR that can be had while maintaining FPR < 1%. For
-SNIascore FPR we show the optimal TPR that can be had
-for FPR = 0.
-max score threshold) are shown in Figure 4. Based on
-this comparison it is clear that SNIascore significantly
-outperforms these alternatives7 . Between 83% (testing
+                                                                    As such, a score that is lower than the cuts discussed
+  For SNIascore, σ refers to σSNIascore .
+                                                                    above should generally be interpreted as that the spec-
+Note—For SNIascore TPR, SNID, and DASH we show the opti-            trum cannot be used to make a confident SN Ia classifi-
+ mal TPR that can be had while maintaining FPR < 1%. For
+ SNIascore FPR we show the optimal TPR that can be had              cation, and nothing further. Only when the SNIascore
+ for FPR = 0.                                                       is extremely low (< 0.01), is there significant statistical
+                                                                    power to support a conclusion that the transient asso-
+                                                                    ciated with the respective spectrum cannot be a SN Ia.
+                                                                    We have made no attempt at optimizing the FNR for
+max score threshold) are shown in Figure 4. Based on                low scores, but based on the FNR curves for the valida-
+this comparison it is clear that SNIascore significantly            tion and testing datasets (Figure 4), SNIascore < 0.01
+outperforms these alternatives7 . Between 83% (testing              corresponds to FNR ≈ 1%.
 data) and 90% (validation data) of the SN Ia spectra
-that SEDM observes for the ZTF BTS can be classified
-with FPR ≈ 0.5%. This performance is achieved for the
-cuts SNIascore > 0.6 and σSNIascore < 0.3.
-SNID can achieve a very low FPR for SN Ia spectra
-when rlap > 10. However, only ≈ 50% of the spectra could potentially be automatically classified (FPR <
-1%) without supervision with SNID. The deep-learning
-based DASH only reaches a low enough FPR to enable
-automatic classification when applied to SEDM spectra
-for 24% of spectra for any cuts on rlap and the softmax score. This is likely due to the fact that no spectra with similarly low resolution to those produced by
-SEDM were part of the DASH training data8 .
-The cuts on SNIascore and σSNIascore mentioned
-above result in the highest TPR while keeping the
-FPR within the range we consider acceptable (< 1%).
-However, these cuts do result in some false positives,
-which we discuss in Section 6. More conservative cuts
-at SNIascore > 0.8 and σSNIascore < 0.275 result in
-zero false positives on the validation and training data.
-Depending on the use-case either choice of these cuts
-may be suitable. For live reporting of classifications to
-the community via TNS, the stricter cut seems appropriate (Section 7). We summarize our recommended
-7 Details on how SNID and DASH were used to produce the corre-
-sponding ROC curves can be found in the appendix (Section B).
-8 We have investigated similar convolutional neural networks as
-used in DASH (Muthukrishna et al. 2019b), trained on SEDM
-data, but we have been unable to beat the performance of our
-optimized RNN.
-SNIascore cuts and the performance compared to SNID
-and DASH in Table 2.
-Finally, we note that a low SNIascore does not necessarily mean that the transient being observed cannot be
-a SN Ia. There are multiple reasons for low scores, for
-example: low signal-to-noise, strong galaxy light contamination and significant contamination from cosmic
-rays that failed to be removed during data reduction.
-As such, a score that is lower than the cuts discussed
-above should generally be interpreted as that the spectrum cannot be used to make a confident SN Ia classification, and nothing further. Only when the SNIascore
-is extremely low (< 0.01), is there significant statistical
-power to support a conclusion that the transient associated with the respective spectrum cannot be a SN Ia.
-We have made no attempt at optimizing the FNR for
-low scores, but based on the FNR curves for the validation and testing datasets (Figure 4), SNIascore < 0.01
-corresponds to FNR ≈ 1%.
-5.2. Redshifts
-To evaluate the accuracy of the redshifts predicted by
-SNIascore we compare predictions for the BTS18 validation and testing datasets primarily to redshifts derived from host-galaxy spectra, and secondarily to redshifts determined from broad SN features through manual template matching using SNID which were performed
-for the BTS18 SEDM data in Fremling et al. (2020).
-The performance of the SNIascore redshift regression
-network is illustrated in Figure 5.
-We find that the performance of our network optimized on the BTS18 validation data carries over very
-well to the testing dataset; we find no evidence for systematic bias in the predictions from SNIascore for either dataset. The absolute value of the difference between each prediction compared to the redshift from the
-host-galaxy spectrum is < 0.005 for 77% of the spectra
-in the validation set and for 85% of the spectra in the
-testing dataset. For 96% (validation data) and 100%
-(testing data), this difference is < 0.01.
-We find the mean of the redshift residuals, ∆z =
-−0.0008, and the standard deviation, σz = 0.0046, for
-the BTS18 validation data when SNIascore is compared to redshifts from host-galaxy spectra. For the
-testing data we find ∆z = 0.0006 and σz = 0.0035,
-when compared to redshifts from host-galaxy spectra.
-When SNIascore is compared to redshifts derived manually from broad SN features using SNID we find ∆z =
-−0.0002 and σz = 0.0049 (only possible for the validation data). It has been previously found that σz = 0.005
-when manual usage of SNID is compared to redshifts
-from host-galaxy spectra on the BTS18 sample (Frem-
-=== PAGE 8 ===
-8
-Fremling et al.
-1
-0.12
-0.11
-0.9
-Redshift from SN spectra (validation data)
-Redshift from host spectra (validation data)
-Redshift from host spectra (testing data)
-y=1.01x+0.000 (best fit)
-0.1
-0.09
-0.08
-0.8
-0.7
-0.78 N tot
-0.06
-0.05
-0.96 N tot
-0.6
-0.07
-0.5
-0.4
-0.04
-0.3
-0.03
-0.2
-0.02
-0.1
-0.01
-0
-0
-0.01
-0.02
-0.03
-0.04
-0.05
-0.06
-0.07
-0.08
-0.09
-0.1
-0.11
-0.12
-0
-0.005
-0.01
-0
-0.015
-0.02
-0.01
-0
--0.01
--0.02
+that SEDM observes for the ZTF BTS can be classified                                      5.2. Redshifts
+with FPR ≈ 0.5%. This performance is achieved for the                 To evaluate the accuracy of the redshifts predicted by
+cuts SNIascore > 0.6 and σSNIascore < 0.3.                          SNIascore we compare predictions for the BTS18 val-
+  SNID can achieve a very low FPR for SN Ia spectra                 idation and testing datasets primarily to redshifts de-
+when rlap > 10. However, only ≈ 50% of the spec-                    rived from host-galaxy spectra, and secondarily to red-
+tra could potentially be automatically classified (FPR <            shifts determined from broad SN features through man-
+1%) without supervision with SNID. The deep-learning                ual template matching using SNID which were performed
+based DASH only reaches a low enough FPR to enable                  for the BTS18 SEDM data in Fremling et al. (2020).
+automatic classification when applied to SEDM spectra               The performance of the SNIascore redshift regression
+for 24% of spectra for any cuts on rlap and the soft-               network is illustrated in Figure 5.
+max score. This is likely due to the fact that no spec-               We find that the performance of our network opti-
+tra with similarly low resolution to those produced by              mized on the BTS18 validation data carries over very
+SEDM were part of the DASH training data8 .                         well to the testing dataset; we find no evidence for sys-
+  The cuts on SNIascore and σSNIascore mentioned                    tematic bias in the predictions from SNIascore for ei-
+above result in the highest TPR while keeping the                   ther dataset. The absolute value of the difference be-
+FPR within the range we consider acceptable (< 1%).                 tween each prediction compared to the redshift from the
+However, these cuts do result in some false positives,              host-galaxy spectrum is < 0.005 for 77% of the spectra
+which we discuss in Section 6. More conservative cuts               in the validation set and for 85% of the spectra in the
+at SNIascore > 0.8 and σSNIascore < 0.275 result in                 testing dataset. For 96% (validation data) and 100%
+zero false positives on the validation and training data.           (testing data), this difference is < 0.01.
+Depending on the use-case either choice of these cuts                 We find the mean of the redshift residuals, ∆z =
+may be suitable. For live reporting of classifications to           −0.0008, and the standard deviation, σz = 0.0046, for
+the community via TNS, the stricter cut seems appro-                the BTS18 validation data when SNIascore is com-
+priate (Section 7). We summarize our recommended                    pared to redshifts from host-galaxy spectra. For the
+                                                                    testing data we find ∆z = 0.0006 and σz = 0.0035,
+  7 Details on how SNID and DASH were used to produce the corre-    when compared to redshifts from host-galaxy spectra.
+   sponding ROC curves can be found in the appendix (Section B).    When SNIascore is compared to redshifts derived man-
+  8 We have investigated similar convolutional neural networks as
+                                                                    ually from broad SN features using SNID we find ∆z =
+   used in DASH (Muthukrishna et al. 2019b), trained on SEDM
+                                                                    −0.0002 and σz = 0.0049 (only possible for the valida-
+   data, but we have been unable to beat the performance of our
+   optimized RNN.                                                   tion data). It has been previously found that σz = 0.005
+                                                                    when manual usage of SNID is compared to redshifts
+                                                                    from host-galaxy spectra on the BTS18 sample (Frem-
+8                                                             Fremling et al.
+
+            0.12                                                                                                                               1
+
+            0.11          Redshift from SN spectra (validation data)                                                                           0.9
+              0.1         Redshift from host spectra (validation data)                                                                         0.8
+            0.09          Redshift from host spectra (testing data)
+                          y=1.01x+0.000 (best fit)                                                                                             0.7
+            0.08
+                                                                                                                                               0.6
+            0.07
+
+
+
+
+                                                                                                                   0.78 N tot
+
+
+                                                                                                                                0.96 N tot
+            0.06                                                                                                                               0.5
+
+            0.05                                                                                                                               0.4
+            0.04                                                                                                                               0.3
+            0.03
+                                                                                                                                               0.2
+            0.02
+                                                                                                                                               0.1
+            0.01
+                0                                                                                                                               0
+                                                                                                              0   0.005         0.01         0.015
+                    0   0.01   0.02   0.03    0.04   0.05    0.06    0.07   0.08   0.09   0.1   0.11   0.12
+              0.02
+              0.01
+                0
+             -0.01
+             -0.02
+
+
 Figure 5. Redshift regression performance for SNIascore on the BTS18 validation sample (red and blue markers and lines),
 and on the testing dataset (green markers and lines). We find no evidence for systematic bias in the redshift predictions of
 SNIascore. The best fit to the validation data is shown as a dashed black line in the main panel. The fit is consistent with y = x
@@ -649,303 +493,224 @@ bias in the redshift residuals (bottom left panel) of either the validation or t
 the residuals are shown in the bottom right panel. The typical uncertainty of a redshift estimate is < 0.005, based on the
 cumulative distribution functions for the absolute value of the residuals of both the validation and testing datasets (top right
 panel).
-ling et al. 2020), which is consistent with what was
-found for higher resolution spectra by Blondin & Tonry
-(2007). As such, we conclude that the performance of
-SNIascore is consistent with what can be done with
-SNID when each result and spectrum is manually inspected. A detailed investigation of the accuracy of automatic SNID SN Ia redshifts from SEDM is being performed for data up until 2021 (Rigault et al., in prep.).
-6. DISCUSSION
-A few spectra in both our validation and testing
-datasets end up as false positives with the optimal TPR
-cut we suggest to be used with SNIascore (Table 2).
-Most of these spectra are of low-quality, or affected by
-strong host-contamination (and uninteresting). However, there are also a few high quality spectra. It is
-interesting to investigate these and the associated SNe
-in some detail.
-In the testing set, ZTF20aatxryt (SN 2020eyj; Tonry
-et al. 2020) stands out. Our first SEDM spectrum, taken
-around maximum light of the SN on 2020 April 2, is of
-high quality and looks consistent with a SN Ia spectrum, and gets an SNIascore of 0.7 ± 0.3. However,
-it later turned out that the ejecta from this SN crashed
-into circumstellar material resulting in a flattening of its
-lightcurve and changing its spectrum into that of a SN
-Ibn (Kool et al., in prep.). The best matches in SNID
-are also SNe Ia with rlap > 10. However, by manually going through all the matches produced by SNID at
-rlap > 5, some SN Ic matches can also be found. Given
-the lightcurve evolution and the fact that SN Ia lighturve models do not match well even around maximum
-light before the interaction sets in, it may be more likely
-that this was a stripped-envelope SN. We note that the
-ZTF BTS officially classified this as a SN Ia, as part of
-our routine operations based on the SNID match to the
-peak spectrum (Dahiwale & Fremling 2020). Only later
-did we realize that the object was unusual.
-In the validation set, ZTF18aaxmhvk (SN 2018cne;
-Tonry et al. 2018a) stands out (SNIascore = 0.71 ±
-0.17). Our SEDM spectrum of this source, taken around
-maximum light on 2018 June 14, is of high quality, and
-is also best matched to SNe Ia in SNID with very high
-rlap values. However, the lightcurve of ZTF18aaxmhvk
-is not consistent with a normal SN Ia. Based on this,
-and the fact that matches to SNe Ic can also be found in
-=== PAGE 9 ===
-9
-SNIascore
-SNID, the BTS officially classified this as a SN Ic (Fremling & Sharma 2018). However, it could also have been
-a peculiar SN Ia. The SEDM spectrum is the only spectrum available for this source; we lack higher resolution
-spectra and do not have any late-time spectra, which
-could have provided a conclusive answer.
-In conclusion, the main contaminants that may produce high SNIascore values appear to be strippedenvelope SNe, and in particular events with SN Ic-like
-spectra. The BTS has been classifying roughly 30 SNe
-Ic per year (Perley et al. 2020). Thus, since there is
-only one SN Ic spectrum that gives a high SNIascore
-value in each of the validation and testing datasets, it
-appears that only in rare cases do SNe Ic cause confusion for the BTS (which probes z < 0.1 for core-collapse
-SNe). Furthermore, if the lightcurves of these SNe are
-taken into account it appears relatively straightforward
-to remove such objects from any sample of SNe Ia that
-is required to be devoid of both core-collapse SNe and
-highly peculiar SNe Ia9 .
-For future versions of SNIascore we plan to add the
-option to include lightcurve information as input. Looking at objects that change SNIascore significantly when
-the lightcurve is included or excluded may turn out to be
-a way to identify rare events that would warrant further
-followup from larger facilities. However, the intended
-use case of SNIascore is primarily to provide live classifications when SEDM is observing. As such, a potential
-limitation is the fact that we do not necessarily have
-much lightcurve information available at the time of the
-spectral observation by SEDM. A significant fraction of
-our spectra are observed before maximum light (Fig. 1),
-and full lightcurves cannot be leveraged.
-Some work on machine learning methods for early
-photometric classification has been done (e.g., RAPID;
-Muthukrishna et al. 2019a). However, we have not
-been able to reproduce the expected performance in
-Muthukrishna et al. (2019a) on live ZTF data. Work on
-lightcurve classifiers trained on ZTF data is in progress,
-which we plan to eventually combine with SNIascore,
-and the redshift predictions that we already produce.
-Work on a deep-learning classifier capable of distinguishing between more SN subtypes while maintaining
+
+ling et al. 2020), which is consistent with what was                        it later turned out that the ejecta from this SN crashed
+found for higher resolution spectra by Blondin & Tonry                      into circumstellar material resulting in a flattening of its
+(2007). As such, we conclude that the performance of                        lightcurve and changing its spectrum into that of a SN
+SNIascore is consistent with what can be done with                          Ibn (Kool et al., in prep.). The best matches in SNID
+SNID when each result and spectrum is manually in-                          are also SNe Ia with rlap > 10. However, by manu-
+spected. A detailed investigation of the accuracy of au-                    ally going through all the matches produced by SNID at
+tomatic SNID SN Ia redshifts from SEDM is being per-                        rlap > 5, some SN Ic matches can also be found. Given
+formed for data up until 2021 (Rigault et al., in prep.).                   the lightcurve evolution and the fact that SN Ia ligh-
+                                                                            turve models do not match well even around maximum
+                        6. DISCUSSION                                       light before the interaction sets in, it may be more likely
+                                                                            that this was a stripped-envelope SN. We note that the
+  A few spectra in both our validation and testing                          ZTF BTS officially classified this as a SN Ia, as part of
+datasets end up as false positives with the optimal TPR                     our routine operations based on the SNID match to the
+cut we suggest to be used with SNIascore (Table 2).                         peak spectrum (Dahiwale & Fremling 2020). Only later
+Most of these spectra are of low-quality, or affected by                    did we realize that the object was unusual.
+strong host-contamination (and uninteresting). How-                            In the validation set, ZTF18aaxmhvk (SN 2018cne;
+ever, there are also a few high quality spectra. It is                      Tonry et al. 2018a) stands out (SNIascore = 0.71 ±
+interesting to investigate these and the associated SNe                     0.17). Our SEDM spectrum of this source, taken around
+in some detail.                                                             maximum light on 2018 June 14, is of high quality, and
+  In the testing set, ZTF20aatxryt (SN 2020eyj; Tonry                       is also best matched to SNe Ia in SNID with very high
+et al. 2020) stands out. Our first SEDM spectrum, taken                     rlap values. However, the lightcurve of ZTF18aaxmhvk
+around maximum light of the SN on 2020 April 2, is of                       is not consistent with a normal SN Ia. Based on this,
+high quality and looks consistent with a SN Ia spec-                        and the fact that matches to SNe Ic can also be found in
+trum, and gets an SNIascore of 0.7 ± 0.3. However,
+                                                             SNIascore                                                         9
+
+SNID, the BTS officially classified this as a SN Ic (Frem-                            7. IMPLEMENTATION
+ling & Sharma 2018). However, it could also have been                     Starting from 2021 April 15 we have fully deployed
+a peculiar SN Ia. The SEDM spectrum is the only spec-                  SNIascore as a part of the automated ZTF SEDM
+trum available for this source; we lack higher resolution              pipeline (Fremling et al. 2021). This includes automatic
+spectra and do not have any late-time spectra, which                   reporting of confident SN Ia classifications and redshift
+could have provided a conclusive answer.                               estimates to TNS. With this, we have achieved automa-
+   In conclusion, the main contaminants that may pro-                  tion all the way from (spectroscopic) observation to data
+duce high SNIascore values appear to be stripped-                      reduction and spectroscopic classification for the first
+envelope SNe, and in particular events with SN Ic-like                 time.
+spectra. The BTS has been classifying roughly 30 SNe                      The first fully automated SEDM SN Ia classification
+Ic per year (Perley et al. 2020). Thus, since there is                 was sent for SN 2021ijb (SNIascore 2021). This report
+only one SN Ic spectrum that gives a high SNIascore                    was sent within roughly 10 minutes after the finished
+value in each of the validation and testing datasets, it               SEDM exposure. With automated ZTF candidate vet-
+appears that only in rare cases do SNe Ic cause confu-                 ting and automatic triggering of SEDM, which is cur-
+sion for the BTS (which probes z < 0.1 for core-collapse               rently possible through AMPEL (Nordin et al. 2019) and
+SNe). Furthermore, if the lightcurves of these SNe are                 the Fritz marshal (van der Walt et al. 2019; Duev et al.
+taken into account it appears relatively straightforward               2019), a fully automated imaging (ZTF) and spectro-
+to remove such objects from any sample of SNe Ia that                  scopic (SEDM) survey is now becoming realistic.
+is required to be devoid of both core-collapse SNe and                    Initially for our TNS reports, we are using a very con-
+highly peculiar SNe Ia9 .                                              servative SNIascore threshold of 0.9. Based on the per-
+   For future versions of SNIascore we plan to add the                 formance evaluation in Section 5.1, we plan to relax this
+option to include lightcurve information as input. Look-               to a cut on SNIascore of > 0.8 combined with a cut on
+ing at objects that change SNIascore significantly when                σSNIascore of < 0.275 over the next few months. This will
+the lightcurve is included or excluded may turn out to be              eliminate the need for human interaction in the classifi-
+a way to identify rare events that would warrant further               cation process for the majority of BTS SNe Ia (≈ 80%
+followup from larger facilities. However, the intended                 based on our testing data or ≈ 90% based on our vali-
+use case of SNIascore is primarily to provide live classi-             dation data), which translates to > 50% of BTS SNe.
+fications when SEDM is observing. As such, a potential                    We do not find significant variations in the FPR as a
+limitation is the fact that we do not necessarily have                 function of time, based on the data currently available to
+much lightcurve information available at the time of the               us. However, we note that the TPR (e.g., Table 2) and
+spectral observation by SEDM. A significant fraction of                the numbers above are subject to changing observing
+our spectra are observed before maximum light (Fig. 1),                conditions and the condition of the telescope and instru-
+and full lightcurves cannot be leveraged.                              ment (low SNR results in low SNIascore). In 2020 it
+   Some work on machine learning methods for early                     has been impossible to realuminize the primary mirror of
+photometric classification has been done (e.g., RAPID;                 the Palomar 60-inch telescope, and our testing dataset is
+Muthukrishna et al. 2019a). However, we have not                       affected by decreased overall throughput (which we cur-
+been able to reproduce the expected performance in                     rently attempt to compensate for by increased exposure
+Muthukrishna et al. (2019a) on live ZTF data. Work on                  times). It is possible that an increased number of SN Ia
+lightcurve classifiers trained on ZTF data is in progress,             spectra can be classified when the mirror has been re-
+which we plan to eventually combine with SNIascore,                    aluminized. Work on improvements to the SEDM data
+and the redshift predictions that we already produce.                  reduction pipeline is also ongoing (e.g., more effective
+Work on a deep-learning classifier capable of distin-                  cosmic-ray rejection and host-galaxy background sub-
+guishing between more SN subtypes while maintaining                    traction).
 a comparably low FPR is also ongoing (Sharma et al.,
 in prep.).
-9 We note that with the low resolution of SEDM, it is not possible
-to spectroscopically separate between the various SN Ia subtypes,
-except in the most clear-cut cases (see Fremling et al. 2020).
-7. IMPLEMENTATION
-Starting from 2021 April 15 we have fully deployed
-SNIascore as a part of the automated ZTF SEDM
-pipeline (Fremling et al. 2021). This includes automatic
-reporting of confident SN Ia classifications and redshift
-estimates to TNS. With this, we have achieved automation all the way from (spectroscopic) observation to data
-reduction and spectroscopic classification for the first
-time.
-The first fully automated SEDM SN Ia classification
-was sent for SN 2021ijb (SNIascore 2021). This report
-was sent within roughly 10 minutes after the finished
-SEDM exposure. With automated ZTF candidate vetting and automatic triggering of SEDM, which is currently possible through AMPEL (Nordin et al. 2019) and
-the Fritz marshal (van der Walt et al. 2019; Duev et al.
-2019), a fully automated imaging (ZTF) and spectroscopic (SEDM) survey is now becoming realistic.
-Initially for our TNS reports, we are using a very conservative SNIascore threshold of 0.9. Based on the performance evaluation in Section 5.1, we plan to relax this
-to a cut on SNIascore of > 0.8 combined with a cut on
-σSNIascore of < 0.275 over the next few months. This will
-eliminate the need for human interaction in the classification process for the majority of BTS SNe Ia (≈ 80%
-based on our testing data or ≈ 90% based on our validation data), which translates to > 50% of BTS SNe.
-We do not find significant variations in the FPR as a
-function of time, based on the data currently available to
-us. However, we note that the TPR (e.g., Table 2) and
-the numbers above are subject to changing observing
-conditions and the condition of the telescope and instrument (low SNR results in low SNIascore). In 2020 it
-has been impossible to realuminize the primary mirror of
-the Palomar 60-inch telescope, and our testing dataset is
-affected by decreased overall throughput (which we currently attempt to compensate for by increased exposure
-times). It is possible that an increased number of SN Ia
-spectra can be classified when the mirror has been realuminized. Work on improvements to the SEDM data
-reduction pipeline is also ongoing (e.g., more effective
-cosmic-ray rejection and host-galaxy background subtraction).
-=== PAGE 10 ===
-10
-Fremling et al.
-ACKNOWLEDGMENTS
-SED Machine is based upon work supported by the
-National Science Foundation under Grant No. 1106171.
+
+
+
+
+  9 We note that with the low resolution of SEDM, it is not possible
+
+   to spectroscopically separate between the various SN Ia subtypes,
+   except in the most clear-cut cases (see Fremling et al. 2020).
+10                                                 Fremling et al.
+
+               ACKNOWLEDGMENTS                                Software:       MATLAB (MATLAB 2020), SNID
+                                                            (Blondin & Tonry 2007), DASH (Muthukrishna et al.
+   SED Machine is based upon work supported by the          2019b), the GROWTH Marshal (Kasliwal et al. 2019),
+National Science Foundation under Grant No. 1106171.        Fritz (https://github.com/fritz-marshal/fritz).
 Based on observations obtained with the Samuel Oschin
-Telescope 48-inch and the 60-inch Telescope at the Palomar Observatory as part of the Zwicky Transient Facility project. ZTF is supported by the National Science
-Foundation under Grant No. AST-1440341 and a collaboration including Caltech, IPAC, the Weizmann Institute for Science, the Oskar Klein Center at Stockholm
+Telescope 48-inch and the 60-inch Telescope at the Palo-
+mar Observatory as part of the Zwicky Transient Facil-
+ity project. ZTF is supported by the National Science
+Foundation under Grant No. AST-1440341 and a col-
+laboration including Caltech, IPAC, the Weizmann In-
+stitute for Science, the Oskar Klein Center at Stockholm
 University, the University of Maryland, the University
 of Washington, Deutsches Elektronen- Synchrotron and
-Humboldt University, Los Alamos National Laboratories, the TANGO Consortium of Taiwan, the University of Wisconsin at Milwaukee, and Lawrence Berkeley National Laboratories. Operations are conducted
+Humboldt University, Los Alamos National Laborato-
+ries, the TANGO Consortium of Taiwan, the Univer-
+sity of Wisconsin at Milwaukee, and Lawrence Berke-
+ley National Laboratories. Operations are conducted
 by COO, IPAC, and UW. This work was supported by
 the GROWTH project funded by the National Science
 Foundation under PIRE Grant No 1545949. The Oskar
-Klein Centre is funded by the Swedish Research Council. C.F. gratefully acknowledges support of his research
+Klein Centre is funded by the Swedish Research Coun-
+cil. C.F. gratefully acknowledges support of his research
 by the Heising-Simons Foundation (#2018-0907). MR
-has received funding from the European Research Council (ERC) under the European Union’s Horizon 2020
+has received funding from the European Research Coun-
+cil (ERC) under the European Union’s Horizon 2020
 research and innovation programme (grant agreement
 n◦ 759194 - USNAC). M. W. C acknowledges support
-from the National Science Foundation with grant number PHY-2010970.
-Software:
-MATLAB (MATLAB 2020), SNID
-(Blondin & Tonry 2007), DASH (Muthukrishna et al.
-2019b), the GROWTH Marshal (Kasliwal et al. 2019),
-Fritz (https://github.com/fritz-marshal/fritz).
-Facilities: P48, P60(SEDM)
-APPENDIX
-A. LOSS FUNCTION DEFINITIONS
-The mean square error (MSE) is the mean of the
-squared distances between the target variable (yi ) and
-predicted values (yip ):
-The mean absolute error (MAE) is the mean of the absolute distances between yi and yip :
-n
-M AE =
-n
-M SE =
-1X
-(yi − yip )2
-n i=1
-(A1)
-The mean bias error (MBE) is the mean of the distances
-between yi and yip :
-n
-M BE =
-1X
-(yi − yip )
-n i=1
-(A2)
-The mean percentage error (MPE) is the mean of the
+from the National Science Foundation with grant num-
+ber PHY-2010970.
+
+  Facilities: P48, P60(SEDM)
+
+                                                     APPENDIX
+
+
+        A. LOSS FUNCTION DEFINITIONS                        The mean absolute error (MAE) is the mean of the ab-
+  The mean square error (MSE) is the mean of the            solute distances between yi and yip :
+squared distances between the target variable (yi ) and                                    n
+                                                                                       1X
+predicted values (yip ):                                                     M AE =          |yi − yip |            (A4)
+                                                                                       n i=1
+                            n
+                         1X
+                M SE =         (yi − yip )2         (A1)             B. SNID AND DASH ROC CURVES
+                         n i=1
+                                                              To evaluate the performance of SNID (v5.0) we use the
+The mean bias error (MBE) is the mean of the distances      standard template bank included with the software10 ,
+between yi and yip :                                        the SNe Ia and non SN templates from the Berkeley SN
+                                                            Ia program (BSNIP; Silverman et al. 2012), the SN Ib
+                             n
+                          1X                                and Ic templates from Modjaz et al. (2014, 2016); Liu
+                M BE =          (yi − yip )         (A2)
+                          n i=1                             et al. (2016), and Williamson et al. (2019), and the SN
+                                                            IIP templates from Gutiérrez et al. (2017). The ROC
+The mean percentage error (MPE) is the mean of the          curve shown in Figure 4 was computed by varying the
 distances between yi and yip divided by yi :
-(A4)
-B. SNID AND DASH ROC CURVES
-To evaluate the performance of SNID (v5.0) we use the
-standard template bank included with the software10 ,
-the SNe Ia and non SN templates from the Berkeley SN
-Ia program (BSNIP; Silverman et al. 2012), the SN Ib
-and Ic templates from Modjaz et al. (2014, 2016); Liu
-et al. (2016), and Williamson et al. (2019), and the SN
-IIP templates from Gutiérrez et al. (2017). The ROC
-curve shown in Figure 4 was computed by varying the
-10 https://people.lam.fr/blondin.stephane/software/snid/
-n
-1 X (yi − yip )
-MPE =
-n i=1
-yi
-1X
-|yi − yip |
-n i=1
-(A3)
-#Download
-=== PAGE 11 ===
-11
-SNIascore
-minimal threshold for the rlap parameter between 0 and
-25. For each automatic classification we take the best
-SNID match with the highest rlap value for that particular spectrum, as we have found that this performs
-better than considering multiple matches (e.g., counting
-how many SNe Ia matches are among the top 10 best
-matches). The redshift range was restricted to a reasonable range for the SNe expected to be found by the BTS
-(z < 0.2). We place no restriction on the phase of the
-templates, and we have not attempted to restrict the
-template set used when running SNID. For future work
-it may be of interest to investigate if there is an optimal
-set of templates to use for SN Ia binary classification.
-In order to evaluate DASH (v1.0 with Models v06) we
-used the default template bank included with the software11 . To create the ROC curve we have investigated
-the effect of cuts on both the softmax scores and the
-rlap values that DASH produces. We investigate the
-ranges softmax > 0.2 − 1 and rlap > 0 − 25. To create
-the ROC curve shown in Figure 4 we consider all possible
-cuts in the range softmax > 0.5−0.9 and rlap > 0−25,
-since for this range we observe the most stable behavior
-in DASH. More extreme cuts on softmax > 0.92−0.99 can
-offer some improvement on the BTS18 dataset, but only
-for one specific and narrow range of FPR (FPR = 0.02),
-which then gives TPR = 0.62. The rest of the ROC
-curve becomes noisy and with no real improvement over
-the one produced for softmax > 0.5 − 0.9. As such, we
-consider this behavior to be unstable and do not recommend extreme cuts on the softmax score for SEDM
-data.
-REFERENCES
-Bellm, E. C., Kulkarni, S. R., Graham, M. J., et al. 2019a,
-PASP, 131, 018002, doi: 10.1088/1538-3873/aaecbe
-Bellm, E. C., Kulkarni, S. R., Barlow, T., et al. 2019b,
-PASP, 131, 068003, doi: 10.1088/1538-3873/ab0c2a
-Blagorodnova, N., Neill, J. D., Walters, R., et al. 2018,
-PASP, 130, 035003, doi: 10.1088/1538-3873/aaa53f
+                                                             10 https://people.lam.fr/blondin.stephane/software/snid/
+                             n
+                     1 X (yi − yip )                            #Download
+               MPE =                                (A3)
+                     n i=1   yi
+                                                        SNIascore                                                           11
+
+minimal threshold for the rlap parameter between 0 and         the effect of cuts on both the softmax scores and the
+25. For each automatic classification we take the best         rlap values that DASH produces. We investigate the
+SNID match with the highest rlap value for that par-           ranges softmax > 0.2 − 1 and rlap > 0 − 25. To create
+ticular spectrum, as we have found that this performs          the ROC curve shown in Figure 4 we consider all possible
+better than considering multiple matches (e.g., counting       cuts in the range softmax > 0.5−0.9 and rlap > 0−25,
+how many SNe Ia matches are among the top 10 best              since for this range we observe the most stable behavior
+matches). The redshift range was restricted to a reason-       in DASH. More extreme cuts on softmax > 0.92−0.99 can
+able range for the SNe expected to be found by the BTS         offer some improvement on the BTS18 dataset, but only
+(z < 0.2). We place no restriction on the phase of the         for one specific and narrow range of FPR (FPR = 0.02),
+templates, and we have not attempted to restrict the           which then gives TPR = 0.62. The rest of the ROC
+template set used when running SNID. For future work           curve becomes noisy and with no real improvement over
+it may be of interest to investigate if there is an optimal    the one produced for softmax > 0.5 − 0.9. As such, we
+set of templates to use for SN Ia binary classification.       consider this behavior to be unstable and do not rec-
+   In order to evaluate DASH (v1.0 with Models v06) we         ommend extreme cuts on the softmax score for SEDM
+used the default template bank included with the soft-         data.
+ware11 . To create the ROC curve we have investigated
+
+
+                                                        REFERENCES
+Bellm, E. C., Kulkarni, S. R., Graham, M. J., et al. 2019a,    Kasliwal, M. M., Cannella, C., Bagdasaryan, A., et al.
+  PASP, 131, 018002, doi: 10.1088/1538-3873/aaecbe                  2019, Publications of the Astronomical Society of the
+Bellm, E. C., Kulkarni, S. R., Barlow, T., et al. 2019b,            Pacific, 131, 038003, doi: 10.1088/1538-3873/aafbc2
+  PASP, 131, 068003, doi: 10.1088/1538-3873/ab0c2a             Kingma, D. P., & Ba, J. 2014, arXiv e-prints,
+Blagorodnova, N., Neill, J. D., Walters, R., et al. 2018,           arXiv:1412.6980. https://arxiv.org/abs/1412.6980
+  PASP, 130, 035003, doi: 10.1088/1538-3873/aaa53f
+                                                               Kulkarni, S. R. 2020, arXiv e-prints, arXiv:2004.03511.
 Blondin, S., & Tonry, J. L. 2007, in American Institute of
-Physics Conference Series, Vol. 924, The Multicolored
-Landscape of Compact Objects and Their Explosive
-Origins, ed. T. di Salvo, G. L. Israel, L. Piersant,
-L. Burderi, G. Matt, A. Tornambe, & M. T. Menna,
-312–321, doi: 10.1063/1.2774875
-Dahiwale, A., & Fremling, C. 2020, Transient Name Server
-Classification Report, 2020-947, 1
-Dekany, R., Smith, R. M., Riddle, R., et al. 2020, PASP,
-132, 038001, doi: 10.1088/1538-3873/ab4ca2
+                                                                    https://arxiv.org/abs/2004.03511
+  Physics Conference Series, Vol. 924, The Multicolored
+  Landscape of Compact Objects and Their Explosive             Liu, Y.-Q., Modjaz, M., Bianco, F. B., & Graur, O. 2016,
+  Origins, ed. T. di Salvo, G. L. Israel, L. Piersant,              ApJ, 827, 90, doi: 10.3847/0004-637X/827/2/90
+  L. Burderi, G. Matt, A. Tornambe, & M. T. Menna,             Masci, F. J., Laher, R. R., Rusholme, B., et al. 2019,
+  312–321, doi: 10.1063/1.2774875                                   PASP, 131, 018003, doi: 10.1088/1538-3873/aae8ac
+Dahiwale, A., & Fremling, C. 2020, Transient Name Server       MATLAB. 2020, 9.8.0.1359463 (R2020a) (Natick,
+  Classification Report, 2020-947, 1                                Massachusetts: The MathWorks Inc.)
+Dekany, R., Smith, R. M., Riddle, R., et al. 2020, PASP,       Modjaz, M., Liu, Y. Q., Bianco, F. B., & Graur, O. 2016,
+  132, 038001, doi: 10.1088/1538-3873/ab4ca2
+                                                                    ApJ, 832, 108, doi: 10.3847/0004-637X/832/2/108
 Duev, D. A., Mahabal, A., Masci, F. J., et al. 2019,
-Monthly Notices of the Royal Astronomical Society, 489,
-3582
-Fremling, C., & Sharma, Y. 2018, Transient Name Server
-Classification Report, 2018-886, 1
-Fremling, C., Miller, A. A., Sharma, Y., et al. 2020, ApJ,
-895, 32, doi: 10.3847/1538-4357/ab8943
-Fremling, C., Dahiwale, A., Mahabal, A., et al. 2021,
-Transient Name Server Astronote, 2021-122
-Graham, M. J., Kulkarni, S. R., Bellm, E. C., et al. 2019,
-PASP, 131, 078001, doi: 10.1088/1538-3873/ab006c
+                                                               Modjaz, M., Blondin, S., Kirshner, R. P., et al. 2014, AJ,
+  Monthly Notices of the Royal Astronomical Society, 489,
+                                                                    147, 99, doi: 10.1088/0004-6256/147/5/99
+  3582
+Fremling, C., & Sharma, Y. 2018, Transient Name Server         Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R.,
+  Classification Report, 2018-886, 1                                & Hložek, R. 2019a, PASP, 131, 118002,
+Fremling, C., Miller, A. A., Sharma, Y., et al. 2020, ApJ,          doi: 10.1088/1538-3873/ab1609
+  895, 32, doi: 10.3847/1538-4357/ab8943                       Muthukrishna, D., Parkinson, D., & Tucker, B. E. 2019b,
+Fremling, C., Dahiwale, A., Mahabal, A., et al. 2021,               ApJ, 885, 85, doi: 10.3847/1538-4357/ab48f4
+  Transient Name Server Astronote, 2021-122                    Nordin, J., Brinnel, V., van Santen, J., et al. 2019, A&A,
+Graham, M. J., Kulkarni, S. R., Bellm, E. C., et al. 2019,          631, A147, doi: 10.1051/0004-6361/201935634
+  PASP, 131, 078001, doi: 10.1088/1538-3873/ab006c
+                                                               Perley, D. A., Fremling, C., Sollerman, J., et al. 2020,
 Gutiérrez, C. P., Anderson, J. P., Hamuy, M., et al. 2017,
-ApJ, 850, 89, doi: 10.3847/1538-4357/aa8f52
-Kasliwal, M. M., Cannella, C., Bagdasaryan, A., et al.
-2019, Publications of the Astronomical Society of the
-Pacific, 131, 038003, doi: 10.1088/1538-3873/aafbc2
-Kingma, D. P., & Ba, J. 2014, arXiv e-prints,
-arXiv:1412.6980. https://arxiv.org/abs/1412.6980
-Kulkarni, S. R. 2020, arXiv e-prints, arXiv:2004.03511.
-https://arxiv.org/abs/2004.03511
-Liu, Y.-Q., Modjaz, M., Bianco, F. B., & Graur, O. 2016,
-ApJ, 827, 90, doi: 10.3847/0004-637X/827/2/90
-Masci, F. J., Laher, R. R., Rusholme, B., et al. 2019,
-PASP, 131, 018003, doi: 10.1088/1538-3873/aae8ac
-MATLAB. 2020, 9.8.0.1359463 (R2020a) (Natick,
-Massachusetts: The MathWorks Inc.)
-Modjaz, M., Liu, Y. Q., Bianco, F. B., & Graur, O. 2016,
-ApJ, 832, 108, doi: 10.3847/0004-637X/832/2/108
-Modjaz, M., Blondin, S., Kirshner, R. P., et al. 2014, AJ,
-147, 99, doi: 10.1088/0004-6256/147/5/99
-Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R.,
-& Hložek, R. 2019a, PASP, 131, 118002,
-doi: 10.1088/1538-3873/ab1609
-Muthukrishna, D., Parkinson, D., & Tucker, B. E. 2019b,
-ApJ, 885, 85, doi: 10.3847/1538-4357/ab48f4
-Nordin, J., Brinnel, V., van Santen, J., et al. 2019, A&A,
-631, A147, doi: 10.1051/0004-6361/201935634
-Perley, D. A., Fremling, C., Sollerman, J., et al. 2020,
-arXiv e-prints, arXiv:2009.01242.
-https://arxiv.org/abs/2009.01242
-Rigault, M., Neill, J. D., Blagorodnova, N., et al. 2019,
-11 https://github.com/daniel-muthukrishna/astrodash
-A&A, 627, A115, doi: 10.1051/0004-6361/201935344
-=== PAGE 12 ===
-12
-Fremling et al.
-Shappee, B., Prieto, J., Stanek, K. Z., et al. 2014, in
-American Astronomical Society Meeting Abstracts, Vol.
-223, American Astronomical Society Meeting Abstracts
-#223, 236.03
-Sherstinsky, A. 2020, Physica D Nonlinear Phenomena,
-404, 132306, doi: 10.1016/j.physd.2019.132306
-Silverman, J. M., Foley, R. J., Filippenko, A. V., et al.
-2012, MNRAS, 425, 1789,
-doi: 10.1111/j.1365-2966.2012.21270.x
+                                                                    arXiv e-prints, arXiv:2009.01242.
+  ApJ, 850, 89, doi: 10.3847/1538-4357/aa8f52
+                                                                    https://arxiv.org/abs/2009.01242
+                                                               Rigault, M., Neill, J. D., Blagorodnova, N., et al. 2019,
+  11 https://github.com/daniel-muthukrishna/astrodash
+                                                                    A&A, 627, A115, doi: 10.1051/0004-6361/201935344
+12                                                      Fremling et al.
+
+Shappee, B., Prieto, J., Stanek, K. Z., et al. 2014, in          Tonry, J., Stalder, B., Denneau, L., et al. 2018a, Transient
+  American Astronomical Society Meeting Abstracts, Vol.            Name Server Discovery Report, 2018-818, 1
+  223, American Astronomical Society Meeting Abstracts           Tonry, J., Denneau, L., Heinze, A., et al. 2020, Transient
+  #223, 236.03                                                     Name Server Discovery Report, 2020-863, 1
+Sherstinsky, A. 2020, Physica D Nonlinear Phenomena,             Tonry, J. L., Denneau, L., Heinze, A. N., et al. 2018b,
+  404, 132306, doi: 10.1016/j.physd.2019.132306                    PASP, 130, 064505, doi: 10.1088/1538-3873/aabadf
+Silverman, J. M., Foley, R. J., Filippenko, A. V., et al.        van der Walt, S. J., Crellin-Quick, A., & Bloom, J. S. 2019,
+   2012, MNRAS, 425, 1789,                                         Journal of Open Source Software, 4,
+                                                                   doi: 10.21105/joss.01247
+   doi: 10.1111/j.1365-2966.2012.21270.x
+                                                                 Williamson, M., Modjaz, M., & Bianco, F. B. 2019, ApJL,
 SNIascore. 2021, Transient Name Server Classification
-Report, 9385
-Tonry, J., Stalder, B., Denneau, L., et al. 2018a, Transient
-Name Server Discovery Report, 2018-818, 1
-Tonry, J., Denneau, L., Heinze, A., et al. 2020, Transient
-Name Server Discovery Report, 2020-863, 1
-Tonry, J. L., Denneau, L., Heinze, A. N., et al. 2018b,
-PASP, 130, 064505, doi: 10.1088/1538-3873/aabadf
-van der Walt, S. J., Crellin-Quick, A., & Bloom, J. S. 2019,
-Journal of Open Source Software, 4,
-doi: 10.21105/joss.01247
-Williamson, M., Modjaz, M., & Bianco, F. B. 2019, ApJL,
-880, L22, doi: 10.3847/2041-8213/ab2edb
-=== PAGE 13 ===
+                                                                   880, L22, doi: 10.3847/2041-8213/ab2edb
+  Report, 9385
+

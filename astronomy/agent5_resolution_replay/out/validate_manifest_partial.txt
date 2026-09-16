@@ -1,6 +1,0 @@
-FAIL out/domain_manifest_partial_agent5.json
-  - missing or empty 'tau'
-  - missing or empty 'label_source'
-  - missing or empty 'exposure_key'
-  - missing or empty 'tool_inventory'
-  - missing or empty 'frozen_hash'

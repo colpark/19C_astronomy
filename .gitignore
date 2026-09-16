@@ -1,0 +1,6 @@
+# Third-party clones and downloaded weights. Only commit hashes are recorded, in each agent's ledgers.
+astronomy/*/code/
+# Source PDFs are hashed in SHA256SUMS; the extracted full text is committed instead.
+astronomy/*/sources/**/*.pdf
+__pycache__/
+*.pyc
