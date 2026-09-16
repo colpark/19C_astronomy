@@ -7,4 +7,4 @@ It does two jobs at once:
 1. **A supply gauge**, run as a five-agent panel. This is a pre-P1 sketch, not a P4 ruling. The skill refuses a ruling until all seven axes carry numbers taken from full source reads.
 2. **An independent-corpus replay.** The skill warns that its replay suite comes from one project. An astronomy run is the out-of-project corpus that warning asks for.
 
-Work lands under `astronomy/`.
+Work lands under `astronomy/`. Start with [`astronomy/SYNTHESIS.md`](astronomy/SYNTHESIS.md), then [`astronomy/replay/RESULT.md`](astronomy/replay/RESULT.md).

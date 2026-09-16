@@ -1,0 +1,18 @@
+set=sealed
+  AST-P2-02 P2     must_fire     ok   
+  AST01 D3     must_fire     ok   
+  AST3-03 P3     must_fire     ok   
+  AST4-03 D4     must_not_fire ok   
+  AST5-02 A4     must_fire     ok   
+  ASTC-02 I3     must_not_fire ok   
+
+must_fire     4 of 4
+must_not_fire 2 of 2
+
+  adjudication  1 of 1
+  discovery     2 of 2
+  instrument    1 of 1
+  supply        2 of 2
+
+validator-only 1: AST-P2-02
+  Convert each into a required refusal inside its owning stage.

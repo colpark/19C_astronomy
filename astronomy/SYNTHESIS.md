@@ -85,7 +85,7 @@ The leaks do not all close, though (agent3 §3):
 
 ## 7. Generality findings: defects the independent corpus exposed in the skill
 
-These are the reason the replay was run. None was visible from the skill's own record.
+These are the reason the replay was run. None was visible from the skill's own record. Item 6 comes from the replay itself.
 
 1. **`scripts/queue.py` crashes at large n.** `ZeroDivisionError` in `ibeta` from midpoint-sum underflow. Reproduced: `queue.py --counted 11183 --passed 7154 --survivors 7154 --target 100`. P5 cannot run on a realistic astronomy corpus. Fix: compute the Clopper-Pearson bounds with `scipy.stats.beta.ppf` or in log space.
 2. **`scripts/tau.py` returns CHOSEN on a curve that bounds nothing.** On a flat curve (every step under 0.3%), the 5% saturation test passes at the second grid point. There is no must-not-join control, so it picked 30″, which merges 39 distinct supernovae. It should REFUSE when no separation column is present and gains never exceed the threshold.
@@ -97,7 +97,8 @@ These are the reason the replay was run. None was visible from the skill's own r
    Agent 1 needed a temporal clause (amendment A1). The skill's tau model comes from sequence identity and assumes one dimension.
 4. **The replay seal protects less than it claims.** `cases.csv` carries polarity, and `replay.py emit` prints it. Since pass/fail is judged on polarity, the sealed rulings file protects only explanation text (agent5 REPLAY_PLAN).
 5. **`replay.md` is internally inconsistent.** It says "Twelve cases are marked sealed" but then "Open the nine once" and reports "sealed, 9 cases". `replay.py audit` counts 12 sealed.
-6. **The load-bearing label distinction transferred cleanly and binds.** Measured vs model-annotated labels map exactly onto human spectroscopic classifications vs SNIascore auto-reports. This part of the skill generalises with no change.
+6. **P2 has no stage-owned refusal.** Two replay cases passed only through global refusal 1 (see §11).
+7. **The load-bearing label distinction transferred cleanly and binds.** Measured vs model-annotated labels map exactly onto human spectroscopic classifications vs SNIascore auto-reports. This part of the skill generalises with no change.
 
 ## 8. Cross-agent disagreements (listed, not reconciled)
 
@@ -130,4 +131,8 @@ These are the reason the replay was run. None was visible from the skill's own r
 
 ## 11. Independent-corpus replay result
 
-_Pending the blind evaluator. See `replay/RESULT.md`._
+**20 of 20 polarity** (14/14 must-fire, 6/6 must-not-fire, sealed 6/6), with **2 unearned**. Scored by the unchanged `replay.py` against a blind fresh evaluator; seal hashes verified. Details: `replay/RESULT.md`.
+
+- This is the first out-of-project evidence that the stage briefs generalise. Read it as consistency, not capability: the cases were written in the skill's own vocabulary, and a clean sweep is the skill's own warning sign.
+- **New skill defect.** Both unearned passes are in **P2**, which has no refusal of its own. Add two refusals there: unmatched floor/ceiling pairs, and floors built on post-decision features. The same kind of gap was found in P4 and A1 in the source record.
+- **Not covered.** There are no runtime or ladder cases, because no harness has run.

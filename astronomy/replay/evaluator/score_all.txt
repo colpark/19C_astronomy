@@ -1,0 +1,32 @@
+set=all
+  AST-P2-01 P2     must_fire     ok   
+  AST-P2-02 P2     must_fire     ok   
+  AST-P2-03 P2     must_not_fire ok   
+  AST-P2-04 P2     must_fire     ok   
+  AST01 D3     must_fire     ok   
+  AST02 P3     must_fire     ok   
+  AST03 P3     must_not_fire ok   
+  AST04 D2     must_fire     ok   
+  AST3-01 D4     must_fire     ok   
+  AST3-02 D2     must_fire     ok   
+  AST3-03 P3     must_fire     ok   
+  AST3-04 D2     must_not_fire ok   
+  AST4-01 I3     must_fire     ok   
+  AST4-02 P3     must_fire     ok   
+  AST4-03 D4     must_not_fire ok   
+  AST4-04 P3     must_fire     ok   
+  AST5-01 A3     must_fire     ok   
+  AST5-02 A4     must_fire     ok   
+  ASTC-01 A3     must_not_fire ok   
+  ASTC-02 I3     must_not_fire ok   
+
+must_fire     14 of 14
+must_not_fire 6 of 6
+
+  adjudication  3 of 3
+  discovery     6 of 6
+  instrument    2 of 2
+  supply        9 of 9
+
+validator-only 2: AST-P2-02, AST-P2-04
+  Convert each into a required refusal inside its owning stage.
