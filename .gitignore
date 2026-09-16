@@ -4,3 +4,8 @@ astronomy/*/code/
 astronomy/*/sources/**/*.pdf
 __pycache__/
 *.pyc
+# Wave 2 and later: nested agent dirs
+astronomy/**/code/
+astronomy/**/data_cache/
+astronomy/**/scratch/
+astronomy/**/sources/**/*.pdf
