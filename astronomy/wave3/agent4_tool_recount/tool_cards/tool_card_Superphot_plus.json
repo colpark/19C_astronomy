@@ -1,0 +1,28 @@
+{
+ "name": "Superphot_plus",
+ "written_from": "code",
+ "wave": 3,
+ "banner": "tool coverage recount (rule D): no output retained as an arm result",
+ "role": "predictor",
+ "quantity_returned": "class probabilities from a LightGBM over light-curve fit parameters",
+ "defining_paper": "de Soto et al. 2024 (Superphot+); read in wave 1 (agent 2)",
+ "accuracy_against_scored_measurement": "Recount: loaded, 0/10: snapi Photometry requires a time/phase/mjd column or DatetimeIndex (TypeError). FAIL at parse.",
+ "what_it_is_not": "Not Rubin-trained; tutorial model only",
+ "served_checkpoint": {
+  "identifier": "data/tutorial/model_superphot_full.pt",
+  "pin": "superphot-plus 973e2a80; sha256 a9536ff1d277f054beff2f51557cc4e00540b3daddd4cf51d2833135da645a88"
+ },
+ "disagreements": [
+  {
+   "topic": "file format vs extension",
+   "file": "model_superphot_full.pt is a plain pickle of superphot_plus.model.lightgbm.SuperphotLightGBM",
+   "code": "SuperphotMLP.load uses torch.load and fails ('Invalid magic number'); the .pt extension implies a torch MLP"
+  },
+  {
+   "topic": "unpinned dependency",
+   "pyproject": "snapi @ git+https://github.com/kdesoto-astro/snapi.git (no ref)",
+   "run": "resolved to 4a419fe0 on 2026-09-16"
+  }
+ ],
+ "completeness": "Covered: the loader, input parser and served checkpoint hash exercised in the wave-3 recount (run_log.jsonl), and each disagreement's code locator. Not covered: the defining paper (not re-read this wave), training code, I4 construct validity and I5 certification."
+}

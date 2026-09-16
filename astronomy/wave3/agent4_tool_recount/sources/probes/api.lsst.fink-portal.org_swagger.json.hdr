@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Server: nginx/1.20.1
+Date: Wed, 16 Sep 2026 20:48:44 GMT
+Content-Type: application/json
+Content-Length: 30918
+Connection: keep-alive
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: Content-Type,Authorization
+Access-Control-Allow-Methods: GET,PUT,POST,DELETE,OPTIONS
+

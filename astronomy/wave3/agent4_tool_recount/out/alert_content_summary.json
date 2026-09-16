@@ -1,0 +1,116 @@
+{
+ "alerts": [
+  {
+   "oid": "170609056632799366",
+   "sources_status": 200,
+   "n_source_rows": 3,
+   "sources_raw_sha256": "c06f410b4fefd9e49f173826aeb51704bca7079490864751a76a06b3e939bf2f",
+   "sources_dropped": [],
+   "objects_status": 200,
+   "objects_raw_sha256": "5e0703095da875c59542d33491eaa61f704f2bc6e6426ee6b9b260bb7a9f4c9a"
+  },
+  {
+   "oid": "170609056632800306",
+   "sources_status": 200,
+   "n_source_rows": 1,
+   "sources_raw_sha256": "b9b05f98df3b1c6f6963e856dbb31bf78305271b8d6591de5976505d8d52f29f",
+   "sources_dropped": [],
+   "objects_status": 200,
+   "objects_raw_sha256": "b8b780c2c2b89c0cc4d3ba7c532d62fa182e3a555ad8201e5515dfa054b751fa"
+  },
+  {
+   "oid": "170609056633324210",
+   "sources_status": 200,
+   "n_source_rows": 1,
+   "sources_raw_sha256": "e2de1b9206a042fd8509ca5d67a0e5b5e6fbe5e638f6dd56bcbe32d7d417501f",
+   "sources_dropped": [],
+   "objects_status": 200,
+   "objects_raw_sha256": "ee67cf6169ae416532bedfb6ab3be74dda273b59e18400b9102f3b6a024cc288"
+  },
+  {
+   "oid": "170609056633848501",
+   "sources_status": 200,
+   "n_source_rows": 2,
+   "sources_raw_sha256": "fa97d8e288b3f5dc44923d0d7804b2354fc4401b8856c705e572125dbe6092df",
+   "sources_dropped": [],
+   "objects_status": 200,
+   "objects_raw_sha256": "ed63cdb8682076b64398a2f15acc0767cd82cc6f5b84645f4f7ea2b2440cd3ea"
+  },
+  {
+   "oid": "170609056633849114",
+   "sources_status": 200,
+   "n_source_rows": 1,
+   "sources_raw_sha256": "2da2ca927e036eaab7c8bfa400feef3e1c03d433c2c3e0afbcf1ca60908ae56d",
+   "sources_dropped": [],
+   "objects_status": 200,
+   "objects_raw_sha256": "1c65ec2f79b6b4eb71f0fc49c4cbb0ca715a5ed30f63f5926788775e8d42b34e"
+  },
+  {
+   "oid": "170609056634372105",
+   "sources_status": 200,
+   "n_source_rows": 2,
+   "sources_raw_sha256": "eecea6a97eec7637c0b828ae85adf91ca1881d3c1751e902fc59de26e257a708",
+   "sources_dropped": [],
+   "objects_status": 200,
+   "objects_raw_sha256": "17a391240b547acdd2e111ada712ee1786f1969847f1228e9156993532c51889"
+  },
+  {
+   "oid": "170609056634372478",
+   "sources_status": 200,
+   "n_source_rows": 1,
+   "sources_raw_sha256": "c3b86fd162d703e50bf2ed3fc5216f3f80a6e83eb3a23b17e209a5feb7a2a5a4",
+   "sources_dropped": [],
+   "objects_status": 200,
+   "objects_raw_sha256": "35d6b028e8792031e155a64f0063b1d0c2bf4e210bdfe6bf4bda1cb923953bc8"
+  },
+  {
+   "oid": "170609056634372804",
+   "sources_status": 200,
+   "n_source_rows": 3,
+   "sources_raw_sha256": "00cd17ff6c5abd032da25829f90c681b0284db7d812b19d57bce5b5bf1ff0688",
+   "sources_dropped": [],
+   "objects_status": 200,
+   "objects_raw_sha256": "307125b44020443fd1127b4516f039e0123cfc9726f56d1954fd512251acbd12"
+  },
+  {
+   "oid": "170609056634372829",
+   "sources_status": 200,
+   "n_source_rows": 2,
+   "sources_raw_sha256": "ede56e90e70f19235b056443b348094a5aef71c483d50411eb92651eaf07290d",
+   "sources_dropped": [],
+   "objects_status": 200,
+   "objects_raw_sha256": "3a80e9310175fabacc4e147bc4c223508c1a9364a8f4942543261a61b8de712f"
+  },
+  {
+   "oid": "170609056634373061",
+   "sources_status": 200,
+   "n_source_rows": 1,
+   "sources_raw_sha256": "6f2126589c71262e55595b0626ff8a62aea3d5caeb1a4a20e678c7b4f488034a",
+   "sources_dropped": [],
+   "objects_status": 200,
+   "objects_raw_sha256": "96fd6e3212e8ea65099f838d58c942cf5f78641452876447d78bb49bf886811a"
+  }
+ ],
+ "avro_attempt": {
+  "name": "s4_avro_attempt_170609056632799366",
+  "time_utc": "2026-09-16T20:53:50.663169+00:00",
+  "method": "POST",
+  "url": "https://api.lsst.fink-portal.org/api/v1/sources",
+  "body": {
+   "diaObjectId": "170609056632799366",
+   "columns": "r:diaObjectId,r:diaSourceId,r:midpointMjdTai,r:band,r:psfFlux,r:psfFluxErr,r:ra,r:dec,r:snr,r:isNegative,r:reliability",
+   "output-format": "avro"
+  },
+  "status": 400,
+  "headers": {
+   "Server": "nginx/1.20.1",
+   "Date": "Wed, 16 Sep 2026 20:53:51 GMT",
+   "Content-Type": "text/html; charset=utf-8",
+   "Content-Length": "115"
+  },
+  "raw_sha256": "fcb3d28458e1a34934b4007f564fd344fb891b7dabad820f850b1584fedd986e",
+  "raw_bytes": 115,
+  "kind": "text(first 2000 chars)",
+  "dropped_keys": []
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "name": "AstroM3",
+ "written_from": "code",
+ "wave": 3,
+ "banner": "tool coverage recount (rule D): no output retained as an arm result",
+ "role": "encoder",
+ "quantity_returned": "photometry Informer (CLIP-photo, 10-class head) over 200-step, 9-feature photometry tensors",
+ "defining_paper": "Rizhko & Bloom 2024, arXiv:2411.08842; not read in this wave",
+ "accuracy_against_scored_measurement": "Recount: loaded (HF AstroMLCore/AstroM3-CLIP-photo rev 8904ed33, safetensors oid 05d5f0b8), 0/10: process_photometry cannot tensorise v11_1 rows (ValueError too many dimensions 'str'). FAIL at parse.",
+ "what_it_is_not": "Not a transient classifier: trained on ASAS-SN variable stars with LAMOST spectra",
+ "served_checkpoint": {
+  "identifier": "huggingface AstroMLCore/AstroM3-CLIP-photo model.safetensors",
+  "pin": "revision 8904ed332cb9437691932a6d44e9a25a123cf76f; lfs sha256 05d5f0b8debb292a8b43095cd5c2ed15625c11365a37494d359cbf600565831d"
+ },
+ "disagreements": [
+  {
+   "topic": "weights availability vs wave-1 inventory",
+   "wave1": "'none found in repo; paper made available upon acceptance' (UNAVAILABLE)",
+   "now": "weights public on Hugging Face under AstroMLCore (12 model repos), not in the GitHub repo"
+  }
+ ],
+ "completeness": "Covered: the loader, input parser and served checkpoint hash exercised in the wave-3 recount (run_log.jsonl), and each disagreement's code locator. Not covered: the defining paper (not re-read this wave), training code, I4 construct validity and I5 certification."
+}

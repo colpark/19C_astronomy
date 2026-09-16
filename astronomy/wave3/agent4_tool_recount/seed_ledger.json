@@ -1,0 +1,84 @@
+{
+ "agent": "wave3/agent4_tool_recount",
+ "date": "2026-09-16",
+ "seeds": [
+  {
+   "id": "PANEL_BRIEF_WAVE3.md",
+   "file": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+   "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+   "read_in_full": true,
+   "contribution": "assignment, rule D, PI rulings 2-3, preamble item 5"
+  },
+  {
+   "id": "bands_FROZEN.md",
+   "file": "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md",
+   "sha256": "8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2",
+   "read_in_full": false,
+   "contribution": "\u00a7tool_coverage band text (lines 157-162) and P4 precondition (b) (line 186) read; admission boundary T0 and unit definitions read from agent 1 REPORT.md and count_protocol_FROZEN.md",
+   "blocks": "none; only the tool_coverage section and P4 preconditions are used"
+  },
+  {
+   "id": "agent1 order_of_operations.log",
+   "file": "astronomy/wave2/agent1_rubin_bands/order_of_operations.log",
+   "read_in_full": true,
+   "contribution": "band hash timestamp 2026-09-16T18:51:26.922781Z"
+  },
+  {
+   "id": "safe_fetch.py",
+   "file": "astronomy/wave2/agent1_rubin_bands/scripts/safe_fetch.py",
+   "read_in_full": true,
+   "contribution": "label-stripping fetch path (copied unchanged to scripts/)"
+  },
+  {
+   "id": "wave-1 tool_inventory_slot.json",
+   "file": "astronomy/agent4_tools_instrument/tool_inventory_slot.json",
+   "read_in_full": true,
+   "contribution": "the 25-tool list, groups, counterparts, weight pins"
+  },
+  {
+   "id": "wave-1 tool_coverage_axis.json",
+   "file": "astronomy/agent4_tools_instrument/tool_coverage_axis.json",
+   "sha256": "5ec00e9ac0269665b2851de9063c5c5c270a3b1bd87adac2b44d129da9fdbadb",
+   "read_in_full": true,
+   "contribution": "superseded record"
+  },
+  {
+   "id": "Fink LSST API swagger + schema",
+   "file": "sources/probes/api.lsst.fink-portal.org_swagger.json.body; fink_schema_*.body",
+   "read_in_full": true,
+   "contribution": "endpoint list, output formats, r:/f: field families (label-bearing f: columns excluded)"
+  },
+  {
+   "id": "Fink Rubin processors @591e75ce",
+   "file": "code/fink-science_591e75ce/fink_science/rubin/{random_forest_snia,slsn,snn,cats}/processor.py",
+   "read_in_full": true,
+   "contribution": "call signatures, defaults, unit conversions, served models"
+  },
+  {
+   "id": "tool entry points",
+   "file": "code/*: astroOracle/pretrained_models.py, parsnip light_curve.py, astrorapid/classify.py, ASTROMER/models.py+utils.py, main-code steps/model_design.py+src/data/loaders.py, AstroM3 src/data.py+model.py, BTSbot from_HF.py+inference_example.py, multimodal-supernovae src/dataloader.py (load_lightcurves), lc_classifier classifier/models.py, superphot_plus model/{mlp,classifier}.py, astro_ghost ghostHelperFunctions.py (getTransientHosts, getGHOST)",
+   "read_in_full": false,
+   "contribution": "input parsers and loaders exercised; read at the function level, not whole repositories",
+   "blocks": "I3 full cards for these tools (cards list only the code paths exercised)"
+  },
+  {
+   "id": "Zenodo 18207945 record",
+   "file": "api JSON (scratch)",
+   "read_in_full": true,
+   "contribution": "Astromer 2 weights file list, sizes, md5"
+  },
+  {
+   "id": "HF model APIs",
+   "file": "huggingface.co/api/models (AstroM3-CLIP-photo, BTSbot, astroclip, searches)",
+   "read_in_full": true,
+   "contribution": "weights existence, sizes, LFS oids, revisions"
+  },
+  {
+   "id": "wave-2 paired score files",
+   "file": "astronomy/wave2/agent4_instrument/data_cache/power/paired_{E1,E3}_{N,R}.csv",
+   "read_in_full": true,
+   "contribution": "inputs to power_calibration_delta005.json (hashes inside that record)"
+  }
+ ],
+ "completeness": "Every file that set a pass criterion, band, boundary, parser, default or weight pin used in this recount is listed; papers of the 25 tools were not re-read in wave 3 (cards say so); bands_FROZEN.md was read only in the sections used."
+}

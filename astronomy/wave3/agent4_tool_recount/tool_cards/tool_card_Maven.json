@@ -1,0 +1,27 @@
+{
+ "name": "Maven",
+ "written_from": "code",
+ "wave": 3,
+ "banner": "tool coverage recount (rule D): no output retained as an arm result",
+ "role": "encoder",
+ "quantity_returned": "CLIP embeddings of ZTF light curves (R, g magnitudes) and SEDM spectra",
+ "defining_paper": "Zhang et al. 2024 (Maven); not read in this wave",
+ "accuracy_against_scored_measurement": "Recount: loaded (ckpt sha256 0fc75ccc match), 0/10: src.dataloader.load_lightcurves requires ZTFBTS_TransientTable.csv (A_V, redshift) alongside ZTF band CSVs. FAIL at parse.",
+ "what_it_is_not": "Not decision-time or Rubin-ready: its loader joins the BTS transient table",
+ "served_checkpoint": {
+  "identifier": "models/clip_noiselesssimpretrain_clipreal/gallant-sweep-1/epoch=30-step=3627.ckpt",
+  "pin": "ThomasHelfer/multimodal-supernovae 1f571aa9; sha256 0fc75ccc06ac33ae481ae08481b27d0d8a6378643f661c1f5c4a5a34dc8cd880"
+ },
+ "disagreements": [
+  {
+   "topic": "label-bearing input",
+   "code": "load_lightcurves reads ZTFBTS_TransientTable.csv (a BTS table; the code reads its ZTFID, A_V and redshift columns) to apply MW extinction and filter objects",
+   "exposure": "the inference loader touches the outcome-bearing table; rule C exposure"
+  },
+  {
+   "topic": "band names",
+   "code": "bands ['R','g'] with wave_eff g=1196.25 A (comment says ZTF-g effective wavelength; ZTF g is ~4800 A)"
+  }
+ ],
+ "completeness": "Covered: the loader, input parser and served checkpoint hash exercised in the wave-3 recount (run_log.jsonl), and each disagreement's code locator. Not covered: the defining paper (not re-read this wave), training code, I4 construct validity and I5 certification."
+}

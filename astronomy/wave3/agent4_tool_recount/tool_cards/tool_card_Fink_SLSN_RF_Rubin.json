@@ -1,0 +1,23 @@
+{
+ "name": "Fink_SLSN_RF_Rubin",
+ "written_from": "code",
+ "wave": 3,
+ "banner": "tool coverage recount (rule D): no output retained as an arm result",
+ "role": "predictor",
+ "quantity_returned": "P(SLSN) from SLSN_rainbow_no_MD.joblib over Rainbow features; 0 when the minimum points per passband is not met",
+ "defining_paper": "Fink SLSN (Russeil et al.); not read in this wave",
+ "accuracy_against_scored_measurement": "Recount: 0/10 non-default on public Fink LSST API rows carrying lsst v11_1 field names (Avro not served: HTTP 400) (all alerts below the per-passband minimum). FAIL at emit.",
+ "what_it_is_not": "Not usable at first alert or within the ~2 weeks of Rubin on-sky data available for the sampled cohort objects",
+ "served_checkpoint": {
+  "identifier": "data/models/SLSN_rainbow_no_MD.joblib",
+  "pin": "fink-science 591e75ce; sha256 855e55d0cc271efef3c3fa4c75eef00ac8f48ae6ca57b1fbe138aa9c88ce5df4"
+ },
+ "disagreements": [
+  {
+   "topic": "kernel vs disk",
+   "code": "kernel.py references data/models/SLSN_rainbow_MD.joblib",
+   "disk": "absent at 591e75ce (only no_MD present); metadata=False path used by slsn_rubin"
+  }
+ ],
+ "completeness": "Covered: the loader, input parser and served checkpoint hash exercised in the wave-3 recount (run_log.jsonl), and each disagreement's code locator. Not covered: the defining paper (not re-read this wave), training code, I4 construct validity and I5 certification."
+}

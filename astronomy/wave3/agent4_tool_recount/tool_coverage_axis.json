@@ -1,0 +1,522 @@
+{
+ "id": "axis-tool_coverage-astronomy-rubin-recount-2026-09-16",
+ "axis": "tool_coverage",
+ "stage": "P3 recount after band hash (wave 3, rule D)",
+ "supersedes": {
+  "path": "astronomy/agent4_tools_instrument/tool_coverage_axis.json",
+  "sha256": "5ec00e9ac0269665b2851de9063c5c5c270a3b1bd87adac2b44d129da9fdbadb",
+  "note": "wave-1 counts were structural (no tool executed); this recount is functional under the frozen protocol"
+ },
+ "recount_timestamps": {
+  "band_hash_utc": "2026-09-16T18:51:26.922781Z",
+  "protocol_frozen_utc": "2026-09-16T20:52:25.088956Z",
+  "first_run_utc": "2026-09-16T20:55:49.571947Z",
+  "last_run_utc": "2026-09-16T21:28:04.390104Z",
+  "record_built_utc": "2026-09-16T21:39:54Z",
+  "all_runs_after_band_hash": true
+ },
+ "protocol": {
+  "path": "recount_protocol_FROZEN.md",
+  "sha256": "f32cf288f1fed6be54ed7c4c44fa0ec8012829945a20eedddf3e439ef5df52e6",
+  "amendments": [
+   "AM1 dedupe candidate oids (before any fetch or run)",
+   "AM2 GHOST pruned model re-fetched; 2 runs voided"
+  ]
+ },
+ "alert_sample": {
+  "sealed_ids": "sealed/alert_ids_SEALED_v2.json",
+  "sha256": "94c01ce119e68ba38ad420e1bc23aa5199426fe491fcb96828f8fbcef81a50aa",
+  "n_alerts": 10,
+  "diaSources_per_alert": "1-3",
+  "sky": "all within ~0.9 deg of ra 223.6, dec -40.0"
+ },
+ "packet_format_qualifier": "No public endpoint served lsst v11_1 Avro packets (Fink /api/v1/sources output-format=avro -> HTTP 400 'Output format avro is not supported. Choose among json, csv, votable, or parquet'). Every run used public Fink LSST API JSON rows carrying lsst v11_1 field names (r: columns), values unchanged. No tool was run on v11_1 Avro packets.",
+ "value": {
+  "counts_by_group_and_disposition": {
+   "FM/deep": {
+    "PASS": 1,
+    "FAIL": 9,
+    "UNDEMONSTRATED": 5
+   },
+   "classical": {
+    "PASS": 1,
+    "FAIL": 5,
+    "UNDEMONSTRATED": 4
+   },
+   "all": {
+    "PASS": 2,
+    "FAIL": 14,
+    "UNDEMONSTRATED": 9
+   }
+  },
+  "per_tool": [
+   {
+    "tool": "ATAT",
+    "group": "FM/deep",
+    "rubin_counterparts_after_remap": [
+     "Fink_EarlySNIa_RF",
+     "Fink_SLSN_RF"
+    ],
+    "remapped": true,
+    "n_log_lines": 1,
+    "disposition": "UNDEMONSTRATED",
+    "reason": "checkpoint over cap (10 GB > 1 GB) and unpinned (no hash obtainable without download)",
+    "alerts_run": 0,
+    "passes": 0
+   },
+   {
+    "tool": "ORACLE",
+    "group": "FM/deep",
+    "rubin_counterparts_after_remap": [
+     "ALeRCE_BHRF",
+     "Fink_EarlySNIa_RF"
+    ],
+    "remapped": false,
+    "n_log_lines": 14,
+    "alerts_run": 10,
+    "passes": 0,
+    "superseded_or_voided_runs": 0,
+    "failed_load_attempts": [
+     "ModuleNotFoundError: No module named 'polars'",
+     "ValueError: Unrecognized keyword arguments passed to GRU: {'time_major': False}",
+     "ModuleNotFoundError: No module named 'imageio'"
+    ],
+    "disposition": "FAIL",
+    "stage": "parse",
+    "logged_statuses": {
+     "error:parse": 10
+    },
+    "error": "KeyError: 'FLUXCAL'",
+    "stage_reclassified": null
+   },
+   {
+    "tool": "SuperNNova",
+    "group": "FM/deep",
+    "rubin_counterparts_after_remap": [
+     "Fink_EarlySNIa_RF",
+     "Fink_SLSN_RF"
+    ],
+    "remapped": false,
+    "n_log_lines": 11,
+    "alerts_run": 10,
+    "passes": 0,
+    "superseded_or_voided_runs": 0,
+    "failed_load_attempts": [],
+    "disposition": "FAIL",
+    "stage": "parse",
+    "logged_statuses": {
+     "error:infer": 10
+    },
+    "error": "KeyError: \"['MWEBV'] not in index\"",
+    "stage_reclassified": "supernnova classify_lcs feature assembly KeyError ['MWEBV']: model cli_args require MWEBV, wrapper supplies none"
+   },
+   {
+    "tool": "CATS",
+    "group": "FM/deep",
+    "rubin_counterparts_after_remap": [
+     "Fink_EarlySNIa_RF",
+     "Fink_SLSN_RF"
+    ],
+    "remapped": false,
+    "n_log_lines": 11,
+    "alerts_run": 10,
+    "passes": 5,
+    "superseded_or_voided_runs": 0,
+    "failed_load_attempts": [],
+    "disposition": "PASS",
+    "pass_count": "5/10"
+   },
+   {
+    "tool": "RAPID",
+    "group": "FM/deep",
+    "rubin_counterparts_after_remap": [
+     "ALeRCE_BHRF",
+     "Superphot_plus"
+    ],
+    "remapped": false,
+    "n_log_lines": 12,
+    "alerts_run": 10,
+    "passes": 0,
+    "superseded_or_voided_runs": 0,
+    "failed_load_attempts": [
+     "ModuleNotFoundError: No module named 'pkg_resources'"
+    ],
+    "disposition": "FAIL",
+    "stage": "parse",
+    "logged_statuses": {
+     "error:infer": 10
+    },
+    "error": "AssertionError: ",
+    "stage_reclassified": "Classify._do_error_checks: assert len(light_curve) == 10 (input validator)"
+   },
+   {
+    "tool": "SCONE",
+    "group": "FM/deep",
+    "rubin_counterparts_after_remap": [
+     "SALT3_sncosmo",
+     "ALeRCE_BHRF"
+    ],
+    "remapped": false,
+    "n_log_lines": 1,
+    "disposition": "UNDEMONSTRATED",
+    "reason": "no weights: none in repo at 9b72001b, none pruned, no SCONE model on Hugging Face (helenqu/astro-time-series-transformer is a different project)",
+    "alerts_run": 0,
+    "passes": 0
+   },
+   {
+    "tool": "BTSbot",
+    "group": "FM/deep",
+    "rubin_counterparts_after_remap": [
+     "ALeRCE_BHRF"
+    ],
+    "remapped": false,
+    "n_log_lines": 12,
+    "alerts_run": 10,
+    "passes": 0,
+    "superseded_or_voided_runs": 0,
+    "failed_load_attempts": [
+     "ModuleNotFoundError: No module named 'bson'"
+    ],
+    "disposition": "FAIL",
+    "stage": "parse",
+    "logged_statuses": {
+     "error:parse": 10
+    },
+    "error": "KeyError: \"['sgscore1', 'distpsnr1', 'sgscore2', 'distpsnr2', 'fwhm', 'magpsf', 'sigmapsf', 'chipsf', 'diffmaglim', 'ndethist', 'nmtchps', 'age', 'days_since_peak', 'days_to_peak', 'peakmag_so_far', 'new_drb', 'ncovhist', 'nnotdet', 'chinr', 'sharpnr', 'scorr', 'sky', 'maxmag_so_far'] not in index\"",
+    "stage_reclassified": null
+   },
+   {
+    "tool": "AppleCiDEr",
+    "group": "FM/deep",
+    "rubin_counterparts_after_remap": [
+     "ALeRCE_BHRF"
+    ],
+    "remapped": false,
+    "n_log_lines": 1,
+    "disposition": "UNDEMONSTRATED",
+    "reason": "no weights: repo at 48148937 has only a placeholder pretrained_weights_path_; none on Hugging Face",
+    "alerts_run": 0,
+    "passes": 0
+   },
+   {
+    "tool": "Maven",
+    "group": "FM/deep",
+    "rubin_counterparts_after_remap": [
+     "Superphot_plus",
+     "ALeRCE_BHRF",
+     "SALT3_sncosmo"
+    ],
+    "remapped": false,
+    "n_log_lines": 11,
+    "alerts_run": 10,
+    "passes": 0,
+    "superseded_or_voided_runs": 0,
+    "failed_load_attempts": [],
+    "disposition": "FAIL",
+    "stage": "parse",
+    "logged_statuses": {
+     "error:parse": 10
+    },
+    "error": "FileNotFoundError: [Errno 2] No such file or directory: '/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave3/agent4_tool_recount/data_cache/tmpxqyv4cd0/ZTFBTS_TransientTable.csv'",
+    "stage_reclassified": null
+   },
+   {
+    "tool": "Astromer1",
+    "group": "FM/deep",
+    "rubin_counterparts_after_remap": [
+     "Fink_EarlySNIa_RF",
+     "Fink_SLSN_RF"
+    ],
+    "remapped": true,
+    "n_log_lines": 13,
+    "alerts_run": 10,
+    "passes": 0,
+    "superseded_or_voided_runs": 0,
+    "failed_load_attempts": [
+     "BadZipFile: File is not a zip file",
+     "FileNotFoundError: [Errno 2] No such file or directory: 'weights/macho_a0/conf.json'"
+    ],
+    "disposition": "FAIL",
+    "stage": "parse",
+    "logged_statuses": {
+     "error:infer": 10
+    },
+    "error": "InvalidArgumentError: {{function_node __wrapped__IteratorGetNext_output_types_8_device_/job:localhost/replica:0/task:0/device:CPU:0}} TypeError: `generator` yielded an element that could not be converted to the expected type. The expected type was float32, but the yielded element was [['z' -39.8260241648 170609056632799366 170609056632799366 False\n  61222.0506421629 6218.2803 536.89136 223.8684288813 0.96664107\n  11.161311]\n ['g' -39.8260797744 170609056632799366 170661828761748131 True\n  61234.",
+    "stage_reclassified": "ASTROMER load_numpy tf.data generator TypeError on the v11_1 row array (input pipeline)"
+   },
+   {
+    "tool": "Astromer2",
+    "group": "FM/deep",
+    "rubin_counterparts_after_remap": [
+     "Fink_EarlySNIa_RF",
+     "Fink_SLSN_RF"
+    ],
+    "remapped": true,
+    "n_log_lines": 11,
+    "alerts_run": 10,
+    "passes": 0,
+    "superseded_or_voided_runs": 0,
+    "failed_load_attempts": [],
+    "disposition": "FAIL",
+    "stage": "parse",
+    "logged_statuses": {
+     "error:infer": 10
+    },
+    "error": "InvalidArgumentError: {{function_node __wrapped__IteratorGetNext_output_types_4_device_/job:localhost/replica:0/task:0/device:CPU:0}} TypeError: `generator` yielded an element that could not be converted to the expected type. The expected type was float32, but the yielded element was [['z' -39.8260241648 170609056632799366 170609056632799366 False\n  61222.0506421629 6218.2803 536.89136 223.8684288813 0.96664107\n  11.161311]\n ['g' -39.8260797744 170609056632799366 170661828761748131 True\n  61234.",
+    "stage_reclassified": "src.data.loaders.load_numpy generator TypeError, expects float (None,3) (input pipeline)"
+   },
+   {
+    "tool": "MultibandAstromer",
+    "group": "FM/deep",
+    "rubin_counterparts_after_remap": [
+     "ALeRCE_BHRF"
+    ],
+    "remapped": false,
+    "n_log_lines": 1,
+    "disposition": "UNDEMONSTRATED",
+    "reason": "no weights: none in repo at 7228548b; none on Hugging Face",
+    "alerts_run": 0,
+    "passes": 0
+   },
+   {
+    "tool": "AstroCLIP",
+    "group": "FM/deep",
+    "rubin_counterparts_after_remap": [
+     "GHOST",
+     "Blast"
+    ],
+    "remapped": false,
+    "n_log_lines": 1,
+    "disposition": "UNDEMONSTRATED",
+    "reason": "checkpoint over cap: x-linked-size 1680929841 bytes > 1 GB (etag e16893952be34d570022012a94fe541d5c6fa985dda3f8d13354c2ad52896d56)",
+    "alerts_run": 0,
+    "passes": 0
+   },
+   {
+    "tool": "AstroM3",
+    "group": "FM/deep",
+    "rubin_counterparts_after_remap": [
+     "ALeRCE_BHRF"
+    ],
+    "remapped": false,
+    "n_log_lines": 11,
+    "alerts_run": 10,
+    "passes": 0,
+    "superseded_or_voided_runs": 0,
+    "failed_load_attempts": [],
+    "disposition": "FAIL",
+    "stage": "parse",
+    "logged_statuses": {
+     "error:parse": 10
+    },
+    "error": "ValueError: too many dimensions 'str'",
+    "stage_reclassified": null
+   },
+   {
+    "tool": "ParSNIP",
+    "group": "FM/deep",
+    "rubin_counterparts_after_remap": [
+     "SALT3_sncosmo",
+     "Superphot_plus"
+    ],
+    "remapped": false,
+    "n_log_lines": 12,
+    "alerts_run": 10,
+    "passes": 0,
+    "superseded_or_voided_runs": 0,
+    "failed_load_attempts": [
+     "ModuleNotFoundError: No module named 'lightgbm'"
+    ],
+    "disposition": "FAIL",
+    "stage": "parse",
+    "logged_statuses": {
+     "error:parse": 10
+    },
+    "error": "ValueError: Couldn't find required key 'time'. Possible aliases ('time', 'date', 'jd', 'mjd', 'mjdobs').",
+    "stage_reclassified": null
+   },
+   {
+    "tool": "ALeRCE_BHRF",
+    "group": "classical",
+    "rubin_counterparts_after_remap": [],
+    "remapped": false,
+    "n_log_lines": 12,
+    "alerts_run": 10,
+    "passes": 0,
+    "superseded_or_voided_runs": 0,
+    "failed_load_attempts": [
+     "AssertionError: "
+    ],
+    "disposition": "FAIL",
+    "stage": "parse",
+    "logged_statuses": {
+     "error:parse": 10
+    },
+    "error": "Exception: Missing features: {'Harmonics_phase_6_1', 'GP_DRW_tau_2', 'MedianBRP_2', 'SPM_beta_2', 'PairSlopeTrend_2', 'SF_ML_amplitude_2', 'Harmonics_phase_3_1', 'StetsonK_1', 'Harmonics_phase_5_2', 'Harmonics_mag_6_2', 'SF_ML_gamma_2', 'Harmonics_phase_5_1', 'SPM_A_1', 'g-r_mean', 'Power_rate_3', 'Pvar_2', 'MedianAbsDev_1', 'SPM_tau_rise_2', 'MaxSlope_2', 'GP_DRW_sigma_2', 'Power_rate_1/4', 'median_diffmaglim_before_fid_2', 'Psi_eta_2', 'r-W2', 'MHPS_low_1', 'n_non_det_after_fid_1', 'max_diffma",
+    "stage_reclassified": null
+   },
+   {
+    "tool": "SALT3_sncosmo",
+    "group": "classical",
+    "rubin_counterparts_after_remap": [],
+    "remapped": false,
+    "n_log_lines": 11,
+    "alerts_run": 10,
+    "passes": 0,
+    "superseded_or_voided_runs": 0,
+    "failed_load_attempts": [],
+    "disposition": "FAIL",
+    "stage": "parse",
+    "logged_statuses": {
+     "error:parse": 10
+    },
+    "error": "ValueError: no alias found for 'time' (possible case-independent aliases: 'jd', 'mjd', 'mjd_obs', 'time', 'date', 'mjdobs')",
+    "stage_reclassified": null
+   },
+   {
+    "tool": "Superphot_plus",
+    "group": "classical",
+    "rubin_counterparts_after_remap": [],
+    "remapped": false,
+    "n_log_lines": 13,
+    "alerts_run": 10,
+    "passes": 0,
+    "superseded_or_voided_runs": 0,
+    "failed_load_attempts": [
+     "ModuleNotFoundError: No module named 'jax'",
+     "RuntimeError: Invalid magic number; corrupt file?"
+    ],
+    "disposition": "FAIL",
+    "stage": "parse",
+    "logged_statuses": {
+     "error:parse": 10
+    },
+    "error": "TypeError: index must be of DatetimeIndex or TimedeltaIndex, or one of ['time','phase','mjd'] must be columns.",
+    "stage_reclassified": null
+   },
+   {
+    "tool": "Superphot",
+    "group": "classical",
+    "rubin_counterparts_after_remap": [],
+    "remapped": false,
+    "n_log_lines": 1,
+    "disposition": "UNDEMONSTRATED",
+    "reason": "no weights: repo at eb3e31be ships no trained classifier",
+    "alerts_run": 0,
+    "passes": 0
+   },
+   {
+    "tool": "Fink_EarlySNIa_RF",
+    "group": "classical",
+    "rubin_counterparts_after_remap": [],
+    "remapped": false,
+    "n_log_lines": 11,
+    "alerts_run": 10,
+    "passes": 0,
+    "superseded_or_voided_runs": 0,
+    "failed_load_attempts": [],
+    "disposition": "FAIL",
+    "stage": "emit",
+    "logged_statuses": {
+     "error:emit(default output)": 10
+    },
+    "error": "code default output on every alert (non-default rule not met)",
+    "stage_reclassified": null
+   },
+   {
+    "tool": "Fink_SLSN_RF",
+    "group": "classical",
+    "rubin_counterparts_after_remap": [],
+    "remapped": false,
+    "n_log_lines": 11,
+    "alerts_run": 10,
+    "passes": 0,
+    "superseded_or_voided_runs": 0,
+    "failed_load_attempts": [],
+    "disposition": "FAIL",
+    "stage": "emit",
+    "logged_statuses": {
+     "error:emit(default output)": 10
+    },
+    "error": "code default output on every alert (non-default rule not met)",
+    "stage_reclassified": null
+   },
+   {
+    "tool": "Sherlock",
+    "group": "classical",
+    "rubin_counterparts_after_remap": [],
+    "remapped": false,
+    "n_log_lines": 1,
+    "disposition": "UNDEMONSTRATED",
+    "reason": "external database not provisioned: sherlock requires a MySQL catalogue database (default_settings.yaml database settings); no public instance",
+    "alerts_run": 0,
+    "passes": 0
+   },
+   {
+    "tool": "GHOST",
+    "group": "classical",
+    "rubin_counterparts_after_remap": [],
+    "remapped": false,
+    "n_log_lines": 13,
+    "alerts_run": 8,
+    "passes": 3,
+    "superseded_or_voided_runs": 2,
+    "failed_load_attempts": [
+     "ModuleNotFoundError: No module named 'astro_ghost._version'"
+    ],
+    "disposition": "PASS",
+    "pass_count": "3/8"
+   },
+   {
+    "tool": "Blast",
+    "group": "classical",
+    "rubin_counterparts_after_remap": [],
+    "remapped": false,
+    "n_log_lines": 1,
+    "disposition": "UNDEMONSTRATED",
+    "reason": "service not runnable within cap: Blast runs as a Django/Celery/Postgres stack (scimma/blast@614ace3b docker compose); the public site processes TNS-registered transients, not arbitrary diaObjectIds",
+    "alerts_run": 0,
+    "passes": 0
+   },
+   {
+    "tool": "SNANA",
+    "group": "classical",
+    "rubin_counterparts_after_remap": [],
+    "remapped": false,
+    "n_log_lines": 1,
+    "disposition": "UNDEMONSTRATED",
+    "reason": "no model libraries: SNDATA_ROOT unset and model libraries not public/pinned",
+    "alerts_run": 0,
+    "passes": 0
+   }
+  ],
+  "fm_deep_passing": [
+   "CATS"
+  ],
+  "fm_deep_accepting_v11_1_input_past_parse": [
+   "CATS"
+  ],
+  "classical_counterparts_passing_for_each_fm_pass": {
+   "CATS": []
+  },
+  "alert_runs_logged": 160,
+  "rule_D_cap": "250 alert runs (25 x 10)"
+ },
+ "band_reading": {
+  "band_source": "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md sha256 8825ef80\u202600d2 \u00a7tool_coverage",
+  "reading": "ESCALATE",
+  "why": "PROCEED needs >=1 FM/deep PASS and >=1 classical counterpart PASS per such channel: CATS passes but both its Rubin counterparts (Fink_EarlySNIa_RF, Fink_SLSN_RF) FAIL at emit on these 1-3-point alerts. CLOSE needs no FM/deep channel to accept v11.1 inputs: CATS accepted them. Hence ESCALATE.",
+  "note": "stated for P4; not ruled here"
+ },
+ "p4_precondition_b": {
+  "clears": true,
+  "basis": "every run timestamp is after the band hash (18:51:26Z) and all 25 tools carry a PASS, FAIL or UNDEMONSTRATED disposition; zero or low passes are still a number"
+ },
+ "referent": "number of the 25 inventory tools that complete parse, infer and emit with non-default output on at least one of 10 sealed real Rubin cohort alerts, by group and disposition",
+ "source": "scripts/build_axis.py over run_log.jsonl (sha256 recorded in order_of_operations.log); runners scripts/run_fink_tools.py and scripts/run_other_tools.py; protocol recount_protocol_FROZEN.md",
+ "population": "25 tool channels x up to 10 alerts (10 distinct diaObjectIds first detected at MJD 61222.04-61222.06, sealed before any run); 158 alert runs logged",
+ "adjudicator": "classical channels under the same pass criterion on the same 10 alerts; wave-1 structural count (0/25 verified on Rubin) as the superseded value",
+ "falsifier": "a rerun of the runners on the sealed ids that changes any disposition, or a public v11_1 Avro endpoint on which a FAIL-at-parse tool's own parser succeeds, would show the count is wrong",
+ "definition_widened": false,
+ "completeness": "All 25 wave-1 tools carry a disposition from logged runs or prechecks after the band hash. Not covered: v11_1 Avro packets (not served); cutouts and forced photometry (not fetched per protocol S4); I4 construct validity and I5 certification for the two PASS tools; any alert beyond the 10 sealed ids."
+}

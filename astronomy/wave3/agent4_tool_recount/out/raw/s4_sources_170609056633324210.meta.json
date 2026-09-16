@@ -1,0 +1,22 @@
+{
+ "name": "s4_sources_170609056633324210",
+ "time_utc": "2026-09-16T20:53:42.789586+00:00",
+ "method": "POST",
+ "url": "https://api.lsst.fink-portal.org/api/v1/sources",
+ "body": {
+  "diaObjectId": "170609056633324210",
+  "columns": "r:diaObjectId,r:diaSourceId,r:midpointMjdTai,r:band,r:psfFlux,r:psfFluxErr,r:ra,r:dec,r:snr,r:isNegative,r:reliability",
+  "output-format": "json"
+ },
+ "status": 200,
+ "headers": {
+  "Server": "nginx/1.20.1",
+  "Date": "Wed, 16 Sep 2026 20:53:43 GMT",
+  "Content-Type": "application/json",
+  "Content-Length": "277"
+ },
+ "raw_sha256": "e2de1b9206a042fd8509ca5d67a0e5b5e6fbe5e638f6dd56bcbe32d7d417501f",
+ "raw_bytes": 277,
+ "kind": "json",
+ "dropped_keys": []
+}

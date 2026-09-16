@@ -1,0 +1,28 @@
+{
+ "name": "RAPID",
+ "written_from": "code",
+ "wave": 3,
+ "banner": "tool coverage recount (rule D): no output retained as an arm result",
+ "role": "predictor",
+ "quantity_returned": "per-epoch class probabilities (Pre-explosion, SNIa, SNII, SNIbc, SLSN, TDE, \u2026) from ZTF_unknown_redshift TCN",
+ "defining_paper": "Muthukrishna et al. 2019 (RAPID); not read in this wave",
+ "accuracy_against_scored_measurement": "Recount: loaded under TF 2.15 (model sha256 d68ed438 match), 0/10: Classify._do_error_checks asserts len(light_curve)==10; v11_1 supplies 7 of the 10 tuple fields (no photflag, redshift, mwebv). FAIL at parse (logged as error:infer by the generic stage mapper; traceback places it in the input validator).",
+ "what_it_is_not": "Not a Rubin model: ZTF g/r passbands only",
+ "served_checkpoint": {
+  "identifier": "astrorapid/ZTF_unknown_redshift.hdf5",
+  "pin": "astrorapid 7f28499f; sha256 d68ed438c2d2e4f6f4e7a86e3eb1e02b1afb9946295f3b3225ecd788a4bad967"
+ },
+ "disagreements": [
+  {
+   "topic": "unknown-redshift input",
+   "docstring": "known_redshift=False model 'ZTF_unknown_redshift'",
+   "code": "_do_error_checks still requires a 10-tuple including redshift and mwebv"
+  },
+  {
+   "topic": "deprecated deps",
+   "code": "classify.py imports pkg_resources (via helpers)",
+   "run": "load failed with ModuleNotFoundError pkg_resources until setuptools<70 was installed"
+  }
+ ],
+ "completeness": "Covered: the loader, input parser and served checkpoint hash exercised in the wave-3 recount (run_log.jsonl), and each disagreement's code locator. Not covered: the defining paper (not re-read this wave), training code, I4 construct validity and I5 certification."
+}

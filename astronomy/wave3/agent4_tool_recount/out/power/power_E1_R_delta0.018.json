@@ -1,0 +1,15 @@
+{
+  "k": 8,
+  "candidates_per_item": 46.41,
+  "chance": 0.172377,
+  "delta": 0.018,
+  "alpha": 0.05,
+  "power": 0.8,
+  "n": 55,
+  "mean_paired_difference": 0.036364,
+  "sigma_d": 0.14568,
+  "mde": 0.055033,
+  "n_min": 515,
+  "ruling": "CLOSE_UNRESOLVABLE",
+  "completeness": "chance, sigma_d, MDE and N_min over 55 clustered units at alpha 0.05, power 0.8"
+}

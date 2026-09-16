@@ -1,0 +1,103 @@
+{
+ "rule": "recount_protocol_FROZEN.md section 3 S1-S2 + amendments.md AM1 (dedupe on oid)",
+ "T0_mjd_tai": 61222.000428,
+ "s1_source": {
+  "url": "https://api-lsst.alerce.online/object_api/list_objects?survey=lsst&firstmjd=61222.040428&firstmjd=61222.060428&page_size=1000&page=1",
+  "raw_sha256": "bc37c182f5c8c1087b3a22713487e4c2608751db549ca25fe7b8926fddf2384d",
+  "status": 200,
+  "dropped_keys": [
+   "class_name",
+   "classifier_name",
+   "classifier_version",
+   "probability",
+   "ranking"
+  ]
+ },
+ "n_candidate_rows": 812,
+ "examined_in_order": [
+  "170609056632799366",
+  "170609056632800306",
+  "170609056633324210",
+  "170609056633848501",
+  "170609056633849114",
+  "170609056634372105",
+  "170609056634372478",
+  "170609056634372804",
+  "170609056634372829",
+  "170609056634373061"
+ ],
+ "accepted_ids": [
+  "170609056632799366",
+  "170609056632800306",
+  "170609056633324210",
+  "170609056633848501",
+  "170609056633849114",
+  "170609056634372105",
+  "170609056634372478",
+  "170609056634372804",
+  "170609056634372829",
+  "170609056634373061"
+ ],
+ "fink_object_responses": [
+  {
+   "oid": "170609056632799366",
+   "status": 200,
+   "raw_sha256": "5e0703095da875c59542d33491eaa61f704f2bc6e6426ee6b9b260bb7a9f4c9a",
+   "dropped_keys": []
+  },
+  {
+   "oid": "170609056632800306",
+   "status": 200,
+   "raw_sha256": "b8b780c2c2b89c0cc4d3ba7c532d62fa182e3a555ad8201e5515dfa054b751fa",
+   "dropped_keys": []
+  },
+  {
+   "oid": "170609056633324210",
+   "status": 200,
+   "raw_sha256": "ee67cf6169ae416532bedfb6ab3be74dda273b59e18400b9102f3b6a024cc288",
+   "dropped_keys": []
+  },
+  {
+   "oid": "170609056633848501",
+   "status": 200,
+   "raw_sha256": "ed63cdb8682076b64398a2f15acc0767cd82cc6f5b84645f4f7ea2b2440cd3ea",
+   "dropped_keys": []
+  },
+  {
+   "oid": "170609056633849114",
+   "status": 200,
+   "raw_sha256": "1c65ec2f79b6b4eb71f0fc49c4cbb0ca715a5ed30f63f5926788775e8d42b34e",
+   "dropped_keys": []
+  },
+  {
+   "oid": "170609056634372105",
+   "status": 200,
+   "raw_sha256": "17a391240b547acdd2e111ada712ee1786f1969847f1228e9156993532c51889",
+   "dropped_keys": []
+  },
+  {
+   "oid": "170609056634372478",
+   "status": 200,
+   "raw_sha256": "35d6b028e8792031e155a64f0063b1d0c2bf4e210bdfe6bf4bda1cb923953bc8",
+   "dropped_keys": []
+  },
+  {
+   "oid": "170609056634372804",
+   "status": 200,
+   "raw_sha256": "307125b44020443fd1127b4516f039e0123cfc9726f56d1954fd512251acbd12",
+   "dropped_keys": []
+  },
+  {
+   "oid": "170609056634372829",
+   "status": 200,
+   "raw_sha256": "3a80e9310175fabacc4e147bc4c223508c1a9364a8f4942543261a61b8de712f",
+   "dropped_keys": []
+  },
+  {
+   "oid": "170609056634373061",
+   "status": 200,
+   "raw_sha256": "96fd6e3212e8ea65099f838d58c942cf5f78641452876447d78bb49bf886811a",
+   "dropped_keys": []
+  }
+ ]
+}

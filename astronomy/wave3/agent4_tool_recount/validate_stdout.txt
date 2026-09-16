@@ -1,0 +1,15 @@
+PASS tool_coverage_axis.json
+PASS power_calibration_delta005.json
+PASS tool_cards/tool_card_AstroM3.json
+PASS tool_cards/tool_card_Astromer1.json
+PASS tool_cards/tool_card_Astromer2.json
+PASS tool_cards/tool_card_BTSbot.json
+PASS tool_cards/tool_card_CATS_Fink.json
+PASS tool_cards/tool_card_Fink_EarlySNIa_RF_Rubin.json
+PASS tool_cards/tool_card_Fink_SLSN_RF_Rubin.json
+PASS tool_cards/tool_card_GHOST.json
+PASS tool_cards/tool_card_Maven.json
+PASS tool_cards/tool_card_ORACLE.json
+PASS tool_cards/tool_card_RAPID.json
+PASS tool_cards/tool_card_SuperNNova_Fink_Rubin.json
+PASS tool_cards/tool_card_Superphot_plus.json

@@ -1,0 +1,33 @@
+{
+ "name": "SuperNNova_Fink_Rubin",
+ "written_from": "code",
+ "wave": 3,
+ "banner": "tool coverage recount (rule D): no output retained as an arm result",
+ "role": "predictor",
+ "quantity_returned": "P(Ia) (elasticc_ia) and broad-class vector (elasticc_broad) from SuperNNova classify_lcs",
+ "defining_paper": "M\u00f6ller & de Boissi\u00e8re 2020 (SuperNNova); not read in this wave",
+ "accuracy_against_scored_measurement": "Recount: 0/10; every alert run raised KeyError \"['MWEBV'] not in index\" inside supernnova classify_lcs feature assembly. FAIL.",
+ "what_it_is_not": "Not runnable through the Fink Rubin wrapper at 591e75ce with supernnova 3.0.51: the served models require an MWEBV feature the wrapper never supplies",
+ "served_checkpoint": {
+  "identifier": "snn_models/elasticc_ia/model.pt and elasticc_broad/model.pt",
+  "pin": "fink-science 591e75ce; sha256 614179b963e5e1a59565fd5436861ad41ed89bed2b5d0b3c140ddfb3a5315cbe; 7109780045d709544afcd5eb31b061a017f4f36039ed24fc9effbe6317daf8ee"
+ },
+ "disagreements": [
+  {
+   "topic": "model features vs wrapper",
+   "model": "elasticc_ia/cli_args.json non_redshift_features include 'MWEBV' and band 'Y'",
+   "wrapper": "rubin/snn/processor.py passes midpointMjdTai, band, psfFlux, psfFluxErr only; Rubin band is lowercase 'y'"
+  },
+  {
+   "topic": "docstring vs usage",
+   "docstring": "snn_ia_elasticc doctest block: '# Does not work for the moment'",
+   "code": "function is exported with no guard"
+  },
+  {
+   "topic": "dependency pin",
+   "install_python_deps.sh": "pip install -r requirements.txt",
+   "repo": "no requirements.txt at 591e75ce, so no supernnova version is pinned"
+  }
+ ],
+ "completeness": "Covered: the loader, input parser and served checkpoint hash exercised in the wave-3 recount (run_log.jsonl), and each disagreement's code locator. Not covered: the defining paper (not re-read this wave), training code, I4 construct validity and I5 certification."
+}

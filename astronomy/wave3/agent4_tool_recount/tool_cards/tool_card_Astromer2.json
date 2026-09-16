@@ -1,0 +1,27 @@
+{
+ "name": "Astromer2",
+ "written_from": "code",
+ "wave": 3,
+ "banner": "tool coverage recount (rule D): no output retained as an arm result",
+ "role": "encoder",
+ "quantity_returned": "pretrained Astromer 2 ('base' arch, 6 layers) representations of (time, magnitude, error) windows of 200",
+ "defining_paper": "Astromer 2 (Donoso-Oliva et al.); Zenodo 10.5281/zenodo.18207945 metadata read, paper not read",
+ "accuracy_against_scored_measurement": "Recount: loaded (pt_macho_v2_2025.zip md5 42dfac36 match), 0/10: src.data.loaders.load_numpy rejects v11_1 rows (expects float (None,3)). FAIL at parse.",
+ "what_it_is_not": "Not flux-input; not multiband",
+ "served_checkpoint": {
+  "identifier": "Zenodo 18207945 pt_macho_v2_2025.zip",
+  "pin": "md5 42dfac36992119f5c4364c83729f3111; sha256 f06d68fc2b421efd5b2177daa943937f5f741242d94b2110b2a404fe79636bff"
+ },
+ "disagreements": [
+  {
+   "topic": "dependency pin",
+   "requirements": "main-code requirements.txt pins tensorflow==2.14",
+   "run": "loaded under tensorflow 2.15.0"
+  },
+  {
+   "topic": "entry point",
+   "code": "get_loader(list) calls load_records_v2 (TFRecord files), not numpy; the numpy path is load_numpy"
+  }
+ ],
+ "completeness": "Covered: the loader, input parser and served checkpoint hash exercised in the wave-3 recount (run_log.jsonl), and each disagreement's code locator. Not covered: the defining paper (not re-read this wave), training code, I4 construct validity and I5 certification."
+}

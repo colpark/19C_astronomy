@@ -1,0 +1,22 @@
+{
+ "name": "s2_fink_objects_170609056632800306",
+ "time_utc": "2026-09-16T20:52:47.404538+00:00",
+ "method": "POST",
+ "url": "https://api.lsst.fink-portal.org/api/v1/objects",
+ "body": {
+  "diaObjectId": "170609056632800306",
+  "columns": "r:diaObjectId,r:firstDiaSourceMjdTai,r:nDiaSources,r:ra,r:dec",
+  "output-format": "json"
+ },
+ "status": 200,
+ "headers": {
+  "Server": "nginx/1.20.1",
+  "Date": "Wed, 16 Sep 2026 20:52:47 GMT",
+  "Content-Type": "application/json",
+  "Content-Length": "101"
+ },
+ "raw_sha256": "b8b780c2c2b89c0cc4d3ba7c532d62fa182e3a555ad8201e5515dfa054b751fa",
+ "raw_bytes": 101,
+ "kind": "json",
+ "dropped_keys": []
+}

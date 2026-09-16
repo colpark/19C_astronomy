@@ -1,0 +1,22 @@
+{
+ "name": "s4_avro_attempt_170609056632799366",
+ "time_utc": "2026-09-16T20:53:50.663169+00:00",
+ "method": "POST",
+ "url": "https://api.lsst.fink-portal.org/api/v1/sources",
+ "body": {
+  "diaObjectId": "170609056632799366",
+  "columns": "r:diaObjectId,r:diaSourceId,r:midpointMjdTai,r:band,r:psfFlux,r:psfFluxErr,r:ra,r:dec,r:snr,r:isNegative,r:reliability",
+  "output-format": "avro"
+ },
+ "status": 400,
+ "headers": {
+  "Server": "nginx/1.20.1",
+  "Date": "Wed, 16 Sep 2026 20:53:51 GMT",
+  "Content-Type": "text/html; charset=utf-8",
+  "Content-Length": "115"
+ },
+ "raw_sha256": "fcb3d28458e1a34934b4007f564fd344fb891b7dabad820f850b1584fedd986e",
+ "raw_bytes": 115,
+ "kind": "text(first 2000 chars)",
+ "dropped_keys": []
+}

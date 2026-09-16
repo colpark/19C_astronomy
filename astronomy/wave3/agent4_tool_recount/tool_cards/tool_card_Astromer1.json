@@ -1,0 +1,36 @@
+{
+ "name": "Astromer1",
+ "written_from": "code",
+ "wave": 3,
+ "banner": "tool coverage recount (rule D): no output retained as an arm result",
+ "role": "encoder",
+ "quantity_returned": "per-observation attention embeddings (SingleBandEncoder.encode) of a single-band (time, magnitude, magnitude error) series",
+ "defining_paper": "Donoso-Oliva et al. 2023 (ASTROMER); not read in this wave",
+ "accuracy_against_scored_measurement": "Recount: loaded (public API, macho_a0 weights hash 76a204a3 match), 0/10: ASTROMER load_numpy generator rejects the v11_1 row array (TypeError inside tf.data). FAIL at parse.",
+ "what_it_is_not": "Not a flux-input or multiband model; v11_1 carries psfFlux in nJy and no code path converts it",
+ "served_checkpoint": {
+  "identifier": "astromer-science/weights macho_a0.zip",
+  "pin": "commit 649eda47; sha256 76a204a37a0d47bfd722477f55231624c0c56cf9eea3369b5f22ff445d95158b"
+ },
+ "disagreements": [
+  {
+   "topic": "loader decorator",
+   "code": "ASTROMER/models.py from_pretraining(cls, name='macho') has no @classmethod; SingleBandEncoder.from_pretraining('macho_a0') binds 'macho_a0' to cls and downloads the default"
+  },
+  {
+   "topic": "README weights name",
+   "README": "model.from_pretraining('macho')",
+   "weights repo": "no macho.zip on main (HTTP 404; GitHub HTML page saved as zip -> BadZipFile); only macho_a0.zip and macho_a1.zip exist"
+  },
+  {
+   "topic": "zip layout",
+   "code": "from_pretraining reads weights/<name>/conf.json",
+   "zip": "macho_a0.zip extracts to macho/, so the README instance-call path raises FileNotFoundError weights/macho_a0/conf.json"
+  },
+  {
+   "topic": "unpinned fetch",
+   "code": "weights fetched from weights/raw/main, not a commit"
+  }
+ ],
+ "completeness": "Covered: the loader, input parser and served checkpoint hash exercised in the wave-3 recount (run_log.jsonl), and each disagreement's code locator. Not covered: the defining paper (not re-read this wave), training code, I4 construct validity and I5 certification."
+}

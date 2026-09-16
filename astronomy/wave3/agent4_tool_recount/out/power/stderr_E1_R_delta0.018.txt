@@ -1,0 +1,2 @@
+
+CLOSE. MDE 0.055033 exceeds delta 0.018. The cohort cannot resolve the declared effect. Close here, not after the run.

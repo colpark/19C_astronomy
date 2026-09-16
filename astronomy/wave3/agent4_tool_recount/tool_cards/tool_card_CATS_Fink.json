@@ -1,0 +1,33 @@
+{
+ "name": "CATS_Fink",
+ "written_from": "code",
+ "wave": 3,
+ "banner": "tool coverage recount (rule D): no output retained as an arm result",
+ "role": "predictor",
+ "quantity_returned": "5-way broad class probability vector ('SN-like','Fast','Long','Periodic','non-Periodic (AGN)') from cats_small_nometa_serial_219_savedmodel via tf.keras.layers.TFSMLayer; [0.0]*5 when fewer than 2 points",
+ "defining_paper": "Fink CATS (cbpf) classifier; paper not read in this wave; card from code only",
+ "accuracy_against_scored_measurement": "Recount: end-to-end non-default output on 5/10 sealed cohort alerts (exactly the 5 with >= 2 diaSources), on public Fink LSST API rows carrying lsst v11_1 field names (Avro not served: HTTP 400). I4 not assessed.",
+ "what_it_is_not": "Not a spectroscopic-class predictor for BTS classes; trained on ELAsTiCC simulations; not metadata-aware (nometa)",
+ "conventions": [
+  "psfFlux and psfFluxErr normalised per object by norm_column (utilities.py), so absolute flux units do not enter",
+  "band mapped u..y -> 1..6 inside predict_nn",
+  "sequences padded to 395 with -999"
+ ],
+ "served_checkpoint": {
+  "identifier": "fink_science/data/models/cats_models/cats_small_nometa_serial_219_savedmodel",
+  "pin": "fink-science 591e75ce; saved_model.pb sha256 7bd7b163d4f5e50bbc0e0ebdc014dd8070a635344b4856faa53bd54a0bd8f1f1; variables.data sha256 df3f7d973f8a4dcb3273f9cb40895d3ef98f7acfe4ca5ba0e4924d3ae279e61b"
+ },
+ "disagreements": [
+  {
+   "topic": "served checkpoint vs inventory",
+   "inventory": "wave-1 inventory pins cats_small_nometa_serial.keras (e51239df\u2026)",
+   "code": "processor.py loads cats_small_nometa_serial_219_savedmodel at import; the .keras file is not what is served"
+  },
+  {
+   "topic": "dependency pin",
+   "requirements": "fink_science/rubin/cats/requirements.txt pins tensorflow==2.8.0 and tensorflow-addons",
+   "run": "loaded and ran under tensorflow 2.21.0 / keras 3.15.1 via TFSMLayer"
+  }
+ ],
+ "completeness": "Covered: the loader, input parser and served checkpoint hash exercised in the wave-3 recount (run_log.jsonl), and each disagreement's code locator. Not covered: the defining paper (not re-read this wave), training code, I4 construct validity and I5 certification."
+}

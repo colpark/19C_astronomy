@@ -1,0 +1,28 @@
+{
+ "name": "ORACLE",
+ "written_from": "code",
+ "wave": 3,
+ "banner": "tool coverage recount (rule D): no output retained as an arm result",
+ "role": "predictor",
+ "quantity_returned": "hierarchical conditional class probabilities (ORACLE_lite, no metadata)",
+ "defining_paper": "Shah et al. 2025, arXiv:2501.01496; not read in this wave",
+ "accuracy_against_scored_measurement": "Recount: loaded only under the pinned tensorflow/keras 2.15 (keras 3 load raised GRU time_major), 0/10: prep_dataframes KeyError 'FLUXCAL'. FAIL at parse.",
+ "what_it_is_not": "Not an lsst v11_1 alert consumer: reads ELAsTiCC SNANA columns FLUXCAL, FLUXCALERR, MJD, PHOTFLAG, BAND",
+ "served_checkpoint": {
+  "identifier": "models/lsst_alpha_0.5_no_md/best_model.h5",
+  "pin": "uiucsn/Astro-ORACLE 876e0339 (in-repo)"
+ },
+ "disagreements": [
+  {
+   "topic": "maintenance",
+   "README": "repository 'will no longer be maintained'; users directed to dev-ved30/Oracle (PyTorch rewrite)",
+   "inventory": "wave-1 counted this repo as the ORACLE tool"
+  },
+  {
+   "topic": "input naming",
+   "paper": "described as a real-time LSST alert classifier",
+   "code": "expects SNANA FITS column names, no Rubin alert parser"
+  }
+ ],
+ "completeness": "Covered: the loader, input parser and served checkpoint hash exercised in the wave-3 recount (run_log.jsonl), and each disagreement's code locator. Not covered: the defining paper (not re-read this wave), training code, I4 construct validity and I5 certification."
+}

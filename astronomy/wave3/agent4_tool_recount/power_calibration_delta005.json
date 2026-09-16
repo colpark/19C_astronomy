@@ -1,0 +1,352 @@
+{
+ "label": "PRE-I1 CALIBRATION, not a P7 record; calibration only",
+ "banner": "calibration only, contamination FAIL on this cohort | PRE-I1: graph edge R1->I1 unmet, ratified PRE-I1 by PI ruling 3",
+ "claim": "none. BTS cohort failed contamination (addition B); compositions PRE-I1 (PI ruling 3)",
+ "supersedes": "nothing; wave-2 power_calibration.json (sha256 e02fd0f2a9d608abb7f814d321d3caa1669767318a16886da04b126c63937f8d) left untouched",
+ "cause": "PI ruling 2 (PANEL_BRIEF_WAVE3.md sha256 a618d911...c4b6): delta override 0.018 -> 0.05; 0.018 kept as literature prior; both carried",
+ "k": 8,
+ "candidates_per_item": 46.41,
+ "chance": 0.172377,
+ "alpha": 0.05,
+ "power": 0.8,
+ "delta": 0.05,
+ "delta_literature_prior": 0.018,
+ "primary_run": "E1_N, k_binding=True stratum (61 nights with >8 scored candidates)",
+ "n": 61,
+ "mean_paired_difference": -0.016393,
+ "sigma_d": 0.089778,
+ "mde": 0.032204,
+ "n_min": 26,
+ "ruling": "RESOLVABLE",
+ "at_literature_prior_0.018": {
+  "n": 61,
+  "mean_paired_difference": -0.016393,
+  "sigma_d": 0.089778,
+  "mde": 0.032204,
+  "n_min": 196,
+  "ruling": "CLOSE_UNRESOLVABLE"
+ },
+ "items_filtered_on_outcome": false,
+ "table_both_deltas": {
+  "E1_N": {
+   "0.05": {
+    "stratum_k_binding_True": {
+     "n": 61,
+     "sigma_d": 0.089778,
+     "mde": 0.032204,
+     "n_min": 26,
+     "ruling_at_this_delta": "RESOLVABLE"
+    }
+   },
+   "0.018": {
+    "stratum_k_binding_True": {
+     "n": 61,
+     "sigma_d": 0.089778,
+     "mde": 0.032204,
+     "n_min": 196,
+     "ruling_at_this_delta": "CLOSE_UNRESOLVABLE"
+    }
+   }
+  },
+  "E1_R": {
+   "0.05": {
+    "n": 55,
+    "sigma_d": 0.14568,
+    "mde": 0.055033,
+    "n_min": 67,
+    "ruling": "CLOSE_UNRESOLVABLE"
+   },
+   "0.018": {
+    "n": 55,
+    "sigma_d": 0.14568,
+    "mde": 0.055033,
+    "n_min": 515,
+    "ruling": "CLOSE_UNRESOLVABLE"
+   }
+  },
+  "E3_N": {
+   "0.05": {
+    "stratum_k_binding_True": {
+     "n": 61,
+     "sigma_d": 0.083776,
+     "mde": 0.030051,
+     "n_min": 23,
+     "ruling_at_this_delta": "RESOLVABLE"
+    }
+   },
+   "0.018": {
+    "stratum_k_binding_True": {
+     "n": 61,
+     "sigma_d": 0.083776,
+     "mde": 0.030051,
+     "n_min": 171,
+     "ruling_at_this_delta": "CLOSE_UNRESOLVABLE"
+    }
+   }
+  },
+  "E3_R": {
+   "0.05": {
+    "n": 55,
+    "sigma_d": 0.165622,
+    "mde": 0.062567,
+    "n_min": 87,
+    "ruling": "CLOSE_UNRESOLVABLE"
+   },
+   "0.018": {
+    "n": 55,
+    "sigma_d": 0.165622,
+    "mde": 0.062567,
+    "n_min": 665,
+    "ruling": "CLOSE_UNRESOLVABLE"
+   }
+  }
+ },
+ "pooled_night_runs_refused": {
+  "E1_N": {
+   "power_py_ruling": "RESOLVABLE",
+   "mde": 0.003419,
+   "refusal": "global refusal 4: pooled night items average precision at k_eff 1..8 (unequal denominators); 518/579 nights have zero paired difference by construction"
+  },
+  "E3_N": {
+   "power_py_ruling": "RESOLVABLE",
+   "mde": 0.003197,
+   "refusal": "global refusal 4: pooled night items average precision at k_eff 1..8 (unequal denominators); 518/579 nights have zero paired difference by construction"
+  }
+ },
+ "note_mde_between_deltas": "binding-night MDE 0.032 (E1) and 0.030 (E3) sits below delta 0.05 (RESOLVABLE at the override) and above 0.018 (CLOSE_UNRESOLVABLE at the literature prior). Round-46 MDE 0.055 (E1) and 0.063 (E3) exceeds both deltas.",
+ "runs": {
+  "E1_N": {
+   "delta_0.05": {
+    "k": 8,
+    "candidates_per_item": 46.41,
+    "chance": 0.172377,
+    "delta": 0.05,
+    "alpha": 0.05,
+    "power": 0.8,
+    "n": 579,
+    "mean_paired_difference": -0.001727,
+    "sigma_d": 0.029361,
+    "mde": 0.003419,
+    "n_min": 3,
+    "strata": {
+     "False": {
+      "n": 518,
+      "mean_paired_difference": 0.0,
+      "sigma_d": 0.0,
+      "mde": 0.0,
+      "n_min": 0,
+      "ruling_at_this_delta": "RESOLVABLE"
+     },
+     "True": {
+      "n": 61,
+      "mean_paired_difference": -0.016393,
+      "sigma_d": 0.089778,
+      "mde": 0.032204,
+      "n_min": 26,
+      "ruling_at_this_delta": "RESOLVABLE",
+      "n_min_recomputed": 26
+     }
+    },
+    "note": "Strata are reported, never filtered. Removing items where the compositions do not separate selects on the outcome variable.",
+    "ruling": "RESOLVABLE",
+    "completeness": "chance, sigma_d, MDE and N_min over 579 clustered units at alpha 0.05, power 0.8, across 2 strata",
+    "scores_file": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent4_instrument/data_cache/power/paired_E1_N.csv",
+    "scores_file_sha256": "427da593129cf25ca0e4aeab5058dd2494c20b3b7607d9e82f2de194e235ed99",
+    "stderr": ""
+   },
+   "delta_0.018": {
+    "k": 8,
+    "candidates_per_item": 46.41,
+    "chance": 0.172377,
+    "delta": 0.018,
+    "alpha": 0.05,
+    "power": 0.8,
+    "n": 579,
+    "mean_paired_difference": -0.001727,
+    "sigma_d": 0.029361,
+    "mde": 0.003419,
+    "n_min": 21,
+    "strata": {
+     "False": {
+      "n": 518,
+      "mean_paired_difference": 0.0,
+      "sigma_d": 0.0,
+      "mde": 0.0,
+      "n_min": 0,
+      "ruling_at_this_delta": "RESOLVABLE"
+     },
+     "True": {
+      "n": 61,
+      "mean_paired_difference": -0.016393,
+      "sigma_d": 0.089778,
+      "mde": 0.032204,
+      "n_min": 196,
+      "ruling_at_this_delta": "CLOSE_UNRESOLVABLE",
+      "n_min_recomputed": 196
+     }
+    },
+    "note": "Strata are reported, never filtered. Removing items where the compositions do not separate selects on the outcome variable.",
+    "ruling": "RESOLVABLE",
+    "completeness": "chance, sigma_d, MDE and N_min over 579 clustered units at alpha 0.05, power 0.8, across 2 strata",
+    "scores_file": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent4_instrument/data_cache/power/paired_E1_N.csv",
+    "scores_file_sha256": "427da593129cf25ca0e4aeab5058dd2494c20b3b7607d9e82f2de194e235ed99",
+    "stderr": ""
+   }
+  },
+  "E1_R": {
+   "delta_0.05": {
+    "k": 8,
+    "candidates_per_item": 46.41,
+    "chance": 0.172377,
+    "delta": 0.05,
+    "alpha": 0.05,
+    "power": 0.8,
+    "n": 55,
+    "mean_paired_difference": 0.036364,
+    "sigma_d": 0.14568,
+    "mde": 0.055033,
+    "n_min": 67,
+    "ruling": "CLOSE_UNRESOLVABLE",
+    "completeness": "chance, sigma_d, MDE and N_min over 55 clustered units at alpha 0.05, power 0.8",
+    "scores_file": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent4_instrument/data_cache/power/paired_E1_R.csv",
+    "scores_file_sha256": "890d710e93bb54203c2fe1930d6745e7f5429e4e17089fd0ff5bf2f68b13ca89",
+    "stderr": "CLOSE. MDE 0.055033 exceeds delta 0.05. The cohort cannot resolve the declared effect. Close here, not after the run."
+   },
+   "delta_0.018": {
+    "k": 8,
+    "candidates_per_item": 46.41,
+    "chance": 0.172377,
+    "delta": 0.018,
+    "alpha": 0.05,
+    "power": 0.8,
+    "n": 55,
+    "mean_paired_difference": 0.036364,
+    "sigma_d": 0.14568,
+    "mde": 0.055033,
+    "n_min": 515,
+    "ruling": "CLOSE_UNRESOLVABLE",
+    "completeness": "chance, sigma_d, MDE and N_min over 55 clustered units at alpha 0.05, power 0.8",
+    "scores_file": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent4_instrument/data_cache/power/paired_E1_R.csv",
+    "scores_file_sha256": "890d710e93bb54203c2fe1930d6745e7f5429e4e17089fd0ff5bf2f68b13ca89",
+    "stderr": "CLOSE. MDE 0.055033 exceeds delta 0.018. The cohort cannot resolve the declared effect. Close here, not after the run."
+   }
+  },
+  "E3_N": {
+   "delta_0.05": {
+    "k": 8,
+    "candidates_per_item": 46.41,
+    "chance": 0.172377,
+    "delta": 0.05,
+    "alpha": 0.05,
+    "power": 0.8,
+    "n": 579,
+    "mean_paired_difference": 0.001727,
+    "sigma_d": 0.027458,
+    "mde": 0.003197,
+    "n_min": 3,
+    "strata": {
+     "False": {
+      "n": 518,
+      "mean_paired_difference": 0.0,
+      "sigma_d": 0.0,
+      "mde": 0.0,
+      "n_min": 0,
+      "ruling_at_this_delta": "RESOLVABLE"
+     },
+     "True": {
+      "n": 61,
+      "mean_paired_difference": 0.016393,
+      "sigma_d": 0.083776,
+      "mde": 0.030051,
+      "n_min": 23,
+      "ruling_at_this_delta": "RESOLVABLE",
+      "n_min_recomputed": 23
+     }
+    },
+    "note": "Strata are reported, never filtered. Removing items where the compositions do not separate selects on the outcome variable.",
+    "ruling": "RESOLVABLE",
+    "completeness": "chance, sigma_d, MDE and N_min over 579 clustered units at alpha 0.05, power 0.8, across 2 strata",
+    "scores_file": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent4_instrument/data_cache/power/paired_E3_N.csv",
+    "scores_file_sha256": "bf1adc591a471834da7862a41519517f28f9f6cb106af127d62c67e5fc7e3b66",
+    "stderr": ""
+   },
+   "delta_0.018": {
+    "k": 8,
+    "candidates_per_item": 46.41,
+    "chance": 0.172377,
+    "delta": 0.018,
+    "alpha": 0.05,
+    "power": 0.8,
+    "n": 579,
+    "mean_paired_difference": 0.001727,
+    "sigma_d": 0.027458,
+    "mde": 0.003197,
+    "n_min": 19,
+    "strata": {
+     "False": {
+      "n": 518,
+      "mean_paired_difference": 0.0,
+      "sigma_d": 0.0,
+      "mde": 0.0,
+      "n_min": 0,
+      "ruling_at_this_delta": "RESOLVABLE"
+     },
+     "True": {
+      "n": 61,
+      "mean_paired_difference": 0.016393,
+      "sigma_d": 0.083776,
+      "mde": 0.030051,
+      "n_min": 171,
+      "ruling_at_this_delta": "CLOSE_UNRESOLVABLE",
+      "n_min_recomputed": 171
+     }
+    },
+    "note": "Strata are reported, never filtered. Removing items where the compositions do not separate selects on the outcome variable.",
+    "ruling": "RESOLVABLE",
+    "completeness": "chance, sigma_d, MDE and N_min over 579 clustered units at alpha 0.05, power 0.8, across 2 strata",
+    "scores_file": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent4_instrument/data_cache/power/paired_E3_N.csv",
+    "scores_file_sha256": "bf1adc591a471834da7862a41519517f28f9f6cb106af127d62c67e5fc7e3b66",
+    "stderr": ""
+   }
+  },
+  "E3_R": {
+   "delta_0.05": {
+    "k": 8,
+    "candidates_per_item": 46.41,
+    "chance": 0.172377,
+    "delta": 0.05,
+    "alpha": 0.05,
+    "power": 0.8,
+    "n": 55,
+    "mean_paired_difference": 0.025,
+    "sigma_d": 0.165622,
+    "mde": 0.062567,
+    "n_min": 87,
+    "ruling": "CLOSE_UNRESOLVABLE",
+    "completeness": "chance, sigma_d, MDE and N_min over 55 clustered units at alpha 0.05, power 0.8",
+    "scores_file": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent4_instrument/data_cache/power/paired_E3_R.csv",
+    "scores_file_sha256": "aac274493c3157808d7113ce49d839cb6473df66a62574c4f06f330fa4280041",
+    "stderr": "CLOSE. MDE 0.062567 exceeds delta 0.05. The cohort cannot resolve the declared effect. Close here, not after the run."
+   },
+   "delta_0.018": {
+    "k": 8,
+    "candidates_per_item": 46.41,
+    "chance": 0.172377,
+    "delta": 0.018,
+    "alpha": 0.05,
+    "power": 0.8,
+    "n": 55,
+    "mean_paired_difference": 0.025,
+    "sigma_d": 0.165622,
+    "mde": 0.062567,
+    "n_min": 665,
+    "ruling": "CLOSE_UNRESOLVABLE",
+    "completeness": "chance, sigma_d, MDE and N_min over 55 clustered units at alpha 0.05, power 0.8",
+    "scores_file": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent4_instrument/data_cache/power/paired_E3_R.csv",
+    "scores_file_sha256": "aac274493c3157808d7113ce49d839cb6473df66a62574c4f06f330fa4280041",
+    "stderr": "CLOSE. MDE 0.062567 exceeds delta 0.018. The cohort cannot resolve the declared effect. Close here, not after the run."
+   }
+  }
+ },
+ "completeness": "power.py (unchanged) rerun at delta 0.05 and 0.018 on the four wave-2 paired score files (hashes recorded) for E1/E3 x night/round-46; primary reading is the k_binding=True night stratum; pooled night rulings refused. Not covered: any Rubin or contamination-free item, agent arms, a P7 ruling."
+}

@@ -1,0 +1,28 @@
+{
+ "name": "BTSbot",
+ "written_from": "code",
+ "wave": 3,
+ "banner": "tool coverage recount (rule D): no output retained as an arm result",
+ "role": "predictor",
+ "quantity_returned": "save/trigger score from ConvNeXt-pico over 63x63 science/reference/difference triplets plus 25 ZTF metadata columns",
+ "defining_paper": "Rehemtulla et al. 2024, arXiv:2401.15167 (read in wave 1)",
+ "accuracy_against_scored_measurement": "Recount: loaded (pytorch_model.bin sha256 c30f3202 match), 0/10: KeyError on sgscore1, distpsnr1, \u2026 (ZTF-only metadata). FAIL at parse.",
+ "what_it_is_not": "Not a Rubin tool; trained on BTS scanner decisions (the governed decision)",
+ "served_checkpoint": {
+  "identifier": "HF nabeelr/BTSbot-convnext-pico-galaxyzoo-metadata pytorch_model.bin",
+  "pin": "sha256 c30f32021da00f8778d348b1f70067532200f271ef7497c0371032b315654592"
+ },
+ "disagreements": [
+  {
+   "topic": "unpinned download",
+   "code": "from_HF.download_HF_model calls snapshot_download without revision (main)",
+   "inventory": "wave-1 pinned HF revision d1014759; served bin hash still matches"
+  },
+  {
+   "topic": "undeclared import",
+   "code": "alert_utils.py imports bson at package import time",
+   "requirements": "lists bson and pymongo; in this run the bson module was supplied by pymongo"
+  }
+ ],
+ "completeness": "Covered: the loader, input parser and served checkpoint hash exercised in the wave-3 recount (run_log.jsonl), and each disagreement's code locator. Not covered: the defining paper (not re-read this wave), training code, I4 construct validity and I5 certification."
+}

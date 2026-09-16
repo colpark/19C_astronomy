@@ -1,0 +1,32 @@
+{
+  "k": 8,
+  "candidates_per_item": 46.41,
+  "chance": 0.172377,
+  "delta": 0.05,
+  "alpha": 0.05,
+  "power": 0.8,
+  "n": 579,
+  "mean_paired_difference": -0.001727,
+  "sigma_d": 0.029361,
+  "mde": 0.003419,
+  "n_min": 3,
+  "strata": {
+    "False": {
+      "n": 518,
+      "mean_paired_difference": 0.0,
+      "sigma_d": 0.0,
+      "mde": 0.0,
+      "n_min": 0
+    },
+    "True": {
+      "n": 61,
+      "mean_paired_difference": -0.016393,
+      "sigma_d": 0.089778,
+      "mde": 0.032204,
+      "n_min": 26
+    }
+  },
+  "note": "Strata are reported, never filtered. Removing items where the compositions do not separate selects on the outcome variable.",
+  "ruling": "RESOLVABLE",
+  "completeness": "chance, sigma_d, MDE and N_min over 579 clustered units at alpha 0.05, power 0.8, across 2 strata"
+}

@@ -1,0 +1,28 @@
+{
+ "name": "GHOST",
+ "written_from": "code",
+ "wave": 3,
+ "banner": "tool coverage recount (rule D): no output retained as an arm result",
+ "role": "predictor",
+ "quantity_returned": "host-galaxy association table (host coordinates and PS1-based properties) for a transient position",
+ "defining_paper": "Gagliano et al. 2021 (GHOST); not read in this wave",
+ "accuracy_against_scored_measurement": "Recount: 3 non-default host associations out of 8 valid alert runs (2 runs voided, AM2), on ra/dec from public Fink LSST API rows carrying lsst v11_1 field names (Avro not served: HTTP 400). I4 not assessed.",
+ "what_it_is_not": "Not a classifier of the transient itself",
+ "served_checkpoint": {
+  "identifier": "astro_ghost MLP_lupton.hdf5 + Star_Galaxy_RealisticModel_GHOST_PS1ClassLabels.sav",
+  "pin": "uiucsn/astro_ghost d7a1dec6; sha256 13ac27c2f6807970b349f434158c95710cbeac2666dee86116e70f84dfb1d820; 48f78c9cdc29c9d0c9ecd6c63194a7d08430a60c598311b433f874d92ab0f040"
+ },
+ "disagreements": [
+  {
+   "topic": "dependency pins",
+   "setup.cfg": "numpy<1.25, scikit-learn<1.3",
+   "run": "required a separate py3.10 environment"
+  },
+  {
+   "topic": "sky coverage",
+   "wave1": "inventory note 'PS1 dec>-30 split'",
+   "recount": "hosts returned for 3 alerts at dec ~ -40; the source catalogue for that match was not inspected (output discarded under rule D)"
+  }
+ ],
+ "completeness": "Covered: the loader, input parser and served checkpoint hash exercised in the wave-3 recount (run_log.jsonl), and each disagreement's code locator. Not covered: the defining paper (not re-read this wave), training code, I4 construct validity and I5 certification."
+}

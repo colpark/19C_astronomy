@@ -1,0 +1,1 @@
+"{'status': 'error', 'text': 'Output format `avro` is not supported. Choose among json, csv, votable, or parquet\\n'}"
