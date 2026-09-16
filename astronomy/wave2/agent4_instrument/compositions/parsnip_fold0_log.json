@@ -1,0 +1,22 @@
+{
+ "banner": "calibration only, contamination FAIL on this cohort | PRE-I1: graph edge R1->I1 unmet, escalated",
+ "fold": 0,
+ "n_train_units": 2724,
+ "n_train_lcs": 5448,
+ "epochs_run": 60,
+ "train_seconds": 1049.5082850456238,
+ "settings_overridden": {
+  "predict_redshift": true,
+  "input_redshift": true,
+  "learning_rate": 0.0001
+ },
+ "max_epochs": 60,
+ "torch": "2.14.0+cu130",
+ "n_test_units_E1": 708,
+ "n_test_predicted_E1": 708,
+ "finite_fraction_E1": 1.0,
+ "weights_finite": true,
+ "n_test_units_E3": 708,
+ "n_test_predicted_E3": 708,
+ "finite_fraction_E3": 1.0
+}

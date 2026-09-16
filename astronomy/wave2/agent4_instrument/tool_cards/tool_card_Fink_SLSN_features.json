@@ -1,0 +1,50 @@
+{
+ "name": "Fink superluminous-SN feature extractor (fink-science ztf/superluminous extract_features)",
+ "role": "encoder",
+ "written_from": "code",
+ "new_card": true,
+ "code_pin": "fink-science commit 591e75ce5ec798355eeeecfd936ef2582a0745fe, ztf/superluminous/{kernel,slsn_classifier,processor}.py; SALT2 served by sncosmo 2.13.1 'salt2' = version T23 (cache dir salt2-k21-frag, salt2_template_0.dat sha256 bf9aefb263972179204c3b7d28b5ae0c993aa090925b92deee278b8d115f1d70); SFD maps sha256 50b6aaad...(ngp), 84891a59...(sgp)",
+ "quantity_returned": "35 columns: distnr, ra, dec, ebv, duration, 9 light_curve statistics, 7 Rainbow (sigmoid temperature, Bazin bolometric) parameters and their S/N, Rainbow chi2, SALT2 (z,t0,x0,x1,c) with z bounded to (0,0.5) and chi2. Fits run only if every g/r band has >=3 points, total points > 7 and duration > 30 d; otherwise fit columns are NaN and the classifier returns -1.",
+ "defining_paper": "Russeil et al. 2024 (Rainbow) cited in code docstring; not read in this wave",
+ "accuracy_against_scored_measurement": "Not a scored quantity. Gate-pass fraction on this cohort: 0.0000 at E1 (dead), 0.0006 at E3 (2 of 3,432 units).",
+ "what_it_is_not": "Not an early-time tool: the gate (duration > 30 d) and processor.py (jd - jdstarthist >= 30) exclude first-alert and night-3 epochs by construction. Not redshift-free in production: processor.py applies an SDSS photo-z absolute-magnitude veto after classification (not used here).",
+ "conventions": [
+  "flux via fink_utils mag2fluxcal_snana (ZP 27.5) but fit_salt declares zp=25.0 for the same fluxes",
+  "SALT fit uses sncosmo source 'salt2' with no version pinned, so the served model depends on the installed sncosmo (T23 here)",
+  "SALT redshift is a free fit parameter bounded (0, 0.5), not an input",
+  "band effective wavelengths g 4770 A, r 6231 A (kernel.py)",
+  "enough_total_points = len(cjd) > min_points_total (strict), so 8 points are needed although kernel.py names the threshold 7"
+ ],
+ "served_checkpoint": {
+  "identifier": "feature extractor code; classifier weights data/models/xgboost_3.4.1/superluminous_classifier.joblib not used",
+  "pin": "fink-science commit 591e75ce5ec798355eeeecfd936ef2582a0745fe"
+ },
+ "substitution": {
+  "what": "xgboost SLSN classifier replaced by the calibration GBDT over the same feature vector; functions copied into scripts/features.py",
+  "disclosed": true
+ },
+ "disagreements": [
+  {
+   "topic": "zeropoint",
+   "code": "compute_flux uses FLUXCAL at ZP 27.5 while fit_salt sets zp=25.0 for those fluxes, so SALT x0 is scaled by 10^(0.4*2.5)=10 relative to the declared zeropoint"
+  },
+  {
+   "topic": "unsorted magnitudes",
+   "code": "fit_rainbow sorts cjd, cflux, csigflux and cfid in place but not cmagpsf; statistical_features then indexes cmagpsf with the sorted cfid, so peak_mag_g/peak_mag_r can take magnitudes from the wrong band or epoch (replicated as-is in this run)"
+  },
+  {
+   "topic": "threshold naming",
+   "code": "kernel.min_points_total = 7 but the test is '>' 7"
+  },
+  {
+   "topic": "model version",
+   "code": "sncosmo.Model(source='salt2') unpinned; doctest values in slsn_classifier.py were produced with an unrecorded SALT2 version; this run served T23"
+  },
+  {
+   "topic": "README vs disk (wave 1)",
+   "code": "wave-1 found SLSN_rainbow_MD.joblib referenced but missing; the served classifier is xgboost_3.4.1/superluminous_classifier.joblib"
+  }
+ ],
+ "completeness": "Covered from code: kernel.py, slsn_classifier.py and processor.py in full. Not covered: light_curve RainbowFit internals, the xgboost model, the Rainbow paper.",
+ "banner": "calibration only, contamination FAIL on this cohort | PRE-I1: graph edge R1->I1 unmet, escalated"
+}

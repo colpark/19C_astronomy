@@ -1,0 +1,44 @@
+{
+ "name": "Fink fast transient rate (fink-science ztf/fast_transient_rate)",
+ "role": "encoder",
+ "written_from": "code",
+ "new_card": true,
+ "code_pin": "fink-science commit 591e75ce5ec798355eeeecfd936ef2582a0745fe, ztf/fast_transient_rate/processor.py::get_last_alert, fast_transient_rate; utils.py",
+ "quantity_returned": "Per alert: mag_rate (mag/day) between the current detection and the most recent previous measurement in the same band (a detection, or an upper limit when the previous record in that band is a non-detection), with sigma, 5th and 95th percentiles from N Monte-Carlo samples, delta_time, from_upper; plus jd_first_real_det and jdstarthist_dt.",
+ "defining_paper": "none located; card from code only",
+ "accuracy_against_scored_measurement": "Not a scored quantity. Alive (finite mag_rate) fraction on this cohort: 0.9449 at E1, 0.9627 at E3.",
+ "what_it_is_not": "Not a classifier. Not a light-curve fit. jdstarthist_dt was not computed here because ALeRCE light curves carry no jdstarthist field.",
+ "conventions": [
+  "flux = 10^(0.4(27.5 - mag)) (utils.py::to_flux)",
+  "upper-limit case samples current flux against Uniform(0, flux(limit))",
+  "samples are shifted by +|min| of the whole sample matrix before log (processor.py 'Fix distribution')",
+  "a previous record in a band other than g/r stops the search and returns NaN (the 'TODO: change the logic for LSST' branch)",
+  "N=100, seed 0 in this calibration run"
+ ],
+ "served_checkpoint": {
+  "identifier": "code only, no weights",
+  "pin": "fink-science commit 591e75ce5ec798355eeeecfd936ef2582a0745fe"
+ },
+ "substitution": {
+  "what": "logic copied into scripts/features.py and run one unit per batch without pyspark",
+  "disclosed": true
+ },
+ "disagreements": [
+  {
+   "topic": "batch dependence",
+   "code": "the positivity shift uses np.min over current_mag_sample[:, idx_valid_data] for the whole DataFrame, so one alert's rate depends on which other alerts share the Spark partition",
+   "this_run": "one unit per batch, so the shift is per unit; Fink production values would differ"
+  },
+  {
+   "topic": "first 5-sigma time",
+   "docstring": "jd_first_real_det is 'first variation time at 5 sigma contains in the alert history'",
+   "code": "get_last_alert takes cjd at the first non-NaN cmagpsf in the history arrays; no significance test is applied inside the function"
+  },
+  {
+   "topic": "shift distorts the rate",
+   "code": "current_mag_sample += np.abs(np.min(...)) is applied unconditionally (also when every sample is positive), adding a constant to both fluxes of the ratio, so mag_rate is not the rate between the measured fluxes"
+  }
+ ],
+ "completeness": "Covered from code: processor.py and utils.py in full. Not covered: notebook/, the Spark wrapper beyond the call signature, any paper.",
+ "banner": "calibration only, contamination FAIL on this cohort | PRE-I1: graph edge R1->I1 unmet, escalated"
+}

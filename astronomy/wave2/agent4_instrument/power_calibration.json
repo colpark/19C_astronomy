@@ -1,0 +1,166 @@
+{
+ "label": "PRE-I1 CALIBRATION, not a P7 record",
+ "banner": "calibration only, contamination FAIL on this cohort | PRE-I1: graph edge R1->I1 unmet, escalated",
+ "claim": "none. BTS cohort failed contamination (addition B); R1 not run; compositions are not I1 records",
+ "primary_run": "E1_N (first alert, one item per decision night, stratum k_binding)",
+ "k": 8,
+ "candidates_per_item": 46.41,
+ "chance": 0.172377,
+ "delta": 0.018,
+ "alpha": 0.05,
+ "power": 0.8,
+ "primary_reading": "k_binding=True stratum of E1_N as emitted by power.py --stratum (equal denominator k_eff=8)",
+ "n": 61,
+ "mean_paired_difference": -0.016393,
+ "sigma_d": 0.089778,
+ "mde": 0.032204,
+ "n_min": 196,
+ "ruling": "CLOSE_UNRESOLVABLE",
+ "strata": {
+  "False": {
+   "n": 518,
+   "mean_paired_difference": 0.0,
+   "sigma_d": 0.0,
+   "mde": 0.0,
+   "n_min": 0
+  },
+  "True": {
+   "n": 61,
+   "mean_paired_difference": -0.016393,
+   "sigma_d": 0.089778,
+   "mde": 0.032204,
+   "n_min": 196
+  }
+ },
+ "pooled_E1_N_refused": {
+  "power_py_ruling": "RESOLVABLE",
+  "mde": 0.003419,
+  "n": 579,
+  "refusal": "global refusal 4: the pooled night record averages precision at k_eff from 1 to 8 (unequal denominators); 518 of 579 nights have n<=8 and a paired difference of 0 by construction, which drives sigma_d and MDE toward 0"
+ },
+ "items_filtered_on_outcome": false,
+ "runs": {
+  "E1_N": {
+   "k": 8,
+   "candidates_per_item": 46.41,
+   "chance": 0.172377,
+   "delta": 0.018,
+   "alpha": 0.05,
+   "power": 0.8,
+   "n": 579,
+   "mean_paired_difference": -0.001727,
+   "sigma_d": 0.029361,
+   "mde": 0.003419,
+   "n_min": 21,
+   "strata": {
+    "False": {
+     "n": 518,
+     "mean_paired_difference": 0.0,
+     "sigma_d": 0.0,
+     "mde": 0.0,
+     "n_min": 0
+    },
+    "True": {
+     "n": 61,
+     "mean_paired_difference": -0.016393,
+     "sigma_d": 0.089778,
+     "mde": 0.032204,
+     "n_min": 196
+    }
+   },
+   "note": "Strata are reported, never filtered. Removing items where the compositions do not separate selects on the outcome variable.",
+   "ruling": "RESOLVABLE",
+   "completeness": "chance, sigma_d, MDE and N_min over 579 clustered units at alpha 0.05, power 0.8, across 2 strata",
+   "exit_code": 0,
+   "stderr": "",
+   "scores_file_sha256": "427da593129cf25ca0e4aeab5058dd2494c20b3b7607d9e82f2de194e235ed99"
+  },
+  "E1_R": {
+   "k": 8,
+   "candidates_per_item": 46.41,
+   "chance": 0.172377,
+   "delta": 0.018,
+   "alpha": 0.05,
+   "power": 0.8,
+   "n": 55,
+   "mean_paired_difference": 0.036364,
+   "sigma_d": 0.14568,
+   "mde": 0.055033,
+   "n_min": 515,
+   "ruling": "CLOSE_UNRESOLVABLE",
+   "completeness": "chance, sigma_d, MDE and N_min over 55 clustered units at alpha 0.05, power 0.8",
+   "exit_code": 2,
+   "stderr": "CLOSE. MDE 0.055033 exceeds delta 0.018. The cohort cannot resolve the declared effect. Close here, not after the run.",
+   "scores_file_sha256": "890d710e93bb54203c2fe1930d6745e7f5429e4e17089fd0ff5bf2f68b13ca89"
+  },
+  "E3_N": {
+   "k": 8,
+   "candidates_per_item": 46.41,
+   "chance": 0.172377,
+   "delta": 0.018,
+   "alpha": 0.05,
+   "power": 0.8,
+   "n": 579,
+   "mean_paired_difference": 0.001727,
+   "sigma_d": 0.027458,
+   "mde": 0.003197,
+   "n_min": 19,
+   "strata": {
+    "False": {
+     "n": 518,
+     "mean_paired_difference": 0.0,
+     "sigma_d": 0.0,
+     "mde": 0.0,
+     "n_min": 0
+    },
+    "True": {
+     "n": 61,
+     "mean_paired_difference": 0.016393,
+     "sigma_d": 0.083776,
+     "mde": 0.030051,
+     "n_min": 171
+    }
+   },
+   "note": "Strata are reported, never filtered. Removing items where the compositions do not separate selects on the outcome variable.",
+   "ruling": "RESOLVABLE",
+   "completeness": "chance, sigma_d, MDE and N_min over 579 clustered units at alpha 0.05, power 0.8, across 2 strata",
+   "exit_code": 0,
+   "stderr": "",
+   "scores_file_sha256": "bf1adc591a471834da7862a41519517f28f9f6cb106af127d62c67e5fc7e3b66"
+  },
+  "E3_R": {
+   "k": 8,
+   "candidates_per_item": 46.41,
+   "chance": 0.172377,
+   "delta": 0.018,
+   "alpha": 0.05,
+   "power": 0.8,
+   "n": 55,
+   "mean_paired_difference": 0.025,
+   "sigma_d": 0.165622,
+   "mde": 0.062567,
+   "n_min": 665,
+   "ruling": "CLOSE_UNRESOLVABLE",
+   "completeness": "chance, sigma_d, MDE and N_min over 55 clustered units at alpha 0.05, power 0.8",
+   "exit_code": 2,
+   "stderr": "CLOSE. MDE 0.062567 exceeds delta 0.018. The cohort cannot resolve the declared effect. Close here, not after the run.",
+   "scores_file_sha256": "aac274493c3157808d7113ce49d839cb6473df66a62574c4f06f330fa4280041"
+  }
+ },
+ "chance_measured_beside_stated": {
+  "E1": {
+   "N": 0.22456057370901486,
+   "R": 0.2296442687747036
+  },
+  "E3": {
+   "N": 0.22456057370901486,
+   "R": 0.2296442687747036
+  }
+ },
+ "warnings": [
+  "chance printed by power.py is k/candidates_per_item = 8/46.41 from the manifest; the measured per-item chance on this saved-sources file differs and is listed beside it",
+  "night items with n <= 8 have identical precision under both compositions by construction (k not binding); they are kept and stratified (never filtered); the pooled night ruling is refused (unequal denominators) and the record reads the k_binding=True stratum",
+  "power.py computes the difference as col-a minus col-b = classical minus instrument"
+ ],
+ "completeness": "power.py (unchanged) run on paired precision@8 for 4 item sets: E1/E3 x night/round-46, over the scored pool of the frozen cohort; label PRE-I1 CALIBRATION. Not covered: Rubin items, contamination-free items, agent arms, any P7 ruling."
+}

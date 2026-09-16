@@ -1,0 +1,312 @@
+{
+ "agent": "wave2/agent4_instrument",
+ "date": "2026-09-16",
+ "banner": "calibration only, contamination FAIL on this cohort | PRE-I1: graph edge R1->I1 unmet, escalated",
+ "seeds": [
+  {
+   "id": "fink-science_591e75ce__ztf_random_forest_snia_processor.py",
+   "file": "sources/fink-science_591e75ce__ztf_random_forest_snia_processor.py",
+   "sha256": "8fc00ab9d846000ae3f2315cc1f553c66a8b4d5e2222dfba9fcbe72e02f28843",
+   "read_in_full": true,
+   "contribution": "C1 caller: selection cuts, feature call parameters, disagreement minpoints 3 vs 4, chisq vs mse",
+   "facts": [
+    {
+     "assertion": "processor.py:41 minpoints=4",
+     "locator": "processor.py:41 minpoints=4"
+    },
+    {
+     "assertion": "processor.py:64 comment 'less than 3 points'",
+     "locator": "processor.py:64 comment 'less than 3 points'"
+    },
+    {
+     "assertion": "processor.py:234 docstring chisq_g",
+     "locator": "processor.py:234 docstring chisq_g"
+    }
+   ]
+  },
+  {
+   "id": "actsnfink_f424ab1f__classifier_sigmoid.py",
+   "file": "sources/actsnfink_f424ab1f__classifier_sigmoid.py",
+   "sha256": "1af7a364e5a80568829d281d2a6633a1c09fc41cf9e71aca8eec49dfc276279b",
+   "read_in_full": true,
+   "contribution": "C1 features: RF_FEATURE_NAMES, get_sigmoid_features_dev_fast logic and fake values",
+   "facts": [
+    {
+     "assertion": "classifier_sigmoid.py:36 RF_FEATURE_NAMES",
+     "locator": "classifier_sigmoid.py:36 RF_FEATURE_NAMES"
+    },
+    {
+     "assertion": "get_sigmoid_features_dev_fast lines 452-580",
+     "locator": "get_sigmoid_features_dev_fast lines 452-580"
+    },
+    {
+     "assertion": "get_fake_fit_parameters [0,0,0,0.1,1e8]",
+     "locator": "get_fake_fit_parameters [0,0,0,0.1,1e8]"
+    }
+   ]
+  },
+  {
+   "id": "actsnfink_f424ab1f__sigmoid.py",
+   "file": "sources/actsnfink_f424ab1f__sigmoid.py",
+   "sha256": "56bb11204fa9ce25546522a471ee6899c107cd91f31070cd213a4b2156b60774",
+   "read_in_full": true,
+   "contribution": "C1 sigmoid fit and mse",
+   "facts": [
+    {
+     "assertion": "fit_sigmoid L85-123",
+     "locator": "fit_sigmoid L85-123"
+    },
+    {
+     "assertion": "compute_mse L126-144",
+     "locator": "compute_mse L126-144"
+    }
+   ]
+  },
+  {
+   "id": "fink_utils_0.77.0__photometry_conversion.py",
+   "file": "sources/fink_utils_0.77.0__photometry_conversion.py",
+   "sha256": "2084e1a032a836553f8a3a0cd7be16fff8a9382ddd027b1f0fe1352311ca18ad",
+   "read_in_full": true,
+   "contribution": "flux convention for C1/C3",
+   "facts": [
+    {
+     "assertion": "conversion.py:41-42 mag2fluxcal_snana",
+     "locator": "conversion.py:41-42 mag2fluxcal_snana"
+    }
+   ]
+  },
+  {
+   "id": "fink_utils_0.77.0__data_utils.py",
+   "file": "sources/fink_utils_0.77.0__data_utils.py",
+   "sha256": "844c378f33748ab70b41c32e62f07bd29acce3d1956ac157749649689888f57c",
+   "read_in_full": true,
+   "contribution": "isdiffpos ignored in format_data_as_snana",
+   "facts": [
+    {
+     "assertion": "data/utils.py format_data_as_snana body",
+     "locator": "data/utils.py format_data_as_snana body"
+    }
+   ]
+  },
+  {
+   "id": "fink-science_591e75ce__ztf_fast_transient_rate_processor.py",
+   "file": "sources/fink-science_591e75ce__ztf_fast_transient_rate_processor.py",
+   "sha256": "816ed1aa2d7f94153032daa27feeda108462d21782d5563bd4222f0f4735006b",
+   "read_in_full": true,
+   "contribution": "C2 logic copied; batch-dependent shift disagreement",
+   "facts": [
+    {
+     "assertion": "get_last_alert L33-101",
+     "locator": "get_last_alert L33-101"
+    },
+    {
+     "assertion": "fast_transient_rate L119-296",
+     "locator": "fast_transient_rate L119-296"
+    }
+   ]
+  },
+  {
+   "id": "fink-science_591e75ce__ztf_fast_transient_rate_utils.py",
+   "file": "sources/fink-science_591e75ce__ztf_fast_transient_rate_utils.py",
+   "sha256": "859723c134e6d8297664c9739a0bdded428791b481878e632de9948839d75c1a",
+   "read_in_full": true,
+   "contribution": "C2 flux conversion",
+   "facts": [
+    {
+     "assertion": "utils.py to_flux, to_fluxerr",
+     "locator": "utils.py to_flux, to_fluxerr"
+    }
+   ]
+  },
+  {
+   "id": "fink-science_591e75ce__ztf_superluminous_kernel.py",
+   "file": "sources/fink-science_591e75ce__ztf_superluminous_kernel.py",
+   "sha256": "b83610ffde06fa719b76532682980e98f5b2bda9bfa576e06bf001bab339b5fe",
+   "read_in_full": true,
+   "contribution": "C3 gate thresholds and band wavelengths",
+   "facts": [
+    {
+     "assertion": "kernel.py min_points_total=7, min_points_perband=3, min_duration=30, band_wave_aa",
+     "locator": "kernel.py min_points_total=7, min_points_perband=3, min_duration=30, band_wave_aa"
+    }
+   ]
+  },
+  {
+   "id": "fink-science_591e75ce__ztf_superluminous_slsn_classifier.py",
+   "file": "sources/fink-science_591e75ce__ztf_superluminous_slsn_classifier.py",
+   "sha256": "6b0e5a6f7970e22265c5b0d864a1a49d0148175150294eeb19cddfb0e71af6e0",
+   "read_in_full": true,
+   "contribution": "C3 extract_features, fit_rainbow, fit_salt (zp 25), statistical_features; unsorted cmagpsf disagreement",
+   "facts": [
+    {
+     "assertion": "extract_features gate slsn_classifier.py:757",
+     "locator": "extract_features gate slsn_classifier.py:757"
+    },
+    {
+     "assertion": "fit_salt zp 25.0",
+     "locator": "fit_salt zp 25.0"
+    },
+    {
+     "assertion": "fit_rainbow in-place sort",
+     "locator": "fit_rainbow in-place sort"
+    }
+   ]
+  },
+  {
+   "id": "fink-science_591e75ce__ztf_superluminous_processor.py",
+   "file": "sources/fink-science_591e75ce__ztf_superluminous_processor.py",
+   "sha256": "90a4b5f4d1ed5ceb170da338a16dd5f87f94d018199d1749e0b9ac65d512e905",
+   "read_in_full": true,
+   "contribution": "C3 production wrapper: 30-day age mask and SDSS photo-z veto (not used)",
+   "facts": [
+    {
+     "assertion": "processor.py old_enough_mask",
+     "locator": "processor.py old_enough_mask"
+    },
+    {
+     "assertion": "add_all_photoz call",
+     "locator": "add_all_photoz call"
+    }
+   ]
+  },
+  {
+   "id": "parsnip_dcea62f__parsnip.py",
+   "file": "sources/parsnip_dcea62f__parsnip.py",
+   "sha256": "391174659f097a1ae6db3980dc271e036446f3f096b8fdd6a41115a0791631ad",
+   "read_in_full": true,
+   "contribution": "C5: _get_data redshift inputs and UnboundLocalError (A-1); loss_function; augmentation empty-LC NaN (A-2); predict_dataset outputs",
+   "facts": [
+    {
+     "assertion": "_get_data ~L520-660",
+     "locator": "_get_data ~L520-660"
+    },
+    {
+     "assertion": "loss_function ~L1100-1160",
+     "locator": "loss_function ~L1100-1160"
+    },
+    {
+     "assertion": "augment_light_curves L439-514",
+     "locator": "augment_light_curves L439-514"
+    },
+    {
+     "assertion": "fit L1206-1300",
+     "locator": "fit L1206-1300"
+    }
+   ]
+  },
+  {
+   "id": "parsnip_dcea62f__settings.py",
+   "file": "sources/parsnip_dcea62f__settings.py",
+   "sha256": "5ee455dc620bb1f43c104c940e30c48ba7ce5e26f2de4784d2b2d71789d0329a",
+   "read_in_full": true,
+   "contribution": "C5 default settings (learning_rate 1e-3, predict_redshift, input_redshift)",
+   "facts": [
+    {
+     "assertion": "default_settings",
+     "locator": "default_settings"
+    }
+   ]
+  },
+  {
+   "id": "parsnip_dcea62f__instruments.py",
+   "file": "sources/parsnip_dcea62f__instruments.py",
+   "sha256": "554255596f858357179527bf1b71680c8ccda1325d9df71ad4420ce0da20a76f",
+   "read_in_full": true,
+   "contribution": "C5 ZTF band_info (MW on, background off); parse_ztf",
+   "facts": [
+    {
+     "assertion": "band_info ztfg/ztfr",
+     "locator": "band_info ztfg/ztfr"
+    },
+    {
+     "assertion": "parse_ztf",
+     "locator": "parse_ztf"
+    }
+   ]
+  },
+  {
+   "id": "parsnip_dcea62f__light_curve.py",
+   "file": "sources/parsnip_dcea62f__light_curve.py",
+   "sha256": "4d31fec667adec92997da0b8bcdb076e5eb1b7cd400f3cda6d9a2361904f3d9f",
+   "read_in_full": true,
+   "contribution": "C5 preprocessing: redshift requirement bypassed in predict_redshift mode",
+   "facts": [
+    {
+     "assertion": "preprocess_light_curve L154 condition",
+     "locator": "preprocess_light_curve L154 condition"
+    }
+   ]
+  },
+  {
+   "id": "parsnip_dcea62f__classifier.py",
+   "file": "sources/parsnip_dcea62f__classifier.py",
+   "sha256": "ca5eb7da507512fda1f09bca31ecc580cad7c5b5ac184570714f43e0df2d8780",
+   "read_in_full": true,
+   "contribution": "C5 feature keys",
+   "facts": [
+    {
+     "assertion": "Classifier.keys",
+     "locator": "Classifier.keys"
+    }
+   ]
+  },
+  {
+   "id": "ztf-avro-alert_75a9831c__docs_schema.md",
+   "file": "sources/ztf-avro-alert_75a9831c__docs_schema.md",
+   "sha256": "c85fc6cca4a4c10bee4a3de429fc69a3246ab746879ac5568f6fcb678abad3af",
+   "read_in_full": true,
+   "contribution": "E1 definition: prv_candidates 30-day history",
+   "facts": [
+    {
+     "assertion": "schema.md:24",
+     "locator": "schema.md:24"
+    },
+    {
+     "assertion": "schema.md:142",
+     "locator": "schema.md:142"
+    }
+   ]
+  },
+  {
+   "id": "atat_0db532f2__datasets.py",
+   "file": "sources/atat_0db532f2__datasets.py",
+   "sha256": "994c5254a8811271a9ffe2e7bc3c509ac6413f94690915a4966e860025e99765",
+   "read_in_full": true,
+   "contribution": "ATAT not built: dataset/channel dictionaries contain no ZTF entry (wave-1 finding re-checked)",
+   "facts": [
+    {
+     "assertion": "channel_dict / seq_dict",
+     "locator": "channel_dict / seq_dict"
+    }
+   ]
+  },
+  {
+   "id": "ALeRCE_lightcurve_API",
+   "file": "data_cache/alerce_raw/*.json (3,435 files; manifest data_cache/ALERCE_RAW_SHA256SUMS sha256 b6eaa73e86a11a62c73af085d2a88243ee1a06dac5e355e85d16b6852fd62690)",
+   "read_in_full": true,
+   "contribution": "decision-time photometry for the cohort; data, not a literature seed",
+   "facts": []
+  },
+  {
+   "id": "SFD_dust_maps_kbarbary_sfddata",
+   "file": "data_cache/dustmaps/sfd/*.fits",
+   "sha256": "ngp 50b6aaad0b880762d0fd081177802dcc17c39d7044a410dd5649e2dfd0503e97; sgp 84891a59054adab44a7be54051e4dcf0e66e3f13eee0d845ce3739242f553b83",
+   "read_in_full": true,
+   "contribution": "E(B-V) for C3 and ParSNIP mwebv; verified against Fink doctest get_ebv values (0.25480431, 0.10597386) reproduced to 1e-7",
+   "facts": []
+  },
+  {
+   "id": "Leoni2022_arXiv2111.11438",
+   "read_in_full": false,
+   "contribution": "none; named as defining paper of C1 only",
+   "blocks": "paper-side disagreements for the C1 card"
+  },
+  {
+   "id": "Russeil2024_Rainbow",
+   "read_in_full": false,
+   "contribution": "none; named as defining paper of C3 Rainbow only",
+   "blocks": "paper-side disagreements for the C3 card"
+  }
+ ],
+ "completeness": "Every code file that set a feature, gate, convention or setting used in the compositions was read whole and copied under sources/ with sha256. Papers for C1 and C3 were not read (read_in_full false, no decision rests on them). Wave-1 sources (ParSNIP paper, ATAT paper) are cited from wave-1 seed ledger, not re-read."
+}

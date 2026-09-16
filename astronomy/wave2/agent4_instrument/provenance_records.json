@@ -1,0 +1,122 @@
+[
+ {
+  "id": "a4w2-E1-auc-C-1",
+  "value": 0.5996251272075266,
+  "referent": "per-object ROC AUC for posB, classical composition C-1 at E1",
+  "source": "astronomy/wave2/agent4_instrument/scripts/score.py::main auc over compositions/predictions/pred_E1_C-1.csv (MANIFEST.sha256)",
+  "population": "2558 labelled 1-arcsec units (posA or neg) of the frozen cohort, out-of-fold, epoch E1",
+  "adjudicator": "chance 0.5; label-permutation AUC in i2_channels.json",
+  "falsifier": "a rerun of compose.py+score.py from the hashed features that returns an AUC outside the bootstrap CI, or a permutation AUC outside [0.45,0.55]",
+  "label": "PRE-I1 CALIBRATION"
+ },
+ {
+  "id": "a4w2-E1-auc-C",
+  "value": 0.5968101198346822,
+  "referent": "per-object ROC AUC for posB, instrument composition C (C-1 plus ParSNIP) at E1",
+  "source": "astronomy/wave2/agent4_instrument/scripts/score.py::main auc over compositions/predictions/pred_E1_C.csv (MANIFEST.sha256)",
+  "population": "2558 labelled 1-arcsec units (posA or neg) of the frozen cohort, out-of-fold, epoch E1",
+  "adjudicator": "classical composition C-1 on the same units, paired",
+  "falsifier": "a rerun with the hashed ParSNIP fold models that differs beyond the bootstrap CI, or permutation AUC outside [0.45,0.55]",
+  "label": "PRE-I1 CALIBRATION"
+ },
+ {
+  "id": "a4w2-E1-prec8-round46-delta",
+  "value": -0.036363636363636376,
+  "referent": "mean paired precision@8 difference C minus C-1 over 46-candidate rounds at E1",
+  "source": "astronomy/wave2/agent4_instrument/scripts/score.py::prec_at_k; paired_scores.csv",
+  "population": "55 rounds of 46 scored units",
+  "adjudicator": "stated chance 0.172 and measured per-round chance in i2_channels.json",
+  "falsifier": "a rerun that changes the sign, or a permutation of round membership that leaves it unchanged",
+  "label": "PRE-I1 CALIBRATION"
+ },
+ {
+  "id": "a4w2-E1-honest-channel-count",
+  "value": 2.9452,
+  "referent": "sum over C1..C5 of the fraction of units where each channel emits a non-default value at E1",
+  "source": "astronomy/wave2/agent4_instrument/scripts/features.py::main alive counts and compositions/parsnip_fold*_log.json finite fractions",
+  "population": "3432 units (all cohort units, labelled or not)",
+  "adjudicator": "nominal channel count 5",
+  "falsifier": "recomputing alive flags from data_cache/features/features_E1.csv that returns a different sum",
+  "label": "PRE-I1 CALIBRATION"
+ },
+ {
+  "id": "a4w2-E3-auc-C-1",
+  "value": 0.6373746097238473,
+  "referent": "per-object ROC AUC for posB, classical composition C-1 at E3",
+  "source": "astronomy/wave2/agent4_instrument/scripts/score.py::main auc over compositions/predictions/pred_E3_C-1.csv (MANIFEST.sha256)",
+  "population": "2558 labelled 1-arcsec units (posA or neg) of the frozen cohort, out-of-fold, epoch E3",
+  "adjudicator": "chance 0.5; label-permutation AUC in i2_channels.json",
+  "falsifier": "a rerun of compose.py+score.py from the hashed features that returns an AUC outside the bootstrap CI, or a permutation AUC outside [0.45,0.55]",
+  "label": "PRE-I1 CALIBRATION"
+ },
+ {
+  "id": "a4w2-E3-auc-C",
+  "value": 0.6184103039827205,
+  "referent": "per-object ROC AUC for posB, instrument composition C (C-1 plus ParSNIP) at E3",
+  "source": "astronomy/wave2/agent4_instrument/scripts/score.py::main auc over compositions/predictions/pred_E3_C.csv (MANIFEST.sha256)",
+  "population": "2558 labelled 1-arcsec units (posA or neg) of the frozen cohort, out-of-fold, epoch E3",
+  "adjudicator": "classical composition C-1 on the same units, paired",
+  "falsifier": "a rerun with the hashed ParSNIP fold models that differs beyond the bootstrap CI, or permutation AUC outside [0.45,0.55]",
+  "label": "PRE-I1 CALIBRATION"
+ },
+ {
+  "id": "a4w2-E3-prec8-round46-delta",
+  "value": -0.025000000000000022,
+  "referent": "mean paired precision@8 difference C minus C-1 over 46-candidate rounds at E3",
+  "source": "astronomy/wave2/agent4_instrument/scripts/score.py::prec_at_k; paired_scores.csv",
+  "population": "55 rounds of 46 scored units",
+  "adjudicator": "stated chance 0.172 and measured per-round chance in i2_channels.json",
+  "falsifier": "a rerun that changes the sign, or a permutation of round membership that leaves it unchanged",
+  "label": "PRE-I1 CALIBRATION"
+ },
+ {
+  "id": "a4w2-E3-honest-channel-count",
+  "value": 3.0047,
+  "referent": "sum over C1..C5 of the fraction of units where each channel emits a non-default value at E3",
+  "source": "astronomy/wave2/agent4_instrument/scripts/features.py::main alive counts and compositions/parsnip_fold*_log.json finite fractions",
+  "population": "3432 units (all cohort units, labelled or not)",
+  "adjudicator": "nominal channel count 5",
+  "falsifier": "recomputing alive flags from data_cache/features/features_E3.csv that returns a different sum",
+  "label": "PRE-I1 CALIBRATION"
+ },
+ {
+  "id": "a4w2-power-E1_N-sigma_d",
+  "value": 0.029361,
+  "referent": "sd of per-item paired precision@8 difference (classical minus instrument), item set E1_N",
+  "source": "fm-advantage-benchmark/scripts/power.py unchanged on data_cache/power/paired_E1_N.csv sha256 427da593129cf25ca0e4aeab5058dd2494c20b3b7607d9e82f2de194e235ed99",
+  "population": "579 items",
+  "adjudicator": "agent5 planning bracket 0.040-0.250 (planning_mde_bracket.csv)",
+  "falsifier": "a rerun of power.py on the same file that returns a different sigma_d, or a contamination-free cohort whose sigma_d falls outside this value's bootstrap range",
+  "label": "PRE-I1 CALIBRATION"
+ },
+ {
+  "id": "a4w2-power-E1_R-sigma_d",
+  "value": 0.14568,
+  "referent": "sd of per-item paired precision@8 difference (classical minus instrument), item set E1_R",
+  "source": "fm-advantage-benchmark/scripts/power.py unchanged on data_cache/power/paired_E1_R.csv sha256 890d710e93bb54203c2fe1930d6745e7f5429e4e17089fd0ff5bf2f68b13ca89",
+  "population": "55 items",
+  "adjudicator": "agent5 planning bracket 0.040-0.250 (planning_mde_bracket.csv)",
+  "falsifier": "a rerun of power.py on the same file that returns a different sigma_d, or a contamination-free cohort whose sigma_d falls outside this value's bootstrap range",
+  "label": "PRE-I1 CALIBRATION"
+ },
+ {
+  "id": "a4w2-power-E3_N-sigma_d",
+  "value": 0.027458,
+  "referent": "sd of per-item paired precision@8 difference (classical minus instrument), item set E3_N",
+  "source": "fm-advantage-benchmark/scripts/power.py unchanged on data_cache/power/paired_E3_N.csv sha256 bf1adc591a471834da7862a41519517f28f9f6cb106af127d62c67e5fc7e3b66",
+  "population": "579 items",
+  "adjudicator": "agent5 planning bracket 0.040-0.250 (planning_mde_bracket.csv)",
+  "falsifier": "a rerun of power.py on the same file that returns a different sigma_d, or a contamination-free cohort whose sigma_d falls outside this value's bootstrap range",
+  "label": "PRE-I1 CALIBRATION"
+ },
+ {
+  "id": "a4w2-power-E3_R-sigma_d",
+  "value": 0.165622,
+  "referent": "sd of per-item paired precision@8 difference (classical minus instrument), item set E3_R",
+  "source": "fm-advantage-benchmark/scripts/power.py unchanged on data_cache/power/paired_E3_R.csv sha256 aac274493c3157808d7113ce49d839cb6473df66a62574c4f06f330fa4280041",
+  "population": "55 items",
+  "adjudicator": "agent5 planning bracket 0.040-0.250 (planning_mde_bracket.csv)",
+  "falsifier": "a rerun of power.py on the same file that returns a different sigma_d, or a contamination-free cohort whose sigma_d falls outside this value's bootstrap range",
+  "label": "PRE-I1 CALIBRATION"
+ }
+]

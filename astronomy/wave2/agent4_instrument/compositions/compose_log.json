@@ -1,0 +1,73 @@
+{
+ "banner": "calibration only, contamination FAIL on this cohort | PRE-I1: graph edge R1->I1 unmet, escalated",
+ "configs": {
+  "C": [
+   "C1",
+   "C2",
+   "C3",
+   "C4",
+   "C5"
+  ],
+  "C-1": [
+   "C1",
+   "C2",
+   "C3",
+   "C4"
+  ],
+  "C-minus-C1": [
+   "C2",
+   "C3",
+   "C4",
+   "C5"
+  ],
+  "C-minus-C2": [
+   "C1",
+   "C3",
+   "C4",
+   "C5"
+  ],
+  "C-minus-C3": [
+   "C1",
+   "C2",
+   "C4",
+   "C5"
+  ],
+  "C-minus-C4": [
+   "C1",
+   "C2",
+   "C3",
+   "C5"
+  ],
+  "C5-only": [
+   "C5"
+  ]
+ },
+ "permutation_control_configs": [
+  "C",
+  "C-1"
+ ],
+ "E1": {
+  "n_units": 3432,
+  "n_scored_pool": 2558,
+  "channel_columns": {
+   "C1": 12,
+   "C2": 6,
+   "C3": 35,
+   "C4": 6,
+   "C5": 14
+  },
+  "units_missing_c5": 0
+ },
+ "E3": {
+  "n_units": 3432,
+  "n_scored_pool": 2558,
+  "channel_columns": {
+   "C1": 12,
+   "C2": 6,
+   "C3": 35,
+   "C4": 6,
+   "C5": 14
+  },
+  "units_missing_c5": 0
+ }
+}

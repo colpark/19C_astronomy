@@ -1,0 +1,425 @@
+{
+ "label": "PRE-I1 CALIBRATION",
+ "banner": "calibration only, contamination FAIL on this cohort | PRE-I1: graph edge R1->I1 unmet, escalated",
+ "stage": "I2",
+ "frozen_sha256": "b2f72948de0b39682ff8bc01c3c3f13f931a0a96966ede90c50466a9d045427c",
+ "amendments": [
+  "A-1 ParSNIP input_redshift",
+  "A-2 ParSNIP learning_rate 1e-4"
+ ],
+ "channels": {
+  "C1": "Fink EarlySNIa sigmoid features (classical)",
+  "C2": "Fink fast transient rate (classical)",
+  "C3": "Fink SLSN feature vector (classical)",
+  "C4": "ZTF alert candidate photometry + galactic b (classical, not Fink)",
+  "C5": "ParSNIP latent, trained per fold, no redshift (deep)"
+ },
+ "C": [
+  "C1",
+  "C2",
+  "C3",
+  "C4",
+  "C5"
+ ],
+ "C_minus_1": [
+  "C1",
+  "C2",
+  "C3",
+  "C4"
+ ],
+ "parsnip_training": {
+  "parsnip_fold0_log.json": {
+   "epochs_run": 60,
+   "train_seconds": 1049.5082850456238,
+   "finite_fraction_E1": 1.0,
+   "finite_fraction_E3": 1.0,
+   "weights_finite": true
+  },
+  "parsnip_fold1_log.json": {
+   "epochs_run": 60,
+   "train_seconds": 1062.7641475200653,
+   "finite_fraction_E1": 1.0,
+   "finite_fraction_E3": 1.0,
+   "weights_finite": true
+  },
+  "parsnip_fold2_log.json": {
+   "epochs_run": 60,
+   "train_seconds": 2094.1225352287292,
+   "finite_fraction_E1": 1.0,
+   "finite_fraction_E3": 1.0,
+   "weights_finite": true
+  },
+  "parsnip_fold3_log.json": {
+   "epochs_run": 60,
+   "train_seconds": 2180.22242808342,
+   "finite_fraction_E1": 1.0,
+   "finite_fraction_E3": 1.0,
+   "weights_finite": true
+  },
+  "parsnip_fold4_log.json": {
+   "epochs_run": 60,
+   "train_seconds": 2175.4292323589325,
+   "finite_fraction_E1": 1.0,
+   "finite_fraction_E3": 1.0,
+   "weights_finite": true
+  }
+ },
+ "gpu_hours_total": 2.378,
+ "epochs": {
+  "E1": {
+   "measured_C_minus_1": {
+    "auc_posB": 0.5996251272075266,
+    "auc_ci95": [
+     0.5741779466807664,
+     0.6260135344631271
+    ],
+    "prec8_night": 0.2253433670532116,
+    "prec8_round46": 0.34545454545454546
+   },
+   "measured_C": {
+    "auc_posB": 0.5968101198346822,
+    "auc_ci95": [
+     0.5696968843710999,
+     0.6220604028868679
+    ],
+    "prec8_night": 0.2270704827699646,
+    "prec8_round46": 0.3090909090909091
+   },
+   "chance": {
+    "auc": 0.5,
+    "prec8_stated_manifest": 0.172,
+    "prec8_measured_mean_night_items": 0.22456057370901486,
+    "prec8_measured_mean_round46_items": 0.2296442687747036,
+    "prevalence_posB_scored_pool": 0.2290852228303362
+   },
+   "alive_fraction": {
+    "C1": 0.0002913752913752914,
+    "C2": 0.9449300699300699,
+    "C3": 0.0,
+    "C4": 1.0,
+    "C5": 1.0
+   },
+   "dead": {
+    "C1": false,
+    "C2": false,
+    "C3": true,
+    "C4": false,
+    "C5": false
+   },
+   "honest_channel_count": {
+    "sum_alive_fractions_all": 2.9452,
+    "classical_C1_C4": 1.9452,
+    "deep_C5": 1.0
+   },
+   "leave_one_out": {
+    "C1": {
+     "delta_auc_C_minus_without": 0.0,
+     "delta_prec8_round46": 0.0
+    },
+    "C2": {
+     "delta_auc_C_minus_without": 0.0054430975638462,
+     "delta_prec8_round46": -0.034090909090909116
+    },
+    "C3": {
+     "delta_auc_C_minus_without": 0.03276069754723121,
+     "delta_prec8_round46": 0.006818181818181834
+    },
+    "C4": {
+     "delta_auc_C_minus_without": -0.0022499290406994277,
+     "delta_prec8_round46": -0.020454545454545447
+    },
+    "C5": {
+     "delta_auc_C_minus_without": -0.002815007372844347,
+     "delta_prec8_round46": -0.036363636363636376,
+     "delta_prec8_night": 0.0017271157167530193
+    }
+   },
+   "configs": {
+    "C": {
+     "auc_posB": 0.5968101198346822,
+     "auc_posB_ci95": [
+      0.5696968843710999,
+      0.6220604028868679
+     ],
+     "auc_SNIa_descriptive": 0.49684215516307295,
+     "mean_prec8_night_items": 0.2270704827699646,
+     "mean_prec8_round46_items": 0.3090909090909091
+    },
+    "C-1": {
+     "auc_posB": 0.5996251272075266,
+     "auc_posB_ci95": [
+      0.5741779466807664,
+      0.6260135344631271
+     ],
+     "auc_SNIa_descriptive": 0.493790632787951,
+     "mean_prec8_night_items": 0.2253433670532116,
+     "mean_prec8_round46_items": 0.34545454545454546
+    },
+    "C-minus-C1": {
+     "auc_posB": 0.5968101198346822,
+     "auc_posB_ci95": [
+      0.5696968843710999,
+      0.6220604028868679
+     ],
+     "auc_SNIa_descriptive": 0.49684215516307295,
+     "mean_prec8_night_items": 0.2270704827699646,
+     "mean_prec8_round46_items": 0.3090909090909091
+    },
+    "C-minus-C2": {
+     "auc_posB": 0.591367022270836,
+     "auc_posB_ci95": [
+      0.5630231215024442,
+      0.6199028480804541
+     ],
+     "auc_SNIa_descriptive": 0.5089622385957309,
+     "mean_prec8_night_items": 0.22685459330537047,
+     "mean_prec8_round46_items": 0.3431818181818182
+    },
+    "C-minus-C3": {
+     "auc_posB": 0.564049422287451,
+     "auc_posB_ci95": [
+      0.5376990737704331,
+      0.5904033114117087
+     ],
+     "auc_SNIa_descriptive": 0.5029926048325929,
+     "mean_prec8_night_items": 0.2270704827699646,
+     "mean_prec8_round46_items": 0.30227272727272725
+    },
+    "C-minus-C4": {
+     "auc_posB": 0.5990600488753817,
+     "auc_posB_ci95": [
+      0.5714547841472568,
+      0.6264230696174469
+     ],
+     "auc_SNIa_descriptive": 0.5049544912774949,
+     "mean_prec8_night_items": 0.2262069249115881,
+     "mean_prec8_round46_items": 0.32954545454545453
+    },
+    "C5-only": {
+     "auc_posB": 0.5337805211527944,
+     "auc_posB_ci95": [
+      0.5048119277726565,
+      0.5625577482310792
+     ],
+     "auc_SNIa_descriptive": 0.5063641104128291,
+     "mean_prec8_night_items": 0.2255592565178057,
+     "mean_prec8_round46_items": 0.26590909090909093
+    }
+   },
+   "permutation_control": {
+    "band": [
+     0.45,
+     0.55
+    ],
+    "within_band": {
+     "C": true,
+     "C-1": true
+    },
+    "disposition": "PASS"
+   },
+   "permutation_auc": {
+    "C": 0.5152060588858351,
+    "C-1": 0.5141053243705391
+   },
+   "items": {
+    "night": {
+     "n_items": 579,
+     "n_items_k_binding": 61
+    },
+    "round46": {
+     "n_items": 55,
+     "partial_units_dropped": 28
+    }
+   },
+   "pool": {
+    "n_units": 3432,
+    "n_scored_pool": 2558,
+    "n_posB": 586,
+    "coverage": {
+     "posA": 2264,
+     "unlabeled": 874,
+     "neg": 294
+    },
+    "n_far_from_peak_in_pool": 99
+   }
+  },
+  "E3": {
+   "measured_C_minus_1": {
+    "auc_posB": 0.6373746097238473,
+    "auc_ci95": [
+     0.6129709645515835,
+     0.6629819183923673
+    ],
+    "prec8_night": 0.227718151163747,
+    "prec8_round46": 0.3613636363636364
+   },
+   "measured_C": {
+    "auc_posB": 0.6184103039827205,
+    "auc_ci95": [
+     0.5932842404633774,
+     0.6428340140358577
+    ],
+    "prec8_night": 0.22599103544699398,
+    "prec8_round46": 0.33636363636363636
+   },
+   "chance": {
+    "auc": 0.5,
+    "prec8_stated_manifest": 0.172,
+    "prec8_measured_mean_night_items": 0.22456057370901486,
+    "prec8_measured_mean_round46_items": 0.2296442687747036,
+    "prevalence_posB_scored_pool": 0.2290852228303362
+   },
+   "alive_fraction": {
+    "C1": 0.041375291375291376,
+    "C2": 0.9627039627039627,
+    "C3": 0.0005827505827505828,
+    "C4": 1.0,
+    "C5": 1.0
+   },
+   "dead": {
+    "C1": false,
+    "C2": false,
+    "C3": false,
+    "C4": false,
+    "C5": false
+   },
+   "honest_channel_count": {
+    "sum_alive_fractions_all": 3.0047,
+    "classical_C1_C4": 2.0047,
+    "deep_C5": 1.0
+   },
+   "leave_one_out": {
+    "C1": {
+     "delta_auc_C_minus_without": -0.0014927413827718894,
+     "delta_prec8_round46": 0.006818181818181834
+    },
+    "C2": {
+     "delta_auc_C_minus_without": 0.027687107560453783,
+     "delta_prec8_round46": 0.022727272727272707
+    },
+    "C3": {
+     "delta_auc_C_minus_without": 0.02352733490712977,
+     "delta_prec8_round46": 0.036363636363636376
+    },
+    "C4": {
+     "delta_auc_C_minus_without": 0.0017990778752361436,
+     "delta_prec8_round46": 0.0022727272727272596
+    },
+    "C5": {
+     "delta_auc_C_minus_without": -0.01896430574112684,
+     "delta_prec8_round46": -0.025000000000000022,
+     "delta_prec8_night": -0.0017271157167530193
+    }
+   },
+   "configs": {
+    "C": {
+     "auc_posB": 0.6184103039827205,
+     "auc_posB_ci95": [
+      0.5932842404633774,
+      0.6428340140358577
+     ],
+     "auc_SNIa_descriptive": 0.4835999295698342,
+     "mean_prec8_night_items": 0.22599103544699398,
+     "mean_prec8_round46_items": 0.33636363636363636
+    },
+    "C-1": {
+     "auc_posB": 0.6373746097238473,
+     "auc_posB_ci95": [
+      0.6129709645515835,
+      0.6629819183923673
+     ],
+     "auc_SNIa_descriptive": 0.47186992090150615,
+     "mean_prec8_night_items": 0.227718151163747,
+     "mean_prec8_round46_items": 0.3613636363636364
+    },
+    "C-minus-C1": {
+     "auc_posB": 0.6199030453654923,
+     "auc_posB_ci95": [
+      0.5942591198106926,
+      0.6439075315388642
+     ],
+     "auc_SNIa_descriptive": 0.4859539224184636,
+     "mean_prec8_night_items": 0.22599103544699398,
+     "mean_prec8_round46_items": 0.32954545454545453
+    },
+    "C-minus-C2": {
+     "auc_posB": 0.5907231964222667,
+     "auc_posB_ci95": [
+      0.5677176772484338,
+      0.6158834280554019
+     ],
+     "auc_SNIa_descriptive": 0.49642770072597253,
+     "mean_prec8_night_items": 0.2262069249115881,
+     "mean_prec8_round46_items": 0.31363636363636366
+    },
+    "C-minus-C3": {
+     "auc_posB": 0.5948829690755907,
+     "auc_posB_ci95": [
+      0.5699948215819293,
+      0.6184770154615937
+     ],
+     "auc_SNIa_descriptive": 0.48581441651316504,
+     "mean_prec8_night_items": 0.22642281437618222,
+     "mean_prec8_round46_items": 0.3
+    },
+    "C-minus-C4": {
+     "auc_posB": 0.6166112261074843,
+     "auc_posB_ci95": [
+      0.5916702205771176,
+      0.640913573786352
+     ],
+     "auc_SNIa_descriptive": 0.48124051901614473,
+     "mean_prec8_night_items": 0.22577514598239984,
+     "mean_prec8_round46_items": 0.3340909090909091
+    },
+    "C5-only": {
+     "auc_posB": 0.5140538356098,
+     "auc_posB_ci95": [
+      0.4871138153601265,
+      0.5397795065006394
+     ],
+     "auc_SNIa_descriptive": 0.4980018826525084,
+     "mean_prec8_night_items": 0.2246956986594292,
+     "mean_prec8_round46_items": 0.25681818181818183
+    }
+   },
+   "permutation_control": {
+    "band": [
+     0.45,
+     0.55
+    ],
+    "within_band": {
+     "C": true,
+     "C-1": true
+    },
+    "disposition": "PASS"
+   },
+   "permutation_auc": {
+    "C": 0.49599858773684835,
+    "C-1": 0.4898484932398286
+   },
+   "items": {
+    "night": {
+     "n_items": 579,
+     "n_items_k_binding": 61
+    },
+    "round46": {
+     "n_items": 55,
+     "partial_units_dropped": 28
+    }
+   },
+   "pool": {
+    "n_units": 3432,
+    "n_scored_pool": 2558,
+    "n_posB": 586,
+    "coverage": {
+     "posA": 2264,
+     "unlabeled": 874,
+     "neg": 294
+    },
+    "n_far_from_peak_in_pool": 99
+   }
+  }
+ },
+ "completeness": "C-1 and C measured at both declared epochs (E1 first alert, E3 night 3) over the 1-arcsec units of the frozen cohort, with leave-one-out for every channel, C5 alone, alive fractions and a label-permutation control. Not covered: ATAT (not built), pretrained ParSNIP checkpoints (not mounted, I4), Rubin inputs, any agent arm."
+}

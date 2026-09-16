@@ -1,0 +1,55 @@
+{
+ "name": "Fink EarlySNIa sigmoid feature extractor (actsnfink get_sigmoid_features_dev_fast) as called by fink-science ztf/random_forest_snia",
+ "role": "encoder",
+ "written_from": "code",
+ "new_card": true,
+ "code_pin": "github.com/emilleishida/fink_sn_activelearning commit f424ab1fc5024a49364d41090d1c3c2b8cb733cd (actsnfink/classifier_sigmoid.py, sigmoid.py); caller fink-science 591e75ce ztf/random_forest_snia/processor.py; flux conversion fink_utils 0.77.0 wheel sha256 bfdef56938f90ed40902d58df549b127c89ee02a3b84d8783b2b9a504861c27a",
+ "quantity_returned": "12 floats, [a, b, c, snratio, mse, nrise] for g then r (RF_FEATURE_NAMES, classifier_sigmoid.py:36). Per band: intraday points averaged on rounded JD; points with FLUXCAL <= -10 masked; if at least min_data_points=4 remain and every averaged point is non-decreasing by the ewma(3) derivative, a sigmoid c/(1+exp(-a(t-b))) is fit by scipy least_squares (sigmoid.py::fit_sigmoid) and snratio (mean flux/err), mse of normalised fluxes, nrise are returned; otherwise the fake values [0,0,0,0.1,1e8,0].",
+ "defining_paper": "Leoni et al. 2022, A&A 663, A13 (arXiv:2111.11438), not read in this wave; card is from code only",
+ "accuracy_against_scored_measurement": "Not a scored quantity itself. Measured coverage on this cohort (3,432 BTS units, 2019-06-01..2021-04-15): alive fraction 0.0003 at first alert (E1) and 0.0414 at night 3 (E3). Contribution to precision@8 and AUC is in i2_channels.json (PRE-I1 CALIBRATION).",
+ "what_it_is_not": "Not the Fink RF probability: the RF weights default-model_sigmoid-1.7.2.obj (sha256 77f0a463..., pruned in wave-1 code/) are not used; only the feature vector enters the calibration GBDT. Not defined at first alert: needs >=4 averaged points in a band, all rising.",
+ "conventions": [
+  "flux = 10^(-0.4 magpsf) * 1e11 (ZP 27.5 FLUXCAL) with err 9.21034e10 exp(-0.921034 m) sigma (fink_utils conversion.py:41-42)",
+  "isdiffpos is ignored: negative-subtraction detections enter as positive flux (fink_utils data/utils.py::format_data_as_snana)",
+  "time axis is JD (Fink passes jd as MJD) rounded with np.around to integer days, so intraday averaging groups on JD integer boundaries at 12:00 UTC",
+  "min_rising_points=2, min_data_points=4, rising_criteria='ewma', ewma_window=3 (processor.py call site)",
+  "fake-fit sentinel [0,0,0,0.1,1e8,0] is indistinguishable from a genuine zero-amplitude fit to a GBDT"
+ ],
+ "served_checkpoint": {
+  "identifier": "feature extractor code only; no weights served in this composition",
+  "pin": "actsnfink commit f424ab1fc5024a49364d41090d1c3c2b8cb733cd"
+ },
+ "substitution": {
+  "what": "Fink RF classifier replaced by a GBDT fit on BTS training folds over the same 12 features (approved Fink RF remapping, D5 amendment)",
+  "justified_against": "scored measurement (posB precision@8), not against the Fink RF",
+  "disclosed": true
+ },
+ "disagreements": [
+  {
+   "topic": "minimum points",
+   "comment": "processor.py:64 '# Flag alerts with less than 3 points in total'",
+   "code": "apply_selection_cuts_ztf default minpoints=4 (processor.py:41) and min_data_points=4"
+  },
+  {
+   "topic": "feature names",
+   "docstring": "extract_features_rf_snia docstring lists 'a_g,b_g,c_g,snratio_g,chisq_g,nrise_g' (processor.py:234)",
+   "code": "RF_FEATURE_NAMES uses mse_g/mse_r and compute_mse is a mean squared error, not a chi-square"
+  },
+  {
+   "topic": "rising points",
+   "comment": "classifier_sigmoid.py:548 '# at least three points (needed for the sigmoid fit)'",
+   "code": "min_rising_points=2 at the Fink call site"
+  },
+  {
+   "topic": "negative subtractions",
+   "expected": "difference flux sign follows isdiffpos",
+   "code": "format_data_as_snana converts magpsf to positive FLUXCAL regardless of isdiffpos"
+  },
+  {
+   "topic": "rubin vs ztf",
+   "code": "fink-science also ships rubin/random_forest_snia; the ZTF path was used here and the Rubin path was not read in this wave"
+  }
+ ],
+ "completeness": "Covered from code: actsnfink classifier_sigmoid.py and sigmoid.py in full; fink-science ztf/random_forest_snia/processor.py in full; fink_utils conversion.py and data/utils.py in full. Not covered: the paper, the RF weights, actsnfink rainbow.py, the Rubin processor.",
+ "banner": "calibration only, contamination FAIL on this cohort | PRE-I1: graph edge R1->I1 unmet, escalated"
+}
