@@ -9,3 +9,5 @@ astronomy/**/code/
 astronomy/**/data_cache/
 astronomy/**/scratch/
 astronomy/**/sources/**/*.pdf
+# Opaque-id maps stay local until a rulings holder takes custody (their hashes are in transfer_record.json)
+astronomy/wave2/agent5_skill_maintenance/holder_handover/

@@ -1,0 +1,104 @@
+--- a/fm-advantage-benchmark/references/replay.md
++++ b/fm-advantage-benchmark/references/replay.md
+@@ -10,9 +10,12 @@
+ 
+ | File | Who may read it |
+ |---|---|
+-| `cases/cases.csv` | the stage under test |
++| `cases/cases.csv` | the stage under test. It must not carry polarity |
++| `cases/POLARITY_SEALED.csv` | the rulings holder only. Polarity decides pass or fail, so it is sealed |
+ | `cases/RULINGS_SEALED.csv` | held out until the stage is finished |
+ 
++`replay.py score` judges each case on `fired` against polarity alone. The rulings file only annotates failures. A seal that holds rulings but leaves polarity in `cases.csv` protects explanation text and nothing that is scored. Run `python scripts/replay.py split-polarity` once, then hand both sealed files to the holder.
++
+ Twelve cases are marked sealed. Develop on the other twenty-six. Open the twelve once, then reseal.
+ 
+ ## Running
+--- a/fm-advantage-benchmark/scripts/replay.py
++++ b/fm-advantage-benchmark/scripts/replay.py
+@@ -5,18 +5,37 @@
+     python replay.py audit
+     python replay.py emit  --set development --stage P3
+     python replay.py score --verdicts v.json --set sealed
++    python replay.py split-polarity
++
++Polarity decides pass or fail, so it is sealed material. The stage under test
++reads cases/cases.csv, which must not carry it. split-polarity moves the column
++to cases/POLARITY_SEALED.csv for the rulings holder. emit never prints polarity.
+ """
+-import argparse, csv, json, os
++import argparse, csv, hashlib, json, os, sys
+ from collections import defaultdict
+ 
+ HERE = os.path.dirname(os.path.abspath(__file__))
+ CASES = os.path.join(HERE, "..", "cases", "cases.csv")
+ RULINGS = os.path.join(HERE, "..", "cases", "RULINGS_SEALED.csv")
++POLARITY = os.path.join(HERE, "..", "cases", "POLARITY_SEALED.csv")
+ MODULE = {"D": "discovery", "P": "supply", "I": "instrument", "R": "runtime", "A": "adjudication", "L": "ladder"}
+ 
+-def load(path=CASES):
++def load(path=CASES, need_polarity=True):
+     with open(path, newline="") as fh:
+-        return list(csv.DictReader(fh))
++        cs = list(csv.DictReader(fh))
++    if cs and "polarity" in cs[0]:
++        print("WARNING: cases.csv carries polarity. The stage under test can read it, so the "
++              "seal protects only ruling text. Run split-polarity and hand "
++              "POLARITY_SEALED.csv to the rulings holder.", file=sys.stderr)
++    elif need_polarity:
++        if not os.path.exists(POLARITY):
++            raise SystemExit("polarity is held out (cases/POLARITY_SEALED.csv absent). "
++                             "Only the rulings holder can audit or score.")
++        pol = {r["case_id"]: r["polarity"] for r in csv.DictReader(open(POLARITY, newline=""))}
++        missing = [c["case_id"] for c in cs if c["case_id"] not in pol]
++        if missing: raise SystemExit(f"no polarity for {', '.join(missing)}")
++        for c in cs: c["polarity"] = pol[c["case_id"]]
++    return cs
+ 
+ def mod(stage):
+     return MODULE.get(stage[0], "?")
+@@ -30,10 +49,10 @@
+     return out
+ 
+ def cmd_emit(a):
+-    cs = pick(load(), a.set, a.stage, a.module)
++    cs = pick(load(need_polarity=False), a.set, a.stage, a.module)
+     if not cs: raise SystemExit("no cases match")
+     for c in cs:
+-        print(f"--- {c['case_id']}  stage={c['stage']}  polarity={c['polarity']}")
++        print(f"--- {c['case_id']}  stage={c['stage']}")
+         print(c["input"]); print()
+     print(f"{len(cs)} cases. Write verdicts as:")
+     print(json.dumps({cs[0]["case_id"]: {"fired": True, "ruling": "...", "via": "stage"}}, indent=2))
+@@ -101,11 +120,29 @@
+     if not probs: print("  suite shape ok")
+     return 1 if probs else 0
+ 
++def cmd_split(a):
++    with open(CASES, newline="") as fh:
++        rd = csv.DictReader(fh); cols = rd.fieldnames; cs = list(rd)
++    if "polarity" not in cols: raise SystemExit("cases.csv carries no polarity column, nothing to split")
++    if os.path.exists(POLARITY): raise SystemExit("POLARITY_SEALED.csv already exists, refusing to overwrite")
++    with open(POLARITY, "w", newline="") as fh:
++        w = csv.writer(fh); w.writerow(["case_id", "polarity"])
++        for c in cs: w.writerow([c["case_id"], c["polarity"]])
++    keep = [k for k in cols if k != "polarity"]
++    with open(CASES, "w", newline="") as fh:
++        w = csv.DictWriter(fh, fieldnames=keep); w.writeheader()
++        for c in cs: w.writerow({k: c[k] for k in keep})
++    for path in (CASES, POLARITY):
++        print(f"{hashlib.sha256(open(path, 'rb').read()).hexdigest()}  {os.path.relpath(path)}")
++    print("Hand POLARITY_SEALED.csv and RULINGS_SEALED.csv to the holder, then remove both from "
++          "anything the stage under test can read.")
++    return 0
++
+ def main():
+     p = argparse.ArgumentParser(); sub = p.add_subparsers(dest="cmd", required=True)
+-    for name, fn in (("emit", cmd_emit), ("score", cmd_score), ("audit", cmd_audit)):
++    for name, fn in (("emit", cmd_emit), ("score", cmd_score), ("audit", cmd_audit), ("split-polarity", cmd_split)):
+         s = sub.add_parser(name)
+-        if name != "audit":
++        if name in ("emit", "score"):
+             s.add_argument("--set", default="development", choices=["development", "sealed", "all"])
+             s.add_argument("--stage"); s.add_argument("--module")
+         if name == "score": s.add_argument("--verdicts", required=True)

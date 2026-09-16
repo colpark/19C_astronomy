@@ -1,0 +1,192 @@
+{
+ "K01": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K02": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K03": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K04": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K05": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "validator"
+ },
+ "K06": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "validator"
+ },
+ "K07": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K08": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "validator"
+ },
+ "K09": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K10": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K11": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "validator"
+ },
+ "K12": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K13": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K14": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "validator"
+ },
+ "K15": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "validator"
+ },
+ "K16": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K17": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K18": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "N01": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "N02": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "N03": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "N04": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "N05": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "N06": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "N07": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "validator"
+ },
+ "N08": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "N09": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "N10": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K19": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "validator"
+ },
+ "K20": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "validator"
+ },
+ "K21": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K22": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K23": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K24": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "K25": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "N11": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "N12": {
+  "fired": false,
+  "ruling": "dummy",
+  "via": "stage"
+ },
+ "N13": {
+  "fired": true,
+  "ruling": "dummy",
+  "via": "stage"
+ }
+}

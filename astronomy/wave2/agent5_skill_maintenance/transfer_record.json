@@ -1,0 +1,105 @@
+{
+ "record": "rulings_transfer",
+ "agent": "wave2 agent 5, skill maintenance",
+ "date": "2026-09-16",
+ "status": "BLOCKED",
+ "disposition": "UNDEMONSTRATED",
+ "blocked_by": "PANEL_BRIEF_WAVE2.md line 17: 'Rulings holder: [SUPPLY: a person who wrote neither the skill nor any case]' arrived as an unfilled placeholder; coordinator preamble item 1 records the transfer as blocked.",
+ "brief_sha256_verified": {
+  "file": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+  "expected": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+  "measured": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb"
+ },
+ "what_did_not_happen": [
+  "No file was handed to anyone.",
+  "No file was moved or deleted. Both RULINGS_SEALED.csv files remain in the repository working tree, readable by anyone with repository access, so the seal stays procedural.",
+  "Neither RULINGS_SEALED.csv was opened. Their sha256 values below were computed with sha256sum without displaying content."
+ ],
+ "handover_package": [
+  {
+   "item": "astronomy suite rulings",
+   "path": "astronomy/replay/cases/RULINGS_SEALED.csv",
+   "sha256": "6041714a30b9143ef6ea74edd3ed35dca86c51317d42a56d2b5204f559f2e2fc",
+   "bytes": 8780,
+   "cross_check": "matches the cases/RULINGS_SEALED.csv line in astronomy/replay/SEAL_SHA256SUMS, committed before verdicts per replay/RESULT.md"
+  },
+  {
+   "item": "source suite rulings",
+   "path": "fm-advantage-benchmark/cases/RULINGS_SEALED.csv",
+   "sha256": "69a30ccffb4500135cad78e4c03ae7345aefd1583c0ac7dfd802db2eb8e1c312",
+   "bytes": 10437,
+   "cross_check": "no prior hash exists for this file anywhere in the panel record (agent5_resolution_replay/REPLAY_PLAN.md 4.3 says it was never hashed); this value is the first recorded baseline"
+  },
+  {
+   "item": "astronomy suite polarity column",
+   "extracted_from": "astronomy/replay/cases/cases.csv",
+   "source_sha256": "60782b6b097dd505ed7242c7fb84b7c16323f4204c7d6fb6c4615954c4b6ca74",
+   "rows": 20,
+   "canonical_form": "UTF-8 bytes of 'case_id,polarity\\n' then one '<case_id>,<polarity>\\n' line per row in cases.csv order, no trailing blank line",
+   "sha256": "ff84a2407103db595ecde1cae6c36f989941f2925a43d20b7b1cc618e28af35f",
+   "written_to_disk": false
+  },
+  {
+   "item": "source suite polarity column",
+   "extracted_from": "fm-advantage-benchmark/cases/cases.csv",
+   "source_sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+   "rows": 38,
+   "canonical_form": "as above",
+   "sha256": "d0f89b30a42678f53dd122d642708659f1174de86c4f1cfb58779287988a853d",
+   "written_to_disk": false
+  },
+  {
+   "item": "blind-id maps (polarity-equivalent for the source suite, whose K/N id prefix encodes polarity; see issues/09)",
+   "paths": [
+    "astronomy/wave2/agent5_skill_maintenance/holder_handover/id_map_fm-advantage-benchmark.csv",
+    "astronomy/wave2/agent5_skill_maintenance/holder_handover/id_map_astronomy_replay.csv"
+   ],
+   "sha256": [
+    "3ea299629fce0975611e5356ff0797f9a8a9677e7d486a005b18da2575acde44",
+    "a613cbac924228b037f2f2edfb6fddd61a6e82a0feb643bb4b34d0528f937c85"
+   ],
+   "note": "written under holder_handover/ because no holder exists; an evaluator must not read this directory. Custody is procedural until transfer."
+  }
+ ],
+ "evaluator_side_files_prepared": [
+  {
+   "path": "astronomy/wave2/agent5_skill_maintenance/blind/fm-advantage-benchmark/cases_blind.csv",
+   "sha256": "4f9d5aa9d179494b13d9c38bc58e9674b083cbeba3d4856252dffda63302e777",
+   "columns": "case_id,stage,sealed,input",
+   "rows": 38,
+   "shuffle_seed": 20260916,
+   "ids": "opaque FMB-NN",
+   "inputs_matching_polarity_words": 0
+  },
+  {
+   "path": "astronomy/wave2/agent5_skill_maintenance/blind/astronomy_replay/cases_blind.csv",
+   "sha256": "ae6b7cf5acc35411bd477986bcd54dd15772c2011b1b082bf7ecf28d365adc96",
+   "columns": "case_id,stage,sealed,input",
+   "rows": 20,
+   "shuffle_seed": 20260916,
+   "ids": "opaque ASTB-NN",
+   "inputs_matching_polarity_words": 0
+  }
+ ],
+ "limits_of_the_prepared_files": [
+  "The shuffle seed and opaque ids were chosen by a panel agent, not the holder. The holder should re-key and re-shuffle with a seed of their own before any evaluator run (REPLAY_PLAN 3.6).",
+  "The original cases.csv files with polarity remain in the repository. The blind files only help an evaluator who is restricted to them, as in astronomy/replay/RESULT.md.",
+  "The 'sealed' column is kept because replay.py needs it to select sets; it reveals set membership, not polarity."
+ ],
+ "protocol_for_the_holder": [
+  "1. Eligibility: confirm in writing that you wrote neither the skill (fm-advantage-benchmark/) nor any replay case (fm-advantage-benchmark/cases/, astronomy/replay/cases/, astronomy/agent*/replay_cases.csv, astronomy/wave2/*/replay_cases.csv). Record name and date in the amendment ledger.",
+  "2. On receipt, recompute sha256 of both RULINGS_SEALED.csv files and of both cases.csv files; compare with this record. Any mismatch voids the corresponding seal; say so, do not repair.",
+  "3. Extract the polarity column from each cases.csv in the canonical form above and confirm its sha256 matches this record. Keep it with the rulings.",
+  "4. Take custody of holder_handover/id_map_*.csv (or regenerate your own ids and shuffle with a seed you draw), then have the coordinator remove from anything the stage under test can read: both RULINGS_SEALED.csv files, the polarity column of both cases.csv files, and the id maps. Record the commit at which that removal happened; any earlier commit readable by the evaluator voids the seal for the cases it exposes (REPLAY_PLAN 4.2 step 2).",
+  "5. Give the evaluator only SKILL.md, references/, and the blind cases file. The evaluator writes verdicts keyed by blind id in replay.py emit format (fired, ruling, via) and hashes the verdict file before any release.",
+  "6. Map blind ids back, join polarity, run replay.py score (or the patched split-polarity flow, patches/04) for development first, then sealed once. Report must-fire, must-not-fire and validator-only separately per module.",
+  "7. Write new sealed cases of your own that no panel agent has seen, per references/replay.md 'The limit that matters'; the existing cases were authored by the panel and cannot carry an independent seal.",
+  "8. Record the transfer in a new transfer_record.json with status COMPLETE, the holder identity, the hashes verified in step 2, and the removal commit from step 4."
+ ],
+ "what_this_blocks": [
+  "Any seal on either suite that carries weight beyond procedure.",
+  "The verification run of the P2 amendment (amendments/P2_refusals.md) as a sealed test; it can still run as a development re-run.",
+  "Independent-holder new cases (protocol step 7)."
+ ],
+ "completeness": "Covers both suites named in the assignment: two rulings files hashed unopened, two polarity columns hashed in canonical form without writing them, two blind case files and two id maps written. Not covered: transfer itself (no holder), removal from the working tree (not in scope for this agent), and any history rewrite."
+}

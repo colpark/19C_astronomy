@@ -1,0 +1,46 @@
+## seal-polarity verification (patch 04). Dummy verdicts: fired = sha256(case_id)[0] even; chosen without reading polarity.
+
+### BEFORE (pristine copy): emit prints polarity
+$ python3 scripts/replay.py emit --set development --stage P2 | head -1
+--- K06  stage=P2  polarity=must_fire
+
+### AFTER, polarity not yet split (s4): emit
+$ python3 scripts/replay.py emit --set development --stage P2 2>&1 | head -2
+WARNING: cases.csv carries polarity. The stage under test can read it, so the seal protects only ruling text. Run split-polarity and hand POLARITY_SEALED.csv to the rulings holder.
+--- K06  stage=P2
+
+$ python3 scripts/replay.py split-polarity   (in s4split)
+f917e653659e548cbd11844e01545096ede78924860ae75fa6023747f2dcf437  cases/cases.csv
+f6b2801b21052e07b1bb5268f7b59673cf0207c29fbf8f42311fa620e36971cd  cases/POLARITY_SEALED.csv
+Hand POLARITY_SEALED.csv and RULINGS_SEALED.csv to the holder, then remove both from anything the stage under test can read.
+[exit=0]
+$ head -1 cases/cases.csv; head -1 cases/POLARITY_SEALED.csv
+case_id,stage,sealed,input
+case_id,polarity
+$ python3 scripts/replay.py split-polarity   (second run must refuse)
+cases.csv carries no polarity column, nothing to split
+[exit=1]
+audit orig exit=0 stdout sha256=b668299331b3459c
+score --set development orig exit=1 stdout sha256=3a5e2a37ab61b081
+score --set sealed orig exit=1 stdout sha256=6f00c3f52f927d1a
+score --set all orig exit=1 stdout sha256=2ee2d9ec567863db
+audit s4 exit=0 stdout sha256=b668299331b3459c
+score --set development s4 exit=1 stdout sha256=3a5e2a37ab61b081
+score --set sealed s4 exit=1 stdout sha256=6f00c3f52f927d1a
+score --set all s4 exit=1 stdout sha256=2ee2d9ec567863db
+audit s4split exit=0 stdout sha256=b668299331b3459c
+score --set development s4split exit=1 stdout sha256=3a5e2a37ab61b081
+score --set sealed s4split exit=1 stdout sha256=6f00c3f52f927d1a
+score --set all s4split exit=1 stdout sha256=2ee2d9ec567863db
+
+$ python3 scripts/replay.py emit --set sealed --module ladder   (s4split, POLARITY_SEALED.csv moved away)
+--- N10  stage=LADDER
+$ python3 scripts/replay.py audit
+polarity is held out (cases/POLARITY_SEALED.csv absent). Only the rulings holder can audit or score.
+[exit=1]
+$ python3 scripts/replay.py score --verdicts dummy_verdicts.json --set all
+polarity is held out (cases/POLARITY_SEALED.csv absent). Only the rulings holder can audit or score.
+[exit=1]
+
+### stage under test can no longer see polarity: grep -c polarity s4split/cases/cases.csv
+0

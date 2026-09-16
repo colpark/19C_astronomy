@@ -1,0 +1,48 @@
+--- a/fm-advantage-benchmark/scripts/tau.py
++++ b/fm-advantage-benchmark/scripts/tau.py
+@@ -28,7 +28,12 @@
+     sep = [float(r["separation"]) for r in rows] if "separation" in rows[0] else None
+ 
+     gains = [(nc[i] - nc[i - 1]) / nc[i - 1] if nc[i - 1] else 0.0 for i in range(1, len(nc))]
+-    sat = next((cuts[i] for i, g in enumerate(gains, start=1) if g < a.saturation), None)
++    # Saturation needs a curve that rises first. The saturation cut is the cut after the
++    # last step gaining at least the threshold, so every tighter step buys less. A curve
++    # with no such step (flat, or falling) bounds nothing and must not yield a cut.
++    rising = [i for i, g in enumerate(gains, start=1) if g >= a.saturation]
++    flat = not rising
++    sat = None if flat or rising[-1] + 1 >= len(cuts) else cuts[rising[-1] + 1]
+ 
+     collapse = None
+     if sep:
+@@ -43,11 +48,15 @@
+         print(f"{c:>8.3f}{nc[i]:>10.0f}{g:>9}{s}")
+ 
+     print()
+-    print(f"saturation cut   {sat if sat is not None else 'not reached in this range'}")
++    print(f"saturation cut   {sat if sat is not None else ('curve flat, no step gains ' + format(a.saturation, '.0%')) if flat else 'not reached in this range'}")
+     if sep:
+         print(f"collapse cut     {collapse if collapse is not None else 'not reached in this range'}")
+ 
+     chosen, why = None, None
++    if sat is not None and collapse is not None and collapse >= sat:
++        print(f"\nREFUSE. Separation has collapsed at {collapse}, at or above the saturation cut {sat}. "
++              "No cut in this range both saturates and separates.")
++        return 2
+     if sat is not None and collapse is not None and collapse < sat:
+         chosen = sat
+         why = (f"cluster gain falls below {a.saturation:.0%} at {sat}, and separation holds "
+@@ -55,7 +64,13 @@
+                "entering the band where no arm can separate")
+     elif sat is not None:
+         chosen = sat
+-        why = f"cluster gain falls below {a.saturation:.0%} at {sat}; separation not supplied"
++        why = (f"cluster gain falls below {a.saturation:.0%} at {sat}; "
++               + ("separation holds across the swept range" if sep else "separation not supplied"))
++    if chosen is None and flat:
++        print(f"\nREFUSE. No step gains {a.saturation:.0%} or more, so the saturation test cannot "
++              "discriminate any cut in this range. Widen the sweep, or bound the cut with "
++              "must-join and must-not-join controls.")
++        return 2
+     if chosen is None:
+         print("\nREFUSE. The curve does not bound a cut in this range. Widen the sweep.")
+         return 2

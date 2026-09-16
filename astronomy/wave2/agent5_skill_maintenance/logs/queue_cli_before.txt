@@ -1,0 +1,140 @@
+$ python3 scripts/queue.py --counted 40 --passed 13 --survivors 7 --target 10 --remaining 200
+observed      7/40 = 0.175
+95% interval  [0.073, 0.328]
+
+queue for 3 more survivor(s)
+  optimistic    10
+  point         18
+  pessimistic   41
+
+supply remaining 200, optimistic yield 65.6
+
+LICENSED. Spread 2.3x. Plan against the point estimate.
+[exit=0]
+
+$ python3 scripts/queue.py --counted 6 --passed 1 --survivors 1 --target 10
+observed      1/6 = 0.167
+95% interval  [0.004, 0.641]
+
+queue for 9 more survivor(s)
+  optimistic    15
+  point         54
+  pessimistic   2138
+
+PROVISIONAL. Pessimistic queue is 40x the point estimate.
+Enumerate 54 against the point estimate, then re-derive.
+Do not commit paid-tier effort on this number.
+[exit=1]
+
+$ python3 scripts/queue.py --counted 250 --passed 9 --survivors 9 --target 100
+observed      9/250 = 0.036
+95% interval  [0.017, 0.067]
+
+queue for 91 more survivor(s)
+  optimistic    1354
+  point         2528
+  pessimistic   5485
+
+LICENSED. Spread 2.2x. Plan against the point estimate.
+[exit=0]
+
+$ python3 scripts/queue.py --counted 30 --passed 1 --survivors 1 --target 100
+observed      1/30 = 0.033
+95% interval  [0.001, 0.172]
+
+queue for 99 more survivor(s)
+  optimistic    575
+  point         2970
+  pessimistic   117359
+
+PROVISIONAL. Pessimistic queue is 40x the point estimate.
+Enumerate 2970 against the point estimate, then re-derive.
+Do not commit paid-tier effort on this number.
+[exit=1]
+
+$ python3 scripts/queue.py --counted 1071 --passed 1071 --survivors 535 --target 600
+observed      535/1071 = 0.500
+95% interval  [0.513, 0.514]
+
+queue for 65 more survivor(s)
+  optimistic    127
+  point         131
+  pessimistic   127
+
+LICENSED. Spread 1.0x. Plan against the point estimate.
+[exit=0]
+
+$ python3 scripts/queue.py --counted 1072 --passed 1072 --survivors 520 --target 600
+Traceback (most recent call last):
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent5_skill_maintenance/scratch/orig/scripts/queue.py", line 90, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent5_skill_maintenance/scratch/orig/scripts/queue.py", line 50, in main
+    lo, hi = clopper(a.survivors, a.counted)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent5_skill_maintenance/scratch/orig/scripts/queue.py", line 35, in clopper
+    1.0 if k == n else beta_inv(1 - alpha / 2, k + 1, n - k))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent5_skill_maintenance/scratch/orig/scripts/queue.py", line 30, in beta_inv
+    lo, hi = (m, hi) if ibeta(m) < p else (lo, m)
+                        ^^^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent5_skill_maintenance/scratch/orig/scripts/queue.py", line 26, in ibeta
+    return s / t
+           ~~^~~
+ZeroDivisionError: float division by zero
+[exit=1]
+
+$ python3 scripts/queue.py --counted 11183 --passed 7154 --survivors 7154 --target 100
+Traceback (most recent call last):
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent5_skill_maintenance/scratch/orig/scripts/queue.py", line 90, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent5_skill_maintenance/scratch/orig/scripts/queue.py", line 50, in main
+    lo, hi = clopper(a.survivors, a.counted)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent5_skill_maintenance/scratch/orig/scripts/queue.py", line 34, in clopper
+    return (0.0 if k == 0 else beta_inv(alpha / 2, k, n - k + 1),
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent5_skill_maintenance/scratch/orig/scripts/queue.py", line 30, in beta_inv
+    lo, hi = (m, hi) if ibeta(m) < p else (lo, m)
+                        ^^^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent5_skill_maintenance/scratch/orig/scripts/queue.py", line 26, in ibeta
+    return s / t
+           ~~^~~
+ZeroDivisionError: float division by zero
+[exit=1]
+
+$ python3 scripts/queue.py --counted 11183 --passed 7154 --survivors 7154 --target 8000 --remaining 20000
+Traceback (most recent call last):
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent5_skill_maintenance/scratch/orig/scripts/queue.py", line 90, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent5_skill_maintenance/scratch/orig/scripts/queue.py", line 50, in main
+    lo, hi = clopper(a.survivors, a.counted)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent5_skill_maintenance/scratch/orig/scripts/queue.py", line 34, in clopper
+    return (0.0 if k == 0 else beta_inv(alpha / 2, k, n - k + 1),
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent5_skill_maintenance/scratch/orig/scripts/queue.py", line 30, in beta_inv
+    lo, hi = (m, hi) if ibeta(m) < p else (lo, m)
+                        ^^^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent5_skill_maintenance/scratch/orig/scripts/queue.py", line 26, in ibeta
+    return s / t
+           ~~^~~
+ZeroDivisionError: float division by zero
+[exit=1]
+
+$ python3 scripts/queue.py --counted 100000 --passed 1 --survivors 1 --target 10 --remaining 1000000
+observed      1/100000 = 0.000
+95% interval  [0.000, 0.000]
+
+queue for 9 more survivor(s)
+  optimistic    113517821
+  point         900000
+  pessimistic   18715262339868
+
+supply remaining 1000000, optimistic yield 0.1
+ESCAPE supply. Even optimistically the pool cannot reach S=10.
+Close the domain and write the finding.
+[exit=3]
+

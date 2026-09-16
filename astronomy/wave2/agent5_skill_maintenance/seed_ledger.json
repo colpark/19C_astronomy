@@ -1,0 +1,308 @@
+{
+ "agent": "wave2 agent 5, skill maintenance",
+ "date": "2026-09-16",
+ "seeds": [
+  {
+   "id": "fm-advantage-benchmark/SKILL.md",
+   "read_in_full": true,
+   "lines": 125,
+   "sha256": "e673042d61499657bcebad3ba68c8910a518dd69478fcf06f830ef5a314eafba",
+   "contribution": "issue 08; patch 08; global refusals cited in rulings"
+  },
+  {
+   "id": "fm-advantage-benchmark/cases/RULINGS_SEALED.csv",
+   "read_in_full": false,
+   "opened": false,
+   "sha256": "69a30ccffb4500135cad78e4c03ae7345aefd1583c0ac7dfd802db2eb8e1c312",
+   "contribution": "hashed without opening for transfer_record.json; not read by instruction"
+  },
+  {
+   "id": "fm-advantage-benchmark/cases/cases.csv",
+   "read_in_full": true,
+   "lines": 39,
+   "sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+   "contribution": "audit, suite counts (issue 03), id-prefix check (issue 09), blind file; polarity only handled programmatically and printed as aggregates, except one emit line quoted in issue 04"
+  },
+  {
+   "id": "fm-advantage-benchmark/references/graph.md",
+   "read_in_full": true,
+   "lines": 34,
+   "sha256": "03b495bff2535295591c5941be1a4126d29c7b486dc9f14f02040946409cdcee",
+   "contribution": "issue 08; patch 08"
+  },
+  {
+   "id": "fm-advantage-benchmark/references/loop.md",
+   "read_in_full": true,
+   "lines": 57,
+   "sha256": "bce6e18f23132355a293d1596a788c916b942b60917ce8ef80b5b37fa17665d4",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/references/manifest.md",
+   "read_in_full": true,
+   "lines": 63,
+   "sha256": "3c26242b2ad3e2fa3e812bc0e46c9dba16ffbc4f2cc86789e09a42a1e139ae68",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/references/provenance.md",
+   "read_in_full": true,
+   "lines": 43,
+   "sha256": "ca92404318db1eccf6ec18cdfd5c1ea76511887e8d32d76aaa4c81b42f45574b",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/references/replay.md",
+   "read_in_full": true,
+   "lines": 49,
+   "sha256": "046fe64b2174f5a2cb6b1ea5b55163706ba21627e9275b808e25aaaa09e2687d",
+   "contribution": "issues 03, 04; patches 03, 04; Extending rule for P2 controls"
+  },
+  {
+   "id": "fm-advantage-benchmark/references/stages/adjudication.md",
+   "read_in_full": true,
+   "lines": 31,
+   "sha256": "6d804d4055b1fa1651dce02e8e0b08cc1a549814f11ae3e5613627569ca98b58",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/references/stages/discovery.md",
+   "read_in_full": true,
+   "lines": 66,
+   "sha256": "0b707be2a10075d7312f6f7237f33907756a3aea16e4fb0d0e694dafa4da4fc2",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/references/stages/instrument.md",
+   "read_in_full": true,
+   "lines": 31,
+   "sha256": "1a681c09ff80a1d768acec07bb8f6238541a6cdd61f9139c7a15111c65de1cb9",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/references/stages/runtime.md",
+   "read_in_full": true,
+   "lines": 45,
+   "sha256": "e109a57f1b8114d8f920806c1d40ed42457e50509b588d438e2acf0704172019",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/references/stages/supply.md",
+   "read_in_full": true,
+   "lines": 54,
+   "sha256": "c49dfac26754d6e66e1bd0e75fe9a7ac2829e5d4e6524c09cab8b2384186f0bd",
+   "contribution": "P2 amendment patch"
+  },
+  {
+   "id": "fm-advantage-benchmark/schemas/README.md",
+   "read_in_full": true,
+   "lines": 17,
+   "sha256": "bbf383250a18f3e0fbfe29ca4683f05dde68514d22d87a4c3b4d7102520040ec",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/schemas/axis_ledger.schema.json",
+   "read_in_full": true,
+   "lines": 45,
+   "sha256": "d7276b7eda7b23f444223f8adaf116d1462577e0cb479b9d67305d2ad334e6a5",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/schemas/certification_record.schema.json",
+   "read_in_full": true,
+   "lines": 23,
+   "sha256": "82c08f3a1df439656bd756fa1b62c2e6f9df871b4048291d64d0a339a47151fd",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/schemas/corpus_ledger.schema.json",
+   "read_in_full": true,
+   "lines": 99,
+   "sha256": "74d5f531f9ca9ee4a4e7aff1e4f155c6f2306b15bb8907da6b5b90acd46e4158",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/schemas/cut_curve.schema.json",
+   "read_in_full": true,
+   "lines": 46,
+   "sha256": "669699587f8e0e8cc0671973ed3e0a8cedede7671b496026edbb37ed3f87c1e1",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/schemas/domain_manifest.schema.json",
+   "read_in_full": true,
+   "lines": 432,
+   "sha256": "3508e2aaa19db932bbaec6b30b02ce3bb4753d130fe8acf13d8616952164c2fe",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/schemas/gate_register.schema.json",
+   "read_in_full": true,
+   "lines": 20,
+   "sha256": "fb1f563149d43615e731c6709e3ec08d71ef0181a4563012c7cd81b59ffb4783",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/schemas/grant_record.schema.json",
+   "read_in_full": true,
+   "lines": 36,
+   "sha256": "ae732b4195b72ad84130636635998b38a3a8dc2ed1eeff049e986e0dd97e3e22",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/schemas/power_record.schema.json",
+   "read_in_full": true,
+   "lines": 51,
+   "sha256": "7e11fc78cd2372de06bb862149e37c514a4bf59e7d4b1b7e9fcbec980fbff0dd",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/schemas/provenance_record.schema.json",
+   "read_in_full": true,
+   "lines": 35,
+   "sha256": "059b57d86ac8dc788db8c9c54bedd1f23ac6d97e8342b310c2a2f1472b6365a4",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/schemas/score_record.schema.json",
+   "read_in_full": true,
+   "lines": 57,
+   "sha256": "9aa415d44ccbc2124a68312a049f5087c7fc764962fde4f38fe693de71c49825",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/schemas/tool_card.schema.json",
+   "read_in_full": true,
+   "lines": 76,
+   "sha256": "befbd4e61ed0425b7ec10f1dee82507a2627476b7680707dac836bfd7ee6af46",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/scripts/power.py",
+   "read_in_full": true,
+   "lines": 79,
+   "sha256": "f24422f349d1c24fd7b1316bdfa13d67869f0caa1267590fdeb135beacdb8776",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "fm-advantage-benchmark/scripts/queue.py",
+   "read_in_full": true,
+   "lines": 90,
+   "sha256": "2f5a31c67e818ab3ea68b1b2bfd67399c90c9926b449fbebc8ad24bb92069050",
+   "contribution": "issues 01, 05; patch 01"
+  },
+  {
+   "id": "fm-advantage-benchmark/scripts/replay.py",
+   "read_in_full": true,
+   "lines": 116,
+   "sha256": "d63459c3b9b377480f0fdba7f612a1f156b94eec121d41259303cc23f14b0ce6",
+   "contribution": "issue 04; patch 04; audit runs"
+  },
+  {
+   "id": "fm-advantage-benchmark/scripts/tau.py",
+   "read_in_full": true,
+   "lines": 80,
+   "sha256": "ede59f37d8cb94205165687bb35d0ea001ae561d6fbb1aee3fa03cf17e7bc2ba",
+   "contribution": "issues 02, 06, 07; patch 02"
+  },
+  {
+   "id": "fm-advantage-benchmark/scripts/validate.py",
+   "read_in_full": true,
+   "lines": 149,
+   "sha256": "283b79976f7c79c1b13643f904fb18e24d51596bc8d43b3f944a229b9fb3555e",
+   "contribution": "read in full; no defect with a repro found"
+  },
+  {
+   "id": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+   "sha256": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+   "lines": 69,
+   "contribution": "brief; sha256 verified against BRIEF_SHA256"
+  },
+  {
+   "id": "astronomy/SYNTHESIS.md",
+   "sha256": "fd749aec24839f6c668350119c96932c6ef5127753661f254e4287c471459137",
+   "lines": 138,
+   "contribution": "section 7 defect list, section 11 unearned P2 passes"
+  },
+  {
+   "id": "astronomy/replay/RESULT.md",
+   "sha256": "66d7757582ba67f0a719997f5af10a0f0446418c4ea73602baf1c4c62aee5aa6",
+   "lines": 35,
+   "contribution": "validator-only cases AST-P2-02/04; seal status"
+  },
+  {
+   "id": "astronomy/agent5_resolution_replay/REPLAY_PLAN.md",
+   "sha256": "395d956b1d4cb5457f032ec14c8405d3d6495cb4ac38dc5b20fc17d11e9fc458",
+   "lines": 117,
+   "contribution": "seal protocol 4.2, design problems 4.3, K06 framing of BTSbot Table 6"
+  },
+  {
+   "id": "astronomy/agent1_supply_corpus/REPORT.md",
+   "sha256": "83c671939d476e1ebdbee0e168f1639ab2bd2ecda24210425e20c29353ce2780",
+   "lines": 142,
+   "contribution": "queue.py and tau.py findings (grep of relevant sections plus D3 table; not read line by line in full)"
+  },
+  {
+   "id": "astronomy/agent1_supply_corpus/out/curve_for_tau.csv",
+   "sha256": "13d54d3df10201f4f436238abdca00544e83238114f13c5a7a9311e4c1c1f064",
+   "lines": 11,
+   "contribution": "real flat curve used as must-fire control for issue 02"
+  },
+  {
+   "id": "astronomy/agent1_supply_corpus/out/tau_stdout.txt",
+   "sha256": "c98d27406913eb05bfbf798f6a42de933bd8ec8ed2f21ecdf9dcff941330a1e6",
+   "lines": 19,
+   "contribution": "original CHOSEN 0.0333 output"
+  },
+  {
+   "id": "astronomy/agent2_floor_headroom/REPORT.md",
+   "sha256": "5beb6fb94f96d7b6cdb5dc102dfdb59bf950160eb55ea9c01358c398aa2cd92b",
+   "lines": 126,
+   "contribution": "sections 3-4 read (lines 28-100); tier results for W2A5-P2-N2"
+  },
+  {
+   "id": "astronomy/agent2_floor_headroom/prior_floor_results.json",
+   "sha256": "71387e96a7166b74933546ce4a7cd7c976893874686ed212f667d6da95ca490d",
+   "lines": 478,
+   "contribution": "task_A T4 learners and temporal split (partial read)"
+  },
+  {
+   "id": "astronomy/agent2_floor_headroom/floor_prior.py",
+   "sha256": "46a6aafc36e7d95877d62ed0173ffdbdbf1cfc10538b1c35ac39d0d7b0a9b286",
+   "lines": 221,
+   "contribution": "lines 100-186 read: learner selection on CV, temporal split"
+  },
+  {
+   "id": "astronomy/agent5_resolution_replay/sources/2401.15167.txt",
+   "sha256": "4c053f1b72692917a8454b8590abce5de7ab3d6891f5b12c8e3a6da746d6d67a",
+   "lines": 1602,
+   "contribution": "read in full (1601 lines): section 4.1 line 660 test-split trial selection, Appendix A line 1290, Table 6 lines 1323-1330; basis of W2A5-P2-K1"
+  },
+  {
+   "id": "astronomy/agent2_floor_headroom/sources/2104.12980.txt",
+   "sha256": "55a0013603d9eb4c36b5cae310602fdde435948ffc1f08799e6236353e7b11c6",
+   "lines": 951,
+   "contribution": "read in full (951 lines): 1016 validation / 1011 test spectra (lines 209-214), Table 2 on validation set (line 498); no held-out matched pair found, so W2A5-P2-N1 is SYNTHETIC"
+  },
+  {
+   "id": "astronomy/replay/cases/cases.csv",
+   "sha256": "60782b6b097dd505ed7242c7fb84b7c16323f4204c7d6fb6c4615954c4b6ca74",
+   "lines": 21,
+   "contribution": "input column printed only for AST-P2-02 and AST-P2-04; case_id list printed; polarity handled programmatically for blind file, hash, and prefix-leak aggregate"
+  },
+  {
+   "id": "astronomy/replay/SEAL_SHA256SUMS",
+   "sha256": "df7a316b9ecb8f3bdc44826b2deddcbf92538a254d53522adb158633163230e6",
+   "lines": 3,
+   "contribution": "cross-check of astronomy RULINGS_SEALED.csv hash"
+  },
+  {
+   "id": "astronomy/replay/cases/RULINGS_SEALED.csv",
+   "opened": false,
+   "read_in_full": false,
+   "sha256": "6041714a30b9143ef6ea74edd3ed35dca86c51317d42a56d2b5204f559f2e2fc",
+   "contribution": "hashed without opening"
+  }
+ ],
+ "completeness": "Every file of the vendored skill except the two .pyc caches and cases/RULINGS_SEALED.csv was read in full (scripts, SKILL.md, references incl. all five stage briefs, all schemas). Panel documents are listed with the extent read. Not read: either RULINGS_SEALED.csv; agent 1 REPORT only in the sections relevant to tau.py/queue.py; agent 2 sources other than 2104.12980."
+}

@@ -1,0 +1,16 @@
+--- a/fm-advantage-benchmark/references/stages/supply.md
++++ b/fm-advantage-benchmark/references/stages/supply.md
+@@ -12,8 +12,11 @@
+ 
+ ## P2 prior floor estimate
+ From evidence already held, state what share of the achievable signal a mechanical composition already captures. In the record a structure predictor with no sequence model reached 92 percent of the best combined result, which reframed the whole project.
+-**Advances when** the floor's share of the ceiling is stated with its provenance record.
+-**Closes the candidate when** the floor already takes the ceiling.
++**Refuses a floor/ceiling pair** unless both were scored on the same items, the same split and the same metric, and neither was selected, tuned or thresholded on the items it is scored on. In the astronomy replay a spectrum classifier was priced at 0.90 against 0.53 on the 1,016 spectra used to choose its architecture and epoch, while a 1,011-spectrum held-out set existed (AST-P2-02). A floor with no matched ceiling is not a pair. State the floor and record its share UNDEMONSTRATED.
++**Refuses a floor built on features that exist only after the governed decision.** Check every input against the decision epoch in the manifest, never against the column name. In the astronomy replay a follow-up floor was stated as AUC 0.967 on redshift and absolute magnitude, which exist only for objects already classified; the same learner on peak magnitude, rise time and Galactic latitude gave 0.798, and at a first-alert epoch even peak magnitude post-dates the decision (AST-P2-04). Restate the floor on decision-time inputs, and report the post-hoc number beside it marked post-hoc.
++A refused pair or floor neither advances the stage nor closes the candidate.
++**Advances when** the floor's share of the ceiling is stated with its provenance record, on a pair neither refusal fires on.
++**Closes the candidate when** the floor already takes the ceiling on such a pair.
+ 
+ ## P3 count every axis, one pass
+ Cluster by the manifest measure, then count. Never count rows.

@@ -1,0 +1,40 @@
+screen: first n with a failing k near n/2 = 1072
+exhaustive all k at n=1071: failing k = []
+exhaustive all k at n=1072: failing k = [520, 521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548, 549, 550, 551, 552]
+  confirm via queue.clopper(520,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(521,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(522,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(523,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(524,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(525,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(526,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(527,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(528,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(529,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(530,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(531,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(532,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(533,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(534,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(535,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(536,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(537,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(538,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(539,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(540,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(541,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(542,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(543,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(544,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(545,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(546,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(547,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(548,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(549,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(550,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(551,1072) raises ZeroDivisionError: True
+  confirm via queue.clopper(552,1072) raises ZeroDivisionError: True
+  control clopper(520,1071) raises: False
+astronomy yield 7154/11183: smallest failing n = 1136 (k=727); clopper raises True; n-1 (k=726) raises False
+source-record yield 1/6: smallest failing n = 1648 (k=275); clopper raises True; n-1 (k=274) raises False
+yield 0.05: smallest failing n = 3731 (k=187); clopper raises True; n-1 (k=186) raises False

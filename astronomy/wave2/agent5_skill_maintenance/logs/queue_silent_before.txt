@@ -1,0 +1,7 @@
+k=n//2: first n whose printed interval differs from scipy = 1063; orig=('0.468', '0.530') scipy=('0.469', '0.530')
+k=1 n=     10: orig hi=0.445 scipy hi=0.445 ratio=1
+k=1 n=    100: orig hi=0.05448 scipy hi=0.05446 ratio=1
+k=1 n=   1000: orig hi=0.005789 scipy hi=0.005559 ratio=0.96
+k=1 n=  10000: orig hi=0.6956 scipy hi=0.000557 ratio=0.000801
+k=1 n= 100000: orig hi=7.928e-08 scipy hi=5.572e-05 ratio=703
+k=1 n=1000000: orig hi=4.337e-19 scipy hi=5.572e-06 ratio=1.28e+13

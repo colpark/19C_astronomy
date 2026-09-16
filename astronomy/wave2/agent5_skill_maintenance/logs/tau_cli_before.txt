@@ -1,0 +1,120 @@
+$ python3 scripts/tau.py --curve repro/tau/flat.csv
+     cut  clusters     gain
+   0.100      1000        -
+   0.200      1001   +0.001
+   0.300      1002   +0.001
+
+saturation cut   0.2
+
+CHOSEN 0.2
+  cluster gain falls below 5% at 0.2; separation not supplied
+  report sensitivity at 0.1 and 0.3
+[exit=0]
+
+$ python3 scripts/tau.py --curve repro/tau/flat_with_sep.csv
+     cut  clusters     gain  separation
+   0.100      1000        -      0.3000
+   0.200      1001   +0.001      0.3000
+   0.300      1002   +0.001      0.3000
+
+saturation cut   0.2
+collapse cut     not reached in this range
+
+CHOSEN 0.2
+  cluster gain falls below 5% at 0.2; separation not supplied
+  report sensitivity at 0.1 and 0.3
+[exit=0]
+
+$ python3 scripts/tau.py --curve repro/tau/saturating.csv
+     cut  clusters     gain
+   0.100       100        -
+   0.200       200   +1.000
+   0.300       205   +0.025
+   0.400       206   +0.005
+
+saturation cut   0.3
+
+CHOSEN 0.3
+  cluster gain falls below 5% at 0.3; separation not supplied
+  report sensitivity at 0.2 and 0.4
+[exit=0]
+
+$ python3 scripts/tau.py --curve repro/tau/late_jump.csv
+     cut  clusters     gain
+   0.100       100        -
+   0.200       102   +0.020
+   0.300       200   +0.961
+   0.400       205   +0.025
+
+saturation cut   0.2
+
+CHOSEN 0.2
+  cluster gain falls below 5% at 0.2; separation not supplied
+  report sensitivity at 0.1 and 0.3
+[exit=0]
+
+$ python3 scripts/tau.py --curve repro/tau/sep_holds.csv
+     cut  clusters     gain  separation
+   1.000       100        -      0.1000
+   2.000       150   +0.500      0.1000
+   3.000       152   +0.013      0.4000
+   4.000       153   +0.007      0.4000
+
+saturation cut   3.0
+collapse cut     2.0
+
+CHOSEN 3.0
+  cluster gain falls below 5% at 3.0, and separation holds above 2.0, so 3.0 is the loosest cut that buys units without entering the band where no arm can separate
+  report sensitivity at 2.0 and 4.0
+[exit=0]
+
+$ python3 scripts/tau.py --curve repro/tau/sep_collapsed_at_sat.csv
+     cut  clusters     gain  separation
+   1.000       100        -      0.4000
+   2.000       150   +0.500      0.4000
+   3.000       152   +0.013      0.1000
+   4.000       153   +0.007      0.1000
+
+saturation cut   3.0
+collapse cut     4.0
+
+CHOSEN 3.0
+  cluster gain falls below 5% at 3.0; separation not supplied
+  report sensitivity at 2.0 and 4.0
+[exit=0]
+
+$ python3 scripts/tau.py --curve repro/tau/sep_never_collapses.csv
+     cut  clusters     gain  separation
+   0.100       100        -      0.4000
+   0.200       200   +1.000      0.4000
+   0.300       205   +0.025      0.4000
+   0.400       206   +0.005      0.4000
+
+saturation cut   0.3
+collapse cut     not reached in this range
+
+CHOSEN 0.3
+  cluster gain falls below 5% at 0.3; separation not supplied
+  report sensitivity at 0.2 and 0.4
+[exit=0]
+
+$ python3 scripts/tau.py --curve repro/tau/astronomy_agent1_curve.csv
+     cut  clusters     gain
+   0.017     11104        -
+   0.033     11116   +0.001
+   0.050     11126   +0.001
+   0.100     11143   +0.002
+   0.200     11164   +0.002
+   0.333     11174   +0.001
+   0.500     11179   +0.000
+   0.667     11183   +0.000
+   1.000     11183   +0.000
+   2.000     11183   +0.000
+
+saturation cut   0.03333333333333333
+
+CHOSEN 0.03333333333333333
+  cluster gain falls below 5% at 0.03333333333333333; separation not supplied
+  report sensitivity at 0.016666666666666666 and 0.05
+[exit=0]
+

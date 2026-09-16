@@ -1,0 +1,47 @@
+--- a/fm-advantage-benchmark/scripts/queue.py
++++ b/fm-advantage-benchmark/scripts/queue.py
+@@ -17,17 +17,35 @@
+ """
+ import argparse, math
+ 
+-def beta_inv(p, a, b, steps=3000):
+-    def ibeta(m):
+-        s = sum(((i + .5) * m / steps) ** (a - 1) * (1 - (i + .5) * m / steps) ** (b - 1)
+-                for i in range(steps)) * m / steps
+-        t = sum(((i + .5) / steps) ** (a - 1) * (1 - (i + .5) / steps) ** (b - 1)
+-                for i in range(steps)) / steps
+-        return s / t
++def ibeta(x, a, b):
++    """Regularised incomplete beta I_x(a, b), evaluated in log space.
++
++    The prefactor x^a (1-x)^b / B(a, b) is formed from lgamma and logs, and the
++    continued fraction (modified Lentz) is scale-free, so nothing underflows at
++    large a + b. The previous midpoint sum divided by a normaliser that reaches
++    exactly 0.0 from n = 1072 and raised ZeroDivisionError."""
++    if x <= 0.0: return 0.0
++    if x >= 1.0: return 1.0
++    if x > (a + 1.0) / (a + b + 2.0):
++        return 1.0 - ibeta(1.0 - x, b, a)
++    lfront = (math.lgamma(a + b) - math.lgamma(a) - math.lgamma(b)
++              + a * math.log(x) + b * math.log1p(-x) - math.log(a))
++    tiny, c, d = 1e-300, 1.0, 1.0 - (a + b) * x / (a + 1.0)
++    d = 1.0 / (d if abs(d) > tiny else tiny); f = d
++    for m in range(1, 10000):
++        for num in (m * (b - m) * x / ((a + 2 * m - 1) * (a + 2 * m)),
++                    -(a + m) * (a + b + m) * x / ((a + 2 * m) * (a + 2 * m + 1))):
++            d = 1.0 + num * d; d = 1.0 / (d if abs(d) > tiny else tiny)
++            c = 1.0 + num / c; c = c if abs(c) > tiny else tiny
++            f *= c * d
++        if abs(c * d - 1.0) < 1e-15: break
++    return math.exp(lfront) * f
++
++def beta_inv(p, a, b):
+     lo, hi = 0.0, 1.0
+-    for _ in range(60):
++    for _ in range(100):
+         m = (lo + hi) / 2
+-        lo, hi = (m, hi) if ibeta(m) < p else (lo, m)
++        lo, hi = (m, hi) if ibeta(m, a, b) < p else (lo, m)
+     return (lo + hi) / 2
+ 
+ def clopper(k, n, alpha=0.05):

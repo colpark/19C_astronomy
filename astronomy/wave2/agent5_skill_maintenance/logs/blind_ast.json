@@ -1,0 +1,13 @@
+{
+ "source": "astronomy/replay/cases/cases.csv",
+ "source_sha256": "60782b6b097dd505ed7242c7fb84b7c16323f4204c7d6fb6c4615954c4b6ca74",
+ "rows": 20,
+ "polarity_column_canonical_sha256": "ff84a2407103db595ecde1cae6c36f989941f2925a43d20b7b1cc618e28af35f",
+ "shuffle_seed": 20260916,
+ "blind_file": "astronomy/wave2/agent5_skill_maintenance/blind/astronomy_replay/cases_blind.csv",
+ "blind_sha256": "ae6b7cf5acc35411bd477986bcd54dd15772c2011b1b082bf7ecf28d365adc96",
+ "blind_header": "case_id,stage,sealed,input",
+ "blind_inputs_matching_polarity_words": 0,
+ "id_map_file": "astronomy/wave2/agent5_skill_maintenance/holder_handover/id_map_astronomy_replay.csv",
+ "id_map_sha256": "a613cbac924228b037f2f2edfb6fddd61a6e82a0feb643bb4b34d0528f937c85"
+}

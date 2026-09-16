@@ -1,0 +1,6 @@
+$ python3 repro/suite_counts.py   (cwd: patched copy)
+rows 38 sealed 12 dev 26
+non-discovery: total 28 dev 19 sealed 9
+discovery: dev 7 sealed 3
+discovery dev SYNTHETIC 3 discovery sealed SYNTHETIC 1
+graph.md edge rows 16 | distinct stages on an edge 17 ['A3', 'A4', 'D2', 'D3', 'D4', 'D5', 'I1', 'I5', 'P1', 'P2', 'P3', 'P6', 'P7', 'R1', 'R4', 'R7', 'R8'] | stages with no edge 12

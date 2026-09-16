@@ -1,0 +1,13 @@
+{
+ "source": "fm-advantage-benchmark/cases/cases.csv",
+ "source_sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+ "rows": 38,
+ "polarity_column_canonical_sha256": "d0f89b30a42678f53dd122d642708659f1174de86c4f1cfb58779287988a853d",
+ "shuffle_seed": 20260916,
+ "blind_file": "astronomy/wave2/agent5_skill_maintenance/blind/fm-advantage-benchmark/cases_blind.csv",
+ "blind_sha256": "4f9d5aa9d179494b13d9c38bc58e9674b083cbeba3d4856252dffda63302e777",
+ "blind_header": "case_id,stage,sealed,input",
+ "blind_inputs_matching_polarity_words": 0,
+ "id_map_file": "astronomy/wave2/agent5_skill_maintenance/holder_handover/id_map_fm-advantage-benchmark.csv",
+ "id_map_sha256": "3ea299629fce0975611e5356ff0797f9a8a9677e7d486a005b18da2575acde44"
+}

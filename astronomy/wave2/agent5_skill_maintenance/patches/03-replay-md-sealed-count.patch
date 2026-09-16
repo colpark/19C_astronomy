@@ -1,0 +1,30 @@
+--- a/fm-advantage-benchmark/references/replay.md
++++ b/fm-advantage-benchmark/references/replay.md
+@@ -13,7 +13,7 @@
+ | `cases/cases.csv` | the stage under test |
+ | `cases/RULINGS_SEALED.csv` | held out until the stage is finished |
+ 
+-Twelve cases are marked sealed. Develop on the other twenty-six. Open the nine once, then reseal.
++Twelve cases are marked sealed. Develop on the other twenty-six. Open the twelve once, then reseal.
+ 
+ ## Running
+ 
+@@ -27,13 +27,15 @@
+ 
+ ## First executed pass
+ 
++The development and sealed rows count nineteen and nine, which matches the twenty-eight cases outside the discovery module in `cases/cases.csv`. The discovery rows count the other ten. The whole suite holds twenty-six development and twelve sealed.
++
+ | Set | Result | Note |
+ |---|---|---|
+ | suite shape audit | 1 finding | the escalation ladder had no must-not-fire case |
+-| development, 19 cases | 19 of 19 | a clean sweep usually means the suite is too easy |
+-| sealed, 9 cases | 9 of 9 polarity, 2 unearned | two passed through a global refusal, not the stage |
++| development, 19 non-discovery cases | 19 of 19 | a clean sweep usually means the suite is too easy |
++| sealed, 9 non-discovery cases | 9 of 9 polarity, 2 unearned | two passed through a global refusal, not the stage |
+ | after repair | 0 unearned | P4 now refuses an incomplete axis ledger, A1 now owns item burning |
+-| discovery, development 7 | 7 of 7 | five of seven extracted from the record |
++| discovery, development 7 | 7 of 7 | four of seven extracted from the record, three SYNTHETIC in cases.csv |
+ | discovery, sealed 3 | 3 of 3 | two extracted, one synthetic |
+ 
+ Read the development sweep with suspicion. The stage briefs and the cases come from one record, so the sweep measures internal consistency and not capability.

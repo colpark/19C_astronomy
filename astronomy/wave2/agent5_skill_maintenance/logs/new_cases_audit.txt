@@ -1,0 +1,13 @@
+$ python3 scripts/replay.py audit   (pristine replay.py; cases = replay_cases.csv + amendments/P2_controls_cases.csv)
+7 cases across 3 modules
+
+module           must_fire  must_not_fire  sealed
+adjudication             0              1       0
+discovery                1              0       0
+supply                   2              3       0
+
+  - adjudication: nothing sealed, every case is available for tuning
+  - discovery: no must-not-fire case, it would score full marks by flagging everything
+  - discovery: nothing sealed, every case is available for tuning
+  - supply: nothing sealed, every case is available for tuning
+[exit=1]

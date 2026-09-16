@@ -1,0 +1,21 @@
+--- a/fm-advantage-benchmark/references/graph.md
++++ b/fm-advantage-benchmark/references/graph.md
+@@ -1,6 +1,6 @@
+ # The dependency graph
+ 
+-Sixteen cross-module edges. Thirteen of the twenty-nine stages carry none and chain only within their module, which is correct.
++Sixteen cross-module edges. Twelve of the twenty-nine stages carry none and chain only within their module, which is correct.
+ 
+ Consult this before starting any stage. An unmet precondition records as UNDEMONSTRATED. It is never skipped.
+ 
+--- a/fm-advantage-benchmark/SKILL.md
++++ b/fm-advantage-benchmark/SKILL.md
+@@ -22,7 +22,7 @@
+ 
+ `references/provenance.md` holds the five fields that govern every number. `references/manifest.md` describes the manifest, which the discovery module derives from your seeds rather than asking you to supply. `references/loop.md` holds the stage contract and the escape rules. Load all three before stage R1.
+ 
+-`references/graph.md` holds the twelve cross-module preconditions. Consult it before starting any stage.
++`references/graph.md` holds the sixteen cross-module preconditions. Consult it before starting any stage.
+ 
+ ## The 29 stages
+ 

@@ -1,0 +1,68 @@
+## Patch application log
+pristine source: repo fm-advantage-benchmark/ copied with cases/RULINGS_SEALED.csv and __pycache__ excluded
+
+### Series, applied in order to one pristine copy
+$ patch -p1 -d scratch/apply < patches/01-queue-logspace-ibeta.patch
+patching file fm-advantage-benchmark/scripts/queue.py
+[exit=0]
+$ patch -p1 -d scratch/apply < patches/02-tau-refuse-unbounded-curve.patch
+patching file fm-advantage-benchmark/scripts/tau.py
+[exit=0]
+$ patch -p1 -d scratch/apply < patches/03-replay-md-sealed-count.patch
+patching file fm-advantage-benchmark/references/replay.md
+[exit=0]
+$ patch -p1 -d scratch/apply < patches/04-seal-polarity.patch
+patching file fm-advantage-benchmark/references/replay.md
+patching file fm-advantage-benchmark/scripts/replay.py
+[exit=0]
+$ patch -p1 -d scratch/apply < patches/08-graph-edge-and-stage-counts.patch
+patching file fm-advantage-benchmark/references/graph.md
+patching file fm-advantage-benchmark/SKILL.md
+[exit=0]
+$ patch -p1 -d scratch/apply < patches/P2-supply-refusals.patch
+patching file fm-advantage-benchmark/references/stages/supply.md
+[exit=0]
+
+$ diff -r scratch/apply/fm-advantage-benchmark scratch/s6   (expect no output)
+[exit=0]
+
+### Each patch alone against its own pristine copy (dry run)
+$ patch -p1 --dry-run -d <pristine> < patches/01-queue-logspace-ibeta.patch
+checking file fm-advantage-benchmark/scripts/queue.py
+[exit=0]
+$ patch -p1 --dry-run -d <pristine> < patches/02-tau-refuse-unbounded-curve.patch
+checking file fm-advantage-benchmark/scripts/tau.py
+[exit=0]
+$ patch -p1 --dry-run -d <pristine> < patches/03-replay-md-sealed-count.patch
+checking file fm-advantage-benchmark/references/replay.md
+[exit=0]
+$ patch -p1 --dry-run -d <pristine> < patches/04-seal-polarity.patch
+checking file fm-advantage-benchmark/references/replay.md
+Hunk #1 FAILED at 10.
+1 out of 1 hunk FAILED
+checking file fm-advantage-benchmark/scripts/replay.py
+[exit=1]
+$ patch -p1 --dry-run -d <pristine> < patches/08-graph-edge-and-stage-counts.patch
+checking file fm-advantage-benchmark/references/graph.md
+checking file fm-advantage-benchmark/SKILL.md
+[exit=0]
+$ patch -p1 --dry-run -d <pristine> < patches/P2-supply-refusals.patch
+checking file fm-advantage-benchmark/references/stages/supply.md
+[exit=0]
+
+### vendored skill untouched: sha256 of the files the patches target, repo copy
+2f5a31c67e818ab3ea68b1b2bfd67399c90c9926b449fbebc8ad24bb92069050  fm-advantage-benchmark/scripts/queue.py
+ede59f37d8cb94205165687bb35d0ea001ae561d6fbb1aee3fa03cf17e7bc2ba  fm-advantage-benchmark/scripts/tau.py
+d63459c3b9b377480f0fdba7f612a1f156b94eec121d41259303cc23f14b0ce6  fm-advantage-benchmark/scripts/replay.py
+046fe64b2174f5a2cb6b1ea5b55163706ba21627e9275b808e25aaaa09e2687d  fm-advantage-benchmark/references/replay.md
+03b495bff2535295591c5941be1a4126d29c7b486dc9f14f02040946409cdcee  fm-advantage-benchmark/references/graph.md
+e673042d61499657bcebad3ba68c8910a518dd69478fcf06f830ef5a314eafba  fm-advantage-benchmark/SKILL.md
+c49dfac26754d6e66e1bd0e75fe9a7ac2829e5d4e6524c09cab8b2384186f0bd  fm-advantage-benchmark/references/stages/supply.md
+### same files in scratch/orig (pristine copy used for the before runs)
+2f5a31c67e818ab3ea68b1b2bfd67399c90c9926b449fbebc8ad24bb92069050  scripts/queue.py
+ede59f37d8cb94205165687bb35d0ea001ae561d6fbb1aee3fa03cf17e7bc2ba  scripts/tau.py
+d63459c3b9b377480f0fdba7f612a1f156b94eec121d41259303cc23f14b0ce6  scripts/replay.py
+046fe64b2174f5a2cb6b1ea5b55163706ba21627e9275b808e25aaaa09e2687d  references/replay.md
+03b495bff2535295591c5941be1a4126d29c7b486dc9f14f02040946409cdcee  references/graph.md
+e673042d61499657bcebad3ba68c8910a518dd69478fcf06f830ef5a314eafba  SKILL.md
+c49dfac26754d6e66e1bd0e75fe9a7ac2829e5d4e6524c09cab8b2384186f0bd  references/stages/supply.md

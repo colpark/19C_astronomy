@@ -1,0 +1,18 @@
+small-n grid: 99 (k,n) pairs, n <= 1071
+  max |orig - scipy|  = 4.37e-02  worst at k=535, n=1071: orig=(0.512816131237184, 0.5138579400771943), scipy=(0.4691577347482415, 0.529911130002458)
+  max |fixed - scipy| = 7.77e-15
+  max |orig - fixed|  = 4.37e-02
+  pairs whose printed 3-decimal interval differs orig vs fixed: 1
+    (535, 1071, (0.512816131237184, 0.5138579400771943), (0.4691577347482443, 0.5299111300024579))
+large n, fixed vs scipy (orig raises or is not evaluated):
+  k=    520 n=    1072  orig=ZeroDivisionError          fixed=(0.454767, 0.515465)  scipy=(0.454767, 0.515465)  max|fixed-scipy|=1.6e-15
+  k=    727 n=    1136  orig=ZeroDivisionError          fixed=(0.611277, 0.667925)  scipy=(0.611277, 0.667925)  max|fixed-scipy|=4.7e-15
+  k=   7154 n=   11183  orig=ZeroDivisionError          fixed=(0.630743, 0.648626)  scipy=(0.630743, 0.648626)  max|fixed-scipy|=1.4e-14
+  k=      9 n=     250  orig=(0.0165913, 0.0672369)     fixed=(0.0165913, 0.0672369)  scipy=(0.0165913, 0.0672369)  max|fixed-scipy|=9.7e-16
+  k=      1 n=      30  orig=(0.000843567, 0.172174)    fixed=(0.000843571, 0.172169)  scipy=(0.000843571, 0.172169)  max|fixed-scipy|=5.3e-16
+  k=      1 n=  100000  orig=(4.80891e-13, 7.92827e-08) fixed=(2.53178e-07, 5.57152e-05)  scipy=(2.53178e-07, 5.57152e-05)  max|fixed-scipy|=3.3e-15
+  k=      1 n= 1000000  orig=(4.33681e-19, 4.33681e-19) fixed=(2.53178e-08, 5.57163e-06)  scipy=(2.53178e-08, 5.57163e-06)  max|fixed-scipy|=2.7e-16
+  k=  50000 n=  100000  orig=ZeroDivisionError          fixed=(0.496896, 0.503104)  scipy=(0.496896, 0.503104)  max|fixed-scipy|=3.3e-14
+  k= 500000 n= 1000000  orig=ZeroDivisionError          fixed=(0.49902, 0.50098)  scipy=(0.49902, 0.50098)  max|fixed-scipy|=1.6e-13
+  k=1000000 n= 1000000  orig=(0.999996, 1)              fixed=(0.999996, 1)  scipy=(0.999996, 1)  max|fixed-scipy|=0.0e+00
+  k=      0 n= 1000000  orig=(0, 4.33681e-19)           fixed=(0, 3.68887e-06)  scipy=(0, 3.68887e-06)  max|fixed-scipy|=3.0e-17
