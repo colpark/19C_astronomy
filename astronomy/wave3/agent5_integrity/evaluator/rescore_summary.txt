@@ -1,0 +1,4 @@
+verdict file sha256 131a6ad4988c4b1fa509da73b9e2daba97615ec39b793ab9d274cb459e9a5d38  (astronomy/wave3/agent5_integrity/evaluator/verdicts_opaque.json)  recorded before join
+polarity accuracy 20 of 20  (must_fire 14 of 14, must_not_fire 6 of 6, missing 0)
+unearned (validator-only) 2
+delta vs wave 1 (20 of 20, 2 unearned): polarity +0, unearned +0

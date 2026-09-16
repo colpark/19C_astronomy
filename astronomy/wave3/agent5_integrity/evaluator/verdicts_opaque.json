@@ -1,0 +1,122 @@
+{
+ "24b4f3e2c3": {
+  "fired": true,
+  "ruling": "The proposal is refused as written. Both channels were trained on the BTS labels and decisions the benchmark scores, so tool-side exposure must be counted per item and per channel before any channel is mounted. Until that count exists the contamination axis has no number and P4 cannot rule.",
+  "rule": "P3 contamination-exposure axis (and tool coverage); P4 refuses to rule on a missing axis; global 14",
+  "via": "stage"
+ },
+ "396bac1368": {
+  "fired": true,
+  "ruling": "The 0.967 floor is refused because its referent is not a decision-time floor. Redshift, and the absolute magnitude derived from it, exist only for objects that are already classified, so the number measures post-classification information. The skill takes the decision-time floor of 0.798 as the candidate floor and records the 0.967 figure as leakage.",
+  "rule": "Global refusal 1 (referent field); P2 requires a provenance record",
+  "via": "validator"
+ },
+ "3cb6da5264": {
+  "fired": false,
+  "ruling": "The comparison is admissible as paired on a common denominator: the same 6,045 objects and the same 10 folds, with the 16 exclusions applied to both arms alike. Scoring proceeds, and the exclusion is recorded.",
+  "rule": "A3 score paired; global 4 not triggered",
+  "via": "stage"
+ },
+ "41f4c6d64a": {
+  "fired": true,
+  "ruling": "The candidate closes on headroom. The classical parametric floor matches the learned representation on multi-class F1 (0.71 vs 0.71, inside the fold spread) and reaches about 97 percent of it on binary Ia. The floor already takes the ceiling, so there is nothing to build toward, and the closure finding is written.",
+  "rule": "P2 closes when the floor already takes the ceiling; global 5",
+  "via": "stage"
+ },
+ "4b743dd16c": {
+  "fired": true,
+  "ruling": "The report of zero exposed units is refused. A missing date column and a refused query leave the axis undemonstrated, not zero. The archived 2024-12-08 copy shows at least 6,166 labels public before every subject cutoff, and no object postdates 2026-06-30, so the axis is reported as exposed (at least 6,166, and effectively all 7,843 predate the subjects) and contamination is disclosed.",
+  "rule": "P3 contamination-exposure axis (typical failure: all units predate all subjects); global 11",
+  "via": "stage"
+ },
+ "52c49d48b4": {
+  "fired": false,
+  "ruling": "The item is admitted. It was first detected after every remaining subject's published cutoff, the subject without a cutoff was removed on the record, the text carries no answer, the label comes from a human report filed after sealing, and the exposure ruling is written. It enters the corpus.",
+  "rule": "D2 admission rule, exposure exception satisfied; global 14 not triggered",
+  "via": "stage"
+ },
+ "59cbd3ad88": {
+  "fired": true,
+  "ruling": "The amendment is refused. Recasting unclassified objects as negatives after the count widens the label definition in response to a low count, and a rule changed after a count invalidates that count. The test side is reported as 9 positives and 9 negatives, and any label-map change requires re-registering the corpus and rerunning the counting stages.",
+  "rule": "D2 (a rule that changes after a count invalidates the count); global 9",
+  "via": "stage"
+ },
+ "659571264c": {
+  "fired": true,
+  "ruling": "'7 of 15 verified on Rubin' is refused. Simulation F1 scores are not verification on the real Rubin alert schema, and several full models need fields the lsst.v11_1 packet lacks, which makes them structurally unavailable on the supplied input. The axis is recounted from code against the real input format, with those channels counted as not covering or undemonstrated.",
+  "rule": "P3 tool-coverage axis (channel structurally unavailable); I2 dead channel on the actual input format; global 1 source",
+  "via": "stage"
+ },
+ "6e448fcc8d": {
+  "fired": true,
+  "ruling": "The card fields may be rewritten to the code values, but deleting the disagreement list is refused. The list is non-optional, and all three paper-versus-code disagreements (dropout, learning rate, input dimension) stay listed.",
+  "rule": "I3 list every disagreement rather than reconciling; advances only with a non-optional disagreement list",
+  "via": "stage"
+ },
+ "72b8a1f880": {
+  "fired": false,
+  "ruling": "Checkpoint identity is accepted. The locally computed sha256 matches the content object id the hub reports for that revision, and I3 accepts a content hash in place of a revision string. The card records the served checkpoint by that hash.",
+  "rule": "I3 served checkpoint with its revision or content hash",
+  "via": "stage"
+ },
+ "830d0e95f7": {
+  "fired": false,
+  "ruling": "Check (b) passes. ParSNIP's decode_spectra (agent-set latent, colour and redshift) is a generator, and SALT3 fit_lc under an agent-bounded hypothesis is a scorer, so both are roles below the encoder and predictor line. The check concerns the tool inventory, not what the production pipeline deploys, so the reviewer's objection does not apply.",
+  "rule": "D4/D5 ratification check (b), at least one role below the encoder/predictor line (manifest.md tool roles)",
+  "via": "stage"
+ },
+ "84f3d173a4": {
+  "fired": true,
+  "ruling": "No floor share is priced from these figures. All three tools were scored on the set used to select the recurrent model, the stronger template tool was not run, so the gain is priced against the weakest adjudicator, and classifying a spectrum already taken measures something adjacent to deciding which transients get a spectrum. The comparison is re-scored on the 1,011 held-out spectra against the strongest template tool, and the referent mismatch is recorded before any floor share is stated.",
+  "rule": "Global refusal 1 (adjudicator, source/population and referent fields); P2 requires a provenance record",
+  "via": "validator"
+ },
+ "89ada8ff23": {
+  "fired": true,
+  "ruling": "Admission is refused. The item text contains the TNS classification report and an SN-prefixed designation, so the answer sits in the item's own source. The 2021 report predates every subject cutoff, so the exposure exception cannot apply. The item goes into the exclusion ledger under that rule.",
+  "rule": "D2 refusal on an answer in its own source; global 14",
+  "via": "stage"
+ },
+ "976917ee22": {
+  "fired": true,
+  "ruling": "The slot is refused as '7843 spectroscopic labels'. The type column mixes human spectroscopic classifications with automated RNN classifications, light-curve-only classifications and reused reports, and nothing in the catalogue separates them, so the referent is wrong. The slot is marked UNDEMONSTRATED until labels are split into measured truth and model-derived annotation, and the affected stages are named and escalated.",
+  "rule": "D4 label-source derivation (measured truth vs annotation from other predictions); loop rung 6b; global 1",
+  "via": "stage"
+ },
+ "a1de1ad3c2": {
+  "fired": false,
+  "ruling": "The prior floor record is accepted as a prior estimate, not a built composition. It is grouped, has a permutation control and a temporal split, and is reported by tier. The decision-time tiers (0.798 at peak, 0.868 on the full light curve) are the usable floor, and the redshift tier is disclosed rather than adopted. The share of ceiling is carried to I1, and the candidate proceeds.",
+  "rule": "P2 prior floor estimate",
+  "via": "stage"
+ },
+ "b32daac242": {
+  "fired": true,
+  "ruling": "Positive supply counted as alerts is refused, because alerts are the abundant unit: one DIAObject gathers many alerts. Supply is recounted at the object level (supernova DIAObjects eligible for follow-up, on the order of a million per year) after clustering by the manifest measure.",
+  "rule": "P3 positive-supply axis (counted at the abundant unit; never count rows)",
+  "via": "stage"
+ },
+ "b908f7130f": {
+  "fired": true,
+  "ruling": "'93% vs ~97%' is refused as a comparison. The two figures use different populations (a test split vs a separate 41-night window), different purity definitions (bright extragalactic vs extragalactic of any brightness), and an internally inconsistent scanner figure (96.7 vs 95.6). The report states both figures separately with their own denominators and makes no comparison until they are scored paired on common items.",
+  "rule": "A3 arm means on different denominators are not a comparison; global 4",
+  "via": "stage"
+ },
+ "d4d63dc512": {
+  "fired": true,
+  "ruling": "No directional claim is made. The 0.018 difference sits below the unpaired MDE of about 0.045, and no paired sigma_d exists. The result statement reads as a no-claim that states the MDE and notes that only an effect larger than about 0.045 is excluded. The production choice is not presented as evidence of M's superiority.",
+  "rule": "A4 refuse a directional claim at or below MDE; global 5",
+  "via": "stage"
+ },
+ "d5e0b9e2c3": {
+  "fired": true,
+  "ruling": "Adopting 30 arcsec is refused. The curve never saturates or collapses, there is no separation column to bound the cut, and the script printed CHOSEN without a bounding signal. At 30 arcsec, 39 distinct supernovae merge. The cut stays unresolved until a separation signal bounds it, or the skill escalates, reporting a looser and a tighter cut for sensitivity.",
+  "rule": "D3 cut chosen by measurement and justified from the curve (tau.py refuses when the curve does not bound one)",
+  "via": "stage"
+ },
+ "ee74e1ed11": {
+  "fired": false,
+  "ruling": "The cluster-structure axis is accepted: 11,193 raw rows beside 11,183 clusters, an overstatement of 0.089 percent. The must-fire control (9 re-trigger duplicates joined) and the must-not-fire control (no distinct supernovae merged) both ran, and every row is accounted for. Counting proceeds.",
+  "rule": "P3 cluster structure, raw beside clustered with overstatement",
+  "via": "stage"
+ }
+}
