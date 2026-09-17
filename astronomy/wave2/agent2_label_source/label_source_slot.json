@@ -1,0 +1,177 @@
+{
+ "slot": "label_source",
+ "candidate": "live time-domain astronomy (Rubin LSST alerts + ZTF BTS labels)",
+ "banner": "calibration only, contamination FAIL on this cohort",
+ "supersedes": {
+  "file": "astronomy/agent3_labels_exposure/label_source_slot.json",
+  "sha256": "09e8dff5ac6f246629feb77c6689b4b0d443ef1595f8dcf2553d08e3ad28bc82",
+  "what_changes": "SNIascore bound tightened; per-object measured/annotation/photometric/unresolved split added from public archived TNS pages; CCSNscore channel added; class-level basis shares of wave 1 carried unchanged (not recounted)"
+ },
+ "status": "UNDEMONSTRATED",
+ "status_reason": "Per-object split is DERIVED only where public archived TNS evidence exists; 6156 of 7843 labels remain UNRESOLVED, so the measured-vs-annotation share of the whole base is bounded, not determined. No TNS credentials were supplied (SUPPLY field empty). The SNIascore bound itself is DERIVED.",
+ "value": {
+  "population": 7843,
+  "category_counts": {
+   "MEASURED": 884,
+   "MODEL_ANNOTATION": 803,
+   "PHOTOMETRIC_ONLY": 0,
+   "UNRESOLVED_UNDEMONSTRATED": 6156
+  },
+  "category_by_strength": [
+   {
+    "category": "MEASURED",
+    "strength": "STRONG",
+    "n": 884
+   },
+   {
+    "category": "MODEL_ANNOTATION",
+    "strength": "MODERATE",
+    "n": 4
+   },
+   {
+    "category": "MODEL_ANNOTATION",
+    "strength": "STRONG",
+    "n": 799
+   },
+   {
+    "category": "UNRESOLVED (UNDEMONSTRATED)",
+    "strength": "",
+    "n": 6156
+   }
+  ],
+  "model_annotation_by_model": [
+   {
+    "model": "SNIascore",
+    "strength": "MODERATE",
+    "n": 4
+   },
+   {
+    "model": "SNIascore",
+    "strength": "STRONG",
+    "n": 799
+   }
+  ],
+  "photometric_only_by_class": {},
+  "sniascore_bound": {
+   "status": "DERIVED",
+   "lower": 803,
+   "upper": 2247,
+   "wave1": [
+    0,
+    3131
+   ],
+   "lower_rule": "E1 archived TNS report with 'SNIascore' in Classifier/s as latest matching report (STRONG, n=799) plus E2 paper-named objects still typed SN Ia with no contradicting E1 (MODERATE)",
+   "upper_rule": "plain 'SN Ia' minus E1 non-SNIascore placement, minus E4 (SN Ia in 2021-01-28 BTS explorer capture), minus E5 (wave-1 phase rule, WEAK); min with wave-1 3131",
+   "upper_noE5_sensitivity_not_slot_value": 2844,
+   "excluded_by": {
+    "E1": 884,
+    "E4": 1340,
+    "E5": 1936,
+    "E1_only_not_E4_E5": 883
+   },
+   "within_upper_fetch_status": {
+    "not_attempted": 1198,
+    "ok": 825,
+    "http_error": 200,
+    "failed_retries": 22,
+    "invalid": 2
+   }
+  },
+  "ccsnscore_bound": {
+   "status": "UNDEMONSTRATED (start date unknown)",
+   "population": 1604,
+   "lower": 0,
+   "upper": 155,
+   "upper_before_E1": 155,
+   "note": "upper counts CC-class objects discovered >= 2025-02-09 not excluded by E1; start date of CCSNscore TNS reporting UNDEMONSTRATED; any CCSNscore report found with discovery < 2025-02-09 would falsify the date margin",
+   "ccsnscore_reports_found_discovered_before_cut": 0
+  },
+  "fetch_status": {
+   "not_attempted": 5910,
+   "ok": 1706,
+   "http_error": 200,
+   "failed_retries": 22,
+   "invalid": 5
+  },
+  "refusal14": {
+   "agent1_flagged": 98,
+   "agent1_REFUSE": 92,
+   "agent1_NOT_FIRED_NAME_ONLY": 6,
+   "agent1_NOT_FIRED_FALSE_MATCH": 0,
+   "agent1_unlabeled_in_bts": 3,
+   "wave2_additional": 17,
+   "wave2_additional_REFUSE": 12,
+   "stated_class_disagrees_with_bts_type": [
+    {
+     "ZTFID": "ZTF18abvkmgw",
+     "IAUID": "SN2018ghd",
+     "bts_type": "SN Ib",
+     "class_stated_in_text": "II"
+    },
+    {
+     "ZTFID": "ZTF19aatubsj",
+     "IAUID": "SN2019fdr",
+     "bts_type": "-",
+     "class_stated_in_text": "AGN (candidate; Classification 'none')"
+    },
+    {
+     "ZTFID": "ZTF19aavxfib",
+     "IAUID": "AT2019gte",
+     "bts_type": "-",
+     "class_stated_in_text": "TDE (candidate; Classification 'none')"
+    },
+    {
+     "ZTFID": "ZTF19abqwtfu",
+     "IAUID": "SN2019odp",
+     "bts_type": "SN Ib",
+     "class_stated_in_text": "Ic\u2212BL"
+    },
+    {
+     "ZTFID": "ZTF20abfhyil",
+     "IAUID": "SN2020mrf",
+     "bts_type": "-",
+     "class_stated_in_text": "CV (candidate; Classification 'none')"
+    },
+    {
+     "ZTFID": "ZTF20abjbgjj",
+     "IAUID": "SN2020ntt",
+     "bts_type": "SN II",
+     "class_stated_in_text": "IIn"
+    },
+    {
+     "ZTFID": "ZTF18aaxmhvk",
+     "IAUID": "SN2018cne",
+     "bts_type": "SN Ia",
+     "class_stated_in_text": "SN Ic (official BTS) / SN Ia-like"
+    },
+    {
+     "ZTFID": "ZTF23abbccir",
+     "IAUID": "SN2023rky",
+     "bts_type": "SN II",
+     "class_stated_in_text": "SN IIL"
+    }
+   ],
+   "partial_class_flags": [
+    {
+     "ZTFID": "ZTF19aailcgs",
+     "IAUID": "SN2019ape",
+     "note": "coarse class 'CC SN' stated; not in frozen token list"
+    },
+    {
+     "ZTFID": "ZTF20abkiarz",
+     "IAUID": "SN2020oce",
+     "note": "coarse class 'CC SN' stated; not in frozen token list"
+    }
+   ]
+  },
+  "wave1_class_level_shares_carried": "see superseded file value.bts_shares (6867 spectroscopic transient classes, 310 with photometric criterion, 561 AGN/CV unresolved, 105 tentative); not recounted",
+  "rubin_era": "unchanged from wave 1: broker classifications are annotation; TNS classifications count as measured only after the Classifier/s field is checked for an automated classifier (SNIascore, CCSNscore, bot markers)"
+ },
+ "provenance": {
+  "referent": "basis of each BTS object's current type label: human spectroscopic classification (MEASURED) vs automated-classifier TNS report (MODEL_ANNOTATION) vs report without prior public spectrum (PHOTOMETRIC_ONLY) vs no admissible evidence (UNRESOLVED); and the number of plain 'SN Ia' labels that are SNIascore annotation",
+  "source": "astronomy/wave2/agent2_label_source/scripts/split_labels.py::main (bounds block); astronomy/wave2/agent2_label_source/definitions_FROZEN.md sha256 4f89ff6718a14ad4e45a6d33d6bde848448ba6a66d895bd970330efe397b37cf; astronomy/wave2/agent2_label_source/sealed_fileonly_placement.json sha256 763002355b6129d9fe0a0eada86684e7dfb2e02bc9475554a8a57c9969c03eb0; astronomy/data/raw/ztf_bts_all_2026-09-16.csv sha256 61415979b75f96bcf2532439109b35f923c5fa1aadfacc5d6013235187ebe570; Internet Archive captures of https://www.wis-tns.org/object/<name> via web/20260916id_/ (sources/tns_captures/fetch_log.jsonl, per-page sha256); arXiv:2104.12980 sec 3 lines 413-415, sec 7 lines 869-886; arXiv:2401.15167 sec 5.1 raw lines 1580-1591; arXiv:2412.08601 sec 6 lines 1089-1091",
+  "population": "7843 BTS rows with type != '-' (unique ZTFID, pre-clustering; Agent 1 owns clustering; 13 IAU names shared by 2 ZTFIDs)",
+  "adjudicator": "authenticated TNS classification reports for every object (TNS API or bulk CSV with a bot/user account), which would replace every archived-capture placement and every UNRESOLVED; not reachable without credentials (HTTP 403 on all wis-tns.org paths 2026-09-16)",
+  "falsifier": "an authenticated TNS report list showing more than 2247 or fewer than 803 BTS 'SN Ia' labels whose latest classification report is SNIascore; or a later human re-report superseding an archived SNIascore report; or a rerun of split_labels.py on the same seal and captures returning different counts"
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "definitions_sha256": "4f89ff6718a14ad4e45a6d33d6bde848448ba6a66d895bd970330efe397b37cf",
+ "seal_sha256": "763002355b6129d9fe0a0eada86684e7dfb2e02bc9475554a8a57c9969c03eb0",
+ "population_labeled": 7843,
+ "fetch_status": {
+  "not_attempted": 5910,
+  "ok": 1706,
+  "http_error": 200,
+  "failed_retries": 22,
+  "invalid": 5
+ },
+ "category_counts": {
+  "UNRESOLVED (UNDEMONSTRATED)": 6156,
+  "MEASURED": 884,
+  "MODEL_ANNOTATION": 803
+ },
+ "category_by_strength": [
+  {
+   "category": "MEASURED",
+   "strength": "STRONG",
+   "n": 884
+  },
+  {
+   "category": "MODEL_ANNOTATION",
+   "strength": "MODERATE",
+   "n": 4
+  },
+  {
+   "category": "MODEL_ANNOTATION",
+   "strength": "STRONG",
+   "n": 799
+  },
+  {
+   "category": "UNRESOLVED (UNDEMONSTRATED)",
+   "strength": "",
+   "n": 6156
+  }
+ ],
+ "model_annotation_by_model": [
+  {
+   "model": "SNIascore",
+   "strength": "MODERATE",
+   "n": 4
+  },
+  {
+   "model": "SNIascore",
+   "strength": "STRONG",
+   "n": 799
+  }
+ ],
+ "photometric_only_by_class": {},
+ "measured_by_group": {
+  "ZTF": 454,
+  "SCAT": 135,
+  "ePESSTO+": 97,
+  "None": 42,
+  "TCD": 32,
+  "UCSC": 19,
+  "Global SN Project": 17,
+  "YSE": 16,
+  "DEbass": 16,
+  "GOTO": 14,
+  "LiONS": 12,
+  "SGLF": 8,
+  "VHU-TDA": 4,
+  "OxQUB": 3,
+  "Fink": 3
+ },
+ "sniascore_bound": {
+  "lower": 803,
+  "upper": 2247,
+  "lower_strong_only": 799,
+  "upper_raw": 2247,
+  "upper_noE5_sensitivity_not_slot_value": 2844,
+  "wave1": [
+   0,
+   3131
+  ],
+  "excluded_by": {
+   "E1": 884,
+   "E4": 1340,
+   "E5": 1936,
+   "E1_only_not_E4_E5": 883
+  },
+  "within_upper_E1_status": {
+   "not_attempted": 1198,
+   "ok": 825,
+   "http_error": 200,
+   "failed_retries": 22,
+   "invalid": 2
+  },
+  "within_upper_unresolved": 1444
+ },
+ "ccsnscore_bound": {
+  "population": 1604,
+  "lower": 0,
+  "upper": 155,
+  "upper_before_E1": 155,
+  "note": "upper counts CC-class objects discovered >= 2025-02-09 not excluded by E1; start date of CCSNscore TNS reporting UNDEMONSTRATED; any CCSNscore report found with discovery < 2025-02-09 would falsify the date margin",
+  "ccsnscore_reports_found_discovered_before_cut": 0
+ },
+ "sniascore_reports_seen": {
+  "n": 830,
+  "earliest": "2021-04-15 04:27:13",
+  "latest": "2025-12-17 09:16:21",
+  "latest_report_is_sniascore_by_year": {
+   "2021": 191,
+   "2022": 247,
+   "2023": 152,
+   "2024": 91,
+   "2025": 118
+  },
+  "sniascore_report_not_SN_Ia": [],
+  "sniascore_report_before_2021_04_15": [],
+  "sniascore_earlier_report_superseded": 31
+ },
+ "class_mismatch_pairs_top": [
+  {
+   "bts": "SN Ia",
+   "tns": "SN II",
+   "n": 1
+  }
+ ],
+ "class_mismatch_total": 1,
+ "syncatto_latest_classifier_measured": 11,
+ "e2_contradicted_by_e1": []
+}

@@ -1,0 +1,71 @@
+{
+ "agent1_flagged": 98,
+ "agent1_REFUSE": 92,
+ "agent1_NOT_FIRED_NAME_ONLY": 6,
+ "agent1_NOT_FIRED_FALSE_MATCH": 0,
+ "agent1_unlabeled_in_bts": 3,
+ "wave2_additional": 17,
+ "wave2_additional_REFUSE": 12,
+ "stated_class_disagrees_with_bts_type": [
+  {
+   "ZTFID": "ZTF18abvkmgw",
+   "IAUID": "SN2018ghd",
+   "bts_type": "SN Ib",
+   "class_stated_in_text": "II"
+  },
+  {
+   "ZTFID": "ZTF19aatubsj",
+   "IAUID": "SN2019fdr",
+   "bts_type": "-",
+   "class_stated_in_text": "AGN (candidate; Classification 'none')"
+  },
+  {
+   "ZTFID": "ZTF19aavxfib",
+   "IAUID": "AT2019gte",
+   "bts_type": "-",
+   "class_stated_in_text": "TDE (candidate; Classification 'none')"
+  },
+  {
+   "ZTFID": "ZTF19abqwtfu",
+   "IAUID": "SN2019odp",
+   "bts_type": "SN Ib",
+   "class_stated_in_text": "Ic\u2212BL"
+  },
+  {
+   "ZTFID": "ZTF20abfhyil",
+   "IAUID": "SN2020mrf",
+   "bts_type": "-",
+   "class_stated_in_text": "CV (candidate; Classification 'none')"
+  },
+  {
+   "ZTFID": "ZTF20abjbgjj",
+   "IAUID": "SN2020ntt",
+   "bts_type": "SN II",
+   "class_stated_in_text": "IIn"
+  },
+  {
+   "ZTFID": "ZTF18aaxmhvk",
+   "IAUID": "SN2018cne",
+   "bts_type": "SN Ia",
+   "class_stated_in_text": "SN Ic (official BTS) / SN Ia-like"
+  },
+  {
+   "ZTFID": "ZTF23abbccir",
+   "IAUID": "SN2023rky",
+   "bts_type": "SN II",
+   "class_stated_in_text": "SN IIL"
+  }
+ ],
+ "partial_class_flags": [
+  {
+   "ZTFID": "ZTF19aailcgs",
+   "IAUID": "SN2019ape",
+   "note": "coarse class 'CC SN' stated; not in frozen token list"
+  },
+  {
+   "ZTFID": "ZTF20abkiarz",
+   "IAUID": "SN2020oce",
+   "note": "coarse class 'CC SN' stated; not in frozen token list"
+  }
+ ]
+}

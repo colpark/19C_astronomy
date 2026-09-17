@@ -1,0 +1,1540 @@
+Astronomy & Astrophysics manuscript no. aanda
+December 4, 2024
+
+©ESO 2024
+
+arXiv:2409.04346v2 [astro-ph.CO] 2 Dec 2024
+
+ZTF SN Ia DR2: Overview
+Rigault, M.1,⋆ , Smith, M.1, 2,⋆⋆ , Goobar, A.3 , , Maguire, K.4 , Dimitriadis, G.4 , Johansson, J.3 , Nordin, J.5 ,
+Burgaz, U.4 , Dhawan, S.6 , Sollerman, J.7 , Regnault, N.8 , , Kowalski, M.9, 5 , Nugent, P.10, 11 , Andreoni,
+12,
+I. 13, 14 , Amenouche, M.15 , Aubert, M.16 , Barjou-Delayre, C.16 , Bautista, J.17 , Bellm, E.18 , Betoule, M.8 ,
+Bloom, J. S.11, 10 , Carreres, B.17, 19 , Chen. T. X.20 , Copin, Y.1 , Deckers, M.4 , de Jaeger, T.8 , Feinstein, F.17 ,
+Fouchez, D.17 , Fremling, C.26 , Galbany, L.22, 23 Ginolin, M.1 , Graham, M.21 , Groom, S. L.20 , Harvey, L.4 ,
+Kasliwal, M. M.21 , Kenworthy, W. D.3 , Kim, Y.-L.2 , Kuhn, D.8 , Kulkarni, S. R.21 , Lacroix, L.8, 3 , Laher,
+R. R.20 , Masci, F. J.20 , Müller-Bravo, T. E.,22, 23 , Miller, A.24, 25 , Osman, M.8 , Perley, D.27 , Popovic, B.1 ,
+Purdum, J.26 , Qin, Y-J.21 , Racine, B.17 , Reusch, S.9 , Riddle, R.26 , Rosnet, P.16 , Rosselli, D.17 , Ruppin, F.1 ,
+Senzel, R.4 , Rusholme, B.20 , Schweyer, T.7 , Terwel, J. H.4, 27 , Townsend, A.5 , Tzanidakis, A.28 , Wold, A.20 ,
+Yan, L.26
+(Affiliations can be found after the references)
+
+ABSTRACT
+
+We present the first homogeneous release of several thousand spectroscopically classified type Ia supernovae (SNe Ia) with spectroscopic redshifts.
+This release, named “DR2,” contains 3628 nearby (z < 0.3) SNe Ia discovered, followed, and classified by the Zwicky Transient Facility survey
+between March 2018 and December 2020. Of these, 3000 have good-to-excellent sampling and 2667 pass standard cosmology light curve quality
+cuts. This release is thus the largest SN Ia release to date, increasing by an order of magnitude the number of well-characterized low-redshift
+objects. With DR2, we also provide a volume-limited (z < 0.06) sample of nearly a thousand SNe Ia. With such a large, homogeneous, and
+well-controlled dataset, we are studying key current questions on SN cosmology, such as the linearity SNe Ia standardization, the SN and host
+dependencies, the diversity of the SN Ia population, and the accuracy of current light curve modeling. These, and more, are studied in detail in
+a series of articles associated with this release. Alongside the SN Ia parameters, we publish our forced-photometry gri-band light curves, 5138
+spectra, local and global host properties, observing logs, and a Python tool to facilitate the use and access of these data. The photometric accuracy
+of DR2 is not yet suited for cosmological parameter inference, which will follow as the “DR2.5” release. We nonetheless demonstrate that our
+Hubble diagram of several thousands of SNe Ia has a typical 0.15 mag scatter.
+Key words. ZTF ; cosmology ; type Ia supernovae
+
+1. Introduction
+For the last thirty years, type Ia supernovae (SNe Ia) have played
+a central role in building the current standard model of cosmology. In the late 1990s, O(100) SNe Ia led to the discovery of
+the acceleration of the expansion rate of the Universe, the cause
+of which was dubbed dark energy (Riess et al. 1998; Perlmutter et al. 1999) (see Goobar & Leibundgut (2011) for a review).
+The existence of dark energy has since been confirmed with
+high precision by various other cosmological probes, such as the
+anisotropies in the cosmic microwave background (Spergel et
+al. 2003; Planck Collab. 2020) and from baryon acoustic oscillations (e.g., Eisenstein et al. 2005; BOSS Collab. 2017). The
+two decades that followed were those of the SN cosmology field
+maturation. Many low- (z < 0.1) and high-redshift (0.1 < z < 1)
+surveys have enabled us to gather, altogether, O(1 000) SNe Ia.
+Joining these datasets, the dark energy equation of state parameter, w, has been shown to be in good agreement with w = −1,
+which is expected if the acceleration of the Universe’s expansion
+is due to a simple cosmological constant, Λ, in Einstein’s general relativity equations (Astier et al. 2006; Betoule et al. 2014;
+Scolnic et al. 2018; Brout et al. 2022). This gain in statistics allows us to test the use of SNe Ia as accurate standard candles
+⋆
+⋆⋆
+
+m.rigault@ip2i.in2p3.fr
+mat.smith@lancaster.ac.uk
+
+of cosmology, since, despite the great success of SN cosmology,
+their underlying astrophysics are still largely unknown.
+It is generally accepted that an SN Ia is the transient event
+resulting from the thermonuclear explosion of a carbon-oxygen
+white dwarf (Whelan & Iben 1973; Iben & Tutukov 1984; Nugent et al. 2011), triggered by accreting material from a companion star in a binary system (Liu et al. 2023). However, the nature of the companion star (another white dwarf, main-sequence
+star, etc.) and the explosion mechanism (at or below the Chandrasekhar mass limit) is still unclear and no single picture has
+emerged (Maoz et al. 2014). In recent years, sample studies of
+SNe Ia have been used, as they provide a population-wide approach to probe various aspects of SNe Ia physics (e.g. Maguire
+et al. 2014; Silverman et al. 2015; Papadogiannakis et al. 2019;
+Tucker et al. 2020; Desai et al. 2024). However, these analyses are so far limited by small-number statistics and/or survey
+design (e.g., coverage, cadence, and depth). The astrophysical
+origin of SNe Ia, and their homogeneity, are consequently still
+highly debated (Jha et al. 2019). Additional data, notably spectroscopic and close to the explosion epoch, would be valuable
+to discriminate competitive models (e.g., Deckers et al. 2022,
+and references there in). Nonetheless, understanding the SN Ia
+mechanism is not an actual requirement for SN cosmology, as
+long as the astrophysical dependencies can be controlled below
+Article number, page 1 of 11
+
+A&A proofs: manuscript no. aanda
+
+the statistical uncertainties. But, without a better grasp on the
+actual SN Ia astrophysics, such an assertion is difficult.
+Since the mid-90s, the success of SN cosmology has
+emerged from our ability to standardize their brightness from
+a natural scatter of ∼ 0.40 mag down to ∼ 0.15 mag by exploiting two empirical linear relations that correlate the SN Ia’s
+stretch and color, derived from their light curve, with their absolute peak brightness (Riess et al. 1996; Tripp 1998; Guy et
+al. 2010). A scatter of ∼ 0.15 mag — that is, 7% precision in
+distance — makes it one of the most precise standard candles
+in astrophysics. However, only half of this variance can be explained by measurement or light curve modeling errors. Thus,
+to further control any unexplained astrophysical dependency in
+SN Ia distances, the correlations between the SN properties and
+those of their host environments have been extensively studied
+over the past decade.
+Early on, it was suggested that two populations of SNe Ia
+must coexist to explain the relative rates between progenitors
+(e.g., Mannucci et al. 2005; Sullivan et al. 2006; Smith et
+al. 2012): one population follows recent star formation (called
+“prompt”) with the other related to stellar mass (i.e., an old population of stars, called “delayed”). More delicate for cosmology,
+the stretch- and color-standardized SN Ia magnitude was then
+shown to depend on its environment, such that those from lowmass hosts are fainter then those from high-mass galaxies (e.g.,
+Sullivan et al. 2010; Childress et al. 2013; Roman et al. 2018).
+This so called mass-step has since been used as a third standardization parameter in all cosmological analysis (e.g., Betoule
+et al. 2014; Scolnic et al. 2018; Brout et al. 2022; Riess et al.
+2022). Yet, the origin of this bias is still highly debated. An inaccurate correction of this effect may lead to significant bias in
+the derivation of cosmological parameters (Rigault et al. 2015,
+2020; Smith et al. 2020). Currently, the most discussed models are: differences between the host interstellar dust properties
+(Brout & Scolnic 2021; Popovic et al. 2023), or the progenitor
+age, in the context of the prompt versus delayed model (Rigault
+et al. 2013, 2020; Nicolas et al. 2021; Briday et al. 2022). Both
+may actually be true (e.g., Kelsey et al. 2021; Wiseman et al.
+2022).
+Today, state-of-the-art compilations of samples nearly reach
+2000 SNe Ia and are limited by systematic uncertainties (Brout
+et al. 2022; Vincenzi et al. 2024). Alongside the astrophysical
+biases, the dominating source of known uncertainties are calibration issues largely due to the requirement to compile SN Ia
+samples from multiple surveys spanning various redshift ranges
+(e.g., Betoule et al. 2014; Brout et al. 2022; Vincenzi et al. 2024).
+This issue is particularly critical at a low-redshift of z < 0.1, at
+which dozen of samples are merged, the largest of which contains fewer than 200 targets (e.g., Brout et al. 2022).
+After two decades, the standard model of cosmology is starting to see the first hints of inconsistencies and, again, SNe Ia
+are playing a key role. First and foremost, the direct measurement of the Hubble constant, H0 , derived by anchoring the absolute SN Ia standardized luminosity with Cepheids, is found to be
+5σ higher than theoretical expectations anchored by cosmic microwave background data (e.g., Riess et al. 2016, 2022; Planck
+Collab. 2020). Most recently, two independent SN Ia compilations concluded that w might differ from w = −1 at the 2 to
+3σ level (Rubin et al. 2023; DES Collab. 2024). These results,
+strengthened by the recent DESI Year-1 release (DESI Collab.
+2024), could be the sign of new fundamental physics, or hints of
+unknown systematic biases in the SN Ia distances.
+In that context, the Zwicky Transient Facility (ZTF; Bellm
+et al. 2019; Graham et al. 2019) has been collecting thousands
+Article number, page 2 of 11
+
+of nearby SNe a year in the northern sky since it started science operations in March 2018. As of mid-2024, O(10k) ZTFdiscovered SNe have been spectroscopically classified. In this
+paper, we present an overview of the second data release associated with the “Type Ia Supernovae & Cosmology” science
+working group, aka “DR2.” This dataset contains 3628 type Ia
+supernovae (SNe Ia) detected, followed, and classified by the
+ZTF survey and discovered before the end of December 2020.
+This DR2 follows Dhawan et al. (2022), in which we illustrate the characteristics of the survey using the first months
+of operations. Along with this release overview, 20 companion
+papers that study the dataset, providing key insights on nearby
+SN Ia physics and their use as cosmological probes, have been
+released. However, we warn the user that the current light curve
+photometry calibration does not yet reach the accuracy to unlock
+cosmological analysis. Any other scientific study is welcomed.
+Ongoing work is being finished on the survey calibration that
+will lead to a cosmological parameter inference as the next release: “DR2.5.”
+With 2667 well-sampled nearby spectroscopic SNe Ia passing the usual light curve quality cuts, this release is the largest
+SN Ia release to date, over any redshift range. It increases by an
+order of magnitude the current state-of-the-art low-redshift sample compilation of 192 targets used in DES Collab. (2024) to
+anchor their Hubble diagram, and by five the number of z < 0.1
+SNe Ia ever used for cosmology (Scolnic et al. 2022).
+We summarize in Sect. 2 the ZTF survey operation during
+the period covered by this release. In Sect. 3, we introduce the
+DR2 sample, and we briefly review the release data in Sect. 4.
+We review the 20 companion papers in Sect. 5, while the content
+and access of the release are summarized in Sect. 6. We conclude
+in Sect. 7.
+
+2. Summary of the ZTF operation
+The ZTF survey employs the ZTF camera mounted on the P48
+Schmidt telescope at Mount Palomar Observatory. As is detailed
+in Dekany et al. (2020), this 576 megapixel camera is made
+of sixteen 6144×6160 e2v CCD231-C6 charge-coupled devices
+(CCD) and equipped with three filters: ztf:g (g), ztf:r (r), and ztf:i
+(i). Each CCD is subdivided into four read-out channels (called
+quadrants) that have square 1.01 arcsec pixels, selected to match
+the typical site image quality of ∼2 arcsec full width at half maximum (see Smith et al. in prep.). The camera has a 47 deg2 field
+of view with an 86.7% filling factor. It reaches a typical 20.5 mag
+5σ-limit depth in 30 s, and, with a slightly less than 9 s read-out
+overhead made while slewing, ZTF is able to cover, at that depth,
+3750 deg2 /hour. Between March 2018 and December 2020, ZTF
+acquired 480,572 exposures, with a typical same-filter cadence
+of three days, thanks to the National Science Foundation (NSF)
+-funded Mid-Scale Innovations Program (MSIP) public survey
+(Bellm et al. 2019). During the DR2 operations, the ZTF collaboration also operated a number of additional surveys, including
+an extragalactic high-cadence survey, with six visits a night in
+the g and r bands, a larger-area (∼ 1800 deg2 ) survey that acquired same-night exposures, mostly in g and r, and an i-band
+survey with a four-day cadence (Bellm et al. 2019).
+ZTF also has a low-resolution integral field spectrograph
+(SEDm, Blagorodnova et al. 2018; Rigault et al. 2019; Kim
+et al. 2022; Lezmy et al. 2022) dedicated to spectroscopically
+classifying transients detected by the photometric survey. The
+Bright Transient Survey (BTS) ZTF cross working group is designed to use the SEDm, and other spectrographs, to construct a
+magnitude-limited spectroscopically classified SN sample. As is
+
+M. Rigault et al.: ZTF SN Ia DR2: Overview
+Table 1. ZTF cosmology science working group DR2 sample statistics
+
+ZTF19acryaon: worst sampling
+
+Cuts
+
+n targets
+
+removed
+
+% removed
+
+Master list
++ ZTF light curve
++ a spectrum
++ confirmed “Ia”
+
+3795
+3778
+3668
+3628
+
+–
+17
+110
+40
+
+–
+0.4
+2.9
+1.1
+
+flux [zp]
+
+z=0.055, x1=-0.31 ± 0.77, c=0.00 ± 0.05
+
+Nov
+
+Basic cuts
+2960
+2899
+2861
+2836
+2822
+2809
+
+668
+61
+38
+25
+14
+13
+
+18.4
+2.1
+1.4
+0.9
+0.5
+0.4
+
+“fitprob”≥ 10−7
+
+2667
+
+142
+
+5.1
+
+994
+2629
+
+1673
+38
+
+62.7
+1.4
+
+15
+
+Jan
+
+15
+
+Feb
+2020-Feb
+ZTF18aaqfziz: average sampling
+
+z=0.054, x1=-1.08 ± 0.11, c=0.15 ± 0.03
+
+Subsample examples
+Volume limited (z ≤ 0.06)
+Non-peculiar SNe Ia
+
+Dec
+
+flux [zp]
+
+Good light curve sampling
+x1 ∈ [−3, +3]
+c ∈ [−0.2, 0.8]
+σt0 ≤ 1
+σ x1 ≤ 1
+σc ≤ 0.1
+
+15
+
+15
+
+May
+
+15
+
+Jun
+
+15
+
+Jul
+
+15
+2018-Jul
+ZTF20aayxldg: best sampling
+
+detailed in Perley et al. (2020), they reach a 97%, 93%, and 75%
+completeness for objects brighter than 18 mag, 18.5 mag, and 19
+mag, respectively (see also Fremling et al. 2020). The vast majority of our targets (79%) are covered by the BTS program. The
+remaining targets are usually fainter than 19 mag (see Smith et
+al. in prep.).
+
+3. 3628 type Ia supernovae
+This DR2 consists of SNe Ia observed by ZTF between March
+2018 and December 2020, with the date cutoff based on the discovery date of the SN. The composition of this sample is detailed
+in Table 1 and reviewed below.
+To build this dataset, we started from the list of any target
+that has been flagged, at some point, as an “SN Ia” either from
+our internal databases (Kasliwal et al. 2019; Duev et al. 2019;
+van der Walt et al., 2019; Coughlin et al. 2023), or through the
+Transient Name Server.1 This “master list” contains 3795 targets
+and, of these, 17 have been removed, since they have no ZTF
+light curves but happened to be in our databases.
+Since we aim to provide spectroscopically confirmed SNe Ia,
+we request to be able to release a spectrum that leads to a classification for each target. Therefore, 110 objects flagged as “SN Ia”
+without a spectrum, or based on non-publicly available spectra,
+have been discarded from this release. This corresponds to 2.9%
+of the initial targets with ZTF light curves. Of the remaining
+3668 SNe with at least one spectrum, there were 40 for which
+a secure Ia classification was not possible. We are thus releasing
+data for 3628 spectroscopically confirmed SNe Ia.
+Following a careful study of the light curve fit residuals, we
+concluded in Rigault et al. (2024,b) that the rest-frame phase
+range, ϕ ∈ [−10, +40], is sufficiently trained to derive reasonable
+light curve model fits. Therefore, considering this phase-range
+only, we defined targets with “good sampling” as those that have,
+at least: detections at seven phases, two of which are before and
+two of which are after peak luminosity (ϕ ≡ 0), and detections
+1
+
+www.wis-tns.org
+
+flux [zp]
+
+z=0.047, x1=0.82 ± 0.03, c=0.14 ± 0.03
+Notes. “Subsample examples” are “logical or” cuts starting from the
+2667 SNe Ia.
+
+May
+
+15
+
+Jun
+
+15
+
+Jul
+
+15
+
+Aug
+2020-Aug
+
+Fig. 1. Three SN Ia light curve examples illustrating, from top to bottom, the worst, average, and best sampling of DR2. Photometric points
+observed with the g, r, and i bands are shown as green, red, and orange
+markers, respectively. Lines show the best fit SALT2 model with matching colors, and the associated parameters in the legend. The lower gray
+bands show the ϕ ∈ [−10, +40] rest-frame phase range used to fit the
+SALT model. The vertical lines indicate the estimated maximum light.
+
+in two photometric bands. Here, we refer to as “phases” the restframe phase with respect to the estimated maximum light (t0 ; see
+Sect. 4.7), while same-night same-band detections are ignored,
+such that, for example, four detections on the same night in g
+only account for 1 phase. These strict phase coverage criteria
+reduce the number of targets by 18.4%, leaving 2960 SNe Ia.
+The norm of the SN cosmology fields usually relaxes the
+“two pre-max detection” criteria to “a detection prior to ϕ = +5
+days” (e.g., Betoule et al. 2014; Scolnic et al. 2022). Doing so
+would leave 3244 objects. However, good sampling pre- and
+post-maximum is preferred to ensure the correct estimation of
+the light curve parameters. We illustrate in Fig. 1 an example
+of an SN Ia with among the worst light curve sampling (seven
+phases), along with SNe Ia with average (40 phases) and best
+sampled (130 phases) light curves (see light curve coverage
+statistics in Smith et al. in prep).
+We used the SALT2 light curve fitter (Guy et al. 2010; Betoule et al. 2014; Taylor et al. 2021) to fit our light curves. To
+ensure the resulting parameters are reasonable for use in cosmological measurements, we further implemented the following
+criteria (see Table 1): −3 ≤ x1 ≤ 3; −0.2 ≤ c ≤ 0.8; σ x1 < 1
+; σc < 0.1; σt0 < 1; a quality of fit (“fitprob”) ≥ 10−7 ; with σ x
+the measured errors on the x SALT2 parameters and with fitprob
+derived from the best SALT fit χ2 (see e.g. Scolnic et al. 2018).
+Article number, page 3 of 11
+
+A&A proofs: manuscript no. aanda
+
+This left 2667 SNe Ia that pass all our cosmology-ready quality
+cuts. Using the aforementioned looser light curve coverage criteria that has been used in previous cosmology studies, we would
+have 2849 targets instead.
+Of these 2667 SNe Ia, 994 have a redshift lower than z =
+0.06, up to which our sample of non-peculiar SNe Ia is free from
+nonrandom selection functions, aka a “volume-limited sample”
+(see Amenouche et al. 2024 and detailed study of this sample in
+Ginolin et al. 2024,a and Ginolin et al. 2024,b): up to z < 0.06
+the observed distribution of any parameter (e.g., stretch, color,
+peak-magnitude) is representative of the parameter’s underlying distribution. Hence, non-peculiar ZTF DR2 SNe Ia up to
+z = 0.06 are free from Malmquist bias, and the parameter distributions and their correlations should be representative of that
+given by nature (see dedicated discussion on Sect. 4.6).
+Careful subclassification indicates that 2625 of these 2667
+SNe Ia are suitable for SN cosmology; that is, non-peculiar objects. This involves removing peculiar subclasses like “91bglike” and “Ia-csm” objects, but keeping subclasses generally
+used in cosmological studies, like “91T-like” or “99aa-like” SNe
+Ia (for further details of these subclassifications and how they
+were determined, see Dimitriadis et al. (2024) and Burgaz et al.
+(2024,b)).
+
+4. Overview of the released data
+Details concerning the DR2 data and the derived parameters are
+given in Smith et al. (in prep.). This section summarizes the toplevel information.
+4.1. Light curves
+
+In this release, we provide g, r, and i ZTF light curves for all
+our 3628 SNe Ia acquired by the ZTF camera installed on the
+P48. Additional photometric data points, such as those obtained
+from the SED machine in camera mode, are not included in this
+release.
+4.1.1. sampling statistics
+
+On the 2960 SNe Ia passing the good sampling criteria, only 9
+do not have g-band and only 2 do not have r-band detections in
+the rest-frame phase range of −10 to +40 with respect to maximum light. However, only 46% of our targets have i-band detections in this same phase range. Most targets acquired since early
+2021 will have coverage in all three bands as we updated our
+observing strategy, but they are not part of this sample. Future
+releases of DR2 targets will include additional i-band observations, after the remaining reference images are processed. For
+these 2960 targets, we typically have 40 detections (median) in
+the ϕ ∈ [−10, +40] day phase range, with medians of 9 and 27
+points pre- and post-maximum light, respectively. This goes up
+to more than 166 detections for the top 10% most observed sample that is part of the aforementioned high-cadence regions. On
+average, our SNe Ia are detected 12 d before maximum light and
+up to 55 d after, with a median one-day cadence in any filter. This
+corresponds to a typical 2.9, 2.5, and 6 d same-filter revisit for
+the g, r, and i bands, respectively. Figure 1 illustrates the typical
+worst, average, and best sampling light curve of the release, with
+the increased uncertainty in the derived SALT2 values of x1 and
+c with decreasing sampling, shown in the legend.
+Article number, page 4 of 11
+
+4.1.2. Photometry
+
+As is detailed in Smith et al. (in prep.), the ZTF SN Ia DR2 light
+curves have been extracted using a custom recalibration of the
+forced-photometry pipeline presented in Masci et al. (2019) and
+Yao et al. (2019). The absolute zero-point, set to zp = 30 in the
+released light curves, is known at the 5 percent level, but the relative photometry is closer to 1%. Our limited knowledge of the
+photometry stems from the use of forced photometry, since reference stars are not measurable in difference imaging. For the
+next ZTF SN Ia releases, we shall use scene-modeling photometry (e.g., Holtzman et al. 2008; Astier et al. 2013; Brout et al.
+2019) that do not require difference images to extract the transient light curve, and thus enable one to use the same flux estimator on both stars and the transients of interest. We demonstrate in
+Lacroix et al. (in prep.) that we have a working scene-modeling
+pipeline, and by comparing it to the released DR2 light curves
+we can assert that our light curve colors (i.e., relative calibration) are good at the percent level (see details in Smith et al. in
+prep.). However, Lacroix et al. (in prep.) identified a nonlinear
+bias in the flux measurements, on the percent level, dubbed the
+“pocket effect.” This effect was observed starting in November
+of 2019, when the camera wave-front read-out system characteristics had been updated. The origin of this effect, its modeling,
+and its correction are presented in Lacroix et al. (in prep.), but
+the current ZTF light curves are affected by this read-out issue.
+We illustrate in Fig. 2 (top) the typical impact of the pocket
+effect on our data: in comparison to their true magnitudes, they
+deviate by up to a few percent peak to peak. To test the impact
+of this effect on our results, we simulated realistic light curves,
+as in (Amenouche et al. 2024, see also our Sect. 4.6), and we
+perturbed them with the nonlinearity effect presented in the top
+panel of Fig. 2. We then derived their light curve parameters, as
+is presented in Sect. 4.7. The resulting shifts are shown in the
+bottom panels of Fig. 2. The pocket effect is expected to exacerbate fainter SNe Ia and bias their observed stretch standardization parameter. As was expected, the light curve colors are not
+affected by the sensor issue. However, the stretch recovered is
+typically ∆ x1 = −0.14 (70% of the average stretch error, σ x1 )
+lower than what is given as an input. This average shift is independent of the actual input value and could be seen as a simple
+stretch zero-point definition bias. As is discussed by Ginolin et
+al. (2024,a), who study the stretch standardization, this stretch
+zero-point bias has no significant impact on our results, since the
+absolute stretch value is meaningless as long as we do not compare the ZTF DR2 stretch values with these from another survey,
+as was done, for instance, in Nicolas et al. (2021). In such a case,
+we suggest applying a ∆ x1 = −0.14 correction term.
+The SN Ia peak magnitude slowly drifts because of the
+pocket effect, especially beyond 18.5 mag, as is shown in the mb
+panel of Fig. 2; so typically SN Ia at z > 0.08. But when focusing on the Hubble residuals, a similar trend to that of the stretch
+is observed: the zero point is off by ∼ 0.02 mag (0.5σ, when not
+accounting for the intrinsic scatter) and this shift is uncorrelated
+with the actual Hubble residuals value. Consequently, the pocket
+effect has no impact on pure ZTF DR2 magnitude residual studies (e.g., steps), since this zero-point cancels out with cosmology
+(M0 definition).
+We emphasize that only targets acquired after November
+2019 are affected by the pocket effect. Hence, we encourage
+people using ZTF SN Ia DR2 data to test their results when
+only including the 50% of the ZTF SN Ia DR2 sample with a
+peak magnitude prior to October 2019 as was done, for example, in Ginolin et al. (2024,a). However, since the ZTF SN Ia
+
+M. Rigault et al.: ZTF SN Ia DR2: Overview
+
+mag
+
+0.04
+0.02
+0.00
+0.02
+0.04
+
+(sim. truth)
+
+(sim. truth)
+
+12
+
+(sim. truth)
+
+plate library made of 370 templates (available upon request).
+This matching was used as an initial classification indicator and
+to derive SN-feature-based redshifts for all our targets (for further details of how further subclassifications were performed see
+Sect. 4.4, as well as Dimitriadis et al. (2024) and Burgaz et al.
+(2024,b)).
+
+Pocket Effect
+
+13
+
+14
+
+15
+
+16
+
+17
+
+mag (true)
+
+18
+
+19
+
+1
+0
+
+4.3. Host galaxies
+
+1
+3
+
+2
+
+0.2
+
+0.0
+
+1
+
+0
+
+0.2
+
+0.4
+
+stretch (truth)
+
+1
+
+2
+
+4
+
+2
+
+0
+
+2
+
+4
+
+0
+
+2
+
+4
+
+0.1
+0.0
+0.1
+
+color (truth)
+
+0.6
+
+0.8
+
+4
+
+2
+
+1.5
+
+2.0
+
+4
+
+2 0 2 4
+(sim.-truth) [ ]
+
+0.1
+0.0
+0.1
+0.5
+
+0.0
+
+0
+
+0.5
+
+1.0
+
+CDM (truth)
+
+Fig. 2. Impact of the pocket effect photometric nonlinearity affecting
+ZTF data since November 2019. Top panel: Magnitude bias caused by
+the pocket effect (model) as a function of (input) magnitude. Lower
+panels: Difference between SN Ia parameters recovered from realistic light curve simulations affected by the pocket effect as a function
+of the input parameter (truth). Top to bottom: SN Ia peak magnitude in
+b band (from x0 ), the SN Ia stretch, color, and Hubble residual (nonstandardized). Orange markers (errors) show the median (nmad) difference per bin of input parameters. The horizontal orange lines show zero.
+The histograms on the right display parameter pulls ((sim.-truth) or error), which should follow a N(0, 1) distribution (dashed gray). Best fit
+normal distributions on pulls are shown in orange. In the mb panel, the
+top gray ticks show the redshift corresponding to the peak magnitude of
+a typical MB = −19.3 SN Ia.
+
+DR2 light curves are derived from forced photometry and the
+abovementioned pocket effect, we discourage the use of this data
+release for precision cosmological parameter inference. The next
+release (DR2.5, planned for the end of 2025), will address both
+problems, and hence will be suitable for precision cosmology
+(see Lacroix et al. in prep.). While it will remove a systematic
+bias, we nonetheless do not expect any significant reduction in
+the Hubble residuals dispersion once the pocket effect is corrected, given its negligible amplitude in comparison to the SN Ia
+intrinsic scatter.
+4.2. Spectra
+
+This DR2 contains 5138 spectra associated with the 3628 SNe
+Ia in our spectroscopically confirmed sample. Each target has
+at least one spectrum with sufficient quality to enable a secured
+“Ia” classification, and 28% have multiple spectra. Most of our
+spectra (60%) have been acquired by the SEDm and, thanks to
+the observing strategy of the BTS program, the vast majority of
+these have been acquired near or before maximum light. In addition to the SEDm, we obtained data from many other facilities,
+such as the Liverpool Telescope (7.6%; Steele et al. 2004), the
+Palomar 200-inch Hale Telescope (7.3%; ), and European Southern Observatory’s New Technology Telescope (NTT), as part of
+the ePESSTO program (6.5%; Smartt et al. 2015).
+All of the spectra were matched with the snid classification algorithm (Blondin & Tonry 2007) using a custom tem-
+
+As is detailed in Smith et al. (in prep.), the host identification
+of each SN Ia in our sample was made in two steps. First, we
+queried public databases, such as DESI-LS DR9 (Dey et al.
+2019), SDSS DR17 (Abdurro’uf et al. 2022), and PS1 DR2
+(Flewelling et al. 2020), for sources within an 100 kpc radius,
+given the estimated redshifts from snid spectral template matching. Then, we computed the directional light radius (DLR, Sullivan et al. 2006; Gupta et al. 2016) between the SN and each surrounding galaxy or galaxy-like source and identified the host as
+the source with the smaller DLR. The SNe for which no galaxy
+has a DLR < 7 were excluded. The global photometry was derived using the HostPhot package (Müller-Bravo & Galbany
+2022) on public g, r, i, z, y PS1 DR2 images that cover the same
+sky as ZTF. Local photometry was made using the 2 kpc radius
+aperture photometry of these data (e.g. Briday et al. 2022). Once
+optical global and local photometry had been estimated, we computed stellar masses and rest-frame color using a spectral energy
+distribution fitting performed with the PÈGASE2 galaxy spectral
+templates (Le Borgne & Rocca-Volmerange 2002), as in, for example, Sullivan et al. (2010).
+4.4. (Sub)-Classification
+
+From the initial master list of 3668 targets that have at least
+a ZTF light curve and a spectrum, we collectively visually inspected each target to ensure they were indeed an SN Ia and
+to subclassify them when possible. This process was made in
+two steps. Firstly, the ZTF Cosmology SWG members manually inspected the data through a specially designed web application.2 In the end, 32 users did more than 14,000 individual
+(sub)-classifications, which fed a decision-tree algorithm to automatically (sub)-classify the objects. This way, each SN Ia from
+the DR2 was vetted at least twice, and 3.5 times on average.
+In a second step, SN Ia population experts double-checked
+edge cases (including those for which ambiguous subtypes were
+suggested) in the volume-limited (z < 0.06) sample to release
+the final (sub)-classification (see details in Dimitriadis et al. 2024
+and Burgaz et al. 2024,b). At the end of this procedure, about 5%
+of the SN Ia targets were classified as too peculiar to be included
+in cosmological analyses (e.g., “Ia-CSM” or “91bg-like”). However, some unidentified peculiar subtypes likely remain in the
+sample at z > 0.06 that were not checked in detail. These contaminants are likely limited to overluminous events, such as “IaCSM” and “03fg-like” SNe Ia that would be detected at these
+higher redshifts. These events are intrinsically rare and would
+also likely fail the SALT2 light curve quality cuts that are applied for cosmological measurements.
+4.5. Redshift
+
+Each of our 3628 targets has a redshift that comes from one
+of four sources in order of preference: the public galaxy redshift catalog (2200, 60.6%), galaxy emission lines visible in non2
+
+typingapp.in2p3.fr
+Article number, page 5 of 11
+
+0.02
+
+(observed)
+
+Redshift
+(host sn)
+
+A&A proofs: manuscript no. aanda
+
+0.00
+
+0.5
+0.0
+
+0.02
+0.00
+
+1.0
+
+0.05
+
+0.10
+
+0.15
+
+Redshift (host)
+
+0.20
+
+0.25
+
+0.30
+
+ZTF (BTS) spectro completness (Perley et al. 2020)
+ZTF SN Ia DR2 selection funtion
+
+15
+
+16
+
+17
+
+data
+
+Fig. 3. Comparison between the host redshift (mostly from DESI) and
+SN-feature-based redshifts. Orange markers represent the median and
+nmad (error bar) per bins of δz = 0.01 redshift. The horizontal orange
+line shows “zero,” while the orange band shows the ±3 × 10−3 range.
+The right-panel histogram shows the ∆z distribution overplotted (orange) with a normal distribution, N(0, 3 × 10−3 ).
+
+18
+
+4
+
+simulation
+
+z 0.04
+(399 SNe Ia)
+
+2
+
+4.6. Selection
+
+In Sect. 4, we claimed that our sample is volume-limited up to
+z = 0.06. A fully realistic simulation based on observing log
+analysis supporting this claim is presented in Amenouche et al.
+(2024). In this section, we provide key elements characterizing
+the sample selection of our dataset.
+As is presented in Smith et al. in prep., the ZTF survey photometric depth is 20.4 mag in g, 20.6 mag in r and 20.0 mag
+in i on average, but the spectroscopic follow-up is ∼ 1.5 mag
+shallower. As we require a spectroscopic classification for the
+ZTF SN Ia DR2 release, this spectroscopic follow-up magnitude limit consequently is our limiting selection function. Figure 4 (top) presents our effective selection function, modeled as
+
+−1
+a survival sigmoid, 1 − S(m ; m0 , s) = 1 − 1 + e s(m−m0 ) , with
+m0 = 18.8 and s = 4.5. As was expected, this model closely
+matches the BTS spectroscopic typing completeness measurements from Perley et al. (2020).
+The steep fainter-redder SN Ia relation means that the first
+SNe Ia missed by a magnitude-limited survey are red targets (see
+e.g., discussion in Nicolas et al. 2021). Hence, the SN Ia color
+distribution is highly sensitive to such a selection, more so than,
+for instance, the SN Ia stretch. We show in Fig. 4 the color distribution of non-peculiar SNe Ia of the DR2 sample for various redArticle number, page 6 of 11
+
+4
+
+z 0.06
+(972 SNe Ia)
+
+0
+z 0.08
+(1809 SNe Ia)
+
+4
+0
+
+parent pop.
+
+20
+
+2
+
+0
+
+2
+
+SEDm target spectra (199, 5.5%), galaxy emission lines visible
+in SEDm spectra (121, 3.3%), and estimated using snid SN Ia
+template matching (1086, 30.0%). The first two cases have a typical precision on the redshift, σz ≤ 10−4 , and are referred to as
+“galaxy-redshifts,” while the latter have a precision of σz ≈ 10−3
+and are referred to as “SN redshifts.” Of the 2200 galaxy catalog redshifts, 71% come from the DESI MOST Hosts program
+(Soumagnac et al. 2024).
+Figure 3 illustrates the accuracy and precision of the SNfeature based redshifts that account for 30% of the sample (22%
+for the volume-limited sample, z < 0.06) using the SN-feature
+redshifts of SNe Ia with galaxy redshifts (mostly DESI, see Soumagnac et al. 2024). We conclude that SN-feature redshifts are
+unbiased (average shifts lower than 10−5 ) with a typical scatter of 3 10−3 across the entire redshift range coverage by ZTF
+(see details in Smith et al. in prep). Such a σz ≈ 3 10−3 scatter
+(900 km s−1 ) typically corresponds to a 0.09 mag additional scatter on the Hubble diagram at our median redshift of zmed = 0.07.
+Redshift are given in the heliocentric frame and the DR2 redshift distribution is shown in Fig. 5. Since most of our hosts are
+brighter than 20 mag in the r band, the vast majority of our SN
+redshifts will soon be acquired and released by DESI as part of
+their bright galaxy survey program (Hahn et al. 2023).
+
+19
+
+SNe Ia peak magnitude
+
+z [0.06, 0.20]
+(1654 SNe Ia)
+
+4
+2
+
+0.2 0.0
+
+0.2 0.4
+color (c)
+
+0.6
+
+0.8
+
+0
+
+0.2 0.0
+
+0.2 0.4
+color (c)
+
+0.6
+
+0.8
+
+Fig. 4. Selection function of the ZTF SN Ia DR2 sample and its effect on the color distribution. Top: Probability that a SN Ia spectrum
+is acquired and leads to a classification as a function of SN Ia peak
+magnitude. The model is the survival sigmoid function 1 − S(18.8, 4.5).
+Bottom: Distribution of the ZTF SN Ia DR2 color (black) compared to
+the expected parent population (orange) and simulation predictions (1
+and 2σ, light blue) for various redshift ranges (see legend).
+
+shift ranges (z ≤ 0.045, z ≤ 0.06, z ≤ 0.08, and z ∈ [0.06, 0.20]).
+We overplot our parent population model, finding it to be within
+1 − 2σ, using a scatter derived from 3000 realistic simulations
+of the same number of targets than that observed in the DR2.
+For the parent population, we assume an intrinsic Gaussian distribution convolved with an extrinsic exponential decay given by
+Ginolin et al. (2024,b) (see also e.g., Brout & Scolnic (2021) and
+Popovic et al. (2024)).
+We draw two conclusions from this figure. First, since the
+simulations, which are sensitive to both the assumed parent population and the modeled selection function, closely match the
+observed data for all of the various redshift ranges, we conclude
+that our model for the selection and underlying SNIa distributions are reasonable. Second, since the observed SN Ia DR2
+color distribution at z < 0.06 closely matches the parent population (significant deviations are visible in the z < 0.08 case), and
+since the color distribution is the most sensitive to selection effects, we conclude that our sample is not affected by a significant
+selection function up to z ≤ 0.06; that is, it is volume-limited up
+to z = 0.06 (see additional details in Amenouche et al. (2024)).
+4.7. Distances
+
+We fit our light curves using the SALT2 (Guy et al. 2007, 2010)
+algorithm in its version 4 (Betoule et al. 2014) retrained by Taylor et al. (2021) and made available by the sncosmo package3
+as “SALT2-T21.” As is detailed in Smith et al. in prep, the fit
+was performed in the ϕ ∈ [−10, +40] d rest-frame phase range
+as this is when the light curve algorithm is sufficiently trained
+(see also Rigault et al. 2024,b). To do so, the fit was performed
+twice. First, given a t0 guess coming from the light curve data,
+we cut at ϕ ∈ [−15, +50] d and fit SALT2 to get a robust t0 , then
+we applied the ϕ ∈ [−10, +40] d cut to refit the light curve and
+store the SALT2 parameters, their errors, and covariances.
+3
+
+https://sncosmo.readthedocs.io/en/stable/about.html
+
+M. Rigault et al.: ZTF SN Ia DR2: Overview
+200
+100
+
+SALT2 stretch (x1)
+
+SALT2 color (c)
+
+0.8
+0.6
+0.4
+0.2
+0.0
+0.2
+150 300
+3
+2
+1
+0
+1
+2
+3
+0.000 0.025 0.050 0.075 0.100 0.125 0.150 0.175 0.200 100 200
+
+Redshift
+
+Fig. 5. Distribution of SALT2 stretch (x1 ) and color (c) parameters as a
+function of redshift for the 2667 SNe Ia passing the basic quality cuts
+detailed in Table 1. The vertical yellow lines illustrate the redshift below
+which the DR2 sample can be considered volume-limited (z < 0.06) for
+normal SNe Ia. The corresponding volume-limited parameter distributions are shown in yellow in the marginalized histograms.
+
+We show the SALT2 stretch (x1 ) and color (c) parameters
+for all the 2667 SNe Ia passing our “basic quality” cuts in Fig 5.
+Above z = 0.06, it can be seen that the fraction of red (high c)
+and slow (low x1 ) SNe Ia starts to decrease rapidly due to selection effects, since these faster and redder SNe Ia are fainter.
+Below this redshift of 0.06, our sample is considered to be free
+from nonrandom selection functions for the normal SN Ia population (see Sect. 4.6). We refer to this sample as “volume limited”
+and it contains nearly 1000 normal SN Ia targets.
+We present our ZTF Hubble diagram for the 2629 nonpeculiar SNe Ia that pass our quality cuts in Fig. 6. These SNe
+Ia have been standardized using the methodology detailed in Ginolin et al. (2024,a), given the SALT2 stretch and color parameter and host local environmental properties (e.g., Sullivan et al.
+2010; Rigault et al. 2020). Following that paper, we have used
+α = −0.16, β = 3.05, and γ = 0.145 mag (local-color step).
+Before standardization, our SNe Ia have a natural scatter
+along the Hubble diagram of 0.33 mag, using the normalized
+median absolute deviation (nMAD) as a robust scatter estimator.
+The standard deviation (std) is 0.46 mag (nMAD=std for a normal distribution). This scatter reduces down to 0.165 mag after
+standardization (std: 0.209 mag), accounting for all 2629 of the
+ZTF DR2 non-peculiar SNe Ia.
+Part of this scatter is due to peculiar motions that typically
+are O(300) km s−1 , leading to an additional scatter of 0.03 mag
+at our median redshift (zmed = 0.07), but to more than 0.1 mag
+for targets with z ≤ 0.02, as is illustrated in Fig. 6. Another part
+is caused by the use of SN-feature redshifts for 32% of the sample. As is presented in Sect. 4.5, these have a dispersion of ∼900
+km s−1 , corresponding to an additional Hubble residual scatter
+of 0.09 mag at zmed = 0.07. To estimate our Hubble scatter without the impact of peculiar velocities and SN-feature redshifts,
+we took the scatter in the range of z ∈ [0.03, 0.1]. There, the
+standardized SN Ia scatter is 0.150 mag (nMAD), corresponding to 0.145 mag after removing the expected peculiar veloc-
+
+ity contribution. This σS N = 0.145 mag scatter is illustrated in
+the inset panel of Fig. 6, showing it is a good description of our
+2629 SN Ia standardized Hubble residual dispersion. Such a 0.15
+magnitude scatter is in good agreement with the state-of-the-art
+results from the literature (see e.g., Brout et al. 2022).
+We finally inspected for outliers that may affect our standard deviation (std) measurements (nMAD statistics have been
+robust). Given our sample size, Chevaunet’s criteria (a less
+than 50% chance of detecting such an outlier) correspond to
+a 4.1 σ rejection. Doing so removed 23 objects (0.8% of the
+total sample) and led to a total standard deviation (std) of
+σS N = 0.187 mag (nMAD: 0.159 mag), including 2606 SN Ia,
+and σS N = 0.166 mag (nMAD: 0.144 mag) when discarding SNfeature redshift SNe Ia (1647 left, 3.95σ rejection).
+
+5. Data release papers
+This data release contains 3628 spectroscopically confirmed
+SNe Ia. In this Letter, we present a high-level overview of these
+data, but readers are referred to the 20 companion papers (Table 2) for more in-depth information on the sample, as well as
+analyses covering sample calibration, SN Ia physics, and cosmological applications. In this section, we summarize the topics
+covered in these DR2 papers.
+Data acquisition and processing (light curve extraction,
+SALT2 fitting, host matching, redshifts, etc.) are presented in
+Smith et al. in prep., while Lacroix et al. in prep. review the
+accuracy of the DR2 photometry and ongoing work to unlock
+cosmology-ready calibrations. An overview of the DR2 SN Ia
+spectra can be found in Johansson et al. in prep.
+The accuracy of the light curve modeling is reviewed in
+Rigault et al. (2024,b). An additional investigation of light curve
+modeling is presented in Kenworthy et al. (2024), in which we
+introduce the possibility of an extra stretch-like light curve parameter that may absorb a significant part of the usual phaseindependent color term.
+The simulation from Amenouche et al. (2024) and data distributions presented in Smith et al. in prep. and in this overview
+show that our normal SNe Ia dataset is free from nonrandom
+selections at z < 0.06. Based on this volume-limited sample,
+Ginolin et al. (2024,a) have analysed the SN Ia standardization
+process and demonstrated the nonlinearity of the “bright-slower”
+relation, while highlighting the most significant environmental
+magnitude offset to date. The origin of this offset and the color
+standardization are further discussed in Ginolin et al. (2024,b)
+and compared with other higher-redshift samples in Popovic et
+al. (2024). The SN Ia standardization is studied through siblings
+in Dhawan et al. (2024).
+Given our large sample statistics, we compared the SN Ia
+properties as a function of their cosmic web origin. Ruppin et al.
+(2024) study how SNe Ia vary as a function of their cluster association, notably since cluster galaxies are less star-forming than
+their field counterparts. Aubert et al. (2024) generalize this study
+when comparing SN Ia properties as a function of their cosmic
+density field. The actual impact of peculiar motion caused by
+the velocity field in the derivation of cosmological parameters is
+discussed in Carreres et al. (2024).
+Our sample also enables careful studies of SN Ia explosion
+physics and progenitor origins. Burgaz et al. (2024,b) present the
+spectroscopic diversity (through measurements of key spectral
+features) of the maximum-light volume-limited sample. This includes an investigation of the impact of host-galaxy contamination on spectral measurements, as well as an analysis, including
+Article number, page 7 of 11
+
+A&A proofs: manuscript no. aanda
+
+40
+
+corr
+
+38
+36
+
+sn = 0.145
+
+34
+32
+
+0.5
+
+30
+CDM
+
+0.0
+corr
+
+0.5
+CDM
+
+0.5
+
+corr
+
+0.0
+0.5
+0.025
+
+0.050
+
+0.075
+
+0.100
+
+0.125
+
+Redshift
+
+0.150
+
+0.175
+
+0.200
+
+Fig. 6. ZTF SN Ia DR2 Hubble diagram. Top:
+Hubble diagram of the 2629 standardized nonpeculiar SNe Ia compared to the ΛCDM model
+anchored on (Planck Collab. 2020) with an arbitrary zero-point offset. Bottom Standardized
+Hubble residuals. Orange markers (lines) show
+the median (±nmad) data per bin of redshifts
+(∆z = 0.01). The light gray band shows the
+expected scatter caused by peculiar velocities
+of 300 km s−1 , while gray lines present the
+expected total scatter, adding in quadrature a
+0.145 mag scatter (see text). Inset panel: Standardized Hubble residual distribution (blue)
+with a normal distribution centered on zero with
+a scatter of 0.145 mag, adding in quadrature a
+velocity dispersion (0.149 mag).
+
+spectral modeling, of the continuum of SN Ia spectral properties seen from the normal SN Ia population to peculiar underluminous subclasses, such as 91bg-like events. Dimitriadis et al.
+(2024) review the photometric diversity of the SN Ia population
+of the DR2 (including peculiar events), describing how subclassifications have been derived, as well as intrinsic rates of the
+subclasses.
+In Terwel et al. (2024), we search for late-time interaction
+with circumstellar material in SNe Ia, finding a few cases of rebrightening years after the explosion. In Harvey et al. (2024), we
+study the demographic of high-velocity silicon features, finding
+that most SNe Ia exhibit such behavior at early phases and that
+they are more common in underluminous SNe Ia. Deckers et al.
+(2024) use Gaussian process fitting of the ZTF light curves to
+study the properties of the second maximum clearly visible in
+redder bands, as well as constrain the origin of these features.
+The connection between host and SNe Ia properties is further
+studied in Burgaz et al. (2024,b), who investigate the low-mass
+host SN Ia population, and in Senzel et al. (2024), who compare
+the SN Ia properties and whether they originate from the bulge,
+bar, or disk of the host that is connected to the age and metallicity.
+A cosmological analysis will soon follow, once photometric
+calibrations detailed in Lacroix et al. in prep. are completed. This
+resulting DR2.5 release will be accompanied by a series of calibration papers. We discourage the user from using the current
+DR2 data to derive cosmological parameters.
+
+Table 2. Overview of the ZTF DR2 paper release.
+
+6. Data release content and access
+
+These SNe Ia will be released as part of a dedicated ZTF H0
+cosmology program. However, light curve data of the 12 peculiar SNe Ia at z < 0.015 SNe Ia have been released, as well as
+spectra and host properties for all targets, including the normal
+very nearby SNe Ia.
+The host tables contains the rest-frame g − z color and stellar mass (log(M∗ /M⊙ )) both for local (2 kpc radius aperture) and
+global properties. The host table also contains the host coordinates and SN-host distance information. The log table contains
+pointing (mjd, ra, dec) and observing conditions (zp, limiting
+magnitude, gain, infobits), which is sufficient to simulate ZTF
+DR2 data.
+We finally provide additional SN Ia data tables in the
+tables/extra repository. These are results obtained when
+changing the used SALT template (SALT2.4 Betoule et al.
+
+The content of this data release is illustrated in Fig. 7 and the
+main release parameters are summarized in Table 3. We are providing:
+– 3591 SNe Ia light curves (g, r, and i band),
+– 5138 spectra, with at least one per SN Ia,
+– an SN metadata table,
+– two host data tables (global and local properties),
+– observing logs.
+We have not released light curve data and derived light curve
+properties for the 37 non-peculiar SNe Ia below z < 0.015
+(∼ 65 Mpc) from which independent distances could be acquired
+and that will lead to a measurement of the Hubble constant, H0 .
+Article number, page 8 of 11
+
+First Author
+Rigault (a, this work)
+Smith
+Lacroix
+Johansson
+Rigault (b)
+Kenworthy
+Amenouche
+Ginolin (a)
+Ginolin (b)
+Popovic
+Dhawan
+Ruppin
+Aubert
+Carreres
+Burgaz (a)
+Dimitriadis
+Terwel
+Harvey
+Deckers
+Burgaz (b)
+Senzel
+
+Short title
+DR2 overview
+DR2 data review
+DR2 photometry
+DR2 spectra review
+Light curve residuals
+Light curve modeling
+DR2 sample simulations
+Host, stretch & steps
+Host, color & bias origin
+Host & color evolution
+SNe Ia siblings
+SNe Ia in clusters
+SNe Ia in voids
+Velocity systematics
+SN Ia spectral diversity
+Thermonuclear SN diversity
+Late-time CSM interaction
+High-velocity features
+Secondary maxima
+SNe Ia in low-mass hosts
+Bulge vs. Disk SNe Ia
+
+M. Rigault et al.: ZTF SN Ia DR2: Overview
+Table 3. Main release table parameters.
+column
+
+comment
+
+Light curve file parameters
+mjd
+filter
+flux
+flux_err
+flag**
+field_id
+rcid
+
+observation modified julian date [day]
+used filter (ztfg, ztfr, ztfi)
+blind flux in unit of zero-point near 30
+flux error
+bit-mask (bad: [1, 2, 4, 8, 16])
+ZTF sky field ID
+ZTF camera quadrant ID
+
+SN metadata table
+redshift
+redshift_err
+source
+t0*
+x0*
+x1*
+c*
+mwebv
+fitprob
+ra, dec
+sn_type
+sub_type
+lccoverage_flag
+fitquality_flag
+
+heliocentric
+do not incl. method scatter
+redshift estimation method
+modified julian date [day]
+blinded flux zeropoint near 30
+SALT2 stretch
+SALT2 color
+Assumed milky way dust with RV = 3.1
+–
+SN Ia coordinates [deg]
+SN Ia classification
+subclassification if any.
+passes the good sampling cut (bool, Table 1)
+passes all other Basic cuts (bool, Table 1)
+
+Global Host properties
+ra, dec
+dDLR
+mass
+color
+
+host coordinates [deg]
+normalized direct light distance
+(log) stellar mass (from SED fit)
+k-corrected g − z color (mag)
+
+Local (2 kpc radius) environmental properties
+mass
+color
+
+(log) stellar mass (from SED fit)
+k-corrected g − z color (mag)
+
+Observing logs
+mjd
+filter
+fieldid
+ra, dec
+rcid
+maglim
+gain
+expid
+
+modified Julian date [day]
+used filter (ztfg, ztfr, ztfi)
+ztf grid field index
+ztf central footprint coordinates
+amplifier index (1->64)
+limited 5σ (point source)
+amplifier gain
+exposure id.
+
+Notes. *: also contain _err for error values and cov_a_b for covariance
+between a and b terms. **: See details in Smith et al. in prep.).
+
+2014 or SALT3 Kenworthy et al. 2021, see modeling discussion in Rigault et al. (2024,b)), or changing the considered phase
+range (starting at −20, −15, −10 or −5 d, and/or finishing at
++30, +40, +45, +50 days) or the use or not of the i band.
+All of the released data can be retrieved from ztfcosmo.in2p3.fr.4 Our observations are also made available via
+WISeREP (Yaron & Gal-Yam 2012).5
+4
+5
+
+Data tables available after publication
+https://www.wiserep.org
+
+‣ dr2:
+‣ tables:
+- snia_data.csv
+- globalhost_data.csv
+- localhost_data.csv
+- observing_logs.csv
+‣ extra:
+- snia_data_{phases}_{salt}.csv
+‣ lightcurves:
+- {name}_lc.csv
+‣ spectra:
+- {name}_{obsdate}_{provenance}_{i-th}.ascii
+Fig. 7. Content of the released data repository. The blue items
+are directories and {gray} entries represent multiple items. The
+observing_logs table cannot be automatically downloaded (too large,
+see text).
+
+7. Conclusions
+With 3628 objects, we are releasing the largest sample of SN
+Ia data to date. This release, named DR2, publishes all SNe Ia
+acquired by the ZTF survey up to December 2020 and spectroscopically classified as “Ia.” The classification as well as the data
+content have been vetted by multiple members of the scientific
+collaboration. Along with 20 companion papers studying in detail SN Ia astrophysics and their use as cosmological distance indicators, we are releasing: 3591 forced-photometry light curves
+(g, r, i) and SALT2 light curve parameters, 5138 spectra, galaxy
+and SN redshifts, global and local (2 kpc) host properties, and
+observing logs. The SN light curves and light curve properties
+of normal SNe Ia at z < 0.015, however, have not been released.
+This release increases by an order of magnitude the current
+state-of-the-art low-redshift SN Ia dataset. Our sample is homogeneous, with well-controlled selection effects. As part of our
+release, nearly 1000 SNe Ia are from a volume-limited sample
+(z < 0.06) for which parameter distributions and correlations are
+representative of the true, normal underlying SN Ia population.
+The photometric accuracy of the release is at the percent
+level with known percent nonlinearity. The data are thus of sufficient quality for any internal ZTF SN Ia analysis but are not
+yet ready to be joined with other datasets to derive cosmological
+parameters. The Cosmology Science Working group is actively
+working on final calibration steps, to release the cosmology associated with these SNe Ia. This will constitute the DR2.5 release that will become public on a timescale of approximately
+one year. The next step will be the use of the full ZTF survey
+(2018-2025), which should contain nearly 8,000 spectroscopically confirmed SNe Ia. In addition, we expect 25,000 additional
+photometrically confirmed SNe Ia. This O(30 000) SNe Ia sample will be our DR3.
+Acknowledgements. Based on observations obtained with the Samuel Oschin
+Telescope 48-inch and the 60-inch Telescope at the Palomar Observatory as
+part of the Zwicky Transient Facility project. ZTF is supported by the National
+Science Foundation under Grants No. AST-1440341 and AST-2034437 and a
+collaboration including current partners Caltech, IPAC, the Weizmann Institute of Science, the Oskar Klein Center at Stockholm University, the University
+of Maryland, Deutsches Elektronen-Synchrotron and Humboldt University, the
+TANGO Consortium of Taiwan, the University of Wisconsin at Milwaukee, Trinity College Dublin, Lawrence Livermore National Laboratories, IN2P3, University of Warwick, Ruhr University Bochum, Northwestern University and former
+partners the University of Washington, Los Alamos National Laboratories, and
+
+Article number, page 9 of 11
+
+A&A proofs: manuscript no. aanda
+Lawrence Berkeley National Laboratories. Operations are conducted by COO,
+IPAC, and UW. SED Machine is based upon work supported by the National Science Foundation under Grant No. 1106171 The ZTF forced-photometry service
+was funded under the Heising-Simons Foundation grant #12540303 (PI: Graham). The Gordon and Betty Moore Foundation, through both the Data-Driven
+Investigator Program and a dedicated grant, provided critical funding for SkyPortal. This project has received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation
+program (grant agreement n 759194 - USNAC). This project is supported by
+the H2020 European Research Council grant no. 758638. This work has been
+supported by the Agence Nationale de la Recherche of the French government
+through the program ANR-21-CE31-0016-03. L.G. acknowledges financial support from the Spanish Ministerio de Ciencia e Innovación (MCIN) and the Agencia Estatal de Investigación (AEI) 10.13039/501100011033 under the PID2020115253GA-I00 HOSTFLOWS project, from Centro Superior de Investigaciones
+Científicas (CSIC) under the PIE project 20215AT016 and the program Unidad
+de Excelencia María de Maeztu CEX2020-001058-M, and from the Departament
+de Recerca i Universitats de la Generalitat de Catalunya through the 2021-SGR01270 grant. Y.-L.K. has received funding from the Science and Technology
+Facilities Council [grant number ST/V000713/1]. This work has been enabled
+by support from the research project grant ‘Understanding the Dynamic Universe’ funded by the Knut and Alice Wallenberg Foundation under Dnr KAW
+2018.0067 This work has been supported by the research project grant “Understanding the Dynamic Universe” funded by the Knut and Alice Wallenberg
+Foundation under Dnr KAW 2018.0067, Vetenskapsrådet, the Swedish Research
+Council, project 2020-03444, and the G.R.E.A.T research environment, project
+number 2016-06012. SRK’s research is supported by the Heising-Simons Foundation. ZTF is supported in part by the Medium Scale Instrumentation Program
+(MSIP of the National Science Foundation (NSF) LH is funded by the Irish Research Council under grant number GOIPG/2020/1387. ECB acknowledges support by the NSF AAG grant 1812779 and grant #2018-0908 from the HeisingSimons Foundation. MMK acknowledges generous support from the David and
+Lucille Packard Foundation.
+
+References
+Abdurro’uf, Accetta, K., Aerts, C., et al. 2022, ApJS, 259, 35.
+Amenouche, M., Smith, M., Rosnet, P., et al. 2024, arXiv:2409.04650.
+doi:10.48550/arXiv.2409.04650, (ZTFSI)
+Astier, P., Guy, J., Regnault, N., et al. 2006, A&A, 447, 31.
+Astier, P., El Hage, P., Guy, J., et al. 2013, A&A, 557, A55.
+Aubert, M., Rosnet, P., Popovic, B., et al. 2024, arXiv:2406.11680.
+doi:10.48550/arXiv.2406.11680, (ZTFSI)
+Bellm, E. C., Kulkarni, S. R., Graham, M. J., et al. 2019, PASP, 131, 018002.
+Bellm, E. C., Kulkarni, S. R., Barlow, T., et al. 2019, PASP, 131, 068003.
+Betoule, M., Kessler, R., Guy, J., et al. 2014, A&A, 568, A22.
+Blagorodnova, N., Neill, J. D., Walters, R., et al. 2018, PASP, 130, 035003.
+Bloom, J. S., Kasen, D., Shen, K. J., et al. 2012, ApJ, 744, L17.
+Blondin, S. & Tonry, J. L. 2007, ApJ, 666, 1024.
+Alam, S., Ata, M., Bailey, S., et al. 2017, MNRAS, 470, 2617.
+Briday, M., Rigault, M., Graziani, R., et al. 2022, A&A, 657, A22.
+Brout, D., Sako, M., Scolnic, D., et al. 2019, ApJ, 874, 106.
+Brout, D. & Scolnic, D. 2021, ApJ, 909, 26.
+Brout, D., Scolnic, D., Popovic, B., et al. 2022, ApJ, 938, 110.
+Burgaz, U., Maguire, K., Dimitriadis, G., et al. 2024, arXiv:2407.06828. (ZTFSI)
+Burgaz, U., Maguire, K., Burgaz, U. et al. 2024, A&A, submitteb (ZTFSI)
+Carreres, B., Rosselli, D., Bautista, J. E., et al. 2024, arXiv:2405.20409.
+doi:10.48550/arXiv.2405.20409, (ZTFSI)
+Childress, M., Aldering, G., Antilogus, P., et al. 2013, ApJ, 770, 108.
+Coughlin, M. W., Bloom, J. S., Nir, G., et al. 2023, ApJS, 267, 31.
+Deckers, M., Maguire, K., Magee, M. R., et al. 2022, MNRAS, 512, 1317.
+Deckers, M., Maguire, K., Shingles, L., et al. 2024, arXiv:2406.19460.
+doi:10.48550/arXiv.2406.19460, (ZTFSI)
+Dekany, R., Smith, R. M., Riddle, R., et al. 2020, PASP, 132, 038001.
+Desai, D. D., Kochanek, C. S., Shappee, B. J., et al. 2024, MNRAS, 530, 5016.
+DES collaboration, Abbott, T. M. C., Acevedo, M., et al. 2024,
+arXiv:2401.02929. doi:10.48550/arXiv.2401.02929
+DESI Collaboration, Adame, A. G., Aguilar, J., et al. 2024, arXiv:2404.03002.
+doi:10.48550/arXiv.2404.03002
+Dey, A., Schlegel, D. J., Lang, D., et al. 2019, AJ, 157, 168.
+Dhawan, S., Goobar, A., Smith, M., et al. 2022, MNRAS, 510, 2228.
+Dhawan, S., Mortsell, E., Johansson, J., et al. 2024, arXiv:2406.01434.
+doi:10.48550/arXiv.2406.01434, (ZTFSI)
+Dimitriadis, G., Burgaz, U., Deckers, M., et al. 2024, arXiv:2409.04200.
+doi:10.48550/arXiv.2409.04200, (ZTFSI)
+Duev, D. A., Mahabal, A., Masci, F. J., et al. 2019, MNRAS, 489, 3582.
+Eisenstein, D. J., Zehavi, I., Hogg, D. W., et al. 2005, ApJ, 633, 560.
+
+Article number, page 10 of 11
+
+Flewelling, H. A., Magnier, E. A., Chambers, K. C., et al. 2020, ApJS, 251, 7.
+Fremling, C., Miller, A. A., Sharma, Y., et al. 2020, ApJ, 895, 32.
+Ginolin, M., Rigault, M., Smith, M., et al. 2024, arXiv:2405.20965.
+doi:10.48550/arXiv.2405.20965, (ZTFSI)
+Ginolin, M., Rigault, M., Copin, Y., et al. 2024, arXiv:2406.02072.
+doi:10.48550/arXiv.2406.02072, (ZTFSI)
+Goobar, A. & Leibundgut, B. 2011, Annual Review of Nuclear and Particle Science, 61, 251.
+Graham, M. J., Kulkarni, S. R., Bellm, E. C., et al. 2019, PASP, 131, 078001.
+Gupta, R. R., Kuhlmann, S., Kovacs, E., et al. 2016, AJ, 152, 154.
+Guy, J., Astier, P., Baumont, S., et al. 2007, A&A, 466, 11.
+Guy, J., Sullivan, M., Conley, A., et al. 2010, A&A, 523, A7.
+Hahn, C., Wilson, M. J., Ruiz-Macias, O., et al. 2023, AJ, 165, 253.
+Harvey, L., Maguire, K., Burgaz, U. et al. 2024, A&A, submitteb (ZTFSI)
+Holtzman, J. A., Marriner, J., Kessler, R., et al. 2008, AJ, 136, 2306.
+Iben, I. & Tutukov, A. V. 1984, ApJS, 54, 335. doi:10.1086/190932
+Jha, S. W., Maguire, K., & Sullivan, M. 2019, Nature Astronomy, 3, 706.
+Kasliwal, M. M., Cannella, C., Bagdasaryan, A., et al. 2019, PASP, 131, 038003.
+Kelsey, L., Sullivan, M., Smith, M., et al. 2021, MNRAS, 501, 4861.
+Kenworthy, W. D., Jones, D. O., Dai, M., et al. 2021, ApJ, 923, 265.
+Kenworthy, W. D., Goobar, A., Jones, D. O. et al. 2024, A&A, submitteb (ZTFSI)
+Kim, Y.-L., Rigault, M., Neill, J. D., et al. 2022, PASP, 134, 024505.
+Le Borgne, D. & Rocca-Volmerange, B. 2002, A&A, 386, 446.
+Lezmy, J., Copin, Y., Rigault, M., et al. 2022, A&A, 668, A43.
+Liu, Z.-W., Röpke, F. K., & Han, Z. 2023, Research in Astronomy and Astrophysics, 23, 082001.
+Maguire, K., Sullivan, M., Pan, Y.-C., et al. 2014, MNRAS, 444, 3258.
+Mannucci, F., Della Valle, M., Panagia, N., et al. 2005, A&A, 433, 807.
+Maoz, D., Mannucci, F., & Nelemans, G. 2014, ARA&A, 52, 107.
+Masci, F. J., Laher, R. R., Rusholme, B., et al. 2019, PASP, 131, 018003.
+Müller-Bravo, T. & Galbany, L. 2022, JOSS, 7, 4508.
+Nicolas, N., Rigault, M., Copin, Y., et al. 2021, A&A, 649, A74.
+Nugent, P. E., Sullivan, M., Cenko, S. B., et al. 2011, Nature, 480, 344.
+Papadogiannakis, S., Dhawan, S., Morosin, R., et al. 2019, MNRAS, 485, 2343.
+Perley, D. A., Fremling, C., Sollerman, J., et al. 2020, ApJ, 904, 35.
+Perlmutter, S., Aldering, G., Goldhaber, G., et al. 1999, ApJ, 517, 565.
+Planck Collaboration, Aghanim, N., Akrami, Y., et al. 2020, A&A, 641, A6.
+Popovic, B., Brout, D., Kessler, R., et al. 2023, ApJ, 945, 84. doi:10.3847/15384357/aca273
+Popovic, B., Rigault, M., Smith, M., et al. 2024, arXiv:2406.06215.
+doi:10.48550/arXiv.2406.06215, (ZTFSI)
+Roman, M., Hardin, D., Betoule, M., et al. 2018, A&A, 615, A68
+Riess, A. G., Press, W. H., & Kirshner, R. P. 1996, ApJ, 473, 88.
+Riess, A. G., Filippenko, A. V., Challis, P., et al. 1998, AJ, 116, 1009.
+Riess, A. G., Macri, L. M., Hoffmann, S. L., et al. 2016, ApJ, 826, 56.
+Riess, A. G., Yuan, W., Macri, L. M., et al. 2022, ApJ, 934, L7.
+Rigault, M., Copin, Y., Aldering, G., et al. 2013, A&A, 560, A66.
+Rigault, M., Aldering, G., Kowalski, M., et al. 2015, ApJ, 802, 20.
+Rigault, M., Neill, J. D., Blagorodnova, N., et al. 2019, A&A, 627, A115.
+Rigault, M., Brinnel, V., Aldering, G., et al. 2020, A&A, 644, A176.
+Rigault, M., Smith, M., Regnault, N., et al. 2024, arXiv:2406.02073.
+doi:10.48550/arXiv.2406.02073, (ZTFSI)
+Rubin, D., Aldering, G., Betoule, M., et al. 2023, arXiv:2311.12098.
+doi:10.48550/arXiv.2311.12098
+Ruppin, F., Rigault, M., Ginolin, M., et al. 2024, arXiv:2406.01108.
+doi:10.48550/arXiv.2406.01108, (ZTFSI)
+Senzel, R., Maguire, K., Burgaz, U., et al. 2024, arXiv:2411.11986.
+doi:10.48550/arXiv.2411.11986 (ZTFSI)
+Scolnic, D. M., Jones, D. O., Rest, A., et al. 2018, ApJ, 859, 101.
+Scolnic, D., Brout, D., Carr, A., et al. 2022, ApJ, 938, 113.
+Silverman, J. M., Vinkó, J., Marion, G. H., et al. 2015, MNRAS, 451, 1973.
+Smartt, S. J., Valenti, S., Fraser, M., et al. 2015, A&A, 579, A40.
+Smith, M., Nichol, R. C., Dilday, B., et al. 2012, ApJ, 755, 61.
+Smith, M., Sullivan, M., Wiseman, P., et al. 2020, MNRAS, 494, 4426.
+Soumagnac, M. T., Nugent, P., Knop, R. A., et al. 2024, arXiv:2405.03857.
+doi:10.48550/arXiv.2405.03857
+Spergel, D. N., Verde, L., Peiris, H. V., et al. 2003, ApJS, 148, 175.
+Steele, I. A., Smith, R. J., Rees, P. C., et al. 2004, Proc. SPIE, 5489, 679.
+Sullivan, M., Le Borgne, D., Pritchet, C. J., et al. 2006, ApJ, 648, 868.
+Sullivan, M., Conley, A., Howell, D. A., et al. 2010, MNRAS, 406, 782.
+Taylor, G., Lidman, C., Tucker, B. E., et al. 2021, MNRAS, 504, 4111.
+Terwel, J. H., Maguire, K., Dimitriadis, G., et al. 2024, arXiv:2402.16962.
+doi:10.48550/arXiv.2402.16962, (ZTF SI)
+Tripp, R. 1998, A&A, 331, 815
+Tucker, M. A., Shappee, B. J., Vallely, P. J., et al. 2020, MNRAS, 493, 1044.
+van der Walt et al., (2019) JOSS, 4(37), 1247,
+Vincenzi, M., Brout, D., Armstrong, P., et al. 2024, arXiv:2401.02945.
+Whelan, J. & Iben, I. 1973, ApJ, 186, 1007.
+Wiseman, P., Vincenzi, M., Sullivan, M., et al. 2022, MNRAS, 515, 4587.
+Yao, Y., Miller, A. A., Kulkarni, S. R., et al. 2019, ApJ, 886, 152.
+
+M. Rigault et al.: ZTF SN Ia DR2: Overview
+Yaron, O. & Gal-Yam, A. 2012, PASP, 124, 668.
+
+Universite Claude Bernard Lyon 1, CNRS, IP2I Lyon / IN2P3, IMR
+5822, F-69622 Villeurbanne, France
+2
+Department of Physics, Lancaster University, Lancs LA1 4YB, UK
+3
+The Oskar Klein Centre, Department of Physics, AlbaNova, SE-106
+91 Stockholm , Sweden
+4
+School of Physics, Trinity College Dublin, College Green, Dublin 2,
+Ireland
+5
+Institut für Physik, Humboldt-Universität zu Berlin, Newtonstr. 15,
+12489 Berlin, Germany
+6
+Institute of Astronomy and Kavli Institute for Cosmology, University of Cambridge, Madingley Road, Cambridge CB3 0HA, UK
+7
+The Oskar Klein Centre, Department of Astronomy, AlbaNova, SE106 91 Stockholm , Sweden
+8
+Sorbonne Université, CNRS/IN2P3, LPNHE, F-75005, Paris,
+France
+9
+Deutsches Elektronen-Synchrotron DESY, Platanenallee 6, 15738
+Zeuthen, Germany
+10
+Lawrence Berkeley National Laboratory, 1 Cyclotron Road MS
+50B-4206, Berkeley, CA, 94720, USA
+11
+Department of Astronomy, University of California, Berkeley, 501
+Campbell Hall, Berkeley, CA 94720, USA
+12
+Joint Space-Science Institute, University of Maryland, College Park,
+MD 20742, USA
+13
+Department of Astronomy, University of Maryland, College Park,
+MD 20742, USA
+14
+Astrophysics Science Division, NASA Goddard Space Flight Center, Mail Code 661, Greenbelt, MD 20771, USA
+15
+National Research Council of Canada, Herzberg Astronomy & Astrophysics Research Centre, 5071 West Saanich Road, Victoria, BC
+V9E 2E7, Canada
+16
+Université Clermont Auvergne, CNRS/IN2P3, LPCA, F-63000
+Clermont-Ferrand, France
+17
+Aix Marseille Université, CNRS/IN2P3, CPPM, Marseille, France
+18
+DIRAC Institute, Department of Astronomy, University of Washington, 3910 15th Avenue NE, Seattle, WA 98195, USA
+19
+Department of Physics, Duke University Durham, NC 27708, USA
+20
+IPAC, California Institute of Technology, 1200 E. California Blvd,
+Pasadena, CA 91125, USA
+21
+Division of Physics, Mathematics & Astronomy 249-17, Caltech.
+Pasadena, CA 91108, USA
+22
+Institute of Space Sciences (ICE-CSIC), Campus UAB, Carrer de
+Can Magrans, s/n, E-08193 Barcelona, Spain.
+23
+Institut d’Estudis Espacials de Catalunya (IEEC), 08860 Castelldefels (Barcelona), Spain
+24
+Department of Physics and Astronomy, Northwestern University,
+2145 Sheridan Rd, Evanston, IL 60208, USA
+25
+Center for Interdisciplinary Exploration and Research in Astrophysics (CIERA), Northwestern University, 1800 Sherman Ave,
+Evanston, IL 60201, USA
+26
+Caltech Optical Observatories, California Institute of Technology,
+Pasadena, CA 91125, USA
+27
+Astrophysics Research Institute, Liverpool John Moores University,
+146 Brownlow Hill, Liverpool L3 5RF, UK Nordic Optical Telescope, Rambla José Ana Fernández Pérez 7, ES-38711 Breña Baja,
+Spain
+28
+Department of Astronomy, University of Washington, 3910 15th Avenue NE, Seattle, WA 98195, USA
+1
+
+Article number, page 11 of 11
+
+

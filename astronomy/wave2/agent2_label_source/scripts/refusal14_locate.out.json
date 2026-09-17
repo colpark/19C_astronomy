@@ -1,0 +1,2029 @@
+{
+ "agent1_98": [
+  {
+   "ZTFID": "ZTF18aayjyub",
+   "IAUID": "SN2018cod",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/1910.12973.raw.txt",
+   "hits": {
+    "sources/1910.12973.raw.txt": [
+     {
+      "line": 1409,
+      "text": "ZTF18aayjyub (SN 2018cod), ZTF18acaeous (SN 2018hbu),",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF18abcfcoo",
+   "IAUID": "AT2018cow",
+   "bts_type": "other",
+   "agent1_source": "sources/1910.12973.raw.txt",
+   "hits": {
+    "sources/1910.12973.raw.txt": [
+     {
+      "line": 211,
+      "text": "5 The internal ZTF designation for AT 2018cow is ZTF18abcfcoo.",
+      "window_class_tokens": []
+     }
+    ],
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 843,
+      "text": "AT2018cow and AT2019cmw, which have extensive spectroscopy but resemble no well-established transient type and",
+      "window_class_tokens": [
+       "LBV",
+       "Other",
+       "other"
+      ]
+     },
+     {
+      "line": 1257,
+      "text": "2018cow",
+      "window_class_tokens": []
+     },
+     {
+      "line": 1394,
+      "text": "is AT2018cow (Prentice et al. 2018; Perley et al. 2019;",
+      "window_class_tokens": [
+       "other"
+      ]
+     },
+     {
+      "line": 1419,
+      "text": "events (both for AT2018cow and for less-extreme RETs:",
+      "window_class_tokens": []
+     },
+     {
+      "line": 1429,
+      "text": "AT2018cow-like events, with their luminous multiwavelength emission (Ho et al. 2019a, 2020b; Margutti et al.",
+      "window_class_tokens": [
+       "other"
+      ]
+     },
+     {
+      "line": 1493,
+      "text": "2018cow (z=0.014)",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3191,
+      "text": "ZTF18abcfcoo",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3212,
+      "text": "AT2018cow",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF18abmrhom",
+   "IAUID": "SN2018ffi",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/1910.12973.raw.txt",
+   "hits": {
+    "sources/1910.12973.raw.txt": [
+     {
+      "line": 1014,
+      "text": "sources: ZTF18abmrhom (SN 2018ffi) and ZTF18abtswjk",
+      "window_class_tokens": [
+       "SN Ia"
+      ]
+     },
+     {
+      "line": 1015,
+      "text": "(SN 2018gfx). We classify ZTF18abmrhom as a SN Ia,",
+      "window_class_tokens": [
+       "SN Ia"
+      ]
+     },
+     {
+      "line": 1017,
+      "text": "just galaxy light. The ZTF spectrum of ZTF18abmrhom,",
+      "window_class_tokens": [
+       "SN Ia"
+      ]
+     },
+     {
+      "line": 1028,
+      "text": "likely that ZTF18abmrhom is a SN Ia. The classification",
+      "window_class_tokens": [
+       "SN IIn",
+       "SN Ia"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF18aceqrrs",
+   "IAUID": "SN2018ijp",
+   "bts_type": "SN Ic",
+   "agent1_source": "sources/1910.12973.raw.txt",
+   "hits": {
+    "sources/1910.12973.raw.txt": [
+     {
+      "line": 1160,
+      "text": "single event, ZTF18aceqrrs (SN 2018ijp), that lacks both H",
+      "window_class_tokens": [
+       "SN Ic",
+       "SNe Ibn"
+      ]
+     },
+     {
+      "line": 1162,
+      "text": "ZTF18aceqrrs as a \u201cpeculiar\u201d SN Ic (Ic-pec in Table 1).",
+      "window_class_tokens": [
+       "SN Ic"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF18acrknyn",
+   "IAUID": "SN2018jef",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/1910.12973.raw.txt",
+   "hits": {
+    "sources/1910.12973.raw.txt": [
+     {
+      "line": 1410,
+      "text": "and ZTF18acrknyn (SN 2018jef), are too faint to be included",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF18abffyqp",
+   "IAUID": "SN2018dfi",
+   "bts_type": "SN II",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 1495,
+      "text": "2018dfi (II, z=0.031)",
+      "window_class_tokens": [
+       "IIb"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF18actuhrs",
+   "IAUID": "SN2018evt",
+   "bts_type": "SN Ia-CSM",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 3192,
+      "text": "ZTF18actuhrs",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3213,
+      "text": "SN2018evt",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF18abukavn",
+   "IAUID": "SN2018gep",
+   "bts_type": "SN Ic-BL",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 1255,
+      "text": "2018gep",
+      "window_class_tokens": []
+     },
+     {
+      "line": 1411,
+      "text": "Ic-BL (SN2018gep; Ho et al. 2019b), and one luminous blue variable (LBV) SN imposter.",
+      "window_class_tokens": [
+       "IIb",
+       "LBV",
+       "Type II",
+       "Type IIn",
+       "Type Ibn",
+       "Type Ic"
+      ]
+     },
+     {
+      "line": 1497,
+      "text": "2018gep (Ic\u2212BL, z=0.032) 2018gjx (IIb, z=0.010)",
+      "window_class_tokens": [
+       "IIb"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF18abvkmgw",
+   "IAUID": "SN2018ghd",
+   "bts_type": "SN Ib",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 1499,
+      "text": "2018ghd (II, z=0.038)",
+      "window_class_tokens": [
+       "IIb"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF18acqxyiq",
+   "IAUID": "SN2018jak",
+   "bts_type": "SN IIb",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 1501,
+      "text": "2018jak (IIb, z=0.038)",
+      "window_class_tokens": [
+       "IIb",
+       "Ibn"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF18acrheel",
+   "IAUID": "SN2018jbs",
+   "bts_type": "SN Ibn",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 1503,
+      "text": "2018jbs (Ibn, z=0.059)",
+      "window_class_tokens": [
+       "IIb",
+       "Ibn",
+       "LBV"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF18aczbkqp",
+   "IAUID": "AT2018kle",
+   "bts_type": "LBV",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 1505,
+      "text": "2018kle (LBV, z=0.013)",
+      "window_class_tokens": [
+       "Ibn",
+       "LBV"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF18adaykvg",
+   "IAUID": "SN2018kzr",
+   "bts_type": "SN Ic",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 1246,
+      "text": "2018kzr",
+      "window_class_tokens": []
+     },
+     {
+      "line": 1400,
+      "text": "SN 2018kzr, faded too rapidly for its timescale to be",
+      "window_class_tokens": [
+       "SN Ic"
+      ]
+     },
+     {
+      "line": 1507,
+      "text": "2018kzr (Ic, z=0.053)",
+      "window_class_tokens": [
+       "LBV"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19aadnwvc",
+   "IAUID": "AT2019ye",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 3193,
+      "text": "ZTF19aadnwvc",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3214,
+      "text": "AT2019ye",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19aadyppr",
+   "IAUID": "AT2019abn",
+   "bts_type": "ILRT",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 1277,
+      "text": "2019abn",
+      "window_class_tokens": [
+       "IIb"
+      ]
+     },
+     {
+      "line": 1476,
+      "text": "AT2019abn, is discussed in detail by Jencson et al.",
+      "window_class_tokens": [
+       "ILRT",
+       "nova",
+       "other"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19aailcgs",
+   "IAUID": "SN2019ape",
+   "bts_type": "SN Ic",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 2192,
+      "text": "progenitors. However, two CC SN hosts (SN 2019ape",
+      "window_class_tokens": [
+       "other"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19aaniqrr",
+   "IAUID": "AT2019cmw",
+   "bts_type": "other",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 843,
+      "text": "AT2018cow and AT2019cmw, which have extensive spectroscopy but resemble no well-established transient type and",
+      "window_class_tokens": [
+       "LBV",
+       "Other",
+       "other"
+      ]
+     },
+     {
+      "line": 1234,
+      "text": "2019cmw",
+      "window_class_tokens": []
+     },
+     {
+      "line": 1652,
+      "text": "mag (AT2019cmw) inferred from a redshift measure-",
+      "window_class_tokens": []
+     },
+     {
+      "line": 2332,
+      "text": "Velzen for discussions on the nature of AT2019cmw and",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3195,
+      "text": "ZTF19aaniqrr",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3216,
+      "text": "AT2019cmw",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19aatubsj",
+   "IAUID": "SN2019fdr",
+   "bts_type": "-",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 2333,
+      "text": "AT2019fdr. We thank the anonymous referee for useful",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3197,
+      "text": "ZTF19aatubsj",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3218,
+      "text": "SN2019fdr",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19aavxfib",
+   "IAUID": "AT2019gte",
+   "bts_type": "-",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 3199,
+      "text": "ZTF19aavxfib",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3220,
+      "text": "AT2019gte",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19aaznwze",
+   "IAUID": "SN2019hty",
+   "bts_type": "Ca-rich",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 1480,
+      "text": "Kasliwal et al. 2012) in BTS, only SN 2019hty (De et al.",
+      "window_class_tokens": [
+       "LBV"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abiszzn",
+   "IAUID": "SN2019lud",
+   "bts_type": "SN II",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 1509,
+      "text": "2019lud (II, z=0.049)",
+      "window_class_tokens": [
+       "Ibn"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abiqfxi",
+   "IAUID": "SN2019ltz",
+   "bts_type": "SN II",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 360,
+      "text": "2019ltz (II, z=0.054)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abpbopt",
+   "IAUID": "SN2019neq",
+   "bts_type": "SLSN-I",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 308,
+      "text": "2019neq (SLSN\u2212I, z=0.108) 2019pjw (Ia, z=0.073)",
+      "window_class_tokens": [
+       "SLSN"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abnacvf",
+   "IAUID": "SN2019nhs",
+   "bts_type": "SLSN-I",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 314,
+      "text": "2019nhs (SLSN\u2212I, z=0.190) 2019nvv (Ia, z=0.040)",
+      "window_class_tokens": [
+       "SLSN"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abpxcaf",
+   "IAUID": "SN2019one",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 294,
+      "text": "2019one (Ia, z=0.063)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abpvbzf",
+   "IAUID": "SN2019npx",
+   "bts_type": "SLSN-II",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 346,
+      "text": "14 2019npx (SLSN\u2212II, z=0.057) 2019pdx (Ia, z=0.020)",
+      "window_class_tokens": [
+       "SLSN"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abqanpy",
+   "IAUID": "SN2019nuc",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 304,
+      "text": "2019nuc (Ia, z=0.043)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abqykei",
+   "IAUID": "SN2019obh",
+   "bts_type": "SN IIb",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 386,
+      "text": "2019obh (IIb, z=0.036)",
+      "window_class_tokens": [
+       "IIb"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abqhikf",
+   "IAUID": "SN2019nvv",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 314,
+      "text": "2019nhs (SLSN\u2212I, z=0.190) 2019nvv (Ia, z=0.040)",
+      "window_class_tokens": [
+       "SLSN"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abqqmui",
+   "IAUID": "SN2019ojv",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 298,
+      "text": "2019ojv (Ia, z=0.050)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abpzuzd",
+   "IAUID": "SN2019okb",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 292,
+      "text": "14 2019okb (Ia, z=0.064)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abqrrto",
+   "IAUID": "SN2019oci",
+   "bts_type": "SN Ia-91T",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 306,
+      "text": "2019oci (Ia, z=0.040)",
+      "window_class_tokens": [
+       "SLSN"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abqsvgf",
+   "IAUID": "SN2019odh",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 296,
+      "text": "2019odh (Ia, z=0.054)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abqrhvy",
+   "IAUID": "SN2019odf",
+   "bts_type": "SN II",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 338,
+      "text": "2019odf (II, z=0.032)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abqwtfu",
+   "IAUID": "SN2019odp",
+   "bts_type": "SN Ib",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 320,
+      "text": "2019odp (Ic\u2212BL, z=0.014)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abqqvhd",
+   "IAUID": "SN2019ocu",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 310,
+      "text": "2019ocu (Ia, z=0.040)",
+      "window_class_tokens": [
+       "SLSN"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abqysic",
+   "IAUID": "SN2019omz",
+   "bts_type": "SN Ia-pec",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 316,
+      "text": "2019omz (Ia\u2212pec, z=0.027)",
+      "window_class_tokens": [
+       "SLSN"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abqyoxt",
+   "IAUID": "SN2019oyt",
+   "bts_type": "SN II",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 354,
+      "text": "2019oyt (II, z=0.020)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abrirmk",
+   "IAUID": "SN2019oli",
+   "bts_type": "SN Ib",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 300,
+      "text": "2019oli (Ib, z=0.065)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abqykyd",
+   "IAUID": "SN2019oln",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 419,
+      "text": "14 2019oln (Ia, z=0.080)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abqmsbk",
+   "IAUID": "SN2019orb",
+   "bts_type": "SN Ic",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 370,
+      "text": "2019orb (Ic, z=0.027)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abrmlxu",
+   "IAUID": "SN2019oym",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 312,
+      "text": "2019oym (Ia, z=0.065)",
+      "window_class_tokens": [
+       "SLSN"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abqxibq",
+   "IAUID": "SN2019omd",
+   "bts_type": "SN Ib",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 362,
+      "text": "2019omd (Ib, z=0.082)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abrogbl",
+   "IAUID": "SN2019omi",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 302,
+      "text": "2019omi (Ia, z=0.036)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abqshry",
+   "IAUID": "SN2019oqp",
+   "bts_type": "SN Ic-BL",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 330,
+      "text": "2019oqp (Ic\u2212BL, z=0.031)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abrsssx",
+   "IAUID": "SN2019ons",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 423,
+      "text": "14 2019ons (Ia, z=0.037)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19absfopz",
+   "IAUID": "SN2019ovi",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 344,
+      "text": "2019ovi (Ia, z=0.048)",
+      "window_class_tokens": [
+       "SLSN"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abrvagn",
+   "IAUID": "SN2019plb",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 328,
+      "text": "2019plb (Ia, z=0.075)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abudlps",
+   "IAUID": "SN2019ovr",
+   "bts_type": "SN II",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 342,
+      "text": "2019ovr (II, z=0.013)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abtsrup",
+   "IAUID": "SN2019owu",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 324,
+      "text": "2019owu (Ia, z=0.035)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abuclhk",
+   "IAUID": "SN2019pgv",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 334,
+      "text": "2019pgv (Ia, z=0.050)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abrcvzz",
+   "IAUID": "SN2019pjw",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 308,
+      "text": "2019neq (SLSN\u2212I, z=0.108) 2019pjw (Ia, z=0.073)",
+      "window_class_tokens": [
+       "SLSN"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abwsecm",
+   "IAUID": "SN2019pmd",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 352,
+      "text": "2019pmd (Ia, z=0.022)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abuxhqc",
+   "IAUID": "SN2019pkd",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 322,
+      "text": "2019pkd (Ia, z=0.070)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abuhlxk",
+   "IAUID": "SN2019pdx",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 346,
+      "text": "14 2019npx (SLSN\u2212II, z=0.057) 2019pdx (Ia, z=0.020)",
+      "window_class_tokens": [
+       "SLSN"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abucvgu",
+   "IAUID": "SN2019pbp",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 326,
+      "text": "2019pbp (Ia, z=0.050)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abujhgm",
+   "IAUID": "SN2019pfl",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 350,
+      "text": "2019pfl (Ia, z=0.060)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abvanim",
+   "IAUID": "SN2019pff",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 442,
+      "text": "14 2019pff (Ia, z=0.060)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abvalfd",
+   "IAUID": "SN2019pfe",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 372,
+      "text": "2019pfe (Ia, z=0.031)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abvdbyx",
+   "IAUID": "SN2019pfd",
+   "bts_type": "SN II",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 376,
+      "text": "2019pfd (II, z=0.037)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abvdgqo",
+   "IAUID": "SN2019pfb",
+   "bts_type": "SN Ib",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 427,
+      "text": "14 2019pfb (Ib, z=0.037)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abvhkst",
+   "IAUID": "SN2019pki",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 366,
+      "text": "2019pki (Ia, z=0.068)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abvhduf",
+   "IAUID": "SN2019phj",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 380,
+      "text": "2019phj (Ia, z=0.029)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abupned",
+   "IAUID": "SN2019pgo",
+   "bts_type": "SN Ic-BL",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 438,
+      "text": "14 2019pgo (Ic\u2212BL, z=0.050)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19aburnqh",
+   "IAUID": "SN2019phs",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 332,
+      "text": "2019phs (Ia, z=0.038)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abwztsb",
+   "IAUID": "SN2019pjs",
+   "bts_type": "SN II",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 368,
+      "text": "2019pjs (II, z=0.007)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abwaohs",
+   "IAUID": "SN2019pnw",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 374,
+      "text": "2019pnw (Ia, z=0.070)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abwouqp",
+   "IAUID": "SN2019poc",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 348,
+      "text": "2019poc (Ia, z=0.075)",
+      "window_class_tokens": [
+       "SLSN"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abwswzb",
+   "IAUID": "SN2019pkg",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 394,
+      "text": "2019pkg (Ia, z=0.041)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abxfunp",
+   "IAUID": "SN2019ptv",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 384,
+      "text": "2019ptv (Ia, z=0.038)",
+      "window_class_tokens": [
+       "IIb"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abxihut",
+   "IAUID": "SN2019pmy",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 364,
+      "text": "2019pmy (Ia, z=0.086)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abwsagv",
+   "IAUID": "SN2019pnl",
+   "bts_type": "SN II",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 390,
+      "text": "2019pnl (II, z=0.038)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abvjcii",
+   "IAUID": "SN2019pny",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 336,
+      "text": "2019pny (Ia, z=0.056)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abxfhrq",
+   "IAUID": "SN2019prw",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 382,
+      "text": "2019prw (Ia, z=0.047)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abwscog",
+   "IAUID": "SN2019poe",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 318,
+      "text": "2019poe (Ia, z=0.056)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abxtcio",
+   "IAUID": "SN2019pof",
+   "bts_type": "SN IIb",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 400,
+      "text": "2019pof (IIb, z=0.015)",
+      "window_class_tokens": [
+       "IIb"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abxvles",
+   "IAUID": "SN2019ppe",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 356,
+      "text": "2019ppe (Ia, z=0.064)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abxdnzt",
+   "IAUID": "SN2019pru",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 388,
+      "text": "2019pru (Ia, z=0.044)",
+      "window_class_tokens": [
+       "IIb"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abxdnhr",
+   "IAUID": "SN2019prt",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 358,
+      "text": "2019prt (Ia, z=0.054)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abyigib",
+   "IAUID": "SN2019qff",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 398,
+      "text": "2019qff (Ia, z=0.063)",
+      "window_class_tokens": [
+       "IIb"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abyjjxp",
+   "IAUID": "SN2019qcj",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 392,
+      "text": "2019qcj (Ia, z=0.040)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abxjimu",
+   "IAUID": "SN2019pxo",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 378,
+      "text": "2019pxo (Ia, z=0.018)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abyfbik",
+   "IAUID": "SN2019pyt",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 446,
+      "text": "14 2019pyt (Ia, z=0.065)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abwamby",
+   "IAUID": "SN2019pzt",
+   "bts_type": "SN II",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 340,
+      "text": "2019pzt (II, z=0.050)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19abylxyt",
+   "IAUID": "SN2019qid",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 396,
+      "text": "2019qid (Ia, z=0.053)",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19accjfgv",
+   "IAUID": "SN2019rta",
+   "bts_type": "SN IIb",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 1526,
+      "text": "2019rta (IIb, z=0.027)",
+      "window_class_tokens": [
+       "IIb"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19acdsqir",
+   "IAUID": "SN2019sxd",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 3200,
+      "text": "ZTF19acdsqir",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3221,
+      "text": "SN2019sxd",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19acoaiub",
+   "IAUID": "AT2019udc",
+   "bts_type": "ILRT",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 3202,
+      "text": "ZTF19acoaiub",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3223,
+      "text": "AT2019udc",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19acnfsij",
+   "IAUID": "AT2019uiz",
+   "bts_type": "nova",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 3201,
+      "text": "ZTF19acnfsij",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3222,
+      "text": "ST2019uiz",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19acrwyyb",
+   "IAUID": "SN2019uqu",
+   "bts_type": "SN Ibn",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 1511,
+      "text": "2019uqu (Ibn, z=0.052)",
+      "window_class_tokens": [
+       "Ibn"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF19adakuos",
+   "IAUID": "AT2019wvf",
+   "bts_type": "nova",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 3203,
+      "text": "ZTF19adakuos",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3224,
+      "text": "AT2019wvf",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF20aaertpj",
+   "IAUID": "AT2020pv",
+   "bts_type": "SN Ib",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 3204,
+      "text": "ZTF20aaertpj",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3225,
+      "text": "AT2020pv",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF20aaeuxqk",
+   "IAUID": "SN2020ut",
+   "bts_type": "SN Ia",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 3205,
+      "text": "ZTF20aaeuxqk",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3226,
+      "text": "SN2020ut",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF20aamttiw",
+   "IAUID": "SN2020cpa",
+   "bts_type": "SN II",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 1513,
+      "text": "2020cpa (II, z=0.045)",
+      "window_class_tokens": [
+       "IIn",
+       "Ibn"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF20aapchqy",
+   "IAUID": "SN2020cxd",
+   "bts_type": "SN II",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 1272,
+      "text": "2020cxd",
+      "window_class_tokens": []
+     },
+     {
+      "line": 1450,
+      "text": "Some low-luminosity events are clearly SNe themselves. SN2020cxd at Mpeak = \u221214.1 mag is the most",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF20abfhyil",
+   "IAUID": "SN2020mrf",
+   "bts_type": "-",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 3273,
+      "text": "ZTF20abfhyil",
+      "window_class_tokens": []
+     },
+     {
+      "line": 3275,
+      "text": "SN2020mrf",
+      "window_class_tokens": []
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF20abjbgjj",
+   "IAUID": "SN2020ntt",
+   "bts_type": "SN II",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 1515,
+      "text": "2020ntt (IIn, z=0.074)",
+      "window_class_tokens": [
+       "IIn"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "ZTFID": "ZTF20abkiarz",
+   "IAUID": "SN2020oce",
+   "bts_type": "SN Ic",
+   "agent1_source": "sources/2009.01242.raw.txt",
+   "hits": {
+    "sources/2009.01242.raw.txt": [
+     {
+      "line": 2193,
+      "text": "and SN 2020oce, representing 1% of the sample) are",
+      "window_class_tokens": [
+       "other"
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "wave2_seeds": [
+  {
+   "ZTFID": "ZTF18aaunfqq",
+   "IAUID": "SN2018lpb",
+   "bts_type": "SN Ia",
+   "seed": "2401.15167",
+   "hits": [
+    {
+     "line": 1189,
+     "text": "ZTF18aaunfqq",
+     "window_class_tokens": []
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF18aaxmhvk",
+   "IAUID": "SN2018cne",
+   "bts_type": "SN Ia",
+   "seed": "2104.12980",
+   "hits": [
+    {
+     "line": 812,
+     "text": "In the validation set, ZTF18aaxmhvk (SN 2018cne;",
+     "window_class_tokens": []
+    },
+    {
+     "line": 817,
+     "text": "rlap values. However, the lightcurve of ZTF18aaxmhvk",
+     "window_class_tokens": [
+      "SN Ia",
+      "SNe Ia",
+      "SNe Ic"
+     ]
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF20acjlkpe",
+   "IAUID": "SN2020xcz",
+   "bts_type": "SN Ia",
+   "seed": "2401.15167",
+   "hits": [
+    {
+     "line": 422,
+     "text": "for the light curve of ZTF20acjlkpe. Teal (g-band) and red",
+     "window_class_tokens": []
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF21aastazz",
+   "IAUID": "SN2021ijb",
+   "bts_type": "SN Ia",
+   "seed": "2104.12980",
+   "hits": [
+    {
+     "line": 877,
+     "text": "was sent for SN 2021ijb (SNIascore 2021). This report",
+     "window_class_tokens": [
+      "SN Ia"
+     ]
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF21acjvgxg",
+   "IAUID": "SN2021adgw",
+   "bts_type": "SN Ia",
+   "seed": "2401.15167",
+   "hits": [
+    {
+     "line": 1184,
+     "text": "ZTF21acjvgxg",
+     "window_class_tokens": []
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF23aaxtplp",
+   "IAUID": "SN2023phn",
+   "bts_type": "SN II",
+   "seed": "2401.15167",
+   "hits": [
+    {
+     "line": 1505,
+     "text": "by CVs and AGN but do include other sources like asteroids. One of the FNs (ZTF23aaxtplp) has an extremely bright host galaxy and is projected very near to",
+     "window_class_tokens": [
+      "AGN",
+      "other"
+     ]
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF23abbccir",
+   "IAUID": "SN2023rky",
+   "bts_type": "SN II",
+   "seed": "2412.08601",
+   "hits": [
+    {
+     "line": 806,
+     "text": "supernova, SN 2023rky \u2013 a Type IIL (that have a similar light curve shape to H-poor SNe), 1 does not show",
+     "window_class_tokens": []
+    },
+    {
+     "line": 809,
+     "text": "from SN 2023rky, 2 do not show H\u03b1 emission and 4",
+     "window_class_tokens": []
+    },
+    {
+     "line": 810,
+     "text": "are genuine mistakes. For case SLD, 6 out of 8 misclassifications are from SN 2023rky and the remaining 2",
+     "window_class_tokens": []
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF23abeuope",
+   "IAUID": "SN2023tgn",
+   "bts_type": "SN Ia",
+   "seed": "2401.15167",
+   "hits": [
+    {
+     "line": 1506,
+     "text": "its nucleus. The other FN (ZTF23abeuope) shows two",
+     "window_class_tokens": [
+      "AGN",
+      "other"
+     ]
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF23abijnsm",
+   "IAUID": "SN2023vcx",
+   "bts_type": "SN Ia",
+   "seed": "2401.15167",
+   "hits": [
+    {
+     "line": 1589,
+     "text": "SN 2023vcx, SN 2023uty, SN 2023vtp, SN 2023vpd,",
+     "window_class_tokens": [
+      "Type Ia"
+     ]
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF18aafdigb",
+   "IAUID": "SN2023uxa",
+   "bts_type": "SN Ia",
+   "seed": "2401.15167",
+   "hits": [
+    {
+     "line": 1588,
+     "text": "by SNIascore: SN 2023vcz, SN 2023uxa, SN 2023uti,",
+     "window_class_tokens": [
+      "Type Ia"
+     ]
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF23abjexnw",
+   "IAUID": "SN2023vcz",
+   "bts_type": "SN Ia",
+   "seed": "2401.15167",
+   "hits": [
+    {
+     "line": 1588,
+     "text": "by SNIascore: SN 2023vcz, SN 2023uxa, SN 2023uti,",
+     "window_class_tokens": [
+      "Type Ia"
+     ]
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF23abjzkqu",
+   "IAUID": "SN2023uti",
+   "bts_type": "SN Ia",
+   "seed": "2401.15167",
+   "hits": [
+    {
+     "line": 1588,
+     "text": "by SNIascore: SN 2023vcz, SN 2023uxa, SN 2023uti,",
+     "window_class_tokens": [
+      "Type Ia"
+     ]
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF23abjxqwr",
+   "IAUID": "SN2023vtp",
+   "bts_type": "SN Ia-91T",
+   "seed": "2401.15167",
+   "hits": [
+    {
+     "line": 1589,
+     "text": "SN 2023vcx, SN 2023uty, SN 2023vtp, SN 2023vpd,",
+     "window_class_tokens": [
+      "Type Ia"
+     ]
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF23ablpfnb",
+   "IAUID": "SN2023vpd",
+   "bts_type": "SN Ia",
+   "seed": "2401.15167",
+   "hits": [
+    {
+     "line": 1589,
+     "text": "SN 2023vcx, SN 2023uty, SN 2023vtp, SN 2023vpd,",
+     "window_class_tokens": [
+      "Type Ia"
+     ]
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF23abkkajk",
+   "IAUID": "SN2023vwz",
+   "bts_type": "SN Ia",
+   "seed": "2401.15167",
+   "hits": [
+    {
+     "line": 1590,
+     "text": "SN 2023vip, SN 2023vwz, SN 2023wts, SN 2023xms,",
+     "window_class_tokens": [
+      "other"
+     ]
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF23abnydbs",
+   "IAUID": "SN2023wts",
+   "bts_type": "SN Ia",
+   "seed": "2401.15167",
+   "hits": [
+    {
+     "line": 1590,
+     "text": "SN 2023vip, SN 2023vwz, SN 2023wts, SN 2023xms,",
+     "window_class_tokens": [
+      "other"
+     ]
+    }
+   ]
+  },
+  {
+   "ZTFID": "ZTF18aaeqjmc",
+   "IAUID": "SN2023xhc",
+   "bts_type": "SN Ia",
+   "seed": "2401.15167",
+   "hits": [
+    {
+     "line": 1591,
+     "text": "SN 2023xhc, SN 2023xkq.",
+     "window_class_tokens": [
+      "other"
+     ]
+    }
+   ]
+  }
+ ]
+}

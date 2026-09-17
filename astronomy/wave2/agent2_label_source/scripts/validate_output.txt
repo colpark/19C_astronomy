@@ -1,0 +1,13 @@
+PASS label_source_slot.json (provenance fields via validate.prov)
+PASS /home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent2_label_source/provenance_records.json
+one-slot domain_manifest stub (expected FAIL on slots owned by other agents / D5):
+FAIL /home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave2/agent2_label_source/scripts/_manifest_stub.json
+  - missing or empty 'tau'
+  - missing or empty 'k'
+  - missing or empty 'exposure_key'
+  - missing or empty 'tool_inventory'
+  - missing or empty 'delta'
+  - missing or empty 'S'
+  - missing or empty 'subject_set'
+  - missing or empty 'frozen_hash'
+  - completeness assertion too thin to name what was covered and what was not

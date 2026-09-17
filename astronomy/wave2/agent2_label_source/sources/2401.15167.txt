@@ -1,0 +1,1602 @@
+                                                  Draft version January 30, 2024
+                                                  Typeset using LATEX twocolumn style in AASTeX631
+
+
+
+
+                                                  The Zwicky Transient Facility Bright Transient Survey. III. BTSbot: Automated Identification and
+                                                                        Follow-up of Bright Transients with Deep Learning
+                                                   Nabeel Rehemtulla ,1, 2 Adam A. Miller ,1, 2 Theophile Jegou Du Laz ,3 Michael W. Coughlin ,4
+                                                          Christoffer Fremling ,3, 5 Daniel A. Perley ,6 Yu-Jing Qin ,3 Jesper Sollerman ,7
+                                                Ashish A. Mahabal ,3, 8 Russ R. Laher ,9 Reed Riddle ,5 Ben Rusholme ,9 and Shrinivas R. Kulkarni                                 3
+
+                                                         1 Department of Physics and Astronomy, Northwestern University, 2145 Sheridan Road, Evanston, IL 60208, USA
+                                                  2 Center for Interdisciplinary Exploration and Research in Astrophysics (CIERA), 1800 Sherman Ave., Evanston, IL 60201, USA
+arXiv:2401.15167v1 [astro-ph.IM] 26 Jan 2024
+
+
+
+
+                                                     3 Division of Physics, Mathematics, and Astronomy 249-17, California Institute of Technology, Pasadena, CA 91125, USA
+                                                                 4 School of Physics and Astronomy, University of Minnesota, Minneapolis, Minnesota 55455, USA
+                                                                   5 Caltech Optical Observatories, California Institute of Technology, Pasadena, CA 91125, USA
+                                               6 Astrophysics Research Institute, Liverpool John Moores University, IC2, Liverpool Science Park, 146 Brownlow Hill, Liverpool L3 5RF,
+
+                                                                                                                UK
+                                                        7 Department of Astronomy, The Oskar Klein Center, Stockholm University, AlbaNova, SE-10691 Stockholm, Sweden
+                                                                 8 Center for Data Driven Discovery, California Institute of Technology, Pasadena, CA 91125, USA
+                                                                   9 IPAC, California Institute of Technology, 1200 E. California Blvd, Pasadena, CA 91125, USA
+
+
+
+                                                                                                           ABSTRACT
+                                                           The Bright Transient Survey (BTS) aims to obtain a classification spectrum for all bright (mpeak ≤
+                                                        18.5 mag) extragalactic transients found in the Zwicky Transient Facility (ZTF) public survey. BTS
+                                                        critically relies on visual inspection (“scanning”) to select targets for spectroscopic follow-up, which,
+                                                        while effective, has required a significant time investment over the past ∼5 yr of ZTF operations. We
+                                                        present BTSbot, a multi-modal convolutional neural network, which provides a bright transient score
+                                                        to individual ZTF detections using their image data and 25 extracted features. BTSbot is able to
+                                                        eliminate the need for daily human scanning by automatically identifying and requesting spectroscopic
+                                                        follow-up observations of new bright transient candidates. BTSbot recovers all bright transients in our
+                                                        test split and performs on par with scanners in terms of identification speed (on average, ∼1 hour
+                                                        quicker than scanners). We also find that BTSbot is not significantly impacted by any data shift by
+                                                        comparing performance across a concealed test split and a sample of very recent BTS candidates.
+                                                        BTSbot has been integrated into Fritz and Kowalski, ZTF’s first-party marshal and alert broker, and
+                                                        now sends automatic spectroscopic follow-up requests for the new transients it identifies. During the
+                                                        month of October 2023, BTSbot selected 296 sources in real-time, 93% of which were real extragalactic
+                                                        transients. With BTSbot and other automation tools, the BTS workflow has produced the first fully
+                                                        automatic end-to-end discovery and classification of a transient, representing a significant reduction
+                                                        in the human-time needed to scan. Future development has tremendous potential for creating similar
+                                                        models to identify and request follow-up observations for specific types of transients.
+
+
+                                                        Keywords: Time domain astronomy (2109) — Sky surveys (1464) — Supernovae (1668) — Convolu-
+                                                                  tional neural networks (1938)
+
+                                                                  1. INTRODUCTION                                     2019; Dekany et al. 2020; Masci et al. 2019) have made
+                                                 Large,    wide-field surveys like Pan-STARRS                         immense contributions to time-domain astronomy by
+                                               (Panoramic Survey Telescope and Rapid Response Sys-                    repeatedly imaging the entire night sky. Some surveys
+                                               tem; Kaiser et al. 2002), ASAS-SN (All-Sky Automated                   interface with the community through the output of
+                                               Survey for Supernovae; Shappee et al. 2014), ATLAS                     an alert stream. Alert packets comprising the stream
+                                               (Asteroid Terrestrial Last-Alert System; Tonry 2011;                   are intended to notify the community of the statisti-
+                                               Tonry et al. 2018; Smith et al. 2020), and ZTF (Zwicky                 cally significant brightening or dimming of some source
+                                               Transient Facility; Bellm et al. 2019a,b; Graham et al.                with respect to a historical reference image. The alert
+                                                                                                                      stream provides time-series for a wide range of astro-
+2
+
+physical, and non-astrophysical, phenomena. We are            Sánchez et al. 2018; Duev et al. 2019; Walmsley et al.
+interested in the study of supernovae (SNe) using these       2020). CNNs are particularly well suited to astronomy
+alert streams, although only a small fraction of alerts in    because they can capture properties, like galaxy mor-
+the unfiltered stream originate from genuine SNe. Thus,       phology, which often remain largely obscured to other
+alert filters are deployed to identify candidate sources of   image processing techniques (Walmsley et al. 2019).
+interest. It is practically impossible to design an alert     Only a very small subset of these CNNs are multi-modal,
+filter that rejects every irrelevant alert and accepts all    meaning they take in images and input of another type,
+alerts related to sources of interest. Therefore, manual      like extracted features or a light curve (e.g., van Roestel
+candidate vetting, or “scanning,” of the filtered alerts      et al. 2021; Duev & van der Walt 2021; Carrasco-Davis
+is required. The term scanning can refer to different         et al. 2021; Morgan et al. 2022, 2023; Stoppa et al. 2023).
+actions depending on the relevant survey and science          We have developed a multi-modal CNN (MM-CNN) to
+case, but, in general, scanning has been used extensively     automate scanning for a filtered stream from ZTF.
+and very successfully in the SN community to identify            The Bright Transient Survey (BTS; Fremling et al.
+SNe for follow-up observations and further study.             2020; Perley et al. 2020) aims to spectroscopically clas-
+   The nightly data rate of the Vera C. Rubin Ob-             sify all bright (mpeak ≤ 18.5 mag in g- or r-band) ex-
+servatory’s Legacy Survey of Space and Time (LSST;            tragalactic transients1 from the ZTF public alert stream
+Ivezić et al. 2019) will significantly surpass our collec-   (Patterson et al. 2019). The ZTF public survey produces
+tive capacity for human scanning. Previous and ongo-          > 105 alert packets per night (Mahabal et al. 2019). The
+ing surveys employ machine learning (ML) techniques           majority of these are from variable sources or are bogus
+for real/bogus classification (e.g., Bailey et al. 2007;      alerts, those arising from non-astrophysical phenomena.
+Bloom et al. 2012; Brink et al. 2013; Wright et al. 2015;     The BTS alert filter (Perley et al. 2020) removes from
+Goldstein et al. 2015; Cabrera-Vives et al. 2017; Maha-       consideration most bogus alerts and many alerts from
+bal et al. 2019; Duev et al. 2019; Turpin et al. 2020;        asteroids, active galactic nuclei (AGN), cataclysmic vari-
+Killestein et al. 2021), and adopting ML will be near-        ables (CVs), variable stars (VarStars), and alerts from
+compulsory to efficiently extract knowledge from the          sources with m > 19.0 mag in g- and r-band. This fil-
+next generation of surveys.                                   ter makes use of braai (Duev et al. 2019) and sgscore
+   Beyond real/bogus classification, ML models have also      (Tachibana & Miller 2018) to filter the stream down to
+been applied to a variety of tasks in astronomy including     ∼50 new candidate BTS sources per night, of which ∼7
+photometric transient classification (e.g., Boone 2019;       are new real bright transients. The other BTS candi-
+Muthukrishna et al. 2019; Hosseinzadeh et al. 2020; Vil-      dates are mostly dim (mpeak > 18.5 mag) SNe or AGN,
+lar et al. 2019, 2020; Gagliano et al. 2023), photomet-       CVs, and VarStars that were not removed by the alert
+ric redshift estimation (e.g., Carrasco Kind & Brunner        filter. All nightly BTS candidates are scanned by ex-
+2013; Sadeh et al. 2016; Pasquet et al. 2019), and many       perts (“scanners”) who catalog (“save”) the real bright
+others. Some have also been developed to, in part, re-        transients and request spectroscopic observations for
+duce scanning load by encoding phenomenological or            classification. Scanning is performed on Fritz,2 ZTF’s
+taxonomic information of a source in their model’s out-       first party marshal and a SkyPortal instance (van der
+put (e.g., Bailey et al. 2007; Duev & van der Walt 2021;      Walt et al. 2019; Coughlin et al. 2023). BTS primarily
+Carrasco-Davis et al. 2021; Gomez et al. 2020, 2023;          executes its follow-up observations with robotic spec-
+Stein et al. 2023).                                           trographs like the SED machine (SEDM; Blagorodnova
+   For the most part, ML models in astronomy perform          et al. 2018; Rigault et al. 2019; Kim et al. 2022), and,
+their tasks using extracted numeric features with archi-      soon, the SED machine Kitt Peak3 (SEDM-KP). The
+tectures like random forests (Breiman 2001), or fully-        resulting classifications, whether assigned automatically
+connected neural networks (McCulloch & Pitts 1943;            by SNIascore (Fremling et al. 2021) or manually by a
+LeCun et al. 2015). While appropriate in some cases,          scanner, are promptly reported to the public via the
+limiting these models to extracted features alone ignores
+potentially valuable information present in the images          1 Henceforth, we use “supernova” and “transient” interchangeably
+from which the features are extracted. A comparatively            with “extragalactic transient.” These are not equivalent, but it
+small number of convolutional neural networks (CNNs;              simplifies the prose.
+Fukushima & Miyake 1982) have been built that make              2 https://github.com/fritz-marshal/fritz
+
+use of the information embedded in astronomical im-             3 https://sites.astro.caltech.edu/sedmkp/
+
+ages, and they have generally had great success (e.g.,
+Dieleman et al. 2015; Lanusse et al. 2018; Domı́nguez
+                                                                                                                               3
+
+Transient Name Server4 (TNS), as visualized in Fig-                   sified, and publicly reported: SN 2023tyk (Rehemtulla
+ure 1.                                                                et al. 2023b). Zero human action was involved from
+   The BTS catalog is available online5 and is updated in             the first detection to the publicly reported spectroscopic
+real-time. Since its origin in May 2018, BTS has main-                classification. Combining complementary ML models al-
+tained exceptionally high spectroscopic completeness of               lows for the automation of a significant fraction of the
+relevant sources (95.4%6 ), and BTS serves the commu-                 tasks necessary to maintain BTS. This has the side-effect
+nity by rapidly releasing their classifications to the pub-           of freeing up time otherwise spent on repetitive, well-
+lic. As of October 2023, the BTS sample contains more                 understood tasks, allowing for the better allocation of
+than 8,300 publicly classified SNe.                                   expert time and resources. We make the BTSbot source
+   BTS enables a large amount of science, notably includ-             code and trained model publicly available on GitHub
+ing some of the largest SN population studies conducted               (https://github.com/nabeelre/BTSbot).
+to date (e.g., Perley et al. 2020; Irani et al. 2022; Sharon
+& Kushnir 2022; Sollerman et al. 2022; Rodrı́guez et al.                               2. TRAINING DATA
+2023; Cold & Hjorth 2023; Sharma et al. 2023). The sur-
+                                                                         The quality of an ML model’s training set is a key
+vey also provides unique discoveries (e.g., Goobar et al.
+                                                                      factor in determining its performance. ML models, es-
+2023; Yang et al. 2021) and is paving the way for using
+                                                                      pecially deep learning models like BTSbot, are known
+SNe to study large scale structure (Tsaprazi et al. 2022).
+                                                                      to behave unpredictably when exposed to data un-
+   Our new model, BTSbot, enables the automation of
+                                                                      like what they were trained on (Szegedy et al. 2013;
+scanning and spectroscopic follow-up for BTS by per-
+                                                                      Hendrycks & Gimpel 2016). Thus, a model’s training
+forming binary classification: bright transient / not
+                                                                      set must be fully representative of the model’s input
+bright transient. BTSbot produces a unit-interval bright
+                                                                      domain. BTSbot’s domain is ZTF alert packets from
+transient score for an input ZTF Avro7 alert packet
+                                                                      BTS candidates. These alerts come from SNe, AGN,
+(Masci et al. 2019; Patterson et al. 2019) augmented
+                                                                      CVs, VarStars, novae in very nearby systems, and a
+with some custom metadata features. It is trained to
+                                                                      small number of other miscellaneous events including
+run only on alerts from sources with at least one alert
+                                                                      bogus alerts of many types (e.g., those due to poor im-
+passing the BTS alert filter (candidate BTS sources),
+                                                                      age subtractions, high proper motion stars, saturated
+the same alerts which are provided to scanners. From
+                                                                      stars, etc.). We compile an extensive list of ZTF identi-
+image cutouts and extracted features, BTSbot must si-
+                                                                      fiers (ZTF-IDs) for sources that fall into these categories
+multaneously separate transients from variable sources
+                                                                      by drawing from a number of repositories. With these
+and, while m > 18.5 mag, predict whether or not the
+                                                                      selections, we fully represent the wide variety of astro-
+source will attain mpeak ≤ 18.5 mag.
+                                                                      physical phenomena BTSbot is exposed to in production.
+   BTSbot is now integrated into Kowalski (Duev et al.
+                                                                         An internal version of the BTS Sample Explorer is
+2019; Coughlin et al. 2023), ZTF’s first-party alert
+                                                                      the most significant contributor to our initial list of
+broker, and Fritz, where BTSbot has now entered
+                                                                      ZTF-IDs. This internal BTS Sample Explorer operates
+the BTS workflow. BTSbot is able to automatically
+                                                                      identically to the public-facing version presented in Ap-
+save sources to BTS catalogs and conditionally trig-
+                                                                      pendix F of Perley et al. 2020, but it adds information
+ger SEDM/SEDM-KP. BTSbot joins a rich collection of
+                                                                      from internal ZTF catalogs. One of these catalogs is
+ML models and automation tools central to daily BTS
+                                                                      assembled by scanning an alert filter nearly identical
+operations, namely braai (Duev et al. 2019), sgscore
+                                                                      to the BTS alert filter but altered to include sources
+(Tachibana & Miller 2018), pySEDM (Rigault et al. 2019),
+                                                                      with 19 < mpeak [mag] < 19.8. Although these are not
+and SNIascore (Fremling et al. 2021). Together, this
+                                                                      strictly BTS candidates, we allow them into the training
+workflow has yielded the first transient to be fully au-
+                                                                      set to increase the number of faint alerts.
+tomatically detected, identified, spectroscopically clas-
+                                                                         We draw from these catalogs with three queries.
+                                                                      The first query, “trues” for short, selects bright
+  4 https://www.wis-tns.org
+                                                                      (mpeak ≤ 18.5 mag) spectroscopically confirmed extra-
+  5 https://sites.astro.caltech.edu/ztf/bts
+                                                                      galactic transients that pass the purity cut (i.e. have a
+  6 Computed for sources passing the BTS alert filter with m
+                                                            peak ≤    galaxy cross-match or a SN-like light curve, see Sec. 2.4
+    18.5 mag, good light curve coverage, and displaying a SN-like
+                                                                      of Perley et al. 2020 for details). These bright confirmed
+    light curve or a galaxy cross-match from May 2018 to September
+    2023. We adopt this value for the BTS sample completeness         transients make up the entire positive/true class of our
+    henceforth. See Perley et al. (2020) for detailed definition of   training set. The second query, “vars” for short, se-
+    sample cuts.                                                      lects any source classified as an AGN, CV, or quasar
+  7 https://avro.apache.org
+                                                                      (QSO) in any of the internal BTS catalogs. These
+4
+
+
+
+
+Figure 1. Diagram of the BTS workflow. The BTS alert filter ingests the ZTF public survey alert stream and, using upstream
+tools like braai and sgscore, removes bogus alerts, dim sources, and sources that are trivially not bright transients. Selection
+of real bright transients from the pool of candidates is done by visual inspection (“scanning”); in this study we develop an ML-
+based alternative: BTSbot. The selected bright transients receive spectroscopic follow-up and classification, and are promptly
+reported to the public.
+
+
+sources are all considered non-transients or are not ex-                    pass the BTS alert filter between January 1st 2021 and
+tragalactic and thus are part of the negative/false class                   January 1st 2023 UTC9 . Many candidates from before
+regardless of their peak magnitude. The third query,                        January 1st 2021 encountered earlier versions of the BTS
+“dims” for short, selects any source that passes the pu-                    alert filter, which was last improved in late 2020; many
+rity cut with pre- and post-peak light curve coverage (see                  candidates from after January 1st 2023 were still evolv-
+Sec. 2.3 of Perley et al. 2020 for coverage definitions)                    ing at the time the sources were queried and thus have
+and mpeak > 18.5 mag. This is designed to broadly se-                       potentially uncertain types. By not saving them, scan-
+lect dim SNe, which, because of their peak magnitudes,                      ners implicitly mark these sources as non-bright tran-
+are part of the negative class. The dims query is domi-                     sients and thus part of our negative class. This as-
+nated by SNe but also includes a small number of other                      sumption is reasonable given BTS’s very high photo-
+sources, e.g., tidal disruption events, CVs, asteroids,                     metric completeness. An extremely small fraction of the
+VarStars, etc. The requirement of pre- and post-peak                        sources in the rejects list may be bright transients and
+light curve coverage is added to avoid selecting bright                     inject a small amount of label noise into our training
+SNe with poor photometric coverage near peak, which                         set, but we find that this effect, if present at all, is small
+could then appear as having dimmer peak magnitudes.                         enough to be ignored.
+Because peak magnitudes presented on the BTS sample                            There is an additional population of BTS candidates,
+explorer are computed from public data alone, there is                      which we do not include in our training set: “junk” for
+a small population of sources which, due to alerts from                     short. These sources, which frequently pass the BTS
+partnership data, have mpeak ≤ 18.5 mag but appear in                       alert filter, have been identified by scanners to clearly
+dims. These are all removed entirely from the training                      not be bright transients. They are mostly AGN and
+set because many of them are unclassified.8 By defi-                        VarStars but also include smaller numbers of sources
+nition, neither vars nor dims overlap with trues, but                       like high-proper motion stars and long-lived CVs. Ex-
+the imperfect nature of the selections done for vars and                    periments trained on these sources frequently yielded
+dims creates some overlap between the two. Sources                          worse performance than equivalent models which ex-
+in the overlap are removed from dims and kept only in                       cluded them. Some sources selected by our other queries
+vars.                                                                       are also cataloged in junk ; these sources remain in
+   Any source queried from the BTS Sample Explorer                          the other query and are not removed with other junk
+was once marked as a bright transient by a human scan-                      sources.
+ner. While we do build a sizeable list of non-bright tran-                     Once we have a list of ZTF-IDs and their correspond-
+sients saved by the human scanners, there is a miss-                        ing labels, we query Kowalski to retrieve all alert pack-
+ing population of BTS candidates that are never saved.                      ets from each source. BTS only uses data from the ZTF
+Our fourth query, “rejects” for short, represents these                     public survey, but we include data from partnership time
+sources. This list is limited to sources with alerts that                   to increase the size of our training set. We arrange the
+                                                                            science, reference, and difference image cutouts of each
+    8 These were identified after the test split was revealed so, to pre-
+                                                                            alert packet to form a 63×63×3 image, or a triplet. Im-
+     serve the same splits, they are removed after train/validation/test
+     splitting is performed.                                                  9 All dates and times here are in UTC unless otherwise specified.
+                                                                                                                                           5
+
+   Table 1. Training set size before/after cleaning cuts                                      17.5
+
+
+
+
+                                                                         Apparent Magnitude
+ Name of Query        Number of Sources      Number of Alerts
+                                                                                              18.0
+                          Initial queries
+     trues a                  5,212                 308,934                                   18.5                         age=15.9 days
+      vars b                 1,127                  150,017                                                      days to peak=11.9 days
+      dims c                 8,979                  249,087                                   19.0              days since peak=4.0 days
+     rejects d              4,417                   407,357
+      Total                19,735                  1,115,395
+                                                                                              19.5
+                      Cleaned training set
+     trues a                5,206                   264,317
+                                                                                              20.0
+      vars b                 1,126                  109,934                                          −12   −8     −4        0       4
+      dims c                 8,824                  223,934
+                                                                                                           Days since peak
+     rejects d               4,402                  241,478
+      Total                 19,558                  839,663          Figure 2. Custom metadata feature definitions depicted
+a Spectroscopically confirmed bright (m            ≤ 18.5 mag) ex-   for the light curve of ZTF20acjlkpe. Teal (g-band) and red
+                                            peak
+ tragalactic transients.                                             (r-band) circles indicate detections. days to peak (purple),
+                                                                     days since peak (green), age (navy), peakmag so far (up-
+b Sources classified as AGN, CVs, VarStars, or QSOs.
+                                                                     per dashed gray), and maxmag so far (lower dashed gray)
+c Dim (m                                                             are presented for the latest detection shown. Together, these
+           peak   > 18.5 mag) sources with transient-like light
+                                                                     features make simplified information of the light curve phase
+ curves.
+d Sources not marked as bright extragalactic transients by           and shape available to BTSbot (shown as the orange line,
+                                                                     which assumes that maxmag so far corresponds to the first
+ BTS scanners.                                                       detection).
+Note—Alerts are removed from the training set if they (i)
+ have a corrupted image cutout; (ii) come from a source with
+ an ambiguous label; (iii) are missing Pan-STARRS1 cross-
+                                                                     The feature days to peak encodes the number of days
+ match information; (iv) are an i-band observation; (v) have
+ a negative difference image; or (vi) come from a source with        from the first alert to the alert with the brightest magni-
+ a transient present in the reference image.                         tude thus far for the source in question. Closely related
+                                                                     is days since peak, which represents the number of
+                                                                     days from the current alert to the alert with the brightest
+                                                                     magnitude. The sum of these quantities is the age. The
+                                                                     features peakmag so far and maxmag so far encode the
+age cutouts are individually normalized with Euclidean-
+                                                                     brightest and dimmest magnitude of all alert packets
+normalization10 ; pixels in masked regions are uniformly
+                                                                     from this source thus far; peakmag so far is particu-
+given values of 0; cutouts smaller than 63 × 63 (due to
+                                                                     larly crucial for correctly classifying late-time alerts of
+being near the edge of a CCD) are padded to 63 × 63
+                                                                     SNe because BTSbot would otherwise have almost no in-
+with pixels of value 10−9 . This image pre-processing is
+                                                                     formation on the brightness history of the source. These
+identical to braai’s (Duev et al. 2019). Some cutouts
+                                                                     features are shown over an example light curve in Fig-
+have pixel values uniformly set to NaN or exactly zero.
+                                                                     ure 2. They clearly do not recover the light curve per-
+These cutouts are corrupted, and alerts with any cor-
+                                                                     fectly, but they are adopted because of their simplic-
+rupted cutouts are removed. The distribution of alerts
+                                                                     ity and effectiveness across a very large variety of light
+and sources in the training set at this stage is shown in
+                                                                     curves. We find that giving BTSbot high-level informa-
+Table 1 under the initial queries header.
+                                                                     tion on the source’s current phase and the rough shape
+                                                                     of its light curve with these features yields a significant
+  We then augment the alert packets with custom meta-
+                                                                     boost in performance. Many methods exist to more
+data features that are not already present in the ZTF
+                                                                     faithfully represent SNe light curves, but many are not
+Avro alert packets: days to peak, days since peak,
+                                                                     conditioned to model light curves of the other sources
+age, peakmag so far, maxmag so far, and nnondet.
+                                                                     in BTSbot’s domain, e.g. AGN, VarStars, and others.
+                                                                     Notably, these features are defined for all sources with
+  10 Also called L2 -normalization.                                  as few as one detection or detections in only one pho-
+                                                                     tometric passband. One could extract more informa-
+6
+
+tion from the light curve by decoupling these features                                                         Bright transients
+to passband-dependent equivalents, however, this would                         0.015                           Nmax = 100
+create instances of alerts having missing features poten-
+
+
+
+
+                                                                 Probability
+tially compromising the model’s performance. Lastly,
+                                                                               0.010
+the feature nnondet is an estimation of the number
+of non-detections at the source’s location. This fea-
+ture was used in the ALeRCE real-time stamp classi-                            0.005
+fier (Carrasco-Davis et al. 2021) and was found to have
+high importance for distinguishing alerts between their
+                                                                               0.000
+five classes; we find that including it similarly boosts                                                       Dim transient–like
+BTSbot’s performance.                                                               0.03                       BTS Rejects
+   All of these features are computed for each alert packet                                                    Variables
+from its perspective, i.e., only using information already                                                     Nmax = 100
+
+
+
+
+                                                                      Probability
+available at the time the alert packet was created, in-                             0.02
+
+cluding alerts from before each source passed the BTS
+alert filter. Additionally, some alerts were created be-                            0.01
+fore the latest version of braai went into production
+and thus have a deep real-bogus score (drb) from an
+outdated version of braai or no drb at all. We rerun                                0.00 0
+                                                                                       10       101          102            103
+all alert packets through the d6 m9 version of braai and                                     Number of alerts per source
+replace all drb scores with these new scores.
+   Next, we clean our training set with a series of cuts.     Figure 3. Gaussian kernel density estimations showing the
+First, we remove alerts from i-band observations and          number of alerts per source for each query comprising our
+alerts with negative difference images. The i-band alerts     cleaned training set. Top: positive class examples; Bot-
+                                                              tom: negative class examples. Sources with many alerts are
+are removed primarily because BTS draws from the ZTF
+                                                              thinned down to Nmax = 100 alerts per source. This prevents
+public survey, which only takes observations in g- and        long-lived sources like AGN (in Variables) and bright SNe (in
+r-band. Negative difference images are identified using       Bright transients) from being over-represented in training.
+the isdiffpos flag included in the ZTF alert packets.
+Alerts with negative difference images are removed be-
+cause they frequently represent instances of SNe or other     sources like binary stars, AGN, and high-proper motion
+transients visible in the reference image: a configuration    stars.
+different than what is typical for an alert. As an extra         We employ standard practices for splitting the full
+precaution, we compile a list of sources with SNe present     training set into train, validation, and test splits. We
+in the reference images and remove them from the train-       randomly assign sources to these splits with probabili-
+ing set. Additionally, some sources fit into neither or       ties of 81%, 9%, and 10% respectively11 . This splitting is
+both of our classes and are correspondingly removed           done on sources rather than alerts to prevent any source
+from our training set. For example, ZTF18abdiasx ap-          from having alerts in multiple splits, which would pro-
+pears to be a bright supernova projected on top of an         duce a validation and test bias that overestimates the
+AGN, and thus fits in both of our classes so it is re-        true performance of the model.
+moved from the training set. Some of the metadata fea-           Figure 3 illustrates that, as expected, the typical num-
+tures we choose to include reference the Pan-STARRS1          ber of alerts per source is variable over the four different
+catalog (PS1; Kaiser et al. 2002): sgscore{1,2} and           queries. Some AGN in vars have > 103 alerts, while
+distpsnr{1,2}. When there are no PS1 sources within           some SNe have as few as two alerts. We correct this im-
+30 arcseconds of a given ZTF alert, these features are        balance by defining a hyperparameter Nmax : the maxi-
+set to −999. We remove all alerts with −999 in any of         mum number of alerts per source allowed in the training
+these four fields. Table 1 shows the counts of sources        set. Sources with more than Nmax alerts will have some
+and alerts at this stage under the cleaned training set       alerts removed and those with Nmax or fewer alerts will
+header. Each of the four queries loses some alerts in the     remain untouched.
+cleaning process, however, the rejects query loses more
+than 150, 000 alerts. These 150, 000 alerts are almost en-
+                                                                11 90% of the training data is seen by the model during development
+tirely negative difference image alerts, which come from
+                                                                     and the remaining 10% is concealed until hyperparameters are
+                                                                     finalized.
+                                                                                                                                   7
+
+    Sources           Train                               Validation                                  Test
+
+              11, 604               4, 238 1, 259                               456 1, 489                           512
+              73.2%                  26.8%         73.4%                      26.6%      74.4%                    25.6%
+    Alerts
+
+
+
+
+              300, 563          167, 436 41, 811                           21, 676 51, 214                      26, 243
+              64.2%                   35.8%        65.9%                      34.1%      66.1%                     33.9%
+                Dim transient-like                   Variables                 BTS Rejects                 Bright transients
+
+Figure 4. Bar charts showing the distribution of sources and alerts from 4 queries into train/validation/test (81%/9%/10%)
+splits. Certain sources have an upper limit set on their number of alerts, excess alerts are removed. Our training set is imbalanced
+favoring not-BTS sources ∼3:1 and favoring the not-BTS alerts ∼2:1.
+
+
+   We apply Nmax alert thinning to sources based on                        The CVs in vars are transients like the sources in trues
+which query they originate from and which split they                     and dims, and we want to capture alerts from all stages
+are present in. For sources in the trues, dims, and re-                  of their evolution, rather than just late-time. The selec-
+jects queries (many of which are galactic or extragalac-                 tion of the latest Nmax = 100 alerts from vars sources
+tic transients), we want BTSbot to learn and identify                    does not significantly impact our coverage of CV evo-
+their properties at all phases of their evolution, so we                 lution because most CVs are very rapidly evolving and
+take a simple uniform random selection of Nmax alerts                    have fewer than Nmax = 100 alerts, so they typically
+to preserve and discard all others. The remaining alerts                 receive no thinning at all.
+are roughly uniformly distributed over the rise, peak,                     Sources from all queries in the train split get Nmax
+and fade of these transients12 . For sources in the vars                 alert thinning to avoid the over-representation prob-
+query, we keep only the most recent Nmax alerts. Meta-                   lem. In the validation and test splits, however, only
+data of long-lived sources look systematically different                 sources from the vars query get alert thinning. The
+in the present than they did years ago. For example,                     other sources are left un-thinned because (i) over-
+AGN were typically first detected near the beginning of                  representation is not an issue, and (ii) we need all alerts
+ZTF and have been repeatedly detected since. New in-                     from these sources to most accurately measure complete-
+coming alerts from these AGN, those that BTSbot will                     ness and purity of the BTSbot predictions. We keep alert
+encounter in production, will typically have very large                  thinning in place for the vars sources in the validation
+age and ndethist (approximately, number of previous                      and test splits because the very old alerts from these
+detections), but those nearer to when they were first de-                long-lived AGN are unlike what appears in present day
+tected will have much smaller age and ndethist. By                       scanning.
+selecting the latest Nmax alerts, we capture those which                   Figure 4 shows the number of sources and alerts in
+are most representative of today’s BTS candidates, and                   each split and the query which they originated from af-
+we avoid a data shift that would dramatically worsen                     ter all cuts and thinning are applied. Our two classes
+BTSbot’s performance in production. Early versions of                    are moderately imbalanced: ∼35% BTS alerts to ∼65%
+BTSbot used random Nmax thinning on vars sources and                     not-BTS alerts. We discuss techniques for mitigating
+yielded markedly worse performance. We find the opti-                    the effects of class imbalance in Sec. 3. In total, our pro-
+mal value to be Nmax = 100 (see Sec. 3.1 for optimiza-                   duction training set comprises 608,943 total alerts from
+tion details).                                                           19,558 total sources totalling >60 GB. Despite BTSbot’s
+                                                                         relatively narrow domain, this is significantly more alerts
+  12 Observational
+                                                                         than other models with similar architectures, such as
+                    coverage of transients is typically greater near
+    peak, so this simple random selection will slightly favor removing   the ALeRCE stamp classifier (∼52,000; Carrasco-Davis
+    alerts near peak. We do not expect significantly different results   et al. 2021) and the ACAI models (∼200,000; Duev &
+    if we attempted to correct for this.                                 van der Walt 2021).
+8
+
+     3. BTSbot SCOPE, ARCHITECTURE, AND                                   Table 2. BTSbot layer configurations
+                         TRAINING
+                                                                                                          Hyperparameter
+  Our MM-CNN, BTSbot, automates source identifica-               Layer type      Layer parameters
+                                                                                                           search range
+tion for BTS by assigning each ZTF alert packet a bright               Convolutional branch
+transient score. Figure 5 shows how input is fed into            2D Conv.    32 filters, 5 × 5 kernel       8 – 128 filtersa
+BTSbot and how information is combined to produce the            2D Conv.    32 filters, 5 × 5 kernel   [3, 5, 7] kernel sizea
+output score; BTSbot contains three main components.             Max pool          2 × 2 kernel                     -
+(1) The convolutional branch processes the science, ref-
+                                                                 Dropout               0.50                     0.1 – 0.8
+erence, and difference cutouts as a three-channel image
+                                                                 2D Conv.    64 filters, 5 × 5 kernel       8 – 128 filtersa
+through a VGG-like architecture (Simonyan & Zisser-
+                                                                 2D Conv.    64 filters, 5 × 5 kernel   [3, 5, 7] kernel sizea
+man 2014). (2) The metadata branch processes the 25
+                                                                 Max pool          4 × 4 kernel                     -
+extracted features (see Table 4) through a batch normal-
+                                                                 Dropout               0.55                     0.1 – 0.8
+ization layer and two dense layers. (3) The combined
+section concatenates the output of the two branches                      Metadata branch
+and passes it through two more dense layers, the sec-           Batch norm.              -                        -
+ond of which produces the prediction using a softmax               Dense             128 units             32 – 256 units
+activation function. The output is a unit-interval score         Dropout               0.25                   0.1 – 0.8
+where higher scores represent increased confidence that            Dense             128 units             32 – 256 units
+the source in the input alert packet is, or will become,                 Combined section
+a bright extragalactic transient. The parameters for               Dense              8 units               8 – 128 units
+each layer are shown in Table 2. Other than the fi-              Dropout               0.20                    0.1 – 0.8
+nal layer, activation functions are all the rectified linear       Dense              1 unit                       -
+unit (ReLU; Nair & Hinton 2010), and all convolutional         a All 2D Convolutional (Conv.) layers have the same search
+layers have symmetric unit stride and same padding.              range for filter counts and kernel size.
+
+   The choice of a MM-CNN is motivated by the fact             Note—Images and metadata are passed through their respec-
+                                                                tive branches, and the output of either is concatenated and
+that the images and the extracted features provide com-
+                                                                sent to the combined branch. Dropout and batch normaliza-
+plementary information for performing our task. For             tion (batch norm.) layers are included to regularize.
+example, the extracted feature distpsnr1 represents
+the angular distance to the PS1 cataloged source near-
+est to this ZTF source, and sgscore1 represents the
+star-galaxy score (Tachibana & Miller 2018) of this PS1
+source. While new transients are not present in PS1,            them together when making a prediction. We also ex-
+the host galaxies of supernovae (SNe) often are. Thus,          periment with uni-modal alternatives to BTSbot in Ap-
+alerts from SNe tend to have moderate distpsnr1 and             pendix B.
+small sgscore1 values, indicating a galaxy projected              Given the scope and architecture of BTSbot we en-
+nearby to the source. Most AGN and some CVs that                counter a number of challenges. First, we are re-
+pass the BTS alert filter are cataloged in PS1 and thus         quiring BTSbot to learn multiple complex separations.
+have distpsnr1 very near to zero. The images also pro-          BTSbot must learn to separate SNe from other sources
+vide important information following a similar heuris-          without using redshift information because it is not al-
+tic. Bright SNe tend to be associated with promi-               ways known a priori. It must also learn to identify
+nent (bright with large angular size) off-center extended       bright SNe with limited time-series information irrespec-
+sources, their host galaxies; faint SNe tend to have less       tive of the SN’s current phase. Early in its rise or late
+prominent host galaxies because they tend to be farther         in its fade, a bright SN can appear very similar to a
+away; AGN will appear as exactly centered extended              near-peak dim SN. Additionally, BTSbot does not have
+sources; CVs will often appear surrounded by many               explicit information stating the BTS threshold is 18.5
+bright point sources because they tend to occur near            mag. Rather, it must learn the position of this threshold
+the galactic plane around many other stars. Carrasco-           drawn through the continuous distribution of SNe peak
+Davis et al. (2021) give more detailed descriptions of          magnitudes. Lastly, BTSbot does not have direct access
+how AGN, SNe, and VarStars can be distinguished using           to full light curve information, i.e., information on every
+ZTF image cutouts and metadata. A MM-CNN is able                previous individual detection. Instead, it has access to
+to pool information from all input types and consider           the basic custom metadata features we compute from
+                                                                                                                              9
+
+
+
+                                         science                 magpsf,
+                                        reference                 age,
+                                        difference                 ...
+
+
+
+
+Figure 5. Diagram of our multi-modal convolutional neural network, BTSbot, performing bright extragalactic transient / not-
+bright extragalactic transient binary classification on ZTF alert packets. Image input is processed through the convolutional
+branch and then flattened to a 1D vector and concatenated with the output of dense layers in the metadata branch. After
+another dense layer, a single-neuron layer produces the final prediction: a unit-interval bright transient score.
+
+the full light curve. We omit full light curve informa-                        Table 3. BTSbot hyperparameters
+tion, in part, because there is no established method in
+                                                                                                            Hyperparameter
+the literature for representing partial light curves of the           Parameter name      Optimized value
+                                                                                                             search range
+wide variety our model encounters in a way that is fit
+                                                                          batch size             64              8 – 64
+for input into a neural network. There has been a great
+                                                                          Adam β1               0.99          0.81 – 0.999
+deal of work to accomplish this for SNe alone (e.g., Vil-
+                                                                          Adam β2               0.99          0.9 – 0.9999
+lar et al. 2020), but these methods are not applicable
+to all the types of sources that BTSbot encounters. This              learning rate (α)        10−4         10−2 – 5 × 10−6
+choice supports the possibility of tuning BTSbot to iden-             α decrease factor          0.4           0.25 – 0.75
+tify extragalactic transients very rapidly, potentially on                  αmin             5 × 10−10       10−10 – 10−5
+their first detection, which Section 5.3 explores.                          Nmax                100              1–∞
+
+
+    3.1. Training and hyperparameter optimization
+   BTSbot is implemented with TensorFlow (Abadi et al.              loss and training terminates after 75 epochs without im-
+2015) and the Keras API (Chollet et al. 2015). We adopt             proved validation loss.
+the Adam optimizer (Kingma & Ba 2014) and the bi-
+nary cross-entropy loss function. In addition to thinning
+a source’s alerts by Nmax (see Sec. 2), we make use of                We utilize the Weights and Biases platform (Biewald
+a number of training techniques to mitigate overfitting.            2020) to perform multiple extensive Bayesian hyper-
+We employ data augmentation, which executes random                  parameter sweeps. A Bayesian hyperparameter sweep
+rotations of 0◦ , 90◦ , 180◦ , and 270◦ and random hori-            guides searching through a large grid of hyperparam-
+zontal and vertical flipping on the image cutouts. These            eters intelligently by leveraging correlations between
+also help ensure that BTSbot is invariant to these trans-           previous hyperparameter inputs and the correspond-
+formations. We weight contributions to the loss function            ing trained model’s performance in a specified metric.
+by the inverse of the relative size of the input alert’s class      This is expected to be more efficient than traditional
+(i.e. misclassifications of BTS alerts contribute more              grid search sweeps because, for example, the Bayesian
+loss than that of not-BTS alerts). This size is computed            sweep can learn to avoid certain regions of the hyper-
+by the count of alerts per class in the train split, but            parameter space that frequently yield poor performing
+we also experiment with computing these weights based               models. We find the optimal configuration of hyper-
+on the number of sources per class. The learning rate               parameters for BTSbot layers (see Table 2), the selec-
+α decreases after 20 epochs without improved validation
+    10
+
+                Table 4. BTSbot metadata features                                                 1.0
+                                                                                                                      1.0
+  Feature name                      Definition [unit]
+                                                                                                  0.8
+
+
+
+
+                                                                             True positive rate
+                       Alert packet metadata
+ sgscore{1,2}        Star/Galaxy score of nearest two PS1 sources
+ distpsnr{1,2}        Distance to nearest two PS1 sources [arcsec]
+                                                                                                  0.6
+ fwhm                         Full Width Half Max [pixels]
+ magpsf                 magnitude of PSF-fit photometry [mag]                                     0.4                 0.8
+ sigmapsf                   1-σ uncertainty in magpsf [mag]                                                              0.0                0.2
+                                 Reduced χ2 of PSF-fit                                                                         Production model
+ chipsf                                                                                           0.2                          ROCAUC=0.985
+ ra                          Right ascension of source [deg]
+                                                                                                                               Other trials
+ dec                           Declination of source [deg]
+                                                                                                  0.0
+ diffmaglim            5-σ magnitude detection threshold [mag]
+                                                                                                          0.0      0.2 0.4 0.6 0.8            1.0
+ ndethist               Number of previous detections of source
+                                                                                                                     False positive rate
+ nmtchps                # of PS1 cross-matches within 30 arcsec
+ drb                     Deep learning-based real/bogus score
+ ncovhist            # of times source on a field and read channel
+
+
+
+
+                                                                                                         not-BTS
+ chinr                 χ parameter of nearest source in reference
+ sharpnr             sharp parameter of nearest source in reference                                                 96.6%           3.4%
+ scorr                     Peak-pixel S/N in detection image
+
+
+
+                                                                                                 True label
+ sky                      Local sky background estimate [DN]
+                         Custom metadata
+ days since peak            Time since brightest alert [days]
+ days to peak           Time from first to brightest alert [days]                            BTS
+ age                       days since peak + days to peak                                                           8.5%           91.5%
+ peakmag so far         Source’s minimum magpsf thusfar [mag]
+ maxmag so far          Source’s maximum magpsf thusfar [mag]
+ nnondeta                         ncovhist - ndethist
+a Adopted from Carrasco-Davis et al. (2021).
+                                                                                                                   not-BTS          BTS
+                                                                                                                       Predicted label
+Note—The 25 metadata features passed into BTSbot’s meta-
+ data branch.      Full definitions of alert packet features can         Figure 6. ROC curve (top) and confusion matrix (bottom)
+ be found at https://zwickytransientfacility.github.io/ztf-avro-alert/   of the BTSbot production model and 19 other trials with
+ schema.html.                                                            different initializations. Top: The production BTSbot model
+                                                                         (orange curve) and 19 other trials (gray curves) yield very
+                                                                         similar ROC curves and ROCAUCs, indicating that BTSbot’s
+                                                                         excellent performance is robust to different initializations.
+                                                                         Bottom: The production model’s confusion matrix makes
+    tion of metadata features (see Table 4), and other val-              clear that BTSbot has greater TN rate (upper-left quadrant)
+    ues (see Table 3). Tables 2 and 3 also include the                   than TP rate (lower-right quadrant). We find that models
+    range of values searched over for each hyperparame-                  which trade-off TP rate in favor of TN rate tend to improve
+    ter in our sweeps. The search over which alert packet                in other key performance metrics.
+    metadata features to provide to BTSbot included many
+    other features which we found to not improve perfor-
+    mance: sgscore3, distpsnr3, fid, maggaia, neargaia,                    To characterize BTSbot’s generalizable performance,
+    magdiff, magap, sigmaap, magapbig, sigmaapbig,                       we present performance metrics on test split data. We
+    magnr, ssnrms, dsnrms, seeratio, nneg, magzpsci,                     train 20 trials of BTSbot with identical optimal hyper-
+    jdstarthist, and classtar.                                           parameters and different random initializations of the
+                                                                         model’s learnable parameters. The trial which yields
+      4. BTSbot PERFORMANCE AND COMPARISON                               the best test split performance is chosen as the produc-
+                      TO HUMAN SCANNERS                                  tion model. Performance metrics are reported for the
+                                                                         chosen production model and the median of the met-
+                4.1. Performance on the test split
+                                                                                                                      11
+
+ric for the 20 trials with uncertainties representing the     cate the request is more urgent. Higher priority requests
+metric’s 1-σ bounds.                                          are typically fulfilled before lower priority requests, al-
+   The final BTSbot models yield test accuracy of 94.1%±      though other factors, e.g. observability, are also taken
+0.28 and 94.9% for the production model. The up-              into account. Most follow-up requests sent by BTS scan-
+per panel of Figure 6 shows BTSbot’s receiver operating       ners are with priority 1 or 2, and priorities 2 and greater
+characteristic (ROC) curves. ROC curves visualize the         are typically reserved for sources which have already at-
+balance of true and false positives at various classifica-    tained mpeak ≤ 18.5 mag.
+tion thresholds, and the area under the ROC curve (RO-           We quantify the performance of these policies with
+CAUC) is frequently used as a summary statistic for the       completeness, purity, ∆tsave , and ∆ttrigger . Complete-
+performance of a classifier. A perfect classifier’s ROC       ness (or “recall”) is the fraction of bright transients
+curve has ROCAUC equal to unity while ROCAUC=0.5              which are correctly classified by the policy: TP/(TP +
+corresponds to random guessing (on a balanced dataset).       FN). The completeness of bts p1 and bts p2 are identi-
+The final BTSbot models yield ROCAUC=0.984 ± 0.001            cal, so we report a single value for both policies. Purity
+and ROCAUC=0.985 for the production model. The re-            (or “precision”) is the fraction of predicted bright tran-
+sults of the production model and the 19 other trials are     sients that are actually bright transients: TP/(TP+FP).
+extremely similar, indicating stability in BTSbot’s per-      ∆tsave/trigger , is the difference between the Julian Date
+formance over different initializations. The lower panel      (JD) at which BTSbot saved and triggered on a source
+of Figure 6 shows the production model’s confusion ma-        with the JD that scanners did the same. The JDs for
+trix. A binary classifier’s confusion matrix visualizes the   scanners are queried from Fritz for all sources in the
+frequencies of the four classification outcomes: true neg-    trues set (see Sec. 2). Sources that were saved before
+ative (TN), false positive (FP), false negative (FN), and     January 1st 2021 are removed from this analysis because
+true positive (TP). The production model shows higher         many of them were scanned using the GROWTH Mar-
+accuracy on not-BTS alerts (TN rate) than on BTS              shal (Kasliwal et al. 2019), so the save and trigger JDs
+alerts (TP rate). We could attempt to train BTSbot to         available on Fritz are unreliable. For saving, we use the
+better balance the TP and TN rates, for example by ad-        JD at which a scanner added a source to the BTS cat-
+justing the class-weights, but we find that models which      alog on Fritz. For triggering, we only consider sources
+favor TN rate perform better overall.                         which had an SEDM integral field unit (IFU) request
+   While we fare excellently in traditional ML perfor-        sent before their first spectrum was uploaded to Fritz.
+mance metrics, they are not necessarily representative of     The JD used for comparison is the JD at which the first
+BTSbot’s real-world performance. Because BTSbot pro-          IFU follow-up request was created. This restriction is
+duces scores on alert packets (alert-based classification)    applied because the time at which scanners decided to
+but sources must be chosen for follow-up (source-based        trigger is not available for the other facilities BTS uses
+classification), we must define a mapping from a se-          for classification. BTSbot’s JD for saving and triggering
+quence of alert predictions to a source prediction. We        on a source is the JD associated with the alert that first
+call these mappings “policies,” which we define to be         made the source satisfy bts p1. The BTSbot JDs corre-
+analogous to the criteria BTS scanners use when de-           spond to either policy, but we select bts p1 as it makes
+ciding whether or not to save a source and request a          for a more direct comparison to scanners.
+spectrum of it. By simulating our policies on BTS can-           When computing completeness and purity for these
+didates, we can compute performance metrics which re-         policies, we make two additional minor cuts. First, 70
+alistically represent how BTSbot performs as a scanner.       sources in the test split also appear in junk (see Sec. 2).
+Further, we can compare the resulting figures against         This catalog is a list of sources that are unambiguously
+human scanners to contextualize BTSbot’s performance.         not bright transients which frequently pass the BTS
+   We define two policies which closely emulate their hu-     alert filter. When scanning, they are typically hidden
+man scanning analogs: bts p1 and bts p2. The pol-             and not considered for saving or triggering; they are ex-
+icy bts p1 requires that a source have at least two           cluded from completeness and purity calculations. We
+alerts with high (≥ 0.5) bright transient score and           also identify 59 sources which have only a single alert
+magpsf ≤ 19 mag before being saved and having an              remaining after the cleaning cuts (see Sec. 2). These
+SEDM trigger sent at priority 1. The policy bts p2 re-        sources will never pass either policy, so they are also
+quires that a source meet bts p1 as well as having at         excluded from completeness and purity calculations.
+least one alert with magpsf ≤ 18.5 mag before a trig-            We use estimates of the scanners’ completeness, pu-
+ger being sent with priority 2. Priority is a parameter       rity, and speed as benchmarks against which to judge
+of the requests sent to SEDM, where larger values indi-       BTSbot’s performance. We compute a lower-limit on
+12
+           100%
+                                                                                                                         Saving
+                                                                                                                         Triggering
+
+
+            90%
+
+
+                                                                                −1.0   −0.5   0.0   0.5   1.0
+
+
+
+            80%
+
+                             Completeness                   Purity
+
+               17.0              17.5              18.0              18.5 −15          −10          −5          0   5        10       15
+                                   Peak magnitude                                             Days after action by scanner
+
+Figure 7. Completeness and purity of BTSbot actions (left) and speed comparison with human scanners (right) for sources in
+our test split. Left: The completeness curve (dash-dot navy) is 100% in all bins. BTSbot’s perfect completeness is conducive to
+BTS’s science efforts which require a highly-complete, unbiased sample. The small variations in the purity curve (solid orange)
+are due to small number statistics. The overall purity of bts p1 and bts p2 are 84.6% and 93.0% respectively. bts p1 has
+extra contamination from SNe with mpeak slightly greater than 18.5 mag, sources which are acceptable targets for spectroscopic
+observation. Right: Histograms comparing BTSbot’s speed in saving (blue) and triggering (red) with that of scanners. Both
+distributions peak very near to zero indicating that BTSbot acts as quickly as human scanners on new bright transients.
+
+
+the scanners’ saving completeness of bright transients                     bright transients by TNS reports from scanners working
+from values presented in Table 1 and Section 3 of Per-                     with other surveys or other ZTF alert brokers. For these
+ley et al. (2020), which give 99.6% completeness. It is                    reasons, ∆tsave/trigger comparisons will not be perfectly
+not straightforward to compute the BTS scanners’ pu-                       direct, but we still adopt them as a basic benchmark for
+rity for saving or triggering on bright transients. Scan-                  BTSbot’s speed.
+ners will often intentionally act on transients which                         The left panel of Figure 7 shows BTSbot’s complete-
+they know will not attain mpeak ≤ 18.5 mag,13 so                           ness and purity under our policies as a function of peak
+straightforward estimates of the scanners’ bright tran-                    magnitude. The completeness curve is exactly 100% in
+sient purity would underestimate their ability to select                   all peak magnitude bins, giving perfect overall complete-
+only bright transients. Instead, we estimate their sav-                    ness. This compares well to the BTS scanners’ saving
+ing and triggering purity for selecting any extragalac-                    completeness: 99.6%. Very high completeness is es-
+tic transient and rejecting other sources. We limit                        sential for maintaining the quality of the BTS sample
+this analysis to saves and triggers performed between                      and ensuring that BTSbot does not inject any signif-
+2460175.5 < JD < 2460216.5 (see Sec. 4.2 for expla-                        icant selection biases into the BTS sample. The pu-
+nation of JD bounds). During this time, 266 sources                        rity curve is > 90% in all peak magnitude bins. Most
+were saved by scanners to the primary internal BTS                         bins have < 10 FPs, so the variations between bins is
+catalog, only 4 of which were not extragalactic tran-                      likely due to small number statistics. Overall purity
+sients: 98.5% scanner saving purity. Similarly, scan-                      for bts p2 is 93.0%, and overall purity for bts p1 is
+ners sent SEDM IFU for 327 unique sources of which 11                      84.6%. The bts p1 purity is not aligned with the pu-
+were non-extragalactic transients: 96.7% scanner trig-                     rity curve because bts p1 also considers a large number
+gering purity. Further, scanners saving and trigger-                       of sources with mpeak > 18.5.14 Contamination from
+ing on transients with mpeak > 18.5 mag complicates                        dim (mpeak > 18.5) transients is the reason why the
+∆tsave/trigger estimates. Scanners will save and trigger                   bts p1 purity is much less than the bts p2 purity; they
+on transients slightly faster than otherwise because they                  make up 53 of the 54 FPs unique to bts p1. These 53
+need not wait for a transient to unambiguously demon-                      transients have median mpeak of 18.57 mag and many
+strate that it will soon have mpeak ≤ 18.5 mag. In addi-                   received spectroscopic follow-up requests by BTS. They
+tion, BTS scanners are occasionally aided in identifying                   are still of interest to members of BTS, so they repre-
+
+  13 These sources, while not “bright” transients, are still of interest     14 Completeness and purity are not shown for m
+                                                                                                                            peak > 18.5 because
+     to BTS and the individuals within BTS.                                      they are undefined and uniformly zero respectively.
+                                                                                                                                            13
+
+                                      Typical true positive        Typical bts_p1 false positive        Typical bts_p2 false positive
+    Apparent Magnitude                  ZTF18aaunfqq                      ZTF21acjvgxg                         ZTF21aaxzcri
+
+                                                                                                                          score ≥ 0.5
+                         18.5                                                                                             score < 0.5
+
+
+                         19.0                                                                                                   g-band
+                                                                                                                                r-band
+
+                         19.5
+
+
+                         20.0
+                                −16       0         16        32   −8     0      8     16     24          0        8       16       24
+                                                                        Days since peak
+Figure 8. Light curves of three sources depicting typical evolution of BTSbot scores. Teal (g-band) and red (r-band) points
+indicate detections, and filled and open circles represent alerts which received score ≥ 0.5 and < 0.5 respectively. Left: TPs
+may have low scoring alerts while still dim, but scores increase once they near the 18.5 mag threshold (dotted gray line). After
+fading well below the peak magnitude, scores remain high, in part, due to information provided by custom metadata features.
+Center: Almost all bts p1 FPs are dim (mpeak > 18.5 mag) transients whose alerts receive high scores when near the BTS
+threshold. Right: Many bts p2 FPs are CVs, which could be better rejected by increasing the score threshold to 0.8.
+
+
+sent a reasonable use of follow-up resources. BTSbot’s                          where BTSbot is slower than scanners are slowly evolv-
+purity falls slightly (∼ 2% − 6%) short of the scanners’                        ing SNe with a history of detections down to ∼20 mag.
+(98.5% saving, 95.6% triggering). Likely at the cost of                         These suggest that scanners can better use the evolu-
+completeness or speed, alternative policies could be de-                        tion prior to reaching 19 mag to identify transients,
+signed to more conservatively allocate spectroscopic re-                        and BTSbot needs brighter detections to identify sources.
+sources, increasing BTSbot’s purity to compare favor-                           Late identifications of these sorts are unlikely an issue
+ably with scanners. BTSbot’s behavior is dependent on                           because BTSbot still consistently identifies these sources
+braai and sgscore because they contribute to deter-                             before or near peak. Sources with poor light curve cov-
+mining what sources pass the BTS alert filter: the only                         erage, especially around 19 mag, cause large ∆tsave and
+sources which BTSbot trains and triggers on.                                    ∆ttrigger and appear in either of these groups. Overall,
+  The right panel of Figure 7 shows histograms compar-                          BTSbot fares very well in time to save and trigger when
+ing the time at which BTSbot and the human scanners                             compared to scanners.
+saved or triggered on a source. Negative values indicate
+that BTSbot was faster, and positive values indicate that                             4.1.1. Analysis of misclassifications in test split
+the scanners were faster. Both histograms peak sharply                            Tracking and categorizing misclassifications is a key
+at 0 days, suggesting that scanners and BTSbot act on                           part of the development of ML models. Misclassifica-
+new transients at the same time. The median of ∆tsave                           tions are particularly important to understand in the
+and ∆ttrigger are −0.0381 days and −0.0147 days re-                             case of BTSbot because mistakes could introduce biases
+spectively; BTSbot acts marginally quicker than scan-                           into the BTS sample and waste valuable spectroscopic
+ners. Much of this performance is likely due to BTSbot’s                        resources.
+decisions being made immediately as new alerts filter                             On test split data, bts p1 selects 92 FPs and 0 FNs.
+through the ZTF and BTS pipelines, although BTS                                 The majority of the FPs (53/92) are real dim transients.
+does benefit from consistent real-time scanning thanks                          These are sources outside of BTSbot’s positive class but
+to members in European time-zones.                                              are still of interest to BTS, so they are acceptable FPs.
+  The tails of this distribution include 6 (11) sources                         Nearly all of the remaining FPs are CVs, AGN or QSOs
+which are saved by BTSbot a week or more before (af-                            and are shared with bts p2. The center panel of Fig-
+ter) scanners did. Nuclear and hostless SNe make up                             ure 8 presents an instance of a typical bts p1 FP. Alerts
+most of the cases where BTSbot was faster. This sug-                            are classified as not belonging to a bright transient until
+gests BTSbot is less hesitant to claim these challeng-                          the source nears the 18.5 mag threshold, at which point
+ing sources to be bright transients. Most of the cases                          a small number of high-scoring alerts cause the source
+14
+
+to pass bts p1. The right panel shows a FP CV mis-                                     1.0
+classified by both bts p1 and bts p2. It shows high-                                                       1.0
+and low-scoring alerts interspersed with each other, al-
+                                                                                       0.8
+
+
+
+
+                                                                  True positive rate
+though some other CV FPs begin receiving exclusively
+low scores once the CV has faded well beyond peak. The
+completeness is perfect for bts p1 and bts p2, so they                                 0.6
+have zero FNs.
+  Overall, the non-SN misclassifications are dominated                                 0.4                 0.8
+by a relatively small number of CVs, AGN, and QSOs.                                                           0.0                 0.2
+Improved policies may be able to improve the rejection
+of these frequent FPs by, e.g., better leveraging existing
+                                                                                       0.2                Present-day (ROCAUC=0.988)
+information in external catalogs. The majority of the                                                     Test split (ROCAUC=0.985)
+total misclassifications (dim SNe selected by bts p1) are                              0.0
+not problematic for BTS and represent an appropriate                                           0.0      0.2 0.4 0.6 0.8               1.0
+allocation of spectroscopic time.                                                                         False positive rate
+
+     4.2. Performance on very recent BTS candidates
+
+
+
+
+                                                                                              not-BTS
+   Performance diagnostics computed on test split data
+tend to be robust and representative of real-world per-                                                  97.4%           2.6%
+formance, but, in some cases, can have associated biases.
+
+
+
+                                                                                      True label
+Our test split includes many alerts that are years old and
+a subtle data shift (caused by, e.g., maintenance to the
+camera or the optics) may have occurred since then. To
+characterize BTSbot’s present-day performance we con-                             BTS
+duct an additional analysis using alerts from very recent                                                8.1%            91.9%
+BTS candidates.
+   We perform this analysis in two parts: (i) we present
+alert-based performance metrics on alerts that recently
+passed the BTS alert filter and our cleaning cuts (see                                                  not-BTS          BTS
+Sec. 2); (ii) we also present policy-based performance                                                      Predicted label
+metrics on sources that recently passed bts p1 or re-
+cently peaked. The date boundaries for these analyses         Figure 9. Same as Figure 6 for a sample of alerts from very
+are determined by the final date our training data was        recent BTS candidates. The results of the ROC (present-
+queried (19 August 2023) and the date BTSbot went into        day: thick green; test split: narrow orange), the ROCAUC,
+production (29 September 2023): 2460175.5 < JD <              and the confusion matrix are all very similar to their test
+2460216.5. This cut on JD minimizes the bias in this          split analogs. All metrics are marginally improved for the
+analysis from transient alerts which BTSbot trained on        present-day sample but not significantly so. These suggest
+                                                              that no data shift has occurred that significantly decreases
+and instances where BTSbot’s actions, which are visible
+                                                              BTSbot’s performance.
+to scanners, influenced scanners’ decisions. Some very
+long-lived sources, like certain AGN, do have alerts in
+our training data and in this cleaned present-day sam-        respectively. The resulting performance is very similar
+ple. We do not remove these sources because they are          to the metrics computed from test split data in Sec. 4.1
+encountered by BTSbot in production, and thus should          and shown in Figure 7. Here, we observe marginally
+be accounted for in this analysis.                            higher performance across all alert-based metrics than
+   We begin this analysis by applying the cleaning cuts       in the test split results. These variations are most likely
+described in Sec. 2 on the public alerts that passed the      due to the relatively small size of the present-day sample
+BTS filter with 2460175.5 < JD < 2460216.5. After             and are not indicative of a data shift affecting BTSbot’s
+cuts, this sample totals 4,031 alerts from 251 bright tran-   performance.
+sients and 15,159 alerts from 1,652 non-bright transients.      As in Sec. 4.1, any source in junk or having only one
+Figure 9 shows that the production BTSbot model yields        alert after cleaning is removed when computing policy
+96.2% accuracy and ROCAUC=0.988 on the present-               completeness and purity. In Sec. 2, the vars query re-
+day sample. TP rate and TN rate are 91.9% and 97.4%,
+                                                                                                                                     15
+          100%
+                                                                                                                   Saving
+                                                                                                                   Triggering
+
+
+           90%
+
+
+                                                                          −1.0   −0.5   0.0   0.5   1.0
+
+
+
+           80%
+
+                          Completeness               Purity
+
+              17.0            17.5            18.0             18.5 −15          −10          −5          0   5        10       15
+                               Peak magnitude                                           Days after action by scanner
+
+Figure 10. Same as Figure 7 for a sample of very recent BTS candidates. Left: The completeness (dash-dot navy) and purity
+(solid orange) curves are perfect in most bins. The overall purity of bts p1 and bts p2 are 81.0% and 92.0% respectively.
+Contamination unique to bts p1 is almost entirely real SNe with mpeak slightly greater than 18.5, acceptable false positives.
+The relatively low purity in two bins is due to small number statistics. Right: Both distributions still peak very near to zero.
+Likely due to differences in the cuts creating the input samples, ∆tsave (0.0525 days) and ∆ttrigger (1.01 days) are larger than
+test split equivalents.
+
+
+ceived alert thinning down to Nmax = 100 alerts per                day sample. The medians of ∆tsave and ∆ttrigger are
+source. We emulate this by thinning sources classified             larger than their test split counterparts: 0.0525 days
+on Fritz or manually identified as an AGN, CV, or QSO              and 1.01 days respectively. We attribute this increase
+down to their latest Nmax = 100 alerts. We run all pub-            to two main factors. (i) We have excluded ZTF part-
+lic alerts passing our Sec. 2 cleaning cuts from all sources       nership data from the present-day sample, but scanners
+through both policies and select only the sources which            typically view data from both the ZTF public and part-
+satisfy bts p1 or reach their peak magnitude between               nership observations when scanning. This frequently
+2460175.5 < JD < 2460216.5. This representatively                  provides them with additional detections for BTS can-
+simulates the actions BTSbot would have taken during               didates, which BTSbot is blinded from, aiding in more
+this time period should it have been fully operational.            quickly identify bright transients. (ii) The present-day
+   Similar to Figure 7, Figure 10 shows the complete-              sample is very small, so the median is volatile to changes.
+ness, purity, and speed comparison of the production               There are just is 65 sources with ∆tsave values in the
+BTSbot model on the present-day BTS sample. Both the               present-day sample, while there were > 250 sources for
+completeness and purity curve, shown in the left panel,            the test split. The shapes of the ∆t distributions, how-
+are at or near 100% in most peak magnitude bins. The               ever, is consistent between the present-day and test split
+overall completeness is 98.7%. This remains near-perfect           analysis. Together, these suggest that the differences
+and supports BTSbot’s ability to scan without imposing             observed are not due to a data shift but rather to dif-
+significant selection biases into the BTS sample. Varia-           ferences in the sample characteristics and in how the
+tions in either curve are due to small number statistics;          experiments were conducted.
+there are 0-3 FPs and FNs in each bin shown. Over-                   With a sample of BTS candidates contiguous in time,
+all bts p1 purity is 81.0%, and overall bts p2 purity              we can now easily compute the median number of saves
+is 92.0%. Similar to the test split results, the sources           and triggers performed by BTSbot per night. Over the 41
+selected by bts p1 but not bts p2 are dominated by                 nights in the present-day sample, 184 sources satisfied
+SNe with mpeak slightly dimmer than 18.5 mag (19/22                bts p1. This is a median of ∼ 4.5 sources per night
+sources): non-problematic FPs because they are typi-               which would have been saved and sent to SEDM.
+cally triggered on by BTS. The completeness and purity
+estimates of the present-day sample are very similar to             4.2.1. Analysis of misclassifications in present-day sample
+their test split analogs, ≤ ±4% difference in all three              Analogously to Sec. 4.1.1, we investigate the types of
+metrics, further suggesting that no data shift has af-             sources which BTSbot misclassifies in the present-day
+fected BTSbot’s performance.                                       sample.
+   The right panel of Figure 10 compares BTSbot’s speed              Our policies select 35 FPs and 2 FNs. Similarly to
+to act with that of the human scanners on our present-             the test split results, the majority of FPs (19/35) are
+16
+
+real dim transients. The other FPs are again dominated       tal has a corresponding application programming inter-
+by CVs and AGN but do include other sources like as-         face (API). The first filtering layer assesses if the candi-
+teroids. One of the FNs (ZTF23aaxtplp) has an ex-            date should be saved, and the second assesses whether
+tremely bright host galaxy and is projected very near to     an instrument should be triggered for follow-up. Auto-
+its nucleus. The other FN (ZTF23abeuope) shows two           triggering is only run on sources which have passed the
+bright stars overlapping the host galaxy and projected       auto-saving filter. In the case of BTSbot, two auto-
+very near to the supernova. It is not certain that these     saving and auto-triggering filters implemented, one for
+properties caused these sources to receive low scores, but   each of the policies bts p1 and bts p2.
+they are clearly very uncommon.                                 Additional features are implemented in SkyPortal to
+   As is the case for the test split, the majority of the    ensure that redundant triggers are not sent. A new,
+misclassifications in the present-day sample, dim SNe,       automatic follow-up request is prevented if a source al-
+have little negative consequence for BTS.                    ready has a spectum, a classification, or if the instru-
+                                                             ment has already been triggered for that source. Instru-
+                      5. DISCUSSION                          ments like SEDM which can conduct both spectroscopic
+                                                             and photometric observations get additional rules to de-
+     5.1. Integration of BTSbot into ZTF and the BTS
+                                                             fine whether the new trigger is redundant with an exist-
+                            workflow
+                                                             ing one. Some teams direct scanners to maintain lists
+   BTSbot has been deployed in Kowalski to enable run-       of sources that frequently pass their alert filter but are
+ning in real-time on incoming alert packets from IPAC’s      not of interest, e.g. the junk set (see Sec. 2). These
+alert-producing and brokering system.                        can optionally be used to prevent a source from be-
+   Kowalski performs three distinct operations on ev-        ing auto-saved. The payload used for triggering an in-
+ery alert packet. First, it separates the alert packet       strument, which contains the triggering instructions like
+from its prv candidates field (a 30-day history of de-       the priority for SEDM, is set in advance alongside the
+tections and non-detections) to concatenate it to the        Kowalski auto-triggering filter, but the priority assigned
+full list of prv candidates from all previous alerts with    to a target can be dynamically increased as new alerts
+the same objectId. This forms a full light curve for a       are posted. In particular, a source triggered on after
+given ZTF object. The product of this concatenation          passing bts p1 can have its payload updated to priority
+is then used to compute the custom metadata features         2 if it passes bts p2 before the trigger is completed.
+BTSbot takes as input (see Sec. 2 for list and defini-          When auto-saving or auto-triggering actions are
+tions). Kowalski then cross-matches every alert with         taken, comments recording these actions are posted to
+a large number of catalogs such as the NASA Extra-           the relevant source page on Fritz. Beyond bookkeep-
+galactic Database15 (NED), CLU (Census of the Local          ing, this is crucial to facilitate scanners working along-
+Universe; Cook et al. 2019), Milliquas (Flesch 2019),        side BTSbot by displaying BTSbot’s actions in the same
+and others. Lastly, Kowalski runs several ML mod-            interface where manual scanning is performed. Seamless
+els: braai, the five ACAI classifiers (Duev & van der        integration with the tools that scanners already rely on
+Walt 2021), and BTSbot. The outputs of all models            enables joint-working that is more efficient and more re-
+are injected into the alert packet along with their cor-     liable than either separately. This also allows scanners
+responding version numbers allowing alert filters to use     to modify triggers sent by BTSbot, for example, increas-
+this information when identifying candidate transients.      ing the trigger’s priority or adding photometry to the
+   The enriched alert packets are then stored in a           request. These make real automated triggers safer and
+non-relational database (MongoDB16 ), allowing users         more dependable, making the automated aspects of BTS
+to design custom, potentially complex, filters as pure       more easily monitored. The results from the SEDM ob-
+database queries for maximum flexibility. These filters,     servations and associated data products are uploaded
+including the BTS alert filter, run on every alert.          back to Fritz for visualization.
+   If an alert passes a filter, it will be sent as a can-       BTSbot saved 296 sources to an internal BTS cata-
+didate to Fritz, a SkyPortal instance that serves as         log while running in production during October 2023,17
+the ZTF collaboration’s Marshal. Two additional lay-         and 92.6% of these were confirmed as extragalactic tran-
+ers of filtering are applied to allow the automated sav-
+ing and triggering of any instrument for which SkyPor-
+                                                               17 An older version of BTSbot (v1.0) was running in production dur-
+
+                                                                 ing October 2023. The production model presented here (v1.0.1)
+  15 https://ned.ipac.caltech.edu/                               corrects for the sources with mpeak ≤ 18.5 in the dims query (see
+  16 https://www.mongodb.com                                     Sec. 2). Both versions yield nearly identical performance.
+                                                                                                                      17
+
+sients. SN 2023tyk (ZTF23abhvlji) is a Type Ia super-         these models in architecture (indeed, some aspects of
+nova that was identified and triggered on by BTSbot.          BTSbot are inspired by them), but they are quite differ-
+The data collected by SEDM was then reduced by                ent in application.
+pySEDM (Rigault et al. 2019), the spectrum classified            The real-time stamp classifier predicts which one of
+as belonging to a Type Ia SN by SNIascore (Frem-              five high-level classes (SN, AGN, VarStar, asteroid, bo-
+ling et al. 2021), and the classification automatically re-   gus) the source in a ZTF alert belongs to. This is done,
+ported to TNS. As detailed by Rehemtulla et al. (2023b),      primarily, with the goal of automatic and rapid iden-
+SN 2023tyk is the first transient to be fully automat-        tification of SNe. To this end, the stamp-classifier is
+ically detected, identified, spectroscopically classified,    trained exclusively on the first alert packet from a given
+and publicly reported. As of December 2023, more              source. While rapid identification of SNe is an interest of
+than a dozen additional Type Ia SNe have been both            ours (see Sec. 5.3), we instead train BTSbot to function
+triggered on by BTSbot and spectroscopically classified       on any alert packet from relevant ZTF sources. This
+by SNIascore: SN 2023vcz, SN 2023uxa, SN 2023uti,             grants BTSbot the extra utility of being able to iden-
+SN 2023vcx, SN 2023uty, SN 2023vtp, SN 2023vpd,               tify SNe at any phase of their evolution, albeit with the
+SN 2023vip, SN 2023vwz, SN 2023wts, SN 2023xms,               additional complications associated with doing so.
+SN 2023xhc, SN 2023xkq.                                          The ACAI framework, a union of five independent bi-
+   Operating BTSbot and SNIascore alongside each              nary classifiers, predicts which of five phenomenological
+other allows for the full-automation of a significant         features (hosted, orphan, nuclear, variable star, bogus)
+amount of day-to-day tasks in BTS. About 70% of bright        characterizes the source in a ZTF alert packet. These
+transients found by BTS are Type Ia supernovae (Frem-         models are trained on any alert from any ZTF source
+ling et al. 2020), nearly all of which we expect to be        and thus learn a much broader domain than BTSbot.
+identified by BTSbot and 80-90% of which will be clas-        Narrowing the input domain of our model reduces its
+sified and reported to TNS by SNIascore. If no hu-            broader utility relative to ACAI but unlocks greater per-
+man scanning took place, this BTS workflow could fully-       formance for our particular task.
+automatically handle more than half of the bright tran-          Unlike BTSbot, neither the stamp classifier nor ACAI
+sients in consideration by BTS. In practice, there are        learn class definitions that are sensitive to the source’s
+additional tasks which remain to be automated or made         brightness. BTSbot must learn to select just a subset of
+more efficient. Namely, scanning also involves the re-        extragalactic transients, those with mpeak ≤ 18.5 mag,
+trieving host galaxy redshifts from NED and classifica-       and reject other extragalactic transients and all other
+tions from TNS. We expect that much of these processes        sources. While BTSbot performs binary classification,
+can be automated and planning for doing so is under-          effectively marginalizing over all non-bright transient
+way. While a comprehensive transition to automated            classes, the stamp classifier performs five-class clas-
+scanning for BTS is unlikely (and not necessarily desir-      sification and the ACAI models perform five binary-
+able), these tools mitigate the dependence of BTS op-         classifications. This requires these other models, the
+erations on the natural fluctuations of scanners’ lives.      stamp classifier in particular, to learn more discrimi-
+Further, a reallocation of some human effort invested in      natory information between its five classes. This is not
+BTS is possible when many tasks are automated. BTS            necessary for BTSbot because our primary interest is au-
+experts are able to spend more time, e.g., analyzing bulk     tomating BTS scanning, for which only bright transients
+properties of SN samples or searching for rare or very        are relevant. Thus, we can justify combining non-bright
+young events.                                                 transients into a single class, simplifying BTSbot’s task.
+
+          5.2. Comparison with similar models                 5.3. An adaptation of BTSbot: Automatic, very rapid
+                   18                                                                 follow-up
+  The ALeRCE (Automatic Learning for the Rapid
+Classification of Events; Förster et al. 2021) real-time        The development of BTSbot and the design of our poli-
+stamp classifier (Carrasco-Davis et al. 2021) and the         cies prioritized completeness of bright transients over
+ACAI (Alert-Classifying Artificial Intelligence; Duev &       other metrics like purity and speed. After operating in
+van der Walt 2021) framework are other image- and ex-         production for a few months a different set of policies
+tracted feature-based MM-CNNs that perform classifi-          was implemented, which are focused on increasing pu-
+cation on ZTF alert packets. BTSbot is very similar to        rity to operate BTSbot with minimal intervention. These
+                                                              priorities are directed by the needs of BTS, but appli-
+                                                              cations of a BTSbot-like model to other science efforts
+  18 https://alerce.online/
+                                                              could prefer to prioritize other metrics.
+18
+
+   BTSbot’s architecture is particularly well suited for the              Automatic spectroscopic follow-up of infant SNe in
+automated identification of very young transients. At                  ZTF data has been successfully implemented before in
+early times (i.e., the night of the first detection), the              AMPEL (Nordin et al. 2019). Target selection was driven
+source’s light curve is uninformative because it is com-               by SNGuess (Miranda et al. 2022), a decision tree-based
+prised of a very small number of data points. Instead,                 ML system for identifying SNe. Their automated trig-
+much of the information available on the new transient                 gering was designed to observe nearby infant SNe, which
+is embedded in associated images. In this regime, one                  was successfully done for a number of sources.
+would expect that an image-based model, like BTSbot,                      BTSbot’s source code and the production
+would have better access to constraining information                   BTSbot model are publicly available on GitHub (https:
+than a purely light-curve based model.                                 //github.com/nabeelre/BTSbot). This repository in-
+   We take SN 2023ixf as an example illustrative of the                cludes all codes necessary for assembling BTSbot’s train-
+additional discovery potential of a model like BTSbot.                 ing set, training the model, creating figures visualizing
+SN 2023ixf was a Type II SN in Messier 101. Ow-                        validation or test split performance, and more. It is
+ing to its proximity, it provided a unique laboratory                  written specifically with adaptability and flexibility in
+to study pre-supernova mass loss events of red super-                  mind. Additional functionalities, e.g. training models
+giants, allowed the assembly of a comprehensive time-                  with alternative architectures (see Appendix B), are
+dependent description of the event, and much more (e.g.;               embedded in the scripts with minimal added complex-
+Bostroem et al. 2023; Hiramatsu et al. 2023; Jacobson-                 ity and no repeated code. This is done to facilitate
+Galán et al. 2023; Qin et al. 2023; Zimmerman et al.                  ease in recycling the BTSbot code-base for other appli-
+2023). SN 2023ixf was reported to TNS by Koichi Ita-                   cations. One could, for example, quickly explore solving
+gaki at 21:42 UTC on 19 May 2023 (Itagaki 2023). The                   a problem with a simple fully-connected neural network
+earliest published spectrum was collected less than an                 and later advance to a MM-CNN with powerful fea-
+hour later by Perley et al. (2023). About 14 hours be-                 tures like data augmentation and Weights and Biases
+fore the first TNS report, SN 2023ixf was detected by                  hyperparameter sweeps integration already built-in. We
+ZTF, and, just minutes later, this alert packet was as-                encourage the use of this resource by the community.
+signed a bright transient score of 0.840 by an early ver-
+sion of BTSbot.19 A variant of BTSbot could be trained                                      6. SUMMARY
+to isolate such sources. With an alert filter and pol-
+                                                                          We have presented BTSbot, a new multi-modal con-
+icy suited for the search of young transients, this could
+                                                                       volutional neural network to automate scanning for the
+have allowed for a more rapid identification and spec-
+                                                                       ZTF Bright Transient Survey. BTSbot uses ZTF im-
+troscopic follow-up of SN 2023ixf. About half the ob-
+                                                                       age cutouts and metadata to produce a bright transient
+serving night was remaining for SEDM at the time the
+                                                                       score for an individual ZTF alert packet. It achieves
+first detection would have passed the auto-triggering fil-
+                                                                       ∼95% accuracy on input alerts and identified 100% of
+ters, enough time to obtain a spectrum if triggered at
+                                                                       bright transients in our test split with 93% purity. Per-
+high enough priority. If the spectrum is collected near
+                                                                       formance compares very closely to that of human scan-
+the end of observing that night at Palomar Observa-
+                                                                       ners in terms of completeness, purity, and speed to act
+tory (∼12:00 UTC), this represents a ∼10 hour speed-
+                                                                       on new transients. BTSbot only falls slightly short of
+up over the otherwise earliest spectrum obtained. In
+                                                                       scanners in terms of purity of the bright transient sam-
+this example, BTSbot and the associated integration
+                                                                       ple it produces: 93% vs. ∼ 97%. We also perform an
+tools presented here allow the probing of early, rapidly-
+                                                                       additional analysis with very recent BTS candidates to
+evolving explosion physics typically unavailable to tra-
+                                                                       demonstrate that BTSbot is not impacted by a signifi-
+ditional triggering methods.
+                                                                       cant data shift.
+   There are a number of challenges related to this adap-
+                                                                          BTSbot has been fully integrated into Kowalski
+tation of BTSbot. Namely, the BTS alert filter and the
+                                                                       and Fritz, ZTF’s first-party alert broker and mar-
+bts p1 and bts p2 policies presented here would likely
+                                                                       shal, and now automatically sends spectroscopic follow-
+be inappropriate or sub-optimal following this new defi-
+                                                                       up requests for the new bright transients it identifies.
+nition of the model’s priorities. A thorough exploration
+                                                                       BTSbot joins a family of automation tools in the BTS
+of how to best assemble a training set for this goal would
+                                                                       workflow (braai, sgscore, pySEDM, and SNIascore)
+also be required.
+                                                                       which aid in running BTS efficiently. These models,
+                                                                       coordinated by Fritz and Kowalski, have enabled the
+  19 The early version of BTSbot referenced here (v0.3) is presented
+                                                                       first fully automatic detection, identification, spectro-
+     in Rehemtulla et al. 2023a.                                       scopic classification, and public reporting of a transient:
+                                                                                                                 19
+
+SN 2023tyk. This milestone represents a boost in effi-      Drexel University. Operations are conducted by COO,
+ciency for BTS and an image of what time-domain as-         IPAC, and UW.
+tronomy could look like during the Rubin-era. It also         SED Machine is based upon work supported by the
+hints towards the discovery potential of adapting simi-     National Science Foundation under Grant No. 1106171
+lar technology to other areas of time-domain astronomy.       The Gordon and Betty Moore Foundation, through
+                                                            both the Data-Driven Investigator Program and a ded-
+                                                            icated grant, provided critical funding for SkyPortal.
+             7. ACKNOWLEDGMENTS                               N. Rehemtulla and A. A. Miller are partially sup-
+                                                            ported by LBNL Subcontract NO. 7707915.
+   A great number of people have contributed to BTS
+                                                              M. W. Coughlin acknowledges support from the Na-
+and BTS scanning over the years. We thank the follow-
+                                                            tional Science Foundation with grant numbers PHY-
+ing people who have saved 10 or more sources to inter-
+                                                            2308862 and PHY-2117997.
+nal BTS catalogs on Fritz as of October 2023: Ivan Al-
+                                                              SRK thanks the Heising-Simons Foundation for sup-
+tunin, Raphael Baer-Way, Pallas A. Beddow, Ofek Ben-
+                                                            porting his research.
+giat, Joshua S. Bloom, Ola Bochenek, Emma Born, Kate
+Bostow, Victoria Mei Brendel, Rachel Bruch, Vidhi
+Chander, Matthew Chu, Elma Chuang, Aishwarya                  Facilities: PO:1.2m, PO:1.5m
+Dahiwale, Asia deGraw, Dmitry Duev, Kingsley Ehrich,
+                                                              Software: Astropy (Astropy Collaboration et al.
+Eli Gendreau-Distler, Nachiket Girish, Xander Hall, K-
+                                                            2013, 2018), corner (Foreman-Mackey 2016), Jupyter
+Ryan Hinds, Ido Irani, Cooper Jacobus, Connor Jen-
+                                                            (Kluyver et al. 2016), Keras (Chollet et al. 2015), Mat-
+nings, Joel Johansson, Snehaa Ganesh Kumar, Michael
+                                                            plotlib (Hunter 2007), NumPy (Harris et al. 2020), pan-
+May, William Meynardie, Shaunak Modak, Kishore Pa-
+                                                            das (pandas development team 2020; Wes McKinney
+tra, Neil Pichay, Sophia Risin, Yashvi Sharma, Gabrielle
+                                                            2010), penquins (Duev et al. 2021), scikit-learn (Pe-
+Stewart, Nora Linn Strotjohann, James Sunseri, Edgar
+                                                            dregosa et al. 2011), SciPy (Virtanen et al. 2020), Sky-
+Vidal, Jacob Wise, Abel Yagubyan, Yoomee Zeng, and
+                                                            Portal (van der Walt et al. 2019; Coughlin et al. 2023),
+Erez A. Zimmerman.
+                                                            Tensorflow (Abadi et al. 2015), tqdm (da Costa-Luis
+   We also thank Jakob Nordin for discussions relating
+                                                            2019), and the Weights and Biases platform (Biewald
+to AMPEL.
+                                                            2020)
+   The material contained in this document is based
+upon work supported by a National Aeronautics and
+Space Administration (NASA) grant or cooperative
+agreement. Any opinions, findings, conclusions, or rec-
+ommendations expressed in this material are those of
+the author and do not necessarily reflect the views of
+NASA. This work was supported through a NASA grant
+awarded to the Illinois/NASA Space Grant Consortium.
+   This research was supported in part through the com-
+putational resources and staff contributions provided for
+the Quest high performance computing facility at North-
+western University which is jointly supported by the Of-
+fice of the Provost, the Office for Research, and North-
+western University Information Technology.
+   Based on observations obtained with the Samuel
+Oschin Telescope 48-inch and the 60-inch Telescope at
+the Palomar Observatory as part of the Zwicky Tran-
+sient Facility project. ZTF is supported by the National
+Science Foundation under Grants No. AST-1440341
+and AST-2034437 and a collaboration including cur-
+rent partners Caltech, IPAC, the Oskar Klein Center at
+Stockholm University, the University of Maryland, Uni-
+versity of California, Berkeley , the University of Wis-
+consin at Milwaukee, University of Warwick, Ruhr Uni-
+versity, Cornell University, Northwestern University and
+20
+
+
+                                                                    APPENDIX
+
+
+                          A. ACCURACY AND LOSS EVOLUTION DURING TRAINING
+
+
+                                              96%
+
+
+
+
+                                   Accuracy
+                                              92%
+
+
+
+                                              88%
+
+
+                                                                                                   Train
+                                              84%       α = 1e-04        4e-05 2e-05 6e-06         Validation
+
+                                                    0        25     50        75     100     125     150
+                                               24                                            Production model
+                                                                                             Other trails
+                                               22
+
+                                               20
+                                       Loss
+
+
+
+
+                                               18
+
+                                               16
+
+                                               14
+
+                                               12
+                                                    0        25     50        75     100     125     150
+                                                                            Epochs
+Figure 11. Accuracy (top) and loss (bottom) for the final BTSbot models (production model: bold curve; other trials: narrow
+curves) of the train (blue) and validation (green) splits during training as a function of epoch. Gray vertical lines indicate
+epochs at which the learning rate decreased. The discrepancies in these metrics between the train and validation splits cannot
+be interpreted as overfitting alone because they are partially due to differences in alert thinning and class weighting.
+
+
+
+   Figure 11 shows how the accuracy and loss evolve during the training of the final BTSbot models, including the
+production model. Differences in how the Nmax alert thinning is applied between train and validation (see Sec. 2) and
+the use of class weights during training can explain much of the difference between their respective loss curves. Thus,
+the train loss being significantly lower than validation loss cannot be interpreted as overfitting. There does appear to
+be overfitting in the production model (bold curves) past epoch ∼30, evidenced by the validation loss beginning to
+increase while the train loss continues to decrease. We avoid this by selecting the model that produced the minimum
+validation loss during training, rather than the model from the final epoch of training. Figure 11 marks the epochs
+where the learning rate decreased due to a plateau in the validation loss as vertical gray lines. The learning rate
+decreases three times, spanning from α = 10−4 to α = 6 × 10−6 . We also observe that the selected production model is
+not the model that produced the least validation loss or had the greatest validation accuracy. The production model
+is selected by considering best performance in policy-based metrics, those most relevant to how BTSbot is used.
+   Training this production model took ∼32 hours on an Intel Xeon 6230 CPU, and inference on a single alert packet
+takes less than a hundredth of a second on a laptop CPU.
+
+                             B. COMPARISON WITH UNI-MODAL ARCHITECTURES
+  An exploration of simpler, alternative architectures and a characterization of their performance is necessary to justify
+BTSbot’s chosen multi-modal architecture. We present alert- and policy-based performance metrics produced by two
+uni-modal model architectures: a uni-modal convolutional neural network (UM-CNN) and a fully-connected neural
+                                                                                                                                  21
+
+                                    Table 5. Architectures of uni-modal BTSbot alternatives
+
+                      Uni-modal convolutional neural network              Fully-connected neural network
+                        Layer type         Layer parameters               Layer type        Layer parameters
+                      2D Convolution     64 filters, 3 × 3 kernel     Batch normalization           -
+                      2D Convolution     64 filters, 3 × 3 kernel           Dense               64 units
+                       Max pooling             2 × 2 kernel                Dropout                0.40
+                         Dropout                   0.45                     Dense               64 units
+                      2D Convolution     16 filters, 3 × 3 kernel           Dense               64 units
+                      2D Convolution     16 filters, 3 × 3 kernel          Dropout                0.70
+                       Max pooling             4 × 4 kernel                 Dense                1 unit
+                         Dropout                   0.65
+                        Flattening                   -
+                          Dense                  128 units
+                         Dropout                   0.45
+                          Dense                   1 unit
+                     Note—Layer parameters of alternative BTSbot architectures: uni-modal convolutional
+                      neural network (left two columns) and fully-connected neural network (right two
+                      columns). Optimal hyperparameters are determined by large hyperparameter sweeps.
+
+
+
+
+                                 Table 6. Performance metrics of uni-modal BTSbot alternatives
+
+                       Alert-based metrics                                      Policy-based metrics
+ Architecture type
+                      Accuracy     ROCAUC      Completeness         bts p1 purity   bts p2 purity      ∆tsave         ∆ttrigger
+      NN               95.5%         0.988         99.8%               82.8%           91.2%         -0.0400 days   -0.0200 days
+    UM-CNN             82.4%         0.902         94.3%               69.5%           92.5%        -0.0485 days     -0.0174 days
+    MM-CNN             94.9%         0.985        100.0%               84.6%           93.0%         -0.0381 days    -0.0147 days
+Note—Comparison of performance metrics on test split data across three different model architectures: a fully-connected
+ neural network (NN), a uni-modal convolutional neural network (UM-CNN), and a multi-modal convolutional neural network
+ (MM-CNN). Each network is the highest performing in at least one metric. The UM-CNN is less complete than the MM-CNN
+ and both the NN and the UM-CNN fall short of the MM-CNN in purity. Overall, the MM-CNN is the best performing
+ architecture.
+
+
+
+
+network (NN). These networks perform inference using only images and only metadata respectively. The training data,
+image preprocessing, and feature extraction are, where relevant, performed identically for all three architectures. The
+ordering and types of layers of the uni-modal architectures are identical to those of the multi-modal architecture with
+the other branch entirely removed. The hyperparameters of the layers, the Adam optimizer, and the value of Nmax
+are searched over in a Bayesian hyperparameter sweep similarly to the sweeps executed for the MM-CNN.
+   Table 5 shows the optimal layer hyperparameters for either architecture. Compared to the MM-CNN’s convolutional
+branch, the UM-CNN has smaller convolutional kernels and a much larger dense layer following the flattening. The
+UM-CNN’s first two convolutional layers have more filters than the final two convolutional layers, whereas the pattern
+is reversed for the MM-CNN. We also find that the optimized UM-CNN has batch size = 32, and Adam parameters
+β1 = β2 = 0.999. Compared to the MM-CNN’s metadata branch, the optimized NN has half as many neurons in
+the first two dense layers but eight times as many in the third layer. We also find that the NN performs best with
+batch size = 128, Adam parameters β1 = β2 = 0.999, and Nmax = 30. The hyperparameter values which are not
+explicitly mentioned can be assumed to be identical to that of the MM-CNN.
+22
+
+
+  Table 6 compares test split performance metrics from each of the three architectures. The NN slightly outperforms
+the MM-CNN in the alert-based metrics while the UM-CNN falls well short of the others. The UM-CNN presented here
+uses the full-size image cutouts, but Appendix C shows that slightly increased performance can be realized through
+the reduction of input image’s size. In policy-based metrics, the MM-CNN’s marginal advantage in completeness over
+the NN is due to having just a single fewer FN. The MM-CNN demonstrates a larger advantage in purity, however. Its
+advantage is ∼ 0.5 − 2% over the others in bts p2 purity; even small boosts in purity are valuable when applied over
+the large samples and baselines in consideration by BTS. Each model performs very similarly in the speed metrics,
+although the NN and the UM-CNN marginally outperform the others in ∆ttrigger and ∆tsave respectively.
+  Each architecture outperforms the others in some metrics, but the MM-CNN delivers the best overall performance.
+It delivers the highest completeness and purity while sacrificing well less than an hour in ∆tsave/trigger .
+  Despite having worse purity than the MM-CNN, there is still valuable utility in the NN because we find that it
+trains ∼ 60 times faster than the MM-CNN. This discrepancy in training time is partially due to the NN adopting
+Nmax = 30 instead of Nmax = 100 as the MM-CNN does, and could be also decreased by training the MM-CNN on a
+GPU. These factors aside, the NN would very likely remain many factors quicker to train, and it is thus better suited
+for experimenting with adapting BTSbot to alternative use cases. In developing adaptations of BTSbot, being able
+to very quickly design and execute experiments will be key. Excluding images may also lend advantages in the ease
+of transferring BTSbot adaptations to other surveys, for example, LSST or the upcoming La Silla Schmidt Southern
+Survey (LS420 ). Although effort has been made to develop survey-agnostic CNNs (e.g., Cabrera-Vives et al. 2023),
+BTSbot is not designed or expected to perform consistently on image data from other surveys. Instead, one could more
+easily design a NN which exclusively uses survey-agnostic features, increasing its potential impact by allowing it to be
+applied more widely.
+              C. CONVOLUTIONAL NEURAL NETWORKS WITH CROPPED IMAGE CUTOUTS
+  The properties of the image cutouts produced by large wide-field surveys are critical to a number of the survey’s
+functions. While the pixel scale, typically measured in arcseconds (”) per pixel, is a fixed property of the telescope’s
+optics, many choices can be made in software that determine the nature of the cutouts sent to alert brokers. One must
+choose the angular and pixel size of the cutouts in light of the pixel scale and whether or not to decrease resolution
+by binning the pixels. A tension arises because scanners generally prefer having more information, i.e. cutouts with
+higher resolution and greater angular size, but the surveys producing and disseminating the alerts prefer minimal
+network bandwidth costs, i.e. lower resolution and smaller angular size. Smaller cutouts with less information may
+compromise the performance of these key ML models, however, possibly reducing the scientific potential of the entire
+survey. Only a small number of studies developing CNNs for large wide-field surveys comment on performance over a
+range of cutout sizes (e.g.; Killestein et al. 2021; Carrasco-Davis et al. 2021; Reyes-Jainaga et al. 2023). It remains to be
+seen, then, what the minimum cutout size is to maintain acceptable performance with current CNNs. Adding further
+complexity, CNNs performing different tasks will be impacted differently by reduced cutout sizes, and MM-CNNs may
+be more resilient to reduced cutout sizes due to the availability of metadata information. Multi-scale cutouts, where
+resolution progressively decreases moving away from the cutout center, are a compelling alternative because they
+dramatically increase the available field-of-view without an increase to the data volume of the cutouts (Reyes-Jainaga
+et al. 2023). Further study of (MM-)CNN performance over a range of cutout sizes is necessary to better characterize
+their correlation.
+  To explore this important issue, we train multiple UM-CNN versions of BTSbot to identify which cutout size produces
+the most accurate model. We create new training sets from BTSbot’s original training set by keeping only the innermost
+Npix × Npix pixels of each cutout and renormalizing them individually. We train ∼30-60 trials of BTSbot with a given
+value of Npix (3, 5, 7, 13, 21, 35, or 49) in Bayesian hyperparameter sweeps similar to Section 3.1 and Appendix B.
+These trials are unlikely sufficient to yield optimal hyperparameters, but they do give a representative view of the
+performance for each value of Npix . For models with Npix ≤ 13, we remove the pooling layers entirely to maintain the
+image’s size through the hidden layers.
+  Figure 12 presents the highest performing models judged by accuracy on the test set. We find that the Npix = 49
+UM-CNN yields the best performance, and that both the Npix = 49 and Npix = 35 UM-CNNs marginally outperform
+
+  20 https://www.snowmass21.org/docs/files/summaries/CF/
+
+     SNOWMASS21-CF6 CF4 Peter Nugent-171.pdf
+                                                                                                                                              23
+
+                                                     85%
+
+
+
+
+                                 Test set accuracy
+                                                     80%
+
+
+
+
+                                                     75%
+                                                           357   13      21         35         49          63
+                                                                      Cutout side length [pixels]
+
+Figure 12. Test set accuracy of BTSbot UM-CNNs as a function of input image cutout size. Very small cutouts (3 × 3 to 13 × 13
+pixels) clearly under-perform relative to models with larger cutouts (35 × 35 to 63 × 63 pixels). The highest performing model is
+notably not that which uses the full-size images but rather the model which uses 49 × 49 pixel cutouts. Cropping cutouts could
+allow for the significant decrease of a survey’s data rate and possibly network bandwidth costs, in this case, with no decrease in
+the performance of ML-based transient detection tools.
+
+
+
+the UM-CNN with uncropped cutouts (Npix = 63). It is not unambiguously clear what the reason for this is from this
+simple experiment alone, however, these results suggest that information ∼ 0.5′ away from the source in question tends
+to be irrelevant or noisy when performing our task. We notably do not observe the same trend for the MM-CNN,
+where the Npix = 63 model is the highest performing. Carrasco-Davis et al. (2021) find that the ALeRCE stamp
+classifier (a MM-CNN), performs best with Npix = 21 cutouts. Together, this indicates that more work is necessary
+to better understand the optimal cutout size for upcoming surveys.
+  The Npix = 35 model roughly matches the Npix = 63 model in accuracy but has 352 /632 ≈ 30% the number of pixels.
+In this case, shrinking cutouts dramatically quickens BTSbot’s training without compromising performance. Shrinking
+cutouts survey-wide is an option to reduce a survey’s network bandwidth costs significantly as image cutouts typically
+comprise a large fraction of the bytes in an alert packet. Although 35 × 35 cutouts are appropriate for BTSbot,
+such small cutouts may reduce scanners’ ability to distinguish sources of different types. Experiments of this sort
+are most relevant to the alert stream design of upcoming surveys like LSST and LS4. LSST’s planned alert packet
+cutout size is at least 30 × 30 pixels21 at a pixel scale of 0.2”/pixel (Ivezić et al. 2019), thus spanning 6” on a side.
+The Npix = 5 and Npix = 7 models are nearest to this in terms of field-of-view, however, ZTF’s much larger pixel
+scale (1”/pixel) makes this an unreasonable comparison. Further study is required to assess how small cutouts can
+be without compromising, e.g., real/bogus performance at LSST-like resolutions. LS4 will have a pixel scale very
+similar to that of ZTF, but, at the time of writing, the alert packet cutout size is undetermined (R. Knop, private
+communications). These results provide the preliminary guidance that LS4 cutouts should be no smaller than 21 × 21
+in order to maintain the performance of BTSbot-like UM-CNN models.
+
+
+                                                                       REFERENCES
+
+
+Abadi, M., Agarwal, A., Barham, P., et al. 2015,                                   Astropy Collaboration, Price-Whelan, A. M., Sipőcz, B. M.,
+  TensorFlow: Large-Scale Machine Learning on                                        et al. 2018, AJ, 156, 123, doi: 10.3847/1538-3881/aabc4f
+  Heterogeneous Systems. https://www.tensorflow.org/                               Bailey, S., Aragon, C., Romano, R., et al. 2007, ApJ, 665,
+Astropy Collaboration, Robitaille, T. P., Tollerud, E. J.,                           1246, doi: 10.1086/519832
+  et al. 2013, A&A, 558, A33,
+                                                                                   Bellm, E. C., Kulkarni, S. R., Graham, M. J., et al. 2019a,
+  doi: 10.1051/0004-6361/201322068
+                                                                                     PASP, 131, 018002, doi: 10.1088/1538-3873/aaecbe
+                                                                                   Bellm, E. C., Kulkarni, S. R., Barlow, T., et al. 2019b,
+  21 https://dmtn-102.lsst.io
+                                                                                     PASP, 131, 068003, doi: 10.1088/1538-3873/ab0c2a
+24
+
+Biewald, L. 2020, Experiment Tracking with Weights and           Flesch, E. W. 2019, VizieR Online Data Catalog, VII/283
+  Biases. https://www.wandb.com/                                 Foreman-Mackey, D. 2016, The Journal of Open Source
+Blagorodnova, N., Neill, J. D., Walters, R., et al. 2018,           Software, 1, 24, doi: 10.21105/joss.00024
+  PASP, 130, 035003, doi: 10.1088/1538-3873/aaa53f               Förster, F., Cabrera-Vives, G., Castillo-Navarrete, E., et al.
+Bloom, J. S., Richards, J. W., Nugent, P. E., et al. 2012,          2021, AJ, 161, 242, doi: 10.3847/1538-3881/abe9bc
+  PASP, 124, 1175, doi: 10.1086/668468                           Fremling, C., Miller, A. A., Sharma, Y., et al. 2020, ApJ,
+Boone, K. 2019, AJ, 158, 257,                                       895, 32, doi: 10.3847/1538-4357/ab8943
+  doi: 10.3847/1538-3881/ab5182                                  Fremling, C., Hall, X. J., Coughlin, M. W., et al. 2021,
+Bostroem, K. A., Pearson, J., Shrestha, M., et al. 2023,            ApJL, 917, L2, doi: 10.3847/2041-8213/ac116f
+  ApJL, 956, L5, doi: 10.3847/2041-8213/acf9a4                   Fukushima, K., & Miyake, S. 1982, Pattern Recognition,
+Breiman, L. 2001, Machine Learning, 45, 5,                          15, 455, doi: 10.1016/0031-3203(82)90024-3
+  doi: 10.1023/A:1010933404324                                   Gagliano, A., Contardo, G., Foreman Mackey, D., Malz,
+Brink, H., Richards, J. W., Poznanski, D., et al. 2013,             A. I., & Aleo, P. D. 2023, arXiv e-prints,
+  MNRAS, 435, 1047, doi: 10.1093/mnras/stt1306                      arXiv:2305.08894. https://arxiv.org/abs/2305.08894
+Cabrera-Vives, G., Bolivar, C., Förster, F., et al. 2023,       Goldstein, D. A., D’Andrea, C. B., Fischer, J. A., et al.
+  arXiv e-prints, arXiv:2308.07538,                                 2015, AJ, 150, 82, doi: 10.1088/0004-6256/150/3/82
+  doi: 10.48550/arXiv.2308.07538                                 Gomez, S., Berger, E., Blanchard, P. K., et al. 2020, ApJ,
+Cabrera-Vives, G., Reyes, I., Förster, F., Estévez, P. A., &      904, 74, doi: 10.3847/1538-4357/abbf49
+  Maureira, J.-C. 2017, ApJ, 836, 97,                            Gomez, S., Villar, V. A., Berger, E., et al. 2023, ApJ, 949,
+  doi: 10.3847/1538-4357/836/1/97                                   113, doi: 10.3847/1538-4357/acc535
+Carrasco-Davis, R., Reyes, E., Valenzuela, C., et al. 2021,      Goobar, A., Johansson, J., Schulze, S., et al. 2023, Nature
+  AJ, 162, 231, doi: 10.3847/1538-3881/ac0ef1                       Astronomy, 7, 1137, doi: 10.1038/s41550-023-02034-5
+Carrasco Kind, M., & Brunner, R. J. 2013, MNRAS, 432,            Graham, M. J., Kulkarni, S. R., Bellm, E. C., et al. 2019,
+  1483, doi: 10.1093/mnras/stt574                                   PASP, 131, 078001, doi: 10.1088/1538-3873/ab006c
+Chollet, F., et al. 2015, Keras, https://keras.io                Harris, C. R., Millman, K. J., van der Walt, S. J., et al.
+Cold, C., & Hjorth, J. 2023, A&A, 670, A48,                         2020, Nature, 585, 357–362,
+  doi: 10.1051/0004-6361/202244867                                  doi: 10.1038/s41586-020-2649-2
+Cook, D. O., Kasliwal, M. M., Sistine, A. V., et al. 2019,       Hendrycks, D., & Gimpel, K. 2016, arXiv e-prints,
+  The Astrophysical Journal, 880, 7,                                arXiv:1610.02136, doi: 10.48550/arXiv.1610.02136
+  doi: 10.3847/1538-4357/ab2131                                  Hiramatsu, D., Tsuna, D., Berger, E., et al. 2023, ApJL,
+Coughlin, M. W., Bloom, J. S., Nir, G., et al. 2023, arXiv          955, L8, doi: 10.3847/2041-8213/acf299
+  e-prints, arXiv:2305.00108,                                    Hosseinzadeh, G., Dauphin, F., Villar, V. A., et al. 2020,
+  doi: 10.48550/arXiv.2305.00108                                    ApJ, 905, 93, doi: 10.3847/1538-4357/abc42b
+da Costa-Luis, C. 2019, The Journal of Open Source               Hunter, J. D. 2007, Computing in Science and Engineering,
+  Software, 4, 1277, doi: 10.21105/joss.01277                       9, 90, doi: 10.1109/MCSE.2007.55
+Dekany, R., Smith, R. M., Riddle, R., et al. 2020, PASP,         Irani, I., Prentice, S. J., Schulze, S., et al. 2022, ApJ, 927,
+  132, 038001, doi: 10.1088/1538-3873/ab4ca2                        10, doi: 10.3847/1538-4357/ac4709
+Dieleman, S., Willett, K. W., & Dambre, J. 2015, MNRAS,          Itagaki, K. 2023, Transient Name Server Discovery Report,
+  450, 1441, doi: 10.1093/mnras/stv632                              2023-1158, 1
+Domı́nguez Sánchez, H., Huertas-Company, M., Bernardi,          Ivezić, Ž., Kahn, S. M., Tyson, J. A., et al. 2019, ApJ, 873,
+  M., Tuccillo, D., & Fischer, J. L. 2018, MNRAS, 476,              111, doi: 10.3847/1538-4357/ab042c
+  3661, doi: 10.1093/mnras/sty338                                Jacobson-Galán, W. V., Dessart, L., Margutti, R., et al.
+Duev, D., Shin, K. M., & Singer, L. 2021,                           2023, ApJL, 954, L42, doi: 10.3847/2041-8213/acf2ec
+  dmitryduev/penquins: a python client for                       Kaiser, N., Aussel, H., Burke, B. E., et al. 2002, in Society
+  dmitryduev/kowalski, v2.1.2, Zenodo,                              of Photo-Optical Instrumentation Engineers (SPIE)
+  doi: 10.5281/zenodo.5651471                                       Conference Series, Vol. 4836, Survey and Other Telescope
+Duev, D. A., & van der Walt, S. J. 2021, arXiv e-prints,            Technologies and Discoveries, ed. J. A. Tyson & S. Wolff,
+  arXiv:2111.12142, doi: 10.48550/arXiv.2111.12142                  154–164, doi: 10.1117/12.457365
+Duev, D. A., Mahabal, A., Masci, F. J., et al. 2019,             Kasliwal, M. M., Cannella, C., Bagdasaryan, A., et al.
+  MNRAS, 489, 3582, doi: 10.1093/mnras/stz2357                      2019, PASP, 131, 038003, doi: 10.1088/1538-3873/aafbc2
+                                                                                                                             25
+
+Killestein, T. L., Lyman, J., Steeghs, D., et al. 2021,          Rehemtulla, N., Miller, A., Fremling, C., et al. 2023b,
+  MNRAS, 503, 4838, doi: 10.1093/mnras/stab633                     Transient Name Server AstroNote, 265, 1
+Kim, Y. L., Rigault, M., Neill, J. D., et al. 2022, PASP,        Reyes-Jainaga, I., Förster, F., Muñoz Arancibia, A. M.,
+  134, 024505, doi: 10.1088/1538-3873/ac50a0                       et al. 2023, ApJL, 952, L43,
+Kingma, D. P., & Ba, J. 2014, arXiv e-prints,                      doi: 10.3847/2041-8213/ace77e
+  arXiv:1412.6980, doi: 10.48550/arXiv.1412.6980                 Rigault, M., Neill, J. D., Blagorodnova, N., et al. 2019,
+Kluyver, T., Ragan-Kelley, B., Pérez, F., et al. 2016, in IOS     A&A, 627, A115, doi: 10.1051/0004-6361/201935344
+  Press, 87–90, doi: 10.3233/978-1-61499-649-1-87                Rodrı́guez, Ó., Maoz, D., & Nakar, E. 2023, ApJ, 955, 71,
+Lanusse, F., Ma, Q., Li, N., et al. 2018, MNRAS, 473, 3895,       doi: 10.3847/1538-4357/ace2bd
+  doi: 10.1093/mnras/stx1665                                     Sadeh, I., Abdalla, F. B., & Lahav, O. 2016, PASP, 128,
+LeCun, Y., Bengio, Y., & Hinton, G. 2015, Nature, 521,             104502, doi: 10.1088/1538-3873/128/968/104502
+  436, doi: 10.1038/nature14539                                  Shappee, B. J., Prieto, J. L., Grupe, D., et al. 2014, ApJ,
+Mahabal, A., Rebbapragada, U., Walters, R., et al. 2019,           788, 48, doi: 10.1088/0004-637X/788/1/48
+  PASP, 131, 038002, doi: 10.1088/1538-3873/aaf3fa               Sharma, Y., Sollerman, J., Fremling, C., et al. 2023, ApJ,
+Masci, F. J., Laher, R. R., Rusholme, B., et al. 2019,             948, 52, doi: 10.3847/1538-4357/acbc16
+  PASP, 131, 018003, doi: 10.1088/1538-3873/aae8ac               Sharon, A., & Kushnir, D. 2022, MNRAS, 509, 5275,
+McCulloch, W. S., & Pitts, W. 1943, The Bulletin of                doi: 10.1093/mnras/stab3380
+  Mathematical Biophysics, 5, 115, doi: 10.1007/bf02478259
+                                                                 Simonyan, K., & Zisserman, A. 2014, arXiv e-prints,
+Miranda, N., Freytag, J. C., Nordin, J., et al. 2022, A&A,
+                                                                   arXiv:1409.1556, doi: 10.48550/arXiv.1409.1556
+  665, A99, doi: 10.1051/0004-6361/202243668
+                                                                 Smith, K. W., Smartt, S. J., Young, D. R., et al. 2020,
+Morgan, R., Nord, B., Bechtol, K., et al. 2022, ApJ, 927,
+                                                                   PASP, 132, 085002, doi: 10.1088/1538-3873/ab936e
+  109, doi: 10.3847/1538-4357/ac5178
+                                                                 Sollerman, J., Yang, S., Perley, D., et al. 2022, A&A, 657,
+—. 2023, ApJ, 943, 19, doi: 10.3847/1538-4357/ac721b
+                                                                   A64, doi: 10.1051/0004-6361/202142049
+Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R.,
+                                                                 Stein, R., Mahabal, A., Reusch, S., et al. 2023, arXiv
+  & Hložek, R. 2019, PASP, 131, 118002,
+                                                                   e-prints, arXiv:2312.00139,
+  doi: 10.1088/1538-3873/ab1609
+                                                                   doi: 10.48550/arXiv.2312.00139
+Nair, V., & Hinton, G. E. 2010, in Proceedings of the 27th
+                                                                 Stoppa, F., Bhattacharyya, S., Ruiz de Austri, R., et al.
+  International Conference on International Conference on
+                                                                   2023, arXiv e-prints, arXiv:2307.14456,
+  Machine Learning, ICML’10 (Madison, WI, USA:
+                                                                   doi: 10.48550/arXiv.2307.14456
+  Omnipress), 807–814
+                                                                 Szegedy, C., Zaremba, W., Sutskever, I., et al. 2013, arXiv
+Nordin, J., Brinnel, V., van Santen, J., et al. 2019, A&A,
+                                                                   e-prints, arXiv:1312.6199, doi: 10.48550/arXiv.1312.6199
+  631, A147, doi: 10.1051/0004-6361/201935634
+                                                                 Tachibana, Y., & Miller, A. A. 2018, PASP, 130, 128001,
+pandas development team, T. 2020, pandas-dev/pandas:
+                                                                   doi: 10.1088/1538-3873/aae3d9
+  Pandas, latest, Zenodo, doi: 10.5281/zenodo.3509134
+Pasquet, J., Bertin, E., Treyer, M., Arnouts, S., & Fouchez,     Tonry, J. L. 2011, PASP, 123, 58, doi: 10.1086/657997
+  D. 2019, A&A, 621, A26,                                        Tonry, J. L., Denneau, L., Heinze, A. N., et al. 2018, PASP,
+  doi: 10.1051/0004-6361/201833617                                 130, 064505, doi: 10.1088/1538-3873/aabadf
+Patterson, M. T., Bellm, E. C., Rusholme, B., et al. 2019,       Tsaprazi, E., Jasche, J., Goobar, A., et al. 2022, MNRAS,
+  PASP, 131, 018001, doi: 10.1088/1538-3873/aae904                 510, 366, doi: 10.1093/mnras/stab3525
+Pedregosa, F., Varoquaux, G., Gramfort, A., et al. 2011,         Turpin, D., Ganet, M., Antier, S., et al. 2020, MNRAS,
+  Journal of Machine Learning Research, 12, 2825                   497, 2641, doi: 10.1093/mnras/staa2046
+Perley, D. A., Gal-Yam, A., Irani, I., & Zimmerman, E.           van der Walt, S. J., Crellin-Quick, A., & Bloom, J. S. 2019,
+  2023, Transient Name Server AstroNote, 119, 1                    Journal of Open Source Software, 4, 1247,
+Perley, D. A., Fremling, C., Sollerman, J., et al. 2020, ApJ,      doi: 10.21105/joss.01247
+  904, 35, doi: 10.3847/1538-4357/abbd98                         van Roestel, J., Duev, D. A., Mahabal, A. A., et al. 2021,
+Qin, Y.-J., Zhang, K., Bloom, J., et al. 2023, arXiv e-prints,     AJ, 161, 267, doi: 10.3847/1538-3881/abe853
+  arXiv:2309.10022, doi: 10.48550/arXiv.2309.10022               Villar, V. A., Berger, E., Miller, G., et al. 2019, ApJ, 884,
+Rehemtulla, N., Miller, A. A., Coughlin, M. W., & Jegou            83, doi: 10.3847/1538-4357/ab418c
+  du Laz, T. 2023a, arXiv e-prints, arXiv:2307.07618,            Villar, V. A., Hosseinzadeh, G., Berger, E., et al. 2020,
+  doi: 10.48550/arXiv.2307.07618                                   ApJ, 905, 94, doi: 10.3847/1538-4357/abc6fd
+26
+
+Virtanen, P., Gommers, R., Oliphant, T. E., et al. 2020,    Wright, D. E., Smartt, S. J., Smith, K. W., et al. 2015,
+  Nature Methods, 17, 261, doi: 10.1038/s41592-019-0686-2     MNRAS, 449, 451, doi: 10.1093/mnras/stv292
+Walmsley, M., Ferguson, A. M. N., Mann, R. G., & Lintott,
+                                                            Yang, S., Sollerman, J., Strotjohann, N. L., et al. 2021,
+  C. J. 2019, MNRAS, 483, 2968,
+  doi: 10.1093/mnras/sty3232                                  A&A, 655, A90, doi: 10.1051/0004-6361/202141244
+Walmsley, M., Smith, L., Lintott, C., et al. 2020, MNRAS,   Zimmerman, E. A., Irani, I., Chen, P., et al. 2023, arXiv
+  491, 1554, doi: 10.1093/mnras/stz2816
+                                                              e-prints, arXiv:2310.10727,
+Wes McKinney. 2010, in Proceedings of the 9th Python in
+  Science Conference, ed. Stéfan van der Walt & Jarrod       doi: 10.48550/arXiv.2310.10727
+  Millman, 56 – 61, doi: 10.25080/Majora-92bf1922-00a
+

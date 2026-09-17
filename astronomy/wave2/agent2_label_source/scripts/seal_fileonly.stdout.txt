@@ -1,0 +1,52 @@
+{
+ "sealed_at": "2026-09-16, before any per-object archived TNS page read",
+ "definitions_sha256": "4f89ff6718a14ad4e45a6d33d6bde848448ba6a66d895bd970330efe397b37cf",
+ "raw_sha256": "61415979b75f96bcf2532439109b35f923c5fa1aadfacc5d6013235187ebe570",
+ "extra_sha256": "7c08daf489bbf648cb798ceba9f5ecbf56abc9f94dc6b2e320f5aaa84ad35b63",
+ "capture2021_sha256": "30dbb78bd2d6379e3f3e5355ccd3eb50517e3bc2d597c396d46187f704dd47f1",
+ "capture2021_rows_parsed": 2691,
+ "capture2021_note": "Internet Archive stored copy truncated at 1,048,576 bytes; rows present parsed",
+ "labeled": 7843,
+ "plain_SN_Ia": 5067,
+ "E2_named_in_file_as_SN_Ia": 9,
+ "E2_names_not_plain_SN_Ia_in_file": {
+  "SN2023tyk": [
+   "absent"
+  ],
+  "SN2023uty": [
+   "absent"
+  ],
+  "SN2023vtp": [
+   "SN Ia-91T"
+  ],
+  "SN2023vip": [
+   "absent"
+  ],
+  "SN2023xms": [
+   "absent"
+  ],
+  "SN2023xkq": [
+   "absent"
+  ]
+ },
+ "E4_excluded": 1340,
+ "E5_excluded": 1936,
+ "E4_and_E5": 1339,
+ "predicted_bound_fileonly": {
+  "lower": 9,
+  "upper": 3130,
+  "upper_raw": 3130,
+  "upper_noE5_sensitivity": 3727
+ },
+ "ccsn_possible_by_date": 155,
+ "fetch_order_counts": {
+  "tier1": 3131,
+  "tier2": 1936,
+  "tier3": 2776
+ },
+ "placement_counts": {
+  "UNRESOLVED": 7834,
+  "MODEL_ANNOTATION": 9
+ }
+}
+sha256 763002355b6129d9fe0a0eada86684e7dfb2e02bc9475554a8a57c9969c03eb0

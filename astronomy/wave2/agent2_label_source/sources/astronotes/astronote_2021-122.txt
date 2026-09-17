@@ -1,0 +1,77 @@
+
+2021-122 | Transient Name Server
+Search
+AstroNotes
+Groups
+Bots
+LVK GW
+Stats
+News
+?
+✉
+Login
+        AstroNote 2021-122
+Primary tabs
+AstroNotes
+Stats
+DRAFT
+2021-04-15 05:19:03
+Type: 
+Announcement-Campaign/Survey
+Bibcode: 
+2021TNSAN.122....1F
+Fully automated spectroscopic classification of ZTF SNe Ia
+Authors: 
+C. Fremling (Caltech), A. Dahiwale (Caltech), A. Mahabal (Caltech), A. Miller (Northwestern), J. Neill (Caltech), D. Perley (LJMU), M. Rigault (IN2P3), Y. Sharma (Caltech), J. Sollerman (SU), S. Kulkarni (Caltech), on behalf of the Zwicky Transient Facility
+Source Group: 
+ZTF
+Keywords: 
+Time-domain
+, 
+       Surveys
+, 
+       Transient
+, 
+       Supernova
+, 
+       Optical
+, 
+       Methods
+Abstract: 
+The Zwicky Transient Facility (ZTF) Bright Transient Survey (BTS) announces the start of fully automated spectroscopic classifications of SNe Ia using spectra obtained by the robotic Palomar 60-inch telescope with the SEDM instrument.
+The Zwicky Transient Facility (ZTF; Bellm et al. 2019; Graham et al. 2019) Bright Transient Survey (Fremling et al. 2020; Perley et al. 2020) announces the start of fully automated spectroscopic classifications of SNe Ia using spectra obtained by the robotic Palomar 60-inch telescope with SEDM (Blagorodnova et al. 2018; Rigault et al. 2019). The observations, data reduction, and classifications are  fully automated and results will be sent to TNS immediately when processing finishes during the night. The classifications are based on SNIascore, a deep learning method by Fremling et al. (in prep.). Initially we will employ a strict cut on SNIascore of 0.9, which translates into a false positive rate of < 0.5% based on testing with past SEDM data.
+Our first official automatic classification has been submitted for SN2021ijb.
+This report is Based on observations obtained with the 60-inch Telescope at the Palomar Observatory as part of the Zwicky Transient Facility project. ZTF is supported by the National Science Foundation under Grant No. AST-2034437 and a collaboration including Caltech, IPAC, the Weizmann Institute for Science, the Oskar Klein Center at Stockholm University, the University of Maryland, Deutsches Elektronen-Synchrotron and Humboldt University, the TANGO Consortium of Taiwan, the University of Wisconsin at Milwaukee, Trinity College Dublin, Lawrence Livermore National Laboratories, and 
+IN2P3
+, France. Operations are conducted by COO, IPAC, and UW. Alert distribution service provided by 
+DIRAC@UW
+. SED Machine is based upon work supported by the National Science Foundation under Grant No. 1106171. Alert filtering provided by the Fritz marshal, which is funded by the Moore Foundation, Heising Simons Foundation, National Science Foundation, NASA and the Packard Foundation.
+Related Objects:
+Show current TNS values
+Catalog
+Name
+Reported RA
+Reported DEC
+Reported Obj-Type
+Reported Redshift
+Host Name
+Host Redshift
+Remarks
+TNS RA
+TNS DEC
+TNS Obj-Type
+TNS Redshift
+TNS
+2021ijb [ZTF21aastazz]
+07:22:54.454
++46:29:44.04
+SN Ia
+0.053
+07:22:54.454
++46:29:44.04
+SN Ia
+0.053
+Comments
+Copyright © 2015
+Built by 
+klido.net

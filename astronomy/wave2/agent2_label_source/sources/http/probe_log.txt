@@ -1,0 +1,30 @@
+2026-09-16T18:48:00Z 403 https://www.wis-tns.org/object/2021ijb
+2026-09-16T18:48:00Z 000 https://wis-tns.org/object/2021ijb
+2026-09-16T18:48:01Z 403 https://www.wis-tns.org/astronotes/astronote/2021-122
+2026-09-16T18:48:01Z 403 https://www.wis-tns.org/system/files/tns_public_objects/tns_public_objects.csv.zip
+2026-09-16T18:48:02Z 403 https://www.wis-tns.org/api/get/object
+2026-09-16T18:48:02Z 403 https://www.wis-tns.org/search?name=2021ijb&format=csv
+2026-09-16T18:48:03Z 403 https://www.wis-tns.org/robots.txt
+2026-09-16T18:48:03Z 403 https://www.wis-tns.org/content/tns-getting-started
+2026-09-16T18:48:20Z 503 https://web.archive.org/cdx/search/cdx?url=wis-tns.org/object/2021ijb&output=json
+2026-09-16T18:48:25Z 503 https://web.archive.org/cdx/search/cdx?url=www.wis-tns.org/object/2021ijb*&output=json
+2026-09-16T18:48:28Z 429 http://archive.org/wayback/available?url=wis-tns.org/object/2021ijb
+2026-09-16T18:49:28Z 000 https://web.archive.org/cdx/search/cdx?url=wis-tns.org/astronotes/astronote/2021-122&output=json
+2026-09-16T18:50:58Z 302 https://web.archive.org/web/2021id_/https://www.wis-tns.org/object/2021ijb
+2026-09-16T18:51:03Z 503 https://web.archive.org/cdx/search/cdx?url=wis-tns.org/object/2021ijb&output=json
+2026-09-16T18:51:14Z 200 https://web.archive.org/web/20210413004847id_/https://www.wis-tns.org/object/2021ijb (followed) https://web.archive.org/web/2021id_/https://www.wis-tns.org/object/2021ijb
+2026-09-16T18:51:22Z 200 (followed) https://web.archive.org/web/2026id_/https://www.wis-tns.org/object/2021ijb
+2026-09-16T18:52:44Z 503 https://web.archive.org/cdx/search/cdx?url=sites.astro.caltech.edu/ztf/bts/explorer.php*&output=json&to=20210415&fl=timestamp,original,statuscode,length&limit=200
+2026-09-16T18:52:55Z 302 https://web.archive.org/web/20210414id_/https://sites.astro.caltech.edu/ztf/bts/explorer.php location: https://web.archive.org/web/20210513221533id_/https://sites.astro.caltech.edu/ztf/bts/explorer.php
+2026-09-16T18:52:59Z 302 https://web.archive.org/web/20210414id_/http://sites.astro.caltech.edu/ztf/bts/explorer.php location: https://web.archive.org/web/20210513221533id_/https://sites.astro.caltech.edu/ztf/bts/explorer.php
+2026-09-16T18:53:02Z 302 https://web.archive.org/web/20200101id_/https://sites.astro.caltech.edu/ztf/bts/explorer.php location: https://web.archive.org/web/20210128125321id_/https://sites.astro.caltech.edu/ztf/bts/explorer.php
+2026-09-16T18:53:06Z 302 https://web.archive.org/web/20200101id_/http://sites.astro.caltech.edu/ztf/bts/explorer.php location: https://web.archive.org/web/20210128125321id_/https://sites.astro.caltech.edu/ztf/bts/explorer.php
+2026-09-16T18:54:01Z 302 0.440539 https://web.archive.org/web/2026id_/https://www.wis-tns.org/object/2019zzz location: https://web.archive.org/web/20250709201554id_/https://www.wis-tns.org/object/2019zzz
+2026-09-16T18:55:22Z 302 https://web.archive.org/web/20210301id_/https://sites.astro.caltech.edu/ztf/bts/explorer.php location: https://web.archive.org/web/20210128125321id_/https://sites.astro.caltech.edu/ztf/bts/explorer.php
+2026-09-16T18:55:26Z 302 https://web.archive.org/web/20210325id_/https://sites.astro.caltech.edu/ztf/bts/explorer.php location: https://web.archive.org/web/20210513221533id_/https://sites.astro.caltech.edu/ztf/bts/explorer.php
+2026-09-16T18:55:29Z 200 https://web.archive.org/web/20210128125321id_/https://sites.astro.caltech.edu/ztf/bts/explorer.php 
+2026-09-16T18:55:33Z 200 GET-followed https://web.archive.org/web/20210128125321id_/https://sites.astro.caltech.edu/ztf/bts/explorer.php
+2026-09-16T19:07:26Z 200 https://web.archive.org/web/20260916id_/https://www.wis-tns.org/astronotes/astronote/2021-122 location: https://web.archive.org/web/20260116221821id_/https://www.wis-tns.org/astronotes/astronote/2021-122 
+2026-09-16T19:07:32Z 200 https://web.archive.org/web/20260916id_/https://wis-tns.org/astronotes/astronote/2021-122 location: https://web.archive.org/web/20260116221821id_/https://www.wis-tns.org/astronotes/astronote/2021-122 
+2026-09-16T19:07:36Z 000 https://web.archive.org/web/20260916id_/https://www.wis-tns.org/astronotes/astronote/2023-265 
+2026-09-16T19:07:40Z 000 https://web.archive.org/web/20260916id_/https://wis-tns.org/astronotes/astronote/2023-265 

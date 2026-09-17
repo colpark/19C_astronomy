@@ -1,0 +1,71 @@
+HTTP/2 302 
+server: nginx
+date: Wed, 16 Sep 2026 18:51:22 GMT
+content-type: text/plain; charset=utf-8
+content-length: 0
+x-archive-redirect-reason: found capture at 20241203053356
+location: https://web.archive.org/web/20241203053356id_/https://www.wis-tns.org/object/2021ijb
+server-timing: captures_list;dur=0.848787, exclusion.robots;dur=0.070929, exclusion.robots.policy;dur=0.046208, esindex;dur=0.012511, cdx.remote;dur=14.340124, LoadShardBlock;dur=143.092818, PetaboxLoader3.datanode;dur=51.514406, PetaboxLoader3.resolve;dur=26.457278
+x-app-server: wwwb-app206-dc6
+x-ts: 302
+x-tr: 180
+server-timing: TR;dur=0,Tw;dur=0,Tc;dur=1
+set-cookie: wb-p-SERVER=wwwb-app206; path=/
+x-location: All
+x-as: 43
+x-rl: 0
+x-na: 0
+x-page-cache: MISS
+server-timing: MISS
+x-nid: BNL-AS
+referrer-policy: no-referrer-when-downgrade
+permissions-policy: interest-cohort=()
+x-sd: 0
+
+HTTP/2 200 
+server: nginx
+date: Wed, 16 Sep 2026 18:51:22 GMT
+content-type: text/html; charset=utf-8
+x-archive-orig-date: Tue, 03 Dec 2024 05:34:00 GMT
+x-archive-orig-transfer-encoding: chunked
+x-archive-orig-connection: keep-alive
+x-archive-orig-server: Apache
+x-archive-orig-x-content-type-options: nosniff
+x-archive-orig-x-drupal-cache: MISS
+x-archive-orig-expires: Sun, 19 Nov 1978 05:00:00 GMT
+x-archive-orig-cache-control: public, max-age=0
+x-archive-orig-x-content-type-options: nosniff
+x-archive-orig-x-frame-options: SameOrigin
+x-archive-orig-x-rate-limit-limit: 10
+x-archive-orig-x-rate-limit-remaining: 9
+x-archive-orig-x-rate-limit-reset: 60
+x-archive-orig-content-language: en
+x-archive-orig-x-generator: Drupal 7 (http://drupal.org)
+x-archive-orig-link: </object/2021ijb>; rel="canonical",</node/105584>; rel="shortlink"
+x-archive-orig-etag: "1733204036-0"
+x-archive-orig-last-modified: Tue, 03 Dec 2024 05:33:56 GMT
+x-archive-orig-vary: Cookie,Accept-Encoding
+cache-control: max-age=1800
+accept-ranges: bytes
+memento-datetime: Tue, 03 Dec 2024 05:33:56 GMT
+link: <https://www.wis-tns.org/object/2021ijb>; rel="original", <https://web.archive.org/web/timemap/link/https://www.wis-tns.org/object/2021ijb>; rel="timemap"; type="application/link-format", <https://web.archive.org/web/https://www.wis-tns.org/object/2021ijb>; rel="timegate"
+content-security-policy: default-src 'self' 'unsafe-eval' 'unsafe-inline' data: blob: archive.org web.archive.org web-static.archive.org wayback-api.archive.org athena.archive.org analytics.archive.org pragma.archivelab.org wwwb-events.archive.org
+x-archive-src: archiveteam_urls_20241203053717_51c03f46/urls_20241203053717_51c03f46.1726247528.megawarc.warc.zst
+server-timing: captures_list;dur=0.514416, exclusion.robots;dur=0.037132, exclusion.robots.policy;dur=0.026370, esindex;dur=0.008199, cdx.remote;dur=19.612379, LoadShardBlock;dur=162.492358, PetaboxLoader3.datanode;dur=264.681063, PetaboxLoader3.resolve;dur=91.063242, load_resource;dur=290.609312, loaddict;dur=108.584342
+x-app-server: wwwb-app220-dc8
+x-ts: 200
+x-tr: 501
+server-timing: TR;dur=0,Tw;dur=0,Tc;dur=0
+set-cookie: wb-p-SERVER=wwwb-app220; path=/
+cache-control: private
+x-location: All
+x-as: 43
+x-rl: 0
+x-na: 0
+x-page-cache: MISS
+server-timing: MISS
+x-nid: BNL-AS
+referrer-policy: no-referrer-when-downgrade
+permissions-policy: interest-cohort=()
+x-sd: 0
+

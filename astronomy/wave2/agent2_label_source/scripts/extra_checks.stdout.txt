@@ -1,0 +1,26 @@
+STRONG-placed plain SN Ia by discovery year (descriptive, tier-1 fetched only, NOT a bound):
+        n  sniascore  share
+yr                         
+2017    1          1  1.000
+2018    1          0  0.000
+2019    2          1  0.500
+2021  394        191  0.485
+2022  370        247  0.668
+2023  309        153  0.495
+2024  269         94  0.349
+2025  337        112  0.332
+overall share 0.475 1683
+capture minus SNIascore report (days): quantiles {0.0: 0.0, 0.1: 77.60000000000002, 0.5: 568.0, 0.9: 1047.2, 1.0: 1866.0}
+SNIascore placements with capture < 30 d after report: 41
+E4-only objects: [{'ZTFID': 'ZTF19abfvovo', 'IAUID': 'SN2019loy', 'category': 'MEASURED', 'model': nan, 'fetch_status': 'ok'}]
+E2 objects: [{'IAUID': 'SN2021ijb', 'category': 'MODEL_ANNOTATION', 'model': 'SNIascore', 'strength': 'STRONG', 'fetch_status': 'ok'}, {'IAUID': 'SN2023vcx', 'category': 'MODEL_ANNOTATION', 'model': 'SNIascore', 'strength': 'STRONG', 'fetch_status': 'ok'}, {'IAUID': 'SN2023uxa', 'category': 'MODEL_ANNOTATION', 'model': 'SNIascore', 'strength': 'STRONG', 'fetch_status': 'invalid'}, {'IAUID': 'SN2023vcz', 'category': 'MODEL_ANNOTATION', 'model': 'SNIascore', 'strength': 'STRONG', 'fetch_status': 'ok'}, {'IAUID': 'SN2023uti', 'category': 'MODEL_ANNOTATION', 'model': 'SNIascore', 'strength': 'MODERATE', 'fetch_status': 'not_attempted'}, {'IAUID': 'SN2023vpd', 'category': 'MODEL_ANNOTATION', 'model': 'SNIascore', 'strength': 'MODERATE', 'fetch_status': 'not_attempted'}, {'IAUID': 'SN2023vwz', 'category': 'MODEL_ANNOTATION', 'model': 'SNIascore', 'strength': 'STRONG', 'fetch_status': 'ok'}, {'IAUID': 'SN2023wts', 'category': 'MODEL_ANNOTATION', 'model': 'SNIascore', 'strength': 'MODERATE', 'fetch_status': 'failed_retries'}, {'IAUID': 'SN2023xhc', 'category': 'MODEL_ANNOTATION', 'model': 'SNIascore', 'strength': 'MODERATE', 'fetch_status': 'not_attempted'}]
+old-discovery SNIascore: [{'IAUID': 'SN2017bde', 'discdate': '2017-02-21', 'peakt': 2056.78, 'e1_report_time': '2023-04-16 11:24:51'}, {'IAUID': 'AT2019czs', 'discdate': '2019-04-08', 'peakt': 2795.79, 'e1_report_time': '2025-04-25 08:11:43'}]
+syncatto measured by class {'SN Ia': 11}
+[{'IAUID': 'SN2021sic', 'class': 'SN Ia', 'evidence': "E1 capture 20240415005120: latest report 10322 'SN II' does not match BTS 'SN Ia' || E6:discovered 2021-07-06 >= 2021-04-15"}]
+no report on capture: 27
+E5 check: SNIascore report minus BTS peak (days), n=799
+{0.0: -16.7, 0.01: -14.0, 0.05: -11.2, 0.5: -2.5, 0.95: 8.0, 0.99: 14.0, 1.0: 553.7}
+reports > +30 d after peak: 2  > +60 d: 1
+          IAUID    peakt       e1_report_time     dd
+5433  SN2023gbn  1505.03  2023-04-24 05:40:52  553.7
+7188  SN2025fca  2773.85  2025-05-20 19:30:31   42.5

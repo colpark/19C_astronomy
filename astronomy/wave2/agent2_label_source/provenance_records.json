@@ -1,0 +1,92 @@
+[
+ {
+  "id": "w2a2-sniascore-lower",
+  "value": 803,
+  "referent": "lower bound on BTS plain 'SN Ia' labels whose current basis is a SNIascore automated TNS report",
+  "source": "astronomy/wave2/agent2_label_source/scripts/split_labels.py::bounds L; astronomy/wave2/agent2_label_source/definitions_FROZEN.md sha256 4f89ff6718a14ad4e45a6d33d6bde848448ba6a66d895bd970330efe397b37cf sec 6; Internet Archive captures of https://www.wis-tns.org/object/<name> via web/20260916id_/ (sources/tns_captures/fetch_log.jsonl, per-page sha256); E2 arXiv:2104.12980 sec 7 lines 876-878, arXiv:2401.15167 sec 5.1 raw lines 1580-1591",
+  "population": "plain 'SN Ia' rows of 7843 BTS rows with type != '-' (unique ZTFID, pre-clustering; Agent 1 owns clustering; 13 IAU names shared by 2 ZTFIDs)",
+  "adjudicator": "authenticated TNS classification reports per object",
+  "falsifier": "an authenticated report list returning fewer objects than this with a SNIascore latest report, or a human re-report after the capture date that replaces the SNIascore report of a counted object",
+  "banner": "calibration only, contamination FAIL on this cohort"
+ },
+ {
+  "id": "w2a2-sniascore-lower-strong",
+  "value": 799,
+  "referent": "lower bound using only E1 archived TNS pages (STRONG)",
+  "source": "astronomy/wave2/agent2_label_source/scripts/split_labels.py::bounds L_strong; Internet Archive captures of https://www.wis-tns.org/object/<name> via web/20260916id_/ (sources/tns_captures/fetch_log.jsonl, per-page sha256)",
+  "population": "plain 'SN Ia' rows of 7843 BTS rows with type != '-' (unique ZTFID, pre-clustering; Agent 1 owns clustering; 13 IAU names shared by 2 ZTFIDs)",
+  "adjudicator": "authenticated TNS classification reports per object",
+  "falsifier": "a rerun of split_labels.py on the same captures returning a different count, or a capture whose Classifier/s field is misparsed on inspection",
+  "banner": "calibration only, contamination FAIL on this cohort"
+ },
+ {
+  "id": "w2a2-sniascore-upper",
+  "value": 2247,
+  "referent": "upper bound on BTS plain 'SN Ia' labels that can be SNIascore annotation",
+  "source": "astronomy/wave2/agent2_label_source/scripts/split_labels.py::bounds U; astronomy/wave2/agent2_label_source/definitions_FROZEN.md sha256 4f89ff6718a14ad4e45a6d33d6bde848448ba6a66d895bd970330efe397b37cf sec 6 (E1, E4 capture sha256 30dbb78bd2d6379e3f3e5355ccd3eb50517e3bc2d597c396d46187f704dd47f1, E5 peakt < 1289.5)",
+  "population": "plain 'SN Ia' rows of 7843 BTS rows with type != '-' (unique ZTFID, pre-clustering; Agent 1 owns clustering; 13 IAU names shared by 2 ZTFIDs)",
+  "adjudicator": "authenticated TNS classification reports; the unexcluded remainder is dominated by objects whose archived capture was unavailable or did not match",
+  "falsifier": "any SNIascore-reported object among those excluded by E1/E4/E5 (E5 is WEAK: an SN Ia first classified by SNIascore more than 30 d after peak would exceed this bound; sensitivity without E5 = 2844)",
+  "banner": "calibration only, contamination FAIL on this cohort"
+ },
+ {
+  "id": "w2a2-count-measured",
+  "value": 884,
+  "referent": "labels whose latest matching archived TNS report names human classifier(s) and follows a public spectrum",
+  "source": "astronomy/wave2/agent2_label_source/scripts/split_labels.py::category; Internet Archive captures of https://www.wis-tns.org/object/<name> via web/20260916id_/ (sources/tns_captures/fetch_log.jsonl, per-page sha256); astronomy/wave2/agent2_label_source/definitions_FROZEN.md sha256 4f89ff6718a14ad4e45a6d33d6bde848448ba6a66d895bd970330efe397b37cf sec 2-4",
+  "population": "7843 BTS rows with type != '-' (unique ZTFID, pre-clustering; Agent 1 owns clustering; 13 IAU names shared by 2 ZTFIDs)",
+  "adjudicator": "authenticated TNS reports; the classifying group's own records (Fritz) for whether the human report was software-assisted",
+  "falsifier": "a counted object whose classifier is shown to be an automated pipeline (e.g. 'Atlas Syncatto' if SCAT documents it as automated), or a rerun returning a different count",
+  "banner": "calibration only, contamination FAIL on this cohort"
+ },
+ {
+  "id": "w2a2-count-model-annotation",
+  "value": 803,
+  "referent": "labels whose basis is an automated-classifier TNS report (SNIascore, CCSNscore or bot marker in Classifier/s) or a paper naming the object as SNIascore-classified",
+  "source": "astronomy/wave2/agent2_label_source/scripts/split_labels.py::category; Internet Archive captures of https://www.wis-tns.org/object/<name> via web/20260916id_/ (sources/tns_captures/fetch_log.jsonl, per-page sha256); astronomy/wave2/agent2_label_source/definitions_FROZEN.md sha256 4f89ff6718a14ad4e45a6d33d6bde848448ba6a66d895bd970330efe397b37cf sec 3 and 5",
+  "population": "7843 BTS rows with type != '-' (unique ZTFID, pre-clustering; Agent 1 owns clustering; 13 IAU names shared by 2 ZTFIDs)",
+  "adjudicator": "authenticated TNS reports",
+  "falsifier": "a human re-report after the capture date for a counted object, or a rerun returning a different count",
+  "banner": "calibration only, contamination FAIL on this cohort"
+ },
+ {
+  "id": "w2a2-count-photometric-only",
+  "value": 0,
+  "referent": "labels whose latest matching archived TNS report has no public spectrum on or before its time (MODERATE unless remarks state a photometric basis)",
+  "source": "astronomy/wave2/agent2_label_source/scripts/split_labels.py::category; Internet Archive captures of https://www.wis-tns.org/object/<name> via web/20260916id_/ (sources/tns_captures/fetch_log.jsonl, per-page sha256); astronomy/wave2/agent2_label_source/definitions_FROZEN.md sha256 4f89ff6718a14ad4e45a6d33d6bde848448ba6a66d895bd970330efe397b37cf sec 2 and 5",
+  "population": "7843 BTS rows with type != '-' (unique ZTFID, pre-clustering; Agent 1 owns clustering; 13 IAU names shared by 2 ZTFIDs)",
+  "adjudicator": "the classifying group's non-public spectra (Fritz/GROWTH Marshal)",
+  "falsifier": "a classifying spectrum found for a counted object that was not uploaded to TNS, or a rerun returning a different count",
+  "banner": "calibration only, contamination FAIL on this cohort"
+ },
+ {
+  "id": "w2a2-count-unresolved",
+  "value": 6156,
+  "referent": "labels no admissible public evidence places (UNDEMONSTRATED, not zero, not guessed)",
+  "source": "astronomy/wave2/agent2_label_source/scripts/split_labels.py::category; fetch status {\"not_attempted\": 5910, \"ok\": 1706, \"http_error\": 200, \"failed_retries\": 22, \"invalid\": 5}",
+  "population": "7843 BTS rows with type != '-' (unique ZTFID, pre-clustering; Agent 1 owns clustering; 13 IAU names shared by 2 ZTFIDs)",
+  "adjudicator": "authenticated TNS reports",
+  "falsifier": "a rerun of fetch_tns_captures.py (resumable) placing objects recorded here as not_attempted/http_error/failed_retries",
+  "banner": "calibration only, contamination FAIL on this cohort"
+ },
+ {
+  "id": "w2a2-ccsnscore-upper",
+  "value": 155,
+  "referent": "upper bound on CC-class labels that can be CCSNscore annotation (reporting start date UNDEMONSTRATED)",
+  "source": "astronomy/wave2/agent2_label_source/scripts/split_labels.py::cc_bound; arXiv:2412.08601 sec 6 lines 1089-1091; astronomy/wave2/agent2_label_source/definitions_FROZEN.md sha256 4f89ff6718a14ad4e45a6d33d6bde848448ba6a66d895bd970330efe397b37cf sec 7",
+  "population": "BTS rows with type in the CCSNscore layer classes",
+  "adjudicator": "CCSNscore GitHub page reporting criteria and TNS reports",
+  "falsifier": "a CCSNscore TNS report measured on an object discovered before 2025-02-09 would fail the date margin (count found: 0)",
+  "banner": "calibration only, contamination FAIL on this cohort"
+ },
+ {
+  "id": "w2a2-refusal14-refuse",
+  "value": 92,
+  "referent": "Agent 1's 98 answer-in-seed objects whose class is stated in seed text (refusal 14 fires; exception unmet)",
+  "source": "astronomy/wave2/agent2_label_source/scripts/refusal14_rulings.py::rule; refusal14_locate.py; agent1_supply_corpus/corpus_ledger.json sha256 3c619a13072092707bc51721d80b147fd903357fcc8561589acff7185f7693e0",
+  "population": "98 ZTFIDs in corpus_ledger.answer_in_own_source",
+  "adjudicator": "a reader independent of both agents re-reading each locator window",
+  "falsifier": "a re-read of a locator window returning no stated class for an object ruled REFUSE, or a class stated for one ruled NOT_FIRED",
+  "banner": "calibration only, contamination FAIL on this cohort"
+ }
+]

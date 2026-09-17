@@ -1,0 +1,969 @@
+                                                 Draft version March 12, 2025
+                                                 Typeset using LATEX twocolumn style in AASTeX631
+
+
+
+
+                                                  CCSNscore: A multi-input deep learning tool for classification of core-collapse supernovae using
+                                                                                    SED-Machine spectra
+                                                        Yashvi Sharma ,1 Ashish A. Mahabal ,1, 2 Jesper Sollerman ,3 Christoffer Fremling ,4
+                                                   S. R. Kulkarni ,1 Nabeel Rehemtulla ,5, 6 Adam A. Miller ,7, 6 Marie Aubert,8 Tracy X. Chen ,9
+                                                 Michael W. Coughlin ,10 Matthew J. Graham ,1 David Hale,4 Mansi M. Kasliwal ,1 Young-Lo Kim ,11
+                                                   James D. Neill ,4 Josiah N. Purdum ,4 Ben Rusholme ,9 Avinash Singh ,3 and Niharika Sravan12
+arXiv:2412.08601v2 [astro-ph.IM] 11 Mar 2025
+
+
+
+
+                                                        1 Division of Physics, Mathematics and Astronomy, California Institute of Technology, Pasadena, CA 91125, USA
+                                                               2 Center for Data Driven Discovery, California Institute of Technology, Pasadena, CA 91125, USA
+                                                         3 Department of Astronomy, The Oskar Klein Center, Stockholm University, AlbaNova, 10691 Stockholm, Sweden
+                                                                  4 Caltech Optical Observatories, California Institute of Technology, Pasadena, CA 91125, USA
+                                                        5 Department of Physics and Astronomy, Northwestern University, 2145 Sheridan Road, Evanston, IL 60208, USA
+                                                  6 Center for Interdisciplinary Exploration and Research in Astrophysics (CIERA), Northwestern University, 1800 Sherman Ave,
+
+                                                                                                   Evanston, IL 60201, USA
+                                                         7 Department of Physics and Astronomy, Northwestern University, 2145 Sheridan Rd, Evanston, IL 60208, USA
+                                                                   8 Université Clermont Auvergne, CNRS/IN2P3, LPCA, F-63000 Clermont-Ferrand, France
+                                                                 9 IPAC, California Institute of Technology, 1200 E. California Blvd, Pasadena, CA 91125, USA
+                                                               10 School of Physics and Astronomy, University of Minnesota, Minneapolis, Minnesota 55455, USA
+                                                                              11 Department of Physics, Lancaster University, Lancs LA1 4YB, UK
+                                                                           12 Department of Physics, Drexel University, Philadelphia, PA 19104, USA
+
+
+
+                                                                                                         ABSTRACT
+                                                          Supernovae (SNe) come in various flavors and are classified into different types based on emission
+                                                       and absorption lines in their spectra. SN candidates are now abundant with the advent of large
+                                                       systematic sky surveys like the Zwicky Transient Facility (ZTF), however, the identification bottleneck
+                                                       lies in their spectroscopic confirmation and classification. Fully robotic telescopes with dedicated
+                                                       spectrographs optimized for SN follow-up have eased the burden of data acquisition. However, the
+                                                       task of classifying the spectra still largely rests with the astronomers. Automating this classification
+                                                       step reduces human effort and can make the SN type available sooner to the public. For this purpose, we
+                                                       have developed a deep-learning based program for classifying core-collapse supernovae (CCSNe) with
+                                                       ultra-low resolution spectra from the SED-Machine spectrograph on the Palomar 60-inch telescope.
+                                                       The program consists of hierarchical classification task layers, with each layer composed of multiple
+                                                       binary classifiers running in parallel to produce a reliable classification. The binary classifiers utilize
+                                                       RNN and CNN architecture and are designed to take multiple inputs to supplement spectra with g- and
+                                                       r-band photometry from ZTF. On non-host-contaminated and good quality SEDM spectra (“gold” test
+                                                       set) of CCSNe, CCSNscore is ∼94% accurate in distinguishing between hydrogen-rich (Type II) and
+                                                       hydrogen-poor (Type Ibc) CCSNe. With light curve input, CCSNscore classifies ∼ 83% of the gold set
+                                                       with high confidence (score ≥ 0.8 and score-error < 0.05), with ∼ 98% accuracy. Based on SNIascore’s
+                                                       and CCSNscore’s real-time performance on bright transients (mpk ≤ 18.5) and our reporting criteria,
+                                                       we expect ∼ 0.5% (∼ 4) true SNe Ia to be misclassified as SNe Ibc and ∼ 6% (∼ 17) of true CCSNe
+                                                       to be misclassified between Type II and Type Ibc annually on the Transient Name Server.
+
+                                                                 1. INTRODUCTION                                      Wide-field optical transient surveys are already find-
+                                                                                                                    ing supernova (SN) candidates in record numbers
+                                                                                                                    (Shappee et al. 2014, ASAS-SN; Chambers et al. 2016,
+                                               Corresponding author: Yashvi Sharma                                  PS1; Tonry et al. 2018, ATLAS; Bellm et al. 2019; Gra-
+                                               yssharma@astrocaltech.edu                                            ham et al. 2019; Dekany et al. 2020, ZTF) which will
+                                                                                                                    increase by tenfold in the era of the Rubin Observa-
+                                                                                                                    tory (Ivezić et al. 2019). A supernova candidate be-
+2                                                       Sharma et al.
+
+coming a secure SN identification involves many steps.          and is easy to install and use, it did not perform well
+Taking the example of ZTF, the transient ‘alerts’ from          on ultra-low resolution spectra (R ∼ 100) when tested
+ZTF (Patterson et al. 2019) are filtered by alert manage-       in Fremling et al. (2021); Kim et al. (2024).
+ment frameworks (e.g. Fritz (van der Walt et al. 2019;             Thus, SNIascore (Fremling et al. 2021) – a deep-
+Coughlin et al. 2023), AMPEL (Nordin et al. 2019), etc.)        learning based binary classifier was developed specifi-
+to obtain potential SN candidates from the slurry of            cally for classifying SNe Ia using the spectra taken by
+transients, variable stars, moving solar system objects,        SED-Machine (Ben-Ami et al. 2012; Blagorodnova et al.
+and bogus artifacts. These candidates are visually in-          2018; Rigault et al. 2019; Kim et al. 2022), an ultra-
+spected for spectroscopic follow-up candidates; however,        low resolution (R∼ 100) IFU spectrograph operating
+this step can be automated depending on survey needs            in the optical wavelength range (3800 Å – 9150 Å) on
+as demonstrated in Rehemtulla et al. (2024) (BTSbot).           the fully robotic Palomar 60-in telescope (P60; Cenko
+Finally, the selected candidates are assigned to various        et al. 2006). The need for SNIascore was motivated
+telescope facilities to obtain secure spectroscopic classifi-   by the ZTF Bright Transient Survey (BTS; Fremling
+cations, but as follow-up resources are limited, this step      et al. 2020; Perley et al. 2020; Rehemtulla et al. 2024);
+becomes the primary bottleneck. Still, dedicated SN             a flux-limited survey to spectroscopically classify bright
+classification instruments and programs (e.g., Ben-Ami          transients (mpeak < 18.5) detected by ZTF with > 90%
+et al. 2012; Blagorodnova et al. 2018, SEDM; Smartt             completeness. With SEDM’s resolution on the moderate
+et al. 2015, ePESSTO; Howell 2019, The Global Su-               aperture of P60, it is uniquely suited for bright transient
+pernova Project) take spectra of a few thousand SNe             classification and thus became the main workhorse in-
+per year, which are then analyzed by astronomers, as-           strument for BTS, as well as the top classifier on TNS.
+signed a classification and then sent to the Transient          SNIascore was optimized to classify SNe Ia with more
+Name Server (TNS1 ). Some programs exist that are               than 90% accuracy at less than 0.6% false positive rate
+meant to support astronomers in the manual SN clas-             (FPR), and with this performance automated half of
+sification task, such as SuperNova IDentification soft-         the manual classification workload for BTS. SNIascore
+ware (SNID; Blondin & Tonry 2007), Superfit (How-               has allowed BTS to send robust SN Ia classifications
+ell et al. 2005), NGSF (Goldwasser et al. 2022), Gelato         to the TNS within ∼ 11 minutes of acquisition. To-
+(Harutyunyan et al. 2008), all based on either template         gether, BTSbot and SNIascore enabled the first fully au-
+cross-correlation techniques (Tonry & Davis 1979) or            tomatic end-to-end discovery and classification of an op-
+minimization algorithms. These programs often require           tical transient (Rehemtulla et al. 2023).
+user input (initial guesses for redshift, age, restriction         As (normal) SNe Ia are quite homogeneous in their
+of parameter search ranges, etc.) to obtain correct clas-       spectral and photometric properties, it is a binary
+sifications. Still, they can be less effective because of       classification problem suited for deep learning. Also,
+host contamination (in SNID) or poor signal-to-noise ra-        SNe Ia are the most abundant type of supernova iden-
+tio (SNR). Moreover, template-matching techniques are           tified in flux-limited surveys like BTS, thus providing a
+slow to run on thousands of spectra, suffer from type-          large sample sufficient for training deep learning models.
+attractor issues if one kind of template dominates the          Core-collapse (CC) supernovae, however, are more het-
+template bank, and are less accurate when automated             erogeneous, with some CCSNe even transitioning to a
+(Kim et al. 2024). With the advent of deep learning             different spectral type over time or developing late-time
+techniques and the dedicated influx of spectral data, so-       interaction signatures (Milisavljevic et al. 2015; Chen
+phisticated deep learning-based models can be trained           et al. 2018; Sollerman et al. 2020; Sharma et al. 2024;
+to automatically and reliably classify the most common          Kangas et al. 2024). In BTS (Perley et al. 2020), the
+SN types. Muthukrishna et al. (2019) presented DASH             most abundant class among CCSNe is the hydrogen-
+(Deep Learning for the Automated Spectral Classifica-           rich Type II SNe (∼ 72%) followed by the hydrogen-
+tion of Supernovae and their Hosts), trained on SNID            poor Type I or stripped-envelope SNe (SESNe). Within
+template dataset (which contains intermediate resolu-           the hydrogen-rich Type II class, the most common
+tion spectra) and tested on the OzDES (Yuan et al. 2015;        (∼ 76%) are the spectroscopically “normal” subtypes
+Childress et al. 2017) dataset, also from intermediate          (SNe IIP/L) showing strong P-Cygni Balmer line pro-
+resolution (R ∼ 1400) spectrographs. Though DASH                files, with the rest (SNe IIb, IIn, and SLSN-II) con-
+showed promising performance on the OzDES test set              tributing ∼ 24% combined. Within the Type I SESNe,
+                                                                SNe Ibc consitute ∼ 59%, SNe Ic-BL make up ∼ 19%,
+    1 https://www.wis-tns.org/
+                                                                SLSN-I are ∼ 13% and the rest are the rare SNe Ibn and
+                                                                SNe Icn (SN subtype fractions referenced from Perley
+                                                                                                                          3
+
+et al. 2020). This is a highly unbalanced dataset with the   1546 unique transients. The training data consists of
+rarer subtypes only having a handful of examples, not        a broad range of spectral quality, from poor to great
+nearly enough for training a deep-learning model. The        SNR (excluding extremely noisy cases), various levels of
+problem is compounded by varying levels of noise in the      host galaxy contamination, and various strengths of the
+spectra and the classification being inherently difficult    emission and absorption features (including completely
+for some subtypes with ultra-low resolution spectra (for     featureless spectra), so that the models can learn to ex-
+example, the ‘n’ in IIn and Ibn refers to ‘narrow’ spec-     pect all kinds of observed data and do not overfit on
+tral lines of ∼ 100 km s−1 , impossible to resolve with a    only good quality of data. The test data containing
+resolution of R ∼ 100). For these reasons, developing a      1535 SEDM spectra also shows this wide variety of spec-
+high-performing and reliable automated spectral classi-      tral quality. To assess the model performance on good
+fier for CCSNe using just the SEDM data is challenging.      vs. bad (unclassifiable or difficult to classify) quality
+   This work attempts to face this challenge and presents    spectra, we split the test data into “gold” and “bronze”
+a deep learning-based program – CCSNscore, designed          categories semi-automatically through a combination of
+specifically for CCSN classification, trained with SEDM      parameter thresholding and visual inspection. The clas-
+spectral data, Open SN Catalog (Guillochon et al. 2017)      sifiability of a spectrum depends not just on the noise
+spectral data, and ZTF photometry. The data prepara-         and SNR but also on the presence of broad supernova
+tion and preprocessing are described in §2, the applica-     features (or similarity to SNe), which SNID encapsu-
+tion structure and model architecture are described in       lates well. We found that the number of “good” SNID
+§3, the training and optimization process is outlined in     matches with an 2 rlap > 4 (referred to as numSN ID
+§4 and the performance on the test set is detailed in        henceforth) serves well as a discriminator for gold vs.
+§5. We explore the limitations and caveats of this tool      bronze split. We found numSN ID ≥ 20 appropri-
+in §7. The CCSNscore software, trained models pre-           ate for crudely separating spectra with clear supernova
+sented in this paper, and the metadata of training and       features and decent SNR. Next, we visually inspected
+test datasets are available on the GitHub repository of      all Type Ibc (hydrogen-poor) spectra in the test sam-
+CCSNscore.                                                   ple to identify spectra with severe host contamination.
+                                                             If the host galaxy has strong typical narrow emission
+                     2. DATASET                              lines (Hα, O III), they show up as blended emission
+                                                             lines in SEDM spectra due to the ultra-low resolution
+   Initially, we started our study with the SEDM spec-
+                                                             and appear just like the features of a SN II or SN IIn
+tra of BTS transients used in Fremling et al. (2021) for
+                                                             in SEDM spectra, making automatic identification of
+SNIascore that are not SNe Ia (‘non-Ia’) and collected
+                                                             the host-contaminated Type Ibc SNe extremely difficult.
+between March 2018 and August 2020. We kept the
+                                                             We keep all of the visually identified host-contaminated
+BTS sample spectra published in Fremling et al. (2020)
+                                                             samples in the bronze set. Finally, the gold (bronze)
+in the test set along with the spectra of a few pecu-
+                                                             test set has a total of 780 (755) SEDM spectra of 431
+liar CCSNe and put the rest in the training set. We
+                                                             (369) unique ZTF transients. The split comes out to be
+made sure that all spectra belonging to a transient were
+                                                             nearly 50%.
+present in only one of the sets. We updated the dataset
+                                                                The properties of the (non-augmented) training and
+a few times as more spectra were collected through BTS,
+                                                             test set samples are shown in Figure 1. From the sub-
+until March 2024. We also added optical spectra from
+                                                             type distribution plots in Figure 1 (top row), it is imme-
+the Open SN Catalog and resampled them to match the
+                                                             diately obvious that there is a significant imbalance be-
+resolution of the SEDM spectra. Because we wanted
+                                                             tween the subsamples of the hydrogen-rich (Type II) and
+to test the performance primarily on SEDM data, we
+                                                             the hydrogen-poor (Type Ibc) SNe. To correct this im-
+put all of the Open SN Catalog spectra of SNe that had
+                                                             balance, we augment the data with fake spectra for each
+an unambiguous and non-peculiar classification in the
+                                                             subtype by randomly choosing pairs of samples (of that
+training set. Then, we split the newer SEDM spectra of
+                                                             subtype) around similar ages, transforming their wave-
+ZTF transients into training and test sets such that the
+                                                             lengths to rest-frame (deredshifting), and taking their
+final ratio of test samples to training samples per major
+                                                             weighted average (random weights). The number of fake
+subtype would be between 10% to 30%. We put most
+                                                             samples to create per subtype can be chosen during the
+of the stripped-envelope SNe with ambiguous subtype
+                                                             data preprocessing step. The fake samples are added
+(Type Ib/c) in the test set.
+   There are 8563 unique spectra in our training set,
+                                                               2 rlap is a SNID parameter indicating the goodness of a template
+of which 3015 are SEDM spectra of 1222 unique ZTF
+transients and 5548 are Open SN Catalog spectra of              fit
+4                                                       Sharma et al.
+
+
+
+
+Figure 1. Distribution of properties of the training and test sets (gold and bronze). The first row contains pie charts depicting
+the highly imbalanced distribution of samples by CCSN subtype. The next four rows depict the property distribution for
+hydrogen-rich (Type II in blue) and hydrogen-poor (Type Ibc in red) SN samples separately, with the second row showing
+spectral phase distribution, the third row showing the distribution of the number of spectra per unique SN, the fourth row
+showing redshift distribution of the unique SNe and the fifth row showing the peak apparent magnitude distribution of unique
+SNe. The mean values of all distributions are marked with dotted vertical lines.
+                                                                                                                     5
+
+to the real data to balance the distribution of training      supplied with the Open SN catalog spectra. We also
+samples across categories for a given classification task.    added another method of providing the light curves by
+The second row of Figure 1 shows the spectral phase           transforming them into “δm − δt” phase space (Maha-
+(days from maximum brightness at the time of spec-            bal et al. 2017). The δm − δt representation takes all
+tral observation) distribution. The time of maximum           pairs of light curve points and maps them to a 2D space
+brightness is not always equal to the peak brightness of      with the y-axis being the magnitude difference and the
+the SN as photometric coverage is sparse for many SNe         x-axis being the time difference (in days) between the
+in the dataset, often missing the rise and the peak. The      two points. This 2D space can potentially capture the
+mean (sigma-clipped) of the H-rich SNe phase distribu-        different rise and decline rates of various subtypes. The
+tion is around the maximum brightness while it is after       program offers optional usage of these additional chan-
+the maximum brightness for the H-poor SNe phase dis-          nels for training. Further details on data preprocessing
+tribution for all three sets (training, gold test, bronze     are described in the sections below. Figure 2 shows ex-
+test). The standard deviation of the H-rich distribution      amples of input data samples for the various subtypes. A
+is also higher than the H-poor distribution for all three     data “sample” in this study refers to one spectrum with
+sets, which reflects the naturally longer duration of H-      its corresponding g, r light curves, and their δm−δt rep-
+rich SNe resulting in more follow-up observations. The        resentations. Note that there can be multiple spectra of
+third row of Figure 1 depicts the distribution of the num-    the same supernova but each spectrum is counted as an
+ber of spectra per unique supernova, the mean of which        individual sample. We have split the Type IIb class into
+is centered around 2–3 spectra per SN. The training set       ‘IIb-H’ (spectra at phases in which Hα P-Cygni dom-
+has more SNe with thorough spectral series data (> 10         inates) and ‘IIb-noH’ (spectra at phases when the Hα
+spectra) owing to the dataset from the Open SN Cat-           feature has weakened and turned towards the nebular
+alog. The test sets, being exclusively SEDM only have         phase) to put in the H-rich and H-poor classes. Ex-
+< 10 SNe per set that have ≥ 10 spectra, not significant      cept the IIn and IIb-noH examples all shown examples
+to affect the performance. These multiple spectra also        are representative of spectra taken near peak-light and
+probe various levels of noise, effects of varying sky back-   are good quality, not host-contaminated SEDM spec-
+ground, and age of the SNe and thus in a way are unique       tra that show strong and clear SN features. However,
+to the models. The fourth and fifth rows show the red-        as mentioned earlier, the training samples span a wide
+shift and peak apparent magnitude distributions of the        range of SNR and SN feature strengths.
+unique SNe. The redshifts are of the host-galaxy of the
+SNe when available through the NED database or de-                               2.1. Preprocessing
+rived from the SNe classification spectra. The peak ap-                         2.1.1. Optical spectra
+parent magnitude distribution shown in the last row of
+                                                                All spectra are deredshifted using the redshifts ob-
+Figure 1 is highly dependent on the photometric cover-
+                                                              tained from the GROWTH Marshal and Fritz for
+age quality as mentioned earlier. The peak magnitudes
+                                                              ZTF transients and the Open SN Catalog for the rest.
+were obtained from the BTS sample explorer page when
+                                                              Though SEDM spectra cover the wavelength range be-
+available or derived from the interpolated light curves.
+                                                              tween 3700 Å and 9200 Å the bluest part of the spectra
+The distributions center around 18 mag, and for the test
+                                                              have been observed to be noisy. Therefore, we restrict
+data drop sharply around 19 mag as that is the maxi-
+                                                              the deredshifted wavelength range from 4200 Å to 9200
+mum depth attainable by SEDM for reasonable exposure
+                                                              Å and interpolate the fluxes with a cubic spline func-
+times.
+                                                              tion to get fluxes at a fixed space wavelength array of
+   To further help with the classification task, we added
+                                                              256 points (to match the sampling across SEDM and
+the capability to use ZTF g- and r-band light curves
+                                                              Open SN catalog spectra) in the mentioned wavelength
+(Masci et al. 2019) as additional input channels. The
+                                                              range. This flux array is then median filtered, and nor-
+light curves can be supplied as fixed-length flux arrays
+                                                              malized, and any ‘nan’ values are converted to zero. We
+where the fluxes are taken from the first detection of the
+                                                              do not divide the spectra by the continuum as the con-
+transient in ZTF to a set number of days (by default 200
+                                                              tinuum also contains information relevant to supernova
+days past first detection). The fixed length of arrays is a
+                                                              classification.
+requirement of the model architecture. Both the SEDM
+spectra and ZTF light curves were queried from the dy-                         2.1.2. 1D light curves
+namic user interfaces, the GROWTH Marshal (Kasliwal
+                                                                 We take the 5σ detections from the ZTF g- and r-band
+et al. 2019) and Fritz (van der Walt et al. 2019; Cough-
+                                                              light curves and fit them using Gaussian process (GP)
+lin et al. 2023). No light curve information is currently
+                                                              regression with brightness as the dependent variable (in
+6                                                   Sharma et al.
+
+
+
+
+Figure 2. Training data samples representing the various transient types (rows). The first column shows the raw (red) and
+processed (black) normalized spectra, the second column shows the raw and GP-interpolated r- and g-band normalized light
+curves, and the third and fourth columns show δm − δt representations of the r- and g-band GP-interpolated light curves,
+respectively.
+                                                                                                                             7
+
+magnitudes) and phase from first detection as the inde-           (deredshifted) spectra with randomly chosen weights to
+pendent variable (in days). Interpolation is necessary            generate the synthetic spectrum. We also set the syn-
+as the cadence of the light curves is not constant and            thetic sample’s redshift to the weighted average of the
+there are gaps in the data due to weather, sun occulta-           pair’s redshifts. Then, we pick one of the light curves
+tion, and instrument downtime. We use a combination               from the pair, scale its flux to the new luminosity dis-
+of a radial basis function (RBF, also known as “squared-          tance (redshift), and use it to generate the synthetic 1D
+exponential”) kernel with length scale bounds between             interpolated light curves and their δm − δt representa-
+(20,200) days, and a White Kernel to characterize the             tions for the synthetic sample.
+noise. We interpolate magnitudes and magnitude errors
+between the first and last detection in 1 day bins. Since                3. PARALLEL BINARY CLASSIFIERS
+all the input samples to the model need to be of fixed
+                                                                     We used Keras (Chollet et al. 2015) Python library
+length, we pad the interpolated light curves with zeros
+                                                                  on top of TensorFlow (Abadi et al. 2015) framework
+if they are shorter than 200 days, and truncate if they
+                                                                  for this study. We initially started with a single mul-
+are longer. These fixed length magnitudes and mag-
+                                                                  ticlass model to classify all CCSN subtypes similar to
+nitude error arrays are then converted to linear fluxes
+                                                                  what is done in DASH (Muthukrishna et al. 2019). Dur-
+(erg s−1 cm−2 Å−1 ) and normalized. The light curves
+                                                                  ing early training and validation, although the overall
+are not redshifted or K-corrected to limit preprocessing
+                                                                  model accuracy was poor (∼50 %), we recognized that
+steps, especially the ones that rely on prior redshift be-
+                                                                  the H-rich subtypes (Type II) formed a group, better
+ing available. The final input that goes to the model is a
+                                                                  separated from the H-poor subtypes (Type Ibc) group.
+stacked array with fluxes at the 0th index and flux errors
+                                                                  Thus we decided to make an application divided into
+at the 1st index, with a shape of (200,2) per sample.
+                                                                  two hierarchical layers based on the current core-collapse
+                 2.1.3. δm − δt light curves                      SN classification scheme and use parallel binary classi-
+   From the interpolated light curves, we compute the             fiers (also known as the One vs. Rest strategy) in each
+magnitude and time (in days) difference for all pairs of          layer instead of a single multiclass model. Our applica-
+light curve points and create a 2D histogram with fixed           tion’s layer 1 has two binary classifiers, one trained for
+but non-uniform bin sizes in magnitude and phase space.           hydrogen-rich (H-rich) SNe and the second for hydrogen-
+The bin intervals are decided based on the magnitude              poor (H-poor) SNe. Though this could have been a sin-
+ranges that our transients span and their typical dura-           gle binary classifier task, we train two parallel classifiers
+tion timescales. The magnitude bin edges are [−4.5, −3,           for an added layer of robustness. Layer 2a has three bi-
+−2.5, −2, −1.5, −1.25, −0.75, −0.5, −0.3, −0.2, −0.1,             nary classifiers for three major subtypes of H-rich SNe
+−0.05, 0, 0.05, 0.1, 0.2, 0.3, 0.5, 0.75, 1.25, 1.5, 2, 2.5, 3,   (II – normal Type II spectra, IIb-H – IIb spectra with
+4.5] mags, and the phase bin edges are [0, 24    1    4
+                                                   , 24 , 0.25,   hydrogen present, IIn – narrow lines from interaction)
+0.5, 0.75, 1, 2, 3, 6, 9, 12, 15, 24, 33, 48, 63, 72, 96,         and layer 2b also has three models for major subtypes
+126, 153, 180, 216, 255, 300] days. The shape of these            of H-poor SNe (Ib, Ic, Ic-BL). In total, we have 8 binary
+2D histogram inputs is (24,24) per sample. Examples               classification tasks.
+of δm − δt histograms for the SN subtypes are shown in               The number of samples in the training and test sets
+Figure 2.                                                         for each layer is outlined in Table 1. The number inside
+                                                                  brackets in the ‘training samples’ column in Table 1 is
+          2.1.4. Simulated data for augmentation                  the real number of training samples of that class, and the
+   The number of synthetic samples to create per sub-             number outside brackets is the total training samples in-
+type is specified during the preprocessing step. For a            cluding the augmented data. The number of augmented
+given subtype, we create two subsets from its training            samples added to each class is such that the total num-
+samples depending on the phase of the spectrum, the               ber of samples is roughly balanced across all classes in
+first subset (early-time phase) contains spectra taken            that layer, making the training samples of the sub-layers
+before the light curve maximum, and the second subset             2a and 2b not add up to the respective layer 1 numbers.
+(photospheric phase) has spectra taken after the light            The gold vs. bronze test set evaluation is only done for
+curve maximum till the SN becomes nebular. We use                 layer 1.
+the early-time subset to create 30% of the total syn-                The architecture of a single binary classifier model
+thetic samples and the photospheric subset for the re-            that we arrived at after the optimization process de-
+maining 70%. To make a synthetic sample, we randomly              scribed in Section 4 is shown in Figure 3. The models
+choose pairs of samples from a subset without replace-            can be trained with up to five input channels, one for
+ments and take the weighted average of their rest-frame           1D optical spectra (the only required channel), two for
+8                                                    Sharma et al.
+
+
+
+
+Figure 3. Multi-channel network architecture of CCSNscore. We found two bidirectional LSTM layers optimal for the spectrum
+channel, and three LSTM layers optimal for the light curve channels.
+
+1D ZTF light curves (LC; r and g bands), and two for            For δm − δt we decided to use 2D CNN layers. We
+the δm − δt representations of the 1D light curves. The         used a 10% dropout rate3 in between NN layers to
+multiple inputs are processed through separate network          tackle overfitting of the data. These initial models were
+paths concatenated at the end, and the output is passed         compiled with the Adam optimizer (initial learning rate,
+through a final dense layer with a sigmoid activation           lr = 0.001) and BinaryCrossentropy loss. The models
+function to generate the final output probabilities. We         were trained on H-rich and H-poor classification tasks
+experimented with several configurations by varying the         with a batch size4 of 32, a validation split5 of 33%, and
+kind of neural network layers in the channels and the           an early stopping criteria6 (patience value of 7 on valida-
+number of layers per channel to arrive at the base archi-       tion loss). Validation accuracy and precision were used
+tecture and then optimized its hyperparameters.                 to decide the best model. We found that bi-LSTM lay-
+                                                                ers performed best for the spectral channel and LSTM
+        4. OPTIMIZATION AND TRAINING                            layers performed best for the 1D light curve channel, as
+
+  For the first step of the optimization process, we kept
+                                                                  3 Percentage of nodes intentionally dropped from the neural net-
+the number of NN layers constant (two per channel)
+and trained several models varying just the NN layer               work to prevent overfitting
+                                                                  4 The number of samples used in one training pass of the network
+type. For spectra and 1D light curves, we decided to              5 Percentage of training data to be used for validation
+test 1D convolutional neural networks (CNN) and re-               6 A conditional criteria to stop the training of a model early if the
+current neural networks (RNN), specifically Gated Re-              loss does not decrease for a certain number (patience value) of
+current Unit (GRU), Long Short-Term Memory (LSTM)                  epochs.
+and bi-directional LSTM among the RNN layer types.
+                                                                                                                          9
+
+Table 1. Total number of samples in the training and test        Table 2. Hyperparameter ranges for tuning binary classi-
+sets per binary classifier. The total number of training sam-    fiers with kerastuner.
+ples (including augmented data) per class is listed outside
+brackets in the second column, while the real number of
+training samples is listed inside brackets. The number of                 Layers              Range            Step
+samples in the gold test set is listed outside brackets in the                                (units)         (units)
+third column while the number of samples in the bronze set
+is listed inside brackets for Layer 1. The amount of aug-               biLSTM                4 – 24             4
+mented data added to each classifier in a layer is such that             LSTM                 4 – 24             4
+the samples per class are roughly balanced.                            Conv 2D (1)            16 – 64           16
+                                                                       Conv 2D (2)             8 – 32            8
+                                                                         Dense                8 – 64             8
+  Classifier    # Training samples       # Test samples
+                                                                        Dropout              0.1 – 0.9          0.2
+                   Total (real)          Gold (bronze)
+
+
+                          Layer 1                                dation loss metric. For balanced training of the binary
+    H-rich          8478 (6025)             627 (536)
+                                                                 classifiers in case one class has more samples than the
+                                                                 other, we take all samples of the smaller class and choose
+    H-poor          8869 (2538)             153 (219)
+                                                                 an equal number of samples from the larger class for
+                          Layer 2a                               the first round of training. Then, we repeat the train-
+      II            6027 (4713)                911               ing by redrawing samples from the larger class without
+    IIb-H            5500 (471)                 80               substitution until enough samples are left in the larger
+     IIn            5999 (841)                 172
+                                                                 class or the training has been repeated 3 times. After
+                                                                 all the binary classifiers have been trained and saved,
+                          Layer 2b                               we predict the final classifications on the test sets. We
+      Ib            1761 (760)                 110               generate 100 predictions per sample with dropout en-
+      Ic            1775 (774)                 142               abled in the trained model (Monte Carlo Dropout tech-
+    Ic-BL           1844 (343)                 103               nique) and calculate the mean and standard deviation
+                                                                 of the 100 predicted probabilities to get the final pre-
+                                                                 dicted probability and the uncertainty on it. This is
+they captured the connections present within these se-           done for each sample to get predictions from each bi-
+rial data. We then optimized the number of NN layers in          nary classifier. We use the following scheme to get the
+each channel by varying them in one channel at a time            final classifications based on the probabilities given by
+between 1 to 4 NN layers, keeping the other channels             the parallel classifiers. The classifier that provides the
+and dropouts unchanged. The models were compiled,                maximum probability is chosen as the final class (and
+trained, and evaluated in the same manner as before and          the max probability as the final score) if the difference
+the optimal number of NN layers found per channel are            between the highest and the second highest probabili-
+shown in Figure 3. Next, with the help of kerastuner,            ties is more than the sum of their uncertainties. The
+we trained a grid of models varying the hyperparameter           remaining samples are assigned an ‘ambiguous’ classifi-
+values within the ranges listed in Table 2 to find the best-     cation and a score of zero.
+performing values. This tuning was done separately for              We also train sets of models for different input channel
+H-rich and H-poor binary classifiers (all input channels         combinations (input cases) for each binary classification
+used) and both classifiers settled to the same optimal           task to compare the contribution of the light curve input
+hyperparameters. We applied further manual tuning to             in different forms. The input cases are as follows: ‘only
+arrive at the final hyperparameter values shown in Fig-          spectra’, ‘spectra + 1D LC’, ‘spectra + δm − δt’, and
+ure 3. Our best-performing model favors high dropout             ‘spectra + 1D LC + δm − δt’ (all channels). The results
+rates similar to SNIascore. We found that the initial            of this comparison are presented in §5.
+learning rate of the Adam optimizer, lr = 0.001, and a
+mini-batch size of 64 performed well across all the binary                         5. PERFORMANCE
+classifiers.
+                                                                             5.1. Layer 1: H-rich vs. H-poor
+  For the final training of the binary classifiers, we use
+a validation split of 0.33, 100 epochs, and apply early            Figures 4 and 5 show the performance of the layer 1
+stopping criteria with a patience value of 7 on the vali-        classification task i.e. H-rich vs. H-poor. Figure 4a
+                                                                 shows results for the “only spectra” input case models
+10                                                        Sharma et al.
+
+
+
+
+                        (a) Results from binary classifiers trained only using the spectral input channel.
+
+
+
+
+           (b) Results from binary classifiers trained using all input channels, i.e. spectra, light curves, and δm − δt.
+Figure 4. Performance of layer 1 binary classifiers on gold and bronze test sets. Left Distribution of binary classifier predicted
+probabilities for positive class (blue) vs. negative class (red) for H-rich and H-poor classifiers. The gold test set distribution is
+depicted as filled bars and the bronze set distribution as empty steps. Right ROC curve from the two layer 1 binary classifiers
+(blue and red), with SNID (purple) and DASH (teal) for comparison. The gold set curves are depicted with solid lines and the
+bronze set curves with dotted lines. The black vertical dashed line marks a 2% false positive rate.
+                                                                                                                      11
+
+and Figure 4b for the “all channels” input case models.      If 2% FPR can be risked, ∼ 80 − 90% of both H-rich
+The left panel in both subfigures shows the distribution     and H-poor gold quality SNe can be sent to TNS using
+of probabilities predicted for the gold (filled bars) and    the best-performing models. For SNID this fraction is
+bronze (not filled bars) test sets, with blue bars denot-    only ∼ 10%. However, programs like SNID, as well as
+ing samples that belong to the class (positive) and red      Superfit (Howell et al. 2005) and Gelato (Harutyunyan
+bars for samples that do not (negative). For any good        et al. 2008)), were always meant to assist with the classi-
+binary classifier, this distribution should be highly bi-    fication process and thus perform best with manual user
+modal with the positive class getting the highest prob-      inputs, often providing more information than just the
+ability scores and the negative class getting the lowest.    classification (for example, age, fairly accurate redshift,
+Models of both input cases show such bimodal distribu-       similarity to historical SNe, host galaxy characteristics,
+tions, but the distribution is less sharp for the “only      etc.). A more appropriate comparison can be made with
+spectra” input case than for the “all channels” case.        DASH (Muthukrishna et al. 2019), which also employs
+Thus, adding the light curve inputs to model training        deep learning for automated classification purposes. In
+results in general higher predicted probabilities for the    Muthukrishna et al. (2019), DASH’s performance was
+positive class and lower predicted probabilities for the     tested on 212 spectra from OzDES ATELs released be-
+negative class. However, it also increases the predicted     tween 2015 and 2017 out of which 81% were SNe Ia,
+probabilities of the false positive cases.                   and DASH provided correct classifications for 93% of
+  The right panel in both subfigures of Figure 4 shows       the 212 SNe. However, the same performance of DASH
+the receiver operating characteristic (ROC) curve for        could not be attained on the SEDM spectra as tested in
+the two layer 1 classifiers (in blue and red lines) on the   Fremling et al. (2021). Kim et al. (2024) compared the
+gold and bronze test sets, along with the SNID (pur-         performance of SNID, NGSF (Goldwasser et al. 2022),
+ple lines) and DASH (teal lines) ROC curves for com-         and DASH on ∼ 4600 SEDM spectra and found the
+parison. A ROC curve depicts the true positive rate          automatic accuracy for five-class classification task (Ia,
+(TPR) vs. false positive rate (FPR) at all classification    II, Ibc, SLSN, notSN) to be ∼ 63% (SNID), ∼ 75%
+thresholds, which for our binary classifiers and DASH        (NGSF) and ∼ 62% (DASH). Particularly for CCSNe,
+are the predicted probabilities while for SNID are the       DASH achieved only ∼ 29% TPR at ∼ 3% FPR for Type
+rlap scores (see Appendix A for the method used to con-      II and ∼ 79% TPR at ∼ 32% FPR for Type Ibc, which
+struct SNID ROC curves). The SNID and DASH ROC               is not suitable for reporting classifications to TNS. We
+curves are calculated considering H-rich as the positive     see the same with DASH’s performance on our test sets,
+class. Our best classifiers achieve ≥ 90% TPR com-           which is ∼ 35% TPR for the gold set and ∼ 4% TPR
+pared to SNID’s ∼ 75% TPR at a FPR of 10% and                for the bronze set at a 2% FPR.
+DASH’s ∼ 65% TPR at a FPR of ∼ 6% on the gold set.              Figure 5 displays the confusion matrices (CMs) for the
+Similar behavior is observed for the bronze set, with our    gold and bronze test sets derived from the predictions of
+best classifier achieving 30–60% TPR versus SNID’s and       our layer 1 models (the four input cases). We present the
+DASH’s ∼ 10% TPR at a FPR of 10%.                            CM data in ‘number of samples’ instead of percentages
+  The addition of light curve inputs (both 1D LC and         to emphasize the number of misclassifications. The top
+δm − δt together) ends up reducing the performance of        row of CMs in both sub-figures (5a & 5b) are for the
+both classifiers on the gold set but improves the per-       gold set and the bottom row of CMs are for the bronze
+formance on the bronze set, especially for the H-rich        set. The four columns of matrices are for the four input
+case with its area-under-the-curve (AUC) being larger        cases (from left to right, ‘only spectra’, ‘spectra + 1D
+for the model trained on all channels (see solid and         LC’, ‘spectra + δm − δt’, and ‘spectra + 1D LC + δm −
+dashed lines in right panels of Figures 4b and 4a respec-    δt’). The ‘accuracy’ metric is printed under each CM.
+tively). This indicates that perhaps additional input is     Henceforth, ‘only spectra’, ‘spectra + 1D LC’, ‘spectra
+more suitable when the spectrum is of lesser quality, but    + δm − δt’, and ‘spectra + 1D LC + δm − δt’ input
+can lead to more inaccuracies and model confusion oth-       cases will be referred to as cases ‘S’, ‘SL’, ‘SD’, and
+erwise. This could be due to how the multi-input chan-       ‘SLD’ respectively.
+nels are concatenated in CCSNscore architecture (see            Figure 5a shows the CMs constructed by including all
+Figure 3), with the spectral channel getting less weight     samples of test sets without applying any quality cut on
+as more channels are added.                                  the predicted probabilities. As mentioned earlier in §4,
+  For directly sending classifications to TNS without hu-    the classifier that assigns the highest probability is cho-
+man intervention, a model with extremely low FPR is          sen as the class for a test sample if the difference between
+preferred, similar to SNIascore (Fremling et al. 2021).      the highest and the second highest probability is more
+12                                                          Sharma et al.
+
+
+
+
+     (a) CMs constructed using all of the test samples’ classifications. The ‘Ambi’ column contains samples for which H-rich
+     and H-poor classifiers assigned probabilities within their uncertainties. The overall classification accuracy for the gold set
+     is highest in the ‘only spectra’ case (without light curve addition), while for the bronze set is highest in the ‘spectra +
+     1D LCs’ case. The utility of light curve input is reflected better in Figure 5b when probability cuts are applied.
+
+
+
+
+     (b) CMs derived using only the test samples that pass confidence and uncertainty cuts. All the ambiguous cases get filtered
+     out with a strict probability cut. The fraction of the test set that qualifies these cuts is printed under each confusion
+     matrix. More bronze quality data gets reliable predictions when light curve inputs are used.
+Figure 5. Results from the layer 1 (H-rich vs. H-poor) models. The four columns of confusion matrices (CM) are for the four
+input cases — ‘only spectra’, ‘spectra + 1D LC’, ‘spectra + δm − δt’, and ‘spectra + 1D LC + δm − δt’. The top row of CMs
+in each subfigure is for the gold test set and the bottom row of CMs is for the bronze test set.
+                                                                                                                      13
+
+than the sum of their uncertainties, otherwise, the test       sented. Hence, we plan on using the Case S models for
+sample gets an ‘ambiguous’ tag. These ambiguous cases          real-time TNS reporting until the performance of partial
+occupy the third column in the CMs of Figure 5a. When          light curve input is characterized.
+spectral quality is good (gold set), the case S model per-        Table 3 further lists the following metrics that quan-
+forms better than other input cases, has the lowest num-       tify the performance of our layer 1 models:
+ber of false and ambiguous predictions, and the highest
+accuracy of 93.5% (see Figure 5a). When spectral qual-                                         TP + TN
+ity is poor (bronze set), all cases perform similarly with                   Accuracy =
+                                                                                         TP + FN + FP + TN
+case SL having slightly higher accuracy. The true use-                                      TP
+fulness of the light curve input can be seen in Figure 5b,       Precision (or Purity) =
+                                                                                         TP + FP
+which shows the CMs constructed from the subset of                                          TP
+the test sets filtered by cuts on predicted probability              TPR (or Recall) =                               (1)
+                                                                                         TP + FN
+(P ) and their uncertainties (Punc ) determined heuristi-                                   FP
+cally to obtain the most confident classifications. The                          FPR =
+                                                                                         FP + TN
+threshold cuts are P > 0.8, Punc < 0.05 for the gold set,                                2 × Precision × Recall
+and P > 0.9, Punc < 0.05 for the bronze set (slightly                          F1score =
+                                                                                           Precision + Recall
+stricter). The filtered subset fraction is printed under
+each matrix in Figure 5b. A high probability threshold           where T P stands for true positives, F P for false posi-
+reduces false positives and increases accuracy, but dis-       tives, F N for false negatives and T N for true negatives.
+cards the test samples that do not pass the threshold          Ambiguous cases were counted as F N for the TPR cal-
+cuts. From Figure 5b, we note that a higher fraction of        culation and T N for the FPR calculation.
+bronze test samples pass the cuts in cases SL, SD, and                      5.1.1. Layer 1 misclassifications
+SLD while maintaining high accuracies. For gold test
+                                                                  From Figure 5b, there are 3, 2, 10, and 6 samples of
+samples, this holds for case SL which has 82.8% confi-
+                                                               the H-poor class from the gold set that get misclassified
+dent classifications compared to 79.4% in case S. This
+                                                               as H-rich even with confidence cuts in cases S, SL, SD,
+increase in high-confidence classifications also slightly
+                                                               and SLD respectively. There are 14 unique misclassified
+increases false positives and negatives, which for the gold
+                                                               samples out of these 21, with some common samples
+set reduces the accuracy in case SL to 98% from 98.7%
+                                                               among cases, and the misclassifications share some sim-
+in case S. But for the bronze set the overall accuracy
+                                                               ilarities. The misclassifications in cases S and SL have
+in case SLD still increases. Thus, multi-input channel
+                                                               weak H-poor spectral line features with a strong blue
+models that can ingest auxiliary information relevant to
+                                                               continuum, making them look similar to early-time H-
+classification are better suited for lesser-quality spectral
+                                                               rich spectra. Out of the 10 misclassifications in case SD,
+data.
+                                                               2 are the same as case S, and the remaining 8 have ei-
+   A caveat with our models is that they were trained on
+                                                               ther long declining or peculiar light curves (unlike reg-
+spectra that had been deredshifted (transformed from
+                                                               ular Type Ibc SNe) possibly influencing the incorrect
+observed wavelengths to rest-frame wavelengths), and
+                                                               decision. Finally, of the 6 case SLD misclassifications,
+thus would require redshift information for real-time ap-
+                                                               3 are common with case SD, and the remaining 3 are
+plication. To analyze the effect of redshifting, we trained
+                                                               cases that completely lack g-band coverage.
+binary classifiers for H-rich and H-poor classes using
+                                                                  Similarly, 5, 11, 15, and 8 gold samples of the H-rich
+only the spectral channel and redshifted spectra. We
+                                                               class are misclassified as H-poor in cases S, SL, SD, and
+found that the classification accuracy for the whole set
+                                                               SLD respectively. Out of the 5 case S misclassifications,
+(gold + bronze) is ∼ 85.9%, the same as the perfor-
+                                                               3 are nebular spectra, 1 does not show Hα emission and
+mance of models trained on deredshifted spectra. This
+                                                               1 seems to be a genuine mistake. Out of the 11 case SL
+is expected as bi-directional LSTM layers are capable of
+                                                               misclassifications, 7 are nebular spectra from the same
+capturing dependencies in sequences in both directions
+                                                               supernova, SN 2023rky – a Type IIL (that have a sim-
+simultaneously.
+                                                               ilar light curve shape to H-poor SNe), 1 does not show
+   Another caveat with our models is that they were
+                                                               strong Hα emission, and the remaining 3 are genuine
+trained using the full duration of light curves but for
+                                                               mistakes. Nine of 15 Case SD misclassifications are also
+real-time application, only epochs up until the spectral
+                                                               from SN 2023rky, 2 do not show Hα emission and 4
+phase will be available (mostly early-time or pre-peak
+                                                               are genuine mistakes. For case SLD, 6 out of 8 mis-
+phase). Thus the real-time performance of the mod-
+                                                               classifications are from SN 2023rky and the remaining 2
+els using light curve input will be different than pre-
+                                                               are genuine mistakes. There are 20 unique misclassified
+14                                                     Sharma et al.
+
+Table 3. Performance metrics of the layer 1 task models on the gold and bronze test sets. The total accuracy in the final row
+shows the combined performance on the gold and bronze sets.
+
+
+                                  Only Spectra       Spectra + 1D LCs        Spectra + δm − δt       All channels
+                                    Case S                Case SL                 Case SD             Case SLD
+
+                                H-rich    H-poor      H-rich     H-poor       H-rich    H-poor    H-rich    H-poor
+
+                   F1 score     96.5%      90.3%      95.7%      88.5%        91.9%     78.4%      93.6%     80.3%
+                   Precision    99.0%      89.7%      99.3%      86.8%        96.7%     81.1%      96.8%     83.7%
+         Gold        TPR        94.1%      90.8%      92.3%      90.2%        87.6%     75.8%      90.6%     77.1%
+                     FPR         3.9%       2.6%       2.6%       3.3%        12.4%      4.3%      12.4%      3.7%
+                   Accuracy           93.5%                 91.9%                  85.3%                87.9%
+
+                   F1 score     86.1%     69.7%       87.7%     70.1%         85.4%     63.6%      86.9%     70.8%
+                   Precision    87.2%     85.4%       88.7%     84.5%         88.2%     87.9%      89.7%     90.7%
+         Bronze      TPR        85.1%     58.9%       86.8%     59.8%         82.6%     49.8%      84.3%     58.0%
+                     FPR        30.6%      4.1%       26.9%      4.5%         26.9%      2.8%      23.7%      2.4%
+                   Accuracy          77.5%                 78.9%                   73.1%                76.7%
+
+          Total    Accuracy           85.6%                  85.5%                 79.3%                82.4%
+
+samples across all cases (39 total) from 12 unique SNe,              and SLD have lower accuracies than in case S, with
+and 9 samples belong to just one SN.                                 case SD performing the worst. As SESN light curve
+  Considering the bronze set, there are many H-poor                  properties do not differ much among the subtypes, per-
+SNe misclassified as H-rich (Figure 5a), most of which               haps the extra input information lends to confusion in
+are because of host contamination. For example, 56 out               the models. On the other hand, SN II light curve prop-
+of the 67 bronze set misclassifications in case S are due            erties of normal Type II, IIb, and IIn at least show some
+to host contamination. The host-contamination cases                  variety, thus making the extra input marginally useful.
+are inherently difficult to classify with SEDM spectra               From Figure 6b, the case S accuracy is the highest at
+even with the help of SNID or NGSF, and thus often                   41.7%, but many misclassifications are among Ic and Ic-
+require intervention at the level of raw data reduction.             BL samples. If Ic and Ic-BL samples are considered just
+Another observation can be made from Figure 5a for the               one class (Ic) and accuracy is measured for a Type Ib
+ambiguous cases. The bronze set has more ambiguous                   vs. Type Ic classification, case S accuracy gets bumped
+classifications for all the input cases, with more H-rich            up to 58.7% including ambiguous samples. If ambiguous
+SNe classified as ambiguous (likely due to a higher oc-              samples are not considered, 72% of the total samples get
+currence of blue featureless spectra).                               a non-ambiguous (Ib or Ic) classification out of which
+                                                                     81.7% are correct. Though this might not be robust
+ 5.2. Layer 2: Sub-typing of H-rich and H-poor SNe                   enough for fully automated classification, the subtype
+   The performance of CCSNscore’s layer 2a and layer 2b              predictions from CCSNscore can be provided as addi-
+models which are trained for classification into subtypes            tional information with the TNS reports.
+of Type II and Type Ibc respectively are presented in
+Figure 6. The confusion matrices are created with the                        6. REAL-TIME IMPLEMENTATION
+full set instead of splitting into gold and bronze sets as              CCSNscore will be integrated into the current SEDM
+the rarer subsets already have limited samples. Look-                pipeline which already runs SNID and SNIascore. It will
+ing at the effect of light curve input on classification             be used in conjunction with SNIascore to infer the clas-
+accuracy, layer 2a (SN II subtypes; Figure 6a) seems                 sification for real-time application. The following sce-
+to benefit marginally from the light curve input (par-               narios are possible based on figure 4 of Fremling et al.
+ticularly δm − δt). While cases SL, SD, and SLD have                 (2021). First, ∼ 85% of true SNe Ia and ∼ 0.5% of
+fewer Type IIb-H and Type IIn samples misclassified as               true CCSNe are likely to pass SN Iascore > 0.6 cut,
+normal Type II, they also have more normal Type II                   which has generally been robust enough for automated
+misclassified as the ‘IIn’ or ambiguous.                             SN Ia classification reporting. Since CCSNscore has not
+   The opposite effect of light curve addition is seen for           been trained on SN Ia data, its performance on real
+layer 2b (SN Ibc subtypes; Figure 6b). Cases SL, SD,                 SNe Ia is unreliable, and thus using CCSNscore pre-
+                                                                                                                                15
+
+
+
+
+                               (a) Confusion matrices from the layer 2a (II, IIb-H, IIn) models.
+
+
+
+
+                                 (b) Confusion matrices from the layer 2b (Ib, Ic, Ic-BL) models.
+Figure 6. Confusion matrices for the whole test set derived from the layer 2 models. The four columns in subfigures are for the
+four input cases — ‘only spectra’, ‘spectra + 1D LC’, ‘spectra + δm − δt’, and ‘spectra + 1D LC + δm − δt’. These confusion
+matrices were constructed considering all of the test samples’ classifications.
+
+diction in this scenario will not help recover the 0.5%             SNe that might get sent to TNS goes down to ∼ 0.5%.
+true CCSNe. Therefore, CCSNscore predictions will not               From the BTS survey, ∼ 800 SNe with mpk ≤ 18.5 are
+be considered where SN Iascore > 0.6. Next, ∼ 12%                   expected to be classified as SNe Ia annually, which trans-
+true SNe Ia and ∼ 9.5% true CCSNe are likely to get                 lates to ∼ 24 SNe Ia getting a SN Iascore < 0.1 and only
+0.1 < SN Iascore < 0.6. In this scenario, a H-rich clas-            ∼ 4 SNe Ia per year passing the further TNS reporting
+sification by CCSNscore can mean host-contamination                 criteria, which is a small number objectively. There-
+in the spectrum (which should not be sent to TNS), a                fore, we will use this criteria (SN Iascore < 0.1) to fil-
+bad classification, or a true SN II. A H-poor classifica-           ter out potential CCSNe from SNe Ia and CCSN score,
+tion by CCSNscore does not provide any distinguish-                 and numSN ID quality criteria will be used to deter-
+ing information as SNe Ia are also hydrogen-poor. We                mine their automatic reporting eligibility. Note that
+will flag these cases for visual inspection and not report          these numbers may change over time based on the real-
+them automatically. In total, ∼ 10% of true CCSNe                   time performance of the classifiers, so we will adjust the
+will not meet automatic classification criteria during              thresholds later on if needed7 .
+real-time operations. Finally, ∼ 90% true CCSNe and                   As the performance of models that include light curve
+∼ 3% true SNe Ia will likely pass the SN Iascore < 0.1              input on only early-time light curve data has not been
+cut. The 3% SN Ia false negatives will comprise dif-                characterized, we will use the layer 1 ‘only spectra’
+ficult cases of host contamination, peculiar SNe Ia, or             model predictions for TNS reporting for now while
+bad classifications. From preliminary analysis, we found            we further analyze the light curve input performance.
+that with the strict threshold cuts on CCSN score and
+numSN ID that we apply for TNS reporting (described                    7 The current TNS reporting criteria cuts are posted on the CC-
+below), most of these SN Ia false negatives get filtered                SNscore GitHub page and will be updated there if any changes
+out and the number of true SNe Ia misclassified as CC-                  are made.
+16                                                     Sharma et al.
+
+Therefore, the CCSN score and CCSN scoreunc are                Table 4. Performance of the layer 1 ‘only spectra’ model
+the prediction probability and uncertainty on prediction       predictions on the test samples that pass the TNS reporting
+probability, respectively, obtained from the ‘only spec-       criteria. The true positive rate and precision values are re-
+                                                               ported separately by phase (≤ 10 days or > 10 days) and
+tra’ model for H-rich (Type II) vs. H-poor (Type Ibc)
+                                                               the true type (II and Ibc). The number of samples that pass
+task. The TNS reporting criteria will be as follows:           the different TNS criteria is shown in brackets in the first
+                                                               column.
+     1. For numSN ID ≥ 30: CCSN score > 0.8 and
+        CCSN scoreunc < 0.05
+                                                                    True class:          Type II            Type Ibc
+     2. For 20 ≤ numSN ID < 30: CCSN score > 0.9
+        and CCSN Scoreunc < 0.05                                        Phase:        ≤ 10d    > 10d     ≤ 10d    > 10d
+
+     3. For numSN ID < 20: CCSN score > 0.95 and                1.          TPR       99.7%    97.5%     83.2%    80.3%
+                                                                (634)     Precision   94.0%    92.8%     98.9%    92.4%
+        CCSN scoreunc < 0.05
+                                                                2.          TPR       100%     100%      87.5%     100%
+   The number of samples that pass the above three cri-         (49)      Precision   96.4%    100%      100%      100%
+teria in our full test set (1535 samples) are 634, 49, and
+275, respectively (62.4% of the full test set). Out of          3.          TPR       96.4%    95.7%     78.4%    81.8%
+these, 598, 48, and 255 are correct classifications, which      (275)     Precision   95.3%    91.8%     82.8%    90.0%
+corresponds to a ∼ 94% accuracy rate and 6% misclas-
+sifications. Among the SESNe in the full test set, 174,
+13 and 59 pass the three TNS reporting criteria respec-        layer 2b meant for classification between subtypes of
+tively, which corresponds to ∼ 66% of the total SESNe          Type Ibc (Ib, Ic, Ic-BL). CCSNscore can be trained
+(372). Again from the BTS survey, ∼ 81 SNe with                with up to five input channels, the spectral channel for
+mpk ≤ 18.5 are expected to be classified as SESNe annu-        SEDM spectra being the required input, and the ZTF g-
+ally, and therefore ∼ 66% of them or ∼ 53 will pass the        and r-band 1D light curves and their respective δm − δt
+TNS reporting criteria. Therefore, the ∼ 4 SNe Ia that         representations as four additional inputs. We trained
+are expected to be falsely reported to TNS as SESNe an-        four different models for four input cases (‘only spectra’,
+nually will make up ∼ 7.5% of the total reported SESNe         ‘spectra + 1D LC’, ‘spectra + δm − δt’, and ‘spectra +
+classifications. Improving the SN Ia automatic classifiers     1D LC + δm − δt’) and quantified the benefit of light
+can help reduce these false positives in the future.           curves to the classification process. We list our main
+   A breakdown of the true positive rate by phase and          results below:
+true type is shown in Table 4 for the samples that pass
+the TNS criteria. We do not see a significant differ-              • CCSNscore’s layer 1 performance with just spec-
+ence with phase for Type II samples under any crite-                 tral data input is quite robust for real-time TNS
+ria. However, Type Ibc samples under numSN ID ≥ 30                   reporting of the classifications when strict score
+have a higher true positive rate and precision for earlier           and uncertainty cuts are applied. Adding light
+phases (phase≤ 10 days), while for numSN ID < 20,                    curve input boosts the number of samples with
+the true positive rate and precision are higher for the              high scores while maintaining accuracy, which can
+later phases. This indicates that the difficult cases have           be useful for difficult classification cases. With just
+a better chance of successful classification with post-              spectra, only 79.4% (54.2%) of the gold (bronze)
+peak spectra. We plan on further testing and revising                test set pass the threshold cuts, out of which 98.7%
+this selection scheme over the next few months before                (87%) are accurate. Comparatively, with spectra
+actually starting real-time TNS reporting.                           and 1D light curves, 82.8% (57.4%) of the gold
+                                                                     (bronze) test set pass the threshold cuts, out of
+          7. DISCUSSION AND SUMMARY                                  which 98% (93.5%) are accurate.
+   In this work, we have presented a new deep-learning
+based software for the automated classification of core-           • CCSNscore also provides subtype predictions from
+collapse supernovae from their ultra-low resolution spec-            its layer 2 models, which can assist astronomers
+tra (from SEDM) called CCSNscore. CCSNscore con-                     with manual classifications. The light curve input
+sists of hierarchical classification tasks, with its layer 1         marginally improves accuracy over the ‘only spec-
+meant for classification between Type II (or H-rich) and             tra’ case in the Type II subtyping task. On the
+Type Ibc (or H-poor) SNe, layer 2a meant for classifi-               other hand, given that SN Ib and Ic light curves
+cation between subtypes of Type II (II, IIb, IIn), and               are very similar, the light curve input actually re-
+                                                                                                                     17
+
+     duces the classification accuracy for the Type Ibc        1. increasing the training data by including spectra
+     subtyping task.                                              from the Open Supernova Catalog smoothed to
+                                                                  match the varying resolutions to the SEDM train-
+   • RNN architecture seems optimal for ultra-low res-            ing set,
+     olution spectral sequences, as found in this study
+     and in Fremling et al. (2021). The biLSTM layers          2. splitting the classification tasks into hierarchical
+     are also capable of deducing classification without          layers which are based on the traditional super-
+     needing redshift correction.                                 nova classification scheme and training parallel bi-
+                                                                  nary classifiers instead of a single multi-class clas-
+   • CCSNscore misclassifies H-poor SNe as H-rich                 sifier,
+     more frequently than it does the other way around
+     because of host-contamination cases, thus mak-            3. using a model architecture that can ingest multiple
+     ing H-poor predictions more reliable until host-             types of inputs, and using photometry data as an
+     contamination is dealt with at the data process-             additional input.
+     ing level. The misclassified true H-rich samples
+                                                               The dominant source of CCSNscore’s misclassifica-
+     come from multiple spectra of a few unique SNe.
+                                                            tions is host contamination, which is difficult to elim-
+     The misclassified true H-poor samples come less
+                                                            inate from the final processed spectra. SEDM’s resolu-
+     often from multiple spectra of a few unique SNe
+                                                            tion augments the issue by blending the strong host lines
+     but often share similar characteristics (weak fea-
+                                                            around Hα, making them appear like SN II or SN IIn Hα
+     tures, strong host lines, etc.).
+                                                            features. There are efforts to separate the SN light from
+   • We will use SNIascore to filter out likely SNe Ia      its host galaxy at the data reduction level for SEDM
+     and select potential CCSNe candidates by ap-           through careful contour separation (Kim et al. 2022) and
+     plying a threshold cut of SN Iascore < 0.1.            hyperspectral scene modeling of the host galaxy (Lezmy
+     Then, we will apply threshold cuts on numSN ID,        et al. 2022), which could greatly improve CCSNscore’s
+     CCSN score, and CCSN scoreunc to determine el-         automatic typing accuracy.
+     igible candidates for reporting to TNS as described       Another possible method to improve the fidelity of
+     in §??. Based on the BTS statistics on bright tran-    CCSNscore could be changing the way photometric in-
+     sients (mpk ≤ 18.5) and expected SNIascore and         put is supplied and modeled. A well-performing pho-
+     CCSNscore performance, we expect ∼ 0.5% (∼ 4)          tometric supernova classifier architecture from the lit-
+     of true SNe Ia to be misclassified as SNe Ibc on       erature that has already been tested independently
+     TNS annually. For the classification of CCSNe          (Charnock & Moss 2017; Pasquet et al. 2019; Möller
+     into Type II or Type Ibc, we expect ∼ 62% of           & de Boissière 2020; Burhanudin & Maund 2022; Allam
+     the total real-time true CCSNe spectra to qualify      & McEwen 2023) could be added as an additional input
+     for TNS reporting, out of which we expect ∼ 94%        channel. Moreover, models that can predict the classifi-
+     correct classifications and ∼ 6% misclassifications.   cation using only early-time photometric data and host-
+                                                            galaxy information will be the most useful as additional
+  Kim et al. (2024) suggest that the effect of instrument   channels to CCSNscore (Muthukrishna et al. 2019; Qu
+resolution might not be significant for SEDM spectra        & Sako 2022).
+when it comes to classification by SNID, NGSF, and             CCSNscore is a small step towards handling the in-
+DASH as all three programs appropriately preprocess         creased load of transient spectroscopic data, which will
+the input (including smoothing and binning) to com-         become more important for future photometric and
+pare to the templates. But still, DASH’s performance        spectroscopic surveys. Currently, CCSNscore is only ca-
+on SEDM spectra does not compare to models trained          pable of providing a robust broad Type (II vs. Ibc) and
+specifically using SEDM spectra like SNIascore and CC-      a prediction for a subtype (less accurately) but does not
+SNscore. This arises from the fact that deep learning       provide other crucial information that can be deduced
+models can be sensitive to the data they are trained        from spectra (redshift and phase). Future work for CC-
+with and do not generalize well until trained with an       SNscore could focus on attempting redshift prediction
+extremely large quantity of data. Kim et al. (2024) also    using a similar model structure and exploring auxiliary
+note that a two-category classification task has more       inputs that can aid in such a task.
+accurate results than a five-category task as CCSNe are
+more difficult to classify than SNe Ia, and CCSNe need                    8. ACKNOWLEDGMENT
+more than just spectral information to be classified ro-     Based on observations obtained with the Samuel
+bustly. CCSNscore addresses the above issues by             Oschin Telescope 48-inch and the 60-inch Telescope at
+18                                                       Sharma et al.
+
+the Palomar Observatory as part of the Zwicky Tran-                under Grant No 1545949. MMK acknowledges generous
+sient Facility project. ZTF is supported by the National           support from the David and Lucille Packard Foundation.
+Science Foundation under Grants No. AST-1440341                    The Gordon and Betty Moore Foundation, through both
+and AST-2034437 and a collaboration including cur-                 the Data-Driven Investigator Program and a dedicated
+rent partners Caltech, IPAC, the Weizmann Institute of             grant, provided critical funding for SkyPortal.
+Science, the Oskar Klein Center at Stockholm Univer-                  Y. Sharma thanks the LSSTC Data Science Fellowship
+sity, the University of Maryland, Deutsches Elektronen-            Program, which is funded by LSSTC, NSF Cybertrain-
+Synchrotron and Humboldt University, the TANGO                     ing Grant #1829740, the Brinson Foundation, and the
+Consortium of Taiwan, the University of Wisconsin                  Moore Foundation; her participation in the program has
+at Milwaukee, Trinity College Dublin, Lawrence Liver-              benefited this work. M.W.C acknowledges support from
+more National Laboratories, IN2P3, University of War-              the National Science Foundation with grant numbers
+wick, Ruhr University Bochum, Northwestern Univer-                 PHY-2308862 and PHY-2117997. Zwicky Transient Fa-
+sity and former partners the University of Washington,             cility access for N.R. was supported by Northwestern
+Los Alamos National Laboratories, and Lawrence Berke-              University and the Center for Interdisciplinary Explo-
+ley National Laboratories. Operations are conducted                ration and Research in Astrophysics (CIERA). Y.-L.K.
+by COO, IPAC, and UW. The ZTF forced-photometry                    has received funding from the Science and Technology
+service was funded under the Heising-Simons Founda-                Facilities Council [grant number ST/V000713/1].
+tion grant #12540303 (PI: Graham). The SED Ma-
+                                                                     Facilities: Palomar 60-in. (SEDM)
+chine is based upon work supported by the National
+Science Foundation under Grant No. 1106171. This                     Software: pandas (pandas development team 2020),
+work was supported by the GROWTH project (Kasliwal                 NumPy (Harris et al. 2020), astropy (Astropy Collab-
+et al. 2019) funded by the National Science Foundation             oration et al. 2013, 2018), Keras (Chollet et al. 2015),
+                                                                   TensorFlow (Abadi et al. 2015)
+
+                                                             APPENDIX
+
+
+                                                   A. SNID ROC CURVE
+  To construct the SNID ROC curve of Figure 4, we ran SNID on our gold and bronze test sets with the following
+settings. We set lapmin = 0.1, rlapmin = 0, set ‘Ia’ and ‘notSN’ as template types to avoid (as we wanted to obtain
+only CCSN predictions), set maximum redshift zmax = 0.2, and ran SNID with interactive and plotting disabled on
+all spectra. The top SNID match of each sample was set as the automatically predicted classification from SNID. For
+the subset of spectra that did not get any template matches with the above settings, we gradually increased zmax
+to 0.5 until all samples had at least one match. The predicted classifications were then labeled as H-rich or H-poor
+based on the SNID assigned type, and the rlap scores were used to measure the confidence in those predictions. Then
+to calculate the ROC curve, we used rlap thresholds in the range 0–25 with a step of 1, and at each threshold, we
+calculated the true positive rate and the false positive rate, considering H-rich as the true positive class.
+
+
+                                                        REFERENCES
+Abadi, M., Agarwal, A., Barham, P., et al. 2015,                   Bellm, E. C., Kulkarni, S. R., Barlow, T., et al. 2019,
+  TensorFlow: Large-Scale Machine Learning on                        PASP, 131, 068003, doi: 10.1088/1538-3873/ab0c2a
+  Heterogeneous Systems. https://www.tensorflow.org/               Ben-Ami, S., Konidaris, N., Quimby, R., et al. 2012, in
+Allam, Tarek, J., & McEwen, J. D. 2023, RAS Techniques               Proc. SPIE, Vol. 8446, Ground-based and Airborne
+  and Instruments, 3, 209, doi: 10.1093/rasti/rzad046                Instrumentation for Astronomy IV, 844686,
+Astropy Collaboration, Robitaille, T. P., Tollerud, E. J.,           doi: 10.1117/12.926317
+  et al. 2013, A&A, 558, A33,                                      Blagorodnova, N., Neill, J. D., Walters, R., et al. 2018,
+  doi: 10.1051/0004-6361/201322068                                   PASP, 130, 035003, doi: 10.1088/1538-3873/aaa53f
+Astropy Collaboration, Price-Whelan, A. M., Sipőcz, B. M.,        Blondin, S., & Tonry, J. L. 2007, ApJ, 666, 1024,
+  et al. 2018, AJ, 156, 123, doi: 10.3847/1538-3881/aabc4f           doi: 10.1086/520494
+                                                                                                                             19
+
+Burhanudin, U. F., & Maund, J. R. 2022, Monthly Notices           Kim, Y.-L., Hook, I., Milligan, A., et al. 2024, Publications
+  of the Royal Astronomical Society, 521, 1601,                     of the Astronomical Society of the Pacific, 136, 114501,
+  doi: 10.1093/mnras/stac3672                                       doi: 10.1088/1538-3873/ad85cd
+Cenko, S. B., Fox, D. B., Moon, D.-S., et al. 2006, PASP,         Lezmy, J., Copin, Y., Rigault, M., Smith, M., & Neill, J. D.
+  118, 1396, doi: 10.1086/508366                                    2022, A&A, 668, A43, doi: 10.1051/0004-6361/202244740
+Chambers, K. C., Magnier, E. A., Metcalfe, N., et al. 2016,       Mahabal, A., Sheth, K., Gieseke, F., et al. 2017, in 2017
+  The Pan-STARRS1 Surveys.                                          IEEE Symposium Series on Computational Intelligence
+  https://arxiv.org/abs/1612.05560                                  (SSCI), Vol. 39 (IEEE), 1–8,
+Charnock, T., & Moss, A. 2017, ApJL, 837, L28,                      doi: 10.1109/ssci.2017.8280984
+  doi: 10.3847/2041-8213/aa603d                                   Masci, F. J., Laher, R. R., Rusholme, B., et al. 2019,
+Chen, T. W., Inserra, C., Fraser, M., et al. 2018, ApJL,            PASP, 131, 018003, doi: 10.1088/1538-3873/aae8ac
+  867, L31, doi: 10.3847/2041-8213/aaeb2e                         Milisavljevic, D., Margutti, R., Kamble, A., et al. 2015,
+Childress, M. J., Lidman, C., Davis, T. M., et al. 2017,            ApJ, 815, 120, doi: 10.1088/0004-637X/815/2/120
+  MNRAS, 472, 273, doi: 10.1093/mnras/stx1872                     Möller, A., & de Boissière, T. 2020, MNRAS, 491, 4277,
+Chollet, F., et al. 2015, Keras, GitHub.                            doi: 10.1093/mnras/stz3312
+  https://github.com/fchollet/keras                               Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R.,
+Coughlin, M. W., Bloom, J. S., Nir, G., et al. 2023, ApJS,          & Hložek, R. 2019, PASP, 131, 118002,
+                                                                    doi: 10.1088/1538-3873/ab1609
+  267, 31, doi: 10.3847/1538-4365/acdee1
+                                                                  Muthukrishna, D., Parkinson, D., & Tucker, B. E. 2019,
+Dekany, R., Smith, R. M., Riddle, R., et al. 2020, PASP,
+                                                                    The Astrophysical Journal, 885, 85,
+  132, 038001, doi: 10.1088/1538-3873/ab4ca2
+                                                                    doi: 10.3847/1538-4357/ab48f4
+Fremling, C., Miller, A. A., Sharma, Y., et al. 2020, ApJ,
+                                                                  Nordin, J., Brinnel, V., van Santen, J., et al. 2019, A&A,
+  895, 32, doi: 10.3847/1538-4357/ab8943
+                                                                    631, A147, doi: 10.1051/0004-6361/201935634
+Fremling, C., Hall, X. J., Coughlin, M. W., et al. 2021, The
+                                                                  pandas development team, T. 2020, pandas-dev/pandas:
+  Astrophysical Journal Letters, 917, L2,
+                                                                    Pandas, latest, Zenodo, doi: 10.5281/zenodo.3509134
+  doi: 10.3847/2041-8213/ac116f
+                                                                  Pasquet, J., Pasquet, J., Chaumont, M., & Fouchez, D.
+Goldwasser, S., Yaron, O., Sass, A., et al. 2022, Transient
+                                                                    2019, A&A, 627, A21, doi: 10.1051/0004-6361/201834473
+ Name Server AstroNote, 191, 1
+                                                                  Patterson, M. T., Bellm, E. C., Rusholme, B., et al. 2019,
+Graham, M. J., Kulkarni, S. R., Bellm, E. C., et al. 2019,
+                                                                    PASP, 131, 018001, doi: 10.1088/1538-3873/aae904
+  PASP, 131, 078001, doi: 10.1088/1538-3873/ab006c
+                                                                  Perley, D. A., Fremling, C., Sollerman, J., et al. 2020, The
+Guillochon, J., Parrent, J., Kelley, L. Z., & Margutti, R.
+                                                                    Astrophysical Journal, 904, 35,
+ 2017, ApJ, 835, 64, doi: 10.3847/1538-4357/835/1/64
+                                                                    doi: 10.3847/1538-4357/abbd98
+Harris, C. R., Millman, K. J., van der Walt, S. J., et al.
+                                                                  Qu, H., & Sako, M. 2022, The Astronomical Journal, 163,
+  2020, Nature, 585, 357, doi: 10.1038/s41586-020-2649-2            57, doi: 10.3847/1538-3881/ac39a1
+Harutyunyan, A. H., Pfahler, P., Pastorello, A., et al. 2008,     Rehemtulla, N., Miller, A., Fremling, C., et al. 2023,
+  A&A, 488, 383, doi: 10.1051/0004-6361:20078859                    Transient Name Server AstroNote, 265, 1
+Howell, D. 2019, in American Astronomical Society                 Rehemtulla, N., Miller, A. A., Jegou Du Laz, T., et al.
+  Meeting Abstracts, Vol. 233, American Astronomical                2024, ApJ, 972, 7, doi: 10.3847/1538-4357/ad5666
+  Society Meeting Abstracts #233, 258.16                          Rigault, M., Neill, J. D., Blagorodnova, N., et al. 2019,
+Howell, D. A., Sullivan, M., Perrett, K., et al. 2005, ApJ,         A&A, 627, A115, doi: 10.1051/0004-6361/201935344
+  634, 1190, doi: 10.1086/497119                                  Shappee, B., Prieto, J., Stanek, K. Z., et al. 2014, in
+Ivezić, Ž., Kahn, S. M., Tyson, J. A., et al. 2019, ApJ, 873,     American Astronomical Society Meeting Abstracts, Vol.
+  111, doi: 10.3847/1538-4357/ab042c                                223, American Astronomical Society Meeting Abstracts
+Kangas, T., Kuncarayakti, H., Nagao, T., et al. 2024, arXiv         #223, 236.03
+ e-prints, arXiv:2401.17423,                                      Sharma, Y., Sollerman, J., Kulkarni, S. R., et al. 2024,
+ doi: 10.48550/arXiv.2401.17423                                     ApJ, 966, 199, doi: 10.3847/1538-4357/ad3758
+Kasliwal, M. M., Cannella, C., Bagdasaryan, A., et al.            Smartt, S. J., Valenti, S., Fraser, M., et al. 2015, A&A, 579,
+ 2019, PASP, 131, 038003, doi: 10.1088/1538-3873/aafbc2             A40, doi: 10.1051/0004-6361/201425237
+Kim, Y. L., Rigault, M., Neill, J. D., et al. 2022, PASP,         Sollerman, J., Fransson, C., Barbarino, C., et al. 2020,
+  134, 024505, doi: 10.1088/1538-3873/ac50a0                        A&A, 643, A79, doi: 10.1051/0004-6361/202038960
+20                                                      Sharma et al.
+
+Tonry, J., & Davis, M. 1979, AJ, 84, 1511,                      Yuan, F., Lidman, C., Davis, T. M., et al. 2015, MNRAS,
+  doi: 10.1086/112569
+Tonry, J. L., Denneau, L., Heinze, A. N., et al. 2018,            452, 3047, doi: 10.1093/mnras/stv1507
+  Publications of the Astronomical Society of the Pacific,
+  130, 064505, doi: 10.1088/1538-3873/aabadf
+van der Walt, S. J., Crellin-Quick, A., & Bloom, J. S. 2019,
+  Journal of Open Source Software, 4,
+  doi: 10.21105/joss.01247
+
