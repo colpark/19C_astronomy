@@ -1,0 +1,60 @@
+{
+  "record": "R6/R4 subject row for r8_symmetry.json, filled by the launching session",
+  "launched_utc": "2026-09-17T19:05Z approx (harness timestamps in task files)",
+  "subject": {
+    "model_id": "claude-opus-5[1m]",
+    "note": "the harness default for general-purpose subagents in this session; the model-side catalog was NOT enumerated, so R4 stays UNDEMONSTRATED",
+    "sampling_parameters": "UNDEMONSTRATED: not exposed to the launching session",
+    "session_type": "fresh general-purpose subagent, no panel context"
+  },
+  "prompts": {
+    "classical": {
+      "declared_file_sha256_prefix": "55ce2897",
+      "emitted_sha256": "255aa48a30b4c471ee8bbc331f80ec947d7702c9fb480c9b8929df923c0c7bcb",
+      "difference": "one trailing newline stripped by the harness; sha256 of the file with the final newline removed equals the emitted hash exactly",
+      "R7_classification": "cosmetic, verified by byte-level reconstruction"
+    },
+    "fm": {
+      "declared_file_sha256_prefix": "a6d0b218",
+      "emitted_sha256": "53ea88930ab27df5aee0b5c843679b629b039573e0b0b943803b69222a767923",
+      "difference": "one trailing newline stripped by the harness; sha256 of the file with the final newline removed equals the emitted hash exactly",
+      "R7_classification": "cosmetic, verified by byte-level reconstruction, not by assertion"
+    }
+  },
+  "separation_audit": {
+    "method": "scripts parse the task JSONL, hash the first user message as the emitted prompt, and scan every tool_use input for forbidden hosts, network calls and forbidden paths",
+    "script": "scratchpad/audit_arm.py (copied to coordinator/audit_arm.py)",
+    "defect_found_and_fixed": "the first pass matched 'ned' and 'tns' without word boundaries, so 'trained', 'determined' and 'constrained' produced 7 false positives; the pattern was fixed and re-run",
+    "fm_arm": {
+      "tool_calls": 17,
+      "by_tool": {
+        "Read": 3,
+        "Bash": 13,
+        "Write": 1
+      },
+      "hits": 0,
+      "verdict": "no separation breach detected"
+    },
+    "classical_arm": {
+      "tool_calls": 20,
+      "by_tool": {
+        "Bash": 19,
+        "Write": 1
+      },
+      "hits": 0,
+      "verdict": "no separation breach detected"
+    },
+    "limitation": "the audit detects, it does not enforce. R4 stays UNDEMONSTRATED (wave-5 brief constraint 3)"
+  },
+  "submissions": {
+    "classical": {
+      "path": "arms/outputs/classical/submission.json",
+      "sha256": "fd9a9302d945cbee81112086bcdace3efa81bf7e000161fdeac0338d21297882"
+    },
+    "fm": {
+      "path": "arms/outputs/fm/submission.json",
+      "sha256": "68e949d399645349f59da2fb056f24d99cd73c1a975cb5344cabe3a03a16ad8e"
+    },
+    "hashed_before_grading": true
+  }
+}
