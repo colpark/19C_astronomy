@@ -1,0 +1,587 @@
+
+TNS Transients Statistics, Skymaps and Plots | Transient Name Server
+Search
+AstroNotes
+Groups
+Bots
+LVK GW
+Stats
+News
+?
+✉
+Login
+        TNS Transients Statistics, Skymaps and Plots
+Primary tabs
+TNS Transients Statistics
+Reports Timeline
+Skymaps
+Plots
+ALL
+transients
+ reported since Jan 1, 2016
+181,430
+PUBLIC
+transients
+ reported since Jan 1, 2016
+181,430
+PUBLIC
+transients
+ for the top 10 reporting groups
+Pan-STARRS
+50,312
+28%
+ZTF
+30,698
+17%
+ALeRCE
+25,586
+14%
+ATLAS
+23,198
+13%
+GaiaAlerts
+19,751
+11%
+YSE
+4,701
+3%
+WFST
+4,536
+3%
+GOTO
+4,287
+2%
+DESIRT
+2,415
+1%
+SGLF
+2,172
+1%
+PUBLIC
+transients
+ for the top 10 data source groups
+ZTF
+60,474
+33%
+Pan-STARRS
+54,776
+30%
+ATLAS
+23,198
+13%
+GaiaAlerts
+19,751
+11%
+WFST
+4,536
+3%
+GOTO
+4,288
+2%
+DESIRT
+2,408
+1%
+iPTF
+1,642
+1%
+MASTER
+1,501
+1%
+ASAS-SN
+1,367
+1%
+PUBLIC
+ classified 
+SNe
+ reported since Jan 1, 2016
+18,181
+PUBLIC
+ classified 
+SNe
+ for the top 10 reporting groups
+ZTF
+5,561
+31%
+ATLAS
+5,013
+28%
+ALeRCE
+2,982
+16%
+Pan-STARRS
+909
+5%
+ASAS-SN
+836
+5%
+GaiaAlerts
+621
+3%
+GOTO
+543
+3%
+SGLF
+293
+2%
+YSE
+279
+2%
+iPTF
+131
+1%
+PUBLIC
+ classified 
+SNe
+ for the top 10 data source groups
+ZTF
+8,994
+50%
+ATLAS
+5,013
+28%
+Pan-STARRS
+1,187
+7%
+ASAS-SN
+834
+5%
+GaiaAlerts
+621
+3%
+GOTO
+543
+3%
+iPTF
+132
+1%
+XOSS
+97
+1%
+PTSS
+72
+0%
+POSS
+47
+0%
+ALL
+spectra
+ reported to the TNS
+21,737
+PUBLIC
+spectra
+ reported to the TNS
+21,564
+PUBLIC
+classifications
+ for the top 10 contributing groups
+ZTF
+8,768
+44%
+ePESSTO+
+2,455
+12%
+SCAT
+1,965
+10%
+ePESSTO
+723
+4%
+UCSC
+409
+2%
+TCD
+372
+2%
+Global SN Project
+359
+2%
+PESSTO
+277
+1%
+iPTF
+256
+1%
+Padova-Asiago
+238
+1%
+PUBLIC
+ spectral classifications for the top 10 
+instruments
+P60/SEDM
+7,133%
+33%
+ESO-NTT/EFOSC2-NTT
+3,738%
+17%
+UH88/SNIFS
+2,050%
+10%
+LT/SPRAT
+1,449%
+7%
+P200/DBSP
+1,104%
+5%
+NOT/ALFOSC
+746%
+3%
+Lick-3m/KAST
+663%
+3%
+Keck1/LRIS
+624%
+3%
+Other/Other
+569%
+3%
+SOAR/Goodman
+375%
+2%
+PUBLIC
+ classified 
+SNe
+ by type
+SN Ia
+11,808
+65%
+SN II
+2,863
+16%
+SN IIn
+512
+3%
+SN Ia-91T-like
+459
+3%
+SN Ic
+400
+2%
+SN Ib
+320
+2%
+SN IIP
+307
+2%
+SN IIb
+281
+2%
+SLSN-I
+207
+1%
+SN Ic-BL
+174
+1%
+SN Ia-91bg-like
+160
+1%
+SLSN-II
+111
+1%
+SN Ia-pec
+97
+1%
+SN
+87
+1%
+SN Ib/c
+81
+0%
+SN Ibn
+70
+0%
+SN Iax[02cx-like]
+61
+0%
+SN I
+58
+0%
+SN Ia-CSM
+41
+0%
+SN Ib-pec
+17
+0%
+SN II-pec
+16
+0%
+SN Ia-SC
+16
+0%
+SN Ib-Ca-rich
+12
+0%
+SN Icn
+7
+0%
+SN IIn-pec
+5
+0%
+SN Ic-pec
+3
+0%
+SN IIL
+3
+0%
+SN Ibn/Icn
+2
+0%
+SN Ic-Ca-rich
+1
+0%
+SN Ia-Ca-rich
+1
+0%
+SN Ien
+1
+0%
+ALL
+ TNS 
+transients
+reported by year
+2026
+49
+2025
+25,890
+2024
+23,892
+2023
+21,106
+2022
+21,650
+2021
+23,762
+2020
+21,885
+2019
+18,846
+2018
+9,144
+2017
+7,623
+2016
+7,074
+2015
+120
+2014
+96
+2013
+102
+2012
+18
+2011
+5
+2010
+6
+2009
+7
+2008
+2
+2007
+1
+2006
+1
+2005
+8
+2004
+10
+2003
+9
+2002
+11
+2001
+6
+2000
+14
+1999
+4
+1997
+2
+1996
+6
+1995
+2
+1994
+6
+1993
+5
+1992
+5
+1991
+8
+1990
+5
+1989
+8
+1988
+5
+1987
+2
+1986
+5
+1985
+2
+1984
+4
+1983
+6
+1982
+8
+1981
+1
+1979
+2
+1978
+1
+1977
+4
+1976
+2
+1001
+1
+PUBLIC
+ TNS 
+transients
+reported by year
+2026
+49
+2025
+25,890
+2024
+23,892
+2023
+21,106
+2022
+21,650
+2021
+23,762
+2020
+21,885
+2019
+18,846
+2018
+9,144
+2017
+7,623
+2016
+7,074
+2015
+120
+2014
+96
+2013
+102
+2012
+18
+2011
+5
+2010
+6
+2009
+7
+2008
+2
+2007
+1
+2006
+1
+2005
+8
+2004
+10
+2003
+9
+2002
+11
+2001
+6
+2000
+14
+1999
+4
+1997
+2
+1996
+6
+1995
+2
+1994
+6
+1993
+5
+1992
+5
+1991
+8
+1990
+5
+1989
+8
+1988
+5
+1987
+2
+1986
+5
+1985
+2
+1984
+4
+1983
+6
+1982
+8
+1981
+1
+1979
+2
+1978
+1
+1977
+4
+1976
+2
+1001
+1
+PUBLIC
+ TNS classified 
+SNe
+ reported by year
+2026
+1
+2025
+2,055
+2024
+2,175
+2023
+1,954
+2022
+2,252
+2021
+2,474
+2020
+2,140
+2019
+2,174
+2018
+1,526
+2017
+747
+2016
+642
+2015
+25
+2014
+8
+2013
+2
+2012
+1
+2011
+3
+2010
+1
+2009
+1
+Copyright © 2015
+Built by 
+klido.net

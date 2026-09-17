@@ -1,0 +1,2384 @@
+
+AstroNotes | Transient Name Server
+Search
+AstroNotes
+Groups
+Bots
+LVK GW
+Stats
+News
+?
+✉
+Login
+        AstroNotes
+Primary tabs
+AstroNotes
+Stats
+Posted in the last
+Days
+Months
+Years
+Posted between dates
+to
+Title Includes
+      Comma-separated list of search strings; e.g. "str1, str2"
+Authors Includes
+      Comma-separated list of search strings; e.g. "str1, str2"
+AstroNotes Indexes
+Keywords Includes
+Show All
+AGN
+Asteroid
+Astrometry
+Astronomical Databases
+Binary
+Black Hole
+Cataclysmic Variable
+Catalogs
+Cluster
+Comet
+Cosmic Rays
+Cosmology
+Earth
+Exoplanet
+Fast Radio Burst
+Galaxy
+Galaxy Cluster
+Gamma Rays
+Gamma-Ray Burst
+Gravitational Waves
+Infra-Red
+Instrumentation
+Inter-Galactic-Medium
+Inter-Stellar-Medium
+Kuiper Belt
+Lensing
+Meteorites
+Meteors
+Methods
+Microlensing
+Minor Planet
+Moon
+Near-Earth-Object
+Neutrinos
+Neutron Star
+Nova
+Oort Cloud
+Optical
+Photometry
+Planet
+Pulsar
+Quasar
+Radio
+Solar System Object
+Spectroscopy
+Star
+Star Cluster
+Sun
+Supernova
+Supernova Remnant
+Surveys
+TDE
+Techniques
+Time-domain
+Transient
+Ultra-Violet
+Variable Star
+White Dwarf
+X-rays
+Type
+Announcement-Tool/Utility
+Announcement-Campaign/Survey
+Announcement-Data Release
+Announcement-General
+Object/s-Discovery/Classification
+Object/s-Data/Analysis
+Source Group
+None
+1M2H
+adH0cc
+AHTS
+AISV-survey
+ALeRCE
+ALERT
+AMPEL
+ANTARES
+ASAS-SN
+ASO
+ATALab
+ATLAS
+ATS
+AUTOGLASS
+AZTEC
+BHTOM
+BlackGEM
+BOSS
+BraTS
+BTDG
+C-SNAILS
+CET-3PO
+CHIMEFRB
+COIN
+CONGRESS
+CRAFT
+CRAFTS
+CRTS
+CSNS
+CSP
+DAO_OTS
+DEBASS
+DECam-GROWTH
+Decameron
+DEHVILS
+DES
+DESGW
+DESI
+DESIRT
+DLT40
+DogsHeavenTS
+DSA-110
+DWF
+EHSSP
+ENGRAVE
+ePESSTO
+ePESSTO+
+ESO-SoXS
+Euclid STSWG
+F. D. Romanov
+FATE
+FDST
+Fink
+FLEET
+FRBCAT
+GaiaAlerts
+Gattini
+GBNCC
+GEOTS
+GGCYSS
+GIT
+GLGW
+GLO
+Global SN Project
+GOTO
+GRAWITA
+GREAT
+GSNST
+GW-MMADS
+GWAC-ToP
+Hermes_group
+HETH
+HOLISMOKES
+HSC
+ILMT
+IMSNG
+iPTF
+ISSP
+J-PAS
+J-VAR
+JADES
+JCAST
+JIST
+JWST-ERS
+JWST-NEXUS
+KEGS
+Kinder
+KNTraP
+KSP
+Lasair
+LAST
+LCOGT SN-KP
+LiONS
+LOSS
+LSQ
+MAGNIF
+MASTER
+MeerLICHT
+MeerTRAP
+Moonbase search SN South
+MUSSES
+NAOCToO
+NGDEEP
+NOIRLab
+NUTS2
+OASIS
+OGLE
+OOICLE
+OxQUB
+Padova-Asiago
+PALEO
+PALFA
+Pan-STARRS
+PASSTA
+PESSTO
+PIKA
+POISE
+POSS
+POTS
+PSH
+PSST-XL
+PTSS
+RANSSP
+RAPAS
+REFITT
+ROTS
+RTSG
+Rubin
+SAAO IO
+SAGUARO
+SALT
+SCAT
+SGLF
+Shadow
+SIMBAD
+SIRAH
+SkyMapper
+SKYS
+SNAD
+SNHunt
+SOS
+StarDestroyers
+STARGATE
+STEP
+STSP
+SUNBIRD
+Super-Kamiokande
+Supernova Alliance
+Swift
+SwiftXRT
+Swope SN Survey
+TAROT
+TCD
+TexSNs
+Tianlai
+TiDES
+TMTS
+TNS
+TNTS
+Tomo-e Gozen
+TRAPUM
+TRex
+TROVE
+TSST
+TSST_COSMOS
+TSST_COSMOS_3D
+UCSC
+ULL-ASTRO-MASTER
+ULTRASAT
+USTC-TDE
+UTMOST
+VHU-TDA
+VLA-realfast
+VLITE-Fast
+WFST
+WINTER
+WL-GW
+WOTS
+WTFU
+XOSS
+XTSS
+XYO
+YSE
+ZTF
+ZUDS
+Related-objects Name/s
+      comma-separated list of names (IAU or internal/alternate)
+Object Type
+Afterglow
+AGN
+Blazar
+Computed-Ia
+Computed-IIb
+Computed-IIn
+Computed-IIP
+Computed-PISN
+CV
+FBOT
+FRB
+Galaxy
+Gap
+Gap I
+Gap II
+ILRT
+Impostor-SN
+Kilonova
+LBV
+Light-Echo
+LRN
+M dwarf
+NA/Unknown
+Nova
+QSO
+SLSN-I
+SLSN-II
+SLSN-R
+SN
+SN I
+SN I-faint
+SN I-rapid
+SN Ia
+SN Ia-91bg-like
+SN Ia-91T-like
+SN Ia-Ca-rich
+SN Ia-CSM
+SN Ia-pec
+SN Ia-SC
+SN Iax[02cx-like]
+SN Ib
+SN Ib-Ca-rich
+SN Ib-pec
+SN Ib/c
+SN Ib/c-Ca-rich
+SN Ibn
+SN Ibn/Icn
+SN Ic
+SN Ic-BL
+SN Ic-Ca-rich
+SN Ic-pec
+SN Icn
+SN Ien
+SN II
+SN II-pec
+SN IIb
+SN IIL
+SN IIn
+SN IIn-pec
+SN IIP
+Std-spec
+TDE
+TDE-featureless
+TDE-H
+TDE-H-He
+TDE-He
+Varstar
+WD
+WR
+WR-WC
+WR-WN
+WR-WO
+Other
+RA
+      Degrees (0..360, with decimal point) or sexagesimal: HH:MM:SS.SS / HH MM SS.SS
+DEC
+      Degrees (-90..+90, with decimal point) or sexagesimal: ±DD:MM:SS.SS / ±DD MM SS.SS
+Search radius
+arcsec
+arcmin
+deg
+RA range
+      Degrees (0..360, with decimal point) or sexagesimal: HH:MM:SS.SS / HH MM SS.SS
+to
+      Degrees (0..360, with decimal point) or sexagesimal: HH:MM:SS.SS / HH MM SS.SS
+DEC range
+      Degrees (0..360, with decimal point) or sexagesimal: HH:MM:SS.SS / HH MM SS.SS
+to
+      Degrees (-90..+90, with decimal point) or sexagesimal: ±DD:MM:SS.SS / ±DD MM SS.SS
+Results in page
+25
+50
+100
+250
+500
+Showing results 1 to 50 out of 2,131
+Pagination
+1
+                Page
+2
+                Page
+3
+                Page
+4
+                Page
+5
+                Page
+6
+                Page
+7
+                Page
+8
+                Page
+9
+…
+Next page
+              ›
+Last page
+              »
+AstroNote 2026-8
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2026-01-18 16:57:47
+Hostless candidates detected by ELEPHANT
+R. Durgesh (independent),  P. Pessi (NCBJ), E. E. O. Ishida (CNRS), E. E. Hayes (KIC), L. Nakazono (USP), R. A. P. Oliv…
+Source Group: 
+COIN
+Keywords: 
+Time-domain
+, 
+Surveys
+, 
+Transient
+Related Objects: 
+2026pl [ZTF26aaacdvu]
+RA, DEC:
+07:01:58.302, +23:11:13.71
+(105.492926, 23.187142)
+Redshift:
+Type:
+See object 2026pl [ZTF26aaacdvu]
+, 
+2026ako [ZTF26aaaqepm]
+RA, DEC:
+15:15:56.401, +09:14:37.42
+(228.985006, 9.243728)
+Redshift:
+Type:
+See object 2026ako [ZTF26aaaqepm]
+, 
+2026pm [ZTF26aaacimu]
+RA, DEC:
+09:44:37.418, +31:58:38.40
+(146.155910, 31.977332)
+Redshift:
+Type:
+See object 2026pm [ZTF26aaacimu]
+We report 3 hostless candidates selected by the ELEPHANT pipeline.
+AstroNote 2026-7
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2026-01-16 19:15:01
+ZTF Classification of AT 2025aljd/ZTF25aclckzl as a likely TDE
+R. Chornock (UC Berkeley), E. Hammerstein (UC Berkeley), R. Stein (UMD/JSI), and J. Carney (UNC), on behalf of the ZTF …
+Source Group: 
+ZTF
+Keywords: 
+Transient
+, 
+TDE
+, 
+Optical
+Related Objects: 
+2025aljd [ZTF25aclckzl]
+RA, DEC:
+09:37:40.689, +20:02:14.98
+(144.419537, 20.037496)
+Redshift:
+0.15
+Type:
+TDE
+See object 2025aljd [ZTF25aclckzl]
+We spectroscopically classify the optical transient AT2025aljd/ZTF25aclckzl as a TDE at redshift z=0.150 using the Shane 3 m telescope at Lick Observatory.
+AstroNote 2026-6
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2026-01-16 15:43:39
+SLSN and TDE candidates from NEEDLE on Lasair
+X. Sheng, M. Nicholl, K. W. Smith, A. Aamer, C. R. Angus, M. Fulton, T. Moore, J. Weston, D. R. Young, D. Magill, A. Sm…
+Source Group: 
+OxQUB
+Keywords: 
+Time-domain
+, 
+Transient
+, 
+Supernova
+, 
+TDE
+Related Objects: 
+2025aiad [ZTF25acktbjh]
+RA, DEC:
+11:49:03.119, -02:24:27.87
+(177.262994, -2.407741)
+Redshift:
+Type:
+See object 2025aiad [ZTF25acktbjh]
+, 
+2026nk [ZTF26aaaanam]
+RA, DEC:
+02:40:39.145, +02:48:30.84
+(40.163105, 2.808568)
+Redshift:
+Type:
+See object 2026nk [ZTF26aaaanam]
+, 
+2026gz [ZTF26aaaagat]
+RA, DEC:
+00:41:35.759, -05:04:14.33
+(10.398995, -5.070647)
+Redshift:
+Type:
+See object 2026gz [ZTF26aaaagat]
+, 
+2025aljd [ZTF25aclckzl]
+RA, DEC:
+09:37:40.689, +20:02:14.98
+(144.419537, 20.037496)
+Redshift:
+0.15
+Type:
+TDE
+See object 2025aljd [ZTF25aclckzl]
+We report 3 SLSN and 1 TDE candidates from the ZTF public alert stream, identified by the NEEDLE classifier running on the Lasair alert broker. We encourage spectroscopic classification of these even…
+AstroNote 2026-5
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2026-01-15 21:49:52
+Re-Classification of AT 2025afsj as a Bowen Fluorescence Flare
+Benny Trakhtenbrot (Tel Aviv University), Iair Arcavi (Tel Aviv University), Kathryn Wynn (UCSB/Las Cumbres), Moira And…
+Related Objects: 
+2025afsj
+RA, DEC:
+12:55:07.057, +34:08:46.95
+(193.779403, 34.146376)
+Redshift:
+0.1654
+Type:
+AGN
+See object 2025afsj
+Using new Las Cumbres spectroscopy, we re-classify the transient AT 2025afsj as a Bowen Fluorescence Flare (BFF). This constitutes the third robust example of a BFF reported to occur in a previously …
+AstroNote 2026-4
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2026-01-14 18:40:50
+ATLAS26anf (AT2026acd): discovery of a candidate young SN in NGC 4168 (32 Mpc)
+A. Aamer (UA/QUB),  S. Srivastav (Oxford), K. W. Smith (Oxford/QUB), D. R. Young, M. Nicholl, M. Fulton, M. McCollum, T…
+Source Group: 
+ATLAS
+Keywords: 
+Supernova
+Related Objects: 
+2026acd [ATLAS26anf]
+RA, DEC:
+12:12:12.756, +13:13:18.30
+(183.053149, 13.221751)
+Redshift:
+0.00758
+Type:
+SN Ia
+See object 2026acd [ATLAS26anf]
+Here we report the ATLAS discovery of the transient ATLAS26anf (AT2026acd) in galaxy NGC 4168 at magnitude m_o = 18.88 +/- 0.14.  At a distance of 32 Mpc, the transient was discovered on MJD = 61054…
+AstroNote 2026-3
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2026-01-11 20:59:17
+ATLAS26afg (AT2026ob): discovery of a candidate SN in NGC 0134 (18 Mpc)
+A. Aamer (UA/QUB), K. W. Smith (Oxford/QUB), D. R. Young, M. Nicholl, M. Fulton, M. McCollum, T. Moore, J. Weston, X. S…
+Source Group: 
+ATLAS
+Keywords: 
+Supernova
+Related Objects: 
+2026ob [ATLAS26afg]
+RA, DEC:
+00:30:19.804, -33:15:00.95
+(7.582516, -33.250264)
+Redshift:
+Type:
+See object 2026ob [ATLAS26afg]
+Here we report the ATLAS discovery of the transient ATLAS26afg (AT2026ob) in galaxy NGC 0134 at magnitude m_o = 18.26 +/- 0.13.  At a distance of 18 Mpc, the transient was discovered on MJD = 61051.2…
+AstroNote 2026-2
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2026-01-09 11:25:47
+SLSN and TDE candidates from NEEDLE on Lasair
+X. Sheng, M. Nicholl, K. W. Smith, A. Aamer, C. R. Angus, M. Fulton, T. Moore, J. Weston, D. R. Young, D. Magill, A. Sm…
+Source Group: 
+OxQUB
+Keywords: 
+Time-domain
+, 
+Transient
+, 
+Supernova
+, 
+TDE
+Related Objects: 
+2025ahxn [ZTF25acinhwn]
+RA, DEC:
+08:18:51.357, +50:11:08.87
+(124.713986, 50.185796)
+Redshift:
+Type:
+See object 2025ahxn [ZTF25acinhwn]
+, 
+2025ahbb [ZTF25acgtdgz]
+RA, DEC:
+13:49:45.013, +08:09:24.17
+(207.437552, 8.156714)
+Redshift:
+Type:
+See object 2025ahbb [ZTF25acgtdgz]
+, 
+2025ahjh [ZTF25acgvbov]
+RA, DEC:
+02:51:43.641, +14:24:04.38
+(42.931838, 14.401217)
+Redshift:
+0.284
+Type:
+SLSN-I
+See object 2025ahjh [ZTF25acgvbov]
+, 
+2025agsx [ZTF25achdnxq]
+RA, DEC:
+23:21:34.274, +09:39:26.29
+(350.392810, 9.657302)
+Redshift:
+Type:
+See object 2025agsx [ZTF25achdnxq]
+, 
+2025agiu [ZTF25acffgtx]
+RA, DEC:
+09:35:19.545, -08:20:41.47
+(143.831438, -8.344853)
+Redshift:
+Type:
+See object 2025agiu [ZTF25acffgtx]
+We report 4 SLSN and 1 TDE candidates from the ZTF public alert stream, identified by the NEEDLE classifier running on the Lasair alert broker. We encourage spectroscopic classification of these even…
+AstroNote 2026-1
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2026-01-08 22:09:24
+COLIBRÍ optical detection of a transient source
+Alan M. Watson (UNAM), Diego López-Cámara (UNAM), Ny Avo Rakotondrainibe (LAM), Noémie Globus (UNAM), Stéphane Basa (UA…
+Related Objects: 
+2025alij [mystery source]
+RA, DEC:
+06:57:45.530, +23:22:18.20
+(104.439708, 23.371722)
+Redshift:
+0.256
+Type:
+SN Ia
+See object 2025alij [mystery source]
+AstroNote 2025-350
+Type: 
+Object/s-Data/Analysis
+Released: 
+2025-12-30 16:23:09
+AMI-LA radio observation of the TDE 2025CYH
+Nadav Shoval (HUJI) , Assaf Horesh (HUJI), Andrew Hughes(Oxford), Joe Bright (Oxford), Yirmi Bernstein (HUJI), Adam Lan…
+Keywords: 
+Transient
+, 
+TDE
+, 
+Radio
+Related Objects: 
+2025cyh
+RA, DEC:
+18:34:46.681, +31:50:05.25
+(278.694506, 31.834790)
+Redshift:
+0.105
+Type:
+TDE
+See object 2025cyh
+We report the possible detection of the TDE 2025CYH with the radio telescope AMI-LA at 15.5 GHz.
+AstroNote 2025-349
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-29 21:37:05
+ATLAS25qko (AT2025ajmj): discovery of a young candidate SN in IC 4366 (68 Mpc)
+K. W. Smith (Oxford/QUB), D. R. Young, M. Nicholl, M. Fulton, M. McCollum, T. Moore, J. Weston, X. Sheng, A. Aamer, C. …
+Source Group: 
+ATLAS
+Keywords: 
+Supernova
+Related Objects: 
+2025ajmj [ATLAS25qko]
+RA, DEC:
+14:05:12.760, -33:46:01.92
+(211.303167, -33.767200)
+Redshift:
+0.013
+Type:
+SN Ia
+See object 2025ajmj [ATLAS25qko]
+Here we report the ATLAS discovery of the transient ATLAS25qko (AT2025ajmj) in galaxy IC 4366 at magnitude m_o = 18.06 +/- 0.14. At a distance of 68 Mpc, the transient was discovered on MJD = 61038.3…
+AstroNote 2025-348
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-27 09:22:47
+Tentative spectroscopic classification of AT 2025afsj as a TDE in AGN
+Mingxin Wu (USTC), Ning Jiang (USTC), Linna Xu (USTC), Shifeng Huang (USTC), Yibo Wang (USTC), Tinggui Wang (USTC), Che…
+Keywords: 
+Time-domain
+, 
+Spectroscopy
+, 
+TDE
+, 
+AGN
+, 
+X-rays
+Related Objects: 
+2025afsj
+RA, DEC:
+12:55:07.057, +34:08:46.95
+(193.779403, 34.146376)
+Redshift:
+0.1654
+Type:
+AGN
+See object 2025afsj
+Related Notes: 
+2025-341
+2025-348
+2025-12-18 11:20:17
+Title: 
+TDE candidates from POTICA
+Authors: 
+E. Concepcion, S. Bhattacharyya, A. Gomboc, T. Petrushevska…
+We report the optical spectroscopic and Swift observations of AT 2025afsj and tentatively classify it as a TDE in AGN.
+AstroNote 2025-347
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-22 04:11:17
+Spectroscopic classification of SN 2025anhj as a young, blue, and rising Type Ibn SN 
+Kaustav K. Das (Caltech), Daniel A. Perley (LJMU), Avinash Singh, Jesper Sollerman, Anjasha Gangopadhyay (OKC), Anna Ho…
+Source Group: 
+ZTF
+Related Objects: 
+2025ahnj
+RA, DEC:
+00:23:38.496, -01:27:32.77
+(5.910400, -1.459103)
+Redshift:
+0.067
+Type:
+SN Ibn
+See object 2025ahnj
+We report Keck/LRIS spectroscopy of SN 2025anhj, a Type Ibn supernova discovered by the Zwicky Transient Facility (ZTF25acipmxl). The classification is based on weak He I P-Cygni features, residual C…
+AstroNote 2025-346
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-21 13:38:29
+ATLAS25qaf (AT2025ahuw): discovery of a candidate SN in KK 2852 (49 Mpc)
+L. Eastman (Oxford), K. W. Smith (Oxford/QUB), D. R. Young, M. Nicholl, M. Fulton, M. McCollum, T. Moore, J. Weston, X…
+Source Group: 
+ATLAS
+Keywords: 
+Supernova
+Related Objects: 
+2025ahuw [ATLAS25qaf]
+RA, DEC:
+10:48:10.095, -65:19:28.35
+(162.042063, -65.324541)
+Redshift:
+0.01135
+Type:
+SN
+See object 2025ahuw [ATLAS25qaf]
+Here we report the ATLAS discovery of the transient ATLAS25qaf (AT2025ahuw) in galaxy KK 2852 at magnitude m_c = 18.16 +/- 0.11.  At a distance of 49 Mpc, the transient was discovered on MJD = 61029…
+AstroNote 2025-345
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-21 04:45:43
+Discovery and classification of SN 2025ahqr, a highly reddened low luminosity Type Iax in M108 (9 Mpc)
+Nabeel Rehemtulla (Northwestern, CIERA), Jesper Sollerman (Stockholm), Chang Liu (Northwestern, CIERA), Wynn Jacobson-G…
+Source Group: 
+ZTF
+Related Objects: 
+2025ahqr [ZTF25acepvuo]
+RA, DEC:
+11:11:25.977, +55:40:29.77
+(167.858238, 55.674935)
+Redshift:
+0.002328
+Type:
+SN Iax[02cx-like]
+See object 2025ahqr [ZTF25acepvuo]
+We report the discovery of a highly reddened transient in Messier 108 (9 Mpc) and classify it as a low luminosity Type Iax. With Gemini/GMOS spectroscopy, we measure low expansion velocities (v 
+AstroNote 2025-344
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-20 20:01:15
+Hostless candidates detected by ELEPHANT
+R. Durgesh (independent), P. Pessi (NCBJ), E. E. O. Ishida (CNRS), E. E. Hayes (KIC), L. Nakazono (USP), R. A. P. Olive…
+Source Group: 
+COIN
+Keywords: 
+Time-domain
+, 
+Surveys
+, 
+Transient
+Related Objects: 
+2025agnm [ZTF25achcijr]
+RA, DEC:
+10:12:42.513, +15:04:08.36
+(153.177137, 15.068989)
+Redshift:
+Type:
+See object 2025agnm [ZTF25achcijr]
+, 
+2025ahdt [ZTF25acgngdl]
+RA, DEC:
+21:41:27.257, -04:20:22.09
+(325.363570, -4.339469)
+Redshift:
+0.06
+Type:
+SN Ia
+See object 2025ahdt [ZTF25acgngdl]
+, 
+2025afyx [ZTF25acfxvix]
+RA, DEC:
+21:51:33.180, +22:03:05.78
+(327.888250, 22.051605)
+Redshift:
+Type:
+See object 2025afyx [ZTF25acfxvix]
+We report 3 hostless candidates selected by the ELEPHANT pipeline.
+AstroNote 2025-343
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-19 13:01:17
+SLSN and TDE candidates from NEEDLE on Lasair
+X. Sheng, M. Nicholl, K. W. Smith, A. Aamer, C. R. Angus, M. Fulton, T. Moore, J. Weston, D. R. Young, D. Magill, A. Sm…
+Source Group: 
+OxQUB
+Keywords: 
+Time-domain
+, 
+Transient
+, 
+Supernova
+, 
+TDE
+Related Objects: 
+2025agnz [ZTF25acgtayx]
+RA, DEC:
+12:59:24.238, +16:08:37.02
+(194.850991, 16.143616)
+Redshift:
+Type:
+See object 2025agnz [ZTF25acgtayx]
+, 
+2025agny [ZTF25acffqol]
+RA, DEC:
+11:27:51.085, +20:12:15.87
+(171.962853, 20.204408)
+Redshift:
+Type:
+See object 2025agny [ZTF25acffqol]
+We report 1 SLSN and 1 TDE candidates from the ZTF public alert stream, identified by the NEEDLE classifier running on the Lasair alert broker. We encourage spectroscopic classification of these even…
+AstroNote 2025-342
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-19 10:17:58
+Optical spectroscopic and Swift observations of TDE 2025afvr
+Mingxin Wu (USTC), Yibo Wang (USTC), Shifeng Huang (USTC), Linna Xu (USTC), Ning Jiang (USTC), Tinggui Wang (USTC).
+Source Group: 
+USTC-TDE
+Keywords: 
+Spectroscopy
+, 
+Transient
+, 
+TDE
+, 
+X-rays
+Related Objects: 
+2025afvr
+RA, DEC:
+01:07:36.302, +24:22:39.82
+(16.901258, 24.377728)
+Redshift:
+Type:
+TDE-featureless
+See object 2025afvr
+We report the optical spectroscopic and Swift observations of TDE 2025afvr which is still in rising phase in optical band.
+AstroNote 2025-341
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-18 15:02:29
+TDE candidates from POTICA
+E. Concepcion, S. Bhattacharyya, A. Gomboc, T. Petrushevska, O. Razim, G. Contardo, E. Umuzigazuba (University of Nova …
+Keywords: 
+Transient
+, 
+Supernova
+, 
+TDE
+Related Objects: 
+2025afsj [ZTF18aaxqitv]
+RA, DEC:
+12:55:07.057, +34:08:46.95
+(193.779403, 34.146376)
+Redshift:
+0.1654
+Type:
+AGN
+See object 2025afsj [ZTF18aaxqitv]
+, 
+2025agis [ZTF18aafhmpq]
+RA, DEC:
+07:24:29.556, +08:33:57.57
+(111.123149, 8.565993)
+Redshift:
+0.107
+Type:
+SN Ia
+See object 2025agis [ZTF18aafhmpq]
+We report two possible TDEs identified by our photometric classifier POTICA (Photometric Optical TDE Identification and Classification Annotator), currently in its testing phase. 
+The lightcurve of …
+AstroNote 2025-340
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-17 12:14:48
+Tentative classification of the optical transient AT 2025afvr as a featureless tidal disruption event.
+Panos Charalampopoulos (Univ. Turku)
+Keywords: 
+Time-domain
+, 
+Transient
+, 
+TDE
+Related Objects: 
+2025afvr [ZTF25acfyeke]
+RA, DEC:
+01:07:36.302, +24:22:39.82
+(16.901258, 24.377728)
+Redshift:
+Type:
+TDE-featureless
+See object 2025afvr [ZTF25acfyeke]
+Related Notes: 
+2025-335
+2025-340
+2025-12-12 11:20:45
+Title: 
+SLSN and TDE candidates from NEEDLE on Lasair
+Authors: 
+X. Sheng, M. Nicholl, K. W. Smith, A. Aamer, C. R. Angus, M…
+Source Group: 
+OxQUB
+We present a NOT/ALFOSC optical spectrum of the rising optical transient AT 2025afvr. The spectrum is blue and featureless. There are no evident host galaxy lines and no spectroscopic redshift for th…
+AstroNote 2025-339
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-17 03:08:36
+Discovery of 20 Supernova Candidates (zhost = 0.072 - 3.087) using NGDEEP JWST/NIRCam Images
+Magdalena Sammut (University of Arizona), Christa DeCoursey (University of Arizona), Eiichi Egami (University of Arizon…
+Related Objects: 
+2024aiie
+RA, DEC:
+03:32:59.505, -27:52:17.40
+(53.247939, -27.871501)
+Redshift:
+Type:
+See object 2024aiie
+, 
+2024aiid
+RA, DEC:
+03:33:05.709, -27:50:25.83
+(53.273787, -27.840509)
+Redshift:
+Type:
+See object 2024aiid
+, 
+2024aiic
+RA, DEC:
+03:33:04.073, -27:50:41.50
+(53.266971, -27.844861)
+Redshift:
+Type:
+See object 2024aiic
+, 
+2024aiib
+RA, DEC:
+03:33:03.076, -27:50:56.74
+(53.262818, -27.849096)
+Redshift:
+Type:
+See object 2024aiib
+, 
+2024aiia
+RA, DEC:
+03:32:57.165, -27:49:28.12
+(53.238188, -27.824478)
+Redshift:
+Type:
+See object 2024aiia
+, 
+2024aihz
+RA, DEC:
+03:32:59.916, -27:49:23.73
+(53.249650, -27.823259)
+Redshift:
+Type:
+See object 2024aihz
+, 
+2024aihy
+RA, DEC:
+03:32:58.419, -27:48:42.52
+(53.243412, -27.811811)
+Redshift:
+Type:
+See object 2024aihy
+, 
+2024aihx
+RA, DEC:
+03:33:02.976, -27:52:14.09
+(53.262399, -27.870581)
+Redshift:
+Type:
+See object 2024aihx
+, 
+2024aihw
+RA, DEC:
+03:33:00.251, -27:52:19.89
+(53.251047, -27.872193)
+Redshift:
+Type:
+See object 2024aihw
+, 
+2024aihv
+RA, DEC:
+03:33:05.798, -27:50:44.36
+(53.274159, -27.845656)
+Redshift:
+Type:
+See object 2024aihv
+, 
+2024aihu
+RA, DEC:
+03:32:59.594, -27:49:12.55
+(53.248307, -27.820151)
+Redshift:
+Type:
+See object 2024aihu
+, 
+2024aiht
+RA, DEC:
+03:33:06.894, -27:51:30.28
+(53.278723, -27.858411)
+Redshift:
+Type:
+See object 2024aiht
+, 
+2024aihs
+RA, DEC:
+03:32:59.855, -27:51:42.27
+(53.249395, -27.861741)
+Redshift:
+Type:
+See object 2024aihs
+, 
+2024aihr
+RA, DEC:
+03:33:01.494, -27:49:12.93
+(53.256223, -27.820258)
+Redshift:
+Type:
+See object 2024aihr
+, 
+2024aihq
+RA, DEC:
+03:32:56.631, -27:49:17.38
+(53.235961, -27.821495)
+Redshift:
+Type:
+See object 2024aihq
+, 
+2023aefc
+RA, DEC:
+03:33:00.622, -27:51:37.67
+(53.252591, -27.860464)
+Redshift:
+Type:
+See object 2023aefc
+, 
+2023aefb
+RA, DEC:
+03:33:00.159, -27:49:23.53
+(53.250664, -27.823203)
+Redshift:
+Type:
+See object 2023aefb
+, 
+2023aefa
+RA, DEC:
+03:32:58.037, -27:49:04.72
+(53.241823, -27.817978)
+Redshift:
+Type:
+See object 2023aefa
+, 
+2023aeez
+RA, DEC:
+03:32:56.435, -27:49:47.83
+(53.235145, -27.829952)
+Redshift:
+Type:
+See object 2023aeez
+, 
+2023aeey
+RA, DEC:
+03:32:54.423, -27:48:31.02
+(53.226762, -27.808617)
+Redshift:
+Type:
+See object 2023aeey
+We report 20 supernova candidates with magnitudes down to ~30.4 AB mag collected from the NGDEEP (PI: Finkelstein; PID: 2079) survey data. They are hosted by galaxies with redshifts ranging from z=0…
+AstroNote 2025-338
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-17 03:08:02
+Discovery of 4 Supernova Candidates (zhost = 0.35 - 2.92) in GOODS-S using JWST Program 3215 and OASIS JWST/NIRCam Images
+Magdalena Sammut (University of Arizona), Christa DeCoursey (University of Arizona), Eiichi Egami (University of Arizon…
+Related Objects: 
+2024aihp
+RA, DEC:
+03:32:16.024, -27:51:42.91
+(53.066768, -27.861920)
+Redshift:
+Type:
+See object 2024aihp
+, 
+2024aiho
+RA, DEC:
+03:32:20.346, -27:52:23.39
+(53.084775, -27.873164)
+Redshift:
+Type:
+See object 2024aiho
+, 
+2023aeex
+RA, DEC:
+03:32:18.269, -27:51:34.89
+(53.076121, -27.859691)
+Redshift:
+Type:
+See object 2023aeex
+, 
+2024aihn
+RA, DEC:
+03:32:23.084, -27:50:56.16
+(53.096185, -27.848932)
+Redshift:
+Type:
+See object 2024aihn
+We report 4 supernova candidates with magnitudes down to ~30.2 AB mag in the GOODS-S field hosted by galaxies with redshifts z=0.342, z~2.55, z~2.92, and one of unknown redshift. We found these sourc…
+AstroNote 2025-337
+Type: 
+Announcement-Campaign/Survey
+Released: 
+2025-12-15 19:50:37
+Planned HST observations of SN 2025afcr
+R. Quimby, S. Gomez, A. Fruchter, and T. Moriya on behalf of a larger collaboration
+Related Objects: 
+2025afcr
+RA, DEC:
+12:38:41.774, +07:36:37.68
+(189.674059, 7.610465)
+Redshift:
+0.1335
+Type:
+SLSN-I
+See object 2025afcr
+Related Notes: 
+2025-333
+2025-337
+2025-12-02 23:32:31
+Title: 
+Liverpool Telescope and P200 classification of 2025afcr as a bright, pre-maximum SLSN-I at z = 0.1335
+Authors: 
+Jacob Wise (LJMU), Ragnhild Lunnan (OKC), Steve Schulze (CI…
+Source Group: 
+ZTF
+AstroNote 2025-336
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-15 15:39:43
+ATLAS25pss (AT2025agwd): discovery of a candidate SN in ESO 507- G 037 (44 Mpc)
+A. J. Smith (QUB), K. W. Smith (Oxford/QUB), D. R. Young, M. Nicholl, M. Fulton, M. McCollum, T. Moore, J. Weston, X. S…
+Source Group: 
+ATLAS
+Keywords: 
+Supernova
+Related Objects: 
+2025agwd [ATLAS25pss]
+RA, DEC:
+12:53:10.810, -27:28:03.60
+(193.295043, -27.467666)
+Redshift:
+Type:
+See object 2025agwd [ATLAS25pss]
+Here we report the ATLAS discovery of the transient ATLAS25pss (AT2025agwd) in galaxy ESO 507- G 037 at magnitude m_o = 18.49 +/- 0.18.  At a distance of 44 Mpc, the transient was discovered on MJD =…
+AstroNote 2025-335
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-12 11:21:17
+SLSN and TDE candidates from NEEDLE on Lasair
+X. Sheng, M. Nicholl, K. W. Smith, A. Aamer, C. R. Angus, M. Fulton, T. Moore, J. Weston, D. R. Young, D. Magill, A. Sm…
+Source Group: 
+OxQUB
+Keywords: 
+Time-domain
+, 
+Transient
+, 
+Supernova
+, 
+TDE
+Related Objects: 
+2025aeuq
+RA, DEC:
+08:07:34.171, +47:56:36.50
+(121.892379, 47.943472)
+Redshift:
+0.135
+Type:
+SLSN-I
+See object 2025aeuq
+, 
+2025aezg [ZTF25acexsew]
+RA, DEC:
+03:38:13.138, -25:09:15.22
+(54.554740, -25.154228)
+Redshift:
+Type:
+See object 2025aezg [ZTF25acexsew]
+, 
+2025afvr [ZTF25acfyeke]
+RA, DEC:
+01:07:36.302, +24:22:39.82
+(16.901258, 24.377728)
+Redshift:
+Type:
+TDE-featureless
+See object 2025afvr [ZTF25acfyeke]
+We report 2 SLSN and 1 TDE candidates from the ZTF public alert stream, identified by the NEEDLE classifier running on the Lasair alert broker. We encourage spectroscopic classification of these even…
+AstroNote 2025-334
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-10 17:41:00
+ATLAS25plg (AT2025aggl): discovery of a candidate SN in UGC 03766 (81 Mpc)
+K. W. Smith (Oxford/QUB), A. J. Smith, D. R. Young, M. Nicholl, M. Fulton, M. McCollum, T. Moore, J. Weston, X. Sheng, …
+Source Group: 
+ATLAS
+Keywords: 
+Supernova
+Related Objects: 
+2025aggl [ATLAS25plg]
+RA, DEC:
+07:14:50.030, +16:58:47.01
+(108.708460, 16.979724)
+Redshift:
+0.0163
+Type:
+SN IIn
+See object 2025aggl [ATLAS25plg]
+Here we report the ATLAS discovery of the transient ATLAS25plg (AT2025aggl) in galaxy UGC 03766 at magnitude m_o = 18.72 +/- 0.18.  At a distance of 81 Mpc, the transient was discovered on MJD = 6101…
+AstroNote 2025-333
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-03 18:33:27
+Liverpool Telescope and P200 classification of 2025afcr as a bright, pre-maximum SLSN-I at z = 0.1335
+Jacob Wise (LJMU), Ragnhild Lunnan (OKC), Steve Schulze (CIERA), Lin Yan (Caltech), Christoffer Fremling (Caltech), Wyn…
+Source Group: 
+ZTF
+Related Objects: 
+2025afcr [ZTF25acemaph]
+RA, DEC:
+12:38:41.774, +07:36:37.68
+(189.674059, 7.610465)
+Redshift:
+0.1335
+Type:
+SLSN-I
+See object 2025afcr [ZTF25acemaph]
+Related Notes: 
+2022-191
+2025-333
+2022-08-15 12:08:04
+Title: 
+The Next Generation SuperFit (NGSF) tool is now available for online execution on WISeREP 
+Authors: 
+Samantha Goldwasser, Ofer Yaron, Avner Sass, Ido Irani, Avi…
+, 
+2024-340
+2025-333
+2024-11-16 06:37:08
+Title: 
+The First Science Spectrum with the Next Generation Palomar Spectrograph (NGPS): Classification of ZTF24abrfcqd as a Type Ia Supernova
+Authors: 
+Mansi M. Kasliwal, Christoffer Fremling, Lin Yan, Kaustav D…
+Source Group: 
+ZTF
+We report ZTF, Liverpool Telescope, Palomar P200 and Swift observations of 2025afcr/ZTF25acemaph. We find it to be a bright (g 
+AstroNote 2025-332
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-12-02 01:23:03
+Classification of Bright, Nearby Transients During Nov 21 and Nov 24
+Yize Dong (Harvard/CfA), Anya Nugent (Harvard/CfA), S. Karthik Yadavalli (Harvard/CfA), V. Ashley Villar (Harvard/CfA),…
+Source Group: 
+VHU-TDA
+Keywords: 
+Spectroscopy
+, 
+Transient
+, 
+Supernova
+, 
+Optical
+Related Objects: 
+2025aarn
+RA, DEC:
+04:37:19.577, -08:46:35.95
+(69.331570, -8.776654)
+Redshift:
+0.01685
+Type:
+SN II
+See object 2025aarn
+, 
+2025aaxz
+RA, DEC:
+09:44:34.866, +55:45:43.41
+(146.145275, 55.762057)
+Redshift:
+0.025
+Type:
+SN II
+See object 2025aaxz
+, 
+2025abdd
+RA, DEC:
+07:52:48.983, +69:00:14.78
+(118.204097, 69.004106)
+Redshift:
+0.01298
+Type:
+SN Ic
+See object 2025abdd
+, 
+2025abmj
+RA, DEC:
+11:32:32.000, +48:21:51.92
+(173.133331, 48.364422)
+Redshift:
+0.034
+Type:
+SN II
+See object 2025abmj
+, 
+2025abob
+RA, DEC:
+03:31:32.223, +04:55:37.36
+(52.884264, 4.927043)
+Redshift:
+0.037
+Type:
+SN II
+See object 2025abob
+, 
+2025acnj
+RA, DEC:
+04:33:31.391, +68:19:59.63
+(68.380796, 68.333231)
+Redshift:
+0.0116
+Type:
+SN IIb
+See object 2025acnj
+, 
+2025acrr
+RA, DEC:
+05:14:45.178, -14:26:58.73
+(78.688240, -14.449647)
+Redshift:
+0.036
+Type:
+SN Ia
+See object 2025acrr
+, 
+2025acrz
+RA, DEC:
+21:51:58.048, +17:52:48.51
+(327.991866, 17.880142)
+Redshift:
+0.098
+Type:
+SN Ia
+See object 2025acrz
+, 
+2025acsj
+RA, DEC:
+11:33:55.950, +49:23:02.47
+(173.483124, 49.384019)
+Redshift:
+0.05
+Type:
+SN Ia
+See object 2025acsj
+, 
+2025aedq
+RA, DEC:
+23:18:40.211, +27:38:48.53
+(349.667547, 27.646814)
+Redshift:
+0.0666
+Type:
+SN Ia
+See object 2025aedq
+, 
+2025cku
+RA, DEC:
+09:50:44.767, +27:18:08.75
+(147.686530, 27.302432)
+Redshift:
+0.075
+Type:
+SN IIn
+See object 2025cku
+, 
+2025uam
+RA, DEC:
+07:47:55.594, +34:02:06.94
+(116.981640, 34.035262)
+Redshift:
+0.0154
+Type:
+SN II
+See object 2025uam
+, 
+2025ztn
+RA, DEC:
+02:03:00.504, -09:39:50.05
+(30.752099, -9.663902)
+Redshift:
+0.0123
+Type:
+SN IIb
+See object 2025ztn
+We report the classifications of 3 transients, including 1 Type II and 2 Type Ia. We also upload the followup spectra of 10 transients.
+AstroNote 2025-331
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-11-30 17:03:51
+WFST251129euxe (AT 2025afih): discovery of a fast optical transient at 80 Mpc
+Dezheng Meng, Zelin Xu, Weiyu Wu, Junhan Zhao, Zhengyan Liu, Ziqing Jia, Ji-an Jiang (USTC) on behalf of the WFST colla…
+Source Group: 
+WFST
+Keywords: 
+Time-domain
+, 
+Surveys
+, 
+Photometry
+, 
+Transient
+, 
+Supernova
+, 
+Optical
+Related Objects: 
+2025afih [WFST251129euxe]
+RA, DEC:
+02:03:03.912, +04:14:37.24
+(30.766301, 4.243677)
+Redshift:
+0.019
+Type:
+SN Ia
+See object 2025afih [WFST251129euxe]
+Related Notes: 
+2024-230
+2025-331
+2024-08-28 14:12:42
+Title: 
+545 supernova candidates from the WFST pilot survey
+Authors: 
+Ji-an Jiang (USTC), Zelin Xu (USTC), Weiyu Wu (USTC), Dezhe…
+Source Group: 
+WFST
+, 
+2025-58
+2025-331
+2025-02-13 14:14:05
+Title: 
+330 supernova candidates from the first two months of the WFST deep high-cadence ugr-bands survey
+Authors: 
+Ji-an Jiang, Zelin Xu, Dezheng Meng, Weiyu Wu, Zhengyan Liu…
+Source Group: 
+WFST
+We report a fast rising transient WFST251129euxe (AT 2025afih) discovered by the 2.5-m Wide Field Survey Telescope (WFST) through the Deep High-cadence ugr-band Survey.
+AstroNote 2025-330
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-11-28 13:22:58
+Detection of a possible fifth image of SN 2025wny (SN Winny)
+A. Aryan, T.-W. Chen, Y.-H. Lee (NCU), A. Galan, E. Mamuzic, A. G. Schweinfurth, S. H. Suyu, S. Taubenberger (TUM/MPA),…
+Source Group: 
+HOLISMOKES
+Keywords: 
+Transient
+, 
+Supernova
+, 
+Optical
+Related Objects: 
+2025wny [ZTF25abnjznp]
+RA, DEC:
+07:16:34.500, +38:21:08.11
+(109.143748, 38.352253)
+Redshift:
+2.011
+Type:
+SLSN-I
+See object 2025wny [ZTF25abnjznp]
+Related Notes: 
+2025-296
+2025-330
+2025-10-04 21:57:10
+Title: 
+Liverpool Telescope Discovery of Multiple Images from AT2025wny (ZTF25abnjznp/GOTO25gtq)
+Authors: 
+Jacob Wise (LJMU), Daniel Perley (LJMU), Ariel Goobar (OKC)…
+Source Group: 
+ZTF
+, 
+2025-306
+2025-330
+2025-10-23 15:07:41
+Title: 
+Keck/LRIS Classification of SN2025wny as a Strongly Lensed Type I Superluminous Supernova at z=2.01
+Authors: 
+Joel Johansson (OKC), Yu-Jing Qin (Caltech), Ariel Goobar (…
+CFHT r'-band observations reveal another transient point source near the four known images of SN 2025wny, possibly a fifth strongly lensed SN image.
+AstroNote 2025-329
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-11-27 20:24:22
+Possible rebrightening of AT 2024uuw observed by ATLAS
+C. R. Angus (QUB), K. W. Smith (Oxford/QUB), T.-W. Chen (NCU), D. R. Young, M. Nicholl, M. Fulton, M. McCollum, T. Moor…
+Source Group: 
+ATLAS
+Related Objects: 
+2024uuw [GOTO24fqo]
+RA, DEC:
+06:36:34.335, -33:20:42.66
+(99.143064, -33.345185)
+Redshift:
+Type:
+See object 2024uuw [GOTO24fqo]
+We report on a re-brightening or second transient event towards the position of AT 2024uuw in ATLAS photometry light curves, 436 days after initial discovery in GOTO. The second flare is approximatel…
+AstroNote 2025-328
+Type: 
+Announcement-General
+Released: 
+2025-11-27 17:50:44
+Gamma-ray upper limits the on the rising phase of TDE 2025aarm from observations by the MAGIC and LST-1 telescopes
+David Paneque (MPP Munich), M. Teshima (MPP Munich), Maria Kherlakian (RUB), Andrea Simongini (INAF-Rome, Uniroma2), Hi…
+Related Objects: 
+2025aarm [BGEM J043212.39-052239.7]
+RA, DEC:
+04:32:12.399, -05:22:39.51
+(68.051664, -5.377641)
+Redshift:
+0.01368
+Type:
+TDE
+See object 2025aarm [BGEM J043212.39-052239.7]
+We report upper-limits obtained at 200 GeV - 50 TeV with the MAGIC and LST-1 telescopes of the nearby TDE 2025aarm.
+AstroNote 2025-327
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-11-27 11:39:05
+Shane KAST & Liverpool Telescope observations of AT 2025zmb/ZTF25abuovxv, a candidate optically overluminous featureless TDE
+Aleksandra Bochenek (LJMU), Zoë McGrath (LJMU), Jacob Wise (LJMU), Daniel Perley (LJMU), R. Michael Rich (UCLA), Christ…
+Source Group: 
+ZTF
+Keywords: 
+Photometry
+, 
+Spectroscopy
+, 
+Transient
+, 
+TDE
+Related Objects: 
+2025zmb [ZTF25abuovxv]
+RA, DEC:
+06:09:46.694, +35:34:19.94
+(92.444560, 35.572207)
+Redshift:
+Type:
+See object 2025zmb [ZTF25abuovxv]
+Related Notes: 
+2025-307
+2025-327
+2025-10-24 10:55:26
+Title: 
+SLSN and TDE candidates from NEEDLE on Lasair
+Authors: 
+X. Sheng, M. Nicholl, K. W. Smith, A. Aamer, C. R. Angus, M…
+Source Group: 
+OxQUB
+, 
+2025-310
+2025-327
+2025-10-29 02:38:54
+Title: 
+ZTF superluminous supernova candidates
+Authors: 
+Aiswarya Sankar.K, Ting-Wan Chen (NCU), Yang Hu, Ragnhild L…
+Source Group: 
+ZTF
+We report the observations of AT 2025zmb/ZTF25abuovxv, which we tentatively classify as a candidate optically overluminous featureless TDE, following its spectroscopic observations with the Kast spec…
+AstroNote 2025-326
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-11-23 00:55:10
+ATLAS25omp (AT2025aecv): discovery of a candidate SN in NGC 4441 (39 Mpc)
+K. W. Smith (Oxford/QUB), T.-W. Chen (NCU), D. R. Young, M. Nicholl, M. Fulton, M. McCollum, T. Moore, J. Weston, X. Sh…
+Source Group: 
+ATLAS
+Keywords: 
+Supernova
+Related Objects: 
+2025aecv [ATLAS25omp]
+RA, DEC:
+12:27:19.927, +64:48:12.05
+(186.833029, 64.803348)
+Redshift:
+0.0088
+Type:
+SN II
+See object 2025aecv [ATLAS25omp]
+Here we report the ATLAS discovery of the transient ATLAS25omp (AT2025aecv) in galaxy NGC 4441 at magnitude m_w = 17.42 +/- 0.04.  At a distance of 39 Mpc, the transient was discovered on MJD = 60997…
+AstroNote 2025-325
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-11-19 03:06:27
+ZTF Identification of ZTF25absjioz (AT 2018mqa) as a possible low-luminosity TDE at 63 Mpc
+R. Stein (JSI), Y. Yao (UC Berkeley), X. J. Hall (CMU), K. Das (Caltech), J. Johansson (Stockholm), M. Kasliwal (Caltec…
+Source Group: 
+ZTF
+Keywords: 
+Transient
+, 
+TDE
+Related Objects: 
+2018mqa [ZTF25absjioz]
+RA, DEC:
+08:10:06.057, +24:55:19.88
+(122.525237, 24.922189)
+Redshift:
+0.014
+Type:
+TDE
+See object 2018mqa [ZTF25absjioz]
+Related Notes: 
+2025-64
+2025-325
+2025-02-15 18:44:13
+Title: 
+ZTF Complete Astronomical Transient Survey within 150 Mpc (CATS150)
+Authors: 
+Kaustav K. Das, Mansi M. Kasliwal, Theophile Jegou du Laz, …
+Source Group: 
+ZTF
+We report the identification of optical transient ZTF25absjioz/AT 2018mqa as a possible tidal disruption event (TDE). The transient is located in the nucleus of a nearby galaxy at 63 Mpc, with a low …
+AstroNote 2025-324
+Type: 
+Object/s-Data/Analysis
+Released: 
+2025-11-18 12:02:11
+ LCO observations of AT 2025adje (ASASSN-25et), a bright supernova candidate in PGC 047292, at a redshift of z = 0.00796 
+P.G. Berdayes, J. Basurto Merino, A. Caballero-Almagro, A. Cerón, M. Contreras, F. Díaz-Segado, T. Ferrer-Laviña, B. Ga…
+Source Group: 
+ULL-ASTRO-MASTER
+Keywords: 
+Transient
+, 
+Supernova
+, 
+Optical
+Related Objects: 
+2025adje [ASASSN-25et]
+RA, DEC:
+13:28:48.658, +38:44:47.39
+(202.202742, 38.746496)
+Redshift:
+0.00796
+Type:
+SN II
+See object 2025adje [ASASSN-25et]
+We report on Las Cumbres Observatory (LCO) observations of the bright supernova candidate AT 2025adje, discovered by ASAS-SN (ASASSN-25et) after seasonal break and located close to the galaxy PGC 047…
+AstroNote 2025-323
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-11-14 15:17:09
+SLSN and TDE candidates from NEEDLE on Lasair
+A. Aamer, C. R. Angus, X. Sheng, M. Nicholl, K. W. Smith, M. Fulton, T. Moore, J. Weston, D. R. Young, D. Magill, A. Sm…
+Source Group: 
+OxQUB
+Keywords: 
+Time-domain
+, 
+Transient
+, 
+Supernova
+, 
+TDE
+Related Objects: 
+2025abwv [ZTF25acbcpff]
+RA, DEC:
+05:05:46.916, +05:44:01.43
+(76.445484, 5.733729)
+Redshift:
+0.106
+Type:
+SN Ia
+See object 2025abwv [ZTF25acbcpff]
+, 
+2025absg [ZTF25acafwrq]
+RA, DEC:
+08:24:54.851, -14:26:50.46
+(126.228548, -14.447351)
+Redshift:
+Type:
+See object 2025absg [ZTF25acafwrq]
+, 
+2025aazi [ZTF25abxpson]
+RA, DEC:
+09:41:58.095, +75:03:36.72
+(145.492064, 75.060200)
+Redshift:
+Type:
+See object 2025aazi [ZTF25abxpson]
+, 
+2025abec [ZTF25abypomt]
+RA, DEC:
+01:14:43.481, +14:05:16.53
+(18.681172, 14.087925)
+Redshift:
+Type:
+See object 2025abec [ZTF25abypomt]
+, 
+2025acrq [ZTF25accwqaq]
+RA, DEC:
+00:21:58.570, +06:55:31.09
+(5.494042, 6.925302)
+Redshift:
+0.088
+Type:
+SN Ia
+See object 2025acrq [ZTF25accwqaq]
+, 
+2025acct [ZTF25acbaljt]
+RA, DEC:
+02:06:56.291, -09:36:49.14
+(31.734546, -9.613650)
+Redshift:
+Type:
+See object 2025acct [ZTF25acbaljt]
+Related Notes: 
+2025-312
+2025-323
+2025-10-31 14:34:26
+Title: 
+SLSN and TDE candidates from NEEDLE on Lasair
+Authors: 
+A. Aamer, X. Sheng, M. Nicholl, K. W. Smith, C. R. Angus, M…
+Source Group: 
+OxQUB
+We report 5 SLSN and 1 TDE candidates from the ZTF public alert stream, identified by the NEEDLE classifier running on the Lasair alert broker. We encourage spectroscopic classification of these even…
+AstroNote 2025-322
+Type: 
+Object/s-Data/Analysis
+Released: 
+2025-11-14 13:01:48
+H.E.S.S. observations and upper limits on the very-high-energy gamma-ray emission of TDE 2025aarm
+L. Mohrmann (MPIK) for the H.E.S.S. Collaboration
+Keywords: 
+TDE
+, 
+Gamma Rays
+Related Objects: 
+2025aarm
+RA, DEC:
+04:32:12.399, -05:22:39.51
+(68.051664, -5.377641)
+Redshift:
+0.01368
+Type:
+TDE
+See object 2025aarm
+We report very-high-energy gamma-ray upper limits obtained with the High Energy Stereoscopic System (H.E.S.S.) for the nearby TDE 2025aarm.
+AstroNote 2025-321
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-11-14 11:20:02
+ATLAS25nsq (SN2025acfm): discovery of a Type IIP SN in IC1722 (54 Mpc)
+J. Tweddle (Oxford), K. W. Smith (Oxford/QUB), D. R. Young, M. Nicholl, M. Fulton, M. McCollum, T. Moore, J. Weston, X…
+Source Group: 
+ATLAS
+Keywords: 
+Supernova
+Related Objects: 
+2025acfm
+RA, DEC:
+01:43:00.374, -34:11:35.13
+(25.751558, -34.193092)
+Redshift:
+0.0139
+Type:
+SN IIP
+See object 2025acfm
+Here we report the ATLAS discovery of the transient ATLAS25nsq (SN2025acfm) in galaxy IC1722  at magnitude m_o = 18.40 +/- 0.16.  At a distance of 54 Mpc, the transient was discovered on MJD = 60981…
+AstroNote 2025-320
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-11-12 21:07:59
+SN 2024qiw as a Possible iPTF14hls-like Supernova
+Iair Arcavi (TAU), Erez Zimmerman (WIS), Joseph Farah (UCSB/Las Cumbres), Paul Groot (Radboud)
+Related Objects: 
+2024qiw
+RA, DEC:
+04:52:54.700, -05:32:04.13
+(73.227917, -5.534481)
+Redshift:
+0.0094
+Type:
+SN II-pec
+See object 2024qiw
+Based on multiple photometric peaks and a non-nebular Type II spectrum we suggest that SN 2024qiw is an iPTF14hls-like supernova, now ~500-600 days from explosion.
+AstroNote 2025-319
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-11-10 10:37:20
+Classification of AT 2025ukn as an Extreme Nuclear Transient (ENT)
+Sara Faris (TAU), Lloyd Landsberg, Francois Campher and Moses Mlangeni (UCT), Fiorenzo Stoppa (Oxf), Iair Arcavi (TAU),…
+Related Objects: 
+2025ukn
+RA, DEC:
+22:13:33.539, -22:30:51.97
+(333.389746, -22.514436)
+Redshift:
+0.13
+Type:
+AGN
+See object 2025ukn
+We report the classification of AT 2025ukn as an Extreme Nuclear Transient (ENT), given AGN-like features in the spectrum and a long rise to ~-22 magnitude.
+AstroNote 2025-318
+Type: 
+Object/s-Data/Analysis
+Released: 
+2025-11-09 20:31:05
+X-ray detection of the off-nuclear TDE 2025abcr using Swift
+Xander J. Hall (CMU), Robert Stein (JSI), Raffaella Margutti (UC Berkeley), Ryan Chornock (UC Berkeley), Erica Hammerst…
+Source Group: 
+DESIRT
+Keywords: 
+Transient
+, 
+TDE
+, 
+Ultra-Violet
+, 
+X-rays
+Related Objects: 
+TDE2025abcr
+RA, DEC:
+01:46:55.400, -15:22:15.71
+(26.730831, -15.371032)
+Redshift:
+0.05
+Type:
+TDE-H-He
+See object TDE2025abcr
+Related Notes: 
+2025-317
+2025-318
+2025-11-09 03:54:08
+Title: 
+ZTF Classification of ZTF25abxvhmk/AT 2025abcr as a likely offnuclear TDE, possibly from an IMBH, at z=0.05
+Authors: 
+R. Stein (JSI), J. Carney (UNC), I. Andreoni (UNC), R. Chor…
+Source Group: 
+ZTF
+We report a Swift-XRT detection of X-ray emission from the off-nuclear IMBH–TDE candidate 2025abcr. The X-rays are luminous and ultrasoft, while contemporaneous Swift-UVOT photometry shows the source…
+AstroNote 2025-317
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-11-09 03:54:08
+ZTF Classification of ZTF25abxvhmk/AT 2025abcr as a likely offnuclear TDE, possibly from an IMBH, at z=0.05
+R. Stein (JSI), J. Carney (UNC), I. Andreoni (UNC), R. Chornock (UC Berkeley), S. Gezari (UMd), Erica Hammerstein (UC B…
+Source Group: 
+ZTF
+Keywords: 
+Transient
+, 
+TDE
+Related Objects: 
+2025abcr
+RA, DEC:
+01:46:55.400, -15:22:15.71
+(26.730831, -15.371032)
+Redshift:
+0.05
+Type:
+TDE-H-He
+See object 2025abcr
+We report the classification of optical transient ZTF25abxvhmk/AT 2025abcr as a likely offnuclear tidal disruption event (TDE). Subsequent follow-up suggests a probable TDE-H-He classification. The l…
+AstroNote 2025-316
+Type: 
+Object/s-Data/Analysis
+Released: 
+2025-11-07 23:42:09
+X-ray detection of the TDE 2025aarm using Chandra
+J. Somalwar (UC Berkeley/KIPAC@Stanford), R. Chornock (UC Berkeley), R. Margutti (UC Berkeley), I. Sfaradi (UC Berkeley…
+Related Objects: 
+2025aarm
+RA, DEC:
+04:32:12.399, -05:22:39.51
+(68.051664, -5.377641)
+Redshift:
+0.01368
+Type:
+TDE
+See object 2025aarm
+We report the detection of X-ray emission coincident with the nearby tidal disruption event TDE 2025aarm
+AstroNote 2025-315
+Type: 
+Object/s-Data/Analysis
+Released: 
+2025-11-07 21:47:53
+Radio detection of TDE 2025aarm with the Very Large Array
+Collin T. Christy (Arizona), Kate D. Alexander (Arizona), Noah Franz (Arizona), Tanmoy Laskar (Utah), Yvette Cendes (Or…
+Keywords: 
+TDE
+, 
+Radio
+Related Objects: 
+2025aarm
+RA, DEC:
+04:32:12.399, -05:22:39.51
+(68.051664, -5.377641)
+Redshift:
+0.01368
+Type:
+TDE
+See object 2025aarm
+Related Notes: 
+2025-311
+2025-315
+2025-10-30 18:30:50
+Title: 
+Classification of AT 2025aarm as a Rising Nearby H+He TDE
+Authors: 
+Sara Faris (Tel Aviv University), Hugo Tranin (Universitat …
+Source Group: 
+StarDestroyers
+, 
+2025-313
+2025-315
+2025-11-02 04:38:19
+Title: 
+Radio upper limits from the TDE 2025aarm using the Allen Telescope Array
+Authors: 
+Itai Sfaradi (UC Berkeley), Erica Hammerstein (UC Berkeley)…
+We report the detection of radio emission coincident with the nearby tidal disruption event TDE 2025aarm.
+AstroNote 2025-314
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-11-07 14:50:45
+SLSN and TDE candidates from NEEDLE on Lasair
+X. Sheng, C. R. Angus, M. Nicholl, K. W. Smith, A. Aamer, M. Fulton, T. Moore, J. Weston, D. R. Young, D. Magill, A. Sm…
+Source Group: 
+OxQUB
+Keywords: 
+Time-domain
+, 
+Transient
+, 
+Supernova
+, 
+TDE
+Related Objects: 
+2025abvv [ZTF25abzyzac]
+RA, DEC:
+00:08:47.471, -09:35:40.49
+(2.197796, -9.594579)
+Redshift:
+0.19
+Type:
+SLSN-I
+See object 2025abvv [ZTF25abzyzac]
+, 
+2025abqh [ZTF25abztmum]
+RA, DEC:
+09:06:24.576, +42:52:42.53
+(136.602398, 42.878479)
+Redshift:
+Type:
+See object 2025abqh [ZTF25abztmum]
+, 
+2025acfx [ZTF25abzmbay]
+RA, DEC:
+10:23:49.765, -09:10:07.65
+(155.957356, -9.168791)
+Redshift:
+0.06
+Type:
+SN Ia
+See object 2025acfx [ZTF25abzmbay]
+, 
+2025acar [ZTF25acblouh]
+RA, DEC:
+08:49:36.857, +61:21:35.60
+(132.403569, 61.359889)
+Redshift:
+0.094
+Type:
+SN Ia
+See object 2025acar [ZTF25acblouh]
+We report 3 SLSN and 1 TDE candidates from the ZTF public alert stream, identified by the NEEDLE classifier running on the Lasair alert broker. We encourage spectroscopic classification of these even…
+AstroNote 2025-313
+Type: 
+Object/s-Data/Analysis
+Released: 
+2025-11-02 04:38:19
+Radio upper limits from the TDE 2025aarm using the Allen Telescope Array
+Itai Sfaradi (UC Berkeley), Erica Hammerstein (UC Berkeley), Ryan Chornock (UC Berkeley), Raffaella Margutti (UC Berkel…
+Keywords: 
+TDE
+, 
+Radio
+Related Objects: 
+2025aarm
+RA, DEC:
+04:32:12.399, -05:22:39.51
+(68.051664, -5.377641)
+Redshift:
+0.01368
+Type:
+TDE
+See object 2025aarm
+Related Notes: 
+2025-311
+2025-313
+2025-10-30 18:30:50
+Title: 
+Classification of AT 2025aarm as a Rising Nearby H+He TDE
+Authors: 
+Sara Faris (Tel Aviv University), Hugo Tranin (Universitat …
+Source Group: 
+StarDestroyers
+We report radio upper limits obtained at 5 and 8 GHz with the Allen Telescope Array for the nearby TDE 2025aarm.
+AstroNote 2025-312
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-10-31 14:34:57
+SLSN and TDE candidates from NEEDLE on Lasair
+A. Aamer, X. Sheng, M. Nicholl, K. W. Smith, C. R. Angus, M. Fulton, T. Moore, J. Weston, D. R. Young, D. Magill, A. Sm…
+Source Group: 
+OxQUB
+Keywords: 
+Time-domain
+, 
+Transient
+, 
+Supernova
+, 
+TDE
+Related Objects: 
+2025aazi [ZTF25abxpson]
+RA, DEC:
+09:41:58.095, +75:03:36.72
+(145.492064, 75.060200)
+Redshift:
+Type:
+See object 2025aazi [ZTF25abxpson]
+, 
+2025aadu [ZTF25abwjiet]
+RA, DEC:
+00:37:39.451, +27:46:20.06
+(9.414378, 27.772238)
+Redshift:
+Type:
+See object 2025aadu [ZTF25abwjiet]
+, 
+2025aagz [ZTF25abwuqln]
+RA, DEC:
+22:29:13.439, +14:51:32.78
+(337.305996, 14.859105)
+Redshift:
+Type:
+See object 2025aagz [ZTF25abwuqln]
+, 
+2025abdo [ZTF25abxywty]
+RA, DEC:
+10:37:19.075, +41:52:50.03
+(159.329478, 41.880565)
+Redshift:
+Type:
+See object 2025abdo [ZTF25abxywty]
+, 
+2025abqa [ZTF25abyxdnh]
+RA, DEC:
+17:32:50.146, +56:20:00.77
+(263.208942, 56.333548)
+Redshift:
+Type:
+See object 2025abqa [ZTF25abyxdnh]
+We report 3 SLSN and 2 TDE candidates from the ZTF public alert stream, identified by the NEEDLE classifier running on the Lasair alert broker. We encourage spectroscopic classification of these even…
+AstroNote 2025-311
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-10-30 18:34:23
+Classification of AT 2025aarm as a Rising Nearby H+He TDE
+Sara Faris (Tel Aviv University), Hugo Tranin (Universitat de Barcelona), Megan Newsome (UT Austin), Iair Arcavi (Tel A…
+Source Group: 
+StarDestroyers
+Keywords: 
+TDE
+Related Objects: 
+2025aarm [BGEM J043212.39-052239.7]
+RA, DEC:
+04:32:12.399, -05:22:39.51
+(68.051664, -5.377641)
+Redshift:
+0.01368
+Type:
+TDE
+See object 2025aarm [BGEM J043212.39-052239.7]
+We report the classification of AT 2025aarm as a nearby pre-peak H+He TDE.
+AstroNote 2025-310
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-10-29 16:33:26
+ZTF superluminous supernova candidates
+Aiswarya Sankar.K, Ting-Wan Chen (NCU), Yang Hu, Ragnhild Lunnan, Etienne Russeil, Anamaria Gkini (OKC), Daniel A. Perl…
+Source Group: 
+ZTF
+Keywords: 
+Transient
+, 
+Supernova
+Related Objects: 
+2025wqw [ZTF25abnmvkd]
+RA, DEC:
+20:03:17.850, +06:46:13.56
+(300.824376, 6.770434)
+Redshift:
+Type:
+See object 2025wqw [ZTF25abnmvkd]
+, 
+2025zqg [ZTF25abtlpwf]
+RA, DEC:
+16:38:00.332, +58:38:51.61
+(249.501383, 58.647669)
+Redshift:
+Type:
+See object 2025zqg [ZTF25abtlpwf]
+, 
+2025wxd [ZTF25abmvftr]
+RA, DEC:
+22:08:48.923, +31:56:09.09
+(332.203847, 31.935857)
+Redshift:
+Type:
+See object 2025wxd [ZTF25abmvftr]
+, 
+2025xjw [ZTF25abqdgrb]
+RA, DEC:
+21:53:34.308, -18:24:06.60
+(328.392949, -18.401833)
+Redshift:
+Type:
+See object 2025xjw [ZTF25abqdgrb]
+, 
+2025xmy [ZTF25abqnaho]
+RA, DEC:
+00:03:14.967, +28:26:58.94
+(0.812361, 28.449704)
+Redshift:
+Type:
+See object 2025xmy [ZTF25abqnaho]
+, 
+2025zmb [ZTF25abuovxv]
+RA, DEC:
+06:09:46.694, +35:34:19.94
+(92.444560, 35.572207)
+Redshift:
+Type:
+See object 2025zmb [ZTF25abuovxv]
+, 
+2025ywm [ZTF25abtymyl]
+RA, DEC:
+17:05:48.460, +34:07:32.32
+(256.451919, 34.125644)
+Redshift:
+Type:
+See object 2025ywm [ZTF25abtymyl]
+We report 7 ZTF superluminous supernova candidates selected by our software filter and subsequent human vetting. In this sample, a typical rise time is longer than 30 days and a typical peak r-band m…
+AstroNote 2025-309
+Type: 
+Object/s-Discovery/Classification
+Released: 
+2025-10-29 02:57:55
+ZTF Classification of AT 2025aapf/ZTF25abxcnsf as a likely TDE-featureless
+R. Chornock (UC Berkeley), R. Stein (UMD/JSI), E. Hammerstein (UC Berkeley), J. Carney (UNC) on behalf of the ZTF TDE/A…
+Source Group: 
+ZTF
+Keywords: 
+Spectroscopy
+, 
+TDE
+, 
+Optical
+Related Objects: 
+2025aapf [ZTF25abxcnsf]
+RA, DEC:
+09:25:01.367, +40:04:18.15
+(141.255697, 40.071709)
+Redshift:
+0.18
+Type:
+TDE-featureless
+See object 2025aapf [ZTF25abxcnsf]
+We spectroscopically classify the optical transient AT2025aapf/ZTF25abxcnsf as a TDE-featureless at redshift z=0.180 using Keck-I/LRIS.
+Pagination
+1
+                Page
+2
+                Page
+3
+                Page
+4
+                Page
+5
+                Page
+6
+                Page
+7
+                Page
+8
+                Page
+9
+…
+Next page
+              ›
+Last page
+              »
+Most Viewed
+AstroNote 2022-145
+Released: 
+2022-07-16
+Views Count: 
+6191
+Discovery of Possible Transient in JWST NIRCam Images of SDSS J141930.11+525159.3
+Mike Engesser (STScI), Gabriel Brammer (University of Copenhagen), Katriona Gould (University of Co…
+AstroNote 2023-136
+Released: 
+2023-05-23
+Views Count: 
+5770
+Early multiband light curve of SN 2023ixf
+Juan-Luis González-Carballo, R. G. Farfán, F. Limón, J. L. Salto, C. Botana, A. Mantero, G. Locatel…
+AstroNote 2023-119
+Released: 
+2023-05-19
+Views Count: 
+5163
+LT Classification of SN 2023ixf as a Type II Supernova in M101
+Daniel A. Perley (LJMU), Avishay Gal-Yam (Weizmann), Ido Irani (Weizmann), Erez Zimmerman (Weizmann)
+AstroNote 2020-100
+Released: 
+2020-05-07
+Views Count: 
+2713
+Classification of SN 2020jfo (ZTF20aaynrrh) as a young Type II supernova
+Daniel Perley (LJMU), Cristina Barbarino (Stockholm), Jesper Sollerman (Stockholm), Tassilo Schweye…
+AstroNote 2023-265
+Released: 
+2023-10-11
+Views Count: 
+2406
+SN 2023tyk: discovery to spectroscopic classification performed fully automatically
+Nabeel Rehemtulla (NU), Adam Miller (NU), Christoffer Fremling (Caltech), D. A. Perley (LJMU), Yu-J…
+AstroNote 2020-89
+Released: 
+2020-04-22
+Views Count: 
+2401
+ATLAS20ktt (AT2020hvp): discovery of a candidate supernova in NGC 6118 (27 Mpc)
+M. Fulton, K. W. Smith, S. Srivastav, O. McBrien, S. J. Smartt, J. Gillanders, P. Clark, D. O'…
+AstroNote 2023-130
+Released: 
+2023-05-22
+Views Count: 
+2399
+Onset of SN 2023ixf observed over East Asian longitudes
+Yiming Mao, Mi Zhang, Guangyao Cai, Jinan Chen, Jin Chen, Xing Gao, Keying Li, Xiaodong Lyu, Yujing…
+AstroNote 2019-163
+Released: 
+2019-12-31
+Views Count: 
+2225
+ePESSTO+ re-classification of AT2019xis as a light echo of SN 1987A in the LMC.
+S. Taubenberger (MPA), D. Malesani (DTU Space), G. Terreran (Northwestern), S. J. Smartt (QUB), A. …
+AstroNote 2020-126
+Released: 
+2020-06-25
+Views Count: 
+2157
+ATLAS20qoq (AT2020nlb): discovery of a candidate SN in MESSIER 85 (17 Mpc)
+A. Townsend (Queen's University Belfast / University of Manchester), K. W. Smith, S. Srivastav…
+AstroNote 2020-70
+Released: 
+2020-03-30
+Views Count: 
+2026
+Fast Radio Bursts (FRBs) now reported to and distributed via the TNS
+O. Yaron, E. Ofek, A. Gal-Yam, A. Sass (Weizmann)
+Recent Released Tools
+Copyright © 2015
+Built by 
+klido.net

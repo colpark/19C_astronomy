@@ -1,0 +1,54 @@
+HTTP/2 302 
+server: nginx
+date: Thu, 17 Sep 2026 00:12:42 GMT
+content-type: text/plain; charset=utf-8
+content-length: 0
+x-archive-redirect-reason: found capture at 20260904020709
+location: https://web.archive.org/web/20260904020709id_/https://www.wis-tns.org/search
+server-timing: captures_list;dur=0.316121, exclusion.robots;dur=0.023266, exclusion.robots.policy;dur=0.015228, esindex;dur=0.006850, cdx.remote;dur=11.435155, LoadShardBlock;dur=1258.990935, PetaboxLoader3.datanode;dur=1216.464866, PetaboxLoader3.resolve;dur=20.851790
+x-app-server: wwwb-app221-dc8
+x-ts: 302
+x-tr: 1307
+server-timing: TR;dur=0,Tw;dur=0,Tc;dur=0
+set-cookie: wb-p-SERVER=wwwb-app221; path=/
+x-location: All
+x-as: 43
+x-rl: 0
+x-na: 0
+x-page-cache: MISS
+server-timing: MISS
+x-nid: BNL-AS
+referrer-policy: no-referrer-when-downgrade
+permissions-policy: interest-cohort=()
+x-sd: 0
+
+HTTP/2 403 
+server: nginx
+date: Thu, 17 Sep 2026 00:12:43 GMT
+content-type: text/html
+content-length: 118
+x-archive-orig-server: awselb/2.0
+x-archive-orig-date: Fri, 04 Sep 2026 02:07:09 GMT
+x-archive-orig-content-length: 118
+x-archive-orig-connection: close
+cache-control: max-age=1800
+memento-datetime: Fri, 04 Sep 2026 02:07:09 GMT
+link: <https://www.wis-tns.org/search>; rel="original", <https://web.archive.org/web/timemap/link/https://www.wis-tns.org/search>; rel="timemap"; type="application/link-format", <https://web.archive.org/web/https://www.wis-tns.org/search>; rel="timegate"
+content-security-policy: default-src 'self' 'unsafe-eval' 'unsafe-inline' data: blob: archive.org web.archive.org web-static.archive.org wayback-api.archive.org athena.archive.org analytics.archive.org pragma.archivelab.org wwwb-events.archive.org
+x-archive-src: SPNOUTLINKS-20260904010247397-00280-zeno-k8s-spn-outlinks-66/SPNOUTLINKS-20260904010247397-00280-zeno-k8s-spn-outlinks-crawl.warc.gz
+server-timing: captures_list;dur=0.442037, exclusion.robots;dur=0.031033, exclusion.robots.policy;dur=0.021641, esindex;dur=0.007277, cdx.remote;dur=95.702056, LoadShardBlock;dur=288.056193, PetaboxLoader3.datanode;dur=273.531020, PetaboxLoader3.resolve;dur=166.055309, load_resource;dur=167.168540
+x-app-server: wwwb-app244-dc8
+x-ts: 403
+x-tr: 610
+server-timing: TR;dur=0,Tw;dur=0,Tc;dur=1
+set-cookie: wb-p-SERVER=wwwb-app244; path=/
+x-location: All
+x-as: 43
+x-rl: 0
+x-na: 0
+x-page-cache: MISS
+x-nid: BNL-AS
+referrer-policy: no-referrer-when-downgrade
+permissions-policy: interest-cohort=()
+x-sd: 0
+

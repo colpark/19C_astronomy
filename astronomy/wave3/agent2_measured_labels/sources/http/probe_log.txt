@@ -1,0 +1,47 @@
+2026-09-17T00:06:46Z PRE-FREEZE-STATUS-ONLY 403 text/html 118 https://www.wis-tns.org/stats-maps server: awselb/2.0 
+2026-09-17T00:06:48Z PRE-FREEZE-STATUS-ONLY 302 text/plain; charset=utf-8 0 https://web.archive.org/web/20260916id_/https://www.wis-tns.org/stats-maps server: nginx location: https://web.archive.org/web/20260904020708id_/https://www.wis-tns.org/stats-maps server-timing: captures_list;dur=0.362901, exclusion.robots;dur=0.028842, exclusion.robots.policy;dur=0.020389, esindex;dur=0.007157, cdx.remote;dur=5.361664, LoadShardBlock;dur=82.184006, PetaboxLoader3.datanode;dur=58.278062, PetaboxLoader3.resolve;dur=10.694547 server-timing: TR;dur=0,Tw;dur=0,Tc;dur=0 server-timing: MISS 
+2026-09-17T00:06:51Z PRE-FREEZE-STATUS-ONLY 302 text/plain; charset=utf-8 0 https://web.archive.org/web/20260916id_/https://www.wis-tns.org/search server: nginx location: https://web.archive.org/web/20260904020709id_/https://www.wis-tns.org/search server-timing: captures_list;dur=0.340523, exclusion.robots;dur=0.026874, exclusion.robots.policy;dur=0.018223, esindex;dur=0.006325, cdx.remote;dur=14.241447, LoadShardBlock;dur=260.845812, PetaboxLoader3.datanode;dur=176.699307, PetaboxLoader3.resolve;dur=16.596169 server-timing: TR;dur=0,Tw;dur=0,Tc;dur=0 server-timing: MISS 
+2026-09-17T00:06:53Z PRE-FREEZE-STATUS-ONLY 302 text/plain; charset=utf-8 0 https://web.archive.org/web/20260916id_/https://www.wis-tns.org/astronotes server: nginx location: https://web.archive.org/web/20260904020710id_/https://www.wis-tns.org/astronotes server-timing: captures_list;dur=0.350988, exclusion.robots;dur=0.026967, exclusion.robots.policy;dur=0.019132, esindex;dur=0.006415, cdx.remote;dur=6.811380, LoadShardBlock;dur=185.279214, PetaboxLoader3.datanode;dur=54.314766, PetaboxLoader3.resolve;dur=11.399526 server-timing: TR;dur=0,Tw;dur=0,Tc;dur=0 server-timing: MISS 
+2026-09-17T00:07:00Z PRE-FREEZE-STATUS-ONLY 503 text/html 11832 https://web.archive.org/cdx/search/cdx?url=wis-tns.org/object/2026*&limit=1 server: nginx 
+2026-09-17T00:07:04Z PRE-FREEZE-STATUS-ONLY 200 text/html 4263342 https://www.rochesterastronomy.org/supernova.html server: Apache 
+2026-09-17T00:07:07Z PRE-FREEZE-STATUS-ONLY 200 text/html; charset=utf-8 38706 https://www.astronomerstelegram.org/ Server: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips PHP/5.4.16 
+2026-09-17T00:07:09Z PRE-FREEZE-STATUS-ONLY 403 text/html 118 https://www.wiserep.org/ server: awselb/2.0 
+2026-09-17T00:07:12Z PRE-FREEZE-STATUS-ONLY 200 text/html; charset=utf-8 52 https://api.lsst.fink-portal.org/api/v1/statistics Server: nginx/1.20.1 
+2026-09-17T00:08:14Z PRE-FREEZE-STATUS-ONLY 000  0 https://api-lsst.alerce.online/object_api/list_objects 
+2026-09-17T00:08:16Z PRE-FREEZE-STATUS-ONLY 200 application/json 20614 https://api.antares.noirlab.edu/v1/loci server: uvicorn 
+2026-09-17T00:08:19Z PRE-FREEZE-STATUS-ONLY 404 text/html 162 https://lasair.lsst.ac.uk/api/ Server: nginx/1.24.0 (Ubuntu) 
+2026-09-17T00:12:38Z 403 https://web.archive.org/web/20260904020708id_/https://www.wis-tns.org/stats-maps https://web.archive.org/web/20260916id_/https://www.wis-tns.org/stats-maps location: https://web.archive.org/web/20260904020708id_/https://www.wis-tns.org/stats-maps 
+2026-09-17T00:12:43Z 403 https://web.archive.org/web/20260904020709id_/https://www.wis-tns.org/search https://web.archive.org/web/20260916id_/https://www.wis-tns.org/search location: https://web.archive.org/web/20260904020709id_/https://www.wis-tns.org/search 
+2026-09-17T00:12:48Z 403 https://web.archive.org/web/20260904020710id_/https://www.wis-tns.org/astronotes https://web.archive.org/web/20260916id_/https://www.wis-tns.org/astronotes location: https://web.archive.org/web/20260904020710id_/https://www.wis-tns.org/astronotes 
+2026-09-17T00:12:52Z 200 https://www.rochesterastronomy.org/supernova.html https://www.rochesterastronomy.org/supernova.html 
+2026-09-17T00:13:04Z stats-maps 20260801 -> 403 https://web.archive.org/web/20260803084202id_/https://www.wis-tns.org/stats-maps 118
+2026-09-17T00:13:09Z stats-maps 20260601 -> 403 https://web.archive.org/web/20260517222550id_/https://www.wis-tns.org/stats-maps 118
+2026-09-17T00:13:14Z stats-maps 20260401 -> 403 https://web.archive.org/web/20260501052304id_/https://www.wis-tns.org/stats-maps 118
+2026-09-17T00:13:18Z stats-maps 20260201 -> 200 https://web.archive.org/web/20260107112933id_/https://www.wis-tns.org/stats-maps 5998
+2026-09-17T00:13:21Z stats-maps 20251201 -> 403 https://web.archive.org/web/20251224104902id_/https://www.wis-tns.org/stats-maps 118
+2026-09-17T00:13:25Z stats-maps 20250901 -> 200 https://web.archive.org/web/20250731105644id_/https://www.wis-tns.org/stats-maps 6719
+2026-09-17T00:13:29Z search 20260801 -> 403 https://web.archive.org/web/20260904020709id_/https://www.wis-tns.org/search 118
+2026-09-17T00:13:34Z search 20260601 -> 200 https://web.archive.org/web/20260514130743id_/https://www.wis-tns.org/search 611742
+2026-09-17T00:13:41Z search 20260401 -> 403 https://web.archive.org/web/20260501052304id_/https://www.wis-tns.org/search 118
+2026-09-17T00:13:45Z search 20260201 -> 403 https://web.archive.org/web/20260104161855id_/https://www.wis-tns.org/search 118
+2026-09-17T00:13:50Z search 20251201 -> 200 https://web.archive.org/web/20251214163359id_/https://www.wis-tns.org/search 593207
+2026-09-17T00:13:54Z search 20250901 -> 403 https://web.archive.org/web/20250829052011id_/https://www.wis-tns.org/search 118
+2026-09-17T00:13:57Z astronotes 20260801 -> 403 https://web.archive.org/web/20260904020710id_/https://www.wis-tns.org/astronotes 118
+2026-09-17T00:14:01Z astronotes 20260601 -> 403 https://web.archive.org/web/20260627161729id_/https://www.wis-tns.org/astronotes 118
+2026-09-17T00:14:05Z astronotes 20260401 -> 403 https://web.archive.org/web/20260501052304id_/https://www.wis-tns.org/astronotes 118
+2026-09-17T00:14:10Z astronotes 20260201 -> 200 https://web.archive.org/web/20260120092045id_/https://www.wis-tns.org/astronotes 263835
+2026-09-17T00:14:13Z astronotes 20251201 -> 403 https://web.archive.org/web/20251231031126id_/https://www.wis-tns.org/astronotes 118
+2026-09-17T00:14:17Z astronotes 20250901 -> 403 https://web.archive.org/web/20250919234342id_/https://www.wis-tns.org/astronotes 118
+2026-09-17T00:15:18Z 200 4394800 https://www.rochesterastronomy.org/sn2026/index.html
+2026-09-17T00:15:21Z 200 4860 https://www.rochesterastronomy.org/snimages/snstats.csv
+2026-09-17T00:16:39Z POST resolver {"resolver":"tns","name_or_id":"2026uxs","output-format":"json"}
+2026-09-17T00:16:39Z POST resolver {"resolver":"tns","name_or_id":"170648615579549734","reverse":true,"output-format":"json"}
+2026-09-17T00:16:39Z POST resolver {"resolver":"tns","name_or_id":"2026","nmax":5,"output-format":"json"}
+2026-09-17T00:16:48Z POST resolver {"resolver":"tns","name_or_id":"SN 2026uxs","output-format":"json"}
+2026-09-17T00:16:48Z POST resolver {"resolver":"tns","name_or_id":"SN2026uxs","output-format":"json"}
+2026-09-17T00:16:49Z POST resolver {"resolver":"tns","name_or_id":"AT 2026uxs","output-format":"json"}
+2026-09-17T00:16:55Z GET https://api.antares.noirlab.edu/v1/catalogs 200
+2026-09-17T00:17:09Z GET ANTARES loci tns_public_objects cohort query
+2026-09-17T00:29:22Z GET https://www.astronomerstelegram.org/ 200 (T5)
+2026-09-17T00:29:46Z GET https://www.astronomerstelegram.org/?read=17991
+2026-09-17T00:29:49Z GET https://www.astronomerstelegram.org/?read=17982

@@ -1,0 +1,65 @@
+{
+ "slot": "label_source",
+ "candidate": "live time-domain astronomy (Rubin LSST alerts + ZTF BTS labels)",
+ "banner": "calibration only, contamination FAIL on this cohort",
+ "supersedes": {
+  "file": "astronomy/wave2/agent2_label_source/label_source_slot.json",
+  "sha256": "01ef18a98fcfd59fcb75853bbee2f6dd4e3b2d15dd3d80583535699850ce00ce",
+  "what_changes": "BTS SNIascore bound tightened from [803, 2247] to [954, 2057] by 345 further public archived TNS captures under the unchanged wave-2 frozen definitions; Rubin-era measured-label supply added (track two); track one (credentials) BLOCKED"
+ },
+ "status": "UNDEMONSTRATED",
+ "status_reason": "BTS per-object split still incomplete (5815 of 7,843 unresolved); Rubin cohort measured non-bot labels: 0 STRONG, 13 existence MODERATE with classifier UNDEMONSTRATED; TNS credentials BLOCKED (request 2026-09-16)",
+ "value": {
+  "bts": {
+   "population": 7843,
+   "category_counts": {
+    "MEASURED": 1074,
+    "MODEL_ANNOTATION": 954,
+    "PHOTOMETRIC_ONLY": 0,
+    "UNRESOLVED_UNDEMONSTRATED": 5815
+   },
+   "sniascore_bound": {
+    "status": "DERIVED",
+    "lower": 954,
+    "upper": 2057,
+    "previous": [
+     803,
+     2247
+    ],
+    "wave1": [
+     0,
+     3131
+    ],
+    "rule": "L' = 803 + new E1 SNIascore placements; U' = 2247 - new E1 non-SNIascore placements among plain SN Ia not already excluded by E4/E5; never widened",
+    "new_captures": {
+     "ok": 345,
+     "http_error": 38,
+     "failed_retries": 7
+    },
+    "new_sniascore_strong": 151,
+    "new_measured": 190,
+    "upper_noE5_sensitivity_not_slot_value": 2654
+   }
+  },
+  "rubin_cohort": {
+   "measured_nonbot_T1_strong": 0,
+   "measured_nonbot_status": "UNDEMONSTRATED",
+   "existence_classified_moderate": 13,
+   "existence_transients_moderate": 12,
+   "leak_older_SN_at_cohort_positions": 7,
+   "automation_share_2026_T1": "20 of 181 spectroscopic 2026 units carry SNIascore (all ZTF); 0 CCSNscore; 0 Syncatto"
+  },
+  "track_one": {
+   "status": "BLOCKED",
+   "reason": "TNS_API_KEY absent (coordinator presence test 2026-09-16T20:13:38Z; agent re-test ABSENT 2026-09-17T00:06Z)",
+   "request_date": "2026-09-16"
+  }
+ },
+ "provenance": {
+  "referent": "basis of BTS type labels (measured vs model annotation) with the SNIascore bound, and the count of measured non-bot spectroscopic labels on Rubin cohort objects",
+  "source": "astronomy/wave3/agent2_measured_labels/scripts/track1_bound.py (imports wave-2 common.py/tns_parse.py read-only; definitions_FROZEN.md sha256 4f89ff6718a14ad4e45a6d33d6bde848448ba6a66d895bd970330efe397b37cf); out/track1_bound.json sha256 8148b5430716be4a2895f378feb60d457d05d1763fb650ccd521100014da30fe; supply_P_per_month.json sha256 b028de4a80b30d875358f1594c4a2b6fc3ceda7e4bfadb958debc56c4527b2ce; scripts/census.py",
+  "population": "7,843 labeled BTS rows (pre-clustering) and Rubin cohort objects first detected >= 2026-07-01 (agent-1 slices, 1,937,720 oids)",
+  "adjudicator": "authenticated TNS classification reports per object (TNS_API_KEY BLOCKED)",
+  "falsifier": "an authenticated report list returning more than 2057 or fewer than 954 BTS plain SN Ia labels with a SNIascore latest report, or any non-bot classification report found for a Rubin cohort object, or a rerun of track1_bound.py returning a different bound"
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "written_utc": "2026-09-17, before reading any classification content",
+ "protocol_sha256": "9fac85524f28b5e3874a0d43a2c089915d20814b7996c18a0c77cc230b3c95fb",
+ "predictions": {
+  "a_all_TNS_classification_reports_per_month_2026": {
+   "point": 250,
+   "range": [
+    150,
+    450
+   ],
+   "basis": "recollection of TNS scale (a few thousand classifications per year); not a source, prediction only"
+  },
+  "b_non_bot_measured_share": {
+   "point": 0.7,
+   "range": [
+    0.5,
+    0.85
+   ]
+  },
+  "c_cohort_objects_with_any_TNS_classification_Jul_Sep_2026": {
+   "point": 60,
+   "range": [
+    0,
+    400
+   ]
+  },
+  "f19": {
+   "point": 0.005,
+   "range": [
+    0.0005,
+    0.03
+   ]
+  },
+  "f185": {
+   "point": 0.002,
+   "range": [
+    0.0002,
+    0.015
+   ]
+  },
+  "A_reachable_arrivals_per_on_sky_night_f19": {
+   "point": 970,
+   "range": [
+    100,
+    6000
+   ],
+   "note": "f19 x 1,937,669 / 10"
+  }
+ }
+}

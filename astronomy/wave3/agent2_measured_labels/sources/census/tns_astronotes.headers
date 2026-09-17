@@ -1,0 +1,54 @@
+HTTP/2 302 
+server: nginx
+date: Thu, 17 Sep 2026 00:12:47 GMT
+content-type: text/plain; charset=utf-8
+content-length: 0
+x-archive-redirect-reason: found capture at 20260904020710
+location: https://web.archive.org/web/20260904020710id_/https://www.wis-tns.org/astronotes
+server-timing: captures_list;dur=0.431910, exclusion.robots;dur=0.028931, exclusion.robots.policy;dur=0.020082, esindex;dur=0.007246, cdx.remote;dur=25.401100, LoadShardBlock;dur=571.086605, PetaboxLoader3.datanode;dur=84.408633, PetaboxLoader3.resolve;dur=144.651591
+x-app-server: wwwb-app244-dc8
+x-ts: 302
+x-tr: 617
+server-timing: TR;dur=0,Tw;dur=0,Tc;dur=1
+set-cookie: wb-p-SERVER=wwwb-app244; path=/
+x-location: All
+x-as: 43
+x-rl: 0
+x-na: 0
+x-page-cache: MISS
+server-timing: MISS
+x-nid: BNL-AS
+referrer-policy: no-referrer-when-downgrade
+permissions-policy: interest-cohort=()
+x-sd: 0
+
+HTTP/2 403 
+server: nginx
+date: Thu, 17 Sep 2026 00:12:48 GMT
+content-type: text/html
+content-length: 118
+x-archive-orig-server: awselb/2.0
+x-archive-orig-date: Fri, 04 Sep 2026 02:07:10 GMT
+x-archive-orig-content-length: 118
+x-archive-orig-connection: close
+cache-control: max-age=1800
+memento-datetime: Fri, 04 Sep 2026 02:07:10 GMT
+link: <https://www.wis-tns.org/astronotes>; rel="original", <https://web.archive.org/web/timemap/link/https://www.wis-tns.org/astronotes>; rel="timemap"; type="application/link-format", <https://web.archive.org/web/https://www.wis-tns.org/astronotes>; rel="timegate"
+content-security-policy: default-src 'self' 'unsafe-eval' 'unsafe-inline' data: blob: archive.org web.archive.org web-static.archive.org wayback-api.archive.org athena.archive.org analytics.archive.org pragma.archivelab.org wwwb-events.archive.org
+x-archive-src: SPNOUTLINKS-20260904010247397-00280-zeno-k8s-spn-outlinks-66/SPNOUTLINKS-20260904010247397-00280-zeno-k8s-spn-outlinks-crawl.warc.gz
+server-timing: captures_list;dur=0.402931, exclusion.robots;dur=0.031918, exclusion.robots.policy;dur=0.022339, esindex;dur=0.006790, cdx.remote;dur=6.703851, LoadShardBlock;dur=160.173054, PetaboxLoader3.datanode;dur=92.079678, PetaboxLoader3.resolve;dur=181.396397, load_resource;dur=165.017861
+x-app-server: wwwb-app218-dc8
+x-ts: 403
+x-tr: 347
+server-timing: TR;dur=0,Tw;dur=0,Tc;dur=0
+set-cookie: wb-p-SERVER=wwwb-app218; path=/
+x-location: All
+x-as: 43
+x-rl: 0
+x-na: 0
+x-page-cache: MISS
+x-nid: BNL-AS
+referrer-policy: no-referrer-when-downgrade
+permissions-policy: interest-cohort=()
+x-sd: 0
+

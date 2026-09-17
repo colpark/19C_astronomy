@@ -1,0 +1,683 @@
+{
+ "banner": "Census of 2026 TNS spectroscopic classification reports from public archives; calibration only for BTS; Rubin cohort supply",
+ "protocol_sha256": "9fac85524f28b5e3874a0d43a2c089915d20814b7996c18a0c77cc230b3c95fb",
+ "track_one": {
+  "status": "BLOCKED",
+  "reason": "TNS_API_KEY absent (coordinator presence test 2026-09-16T20:13:38Z; agent re-test ABSENT 2026-09-17T00:06Z)",
+  "request_date": "2026-09-16"
+ },
+ "months": {
+  "2026-01": {
+   "a_spectroscopic_units_lower_bound": 24,
+   "a_non_spectroscopic_or_unknown_lower_bound": 0,
+   "P_objects_first_classified_lower_bound": 23,
+   "b_nonbot_measured_lower_bound": {
+    "incl_syncatto": 17,
+    "excl_syncatto": 17
+   },
+   "c_cohort_T1_strong": "n/a (cohort starts 2026-07-01)",
+   "disposition": "LOWER BOUND DERIVED (T1 STRONG, 214/2244 enumerated objects had a readable capture); exact count UNDEMONSTRATED",
+   "exact_blocked_by": [
+    "Wayback stats-maps captures 20260904020708, 20260803084202, 20260517222550, 20260501052304, 20251224104902: archived TNS 403 page (118 bytes); 20260107112933: HTTP 200 (per-year only, 2026=1 classified SN)",
+    "live https://www.wis-tns.org/stats-maps HTTP 403 server awselb/2.0 (2026-09-17T00:06:46Z)",
+    "Wayback CDX https://web.archive.org/cdx/search/cdx?url=wis-tns.org/object/2026* HTTP 503 (2026-09-17T00:07:00Z)",
+    "Wayback search captures 20260904020709, 20260501052304, 20260104161855, 20250829052011: archived 403; 20260514130743: 200 (50 rows, discovery date 2026-05-14 only)",
+    "ATel ?read=17991, ?read=17982: reCAPTCHA page (access control, not bypassed)"
+   ]
+  },
+  "2026-02": {
+   "a_spectroscopic_units_lower_bound": 2,
+   "a_non_spectroscopic_or_unknown_lower_bound": 0,
+   "P_objects_first_classified_lower_bound": 2,
+   "b_nonbot_measured_lower_bound": {
+    "incl_syncatto": 2,
+    "excl_syncatto": 2
+   },
+   "c_cohort_T1_strong": "n/a (cohort starts 2026-07-01)",
+   "disposition": "LOWER BOUND DERIVED (T1 STRONG, 214/2244 enumerated objects had a readable capture); exact count UNDEMONSTRATED",
+   "exact_blocked_by": [
+    "Wayback stats-maps captures 20260904020708, 20260803084202, 20260517222550, 20260501052304, 20251224104902: archived TNS 403 page (118 bytes); 20260107112933: HTTP 200 (per-year only, 2026=1 classified SN)",
+    "live https://www.wis-tns.org/stats-maps HTTP 403 server awselb/2.0 (2026-09-17T00:06:46Z)",
+    "Wayback CDX https://web.archive.org/cdx/search/cdx?url=wis-tns.org/object/2026* HTTP 503 (2026-09-17T00:07:00Z)",
+    "Wayback search captures 20260904020709, 20260501052304, 20260104161855, 20250829052011: archived 403; 20260514130743: 200 (50 rows, discovery date 2026-05-14 only)",
+    "ATel ?read=17991, ?read=17982: reCAPTCHA page (access control, not bypassed)"
+   ]
+  },
+  "2026-03": {
+   "a_spectroscopic_units_lower_bound": 20,
+   "a_non_spectroscopic_or_unknown_lower_bound": 1,
+   "P_objects_first_classified_lower_bound": 18,
+   "b_nonbot_measured_lower_bound": {
+    "incl_syncatto": 19,
+    "excl_syncatto": 19
+   },
+   "c_cohort_T1_strong": "n/a (cohort starts 2026-07-01)",
+   "disposition": "LOWER BOUND DERIVED (T1 STRONG, 214/2244 enumerated objects had a readable capture); exact count UNDEMONSTRATED",
+   "exact_blocked_by": [
+    "Wayback stats-maps captures 20260904020708, 20260803084202, 20260517222550, 20260501052304, 20251224104902: archived TNS 403 page (118 bytes); 20260107112933: HTTP 200 (per-year only, 2026=1 classified SN)",
+    "live https://www.wis-tns.org/stats-maps HTTP 403 server awselb/2.0 (2026-09-17T00:06:46Z)",
+    "Wayback CDX https://web.archive.org/cdx/search/cdx?url=wis-tns.org/object/2026* HTTP 503 (2026-09-17T00:07:00Z)",
+    "Wayback search captures 20260904020709, 20260501052304, 20260104161855, 20250829052011: archived 403; 20260514130743: 200 (50 rows, discovery date 2026-05-14 only)",
+    "ATel ?read=17991, ?read=17982: reCAPTCHA page (access control, not bypassed)"
+   ]
+  },
+  "2026-04": {
+   "a_spectroscopic_units_lower_bound": 13,
+   "a_non_spectroscopic_or_unknown_lower_bound": 0,
+   "P_objects_first_classified_lower_bound": 13,
+   "b_nonbot_measured_lower_bound": {
+    "incl_syncatto": 10,
+    "excl_syncatto": 10
+   },
+   "c_cohort_T1_strong": "n/a (cohort starts 2026-07-01)",
+   "disposition": "LOWER BOUND DERIVED (T1 STRONG, 214/2244 enumerated objects had a readable capture); exact count UNDEMONSTRATED",
+   "exact_blocked_by": [
+    "Wayback stats-maps captures 20260904020708, 20260803084202, 20260517222550, 20260501052304, 20251224104902: archived TNS 403 page (118 bytes); 20260107112933: HTTP 200 (per-year only, 2026=1 classified SN)",
+    "live https://www.wis-tns.org/stats-maps HTTP 403 server awselb/2.0 (2026-09-17T00:06:46Z)",
+    "Wayback CDX https://web.archive.org/cdx/search/cdx?url=wis-tns.org/object/2026* HTTP 503 (2026-09-17T00:07:00Z)",
+    "Wayback search captures 20260904020709, 20260501052304, 20260104161855, 20250829052011: archived 403; 20260514130743: 200 (50 rows, discovery date 2026-05-14 only)",
+    "ATel ?read=17991, ?read=17982: reCAPTCHA page (access control, not bypassed)"
+   ]
+  },
+  "2026-05": {
+   "a_spectroscopic_units_lower_bound": 90,
+   "a_non_spectroscopic_or_unknown_lower_bound": 0,
+   "P_objects_first_classified_lower_bound": 85,
+   "b_nonbot_measured_lower_bound": {
+    "incl_syncatto": 84,
+    "excl_syncatto": 84
+   },
+   "c_cohort_T1_strong": "n/a (cohort starts 2026-07-01)",
+   "disposition": "LOWER BOUND DERIVED (T1 STRONG, 214/2244 enumerated objects had a readable capture); exact count UNDEMONSTRATED",
+   "exact_blocked_by": [
+    "Wayback stats-maps captures 20260904020708, 20260803084202, 20260517222550, 20260501052304, 20251224104902: archived TNS 403 page (118 bytes); 20260107112933: HTTP 200 (per-year only, 2026=1 classified SN)",
+    "live https://www.wis-tns.org/stats-maps HTTP 403 server awselb/2.0 (2026-09-17T00:06:46Z)",
+    "Wayback CDX https://web.archive.org/cdx/search/cdx?url=wis-tns.org/object/2026* HTTP 503 (2026-09-17T00:07:00Z)",
+    "Wayback search captures 20260904020709, 20260501052304, 20260104161855, 20250829052011: archived 403; 20260514130743: 200 (50 rows, discovery date 2026-05-14 only)",
+    "ATel ?read=17991, ?read=17982: reCAPTCHA page (access control, not bypassed)"
+   ]
+  },
+  "2026-06": {
+   "a_spectroscopic_units_lower_bound": 22,
+   "a_non_spectroscopic_or_unknown_lower_bound": 0,
+   "P_objects_first_classified_lower_bound": 19,
+   "b_nonbot_measured_lower_bound": {
+    "incl_syncatto": 20,
+    "excl_syncatto": 20
+   },
+   "c_cohort_T1_strong": "n/a (cohort starts 2026-07-01)",
+   "disposition": "LOWER BOUND DERIVED (T1 STRONG, 214/2244 enumerated objects had a readable capture); exact count UNDEMONSTRATED",
+   "exact_blocked_by": [
+    "Wayback stats-maps captures 20260904020708, 20260803084202, 20260517222550, 20260501052304, 20251224104902: archived TNS 403 page (118 bytes); 20260107112933: HTTP 200 (per-year only, 2026=1 classified SN)",
+    "live https://www.wis-tns.org/stats-maps HTTP 403 server awselb/2.0 (2026-09-17T00:06:46Z)",
+    "Wayback CDX https://web.archive.org/cdx/search/cdx?url=wis-tns.org/object/2026* HTTP 503 (2026-09-17T00:07:00Z)",
+    "Wayback search captures 20260904020709, 20260501052304, 20260104161855, 20250829052011: archived 403; 20260514130743: 200 (50 rows, discovery date 2026-05-14 only)",
+    "ATel ?read=17991, ?read=17982: reCAPTCHA page (access control, not bypassed)"
+   ]
+  },
+  "2026-07": {
+   "a_spectroscopic_units_lower_bound": 3,
+   "a_non_spectroscopic_or_unknown_lower_bound": 0,
+   "P_objects_first_classified_lower_bound": 3,
+   "b_nonbot_measured_lower_bound": {
+    "incl_syncatto": 3,
+    "excl_syncatto": 3
+   },
+   "c_cohort_T1_strong": 0,
+   "disposition": "LOWER BOUND DERIVED (T1 STRONG, 214/2244 enumerated objects had a readable capture); exact count UNDEMONSTRATED",
+   "exact_blocked_by": [
+    "Wayback stats-maps captures 20260904020708, 20260803084202, 20260517222550, 20260501052304, 20251224104902: archived TNS 403 page (118 bytes); 20260107112933: HTTP 200 (per-year only, 2026=1 classified SN)",
+    "live https://www.wis-tns.org/stats-maps HTTP 403 server awselb/2.0 (2026-09-17T00:06:46Z)",
+    "Wayback CDX https://web.archive.org/cdx/search/cdx?url=wis-tns.org/object/2026* HTTP 503 (2026-09-17T00:07:00Z)",
+    "Wayback search captures 20260904020709, 20260501052304, 20260104161855, 20250829052011: archived 403; 20260514130743: 200 (50 rows, discovery date 2026-05-14 only)",
+    "ATel ?read=17991, ?read=17982: reCAPTCHA page (access control, not bypassed)"
+   ],
+   "c_cohort_existence_moderate": "UNDEMONSTRATED per month (classification month unknown for T9/T8 existence matches; see totals)"
+  },
+  "2026-08": {
+   "a_spectroscopic_units_lower_bound": 5,
+   "a_non_spectroscopic_or_unknown_lower_bound": 0,
+   "P_objects_first_classified_lower_bound": 4,
+   "b_nonbot_measured_lower_bound": {
+    "incl_syncatto": 5,
+    "excl_syncatto": 5
+   },
+   "c_cohort_T1_strong": 0,
+   "disposition": "LOWER BOUND DERIVED (T1 STRONG, 214/2244 enumerated objects had a readable capture); exact count UNDEMONSTRATED",
+   "exact_blocked_by": [
+    "Wayback stats-maps captures 20260904020708, 20260803084202, 20260517222550, 20260501052304, 20251224104902: archived TNS 403 page (118 bytes); 20260107112933: HTTP 200 (per-year only, 2026=1 classified SN)",
+    "live https://www.wis-tns.org/stats-maps HTTP 403 server awselb/2.0 (2026-09-17T00:06:46Z)",
+    "Wayback CDX https://web.archive.org/cdx/search/cdx?url=wis-tns.org/object/2026* HTTP 503 (2026-09-17T00:07:00Z)",
+    "Wayback search captures 20260904020709, 20260501052304, 20260104161855, 20250829052011: archived 403; 20260514130743: 200 (50 rows, discovery date 2026-05-14 only)",
+    "ATel ?read=17991, ?read=17982: reCAPTCHA page (access control, not bypassed)"
+   ],
+   "c_cohort_existence_moderate": "UNDEMONSTRATED per month (classification month unknown for T9/T8 existence matches; see totals)"
+  },
+  "2026-09": {
+   "a_spectroscopic_units_lower_bound": 2,
+   "a_non_spectroscopic_or_unknown_lower_bound": 0,
+   "P_objects_first_classified_lower_bound": 2,
+   "b_nonbot_measured_lower_bound": {
+    "incl_syncatto": 1,
+    "excl_syncatto": 1
+   },
+   "c_cohort_T1_strong": 0,
+   "disposition": "LOWER BOUND DERIVED (T1 STRONG, 214/2244 enumerated objects had a readable capture); exact count UNDEMONSTRATED",
+   "exact_blocked_by": [
+    "Wayback stats-maps captures 20260904020708, 20260803084202, 20260517222550, 20260501052304, 20251224104902: archived TNS 403 page (118 bytes); 20260107112933: HTTP 200 (per-year only, 2026=1 classified SN)",
+    "live https://www.wis-tns.org/stats-maps HTTP 403 server awselb/2.0 (2026-09-17T00:06:46Z)",
+    "Wayback CDX https://web.archive.org/cdx/search/cdx?url=wis-tns.org/object/2026* HTTP 503 (2026-09-17T00:07:00Z)",
+    "Wayback search captures 20260904020709, 20260501052304, 20260104161855, 20250829052011: archived 403; 20260514130743: 200 (50 rows, discovery date 2026-05-14 only)",
+    "ATel ?read=17991, ?read=17982: reCAPTCHA page (access control, not bypassed)"
+   ],
+   "c_cohort_existence_moderate": "UNDEMONSTRATED per month (classification month unknown for T9/T8 existence matches; see totals)"
+  }
+ },
+ "programs_spectroscopic_units_per_month_lower_bound": {
+  "ZTF": {
+   "2026-01": 16,
+   "2026-02": 1,
+   "2026-03": 6,
+   "2026-04": 7,
+   "2026-05": 20,
+   "2026-06": 8,
+   "2026-07": 2,
+   "2026-08": 2,
+   "2026-09": 1
+  },
+  "ePESSTO+": {
+   "2026-01": 0,
+   "2026-02": 0,
+   "2026-03": 0,
+   "2026-04": 0,
+   "2026-05": 49,
+   "2026-06": 6,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "GeminiClass": {
+   "2026-01": 0,
+   "2026-02": 0,
+   "2026-03": 0,
+   "2026-04": 0,
+   "2026-05": 3,
+   "2026-06": 6,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "SCAT": {
+   "2026-01": 3,
+   "2026-02": 0,
+   "2026-03": 0,
+   "2026-04": 0,
+   "2026-05": 5,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "UCSC": {
+   "2026-01": 1,
+   "2026-02": 0,
+   "2026-03": 1,
+   "2026-04": 0,
+   "2026-05": 4,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "BlackGEM": {
+   "2026-01": 0,
+   "2026-02": 0,
+   "2026-03": 0,
+   "2026-04": 2,
+   "2026-05": 2,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 1,
+   "2026-09": 0
+  },
+  "FLEET": {
+   "2026-01": 0,
+   "2026-02": 0,
+   "2026-03": 3,
+   "2026-04": 0,
+   "2026-05": 0,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 1,
+   "2026-09": 0
+  },
+  "LiONS": {
+   "2026-01": 2,
+   "2026-02": 0,
+   "2026-03": 0,
+   "2026-04": 0,
+   "2026-05": 1,
+   "2026-06": 1,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "Supernova Alliance": {
+   "2026-01": 0,
+   "2026-02": 0,
+   "2026-03": 0,
+   "2026-04": 3,
+   "2026-05": 0,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 1,
+   "2026-09": 0
+  },
+  "None": {
+   "2026-01": 0,
+   "2026-02": 0,
+   "2026-03": 1,
+   "2026-04": 0,
+   "2026-05": 3,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "DESI": {
+   "2026-01": 0,
+   "2026-02": 1,
+   "2026-03": 2,
+   "2026-04": 1,
+   "2026-05": 0,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "VHU-TDA": {
+   "2026-01": 0,
+   "2026-02": 0,
+   "2026-03": 3,
+   "2026-04": 0,
+   "2026-05": 0,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "GOTO": {
+   "2026-01": 0,
+   "2026-02": 0,
+   "2026-03": 0,
+   "2026-04": 0,
+   "2026-05": 1,
+   "2026-06": 0,
+   "2026-07": 1,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "AZTEC": {
+   "2026-01": 0,
+   "2026-02": 0,
+   "2026-03": 2,
+   "2026-04": 0,
+   "2026-05": 0,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "TRex": {
+   "2026-01": 0,
+   "2026-02": 0,
+   "2026-03": 0,
+   "2026-04": 0,
+   "2026-05": 1,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "PASSTA": {
+   "2026-01": 0,
+   "2026-02": 0,
+   "2026-03": 1,
+   "2026-04": 0,
+   "2026-05": 0,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "CET-3PO": {
+   "2026-01": 0,
+   "2026-02": 0,
+   "2026-03": 0,
+   "2026-04": 0,
+   "2026-05": 0,
+   "2026-06": 1,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "OxQUB": {
+   "2026-01": 0,
+   "2026-02": 0,
+   "2026-03": 1,
+   "2026-04": 0,
+   "2026-05": 0,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "ENGRAVE": {
+   "2026-01": 0,
+   "2026-02": 0,
+   "2026-03": 0,
+   "2026-04": 0,
+   "2026-05": 1,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "adH0cc": {
+   "2026-01": 1,
+   "2026-02": 0,
+   "2026-03": 0,
+   "2026-04": 0,
+   "2026-05": 0,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "Padova-Asiago": {
+   "2026-01": 1,
+   "2026-02": 0,
+   "2026-03": 0,
+   "2026-04": 0,
+   "2026-05": 0,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 0
+  },
+  "STARGATE": {
+   "2026-01": 0,
+   "2026-02": 0,
+   "2026-03": 0,
+   "2026-04": 0,
+   "2026-05": 0,
+   "2026-06": 0,
+   "2026-07": 0,
+   "2026-08": 0,
+   "2026-09": 1
+  }
+ },
+ "programs_automation_mix": {
+  "ePESSTO+": {
+   "human": 55
+  },
+  "FLEET": {
+   "human": 4
+  },
+  "LiONS": {
+   "human": 4
+  },
+  "ZTF": {
+   "human": 43,
+   "SNIascore": 20
+  },
+  "UCSC": {
+   "human": 6
+  },
+  "TRex": {
+   "human": 1
+  },
+  "GeminiClass": {
+   "human": 9
+  },
+  "GOTO": {
+   "human": 2
+  },
+  "SCAT": {
+   "human": 8
+  },
+  "AZTEC": {
+   "human": 2
+  },
+  "BlackGEM": {
+   "human": 5
+  },
+  "Supernova Alliance": {
+   "human": 4
+  },
+  "VHU-TDA": {
+   "human": 3
+  },
+  "PASSTA": {
+   "human": 1
+  },
+  "None": {
+   "human": 4
+  },
+  "DESI": {
+   "human": 4
+  },
+  "CET-3PO": {
+   "human": 1
+  },
+  "OxQUB": {
+   "human": 1
+  },
+  "ENGRAVE": {
+   "human": 1
+  },
+  "adH0cc": {
+   "human": 1
+  },
+  "Padova-Asiago": {
+   "human": 1
+  },
+  "STARGATE": {
+   "human": 1
+  }
+ },
+ "fetch": {
+  "objects_in_E": 2244,
+  "attempted": 2244,
+  "status": {
+   "http_error": 2030,
+   "ok": 214
+  },
+  "status_by_tier": {
+   "A:http_error": 614,
+   "A:ok": 13,
+   "B:ok": 201,
+   "B:http_error": 1416
+  },
+  "http_codes_all_requests": {
+   "404": 1981,
+   "-1": 388,
+   "302": 316,
+   "200": 214,
+   "403": 49
+  },
+  "valid_captures_with_reports": 169,
+  "captures_without_reports": 45,
+  "invalid": 0,
+  "capture_ts_range": [
+   "20260125060813",
+   "20260912173404"
+  ]
+ },
+ "aggregates_moderate": {
+  "T9_rochester_confirmed_SNe_discovered_2026_as_of_2026_09_16": {
+   "value": 1587,
+   "locator": "sources/census/rochester_supernova.html 'For the year 2026, 19448 supernovae (1587 confirmed, 17858 unconfirmed, and 3 other sources)'",
+   "note": "by discovery year, not report month; confirmed = spectroscopically typed; no program attribution"
+  },
+  "T9_typed_entries_enumerated": 1629,
+  "T2_classified_SNe_discovered_2025": {
+   "value": 2055,
+   "locator": "sources/census/tns_stats_maps_20260107112933.txt 'TNS classified SNe reported by year 2025 2,055'"
+  },
+  "T2_cumulative_classifications_top_groups_since_2016": "ZTF 8,768 (44%), ePESSTO+ 2,455 (12%), SCAT 1,965 (10%), ePESSTO 723, UCSC 409, TCD 372, Global SN Project 359, PESSTO 277, iPTF 256, Padova-Asiago 238 (capture 2026-01-07)"
+ },
+ "cohort_c": {
+  "T1_strong_reports_on_cohort_objects": 0,
+  "tierA_objects": 627,
+  "tierA_captures_ok": 13,
+  "tierA_captures_with_reports": 0,
+  "T9_typed_cohort_matches": [
+   {
+    "name": "2026vpl",
+    "type": "Ia-SC",
+    "discdate": "2026-07-13",
+    "match": "pos:170653061467865234"
+   },
+   {
+    "name": "2026uxs",
+    "type": "Ia",
+    "discdate": "2026-07-10",
+    "match": "id:170648615579549734"
+   },
+   {
+    "name": "2026uwo",
+    "type": "Ia",
+    "discdate": "2026-07-10",
+    "match": "pos:170666261190017210"
+   },
+   {
+    "name": "2026uvw",
+    "type": "Ia",
+    "discdate": "2026-07-08",
+    "match": "pos:170635502649081969"
+   },
+   {
+    "name": "2026uii",
+    "type": "Ia",
+    "discdate": "2026-07-06",
+    "match": "pos:170635513131172057"
+   },
+   {
+    "name": "2026tzm",
+    "type": "Ia",
+    "discdate": "2026-07-08",
+    "match": "pos:170657505023098990"
+   },
+   {
+    "name": "2026trp",
+    "type": "Ib",
+    "discdate": "2026-07-10",
+    "match": "pos:170635521638269115"
+   },
+   {
+    "name": "2026tim",
+    "type": "CV",
+    "discdate": "2026-07-06",
+    "match": "pos:170631094842425480"
+   },
+   {
+    "name": "2026stu",
+    "type": "Icn",
+    "discdate": "2026-07-09",
+    "match": "pos:170648686120927635"
+   },
+   {
+    "name": "2026stj",
+    "type": "Ia",
+    "discdate": "2026-07-08",
+    "match": "pos:170631096683725473"
+   },
+   {
+    "name": "2026srp",
+    "type": "Ia",
+    "discdate": "2026-07-08",
+    "match": "pos:170644257723908225"
+   },
+   {
+    "name": "2026rwk",
+    "type": "Ia",
+    "discdate": "2026-07-06",
+    "match": "pos:170635528815247505"
+   }
+  ],
+  "T8_antares_SN_classified_cohort_loci_disc_ge_2026_06_30": [
+   "2026rwk",
+   "2026stj",
+   "2026stu",
+   "2026trp",
+   "2026tzm",
+   "2026uvw",
+   "2026uwo",
+   "2026uyc",
+   "2026vpl"
+  ],
+  "T8_antares_SN_at_cohort_position_discovered_before_2026_06_30_LEAK": [
+   {
+    "name": "2025bbx",
+    "discdate": "2025-02-08"
+   },
+   {
+    "name": "2025ghd",
+    "discdate": "2025-03-26"
+   },
+   {
+    "name": "2025gjp",
+    "discdate": "2025-03-30"
+   },
+   {
+    "name": "2025kfd",
+    "discdate": "2025-05-09"
+   },
+   {
+    "name": "2025mjq",
+    "discdate": "2025-05-25"
+   },
+   {
+    "name": "2025voy",
+    "discdate": "2025-08-27"
+   },
+   {
+    "name": "2026kut",
+    "discdate": "2026-04-25"
+   }
+  ],
+  "existence_union_T9_T8": [
+   "2026rwk",
+   "2026srp",
+   "2026stj",
+   "2026stu",
+   "2026tim",
+   "2026trp",
+   "2026tzm",
+   "2026uii",
+   "2026uvw",
+   "2026uwo",
+   "2026uxs",
+   "2026uyc",
+   "2026vpl"
+  ],
+  "existence_total_moderate": 13,
+  "T9_T8_disagreement": {
+   "in_T9_not_T8": [
+    "2026srp",
+    "2026tim",
+    "2026uii",
+    "2026uxs"
+   ],
+   "in_T8_not_T9": [
+    "2026uyc"
+   ]
+  },
+  "existence_transients_moderate": 12,
+  "measured_nonbot_T1_strong": 0,
+  "measured_nonbot_status": "UNDEMONSTRATED (12 T9-typed cohort objects: archive 404 x11, 403 x1; 2026uyc T1 404)"
+ },
+ "cohort_classified_existence_T8_T9_moderate": 13,
+ "cohort_measured_nonbot_labels_T1_strong": 0
+}

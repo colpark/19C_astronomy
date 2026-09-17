@@ -1,0 +1,108 @@
+[
+ {
+  "id": "w3a2-a-spectroscopic-units-lb",
+  "value": {
+   "total_Jan_Sep": 181,
+   "per_month": {
+    "2026-01": 24,
+    "2026-02": 2,
+    "2026-03": 20,
+    "2026-04": 13,
+    "2026-05": 90,
+    "2026-06": 22,
+    "2026-07": 3,
+    "2026-08": 5,
+    "2026-09": 2
+   }
+  },
+  "referent": "lower bound on 2026 spectroscopic classification reports per month (unit: object x program, earliest report)",
+  "source": "astronomy/wave3/agent2_measured_labels/scripts/census.py::main; sealed/enumeration_E_SEALED.json sha256 6575c3dd4f52b6dd68856377b1623d825f927b296b61fe7e5bf42dbd5125b4ba; out/tns_captures_w3/fetch_log.jsonl sha256 ceee23f41575c657b59a826934b4c108566b9a5e2a19789584f9664db50e6c8d; census_protocol_FROZEN.md sha256 9fac85524f28b5e3874a0d43a2c089915d20814b7996c18a0c77cc230b3c95fb",
+  "population": "2026 TNS classification reports readable in Internet Archive captures of www.wis-tns.org/object/<name> for the sealed enumeration E (2,244 objects: 627 cohort-matched + 1,617 other typed 2026 objects from rochesterastronomy.org); dedup (object, program)",
+  "adjudicator": "authenticated TNS search/API over all 2026 classification reports (TNS_API_KEY BLOCKED), or TNS stats page with monthly per-group breakdown (archived copies are 403 pages)",
+  "falsifier": "an authenticated report list returning fewer reports than this in any month, or a rerun of census.py on the same captures returning different counts",
+  "banner": "calibration only, contamination FAIL on this cohort (BTS); Rubin cohort supply planning"
+ },
+ {
+  "id": "w3a2-b-nonbot-units-lb",
+  "value": {
+   "total_Jan_Sep": 161,
+   "per_month": {
+    "2026-01": 17,
+    "2026-02": 2,
+    "2026-03": 19,
+    "2026-04": 10,
+    "2026-05": 84,
+    "2026-06": 20,
+    "2026-07": 3,
+    "2026-08": 5,
+    "2026-09": 1
+   }
+  },
+  "referent": "lower bound on 2026 non-bot measured spectroscopic classification reports per month (no SNIascore/CCSNscore/bot marker in Classifier/s; Syncatto both ways identical)",
+  "source": "astronomy/wave3/agent2_measured_labels/scripts/census.py::main; sealed/enumeration_E_SEALED.json sha256 6575c3dd4f52b6dd68856377b1623d825f927b296b61fe7e5bf42dbd5125b4ba; out/tns_captures_w3/fetch_log.jsonl sha256 ceee23f41575c657b59a826934b4c108566b9a5e2a19789584f9664db50e6c8d; census_protocol_FROZEN.md sha256 9fac85524f28b5e3874a0d43a2c089915d20814b7996c18a0c77cc230b3c95fb",
+  "population": "2026 TNS classification reports readable in Internet Archive captures of www.wis-tns.org/object/<name> for the sealed enumeration E (2,244 objects: 627 cohort-matched + 1,617 other typed 2026 objects from rochesterastronomy.org); dedup (object, program)",
+  "adjudicator": "authenticated TNS search/API over all 2026 classification reports (TNS_API_KEY BLOCKED), or TNS stats page with monthly per-group breakdown (archived copies are 403 pages)",
+  "falsifier": "a counted report whose Classifier/s is shown to be an automated pipeline, or a rerun returning different counts",
+  "banner": "calibration only, contamination FAIL on this cohort (BTS); Rubin cohort supply planning"
+ },
+ {
+  "id": "w3a2-P-objects-lb",
+  "value": {
+   "per_month": {
+    "2026-01": 23,
+    "2026-02": 2,
+    "2026-03": 18,
+    "2026-04": 13,
+    "2026-05": 85,
+    "2026-06": 19,
+    "2026-07": 3,
+    "2026-08": 4,
+    "2026-09": 2
+   }
+  },
+  "referent": "lower bound on distinct objects first classified per month in 2026",
+  "source": "astronomy/wave3/agent2_measured_labels/scripts/census.py::main; sealed/enumeration_E_SEALED.json sha256 6575c3dd4f52b6dd68856377b1623d825f927b296b61fe7e5bf42dbd5125b4ba; out/tns_captures_w3/fetch_log.jsonl sha256 ceee23f41575c657b59a826934b4c108566b9a5e2a19789584f9664db50e6c8d; census_protocol_FROZEN.md sha256 9fac85524f28b5e3874a0d43a2c089915d20814b7996c18a0c77cc230b3c95fb",
+  "population": "2026 TNS classification reports readable in Internet Archive captures of www.wis-tns.org/object/<name> for the sealed enumeration E (2,244 objects: 627 cohort-matched + 1,617 other typed 2026 objects from rochesterastronomy.org); dedup (object, program)",
+  "adjudicator": "authenticated TNS search/API over all 2026 classification reports (TNS_API_KEY BLOCKED), or TNS stats page with monthly per-group breakdown (archived copies are 403 pages)",
+  "falsifier": "an authenticated list returning fewer first classifications per month, or a rerun returning different counts",
+  "banner": "calibration only, contamination FAIL on this cohort (BTS); Rubin cohort supply planning"
+ },
+ {
+  "id": "w3a2-c-cohort-existence",
+  "value": 13,
+  "referent": "Rubin cohort objects (first detection >= 2026-07-01, agent-1 slices) with a typed 2026 TNS name, by 1 arcsec position or LSST diaObjectId alias (T9) or ANTARES tns_public_objects SN match with discovery >= 2026-06-30 (T8), union, MODERATE; classifier UNDEMONSTRATED",
+  "source": "astronomy/wave3/agent2_measured_labels/scripts/build_E.py::cohort_match; out/rochester_entries_rochester_supernova.json sha256 7c7f8eaa75fe94c3374eb4e6aa2f8551375b76d901accf581656104316f565e8; out/antares_tns_cohort.json sha256 53530a4183f00fc7ce73b80b70d23370a777b3dc8686c86b051fc099a29eced0",
+  "population": "1,937,720 cohort oids (agent-1 w3_c3_slices, firstmjd >= T0) crossmatched to 19,170 rochesterastronomy.org 2026 entries and 319 ANTARES TNS-matched cohort loci",
+  "adjudicator": "authenticated TNS classification reports for these objects",
+  "falsifier": "a TNS report showing one of these objects was classified before its Rubin first detection, or a rerun of build_E.py cohort_match returning a different match set",
+  "banner": "calibration only, contamination FAIL on this cohort (BTS); Rubin cohort supply planning"
+ },
+ {
+  "id": "w3a2-c-cohort-measured-strong",
+  "value": 0,
+  "referent": "Rubin cohort objects with a STRONG (archived page) non-bot spectroscopic classification report: 0 found; UNDEMONSTRATED, not zero (tier-A captures: 13 readable, none with a report; typed cohort objects returned archive 404 or 403)",
+  "source": "astronomy/wave3/agent2_measured_labels/scripts/census.py::main; sealed/enumeration_E_SEALED.json sha256 6575c3dd4f52b6dd68856377b1623d825f927b296b61fe7e5bf42dbd5125b4ba; out/tns_captures_w3/fetch_log.jsonl sha256 ceee23f41575c657b59a826934b4c108566b9a5e2a19789584f9664db50e6c8d; census_protocol_FROZEN.md sha256 9fac85524f28b5e3874a0d43a2c089915d20814b7996c18a0c77cc230b3c95fb",
+  "population": "627 tier-A cohort-matched objects in sealed enumeration E",
+  "adjudicator": "authenticated TNS search/API over all 2026 classification reports (TNS_API_KEY BLOCKED), or TNS stats page with monthly per-group breakdown (archived copies are 403 pages)",
+  "falsifier": "an archived or authenticated page returning a non-bot classification report for one of the 627 tier-A objects would replace this record",
+  "banner": "calibration only, contamination FAIL on this cohort (BTS); Rubin cohort supply planning"
+ },
+ {
+  "id": "w3a2-reach-f19",
+  "value": {
+   "k": 8,
+   "n": 2000,
+   "point": 0.004,
+   "cp95": [
+    0.001728,
+    0.007866
+   ]
+  },
+  "referent": "share of Rubin cohort objects whose brightest S/N>=5 difference-flux detection is <= 19.0 AB mag (SEDM depth, arXiv:2412.08601 line 265)",
+  "source": "astronomy/wave3/agent2_measured_labels/scripts/reach_compute.py; out/reach_rows.jsonl sha256 0eb1e5129c8c0f0266c1e499eca8c4ca9003ffbaf1e88cd9be502395486aada9; Fink /api/v1/sources via scripts/safe_fetch.py (labels stripped)",
+  "population": "sample R: 2,000 cohort oids with smallest sha1(oid) (sealed/lookup_list_SEALED.json)",
+  "adjudicator": "full-cohort photometry, or PPDB forced photometry when released",
+  "falsifier": "a second declared sample returning a share outside the Clopper-Pearson 95% interval, or revised Fink photometry that changes the peak magnitudes of the 8 counted objects",
+  "banner": "calibration only, contamination FAIL on this cohort (BTS); Rubin cohort supply planning"
+ }
+]

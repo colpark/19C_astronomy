@@ -1,0 +1,22 @@
+{
+ "name": "probeR_fink",
+ "time_utc": "2026-09-17T00:11:12.658707+00:00",
+ "method": "POST",
+ "url": "https://api.lsst.fink-portal.org/api/v1/objects",
+ "body": {
+  "diaObjectId": "170644236615025523",
+  "columns": "r:diaObjectId,r:psfFlux,r:psfFluxErr,r:band,r:midpointMjdTai",
+  "output-format": "json"
+ },
+ "status": 200,
+ "headers": {
+  "Server": "nginx/1.20.1",
+  "Date": "Thu, 17 Sep 2026 00:11:13 GMT",
+  "Content-Type": "application/json",
+  "Content-Length": "38"
+ },
+ "raw_sha256": "ae3190a00a687df9366d8bd71d74c7b8277ee9b658d18387753210b38a3f8315",
+ "raw_bytes": 38,
+ "kind": "json",
+ "dropped_keys": []
+}

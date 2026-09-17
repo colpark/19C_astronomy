@@ -1,0 +1,392 @@
+
+ The Astronomer's Telegram 
+ ATel On
+Patreon 
+Mastodon 
+X 
+Post  
+|
+Search 
+ |
+Policies 
+ Credential 
+ |
+Feeds
+|
+Email 
+ 17 Sep 2026; 00:29 UT 
+ 🔔 Enable Notifications 
+ You have no devices connected 
+This space for free 
+ for your conference.
+Email Circulation: 8579 
+ Get Telegram #: 
+Apply Subject Selections 
+Combine With: 
+(Show All) 
+ AND 
+ OR 
+Radio
+Millimeter
+Sub-Millimeter
+Far-Infra-Red
+Infra-Red
+Optical
+Ultra-Violet
+X-ray
+Gamma Ray
+GeV" VALUE="YES" >>GeV
+TeV
+VHE
+UHE
+Neutrinos
+A Comment
+AGN
+Asteroid
+Asteroid (Binary)
+Binary
+Black Hole
+Blazar
+Cataclysmic Variable
+Comet
+Cosmic Rays
+Direct Collapse Event
+Exoplanet
+Fast Radio Burst
+Gamma-Ray Burst
+Globular Cluster
+Gravitational Lensing
+Gravitational Waves
+Magnetar
+Meteor
+Microlensing Event
+Near-Earth Object
+Neutron Star
+Nova
+Planet
+Planet (minor)
+Potentially Hazardous Asteroid
+Pre-Main-Sequence Star
+Pulsar
+Quasar
+Request for Observations
+Soft Gamma-ray Repeater
+Solar System Object
+Star
+Supernova Remnant
+Supernovae
+The Sun
+Tidal Disruption Event
+Transient
+Variables
+Young Stellar Object
+Telegram Index
+Telegrams Posted Within the Last 30 Days  
+ (
+ All 
+) 
+69 Selected of 18050 Telegrams 
+18050
+ Swift/XRT and optical follow-up of the new X-ray transient SRGA J174800.5-280826
+G. K. Jaisawal  and  A. Sanna  
+ 16 Sep 2026; 22:16 UT 
+18049
+Spectral hardening of Cygnus X-3 observed with SVOM/ECLAIRs
+F. Cangemi, S. Le Stum, S. Guillot, A. Coleiro, L. Tao, L. Zhang  
+ 16 Sep 2026; 08:02 UT 
+18048
+MDM/MIRAGE discovery of a pronounced infrared brightening in the luminous nova AT2026aabo in M31
+Viraj Karambelkar, Kishalay De, Salma Ibrahim, David Schiminovich  
+ 16 Sep 2026; 03:48 UT 
+18047
+The CSS 3C 138: renewed optical activity in 2026 August-September
+V. V. Vlasyuk, O. I. Spiridonova  
+ 16 Sep 2026; 00:51 UT 
+18046
+Fermi-LAT detection of enhanced gamma-ray activity from the BL Lac PKS 0332-403
+S. Wagner  on behalf of the Fermi Large Area Telescope Collaboration 
+ 15 Sep 2026; 19:18 UT 
+18045
+Detection of superhumps in Gaia16ahk during its ongoing superoutburst 
+A. O. Simon, D. Yu. Rusanova, W. Ogloza, A. Yu. Korosko, P. J. Mikolajczyk, L.  Wyrzykowski, K. Kotysz,... 
+ 15 Sep 2026; 18:56 UT 
+18044
+The Narrow-line Seyfert 1 galaxy Mkn 335 in its brighest X-ray state in more than a decade
+Dirk Grupe, S. Komossa, L. Gallo, Jon M. Miller  
+ 15 Sep 2026; 17:37 UT 
+18043
+Further classifications at OHP of Gaia Alerted QSO candidates
+Michel Dennefeld, Christophe Adami & Delphine Russeil, Tapio Pursimo  
+ 15 Sep 2026; 08:52 UT 
+18042
+Radio Non-detection of Hercules X-1 during the ALS with MeerKAT/X-KAT
+Teresa Panurach, Evangelia Tremou, Kristen Dage, Alexandra Tetarenko, Francesco Carotenuto, Rob Fender,... 
+ 14 Sep 2026; 17:00 UT 
+18041
+FSRQ 3C 395: Upper limits from a neutrino search with IceCube
+Shi Yan, Anna Franckowiak  for the IceCube Collaboration 
+ 14 Sep 2026; 14:20 UT 
+18040
+The magnetar XTE J1810-197 remains in radio quiescence
+Marcus E. Lower, Jade Salisbury, Ryan M. Shannon, Fernando Camilo, Paul Scholz, George Younes, John E.... 
+ 14 Sep 2026; 09:25 UT 
+18039
+MAXI/GSC detection of bright X-ray burst-like activity positionally  consistent with XTE J1810-197 and XTE J1810-189
+H. Negoro, M. Serino,  M. Nakajima, K. Saito, T. Yokoyama, M. Wada,  T. Mihara, T. Tamagawa, N. Kawai,... 
+ 12 Sep 2026; 16:49 UT 
+18038
+NuSTAR observation of state transition and Quasi-Regular Modulations in 4U 1630-47
+Maxime Parra, Pierre-Olivier Petrucci, Stefano Bianchi, Floriane Cangemi, Alessio Marino, Poshak Gandhi,... 
+ 12 Sep 2026; 14:32 UT 
+18037
+XRISM/Xtend Transient Search (XTS) detected an X-ray flare from XRISM J1631-4843
+C. Kang, M. Nobukawa, T. Hakamata, Y. Kanemaru, A. Miyamoto, Y. Omiya, Y. Uchida, T. Yoneyama, M. Audard,... 
+ 12 Sep 2026; 13:08 UT 
+18036
+PKS 0521-36: Upper limits from a neutrino search with IceCube
+Alicia Mand, Justin Vandenbroucke  
+ 11 Sep 2026; 23:34 UT 
+18035
+Fermi-LAT detection of enhanced gamma-ray activity form the FSRQ PKS 0140-322
+S. Wagner, Giovanni La Mura  on behalf of the Fermi Large Area Telescope Collaboration 
+ 10 Sep 2026; 19:05 UT 
+18034
+NuSTAR follow-up of 4U 1630-47 in the hard intermediate state
+Maxime Parra, Pierre-Olivier Petrucci, Stefano Bianchi, Floriane Cangemi, Alessio Marino, Poshak Gandhi,... 
+ 7 Sep 2026; 18:27 UT 
+18033
+Follow-up Imaging & Spectroscopy of Nova Sagittae 2026 (V488 Sge)
+M. Mugrauer, L. Maul, and P. Rajkumari  
+ 7 Sep 2026; 12:42 UT 
+18032
+Fermi-LAT detection of gamma-ray activity from the Seyfert 1 galaxy source PKS 0521-36
+F. Casaburo, S. Ciprini  on behalf of the Fermi Large Area Telescope Collaboration 
+ 6 Sep 2026; 20:43 UT 
+18031
+MAXI/GSC observation of an X-ray outburst from the Be/X-ray binary pulsar GS 0834-430
+M. Nakajima, H. Negoro, M. Serino, S. Sugita, K. Saito, T. Yokoyama, M. Wada, T. Mihara, T. Tamagawa,... 
+ 6 Sep 2026; 08:02 UT 
+18030
+SVOM/ECLAIRs detection of a possible new outburst onset from the black hole 4U 1630-472
+F. Cangemi, S. Le Stum, A. Coleiro, O. Godet, J. Rodriguez, Y.-H. I. Yin, R.-C. Chen, L. Tao, L. Zhang... 
+ 4 Sep 2026; 13:05 UT 
+18029
+Spectroscopic classification of AT 2026aabo as a bright nova in M31
+Shatakshi Chamoli, Judhajeet Basu, Sudhanshu Barway, G. C. Anupama, Tanishk Mohan, Aditya Pawan Saikia,... 
+ 3 Sep 2026; 07:45 UT 
+18028
+NuSTAR detection of shock-powered X-rays from Nova Sagittae 2026 = V488 Sge
+Kirill Sokolovsky, Katie Barnhart, Darien Perla, Pragati Acharya, John Worley, Anthony Pearce, Vallia... 
+ 2 Sep 2026; 19:29 UT 
+18027
+AT 2026aabo (ZTF26abramlb, ATLAS26kqn): a bright nova candidate in M31
+I. Perez-Fournon, F. Poidevin, A. Lopez-Oramas,  D. Aguado, N. Abreu Garcia, D. Cano-Morales, I. Correa-Plasencia,... 
+ 2 Sep 2026; 11:55 UT 
+18026
+Insight-HXMT observations of a soft X-ray flare and a possible QPO-type transition in MAXI J1750-327 / EP260812c (Format Corrected)
+B. Y. Chen, W. Z. Li, Q. C. Shui, Y. P. Chen, S. Zhang, S. N. Zhang, H. Feng, L. Tao, L. Zhang, S. M.... 
+ 1 Sep 2026; 13:41 UT 
+18025
+XMM-Newton detection of a high flux state in the HMXRB IGR J13020-6359
+Robbie Webbe, Natalie A. Webb, Erwan Quintin, Laurent Michel  
+ 1 Sep 2026; 10:23 UT 
+18024
+Insight-HXMT observations of a soft X-ray flare and a possible QPO-type transition in MAXI J1750-327
+B. Y. Chen, W. Z. Li, Q. C. Shui, Y. P. Chen, S. Zhang, S. N. Zhang, H. Feng, L. Tao, L. Zhang, S. M.... 
+ 1 Sep 2026; 02:15 UT 
+18023
+SRG/ART-XC detection of the new outburst of XTE J1637-498
+I. Mereminskiy, A. Semena, A. Lutovinov, S. Molkov, A. Tkachenko  
+ 31 Aug 2026; 19:02 UT 
+18022
+Follow-up spectroscopic observations of Nova Sge 2026 (V488 Sge) with WHUT
+Sai-En Xu, Yi-Fei Qu, Bei You, on behalf of the Wuhan University One-Meter Optical Telescope team. 
+ 31 Aug 2026; 12:02 UT 
+18021
+The Fast Nova Sge 2026 (V0488 Sge) from photospheric to nebular regime in four days
+Paolo Ochner, Costantino Sigismondi, Andrea Reguitti, Alessandro Siviero, Valerio Nobile, Andrea Farina... 
+ 30 Aug 2026; 15:22 UT 
+18020
+MAXI/GSC observation of a major X-ray outburst from the Be/X-ray Binary Pulsar 1A 0535-66 (1A 0538-66)
+M. Nakajima, H. Hiramatsu, H. Negoro, K. Saito, T. Yokoyama, M. Wada, T. Mihara, T. Tamagawa, N. Kawai,... 
+ 29 Aug 2026; 02:00 UT 
+18019
+1ES 1028+511: Upper limits from a neutrino search with IceCube
+Sam Hori, Justin Vandenbroucke  
+ 28 Aug 2026; 05:13 UT 
+18018
+NGC 1275: Upper limits from a neutrino search with IceCube
+Sam Hori, Justin Vandenbroucke  
+ 28 Aug 2026; 04:57 UT 
+18017
+Radio flux density monitoring of MAXI J1750-327 with the Yamaguchi Interferometer (format corrected)
+Masanori Akimoto, Shogo Nohara, Hibiki Fujii, Natsuki Maekawa, Kotaro Ninuma, Kenta Fujisawa  
+ 28 Aug 2026; 01:19 UT 
+18016
+Radio flux density monitoring of MAXI J1750-327 with the Yamaguchi Interferometer
+Masanori Akimoto, Shogo Nohara, Hibiki Fujii, Natsuki Maekawa, Kotaro Ninuma, Kenta Fujisawa  
+ 28 Aug 2026; 00:13 UT 
+18015
+MeerKAT monitoring reveals GX 339-4 to be in a radio quiescent state
+Miriam M. Nyamai, Rob P. Fender,, Sara Motta, Noa Grollimund  for the X-KAT collaboration 
+ 27 Aug 2026; 17:43 UT 
+18014
+Spectroscopic observations of Nova Sge 2026 (PNV J19450648+1822422)
+Gesesew Reta Habtie  
+ 27 Aug 2026; 16:02 UT 
+18013
+Fermi-LAT detection of further gamma-ray brightening of the FSRQ 3C 395
+A. Holzmann Airasca  and P. Monti-Guarnieri, on behalf of the Fermi Large Area Telescope... 
+ 26 Aug 2026; 15:30 UT 
+18012
+Spectroscopic Classification of PNV J19450648+1822422 as an Fe II-type Nova with Concurrent Photometry
+Jingyuan Zhao, Jiashuo Zhang, Wang Li, Yaozhang Ou, Ezhar Elijan, Xinyan Chen  
+ 26 Aug 2026; 14:28 UT 
+18011
+Einstein Probe detection of renewed X-ray activity from the intermittent accreting millisecond pulsar SAX J1748.9-2021
+F. Coti Zelati, A. Marino, G. Illiano, Y. L. Wang, J. H. Wu, H. N. Yang, R. D. Liang, H. W. Pan, N. Rea,... 
+ 26 Aug 2026; 08:03 UT 
+18010
+XSPECT observation of the newly discovered black hole transient MAXI J1750-327 / EP260812c: Detection of variable low frequency QPOs
+Rwitika Chatterjee, Vivek Kumar Agrawal, Biswajit Paul, Anuj Nandi  
+ 25 Aug 2026; 18:30 UT 
+18009
+Discovery and follow up observations of the likely Galactic Nova NMW-TTU-26bp (PNV J19450648+1822422)
+Katie Barnhart, Kirill Sokolovsky, Darien Perla, Pragati Acharya, John Worley, Anthony Pearce, Vallia... 
+ 25 Aug 2026; 18:04 UT 
+18008
+Spectroscopic Observation of PNV J19450648+1822422: Likely a Classical Nova?
+Kenta Taguchi, Akira Arai  
+ 25 Aug 2026; 11:52 UT 
+18007
+ALMA + VLA observations of MAXI J1750-327
+A. J. Tetarenko, E. Lescure, A. Bahramian, J. C.A. Miller-Jones,  P. Casella, N. Castro Segura, P. Gandhi,... 
+ 25 Aug 2026; 10:23 UT 
+18006
+EP-WXT detection of on-going X-ray brightening likely from 4U 1850-086
+M. J. Liu, B. T. Wang, Y. L. Hua, and W. D. Zhang  on behalf of the Einstein Probe  team 
+ 25 Aug 2026; 09:51 UT 
+18005
+Gaia16amd: a new SU UMa-type dwarf nova
+A. O. Simon, D. Yu. Rusanova, F.-J. Hambsch, W. Ogloza, N. Karaman, A. Yu. Korosko, P. J. Mikolajczyk,... 
+ 25 Aug 2026; 09:06 UT 
+18004
+NuSTAR observation of the new black hole transient MAXI J1750-327/EP260812c
+S. Mandel, K. Mori, C. Hailey, M. Parra, A. Marino, N. Degenaar, R. Wijnands, J. Tomsick, M. Bachetti,... 
+ 25 Aug 2026; 01:43 UT 
+18003
+Detection of renewed radio activity from Cygnus X-3 with the Nasu radio telescope array at 1.4 GHz
+K. Tsubono, K. Asuma, K. Niinuma, K. Takefuji  and T. Daishido  
+ 24 Aug 2026; 07:20 UT 
+18002
+NuSTAR observations of the new X-ray transient SRGA J174800.5-280826
+A. Sanna, A. Beri, Arvind Balasubramanian, G. Illiano, M. C. Baglio, L. Tao, G. L. Huang, Q. C. Zhao,... 
+ 24 Aug 2026; 04:50 UT 
+18001
+Ongoing radio flaring activity of Cyg X-3 at 18.5 GHz with the Medicina Radio Telescope
+E. Egron, S. Vercellone, G. Pareschi, M. N. Iacolina, M. Giroletti, A. Giuliani, M. Pilia, A. Pellizzoni,... 
+ 24 Aug 2026; 04:26 UT 
+18000
+Fermi-LAT detection of enhanced gamma-ray activity from the flat-spectrum radio galaxy PKS 2331-240 and the BL Lac PMN J1326-5256
+G. La Mura, on behalf of the Fermi Large Area Telescope Collaboration 
+ 23 Aug 2026; 17:13 UT 
+17999
+The blazar S5 1044+71 shows exceptionally high optical activity
+S. Duerr, L. Lehmann, B. Lehmann, O. Domann, E. Bommert, M. Heemskerk, F. Lach, F. Pfeuffer, H. Reinhart,... 
+ 23 Aug 2026; 13:44 UT 
+17998
+Intense solar activity near the limbs: monitoring AR4513
+C. Sigismondi, A. Ravagnin, P. Ochner, V. Oldani, A. Brucato, A. Reguitti, R. Ruffini  
+ 21 Aug 2026; 18:50 UT 
+17997
+SVOM/ECLAIRs detection of the symbiotic low-mass X-ray binary 4U 1700+24 
+H. Yang,, F. Cangemi, S. Guillot, A. Coleiro, C. Plasse, L. Tao,, L. Zhang  
+ 21 Aug 2026; 13:01 UT 
+17996
+Erratum to ATel #17984: Post-outburst morphology and polarization behavior of the short-periodical comet 220P/McNaught
+Christian Woehler  
+ 20 Aug 2026; 23:19 UT 
+17995
+Liverpool Telescope spectroscopy identifies TCP J18251276-2225293 as an Fe II-type nova
+Jingyuan Zhao, Jiashuo Zhang, Ezhar Elijan, Yaozhang Ou  
+ 20 Aug 2026; 22:16 UT 
+17994
+XRISM/Xtend Transient Search (XTS) detected an X-ray flare from CD-61 901
+H. Kuramoto, T. Narita, S. Ogawa, T. Hakamata, Y. Kanemaru, A. Miyamoto, Y. Omiya, Y. Uchida, T. Yoneyama,... 
+ 20 Aug 2026; 13:32 UT 
+17993
+SVOM follow-up on MAXI J1750-327/EP260812c
+F. Cangemi, L. Tao, A. Coleiro, G. L. Huang, P.-O. Petrucci, L. Zhang  
+ 20 Aug 2026; 08:02 UT 
+17992
+OAUNI multicolor photometry of SN 2026fov
+A. Pereyra, M. Zevallos, J. Tello  
+ 19 Aug 2026; 23:41 UT 
+17991
+Spectroscopic Classification of Astrophysical Transients with Keck II + KCWI
+J. Karcheski, R. J. Foley, K. C. Patra  
+ 19 Aug 2026; 20:53 UT 
+17990
+GTC spectroscopy of MAXI J1750-327
+Teo Munoz-Darias, Daniel Mata Sanchez, Montserrat Armas Padilla, Manuel A. P. Torres, Enzo Saavedra,... 
+ 19 Aug 2026; 16:50 UT 
+17989
+Spectroscopic Classification of TCP J18251276-2225293 as a Classical Nova
+Kenta Taguchi  
+ 19 Aug 2026; 14:56 UT 
+17988
+PRIME early detection and pre-outburst upper limit for the NIR counterpart to MAXI J1750-327
+A. Masegian, R. Hamada, K. De, D. Suzuki, T. Sumi, K. Nunota, T. Tamaoki, S. Makida, R. Oishi, R. Ogawa,... 
+ 19 Aug 2026; 10:11 UT 
+17987
+Galactic Nova candidate TCP J18251276-2225293
+Katie Barnhart, Kirill Sokolovsky, Darien Perla, Pragati Acharya, John Worley, Vallia Antoniou, Elias... 
+ 19 Aug 2026; 09:08 UT 
+17986
+First X-ray polarimetric measurement of Her X-1 in the anomalous low state
+Sergey S. Tsygankov, Sofia V. Forsblom, Juri Poutanen, Alexandra Veledina, Sergey Molkov, Alexander Lutovinov,... 
+ 19 Aug 2026; 06:11 UT 
+17985
+Small Apparent Outburst of Comet 10P/Tempel 2
+Michael S. P. Kelley, Thomas Lehmann, Carrie Holt, on behalf of the LCO Outbursting Objects Key... 
+ 18 Aug 2026; 16:50 UT 
+17984
+Post-outburst morphology and polarization behavior of the short-periodical comet 220P/McNaught
+Christian Woehler  
+ 18 Aug 2026; 13:07 UT 
+17983
+Insight-HXMT observed the Galactic transient EP260812c/EP J175003.0-324244/MAXI J1750-327 and detected a low-frequency quasi-periodic oscillation signal
+Z. X. Li, G. L. Huang, Q. C. Zhao, L. Tao, S. N. Zhang, H. Feng, S. M. Jia, S. Zhang, X. B. Li, Y. P.... 
+ 18 Aug 2026; 02:27 UT 
+17982
+Spectroscopic Classification of Astrophysical Transients with the Lick Shane Telescope
+R. Kaur, K. C. Patra, R. J. Foley  
+ 17 Aug 2026; 22:48 UT 
+ Recently 
+ 18033 
+ Follow-up Imaging & Spectroscopy of Nova Sagittae 2026 (V488 Sge) 
+ M. Mugrauer ... 
+ 18028 
+ NuSTAR detection of shock-powered X-rays from Nova Sagittae 2026 = V488 Sge 
+ Kirill Sokolovsky... 
+ 18022 
+ Follow-up spectroscopic observations of Nova Sge 2026 (V488 Sge) with WHUT 
+ Sai-En Xu... 
+ 18021 
+ The Fast Nova Sge 2026 (V0488 Sge) from photospheric to nebular regime in four days 
+ Paolo Ochner ... 
+ Most Viewed 
+ 18048 
+ MDM/MIRAGE discovery of a pronounced infrared brightening in the luminous nova AT2026aabo in M31 
+ Viraj Karambelkar... 
+ 18049 
+ Spectral hardening of Cygnus X-3 observed with SVOM/ECLAIRs 
+ F. Cangemi ... 
+ 18047 
+ The CSS 3C 138: renewed optical activity in 2026 August-September 
+ V. V. Vlasyuk... 
+[ 
+Telegram Index
+ ]
+ R. E. Rutledge, Editor-in-Chief
+ Derek Fox, Editor
