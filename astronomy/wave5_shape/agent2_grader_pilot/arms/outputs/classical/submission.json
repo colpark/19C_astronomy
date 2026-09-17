@@ -1,0 +1,26 @@
+{
+  "item_id": "PILOT-001",
+  "family": "SALT3",
+  "parameters": {
+    "z": 0.142,
+    "t0": 59746.85994163718,
+    "x0": 0.00038650776616758035,
+    "x1": 0.7931628251637618,
+    "c": -0.15933508507312663
+  },
+  "rejected_rivals": [
+    {
+      "family": "Bazin",
+      "reason": "Bazin has five free parameters per band and the pre-cut window contains only 9 ztfg and 7 ztfr detections, all of them on the monotonic pre-maximum rise. The decline timescale is therefore completely unconstrained: the free fit drives tau_fall to its upper bound (500 d in both bands, with the baseline B absorbing ~40-80 flux units), i.e. it predicts an essentially flat, never-declining light curve out to the horizon. Its lower pre-cut chi2 per point (0.18 vs 0.37 for SALT3) is pure overfitting of 5 parameters to 7-9 noisy points, not evidence of a better forward model. Because the scoring window (t_cut to +60 d from first detection) is dominated by the post-maximum decline, a model whose decline is set by a bound rather than by data is the worst possible extrapolator here. SALT3 instead imports the empirical SN Ia decline shape and colour law from a trained spectral time series, so the post-cut behaviour is predicted, not fitted. Bazin is also purely per-band and so cannot use the g-r colour as a phase constraint."
+    },
+    {
+      "family": "Villar",
+      "reason": "Same failure mode as Bazin and worse. Villar adds a plateau duration gamma and a plateau slope beta on top of the Bazin shape (6-7 free parameters per band) against 7-9 pre-maximum points. The fit is degenerate: beta runs to ~0 (1e-18 and 1e-12 in g and r), gamma runs to 258 d (g) and 266 d (r), and tau_fall pins at its bound in r, i.e. the fitted object is a ~260-day plateau source. That is a statement about the bounds, not about the data, and it would be catastrophically wrong for the post-cut decline of any thermonuclear transient. Its pre-cut chi2 per point (0.182) is indistinguishable from Bazin's (0.182), confirming the extra plateau parameters are unconstrained. Villar's physical motivation is core-collapse plateaus; nothing in the pre-cut data (blue g-r ~ -0.2 to -0.4, smoothly decelerating rise, deep non-detection at 20.55 mag one day before first detection) requires or even suggests a plateau."
+    },
+    {
+      "family": "ParSNIP",
+      "reason": "ParSNIP is a data-driven low-dimensional latent-space model trained across many transient classes. With only pre-maximum photometry its latent variables are poorly identified and the encoder is being used far outside the regime where it is informative, so its extrapolation past maximum would be driven by whatever class prior dominates the latent neighbourhood rather than by this object's data. Here the object is positively identified as a normal SN Ia (see notes: the SALT3 fit is self-consistent on the Hubble diagram to within 0.04 mag), so the class-agnostic flexibility of ParSNIP buys nothing and costs the tight, physically calibrated decline shape that SALT3 supplies. ParSNIP is also outside the submittable scope for this item."
+    }
+  ],
+  "notes": "Object is a normal SN Ia caught ~14 rest-frame days before B maximum. Evidence: (1) deep g non-detection at 20.55 one day before the 20.45 first detection, then a smooth, decelerating rise of only 1.23 mag in 9 d; (2) blue, slowly evolving colour, g-r ~ -0.06 to -0.41, consistent with a blue (c<0) Ia pre-maximum; (3) SALT3-f22 fits all 16 pre-cut detections with chi2 = 5.2 for 11 dof (chi2 per point 0.369 under the grading formula) with MW E(B-V)=0.02979 applied, and every non-detection back to MJD 59702 is satisfied. Redshift determination: the light-curve fit alone is degenerate in z (pre-cut chi2 is flat to <0.1 over 0.04 < z < 0.26), so z was set by requiring SALT3 standardisation consistency. Fitting at fixed z and evaluating M_corr = m_B - mu(z) + 0.148 x1 - 3.11 c (flat LCDM, H0=70, Om=0.3) gives M_corr = -18.63 at z=0.10, -19.33 at z=0.14, -19.47 at z=0.15 and -19.86 at z=0.18; the standard M_B = -19.36 is matched at z = 0.142, which is the value submitted. The fitted peak is m_B = 19.17, mu = 39.13. Robustness checks: (a) marginalising over t0 with weights exp(-chi2/2) across t0 = 59743-59750 changes the predicted post-cut flux by at most 4.5 per cent in either band, below the 5 per cent error floor in the scoring metric, so the maximum-likelihood point estimate is used; (b) refitting on progressively truncated pre-cut data (through MJD 59736.5, 59737.5, 59738.5, 59739.5, 59740.5) returns t0 between 59742.0 and 59747.2, i.e. the formal t0 error of ~3 d is realistic and the full-data value 59746.86 sits at the top of that range; (c) varying z from 0.06 to 0.26 changes the predicted post-cut fluxes by up to ~30 per cent at late phases, which is why the Hubble-consistency prior rather than the raw chi2 minimum (z=0.185, which would make the object 0.5 mag over-luminous) was used to fix z. x1 = +0.79 and c = -0.16 are both well inside the normal Ia population. The horizon, MJD 59792.28, is rest-frame phase +39.7 d, inside the SALT3 phase range."
+}

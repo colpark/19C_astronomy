@@ -1,0 +1,64 @@
+{
+ "banner": "PRE-RATIFICATION PILOT (harness check only); not a score record",
+ "graded_utc": "2026-09-17T18:31:09.520414+00:00",
+ "protocol_sha256": "ef58005482a049e5d58131267b0758ab0bfae3bb1c674650d6302f545fa709bc",
+ "forward_models_sha256": "302586fd569997382bd9d46a564722c0d91410a79cad6ebef556a665d677d36f",
+ "grade_py_sha256": "52f12faa901225c22090743783158fdac20bbbe4d42e973c1e4b1905a15e10b5",
+ "item_id": "PILOT-001",
+ "item_meta_sha256": "b97dcc27cca42e0870ec5caf681c2b2b0d96f9656542b56fcbea532a4d4a2cd8",
+ "held_out_sha256": "bc228eee2d53993b7e6f276e984814e64038d3bbf3583b82444a57a80b49c052",
+ "submission_path": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/arms/outputs/classical/submission.json",
+ "submission_sha256": "fd9a9302d945cbee81112086bcdace3efa81bf7e000161fdeac0338d21297882",
+ "scope": {
+  "file_sha256": "849cf432c4d419bdb0862c325cf9be4082e6598a4af7b1dd32bc4d4306129aa6",
+  "amendment": "AM-2",
+  "submittable_families": [
+   "SALT3"
+  ],
+  "decline_allowed": true,
+  "object_family_file": "object_family_POST_SEAL.json"
+ },
+ "family": "SALT3",
+ "parameters": {
+  "z": 0.142,
+  "t0": 59746.85994163718,
+  "x0": 0.00038650776616758035,
+  "x1": 0.7931628251637618,
+  "c": -0.15933508507312663
+ },
+ "rejected_rivals_families": [
+  "Bazin",
+  "Villar",
+  "ParSNIP"
+ ],
+ "asset_hashes": {
+  "salt3/salt3_color_correction.dat": "92caf54c0adedb6aa95add602022508cac4ee99324668686c94769103da9339b",
+  "salt3/salt3_color_dispersion.dat": "537a2807a1d0ac923630a5461901596ab1fe61cfda3640e21eb8d92e0c99f2bc",
+  "salt3/salt3_lc_covariance_01.dat": "58dade9a3480304567c1df10000d806d50e5ab863bbb6e5f4f1a432ebecf7f51",
+  "salt3/salt3_lc_variance_0.dat": "3637f1093732a15ac1254ccefdd304e46740228407649bd36b6cb330d6fa8e8b",
+  "salt3/salt3_lc_variance_1.dat": "b5267e57b7c8cc11b76b1ddfa4fb723a74183995f0f914331a188ff1e74ee75b",
+  "salt3/salt3_template_0.dat": "f09df51e2567a9b4e00c4846723c7b640dcbda06a4bc2f0d4bc559915f334813",
+  "salt3/salt3_template_1.dat": "46a11e7c9915159496741599b3f55c2eda98c2058aec32e8300281bc1eab3bf9"
+ },
+ "bands_excluded_lt5": {},
+ "status": "OUT_OF_SCOPE:NON_IA_OBJECT",
+ "diagnostic_pre_cut_chi2_per_point": 0.3690260693808857,
+ "object_family_file_sha256": "cd9bd8ec1fef1544d7a5b6a60dc362234ec6929b73b1b8d62a785cda233d5933",
+ "harness_diagnostic_residual_NOT_A_SCORE": {
+  "S": 30.626154649375824,
+  "Q": 0.031619398914807244,
+  "per_band": {
+   "ztfg": {
+    "N": 35,
+    "chi2_per_point": 27.86742012953586,
+    "median_abs_resid": 5.483319689516011
+   },
+   "ztfr": {
+    "N": 35,
+    "chi2_per_point": 33.38488916921579,
+    "median_abs_resid": 5.795723574593434
+   }
+  }
+ },
+ "message": "AM-2: SALT3 renders the SN Ia family only; object family recorded after the seal is not SN Ia. Scope failure, not a score."
+}

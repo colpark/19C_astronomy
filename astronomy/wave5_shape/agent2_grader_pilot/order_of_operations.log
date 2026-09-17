@@ -30,3 +30,6 @@
 2026-09-17T18:19:45Z step8 deliverables hashed: HASH_MANIFEST.sha256 913426550ff194701649273d33ad22cf92d39863eefe8f95b37a7e8da1b653af; STOP for coordinator to launch the two arms
 2026-09-17T18:20:35Z step9 disagreements.json 5ed07166736ff95456c669d386f0c1df18502fa4a02977e62769817e7bc97e1b written after the coordinator message; tool cards annotated with AM-2 scope (validate PASS x3)
 2026-09-17T18:20:35Z step10 final HASH_MANIFEST.sha256 77d06aa1b47506a15c113f99af5149585cd3cb0b6c35931fa7dd086154110302 over 190 files; data_cache/ is gitignored and hashed in ALERCE_RAW_SHA256SUMS and the cards
+2026-09-17T18:31:11Z step11 blind grading of both arm submissions (hashes match coordinator record fd9a9302 / 68e949d3): grades/classical_grade.json f983ca050fd5201e grades/fm_grade.json a8602190ecede3ea
+2026-09-17T18:33:12Z step12 r8_symmetry.json subject+emitted rows filled from coordinator/arm_launch_record.json -> R8 EXIT (f25128aa40e912f9); pilot_result.json 3c0523b022450a24c695b67be9d086abd88d68023da998c7e048582509cf6afb; replay cases AST2W5-05 (must_fire) and -06 (must_not_fire) appended
+2026-09-17T18:33:22Z step13 final HASH_MANIFEST.sha256 f0c68c298db0543d7ff3c3d89a74900d704e5f20b42a60405833e246626c424e over 197 files

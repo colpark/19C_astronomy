@@ -110,6 +110,10 @@ AM-2 is recorded in `amendments.md`; the frozen protocol was not edited. The pil
 | R4 grant and separation | UNDEMONSTRATED (audit declared, not enforceable) |
 | Arm symmetry (R8) | PASS except the subject row, which the coordinator fills |
 
+## Final grading result (appended after the arms ran)
+
+Both arms were graded blind. Both return `OUT_OF_SCOPE:NON_IA_OBJECT`: a coverage failure, not a score. The full final report is in `FINAL_REPORT.md`.
+
 ## What the coordinator does next
 1. Launch two fresh subagents with `arms/classical_arm_prompt.md` and `arms/fm_arm_prompt.md` verbatim. Hash the emitted prompts and record them beside `55ce2897…` and `a6d0b218…` (R6), with model id, sampling parameters and the model-side tool catalogue (R4).
 2. Run the AM-2 item-5 transcript grep on both arms before sending anything back.

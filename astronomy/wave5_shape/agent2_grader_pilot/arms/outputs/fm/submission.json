@@ -1,0 +1,26 @@
+{
+  "item_id": "PILOT-001",
+  "family": "SALT3",
+  "parameters": {
+    "z": 0.14,
+    "t0": 59746.804,
+    "x0": 0.00038650,
+    "x1": 0.783,
+    "c": -0.1606
+  },
+  "rejected_rivals": [
+    {
+      "family": "Bazin",
+      "reason": "Bazin reaches a slightly lower pre-cut chi2 per point (0.182 vs 0.369 for SALT3) but only by overfitting: it spends 5 free parameters per band on 9 (g) and 7 (r) detections that are ALL pre-maximum, so tau_fall and the plateau term are fixed by nothing in the data and the post-peak extrapolation is arbitrary. It is also a smooth single-exponential decline with no physical content, so it cannot produce the ztfr secondary maximum (the ~25-day shoulder) that a SN Ia must show and that dominates the r-band held-out points. Bands are fitted independently, so it carries no colour/SED information and cannot enforce a common explosion date. SALT3, by contrast, is a trained spectral time series whose post-peak shape is determined once the pre-peak rise fixes t0, x1 and the amplitude; it fits the pre-cut data acceptably (chi2/pt 0.37) with only 4 free parameters shared across bands. Bazin is also outside the submittable scope for this item."
+    },
+    {
+      "family": "Villar",
+      "reason": "Same objection as Bazin, more so: Villar adds a plateau/knee parameter (gamma) on top of the rise and fall timescales, i.e. 6 per-band parameters against 7-9 strictly pre-maximum points. Its pre-cut chi2 per point (0.182) is indistinguishable from Bazin's, confirming the extra freedom buys nothing the data constrain; gamma and tau_fall are entirely unconstrained here and the model would be a blind extrapolation over the whole graded window. Villar's shape is designed for core-collapse plateaus; the data give no evidence for a plateau object (see the SN Ia reasoning in notes), and it also cannot reproduce the r-band secondary maximum. Independent per-band fits again discard the colour information that is the main lever for redshift and extinction here. Outside the submittable scope for this item."
+    },
+    {
+      "family": "ParSNIP",
+      "reason": "Used only as evidence, not adopted. Its encoding of these data is a clearly worse forward model: pre-cut chi2 per point 4.70 (g 6.02, r 3.00) versus 0.37 for SALT3, i.e. it does not even reproduce the data it was shown. Its latent redshift (0.276) and t0 (59738.2, before the last rising pre-cut detection, which is manifestly wrong since the object is still brightening at 59741.2) are inconsistent with the light curve. This is expected given the stated checkpoint limitations: trained on BTS light curves truncated at most 3 nights after first detection with no redshift information, so it has seen almost no photometry at the phases that will be graded and its amplitude/redshift degeneracy is unbroken. It is also not submittable for this item. Its one useful contribution was negative: it offers no support for a non-Ia interpretation."
+    }
+  ],
+  "notes": "Object is a normal SN Ia caught ~14 observer-days pre-maximum and still rising at the cut. Evidence: smooth monotonic rise of 1.3 mag in 8 days; blue and slowly reddening g-r (-0.38 at 59736 to -0.19 at 59740); deep g non-detections at 59726.3 (20.90, 20.96) bracketing an explosion date ~17-18 rest-frame days before the fitted t0, which is the canonical SN Ia rise time; and SALT3 fits all 16 detections in both bands with 4 parameters at chi2/pt = 0.37. Redshift: the pre-cut chi2 is essentially flat in z (0.368-0.391 over 0.04-0.28), so z is not constrained by shape alone. I broke the degeneracy with the Hubble-diagram self-consistency of the fit itself: for each fixed z I formed m_B = -2.5log10(x0)+10.635 and the standardized M = -19.36 - 0.14*x1 + 3.1*c, then the implied z from mu (flat LCDM, H0=70, Om=0.3). The map has a fixed point at z_fit = 0.14 -> z_implied = 0.142; z=0.10 implies 0.136 and z=0.19 implies 0.148, so the solution is stable. Adopted z = 0.14. x1 and c are only weakly constrained by pre-peak data (formal errors 3.1 and 0.08); I checked the alternatives (x1 = 0.55, c = -0.12 at z = 0.14, and the free-z solution z = 0.185, t0 = 59747.6, x1 = 0.88, c = -0.179) and they differ from the submitted model by under 10 percent in flux everywhere in the graded window, so the answer is not sensitive to that choice, and I kept the maximum-likelihood values at the self-consistent redshift. Predicted behaviour: peak near 59747 at g = 19.06, r = 19.24, then a normal decline with the r-band secondary maximum keeping r bright (r = 20.18 at 59772, 21.08 at 59792). Phase coverage is safe: the first pre-cut detection is at rest phase -13 and the horizon at rest phase +40, both inside SALT3's -20 to +50 range, so no zero-flux truncation occurs. MW dust (E(B-V) = 0.02979) was fixed in the fit and is re-applied by the grader. DECLINE was considered and rejected: SALT3 is an adequate forward model here, fitting both bands to well under 1 chi2 per point with a physically sensible rise time, colour and standardized luminosity."
+}

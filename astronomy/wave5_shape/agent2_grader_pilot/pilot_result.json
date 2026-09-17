@@ -1,0 +1,190 @@
+{
+ "banner": "PRE-RATIFICATION PILOT (harness check only). NOT a score record, NOT an I1 record, NO directional claim.",
+ "item_id": "PILOT-001",
+ "graded_utc": "2026-09-17T18:31:09.520414+00:00",
+ "hashes": {
+  "protocol": "ef58005482a049e5d58131267b0758ab0bfae3bb1c674650d6302f545fa709bc",
+  "amendments": "91c9486e3960448562c396ec7e7e1c17226becb9a6acb289efc685dd26ce1454",
+  "grade_py": "52f12faa901225c22090743783158fdac20bbbe4d42e973c1e4b1905a15e10b5",
+  "forward_models": "302586fd569997382bd9d46a564722c0d91410a79cad6ebef556a665d677d36f",
+  "item_pre_cut": "0f6ab10dc266e6528cccc475a4d3877d12851c76567d5cade01c8944684e9e72",
+  "item_meta": "b97dcc27cca42e0870ec5caf681c2b2b0d96f9656542b56fcbea532a4d4a2cd8",
+  "item_scope": "bec1a20b6dc44697cb86fcd5dbfdd71402f7369fa12d8dde03adc246c70c009d",
+  "held_out": "bc228eee2d53993b7e6f276e984814e64038d3bbf3583b82444a57a80b49c052",
+  "object_family_post_seal": "cd9bd8ec1fef1544d7a5b6a60dc362234ec6929b73b1b8d62a785cda233d5933",
+  "selection_rule": "581bf68fd86e7d8fd199192444a415b8f847f132a0f8102e4d0c76f76bd5ec6d",
+  "selection_seal": "5b496ff37bd1cbcd189209939a14dc3b3710a54170b9fb9c1adcff99eb495c13",
+  "r8_symmetry": "f25128aa40e912f9d7d53d905f8b52b3019b139a4bd7a921ac821118e1edca58",
+  "classical_prompt_declared": "55ce2897cb44fb4da6c1547b1506a241e3bb289c0e128fcbe5c865bfd4b987a8",
+  "fm_prompt_declared": "a6d0b2182508d0853b9faee903dd6f0c09b9f78726f8ec1d1a0bd2b775747a55",
+  "classical_prompt_emitted": "255aa48a30b4c471ee8bbc331f80ec947d7702c9fb480c9b8929df923c0c7bcb",
+  "fm_prompt_emitted": "53ea88930ab27df5aee0b5c843679b629b039573e0b0b943803b69222a767923",
+  "arm_launch_record": "cecaf7c78b7e7562963f78053796c6f9840cf95302de8954d2021fd5ae5d6f27"
+ },
+ "scope": {
+  "amendment": "AM-2",
+  "submittable_families": [
+   "SALT3",
+   "DECLINE"
+  ],
+  "object_family_read_after_seal": "SN II (BTS), z 0.143",
+  "grader_family_coverage": "SALT3-f22 renders the SN Ia family only (DS-03)",
+  "consequence": "every SALT3 submission for this item is a scope failure, not a score"
+ },
+ "arms": {
+  "classical": {
+   "submission_path": "arms/outputs/classical/submission.json",
+   "submission_sha256": "fd9a9302d945cbee81112086bcdace3efa81bf7e000161fdeac0338d21297882",
+   "family": "SALT3",
+   "parameters": {
+    "z": 0.142,
+    "t0": 59746.85994163718,
+    "x0": 0.00038650776616758035,
+    "x1": 0.7931628251637618,
+    "c": -0.15933508507312663
+   },
+   "rejected_rivals_families": [
+    "Bazin",
+    "Villar",
+    "ParSNIP"
+   ],
+   "coverage_code": "OUT_OF_SCOPE:NON_IA_OBJECT",
+   "score": null,
+   "why_no_score": "AM-2: SALT3 renders the SN Ia family only; object family recorded after the seal is not SN Ia. Scope failure, not a score.",
+   "harness_diagnostic_residual_NOT_A_SCORE": {
+    "S": 30.626154649375824,
+    "Q": 0.031619398914807244,
+    "per_band": {
+     "ztfg": {
+      "N": 35,
+      "chi2_per_point": 27.86742012953586,
+      "median_abs_resid": 5.483319689516011
+     },
+     "ztfr": {
+      "N": 35,
+      "chi2_per_point": 33.38488916921579,
+      "median_abs_resid": 5.795723574593434
+     }
+    }
+   },
+   "diagnostic_pre_cut_chi2_per_point": 0.3690260693808857,
+   "grade_file": "grades/classical_grade.json",
+   "grade_file_sha256": "f983ca050fd5201e72cb3305315ac1676aa61faf95af800d8c51fadf1ba9f85e"
+  },
+  "fm": {
+   "submission_path": "arms/outputs/fm/submission.json",
+   "submission_sha256": "68e949d399645349f59da2fb056f24d99cd73c1a975cb5344cabe3a03a16ad8e",
+   "family": "SALT3",
+   "parameters": {
+    "z": 0.14,
+    "t0": 59746.804,
+    "x0": 0.0003865,
+    "x1": 0.783,
+    "c": -0.1606
+   },
+   "rejected_rivals_families": [
+    "Bazin",
+    "Villar",
+    "ParSNIP"
+   ],
+   "coverage_code": "OUT_OF_SCOPE:NON_IA_OBJECT",
+   "score": null,
+   "why_no_score": "AM-2: SALT3 renders the SN Ia family only; object family recorded after the seal is not SN Ia. Scope failure, not a score.",
+   "harness_diagnostic_residual_NOT_A_SCORE": {
+    "S": 30.867085647369212,
+    "Q": 0.03138034055155448,
+    "per_band": {
+     "ztfg": {
+      "N": 35,
+      "chi2_per_point": 28.067145158228925,
+      "median_abs_resid": 5.499827167026223
+     },
+     "ztfr": {
+      "N": 35,
+      "chi2_per_point": 33.6670261365095,
+      "median_abs_resid": 5.848161321490151
+     }
+    }
+   },
+   "diagnostic_pre_cut_chi2_per_point": 0.3687814706144965,
+   "grade_file": "grades/fm_grade.json",
+   "grade_file_sha256": "a8602190ecede3ea6300a676229c7ab4c8b0901d73cf3699a31b383bf0285bdc"
+  }
+ },
+ "mechanical_floor_AM2": {
+  "generator": "sncosmo fit_lc SALT3 at defaults, z bounds 0.005-0.3, pre-cut detections only",
+  "submission_sha256": "b0371f50d3a6e27f1a9caad761fa1b1a0075be493cc7ba884924bc1ae1952126",
+  "coverage_code": "OUT_OF_SCOPE:NON_IA_OBJECT",
+  "score": null,
+  "harness_diagnostic_residual_NOT_A_SCORE": {
+   "S": 28.57814089953319,
+   "Q": 0.03380875097581885,
+   "per_band": {
+    "ztfg": {
+     "N": 35,
+     "chi2_per_point": 26.41687385763444,
+     "median_abs_resid": 5.346732545271283
+    },
+    "ztfr": {
+     "N": 35,
+     "chi2_per_point": 30.739407941431942,
+     "median_abs_resid": 5.562570693654553
+    }
+   }
+  },
+  "diagnostic_pre_cut_chi2_per_point": 0.36892573257531847,
+  "parameters": {
+   "z": 0.1850179660101875,
+   "t0": 59747.553629213435,
+   "x0": 0.00037787279791547004,
+   "x1": 0.9005427778030011,
+   "c": -0.17369195623164832
+  }
+ },
+ "frozen_s9_floor_diagnostic": {
+  "choice": "Bazin (pre-cut chi2 per point 0.182 vs SALT3 0.369)",
+  "coverage_code": "COVERAGE_FAIL:SCOPE",
+  "note": "the protocol-section-9 two-generator floor, kept as a labelled pre-AM-2 diagnostic; it is refused by the AM-2 scope, which is itself a test of the scope code"
+ },
+ "diagnostic_comparison_NOT_A_RANKING": {
+  "definition": "S = mean over bands of chi2 per held-out point under the frozen formula; reported here ONLY because the harness computed it. All three values are scope failures and none is a score.",
+  "values": {
+   "mechanical_floor_AM2": 28.57814089953319,
+   "classical_arm": 30.626154649375824,
+   "fm_arm": 30.867085647369212
+  },
+  "spread": "floor 28.58, classical 30.63, fm 30.87: a spread of 2.3 on values around 30, i.e. all three models are wrong in the same way and by nearly the same amount",
+  "family_capability_check": {
+   "method": "grader-side only, never shown to an arm: SALT3 refitted ON the held-out data and on all epochs, and Bazin/Villar fitted on all epochs, then scored on the held-out points",
+   "SALT3_best_possible_fit_to_the_held_out_data_itself": 4.612383380378391,
+   "SALT3_best_possible_fit_to_all_epochs": 8.46923696477685,
+   "Bazin_best_possible_fit_to_all_epochs": 0.9513830331679416,
+   "Villar_best_possible_fit_to_all_epochs": 0.9667076678935248,
+   "reading": "even with the answer in hand, SALT3 cannot get below S = 4.6 on this object (and only by driving x1 to its bound, 5.0, at z 0.268), while a parametric curve reaches S = 0.95. The family, not the arms, accounts for most of the 28-31 residual. This is the empirical support for the scope ruling."
+  },
+  "refusal": "No arm is ranked, no difference is interpreted, and no arm is compared with the floor as evidence. One item is far below any MDE (wave-2 measured sigma_d 0.084-0.166 on a different metric; no MDE is computed here), and the item is outside the grader's family scope."
+ },
+ "what_the_two_submissions_share": {
+  "facts": [
+   "both chose family SALT3 (the only submittable family besides DECLINE)",
+   "both fixed the redshift by SALT3 standardisation self-consistency (Hubble-diagram argument) rather than from light-curve shape, having found the pre-cut chi2 flat in z (classical: flat to <0.1 over 0.04-0.26; fm: 0.368-0.391 over 0.04-0.28)",
+   "both landed within 0.002 in z of each other (0.142 vs 0.140) and within 0.06 d in t0, 0.01 in x1, 0.003 in c",
+   "both rejected Bazin and Villar as overfitting unconstrained decline parameters to pre-maximum points only",
+   "both diagnosed the object as a normal SN Ia; the catalogue type, read after the seal, is SN II",
+   "the FM arm additionally rejected ParSNIP on measured grounds (pre-cut chi2 per point 4.70 vs 0.37; latent z 0.276 and t0 before the last rising detection)",
+   "neither arm declined, though DECLINE was available and the FM arm explicitly considered and rejected it"
+  ],
+  "what_it_does_not_tell_us": [
+   "nothing about tool value: both arms held the same four tools, the FM arm's only extra tool was not submittable, and its checkpoint had never seen photometry at the graded phases (DS-01). A null here is what the design predicts, not a finding",
+   "nothing about agent value over the floor: the floor, both arms and the best-possible SALT3 fit are all scope failures on this item",
+   "nothing about calibration of the redshift argument: z 0.142/0.140 sits within 0.003 of the catalogue z 0.143, which is a striking single instance and no more. n = 1, the arms could not see the catalogue, and the same argument would have been made for a non-Ia object, as it was"
+  ],
+  "what_it_does_tell_us": [
+   "the harness, the item packaging, the grader separation, the scope code and the coverage codes all work end to end on a real object",
+   "the written-rejection branch produces substantive, checkable reasons: both arms named the specific degeneracy (tau_fall pinned at its 500 d bound, gamma at ~260 d) rather than asserting overfitting",
+   "the one branch the grader cannot score is the one that carried the most content: neither arm's family reasoning, nor the false SN Ia diagnosis, changes S by a single point"
+  ]
+ },
+ "claim": "NONE. This pilot supports no directional claim of any kind. It is a harness check under brief constraint 2, it writes no score record, it is not an I1 record, and the single item is both out of the grader's family scope and far below any minimum detectable effect.",
+ "completeness": "Covers both arm submissions, the two floors, the family-capability diagnostic, every hash in the chain from the protocol to the emitted prompts, and the scope ruling. Does not cover: sampling parameters, the model-side tool catalogue (R4), any MDE for this metric, and any second item."
+}

@@ -16,7 +16,9 @@
    "classical": "55ce2897cb44fb4da6c1547b1506a241e3bb289c0e128fcbe5c865bfd4b987a8",
    "fm": "a6d0b2182508d0853b9faee903dd6f0c09b9f78726f8ec1d1a0bd2b775747a55",
    "difference": true,
-   "ruling": "ACCEPTED, same cause. R6: the coordinator must hash the prompt it actually emits and record it beside these declared hashes; a mismatch voids the cell."
+   "ruling": "RESOLVED (R6/R7). The emitted prompts differ from the declared files by exactly one stripped trailing newline, for both arms identically; the launching session verified this by reconstruction (sha256 of each file minus its final newline equals the emitted hash), not by assertion. R7 classification: cosmetic, and symmetric across arms. The declared-vs-emitted hashes now sit side by side as R6 requires.",
+   "emitted_classical": "255aa48a30b4c471ee8bbc331f80ec947d7702c9fb480c9b8929df923c0c7bcb",
+   "emitted_fm": "53ea88930ab27df5aee0b5c843679b629b039573e0b0b943803b69222a767923"
   },
   {
    "attribute": "identical prompt prefix bytes",
@@ -148,10 +150,30 @@
   },
   {
    "attribute": "subject and sampling parameters",
-   "classical": "UNDEMONSTRATED at this stage",
-   "fm": "UNDEMONSTRATED at this stage",
-   "difference": null,
-   "ruling": "NOT SETTLED HERE. The coordinator launches both arms as fresh subagents and must record model id, temperature, tool grant (R4 model-side catalogue) and transcript hash per arm before grading. Brief constraint 3: R4 cannot be enforced for shell-capable subagents, only instructed and audited."
+   "classical": {
+    "model_id": "claude-opus-5[1m]",
+    "session": "fresh general-purpose subagent, no panel context",
+    "sampling_parameters": "UNDEMONSTRATED (not exposed to the launching session)",
+    "tool_calls": 20,
+    "by_tool": {
+     "Bash": 19,
+     "Write": 1
+    }
+   },
+   "fm": {
+    "model_id": "claude-opus-5[1m]",
+    "session": "fresh general-purpose subagent, no panel context",
+    "sampling_parameters": "UNDEMONSTRATED (not exposed to the launching session)",
+    "tool_calls": 17,
+    "by_tool": {
+     "Read": 3,
+     "Bash": 13,
+     "Write": 1
+    }
+   },
+   "difference": false,
+   "ruling": "RULED, with one residual. Same model and session type for both arms, so the subject is not a confound. Sampling parameters are UNDEMONSTRATED for both equally (the launching session cannot read them), which is symmetric and therefore not a difference between arms, but it does mean the cell is not replayable bit for bit. Tool-call counts (20 vs 17) are an outcome, not a supplied asymmetry: the cap (60) was identical and neither arm reached it.",
+   "source": "astronomy/wave5_shape/coordinator/arm_launch_record.json"
   },
   {
    "attribute": "separation audit",
@@ -159,8 +181,22 @@
    "fm": "transcript grep, AM-2 item 5",
    "difference": false,
    "ruling": "No difference: the same forbidden-path and network greps are applied to both transcripts; a hit voids that arm's grade as VOID:SEPARATION_BREACH."
+  },
+  {
+   "attribute": "separation audit result",
+   "classical": {
+    "tool_calls": 20,
+    "forbidden_hits": 0
+   },
+   "fm": {
+    "tool_calls": 17,
+    "forbidden_hits": 0
+   },
+   "difference": false,
+   "ruling": "RULED: no separation breach detected in either transcript, so neither arm is voided. The audit script had a word-boundary defect on its first pass ('ned' matching inside 'trained') producing 7 false positives; it was fixed and re-run, and both the defect and the fix are on the record. R4 stays UNDEMONSTRATED: the audit detects, it does not enforce, and the model-side tool catalogue was never enumerated."
   }
  ],
- "exit_condition": "runtime.md R8: every difference carries a ruling. 7 differences, 7 rulings; 1 row (subject and sampling parameters) is explicitly left to the coordinator and blocks the stage exit until recorded.",
- "completeness": "Covers prompts, tools, assets, caps, reference material, presentation, scope, output paths, separation audit. Does not cover subject identity, sampling parameters, emitted-prompt hashes or per-arm tool grants, which only the launching session can record."
+ "exit_condition": "runtime.md R8: every difference carries a ruling. 8 differences, 8 rulings; the subject row and the emitted-prompt row are now filled from astronomy/wave5_shape/coordinator/arm_launch_record.json. R8 EXITS for this pilot cell. Two limitations are recorded rather than resolved: sampling parameters UNDEMONSTRATED (symmetric), and R4 grant verification UNDEMONSTRATED (brief constraint 3).",
+ "completeness": "Covers prompts (declared and emitted), tools, assets, caps, reference material, presentation, scope, output paths, separation audit and subject. Does not cover sampling parameters or the model-side tool catalogue, neither of which the launching session can read.",
+ "stage_disposition": "R8 EXIT (pilot cell), with R4 UNDEMONSTRATED recorded"
 }
