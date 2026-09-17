@@ -1,0 +1,63 @@
+{
+ "source": "astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json",
+ "source_sha256": "dab4ec1baaa8d3ead3300ed2e4d29c57edb212405a1ee134161777921648a1e0",
+ "n_tools": 25,
+ "group_sizes": {
+  "FM/deep": 15,
+  "classical": 10
+ },
+ "fail_stage_counts": {
+  "parse": 12,
+  "emit": 2
+ },
+ "fail_stage_by_group": {
+  "FM/deep": {
+   "parse": 9
+  },
+  "classical": {
+   "parse": 3,
+   "emit": 2
+  }
+ },
+ "fail_stage_reclassified_tools": [
+  "Astromer1",
+  "Astromer2",
+  "RAPID",
+  "SuperNNova"
+ ],
+ "fail_tools_by_stage": {
+  "emit": [
+   "Fink_EarlySNIa_RF",
+   "Fink_SLSN_RF"
+  ],
+  "parse": [
+   "ALeRCE_BHRF",
+   "AstroM3",
+   "Astromer1",
+   "Astromer2",
+   "BTSbot",
+   "Maven",
+   "ORACLE",
+   "ParSNIP",
+   "RAPID",
+   "SALT3_sncosmo",
+   "SuperNNova",
+   "Superphot_plus"
+  ]
+ },
+ "undemonstrated_tools": [
+  "ATAT",
+  "AppleCiDEr",
+  "AstroCLIP",
+  "Blast",
+  "MultibandAstromer",
+  "SCONE",
+  "SNANA",
+  "Sherlock",
+  "Superphot"
+ ],
+ "pass_tools": [
+  "CATS",
+  "GHOST"
+ ]
+}

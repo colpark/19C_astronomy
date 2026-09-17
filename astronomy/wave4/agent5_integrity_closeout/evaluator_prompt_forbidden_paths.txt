@@ -1,0 +1,49 @@
+# CANONICAL FORBIDDEN PATHS FOR EVERY REPLAY EVALUATOR PROMPT
+# Source: astronomy/wave4/agent5_integrity_closeout/QUARANTINE.md (wave 4, agent 5).
+# Every future evaluator prompt must include every non-comment line below, verbatim.
+# Patterns are repository-relative; ** matches any number of directories.
+# The ALLOWED list in the prompt (skill SKILL.md, skill references/, one named blind input file) overrides nothing here
+# except that single blind input file, which the prompt names exactly, and the evaluator's own verdict file,
+# which it may write and hash (never read other files) at the one holder_handover/ path the prompt names.
+.git/
+fm-advantage-benchmark/cases/
+fm-advantage-benchmark/scripts/
+fm-advantage-benchmark/schemas/
+astronomy/replay/
+astronomy/agent1_supply_corpus/
+astronomy/agent2_floor_headroom/
+astronomy/agent3_labels_exposure/
+astronomy/agent4_tools_instrument/
+astronomy/agent5_resolution_replay/
+astronomy/SYNTHESIS.md
+astronomy/PANEL_BRIEF.md
+astronomy/wave*/  (every file except the single blind input file named in the prompt)
+**/holder_handover/
+**/scratch/
+**/score_*.txt
+**/verdicts*.json
+**/rescore_summary*
+**/RESULT*.md
+**/REPORT.md
+**/REPLAY_PLAN.md
+**/PANEL_BRIEF*.md
+**/cases.csv
+**/cases_blind.csv
+**/cases_opaque.csv
+**/blind_inputs.csv
+**/replay_cases.csv
+**/replay_rulings.csv
+**/P2_controls_cases.csv
+**/P2_controls_rulings.csv
+**/RULINGS_SEALED.csv
+**/POLARITY_SEALED.csv
+**/polarity_*.csv
+**/id_map_*.csv
+**/issues/
+**/amendments/
+**/logs/
+**/order_of_operations.log
+git log, git show, git diff, git blame, git grep, or any other command that reads repository history
+recursive search or listing over the repository (grep -r, rg, find, ls -R, globbing across directories)
+the network: web search, web fetch, package indexes, GitHub, or any remote copy of this repository
+any transcript, message or summary from a panel agent or the coordinator

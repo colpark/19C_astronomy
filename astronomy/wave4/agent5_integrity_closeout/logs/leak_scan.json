@@ -1,0 +1,778 @@
+[
+ {
+  "path": "astronomy/SYNTHESIS.md",
+  "sha256": "fd749aec24839f6c668350119c96932c6ef5127753661f254e4287c471459137",
+  "bytes": 12914,
+  "rules": {
+   "R4": 1
+  },
+  "name_match": false,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/agent1_supply_corpus/REPORT.md",
+  "sha256": "83c671939d476e1ebdbee0e168f1639ab2bd2ecda24210425e20c29353ce2780",
+  "bytes": 11026,
+  "rules": {
+   "R4": 4
+  },
+  "name_match": false,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/agent1_supply_corpus/replay_cases.csv",
+  "sha256": "02f837817ee1c928cef5a9320e72fe551c7538aba714e9b1b21367e4a1e79480",
+  "bytes": 1533,
+  "rules": {
+   "R2": 1,
+   "R4": 4
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/agent2_floor_headroom/replay_cases.csv",
+  "sha256": "c4d6f13c4fb71f619179a64f5252b3954f6f88c0fb38a76c66a0978d210a69c5",
+  "bytes": 2190,
+  "rules": {
+   "R2": 1,
+   "R4": 4
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/agent3_labels_exposure/replay_cases.csv",
+  "sha256": "c247631f88ddcc61a881af2fc965194128ac95d42df6860174560764f8a4b5df",
+  "bytes": 2389,
+  "rules": {
+   "R2": 1,
+   "R4": 4
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/agent3_labels_exposure/replay_rulings.csv",
+  "sha256": "683b4069be2b6b49ded9581b9b2cbf4e707f88edbeebf37c97681d180fca151b",
+  "bytes": 2002,
+  "rules": {
+   "R4": 1
+  },
+  "name_match": false,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/agent4_tools_instrument/REPORT.md",
+  "sha256": "f00eb338362e42388875d80b1e0ed484bb0ec073df2adab7260bc390107ea7c2",
+  "bytes": 11749,
+  "rules": {
+   "R4": 4
+  },
+  "name_match": false,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/agent4_tools_instrument/replay_cases.csv",
+  "sha256": "0703c404feb2d6a61b5d387ea7a9450bf2382b182bb1f7de3f58e167521d23ed",
+  "bytes": 2317,
+  "rules": {
+   "R2": 1,
+   "R4": 4
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/agent5_resolution_replay/REPLAY_PLAN.md",
+  "sha256": "395d956b1d4cb5457f032ec14c8405d3d6495cb4ac38dc5b20fc17d11e9fc458",
+  "bytes": 17156,
+  "rules": {
+   "R4": 42
+  },
+  "name_match": false,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/agent5_resolution_replay/REPORT.md",
+  "sha256": "dc34bfcbc8f903bf3970a74cf6eb9f98a467f18794754e21994dbeca4a5b3c16",
+  "bytes": 9140,
+  "rules": {
+   "R4": 4
+  },
+  "name_match": false,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/agent5_resolution_replay/replay_cases.csv",
+  "sha256": "0604180b98e4eec3987418e880e9063543f16b85eadd78a083e1664f0f0ca850",
+  "bytes": 2386,
+  "rules": {
+   "R2": 1,
+   "R4": 4
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/replay/cases/cases.csv",
+  "sha256": "60782b6b097dd505ed7242c7fb84b7c16323f4204c7d6fb6c4615954c4b6ca74",
+  "bytes": 10399,
+  "rules": {
+   "R2": 1,
+   "R4": 20
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/replay/evaluator/blind_inputs.csv",
+  "sha256": "6b97a4bcf6834cce8cb2f233716b41cdfad79fa5e73af3317d63e549f298bdd2",
+  "bytes": 10119,
+  "rules": {},
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/replay/evaluator/score_all.txt",
+  "sha256": "d36137f1207ea4b4ebfc8d2776ee8a0711c36d0c04594f2c86261aea53649a05",
+  "bytes": 990,
+  "rules": {
+   "R1": 20,
+   "R4": 20
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/replay/evaluator/score_development.txt",
+  "sha256": "8d6f23841c2d45e50ec987c3f76b0d8335e2ef5e04469ef23b19922ac266c6f6",
+  "bytes": 765,
+  "rules": {
+   "R1": 14,
+   "R4": 14
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/replay/evaluator/score_sealed.txt",
+  "sha256": "51d051625d273a57f6b1377a33e3c67405a0a7584c05b3417a11ed8254e2051b",
+  "bytes": 462,
+  "rules": {
+   "R1": 6,
+   "R4": 6
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/replay/evaluator/verdicts.json",
+  "sha256": "c2a6d4904b17f4c11ce7b4e240cbc58d39feb2c4441a83f37443cf2aa93a1dcc",
+  "bytes": 8666,
+  "rules": {
+   "R5": 20
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave2/agent1_rubin_bands/replay_cases.csv",
+  "sha256": "fcf713bec874691fccc21cd35af737a6f73710d6edc3eb73cd48c33a07a6f3ca",
+  "bytes": 2119,
+  "rules": {
+   "R2": 1
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave2/agent2_label_source/replay_cases.csv",
+  "sha256": "120852f4d804304a186ce20dc6ecbc12361b940bcd067689ea325f26fc640c5f",
+  "bytes": 2342,
+  "rules": {
+   "R2": 1
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave2/agent4_instrument/replay_cases.csv",
+  "sha256": "f7cc2fae2fb016973c835a7ab356ff54a74411c41e658281efc51d7c4bf6a3e9",
+  "bytes": 2026,
+  "rules": {
+   "R2": 1
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/REPORT.md",
+  "sha256": "8f10ec6f0ef145e8ba28ad1d0f7bd81671aaa7d5562d2634d879d6f210afd7a7",
+  "bytes": 11514,
+  "rules": {
+   "R3": 1,
+   "R4": 5
+  },
+  "name_match": false,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/amendments/P2_controls_cases.csv",
+  "sha256": "dea27a0ff2e0414de8936d2e75dce7c830e34e7e1d8a87637ac2884dd99df1ab",
+  "bytes": 1861,
+  "rules": {
+   "R2": 1,
+   "R4": 3
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/amendments/P2_controls_rulings.csv",
+  "sha256": "753e4f08a59602fa6d3c6317acabc2b4422f77201d4d4735981388d71abfedbd",
+  "bytes": 1360,
+  "rules": {
+   "R4": 1
+  },
+  "name_match": false,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/blind/astronomy_replay/cases_blind.csv",
+  "sha256": "ae6b7cf5acc35411bd477986bcd54dd15772c2011b1b082bf7ecf28d365adc96",
+  "bytes": 10166,
+  "rules": {},
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/blind/fm-advantage-benchmark/cases_blind.csv",
+  "sha256": "4f9d5aa9d179494b13d9c38bc58e9674b083cbeba3d4856252dffda63302e777",
+  "bytes": 9572,
+  "rules": {},
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/issues/04-seal-protects-polarity-only.md",
+  "sha256": "440384bf0fbbd1a08c079599ab876ec82e99abeae088b86861484fa0ab087f54",
+  "bytes": 7425,
+  "rules": {
+   "R3": 1,
+   "R4": 1
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/issues/09-case-id-prefix-encodes-polarity.md",
+  "sha256": "022e77d0954f0a44f9a5f478e720d19c00c1f02b296613ddbb57e8156ccd787e",
+  "bytes": 4001,
+  "rules": {},
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/logs/dummy_verdicts.json",
+  "sha256": "cb7cac726231d5bf6ae859112e0486109e88a4e689dc33614e15c32d8c6a16cf",
+  "bytes": 2677,
+  "rules": {
+   "R5": 38
+  },
+  "name_match": false,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/logs/seal_polarity_verification.txt",
+  "sha256": "547f124d0f5e62dde6a32dd87acd61e77ffa709b49212119c5d52056bfca1051",
+  "bytes": 2480,
+  "rules": {
+   "R3": 1,
+   "R4": 1
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/replay_cases.csv",
+  "sha256": "80a2d28a637400a98f7455a087e22bf67b75ff48774cda37cab0b80fbac51a63",
+  "bytes": 2142,
+  "rules": {
+   "R2": 1,
+   "R4": 4
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/replay_rulings.csv",
+  "sha256": "e2e831b139988d43d546d2c91450013e7bf6337f6863ac6151a96d4cc810bf40",
+  "bytes": 1726,
+  "rules": {
+   "R4": 1
+  },
+  "name_match": false,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/scratch/apply/fm-advantage-benchmark/cases/cases.csv",
+  "sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+  "bytes": 9921,
+  "rules": {
+   "R2": 1,
+   "R4": 38
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/scratch/audit_new/cases/cases.csv",
+  "sha256": "2e24294807e81f8bbb6380e479fbf3d355db8a606ee71584ee2418f022a8576b",
+  "bytes": 3975,
+  "rules": {
+   "R2": 1,
+   "R4": 7
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/scratch/fixed/cases/cases.csv",
+  "sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+  "bytes": 9921,
+  "rules": {
+   "R2": 1,
+   "R4": 38
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/scratch/orig/cases/cases.csv",
+  "sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+  "bytes": 9921,
+  "rules": {
+   "R2": 1,
+   "R4": 38
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/scratch/s1/cases/cases.csv",
+  "sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+  "bytes": 9921,
+  "rules": {
+   "R2": 1,
+   "R4": 38
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/scratch/s2/cases/cases.csv",
+  "sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+  "bytes": 9921,
+  "rules": {
+   "R2": 1,
+   "R4": 38
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/scratch/s3/cases/cases.csv",
+  "sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+  "bytes": 9921,
+  "rules": {
+   "R2": 1,
+   "R4": 38
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/scratch/s4/cases/cases.csv",
+  "sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+  "bytes": 9921,
+  "rules": {
+   "R2": 1,
+   "R4": 38
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/scratch/s4split/cases/POLARITY_SEALED.csv",
+  "sha256": "f6b2801b21052e07b1bb5268f7b59673cf0207c29fbf8f42311fa620e36971cd",
+  "bytes": 640,
+  "rules": {
+   "R2": 1,
+   "R4": 38
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/scratch/s4split/cases/cases.csv",
+  "sha256": "f917e653659e548cbd11844e01545096ede78924860ae75fa6023747f2dcf437",
+  "bytes": 9497,
+  "rules": {},
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/scratch/s5/cases/cases.csv",
+  "sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+  "bytes": 9921,
+  "rules": {
+   "R2": 1,
+   "R4": 38
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/scratch/s6/cases/cases.csv",
+  "sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+  "bytes": 9921,
+  "rules": {
+   "R2": 1,
+   "R4": 38
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave2/agent5_skill_maintenance/scratch/standalone/fm-advantage-benchmark/cases/cases.csv",
+  "sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+  "bytes": 9921,
+  "rules": {
+   "R2": 1,
+   "R4": 38
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent1_cohort_finish/replay_cases.csv",
+  "sha256": "abc5783d07cac41d8e7480daac3e4f1ff4adc55532954da001d210958b39421e",
+  "bytes": 1518,
+  "rules": {
+   "R2": 1
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave3/agent2_measured_labels/replay_cases.csv",
+  "sha256": "b405e6ef256963a2c1dce19dc9f4378d3eca0518a583d1b0f47c5d27ee7e32ea",
+  "bytes": 2328,
+  "rules": {
+   "R2": 1
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave3/agent3_manifest_freeze/replay_cases.csv",
+  "sha256": "27632acb877a8bcc1839b9f9368caba4c6daae1ee242e3a511cde644a1249439",
+  "bytes": 2467,
+  "rules": {
+   "R2": 1
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave3/agent4_tool_recount/replay_cases.csv",
+  "sha256": "5edf578bdec7370c22a58d078daec82af32d648c460b30fac38fd39876ed2a95",
+  "bytes": 2080,
+  "rules": {
+   "R2": 1
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/REPORT.md",
+  "sha256": "b049b0e1d6208175a89c3848cb4172662405a825953eb1137171441a0e8eb5c0",
+  "bytes": 6604,
+  "rules": {
+   "R4": 4
+  },
+  "name_match": false,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/evaluator/blind_inputs_opaque.csv",
+  "sha256": "c02f6bf134c05327d4c311649246d18bf60ebafef9298689bbdfcdf3c49bd47b",
+  "bytes": 10181,
+  "rules": {},
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/evaluator/verdicts_opaque.json",
+  "sha256": "131a6ad4988c4b1fa509da73b9e2daba97615ec39b793ab9d274cb459e9a5d38",
+  "bytes": 9887,
+  "rules": {
+   "R5": 20
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/polarity_astronomy_replay.csv",
+  "sha256": "ff84a2407103db595ecde1cae6c36f989941f2925a43d20b7b1cc618e28af35f",
+  "bytes": 401,
+  "rules": {
+   "R2": 1,
+   "R4": 20
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/polarity_fm-advantage-benchmark.csv",
+  "sha256": "d0f89b30a42678f53dd122d642708659f1174de86c4f1cfb58779287988a853d",
+  "bytes": 601,
+  "rules": {
+   "R2": 1,
+   "R4": 38
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_test_out/dummy_opaque.json",
+  "sha256": "4c5926e615314c259828ce3adedc7add87befa1df95488343d29a11934fddf38",
+  "bytes": 1552,
+  "rules": {
+   "R5": 20
+  },
+  "name_match": false,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_test_out/malformed.json",
+  "sha256": "9fa3149ae1c287683ffb0d0e5f5dc7d7e6f53ab3604a63b0ef9160a58598f23b",
+  "bytes": 1351,
+  "rules": {
+   "R5": 20
+  },
+  "name_match": false,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_test_out/missing_one.json",
+  "sha256": "2de9e7bb9845e42121059ad8b4cb3786961f0f668ed8c75365558d4cd6fbc006",
+  "bytes": 8417,
+  "rules": {
+   "R5": 19
+  },
+  "name_match": false,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_test_out/original_ids.json",
+  "sha256": "0c558c1c83c6c74e840df37704bc0af8bd66bd23e7ae073136f83402a3ced1ce",
+  "bytes": 8905,
+  "rules": {
+   "R5": 20
+  },
+  "name_match": false,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_test_out/t1/score_all.txt",
+  "sha256": "5b403640329be21c9cee368f3dca7196bb3f45fd9de91d7a7fb6d01643282b58",
+  "bytes": 1018,
+  "rules": {
+   "R1": 20,
+   "R4": 20
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_test_out/t1/score_development.txt",
+  "sha256": "6db03230bd5b5ed7dee45e672d47b91de3eb178328ad6bef1bc27acc917354af",
+  "bytes": 804,
+  "rules": {
+   "R1": 14,
+   "R4": 14
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_test_out/t1/score_sealed.txt",
+  "sha256": "92e7888038837dcd027596b7d53472f5ff636ba66e5f17a0b4f7350c05c3b6e4",
+  "bytes": 388,
+  "rules": {
+   "R1": 6,
+   "R4": 6
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_test_out/t2/score_all.txt",
+  "sha256": "d36137f1207ea4b4ebfc8d2776ee8a0711c36d0c04594f2c86261aea53649a05",
+  "bytes": 990,
+  "rules": {
+   "R1": 20,
+   "R4": 20
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_test_out/t2/score_development.txt",
+  "sha256": "8d6f23841c2d45e50ec987c3f76b0d8335e2ef5e04469ef23b19922ac266c6f6",
+  "bytes": 765,
+  "rules": {
+   "R1": 14,
+   "R4": 14
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_test_out/t2/score_sealed.txt",
+  "sha256": "51d051625d273a57f6b1377a33e3c67405a0a7584c05b3417a11ed8254e2051b",
+  "bytes": 462,
+  "rules": {
+   "R1": 6,
+   "R4": 6
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_test_out/t3/score_all.txt",
+  "sha256": "8048e0f7bf9ee78c824a858ae04613716e8de6c0ba0db4e7d4efe03adf83425e",
+  "bytes": 1048,
+  "rules": {
+   "R1": 19,
+   "R4": 20
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_test_out/t3/score_development.txt",
+  "sha256": "52a8083979e009412668f953add3688465b5bfa05d38134130290f460cf6ff15",
+  "bytes": 822,
+  "rules": {
+   "R1": 13,
+   "R4": 14
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_test_out/t3/score_sealed.txt",
+  "sha256": "51d051625d273a57f6b1377a33e3c67405a0a7584c05b3417a11ed8254e2051b",
+  "bytes": 462,
+  "rules": {
+   "R1": 6,
+   "R4": 6
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_test_out/unknown_id.json",
+  "sha256": "56a3c81308baf668c2b0e86fe243075d3dde3366dc42669e9e29366e0ec82919",
+  "bytes": 1397,
+  "rules": {
+   "R5": 21
+  },
+  "name_match": false,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_test_out/wave1_as_opaque.json",
+  "sha256": "135f3d33f948371e2bd4f6ad813b47a79e5229d91ffc29e7c39e01c536bf21a5",
+  "bytes": 8965,
+  "rules": {
+   "R5": 20
+  },
+  "name_match": false,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_wave3/score_all.txt",
+  "sha256": "d36137f1207ea4b4ebfc8d2776ee8a0711c36d0c04594f2c86261aea53649a05",
+  "bytes": 990,
+  "rules": {
+   "R1": 20,
+   "R4": 20
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_wave3/score_development.txt",
+  "sha256": "8d6f23841c2d45e50ec987c3f76b0d8335e2ef5e04469ef23b19922ac266c6f6",
+  "bytes": 765,
+  "rules": {
+   "R1": 14,
+   "R4": 14
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/holder_handover/rescore_wave3/score_sealed.txt",
+  "sha256": "51d051625d273a57f6b1377a33e3c67405a0a7584c05b3417a11ed8254e2051b",
+  "bytes": 462,
+  "rules": {
+   "R1": 6,
+   "R4": 6
+  },
+  "name_match": true,
+  "gitignored_by_pattern": true
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/replay_cases.csv",
+  "sha256": "15210846d30a03edfc1c6185332c3df3cd55f85aa811702cada685a3c85dd914",
+  "bytes": 2574,
+  "rules": {
+   "R2": 1,
+   "R4": 4
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/suites/astronomy_replay/cases_opaque.csv",
+  "sha256": "5a6991e4a62446bfb325b1789910a2852484ab62320f6a3bd894ff935e55c128",
+  "bytes": 10228,
+  "rules": {},
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "astronomy/wave3/agent5_integrity/suites/fm-advantage-benchmark/cases_opaque.csv",
+  "sha256": "9fe1e3d48ded7db4d37d631a31242747a89792459b7818c87ba8863604202c76",
+  "bytes": 9726,
+  "rules": {},
+  "name_match": true,
+  "gitignored_by_pattern": false
+ },
+ {
+  "path": "fm-advantage-benchmark/cases/cases.csv",
+  "sha256": "194b911c810f4e28a221048a12d9a7a2ea717df0b20177c45d5fdf03246cf561",
+  "bytes": 9921,
+  "rules": {
+   "R2": 1,
+   "R4": 38
+  },
+  "name_match": true,
+  "gitignored_by_pattern": false
+ }
+]

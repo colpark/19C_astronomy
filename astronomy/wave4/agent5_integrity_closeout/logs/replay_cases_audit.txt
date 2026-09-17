@@ -1,0 +1,13 @@
+$ python3 scripts/replay.py audit   (unchanged vendored replay.py; cases = wave-4 agent5 replay_cases.csv only)
+4 cases across 3 modules
+
+module           must_fire  must_not_fire  sealed
+adjudication             1              1       0
+discovery                1              0       0
+runtime                  0              1       0
+
+  - adjudication: nothing sealed, every case is available for tuning
+  - discovery: no must-not-fire case, it would score full marks by flagging everything
+  - discovery: nothing sealed, every case is available for tuning
+  - runtime: nothing sealed, every case is available for tuning
+[exit=1]

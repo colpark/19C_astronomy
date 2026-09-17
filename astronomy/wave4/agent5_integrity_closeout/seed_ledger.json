@@ -1,0 +1,214 @@
+{
+ "agent": "wave4 agent 5 (integrity close-out)",
+ "date": "2026-09-17",
+ "seeds": [
+  {
+   "id": "astronomy/wave4/PANEL_BRIEF_WAVE4.md",
+   "read": "full",
+   "sha256": "8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58",
+   "lines": 116,
+   "contribution": "brief and preamble; ruling 2 custody, ruling 4 (L17-L20), preamble item 3 (L109) and item 5"
+  },
+  {
+   "id": "astronomy/wave4/BRIEF_SHA256",
+   "read": "full",
+   "sha256": "44caced04860e9ab0e725a3da35561efe53427adb2a3f7ecbcda8a2c81b12d79",
+   "lines": 1,
+   "contribution": "hash check"
+  },
+  {
+   "id": "astronomy/wave3/agent5_integrity/transfer_record.json",
+   "read": "fields status, receipt_hash",
+   "sha256": "945c1ca436e7bfbf4660b59f4d1031649eb4356b74c127fbe2e1d21e5fe2084a",
+   "lines": 105,
+   "contribution": "custody check"
+  },
+  {
+   "id": "astronomy/wave3/agent5_integrity/transfer/PACKAGE_SHA256SUMS",
+   "read": "hash",
+   "sha256": "f2576e622174fc711c2040bc06deb1858d25535d582e1c00779896a9a8dfc237",
+   "lines": 6,
+   "contribution": "custody check"
+  },
+  {
+   "id": "astronomy/wave3/agent5_integrity/transfer/RECEIPT_TEMPLATE.txt",
+   "read": "hash",
+   "sha256": "ab93c639c62fd814d77f575051e2ae9f432fc6a2896e34bb50ecb4728bd4b52f",
+   "lines": 21,
+   "contribution": "custody check (unfilled)"
+  },
+  {
+   "id": "astronomy/wave3/agent5_integrity/evaluator/RESULT_ISSUE09.md",
+   "read": "full",
+   "sha256": "18f6b64b580cd697375d168e72c14fcb28014f6454217ae99bd3df3bb03b4cd4",
+   "lines": 26,
+   "contribution": "wave-3 re-score result; exposure table; replay case W4A5-02"
+  },
+  {
+   "id": "astronomy/wave3/agent5_integrity/evaluator/rescore_summary.txt",
+   "read": "full",
+   "sha256": "594074e7412f8329db1b79847e1814a5bc47926036dc855be14e057014cbf943",
+   "lines": 4,
+   "contribution": "aggregates only"
+  },
+  {
+   "id": "astronomy/wave3/agent5_integrity/evaluator/EVALUATOR_PROMPT.md",
+   "read": "forbidden section and output lines",
+   "sha256": "7cea3975055e734b00c51b1cd7ae7a5249187ad8722024597d5e4b31b8db5272",
+   "lines": 93,
+   "contribution": "base of EVALUATOR_PROMPT_v2.md"
+  },
+  {
+   "id": ".gitignore",
+   "read": "tail",
+   "sha256": "8053b60bc6263c4ac329b61f5eb12c13e2e5f73163901e8e7180d686bb52a2b6",
+   "lines": 17,
+   "contribution": "holder_handover patterns"
+  },
+  {
+   "id": ".git/config",
+   "read": ".git internals read with python (no git binary)",
+   "sha256": "341b3aa82eac06203adf6d241274412371ad90b25fa18a44973ff77a65db179f",
+   "lines": 14,
+   "contribution": "remote origin URL"
+  },
+  {
+   "id": ".git/logs/refs/remotes/origin/main",
+   "read": "full",
+   "sha256": "a24e40c16f672970b8bfb794ada56866eec17dc68644c8d264a6007b8f097340",
+   "lines": 29,
+   "contribution": "29 push entries; history already pushed"
+  },
+  {
+   "id": "astronomy/wave2/agent2_label_source/REPORT.md",
+   "read": "full",
+   "sha256": "6243de564fd77f28322e77948ce0a7c50c880d588ca832e22b6fab4627f95ad1",
+   "lines": 160,
+   "contribution": "label note locators"
+  },
+  {
+   "id": "astronomy/wave2/agent2_label_source/split_summary.json",
+   "read": "first 120 lines of pretty JSON",
+   "sha256": "676e0f7ff412377c6ee08b6d6b6c7b0942ee62e89b13d15b017faf1724aea440",
+   "lines": 127,
+   "contribution": "label note locators"
+  },
+  {
+   "id": "astronomy/wave2/agent2_label_source/definitions_FROZEN.md",
+   "read": "lines 10-16, 28-35, 44-52, 66-75, 118-124",
+   "sha256": "4f89ff6718a14ad4e45a6d33d6bde848448ba6a66d895bd970330efe397b37cf",
+   "lines": 130,
+   "contribution": "label note locators"
+  },
+  {
+   "id": "astronomy/wave2/agent2_label_source/refusal14_rulings.json",
+   "read": "top-level fields and counts",
+   "sha256": "830b4012405cdad4718562818b9d14fcff37bfa91bdda94df6e11ab3e65dec5d",
+   "lines": 1574,
+   "contribution": "label note locators"
+  },
+  {
+   "id": "astronomy/wave3/agent2_measured_labels/REPORT.md",
+   "read": "first 150 lines (whole report)",
+   "sha256": "934b7fba7579676947bd0d2edab5a78d7fd431908e62d1cdc69414fa9ba74333",
+   "lines": 153,
+   "contribution": "label bound history"
+  },
+  {
+   "id": "astronomy/wave3/agent2_measured_labels/label_source_slot.json",
+   "read": "first 80 lines of pretty JSON",
+   "sha256": "fdae64921d6749e466932d13ffd0aa4e14359b0a946a31b32bacf9a97ce83719",
+   "lines": 65,
+   "contribution": "label note locators"
+  },
+  {
+   "id": "astronomy/wave3/agent4_tool_recount/REPORT.md",
+   "read": "lines 1-170",
+   "sha256": "7dc89483f52da9d7ef51952dedd1c2e4b7d5e0580a85295042079fb8592ee257",
+   "lines": 173,
+   "contribution": "tool note locators"
+  },
+  {
+   "id": "astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json",
+   "read": "all fields programmatically",
+   "sha256": "dab4ec1baaa8d3ead3300ed2e4d29c57edb212405a1ee134161777921648a1e0",
+   "lines": 522,
+   "contribution": "tool note locators; tally"
+  },
+  {
+   "id": "astronomy/wave3/agent4_tool_recount/recount_protocol_FROZEN.md",
+   "read": "grep of pass-criterion lines",
+   "sha256": "f32cf288f1fed6be54ed7c4c44fa0ec8012829945a20eedddf3e439ef5df52e6",
+   "lines": 133,
+   "contribution": "tool note locators"
+  },
+  {
+   "id": "astronomy/wave3/agent4_tool_recount/run_log.jsonl",
+   "read": "first record and key set",
+   "sha256": "e97ac1f3bb0df6484d2a3f0c0b0bbc0dc73889378c9678b150731b92f2cf9f56",
+   "lines": 198,
+   "contribution": "structure only"
+  },
+  {
+   "id": "astronomy/wave4/agent4_module_v/V_TARGETS.json",
+   "read": "targets list (claims and locations)",
+   "sha256": "4f9594a158771b41d9ad3e27a461389ed9eb9b1a4a13ea5abba0d351bdded017",
+   "lines": 709,
+   "contribution": "Rule E markers L01-L05, T01-T03"
+  },
+  {
+   "id": "astronomy/wave4/agent4_module_v/order_of_operations.log",
+   "read": "last 5 lines",
+   "sha256": "8476bd312f30b0cf899be27d086ab16b07bf9b900bfbc53dac5b3ec5547a203c",
+   "lines": 37,
+   "contribution": "sealing status of V targets"
+  },
+  {
+   "id": "astronomy/wave2/agent5_skill_maintenance/issues/04-seal-protects-polarity-only.md",
+   "read": "grep lines 38-39",
+   "sha256": "440384bf0fbbd1a08c079599ab876ec82e99abeae088b86861484fa0ab087f54",
+   "lines": 138,
+   "contribution": "replay case W4A5-04"
+  },
+  {
+   "id": "astronomy/wave2/agent5_skill_maintenance/logs/seal_polarity_verification.txt",
+   "read": "line 1",
+   "sha256": "547f124d0f5e62dde6a32dd87acd61e77ffa709b49212119c5d52056bfca1051",
+   "lines": 46,
+   "contribution": "replay case W4A5-04"
+  },
+  {
+   "id": "all .txt/.csv/.md/.json/.log/.py files in the repository except .git, code/, sources/, data_cache/, __pycache__ and both RULINGS_SEALED.csv",
+   "read": "programmatic regex scan; only path, sha256, rule and count printed",
+   "contribution": "QUARANTINE.md; logs/leak_scan.json"
+  },
+  {
+   "id": ".git/objects (loose objects)",
+   "read": "zlib decode of commit and tree objects reachable from HEAD; blob contents not decoded",
+   "contribution": "first-commit ids (logs/git_first_commit*.json)"
+  },
+  {
+   "id": "astronomy/replay/cases/RULINGS_SEALED.csv",
+   "read": "not opened by agent; the first leak_scan.py run read bytes for regex counts before the skip was added (printed counts only; order_of_operations.log step 2a); sha256 only thereafter",
+   "sha256": "6041714a30b9143ef6ea74edd3ed35dca86c51317d42a56d2b5204f559f2e2fc",
+   "contribution": "QUARANTINE.md rulings-in-history table"
+  },
+  {
+   "id": "fm-advantage-benchmark/cases/RULINGS_SEALED.csv",
+   "read": "not opened by agent; the first leak_scan.py run read bytes for regex counts before the skip was added (printed counts only; order_of_operations.log step 2a); sha256 only thereafter",
+   "sha256": "69a30ccffb4500135cad78e4c03ae7345aefd1583c0ac7dfd802db2eb8e1c312",
+   "contribution": "QUARANTINE.md rulings-in-history table"
+  },
+  {
+   "id": "process environment",
+   "read": "variable names only, filtered for receipt|holder|transfer|rulings",
+   "contribution": "custody check"
+  },
+  {
+   "id": "coordinator message to wave-4 agent 5 (not a file)",
+   "read": "full",
+   "contribution": "assignment"
+  }
+ ],
+ "completeness": "Every file or source read or hashed for wave-4 work, with extent. Not read: RULINGS_SEALED.csv contents, module V sealed derivations, any file outside the repository."
+}

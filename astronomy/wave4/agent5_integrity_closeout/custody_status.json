@@ -1,0 +1,44 @@
+{
+ "record": "custody_status",
+ "ruling": "PI ruling 2, astronomy/wave4/PANEL_BRIEF_WAVE4.md (sha256 8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58)",
+ "checked_utc": "2026-09-17T13:16:05.240242Z",
+ "checked_by": "wave4 agent 5 (integrity close-out)",
+ "status": "PENDING_RECEIPT",
+ "transfer_record_v2_written": false,
+ "brief_assertion": "The PI states 'I execute the handover out of band today' (ruling 2). Recorded as an assertion. A handover without a receipt hash in the repository is not RECEIVED under the same ruling.",
+ "checks": [
+  {
+   "place": "astronomy/wave3/agent5_integrity/transfer_record.json field receipt_hash",
+   "result": "empty string",
+   "status_field": "PENDING_RECEIPT",
+   "file_sha256": "945c1ca436e7bfbf4660b59f4d1031649eb4356b74c127fbe2e1d21e5fe2084a",
+   "unchanged_since_wave3": true
+  },
+  {
+   "place": "astronomy/wave3/agent5_integrity/transfer/",
+   "result": "only PACKAGE_SHA256SUMS and RECEIPT_TEMPLATE.txt (both as prepared in wave 3, hashes unchanged); no completed receipt file",
+   "files": {
+    "PACKAGE_SHA256SUMS": "f2576e622174fc711c2040bc06deb1858d25535d582e1c00779896a9a8dfc237",
+    "RECEIPT_TEMPLATE.txt": "ab93c639c62fd814d77f575051e2ae9f432fc6a2896e34bb50ecb4728bd4b52f"
+   }
+  },
+  {
+   "place": "repository-wide filename search under astronomy/ for *receipt* (excluding third-party code dirs)",
+   "result": "only the unfilled RECEIPT_TEMPLATE.txt"
+  },
+  {
+   "place": "process environment",
+   "method": "variable names matched against receipt|holder|transfer|rulings; names only, no values printed",
+   "result": "no matching variable"
+  }
+ ],
+ "not_verified": [
+  "receipt hash (absent)",
+  "holder identity",
+  "holder non-authorship record (PI-asserted in wave 3 ruling 4; no record attached)",
+  "package integrity as received by the holder"
+ ],
+ "consequence": "Every blind replay result keeps the word 'procedural' attached, including the wave-1 astronomy replay (20 of 20, 2 unearned) and the wave-3 opaque-id re-score (20 of 20, 2 unearned, delta 0; evaluator/RESULT_ISSUE09.md).",
+ "to_close": "The coordinator writes the holder's completed-receipt sha256 into a transfer record; agent 5 (or module V) then checks the receipt against RECEIPT_TEMPLATE.txt items 1-5, PACKAGE_SHA256SUMS (f2576e62...c237) and the six package hashes, confirms the non-authorship record is attached, and writes transfer_record_v2.json with status RECEIVED. The wave-3 file is not edited.",
+ "completeness": "All three places named in the assignment were checked: the wave-3 receipt_hash field, the wave-3 transfer/ directory (plus a filename search), and the environment by name. No file outside the repository was read."
+}

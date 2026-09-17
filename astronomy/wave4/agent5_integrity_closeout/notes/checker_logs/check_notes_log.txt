@@ -1,0 +1,54 @@
+## check_notes.py run log (wave 4, agent 5)
+
+### Run 1 (historical): tool note before fixes. The checker fired on real defects: a locator regex bug on nested brackets, and 3 derived numbers missing from their locators
+== notes/rubin_tool_readiness_note.md: 49 claim units checked, 28 flag(s)
+  NUMBER_NOT_AT_LOC  line 53: 25 in: | all 25 tools  | 2 | 14 | 9 |  |
+  NUMBER_NOT_AT_LOC  line 54: 15 in: | inventory group FM/deep (15 tools) | 1 | 9 | 5 |  |
+  NUMBER_NOT_AT_LOC  line 55: 10 in: | inventory group classical (10 tools) | 1 | 5 | 4 |  |
+  BAD_LOCATOR        line 67: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=CATS: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 68: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=GHOST: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 69: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=ORACLE: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 70: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=SuperNNova: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 71: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=RAPID: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 72: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=BTSbot: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 73: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=Maven: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 74: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=Astromer1: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 75: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=Astromer2: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 76: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=AstroM3: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 77: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=ParSNIP: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 78: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=ALeRCE_BHRF: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 79: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=SALT3_sncosmo: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 80: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=Superphot_plus: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 81: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=Fink_EarlySNIa_RF: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 82: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=Fink_SLSN_RF: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 83: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=ATAT: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 84: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=AstroCLIP: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 85: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=SCONE: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 86: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=AppleCiDEr: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 87: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=MultibandAstromer: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 88: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=Superphot: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 89: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=Sherlock: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 90: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=Blast: TypeError list indices must be integers or slices, not str
+  BAD_LOCATOR        line 91: astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json#value.per_tool[tool=SNANA: TypeError list indices must be integers or slices, not str
+RESULT: FAIL (flags above)
+
+### Run 2: must-fire controls (planted file)
+$ python3 scripts/check_notes.py notes/checker_logs/planted_controls.md
+== notes/checker_logs/planted_controls.md: 6 claim units checked, 8 flag(s)
+  MISSING_BANNER     line 0: 
+  NO_LOCATOR         line 3: The labelled population is 7,843 BTS rows.
+  NUMBER_NOT_AT_LOC  line 5: 7844 in: The labelled population is 7,844 BTS rows .
+  DIRECTIONAL        line 7: outperforms
+  DIRECTIONAL        line 9: helps
+  DIRECTIONAL        line 9: than
+  BAD_LOCATOR        line 11: astronomy/wave3/agent2_measured_labels/label_source_slot.json#value.bts.no_such_field: KeyError 'no_such_field'
+  BAD_LOCATOR        line 13: astronomy/wave3/agent4_tool_recount/recount_protocol_FROZEN.md:L99999: ValueError line range 99999-99999 outside 1-134
+RESULT: FAIL (flags above)
+[exit=1]
+
+### Run 3: final check of both notes (must not fire)
+$ python3 scripts/check_notes.py notes/label_provenance_note.md notes/rubin_tool_readiness_note.md
+== notes/label_provenance_note.md: 41 claim units checked, 0 flag(s)
+== notes/rubin_tool_readiness_note.md: 49 claim units checked, 0 flag(s)
+RESULT: PASS (no flags)
+[exit=0]

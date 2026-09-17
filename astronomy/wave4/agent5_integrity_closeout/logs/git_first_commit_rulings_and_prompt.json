@@ -1,0 +1,42 @@
+{
+ "head": "bf76f534128468c40c2cb2fae51dd5b20a4da8b5",
+ "commits_reachable": 29,
+ "paths": {
+  "astronomy/replay/cases/RULINGS_SEALED.csv": {
+   "in_head_tree": true,
+   "head_blob": "91750e250f258e56fe843ce46a8b556a511918d4",
+   "working_tree_equals_head_blob": true,
+   "first_commit": "8b01d130157ed2b6dbdb655a6fd50852a265d194",
+   "first_commit_committer_epoch": 1789581001,
+   "first_commit_blob": "91750e250f258e56fe843ce46a8b556a511918d4",
+   "distinct_blobs_in_history": 1
+  },
+  "fm-advantage-benchmark/cases/RULINGS_SEALED.csv": {
+   "in_head_tree": true,
+   "head_blob": "14e00ee2079387eb3e2103e6e5a3820a8cba528f",
+   "working_tree_equals_head_blob": true,
+   "first_commit": "fd68058e04c4ecc0fe89d053f5b465cab54bc8a0",
+   "first_commit_committer_epoch": 1789578689,
+   "first_commit_blob": "14e00ee2079387eb3e2103e6e5a3820a8cba528f",
+   "distinct_blobs_in_history": 1
+  },
+  "astronomy/wave3/agent5_integrity/evaluator/RESULT_ISSUE09.md": {
+   "in_head_tree": true,
+   "head_blob": "5a59218a1895b4e79d36d2fc360032af2fcf695e",
+   "working_tree_equals_head_blob": true,
+   "first_commit": "20391f6680e9741125d497f53b20e4eb5c5f6ef9",
+   "first_commit_committer_epoch": 1789590399,
+   "first_commit_blob": "5a59218a1895b4e79d36d2fc360032af2fcf695e",
+   "distinct_blobs_in_history": 1
+  },
+  "astronomy/wave3/agent5_integrity/evaluator/EVALUATOR_PROMPT.md": {
+   "in_head_tree": true,
+   "head_blob": "2d98fd4aa1746191f804135c8d15a86328122c63",
+   "working_tree_equals_head_blob": true,
+   "first_commit": "883b6e628a42992d9fbbda9fb1b8fbad09d87ec7",
+   "first_commit_committer_epoch": 1789590258,
+   "first_commit_blob": "2d98fd4aa1746191f804135c8d15a86328122c63",
+   "distinct_blobs_in_history": 1
+  }
+ }
+}
