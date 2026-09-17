@@ -1,0 +1,709 @@
+{
+ "seed_id": "2401.15167",
+ "title": "The Zwicky Transient Facility Bright Transient Survey. III. BTSbot: Automated Identification and Follow-up of Bright Transients with Deep Learning",
+ "arxiv_version_verified": "arXiv:2401.15167v1 (layout L15)",
+ "read_in_full": true,
+ "reader": "fork-B",
+ "layout_lines": 1601,
+ "pages": 26,
+ "episodes": [
+  {
+   "episode_id": "E1",
+   "level": "per_object",
+   "description": "Human BTS scanning of one candidate: filtered alert viewed by scanner, saved or not, spectrum requested at a priority, SEDM spectrum, classification (SNIascore or manual), TNS report.",
+   "practitioner_action": "commit_resource",
+   "action_locator": "2401.15167.layout.txt p2 §1 L98-110",
+   "chain": [
+    {
+     "op": "ZTF public alert stream ingested",
+     "locator": "2401.15167.layout.txt p2 §1 L81-86"
+    },
+    {
+     "op": "BTS alert filter (braai, sgscore, magnitude) reduces to ~50 candidates/night",
+     "locator": "2401.15167.layout.txt p2 §1 L87-97"
+    },
+    {
+     "op": "scanner visual inspection on Fritz",
+     "locator": "2401.15167.layout.txt p2 §1 L97-101"
+    },
+    {
+     "op": "save to BTS catalog",
+     "locator": "2401.15167.layout.txt p2 §1 L98-100"
+    },
+    {
+     "op": "request spectroscopic observation (SEDM, priority)",
+     "locator": "2401.15167.layout.txt p11 §4.1 L713-717"
+    },
+    {
+     "op": "SEDM spectrum obtained and reduced (pySEDM)",
+     "locator": "2401.15167.layout.txt p2 §1 L103-108"
+    },
+    {
+     "op": "classification by SNIascore or manually by scanner",
+     "locator": "2401.15167.layout.txt p2 §1 L108-110"
+    },
+    {
+     "op": "classification reported to TNS",
+     "locator": "2401.15167.layout.txt p3 §1 L123-124"
+    }
+   ],
+   "chain_length": 8
+  },
+  {
+   "episode_id": "E2",
+   "level": "per_object",
+   "description": "Automated BTSbot workflow for one source in production: Kowalski features and crossmatch, BTSbot score, policy auto-save/auto-trigger, SEDM, pySEDM, SNIascore, TNS.",
+   "practitioner_action": "commit_resource",
+   "action_locator": "2401.15167.layout.txt p16 §5.1 L1014-1018",
+   "chain": [
+    {
+     "op": "alert packet received from IPAC",
+     "locator": "2401.15167.layout.txt p16 §5.1 L987-989"
+    },
+    {
+     "op": "prv_candidates concatenated, custom metadata computed",
+     "locator": "2401.15167.layout.txt p16 §5.1 L990-998"
+    },
+    {
+     "op": "catalog crossmatch (NED, CLU, Milliquas)",
+     "locator": "2401.15167.layout.txt p16 §5.1 L999-1002"
+    },
+    {
+     "op": "ML models run incl. BTSbot score",
+     "locator": "2401.15167.layout.txt p16 §5.1 L1003-1008"
+    },
+    {
+     "op": "BTS alert filter as database query",
+     "locator": "2401.15167.layout.txt p16 §5.1 L1009-1013"
+    },
+    {
+     "op": "auto-save filter under bts_p1/bts_p2",
+     "locator": "2401.15167.layout.txt p16 §5.1 L1014-1017"
+    },
+    {
+     "op": "auto-trigger filter with redundancy rules",
+     "locator": "2401.15167.layout.txt p16 §5.1 L977-1004"
+    },
+    {
+     "op": "SEDM observation",
+     "locator": "2401.15167.layout.txt p17 §5.1 L1026-1028"
+    },
+    {
+     "op": "pySEDM reduction",
+     "locator": "2401.15167.layout.txt p17 §5.1 L1028-1029"
+    },
+    {
+     "op": "SNIascore classification",
+     "locator": "2401.15167.layout.txt p17 §5.1 L1029-1031"
+    },
+    {
+     "op": "automatic TNS report",
+     "locator": "2401.15167.layout.txt p17 §5.1 L1031-1034"
+    }
+   ],
+   "chain_length": 11
+  },
+  {
+   "episode_id": "E3",
+   "level": "per_study",
+   "description": "Building, selecting and validating the BTSbot model and its follow-up policies.",
+   "practitioner_action": "publish_object",
+   "action_locator": "2401.15167.layout.txt p3 §1 L132-133",
+   "chain": [
+    {
+     "op": "four catalog queries (trues, vars, dims, rejects)",
+     "locator": "2401.15167.layout.txt p3 §2 L195-255"
+    },
+    {
+     "op": "retrieve alert packets from Kowalski",
+     "locator": "2401.15167.layout.txt p4 §2 L251-255"
+    },
+    {
+     "op": "assemble 63x63x3 image triplets",
+     "locator": "2401.15167.layout.txt p4 §2 L256-258"
+    },
+    {
+     "op": "compute custom metadata features",
+     "locator": "2401.15167.layout.txt p5 §2 L333-340"
+    },
+    {
+     "op": "rerun braai d6_m9 drb",
+     "locator": "2401.15167.layout.txt p6 §2 L374-380"
+    },
+    {
+     "op": "cleaning cuts",
+     "locator": "2401.15167.layout.txt p6 §2 L381-407"
+    },
+    {
+     "op": "Nmax alert thinning",
+     "locator": "2401.15167.layout.txt p7 §2 L436-463"
+    },
+    {
+     "op": "source-level 81/9/10 split",
+     "locator": "2401.15167.layout.txt p6 §2 L393-400"
+    },
+    {
+     "op": "Bayesian hyperparameter sweeps",
+     "locator": "2401.15167.layout.txt p9 §3.1 L573-585"
+    },
+    {
+     "op": "train 20 trials",
+     "locator": "2401.15167.layout.txt p10 §4.1 L658-661"
+    },
+    {
+     "op": "select production model",
+     "locator": "2401.15167.layout.txt p20 §A L1285-1290"
+    },
+    {
+     "op": "alert-based test metrics",
+     "locator": "2401.15167.layout.txt p11 §4.1 L668-679"
+    },
+    {
+     "op": "policy simulation vs scanners (completeness, purity, delta t)",
+     "locator": "2401.15167.layout.txt p11 §4.1 L693-717"
+    },
+    {
+     "op": "present-day sample check",
+     "locator": "2401.15167.layout.txt p14 §4.2 L872-905"
+    },
+    {
+     "op": "deployment in Kowalski/Fritz",
+     "locator": "2401.15167.layout.txt p16 §5.1 L987-1018"
+    }
+   ],
+   "chain_length": 15
+  }
+ ],
+ "branches": [
+  {
+   "id": "B01",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "intervene",
+   "choice": "scanner saves a candidate as a real bright transient and requests a spectrum, or does not save it",
+   "alternatives_visible": [
+    "save and request spectrum",
+    "leave unsaved (implicit reject)"
+   ],
+   "rejected_named": true,
+   "rejected_option": "unsaved candidates ('rejects' list, implicitly marked non-bright)",
+   "reason": "scanner judgement of whether the source is a real bright extragalactic transient",
+   "locator": "2401.15167.layout.txt p2 §1 L97-101",
+   "quote": "perts (“scanners”) who catalog (“save”) the real bright"
+  },
+  {
+   "id": "B02",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "intervene",
+   "choice": "scanners intentionally spend follow-up on transients they know will not reach mpeak<=18.5",
+   "alternatives_visible": [
+    "act only on bright candidates",
+    "act also on dim transients of interest"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "sources still of interest to BTS members (footnote 13)",
+   "locator": "2401.15167.layout.txt p12 §4.1 L751-755",
+   "quote": "ners will often intentionally act on transients which"
+  },
+  {
+   "id": "B03",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "intervene",
+   "choice": "priority of the SEDM request (1 vs 2+); priorities >=2 reserved for sources already at mpeak<=18.5",
+   "alternatives_visible": [
+    "priority 1",
+    "priority 2 or greater"
+   ],
+   "rejected_named": true,
+   "rejected_option": "higher priority for sources not yet at 18.5 mag",
+   "reason": "urgency; higher priority fulfilled first subject to observability",
+   "locator": "2401.15167.layout.txt p11 §4.1 L666-672",
+   "quote": "are typically reserved for sources which have already at-"
+  },
+  {
+   "id": "B04",
+   "episode_id": "E2",
+   "level": "per_object",
+   "kind": "intervene",
+   "choice": "scanners may modify triggers sent by BTSbot (raise priority, add photometry)",
+   "alternatives_visible": [
+    "accept automatic trigger",
+    "increase priority",
+    "add photometry to request"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "joint human-bot working; safer automated triggers",
+   "locator": "2401.15167.layout.txt p16 §5.1 L1005-1009",
+   "quote": "to modify triggers sent by BTSbot, for example, increas-"
+  },
+  {
+   "id": "B05",
+   "episode_id": "E3",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "ZTF18abdiasx removed from training set because it fits both classes (bright SN projected on an AGN)",
+   "alternatives_visible": [
+    "positive class",
+    "negative class",
+    "remove"
+   ],
+   "rejected_named": true,
+   "rejected_option": "assigning it to either class",
+   "reason": "object-specific ambiguous label",
+   "locator": "2401.15167.layout.txt p6 §2 L396-401",
+   "quote": "from our training set. For example, ZTF18abdiasx ap-"
+  },
+  {
+   "id": "B06",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "exclude 'junk' sources from training set",
+   "alternatives_visible": [
+    "train with junk",
+    "train without junk"
+   ],
+   "rejected_named": true,
+   "rejected_option": "training on junk sources",
+   "reason": "experiments with junk frequently yielded worse performance",
+   "locator": "2401.15167.layout.txt p4 §2 L238-247",
+   "quote": "periments trained on these sources frequently yielded"
+  },
+  {
+   "id": "B07",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "rejects query limited to 2021-01-01..2023-01-01",
+   "alternatives_visible": [
+    "pre-2021 candidates",
+    "post-2023 candidates",
+    "2021-2023 window"
+   ],
+   "rejected_named": true,
+   "rejected_option": "candidates before 2021 (older filter) and after 2023 (still evolving types)",
+   "reason": "filter versions and uncertain types",
+   "locator": "2401.15167.layout.txt p4 §2 L223-231",
+   "quote": "alert filter, which was last improved in late 2020; many"
+  },
+  {
+   "id": "B08",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "dims sources with mpeak<=18.5 from partnership data removed entirely",
+   "alternatives_visible": [
+    "keep in dims",
+    "remove"
+   ],
+   "rejected_named": true,
+   "rejected_option": "keeping them in the negative class",
+   "reason": "many are unclassified",
+   "locator": "2401.15167.layout.txt p4 §2 L238-243",
+   "quote": "dims. These are all removed entirely from the training"
+  },
+  {
+   "id": "B09",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "include ZTF partnership-time alerts in training though BTS uses public data only",
+   "alternatives_visible": [
+    "public only",
+    "public plus partnership"
+   ],
+   "rejected_named": true,
+   "rejected_option": "public-only training set",
+   "reason": "increase training set size",
+   "locator": "2401.15167.layout.txt p4 §2 L252-255",
+   "quote": "public survey, but we include data from partnership time"
+  },
+  {
+   "id": "B10",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "simple custom metadata features instead of more faithful light-curve representations",
+   "alternatives_visible": [
+    "custom phase/shape features",
+    "more faithful SN light-curve models"
+   ],
+   "rejected_named": true,
+   "rejected_option": "SN-specific light-curve representations (not conditioned on AGN, VarStars)",
+   "reason": "simplicity and effectiveness across the variety of sources",
+   "locator": "2401.15167.layout.txt p5 §2 L321-340",
+   "quote": "fectly, but they are adopted because of their simplic-"
+  },
+  {
+   "id": "B11",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "band-independent features rather than passband-dependent equivalents",
+   "alternatives_visible": [
+    "band-combined features",
+    "passband-dependent features"
+   ],
+   "rejected_named": true,
+   "rejected_option": "passband-dependent features",
+   "reason": "would create alerts with missing features",
+   "locator": "2401.15167.layout.txt p6 §2 L346-357",
+   "quote": "to passband-dependent equivalents, however, this would"
+  },
+  {
+   "id": "B12",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "remove i-band alerts and negative-difference-image alerts",
+   "alternatives_visible": [
+    "keep",
+    "remove"
+   ],
+   "rejected_named": true,
+   "rejected_option": "keeping i-band and negative difference alerts",
+   "reason": "BTS public survey is g/r only; negative differences are atypical configurations",
+   "locator": "2401.15167.layout.txt p6 §2 L382-393",
+   "quote": "are removed primarily because BTS draws from the ZTF"
+  },
+  {
+   "id": "B13",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "vars sources thinned to latest Nmax alerts instead of random thinning",
+   "alternatives_visible": [
+    "latest Nmax",
+    "random Nmax"
+   ],
+   "rejected_named": true,
+   "rejected_option": "random Nmax thinning on vars",
+   "reason": "early versions with random thinning yielded markedly worse performance; data shift",
+   "locator": "2401.15167.layout.txt p7 §2 L445-463",
+   "quote": "BTSbot used random Nmax thinning on vars sources and"
+  },
+  {
+   "id": "B14",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "omit full light-curve input",
+   "alternatives_visible": [
+    "custom features",
+    "full light curve"
+   ],
+   "rejected_named": true,
+   "rejected_option": "full light-curve information",
+   "reason": "no established representation for partial light curves across source types",
+   "locator": "2401.15167.layout.txt p9 §3 L550-565",
+   "quote": "the full light curve. We omit full light curve informa-"
+  },
+  {
+   "id": "B15",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "metadata features selected by sweep; many candidate features dropped",
+   "alternatives_visible": [
+    "sgscore3",
+    "distpsnr3",
+    "fid",
+    "maggaia",
+    "others"
+   ],
+   "rejected_named": true,
+   "rejected_option": "sgscore3, distpsnr3, fid, maggaia, neargaia, magdiff, ...",
+   "reason": "found to not improve performance",
+   "locator": "2401.15167.layout.txt p10 §3.1 L652-658",
+   "quote": "other features which we found to not improve perfor-"
+  },
+  {
+   "id": "B16",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "keep class weighting favouring TN rate rather than rebalancing TP/TN",
+   "alternatives_visible": [
+    "balance TP and TN via class weights",
+    "favour TN rate"
+   ],
+   "rejected_named": true,
+   "rejected_option": "balanced TP/TN rates",
+   "reason": "models favouring TN rate perform better overall",
+   "locator": "2401.15167.layout.txt p11 §4.1 L689-692",
+   "quote": "justing the class-weights, but we find that models which"
+  },
+  {
+   "id": "B17",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "production model selected on policy-based metrics, not minimum validation loss or final epoch",
+   "alternatives_visible": [
+    "final epoch",
+    "min validation loss",
+    "best policy metrics"
+   ],
+   "rejected_named": true,
+   "rejected_option": "model with least validation loss / greatest validation accuracy",
+   "reason": "policy metrics most relevant to use; Sec 4.1 also states best test-split trial chosen (ambiguity recorded)",
+   "locator": "2401.15167.layout.txt p20 §A L1285-1290",
+   "quote": "is selected by considering best performance in policy-based metrics, those most relevant to how BTSbot is used."
+  },
+  {
+   "id": "B18",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "multi-modal CNN over image-only CNN and metadata-only NN",
+   "alternatives_visible": [
+    "MM-CNN",
+    "UM-CNN",
+    "NN"
+   ],
+   "rejected_named": true,
+   "rejected_option": "UM-CNN and fully connected NN",
+   "reason": "MM-CNN best overall completeness and purity",
+   "locator": "2401.15167.layout.txt p22 §B L1356-1365",
+   "quote": "Each architecture outperforms the others in some metrics, but the MM-CNN delivers the best overall performance."
+  },
+  {
+   "id": "B19",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "cutout size Npix (UM-CNN best at 49; MM-CNN best at 63)",
+   "alternatives_visible": [
+    "3",
+    "5",
+    "7",
+    "13",
+    "21",
+    "35",
+    "49",
+    "63"
+   ],
+   "rejected_named": true,
+   "rejected_option": "smaller cutouts",
+   "reason": "test accuracy by cutout size",
+   "locator": "2401.15167.layout.txt p23 §C L1433-1438",
+   "quote": "to be irrelevant or noisy when performing our task. We notably do not observe the same trend for the MM-CNN,"
+  },
+  {
+   "id": "B20",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "intervene",
+   "choice": "follow-up policies bts_p1 vs bts_p2; bts_p1 used for speed comparison",
+   "alternatives_visible": [
+    "bts_p1 (>=2 alerts score>=0.5, magpsf<=19, priority 1)",
+    "bts_p2 (plus magpsf<=18.5, priority 2)"
+   ],
+   "rejected_named": true,
+   "rejected_option": "bts_p2 for the speed comparison",
+   "reason": "bts_p1 makes a more direct comparison to scanners",
+   "locator": "2401.15167.layout.txt p11 §4.1 L700-716",
+   "quote": "spond to either policy, but we select bts p1 as it makes"
+  },
+  {
+   "id": "B21",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "intervene",
+   "choice": "score threshold 0.5 kept; raising to 0.8 would better reject CV false positives",
+   "alternatives_visible": [
+    "0.5",
+    "0.8"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "alternative stated as possible improvement, not adopted in this paper",
+   "locator": "2401.15167.layout.txt p13 §4.1 L796-801",
+   "quote": "threshold. Right: Many bts p2 FPs are CVs, which could be better rejected by increasing the score threshold to 0.8."
+  },
+  {
+   "id": "B22",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "intervene",
+   "choice": "completeness-prioritised policies later replaced by purity-focused policies in production",
+   "alternatives_visible": [
+    "completeness-first policies",
+    "purity-focused policies"
+   ],
+   "rejected_named": true,
+   "rejected_option": "original completeness-prioritised policies",
+   "reason": "operate BTSbot with minimal intervention",
+   "locator": "2401.15167.layout.txt p17 §5.3 L1070-1076",
+   "quote": "production for a few months a different set of policies"
+  },
+  {
+   "id": "B23",
+   "episode_id": "E2",
+   "level": "per_object",
+   "kind": "intervene",
+   "choice": "counterfactual: SN 2023ixf scored 0.840 minutes after ZTF detection, ~14 h before TNS report; could have been triggered on SEDM",
+   "alternatives_visible": [
+    "auto-trigger at first detection",
+    "no trigger (actual: spectrum after TNS report)"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "counterfactual illustration of ~10 h speed-up; not a decision actually taken",
+   "locator": "2401.15167.layout.txt p18 §5.3 L1101-1127",
+   "quote": "signed a bright transient score of 0.840 by an early ver-"
+  }
+ ],
+ "conclusions_depth": [
+  {
+   "id": "C1",
+   "conclusion": "multi-modal input chosen because images and extracted features give complementary information (host galaxy prominence, PS1 star-galaxy score and distance)",
+   "channels_claimed": [
+    "science/reference/difference image cutouts",
+    "ZTF alert packet features",
+    "PS1 crossmatch (sgscore, distpsnr)",
+    "custom light-curve history features"
+   ],
+   "n_channels_claimed": 4,
+   "locator": "2401.15167.layout.txt p8 §3 L505-532",
+   "quote": "that the images and the extracted features provide com-",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "C2",
+   "conclusion": "MM-CNN outperforms image-only and metadata-only networks in completeness and purity (author-reported ablation, one branch removed)",
+   "channels_claimed": [
+    "image cutouts",
+    "metadata features"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2401.15167.layout.txt p22 §B L1356-1365",
+   "quote": "Each architecture outperforms the others in some metrics, but the MM-CNN delivers the best overall performance.",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "C3",
+   "conclusion": "scanners identify bright transients faster in present-day sample partly because they see partnership photometry BTSbot is blinded from",
+   "channels_claimed": [
+    "ZTF public photometry",
+    "ZTF partnership photometry"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2401.15167.layout.txt p15 §4.2 L936-943",
+   "quote": "nership data from the present-day sample, but scanners",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "C4",
+   "conclusion": "at first detection images carry more constraining information than the light curve for very young transients",
+   "channels_claimed": [
+    "image cutouts",
+    "light curve"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2401.15167.layout.txt p18 §5.3 L1082-1091",
+   "quote": "would expect that an image-based model, like BTSbot,",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "C5",
+   "conclusion": "SN 2023tyk fully automatically detected, identified, spectroscopically classified as SN Ia and reported",
+   "channels_claimed": [
+    "ZTF alert images and metadata",
+    "SEDM spectrum"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2401.15167.layout.txt p17 §5.1 L1026-1034",
+   "quote": "sients. SN 2023tyk (ZTF23abhvlji) is a Type Ia super-",
+   "measured_depth": "not_measured"
+  }
+ ],
+ "facts_for_shape": [
+  {
+   "id": "F1",
+   "fact": "Label source for negatives includes scanners' non-saves (rejects): labels are the historical follow-up policy itself",
+   "locator": "2401.15167.layout.txt p4 §2 L225-237",
+   "quote": "potentially uncertain types. By not saving them, scan-"
+  },
+  {
+   "id": "F2",
+   "fact": "Practitioner action is committing spectroscopic follow-up: scanners save and request spectra",
+   "locator": "2401.15167.layout.txt p2 §1 L97-101",
+   "quote": "transients and request spectroscopic observations for"
+  },
+  {
+   "id": "F3",
+   "fact": "Validation of the governed decision is by simulating policies on historical candidates and comparing to scanner save/trigger times, not by outcomes of untaken actions",
+   "locator": "2401.15167.layout.txt p11 §4.1 L693-707",
+   "quote": "spectrum of it. By simulating our policies on BTS can-"
+  },
+  {
+   "id": "F4",
+   "fact": "Scanner purity cannot be computed straightforwardly because scanners act on dim transients deliberately (selective-labels/value ambiguity)",
+   "locator": "2401.15167.layout.txt p12 §4.1 L747-758",
+   "quote": "not straightforward to compute the BTS scanners’ pu-"
+  },
+  {
+   "id": "F5",
+   "fact": "False positives on dim SNe are judged an appropriate use of spectroscopic time: value of the action differs from the class label",
+   "locator": "2401.15167.layout.txt p14 §4.1 L849-857",
+   "quote": "not problematic for BTS and represent an appropriate"
+  },
+  {
+   "id": "F6",
+   "fact": "BTSbot uses no redshift information",
+   "locator": "2401.15167.layout.txt p8 §3 L518-522",
+   "quote": "without using redshift information because it is not al-"
+  },
+  {
+   "id": "F7",
+   "fact": "Present-day window chosen to reduce bias from BTSbot actions visible to scanners influencing their decisions (policy leakage into labels)",
+   "locator": "2401.15167.layout.txt p14 §4.2 L883-892",
+   "quote": "and instances where BTSbot’s actions, which are visible"
+  },
+  {
+   "id": "F8",
+   "fact": "Task is binary classification that includes a forecast of whether the source will reach mpeak<=18.5; no light-curve model fit, no forward model, no held-out-epoch prediction practised",
+   "locator": "2401.15167.layout.txt p3 §1 L146-170",
+   "quote": "forming binary classification: bright transient / not"
+  },
+  {
+   "id": "F9",
+   "fact": "Scanning also involves retrieving host redshifts from NED and TNS classifications (not yet automated)",
+   "locator": "2401.15167.layout.txt p17 §5.1 L1051-1056",
+   "quote": "trieving host galaxy redshifts from NED and classifica-"
+  },
+  {
+   "id": "F10",
+   "fact": "About 70% of BTS bright transients are SNe Ia; SNIascore classifies and reports 80-90% of these",
+   "locator": "2401.15167.layout.txt p17 §5.1 L1042-1048",
+   "quote": "amount of day-to-day tasks in BTS. About 70% of bright"
+  }
+ ],
+ "item_template_evidence": [
+  {
+   "id": "T1",
+   "question_form": "Given the alert history of one BTS candidate up to now, save it and request an SEDM spectrum (and at which priority), or not",
+   "locator": "2401.15167.layout.txt p11 §4.1 L708-717",
+   "quote": "icy bts p1 requires that a source have at least two"
+  },
+  {
+   "id": "T2",
+   "question_form": "While m>18.5, will this source reach mpeak<=18.5 mag (forecast from partial light curve)",
+   "locator": "2401.15167.layout.txt p3 §1 L164-170",
+   "quote": "and, while m > 18.5 mag, predict whether or not the"
+  },
+  {
+   "id": "T3",
+   "question_form": "Trigger rapid spectroscopy on a very young transient at first detection (SN 2023ixf counterfactual)",
+   "locator": "2401.15167.layout.txt p18 §5.3 L1101-1107",
+   "quote": "fore the first TNS report, SN 2023ixf was detected by"
+  }
+ ],
+ "zero_contribution": false,
+ "notes": "All 1601 layout lines (26 pages, incl. appendices A-C and references) read via rd.sh in chunks 1-400, 401-780, 780-1150, 1151-1601. Branches B05 and B23 are the only object-specific ones outside the scanning episode; B23 is a counterfactual, not a taken decision. No per-object branch concerns model-family choice or light-curve fitting. Selective labels: rejects and non-triggered sources have no spectroscopic outcome."
+}

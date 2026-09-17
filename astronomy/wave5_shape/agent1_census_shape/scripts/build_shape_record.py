@@ -1,0 +1,161 @@
+#!/usr/bin/env python3
+import json, os, hashlib
+base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+bc = json.load(open(os.path.join(base, "census/branch_census.json")))
+dc = json.load(open(os.path.join(base, "census/depth_census.json")))
+S = bc["summary"]
+def sha(p): return hashlib.sha256(open(os.path.join(base, p), "rb").read()).hexdigest()
+gen_obj = [(s["seed_id"], b) for s in bc["seeds"] for b in s["branches"] if b["level"]=="per_object" and b["kind"]=="generate"]
+gen_study_locs = [b["locator"] for s in bc["seeds"] for b in s["branches"] if b["level"]=="per_study" and b["kind"]=="generate"]
+
+rulings = [
+ # ---------------- infer (ladder) ----------------
+ {"root":"infer","subtype":"pick k of M (waves 1-4 task)",
+  "census":{"per_object_branches_of_kind":S["per_object"]["infer"],"named_rejection":S["per_object_named_rejection"]["infer"],"locator_examples":["1910.12973.layout.txt p9 §3.2 L537-581 (ZTF18abmrhom SN Ia against ePESSTO)","2009.01242.layout.txt p31 App E L1995-1997 (SN2020mrf TNS class rejected: probable CV)"]},
+  "gate1_role_floor":{"role":"predictor","below_line":False,"lift":"required_rejection is practised in the census (per-object reclassifications with a named rejected class) but no lift is recorded for this candidate","ruling":"FAIL without a recorded lift (refusal 3)"},
+  "gate2_grader":{"named":"answer key = spectroscopic class labels","in_inventory":"labels exist but are not admissible: post-cutoff TNS and WISeREP BLOCKED (wave4/STATUS.md precondition a); BTS labels public in the BTS Sample Explorer (2009.01242.layout.txt p32 App F L2032-2035) and model-derived since 2021-04-15 (2104.12980.layout.txt p9 §7 L523-531)","ruling":"FAIL"},
+  "gate3_yield":{"arithmetic":"k = 8 thresholded binaries per round (agent5_resolution_replay/k_slot.json value 8 = 327/41 rounded); measured MDE 0.032 on 61 k-binding nights, 0.055-0.063 on 46-candidate rounds (wave2/agent4_instrument/power_calibration.json)","graded":False,"ruling":"ESCALATE condition met: thresholded yield and P2 floor 0.951 of ceiling (agent2_floor_headroom/prior_floor_record.json pr-a2-01)"},
+  "disposition":"CLOSE","binding_gate":"grader"},
+ {"root":"infer","subtype":"calibrated probability per candidate",
+  "census":{"per_object_branches_of_kind":S["per_object"]["infer"],"note":"same census as pick k"},
+  "gate1_role_floor":{"role":"predictor","below_line":False,"ruling":"FAIL without a recorded lift"},
+  "gate2_grader":{"named":"answer key under a proper score (same labels)","ruling":"FAIL, same blocks as pick k"},
+  "gate3_yield":{"arithmetic":"1 graded scalar per candidate x 46.41 candidates per round (k_slot.json candidates per round); climbing the ladder raises yield, not grader access","graded":True,"ruling":"PASS"},
+  "disposition":"CLOSE","binding_gate":"grader"},
+ {"root":"infer","subtype":"point forecast of post-cut photometry (derived; not on the shape.md seed list)",
+  "census":{"practised":"forecast of future peak brightness is practised per object: BTSbot predicts whether a source will attain mpeak <= 18.5 (2401.15167.layout.txt p3 §2 L168-170); BTS scanners prioritise by whether a transient is likely to peak brighter than 18.5 (1910.12973.layout.txt p6 §2.3 L330-334)"},
+  "gate1_role_floor":{"role":"predictor","below_line":False,"lift":"none recorded","ruling":"FAIL: the mechanical composition (fit a parametric model, extrapolate) is the whole task; refusal 3"},
+  "gate2_grader":{"named":"answer key = measured held-out photometry","in_inventory":"available without spectroscopy; the answer appears in the item's own public light curve (ZTF alert archive, ALeRCE, Fink), so under infer contamination = answer in source for every archival unit","ruling":"PASS for access, contamination to be counted"},
+  "gate3_yield":{"arithmetic":"1 graded residual per unit (held-out points share one fitted curve, so they are not independent scalars)","graded":True,"ruling":"PASS"},
+  "disposition":"CLOSE","binding_gate":"role_floor","note":"Nearest sibling of the chosen candidate. It shares the grader data; it differs in the answer object (flux values, not a model instance). Re-opening requires an amendment recording a lift and a floor rebuilt against the lifted task (refusals 4, 14)."},
+ # ---------------- explain ----------------
+ {"root":"explain","subtype":"hypothesis set under a frozen likelihood",
+  "census":{"per_object_branches_of_kind":S["per_object"]["explain"],"named_rejection":S["per_object_named_rejection"]["explain"],"locator_examples":["1808.00969.layout.txt p16 §5.2 L1368-1381 (MOSFiT TDE fit, the only quantitative forward-model test of one hypothesis, after relaxing two constraints)","2104.12980.layout.txt p8 §6 L497-520 (SN 2020eyj: SN Ia light-curve models do not match, Ia rejected)","2403.07975.layout.txt p11 §3.1 L604-629 (visual diagnosis of 62 fits failing chi2)"]},
+  "gate1_role_floor":{"role":"scorer","below_line":True,"ruling":"PASS"},
+  "gate2_grader":{"named":"frozen_likelihood","in_inventory":"on ZTF bands only one hypothesis has an admissible likelihood: SALT3-f22 sha256 c7de5343 (SN Ia only; agent4_tools_instrument/tool_cards/tool_card_SALT3_sncosmo.json). ParSNIP ZTF checkpoints are per-fold models trained on BTS cohort light curves truncated at E1 and E3 (wave2/agent4_instrument/compositions_FROZEN.md §7); shipped plasticc/ps1 checkpoints carry no ZTF bands. A set of rival hypotheses cannot be scored. In the census, rival causes are rejected across channels qualitatively (1808.00969 COW-B08..B17), and a likelihood cannot mark the root's failure mode 'fits the data and names the wrong cause'","ruling":"FAIL today; acquirable only by the same D5-budgeted forward-model build as the chosen candidate"},
+  "gate3_yield":{"arithmetic":"H graded log-likelihoods per unit, but correctness needs an adjudicated cause per unit (downstream table, P3 positive supply), which returns to the blocked label source","graded":True,"ruling":"PASS on form; supply bound by labels"},
+  "disposition":"ESCALATE","binding_gate":"grader"},
+ {"root":"explain","subtype":"anomaly diagnosis",
+  "census":{"locator_examples":["2009.01242.layout.txt p14 §4.1.3 L916-919 (AT2019cmw left among SN, TDE, AGN)","2008.04912.layout.txt p16 §5.3 L1128-1148 (nuclear SLSN-like: SN/TDE vs AGN undecided)","1808.00969.layout.txt p17 §6 L1437-1455 (AT2018cow left as hypothesis set)"]},
+  "gate1_role_floor":{"role":"scorer","below_line":True,"ruling":"PASS"},
+  "gate2_grader":{"named":"certified judge or held-out repeat measurement","in_inventory":"no judge in inventory; no repeat-measurement archive in inventory","ruling":"FAIL"},
+  "gate3_yield":{"arithmetic":"1 score per case","graded":True,"ruling":"PASS"},
+  "disposition":"CLOSE","binding_gate":"grader"},
+ {"root":"explain","subtype":"mechanism attribution",
+  "census":{"locator_examples":["1808.00969.layout.txt p14 §5.1 L1229-1236 (56Ni heating rejected)","1808.00969.layout.txt p15 §5.1 L1305-1312 (jet-driven failed SN vs classical neutrino mechanism)"]},
+  "gate1_role_floor":{"role":"scorer","below_line":True,"ruling":"PASS"},
+  "gate2_grader":{"named":"certified judge","in_inventory":"none","ruling":"FAIL"},
+  "gate3_yield":{"arithmetic":"1 rubric score per case","graded":True,"ruling":"PASS"},
+  "disposition":"CLOSE","binding_gate":"grader"},
+ # ---------------- generate ----------------
+ {"root":"generate","subtype":"inverse problem",
+  "census":{"per_object_branches_of_kind":S["per_object"]["generate"],"named_rejection":S["per_object_named_rejection"]["generate"],"per_study_generate_branches":S["per_study"]["generate"],
+            "per_object_branches":[{"seed":s,"id":b["id"],"choice":b["choice"],"locator":b["locator"]} for s,b in gen_obj],
+            "note":"Only 2403.07975 B26 is a per-object choice among model families with the rejected family named. Held-out-epoch forecasting is not practised in any of the 12 seeds: V19 says partial-light-curve performance 'is yet to be evaluated' (1905.07422.layout.txt p18 §7 L1406-1408); Superphot+ grades truncated fits only against class labels (2403.07975.layout.txt p18 §5.2 L1423-1431); Superphot leaves the required fraction of the light curve to future work (2008.04912.layout.txt p16 §5.1 L1093-1098)."},
+  "gate1_role_floor":{"role":"generator","below_line":True,"lift":"none","ruling":"PASS, conditional on the item template fixing the answer object as a model instance (family + parameters) rendered only by the frozen grader. If the answer is predicted flux, the candidate is the infer point-forecast sibling above"},
+  "gate2_grader":{"named":"frozen forward model scored by held-out Gaussian log-likelihood: SALT3-f22 (sncosmo 'salt3', sha256 c7de5343) is in inventory for the SN Ia family only, phase -20..+50 d, K21 training contains no ZTF data, fit_lc default modelcov=False; a general-transient ZTF forward model is NOT in inventory in admissible form (ParSNIP wave-2 fold checkpoints never saw post-E3 photometry and were trained on the proposed supply; Superphot+ serves a LightGBM tutorial classifier, its parametric form has no frozen weights)",
+                   "in_inventory":"partial: SN Ia family only","ruling":"ESCALATE: admissible for all units only after a D5-budgeted build (e.g. ParSNIP retrained on full ZTF g/r light curves disjoint from the supply, pinned separately from arm tools) or a PI ruling restricting scope to the SALT3 family; I4 construct validity of held-out log-likelihood UNDEMONSTRATED"},
+  "gate3_yield":{"arithmetic":"1 light curve -> 1 graded scalar: sum over held-out detections after the cut, in g and r, of -0.5*chi2 under the frozen grader's rendering of the arm's parameters. Per-band (2) and per-epoch values are reported but share one parameter vector, so they are not independent scalars","graded":True,"ruling":"PASS"},
+  "disposition":"ESCALATE","binding_gate":"grader"},
+ {"root":"generate","subtype":"object design",
+  "census":{"note":"no per-object branch designs an object under a constraint; per-study model building (79 generate branches) is graded in its own seeds against class labels or distances (e.g. 2405.03078 test set of 1000 light curves per class; 2104.07795.layout.txt p8 §3.1 L581-584 Hubble residuals)"},
+  "gate1_role_floor":{"role":"generator","below_line":True,"ruling":"PASS"},
+  "gate2_grader":{"named":"certified oracle, simulator or assay","in_inventory":"none; SNANA UNDEMONSTRATED (agent4_tools_instrument/REPORT.md §2)","ruling":"FAIL"},
+  "gate3_yield":{"arithmetic":"pass/fail per design","graded":False,"ruling":"not reached"},
+  "disposition":"CLOSE","binding_gate":"grader"},
+ {"root":"generate","subtype":"procedure or code",
+  "census":{"note":"per-study pipeline construction branches exist (2405.03078 13, 2401.15167 14, 2104.07795 15 generate branches); the built pipeline is graded in every seed against labels"},
+  "gate1_role_floor":{"role":"generator","below_line":True,"ruling":"PASS"},
+  "gate2_grader":{"named":"execution harness","in_inventory":"buildable, but a harness verifies execution, not the scored quantity; correctness of a classification pipeline returns to the blocked label key","ruling":"FAIL"},
+  "gate3_yield":{"arithmetic":"1 binary per test, several tests per item","graded":False,"ruling":"not reached"},
+  "disposition":"CLOSE","binding_gate":"grader"},
+ # ---------------- intervene ----------------
+ {"root":"intervene","subtype":"choose the next measurement",
+  "census":{"per_object_branches_of_kind":S["per_object"]["intervene"],"named_rejection":S["per_object_named_rejection"]["intervene"],"locator_examples":["1910.12973.layout.txt p5 §2.2 L258-270 (scanners assign follow-up to 5-15 candidates per night)","2401.15167.layout.txt p4 §2 L225-237 (negatives are the scanners' non-saves: labels are the historical policy)","1808.00969.layout.txt p5 §2.6 L333-341 (spectroscopic cadence)"]},
+  "gate1_role_floor":{"role":"simulator","below_line":True,"ruling":"PASS"},
+  "gate2_grader":{"named":"replayable environment or held-out outcome of the action not taken","in_inventory":"none: SNANA UNDEMONSTRATED; ELAsTiCC truth tables without an environment; BTS outcomes exist only for the historical policy (selective labels)","ruling":"FAIL"},
+  "gate3_yield":{"arithmetic":"1 realized value per episode","graded":True,"ruling":"PASS"},
+  "disposition":"CLOSE","binding_gate":"grader"},
+ {"root":"intervene","subtype":"allocate a budget across rounds",
+  "census":{"locator_examples":["1910.12973.layout.txt p6 §2.3 L328-350 (P3/P2/P1 priority queue)","2401.15167.layout.txt p11 §4.1 L666-672 (SEDM request priority)"]},
+  "gate1_role_floor":{"role":"simulator","below_line":True,"ruling":"PASS"},
+  "gate2_grader":{"named":"replayable environment","in_inventory":"none","ruling":"FAIL"},
+  "gate3_yield":{"arithmetic":"1 trajectory value plus 1 per round","graded":True,"ruling":"PASS"},
+  "disposition":"CLOSE","binding_gate":"grader"},
+ {"root":"intervene","subtype":"decide when to stop",
+  "census":{"locator_examples":["1910.12973.layout.txt p5 §2.2 L270-278 (wait about a week and compare with CV evolution before triggering)"]},
+  "gate1_role_floor":{"role":"simulator","below_line":True,"ruling":"PASS"},
+  "gate2_grader":{"named":"replayable environment","in_inventory":"none","ruling":"FAIL"},
+  "gate3_yield":{"arithmetic":"value and cost per episode, 2 graded scalars","graded":True,"ruling":"PASS"},
+  "disposition":"CLOSE","binding_gate":"grader"},
+]
+
+downstream = {
+ "infer":{"unit":"labeled unit after clustering (one candidate or one round)","P3_negative":"labeled negatives","contamination":"the answer appears in the item's source","I1_floor":"sort on the predictor score, take k","P6_chance":"k over candidates per item (8/46.41 = 0.172 stated; 0.225-0.230 measured, wave2)","A3":"paired per item against the key"},
+ "explain":{"unit":"case with an adjudicated cause","P3_negative":"rival causes that were ruled out","contamination":"the cause is stated in literature the subject read","I1_floor":"copy the cause of the nearest labeled case","P6_chance":"prior over the cause set","A3":"rubric with a certified judge, or likelihood"},
+ "generate":{"unit":"one light curve (object cluster) with a declared cut epoch and held-out later epochs","P3_negative":"specifications that must fail","contamination":"the object is published and indexed: a published fit exists for this object","I1_floor":"run the grader-renderable families at defaults on pre-cut data, keep the best on held-out-blind training likelihood","P6_chance":"pass rate of unconditioned generation: parameters drawn from the frozen grader's prior, scored on held-out epochs (UNDEMONSTRATED until I1)","A3":"the grader's verdict, coverage as coverage"},
+ "intervene":{"unit":"episode with a recorded outcome","P3_negative":"actions not taken, with outcomes","contamination":"the historical policy is recoverable from the data","I1_floor":"the historical policy, or a fixed greedy rule","P6_chance":"random allocation under the same budget","A3":"realized value per unit of resource, paired per episode"}}
+
+ranking = {"status":"UNDEMONSTRATED (no MDE exists for any candidate except infer pick k; P7 needs I1 compositions)",
+ "survivors_after_gates":["generate / inverse problem (ESCALATE, grader acquirable by build)","explain / hypothesis set (ESCALATE, grader acquirable by the same build)"],
+ "expected_order":[
+   {"rank":1,"candidate":"generate / inverse problem","reason":"1 graded scalar per unit; a unit needs no spectroscopic label, so supply is bounded by multi-epoch light curves, not by classifications; margin kept (no threshold)"},
+   {"rank":2,"candidate":"explain / hypothesis set","reason":"H graded log-likelihoods per unit, but scoring correctness needs an adjudicated cause per unit, so supply returns to the blocked label source; the likelihood cannot detect the root's failure mode"},
+   {"rank":3,"candidate":"infer / calibrated probability (closed at grader)","reason":"graded but label-bound"},
+   {"rank":4,"candidate":"infer / pick k of M (closed at grader)","reason":"k thresholded binaries; measured MDE 0.032 (61 binding nights) to 0.063 (rounds), CLOSE_UNRESOLVABLE at delta 0.018 (wave2/agent4_instrument/power_calibration.json)"}],
+ "grader_cost_used":"not used; both survivors need the same build, so cost does not break a tie here (refusal 12)"}
+
+disagreements = [
+ {"id":"DS-01","screening_says":"ParSNIP decoder (ZTF-trained, hashed, wave 2) is a frozen likelihood / forward model in inventory","finding":"The wave-2 ZTF ParSNIP is 5 per-fold models trained from scratch on BTS cohort units truncated at E1 (first alert) and E3 (night 3), learning rate amended to 1e-4, fold 4 loss plateaued near 247. They never saw post-E3 photometry and were trained on the units the screening proposes as supply. Inadmissible as a held-out-epoch grader without a new build.","locator":"astronomy/wave2/agent4_instrument/compositions_FROZEN.md §7 ('ParSNIP training set'); AMENDMENTS.md A-2; REPORT.md disagreement 5"},
+ {"id":"DS-02","screening_says":"Superphot+ parametric model, generator role, ZTF AU, is a grader forward model","finding":"Wave-3 card: role predictor; served checkpoint is a tutorial LightGBM classifier (superphot-plus 973e2a80); the parametric model is a functional form whose priors were iterated on the same dataset, with no frozen weights. Usable as an arm tool or floor family, not as a frozen likelihood.","locator":"astronomy/wave3/agent4_tool_recount/tool_cards/tool_card_Superphot_plus.json; 2403.07975.layout.txt p8 §3 L485-491"},
+ {"id":"DS-03","screening_says":"SALT3 (Ia) is a forward model grader for the inverse problem","finding":"Agreed for the SN Ia family only, and bounded: phase -20..+50 d, K21 training has no ZTF data, fit_lc modelcov=False by default. Held-out epochs beyond +50 d and non-Ia units are unscorable by it.","locator":"agent4_tools_instrument/tool_cards/tool_card_SALT3_sncosmo.json; 2104.07795.layout.txt p16 Table 4 L1089-1109"},
+ {"id":"DS-04","screening_says":"scoring on held-out epochs adds per-band, per-epoch scalars and stays graded; several scalars per object","finding":"Held-out residuals share one fitted parameter vector per unit, so gate 3 counts 1 independently scored scalar per unit (2 per-band values reported, not independent).","locator":"shape.md Gate 3 ('independently scored scalars')"},
+ {"id":"DS-05","screening_says":"the action (choosing a model, bounds or rejections while fitting) should be located in SALT3, ParSNIP, Superphot+ and Villar methods sections","finding":"Across 12 seeds: 3 per-object generate branches, 1 with the rejected family named (2403.07975 B26, Fig. 17); 79 per-study generate branches (model building). Per-object fitting is chain in every fitting seed. Held-out-epoch prediction is practised in none.","locator":"census/branch_census.json summary; 1905.07422.layout.txt p18 §7 L1406-1408; 2403.07975.layout.txt p18 §5.2 L1423-1431"},
+ {"id":"DS-06","screening_says":"generate / inverse problem graded against later photometry has no answer string to memorize","finding":"Scored only on held-out photometry, the task is a forecast, which shape.md classes as infer ('calibrated forecast'); the held-out photometry is an answer key that sits in the unit's own public light curve (ALeRCE/Fink/ZTF archive). It stays generate only if the answer object is a model instance rendered by the frozen grader, and arms with shell access can fetch the held-out epochs (brief §3 already concedes R4 cannot be enforced).","locator":"shape.md 'The four roots' (calibrated forecast is infer); PANEL_BRIEF_WAVE5.md item 3"},
+ {"id":"DS-07","screening_says":"published fit for this object is absent for post-cutoff objects and most archival ZTF objects","finding":"ZTF SN Ia DR2 publishes SALT2 t0, x0, x1, c and fitprob for 3628 SNe Ia to Dec 2020 plus alternative-template fits, 79% overlapping BTS; Superphot+ publishes per-object reduced chi2 and probabilities (Table 5, Zenodo) and saves fit parameters on ANTARES. Countable at P3; not counted here (refusal 1).","locator":"2409.04346.layout.txt p9 L671-686, p8 L646-648, p3 L183-184; 2403.07975.layout.txt p24 Table 5 L1854-1868, p29 §8 L2341-2343"},
+ {"id":"DS-08","screening_says":"explain / hypothesis set: conditional pass; frozen likelihood in inventory (SALT3, ParSNIP decoder, PLAsTiCC checkpoint for LSST bands)","finding":"On ZTF bands only one hypothesis (SN Ia) has an admissible likelihood; the PLAsTiCC checkpoint is LSST-band, and Rubin cohort objects carry 1-3 detections. Ruled ESCALATE at grader, ranked below generate because its correctness needs adjudicated causes.","locator":"wave3/agent4_tool_recount/REPORT.md dispositions and disagreement 12"},
+ {"id":"DS-09","screening_says":"rejecting a degenerate fit with a written reason is a native branch where agent value could live","finding":"Fit rejection is a uniform cut in the fitting seeds (Superphot+ chi2_red <= 1.2; Superphot classifies PSc000102 at chi2_red 801.5; V19 cuts only on detection count). Object-specific fit-rejection judgments are rare and visual (2403.07975 B14; 2104.12980 B14).","locator":"2403.07975.layout.txt p11 §3.1 L604-639; 2008.04912 notes SP fact on Table 3 (p10 §4 L635-653); 2104.12980.layout.txt p8 §6 L497-520"},
+ {"id":"DS-10","screening_says":"cut epoch e.g. 10 days after first detection; at least 20 epochs","finding":"Both numbers are conventional (refusal 15). The P3 draft uses the recorded, hashed decision epochs E1 and E3 from wave 2 and marks any other cut or epoch minimum UNDEMONSTRATED.","locator":"p3_protocol_DRAFT.md §2"},
+ {"id":"DS-11","screening_says":"mechanical floor: sncosmo SALT3 at default bounds plus a Bazin/Villar parametric fit; FM channel ParSNIP at default encoding","finding":"Under generate the floor runs the generator at defaults and keeps the best on one metric. A floor family the frozen grader cannot render (Bazin/Villar) breaks arm-grader symmetry; either the grader freezes that family too or the floor uses only grader-renderable families. The ParSNIP default encoding needs a redshift the alert lacks.","locator":"shape.md downstream table I1; wave2/agent4_instrument/tool_cards/tool_card_ParSNIP.json what_it_is_not"},
+ {"id":"DS-12","screening_says":"intervene closes at grader and that explains waves 1-4","finding":"Agreement, with census support: BTSbot's negatives are the scanners' non-saves, so the labels are the historical policy (2401.15167.layout.txt p4 L225-237), and 17 per-object intervene branches are found. Recorded, not a disagreement.","locator":"census/branch_census.json"},
+ {"id":"DS-13","screening_says":"skill stage briefs at stages/discovery.md","finding":"They are at fm-advantage-benchmark-with-shape/references/stages/ (path only).","locator":"fm-advantage-benchmark-with-shape/SKILL.md 'Stage briefs live in references/stages/'"}]
+
+value = {
+ "root":"generate",
+ "subtype":{"name":"inverse problem","derived":False},
+ "disposition":"ESCALATE",
+ "binding_gate":"grader",
+ "binding_gate_detail":"No admissible frozen forward model covers every unit: SALT3-f22 (pinned) renders the SN Ia family only within -20..+50 d; the wave-2 ZTF ParSNIP checkpoints are early-truncated and trained on the supply. PI/D5 must (a) budget a separately pinned forward-model build on full ZTF g/r light curves disjoint from the supply, or (b) rule the scope to the SALT3 family, and I4 must certify held-out log-likelihood as the scored quantity. Shape ratification is a PI act; status stays DERIVED.",
+ "item_template":{"description":"One ZTF object cluster (1 arcsec unit) whose g/r light curve is cut at a declared decision epoch (wave-2 E1 or E3). The arm sees only pre-cut detections and alert metadata, and returns: (1) a model family from the frozen grader's renderable set, (2) a parameter vector including redshift or redshift bounds and t0, (3) a written rejection, with reason, of each rival family. The answer object is the model instance; predicted fluxes are never accepted as the answer. A frozen, separately pinned forward-model instance renders the parameters at every held-out detection after the cut (within the family's phase range) and scores the sum of Gaussian log-likelihood terms in g and r. An unparsed or unrenderable answer is a coverage failure, not a zero.",
+                  "locator":"2403.07975.layout.txt p23 Fig.17 L1814-1819 (per-light-curve judgment of which model family reproduces it, rival families named); 2109.13999.layout.txt p13 §4.3 L812-818 (SALT2 vs ParSNIP reduced chi2 on the same SN Ia light curves); 2008.04912.layout.txt p16 §5.1 L1093-1098 (partial light-curve fit keeps future behaviour within parameter uncertainties, claimed not evaluated). Held-out-epoch scoring itself has no corpus locator (DS-05)."},
+ "branch_census":{"chain_length":13,"branch_points":len(gen_obj),"branches_with_named_rejection":S["per_object_named_rejection"]["generate"],"branches_per_episode":1,
+   "locators":[b["locator"] for s,b in gen_obj],
+   "chain_length_source":"2403.07975 notes E1, per-object archival fit-and-classify chain (13 operations), the episode type the item is cut from",
+   "totals_all_roots":S,
+   "per_study_generate_branches":S["per_study"]["generate"],
+   "caution":"A long chain with one branch per episode is a single-decision task (shape.md). The chosen root rests on 3 per-object branches, 1 with a named rejection."},
+ "depth_census":{"claimed_channels":2,"measured_depth":1,"method":"not_measured",
+   "note":"claimed: g and r photometry (2403.07975 Fig. 17 conclusions) plus redshift where the family needs it (2109.13999.layout.txt p3 §2 L148-153). measured_depth is written as 1 because the schema requires an integer >=1 and refusal 11 records unmeasured items as depth one; it is not a measurement. Conclusions censused: %d across 12 seeds, claimed-channel distribution %s." % (dc["summary"]["conclusions"], json.dumps(dc["summary"]["claimed_channel_count_distribution"])),
+   "unmounted_channels":["host redshift (not in ZTF or Rubin alerts; BTS redshift is post-follow-up and leaks the outcome)","spectra","X-ray/radio/UV (1808.00969 channels)"]},
+ "grader":{"kind":"frozen_likelihood","in_tool_inventory":True,"certification_stage":"in inventory for the SN Ia family only (SALT3-f22 sha256 c7de5343); general family UNDEMONSTRATED, D5 build; I4 construct validity then I5 on a pinned instance separate from arm tools",
+   "name":"SALT3-f22 via sncosmo (pinned) for the SN Ia family; general ZTF forward model not yet admissible"},
+ "yield_per_unit":{"scalars":1,"thresholded":False,"arithmetic":"1 unit -> 1 graded scalar = sum over held-out g,r detections after the cut of -0.5*((f_obs - f_model)/sigma)^2 under the frozen grader; per-band and per-epoch terms share one parameter vector and are not independent"},
+ "role_floor":{"role":"generator","below_predictor_line":True,"lift":"none"},
+ "alternatives_considered":[{"root":r["root"],"binding_gate":r["binding_gate"],"note":f"{r['subtype']}: {r['disposition']}"} for r in rulings if not (r["root"]=="generate" and r["subtype"]=="inverse problem")],
+ "rulings_all_roots_one_pass":rulings,
+ "downstream_by_root":downstream,
+ "resolving_power_ranking":ranking,
+ "disagreements_with_screening":disagreements,
+ "inputs":{"screening":"astronomy/wave5_shape/SHAPE_REEVALUATION.md sha256 4ca403a00c5acd47dc2e6e6a06061aa6f9e540533ab7a622d2de8915b4ab7f3e","branch_census":"census/branch_census.json sha256 "+sha("census/branch_census.json"),"depth_census":"census/depth_census.json sha256 "+sha("census/depth_census.json"),"shape_md":"fm-advantage-benchmark-with-shape/references/shape.md sha256 46617c6ad648f0a7f0c3337e21a67978f6d8feedffe55a02d3f94d2c95652da9"}}
+
+prov = {"id":"shape-a1-w5","referent":"the decision shape of the astronomy FM-advantage candidate: root, subtype, disposition and binding gate from gates 1-3 ruled at subtype level over all four roots",
+ "source":"census/branch_census.json and census/depth_census.json (12 seeds read in full, 236 branches with locators); fm-advantage-benchmark-with-shape/references/shape.md gates 1-3 and downstream table; tool facts from agent4_tools_instrument/tool_cards/tool_card_SALT3_sncosmo.json (sha256 c7de5343 pin) and wave2/agent4_instrument/compositions_FROZEN.md section 7",
+ "population":"4 roots, 12 subtypes; per-object branches 74 (intervene 17, explain 24, generate 3, infer 30) and per-study branches 162 across 12 seeds",
+ "adjudicator":"coordinator screening SHAPE_REEVALUATION.md sha256 4ca403a0 (conditional pass for generate/inverse problem and explain/hypothesis set); strongest rival subtype is infer point forecast of post-cut photometry, closed at role floor",
+ "falsifier":"a pinned ZTF g/r forward model trained on full light curves disjoint from the supply is found in the inventory (grader gate would PASS and the disposition would change to PROCEED); or a re-read of the 12 seeds returns zero per-object generate branches (would close at action_absent_from_corpus); or an I4 test measures held-out log-likelihood failing to separate a known-good fit from a degenerate one"}
+rec = {"decision_shape":{"value":value,"provenance":{k:prov[k] for k in ("referent","source","population","adjudicator","falsifier")},"status":"DERIVED"},
+       "provenance_records":[prov],
+       "completeness":"Rules all four roots and 12 subtypes (4 infer rungs collapsed to the 3 weighed here plus the derived point-forecast subtype) in one pass. Covers 12 seeds read in full. Not covered: P3 counts (refused before ratification), MDE for any candidate but infer pick k, I4/I5 for any grader, companion papers not read."}
+json.dump(rec, open(os.path.join(base,"shape_record.json"),"w"), indent=1, ensure_ascii=False)
+json.dump([prov], open(os.path.join(base,"shape_provenance.json"),"w"), indent=1, ensure_ascii=False)
+print("alternatives", len(value["alternatives_considered"]))

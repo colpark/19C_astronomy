@@ -1,0 +1,693 @@
+{
+ "agent": "wave5_shape/agent1_census_shape",
+ "date": "2026-09-17",
+ "seeds": [
+  {
+   "id": "arXiv:arXiv:1808.00969v4 (layout L10)",
+   "title": "The Fast, Luminous Ultraviolet Transient AT2018cow: Extreme Supernova, or Disruption of a Star by an Intermediate-Mass Black Hole? (Perley et al. 2019)",
+   "file": "sources/1808.00969.pdf",
+   "sha256": "f36b68f46a89035d1168ec0c7d52972213334aa9049dd001af677422b2279592",
+   "text": "sources/1808.00969.layout.txt",
+   "text_sha256": "67174992dee7dc4c96b80fbff8df8127fc6be3b7d7ba36b2be72f36974686a90",
+   "id_verified_by_download": true,
+   "read_in_full": true,
+   "read_range": "1-1696",
+   "pages": 20,
+   "reader": "fork-D",
+   "contribution": "20 branches (17 with named rejection), 6 depth conclusions, 8 shape facts",
+   "zero_contribution": false,
+   "notes_file": "census/notes/1808.00969.json",
+   "facts": [
+    {
+     "assertion": "Practitioner action is publishing a cause, but as an unresolved hypothesis set (jet-driven failed SN vs IMBH TDE); no adjudicated cause exists in this seed",
+     "locator": "1808.00969.layout.txt p2 §1 L102-109"
+    },
+    {
+     "assertion": "Rival hypotheses were weighed qualitatively across channels; only the TDE hypothesis received a quantitative forward-model fit (MOSFiT MCMC); no likelihood comparison between hypotheses",
+     "locator": "1808.00969.layout.txt p16 §5.2 L1368-1371"
+    },
+    {
+     "assertion": "Follow-up (intervene) decision taken in real time via GROWTH marshal to filter alerts and coordinate follow-up",
+     "locator": "1808.00969.layout.txt p18 §ack L1492-1493"
+    },
+    {
+     "assertion": "Object is also ZTF18abcfcoo; its cause discussion is published and indexed (contamination under explain)",
+     "locator": "1808.00969.layout.txt p2 §fn1 L129-130"
+    },
+    {
+     "assertion": "X-ray and radio channels analysed in companion papers (Ho et al. 2018; Margutti et al. 2018), not in this seed",
+     "locator": "1808.00969.layout.txt p17 §5.2 L1425-1426"
+    },
+    {
+     "assertion": "Early subset-of-channels conclusion (Ic-BL) was later overturned by further time-series data: an instance where a conclusion reached at a cut epoch was wrong",
+     "locator": "1808.00969.layout.txt p8 §3.3 L527-533"
+    },
+    {
+     "assertion": "949 photometric points released machine-readable",
+     "locator": "1808.00969.layout.txt p5 §Table 1 L273-274"
+    },
+    {
+     "assertion": "Rival SN hypothesis ruled out by forward reasoning on light curve (Ni mass, no second peak), not by fitting a SN light-curve model",
+     "locator": "1808.00969.layout.txt p15 §5.1 L1310-1314"
+    }
+   ]
+  },
+  {
+   "id": "arXiv:arXiv:1905.07422v2 (header L13; downloaded PDF sha256 9288e1ac...)",
+   "title": "Supernova Photometric Classification Pipelines Trained on Spectroscopically Classified Supernovae from the Pan-STARRS1 Medium-Deep Survey (Villar et al. 2019)",
+   "file": "sources/1905.07422.pdf",
+   "sha256": "9288e1ac9185e6d53738fe0ee9ddfffd0d77481d67033298c0cefeffd9418305",
+   "text": "sources/1905.07422.layout.txt",
+   "text_sha256": "687d8725cec81b1cf69cb3ebecc20fd9d30686c30a9535839c013a16a0cda6e3",
+   "id_verified_by_download": true,
+   "read_in_full": true,
+   "read_range": "1-1625",
+   "pages": 21,
+   "reader": "fork-E",
+   "contribution": "16 branches (14 with named rejection), 4 depth conclusions, 8 shape facts",
+   "zero_contribution": false,
+   "notes_file": "census/notes/1905.07422.json",
+   "facts": [
+    {
+     "assertion": "Label source: spectroscopic classifications via SNID template matching; SNID misclassification possible",
+     "locator": "1905.07422.layout.txt p3 §2 L167-197"
+    },
+    {
+     "assertion": "No held-out-epoch prediction: evaluation is leave-one-out CV on complete light curves; performance on partial light curves (real-time) not evaluated",
+     "locator": "1905.07422.layout.txt p18 §7 L1400-1412"
+    },
+    {
+     "assertion": "Model parameters are partly degenerate (A not peak flux, t0 not explosion/peak time; correlations listed)",
+     "locator": "1905.07422.layout.txt p4 §3 L227-234; p6 L338-345"
+    },
+    {
+     "assertion": "Posteriors well constrained for well-sampled light curves, poorly for sparse ones; posterior draws propagate to classification uncertainty",
+     "locator": "1905.07422.layout.txt p6 §3 L309-323"
+    },
+    {
+     "assertion": "No per-object fit-quality rejection criterion is reported; the only object cut is the detection count; authors state further information-content cuts may be necessary",
+     "locator": "1905.07422.layout.txt p19 §7 L1478-1492"
+    },
+    {
+     "assertion": "Likelihood includes observational error plus a white-noise scatter term; PyMC Metropolis-Hastings",
+     "locator": "1905.07422.layout.txt p5 §3 L285-298"
+    },
+    {
+     "assertion": "Spectroscopic follow-up magnitude limit ~1.5 mag shallower than survey depth (selective labels relative to photometric sample)",
+     "locator": "1905.07422.layout.txt p4 §2 L198-204"
+    },
+    {
+     "assertion": "Pipeline code released on GitHub excluding the MCMC fitting step",
+     "locator": "1905.07422.layout.txt p10 §4.3 L567-569"
+    }
+   ]
+  },
+  {
+   "id": "arXiv:arXiv:1910.12973v1 (layout L14)",
+   "title": "The Zwicky Transient Facility Bright Transient Survey I: Spectroscopic Classification and the Redshift Completeness of Local Galaxy Catalogs (Fremling et al.)",
+   "file": "sources/1910.12973.pdf",
+   "sha256": "666377161c0c9208f57e7bdb9d160c7de5df898276741bb31eff25143d76ea40",
+   "text": "sources/1910.12973.layout.txt",
+   "text_sha256": "9e84edc46fa80976ef3018b4d104ff0a7b58454d21801909a9fd2c8efc73cb10",
+   "id_verified_by_download": true,
+   "read_in_full": true,
+   "read_range": "1-1422",
+   "pages": 22,
+   "reader": "fork-A",
+   "contribution": "25 branches (22 with named rejection), 10 depth conclusions, 10 shape facts",
+   "zero_contribution": false,
+   "notes_file": "census/notes/1910.12973.json",
+   "facts": [
+    {
+     "assertion": "Label source: classifications are human (SNID template match plus visual inspection by named team members); TNS classifications are preliminary and subsumed by the paper",
+     "locator": "1910.12973.layout.txt p7 §3.1 L412-437"
+    },
+    {
+     "assertion": "The governed action is scanners assigning scarce spectroscopic follow-up (5-15 candidates per night); only assigned objects get labels (selective labels)",
+     "locator": "1910.12973.layout.txt p5 §2.2 L258-270"
+    },
+    {
+     "assertion": "Per-object published values: SN type, SNID redshift, peak time and magnitude per band, E(B-V), host name/position/redshift/photometry (Tables 1 and 3): contamination-relevant for infer on these quantities",
+     "locator": "1910.12973.layout.txt p8 Table 1 L442-476"
+    },
+    {
+     "assertion": "No light-curve model is fitted: peak time and magnitude are read directly from alert photometry; no SALT or parametric fit, no forward model, no held-out-epoch prediction in this seed",
+     "locator": "1910.12973.layout.txt p8 Table 1 note a L469"
+    },
+    {
+     "assertion": "Rise and fade times (0.75 mag from peak) estimated by an automated procedure only for completeness checks",
+     "locator": "1910.12973.layout.txt p6 §2.3.1 L337-346"
+    },
+    {
+     "assertion": "Light-curve features are used as a secondary channel in classification (r-band shoulder/secondary peak)",
+     "locator": "1910.12973.layout.txt p7 §3.1 L404-411"
+    },
+    {
+     "assertion": "Classification accuracy adjudicated against ePESSTO: 26 in common, 2 disagreements",
+     "locator": "1910.12973.layout.txt p9 §3.2 L573-578"
+    },
+    {
+     "assertion": "SNID template set heterogeneity acknowledged as a source of sub-classification uncertainty",
+     "locator": "1910.12973.layout.txt p10 §3.3 L612-619"
+    },
+    {
+     "assertion": "Selection effects: BTS incomplete for SNe near AGN; biased against slow SLSNe present in reference images",
+     "locator": "1910.12973.layout.txt p5 §2.2 L293-295"
+    },
+    {
+     "assertion": "Completeness validated by re-processing all 2018 alerts with AMPEL: 17 missed SNe, 97% scanning completeness",
+     "locator": "1910.12973.layout.txt p5 §2.2.1 L299-306"
+    }
+   ]
+  },
+  {
+   "id": "arXiv:arXiv:2008.04912v3 (header L13; downloaded PDF sha256 576f7fa1...)",
+   "title": "Photometric Classification of 2315 Pan-STARRS1 Supernovae with Superphot (Hosseinzadeh et al. 2020)",
+   "file": "sources/2008.04912.pdf",
+   "sha256": "576f7fa1657b089ac73744a063affb5d133c941bde79af75840fc92e5a05c027",
+   "text": "sources/2008.04912.layout.txt",
+   "text_sha256": "4ae91cfbf1d1e7fdd30ce90c23e9ce90645f314bd2ff0b49211b4c04b2b38ba8",
+   "id_verified_by_download": true,
+   "read_in_full": true,
+   "read_range": "1-1795",
+   "pages": 24,
+   "reader": "fork-E",
+   "contribution": "20 branches (16 with named rejection), 5 depth conclusions, 9 shape facts",
+   "zero_contribution": false,
+   "notes_file": "census/notes/2008.04912.json",
+   "facts": [
+    {
+     "assertion": "Correctness of individual test-set classifications cannot be judged (no labels); only agreement with other classifiers is measured",
+     "locator": "2008.04912.layout.txt p12 §4.4 L830-839"
+    },
+    {
+     "assertion": "Per-object reduced chi2 (median-parameter model) and max Gelman-Rubin R-hat are reported for each transient",
+     "locator": "2008.04912.layout.txt p5 §3.1 L341-344"
+    },
+    {
+     "assertion": "No fit-quality rejection cut is applied: Table 3 rows include reduced chi2 801.5 with R-hat 1.7 (PSc000102) and R-hat 1.8 (PSc000150) still classified",
+     "locator": "2008.04912.layout.txt p10 §4 L635-653"
+    },
+    {
+     "assertion": "Reduced chi2 is infinite or negative when a light curve has 24 or fewer points across four filters",
+     "locator": "2008.04912.layout.txt p5 §3.1 L273-284"
+    },
+    {
+     "assertion": "Bayesian modeling allows fitting part of a light curve while keeping future behavior within uncertainties; what fraction is needed is left to future work (no held-out epoch evaluation)",
+     "locator": "2008.04912.layout.txt p16 §5.1 L1093-1098"
+    },
+    {
+     "assertion": "For rare transients a high confidence does not imply a correct classification",
+     "locator": "2008.04912.layout.txt p16 §5.2 L1108-1112"
+    },
+    {
+     "assertion": "Test-set light curves are worse sampled than training set because brighter targets were prioritized for spectroscopy (selective labels)",
+     "locator": "2008.04912.layout.txt p7 §3.2 L452-455"
+    },
+    {
+     "assertion": "Agreement between two classifiers is not an indication of correctness",
+     "locator": "2008.04912.layout.txt p17 §6 L1179-1182"
+    },
+    {
+     "assertion": "Code open source on GitHub/Zenodo/PyPI; reproducing results needs seed 0",
+     "locator": "2008.04912.layout.txt p2 §1 L79-85"
+    }
+   ]
+  },
+  {
+   "id": "arXiv:arXiv:2009.01242v2 (layout L12)",
+   "title": "The Zwicky Transient Facility Bright Transient Survey. II. A Public Statistical Sample for Exploring Supernova Demographics (Perley et al.)",
+   "file": "sources/2009.01242.pdf",
+   "sha256": "d5afed266c124b5c7f2479bf9ce51b68e4d9b189445f55bf11ed8ea8ca7b2fca",
+   "text": "sources/2009.01242.layout.txt",
+   "text_sha256": "99d14eeadc76657b7157f8792aacec36f4e3ed9b6d926445a1535c3f1fabe621",
+   "id_verified_by_download": true,
+   "read_in_full": true,
+   "read_range": "1-2048",
+   "pages": 33,
+   "reader": "fork-A",
+   "contribution": "30 branches (24 with named rejection), 10 depth conclusions, 10 shape facts",
+   "zero_contribution": false,
+   "notes_file": "census/notes/2009.01242.json",
+   "facts": [
+    {
+     "assertion": "Label source for the sample is the most recent TNS classification (public, preliminary), with listed exceptions; subtypes removed",
+     "locator": "2009.01242.layout.txt p31 App E L2005-2010"
+    },
+    {
+     "assertion": "Authors state that deciding which transients to classify involves extensive human decision-making that can bias samples (the governed intervene action and selective labels)",
+     "locator": "2009.01242.layout.txt p2 §1 L104-111"
+    },
+    {
+     "assertion": "Per-object values (peak time/mag, rise/fade, classification, redshift, absolute mag, host properties) are published in the real-time public BTS Sample Explorer: contamination relevant for any infer item on these quantities",
+     "locator": "2009.01242.layout.txt p32 App F L2032-2035"
+    },
+    {
+     "assertion": "No light-curve model is fitted: timescales by linear interpolation; light-curve modelling deferred to future focused papers",
+     "locator": "2009.01242.layout.txt p20 §5 L1312-1315"
+    },
+    {
+     "assertion": "Analysis techniques chosen to avoid human intervention",
+     "locator": "2009.01242.layout.txt p19-20 §5 L1306-1310"
+    },
+    {
+     "assertion": "Quality cuts requiring pre-peak, near-peak and post-peak coverage remove 48% of the sample (supply of well-sampled light curves)",
+     "locator": "2009.01242.layout.txt p7 §2.3 L410-415"
+    },
+    {
+     "assertion": "Spectroscopic completeness 93% at m<18.5, 97% at m<18, 75% at m<19; unclassified events mostly missed through weather (labels missing by season)",
+     "locator": "2009.01242.layout.txt p8 §3 L484-492"
+    },
+    {
+     "assertion": "Seasonal dependence of classification success from weather",
+     "locator": "2009.01242.layout.txt p30 App D L1964-1969"
+    },
+    {
+     "assertion": "Completeness of saving checked against 4350 TNS-classified transients cross-matched to ZTF alerts",
+     "locator": "2009.01242.layout.txt p9 §3 L547-556"
+    },
+    {
+     "assertion": "Authors expect heavy reliance on photometric classification for Rubin, with bright-end spectroscopic surveys as training data",
+     "locator": "2009.01242.layout.txt p20 §5 L1326-1337"
+    }
+   ]
+  },
+  {
+   "id": "arXiv:arXiv:2104.07795v1 (layout L13)",
+   "title": "SALT3: An Improved Type Ia Supernova Model for Measuring Cosmic Distances (Kenworthy et al. 2021)",
+   "file": "sources/2104.07795.pdf",
+   "sha256": "e95e82df74747915610d8b9e6679e9a7f51f30617a09908c0b19675ddc6a67b3",
+   "text": "sources/2104.07795.layout.txt",
+   "text_sha256": "35b61c2baa2c93a417b6be21c101f5473b2208fc5cf3b207943072d5606a3c94",
+   "id_verified_by_download": true,
+   "read_in_full": true,
+   "read_range": "1-1677",
+   "pages": 25,
+   "reader": "fork-D",
+   "contribution": "17 branches (13 with named rejection), 3 depth conclusions, 8 shape facts",
+   "zero_contribution": false,
+   "notes_file": "census/notes/2104.07795.json",
+   "facts": [
+    {
+     "assertion": "Model validation grader is distance-level (Hubble residual RMS, alpha/beta, Diff(dz mu)) on held-out SNe or simulated truth, not prediction of held-out epochs of individual light curves",
+     "locator": "2104.07795.layout.txt p8 §3.1 L581-584"
+    },
+    {
+     "assertion": "Held-out validation design exists at study level: random half split K21train/K21valid (541/541)",
+     "locator": "2104.07795.layout.txt p10 §Table 3 L657-661"
+    },
+    {
+     "assertion": "Training label source: spectroscopically classified Branch-normal SNe Ia (incl. 91T-like); many training spectra are TNS classification spectra",
+     "locator": "2104.07795.layout.txt p14 §4.4 L906-909"
+    },
+    {
+     "assertion": "K21 compilation contains no ZTF photometry (surveys listed: Calan-Tololo, CfA1-4, SDSS, SNLS, CSP, Foundation, PS1 MDS, DES)",
+     "locator": "2104.07795.layout.txt p16 §Table 4 L1089-1107"
+    },
+    {
+     "assertion": "SALT3.K21 is integrated in sncosmo and SNANA; training code, data, model public (forward model available to any arm)",
+     "locator": "2104.07795.layout.txt p20 §6 L1349-1351"
+    },
+    {
+     "assertion": "The SED model is itself a generative forward model: F(p,lambda)=x0[M0+x1 M1]exp(c CL), integrated through bandpass at redshift",
+     "locator": "2104.07795.layout.txt p4 §2 L238-243"
+    },
+    {
+     "assertion": "Model is SN Ia-only (single stretch parameter); authors state one SED parameter will not capture full diversity",
+     "locator": "2104.07795.layout.txt p4 §2.2 L253-255"
+    },
+    {
+     "assertion": "Per-object light-curve fitting is a uniform pipeline step (SNANA fit then Tripp); no per-object model-family choice is described",
+     "locator": "2104.07795.layout.txt p8 §3.1 L555-560"
+    }
+   ]
+  },
+  {
+   "id": "arXiv:arXiv:2104.12980v2 (layout L13)",
+   "title": "SNIascore: Deep Learning Classification of Low-Resolution Supernova Spectra (Fremling et al.)",
+   "file": "sources/2104.12980.pdf",
+   "sha256": "524407042cf9a34b85c3ad1e9bdc77eac7b7e935f3d9257ea4a1439dc4d6cfcc",
+   "text": "sources/2104.12980.layout.txt",
+   "text_sha256": "b6e4e8c64b68d8346742d829bb7cf425319cc3b8fed692946524757eb57fccce",
+   "id_verified_by_download": true,
+   "read_in_full": true,
+   "read_range": "1-715",
+   "pages": 12,
+   "reader": "fork-A",
+   "contribution": "17 branches (16 with named rejection), 5 depth conclusions, 9 shape facts",
+   "zero_contribution": false,
+   "notes_file": "census/notes/2104.12980.json",
+   "facts": [
+    {
+     "assertion": "Training, validation and testing labels are BTS classifications (manual SNID template matching plus inspection); BTS18 human-vetted; testing labels subject to minor future change",
+     "locator": "2104.12980.layout.txt p2-3 §1-2 L91-213"
+    },
+    {
+     "assertion": "From 2021-04-15 SNIascore auto-reports SN Ia classifications and redshifts to TNS: later BTS SN Ia labels can be annotations derived from this model's output",
+     "locator": "2104.12980.layout.txt p9 §7 L523-531"
+    },
+    {
+     "assertion": "An official BTS/TNS classification (SN 2020eyj as SN Ia) was later judged likely wrong: TNS labels are not measured truth in every case",
+     "locator": "2104.12980.layout.txt p8 §6 L507-511"
+    },
+    {
+     "assertion": "The only use of a light-curve model is a per-object check that SN Ia light-curve models fail to match, used to reject the SN Ia class (explain-type evidence, not a published fit)",
+     "locator": "2104.12980.layout.txt p8 §6 L503-507"
+    },
+    {
+     "assertion": "Evaluation is on held-out validation and later testing data against SNID and DASH baselines via ROC; FPR<1% is a hard requirement",
+     "locator": "2104.12980.layout.txt p5 §4.1 L297-301"
+    },
+    {
+     "assertion": "Light-curve information is often unavailable at the time of the spectrum; many spectra are pre-maximum",
+     "locator": "2104.12980.layout.txt p9 §6 L549-555"
+    },
+    {
+     "assertion": "Proposed (not practised): objects whose SNIascore changes when the light curve is included may warrant further follow-up",
+     "locator": "2104.12980.layout.txt p9 §6 L543-548"
+    },
+    {
+     "assertion": "Spectral phase uses time of maximum from the BTS Sample Explorer brightest measurement, not a fitted model",
+     "locator": "2104.12980.layout.txt p3 §2 L164-171"
+    },
+    {
+     "assertion": "Planned relaxed cut would remove human interaction for most BTS SNe Ia (about 80% testing, 90% validation), i.e. more than 50% of BTS SNe (body text; the abstract's 60% figure is not used)",
+     "locator": "2104.12980.layout.txt p9 §7 L545-550"
+    }
+   ]
+  },
+  {
+   "id": "arXiv:2109.13999v1",
+   "title": "ParSNIP: Generative Models of Transient Light Curves with Physics-Enabled Deep Learning (Boone 2021)",
+   "file": "sources/2109.13999.pdf",
+   "sha256": "250602d36957e0968162b226be0bd0973691bea84b6c142fe9d0941326d4a91e",
+   "text": "sources/2109.13999.layout.txt",
+   "text_sha256": "a792c0570ae1b2771bec5218acd1265e1ebad74b2224f31b83d7265b723e1503",
+   "id_verified_by_download": true,
+   "read_in_full": true,
+   "read_range": "1-1894",
+   "pages": 27,
+   "reader": "agent1",
+   "contribution": "15 branches (13 with named rejection), 4 depth conclusions, 11 shape facts",
+   "zero_contribution": false,
+   "notes_file": "census/notes/2109.13999.json",
+   "facts": [
+    {
+     "assertion": "Generative-model validation practised = residuals of whole held-out light curves (random 10% of objects), not forecasting later epochs of a partially observed object",
+     "locator": "2109.13999.layout.txt p10 §4.1 L613-642"
+    },
+    {
+     "assertion": "Training-set residuals consistent with statistical uncertainties, author suspects overfitting; validation core dispersion ~0.06 mag",
+     "locator": "2109.13999.layout.txt p10 §4.1 L627-634"
+    },
+    {
+     "assertion": "Large residuals for transient types poorly represented in training: a learned forward model as grader penalizes rare types (I4 risk)",
+     "locator": "2109.13999.layout.txt p10 §4.1 L636-639"
+    },
+    {
+     "assertion": "Per-object comparison of two model families practised: median reduced chi2 1.42 (1.68) ParSNIP vs 1.40 (1.21) SALT2 on SNe Ia",
+     "locator": "2109.13999.layout.txt p13 §4.3 L815-818"
+    },
+    {
+     "assertion": "SALT2 well-fit cuts used: converged fit, x1 in [-5,5], sigma_x1<0.5, sigma_c<0.1, >=1 pre-max observation",
+     "locator": "2109.13999.layout.txt p13 §4.3 L819-824"
+    },
+    {
+     "assertion": "Model assumes known redshift; photo-z path not implemented in the paper (only proposed)",
+     "locator": "2109.13999.layout.txt p3 §2 L148-153"
+    },
+    {
+     "assertion": "Preprocessing requires a stable background before and after the transient and estimates background from points >=250 d from peak, i.e. it presupposes the full light curve (bears on a cut-epoch item)",
+     "locator": "2109.13999.layout.txt p3 §2 L157-159"
+    },
+    {
+     "assertion": "Spectra-comparison objects PS1-12cht and PS1-12baa were included in training for that run (in-sample demonstration)",
+     "locator": "2109.13999.layout.txt p14 §4.4 L937-938"
+    },
+    {
+     "assertion": "Decoder claimed usable for any instrument/bandpass without modification (wave-1 tool card lists a code disagreement)",
+     "locator": "2109.13999.layout.txt p23 §6.8 L1630-1634"
+    },
+    {
+     "assertion": "Posterior Gaussian approximation holds even for partially sampled light curves (MCMC check), no multimodality seen",
+     "locator": "2109.13999.layout.txt p23 §6.5 L1614-1616"
+    },
+    {
+     "assertion": "Novel-transient detection is framed as needing a follow-up feedback loop that spends resources (intervene named, not practised)",
+     "locator": "2109.13999.layout.txt p21 §5.4 L1489-1492"
+    }
+   ]
+  },
+  {
+   "id": "arXiv:arXiv:2401.15167v1 (layout L15)",
+   "title": "The Zwicky Transient Facility Bright Transient Survey. III. BTSbot: Automated Identification and Follow-up of Bright Transients with Deep Learning",
+   "file": "sources/2401.15167.pdf",
+   "sha256": "756c6074c4998317b5cda5f16bf41a9c8fc93bc53306e82c2141c78490fc441e",
+   "text": "sources/2401.15167.layout.txt",
+   "text_sha256": "4c053f1b72692917a8454b8590abce5de7ab3d6891f5b12c8e3a6da746d6d67a",
+   "id_verified_by_download": true,
+   "read_in_full": true,
+   "read_range": "1-1601",
+   "pages": 26,
+   "reader": "fork-B",
+   "contribution": "23 branches (19 with named rejection), 5 depth conclusions, 10 shape facts",
+   "zero_contribution": false,
+   "notes_file": "census/notes/2401.15167.json",
+   "facts": [
+    {
+     "assertion": "Label source for negatives includes scanners' non-saves (rejects): labels are the historical follow-up policy itself",
+     "locator": "2401.15167.layout.txt p4 §2 L225-237"
+    },
+    {
+     "assertion": "Practitioner action is committing spectroscopic follow-up: scanners save and request spectra",
+     "locator": "2401.15167.layout.txt p2 §1 L97-101"
+    },
+    {
+     "assertion": "Validation of the governed decision is by simulating policies on historical candidates and comparing to scanner save/trigger times, not by outcomes of untaken actions",
+     "locator": "2401.15167.layout.txt p11 §4.1 L693-707"
+    },
+    {
+     "assertion": "Scanner purity cannot be computed straightforwardly because scanners act on dim transients deliberately (selective-labels/value ambiguity)",
+     "locator": "2401.15167.layout.txt p12 §4.1 L747-758"
+    },
+    {
+     "assertion": "False positives on dim SNe are judged an appropriate use of spectroscopic time: value of the action differs from the class label",
+     "locator": "2401.15167.layout.txt p14 §4.1 L849-857"
+    },
+    {
+     "assertion": "BTSbot uses no redshift information",
+     "locator": "2401.15167.layout.txt p8 §3 L518-522"
+    },
+    {
+     "assertion": "Present-day window chosen to reduce bias from BTSbot actions visible to scanners influencing their decisions (policy leakage into labels)",
+     "locator": "2401.15167.layout.txt p14 §4.2 L883-892"
+    },
+    {
+     "assertion": "Task is binary classification that includes a forecast of whether the source will reach mpeak<=18.5; no light-curve model fit, no forward model, no held-out-epoch prediction practised",
+     "locator": "2401.15167.layout.txt p3 §1 L146-170"
+    },
+    {
+     "assertion": "Scanning also involves retrieving host redshifts from NED and TNS classifications (not yet automated)",
+     "locator": "2401.15167.layout.txt p17 §5.1 L1051-1056"
+    },
+    {
+     "assertion": "About 70% of BTS bright transients are SNe Ia; SNIascore classifies and reports 80-90% of these",
+     "locator": "2401.15167.layout.txt p17 §5.1 L1042-1048"
+    }
+   ]
+  },
+  {
+   "id": "arXiv:arXiv:2403.07975v1 (L13)",
+   "title": "Superphot+: Realtime Fitting and Classification of Supernova Light Curves (de Soto et al. 2024)",
+   "file": "sources/2403.07975.pdf",
+   "sha256": "a127b54e7728c33e17a5f730f7eb011ba0ebcc880ff0b61286fb62fa8febac08",
+   "text": "sources/2403.07975.layout.txt",
+   "text_sha256": "65b279a40168761321e2ef1b32f3c6597a3b91cd01f56c890da08d988cf115c3",
+   "id_verified_by_download": true,
+   "read_in_full": true,
+   "read_range": "1-2915",
+   "pages": 37,
+   "reader": "fork-C",
+   "contribution": "26 branches (21 with named rejection), 7 depth conclusions, 15 shape facts",
+   "zero_contribution": false,
+   "notes_file": "census/notes/2403.07975.json",
+   "facts": [
+    {
+     "assertion": "Per-object published output: five class probabilities plus fit reduced chi2 and ALeRCE label, machine-readable on Zenodo (Table 5).",
+     "locator": "2403.07975.layout.txt p24 §7.1 L1854-1879"
+    },
+    {
+     "assertion": "Fit parameters are saved as light-curve properties on ANTARES (a published per-object fit exists for objects processed in realtime).",
+     "locator": "2403.07975.layout.txt p29 §8 L2337-2344"
+    },
+    {
+     "assertion": "Training set keeps partial light curves: 91 pre-peak-only, 503 post-peak-only; poorly sampled fits are prior-dominated.",
+     "locator": "2403.07975.layout.txt p7 §2.6 L429-445"
+    },
+    {
+     "assertion": "Truncation experiment fits and classifies truncated light curves and grades by classification metrics; no prediction of held-out later photometry is evaluated anywhere in the paper.",
+     "locator": "2403.07975.layout.txt p18 §5.2 L1423-1431"
+    },
+    {
+     "assertion": "6,061 (~99%) spectroscopic light curves pass median reduced chi2 < 1.2.",
+     "locator": "2403.07975.layout.txt p11 §3.1 L674-680"
+    },
+    {
+     "assertion": "Labels come from TNS spectroscopic classifications; 66% of training light curves are also in ZTF BTS.",
+     "locator": "2403.07975.layout.txt p6 §2.6 L336-340"
+    },
+    {
+     "assertion": "Priors are set from marginal posteriors of fits to the same dataset (data-derived priors).",
+     "locator": "2403.07975.layout.txt p8 §3 L485-491"
+    },
+    {
+     "assertion": "Parametric model cannot capture SN Ia secondary r-band bumps; ParSNIP can.",
+     "locator": "2403.07975.layout.txt p22 §6 L1766-1770"
+    },
+    {
+     "assertion": "Tail clipping touches 4,324 of 9,526 light curves (45%), due to template-subtraction artefacts.",
+     "locator": "2403.07975.layout.txt p30 §App A L2466-2472"
+    },
+    {
+     "assertion": "Early-phase classifier outperforms full-phase before ~20 days but is not deployed on ANTARES.",
+     "locator": "2403.07975.layout.txt p19 §5.2 L1568-1570"
+    },
+    {
+     "assertion": "ANTARES filter has not yet incorporated the early-phase variant.",
+     "locator": "2403.07975.layout.txt p29 §8 L2399-2408"
+    },
+    {
+     "assertion": "SuperRAENN decodings of the same encoding vary with number of requested timestamps (forward-model instability of an alternative generator).",
+     "locator": "2403.07975.layout.txt p22 §6 L1762-1766"
+    },
+    {
+     "assertion": "Internal disagreement: binary SN Ia threshold p>=0.142 (Fig. 13 caption) vs p=0.175 (Sec. 5.3 text).",
+     "locator": "2403.07975.layout.txt p20 §5.3 L1584-1588"
+    },
+    {
+     "assertion": "sigma_extra per band added in quadrature to account for empirical model limitations.",
+     "locator": "2403.07975.layout.txt p7 §3 L414-422"
+    },
+    {
+     "assertion": "Fits from light curves with only rise or decline information are more likely prior-dominated.",
+     "locator": "2403.07975.layout.txt p10 §3 L599-602"
+    }
+   ]
+  },
+  {
+   "id": "arXiv:arXiv:2405.03078v2 (layout L23)",
+   "title": "ATAT: Astronomical Transformer for time series And Tabular data",
+   "file": "sources/2405.03078.pdf",
+   "sha256": "d0342eba419d189d7b717d8a924aa6307e51697872499351338df96fd5a6d9ce",
+   "text": "sources/2405.03078.layout.txt",
+   "text_sha256": "0a06bb25a5ada0226dee0a9c0839ba3f10fbcb7b7d49f37f5139ab58183b1097",
+   "id_verified_by_download": true,
+   "read_in_full": true,
+   "read_range": "1-1430",
+   "pages": 12,
+   "reader": "fork-B",
+   "contribution": "13 branches (12 with named rejection), 4 depth conclusions, 6 shape facts",
+   "zero_contribution": false,
+   "notes_file": "census/notes/2405.03078.json",
+   "facts": [
+    {
+     "assertion": "All training and evaluation are on simulated ELAsTiCC data; labels are simulation truth; authors warn real LSST performance may differ",
+     "locator": "2405.03078.layout.txt p10 §4 L1260-1268"
+    },
+    {
+     "assertion": "Metadata channel includes host spectroscopic/photometric redshift and MW extinction",
+     "locator": "2405.03078.layout.txt p2 §2.1 L112-124"
+    },
+    {
+     "assertion": "Grader is an answer key: held-out test set of 1000 light curves per class",
+     "locator": "2405.03078.layout.txt p2 §2.1 L126-142"
+    },
+    {
+     "assertion": "The only forward-model fit (SPM) is a feature extractor with tuned bounds; fit quality is never graded on held-out epochs",
+     "locator": "2405.03078.layout.txt p12 §A L1355-1357"
+    },
+    {
+     "assertion": "Early classification evaluated on light curves truncated at days after first alert (partial light curves), graded against class labels",
+     "locator": "2405.03078.layout.txt p6 §3.1 L439-446"
+    },
+    {
+     "assertion": "Practitioner action: model put into production in the ALeRCE broker (tool built; per-object outputs are class predictions)",
+     "locator": "2405.03078.layout.txt p9 §4 L1191-1194"
+    }
+   ]
+  },
+  {
+   "id": "arXiv:arXiv:2409.04346v2 (layout L19)",
+   "title": "ZTF SN Ia DR2: Overview (Rigault, Smith et al. 2024/2025)",
+   "file": "sources/2409.04346.pdf",
+   "sha256": "2b7085ccbee534a7b1c63114f8a0b11b723eae11f7b228f937bf8d367975019c",
+   "text": "sources/2409.04346.layout.txt",
+   "text_sha256": "e233ec83500542afeabac7f437fafe27d9c6ac1e62d4efedb2261935793d6b7d",
+   "id_verified_by_download": true,
+   "read_in_full": true,
+   "read_range": "1-912",
+   "pages": 11,
+   "reader": "fork-D",
+   "contribution": "14 branches (8 with named rejection), 3 depth conclusions, 10 shape facts",
+   "zero_contribution": false,
+   "notes_file": "census/notes/2409.04346.json",
+   "facts": [
+    {
+     "assertion": "Per object DR2 publishes SALT2 t0, x0, x1, c with errors and covariances, fitprob, coverage and fit-quality flags, redshift, type and subtype: a published fit exists for every released DR2 SN Ia",
+     "locator": "2409.04346.layout.txt p9 §Table 3 L671-686"
+    },
+    {
+     "assertion": "Released forced-photometry g,r,i light curves for 3591 SNe Ia plus 5138 spectra; also on WISeREP",
+     "locator": "2409.04346.layout.txt p8 §6 L635-637"
+    },
+    {
+     "assertion": "Extra tables publish alternative per-object fits: SALT2.4 or SALT3 templates, alternative phase windows, with or without i band",
+     "locator": "2409.04346.layout.txt p8 §6 L646-648"
+    },
+    {
+     "assertion": "Label source: spectroscopic classification, snid matching plus crowd visual vetting (each SN vetted at least twice), experts on edge cases",
+     "locator": "2409.04346.layout.txt p5 §4.4 L368-370"
+    },
+    {
+     "assertion": "79% of DR2 targets are covered by the BTS program (overlap with BTS supply)",
+     "locator": "2409.04346.layout.txt p3 §2 L183-184"
+    },
+    {
+     "assertion": "Light-curve model accuracy (fit residuals) and an extra stretch-like parameter are studied in companion papers (Rigault 2024b, Kenworthy 2024); not in this seed",
+     "locator": "2409.04346.layout.txt p7 §5 L527-532"
+    },
+    {
+     "assertion": "Photometry has percent-level nonlinearity (pocket effect) after Nov 2019; zero point known at 5%",
+     "locator": "2409.04346.layout.txt p4 §4.1.2 L255-261"
+    },
+    {
+     "assertion": "Light curves of 37 normal SNe Ia at z<0.015 withheld for an H0 program",
+     "locator": "2409.04346.layout.txt p8 §6 L645-648"
+    },
+    {
+     "assertion": "Typical sampling: ~40 detections in [-10,+40], median 9 pre-max and 27 post-max; detected 12 d before max",
+     "locator": "2409.04346.layout.txt p4 §4.1.1 L289-295"
+    },
+    {
+     "assertion": "Spectroscopic follow-up selection modelled as sigmoid with m0=18.8, matching BTS completeness",
+     "locator": "2409.04346.layout.txt p6 §4.6 L467-473"
+    }
+   ]
+  }
+ ],
+ "non_seed_inputs_read": [
+  "astronomy/wave5_shape/PANEL_BRIEF_WAVE5.md (sha256 verified)",
+  "astronomy/wave5_shape/SHAPE_REEVALUATION.md",
+  "fm-advantage-benchmark-with-shape: SKILL.md, references/shape.md, manifest.md, provenance.md, loop.md, graph.md, references/stages/discovery.md, references/stages/supply.md, schemas/domain_manifest.schema.json, scripts/validate.py",
+  "astronomy/wave4/STATUS.md",
+  "astronomy/agent4_tools_instrument/REPORT.md and tool_cards SALT3/ParSNIP",
+  "astronomy/wave3/agent4_tool_recount/REPORT.md and tool_card_Superphot_plus.json",
+  "astronomy/wave2/agent4_instrument/REPORT.md, compositions_FROZEN.md, AMENDMENTS.md, tool_card_ParSNIP.json",
+  "astronomy/agent5_resolution_replay/k_slot.json",
+  "astronomy/agent2_floor_headroom/prior_floor_record.json",
+  "astronomy/agent1_supply_corpus/cut_curve.json"
+ ],
+ "reading_method": "Each seed downloaded fresh from arxiv.org/pdf/<id> (id verified against the PDF header), pdftotext -layout; read L1 to last line in chunks including references. 2109.13999 read by agent 1; the other 11 by five reading forks of agent 1 under one written rule set; every quote verified by script (0 failures on 452 quotes); agent 1 re-read 15 ruling-bearing locators in 7 seeds against the layout text.",
+ "arxiv_ids_wrong": [],
+ "completeness": "12 seeds, all read in full, all ids verified by download, none wrong. Held full texts from earlier waves were not reused for locators because wave-1 agent 4 read from a copy with numeric table cells stripped; fresh downloads were used instead. Not read: DR2 companion fitting papers, AT2018cow X-ray/radio companions, SuperRAENN, SALT3 F22 recalibration (Brout et al. 2022)."
+}

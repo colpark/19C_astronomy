@@ -1,0 +1,1423 @@
+                                                 D RAFT VERSION O CTOBER 30, 2019
+                                                 Typeset using LATEX twocolumn style in AASTeX62
+
+
+
+
+                                                                                      The Zwicky Transient Facility Bright Transient Survey I:
+                                                                        Spectroscopic Classification and the Redshift Completeness of Local Galaxy Catalogs
+                                                  U. C. F REMLING , 1 A. A. M ILLER , 2, 3 Y. S HARMA , 1 A. D UGAS , 1 D. A. P ERLEY , 4 K. TAGGART , 4 J. S OLLERMAN , 5 A. G OOBAR , 6
+                                                  M. L. G RAHAM , 7 J. D. N EILL , 1 J. N ORDIN , 8 M. R IGAULT , 9 R. WALTERS , 1, 10 I. A NDREONI , 1 A. BAGDASARYAN , 1 J. B ELICKI , 10
+                                               C. C ANNELLA , 11 E RIC C. B ELLM , 12 S. B. C ENKO , 13 K. D E , 1 R. D EKANY , 10 S. F REDERICK , 14 V. Z ACH G OLKHOU , 12, 15 M. G RAHAM , 1
+                                                G. H ELOU , 16 A. Y. Q. H O , 1 M. K ASLIWAL , 1 T. K UPFER , 17 RUSS R. L AHER , 16 A. M AHABAL , 1, 18 F RANK J. M ASCI , 16 R. R IDDLE , 10
+                                                B EN RUSHOLME , 16 S. S CHULZE , 19 DAVID L. S HUPE , 16 R. M. S MITH , 10 L IN YAN , 10 Y. YAO , 1 Z. Z HUANG , 1 AND S. R. K ULKARNI 1
+arXiv:1910.12973v1 [astro-ph.HE] 28 Oct 2019
+
+
+
+
+                                                                    1 Division of Physics, Mathematics and Astronomy, California Institute of Technology, Pasadena, CA 91125, USA
+                                                2 Center for Interdisciplinary Exploration and Research in Astrophysics and Department of Physics and Astronomy, Northwestern University, 2145 Sheridan
+
+                                                                                                            Road, Evanston, IL 60208, USA
+                                                                                                   3 The Adler Planetarium, Chicago, IL 60605, USA
+                                                          4 Astrophysics Research Institute, Liverpool John Moores University, Liverpool Science Park, 146 Brownlow Hill, Liverpool L35RF, UK
+                                                                     5 Department of Astronomy, The Oskar Klein Center, Stockholm University, AlbaNova, 10691 Stockholm, Sweden
+                                                                      6 Department of Physics, The Oskar Klein Center, Stockholm University, AlbaNova, 10691 Stockholm, Sweden
+                                                                            7 Department of Astronomy, University of Washington, Box 351580, U.W., Seattle, WA 98195, USA
+                                                                              8 Institut fur Physik, Humboldt-Universitat zu Berlin, Newtonstr. 15, 12489, Berlin, Germany
+                                                                9 Université Clermont Auvergne, CNRS/IN2P3, Laboratoire de Physique de Clermont, F-63000 Clermont-Ferrand, France.
+                                                                             10 Caltech Optical Observatories, California Institute of Technology, Pasadena, CA 91125, USA
+                                                                 11 Department of Electrical and Computer Engineering, Duke University, Durham, North Carolina 27708, United States
+                                                                 12 DIRAC Institute, Department of Astronomy, University of Washington, 3910 15th Avenue NE, Seattle, WA 98195, USA
+                                                                 13 Astrophysics Science Division, NASA Goddard Space Flight Center, 8800 Greenbelt Road, Greenbelt, MD 20771, USA
+                                                                                  14 Department of Astronomy, University of Maryland, College Park, MD 20742, USA
+                                                                                      15 The eScience Institute, University of Washington, Seattle, WA 98195, USA∗
+                                                                             16 IPAC, California Institute of Technology, 1200 E. California Blvd, Pasadena, CA 91125, USA
+                                                                           17 Kavli Institute for Theoretical Physics, University of California, Santa Barbara, CA 93106, USA
+                                                                           18 Center for Data Driven Discovery, California Institute of Technology, Pasadena, CA 91125, USA
+                                                                             19 Benoziyo Center for Astrophysics, The Weizmann Institute of Science, Rehovot 76100, Israel
+
+
+
+                                                                                                 (Received October 30, 2019; Revised; Accepted)
+
+                                                                                                                 Submitted to ApJ
+
+                                                                                                                    ABSTRACT
+                                                            The Zwicky Transient Facility (ZTF) is performing a three-day cadence survey of the visible Northern sky
+                                                         (∼3π steradian). The transient candidates found in this survey are announced via public alerts. As a supplemen-
+                                                         tary product ZTF is also conducting a large spectroscopic campaign: the ZTF Bright Transient Survey (BTS).
+                                                         The goal of the BTS is to spectroscopically classify all extragalactic transients brighter than 18.5 mag in ei-
+                                                         ther the gZTF or rZTF -filters at peak brightness and immediately announce those classifications to the public.
+                                                         Extragalactic discoveries from ZTF are predominantly Supernovae (SNe). The BTS is the largest flux-limited
+                                                         SN survey to date. Here we present a catalog of the 761 BTS SNe that were classified during the first nine
+                                                         months of the survey (2018 Apr. 1 to 2018 Dec. 31). The BTS SN catalog contains redshifts based on SN
+                                                         template matching and spectroscopic host galaxy redshifts when available. Based on this data we perform an
+                                                         analysis of the redshift completeness of local galaxy catalogs, dubbed as the Redshift Completeness Fraction
+                                                         (RCF; the number of SN host galaxies with known spectroscopic redshift prior to SN discovery divided by the
+                                                         total number of SN hosts). In total, we identify the host galaxies of 512 Type Ia supernovae, 227 of which have
+                                                         known spectroscopic redshifts, yielding an RCF estimate of 44% ± 1% (90% confidence interval). We find a
+                                                         steady decrease in the RCF with increasing distance in the local universe. For z . 0.05, or ∼ 200 Mpc, we
+
+
+                                               Corresponding author: U. C. Fremling
+                                               fremling@caltech.edu
+2                                                              F REMLING ET AL .
+
+         find RCF ≈ 0.6, which has important ramifications when searching for multimessenger astronomical events.
+         Prospects for dramatically increasing the RCF are limited to new multi-fiber spectroscopic instruments that can
+         catalog &10 million galaxies in the local universe, or wide-field narrowband surveys. We find that existing
+         galaxy redshift catalogs are only 50% complete at r ≈ 16.9 mag (AB). Pushing this limit several magnitudes
+         deeper will pay huge dividends when searching for electromagnetic counterparts to gravitational wave events or
+         sources of ultra high energy cosmic rays or neutrinos.
+
+         Keywords: supernovae: general — galaxies: distances and redshifts — catalogs — surveys
+
+                      1. INTRODUCTION                                     spectroscopy include for example: the Lick Observatory Su-
+   Fritz Zwicky and Walter Baade first hypothesized that su-              pernova Search (LOSS; Li et al. 2000), the Nearby Super-
+pernovae (SNe) were the transition of normal stars into neu-              nova Factory (SNfactory; Aldering et al. 2002), the Sloan
+tron stars (Baade & Zwicky 1934). To test this hypothesis,                Digital Sky Survey-II (SDSS-II) SN Survey (Frieman et al.
+Zwicky used the 18-inch Schimdt telescope commissioned                    2008), and the Supernova Legacy Survey (SNLS; Astier et al.
+on Palomar mountain in 1936, to carry out the first systematic            2006). In the last few years, based on statistics on the Tran-
+SN survey (Zwicky 1938a,b, 1942). This survey was carried                 sient Name Server (TNS2 ), several surveys are discovering
+out by visually inspecting photographic plates of nebulae,1               hundreds of SNe that are also being spectroscopically clas-
+and identifying new point-sources. Twelve SNe were identi-                sified, including the Palomar Transient Factory (PTF; Law
+fied by Zwicky between 1936 Sept. 5 to 1940 Jan. 1.                       et al. 2009), the Asteroid Terrestrial-impact Last Alert Sys-
+   Since the pioneering efforts by Zwicky, a variety of SN                tem (ATLAS; Tonry et al. 2018), the All-Sky Automated Sur-
+types have been identified through spectroscopy (see e.g.,                vey for SuperNovae (ASAS-SN; Shappee et al. 2014), and
+Filippenko 1997). Thermonuclear SNe (SNe Ia) in particular                the Panoramic Survey Telescope and Rapid Response Sys-
+have proven to be invaluable tools in order to measure cosmo-             tem (Pan-STARRS1, hereafter PS1; Chambers et al. 2016)
+logical distances (e.g., Goobar & Leibundgut 2011), and the               Medium Deep Survey.
+study of SNe Ia eventually led to the remarkable discovery of                The past few decades have seen a growing complexity in
+the accelerating expansion of the universe (Riess et al. 1998;            SN search surveys, with the general trend being an increase
+Perlmutter et al. 1999). Studies of core-collapse (CC) SNe                in volumetric survey speed (e.g., Bellm 2016) and conse-
+have led to considerable insights in massive star evolution;              quently the number of SN discoveries. Given the scarcity of
+extragalactic neutrinos were detected in SN 1987A (Hirata                 spectroscopic resources for SN follow-up observations, the
+et al. 1987), a γ-ray burst was associated with SN 1998bw                 increase in SN discoveries has resulted in a smaller fraction
+(Galama et al. 1998), direct evidence for binary-star driven              of the SNe being classified with time. Of the on-going sur-
+mass loss was seen in SN 1993J (e.g., Schmidt et al. 1993;                veys, only ASAS-SN is able to maintain close to complete
+Fox et al. 2014).                                                         spectroscopic coverage (95 ± 3% for mpeak < 16.5; Holoien
+   In order to constrain cosmological models and to charac-               et al. 2019), largely since ASAS-SN only detects very bright
+terize both SNe in general and the various SN types and their             SNe. Otherwise, the typical strategies are to either: (i) fo-
+host galaxies, a large number of SN surveys have been car-                cus entirely on the most nearby galaxies (LOSS employed
+ried out since Zwicky’s time. The scope of these surveys                  this strategy and maintained a nearly complete survey for
+largely traces the progress made in both automation and de-               ∼10 yr), (ii) focus observations on likely SNe Ia to study cos-
+tector technology during the last few decades. The first sys-             mology (e.g., SDSS-II, SNLS), or (iii) target only a subset of
+tematic search for SNe using a charge-coupled device (CCD)                SN candidates (e.g., PTF, ATLAS). Any of these choices re-
+was performed on the 1.5-m telescope at La Silla (Norgaard-               sult in major systematic ambiguities underlying any attempt
+Nielsen et al. 1989). The Field-of-View (FoV) of this tele-               to derive SN rates and demographics, or to use SNe from
+scope and CCD was 2.50 × 40 , and the survey was designed                 these surveys as population probes of galaxies. Nevertheless,
+to find a thermonuclear supernova at high-redshift. Two SNe,              these compromises have been necessary given the resources
+one SN Ia and one probable SN II, were found in two years.                at hand.
+More recent examples of SN surveys that have also been able                  With the Zwicky Transient Facility (ZTF; Bellm et al.
+to systematically classify their supernova candidates using               2019a,b; Graham et al. 2019) in combination with the fully
+                                                                          automated Spectral Energy Distribution Machine (SEDM;
+                                                                          Ben-Ami et al. 2012; Blagorodnova et al. 2018; Rigault et al.
+∗ Moore-Sloan, WRF Innovation in Data Science, and DIRAC Fellow
+  1 At the time, the term nebulae encompassed any diffuse astronomical
+
+object, including galaxies.                                                 2 https://wis-tns.weizmann.ac.il/stats-maps
+                                                                   ZTF BTS                                                           3
+
+2019), a low-resoultion (R∼ 100) Integral-Field-Unit (IFU)               methodology for this analysis closely follows that of Kulka-
+spectrograph mounted on the robotic Palomar 60-inch tele-                rni et al. (2018).
+scope (P60; Cenko et al. 2006), we have set out to address
+                                                                                                  2. SURVEY DESIGN
+the lack of spectroscopic completeness described above. We
+aim to monitor the entire visible sky at moderate cadence                   Transient candidates for the BTS are provided by the pub-
+while being complete in terms of spectroscopic classifica-               lic ZTF surveys: the Northern Sky Survey (NSS) and the
+tion. The 47 deg2 field of view of the ZTF camera, along                 Galactic Plane Survey (GPS). These surveys are made pos-
+with upgrades to the Palomar 48-inch (P48) telescope and                 sible by an award from the NSF Mid-Scale Innovations Pro-
+dome, achieves a survey speed of 3750 deg2 hr−1 , to a 5σ                gram (MSIP), and we henceforth refer to them as the ZTF
+depth of ∼20.5 mag in rZTF using 30 s exposures. This al-                MSIP surveys (see Bellm et al. 2019b for details). The NSS
+lows most of the sky visible from Palomar to be imaged at                covers ≈ 13,000 deg2 of the Northern sky at a 3-day ca-
+a 3-day cadence (see §2 for details). Furthermore, SEDM is               dence in the gZTF and rZTF filters, while using 34% of the
+capable of classifying > 10 SNe in the 18.5 − 19 magni-                  P48 telescope time. The GPS covers ≈ 1,500 deg2 of the
+tude range every night. A significant amount of time is also             galactic plane at a 1-day cadence, also in the gZTF and rZTF
+allocated to this project on the Palomar 200-inch telescope              filters, and uses 6% of the P48 telescope time.
+(P200), Keck I, the Liverpool Telescope (LT), Apache Point                  The BTS avoids low Galactic latitudes by design; we re-
+Observatory (APO) and the Nordic Optical Telescope (NOT).                ject all transient candidates found within 7◦ of the Galactic
+These resources are used to supplement our SEDM observa-                 plane (see §2.1). The combination of significant Galactic ex-
+tions when SEDM classification is not possible, and the com-             tinction and the BTS Galactic plane cut means that the vast
+bination enables the ZTF Bright Transient Survey (BTS): a                majority of the transients in the BTS originate from the NSS.
+SN survey of unprecedented scale and spectroscopic com-                  However, due to the large FoV and the fixed main field-grid
+pleteness in the local universe.                                         used by ZTF (Masci et al. 2019), some of the GPS fields still
+   The primary goal of the BTS is to spectroscopically clas-             allow transients to be found and monitored after a 7◦ galactic
+sify and publicly report every extragalactic r < 18.5 mag                plane cut. During 2018 we classified two SNe within GPS
+transient in the Northern sky covered by the public ZTF sur-             fields.
+veys,3 producing the first large, fully magnitude-complete                  The images from the ZTF MSIP surveys are processed
+sample to rpeak < 18.5 mag.4 In this paper we will focus on              and analysed at IPAC by an automated pipeline (Masci et al.
+SNe, but the BTS also finds and classifies Tidal Disruption              2019), that uses the Zackay et al. (2016) difference-imaging
+Events (TDEs), which will be analysed separately, and other              method. The pipeline produces transient alert packets from
+extragalactic phenomena such as massive active galactic nu-              the difference images in the Apache AvroTM format.6 The
+cleus (AGN) flares, and fast and highly energetic transients             Avro alert packets are distributed through the University of
+such as AT 2018cow5 (Prentice et al. 2018; ?; Ho et al. 2019),           Washington (UW) as a Kafka data stream.7 The alert stream
+whose nature remains mysterious. Here we present a cata-                 originating from the ZTF MSIP surveys is the data source
+log of the 761 BTS SNe classified during the first 9 months              for BTS transient candidates. The full ZTF Alert Distribu-
+of the survey (2018 Apr. 1 to 2018 Dec. 31; Table 1). Our                tion System (ZADS) is described in detail in Patterson et al.
+catalog contains redshifts based on SN template matching                 (2019).
+(Blondin & Tonry 2007) and spectroscopic host galaxy red-                   Figure 1 shows the gZTF and rZTF -band coverage maps of
+shifts when available. WISE (Wright et al. 2010) W 1-band                the ZTF MSIP surveys, between 2018 April 1 and 2018 De-
+and PS1 (Chambers et al. 2016) i-band host galaxy magni-                 cember 31. The distribution of re-visit times (cadence) for
+tudes are also reported.                                                 the NSS for each field during the same time period, exclud-
+   We expect that this sample, and its ongoing extension                 ing 2018 September 29 to 2018 October 31 when the P48
+through 2019 and 2020, will be useful for a wide variety of              was undergoing maintenance, is shown in Figure 2. Approx-
+topics within supernova astrophysics, some of which will be              imately 70% of the NSS observations were carried out at the
+the focus of follow-up papers. In this paper, we focus on an             planned 3 d cadence, and ∼90% of re-visits occurred within
+analysis of the redshift completeness of local galaxy catalogs           ≤ 6 d during 2018. For the GPS, around 80% of the obser-
+(§5), dubbed as the Redshift Completeness Fraction (RCF;                 vations were carried out at a 1-day cadence. However, since
+the number of SN host galaxies with known redshift prior                 only two BTS SNe were found and classified during 2018 in
+to SN discovery divided by the total number of SNe). The                 the GPS fields, the GPS cadence is not representative for the
+                                                                         BTS.
+  3 Excluding the galactic plane (±7◦ ).
+  4 The saturation limit of ZTF is ∼ 14 mag.                                 6 https://avro.apache.org
+  5 The internal ZTF designation for AT 2018cow is ZTF18abcfcoo.             7 https://kafka.apache.org
+ 4                                                                      F REMLING ET AL .
+                         60°                                60°                                         60°                                 60°
+
+           30°                                                            30°                30°                                                        30°
+
+
+      0°                                                                         0°     0°                                                                     0°
+Dec
+
+
+
+
+                                                                                  Dec
+            150° 120° 90° 60° 30°         0° 330° 300° 270° 240° 210°                         150° 120° 90° 60° 30°       0° 330° 300° 270° 240° 210°
+                                          RA                                                                              RA
+           -30°                                                           -30°               -30°                                                       -30°
+
+                        -60°                                -60°                                        -60°                                -60°
+
+                  0      10    20       30      40     50          60                               0   10     20       30      40     50          60
+                                    Number of epochs                                                                Number of epochs
+Figure 1. Coverage maps for the ZTF MSIP surveys, in the gZTF - (left panel) and rZTF -band (right panel) between 2018 Apr. 1 and 2018
+Dec. 31. The colored rectangles represent the fixed ZTF main field grid. The color intensity indicates the number of observations during this
+time period, truncated to a maximum of 65.
+
+   In order to identify bright SN candidates within the raw                                    • Alerts that do not include at least two detections sep-
+ZTF alert stream produced by the MSIP surveys we uti-                                            arated by a minimum of 30 min are rejected (moving
+lize the filtering capability within the GROWTH Marshal                                          object filter).
+framework (Kasliwal et al. 2019) to apply the candidate fil-
+ter described below (§2.1). The GROWTH Marshal is also                                         • Alerts with negative flux relative to the reference im-
+used to organize BTS sources and the corresponding spectro-                                      age are rejected.
+scopic follow-up efforts (§§2.2, 2.3).
+                                                                                               • The alert must include at least one epoch with m >
+                                                                                                 19 mag (in gZTF - or rZTF -band), otherwise it is re-
+                      2.1. Supernova Candidate Filter
+                                                                                                 jected.
+  The BTS filter used between 2018 Apr. 1st and 2018
+Dec. 31st was deliberately designed to be simple, in order to                           The BTS filter effectively passes all alerts brighter than
+minimize the risk of false negatives (i.e., real transients that                        19 mag that are not consistent with stellar events (star de-
+are not saved as part of the program). Using the GROWTH                                 tected in PS1) or moving objects for human vetting (scan-
+Marshal alert filtering system, we applied the following                                ning; §2.2).
+cuts to the raw ZTF alert stream in order to identify bright
+SN candidates:                                                                                            2.2. Human candidate vetting
+                                                                                           On a typical night in 2018 a few hundred alerts passed
+       • Alerts at low Galacitc latitudes (|b| ≤ 7◦ ) are rejected.                     the BTS filter. These BTS transient candidates were visu-
+                                                                                        ally inspected by a team of scanners on a daily basis. To
+       • Alerts with a random forest based machine learning                             organize this effort we use the GROWTH Marshal (Kasli-
+         real-bogus score (rbscore; Mahabal et al. 2019) of                             wal et al. 2019), where the light curves and image cutouts
+         less than 0.2 are rejected. This choice results in a com-                      (science, reference, and subtraction) contained in the Avro
+         pleteness (i.e., 1 - false negative rate) of > 99% (figure                     packets of the passing alerts are collected on a scanning page
+         16 in Duev et al. 2019).                                                       for each night. Supplementary information is also displayed,
+                                                                                        such as: PS1 and SDSS color composite cutouts centered
+       • Alerts produced at the position of known stars, as iden-
+                                                                                        on the position of the transient, the star-galaxy separation
+         tified in the catalog created by Tachibana & Miller
+                                                                                        score (sgscore), which gives a probability that the clos-
+         (2018), are rejected. A small fraction of galaxies (esti-
+                                                                                        est PS1 counterpart is an extended galaxy or a point-like
+         mated to be <0.5% in Tachibana & Miller 2018), and
+                                                                                        star (Tachibana & Miller 2018), multi-band photometry of
+         thus nuclear SNe will be missed as a result of this cut.
+                                                                                        this PS1 counterpart, a cross-check for known near earth ob-
+                                                                                        jects (NEOs), and information about if and when there have
+       • Alerts produced close to very bright stars have been
+                                                                                        been previous ZTF alerts at the same position that are not
+         rejected (< 2000 for < 15 mag stars; ∼ 1% loss of
+                                                                                        part of the 30-day history contained in the alert packet itself.
+         survey area8 ).
+                                                                                        External catalog cross-matches (e.g., NED, TNS, SIMBAD,
+                                                                                        VizieR) are also linked through the GROWTH Marshal to
+  8 Based on randomly injecting 10, 000 SNe within the survey footprint                 provide additional contextual information for each potential
+and matching against PS1 stars.                                                         SN candidate.
+                                                                         ZTF BTS                                                                        5
+
+   The human vetting process essentially consisted of inspect-                              0.9
+ing the information contained in the Avro packets for each
+alert that passed our filter and also taking into account any                               0.8
+relevant supplementary information available in order to rule
+out variability from a stellar counterpart, and to reject alerts                            0.7
+
+produced by known AGN.
+                                                                                            0.6
+   Among the passing alerts, 5–15 SN candidates are typi-
+cally identified by the human scanners as good SN candidates                                0.5                                         g band
+
+
+
+
+                                                                                   N/Ntot
+and assigned for spectroscopic followup, per night.9 The two                                                                            r band
+main contaminants in our scanning process are cataclysmic                                   0.4
+variables (CVs) that are too faint to be seen in PS1 in their
+quiescent phase, and therefore lack an sgscore, and AGN.                                    0.3
+Both of these must be avoided, given our limited spectro-
+scopic resources. We have found that the vast majority of                                   0.2
+CVs can be avoided by monitoring the lightcurve behavior
+                                                                                            0.1
+until ∼ 1 week after the initial outburst and comparing the
+evolution with typical CV lightcurves.10 This is especially ef-
+                                                                                             0
+fective since ZTF produces both gZTF - and rZTF -band pho-                                        3            4           5                  6
+                                                                                                               Cadence (days)
+tometry for virtually all transients that are detected.
+   Filtering AGN is more challenging: excluding all AGN                        Figure 2. Cadence distribution for the ZTF NSS, in the gZTF - (blue
+from the BTS could inadvertently reject a SN that has ex-                      bars) and rZTF -band (red bars), truncated at six days. Cumulative
+ploded near the nucleus of a galaxy that harbors an AGN.                       distributions are shown as a blue solid line for the g band and a red
+Filtering on past variability is a very effective way of exclud-               dashed line for the r band. N/Ntot is the fraction of observations
+ing AGN, but for the sample presented here the baseline of                     at a specific cadence compared to the total number of observations
+                                                                               between 2018 Apr. 1 and 2018 Dec. 31.
+ZTF observations was only a few weeks or months, which is
+not always a sufficient amount of time for the AGN to change
+in flux enough to be recognized as a variable object. We have                  AMPEL11 , and the AMPEL TNS channel filter described in
+generally not triggered spectroscopic follow-up for alerts that                Nordin et al. (2019).
+are positionally coincident with known AGN (e.g., the ALL-                        After the filtering step, we combined the passing candi-
+WISE mid-infrared AGN catalog; Secrest et al. 2015, the                        dates from both filters and imposed a cut requiring: at least
+Million Quasar catalog; Flesch 2015), unless the photomet-                     5 detections, a peak mag < 18.5, no more than one nega-
+ric evolution of the transient is very similar to that of a SN.                tive detection, and a time between the first and last detection
+Thus, the BTS is incomplete for SNe near AGN (a focused                        more than 5 days and less than 90 days12 . Finally, we also
+survey with the specific goal of discovering SNe in galaxies                   required that the candidate passes a version of the GROWTH
+with AGN is needed to address this).                                           Marshal filter that checks all associated Avro packets for
+                                                                               that candidate. All of the remaining objects that were not
+                                                                               saved on the GROWTH Marshal were then vetted individ-
+                2.2.1. Completeness of the BTS filter                          ually to remove any remaining CVs, AGNs, classical novae,
+  To assess the completeness of our BTS GROWTH                                 and artifacts.
+Marshal filter (§2.1) and human scanning effort (§2.2)                            This singled out 17 likely SNe that our BTS filter scan-
+we have re-processed and re-filtered all public ZTF alerts                     ning efforts had not picked up. Among these 9 were saved
+between 2018 Apr. 1 to 2018 Dec. 31 using the AMPEL                            by other ZTF science programs or AMPEL, and were spectro-
+system (Nordin et al. 2019; Soumagnac & Ofek 2018).                            scopically classified. The remaining 8 are unclassified. The
+Two filters were applied for this exercise: a variant of our                   BTS sample contains 520 SNe peaking at < 18.5±0.05 mag.
+BTS GROWTH Marshal filter converted to work within                             This implies a completeness in our scanning of the BTS fil-
+                                                                               ter in 2018 of 97% for candidates with peak mag . 18.5.
+                                                                               The 17 objects identified here are not included in our sam-
+   9 This number strongly depends on the weather; after a period of bad
+
+weather a large number of SNe will be recovered when observations are
+resumed. Good weather periods produce a more constant number each night.          11 We have confirmed that this filter passes all candidates we found and
+   10 CVs feature a fast evolution (rise time of ∼1–2 d, decline of ∼7–10 d)   classified in 2018
+and their gZTF − rZTF colors are persistently blue. We do not follow-             12 A subset of the >90 day events were also vetted and no SNe were
+up events with these characteristics that also lack an obvious host-galaxy     found.
+counterpart.
+6                                                          F REMLING ET AL .
+
+ple or analysis but will be included and analysed in our next         evitably imperfect. Following the conclusion of 2018 (i.e.,
+data-release. We also note that Nordin et al. (2019) showed           the period covered in this early-release paper), we conducted
+that ZTF has been complete with respect to detecting SNe re-          two independent tests of our completeness as described be-
+ported to TNS by other groups when they fall on active ZTF            low.
+CCD regions.                                                             As an initial test of the completeness of BTS spectroscopic
+                                                                      follow-up, we compiled every object that was saved follow-
+          2.3. Spectroscopic followup assignment
+                                                                      ing visual inspection (§2.2) and applied additional filters de-
+   The primary classification instrument of BTS candidates is         signed to remove most variables and AGN using a more so-
+the SEDM (Blagorodnova et al. 2018; Rigault et al. 2019).             phisticated point-source coincidence check and the long-term
+For candidates that pass the BTS filter (§2.1) and visual in-         light-curve history.13 We restrict these candidates to those
+spection (§2.2), we assign spectroscopic SEDM observations            brighter than m < 18.5 in at least one observation. Every
+with the following priorities: transients that are, or are likely     such object without a formal spectroscopic classification (74
+to become, brighter than 18.5 mag are scheduled with the              in total) was then visually examined by our team of scanners.
+highest priority (P3). Transients that appear likely to peak          Most of these events are clearly not transients (e.g., subtrac-
+between 18.5 and 18.75 mag are assigned a lower priority              tion artifacts, AGN, stars) based on their full light curves.
+(P2), and transients expected to peak fainter than 18.75 mag          However, 31 events had properties consistent with SNe and
+are triggered at the lowest priority (P1). For a typical BTS          were unclassified. If each of these events is a genuine SN,
+source (m ≈ 18.5 mag) observed under typical observing                this would suggest a completeness of ∼96%.
+conditions for 1800 s, SEDM obtains SNR ≈ 12 per reso-                   We separately examined the filtered subset of alerts de-
+lution element, and an integrated SNR ≈ 50 in the region              scribed above and estimated the characteristic rise and fade
+covered by the rZTF filter.                                           times (from, and to, 0.75 mag below peak, respectively) for
+   The SEDM queue is designed so that lower priority targets          every event using an automated procedure. For events with
+(e.g., P1, P2) are only observed if no higher priority targets        sufficient P48 data around peak to accurately constrain the
+are present in the queue that could be observed within the            rise and fade times, and with rise times between 4–100 d and
+same observation-time window. The purpose of this priority            fade times between 10–200 d (i.e., probable SNe), our clas-
+scheme is two-fold. First, it ensures that we can reach a high        sification completeness rate is 100% to mpeak <16.5 mag,
+level of completeness for mpeak < 18.5 mag sources, by al-            98.8% to mpeak <17.5 mag, 93.6% to mpeak <18.5 mag,
+lowing some margin for error on the fainter end of 18.5 mag.          and 88.8% to mpeak <19.0 mag. This method, which is eas-
+Second, when the queue allows (e.g., periods of consistently          ily automated (and could be applied to samples larger than
+good weather), significantly fainter targets, including as faint      what can be manually inspected), is consistent with the re-
+as ∼19 mag, can also be observed in addition to our high pri-         sults from our visual inspection described above.
+ority (P3) targets.
+   By default, triggers that enter the SEDM queue remain ac-                            3. BTS SN CLASSIFICATIONS
+tive for 7 d. If the transient has not been observed at this                                3.1. Classification Method
+time, the candidate is re-assigned to SEDM, or to larger
+                                                                         As previously noted, spectroscopic observations of BTS
+telescopes if the candidate has become too faint for SEDM
+                                                                      SN candidates are primarily obtained with SEDM. In cases
+(m & 19 mag). Larger telescopes are also used if classifi-
+                                                                      where the candidates were too faint to be observed with
+cation with SEDM is unsuccessful, which typically happens
+                                                                      SEDM, or scheduling conflicts prevented SEDM observa-
+only if the candidate was observed in poor sky conditions,
+                                                                      tions, or the SEDM spectra proved to be ambiguous, spec-
+there is strong host galaxy contamination, or if higher resolu-
+                                                                      tra were obtained with spectrographs on larger aperture tele-
+tion is needed for a secure classification. For this purpose we
+                                                                      scopes: the Double Spectrograph (DBSP; Oke & Gunn 1982)
+have primarily used P200 and Keck I, but supporting observ-
+                                                                      on P200, the Low Resolution Imaging Spectrometer (LRIS;
+ing programs at LT, NOT and APO have contributed signif-
+                                                                      Oke et al. 1995) on the Keck 1 telescope, the Dual Imaging
+icantly as well. Community efforts (e.g., ePESSTO; Smartt
+                                                                      Spectrograph (DIS) on the APO 3.5 m telescope, the Spec-
+et al. 2015) have also contributed through TNS (see §3.1 for
+                                                                      trograph for the Rapid Acquisition of Transients (SPRAT;
+details).
+                                                                      Piascik et al. 2014) on the 2.0 m LT, and the Alhambra Faint
+               2.3.1. Spectroscopic completeness                      Object Spectrograph and Camera (ALFOSC) on the 2.56 m
+   A key goal for the BTS is to obtain high spectroscopic             NOT.
+completeness for all events passing our basic selection cri-
+teria (essentially, m < 18.5 mag and extragalactic, see §2.1).            13 All but 3 of the early-release SNe passed these additional filters. These
+
+While we made every effort to spectroscopically classify ev-          3 were rejected due to their proximity to bright stars, meaning the additional
+ery transient saved to the BTS program, our efforts were in-          filters still find genuine SNe with high fidelity.
+                                                                      ZTF BTS                                                              7
+
+   SEDM data were reduced by the pipeline described in                      from the Berkeley SN Ia program (BSNIP; Silverman et al.
+Blagorodnova et al. (2018), for data until August 2018, and                 2012a), SN Ib/c templates from Modjaz et al. (2014, 2016);
+the automatic PYSEDM pipeline described in Rigault et al.                   Liu et al. (2016), and Williamson et al. (2019), and SN IIP
+(2019) for data after August 2018. DIS data were reduced                    templates from Gutiérrez et al. (2017).
+with the pyDIS package (Davenport et al. 2016). DBSP data                      Following the SNID matching, we produced plots show-
+were reduced using the PyRAF (Science Software Branch at                    ing a comparison between the observed BTS spectrum and
+STScI 2012) based pipeline pyraf-dbsp (Bellm & Sesar                        the (redshift-corrected) template spectrum from SNID. These
+2016). ALFOSC data were reduced using standard proce-                       plots were visually inspected to identify the best matching
+dures and tools based on IRAF (Tody 1986). LRIS data                        template. In practice, the sample was split into 6 groups,
+were reduced using the LRIS automated reduction pipeline                    and each group was inspected by a member of our team
+(LPipe; Perley 2019).                                                       (CF, AAM, AD, YS, KT, AG). While identifying the best-
+   For SN candidates where we could not obtain spectro-                     matching template, we recorded the SN type and redshift, as
+scopic observations from any of the above mentioned tele-                   well as the name and phase of the template SN spectrum.
+scopes, public TNS spectra were analysed from the follow-                   In cases where the same classification was reported for all
+ing instruments: the Asiago Faint Object Spectrograph and                   15 matches, we recorded the type, redshift, and phase from
+Camera (AFOSC) on the Asiago Ekar 182 cm telescope,                         the top match from the SNID output. We otherwise selected
+FLOYDS on the Faulkes Telescope South (FTS) in Aus-                         the best match based on common prominent SN spectral fea-
+tralia operated by Las Cumbres Observatory (LCO), the                       tures (H, He, Si, Ca, Fe, etc.). If the top 15 matches from
+Wide Field Reimaging CCD (WFCCD) on LCO’s duPont                            SNID proved ambiguous, we used either the ZTF light curve
+telescope, the ESO Faint Object Spectrograph and Camera                     or alternative spectra to remove the ambiguity. For example,
+v.2 (EFOSC2) on the New Technology Telescope (NTT),                         in cases with multiple matches to both SNe Ia and SNe Ic,
+the Dolores (Device Optimized for the LOw RESolution) on                    the telltale secondary near-infrared (nIR) peak of SNe Ia can
+the Telescopio Nazionale Galileo (TNG), the Intermediate-                   typically be seen in ZTF rZTF -band light curves. The sec-
+dispersion Spectrograph and Imaging System (ISIS) on the                    ondary nIR peak is unique to SNe Ia, as explained in Kasen
+William Herschel Telescope (WHT), and the DeVeny spec-                      (2006). It occurs following a recombination transition of
+trograph on the Discovery Channel Telescope (DCT).                          the iron-group elements in the ejecta, whereby the strength
+   Preliminary classifications are made via SuperNova                       of the Fe III and Co III lines decreases and there is a cor-
+IDentification (SNID; Blondin & Tonry 2007) tem-                            responding strengthening of the Fe II and Co II lines (see
+plate matching and visual inspection. SNID is automatically                 also Blondin et al. 2015). While these papers have mostly
+applied to all SEDM spectra, whereas for all other instru-                  considered λ & 7500 Å, a related ”shoulder” in the r-band
+ments SNID is applied to the spectra by the observer. These                 lightcurve is also observed at approximately the same time
+preliminary classifications are annotated and recorded within               (Papadogiannakis et al. 2019a,b).
+the BTS program on the GROWTH Marshal, and subse-                              If at this stage a classification still proved ambiguous, then
+quently sent to TNS within one to two days.14                               the SN was examined by another member of the team. For
+   We revisit each of the preliminary classifications for this              consistency, a final check of all ambiguous classifications
+study in order to develop a homogeneous classification                      was performed by two members of the team (CF, AAM). Ul-
+scheme. For this purpose we developed a custom process                      timately, we have classified 761 SNe via their spectra and
+to spectroscopically classify the 761 SNe in the BTS sam-                   light curves (Table 1). Out of these, 503 were classified us-
+ple. For each BTS SN, we identified the top 15 spectral                     ing SEDM spectra, 86 using P200-DBSP, 76 using Keck 1-
+matches (rlapmin ≥ 5) from SNID to the most recent spec-                    LRIS, 20 using LT-SPRAT, 11 using APO-DIS, and 9 using
+trum available on the GROWTH Marshal. We used the                           NOT-ALFOSC. Finally, 56 were classified based on publicly
+latest spectrum from the Marshal under the assumption that                  available spectra on TNS.
+BTS targets only received additional spectroscopic observa-                    We note that the positions reported in Table 1 are obtained
+tions when the initial classification was inconclusive. The                 by taking the weighted average of the position of the SN in
+SNID templates used for this process include the developer                  every image in which the SN is detected (i.e., for every alert
+defaults,15 as well as SNe Ia and a few non SN templates                    associated with the SN). The updated positions are more ac-
+                                                                            curate than those reported to TNS, which typically only in-
+   14 The BTS classifications on TNS should also be considered prelimi-
+                                                                            clude a single low signal-to-noise ratio (SNR) detection of
+nary. They reflect the initial classifications on the GROWTH Marshal,       the SN.
+since turnaround speed is important, but they are subsumed by the efforts
+described in this paper.
+   15 https://people.lam.fr/blondin.stephane/software/snid/#Download
+                                                                                                 3.2. Classifications
+         8                                                                             F REMLING ET AL .
+
+                                                                                     Table 1. ZTF BTS SNe
+
+                                                                                                                                                  Observed time and mag at maximum brightnessa
+
+       ZTF                αSN              δSN                  IAU        TNS Internal      Discovered     E(B −V )b        SN      zSN c      tg        mg       σmg       tr        mr      σmr
+
+      Name             (J2000.0)         (J2000.0)          Name              Name               by            (mag)        Type              (JD0 )d    (mag)    (mag)    (JD0 )d    (mag)    (mag)
+
+ ZTF18aabssth        11:00:45.38      +22:17:15.0        SN 2018aex      ZTF18aabssth        ZTF                0.015         II     0.026    494.05     20.44      0.19   218.71     18.74      0.05
+ ZTF18aabxlsv        10:29:51.62      +09:00:46.6        SN 2018aks      ASASSN-18ga         ASAS-SN            0.025         Ib     0.055    605.71     20.33      0.19   224.68     18.64      0.04
+ ZTF18aaemivw        10:33:42.69      +39:29:26.6        SN 2018hus      ZTF18aaemivw        ZTF                0.012         Ia     0.065    423.96     19.00      0.16   534.87     17.95      0.15
+ ZTF18aagpzjk        07:59:25.01      +16:25:34.5        SN 2018afm      ...                 POSS               0.031         II     0.013       ...       ...       ...   217.66     17.46      0.02
+ ZTF18aagrdcs        14:33:19.98      +41:16:02.3        SN 2018alc      ASASSN-18ge         ASAS-SN            0.012         Ib     0.024    547.91     17.37      0.05   217.90     16.67      0.01
+ ZTF18aagrtxs        13:14:25.46      +50:58:39.7        SN 2018amo      ASASSN-18gi         ASAS-SN            0.010         Ia     0.018    214.76     16.52      0.02   214.73     16.46      0.02
+ ZTF18aagstdc        15:50:03.56      +42:05:18.5        SN 2018apn      ASASSN-18gs         ASAS-SN            0.018         Ia     0.038    210.86     17.24      0.02   539.01     17.27      0.06
+ ZTF18aagtcxj        16:32:11.55      +42:42:48.3        SN 2018aqm      ...                 TNTS               0.011         Ia     0.033    539.03     19.01      0.19   219.96     18.09      0.03
+ ZTF18aahesrp        08:35:45.43      +28:16:12.9        SN 2018aqy      ATLAS18mzs          ATLAS              0.036         Ia     0.051       ...       ...       ...   217.69     18.54      0.07
+ ZTF18aahfeiy        10:17:15.57      +43:31:24.2        SN 2018loy      ZTF18aahfeiy        ZTF                0.010         Ia     0.071    429.99     20.53      0.21   214.71     18.15      0.05
+
+N OTE— This table is available in its entirety in a machine-readable form in the online journal. A portion is shown here for guidance regarding its form and content.
+
+References for SNe that were recovered by ZTF and discovered elsewhere (“Discovered by” in the table) are as follows: ASAS-SN (Shappee et al. 2014), ATLAS (Tonry et al. 2018), the Corona Borealis
+ Observatory Supernova Survey (CSNS; Sun et al. 2018), G. Cortini (Cortini 2018), DLT40 (Tartaglia et al. 2018), Gaia (Hodgkin et al. 2013), K. Itagaki (Itagaki 2018a,b), the Italian Supernovae Search
+ Project (ISSP; http://italiansupernovae.org/), LOSS (Filippenko et al. 2001), the Mobile Astronomical System of TElescope Robots (MASTER; Gorbovskoy et al. 2013), the Puckett Observatory
+ Supernova Search (POSS; http://www.posssupernova.com/, PS1 (Chambers et al. 2016), J. Grzegorzek (Grzegorzek 2018), the PMO-Tsinghua Supernova Survey (PTSS, http://www.cneost.org/ptss/),
+ the Great Supernova Hunt (SNhunt; http://nesssi.cacr.caltech.edu/SNhunt/), the Tsinghua University-National Astronomical Observatories, Chinese Academy of Sciences Transient Survey (TNTS;
+ Zhang et al. 2015), the Xinming Observatory Supernova Survey (XOSS; (Zhang et al. 2018)), Y. Tanaka (Tanaka 2018)
+a Time and magnitude of maximum brightness are determined directly from the observations, as available in the AVRO alert packets. “. . .” is used when the SN was not detected in either the g
+                                                                                                                                                                                                 ZTF or
+  rZTF filter. No correction for extinction has been applied.
+b E(B −V ) is determined using the Schlafly & Finkbeiner (2011) updates to the Schlegel et al. (1998) maps.
+
+c Determined from SNID (see text).
+
+d JD0 = JD − 2,458,000.
+
+
+
+
+           We broadly classify all BTS SNe as belonging to one of 4                                       of SNe II than LOSS, although these estimates all agree to
+        different classes: SNe Ia, SNe II, SNe Ib/c, and super lumi-                                      within the uncertainties. By targeting massive galaxies, in-
+        nous SNe (SLSNe). As detailed above, these classifications                                        cluding a significant fraction of passive elliptical galaxies,
+        are primarily made via the SN spectra, however, in some                                           LOSS may have been slightly biased against finding CC SNe
+        cases the photometric evolution of the SN also informs the                                        (see Taubenberger 2017 and references therein). The rela-
+        classification. This is especially true of the SLSNe, which                                       tive rate of SLSNe is somewhat higher for ZTF compared to
+        are defined by their luminosity (typically M < −21 mag,                                           ASAS-SN, but still consistent within the uncertainties (see
+        Gal-Yam 2012; although ZTF adopts M < −20 mag).                                                   §3.3.4).
+           Of the 761 SNe, we find that 547 are SNe Ia, 155 are                                              Table 2 summarizes the relative fraction of SNe in each
+        SNe II, 40 are SNe Ib/c, and 19 are SLSNe. The fraction                                           class for the ZTF BTS, ASAS-SN, and LOSS. For LOSS we
+        of discoveries belonging to each of these classes is in agree-                                    directly use the estimates from Li et al. (2011), while for the
+        ment with the results from Li et al. (2011) for a magnitude-                                      BTS and ASAS-SN we assume the observations are drawn
+        limited survey, as shown in Figure 3.16 Figure 3 also shows                                       from a multinomial distribution and estimate 95% confidence
+        the relative rate of SNe found by ASAS-SN (Holoien et al.                                         intervals on the true rate via the approximate method of
+        2017a,b,c, 2019), which, like the ZTF BTS and unlike LOSS,                                        Goodman (1965) as implemented in the MultinomCI (Sig-
+        does not target specific galaxies when searching for tran-                                        norell & et al. 2019) package in R. The true uncertainties on
+        sients.17 Both ZTF and ASAS-SN find a higher fraction                                             these fractions require a detailed estimate of the complete-
+                                                                                                          ness of the BTS, which is beyond the scope of this paper, and
+           16 The ZTF BTS utilizes a 3-d cadence (see §2), whereas Table 7 in Li
+                                                                                                          will be addressed in future work (Nordin et al., in prep.).
+        et al. (2011) reports results for surveys with a 1-d and 5-d cadence. The
+        results in Li et al. (2011) are identical for 1-d and 5-d cadences, and thus
+        we assume an intermediate 3-d cadence would also yield identical relative                         coveries, and SNe recovered by ASAS-SN, as all discovered and recovered
+        fractions of SNe.                                                                                 SNe are included in our analysis of the ZTF BTS. Therefore, the numbers
+           17 To calculate the relative rates of SNe found by ASAS-SN (and host-                          shown here differ slightly from what is shown in e.g., Figure 1 of Holoien
+                                                                                                          et al. (2019), which only considers SNe discovered by ASAS-SN.
+        galaxy offsets, which are discussed below) we include both ASAS-SN dis-
+                                                                                      ZTF BTS                                                                 9
+
+                                                                              Table 2. Relative SN rates
+
+                                      Survey          R(Ia)         NIa       R(II)      NII       R(Ibc)      NIbc     R(SLSN)      NSLSN
+                                    LOSS            0.792±0.044
+                                                          0.055      ...   0.166±0.050
+                                                                                 0.039    ...    0.041±0.016
+                                                                                                       0.013     ...           ...       ...
+                                    ASAS-SN         0.742±0.040
+                                                          0.045     607    0.211±0.043
+                                                                                 0.037   173     0.043±0.024
+                                                                                                       0.016     35    0.004±0.012
+                                                                                                                             0.003         3
+                                    ZTF BTS         0.719±0.043
+                                                          0.048     547    0.204±0.043
+                                                                                 0.038   155     0.053±0.027
+                                                                                                       0.018     40    0.025±0.021
+                                                                                                                             0.012        19
+                                   N OTE— Relative rates R of SNe Ia, II, Ibc, and SLSN from a flux limited search. Results for LOSS are
+                                    taken directly from Table 7 in Li et al. (2011) for a 1-d cadence and are based on an assumed luminosity
+                                    function and Monte Carlo simulations. Thus, the total number of each type of SN is not relevant and
+                                    therefore not reported. Results for ASAS-SN use all discovered and recovered SNe reported in Holoien
+                                    et al. (2017a,b,c, 2019). Uncertainties for both ASAS-SN and the ZTF BTS include 90% confidence
+                                    intervals (see text).
+
+
+
+
+                                                                                                which was obtained 2 nights prior to the ePESSTO spec-
+                        0.8
+                                                                                                trum, shows clear and strong Si II absorption. The same
+                                                                                                broad feature can be seen in the ePESSTO spectrum, which
+                                                                    ZTF BTS                     is otherwise dominated by emission from the host galaxy.
+                        0.6
+flux-limited fraction
+
+
+
+
+                                                                                                Furthermore, the rZTF -band light curve shows a “shoulder”
+                                                                    LOSS
+                                                                                                a few weeks after maximum light. Taken together, it is very
+                                                                    ASAS-SN                     likely that ZTF18abmrhom is a SN Ia. The classification
+                        0.4
+                                                                                                of ZTF18abtswjk is more challenging: the spectrum clearly
+                                                                                                shows narrow emission lines, and we have classified the
+                                                                                                event as a SN IIn, whereas ePESSTO classified the spectrum
+                        0.2                                                                     as an active galactic nucleus (AGN). The photometric evo-
+                                                                                                lution of ZTF18abtswjk is far more reminiscent of SNe than
+                                                                                                AGN: the transient exhibits a ∼30 d rise, followed by a very
+                        0.0
+                              Ia               II             Ibc          SLSN                 slow, monotonic decline (the transient has exhibited a mono-
+                                                                                                tonic fade by ∼1.5 mag over the period covering 2018 and
+     Figure 3. Relative fractions of SNe Ia, II, Ib/c, and SLSNe in the                         2019) as is characteristic of many SNe IIn (e.g., Turatto et al.
+     flux-limited ZTF BTS survey. The orange, hatched bars show the                             1993). Furthermore, the WISE colors for the host galaxy
+     results for the BTS, while the light grey, open bars show results from
+                                                                                                are not consistent with AGN (Jarrett et al. 2011). Thus,
+     LOSS (Li et al. 2011), and the blue double-hatched bars show the
+     results from ASAS-SN (Holoien et al. 2019). The lightly shaded                             based on our comparison to ePESSTO, we conclude that our
+     regions show the uncertainty on each estimate (see text for further                        classifications are of high fidelity.
+     details). To within the uncertainties, the results agree for all 3 sur-                       There were 3 BTS sources for which we attempted spectro-
+     veys (Li et al. 2011 did not report results for the SLSN class – see                       scopic classification, but the nature of the transients remains
+     text).                                                                                     unresolved. Each of the 3 candidates are positionally coinci-
+                                                                                                dent with the nucleus of their host galaxies. ZTF18aaqkdwf
+        As a test of our classification accuracy, we compare our                                (SN 2018fhd) exhibits a broad rise and decline over ∼200 d
+     final classifications to those made by ePESSTO (Smartt                                     and significant P-Cygni-like feature around Hα. However,
+     et al. 2015).18 There are 26 sources in common between                                     variability at the location of ZTF18aaqkdwf was detected
+     our BTS classifications and those made by ePESSTO,                                         ∼3.5 yr prior to the 2018 variability by iPTF, and the host
+     and the classifications are in agreement for all but 2                                     galaxy is a bright point source in the radio (Helfand et al.
+     sources: ZTF18abmrhom (SN 2018ffi) and ZTF18abtswjk                                        2015). Thus the variability may be due to an AGN. The light
+     (SN 2018gfx). We classify ZTF18abmrhom as a SN Ia,                                         curve of ZTF18abuqhje (SN 2018gki) has poor coverage with
+     whereas the ePESSTO spectrum is classified as having                                       only 4 rZTF detections that show a decline of ∼0.7 mag over
+     just galaxy light. The ZTF spectrum of ZTF18abmrhom,                                       ∼15 d. We obtained 2 spectra of ZTF18abuqhje, both of
+                                                                                                which show many narrow lines that could be consistent either
+        18 We adopt ePESSTO for comparison because (i) it is the survey with
+                                                                                                with an AGN or a SN IIn. However, we detected variabil-
+     the most overlap with the ZTF BTS, and (ii) all ePESSTO classifications
+                                                                                                ity from this nucleus ∼2.5 yr prior to 2018 with iPTF, which
+     are made with the 3.6 m NTT, which, on average, will perform better than                   would be consistent with an AGN. The general evolution of
+     SEDM for SN classification.                                                                the ZTF18aarcchg (AT 2018boa) rZTF light curve is consis-
+10                                                         F REMLING ET AL .
+
+tent with a SN: the transient rises by ∼1.5 mag over ∼20 d,             We caution that sub-type classification can be difficult with
+followed by a monotonic decline. Spectra of ZTF18aarcchg             a single low-resolution SEDM spectrum, as is the case for
+exhibit a blue continuum with superposed narrow emission             the majority of the SNe in our sample. For example, the
+from the Balmer series, [O III], and [S II], all of which are        most distinguishing feature of 91T-like SNe is weak Si II
+consistent with star formation (the host is classified as a star-    and Ca II absorption prior to maximum light (e.g., Filip-
+forming galaxy; Maraston et al. 2013). Without discernible           penko 1997; Branch et al. 2006). At R ≈ 100 even rela-
+SNe features in the spectrum, we cannot classify this tran-          tively strong absorption can be smeared out, and as a result
+sient. We exclude these 3 candidates from the subsequent             SNID frequently identifies both normal and 91T-like SNe Ia
+analysis.                                                            as the best matches for the SNe Ia in our sample. Further-
+                                                                     more, it is difficult to separate normal and 91T-like SNe in
+                3.3. Sub-type Classifications                        post-maximum spectra. Thus, we conservatively label SNe
+   The primary purpose of this study is to improve the mea-          Ia as normal, unless there is strong spectroscopic (very weak
+surement of the RCF, and to extend the redshift coverage of          Si II and Ca II) or photometric (over-luminous and a slow
+this measurement beyond what is presented in Kulkarni et al.         decline) evidence to support a 91T-like classification. Simi-
+(2018). To that end, we only need to separate SNe Ia from            larly for 91bg-like SNe, unless there is strong spectroscopic
+all other transients in the ZTF BTS. Nevertheless, we attempt        (weak Fe II, strong Ti II; Filippenko 1997) and photometric
+to make sub-type classifications, based on the SNID matches          (under-luminous and a fast decline) evidence, we label the
+described above, as detailed for each class below. We cau-           SN as normal.
+tion, however, that the vast majority of these classifications          In addition to the above subclasses, we additionally iden-
+are made with very low resolution (R ≈ 100) SEDM spec-               tify 3 SN 2002cx-like SNe, 1 SN Ia that shows signs of CSM
+tra, and as a result there are significant uncertainties on the      interaction (SN Ia-CSM), and 2 SNe that appear to be super-
+subclass of any individual SN. Furthermore, any biases in            Chandrasekhar mass explosions.
+the SNID template set can influence the final BTS classifi-
+cations. The SNID templates were compiled from hetero-                                        3.3.2. SNe II
+geneous sources and do not perfectly reflect the discovery-             We have identified 162 H-rich SNe in the ZTF BTS. Of
+space of an un-targeted transient survey, meaning the SNID           these, we make no effort to distinguish between Type IIP and
+templates themselves are a further source of uncertainty for         IIL SNe, which are photometrically defined subtypes. We
+the final sub-classifications presented in Table 1 (see Blondin      classify SNe II as either “normal” (119 of the 162), IIb (15),
+& Tonry 2007 for further details).                                   IIn (19), SLSNe-II (7, see also §3.3.4), or SN 1987A-like (2;
+                                                                     SN II-87A in Table 1). The relative fraction of SNe IIb and
+                         3.3.1. SNe Ia
+                                                                     SNe IIn is significantly smaller in the BTS than that reported
+   The vast majority of SNe Ia discovered in magnitude-              from LOSS (Li et al. 2011). This could be a direct conse-
+limited surveys are considered “normal.” It is argued in Li          quence of the different targeting strategies, although there is
+et al. (2011) that the most common subclass is SN 1991T-             one important caveat for SNe IIn: for SEDm spectra, the SNe
+like (SN Ia-91T in Table 1), which are slightly over-luminous        IIn represent the most difficult subclass to positively iden-
+relative to normal SNe Ia, followed by SN 1991bg-like (SN            tify because the narrow emission that is the hallmark of SNe
+Ia-91bg in Table 1), which are under-luminous and decline            IIn (see Schlegel 1990) can easily be confused with emission
+faster than normal SNe Ia. These rates are derived from              lines from the host galaxy. When SEDM spectra indicate the
+LOSS, which targeted relatively massive, high star-formation         presence of strong narrow H emission, we have generally at-
+rate galaxies. SNe Ia-91T seem to prefer late-type galaxies          tempted to obtain higher resolution spectra. However, some
+and may be associated with young stellar populations (e.g.,          SNe IIn may not have strong enough narrow lines to be no-
+Howell 2001). Thus, the relative rate of SNe Ia-91T may              ticed in a SEDM spectrum. These would be classified as SNe
+have been over-estimated (see e.g., Taubenberger 2017; Sil-          II. In conclusion, SNe identified as Type IIn in the BTS all
+verman et al. 2012b).                                                have clear evidence for strong Hα emission lines that are sig-
+   In the ZTF BTS we identify 504 normal SNe Ia, 31 91T-             nificantly broader than would be expected from a galaxy or
+like SNe, and 6 91bg-like SNe. This represents significantly         H II region.
+less 91T-like (∼6%) and 91bg-like (∼1%) SNe than one                    SNe for which there were both Type II and IIb SNID
+would expect based on the LOSS results for a magnitude               matches have been manually inspected and classified by
+limited survey (∼18% 91T-like and ∼3% 91bg-like SNe; Li              comparing the absolute and relative strengths of the H and
+et al. 2011), however, it does agree with what is found by           He features (both emission and absorption) to those seen in
+ASAS-SN (∼6% 91T-like and ∼1% 91bg-like SNe; Holoien                 typical hydrogen rich SN II spectra. The two SN II-87A
+et al. 2017a,b,c, 2019).                                             events exhibit a nearly identical spectroscopic evolution as
+                                                              ZTF BTS                                                                        11
+
+SN 1987A itself, as well as the highly unusual light curve          maining 7 have H emission lines (SLSN-II). This represents
+with an initial decline followed by a ∼100 d long rise (see         2.5%±2.11.2 of the sample—which is, not surprisingly, a far
+e.g., Arnett et al. 1989; McCray 1993).                             higher fraction than what was found in galaxy-targeted sur-
+                                                                    veys such as LOSS. LOSS found a single SLSN (SN 2006gy;
+                         3.3.3. SNe Ibc
+                                                                    Foley et al. 2006), which was not recognized as part of a sep-
+  There are 40 H-poor core-collapse SNe in the BTS (ex-             arate class in Li et al. (2011). SLSNe are volumetrically rare,
+cluding 12 SLSNe-I; see §3.3.4). We classify these sources          and best found via untargeted wide-area surveys (Quimby
+as either SNe Ib (11), Ic (18), Ic-BL (5), Ib/c (3), Ibn (2),       et al. 2011). The relative rate of SLSNe in ASAS-SN is
+or Ic-pec (1). The relative ratio of SNe Ib to Ic in the BTS        0.4%±1.20.3 . This is lower but still consistent with our BTS
+sample is in agreement with that found by LOSS (Li et al.           estimate within the uncertainties on both measurements.
+2011), though we note that for both surveys the total number           The true fraction of SLSNe may be even higher than what
+of stripped-envelope SNe discovered is relatively small and         we report here: over this early-survey period our selection
+thus the uncertainties on the relative rates are high.              methods were biased against SLSNe, because these very
+  The SNe Ib clearly show He in their spectra, whereas the          long-lived and slow-rising transients were often present in
+SNe Ic do not. There are three events that clearly lack H           the reference image, such that at peak the subtraction of their
+emission, but where we cannot distinguish between either            own pre-max flux made them appear fainter than they really
+a Ib or Ic classification (designated as SN Ib/c). The five         were and thus less likely to pass the BTS filter.
+SNe Ic-BL show very broad absorption features, similar to              The detailed analysis of the four SLSN-I discovered during
+SN 1998bw (Patat et al. 2001), while the two SNe Ibn display        the ZTF commission phase has been submitted for publica-
+the hallmark narrow He emission lines that define the subtype       tion by (Lunnan et al. 2019), and a thorough investigation of
+(Pastorello et al. 2007; Foley et al. 2007). Finally, there is a    the full ZTF SLSN sample is underway.
+single event, ZTF18aceqrrs (SN 2018ijp), that lacks both H
+and He, but has a highly unusual spectroscopic and photo-                   4. SN DISTANCES AND HOST GALAXIES
+metric evolution (Tartaglia et al., in prep.). Thus, we refer to
+                                                                      As in Kulkarni et al. (2018), our aim is to measure the RCF
+ZTF18aceqrrs as a “peculiar” SN Ic (Ic-pec in Table 1).
+                                                                    of local galaxy catalogs, in this case using SNe from the ZTF
+                         3.3.4. SLSNe                               BTS. In order to make this measurement we need to both
+   A population of so-called “superluminous” supernovae,            identify the host galaxy for every SN, and measure the SN
+with peak optical luminosities (MV up to −23 mag) greatly           redshift (for cases where the host redshift is unknown). Using
+in excess of any known supernova at the time, was first iden-       this information it is then possible to calculate the RCF.
+tified in the late 2000s (Quimby et al. 2007) and quickly
+                                                                                               4.1. SN redshifts
+recognized to occur in both hydrogen-rich (SLSN-II) and
+hydrogen-free (SLSN-I) varieties (Smith et al. 2007; Gal-              In addition to providing SN spectral types, SNID estimates
+Yam et al. 2009; Quimby et al. 2011). More recent surveys           the redshift of the SN it is attempting to classify. We adopt
+have shown that the luminosity distributions of both types          the redshift of the best-matching SNID template as the red-
+of SLSNe overlap with “ordinary” Type IIn and Ic SNe (De            shift of the SN, zSN .19 The redshift distribution for BTS SNe
+Cia et al. 2018; Angus et al. 2019), and the spectral proper-       is shown in Figure 4, where we adopt the redshift of the host
+ties may also form a continuum. Thus, the identification of         galaxy (zhost ) when known, otherwise we show zSN .
+a particular luminous transient as a superluminous SN, ver-            We can estimate the accuracy of the SNID redshift mea-
+sus merely a luminous SN Ic or IIn is a challenge. Work by          surements using the subset of BTS SNe that have host galax-
+Quimby et al. (2018) does indicate that SLSN-I can be classi-       ies with known redshift (for more on the identification of
+fied with spectral features alone without any luminosity cut.       BTS host galaxies, see §4.2). We find that zSN is a good
+Quimby et al. (2018) show several SLSN-I events with peak           estimator of the host galaxy redshift, zhost , as summarized
+luminosity below the traditional −21 mag threshold. How-            in Figure 5 for the 345 ZTF BTS host galaxies with known
+ever it is still true that post-peak spectra for SLSNe-I and SNe    redshifts.
+Ic can be very similar (Pastorello et al. 2010). For the pur-          The main panel in Figure 5 shows the difference between
+poses of this analysis we use spectroscopic matches to previ-       zSN and zhost as a function of zhost . The residuals show that
+ous “unambiguous” SLSNe-I as the primary determinant, but           for SNe Ia there is relatively small scatter (σ ≈ 0.0037)20
+also place any transient with Mg < −20 mag in this category
+even if it is well-fit by ordinary SNe (as is the case for nearly     19 No corrections for Heliocentric, Galactocentric, or host-galaxy-rotation
+all SLSNe-II, which are good matches to SNe IIn).                   velocity are applied to zSN .
+   In total, we identify 19 SLSNe in the BTS sample. Of               20 We use a robust estimate of scatter by taking half of the difference
+
+these, 12 are classified as H-poor (SLSN-I), and the re-            between the 84th and 16th percentiles. The sample standard deviation
+     12                                                                           F REMLING ET AL .
+            90                                                   Ia
+            75                                                   Ia with known zhost        and virtually no bias in the estimates of zSN . The scat-
+            60                                                   Ia with unknown zhost      ter is somewhat higher for CC SNe (σ ≈ 0.0047), where
+            45
+ N
+
+
+                                                                                            SNID appears to systematically overestimate the true red-
+            30
+            15                                                                              shift, as is seen in the Gaussian Kernel Density Estimate
+             0                                                                              (KDE) shown in the right panel of Figure 5. We find some
+            45                                                  CC SNe                      evidence for an increased scatter at higher redshifts. For SN
+                                                                CC with known zhost
+            30                                                  CC with unknown zhost       Ia hosts with z ≤ 0.04, σ ≈ 0.0032, while for hosts with
+ N
+
+
+
+
+                                                                                            0.08 ≤ z < 0.12 σ ≈ 0.0045 (though the 90th percentile
+            15
+                                                                                            widths are nearly identical in these two regions). This in-
+            0                                                                               creased scatter makes sense as the signal-to-noise ratio typ-
+                 0.00             0.05                  0.10                   0.15
+                                                 z                                          ically decreases for higher redshift SNe; for SNe outside
+                                                                                            the redshift range shown in Figure 5 the typical uncertainty
+   Figure 4. Redshift distribution of BTS SNe Ia (top) and CC SNe
+                                                                                            on any individual redshift may be larger than ∼0.004. We
+   (bottom) shown via thin dashed lines. SNe associated with host
+   galaxies of known redshift are shown as solid histograms. If the                         also find that the scatter is not appreciably larger when re-
+   host galaxy redshift is unknown we adopt zSN as the host galaxy                          stricting the sample to only those SNe that have been ob-
+   redshift, as shown by the thick solid lines. SLSNe are not shown.                        served by SEDM. In the analysis that follows, we assume
+                                                                                            that zhost = zSN for normal SNe Ia, and that the typical un-
+                                                                                            certainty on zSN is 0.004. We note that (i) this is very con-
+                                                                                            sistent with the uncertainty (σ = 0.005) reported in figure 19
+                                                                                            in Blondin & Tonry (2007), even though a very different red-
+             0.15                                                                           shift range was used (z = 0.1 − 0.8), and (ii) our estimated
+             0.10                                                                           redshift uncertainty on zSN is much larger than the uncer-
+   zSN
+
+
+
+
+             0.05                                                                           tainty in the wavelength calibration of SEDM (figure 13 in
+                                                                                            Rigault et al. 2019). These two findings indicate that the ac-
+             0.00                                                            PDF            curacy of our SNID based redshifts (zSN ) is not limited by
+                                                               CC SNe
+             0.02                                              SNe Ia                       the low resultion of SEDM.
+                                                                                                              4.2. Host Galaxy Identification
+             0.01                                                                              Correctly associating a newly discovered transient with its
+                                                                                            host galaxy is a challenging problem, especially when the
+zSN zhost
+
+
+
+
+                                                                                            redshifts of the host candidates are unknown. Simply iden-
+             0.00
+                                                                                            tifying the closest galaxy (in angular offset) is likely to pro-
+                                                                                            duce a significant number of misidentifications, especially in
+             0.01                                                                           the case of nearby SNe for which angular offsets relative to
+                                                                                            the host nuclei may be quite large.
+                                                                                               We use a combination of automated procedures and visual
+             0.02
+                                                                                            inspection to identify hosts for ZTF BTS SNe. As an initial
+                   0.00   0.02   0.04    0.06    0.08     0.10       0.12                   pass, we query the NASA Extragalactic Database (NED)21
+                                         zhost                                              for all galaxies within 20 of the SN position. Within this list,
+                                                                                            the galaxy with the smallest angular separation from the SN
+   Figure 5. Difference between host-galaxy redshifts (zhost ) and                          AND a cataloged redshift in NED is automatically assigned
+   SNID-derived redshifts (zSN ) as a function of host-galaxy redshift.                     as the host. In cases where there are no cataloged galaxy red-
+   CC SNe are shown as crosses, while SNe Ia are shown as open cir-                         shifts within 20 of the SN, the galaxy with the smallest angular
+   cles. The scatter in the difference is nearly constant as a function of                  separation from the SN is assigned as the host. In cases where
+   redshift. Top: zSN vs. zhost . Right: A Gaussian KDE of the PDF of                       the zhost and zSN significantly differ (|zSN − zhost | > 0.05),
+   the residuals for CC SNe (red) and SNe Ia (blue). The typical scat-
+                                                                                            the galaxy with the smallest angular separation from the SN
+   ter is ∼0.004 (see text), while 95% of all SNe Ia have zSN within
+   0.01 of zhost .                                                                          is assigned as the host. From here we calculated the pro-
+                                                                                            jected separation, dp , between the SN and the host galaxy
+                                                                                            using the redshift of the SN (see above). We visually inspect
+                                                                                            host candidates with a projected separation dp ≥ 19 kpc. In
+
+   is ∼0.005. The sample standard deviation for the recession velocity is
+   ∆ v/v ≈ 0.14.                                                                              21 https://ned.ipac.caltech.edu/
+                                                            ZTF BTS                                                                     13
+
+most of these cases it is clear that the automated procedure      which is astrometrically calibrated against Gaia. Four of the
+identified a background galaxy that is clearly not the host, in   hosts, those associated with ZTF18aapgrxo (SN 2018bym),
+which case we update the host with the NED galaxy with the        ZTF18aayjyub (SN 2018cod), ZTF18acaeous (SN 2018hbu),
+smallest angular separation from the SN. Following this pro-      and ZTF18acrknyn (SN 2018jef), are too faint to be included
+cedure, there were a total of 12 SN host identifications with     in the PS1 MeanObject table, and instead we use PS1
+separations dp ≥ 19 kpc (9 SNe Ia and 3 SNe II). In 11 of         positions from the StackObjectThin table. The last
+these 12, the host redshift is known and that redshift matches    two hosts, associated with ZTF18acbzoyh (SN 2018hqu) and
+that of the SN, providing confidence in these associations.       ZTF18acdwohd (SN 2018ids) are not detected in the PS1 cat-
+We cannot rule out the possibility that these SNe occurred in     alog, and we instead use their positions from SDSS and the
+faint dwarf galaxies that are associated with the bright galaxy   Galaxy Evolution Explorer (GALEX; Martin et al. 2005), re-
+that has been identified as the host. For the purposes of the     spectively, in Table 3. Following this update of the posi-
+RCF calculation below, we assume each of these identifica-        tions, we recalculate the distribution of host-galaxy separa-
+tions to be correct. For the remaining SN, ZTF18acrcetn           tions, which is shown in Figure 6. We find a nearly identi-
+(SN 2018jag), there is a very bright (r0 = 14.3 mag) ellip-       cal distribution in projected separation for CC SNe and SNe
+tical galaxy, PSO J015.9596+10.5902, in the field of the SN.      Ia (middle panel of Figure 6). We use a two-sample Kol-
+The SN is ∼3.2 Petrosian radii from the galaxy which has an       mogorovSmirnov (KS) test and a χ2 test for independence to
+SDSS photometric redshift, 0.052 ± 0.012 (Abolfathi et al.        determine the statistical difference between the two distribu-
+2018), that agrees with the SN redshift determined by SNID,       tions and find no significant difference between the projected
+0.053 (which gives dp ≈ 24 kpc). For the calculations below       offsets of CC SNe and SNe Ia.
+we assume that this identification is correct.                       Using the newly identified host offsets, we can addition-
+   Following this procedure, we use deep i-band stack images      ally examine whether or not there is a bias against finding
+from PS1 to visualize the position of each SN relative to its     nuclear SNe in ZTF, as has been found for other surveys (see
+host galaxy. In the vast majority of cases these images con-      Holoien et al. 2019). Figure 7 compares the cumulative dis-
+firmed a clear association between the SN and host galaxy.        tribution of angular offsets for bright (mpeak ≤ 17 mag) BTS
+In some cases, the putative host was extremely faint and a        SNe and ASAS-SN.22 We find remarkably similar distribu-
+significantly brighter galaxy with only slightly larger angu-     tions between ZTF and ASAS-SN. Both a two-sample KS
+lar separation was selected at the likely host. Finally, there    test and a χ2 test for independence do not show a statisti-
+were a handful of cases where the association was ambigu-         cally significant difference between the two samples. This
+ous or with a low signal-to-noise ratio PS1 detection. We         suggests that ZTF is not significantly biased against finding
+find that for 40 SNe in the sample, the host identification       nuclear SNe. In contrast, other surveys that detect bright SNe
+is ambiguous. We exclude these SNe from the host galaxy           are biased away from galaxy nuclei (Holoien et al. 2019).
+analysis below. We thus identify host galaxies for 721 of the        Following host identification, we need to determine the ab-
+761 SNe in the ZTF BTS sample. Properties of the BTS SNe          solute magnitude of the host galaxies in order to measure
+host galaxies are summarized in Table 3, including notes on       the RCF (see Kulkarni et al. 2018 and below for further
+each of the SNe identified as having ambiguous hosts. For         details). In this study we focus on the mid-infrared (mid-
+the 40 ambiguous cases, we find that 29 SNe have no dis-          IR) flux of the host galaxies, primarily for 2 reasons: (i) a
+cernible host, including 17 SLSNe, for which host galaxies        galaxy’s mid-IR absolute magnitude serves as a good proxy
+are typically not found in imaging at the depth of PS1 in this    for the total galactic stellar mass (Wen et al. 2013), and (ii)
+redshift range (e.g., Quimby et al. 2011). The remaining 11       mid-IR photons are mostly transparent to dust in the Milky
+are either roughly equidistant between multiple galaxies of       Way, meaning that significant reddening corrections are not
+the same brightness, or very close to a faint galaxy, with a      needed to estimate a galaxy’s absolute magnitude in the mid-
+significantly brighter galaxy at a similar redshift of the SN     IR. The Wide-field Infrared Survey Explorer (WISE; Wright
+residing at much larger angular separation.                       et al. 2010) satellite conducted an all-sky survey in the mid-
+   The host galaxy coordinates available via NED come from        IR, and we use WISE images to determine the brightness of
+a heterogeneous set of catalogs and surveys, resulting in         ZTF BTS SN host galaxies at 3.4 µm.
+an astrometric offset between NED and ZTF SN positions,              The largest WISE source catalogs (e.g., unWISE; Schlafly
+which are measured relative to Gaia (Gaia Collaboration           et al. 2019) utilize an unresolved (i.e. stellar) point-spread-
+et al. 2016). We crossmatch the host positions against the        function (PSF) to measure source flux. This PSF is not ap-
+PS1 catalog, which is also calibrated against Gaia, in order to   propriate for many of the low-z galaxies in our sample, which
+place the BTS SNe and host galaxies on the same relative as-
+trometric system. 715 of our initial host positions have coun-      22 As shown in Figure 6 the BTS sample needs to be restricted for a fair
+terparts within 2 arcsec in the PS1 DR1 MeanObject table,         comparison to ASAS-SN as high-z SNe have smaller angular offsets.
+             14                                                                           F REMLING ET AL .
+
+                                                                                   Table 3. BTS Host Galaxies
+
+       ZTF                    Host                  αhost             δhost          zhost      SN offset      dp       mg        mr        mi        mz        my       mW 1      mW 2      E(B −V )a
+
+      Name                    Name                 (J2000.0)        (J2000.0)                    (arcsec)     (kpc)    (mag)     (mag)     (mag)     (mag)     (mag)     (mag)     (mag)        (mag)
+ ZTF18aabssth        PSO J165.1878+22.2877       11:00:45.07      +22:17:15.8       0.02291         4.44       2.06    16.89     16.49     16.38     16.38     16.61     15.79     16.38        0.015
+ ZTF18aabxlsv        PSO J157.4639+09.0106       10:29:51.32      +09:00:38.1       0.04797         9.53       8.96    16.17     15.48     15.27     15.02     15.02     14.82     15.30        0.025
+ ZTF18aaemivw        PSO J158.4280+39.4908       10:33:42.72      +39:29:26.8       0.06807         0.33       0.43    16.66     16.03     15.67     15.53     15.35     14.94     15.08        0.012
+ ZTF18aagpzjk        PSO J119.8484+16.4214       07:59:23.61      +16:25:16.9       0.01631        26.83       8.91    14.96     14.49     14.33     14.49     14.87     13.85     14.43        0.031
+ ZTF18aagrdcs        PSO J218.3331+41.2658       14:33:19.95      +41:15:56.9       0.01814         5.43       2.00    18.53     17.62     17.45     18.11     18.86     17.32     18.00        0.012
+ ZTF18aagrtxs        PSO J198.6087+50.9792       13:14:26.08      +50:58:45.0       0.02966         7.94       4.72      ...      ...       ...      13.77     13.68     13.70     14.36        0.010
+ ZTF18aagstdc                          ...               ...      ...               ...              ...        ...      ...      ...       ...        ...      ...       ...       ...          ...
+ ZTF18aagtcxj        PSO J248.0475+42.7139       16:32:11.40      +42:42:50.0       0.03240         2.40       1.55    16.72     15.70     15.31     15.00     14.82     14.28     14.75        0.011
+ ZTF18aahesrp        PSO J128.9390+28.2705       08:35:45.35      +28:16:13.7       ...             1.36       1.35    19.43     18.99     18.82     18.69     18.68     19.14     19.86        0.036
+ ZTF18aahfeiy        PSO J154.3116+43.5219       10:17:14.78      +43:31:18.8       0.07126        10.09      13.71    17.13     16.69     16.38     16.43     16.50     16.19     16.61        0.010
+
+N OTE— This table is available in its entirety in a machine-readable form in the online journal. A portion is shown here for guidance regarding its form and content. Optical grizy photometry is taken from
+  PS1 Kron magnitude measurements, while mid-IR W 1 and W 2 photometry are from Tractor and WISE (see text). All magnitudes are reported in the AB system, and no correction for extinction has
+  been applied.
+a E(B −V ) is determined using the Schlafly & Finkbeiner (2011) updates to the Schlegel et al. (1998) maps.
+
+
+
+
+             are clearly resolved in WISE imaging. The recent develop-                                      (2018). The RCF captures the probability that a random
+             ment of The Tractor (Lang et al. 2016a), enables “forced”                                      galaxy will have a catalogued spectroscopic redshift as a
+             WISE flux measurements, where the mid-IR apertures are de-                                     function of its redshift and IR luminosity. To estimate the
+             termined via sources detected in (relatively) high-resolution                                  RCF we use only SNe Ia, as they occur in both star-forming
+             optical images. The Tractor was used to measure the mid-                                       and passive galaxies, whereas CC SNe would only trace star-
+             IR flux of ∼400 million WISE sources that were detected by                                     forming galaxies. When a ZTF BTS SN has a previously cat-
+             SDSS (Lang et al. 2016b), and now is also being applied to                                     aloged host galaxy redshift, we consider that a “hit” (NEDz ),
+             Legacy Survey (Dey et al. 2019) images. There are 371 BTS                                      and when the host does not have a known redshift that is con-
+             host galaxies that have Tractor forced mid-IR photometry                                       sidered a “miss” (!NEDz ).
+             from both Legacy Survey and SDSS images, while an addi-                                           By raw number, there are 512 SNe Ia with known hosts
+             tional 157 hosts have detections in just Legacy Survey images                                  in the BTS,24 and 227 of them are “hits” (have known red-
+             and another 90 hosts have detections in just SDSS23 (here-                                     shifts). Thus, over the redshift range sampled by the BTS,
+             after we refer to this aperture-matched forced photometry as                                   the RCF = 44% ± 1% (90% confidence interval).25 This es-
+             Tractor photometry). We include Tractor photometry                                             timate is significantly lower than what was found for a lower-
+             based on both Legacy Survey and SDSS images in our anal-                                       redshift sample (Kulkarni et al. 2018 estimated RCF ≈
+             ysis of the RCF below. For the 371 sources detected both                                       75%). The difference in RCF estimates can be entirely under-
+             in the Legacy Survey and SDSS we compare the Tractor                                           stood by the differing redshift distributions of the two sam-
+             photometry dervied from each set of images and measure                                         ples. If we restrict our analysis to SNe with z ≤ 0.03, we find
+             a sample standard deviation of 0.008 in ∆ flux/flux. This                                      the RCF = 69% ± 4% (90% confidence interval), which is
+             small difference suggests that there are no systematic effects                                 consistent with the results reported in Kulkarni et al. (2018).
+             introduced by combining photometry from the two different                                      At face value these results show that the RCF decreases as
+             optical catalogs. Ultimately, this results in 618 host galaxies                                redshift increases, an unsurprising result.
+             with 3.4 µm flux measurements that we can use in the analy-                                       We can further constrain the RCF as a function of red-
+             sis of the RCF. Including only the brightest mid-IR galaxies                                   shift and galaxy luminosity by estimating the joint distribu-
+             in our sample will bias our final measurement of the RCF, as                                   tion for a galaxy to have a cataloged redshift given its red-
+             discussed below.
+                                                                                                               24 We exclude Ia-02cx, Ia-csm, and Ia-SC events from the RCF calcula-
+                   5. THE REDSHIFT COMPLETENESS FACTOR                                                      tions. These “peculiar” events account for ∼1% of the BTS SN Ia sample,
+                                                                                                            and would not substantially change our analysis.
+               To calculate the Redshift Completeness Factor (RCF), we                                         25 As in Kulkarni et al. (2018) we find that the RCF as traced by CC
+             follow the methodology originally outlined in Kulkarni et al.                                  SNe is much higher than that traced by SNe Ia. This suggests that redshift
+                                                                                                            catalogs are more complete for star-forming galaxies than passive galaxies.
+                23 We only retain galaxies with a signal-to-noise ratio >5 in the W 1 filter
+
+             from the forced photometry catalogs.
+                                                                                  ZTF BTS                                                                  15
+                                                                                                        1.0
+             102                                                        SNe Ia
+                                                                        CC SNe                          0.8
+
+
+
+
+                                                                                       cumulative fSN
+                                                                                                        0.6
+             101
+N
+
+
+
+                                                                                                        0.4
+                                                                                                        0.2                                      ZTF BTS
+             100                                                                                                                                 ASAS-SN
+                                                                                                        0.0
+                       0   5        10      15     20         25   30        35                               0   5       10         15          20
+                                             dp (kpc)                                                                 SN offset (arcsec)
+                 1.0
+                                                                                          Figure 7. Cumulative distribution of the angular offset between
+                 0.8
+cumulative fSN
+
+
+
+
+                                                                                          mpeak ≤ 17 mag SNe and their host galaxies found by the ZTF
+                 0.6                                                                      BTS (solid line) and ASAS-SN (dashed line). The distributions are
+                                                                                          generally very similar, with ASAS-SN doing slightly better at small
+                 0.4                                                                      separations (< 500 ), however, these differences may simply be due
+                 0.2                                                                      to small number statistics.
+                 0.0
+                       0   5        10      15     20         25   30        35           “hits.” An estimate of this joint distribution is shown in Fig-
+                                             dp (kpc)                                     ure 8, as well as one-dimensional probabilities RCF(z) and
+                 1.0
+                                                                                          RCF(MW 1 ). All 512 SNe Ia are used to constrain RCF(z),
+                 0.8
+cumulative fSN
+
+
+
+
+                                                                                          as a host galaxy identification or brightness measurement is
+                 0.6                                                                      not necessary for that calculation.
+                 0.4                                                                         From Figure 8 it is clear that the analysis in Kulkarni et al.
+                                                                                          (2018) was significantly limited by the lower redshift sam-
+                 0.2                                                                      ple that was available at that time. For example, there are
+                 0.0                                                                      no “hits” for z > 0.12, and the RCF(z) tends towards zero
+                       0       10            20         30              40
+                                         SN offset (arcsec)                               at high redshifts, whereas Kulkarni et al. (2018) only found
+                                                                                          mild evidence that the RCF(z) decreases with z. Unsurpris-
+   Figure 6. Top: Projected physical separation dp , in kpc, between                      ingly, we still find that low-z and massive galaxies are the
+   ZTF BTS SNe and their respective host galaxies. SNe Ia are shown                       most likely to be catalogued. At higher redshifts (z > 0.1),
+   via a solid histogram, while CC SNe are shown via a thick, crimson
+                                                                                          only very massive galaxies (MW 1 . −22 mag AB, compa-
+   line. The general shape of these distributions are similar to what was
+   found during PTF, with roughly an order of magnitude fewer SNe                         rable to that of the Milky Way) are catalogued.
+   at dp ≈ 10 kpc, as there are with dp < 1 kpc (Kasliwal et al. 2012).                      The decline in RCF(z) as a function of z has impor-
+   Middle: Cumulative distribution of dp for BTS SNe and their hosts.                     tant ramifications for the electromagnetic (EM) follow-up
+   The distribution for SNe Ia and CC SNe is nearly identical; the small                  of gravitational wave events. The typical localization ar-
+   discrepancies observed between ∼10–15 kpc are likely due to small                      eas for 2 and 3 detector networks is several hundred to
+   number statistics. Bottom: Cumulative distribution of the angular                      several thousand deg2 (Kasliwal & Nissanke 2014). One
+   offset, in arcsec, between BTS SNe and their hosts. Given that the
+                                                                                          strategy to mitigate against these large areas that would
+   average SN Ia is at higher redshift than the average CC SN in the
+   BTS (Figure 4), but the physical separations are the same, it makes                    be impossible to search even with modest field-of-view in-
+   sense that SNe Ia, on average, have a smaller angular offset than CC                   struments, is to target known galaxies within the LIGO lo-
+   SNe.                                                                                   calization volume (e.g., Gehrels et al. 2016). During O3,
+                                                                                          the horizon distance for binary neutron star (BNS) merg-
+   shift and MW 1 , RCF(z, MW 1 ).26 A detailed summary of the                            ers is ∼200 Mpc (see O3 alerts for S190425z, S190510g,
+   joint probability RCF calculation is included in Appendix A.                           S190901ap, S190910h; Ligo Scientific Collaboration &
+   To estimate RCF(z, MW 1 ), we include only those SNe Ia                                VIRGO Collaboration 2019a,b,c,d), roughly corresponding
+   with identified host galaxies that have a measured IR bright-                          to z ≈ 0.05. According to the BTS, for z ≤ 0.05 the RCF
+   ness. This reduces the sample to 442 SNe, of which 213 are                             ≈ 63%, while integrating our best model inference from
+                                                                                          z = 0 to 0.05 yields RCF ≈ 57%. Thus, targeted efforts to
+                                                                                          identify EM radiation from BNS mergers are likely to miss
+      26 We convert observed W 1 magnitudes to absolute magnitude by cal-
+                                                                                          1/3, or more, of all potential host galaxies for the EM tran-
+   culating the distance modulus with astropy (Astropy Collaboration et al.
+   2013), assuming a concordance cosmology with ΩΛ = 0.7, ΩM = 0.3,                       sient. These numbers become significantly worse for events
+   and H0 = 70 km s−1 Mpc−1 . We also correct for Milky Way extinc-                       discovered at a distance z > 0.05. Any future efforts to
+   tion, a small effect, using E(B − V ) from Schlafly & Finkbeiner (2011),               quantify the rate of EM counterparts to gravitational wave
+   RV = 3.1, and the extinction law from Fitzpatrick & Massa (2007).
+       16                                                            F REMLING ET AL .
+
+
+
+
+                     1.0
+                     0.8
+                     0.6
+         RCF(z)
+
+
+
+                     0.4
+                     0.2                                                                                                      RCF(MW1)
+
+
+
+
+                                                                                                                      0.0
+                                                                                                                      0.2
+                                                                                                                      0.4
+                                                                                                                      0.6
+                                                                                                                      0.8
+                                                                                                                      1.0
+                     0.0
+                     -24
+                     -23
+                     -22
+                     -21
+MW1, host (mag AB)
+
+
+
+
+                     -20
+                     -19
+                     -18
+                     -17
+                     -16
+                     -15                                                                          NEDz
+                     -14                                                                          ! NEDz
+                     -13                                   RCF(z, MW1)
+                            0.0   0.2                      0.4     0.6                  0.8            1.0
+                     -12
+                        0.0     0.04                             0.08                    0.12                    0.16
+                                                                zhost
+      Figure 8. Absolute W1 -band magnitude, MW1 ,host , vs. redshift, z, for the host galaxies of SNe Ia in the ZTF BTS. Galaxies with known
+      redshifts (from NED or other databases) prior to SN discovery are shown as magenta pluses, while those lacking redshifts (!NEDz ) are shown
+      as gold circles. The dashed line roughly corresponds to the WISE detection limit mW1 ,limit ≈ 20.629 mag Schlafly et al. 2019. The shaded
+      background shows the probability of a host galaxy having a cataloged redshift given its redshift and MW1 (RCF(z, MW1 )), based on 442
+      galaxies with WISE detections. The top and right plots show the probability of a host galaxy having a cataloged redshift given only its redshift,
+      RCF(z), or MW1 , RCF(MW1 ), respectively. In these two plots the solid lines show the median value of the RCF, while the shaded region
+      corresponds to the 90% credible region on the RCF.
+                                                                            ZTF BTS                                                                   17
+      1.0                                                         in PS1             same methodology described above, we can estimate the
+                                                                  in SDSS
+      0.9                                                         not in SDSS        RCF as a function of galaxy brightness (as traced by the PS1
+      0.8                                                                            r-band), rather than z or MW 1 . The results from this exercise
+      0.7                                                                            are summarized in Figure 9.
+                                                                                        From Figure 9 it is clear that the vast majority of ex-
+      0.6
+                                                                                     tremely bright galaxies (rPS1 . 14 mag) have catalogued
+RCF
+
+
+
+
+      0.5                                                                            redshifts. Figure 9 also shows the RCF for galaxies that are
+      0.4                                                                            and are not within the SDSS imaging footprint,31 and a com-
+      0.3                                                                            parison of these two curves highlights the crucial role that
+                                                                                     SDSS played in terms of identifying galaxies in the local uni-
+      0.2
+                                                                                     verse and spectroscopically measuring their redshifts. SDSS
+      0.1                                                                            pushes the completeness of redshift catalogs ∼2 mag fainter
+      0.0                                                                            than what is observed outside the SDSS footprint. From our
+            11   12   13   14   15      16   17    18   19   20       21        22
+                                      rps1 (mag)                                     analysis, it is possible to estimate the completeness of exist-
+                                                                                     ing redshift catalogs as a function of depth, and we find that
+ Figure 9. Redshift completeness factor as a function of appar-                      catalogs are currently ∼90%, 50%, and 10% complete to a
+ ent host galaxy brightness, as traced by the rPS1 Kron mag mea-                     depth of rPS1 ≈14.7 mag, 16.9 mag, and 19.1 mag respec-
+ surement. The solid purple curve shows the median value for all
+                                                                                     tively. Since the DESI bright galaxy survey is an order-of-
+ hosts in PS1 (95% of all identified ZTF BTS hosts), while the
+ green, dot-dashed curve shows hosts within the SDSS imaging                         magnitude increase over SDSS, Figure 9 makes it clear that
+ footprint (72% of all hosts), and the orange, dashed curve shows                    the DESI bright galaxy survey will dramatically improve our
+ hosts outside SDSS (23% of all hosts). The RCF is higher within                     knowledge of which galaxies reside in the local universe.
+ the SDSS footprint, likely due to the many SDSS spectroscopic
+ redshift surveys. For all galaxies within PS1, the RCF = 0.5 at                                6. SUMMARY AND CONCLUSIONS
+ rPS1 ≈ 16.9 mag, while within the SDSS footprint, the RCF =
+ 0.5 at rPS1 ≈ 17.4 mag, and outside SDSS the RCF = 0.5 at                              We have presented early results from the ZTF Bright Tran-
+ rPS1 ≈ 15.5 mag.                                                                    sient Survey. The BTS utilizes publicly announced discover-
+                                                                                     ies from the ZTF MSIP surveys to spectroscopically classify
+                                                                                     all extragalactic transients that peak brighter than 18.5 mag.
+ events should account for the fraction of “missing” galaxies
+                                                                                     Simple filters are applied to the ZTF alert stream with the aim
+ that we have identified with the BTS.
+                                                                                     of minimizing false negatives, and we estimate that ∼95% of
+                                                                                     all mpeak ≤ 18.5 mag SNe in the BTS are spectroscopically
+        5.1. Catalog Completeness as a Function of Galaxy
+                                                                                     classified (during the period of the survey in 2018). This ef-
+                             Brightness
+                                                                                     fort has resulted in the classification of 761 SNe.
+    To date SDSS has been the most prolific survey in                                   Spectroscopic observations are primarily conducted with
+ terms of spectroscopically measuring galaxy redshifts, with                         SEDM, which is optimized to classify SN with m < 19 mag.
+ ∼2.8 million catalogued galaxies and counting (Aguado et al.                        For sources that are inaccessible to SEDM, we utilize any
+ 2019). At this stage, significant improvements to the RCF                           available resource in order to obtain a classification. Final
+ will require tens of millions of new redshift measurements.                         BTS classifications utilize spectral template matching, via
+ Fortunately, within the next few years we will enter the era of                     SNID, and visual inspection of the spectra and (publically
+ supremely multiplexed spectrographs [e.g., The Dark Energy                          available) light curves. Of the 761 classified BTS SNe, the
+ Spectroscopic Instrument (DESI),27 the Subaru Prime Fo-                             majority are SNe Ia (547), followed by CC SNe, both SNe
+ cus Spectrograph (PFS),28 Euclid,29 the Wide Field Infrared                         II (155) and SNe Ib/c (40), with a relatively small number of
+ Survey Telescope (WFIRST)30 ], which could dramatically                             SLSNe (19). The relative fraction of each of these types of
+ increase the number of galaxies with known spectroscopic                            SNe agrees with what has been found in previous studies (Li
+ redshifts within the local universe. The best strategy to this                      et al. 2011; Holoien et al. 2019).
+ end is to obtain spectra of bright galaxies with currently un-                         In this early release paper, we have focused on measuring
+ known redshifts, as is planned as part of the DESI Bright                           the redshift completeness of local galaxy catalogs by using
+ Galaxy Survey (DESI Collaboration et al. 2016). Using the                           SNe Ia as a relatively unbiased tracer of galaxies in the local
+                                                                                     universe. By raw number, we find that less than half of the
+   27 https://www.desi.lbl.gov/
+   28 https://pfs.ipmu.jp/                                                             31 This is determined by performing a cross match between BTS host
+   29 https://sci.esa.int/web/euclid/
+                                                                                     positions and the SDSS imaging catalog. Any hosts with SDSS sources
+   30 https://wfirst.gsfc.nasa.gov/                                                  within 10 are assumed to be within the SDSS imaging footprint.
+18                                                          F REMLING ET AL .
+
+BTS SN host galaxies have known spectroscopic redshifts.              mann Institute for Science, the Oskar Klein Center at Stockholm
+In more detail, we find that the RCF falls steeply as a func-         University, the University of Maryland, the University of Wash-
+tion of redshift, with only ∼half of all galaxies having known        ington, Deutsches Elektronen- Synchrotron and Humboldt Univer-
+                                                                      sity, Los Alamos National Laboratories, the TANGO Consortium of
+redshifts at z ≈ 0.05, and .20% of galaxies having known
+                                                                      Taiwan, the University of Wisconsin at Milwaukee, and Lawrence
+redshifts at z ≈ 0.1. The “missing” galaxies with unknown             Berkeley National Laboratories. Operations are conducted by COO,
+redshifts have important ramifications when searching for             IPAC, and UW.
+electromagnetic counterparts to multimessenger astronomi-                This work was supported by the GROWTH project funded by
+cal events, and suggest that the most complete method to find         the National Science Foundation under PIRE Grant No 1545949.
+the EM counterparts for events at d & 100 Mpc is to tile the          The ZTF forced-photometry service was funded under the Heising-
+entire error regions associated with gravitational wave (GW)          Simons Foundation grant #12540303 (PI: Graham). A.A.M. is
+or neutrino event alerts. However, even if this is done the           funded by the Large Synoptic Survey Telescope Corporation, the
+                                                                      Brinson Foundation, and the Moore Foundation in support of the
+same problem arises again when deciding which candidates
+                                                                      LSSTC Data Science Fellowship Program, he also receives sup-
+among those found by the wide-field searches to follow up             port as a CIERA Fellow by the CIERA Postdoctoral Fellowship
+spectroscopically. Given the resources available, typically           Program (Center for Interdisciplinary Exploration and Research in
+candidates with known distances, that also coincide with the          Astrophysics, Northwestern University). M.R. has received fund-
+distance constraints in a GW alert, are heavily prioritized for       ing from the European Research Council (ERC) under the Euro-
+follow-up (e.g., Andreoni et al. 2019; Coughlin et al. 2019).         pean Union’s Horizon 2020 research and innovation programme
+Incorporation of redshifts from the Census of the Local Uni-          (grant agreement No 759194 - USNAC). The Oskar Klein Centre
+                                                                      is funded by the Swedish Research Council. A.Y.Q.H. is supported
+verse narrowband Hα catalog (Cook et al. 2019) may allevi-
+                                                                      by a National Science Foundation Graduate Research Fellowship
+ate this problem to some extent in the near future.                   under Grant No. DGE1144469.
+   The combination of ZTF and SEDM has illustrated the                   Partially based on observations made with the Nordic Optical
+power of focused efforts in the era of very large time-domain         Telescope, operated by the Nordic Optical Telescope Scientific As-
+surveys. Within the next few years the Large Synoptic Sur-            sociation at the Observatorio del Roque de los Muchachos, La
+vey Telescope (LSST; Ivezić et al. 2008) will begin full sur-        Palma, Spain, of the Instituto de Astrofisica de Canarias. Some
+vey operations. LSST will increase the volume of transient            of the data presented here were obtained with ALFOSC, which is
+discoveries by an order of magnitude relative to on-going sur-        provided by the Instituto de Astrofisica de Andalucia (IAA) under a
+                                                                      joint agreement with the University of Copenhagen and NOTSA.
+veys in much the same way that PTF, PS1, and others built                Some of the data presented herein were obtained at the W. M.
+upon LOSS, and ATLAS and ZTF have built upon those sur-               Keck Observatory, which is operated as a scientific partnership
+veys. We have already reached the era where true spectro-             among the California Institute of Technology, the University of Cal-
+scopic completeness is impossible for SN surveys, and LSST            ifornia, and NASA; the observatory was made possible by the gen-
+will greatly exacerbate this problem. Nevertheless, the use of        erous financial support of the W. M. Keck Foundation.
+an ultra-low-resolution instrument has allowed us to spectro-            This paper is partly based on observations made with the Ital-
+scopically classify a nearly-complete subset of the discover-         ian Telescopio Nazionale Galileo (TNG) operated on the island of
+                                                                      La Palma by the Fundación Galileo Galilei of the INAF (Istituto
+ies made by ZTF (those with mpeak ≤ 18.5 mag). The sim-
+                                                                      Nazionale di Astrofisica) at the Spanish Observatorio del Roque de
+ple focus of the BTS – classify all the bright transients – has       los Muchachos of the Instituto de Astrofisica de Canarias. Partially
+resulted in the largest systematic classification of SNe to date.     based on observations obtained with the Apache Point Observatory
+761 SNe are included in this early release paper, while the in-       3.5-meter telescope, which is owned and operated by the Astrophys-
+clusion of 2019 results will eventually bring this number to          ical Research Consortium. Partially based on observations from the
+>1800. In addition to measuring the RCF, as was done here,            LCOGT network. Partially based on public observations collected
+our growing sample can be used to: determine volumetric               at the WHT, operated on the island of La Palma by the Isaac Newton
+                                                                      Group.
+SN rates, measure the expansion of the Universe using low-z
+                                                                         The Liverpool Telescope is operated on the island of La Palma
+SNe Ia, study the demographics of CC SNe, and measure the             by Liverpool John Moores University in the Spanish Observatorio
+luminosity function of a wide range of transient phenomena.           del Roque de los Muchachos of the Instituto de Astrofisica de Ca-
+This, despite the fact that BTS only targets a tiny minority          narias with financial support from the UK Science and Technology
+of all transients discovered by ZTF. The BTS demonstrates             Facilities Council.
+that a focused triage of an otherwise overwhelming discov-               The SED Machine is based upon work supported by the National
+ery stream can lead to both impactful and novel results.              Science Foundation under Grant No. 1106171.
+                                                                         We thank students Shaney Sze and Ho Ko for assisting with the
+                                                                      manual candidate vetting during the summer of 2018.
+   Based on observations obtained with the Samuel Oschin Tele-
+scope 48-inch and the 60-inch Telescope at the Palomar Observa-          Software: SNID (Blondin & Tonry 2007), astropy (As-
+tory as part of the Zwicky Transient Facility project. ZTF is sup-    tropy Collaboration et al. 2013), scipy (Jones et al. 2001),
+ported by the National Science Foundation under Grant No. AST-        matplotlib (Hunter 2007), pandas (McKinney 2010), emcee
+1440341 and a collaboration including Caltech, IPAC, the Weiz-        (Foreman-Mackey et al. 2013), corner (Foreman-Mackey 2016),
+                                                                     ZTF BTS                                                                       19
+
+MultinomCI (Signorell & et al. 2019), PYSEDM (Rigault et al.                    STScI 2012), pyraf-dbsp (Bellm & Sesar 2016), LPipe (Per-
+2019), IRAF (Tody 1986), PyRAF (Science Software Branch at                      ley 2019), pyDIS (Davenport et al. 2016).
+
+                                                                     APPENDIX
+                               A. MEASURING THE CONDITIONAL PROBABILITY OF THE RCF
+  To estimate the conditional probability that a galaxy has a catalogued redshift based on its distance and IR-luminosity, we model the data X
+with the Bernoulli distribution
+                                                                 X ∼ Bern(p),                                                             (A1)
+where p is parameterized with a logistic function with dependence on both redshift z and host galaxy luminosity:
+                                                                                1
+                                                    p(z, M, θ) =                           ,                                                   (A2)
+                                                                      1 + exp(az + bM − c)
+
+with host-galaxy absolute magnitude M , and θ representing the model parameters: a, b, and c, which need to be determined. The precise
+analytic dependence of p on z and M may not be logistic, however, the purpose of this exercise is to provide a general sense for how the RCF
+relies on z and M . Given that it smoothly transitions over an exponential length scale from 1 to 0, the logistic function works well for this
+general purpose.
+   From here it follows that the probability of a host galaxy having a previously cataloged redshift is:
+                                                            (
+                                                               p(z, M, θ),      if q = NEDz
+                                                   P r(q) =                                                                              (A3)
+                                                               1 − p(z, M, θ), if q = !NEDz
+
+and the likelihood of the observations given the data and model parameters is:
+                                                               K
+                                                               Y
+                                     P r(qk | zk , MK , θ) =         p(zk , Mk , θ)qk (1 − p(zk , Mk , θ))1−qk ,                               (A4)
+                                                               k=1
+
+where k represents the individual observations and qk = 1 for NEDz galaxies and qk = 0 for !NEDz galaxies.
+  To estimate the model parameters we adopt wide, flat priors, and use the affine-invariant Markov Chain Monte Carlo (MCMC) ensemble
+sampling technique described by Goodman & Weare (2010), as implemented in the emcee software package (Foreman-Mackey et al. 2013) .
+For a and b we adopt flat priors boundead between 0 and 106 . For c we adopt a flat prior between −100 and 100. We use 25 walkers within the
+sample, and run the ensemble until it has “converged,” which we define as >100 times longer than the average auto-correlation length of the
+individual chains from each walker. We find there is a strong covariance between b and c, whereas a is relatively independent, as shown in the
+corner plot in Figure 10. We will happily make our posterior samples available to readers upon request.
+  We also constrain the RCF as a function of the host redshift, z, or host galaxy luminosity, individually. We do this separately from the
+analysis above, while using the same MCMC procedure with p in Equations A3 and A4 replaced by
+                                                                               1
+                                                         p(z, θ) =                      ,                                                      (A5)
+                                                                        1 + exp(az − c)
+for redshift, and
+                                                                              1
+                                                        p(M, θ) =                       ,                                                  (A6)
+                                                                      1 + exp(bM − c)
+for host galaxy luminosity (where, again, we use absolute magnitude MW 1 instead of total luminosity). The results of this procedure are shown
+in the side panels of Figure 8. In these panels the solid lines show the median value of p(z), RCF(z), and p(M ), RCF(M ), while the shaded
+region shows the 90% credible regions for p(z) and p(M ).
+
+
+                                                                REFERENCES
+Abolfathi, B., Aguado, D. S., Aguilar, G., et al. 2018, ApJS, 235,              Andreoni, I., Goldstein, D. A., Anand, S., et al. 2019, ApJL, 881,
+  42                                                                              L16
+Aguado, D. S., Ahumada, R., Almeida, A., et al. 2019, ApJS, 240,                Angus, C. R., Smith, M., Sullivan, M., et al. 2019, MNRAS, 487,
+  23                                                                              2215
+Aldering, G., Adam, G., Antilogus, P., et al. 2002, in Proc. SPIE,              Arnett, W. D., Bahcall, J. N., Kirshner, R. P., & Woosley, S. E.
+  Vol. 4836, Survey and Other Telescope Technologies and                          1989, ARA&A, 27, 629
+  Discoveries, ed. J. A. Tyson & S. Wolff, 61–72                                Astier, P., Guy, J., Regnault, N., et al. 2006, A&A, 447, 31
+20                                                                F REMLING ET AL .
+
+
+
+
+                                               1.0
+                                               0.8
+                                           b
+                                               0.6
+                                               6 0.4
+                                                9
+                                               12
+                                           c
+                                               15
+                                               18
+
+
+                                                       30
+
+                                                            45
+
+                                                                 60
+
+                                                                      0.4
+
+                                                                            0.6
+
+                                                                                  0.8
+
+                                                                                        1.0
+
+
+                                                                                              18
+                                                                                                   15
+                                                                                                        12
+                                                                                                             9
+                                                                                                                 6
+                                                            a                     b                     c
+
+
+Figure 10. Corner plot showing the posterior distribution of a, b, and c, used to constrain the joint distribution of the RCF on z and MW 1 ,
+RCF(z, MW1 ).
+
+Astropy Collaboration, Robitaille, T. P., Tollerud, E. J., et al. 2013,               Cortini, G. 2018, Transient Name Server Discovery Report,
+  A&A, 558, A33                                                                          2018-393, 1
+Baade, W., & Zwicky, F. 1934, Physical Review, 46, 76                                 Coughlin, M. W., Ahumada, T., Anand, S., et al. 2019, arXiv
+Bellm, E. C. 2016, PASP, 128, 084501                                                     e-prints, arXiv:1907.12645
+Bellm, E. C., & Sesar, B. 2016, pyraf-dbsp: Reduction pipeline for                    Davenport, J., de Val-Borro, M., & Wilkinson, T. D. 2016,
+  the Palomar Double Beam Spectrograph, Astrophysics Source                              doi:10.5281/zenodo.58753
+  Code Library, , , ascl:1602.002                                                     De Cia, A., Gal-Yam, A., Rubin, A., et al. 2018, ApJ, 860, 100
+Bellm, E. C., Kulkarni, S. R., Graham, M. J., et al. 2019a, PASP,                     DESI Collaboration, Aghamousa, A., Aguilar, J., et al. 2016, arXiv
+  131, 018002                                                                            e-prints, arXiv:1611.00036
+Bellm, E. C., Kulkarni, S. R., Barlow, T., et al. 2019b, PASP, 131,                   Dey, A., Schlegel, D. J., Lang, D., et al. 2019, AJ, 157, 168
+                                                                                      Duev, D. A., Mahabal, A., Masci, F. J., et al. 2019, arXiv e-prints,
+  068003
+                                                                                         arXiv:1907.11259
+Ben-Ami, S., Konidaris, N., Quimby, R., et al. 2012, in Proc. SPIE,
+                                                                                      Filippenko, A. V. 1997, ARA&A, 35, 309
+  Vol. 8446, Ground-based and Airborne Instrumentation for
+                                                                                      Filippenko, A. V., Li, W. D., Treffers, R. R., & Modjaz, M. 2001,
+  Astronomy IV, 844686
+                                                                                         in Astronomical Society of the Pacific Conference Series, Vol.
+Blagorodnova, N., Neill, J. D., Walters, R., et al. 2018, PASP, 130,
+                                                                                         246, IAU Colloq. 183: Small Telescope Astronomy on Global
+  035003
+                                                                                         Scales, ed. B. Paczynski, W.-P. Chen, & C. Lemme, 121–+
+Blondin, S., Dessart, L., & Hillier, D. J. 2015, MNRAS, 448, 2766
+                                                                                      Fitzpatrick, E. L., & Massa, D. 2007, ApJ, 663, 320
+Blondin, S., & Tonry, J. L. 2007, in American Institute of Physics
+                                                                                      Flesch, E. W. 2015, PASA, 32, e010
+  Conference Series, Vol. 924, The Multicolored Landscape of
+                                                                                      Foley, R. J., Li, W., Moore, M., et al. 2006, Central Bureau
+  Compact Objects and Their Explosive Origins, ed. T. di Salvo,                          Electronic Telegrams, 695, 1
+  G. L. Israel, L. Piersant, L. Burderi, G. Matt, A. Tornambe, &                      Foley, R. J., Smith, N., Ganeshalingam, M., et al. 2007, ApJL, 657,
+  M. T. Menna, 312–321                                                                   L105
+Branch, D., Dang, L. C., Hall, N., et al. 2006, PASP, 118, 560                        Foreman-Mackey, D. 2016, The Journal of Open Source Software,
+Cenko, S. B., Fox, D. B., Moon, D.-S., et al. 2006, PASP, 118,                           24, doi:10.21105/joss.00024.
+  1396                                                                                   http://dx.doi.org/10.5281/zenodo.45906
+Chambers, K. C., Magnier, E. A., Metcalfe, N., et al. 2016, arXiv                     Foreman-Mackey, D., Hogg, D. W., Lang, D., & Goodman, J.
+  e-prints, arXiv:1612.05560                                                             2013, PASP, 125, 306
+Cook, D. O., Kasliwal, M. M., Van Sistine, A., et al. 2019, ApJ,                      Fox, O. D., Azalee Bostroem, K., Van Dyk, S. D., et al. 2014, ApJ,
+  880, 7                                                                                 790, 17
+                                                                   ZTF BTS                                                                   21
+
+Frieman, J. A., Bassett, B., Becker, A., et al. 2008, AJ, 135, 338       Kasliwal, M. M., Kulkarni, S. R., Gal-Yam, A., et al. 2012, ApJ,
+Gaia Collaboration, Prusti, T., de Bruijne, J. H. J., et al. 2016,         755, 161
+   A&A, 595, A1                                                          Kasliwal, M. M., Cannella, C., Bagdasaryan, A., et al. 2019, PASP,
+Gal-Yam, A. 2012, Science, 337, 927                                        131, 038003
+Gal-Yam, A., Mazzali, P., Ofek, E. O., et al. 2009, Nature, 462, 624     Kulkarni, S. R., Perley, D. A., & Miller, A. A. 2018, ApJ, 860, 22
+Galama, T. J., Vreeswijk, P. M., van Paradijs, J., et al. 1998,          Lang, D., Hogg, D. W., & Mykytyn, D. 2016a, The Tractor:
+   Nature, 395, 670                                                        Probabilistic astronomical source detection and measurement, , ,
+Gehrels, N., Cannizzo, J. K., Kanner, J., et al. 2016, ApJ, 820, 136       ascl:1604.008
+Goobar, A., & Leibundgut, B. 2011, Annual Review of Nuclear              Lang, D., Hogg, D. W., & Schlegel, D. J. 2016b, AJ, 151, 36
+   and Particle Science, 61, 251                                         Law, N. M., Kulkarni, S. R., Dekany, R. G., et al. 2009, PASP,
+Goodman, J., & Weare, J. 2010, Communications in Applied                   121, 1395
+   Mathematics and Computational Science, 5, 65                          Li, W., Leaman, J., Chornock, R., et al. 2011, MNRAS, 412, 1441
+Goodman, L. A. 1965, Technometrics, 7, 247. https://www.                 Li, W. D., Filippenko, A. V., Treffers, R. R., et al. 2000, in
+   tandfonline.com/doi/abs/10.1080/00401706.1965.10490252                  American Institute of Physics Conference Series, Vol. 522,
+Gorbovskoy, E. S., Lipunov, V. M., Kornilov, V. G., et al. 2013,           American Institute of Physics Conference Series, ed. S. S. Holt
+   Astronomy Reports, 57, 233                                              & W. W. Zhang, 103–106
+Graham, M. J., Kulkarni, S. R., Bellm, E. C., et al. 2019, PASP,         Ligo Scientific Collaboration, & VIRGO Collaboration. 2019a,
+   131, 078001                                                             GRB Coordinates Network, Circular Service, 24168
+Grzegorzek, J. 2018, Transient Name Server Discovery Report,             —. 2019b, GRB Coordinates Network, Circular Service, 24442
+   2018-582, 1                                                           —. 2019c, GRB Coordinates Network, Circular Service, 25606
+Gutiérrez, C. P., Anderson, J. P., Hamuy, M., et al. 2017, ApJ, 850,    —. 2019d, GRB Coordinates Network, Circular Service, 25707
+   89                                                                    Liu, Y.-Q., Modjaz, M., Bianco, F. B., & Graur, O. 2016, ApJ, 827,
+Helfand, D. J., White, R. L., & Becker, R. H. 2015, ApJ, 801, 26           90
+Hirata, K., Kajita, T., Koshiba, M., et al. 1987, Physical Review        Lunnan, R., Yan, L., Perley, D. A., et al. 2019, arXiv e-prints,
+   Letters, 58, 1490                                                       arXiv:1910.02968
+Ho, A. Y. Q., Phinney, E. S., Ravi, V., et al. 2019, ApJ, 871, 73        Mahabal, A., Rebbapragada, U., Walters, R., et al. 2019, PASP,
+Hodgkin, S. T., Wyrzykowski, L., Blagorodnova, N., & Koposov,             131, 038002
+   S. 2013, Philosophical Transactions of the Royal Society of           Maraston, C., Pforr, J., Henriques, B. M., et al. 2013, MNRAS,
+   London Series A, 371, 20120239                                         435, 2764
+Holoien, T. W. S., Stanek, K. Z., Kochanek, C. S., et al. 2017a,         Martin, D. C., Fanson, J., Schiminovich, D., et al. 2005, ApJL,
+   MNRAS, 464, 2672                                                       619, L1
+Holoien, T. W. S., Brown, J. S., Stanek, K. Z., et al. 2017b,            Masci, F. J., Laher, R. R., Rusholme, B., et al. 2019, PASP, 131,
+   MNRAS, 467, 1098                                                       018003
+—. 2017c, MNRAS, 471, 4966                                               McCray, R. 1993, ARA&A, 31, 175
+Holoien, T. W. S., Brown, J. S., Vallely, P. J., et al. 2019, MNRAS,     McKinney, W. 2010, in Proceedings of the 9th Python in Science
+   484, 1899                                                              Conference, ed. S. van der Walt & J. Millman, 51 – 56
+Howell, D. A. 2001, ApJL, 554, L193                                      Modjaz, M., Liu, Y. Q., Bianco, F. B., & Graur, O. 2016, ApJ, 832,
+Hunter, J. D. 2007, Computing In Science & Engineering, 9, 90             108
+Itagaki, K. 2018a, Transient Name Server Discovery Report,               Modjaz, M., Blondin, S., Kirshner, R. P., et al. 2014, AJ, 147, 99
+   2018-1614, 1                                                          Nordin, J., Brinnel, V., van Santen, J., et al. 2019, arXiv e-prints,
+—. 2018b, Transient Name Server Discovery Report, 2018-1766, 1             arXiv:1904.05922
+Ivezić, Ž., Tyson, J. A., Acosta, E., et al. 2008, ArXiv e-prints,     Norgaard-Nielsen, H. U., Hansen, L., Jorgensen, H. E., Aragon
+   arXiv:0805.2366                                                         Salamanca, A., & Ellis, R. S. 1989, Nature, 339, 523
+Jarrett, T. H., Cohen, M., Masci, F., et al. 2011, ApJ, 735, 112         Oke, J. B., & Gunn, J. E. 1982, PASP, 94, 586
+Jones, E., Oliphant, T., Peterson, P., et al. 2001, SciPy: Open          Oke, J. B., Cohen, J. G., Carr, M., et al. 1995, PASP, 107, 375
+   source scientific tools for Python, , , [Online; accessed ¡today¿].   Papadogiannakis, S., Dhawan, S., Morosin, R., & Goobar, A.
+   http://www.scipy.org/                                                   2019a, MNRAS, 485, 2343
+Kasen, D. 2006, ApJ, 649, 939                                            Papadogiannakis, S., Goobar, A., Amanullah, R., et al. 2019b,
+Kasliwal, M. M., & Nissanke, S. 2014, ApJL, 789, L5                        MNRAS, 483, 5045
+22                                                                F REMLING ET AL .
+
+Pastorello, A., Smartt, S. J., Mattila, S., et al. 2007, Nature, 447,       Shappee, B., Prieto, J., Stanek, K. Z., et al. 2014, in American
+  829                                                                          Astronomical Society Meeting Abstracts, Vol. 223, American
+Pastorello, A., Smartt, S. J., Botticella, M. T., et al. 2010, ApJL,           Astronomical Society Meeting Abstracts #223, 236.03
+  724, L16                                                                  Signorell, A., & et al. 2019, DescTools: Tools for Descriptive
+                                                                               Statistics, r package version 0.99.29.
+Patat, F., Cappellaro, E., Danziger, J., et al. 2001, ApJ, 555, 900
+                                                                               https://cran.r-project.org/package=DescTools
+Patterson, M. T., Bellm, E. C., Rusholme, B., et al. 2019, PASP,
+                                                                            Silverman, J. M., Foley, R. J., Filippenko, A. V., et al. 2012a,
+  131, 018001
+                                                                               MNRAS, 425, 1789
+Perley, D. A. 2019, PASP, 131, 084503                                       —. 2012b, MNRAS, 425, 1789
+Perlmutter, S., Aldering, G., Goldhaber, G., et al. 1999, ApJ, 517,         Smartt, S. J., Valenti, S., Fraser, M., et al. 2015, A&A, 579, A40
+  565                                                                       Smith, N., Li, W., Foley, R. J., et al. 2007, ApJ, 666, 1116
+Piascik, A. S., Steele, I. A., Bates, S. D., et al. 2014, in Proc. SPIE,    Soumagnac, M. T., & Ofek, E. O. 2018, PASP, 130, 075002
+  Vol. 9147, Ground-based and Airborne Instrumentation for                  Sun, P., Lau, A., Liu, J., et al. 2018, Transient Name Server
+  Astronomy V, 91478H                                                          Discovery Report, 2018-2007, 1
+Prentice, S. J., Maguire, K., Smartt, S. J., et al. 2018, ApJL, 865,        Tachibana, Y., & Miller, A. A. 2018, PASP, 130, 128001
+  L3                                                                        Tanaka, Y. 2018, Transient Name Server Discovery Report,
+                                                                              2018-469, 1
+Quimby, R. M., Aldering, G., Wheeler, J. C., et al. 2007, ApJL,
+                                                                            Tartaglia, L., Sand, D. J., Valenti, S., et al. 2018, ApJ, 853, 62
+  668, L99
+                                                                            Taubenberger, S. 2017, The Extremes of Thermonuclear
+Quimby, R. M., Kulkarni, S. R., Kasliwal, M. M., et al. 2011,
+                                                                              Supernovae, 317
+  Nature, 474, 487                                                          Tody, D. 1986, in Proc. SPIE, Vol. 627, Instrumentation in
+Quimby, R. M., De Cia, A., Gal-Yam, A., et al. 2018, ApJ, 855, 2              astronomy VI, ed. D. L. Crawford, 733
+Riess, A. G., Filippenko, A. V., Challis, P., et al. 1998, AJ, 116,         Tonry, J. L., Denneau, L., Heinze, A. N., et al. 2018, PASP, 130,
+  1009                                                                        064505
+Rigault, M., Neill, J. D., Blagorodnova, N., et al. 2019, A&A, 627,         Turatto, M., Cappellaro, E., Danziger, I. J., et al. 1993, MNRAS,
+  A115                                                                        262, 128
+                                                                            Wen, X.-Q., Wu, H., Zhu, Y.-N., et al. 2013, MNRAS, 433, 2946
+Schlafly, E. F., & Finkbeiner, D. P. 2011, ApJ, 737, 103
+                                                                            Williamson, M., Modjaz, M., & Bianco, F. B. 2019, ApJL, 880,
+Schlafly, E. F., Meisner, A. M., & Green, G. M. 2019, ApJS, 240,
+                                                                              L22
+  30
+                                                                            Wright, E. L., Eisenhardt, P. R. M., Mainzer, A. K., et al. 2010, AJ,
+Schlegel, D. J., Finkbeiner, D. P., & Davis, M. 1998, ApJ, 500, 525           140, 1868
+Schlegel, E. M. 1990, MNRAS, 244, 269                                       Zackay, B., Ofek, E. O., & Gal-Yam, A. 2016, ApJ, 830, 27
+Schmidt, B. P., Kirshner, R. P., Eastman, R. G., et al. 1993, Nature,       Zhang, M., Ding, Y., Liu, S., et al. 2018, Transient Name Server
+  364, 600                                                                    Discovery Report, 2018-1393, 1
+Science Software Branch at STScI. 2012, PyRAF: Python                       Zhang, T.-M., Wang, X.-F., Chen, J.-C., et al. 2015, Research in
+  alternative for IRAF, Astrophysics Source Code Library, , ,                 Astronomy and Astrophysics, 15, 215
+  ascl:1207.011                                                             Zwicky, F. 1938a, PASP, 50, 215
+                                                                            —. 1938b, ApJ, 88, 529
+Secrest, N. J., Dudik, R. P., Dorland, B. N., et al. 2015, ApJS, 221,
+                                                                            —. 1942, ApJ, 96, 28
+  12
+

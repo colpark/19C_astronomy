@@ -1,0 +1,606 @@
+{
+ "seed_id": "2008.04912",
+ "title": "Photometric Classification of 2315 Pan-STARRS1 Supernovae with Superphot (Hosseinzadeh et al. 2020)",
+ "arxiv_version_verified": "arXiv:2008.04912v3 (header L13; downloaded PDF sha256 576f7fa1...)",
+ "read_in_full": true,
+ "reader": "fork-E",
+ "layout_lines": 1795,
+ "pages": 24,
+ "episodes": [
+  {
+   "episode_id": "E1",
+   "level": "per_object",
+   "description": "Classify one spectroscopically unclassified PS1-MDS transient with Superphot from its griz light curve and host redshift",
+   "practitioner_action": "publish_value",
+   "action_locator": "2008.04912.layout.txt p7 §4 L465-470",
+   "chain": [
+    {
+     "op": "restrict to points between -50 and +180 d of discovery",
+     "locator": "2008.04912.layout.txt p4 §3.1 L268-268; p5 L336-337"
+    },
+    {
+     "op": "MCMC fit of Eq.1 (6 params + intrinsic scatter) per filter, PyMC3 Metropolis-Hastings, 25 chains",
+     "locator": "2008.04912.layout.txt p4 §3.1 L249-265"
+    },
+    {
+     "op": "sum per-filter posteriors as prior for second iteration",
+     "locator": "2008.04912.layout.txt p4 §3.1 L251-258"
+    },
+    {
+     "op": "average observed-filter posteriors for unobserved filters",
+     "locator": "2008.04912.layout.txt p4 §3.1 L257-260"
+    },
+    {
+     "op": "draw 10 model light curves from posterior",
+     "locator": "2008.04912.layout.txt p5 §3.2 L334-340"
+    },
+    {
+     "op": "convert fluxes to luminosity with host redshift, MW extinction, K-correction 1+z",
+     "locator": "2008.04912.layout.txt p5 §3.2 L340-351"
+    },
+    {
+     "op": "project onto training-set PCA (6 components) + peak absolute magnitude per filter; rescale",
+     "locator": "2008.04912.layout.txt p7 §3.2 L445-477"
+    },
+    {
+     "op": "apply RF to 10 feature sets, average probabilities, adopt max",
+     "locator": "2008.04912.layout.txt p7 §3.3 L450-462"
+    },
+    {
+     "op": "publish classification, confidence, reduced chi2 and R-hat in Table 3",
+     "locator": "2008.04912.layout.txt p10 §4 L630-655"
+    }
+   ],
+   "chain_length": 9
+  },
+  {
+   "episode_id": "E2",
+   "level": "per_object",
+   "description": "Determine the host-galaxy redshift of one transient from its host spectrum (RVSAO cross-correlation with visual inspection)",
+   "practitioner_action": "publish_value",
+   "action_locator": "2008.04912.layout.txt p3 §2 L121-171",
+   "chain": [
+    {
+     "op": "cross-correlate host spectrum with 16 galaxy templates in RVSAO",
+     "locator": "2008.04912.layout.txt p3 §2 L121-129"
+    },
+    {
+     "op": "exclude spectra with all RCC<4 and single matches 4<RCC<5",
+     "locator": "2008.04912.layout.txt p3 §2 L130-137"
+    },
+    {
+     "op": "visually inspect ~600 spectra meeting 3 mismatch criteria; verify or determine redshift manually, else exclude",
+     "locator": "2008.04912.layout.txt p3 §2 L137-157"
+    },
+    {
+     "op": "supplement with public catalog redshifts (1 arcsec); manually inspect conflicts",
+     "locator": "2008.04912.layout.txt p3 §2 L157-165"
+    },
+    {
+     "op": "exclude 199 transients variable across seasons",
+     "locator": "2008.04912.layout.txt p3 §2 L173-179"
+    }
+   ],
+   "chain_length": 5
+  },
+  {
+   "episode_id": "E3",
+   "level": "per_study",
+   "description": "Implement V19 method as open-source Superphot, choose modifications, validate by LOO CV, study confidence thresholds, compare to other classifiers, apply to 2315 transients",
+   "practitioner_action": "publish_object",
+   "action_locator": "2008.04912.layout.txt p2 §1 L79-85",
+   "chain": [
+    {
+     "op": "assemble training set (557 SNe) and test set (2315)",
+     "locator": "2008.04912.layout.txt p3 §2 L178-194"
+    },
+    {
+     "op": "model fitting with modified priors",
+     "locator": "2008.04912.layout.txt p4 §3.1 L226-262"
+    },
+    {
+     "op": "PCA feature extraction",
+     "locator": "2008.04912.layout.txt p5 §3.2 L315-333"
+    },
+    {
+     "op": "MVG oversampling to 1000 per class",
+     "locator": "2008.04912.layout.txt p7 §3.3 L482-500"
+    },
+    {
+     "op": "RF classification",
+     "locator": "2008.04912.layout.txt p7 §3.3 L447-462"
+    },
+    {
+     "op": "leave-one-out cross-validation and confusion matrices",
+     "locator": "2008.04912.layout.txt p7 §4.1 L476-491"
+    },
+    {
+     "op": "class-fraction correction check",
+     "locator": "2008.04912.layout.txt p11 §4.2 L755-822"
+    },
+    {
+     "op": "confidence-threshold analysis",
+     "locator": "2008.04912.layout.txt p12 §4.3 L824-827"
+    },
+    {
+     "op": "agreement with V20 and Jones et al. 2017 classifiers",
+     "locator": "2008.04912.layout.txt p13 §4.4 L924-1014"
+    },
+    {
+     "op": "rare-class and AGN checks",
+     "locator": "2008.04912.layout.txt p16 §5.2 L1134-1178"
+    },
+    {
+     "op": "hyperparameter grid and alternative classifiers (Appendix D)",
+     "locator": "2008.04912.layout.txt p21 §D L1555-1567"
+    }
+   ],
+   "chain_length": 11
+  }
+ ],
+ "branches": [
+  {
+   "id": "SP-B01",
+   "episode_id": "E2",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "For ~600 host spectra with inconsistent RVSAO estimates, verify RVSAO redshift, determine a new one manually, or exclude",
+   "alternatives_visible": [
+    "RVSAO best redshift",
+    "manually determined redshift",
+    "exclude transient"
+   ],
+   "rejected_named": true,
+   "rejected_option": "remaining third excluded; RVSAO values rejected where telluric/artifact matches",
+   "reason": "best/median/modal mismatch, no three estimates agree, or telluric/instrumental artifact match",
+   "locator": "2008.04912.layout.txt p3 §2 L130-157",
+   "quote": "4 < RCC < 5. We then visually inspected approximately"
+  },
+  {
+   "id": "SP-B02",
+   "episode_id": "E2",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "Resolve conflicts between catalog redshift and RVSAO by manual inspection of own spectrum",
+   "alternatives_visible": [
+    "catalog redshift",
+    "RVSAO redshift"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "conflict between sources; outcome per object not reported",
+   "locator": "2008.04912.layout.txt p3 §2 L157-165",
+   "quote": "case of a conflict with RVSAO, we manually inspected"
+  },
+  {
+   "id": "SP-B03",
+   "episode_id": "E3",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "Treat PSc110446 and PSc130816 as unclassified transients with known redshifts",
+   "alternatives_visible": [
+    "use as spectroscopically classified training members"
+   ],
+   "rejected_named": true,
+   "rejected_option": "inclusion in the training set",
+   "reason": "transient spectra yielded redshifts but not confident classifications",
+   "locator": "2008.04912.layout.txt p3 §2 L165-171",
+   "quote": "transient spectra (of PSc110446 and PSc130816) yielded"
+  },
+  {
+   "id": "SP-B04",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Exclude 199 transients variable across multiple observing seasons",
+   "alternatives_visible": [
+    "keep them in the test set"
+   ],
+   "rejected_named": true,
+   "rejected_option": "the 199 variable transients",
+   "reason": "variability across seasons indicates unlikely SNe",
+   "locator": "2008.04912.layout.txt p3 §2 L173-179",
+   "quote": "light curves are variable across multiple observing sea-"
+  },
+  {
+   "id": "SP-B05",
+   "episode_id": "E3",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "Photometric SLSNe with broad host lines within 1 arcsec of host center: nuclear SN/TDE vs AGN variability left undecided, caution urged",
+   "alternatives_visible": [
+    "nuclear SN",
+    "TDE",
+    "increase in AGN luminosity"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "broad lines visible in at least 17 host spectra, 14 within 1 arcsec; cannot distinguish the cases (explicit non-decision with rivals named)",
+   "locator": "2008.04912.layout.txt p16 §5.3 L1128-1148",
+   "quote": "could either indicate a nuclear SN (or even a TDE) that"
+  },
+  {
+   "id": "SP-B06",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "Log-uniform prior on amplitude A instead of V19 uniform prior",
+   "alternatives_visible": [
+    "uniform prior (V19)"
+   ],
+   "rejected_named": true,
+   "rejected_option": "uniform amplitude prior",
+   "reason": "models of light curves missing their peak peak at SLSN luminosities; bias toward higher luminosities",
+   "locator": "2008.04912.layout.txt p14 §4.4 L967-991; p4 L259-261",
+   "quote": "reason we introduced a log-uniform prior on the ampli-"
+  },
+  {
+   "id": "SP-B07",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "Adopt V19 two-iteration per-filter fitting rather than a joint multi-filter fit",
+   "alternatives_visible": [
+    "simultaneous fit of >20 parameters across filters",
+    "SED-based cross-filter model"
+   ],
+   "rejected_named": true,
+   "rejected_option": "simultaneous multi-filter fit",
+   "reason": "no prior knowledge of SED before classification; MCMC convergence difficult for >20 parameters. Ambiguity: fitting procedure, could be tagged infer",
+   "locator": "2008.04912.layout.txt p4 §3.1 L246-255",
+   "quote": "when simultaneously fitting more than 20 parameters."
+  },
+  {
+   "id": "SP-B08",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Fit only points between -50 and +180 d of discovery",
+   "alternatives_visible": [],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "window encompasses >99% of >=3 sigma detections in the same season (criterion stated, alternative not shown)",
+   "locator": "2008.04912.layout.txt p5 §3.1 L336-338",
+   "quote": "and +180 days of the discovery date, which encompasses"
+  },
+  {
+   "id": "SP-B09",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "PCA features rather than model parameters",
+   "alternatives_visible": [
+    "model parameters",
+    "hand-selected features",
+    "downsampled model light curves"
+   ],
+   "rejected_named": true,
+   "rejected_option": "model parameters as features (slightly worse, Table 6)",
+   "reason": "V19 best pipeline used PCA; model parameters give slightly worse results",
+   "locator": "2008.04912.layout.txt p5 §3.2 L315-333; p21 L1557-1566",
+   "quote": "gives the option of using the model parameters directly,"
+  },
+  {
+   "id": "SP-B10",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "MVG oversampling rather than SMOTE",
+   "alternatives_visible": [
+    "SMOTE",
+    "MVG"
+   ],
+   "rejected_named": true,
+   "rejected_option": "SMOTE",
+   "reason": "MVG allows features outside the original distribution; agrees with V19",
+   "locator": "2008.04912.layout.txt p7 §3.3 L488-500",
+   "quote": "find that MVG oversampling gives better results be-"
+  },
+  {
+   "id": "SP-B11",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Random forest (entropy, no max depth, 5 features, 100 trees) over SVM and MLP; grid over 360 RF configurations",
+   "alternatives_visible": [
+    "SVM",
+    "MLP",
+    "Gini criterion",
+    "limited tree depth"
+   ],
+   "rejected_named": true,
+   "rejected_option": "SVM (low SLSN purity), MLP (worse in most metrics), Gini (neutral or worse)",
+   "reason": "highest F1; no clear winner in all 12 metrics",
+   "locator": "2008.04912.layout.txt p21 §D L1540-1567",
+   "quote": "purity, respectively). The MLP performs worse in most"
+  },
+  {
+   "id": "SP-B12",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Keep observer-frame times",
+   "alternatives_visible": [
+    "rest-frame time correction"
+   ],
+   "rejected_named": true,
+   "rejected_option": "correcting to rest-frame times",
+   "reason": "V19 found it gave worse results",
+   "locator": "2008.04912.layout.txt p6 §3.2 L433-437",
+   "quote": "set. V19 found that correcting to rest-frame times gave"
+  },
+  {
+   "id": "SP-B13",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Do not correct for host-galaxy extinction",
+   "alternatives_visible": [
+    "host extinction correction"
+   ],
+   "rejected_named": true,
+   "rejected_option": "host-galaxy extinction correction",
+   "reason": "no way to estimate it for test-set transients",
+   "locator": "2008.04912.layout.txt p6 §3.2 L431-437",
+   "quote": "We do not consider host-galaxy extinction, because we"
+  },
+  {
+   "id": "SP-B14",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Do not adopt a threshold on number of detections; confidence thresholds shown but any threshold called arbitrary",
+   "alternatives_visible": [
+    "confidence threshold (e.g. p>=0.75)",
+    "detection-count threshold",
+    "no threshold"
+   ],
+   "rejected_named": true,
+   "rejected_option": "detection-count threshold",
+   "reason": "confidence threshold more effective and removes smaller fraction; training/test distributions differ",
+   "locator": "2008.04912.layout.txt p12 §4.3 L805-827",
+   "quote": "smaller fraction of the sample, so we do not adopt a"
+  },
+  {
+   "id": "SP-B15",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Do not multiply classification probabilities by class rate priors",
+   "alternatives_visible": [
+    "apply relative-rate prior"
+   ],
+   "rejected_named": true,
+   "rejected_option": "rate prior",
+   "reason": "leave choice of rate measurements to future users",
+   "locator": "2008.04912.layout.txt p16 §5.1 L1109-1125",
+   "quote": "sify as SLSNe and V20 classify as SNe Ia. We choose not"
+  },
+  {
+   "id": "SP-B16",
+   "episode_id": "E3",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "For 94 transients Superphot calls Ibc and V20 calls Ia, prefer the Ia classification (rule applied to a set of objects)",
+   "alternatives_visible": [
+    "SN Ibc (Superphot)",
+    "SN Ia (V20)"
+   ],
+   "rejected_named": true,
+   "rejected_option": "Superphot SN Ibc label",
+   "reason": "SNe Ia much more common; Superphot Ibc purity only 21%",
+   "locator": "2008.04912.layout.txt p15 §4.4 L1067-1074",
+   "quote": "and V20 classify as SNe Ia, we prefer the SN Ia classifi-"
+  },
+  {
+   "id": "SP-B17",
+   "episode_id": "E3",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "Explain 24 Superphot SLSNe classified Ia by V20: visual inspection shows missing rise or decline at season boundaries, a model failure mode",
+   "alternatives_visible": [
+    "genuine SLSN",
+    "SN Ia",
+    "fit artifact of unobserved peak"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "visual inspection of the light curves",
+   "locator": "2008.04912.layout.txt p14 §4.4 L963-991",
+   "quote": "A visual inspection of these light curves shows that"
+  },
+  {
+   "id": "SP-B18",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Exclude 16 spectroscopically classified rare-class transients from training; only explore their labels",
+   "alternatives_visible": [
+    "include rare classes"
+   ],
+   "rejected_named": true,
+   "rejected_option": "SN Iax, TDEs, lensed Ia, Ibn, IIb?, FELTs as training classes",
+   "reason": "too few in number",
+   "locator": "2008.04912.layout.txt p3 §2 L188-194",
+   "quote": "common classes. Because these are too few in number"
+  },
+  {
+   "id": "SP-B19",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Exclude y filter",
+   "alternatives_visible": [
+    "use y band"
+   ],
+   "rejected_named": true,
+   "rejected_option": "y-band photometry",
+   "reason": "lower throughput and cadence",
+   "locator": "2008.04912.layout.txt p3 §2 L152-158",
+   "quote": "the y filter has lower throughput and cadence, so we"
+  },
+  {
+   "id": "SP-B20",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Class definitions: merge Ib/Ic, IIL/IIP, H-rich SLSNe into IIn",
+   "alternatives_visible": [
+    "separate Ib and Ic",
+    "separate IIL and IIP"
+   ],
+   "rejected_named": true,
+   "rejected_option": "finer subclasses",
+   "reason": "small numbers of Ibc; unclear IIL/IIP are separate populations",
+   "locator": "2008.04912.layout.txt p2 §1 L94-110",
+   "quote": "and SNe IIP, because it is not clear that these pop-"
+  }
+ ],
+ "conclusions_depth": [
+  {
+   "id": "SP-C1",
+   "conclusion": "Much of the classifier's success depends on absolute magnitude, which requires a redshift",
+   "channels_claimed": [
+    "griz photometry",
+    "host-galaxy spectroscopic redshift",
+    "Milky Way extinction"
+   ],
+   "n_channels_claimed": 3,
+   "locator": "2008.04912.layout.txt p15 §5.1 L1080-1082",
+   "quote": "Much of the success of our algorithm (unlike, e.g.,",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "SP-C2",
+   "conclusion": "SLSNe easy to identify because they separate cleanly by absolute magnitude",
+   "channels_claimed": [
+    "photometry",
+    "redshift"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2008.04912.layout.txt p7 §4.1 L492-495",
+   "quote": "tify because they separate relatively cleanly by absolute",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "SP-C3",
+   "conclusion": "AGNs may contaminate photometric SLSN sample; broad lines in host spectra, small host offsets",
+   "channels_claimed": [
+    "light curve (luminosity, slow evolution)",
+    "host-galaxy spectrum broad lines",
+    "transient-host offset"
+   ],
+   "n_channels_claimed": 3,
+   "locator": "2008.04912.layout.txt p16 §5.3 L1116-1142",
+   "quote": "check for this possibility, we inspect the host-galaxy",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "SP-C4",
+   "conclusion": "Peak absolute magnitude and first PC projection are the most discriminating features (author-reported single-filter retraining with impurity and permutation importance)",
+   "channels_claimed": [
+    "single-filter photometry",
+    "redshift"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2008.04912.layout.txt p20 §C L1497-1507",
+   "quote": "In all cases, the peak absolute magnitude and the",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "SP-C5",
+   "conclusion": "SLSN/Ia disagreements with V20 stem from light curves missing rise or decline",
+   "channels_claimed": [
+    "photometric sampling of the light curve"
+   ],
+   "n_channels_claimed": 1,
+   "locator": "2008.04912.layout.txt p14 §4.4 L967-973",
+   "quote": "A visual inspection of these light curves shows that",
+   "measured_depth": "not_measured"
+  }
+ ],
+ "facts_for_shape": [
+  {
+   "id": "SP-F1",
+   "fact": "Correctness of individual test-set classifications cannot be judged (no labels); only agreement with other classifiers is measured",
+   "locator": "2008.04912.layout.txt p12 §4.4 L830-839",
+   "quote": "Although we cannot judge the correctness of individ-"
+  },
+  {
+   "id": "SP-F2",
+   "fact": "Per-object reduced chi2 (median-parameter model) and max Gelman-Rubin R-hat are reported for each transient",
+   "locator": "2008.04912.layout.txt p5 §3.1 L341-344",
+   "quote": "versity.6 Tables 3–5 list the reduced χ2 goodness-of-fit"
+  },
+  {
+   "id": "SP-F3",
+   "fact": "No fit-quality rejection cut is applied: Table 3 rows include reduced chi2 801.5 with R-hat 1.7 (PSc000102) and R-hat 1.8 (PSc000150) still classified",
+   "locator": "2008.04912.layout.txt p10 §4 L635-653",
+   "quote": "Note—This table is available in its entirety in machine-readable form."
+  },
+  {
+   "id": "SP-F4",
+   "fact": "Reduced chi2 is infinite or negative when a light curve has 24 or fewer points across four filters",
+   "locator": "2008.04912.layout.txt p5 §3.1 L273-284",
+   "quote": "infinite or negative when the light curve has 24 or fewer"
+  },
+  {
+   "id": "SP-F5",
+   "fact": "Bayesian modeling allows fitting part of a light curve while keeping future behavior within uncertainties; what fraction is needed is left to future work (no held-out epoch evaluation)",
+   "locator": "2008.04912.layout.txt p16 §5.1 L1093-1098",
+   "quote": "curve while keeping all possible future behavior within"
+  },
+  {
+   "id": "SP-F6",
+   "fact": "For rare transients a high confidence does not imply a correct classification",
+   "locator": "2008.04912.layout.txt p16 §5.2 L1108-1112",
+   "quote": "that in these cases a high confidence does not imply a"
+  },
+  {
+   "id": "SP-F7",
+   "fact": "Test-set light curves are worse sampled than training set because brighter targets were prioritized for spectroscopy (selective labels)",
+   "locator": "2008.04912.layout.txt p7 §3.2 L452-455",
+   "quote": "ing set, likely because brighter targets were prioritized"
+  },
+  {
+   "id": "SP-F8",
+   "fact": "Agreement between two classifiers is not an indication of correctness",
+   "locator": "2008.04912.layout.txt p17 §6 L1179-1182",
+   "quote": "sient is not necessarily an indication that they are"
+  },
+  {
+   "id": "SP-F9",
+   "fact": "Code open source on GitHub/Zenodo/PyPI; reproducing results needs seed 0",
+   "locator": "2008.04912.layout.txt p2 §1 L79-85",
+   "quote": "dex under the name Superphot.1,2"
+  }
+ ],
+ "item_template_evidence": [
+  {
+   "id": "SP-I1",
+   "question_form": "infer: classify an unlabeled transient from its full griz light curve and host redshift into one of five classes with probability",
+   "locator": "2008.04912.layout.txt p7 §4 L465-470",
+   "quote": "Applying our classification pipeline to the test set de-"
+  },
+  {
+   "id": "SP-I2",
+   "question_form": "per-object MCMC fit of the parametric model reporting reduced chi2 and R-hat (parameter estimation; no held-out epochs scored)",
+   "locator": "2008.04912.layout.txt p4 §3.1 L249-255",
+   "quote": "Monte Carlo (MCMC) routine to fit each of the observed"
+  },
+  {
+   "id": "SP-I3",
+   "question_form": "infer: decide a host-galaxy redshift from an ambiguous cross-correlation by visual inspection",
+   "locator": "2008.04912.layout.txt p3 §2 L137-157",
+   "quote": "4 < RCC < 5. We then visually inspected approximately"
+  },
+  {
+   "id": "SP-I4",
+   "question_form": "explain: is a nuclear photometric SLSN an AGN, a nuclear SN or a TDE (left unresolved)",
+   "locator": "2008.04912.layout.txt p16 §5.3 L1128-1148",
+   "quote": "could either indicate a nuclear SN (or even a TDE) that"
+  }
+ ],
+ "zero_contribution": false,
+ "notes": "All 1795 layout lines read (24 pages incl. appendices and references); layout text contains full body text for all pages, so raw .txt was not needed (raw is longer because figure tick labels expand). Per-object human branches occur in redshift determination (SP-B01..B03) and post-hoc diagnoses (SP-B05, SP-B16, SP-B17); model-family choice per object is absent (every object gets the same model). Fit-quality statistics are reported but not used to reject fits."
+}

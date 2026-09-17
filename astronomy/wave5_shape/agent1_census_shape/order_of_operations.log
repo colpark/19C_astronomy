@@ -1,0 +1,44 @@
+2026-09-17T17:54:39Z step0 brief verified sha256 cd10a41c905a4914291b9976df7f3241960494e312f11e4f32171bfecd5e4c6b matches BRIEF_SHA256
+2026-09-17T17:54:39Z step0 read ../SHAPE_REEVALUATION.md sha256 4ca403a00c5acd47dc2e6e6a06061aa6f9e540533ab7a622d2de8915b4ab7f3e
+2026-09-17T17:54:39Z step0 read ../../../fm-advantage-benchmark-with-shape/references/shape.md sha256 46617c6ad648f0a7f0c3337e21a67978f6d8feedffe55a02d3f94d2c95652da9
+2026-09-17T17:54:39Z step0 read ../../../fm-advantage-benchmark-with-shape/schemas/domain_manifest.schema.json sha256 9d905ec64a6fb08eb0b32c3b41449c2899f9760b1ca4874b3570a23b3be652e5
+2026-09-17T17:54:39Z step0 read ../../../fm-advantage-benchmark-with-shape/scripts/validate.py sha256 283b79976f7c79c1b13643f904fb18e24d51596bc8d43b3f944a229b9fb3555e
+2026-09-17T17:55:45Z step1 downloaded arxiv sources/1808.00969.pdf sha256 f36b68f46a89035d1168ec0c7d52972213334aa9049dd001af677422b2279592
+2026-09-17T17:55:45Z step1 downloaded arxiv sources/1905.07422.pdf sha256 9288e1ac9185e6d53738fe0ee9ddfffd0d77481d67033298c0cefeffd9418305
+2026-09-17T17:55:45Z step1 downloaded arxiv sources/1910.12973.pdf sha256 666377161c0c9208f57e7bdb9d160c7de5df898276741bb31eff25143d76ea40
+2026-09-17T17:55:45Z step1 downloaded arxiv sources/2008.04912.pdf sha256 576f7fa1657b089ac73744a063affb5d133c941bde79af75840fc92e5a05c027
+2026-09-17T17:55:45Z step1 downloaded arxiv sources/2009.01242.pdf sha256 d5afed266c124b5c7f2479bf9ce51b68e4d9b189445f55bf11ed8ea8ca7b2fca
+2026-09-17T17:55:45Z step1 downloaded arxiv sources/2104.07795.pdf sha256 e95e82df74747915610d8b9e6679e9a7f51f30617a09908c0b19675ddc6a67b3
+2026-09-17T17:55:45Z step1 downloaded arxiv sources/2104.12980.pdf sha256 524407042cf9a34b85c3ad1e9bdc77eac7b7e935f3d9257ea4a1439dc4d6cfcc
+2026-09-17T17:55:45Z step1 downloaded arxiv sources/2109.13999.pdf sha256 250602d36957e0968162b226be0bd0973691bea84b6c142fe9d0941326d4a91e
+2026-09-17T17:55:45Z step1 downloaded arxiv sources/2401.15167.pdf sha256 756c6074c4998317b5cda5f16bf41a9c8fc93bc53306e82c2141c78490fc441e
+2026-09-17T17:55:45Z step1 downloaded arxiv sources/2403.07975.pdf sha256 a127b54e7728c33e17a5f730f7eb011ba0ebcc880ff0b61286fb62fa8febac08
+2026-09-17T17:55:45Z step1 downloaded arxiv sources/2405.03078.pdf sha256 d0342eba419d189d7b717d8a924aa6307e51697872499351338df96fd5a6d9ce
+2026-09-17T17:55:45Z step1 downloaded arxiv sources/2409.04346.pdf sha256 2b7085ccbee534a7b1c63114f8a0b11b723eae11f7b228f937bf8d367975019c
+2026-09-17T17:58:37Z step2 census reading launched: forks A-E for 11 seeds; agent1 reads 2109.13999 directly
+2026-09-17T18:00:20Z step2a 2109.13999 read in full by agent1 (L1-1894), notes written sha256 828f6a11557943ce59e4b853d83ba01fead87216e3f6786d8f5f331a20fe0c62
+2026-09-17T18:07:20Z step2b all 12 notes present; quote checker 0 failures on 12/12; agent1 spot-checked 15 ruling-bearing locators in 7 seeds against layout text (all match)
+2026-09-17T18:07:20Z step2b notes census/notes/1808.00969.json sha256 7eec0a043350c4f3a63ac09bc9ca6bc32c8b6b96ba9c0b46816cfa8fb76f32f2
+2026-09-17T18:07:20Z step2b notes census/notes/1905.07422.json sha256 95991bf9314f82bc9b3a0fb5e88f201859e1512dd125403dc87e7eae21517a82
+2026-09-17T18:07:20Z step2b notes census/notes/1910.12973.json sha256 211bd64785ae5f92b8d5d522d6b084da7b0d9f55e4ebcb48ba59c13829b85c04
+2026-09-17T18:07:20Z step2b notes census/notes/2008.04912.json sha256 ba9eb2d4596df87ea208f109b84807529cf31f44da5a2433de8f422e089723ef
+2026-09-17T18:07:20Z step2b notes census/notes/2009.01242.json sha256 50d5676f1196179ad3d979744bc2779833da482d7adf70ff75ef87f1f5f67022
+2026-09-17T18:07:20Z step2b notes census/notes/2104.07795.json sha256 5ab6671e0321398b31b81d8ae84d4f0c812dee4fee67969b077b1c6d38b00a33
+2026-09-17T18:07:20Z step2b notes census/notes/2104.12980.json sha256 68a470930e7ae85067096a20566a270eae46c08e1df76e1669bdd04727c1063a
+2026-09-17T18:07:20Z step2b notes census/notes/2109.13999.json sha256 828f6a11557943ce59e4b853d83ba01fead87216e3f6786d8f5f331a20fe0c62
+2026-09-17T18:07:20Z step2b notes census/notes/2401.15167.json sha256 d8cd2857e7d9709ae61f3d82651c6fc6d3597dd3d2204da6df32aa866d0755d6
+2026-09-17T18:07:20Z step2b notes census/notes/2403.07975.json sha256 6fc705516714f4b83a0d5a7cb82f0455e60ac6ad595b4bbd68825ff472e32c70
+2026-09-17T18:07:20Z step2b notes census/notes/2405.03078.json sha256 a9be5496e6dec72275215d03045e483e884bc20b8e2d3a927c552c37a2cc854c
+2026-09-17T18:07:20Z step2b notes census/notes/2409.04346.json sha256 d264c8f23912cdc3bb0c852fb5a7f57490d84149096073668868f1eb7a348a99
+2026-09-17T18:10:03Z step3 wrote census/branch_census.json sha256 30100953266616c92cc116b3baf0bd15d11393dfdce6f0ad36d89cdcfd0ddd58
+2026-09-17T18:10:03Z step3 wrote census/depth_census.json sha256 dcd91d55aa6328c063ec8ae7bd82a4badf4c33c11dd591391892e6da129afbcd
+2026-09-17T18:10:03Z step3 wrote shape_record.json sha256 b8612607ec43f308a7e8ded23b05880434cc1266151afdc117e31763e244f5ad
+2026-09-17T18:10:03Z step3 wrote shape_provenance.json sha256 489fc355d7dd0a1f326931809f9fa13f60f85ad5d3278ee17aa1911f78a45c07
+2026-09-17T18:10:03Z step3 wrote shape_record_checker_output.txt sha256 264e948f86ea197e1a72fc4a17b04d4f356fd9d80efd290ca334d46161c2129b
+2026-09-17T18:10:03Z step3 wrote scripts/build_census.py sha256 985299a0138bd35ae2df7197853e47f8954c3447710f35aad227498f20ac6243
+2026-09-17T18:10:03Z step3 wrote scripts/build_shape_record.py sha256 8b552d5fb9d90a0686476972433d1b3608d89348c9ad6d923cf6cb862ca7e8a8
+2026-09-17T18:10:03Z step3 wrote scripts/check_shape_schema.py sha256 d88d5c1543f79c69bb4b50e79908f2f2f1b7e8374ead5f307eae4813706dcd1f
+2026-09-17T18:11:00Z step4 p3_protocol_DRAFT.md written and hashed sha256 cc3139a231c9f2bfe5b82ba0ddc09e3e889b68ef31d4fe1b488e022a70ee4035; no count run
+2026-09-17T18:11:00Z step5 replay_cases.csv sha256 8f70fcbf970ee836896d4230addaf1a271da8330996061a885a518285e98f608; replay_rulings.csv sha256 0df20efc04c7a35a6fde1bb63a350ce293762a2e47628067f3f3d7f7dcda6b37 (rulings written after cases, separate file)
+2026-09-17T18:11:19Z step6 seed_ledger.json sha256 e1c7121944af0f22b6882c7ed87af6f0ce6d567f394e23378a8e73cc07ea06b0; helper scripts rd.sh checkquotes.py copied to scripts/
+2026-09-17T18:11:26Z step6b seed_ledger.json corrected quote total 431->452 (arithmetic error), sha256 8a2c1838c3d949659d01a967cf1016bbd6b4689195b5d740db017266a2e9f928; sources/SHA256SUMS sha256 7f551a3452e9234c5a544e4bcc3a5ef88ed30c4ceff9911df51bd2204362bca4

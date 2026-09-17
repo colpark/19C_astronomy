@@ -1,0 +1,8 @@
+must_fire control: FIRED (2 findings)
+  control - control.value.root: 'select' not in enum ['infer', 'explain', 'generate', 'intervene']
+  control - control.value.alternatives_considered: 0 items < minItems 3
+PASS shape_record.json
+exit=0
+--- validate.py provenance
+PASS shape_provenance.json
+exit=0

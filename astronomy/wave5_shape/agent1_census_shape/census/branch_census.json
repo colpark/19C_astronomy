@@ -1,0 +1,4421 @@
+{
+ "record": "D1 branch-point census, wave 5 agent 1",
+ "method": "shape.md 'The chain and the branch'; every branch carries a layout-text locator and a verbatim quote verified by checkquotes.py (0 failures on all seeds)",
+ "kind_rule": "intervene=spend a scarce resource; explain=which cause; generate=which object/model to build under a constraint; infer=which value/class the data implies; tagged by the choice at the branch, ambiguity written in the notes' reason field",
+ "level_rule": "per_object = a judgment specific to one object; per_study = a design choice made once for the study. A uniform cut applied to all objects is chain.",
+ "summary": {
+  "seeds": 12,
+  "branch_points_total": 236,
+  "with_alternative_visible": 234,
+  "with_rejected_option_named": 195,
+  "per_object": {
+   "intervene": 17,
+   "explain": 24,
+   "generate": 3,
+   "infer": 30
+  },
+  "per_study": {
+   "intervene": 8,
+   "explain": 1,
+   "generate": 79,
+   "infer": 74
+  },
+  "per_object_named_rejection": {
+   "intervene": 11,
+   "explain": 18,
+   "generate": 1,
+   "infer": 24
+  },
+  "seeds_with_per_object_branch_of_kind": {
+   "intervene": [
+    "1808.00969",
+    "1910.12973",
+    "2009.01242",
+    "2401.15167"
+   ],
+   "explain": [
+    "1808.00969",
+    "1905.07422",
+    "1910.12973",
+    "2008.04912",
+    "2009.01242",
+    "2104.12980",
+    "2403.07975"
+   ],
+   "generate": [
+    "1808.00969",
+    "2104.07795",
+    "2403.07975"
+   ],
+   "infer": [
+    "1808.00969",
+    "1905.07422",
+    "1910.12973",
+    "2008.04912",
+    "2009.01242",
+    "2104.12980",
+    "2401.15167",
+    "2403.07975",
+    "2409.04346"
+   ]
+  },
+  "per_object_episodes_with_two_or_more_branches": [
+   "1808.00969:E1(20)",
+   "1905.07422:E1(2)",
+   "1910.12973:E1(6)",
+   "1910.12973:E2(7)",
+   "1910.12973:E3(4)",
+   "2008.04912:E2(2)",
+   "2008.04912:E3(4)",
+   "2009.01242:E1(4)",
+   "2009.01242:E2(5)",
+   "2009.01242:E3(3)",
+   "2009.01242:E5(2)",
+   "2104.12980:E4(2)",
+   "2401.15167:E1(3)",
+   "2401.15167:E2(2)",
+   "2403.07975:E3(2)",
+   "2409.04346:E3(2)"
+  ]
+ },
+ "seeds": [
+  {
+   "seed_id": "1808.00969",
+   "title": "The Fast, Luminous Ultraviolet Transient AT2018cow: Extreme Supernova, or Disruption of a Star by an Intermediate-Mass Black Hole? (Perley et al. 2019)",
+   "arxiv_version_verified": "arXiv:1808.00969v4 (layout L10)",
+   "read_in_full": true,
+   "reader": "fork-D",
+   "layout_lines_read": "1-1696",
+   "pages": 20,
+   "notes_file": "census/notes/1808.00969.json",
+   "notes_sha256": "7eec0a043350c4f3a63ac09bc9ca6bc32c8b6b96ba9c0b46816cfa8fb76f32f2",
+   "episodes": [
+    {
+     "episode_id": "E1",
+     "level": "per_object",
+     "practitioner_action": "publish_cause",
+     "action_locator": "1808.00969.layout.txt p17 §6 L1437-1455",
+     "chain_length": 16,
+     "branches_in_episode": 20,
+     "per_object_branches_in_episode": 20
+    }
+   ],
+   "branch_points_total": 20,
+   "branch_points_with_alternative_visible": 20,
+   "branch_points_with_rejected_option_named": 17,
+   "max_branches_per_episode": 20,
+   "max_per_object_branches_per_episode": 20,
+   "by_level_and_kind": {
+    "per_object": {
+     "intervene": 2,
+     "explain": 11,
+     "generate": 1,
+     "infer": 6
+    },
+    "per_study": {
+     "intervene": 0,
+     "explain": 0,
+     "generate": 0,
+     "infer": 0
+    }
+   },
+   "branches": [
+    {
+     "id": "COW-B01",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "initiate worldwide GROWTH observing campaign",
+     "alternatives_visible": [
+      "follow up",
+      "not follow up"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "1808.00969.layout.txt p3 §2.1 L150-160",
+     "quote": "tory paragraph. Motivated by these unusual characteristics,"
+    },
+    {
+     "id": "COW-B02",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "spectroscopic cadence at least nightly, 2-3 times nightly in first 12 days; larger telescopes at later phases",
+     "alternatives_visible": [
+      "small robotic spectrographs at sub-night cadence",
+      "larger telescopes less regularly"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "1808.00969.layout.txt p5 §2.6 L333-341",
+     "quote": "monitor the evolution of the transient at high cadence. Spec-"
+    },
+    {
+     "id": "COW-B03",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "use SDSS z-band image as NIR host-subtraction reference instead of 2MASS",
+     "alternatives_visible": [
+      "2MASS pre-explosion reference",
+      "SDSS z-band with visually adjusted flux scale"
+     ],
+     "rejected_named": true,
+     "rejected_option": "2MASS reference",
+     "locator": "1808.00969.layout.txt p3 §2.2 L150-155",
+     "quote": "Micron All Sky Survey (2MASS), which is shallow and has"
+    },
+    {
+     "id": "COW-B04",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "UVOT: discard frames with large pointing smearing; 5 arcsec aperture for slightly smeared frames; manual centroids for astrometric errors",
+     "alternatives_visible": [
+      "3 arcsec aperture",
+      "5 arcsec aperture",
+      "discard frame"
+     ],
+     "rejected_named": true,
+     "rejected_option": "frames with large pointing smearing",
+     "locator": "1808.00969.layout.txt p5 §2.3 L340-343",
+     "quote": "with large pointing smearing were thrown away. For a small"
+    },
+    {
+     "id": "COW-B05",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "subtract UVOT host contribution in flux space using a final epoch rather than image subtraction",
+     "alternatives_visible": [
+      "image subtraction",
+      "flux-space subtraction"
+     ],
+     "rejected_named": true,
+     "rejected_option": "image subtraction",
+     "locator": "1808.00969.layout.txt p5 §2.3 L273-282",
+     "quote": "As the UVOT PSF is stable, we subtracted off the es-"
+    },
+    {
+     "id": "COW-B06",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "model red SED excess as power-law rather than second (warm) blackbody",
+     "alternatives_visible": [
+      "second blackbody (~3000 K)",
+      "power-law alpha ~ -0.75"
+     ],
+     "rejected_named": true,
+     "rejected_option": "warm second blackbody",
+     "locator": "1808.00969.layout.txt p8 §3.4 L538-546",
+     "quote": "model: a warm blackbody is not well-justified theoretically"
+    },
+    {
+     "id": "COW-B07",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "exclude uBg filters (dip) and late-time z-band from SED fits",
+     "alternatives_visible": [
+      "fit all bands",
+      "exclude uBg and late z"
+     ],
+     "rejected_named": true,
+     "rejected_option": "uBg filters and late z-band",
+     "locator": "1808.00969.layout.txt p8 §3.4 L531-550",
+     "quote": "early optical observations (Figure 7). We thus exclude the"
+    },
+    {
+     "id": "COW-B08",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "early emission is thermal, not synchrotron",
+     "alternatives_visible": [
+      "thermal (Rayleigh-Jeans)",
+      "synchrotron"
+     ],
+     "rejected_named": true,
+     "rejected_option": "synchrotron emission",
+     "locator": "1808.00969.layout.txt p8 §3.4 L518-523",
+     "quote": "Rayleigh-Jeans α = 2 and inconsistent (in particular) with"
+    },
+    {
+     "id": "COW-B09",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "reject SN Ic-BL association suggested early",
+     "alternatives_visible": [
+      "Ic-BL supernova",
+      "other origin"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SN Ic-BL (early ATel suggestions; SN1998bw, SN2002ap, SN2008D comparisons)",
+     "locator": "1808.00969.layout.txt p8 §3.3 L523-537",
+     "quote": "This is not what happened: while the feature strength-"
+    },
+    {
+     "id": "COW-B10",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "reject Type IIn / Thomson-broadened CSM interaction as source of H/He lines",
+     "alternatives_visible": [
+      "Type IIn",
+      "H and He in ejecta"
+     ],
+     "rejected_named": true,
+     "rejected_option": "Type IIn supernova (SN 1998S) and Thomson scattering broadening",
+     "locator": "1808.00969.layout.txt p13 §4.2 L1124-1131",
+     "quote": "not narrow for most of their evolution (v ∼ 6000 km/s, ver-"
+    },
+    {
+     "id": "COW-B11",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "reject afterglow wash-out of SN features",
+     "alternatives_visible": [
+      "SN features hidden by bright afterglow (as SN2003dh/GRB030329)",
+      "no hidden SN"
+     ],
+     "rejected_named": true,
+     "rejected_option": "afterglow wash-out as in SN 2003dh / GRB 030329",
+     "locator": "1808.00969.layout.txt p13 §fn9 L1162-1166",
+     "quote": "This cannot be because the SN features are washed out by a"
+    },
+    {
+     "id": "COW-B12",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "reject radioactive 56Ni heating as power source of the rise",
+     "alternatives_visible": [
+      "56Ni heating",
+      "shock heating"
+     ],
+     "rejected_named": true,
+     "rejected_option": "radioactive 56Ni heating",
+     "locator": "1808.00969.layout.txt p14 §5.1 L1229-1236",
+     "quote": "Heating from radioactive 56 Ni certainly"
+    },
+    {
+     "id": "COW-B13",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "reject shock cooling of standard or extended progenitor; require breakout into dense wind/shell",
+     "alternatives_visible": [
+      "standard progenitor shock cooling",
+      "extended R~1e14 cm envelope",
+      "breakout into dense wind"
+     ],
+     "rejected_named": true,
+     "rejected_option": "shock cooling of standard progenitor; massive extended envelope",
+     "locator": "1808.00969.layout.txt p14 §5.1 L1226-1239",
+     "quote": "types of stellar progenitor the shock-cooling rise time is far"
+    },
+    {
+     "id": "COW-B14",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "reject neutron star merger and white-dwarf explosion progenitors",
+     "alternatives_visible": [
+      "neutron star merger",
+      "white-dwarf explosion / AIC",
+      "core collapse"
+     ],
+     "rejected_named": true,
+     "rejected_option": "neutron star merger; white-dwarf explosions",
+     "locator": "1808.00969.layout.txt p16 §5.1 L1351-1371",
+     "quote": "Alternative stellar progenitor scenarios beyond core-"
+    },
+    {
+     "id": "COW-B15",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "propose jet-driven failed supernova with choked jet but record its difficulties",
+     "alternatives_visible": [
+      "classical neutrino-driven SN",
+      "jet from BH after direct collapse"
+     ],
+     "rejected_named": true,
+     "rejected_option": "classical neutrino mechanism",
+     "locator": "1808.00969.layout.txt p15 §5.1 L1305-1312",
+     "quote": "Perhaps the shock in this SN was driven not by the"
+    },
+    {
+     "id": "COW-B16",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "consider IMBH tidal disruption; reject anisotropic beaming as resolution of super-Eddington luminosity; leave circularization open",
+     "alternatives_visible": [
+      "anisotropic radiation",
+      "heating not from accretion (circularization)"
+     ],
+     "rejected_named": true,
+     "rejected_option": "anisotropic/beamed emission",
+     "locator": "1808.00969.layout.txt p17 §5.2 L1428-1431",
+     "quote": "minosity estimates is unambiguously thermal and not easily"
+    },
+    {
+     "id": "COW-B17",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "reject transient dust extinction as origin of broad feature",
+     "alternatives_visible": [
+      "velocity-broadened absorption",
+      "transient dust extinction"
+     ],
+     "rejected_named": true,
+     "rejected_option": "transient dust extinction with unknown broad feature",
+     "locator": "1808.00969.layout.txt p15 §fn10 L1319-1324",
+     "quote": "from what is otherwise an excellent fit to a single thermal SED;"
+    },
+    {
+     "id": "COW-B18",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "retain AT designation rather than SN2018cow",
+     "alternatives_visible": [
+      "SN2018cow (TNS redesignation)",
+      "AT2018cow"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SN designation",
+     "locator": "1808.00969.layout.txt p2 §fn1 L126-130",
+     "quote": "features in the spectrum, although we argue here that a SN associ-"
+    },
+    {
+     "id": "COW-B19",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "generate",
+     "choice": "relax MOSFiT TDE model (allow super-Eddington peak and larger photosphere) to obtain a fit",
+     "alternatives_visible": [
+      "default MOSFiT TDE model",
+      "adjusted model"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "1808.00969.layout.txt p16 §5.2 L1376-1381",
+     "quote": "light curves. Two adjustments to the model were required to"
+    },
+    {
+     "id": "COW-B20",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "associate AT2018cow with PS1 fast blue transients rather than other fast classes",
+     "alternatives_visible": [
+      "GRB-SNe",
+      "TDEs",
+      "GRB afterglows",
+      "SLSN",
+      "PS1/Kepler fast transients"
+     ],
+     "rejected_named": true,
+     "rejected_option": "GRB-SNe, known TDEs, GRB afterglows",
+     "locator": "1808.00969.layout.txt p14 §Fig.10 L1220-1223",
+     "quote": "and also far too blue. It is much faster than any known TDE and the thermal SED is entirely unlike the optically thin spectra of GRB"
+    }
+   ]
+  },
+  {
+   "seed_id": "1905.07422",
+   "title": "Supernova Photometric Classification Pipelines Trained on Spectroscopically Classified Supernovae from the Pan-STARRS1 Medium-Deep Survey (Villar et al. 2019)",
+   "arxiv_version_verified": "arXiv:1905.07422v2 (header L13; downloaded PDF sha256 9288e1ac...)",
+   "read_in_full": true,
+   "reader": "fork-E",
+   "layout_lines_read": "1-1625",
+   "pages": 21,
+   "notes_file": "census/notes/1905.07422.json",
+   "notes_sha256": "95991bf9314f82bc9b3a0fb5e88f201859e1512dd125403dc87e7eae21517a82",
+   "episodes": [
+    {
+     "episode_id": "E1",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "1905.07422.layout.txt p18 §7 L1426-1428",
+     "chain_length": 8,
+     "branches_in_episode": 2,
+     "per_object_branches_in_episode": 2
+    },
+    {
+     "episode_id": "E2",
+     "level": "per_study",
+     "practitioner_action": "publish_object",
+     "action_locator": "1905.07422.layout.txt p10 §5 L574-590",
+     "chain_length": 10,
+     "branches_in_episode": 14,
+     "per_object_branches_in_episode": 0
+    }
+   ],
+   "branch_points_total": 16,
+   "branch_points_with_alternative_visible": 16,
+   "branch_points_with_rejected_option_named": 14,
+   "max_branches_per_episode": 14,
+   "max_per_object_branches_per_episode": 2,
+   "by_level_and_kind": {
+    "per_object": {
+     "intervene": 0,
+     "explain": 1,
+     "generate": 0,
+     "infer": 1
+    },
+    "per_study": {
+     "intervene": 0,
+     "explain": 0,
+     "generate": 5,
+     "infer": 9
+    }
+   },
+   "branches": [
+    {
+     "id": "V19-B01",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "Build a new 7-parameter piecewise parametric model with a plateau",
+     "alternatives_visible": [
+      "Bazin et al. 2009 (5 params)",
+      "Karpenka et al. 2013 (6 params)",
+      "Sanders et al. 2015 piecewise model (11 params)",
+      "interpolating data points"
+     ],
+     "rejected_named": true,
+     "rejected_option": "Bazin, Karpenka, Sanders models; interpolation",
+     "locator": "1905.07422.layout.txt p4 §3 L205-214; p5 L262-289",
+     "quote": "majority of existing analytical light curve models are"
+    },
+    {
+     "id": "V19-B02",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "Omit the SN Ia secondary red peak from the model",
+     "alternatives_visible": [
+      "model including a second peak"
+     ],
+     "rejected_named": true,
+     "rejected_option": "explicit second-peak component",
+     "locator": "1905.07422.layout.txt p5 §3 L290-298",
+     "quote": "One common Type Ia SN light curve feature missing"
+    },
+    {
+     "id": "V19-B03",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "Double-Gaussian prior on plateau duration gamma (peaks 5 and 60 d) instead of uniform",
+     "alternatives_visible": [
+      "uniform prior (used for all other parameters)"
+     ],
+     "rejected_named": true,
+     "rejected_option": "uniform prior on gamma",
+     "locator": "1905.07422.layout.txt p5 §3 L285-296",
+     "quote": "prior of γ to a double Gaussian peaked at 5 and 60 days."
+    },
+    {
+     "id": "V19-B04",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "Reparameterize t1 as gamma = t1 - t0",
+     "alternatives_visible": [
+      "fitting t1 directly"
+     ],
+     "rejected_named": true,
+     "rejected_option": "t1 parameterization",
+     "locator": "1905.07422.layout.txt p4 §3 L236-244",
+     "quote": "purposes of fitting, we reparameterize t1 into a new pa-"
+    },
+    {
+     "id": "V19-B05",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "Iterative two-pass fitting (per-filter fits, combined posterior as prior) and stop after one extra iteration",
+     "alternatives_visible": [
+      "single independent per-filter fits",
+      "repeating the iteration more times"
+     ],
+     "rejected_named": true,
+     "rejected_option": "independent per-filter fits (peak times disagree, Fig 4); further iterations",
+     "locator": "1905.07422.layout.txt p6 §3 L346-362; p6 L301-308",
+     "quote": "tion of fitting. We can apply this process repeatedly, but"
+    },
+    {
+     "id": "V19-B06",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "Check by eye each Type Ibc and SLSN member's SNID classification",
+     "alternatives_visible": [
+      "accept SNID label",
+      "flag SNID misclassification (low-SNR events match Ia)"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "1905.07422.layout.txt p4 §2 L192-197",
+     "quote": "Tonry 2007). To partially counteract this, we check each"
+    },
+    {
+     "id": "V19-B07",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Exclude rare transient types from the class set",
+     "alternatives_visible": [
+      "include TDEs",
+      "include fast-evolving luminous transients"
+     ],
+     "rejected_named": true,
+     "rejected_option": "TDEs, FELTs",
+     "locator": "1905.07422.layout.txt p4 §2 L181-192",
+     "quote": "and fast-evolving luminous transients (Drout"
+    },
+    {
+     "id": "V19-B08",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Drop 7 SNe with fewer than two 3-sigma detections in three or more filters; footnote reruns final classifier on them",
+     "alternatives_visible": [
+      "keep the 7 events"
+     ],
+     "rejected_named": true,
+     "rejected_option": "the 7 excluded events (6 Ia, 1 II); 5 of 6 Ia and the II were classified correctly with low confidence",
+     "locator": "1905.07422.layout.txt p4 §2 L205-244",
+     "quote": "light curves that contain fewer than two 3σ detections in"
+    },
+    {
+     "id": "V19-B09",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Exclude y-band photometry",
+     "alternatives_visible": [
+      "use yP1 data"
+     ],
+     "rejected_named": true,
+     "rejected_option": "yP1-band data",
+     "locator": "1905.07422.layout.txt p2 §2 L131-159",
+     "quote": "of ≈ 21.7 mag; we do not use the yP1 -band data in this"
+    },
+    {
+     "id": "V19-B10",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "For LC features, renormalize for luminosity distance but do not correct time dilation",
+     "alternatives_visible": [
+      "apply time-dilation correction"
+     ],
+     "rejected_named": true,
+     "rejected_option": "time-dilation correction",
+     "locator": "1905.07422.layout.txt p7 §4.1 L419-432",
+     "quote": "tance; however, we find that neglecting time dila-"
+    },
+    {
+     "id": "V19-B11",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Number of PCA components: first 6 per filter",
+     "alternatives_visible": [
+      "other numbers of components (implied by explained-variance criterion)"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "1905.07422.layout.txt p7 §4.1 L409-417",
+     "quote": "first 6 PCA components from each filter, corre-"
+    },
+    {
+     "id": "V19-B12",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Augment by SMOTE/MVG synthesis rather than by many MCMC posterior draws",
+     "alternatives_visible": [
+      "augment with posterior draws",
+      "SMOTE",
+      "MVG"
+     ],
+     "rejected_named": true,
+     "rejected_option": "augmentation with MCMC posterior draws",
+     "locator": "1905.07422.layout.txt p9 §4.2 L514-519",
+     "quote": "from the MCMC posteriors. However, this would lead to"
+    },
+    {
+     "id": "V19-B13",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Classifier comparison: RF performs better and more uniformly",
+     "alternatives_visible": [
+      "SVM",
+      "RF",
+      "MLP"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SVM, NN",
+     "locator": "1905.07422.layout.txt p14 §5.1 L891-908",
+     "quote": "noticeably better, and more uniformly, than the SVM"
+    },
+    {
+     "id": "V19-B14",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Focus on PCA + MVG + RF pipeline (highest purity/completeness), while stating it does not significantly outperform others",
+     "alternatives_visible": [
+      "other 23 pipelines"
+     ],
+     "rejected_named": true,
+     "rejected_option": "the other 23 pipelines (Fig 8 labels)",
+     "locator": "1905.07422.layout.txt p15 §5.1 L985-991",
+     "quote": "the 5 SN classes. This pipeline consists of PCA feature"
+    },
+    {
+     "id": "V19-B15",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Keep data augmentation after testing best pipeline without it",
+     "alternatives_visible": [
+      "no augmentation"
+     ],
+     "rejected_named": true,
+     "rejected_option": "original training set without augmentation",
+     "locator": "1905.07422.layout.txt p19 §7 L1444-1458",
+     "quote": "classes, like Type Ibc and IIn SNe, falls by 20 − 40%."
+    },
+    {
+     "id": "V19-B16",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "Attribute three high-confidence misclassifications (Fig 12) to inherent feature-space overlap rather than data quality",
+     "alternatives_visible": [
+      "poorly sampled light curves",
+      "inherent overlap in feature space",
+      "rapid linear decline (IIL)"
+     ],
+     "rejected_named": true,
+     "rejected_option": "poor data quality",
+     "locator": "1905.07422.layout.txt p15 §5.2 L980-1013",
+     "quote": "Given the high data quality, these misclassifications are due to inherent overlap"
+    }
+   ]
+  },
+  {
+   "seed_id": "1910.12973",
+   "title": "The Zwicky Transient Facility Bright Transient Survey I: Spectroscopic Classification and the Redshift Completeness of Local Galaxy Catalogs (Fremling et al.)",
+   "arxiv_version_verified": "arXiv:1910.12973v1 (layout L14)",
+   "read_in_full": true,
+   "reader": "fork-A",
+   "layout_lines_read": "1-1422",
+   "pages": 22,
+   "notes_file": "census/notes/1910.12973.json",
+   "notes_sha256": "211bd64785ae5f92b8d5d522d6b084da7b0d9f55e4ebcb48ba59c13829b85c04",
+   "episodes": [
+    {
+     "episode_id": "E1",
+     "level": "per_object",
+     "practitioner_action": "commit_resource",
+     "action_locator": "1910.12973.layout.txt p5 §2.2 L258-270",
+     "chain_length": 16,
+     "branches_in_episode": 7,
+     "per_object_branches_in_episode": 6
+    },
+    {
+     "episode_id": "E2",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "1910.12973.layout.txt p7 §3.1 L420-427",
+     "chain_length": 9,
+     "branches_in_episode": 10,
+     "per_object_branches_in_episode": 7
+    },
+    {
+     "episode_id": "E3",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "1910.12973.layout.txt p12 §4.2 L766-773",
+     "chain_length": 10,
+     "branches_in_episode": 6,
+     "per_object_branches_in_episode": 4
+    },
+    {
+     "episode_id": "E4",
+     "level": "per_study",
+     "practitioner_action": "publish_value",
+     "action_locator": "1910.12973.layout.txt p14 §5 L876-879",
+     "chain_length": 8,
+     "branches_in_episode": 2,
+     "per_object_branches_in_episode": 0
+    },
+    {
+     "episode_id": "E5",
+     "level": "per_study",
+     "practitioner_action": "publish_value",
+     "action_locator": "1910.12973.layout.txt p5 §2.2.1 L299-306",
+     "chain_length": 9,
+     "branches_in_episode": 0,
+     "per_object_branches_in_episode": 0
+    }
+   ],
+   "branch_points_total": 25,
+   "branch_points_with_alternative_visible": 25,
+   "branch_points_with_rejected_option_named": 22,
+   "max_branches_per_episode": 10,
+   "max_per_object_branches_per_episode": 7,
+   "by_level_and_kind": {
+    "per_object": {
+     "intervene": 6,
+     "explain": 3,
+     "generate": 0,
+     "infer": 8
+    },
+    "per_study": {
+     "intervene": 1,
+     "explain": 0,
+     "generate": 0,
+     "infer": 7
+    }
+   },
+   "branches": [
+    {
+     "id": "B01",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "intervene",
+     "choice": "BTS filter designed simple, rbscore threshold 0.2, to minimise false negatives passed to human vetting",
+     "alternatives_visible": [
+      "stricter filter"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "1910.12973.layout.txt p4 §2.1 L212-226",
+     "quote": "minimize the risk of false negatives"
+    },
+    {
+     "id": "B02",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "human scanners identify 5-15 good SN candidates per night and assign spectroscopic follow-up",
+     "alternatives_visible": [
+      "assign follow-up",
+      "do not assign (CV, AGN, stellar variability)"
+     ],
+     "rejected_named": true,
+     "rejected_option": "cataclysmic variables and AGN as main contaminants",
+     "locator": "1910.12973.layout.txt p5 §2.2 L258-270",
+     "quote": "identified by the human scanners as good SN candidates"
+    },
+    {
+     "id": "B03",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "wait ~1 week and compare light curve with typical CV evolution before triggering",
+     "alternatives_visible": [
+      "trigger immediately",
+      "wait and compare to CV light curves"
+     ],
+     "rejected_named": true,
+     "rejected_option": "CVs (fast rise, persistent blue g-r, no host) not followed up",
+     "locator": "1910.12973.layout.txt p5 §2.2 L270-278",
+     "quote": "CVs can be avoided by monitoring the lightcurve behavior"
+    },
+    {
+     "id": "B04",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "do not trigger follow-up for alerts coincident with known AGN unless photometric evolution is SN-like",
+     "alternatives_visible": [
+      "exclude all AGN-coincident alerts",
+      "trigger when evolution resembles SN"
+     ],
+     "rejected_named": true,
+     "rejected_option": "excluding all AGN, which could reject a nuclear SN",
+     "locator": "1910.12973.layout.txt p5 §2.2 L279-295",
+     "quote": "are positionally coincident with known AGN"
+    },
+    {
+     "id": "B05",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "priority P3/P2/P1 by whether transient is likely to peak brighter than 18.5, 18.5-18.75, fainter",
+     "alternatives_visible": [
+      "P3",
+      "P2",
+      "P1"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "1910.12973.layout.txt p6 §2.3 L328-350",
+     "quote": "transients that are, or are likely"
+    },
+    {
+     "id": "B06",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "re-assign trigger to SEDM or larger telescopes (P200, Keck) when unobserved in 7 d, too faint, SEDM ambiguous, host contamination or higher resolution needed",
+     "alternatives_visible": [
+      "SEDM",
+      "P200 DBSP",
+      "Keck LRIS",
+      "LT, NOT, APO",
+      "public TNS spectra"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SEDM when unsuccessful",
+     "locator": "1910.12973.layout.txt p6 §2.3 L351-365",
+     "quote": "Larger telescopes are also used if classifi-"
+    },
+    {
+     "id": "B07",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "when SNID top-15 ambiguous between SN Ia and SN Ic, use r-band light-curve secondary peak/shoulder or alternative spectra",
+     "alternatives_visible": [
+      "SN Ia",
+      "SN Ic"
+     ],
+     "rejected_named": true,
+     "rejected_option": "the class not supported by the light-curve shoulder",
+     "locator": "1910.12973.layout.txt p7 §3.1 L400-417",
+     "quote": "in cases with multiple matches to both SNe Ia and SNe Ic,"
+    },
+    {
+     "id": "B08",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "ZTF18abmrhom classified SN Ia against ePESSTO 'just galaxy light'",
+     "alternatives_visible": [
+      "SN Ia",
+      "galaxy light only"
+     ],
+     "rejected_named": true,
+     "rejected_option": "ePESSTO galaxy-light classification",
+     "locator": "1910.12973.layout.txt p9 §3.2 L537-581",
+     "quote": "We classify ZTF18abmrhom as a SN Ia,"
+    },
+    {
+     "id": "B09",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "ZTF18abtswjk classified SN IIn rather than AGN",
+     "alternatives_visible": [
+      "SN IIn",
+      "AGN"
+     ],
+     "rejected_named": true,
+     "rejected_option": "AGN (ePESSTO classification)",
+     "locator": "1910.12973.layout.txt p9 §3.2 L553-568",
+     "quote": "as an active galactic nucleus (AGN). The photometric evo-"
+    },
+    {
+     "id": "B10",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "ZTF18aaqkdwf left unresolved, variability possibly AGN; excluded",
+     "alternatives_visible": [
+      "SN (P-Cygni Halpha)",
+      "AGN"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SN classification",
+     "locator": "1910.12973.layout.txt p9 §3.2 L569-578",
+     "quote": "variability at the location of ZTF18aaqkdwf was detected"
+    },
+    {
+     "id": "B11",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "ZTF18abuqhje unresolved, AGN or SN IIn; excluded",
+     "alternatives_visible": [
+      "AGN",
+      "SN IIn"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SN IIn",
+     "locator": "1910.12973.layout.txt p9 §3.2 L578-588",
+     "quote": "with an AGN or a SN IIn. However, we detected variabil-"
+    },
+    {
+     "id": "B12",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "ZTF18aarcchg not classified and excluded despite SN-like light curve",
+     "alternatives_visible": [
+      "SN",
+      "unclassified"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SN classification",
+     "locator": "1910.12973.layout.txt p10 §3.2 L591-599",
+     "quote": "SNe features in the spectrum, we cannot classify this tran-"
+    },
+    {
+     "id": "B13",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "label SNe Ia normal unless strong spectroscopic or photometric evidence for 91T-like or 91bg-like",
+     "alternatives_visible": [
+      "normal",
+      "91T-like",
+      "91bg-like"
+     ],
+     "rejected_named": true,
+     "rejected_option": "91T/91bg sub-types without strong evidence",
+     "locator": "1910.12973.layout.txt p10 §3.3 L591-608",
+     "quote": "Ia as normal, unless there is strong spectroscopic (very weak"
+    },
+    {
+     "id": "B14",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "objects with both Type II and IIb SNID matches manually classified by H and He strengths",
+     "alternatives_visible": [
+      "SN II",
+      "SN IIb"
+     ],
+     "rejected_named": true,
+     "rejected_option": "the non-chosen of II/IIb",
+     "locator": "1910.12973.layout.txt p10 §3.3.2 L638-642",
+     "quote": "SNe for which there were both Type II and IIb SNID"
+    },
+    {
+     "id": "B15",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "obtain higher-resolution spectra when SEDM shows strong narrow H emission",
+     "alternatives_visible": [
+      "SEDM only",
+      "higher resolution spectrum"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SEDM-only classification",
+     "locator": "1910.12973.layout.txt p10 §3.3.2 L625-633",
+     "quote": "presence of strong narrow H emission, we have generally at-"
+    },
+    {
+     "id": "B16",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "SLSN category: spectroscopic matches to unambiguous SLSN-I primary, plus any transient with Mg<-20 even if well fit by ordinary SNe",
+     "alternatives_visible": [
+      "SLSN",
+      "luminous SN Ic or IIn"
+     ],
+     "rejected_named": true,
+     "rejected_option": "ordinary SN IIn/Ic label for Mg<-20 events",
+     "locator": "1910.12973.layout.txt p11 §3.3.4 L686-699",
+     "quote": "also place any transient with Mg < −20 mag in this category"
+    },
+    {
+     "id": "B17",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "ZTF adopts SLSN threshold M<-20 instead of typical M<-21",
+     "alternatives_visible": [
+      "M<-21",
+      "M<-20"
+     ],
+     "rejected_named": true,
+     "rejected_option": "M<-21",
+     "locator": "1910.12973.layout.txt p8 §3.2 L486-488",
+     "quote": "are defined by their luminosity (typically M < −21 mag,"
+    },
+    {
+     "id": "B18",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "adopt host redshift when known, otherwise SNID redshift",
+     "alternatives_visible": [
+      "zhost",
+      "zSN"
+     ],
+     "rejected_named": true,
+     "rejected_option": "zSN when zhost known",
+     "locator": "1910.12973.layout.txt p11 §4.1 L683-693",
+     "quote": "the redshift of the best-matching SNID template as the red-"
+    },
+    {
+     "id": "B19",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "replace automatically identified background galaxy with nearest NED galaxy after visual inspection",
+     "alternatives_visible": [
+      "automated host",
+      "nearest NED galaxy"
+     ],
+     "rejected_named": true,
+     "rejected_option": "background galaxy from automated procedure",
+     "locator": "1910.12973.layout.txt p13 §4.2 L789-796",
+     "quote": "identified a background galaxy that is clearly not the host, in"
+    },
+    {
+     "id": "B20",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "select significantly brighter galaxy at slightly larger separation over extremely faint putative host",
+     "alternatives_visible": [
+      "faint putative host",
+      "brighter galaxy"
+     ],
+     "rejected_named": true,
+     "rejected_option": "extremely faint putative host",
+     "locator": "1910.12973.layout.txt p13 §4.2 L813-815",
+     "quote": "significantly brighter galaxy with only slightly larger angu-"
+    },
+    {
+     "id": "B21",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "exclude 40 SNe with ambiguous host identification from host analysis",
+     "alternatives_visible": [
+      "multiple equidistant galaxies",
+      "faint near vs bright far galaxy",
+      "exclude"
+     ],
+     "rejected_named": true,
+     "rejected_option": "assigning an ambiguous host",
+     "locator": "1910.12973.layout.txt p13 §4.2 L815-831",
+     "quote": "is ambiguous. We exclude these SNe from the host galaxy"
+    },
+    {
+     "id": "B22",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "accept PSO J015.9596+10.5902 as host of ZTF18acrcetn at 3.2 Petrosian radii",
+     "alternatives_visible": [
+      "accept distant bright elliptical"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "1910.12973.layout.txt p13 §4.2 L801-808",
+     "quote": "The SN is ∼3.2 Petrosian radii from the galaxy which has an"
+    },
+    {
+     "id": "B23",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "host brightness in mid-IR W1 via Tractor forced photometry",
+     "alternatives_visible": [
+      "unWISE PSF photometry",
+      "Tractor forced photometry"
+     ],
+     "rejected_named": true,
+     "rejected_option": "unWISE unresolved PSF fluxes",
+     "locator": "1910.12973.layout.txt p13-14 §4.2 L823-837",
+     "quote": "The largest WISE source catalogs (e.g., unWISE; Schlafly"
+    },
+    {
+     "id": "B24",
+     "episode_id": "E4",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "estimate RCF with SNe Ia only",
+     "alternatives_visible": [
+      "SNe Ia",
+      "CC SNe"
+     ],
+     "rejected_named": true,
+     "rejected_option": "CC SNe",
+     "locator": "1910.12973.layout.txt p14 §5 L867-872",
+     "quote": "RCF we use only SNe Ia, as they occur in both star-forming"
+    },
+    {
+     "id": "B25",
+     "episode_id": "E4",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "exclude peculiar Ia-02cx, Ia-csm, Ia-SC from RCF",
+     "alternatives_visible": [
+      "include",
+      "exclude"
+     ],
+     "rejected_named": true,
+     "rejected_option": "including peculiar SNe Ia",
+     "locator": "1910.12973.layout.txt p14 fn24 L893-895",
+     "quote": "We exclude Ia-02cx, Ia-csm, and Ia-SC events from the RCF calcula-"
+    }
+   ]
+  },
+  {
+   "seed_id": "2008.04912",
+   "title": "Photometric Classification of 2315 Pan-STARRS1 Supernovae with Superphot (Hosseinzadeh et al. 2020)",
+   "arxiv_version_verified": "arXiv:2008.04912v3 (header L13; downloaded PDF sha256 576f7fa1...)",
+   "read_in_full": true,
+   "reader": "fork-E",
+   "layout_lines_read": "1-1795",
+   "pages": 24,
+   "notes_file": "census/notes/2008.04912.json",
+   "notes_sha256": "ba9eb2d4596df87ea208f109b84807529cf31f44da5a2433de8f422e089723ef",
+   "episodes": [
+    {
+     "episode_id": "E1",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "2008.04912.layout.txt p7 §4 L465-470",
+     "chain_length": 9,
+     "branches_in_episode": 0,
+     "per_object_branches_in_episode": 0
+    },
+    {
+     "episode_id": "E2",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "2008.04912.layout.txt p3 §2 L121-171",
+     "chain_length": 5,
+     "branches_in_episode": 2,
+     "per_object_branches_in_episode": 2
+    },
+    {
+     "episode_id": "E3",
+     "level": "per_study",
+     "practitioner_action": "publish_object",
+     "action_locator": "2008.04912.layout.txt p2 §1 L79-85",
+     "chain_length": 11,
+     "branches_in_episode": 18,
+     "per_object_branches_in_episode": 4
+    }
+   ],
+   "branch_points_total": 20,
+   "branch_points_with_alternative_visible": 19,
+   "branch_points_with_rejected_option_named": 16,
+   "max_branches_per_episode": 18,
+   "max_per_object_branches_per_episode": 4,
+   "by_level_and_kind": {
+    "per_object": {
+     "intervene": 0,
+     "explain": 2,
+     "generate": 0,
+     "infer": 4
+    },
+    "per_study": {
+     "intervene": 0,
+     "explain": 0,
+     "generate": 2,
+     "infer": 12
+    }
+   },
+   "branches": [
+    {
+     "id": "SP-B01",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "For ~600 host spectra with inconsistent RVSAO estimates, verify RVSAO redshift, determine a new one manually, or exclude",
+     "alternatives_visible": [
+      "RVSAO best redshift",
+      "manually determined redshift",
+      "exclude transient"
+     ],
+     "rejected_named": true,
+     "rejected_option": "remaining third excluded; RVSAO values rejected where telluric/artifact matches",
+     "locator": "2008.04912.layout.txt p3 §2 L130-157",
+     "quote": "4 < RCC < 5. We then visually inspected approximately"
+    },
+    {
+     "id": "SP-B02",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "Resolve conflicts between catalog redshift and RVSAO by manual inspection of own spectrum",
+     "alternatives_visible": [
+      "catalog redshift",
+      "RVSAO redshift"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2008.04912.layout.txt p3 §2 L157-165",
+     "quote": "case of a conflict with RVSAO, we manually inspected"
+    },
+    {
+     "id": "SP-B03",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "Treat PSc110446 and PSc130816 as unclassified transients with known redshifts",
+     "alternatives_visible": [
+      "use as spectroscopically classified training members"
+     ],
+     "rejected_named": true,
+     "rejected_option": "inclusion in the training set",
+     "locator": "2008.04912.layout.txt p3 §2 L165-171",
+     "quote": "transient spectra (of PSc110446 and PSc130816) yielded"
+    },
+    {
+     "id": "SP-B04",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Exclude 199 transients variable across multiple observing seasons",
+     "alternatives_visible": [
+      "keep them in the test set"
+     ],
+     "rejected_named": true,
+     "rejected_option": "the 199 variable transients",
+     "locator": "2008.04912.layout.txt p3 §2 L173-179",
+     "quote": "light curves are variable across multiple observing sea-"
+    },
+    {
+     "id": "SP-B05",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "Photometric SLSNe with broad host lines within 1 arcsec of host center: nuclear SN/TDE vs AGN variability left undecided, caution urged",
+     "alternatives_visible": [
+      "nuclear SN",
+      "TDE",
+      "increase in AGN luminosity"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2008.04912.layout.txt p16 §5.3 L1128-1148",
+     "quote": "could either indicate a nuclear SN (or even a TDE) that"
+    },
+    {
+     "id": "SP-B06",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "Log-uniform prior on amplitude A instead of V19 uniform prior",
+     "alternatives_visible": [
+      "uniform prior (V19)"
+     ],
+     "rejected_named": true,
+     "rejected_option": "uniform amplitude prior",
+     "locator": "2008.04912.layout.txt p14 §4.4 L967-991; p4 L259-261",
+     "quote": "reason we introduced a log-uniform prior on the ampli-"
+    },
+    {
+     "id": "SP-B07",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "Adopt V19 two-iteration per-filter fitting rather than a joint multi-filter fit",
+     "alternatives_visible": [
+      "simultaneous fit of >20 parameters across filters",
+      "SED-based cross-filter model"
+     ],
+     "rejected_named": true,
+     "rejected_option": "simultaneous multi-filter fit",
+     "locator": "2008.04912.layout.txt p4 §3.1 L246-255",
+     "quote": "when simultaneously fitting more than 20 parameters."
+    },
+    {
+     "id": "SP-B08",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Fit only points between -50 and +180 d of discovery",
+     "alternatives_visible": [],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2008.04912.layout.txt p5 §3.1 L336-338",
+     "quote": "and +180 days of the discovery date, which encompasses"
+    },
+    {
+     "id": "SP-B09",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "PCA features rather than model parameters",
+     "alternatives_visible": [
+      "model parameters",
+      "hand-selected features",
+      "downsampled model light curves"
+     ],
+     "rejected_named": true,
+     "rejected_option": "model parameters as features (slightly worse, Table 6)",
+     "locator": "2008.04912.layout.txt p5 §3.2 L315-333; p21 L1557-1566",
+     "quote": "gives the option of using the model parameters directly,"
+    },
+    {
+     "id": "SP-B10",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "MVG oversampling rather than SMOTE",
+     "alternatives_visible": [
+      "SMOTE",
+      "MVG"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SMOTE",
+     "locator": "2008.04912.layout.txt p7 §3.3 L488-500",
+     "quote": "find that MVG oversampling gives better results be-"
+    },
+    {
+     "id": "SP-B11",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Random forest (entropy, no max depth, 5 features, 100 trees) over SVM and MLP; grid over 360 RF configurations",
+     "alternatives_visible": [
+      "SVM",
+      "MLP",
+      "Gini criterion",
+      "limited tree depth"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SVM (low SLSN purity), MLP (worse in most metrics), Gini (neutral or worse)",
+     "locator": "2008.04912.layout.txt p21 §D L1540-1567",
+     "quote": "purity, respectively). The MLP performs worse in most"
+    },
+    {
+     "id": "SP-B12",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Keep observer-frame times",
+     "alternatives_visible": [
+      "rest-frame time correction"
+     ],
+     "rejected_named": true,
+     "rejected_option": "correcting to rest-frame times",
+     "locator": "2008.04912.layout.txt p6 §3.2 L433-437",
+     "quote": "set. V19 found that correcting to rest-frame times gave"
+    },
+    {
+     "id": "SP-B13",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Do not correct for host-galaxy extinction",
+     "alternatives_visible": [
+      "host extinction correction"
+     ],
+     "rejected_named": true,
+     "rejected_option": "host-galaxy extinction correction",
+     "locator": "2008.04912.layout.txt p6 §3.2 L431-437",
+     "quote": "We do not consider host-galaxy extinction, because we"
+    },
+    {
+     "id": "SP-B14",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Do not adopt a threshold on number of detections; confidence thresholds shown but any threshold called arbitrary",
+     "alternatives_visible": [
+      "confidence threshold (e.g. p>=0.75)",
+      "detection-count threshold",
+      "no threshold"
+     ],
+     "rejected_named": true,
+     "rejected_option": "detection-count threshold",
+     "locator": "2008.04912.layout.txt p12 §4.3 L805-827",
+     "quote": "smaller fraction of the sample, so we do not adopt a"
+    },
+    {
+     "id": "SP-B15",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Do not multiply classification probabilities by class rate priors",
+     "alternatives_visible": [
+      "apply relative-rate prior"
+     ],
+     "rejected_named": true,
+     "rejected_option": "rate prior",
+     "locator": "2008.04912.layout.txt p16 §5.1 L1109-1125",
+     "quote": "sify as SLSNe and V20 classify as SNe Ia. We choose not"
+    },
+    {
+     "id": "SP-B16",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "For 94 transients Superphot calls Ibc and V20 calls Ia, prefer the Ia classification (rule applied to a set of objects)",
+     "alternatives_visible": [
+      "SN Ibc (Superphot)",
+      "SN Ia (V20)"
+     ],
+     "rejected_named": true,
+     "rejected_option": "Superphot SN Ibc label",
+     "locator": "2008.04912.layout.txt p15 §4.4 L1067-1074",
+     "quote": "and V20 classify as SNe Ia, we prefer the SN Ia classifi-"
+    },
+    {
+     "id": "SP-B17",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "Explain 24 Superphot SLSNe classified Ia by V20: visual inspection shows missing rise or decline at season boundaries, a model failure mode",
+     "alternatives_visible": [
+      "genuine SLSN",
+      "SN Ia",
+      "fit artifact of unobserved peak"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2008.04912.layout.txt p14 §4.4 L963-991",
+     "quote": "A visual inspection of these light curves shows that"
+    },
+    {
+     "id": "SP-B18",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Exclude 16 spectroscopically classified rare-class transients from training; only explore their labels",
+     "alternatives_visible": [
+      "include rare classes"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SN Iax, TDEs, lensed Ia, Ibn, IIb?, FELTs as training classes",
+     "locator": "2008.04912.layout.txt p3 §2 L188-194",
+     "quote": "common classes. Because these are too few in number"
+    },
+    {
+     "id": "SP-B19",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Exclude y filter",
+     "alternatives_visible": [
+      "use y band"
+     ],
+     "rejected_named": true,
+     "rejected_option": "y-band photometry",
+     "locator": "2008.04912.layout.txt p3 §2 L152-158",
+     "quote": "the y filter has lower throughput and cadence, so we"
+    },
+    {
+     "id": "SP-B20",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Class definitions: merge Ib/Ic, IIL/IIP, H-rich SLSNe into IIn",
+     "alternatives_visible": [
+      "separate Ib and Ic",
+      "separate IIL and IIP"
+     ],
+     "rejected_named": true,
+     "rejected_option": "finer subclasses",
+     "locator": "2008.04912.layout.txt p2 §1 L94-110",
+     "quote": "and SNe IIP, because it is not clear that these pop-"
+    }
+   ]
+  },
+  {
+   "seed_id": "2009.01242",
+   "title": "The Zwicky Transient Facility Bright Transient Survey. II. A Public Statistical Sample for Exploring Supernova Demographics (Perley et al.)",
+   "arxiv_version_verified": "arXiv:2009.01242v2 (layout L12)",
+   "read_in_full": true,
+   "reader": "fork-A",
+   "layout_lines_read": "1-2048",
+   "pages": 33,
+   "notes_file": "census/notes/2009.01242.json",
+   "notes_sha256": "50d5676f1196179ad3d979744bc2779833da482d7adf70ff75ef87f1f5f67022",
+   "episodes": [
+    {
+     "episode_id": "E1",
+     "level": "per_object",
+     "practitioner_action": "commit_resource",
+     "action_locator": "2009.01242.layout.txt p3 §2.1-2.2 L140-176",
+     "chain_length": 10,
+     "branches_in_episode": 7,
+     "per_object_branches_in_episode": 4
+    },
+    {
+     "episode_id": "E2",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "2009.01242.layout.txt p20 §5 L1321-1333",
+     "chain_length": 11,
+     "branches_in_episode": 10,
+     "per_object_branches_in_episode": 5
+    },
+    {
+     "episode_id": "E3",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "2009.01242.layout.txt p8 §3 L486-492",
+     "chain_length": 10,
+     "branches_in_episode": 6,
+     "per_object_branches_in_episode": 3
+    },
+    {
+     "episode_id": "E4",
+     "level": "per_study",
+     "practitioner_action": "publish_value",
+     "action_locator": "2009.01242.layout.txt p16 §4.3 L1072-1075",
+     "chain_length": 8,
+     "branches_in_episode": 4,
+     "per_object_branches_in_episode": 0
+    },
+    {
+     "episode_id": "E5",
+     "level": "per_study",
+     "practitioner_action": "publish_value",
+     "action_locator": "2009.01242.layout.txt p19 §4.4 L1263-1271",
+     "chain_length": 5,
+     "branches_in_episode": 3,
+     "per_object_branches_in_episode": 2
+    }
+   ],
+   "branch_points_total": 30,
+   "branch_points_with_alternative_visible": 30,
+   "branch_points_with_rejected_option_named": 24,
+   "max_branches_per_episode": 10,
+   "max_per_object_branches_per_episode": 5,
+   "by_level_and_kind": {
+    "per_object": {
+     "intervene": 4,
+     "explain": 4,
+     "generate": 0,
+     "infer": 6
+    },
+    "per_study": {
+     "intervene": 3,
+     "explain": 1,
+     "generate": 0,
+     "infer": 12
+    }
+   },
+   "branches": [
+    {
+     "id": "B01",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "intervene",
+     "choice": "replace basic 2018 filter with 2019 filter (long-history bright-source rejection, reduced bright-star radius, drb score)",
+     "alternatives_visible": [
+      "2018 basic filter",
+      "2019 revised filter"
+     ],
+     "rejected_named": true,
+     "rejected_option": "2018 filter",
+     "locator": "2009.01242.layout.txt p3 §2.1 L159-176",
+     "quote": "the false-positive rate was significant (several hundred"
+    },
+    {
+     "id": "B02",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "scanner ignores candidates assessed definitely AGN, variable stars or artifacts; saves the rest",
+     "alternatives_visible": [
+      "save",
+      "ignore"
+     ],
+     "rejected_named": true,
+     "rejected_option": "AGNs, variable stars, artifacts",
+     "locator": "2009.01242.layout.txt p3 §2.1 L141-150",
+     "quote": "sessed to definitely be AGNs, variable stars, artifacts,"
+    },
+    {
+     "id": "B03",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "after saving, classify as false positive from light curve and catalog context instead of requesting a spectrum",
+     "alternatives_visible": [
+      "photometric/contextual false-positive classification",
+      "report to TNS and request spectrum"
+     ],
+     "rejected_named": true,
+     "rejected_option": "known AGN / WISE AGN colours / stellar flare with prior flares",
+     "locator": "2009.01242.layout.txt p3 §2.2 L155-167",
+     "quote": "ing data. This is sometimes enough to classify false pos-"
+    },
+    {
+     "id": "B04",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "avoid duplicating a classification already reported by another group unless it appears unreliable",
+     "alternatives_visible": [
+      "observe anyway",
+      "accept external classification"
+     ],
+     "rejected_named": true,
+     "rejected_option": "duplicating effort",
+     "locator": "2009.01242.layout.txt p4 §2.2 L210-214",
+     "quote": "by another group or acquired by another ZTF program"
+    },
+    {
+     "id": "B05",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "schedule targets SEDM/SPRAT cannot classify on larger telescopes (DBSP, DIS, Kast, LRIS)",
+     "alternatives_visible": [
+      "SEDM",
+      "SPRAT",
+      "DBSP",
+      "DIS",
+      "Kast",
+      "LRIS"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SEDM/SPRAT",
+     "locator": "2009.01242.layout.txt p3 §2.2 L173-176",
+     "quote": "gets that cannot be classified with these facilities are"
+    },
+    {
+     "id": "B06",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "use hybrid two-band timescale (shift fainter band, fastest band each direction) in cuts and analysis",
+     "alternatives_visible": [
+      "per-filter timescale",
+      "hybrid timescale"
+     ],
+     "rejected_named": true,
+     "rejected_option": "per-filter timescales",
+     "locator": "2009.01242.layout.txt p4 §2.2 L209-218",
+     "quote": "hybrid timescale measurement by shifting the “fainter”"
+    },
+    {
+     "id": "B07",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "use packet upper limits only before first detection",
+     "alternatives_visible": [
+      "use all limits",
+      "use only pre-detection limits"
+     ],
+     "rejected_named": true,
+     "rejected_option": "limits interspersed after first detection",
+     "locator": "2009.01242.layout.txt p4 §2.2 L205-230",
+     "quote": "limits from the alert-packet history are used only if they"
+    },
+    {
+     "id": "B08",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "quality cuts designed minimally dependent on duration; no large detection-count requirement",
+     "alternatives_visible": [
+      "require many detections",
+      "coverage-based cuts"
+     ],
+     "rejected_named": true,
+     "rejected_option": "requiring a large number of detections",
+     "locator": "2009.01242.layout.txt p6 §2.3 L323-327",
+     "quote": "ber of detections would introduce a strong bias against"
+    },
+    {
+     "id": "B09",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "purity cut passes either a credible non-nuclear galaxy cross-match or an SN-like timescale",
+     "alternatives_visible": [
+      "timescale-only cut",
+      "cross-match-only cut",
+      "either"
+     ],
+     "rejected_named": true,
+     "rejected_option": "timescale-only cut",
+     "locator": "2009.01242.layout.txt p27 App B L1791-1794",
+     "quote": "pass all transients with credible host-galaxy associations even if their timescale is not supernova-like"
+    },
+    {
+     "id": "B10",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "remove candidates matching all dwarf-nova criteria without spectroscopy",
+     "alternatives_visible": [
+      "dwarf nova",
+      "fast-evolving SN"
+     ],
+     "rejected_named": true,
+     "rejected_option": "fast-evolving SN",
+     "locator": "2009.01242.layout.txt p7 §2.4 L402-420",
+     "quote": "matching all of these criteria are considered to be se-"
+    },
+    {
+     "id": "B11",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "classify AGN photometrically from continuous slow variability over a year without return to reference flux",
+     "alternatives_visible": [
+      "AGN",
+      "transient"
+     ],
+     "rejected_named": true,
+     "rejected_option": "genuine transient",
+     "locator": "2009.01242.layout.txt p7 §2.4 L392-401",
+     "quote": "slow variability (both upward and downward) lasting"
+    },
+    {
+     "id": "B12",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "visual inspection of unclassified m<18.5 events failing purity cut; none judged likely SN",
+     "alternatives_visible": [
+      "SN or extragalactic transient",
+      "not a transient"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SN",
+     "locator": "2009.01242.layout.txt p8 §2.4 L471-474",
+     "quote": "We also visually inspected all unclassified m < 18.5 mag"
+    },
+    {
+     "id": "B13",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "omit events with only lower-limit timescales from duration-luminosity diagram unless rise <8 d",
+     "alternatives_visible": [
+      "actual fast transient",
+      "transient with sparse light curve"
+     ],
+     "rejected_named": true,
+     "rejected_option": "sparse-light-curve transient with non-constraining limit",
+     "locator": "2009.01242.layout.txt p11 §4.1 L702-716",
+     "quote": "have lower limits on their timescales have been omit-"
+    },
+    {
+     "id": "B14",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "remove a small number of SNe with data-quality issues found by manual inspection",
+     "alternatives_visible": [
+      "keep",
+      "remove"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2009.01242.layout.txt p11 §4.1 L716-720",
+     "quote": "small number of SNe with data-quality issues identified"
+    },
+    {
+     "id": "B15",
+     "episode_id": "E4",
+     "level": "per_study",
+     "kind": "explain",
+     "choice": "rapidly evolving luminous transients powered by shock breakout into extended envelope/CSM, not radioactive heating",
+     "alternatives_visible": [
+      "radioactive heating",
+      "shock breakout into extended envelope or CSM",
+      "engine-driven jet (some SNe)"
+     ],
+     "rejected_named": true,
+     "rejected_option": "radioactive heating as primary source for main peak",
+     "locator": "2009.01242.layout.txt p13 §4.1.1 L839-858",
+     "quote": "making them incompatible with radioactive heating"
+    },
+    {
+     "id": "B16",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "SN2020cxd judged almost certainly a massive-star explosion despite gap-level luminosity",
+     "alternatives_visible": [
+      "massive-star SN",
+      "non-SN gap transient"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2009.01242.layout.txt p13 §4.1.2 L829-837",
+     "quote": "almost certainly the explosion of a massive star, despite"
+    },
+    {
+     "id": "B17",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "AT2019cmw left unresolved between extreme SN, TDE and extreme AGN accretion; deferred",
+     "alternatives_visible": [
+      "extreme SN",
+      "TDE",
+      "extreme AGN accretion phenomenon"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2009.01242.layout.txt p14 §4.1.3 L916-919",
+     "quote": "not yet clear whether this represents an extreme SN,"
+    },
+    {
+     "id": "B18",
+     "episode_id": "E4",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "H-poor SN subpopulation hypothesis not adopted after k-means",
+     "alternatives_visible": [
+      "single population",
+      "separate ordinary Ib/c and slow bright Ic subpopulations"
+     ],
+     "rejected_named": true,
+     "rejected_option": "separate subpopulations",
+     "locator": "2009.01242.layout.txt p15 §4.2 L997-1005",
+     "quote": "k-means clustering analysis did not confirm that these"
+    },
+    {
+     "id": "B19",
+     "episode_id": "E4",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "estimate recovery fraction from bright SNe Ia subset (412/690, frec=0.60) instead of 52% quality-cut pass rate",
+     "alternatives_visible": [
+      "52% overall pass fraction",
+      "bright SN Ia subset"
+     ],
+     "rejected_named": true,
+     "rejected_option": "52% overall pass fraction",
+     "locator": "2009.01242.layout.txt p16 §4.3 L1071-1085",
+     "quote": "is not an ideal estimate because some candidates were"
+    },
+    {
+     "id": "B20",
+     "episode_id": "E4",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "replace lower limit with m<19 sample limit when more constraining",
+     "alternatives_visible": [
+      "m<18.5 limit",
+      "m<19 limit"
+     ],
+     "rejected_named": true,
+     "rejected_option": "m<18.5 limit when less constraining",
+     "locator": "2009.01242.layout.txt p17 §4.3 L1097-1103",
+     "quote": "lower limit with a limit calculated from the m < 19.0"
+    },
+    {
+     "id": "B21",
+     "episode_id": "E5",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "restrict host analysis to SDSS fields",
+     "alternatives_visible": [
+      "PS1 photometry",
+      "SDSS photometry"
+     ],
+     "rejected_named": true,
+     "rejected_option": "PS1 catalog photometry",
+     "locator": "2009.01242.layout.txt p18 fn14 L1226-1234",
+     "quote": "was found to be unreliable for this purpose, so we restrict our"
+    },
+    {
+     "id": "B22",
+     "episode_id": "E5",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "two CC SNe in featureless elliptical hosts left open among three explanations",
+     "alternatives_visible": [
+      "not actually CC SNe",
+      "long progenitor lifetimes",
+      "residual star formation in ellipticals"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2009.01242.layout.txt p19 §4.4 L1284-1295",
+     "quote": "mation. This could indicate that these events are not"
+    },
+    {
+     "id": "B23",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "intervene",
+     "choice": "revise 2019 bright-star exclusion in mid-2020 (smaller radius, stricter drb)",
+     "alternatives_visible": [
+      "2019 criterion",
+      "2020 criterion"
+     ],
+     "rejected_named": true,
+     "rejected_option": "2019 bright-star criterion",
+     "locator": "2009.01242.layout.txt p26 App A L1693-1716",
+     "quote": "While an improvement over our 2018 filter, this criterion was found to occasionally reject real SNe and has been"
+    },
+    {
+     "id": "B24",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "intervene",
+     "choice": "apply reference-catalog variability criteria only when light curve not at local maximum and several m<19 detections exist",
+     "alternatives_visible": [
+      "apply always",
+      "apply conditionally"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2009.01242.layout.txt p26 App A L1706-1710",
+     "quote": "(especially near galaxy centers where bad subtractions are common) so caution is necessary in applying this"
+    },
+    {
+     "id": "B25",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "purity-cut region equations chosen by trial and error",
+     "alternatives_visible": [
+      "alternative boundary forms tried"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2009.01242.layout.txt p28 App B L1870-1873",
+     "quote": "chosen largely using trial and error in order to avoid as much of the non-transient populations as possible while still"
+    },
+    {
+     "id": "B26",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "stricter hostless threshold for PS1 (p<0.05) than SDSS (p<0.1)",
+     "alternatives_visible": [
+      "p<0.1",
+      "p<0.05"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SDSS threshold for PS1",
+     "locator": "2009.01242.layout.txt p29 App C L1920-1922",
+     "quote": "cut for PS1 is due to the higher incidence of spurious sources in this catalog.)"
+    },
+    {
+     "id": "B27",
+     "episode_id": "E5",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "manually vet SDSS host associations and reassign inaccurate automatic hosts",
+     "alternatives_visible": [
+      "automatic host",
+      "reassigned host"
+     ],
+     "rejected_named": true,
+     "rejected_option": "automatically-determined host",
+     "locator": "2009.01242.layout.txt p29 App C L1922-1924",
+     "quote": "host-galaxy analysis of this paper (§ 10) were manually vetted and the host reassigned if the automatically-determined"
+    },
+    {
+     "id": "B28",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "SN2019fdr classification replaced by none: possibly AGN/NLSy1",
+     "alternatives_visible": [
+      "TNS classification",
+      "AGN/NLSy1"
+     ],
+     "rejected_named": true,
+     "rejected_option": "existing TNS classification",
+     "locator": "2009.01242.layout.txt p31 App E Table 3 L1983",
+     "quote": "Possibly an AGN/NLSy1 based on late-time spectra"
+    },
+    {
+     "id": "B29",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "SN2020mrf TNS classification rejected: probable CV",
+     "alternatives_visible": [
+      "TNS SN classification",
+      "probable CV"
+     ],
+     "rejected_named": true,
+     "rejected_option": "TNS classification based on featureless spectrum",
+     "locator": "2009.01242.layout.txt p31 App E Table 3 L1995-1997",
+     "quote": "featureless spectrum; probable CV"
+    },
+    {
+     "id": "B30",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "remove subtype information (SN Ia subtypes, IIP vs IIL) from classifications",
+     "alternatives_visible": [
+      "keep subtypes",
+      "remove subtypes"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SN Ia subtypes and IIP/IIL distinction",
+     "locator": "2009.01242.layout.txt p31 App E L2005-2007",
+     "quote": "distinguish classical SN Ia subtypes or to separate SN IIP vs. SN IIL."
+    }
+   ]
+  },
+  {
+   "seed_id": "2104.07795",
+   "title": "SALT3: An Improved Type Ia Supernova Model for Measuring Cosmic Distances (Kenworthy et al. 2021)",
+   "arxiv_version_verified": "arXiv:2104.07795v1 (layout L13)",
+   "read_in_full": true,
+   "reader": "fork-D",
+   "layout_lines_read": "1-1677",
+   "pages": 25,
+   "notes_file": "census/notes/2104.07795.json",
+   "notes_sha256": "5ab6671e0321398b31b81d8ae84d4f0c812dee4fee67969b077b1c6d38b00a33",
+   "episodes": [
+    {
+     "episode_id": "E1",
+     "level": "per_study",
+     "practitioner_action": "publish_object",
+     "action_locator": "2104.07795.layout.txt p16 §5.2 L1131-1136",
+     "chain_length": 11,
+     "branches_in_episode": 15,
+     "per_object_branches_in_episode": 1
+    },
+    {
+     "episode_id": "E2",
+     "level": "per_study",
+     "practitioner_action": "publish_value",
+     "action_locator": "2104.07795.layout.txt p12 §3.4 L813-830",
+     "chain_length": 4,
+     "branches_in_episode": 1,
+     "per_object_branches_in_episode": 0
+    },
+    {
+     "episode_id": "E3",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "2104.07795.layout.txt p8 §3.1 L555-560",
+     "chain_length": 3,
+     "branches_in_episode": 1,
+     "per_object_branches_in_episode": 0
+    }
+   ],
+   "branch_points_total": 17,
+   "branch_points_with_alternative_visible": 17,
+   "branch_points_with_rejected_option_named": 13,
+   "max_branches_per_episode": 15,
+   "max_per_object_branches_per_episode": 1,
+   "by_level_and_kind": {
+    "per_object": {
+     "intervene": 0,
+     "explain": 0,
+     "generate": 1,
+     "infer": 0
+    },
+    "per_study": {
+     "intervene": 0,
+     "explain": 0,
+     "generate": 15,
+     "infer": 1
+    }
+   },
+   "branches": [
+    {
+     "id": "SALT3-B01",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "fourth-order colour-law polynomial",
+     "alternatives_visible": [
+      "third-order polynomial (SALT2.JLA)",
+      "fourth-order polynomial"
+     ],
+     "rejected_named": true,
+     "rejected_option": "third-order polynomial used for SALT2.JLA",
+     "locator": "2104.07795.layout.txt p15 §5 L1083-1084",
+     "quote": "nomial, rather than the third-order polynomial used for"
+    },
+    {
+     "id": "SALT3-B02",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "colour scatter model changed from third- to fourth-order polynomial",
+     "alternatives_visible": [
+      "third-order",
+      "fourth-order"
+     ],
+     "rejected_named": true,
+     "rejected_option": "third-order colour scatter polynomial",
+     "locator": "2104.07795.layout.txt p15 §5 L1069-1071",
+     "quote": "the color scatter model is changed from a third to a"
+    },
+    {
+     "id": "SALT3-B03",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "extend SED wavelength range to 11000 A",
+     "alternatives_visible": [
+      "SALT2.JLA range to 9200 A",
+      "11000 A"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SALT2.JLA 9200 A range",
+     "locator": "2104.07795.layout.txt p15 §5 L1076-1080",
+     "quote": "extend the SED wavelength range to 11000"
+    },
+    {
+     "id": "SALT3-B04",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "model definition 7: x1 and c uncorrelated in training sample",
+     "alternatives_visible": [
+      "SALT2 definition fixing M1 V-band flux to 0 at peak",
+      "no x1-c correlation constraint"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SALT2 approach fixing V-band flux of M1 at peak",
+     "locator": "2104.07795.layout.txt p4 §2.1 L234-248",
+     "quote": "differ only in the last definition, intended to separate"
+    },
+    {
+     "id": "SALT3-B05",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "in-sample variance fitted by maximum likelihood as separate B-spline terms",
+     "alternatives_visible": [
+      "SALT2 error snake scaling out-of-sample variance to chi2_nu=1",
+      "ML-estimated in-sample variance"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SALT2 error snake from leave-one-out tests",
+     "locator": "2104.07795.layout.txt p5 §2.2 L288-310",
+     "quote": "of SALT2, which took the in-sample variance to have"
+    },
+    {
+     "id": "SALT3-B06",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "use C11 scatter model in the simulation",
+     "alternatives_visible": [
+      "default G10 scatter model",
+      "C11 scatter model"
+     ],
+     "rejected_named": true,
+     "rejected_option": "G10 (Guy et al. 2010) scatter model",
+     "locator": "2104.07795.layout.txt p9 §3.3 L614-619",
+     "quote": "hereafter G10), as the G10 model has non-physical scat-"
+    },
+    {
+     "id": "SALT3-B07",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "hold colour scatter fixed at zero during main training stage",
+     "alternatives_visible": [
+      "nonzero colour scatter during training",
+      "k fixed to 0"
+     ],
+     "rejected_named": true,
+     "rejected_option": "allowing nonzero colour scatter",
+     "locator": "2104.07795.layout.txt p8 §2.5 L529-531",
+     "quote": "lowing nonzero color scatter results in biased flux sur-"
+    },
+    {
+     "id": "SALT3-B08",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "iMinuit likelihood fit for model uncertainties instead of Schubert rank-one Jacobian method",
+     "alternatives_visible": [
+      "Schubert's method",
+      "iMinuit likelihood"
+     ],
+     "rejected_named": true,
+     "rejected_option": "Schubert's method for uncertainty parameters",
+     "locator": "2104.07795.layout.txt p8 §2.5 L535-549",
+     "quote": "for determining the model uncertainties."
+    },
+    {
+     "id": "SALT3-B09",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "native spectral binning rather than 29-A binning",
+     "alternatives_visible": [
+      "29-A binning (SALT2.JLA, faster)",
+      "native binning"
+     ],
+     "rejected_named": true,
+     "rejected_option": "29-A spectral binning",
+     "locator": "2104.07795.layout.txt p8 §2.5 L570-575",
+     "quote": "SALTshaker but the models in this work use the native"
+    },
+    {
+     "id": "SALT3-B10",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "do not use SALT2mu selection-bias correction in validation",
+     "alternatives_visible": [
+      "apply SALT2mu bias correction",
+      "no bias correction"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SALT2mu selection-bias correction",
+     "locator": "2104.07795.layout.txt p8 §3.1 L576-580",
+     "quote": "therefore we do not use SALT2mu to correct for selection"
+    },
+    {
+     "id": "SALT3-B11",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "add a pre-peak measurement cut not used in SALT2 training",
+     "alternatives_visible": [
+      "SALT2 training cut set",
+      "SALT2 cuts plus pre-peak requirement"
+     ],
+     "rejected_named": true,
+     "rejected_option": "original SALT2 training cuts without pre-peak requirement",
+     "locator": "2104.07795.layout.txt p14 §4.4 L925-928",
+     "quote": "of maximum light. This is the only cut that was"
+    },
+    {
+     "id": "SALT3-B12",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "include 1991T-like SNe Ia in training sample",
+     "alternatives_visible": [
+      "Branch-normal only",
+      "Branch-normal plus 1991T-like"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2104.07795.layout.txt p14 §4.4 L908-911",
+     "quote": "SN Ia (Branch et al. 1993; we include 1991T-like SNe Ia"
+    },
+    {
+     "id": "SALT3-B13",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "do not subtract host-galaxy continuum from low-z spectra; clip lines and mask tellurics",
+     "alternatives_visible": [
+      "Guy et al. 2007 galaxy-template fit and removal of contaminated spectra",
+      "clip/mask without continuum subtraction"
+     ],
+     "rejected_named": true,
+     "rejected_option": "host-galaxy continuum subtraction / template fit as in Guy et al. 2007",
+     "locator": "2104.07795.layout.txt p14 §4.4 L945-952",
+     "quote": "spectrum, but do not attempt to subtract a host galaxy"
+    },
+    {
+     "id": "SALT3-B14",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "generate",
+     "choice": "remove a handful of spectra judged poor quality by visual inspection",
+     "alternatives_visible": [
+      "keep spectrum",
+      "remove spectrum"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2104.07795.layout.txt p14 §4.4 L952-953",
+     "quote": "We remove a handful of spectra with poor"
+    },
+    {
+     "id": "SALT3-B15",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "tune regularization weights so regularization does not contribute significantly to total chi2",
+     "alternatives_visible": [
+      "JLA training weights (Table 1)",
+      "SALT3 weights"
+     ],
+     "rejected_named": true,
+     "rejected_option": "JLA regularization weights (APhase 0, Awave 10)",
+     "locator": "2104.07795.layout.txt p7 §2.4 L477-484",
+     "quote": "weights to ensure that the regularization terms do not"
+    },
+    {
+     "id": "SALT3-B16",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "set spectral suppression so spectra and photometry contribute roughly equally",
+     "alternatives_visible": [
+      "unsuppressed spectra",
+      "ASpec=0.75"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2104.07795.layout.txt p7 §2.5 L520-526",
+     "quote": "the spectral and photometric data have roughly equal"
+    },
+    {
+     "id": "SALT3-B17",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "validate first on random half split (K21train vs K21valid) before training on all data",
+     "alternatives_visible": [
+      "train on full K21 only",
+      "half split validation then full"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2104.07795.layout.txt p12 §4 L835-841",
+     "quote": "We initially characterize our performance with the"
+    }
+   ]
+  },
+  {
+   "seed_id": "2104.12980",
+   "title": "SNIascore: Deep Learning Classification of Low-Resolution Supernova Spectra (Fremling et al.)",
+   "arxiv_version_verified": "arXiv:2104.12980v2 (layout L13)",
+   "read_in_full": true,
+   "reader": "fork-A",
+   "layout_lines_read": "1-715",
+   "pages": 12,
+   "notes_file": "census/notes/2104.12980.json",
+   "notes_sha256": "68a470930e7ae85067096a20566a270eae46c08e1df76e1669bdd04727c1063a",
+   "episodes": [
+    {
+     "episode_id": "E1",
+     "level": "per_study",
+     "practitioner_action": "publish_object",
+     "action_locator": "2104.12980.layout.txt p4 §3 L253-267",
+     "chain_length": 11,
+     "branches_in_episode": 9,
+     "per_object_branches_in_episode": 0
+    },
+    {
+     "episode_id": "E2",
+     "level": "per_study",
+     "practitioner_action": "publish_object",
+     "action_locator": "2104.12980.layout.txt p5 §4.2 L326-339",
+     "chain_length": 6,
+     "branches_in_episode": 3,
+     "per_object_branches_in_episode": 0
+    },
+    {
+     "episode_id": "E3",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "2104.12980.layout.txt p9 §7 L523-531",
+     "chain_length": 6,
+     "branches_in_episode": 2,
+     "per_object_branches_in_episode": 0
+    },
+    {
+     "episode_id": "E4",
+     "level": "per_object",
+     "practitioner_action": "publish_cause",
+     "action_locator": "2104.12980.layout.txt p8-9 §6 L508-542",
+     "chain_length": 5,
+     "branches_in_episode": 3,
+     "per_object_branches_in_episode": 2
+    }
+   ],
+   "branch_points_total": 17,
+   "branch_points_with_alternative_visible": 17,
+   "branch_points_with_rejected_option_named": 16,
+   "max_branches_per_episode": 9,
+   "max_per_object_branches_per_episode": 2,
+   "by_level_and_kind": {
+    "per_object": {
+     "intervene": 0,
+     "explain": 1,
+     "generate": 0,
+     "infer": 1
+    },
+    "per_study": {
+     "intervene": 0,
+     "explain": 0,
+     "generate": 7,
+     "infer": 8
+    }
+   },
+   "branches": [
+    {
+     "id": "B01",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "use BTS18 sample as validation set",
+     "alternatives_visible": [
+      "BTS18",
+      "other BTS data"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2104.12980.layout.txt p3 §2 L190-202",
+     "quote": "chosen for validation since the classifications and red-"
+    },
+    {
+     "id": "B02",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "train redshift regression only on SNe Ia with redshift known to three decimals",
+     "alternatives_visible": [
+      "all SN Ia redshifts",
+      "three-decimal redshifts"
+     ],
+     "rejected_named": true,
+     "rejected_option": "lower-precision redshifts",
+     "locator": "2104.12980.layout.txt p3 §2 L136-148",
+     "quote": "where the redshift is known to three decimal places or"
+    },
+    {
+     "id": "B03",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "augment training data to equalise redshift distribution for regression (not for classification)",
+     "alternatives_visible": [
+      "no augmentation",
+      "weighting scheme",
+      "augmentation"
+     ],
+     "rejected_named": true,
+     "rejected_option": "no augmentation / weighting scheme",
+     "locator": "2104.12980.layout.txt p3 §2.1 L175-203",
+     "quote": "a weighting scheme, or data augmentation is needed."
+    },
+    {
+     "id": "B04",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "preprocess by median normalisation, continuum division and subtraction of one",
+     "alternatives_visible": [
+      "simple division by median",
+      "direct division by smoothed continuum",
+      "chosen procedure"
+     ],
+     "rejected_named": true,
+     "rejected_option": "simple median division; direct continuum division",
+     "locator": "2104.12980.layout.txt p4 §2.2 L272-274",
+     "quote": "nificantly outperforms a simple division by the median,"
+    },
+    {
+     "id": "B05",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "do not suppress bluest and reddest spectral regions",
+     "alternatives_visible": [
+      "suppress edges (as in DASH)",
+      "keep edges"
+     ],
+     "rejected_named": true,
+     "rejected_option": "suppressing spectral edges",
+     "locator": "2104.12980.layout.txt p4 §2.2 L240-244",
+     "quote": "ing the bluest and reddest parts of the spectra (which"
+    },
+    {
+     "id": "B06",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "replace middle of three BiLSTM layers with a GRU layer",
+     "alternatives_visible": [
+      "three BiLSTM layers",
+      "GRU replacements in all combinations"
+     ],
+     "rejected_named": true,
+     "rejected_option": "three-BiLSTM architecture",
+     "locator": "2104.12980.layout.txt p5 §4.1 L302-316",
+     "quote": "of replacing the BiLSTM layers with GRU layers in all"
+    },
+    {
+     "id": "B07",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "no loss-based stopping; train past overfitting and pick optimal epoch after the fact",
+     "alternatives_visible": [
+      "loss-based stopping condition",
+      "post hoc epoch selection"
+     ],
+     "rejected_named": true,
+     "rejected_option": "stopping condition based on the loss",
+     "locator": "2104.12980.layout.txt p5 §4.1 L335-342",
+     "quote": "a good performance. We do not employ any stopping"
+    },
+    {
+     "id": "B08",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "root mean bias error squared as forward loss with MAE derivative backward",
+     "alternatives_visible": [
+      "MSE",
+      "MAE",
+      "MPE",
+      "MBE",
+      "pairwise combinations"
+     ],
+     "rejected_named": true,
+     "rejected_option": "standard MSE or MAE",
+     "locator": "2104.12980.layout.txt p5-6 §4.2 L326-363",
+     "quote": "(Fig. 3). However, we have found that the standard"
+    },
+    {
+     "id": "B09",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "classification cuts SNIascore>0.6 & sigma<0.3 or stricter >0.8 & sigma<0.275 instead of standard 0.5",
+     "alternatives_visible": [
+      "score>0.5",
+      "score>0.6, sigma<0.3",
+      "score>0.8, sigma<0.275"
+     ],
+     "rejected_named": true,
+     "rejected_option": "standard SNIascore>0.5",
+     "locator": "2104.12980.layout.txt p6-7 §5.1 L368-438",
+     "quote": "SNIascore > 0.5 to classify a spectrum as that of a"
+    },
+    {
+     "id": "B10",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "deploy with conservative threshold 0.9, plan to relax to 0.8 with sigma<0.275",
+     "alternatives_visible": [
+      "0.9",
+      "0.8 plus sigma cut"
+     ],
+     "rejected_named": true,
+     "rejected_option": "0.8 cut at initial deployment",
+     "locator": "2104.12980.layout.txt p9 §7 L542-547",
+     "quote": "servative SNIascore threshold of 0.9. Based on the per-"
+    },
+    {
+     "id": "B11",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "keep RNN over DASH-like CNNs trained on SEDM",
+     "alternatives_visible": [
+      "convolutional networks as in DASH",
+      "optimized RNN"
+     ],
+     "rejected_named": true,
+     "rejected_option": "DASH-like CNN",
+     "locator": "2104.12980.layout.txt p7 fn8 L442-447",
+     "quote": "We have investigated similar convolutional neural networks as"
+    },
+    {
+     "id": "B12",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "SNID baseline uses best match with highest rlap",
+     "alternatives_visible": [
+      "highest-rlap match",
+      "counting SN Ia among top 10 matches"
+     ],
+     "rejected_named": true,
+     "rejected_option": "counting multiple matches",
+     "locator": "2104.12980.layout.txt p11 App B L641-647",
+     "quote": "better than considering multiple matches (e.g., counting"
+    },
+    {
+     "id": "B13",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "DASH ROC over softmax 0.5-0.9; extreme softmax cuts not recommended",
+     "alternatives_visible": [
+      "softmax 0.5-0.9",
+      "softmax 0.92-0.99"
+     ],
+     "rejected_named": true,
+     "rejected_option": "extreme softmax cuts",
+     "locator": "2104.12980.layout.txt p11 App B L645-655",
+     "quote": "consider this behavior to be unstable and do not rec-"
+    },
+    {
+     "id": "B14",
+     "episode_id": "E4",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "ZTF20aatxryt (SN 2020eyj), officially SN Ia, judged more likely a stripped-envelope SN",
+     "alternatives_visible": [
+      "SN Ia",
+      "SN Ic / stripped-envelope SN"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SN Ia (official BTS classification)",
+     "locator": "2104.12980.layout.txt p8 §6 L497-520",
+     "quote": "light before the interaction sets in, it may be more likely"
+    },
+    {
+     "id": "B15",
+     "episode_id": "E4",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "ZTF18aaxmhvk (SN 2018cne) classified SN Ic despite SN Ia SNID matches; peculiar SN Ia left open",
+     "alternatives_visible": [
+      "normal SN Ia",
+      "SN Ic",
+      "peculiar SN Ia"
+     ],
+     "rejected_named": true,
+     "rejected_option": "normal SN Ia",
+     "locator": "2104.12980.layout.txt p8-9 §6 L512-528",
+     "quote": "is not consistent with a normal SN Ia. Based on this,"
+    },
+    {
+     "id": "B16",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "treat low SNIascore as not confident rather than as not-SN Ia, except <0.01",
+     "alternatives_visible": [
+      "low score means not SN Ia",
+      "low score means no confident classification"
+     ],
+     "rejected_named": true,
+     "rejected_option": "concluding the transient is not a SN Ia from a low score",
+     "locator": "2104.12980.layout.txt p7 §5.1 L390-409",
+     "quote": "Finally, we note that a low SNIascore does not neces-"
+    },
+    {
+     "id": "B17",
+     "episode_id": "E4",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "RAPID early photometric classification not adopted",
+     "alternatives_visible": [
+      "RAPID",
+      "ZTF-trained light-curve classifiers in progress"
+     ],
+     "rejected_named": true,
+     "rejected_option": "RAPID",
+     "locator": "2104.12980.layout.txt p9 §6 L556-563",
+     "quote": "been able to reproduce the expected performance in"
+    }
+   ]
+  },
+  {
+   "seed_id": "2109.13999",
+   "title": "ParSNIP: Generative Models of Transient Light Curves with Physics-Enabled Deep Learning (Boone 2021)",
+   "arxiv_version_verified": "2109.13999v1",
+   "read_in_full": true,
+   "reader": "agent1",
+   "layout_lines_read": "1-1894",
+   "pages": 27,
+   "notes_file": "census/notes/2109.13999.json",
+   "notes_sha256": "828f6a11557943ce59e4b853d83ba01fead87216e3f6786d8f5f331a20fe0c62",
+   "episodes": [
+    {
+     "episode_id": "E1",
+     "level": "per_study",
+     "practitioner_action": "publish_object",
+     "action_locator": "2109.13999.layout.txt p25 §7 L1759-1764",
+     "chain_length": 13,
+     "branches_in_episode": 9,
+     "per_object_branches_in_episode": 0
+    },
+    {
+     "episode_id": "E2",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "2109.13999.layout.txt p13 §4.3 L812-829",
+     "chain_length": 4,
+     "branches_in_episode": 2,
+     "per_object_branches_in_episode": 0
+    },
+    {
+     "episode_id": "E3",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "2109.13999.layout.txt p18 §5.2 L1207-1227",
+     "chain_length": 6,
+     "branches_in_episode": 4,
+     "per_object_branches_in_episode": 0
+    },
+    {
+     "episode_id": "E4",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "2109.13999.layout.txt p21 §5.5 L1507-1532",
+     "chain_length": 4,
+     "branches_in_episode": 0,
+     "per_object_branches_in_episode": 0
+    }
+   ],
+   "branch_points_total": 15,
+   "branch_points_with_alternative_visible": 15,
+   "branch_points_with_rejected_option_named": 13,
+   "max_branches_per_episode": 9,
+   "max_per_object_branches_per_episode": 0,
+   "by_level_and_kind": {
+    "per_object": {
+     "intervene": 0,
+     "explain": 0,
+     "generate": 0,
+     "infer": 0
+    },
+    "per_study": {
+     "intervene": 0,
+     "explain": 0,
+     "generate": 9,
+     "infer": 6
+    }
+   },
+   "branches": [
+    {
+     "id": "PS-B1",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "intrinsic latent dimensionality = 3",
+     "alternatives_visible": [
+      "1 to 10 dimensions (Figure 4)"
+     ],
+     "rejected_named": true,
+     "rejected_option": "more than three dimensions (little benefit; dimensions unused, uninformative posteriors)",
+     "locator": "2109.13999.layout.txt p9 §3.12 L562-584",
+     "quote": "ing and validation sets, but there is little benefit from"
+    },
+    {
+     "id": "PS-B2",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "hyperparameters from a 56-model sweep; prefer the more computationally efficient of equally good configurations",
+     "alternatives_visible": [
+      "Table 1 grid of batch size, learning rate, scheduler factor, block types and widths, decoder architectures"
+     ],
+     "rejected_named": true,
+     "rejected_option": "non-bold Table 1 values",
+     "locator": "2109.13999.layout.txt p9 §3.11 L538-556",
+     "quote": "forms similarly well on two different configurations, we"
+    },
+    {
+     "id": "PS-B3",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "marginalize over amplitude instead of predicting it",
+     "alternatives_visible": [
+      "amplitude as explicit encoder parameter"
+     ],
+     "rejected_named": true,
+     "rejected_option": "explicit amplitude parameter",
+     "locator": "2109.13999.layout.txt p8 §3.7 L494-496",
+     "quote": "the amplitude is much easier to train than a model where"
+    },
+    {
+     "id": "PS-B4",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "custom symmetry-aware (time-indexing) layers for explicit latents",
+     "alternatives_visible": [
+      "fully connected layers as in a traditional VAE"
+     ],
+     "rejected_named": true,
+     "rejected_option": "fully connected posterior layers",
+     "locator": "2109.13999.layout.txt p6 §3.5 L339-347",
+     "quote": "works are very unstable and difficult to train. To address"
+    },
+    {
+     "id": "PS-B5",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "no redshift augmentation",
+     "alternatives_visible": [
+      "redshift augmentation as in Boone (2019)"
+     ],
+     "rejected_named": true,
+     "rejected_option": "redshift augmentation",
+     "locator": "2109.13999.layout.txt p8 §3.9 L497-501",
+     "quote": "we do not attempt to augment our light curves in red-"
+    },
+    {
+     "id": "PS-B6",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "spectral regularization eta = 0.001",
+     "alternatives_visible": [
+      "stronger regularization (oversmoothing)",
+      "weaker (noise)"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2109.13999.layout.txt p8 §3.8 L458-463",
+     "quote": "pirically that a value of η = 0.001 results in a reasonable"
+    },
+    {
+     "id": "PS-B7",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "add 0.01 flux error floor",
+     "alternatives_visible": [
+      "reported statistical uncertainties as given"
+     ],
+     "rejected_named": true,
+     "rejected_option": "unmodified reported uncertainties (underestimated at high S/N)",
+     "locator": "2109.13999.layout.txt p3 §2.1 L133-142",
+     "quote": "ily underestimate the true uncertainties for very high"
+    },
+    {
+     "id": "PS-B8",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "fixed weak priors on explicit latent variables",
+     "alternatives_visible": [
+      "priors estimated by modelling survey selection functions",
+      "priors from theoretical/empirical models"
+     ],
+     "rejected_named": true,
+     "rejected_option": "learned/selection-modelled priors",
+     "locator": "2109.13999.layout.txt p22 §6.4 L1546-1554",
+     "quote": "the explicitly-modeled latent variables. We made this"
+    },
+    {
+     "id": "PS-B9",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "train separate models per dataset (joint PS1+PLAsTiCC model tested)",
+     "alternatives_visible": [
+      "joint training on PS1 and PLAsTiCC"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2109.13999.layout.txt p24 §6.8 L1725-1731",
+     "quote": "ParSNIP model simultaneously on the PS1 and PLAs-"
+    },
+    {
+     "id": "PS-B10",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "compare SALT2 and ParSNIP only with the PS1-trained ParSNIP",
+     "alternatives_visible": [
+      "PLAsTiCC-trained ParSNIP"
+     ],
+     "rejected_named": true,
+     "rejected_option": "PLAsTiCC-trained model (PLAsTiCC SNe Ia simulated with SALT2)",
+     "locator": "2109.13999.layout.txt p13 §4.3 L808-812",
+     "quote": "were simulated using SALT2. For a fair comparison, we"
+    },
+    {
+     "id": "PS-B11",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "ParSNIP parameters from encoder approximate MAP rather than full maximum-likelihood fit (SALT2 fitted exactly)",
+     "alternatives_visible": [
+      "full fit for maximum likelihood",
+      "MCMC via SNCosmo"
+     ],
+     "rejected_named": true,
+     "rejected_option": "full fit (reduced chi2 would decrease)",
+     "locator": "2109.13999.layout.txt p13 §4.3 L821-826",
+     "quote": "reduced χ2 values would decrease if a full fit were per-"
+    },
+    {
+     "id": "PS-B12",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "exclude redshift as a classifier feature",
+     "alternatives_visible": [
+      "redshift as explicit feature"
+     ],
+     "rejected_named": true,
+     "rejected_option": "redshift feature",
+     "locator": "2109.13999.layout.txt p17 §5.1 L1138-1141",
+     "quote": "as an explicit feature as the redshift distributions of the"
+    },
+    {
+     "id": "PS-B13",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "LightGBM min child weight 1000 (otherwise defaults)",
+     "alternatives_visible": [
+      "lightgbm default min child weight"
+     ],
+     "rejected_named": true,
+     "rejected_option": "default value",
+     "locator": "2109.13999.layout.txt p18 §5.1 L1156-1162",
+     "quote": "rameter to 1000 to avoid overfitting the augmented light"
+    },
+    {
+     "id": "PS-B14",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "retrain the Avocado comparator with true redshifts",
+     "alternatives_visible": [
+      "Avocado with photometric redshifts as in the challenge"
+     ],
+     "rejected_named": true,
+     "rejected_option": "Avocado with photometric redshifts",
+     "locator": "2109.13999.layout.txt p18 §5.3 L1242-1245",
+     "quote": "retrained the Avocado classifier using the true redshifts"
+    },
+    {
+     "id": "PS-B15",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "novelty score = latent distance to nearest augmented training transient",
+     "alternatives_visible": [
+      "isolation forest (Villar et al. 2021)",
+      "outlier-from-bulk methods"
+     ],
+     "rejected_named": true,
+     "rejected_option": "isolation-forest style anomaly detection",
+     "locator": "2109.13999.layout.txt p20 §5.4 L1407-1416",
+     "quote": "In this work, we instead explore an alternative ap-"
+    }
+   ]
+  },
+  {
+   "seed_id": "2401.15167",
+   "title": "The Zwicky Transient Facility Bright Transient Survey. III. BTSbot: Automated Identification and Follow-up of Bright Transients with Deep Learning",
+   "arxiv_version_verified": "arXiv:2401.15167v1 (layout L15)",
+   "read_in_full": true,
+   "reader": "fork-B",
+   "layout_lines_read": "1-1601",
+   "pages": 26,
+   "notes_file": "census/notes/2401.15167.json",
+   "notes_sha256": "d8cd2857e7d9709ae61f3d82651c6fc6d3597dd3d2204da6df32aa866d0755d6",
+   "episodes": [
+    {
+     "episode_id": "E1",
+     "level": "per_object",
+     "practitioner_action": "commit_resource",
+     "action_locator": "2401.15167.layout.txt p2 §1 L98-110",
+     "chain_length": 8,
+     "branches_in_episode": 3,
+     "per_object_branches_in_episode": 3
+    },
+    {
+     "episode_id": "E2",
+     "level": "per_object",
+     "practitioner_action": "commit_resource",
+     "action_locator": "2401.15167.layout.txt p16 §5.1 L1014-1018",
+     "chain_length": 11,
+     "branches_in_episode": 2,
+     "per_object_branches_in_episode": 2
+    },
+    {
+     "episode_id": "E3",
+     "level": "per_study",
+     "practitioner_action": "publish_object",
+     "action_locator": "2401.15167.layout.txt p3 §1 L132-133",
+     "chain_length": 15,
+     "branches_in_episode": 18,
+     "per_object_branches_in_episode": 1
+    }
+   ],
+   "branch_points_total": 23,
+   "branch_points_with_alternative_visible": 23,
+   "branch_points_with_rejected_option_named": 19,
+   "max_branches_per_episode": 18,
+   "max_per_object_branches_per_episode": 3,
+   "by_level_and_kind": {
+    "per_object": {
+     "intervene": 5,
+     "explain": 0,
+     "generate": 0,
+     "infer": 1
+    },
+    "per_study": {
+     "intervene": 3,
+     "explain": 0,
+     "generate": 14,
+     "infer": 0
+    }
+   },
+   "branches": [
+    {
+     "id": "B01",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "scanner saves a candidate as a real bright transient and requests a spectrum, or does not save it",
+     "alternatives_visible": [
+      "save and request spectrum",
+      "leave unsaved (implicit reject)"
+     ],
+     "rejected_named": true,
+     "rejected_option": "unsaved candidates ('rejects' list, implicitly marked non-bright)",
+     "locator": "2401.15167.layout.txt p2 §1 L97-101",
+     "quote": "perts (“scanners”) who catalog (“save”) the real bright"
+    },
+    {
+     "id": "B02",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "scanners intentionally spend follow-up on transients they know will not reach mpeak<=18.5",
+     "alternatives_visible": [
+      "act only on bright candidates",
+      "act also on dim transients of interest"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2401.15167.layout.txt p12 §4.1 L751-755",
+     "quote": "ners will often intentionally act on transients which"
+    },
+    {
+     "id": "B03",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "priority of the SEDM request (1 vs 2+); priorities >=2 reserved for sources already at mpeak<=18.5",
+     "alternatives_visible": [
+      "priority 1",
+      "priority 2 or greater"
+     ],
+     "rejected_named": true,
+     "rejected_option": "higher priority for sources not yet at 18.5 mag",
+     "locator": "2401.15167.layout.txt p11 §4.1 L666-672",
+     "quote": "are typically reserved for sources which have already at-"
+    },
+    {
+     "id": "B04",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "scanners may modify triggers sent by BTSbot (raise priority, add photometry)",
+     "alternatives_visible": [
+      "accept automatic trigger",
+      "increase priority",
+      "add photometry to request"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2401.15167.layout.txt p16 §5.1 L1005-1009",
+     "quote": "to modify triggers sent by BTSbot, for example, increas-"
+    },
+    {
+     "id": "B05",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "ZTF18abdiasx removed from training set because it fits both classes (bright SN projected on an AGN)",
+     "alternatives_visible": [
+      "positive class",
+      "negative class",
+      "remove"
+     ],
+     "rejected_named": true,
+     "rejected_option": "assigning it to either class",
+     "locator": "2401.15167.layout.txt p6 §2 L396-401",
+     "quote": "from our training set. For example, ZTF18abdiasx ap-"
+    },
+    {
+     "id": "B06",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "exclude 'junk' sources from training set",
+     "alternatives_visible": [
+      "train with junk",
+      "train without junk"
+     ],
+     "rejected_named": true,
+     "rejected_option": "training on junk sources",
+     "locator": "2401.15167.layout.txt p4 §2 L238-247",
+     "quote": "periments trained on these sources frequently yielded"
+    },
+    {
+     "id": "B07",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "rejects query limited to 2021-01-01..2023-01-01",
+     "alternatives_visible": [
+      "pre-2021 candidates",
+      "post-2023 candidates",
+      "2021-2023 window"
+     ],
+     "rejected_named": true,
+     "rejected_option": "candidates before 2021 (older filter) and after 2023 (still evolving types)",
+     "locator": "2401.15167.layout.txt p4 §2 L223-231",
+     "quote": "alert filter, which was last improved in late 2020; many"
+    },
+    {
+     "id": "B08",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "dims sources with mpeak<=18.5 from partnership data removed entirely",
+     "alternatives_visible": [
+      "keep in dims",
+      "remove"
+     ],
+     "rejected_named": true,
+     "rejected_option": "keeping them in the negative class",
+     "locator": "2401.15167.layout.txt p4 §2 L238-243",
+     "quote": "dims. These are all removed entirely from the training"
+    },
+    {
+     "id": "B09",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "include ZTF partnership-time alerts in training though BTS uses public data only",
+     "alternatives_visible": [
+      "public only",
+      "public plus partnership"
+     ],
+     "rejected_named": true,
+     "rejected_option": "public-only training set",
+     "locator": "2401.15167.layout.txt p4 §2 L252-255",
+     "quote": "public survey, but we include data from partnership time"
+    },
+    {
+     "id": "B10",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "simple custom metadata features instead of more faithful light-curve representations",
+     "alternatives_visible": [
+      "custom phase/shape features",
+      "more faithful SN light-curve models"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SN-specific light-curve representations (not conditioned on AGN, VarStars)",
+     "locator": "2401.15167.layout.txt p5 §2 L321-340",
+     "quote": "fectly, but they are adopted because of their simplic-"
+    },
+    {
+     "id": "B11",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "band-independent features rather than passband-dependent equivalents",
+     "alternatives_visible": [
+      "band-combined features",
+      "passband-dependent features"
+     ],
+     "rejected_named": true,
+     "rejected_option": "passband-dependent features",
+     "locator": "2401.15167.layout.txt p6 §2 L346-357",
+     "quote": "to passband-dependent equivalents, however, this would"
+    },
+    {
+     "id": "B12",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "remove i-band alerts and negative-difference-image alerts",
+     "alternatives_visible": [
+      "keep",
+      "remove"
+     ],
+     "rejected_named": true,
+     "rejected_option": "keeping i-band and negative difference alerts",
+     "locator": "2401.15167.layout.txt p6 §2 L382-393",
+     "quote": "are removed primarily because BTS draws from the ZTF"
+    },
+    {
+     "id": "B13",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "vars sources thinned to latest Nmax alerts instead of random thinning",
+     "alternatives_visible": [
+      "latest Nmax",
+      "random Nmax"
+     ],
+     "rejected_named": true,
+     "rejected_option": "random Nmax thinning on vars",
+     "locator": "2401.15167.layout.txt p7 §2 L445-463",
+     "quote": "BTSbot used random Nmax thinning on vars sources and"
+    },
+    {
+     "id": "B14",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "omit full light-curve input",
+     "alternatives_visible": [
+      "custom features",
+      "full light curve"
+     ],
+     "rejected_named": true,
+     "rejected_option": "full light-curve information",
+     "locator": "2401.15167.layout.txt p9 §3 L550-565",
+     "quote": "the full light curve. We omit full light curve informa-"
+    },
+    {
+     "id": "B15",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "metadata features selected by sweep; many candidate features dropped",
+     "alternatives_visible": [
+      "sgscore3",
+      "distpsnr3",
+      "fid",
+      "maggaia",
+      "others"
+     ],
+     "rejected_named": true,
+     "rejected_option": "sgscore3, distpsnr3, fid, maggaia, neargaia, magdiff, ...",
+     "locator": "2401.15167.layout.txt p10 §3.1 L652-658",
+     "quote": "other features which we found to not improve perfor-"
+    },
+    {
+     "id": "B16",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "keep class weighting favouring TN rate rather than rebalancing TP/TN",
+     "alternatives_visible": [
+      "balance TP and TN via class weights",
+      "favour TN rate"
+     ],
+     "rejected_named": true,
+     "rejected_option": "balanced TP/TN rates",
+     "locator": "2401.15167.layout.txt p11 §4.1 L689-692",
+     "quote": "justing the class-weights, but we find that models which"
+    },
+    {
+     "id": "B17",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "production model selected on policy-based metrics, not minimum validation loss or final epoch",
+     "alternatives_visible": [
+      "final epoch",
+      "min validation loss",
+      "best policy metrics"
+     ],
+     "rejected_named": true,
+     "rejected_option": "model with least validation loss / greatest validation accuracy",
+     "locator": "2401.15167.layout.txt p20 §A L1285-1290",
+     "quote": "is selected by considering best performance in policy-based metrics, those most relevant to how BTSbot is used."
+    },
+    {
+     "id": "B18",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "multi-modal CNN over image-only CNN and metadata-only NN",
+     "alternatives_visible": [
+      "MM-CNN",
+      "UM-CNN",
+      "NN"
+     ],
+     "rejected_named": true,
+     "rejected_option": "UM-CNN and fully connected NN",
+     "locator": "2401.15167.layout.txt p22 §B L1356-1365",
+     "quote": "Each architecture outperforms the others in some metrics, but the MM-CNN delivers the best overall performance."
+    },
+    {
+     "id": "B19",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "cutout size Npix (UM-CNN best at 49; MM-CNN best at 63)",
+     "alternatives_visible": [
+      "3",
+      "5",
+      "7",
+      "13",
+      "21",
+      "35",
+      "49",
+      "63"
+     ],
+     "rejected_named": true,
+     "rejected_option": "smaller cutouts",
+     "locator": "2401.15167.layout.txt p23 §C L1433-1438",
+     "quote": "to be irrelevant or noisy when performing our task. We notably do not observe the same trend for the MM-CNN,"
+    },
+    {
+     "id": "B20",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "intervene",
+     "choice": "follow-up policies bts_p1 vs bts_p2; bts_p1 used for speed comparison",
+     "alternatives_visible": [
+      "bts_p1 (>=2 alerts score>=0.5, magpsf<=19, priority 1)",
+      "bts_p2 (plus magpsf<=18.5, priority 2)"
+     ],
+     "rejected_named": true,
+     "rejected_option": "bts_p2 for the speed comparison",
+     "locator": "2401.15167.layout.txt p11 §4.1 L700-716",
+     "quote": "spond to either policy, but we select bts p1 as it makes"
+    },
+    {
+     "id": "B21",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "intervene",
+     "choice": "score threshold 0.5 kept; raising to 0.8 would better reject CV false positives",
+     "alternatives_visible": [
+      "0.5",
+      "0.8"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2401.15167.layout.txt p13 §4.1 L796-801",
+     "quote": "threshold. Right: Many bts p2 FPs are CVs, which could be better rejected by increasing the score threshold to 0.8."
+    },
+    {
+     "id": "B22",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "intervene",
+     "choice": "completeness-prioritised policies later replaced by purity-focused policies in production",
+     "alternatives_visible": [
+      "completeness-first policies",
+      "purity-focused policies"
+     ],
+     "rejected_named": true,
+     "rejected_option": "original completeness-prioritised policies",
+     "locator": "2401.15167.layout.txt p17 §5.3 L1070-1076",
+     "quote": "production for a few months a different set of policies"
+    },
+    {
+     "id": "B23",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "intervene",
+     "choice": "counterfactual: SN 2023ixf scored 0.840 minutes after ZTF detection, ~14 h before TNS report; could have been triggered on SEDM",
+     "alternatives_visible": [
+      "auto-trigger at first detection",
+      "no trigger (actual: spectrum after TNS report)"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2401.15167.layout.txt p18 §5.3 L1101-1127",
+     "quote": "signed a bright transient score of 0.840 by an early ver-"
+    }
+   ]
+  },
+  {
+   "seed_id": "2403.07975",
+   "title": "Superphot+: Realtime Fitting and Classification of Supernova Light Curves (de Soto et al. 2024)",
+   "arxiv_version_verified": "arXiv:2403.07975v1 (L13)",
+   "read_in_full": true,
+   "reader": "fork-C",
+   "layout_lines_read": "1-2915",
+   "pages": 37,
+   "notes_file": "census/notes/2403.07975.json",
+   "notes_sha256": "6fc705516714f4b83a0d5a7cb82f0455e60ac6ad595b4bbd68825ff472e32c70",
+   "episodes": [
+    {
+     "episode_id": "E1",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "2403.07975.layout.txt p24 §7.1 L1854-1879",
+     "chain_length": 13,
+     "branches_in_episode": 1,
+     "per_object_branches_in_episode": 1
+    },
+    {
+     "episode_id": "E2",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "2403.07975.layout.txt p29 §8 L2337-2344",
+     "chain_length": 5,
+     "branches_in_episode": 1,
+     "per_object_branches_in_episode": 1
+    },
+    {
+     "episode_id": "E3",
+     "level": "per_study",
+     "practitioner_action": "publish_object",
+     "action_locator": "2403.07975.layout.txt p2 §1 L96-97",
+     "chain_length": 16,
+     "branches_in_episode": 23,
+     "per_object_branches_in_episode": 2
+    },
+    {
+     "episode_id": "E4",
+     "level": "per_study",
+     "practitioner_action": "publish_value",
+     "action_locator": "2403.07975.layout.txt p18 §5.2 L1423-1431",
+     "chain_length": 5,
+     "branches_in_episode": 1,
+     "per_object_branches_in_episode": 0
+    }
+   ],
+   "branch_points_total": 26,
+   "branch_points_with_alternative_visible": 25,
+   "branch_points_with_rejected_option_named": 21,
+   "max_branches_per_episode": 23,
+   "max_per_object_branches_per_episode": 2,
+   "by_level_and_kind": {
+    "per_object": {
+     "intervene": 0,
+     "explain": 2,
+     "generate": 1,
+     "infer": 1
+    },
+    "per_study": {
+     "intervene": 0,
+     "explain": 0,
+     "generate": 14,
+     "infer": 8
+    }
+   },
+   "branches": [
+    {
+     "id": "B01",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "no constant flux-offset term in the parametric model; filter spurious tail points before fitting instead",
+     "alternatives_visible": [
+      "add constant offset term to model",
+      "clip spurious points before fitting"
+     ],
+     "rejected_named": true,
+     "rejected_option": "constant flux offset term",
+     "locator": "2403.07975.layout.txt p4 §2.2 L224-232",
+     "quote": "offset, we find that including such an offset leads to over-"
+    },
+    {
+     "id": "B02",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "tail-clipping slope cutoff 0.2 of maximum slope, chosen empirically; side effects (SN IIP tails, Ia secondary bumps clipped) accepted",
+     "alternatives_visible": [
+      "various cutoff slopes (values not given)"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2403.07975.layout.txt p30 §App A L2449-2465",
+     "quote": "empirically by experimenting with various cutoff slopes."
+    },
+    {
+     "id": "B03",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "require >=5 points SNR>3 in each band",
+     "alternatives_visible": [],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2403.07975.layout.txt p5 §2.3 L247-256",
+     "quote": "This number is selected so all"
+    },
+    {
+     "id": "B04",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "merge SLSN-II into SN IIn class",
+     "alternatives_visible": [
+      "group SLSN-II with SLSN-I",
+      "SLSN-II as distinct label",
+      "merge with SN IIn"
+     ],
+     "rejected_named": true,
+     "rejected_option": "grouping with SLSN-I; separate SLSN-II label",
+     "locator": "2403.07975.layout.txt p5 §2.4 L286-295",
+     "quote": "compared to grouping SLSNe-II with SLSNe-I or"
+    },
+    {
+     "id": "B05",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "include SN IIL and IIP in SN II class",
+     "alternatives_visible": [
+      "IIL/IIP as distinct classes"
+     ],
+     "rejected_named": true,
+     "rejected_option": "IIL and IIP as distinct subclasses",
+     "locator": "2403.07975.layout.txt p5 §2.4 L269-273",
+     "quote": "in this category, as there is debate whether these"
+    },
+    {
+     "id": "B06",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "do not add SN Iax, Ibn, IIb, TDE, LBV as output classes",
+     "alternatives_visible": [
+      "add rarer classes as outputs",
+      "exclude them"
+     ],
+     "rejected_named": true,
+     "rejected_option": "rarer classes as additional output labels",
+     "locator": "2403.07975.layout.txt p21 §5.4 L1693-1702",
+     "quote": "rity. This supports our decision not to include the rarer"
+    },
+    {
+     "id": "B07",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "photometric set additionally filtered by ALeRCE stamp classifier after visual inspection showed cuts insufficient",
+     "alternatives_visible": [
+      "observational+variability cuts only",
+      "add stamp-classifier SN filter"
+     ],
+     "rejected_named": true,
+     "rejected_option": "relying on quality cuts alone",
+     "locator": "2403.07975.layout.txt p6 §2.5 L304-312",
+     "quote": "Through visual inspection, we find that these cuts"
+    },
+    {
+     "id": "B08",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "fit g and r jointly in 14-D with g-band priors as log ratios to r-band",
+     "alternatives_visible": [
+      "fit each band independently twice with averaged posterior prior (Villar 2019; Hosseinzadeh 2020)",
+      "joint 14-parameter fit"
+     ],
+     "rejected_named": true,
+     "rejected_option": "independent per-band fitting of Villar et al. 2019 / Hosseinzadeh et al. 2020",
+     "locator": "2403.07975.layout.txt p8 §3 L491-501",
+     "quote": "eter space. This differs from the method used in Villar"
+    },
+    {
+     "id": "B09",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "r-band as reference band for priors",
+     "alternatives_visible": [
+      "r-band reference",
+      "g-band reference (implicit)"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2403.07975.layout.txt p7 §3 L428-436",
+     "quote": "light curves have better coverage in the r-band"
+    },
+    {
+     "id": "B10",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "iteratively refine priors to population marginal posteriors until stable (stopping rule), final truncated (log-)Gaussians",
+     "alternatives_visible": [
+      "broad uniform priors",
+      "iterated data-driven priors"
+     ],
+     "rejected_named": true,
+     "rejected_option": "broad, uniform priors (Superphot 'suffers tremendously from broad, uniform priors', L1759-1760)",
+     "locator": "2403.07975.layout.txt p8 §3 L483-496",
+     "quote": "broad, uniform priors, and then iteratively alternate be-"
+    },
+    {
+     "id": "B11",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "nested sampling (dynesty) for archival fits, SVI for realtime; per-light-curve fallback from SVI to nested sampling when SVI fit is poor",
+     "alternatives_visible": [
+      "nested sampling",
+      "NUTS",
+      "SVI",
+      "MIGRAD",
+      "CERES / Levenberg-Marquardt (scipy curve_fit)",
+      "Metropolis-Hastings MCMC"
+     ],
+     "rejected_named": true,
+     "rejected_option": "NUTS (order of magnitude slower), MIGRAD and CERES (fail >50% of fits), MH-MCMC (slow, piecewise discontinuity), gradient-descent optimizers",
+     "locator": "2403.07975.layout.txt p33 §App B L2640-2655",
+     "quote": "we use SVI as the default fitting method but switch to"
+    },
+    {
+     "id": "B12",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "modified reduced chi2 without degrees-of-freedom correction as fit-quality metric",
+     "alternatives_visible": [
+      "traditional reduced chi2",
+      "modified reduced chi2"
+     ],
+     "rejected_named": true,
+     "rejected_option": "traditional reduced chi-squared",
+     "locator": "2403.07975.layout.txt p11 §3.1 L663-672",
+     "quote": "grees of freedom). We opt for our modified metric as"
+    },
+    {
+     "id": "B13",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "fit-quality cut at median reduced chi2 <= 1.2",
+     "alternatives_visible": [
+      "no chi2 cut",
+      "more lenient threshold",
+      "1.2 cutoff"
+     ],
+     "rejected_named": true,
+     "rejected_option": "no cut; more lenient threshold",
+     "locator": "2403.07975.layout.txt p11 §3.1 L620-639",
+     "quote": "or using a more lenient threshold lets significantly more"
+    },
+    {
+     "id": "B14",
+     "episode_id": "E1",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "visual diagnosis of each of the 62 spectroscopic light curves failing the chi2 cut: 48 unfit-able (poor template subtraction, extreme outliers, extreme secondary peaks), 4 could be fit better, ~15 well fit",
+     "alternatives_visible": [
+      "poor template subtraction",
+      "extreme outlier points",
+      "extreme secondary peaks",
+      "fit could have been better",
+      "well-fit, unnecessarily removed"
+     ],
+     "rejected_named": true,
+     "rejected_option": "'well-fit' reading for the 48; 'bad fit' reading for ~15",
+     "locator": "2403.07975.layout.txt p11 §3.1 L604-629",
+     "quote": "that 48 cannot be fit adequately by our empirical model"
+    },
+    {
+     "id": "B15",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "exclude A_r and t0_r from redshift-independent feature set (re-add A_r for redshift variant)",
+     "alternatives_visible": [
+      "all 14 parameters",
+      "12 parameters without A_r, t0_r"
+     ],
+     "rejected_named": true,
+     "rejected_option": "using A_r and t0_r",
+     "locator": "2403.07975.layout.txt p12 §4.3 L709-714",
+     "quote": "properties; the former is dependent on the phases each"
+    },
+    {
+     "id": "B16",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "keep beta, gamma, tau_rise, tau_fall rather than redshift-cancelling ratios theta1-3 for ZTF",
+     "alternatives_visible": [
+      "raw shape parameters",
+      "theta1=beta*tau_rise, theta2=tau_rise/tau_fall, theta3=tau_rise/gamma"
+     ],
+     "rejected_named": true,
+     "rejected_option": "alternate (1+z)-cancelling feature set",
+     "locator": "2403.07975.layout.txt p13 §4.3 L807-818",
+     "quote": "(1 + z) multiplicative factors. We find that this alter-"
+    },
+    {
+     "id": "B17",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "LightGBM GBM as default classifier",
+     "alternatives_visible": [
+      "MLP (grid over layers/neurons)",
+      "LightGBM GBM"
+     ],
+     "rejected_named": true,
+     "rejected_option": "multi-layer perceptron",
+     "locator": "2403.07975.layout.txt p34 §App D L2697-2718",
+     "quote": "finalize the LightGBM model as the default classifier, as"
+    },
+    {
+     "id": "B18",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "Bayesian oversampling of posterior fit draws per minority-class light curve (22,730 sets per class)",
+     "alternatives_visible": [
+      "class-weighted loss on median fits",
+      "SMOTE",
+      "Bayesian oversampling of posterior draws",
+      "more / fewer draws"
+     ],
+     "rejected_named": true,
+     "rejected_option": "class weights; SMOTE; more or fewer samples",
+     "locator": "2403.07975.layout.txt p33 §App C L2659-2693",
+     "quote": "we try a Bayesian oversampling approach where we draw"
+    },
+    {
+     "id": "B19",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "purity-completeness curves instead of ROC curves for binary evaluation",
+     "alternatives_visible": [
+      "ROC curves",
+      "purity-completeness curves"
+     ],
+     "rejected_named": true,
+     "rejected_option": "ROC curves",
+     "locator": "2403.07975.layout.txt p20 §5.3 L1591-1600",
+     "quote": "optimistic for highly imbalanced datasets, such as our"
+    },
+    {
+     "id": "B20",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "SN Ia vs CC binary confidence threshold chosen by maximizing F1 over thresholds",
+     "alternatives_visible": [
+      "range of confidence thresholds (Fig. 13)"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2403.07975.layout.txt p17 §Fig 13 L1268-1278",
+     "quote": "a SN Ia threshold of p"
+    },
+    {
+     "id": "B21",
+     "episode_id": "E4",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "train early-phase classifier without gamma, tau_fall (and g/r ratios) for partial light curves; ANTARES deploys only full-phase",
+     "alternatives_visible": [
+      "full-phase classifier",
+      "early-phase classifier"
+     ],
+     "rejected_named": true,
+     "rejected_option": "full-phase features for early light curves (unconstrained post-peak parameters reflect priors)",
+     "locator": "2403.07975.layout.txt p18 §5.2 L1413-1427",
+     "quote": "an alternate version of our GBM classifier without γ,"
+    },
+    {
+     "id": "B22",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "do not analyze redshift-inclusive variant on photometric set",
+     "alternatives_visible": [
+      "analyze with-z variant",
+      "analyze no-z variant only"
+     ],
+     "rejected_named": true,
+     "rejected_option": "redshift-inclusive variant analysis",
+     "locator": "2403.07975.layout.txt p24 §7.1 L1873-1878",
+     "quote": "as described in Section 5.5 yields a negligible change in"
+    },
+    {
+     "id": "B23",
+     "episode_id": "E3",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "exclude AGNs and CVs from rare-class analysis",
+     "alternatives_visible": [
+      "include AGN/CV",
+      "exclude AGN/CV"
+     ],
+     "rejected_named": true,
+     "rejected_option": "analyzing AGNs and CVs",
+     "locator": "2403.07975.layout.txt p6 §2.4 L316-321",
+     "quote": "clude AGNs and cataclysmic variables (CVs) from this"
+    },
+    {
+     "id": "B24",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "explain",
+     "choice": "manual inspection assigning confounding causes to misclassified light curves (partial LCs, secondary r-band peaks, host extinction/red colour, missing plateau constraints, long timescales, sparse/noisy data)",
+     "alternatives_visible": [
+      "partial light curve",
+      "secondary peak",
+      "host extinction",
+      "missing plateau sampling",
+      "long evolution timescale",
+      "sparse/noisy data"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2403.07975.layout.txt p15 §5.1 L1105-1122",
+     "quote": "manual inspection, the main confounding factors among"
+    },
+    {
+     "id": "B25",
+     "episode_id": "E2",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "visually inspect 'strange' realtime events (possible AGNs/TDEs) rather than add a top-level classifier",
+     "alternatives_visible": [
+      "top-level classifier",
+      "star-catalog cross-check + visual inspection"
+     ],
+     "rejected_named": true,
+     "rejected_option": "top-level classifier to isolate SNe",
+     "locator": "2403.07975.layout.txt p29 §8 L2337-2344",
+     "quote": "reduce nightly SN counts such that we can visually in-"
+    },
+    {
+     "id": "B26",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "generate",
+     "choice": "per-light-curve judgment of which pipeline's model reproduces a given light curve (Fig. 17): ParSNIP alone captures SN Ia secondary bump; Superphot fails from broad priors; parametric models best for slow-rise SN IIn",
+     "alternatives_visible": [
+      "Superphot+",
+      "Superphot",
+      "SuperRAENN",
+      "ParSNIP"
+     ],
+     "rejected_named": true,
+     "rejected_option": "Superphot (broad priors) for bottom-left SN Ia; non-parametric models for SN IIn; parametric models for Ia bump",
+     "locator": "2403.07975.layout.txt p23 §Fig 17 L1814-1819",
+     "quote": "The top left light curve is fitted fairly well by Superphot+"
+    }
+   ]
+  },
+  {
+   "seed_id": "2405.03078",
+   "title": "ATAT: Astronomical Transformer for time series And Tabular data",
+   "arxiv_version_verified": "arXiv:2405.03078v2 (layout L23)",
+   "read_in_full": true,
+   "reader": "fork-B",
+   "layout_lines_read": "1-1430",
+   "pages": 12,
+   "notes_file": "census/notes/2405.03078.json",
+   "notes_sha256": "a9be5496e6dec72275215d03045e483e884bc20b8e2d3a927c552c37a2cc854c",
+   "episodes": [
+    {
+     "episode_id": "E1",
+     "level": "per_study",
+     "practitioner_action": "publish_object",
+     "action_locator": "2405.03078.layout.txt p6 §3.2 L454-463",
+     "chain_length": 14,
+     "branches_in_episode": 13,
+     "per_object_branches_in_episode": 0
+    },
+    {
+     "episode_id": "E2",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "2405.03078.layout.txt p9 §4 L1191-1194",
+     "chain_length": 3,
+     "branches_in_episode": 0,
+     "per_object_branches_in_episode": 0
+    }
+   ],
+   "branch_points_total": 13,
+   "branch_points_with_alternative_visible": 13,
+   "branch_points_with_rejected_option_named": 12,
+   "max_branches_per_episode": 13,
+   "max_per_object_branches_per_episode": 0,
+   "by_level_and_kind": {
+    "per_object": {
+     "intervene": 0,
+     "explain": 0,
+     "generate": 0,
+     "infer": 0
+    },
+    "per_study": {
+     "intervene": 0,
+     "explain": 0,
+     "generate": 13,
+     "infer": 0
+    }
+   },
+   "branches": [
+    {
+     "id": "A01",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "SN-like/Other class restricted to SNe IIb",
+     "alternatives_visible": [
+      "ELAsTiCC broker taxonomy",
+      "modified class with SNe IIb only"
+     ],
+     "rejected_named": true,
+     "rejected_option": "broker taxonomy's SN-like/other definition",
+     "locator": "2405.03078.layout.txt p2 §2.1 L109-111",
+     "quote": "SN-like/other class that includes only SNe IIb (see Figure 2 b)."
+    },
+    {
+     "id": "A02",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "model size limited although larger models performed better",
+     "alternatives_visible": [
+      "larger models",
+      "smaller models"
+     ],
+     "rejected_named": true,
+     "rejected_option": "larger models",
+     "locator": "2405.03078.layout.txt p3 §2.2 L253-255",
+     "quote": "Implementation details section. We noted larger models showed"
+    },
+    {
+     "id": "A03",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "MTA truncation times drawn from discrete set {8,128,2048}",
+     "alternatives_visible": [
+      "arbitrary truncation times",
+      "discrete set"
+     ],
+     "rejected_named": true,
+     "rejected_option": "arbitrary truncation times",
+     "locator": "2405.03078.layout.txt p5 §2.2.4 L384-391",
+     "quote": "a limited discrete set since it is unfeasible to compute the fea-"
+    },
+    {
+     "id": "A04",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "drop features not simulated (star-galaxy score, ALLWISE colours) and object coordinates",
+     "alternatives_visible": [
+      "original Sanchez-Saez 2021 feature set",
+      "reduced set"
+     ],
+     "rejected_named": true,
+     "rejected_option": "coordinates, sgscore, ALLWISE colours",
+     "locator": "2405.03078.layout.txt p5 §2.3 L370-375",
+     "quote": "nates of the objects are not used because they were not simu-"
+    },
+    {
+     "id": "A05",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "supernova parametric model modified for six bands, redshift and MW extinction (metadata enters features)",
+     "alternatives_visible": [
+      "original SPM",
+      "modified SPM"
+     ],
+     "rejected_named": true,
+     "rejected_option": "original ZTF SPM",
+     "locator": "2405.03078.layout.txt p5 §2.3 L360-370",
+     "quote": "from Sánchez-Sáez et al. (2021) was modified to better handle"
+    },
+    {
+     "id": "A06",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "BHRF hyperparameters by grid search: entropy, 350 trees, depth 100",
+     "alternatives_visible": [
+      "Gini/entropy",
+      "10/100/350/500 trees",
+      "depth 10/100/none"
+     ],
+     "rejected_named": true,
+     "rejected_option": "other grid points",
+     "locator": "2405.03078.layout.txt p5 §2.4 L420-429",
+     "quote": "criterion (Gini impurity, entropy), number of trees (10, 100, 350,"
+    },
+    {
+     "id": "A07",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "BHRF uses only top 100 features per forest",
+     "alternatives_visible": [
+      "all features",
+      "top 100 by importance"
+     ],
+     "rejected_named": true,
+     "rejected_option": "full feature set",
+     "locator": "2405.03078.layout.txt p6 §2.4 L429-433",
+     "quote": "standard deviation). These decisions were made to diminish the"
+    },
+    {
+     "id": "A08",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "two LC+MD+MTA variants put into production among eleven variants",
+     "alternatives_visible": [
+      "LC only",
+      "tabular only",
+      "LC+MD+Features",
+      "with/without MTA"
+     ],
+     "rejected_named": true,
+     "rejected_option": "variants without MTA or without metadata",
+     "locator": "2405.03078.layout.txt p6 §3.2 L454-463",
+     "quote": "put into production within the pipeline that processes the ELAs-"
+    },
+    {
+     "id": "A09",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "time modulation over fixed sinusoidal PE; quantile feature tokenizer over plain FT",
+     "alternatives_visible": [
+      "TM",
+      "fixed sinusoidal PE",
+      "QFT",
+      "FT",
+      "no tabular data"
+     ],
+     "rejected_named": true,
+     "rejected_option": "fixed sinusoidal PE and non-quantile FT",
+     "locator": "2405.03078.layout.txt p7 §3.3 L566-579",
+     "quote": "is able to increase the performance of our model by over 2%."
+    },
+    {
+     "id": "A10",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "ablation uses metadata rather than features for tabular branch",
+     "alternatives_visible": [
+      "metadata",
+      "features"
+     ],
+     "rejected_named": true,
+     "rejected_option": "features",
+     "locator": "2405.03078.layout.txt p7 §3.3 L562-566",
+     "quote": "tabular data we consider the metadata and not the features, given"
+    },
+    {
+     "id": "A11",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "LC+MD+MTA without engineered features preferred as trade-off",
+     "alternatives_visible": [
+      "LC+MD+MTA",
+      "LC+MD+Features+MTA",
+      "RF"
+     ],
+     "rejected_named": true,
+     "rejected_option": "feature-based variants",
+     "locator": "2405.03078.layout.txt p8 §3.4 L638-645",
+     "quote": "variant as a very interesting trade-off, reducing computational"
+    },
+    {
+     "id": "A12",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "detection defined as |flux| >= 3 sigma for supernova features",
+     "alternatives_visible": [
+      "stream alert flag",
+      "3-sigma flux criterion"
+     ],
+     "rejected_named": true,
+     "rejected_option": "relying on the stream to flag alerts vs forced photometry",
+     "locator": "2405.03078.layout.txt p12 §A L1396-1401",
+     "quote": "if the absolute value of the difference flux was at least 3 times"
+    },
+    {
+     "id": "A13",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "generate",
+     "choice": "SPM fitted per band but optimised jointly with a dispersion penalty; coefficients, initial guesses and bounds tuned",
+     "alternatives_visible": [
+      "independent per-band fits",
+      "joint penalised fit"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2405.03078.layout.txt p12 §A L1402-1426",
+     "quote": "ted to the data, but the optimization was done simultaneously"
+    }
+   ]
+  },
+  {
+   "seed_id": "2409.04346",
+   "title": "ZTF SN Ia DR2: Overview (Rigault, Smith et al. 2024/2025)",
+   "arxiv_version_verified": "arXiv:2409.04346v2 (layout L19)",
+   "read_in_full": true,
+   "reader": "fork-D",
+   "layout_lines_read": "1-912",
+   "pages": 11,
+   "notes_file": "census/notes/2409.04346.json",
+   "notes_sha256": "d264c8f23912cdc3bb0c852fb5a7f57490d84149096073668868f1eb7a348a99",
+   "episodes": [
+    {
+     "episode_id": "E1",
+     "level": "per_study",
+     "practitioner_action": "publish_value",
+     "action_locator": "2409.04346.layout.txt p9 §7 L678-693",
+     "chain_length": 15,
+     "branches_in_episode": 11,
+     "per_object_branches_in_episode": 0
+    },
+    {
+     "episode_id": "E2",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "2409.04346.layout.txt p9 §Table 3 L671-686",
+     "chain_length": 5,
+     "branches_in_episode": 1,
+     "per_object_branches_in_episode": 0
+    },
+    {
+     "episode_id": "E3",
+     "level": "per_object",
+     "practitioner_action": "publish_value",
+     "action_locator": "2409.04346.layout.txt p9 §Table 3 L679-681",
+     "chain_length": 4,
+     "branches_in_episode": 2,
+     "per_object_branches_in_episode": 2
+    }
+   ],
+   "branch_points_total": 14,
+   "branch_points_with_alternative_visible": 14,
+   "branch_points_with_rejected_option_named": 8,
+   "max_branches_per_episode": 11,
+   "max_per_object_branches_per_episode": 2,
+   "by_level_and_kind": {
+    "per_object": {
+     "intervene": 0,
+     "explain": 0,
+     "generate": 0,
+     "infer": 2
+    },
+    "per_study": {
+     "intervene": 1,
+     "explain": 0,
+     "generate": 0,
+     "infer": 11
+    }
+   },
+   "branches": [
+    {
+     "id": "DR2-B01",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "strict good-sampling cut (7 phases, 2 pre- and 2 post-peak)",
+     "alternatives_visible": [
+      "relaxed norm: a detection prior to phase +5 d (3244 objects)",
+      "strict criterion (2960)"
+     ],
+     "rejected_named": true,
+     "rejected_option": "relaxed 'detection prior to +5 d' criterion used in the cosmology field",
+     "locator": "2409.04346.layout.txt p3 §3 L203-208",
+     "quote": "post-maximum is preferred to ensure the correct estimation of"
+    },
+    {
+     "id": "DR2-B02",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "fit phase range [-10,+40] d",
+     "alternatives_visible": [
+      "[-20|-15|-10|-5, +30|+40|+45|+50] d ranges provided in extra tables"
+     ],
+     "rejected_named": true,
+     "rejected_option": "other phase windows (e.g. starting -20/-15/-5, ending +30/+45/+50)",
+     "locator": "2409.04346.layout.txt p3 §3 L212-215",
+     "quote": "concluded in Rigault et al. (2024,b) that the rest-frame phase"
+    },
+    {
+     "id": "DR2-B03",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "SALT2-T21 as the fitting model for released parameters",
+     "alternatives_visible": [
+      "SALT2.4 (Betoule 2014)",
+      "SALT3 (Kenworthy 2021)",
+      "SALT2-T21"
+     ],
+     "rejected_named": true,
+     "rejected_option": "SALT2.4 and SALT3 (released only as extra tables)",
+     "locator": "2409.04346.layout.txt p9 §6 L718-722",
+     "quote": "2014 or SALT3 Kenworthy et al. 2021, see modeling discus-"
+    },
+    {
+     "id": "DR2-B04",
+     "episode_id": "E2",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "two-pass fit: wide window for t0 then refit in narrow window",
+     "alternatives_visible": [
+      "single fit",
+      "two-pass fit"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2409.04346.layout.txt p6 §4.7 L473-477",
+     "quote": "twice. First, given a t0 guess coming from the light curve data,"
+    },
+    {
+     "id": "DR2-B05",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "SALT2 quality cuts x1 in [-3,3], c in [-0.2,0.8], sigma_x1<1, sigma_c<0.1, sigma_t0<1, fitprob>=1e-7",
+     "alternatives_visible": [
+      "objects failing each cut (Table 1 counts)"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2409.04346.layout.txt p3 §3 L214-221",
+     "quote": "ensure the resulting parameters are reasonable for use in cos-"
+    },
+    {
+     "id": "DR2-B06",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "discard 110 SN Ia-flagged targets without a releasable spectrum",
+     "alternatives_visible": [
+      "keep targets flagged Ia without public spectrum",
+      "discard"
+     ],
+     "rejected_named": true,
+     "rejected_option": "targets flagged SN Ia without spectrum or with non-public spectra",
+     "locator": "2409.04346.layout.txt p3 §3 L203-208",
+     "quote": "cation for each target. Therefore, 110 objects flagged as “SN Ia”"
+    },
+    {
+     "id": "DR2-B07",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "40 targets excluded where secure Ia classification not possible",
+     "alternatives_visible": [
+      "classify as Ia",
+      "exclude"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2409.04346.layout.txt p3 §3 L208-211",
+     "quote": "3668 SNe with at least one spectrum, there were 40 for which"
+    },
+    {
+     "id": "DR2-B08",
+     "episode_id": "E3",
+     "level": "per_object",
+     "kind": "infer",
+     "choice": "per-target visual (sub)classification with expert double-check of ambiguous subtypes",
+     "alternatives_visible": [
+      "subtypes e.g. 91T-like, 99aa-like, 91bg-like, Ia-CSM, 03fg-like"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2409.04346.layout.txt p5 §4.4 L361-375",
+     "quote": "spected each target to ensure they were indeed an SN Ia and"
+    },
+    {
+     "id": "DR2-B09",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "exclude peculiar subclasses (91bg-like, Ia-CSM) from cosmology subset but keep 91T-like and 99aa-like",
+     "alternatives_visible": [
+      "include all subclasses",
+      "exclude all peculiar",
+      "exclude only non-cosmology subclasses"
+     ],
+     "rejected_named": true,
+     "rejected_option": "91bg-like and Ia-csm objects",
+     "locator": "2409.04346.layout.txt p4 §3 L252-259",
+     "quote": "jects. This involves removing peculiar subclasses like “91bg-"
+    },
+    {
+     "id": "DR2-B10",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "redshift source order of preference: galaxy catalog > SEDm host lines in target > SEDm lines > snid",
+     "alternatives_visible": [
+      "public galaxy catalog",
+      "emission lines in non-SEDm spectra",
+      "SEDm emission lines",
+      "snid SN-feature redshift"
+     ],
+     "rejected_named": true,
+     "rejected_option": "snid SN-feature redshifts ranked last",
+     "locator": "2409.04346.layout.txt p5 §4.5 L387-391",
+     "quote": "Each of our 3628 targets has a redshift that comes from one"
+    },
+    {
+     "id": "DR2-B11",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "Chauvenet 4.1 sigma outlier rejection for std measurement",
+     "alternatives_visible": [
+      "nMAD robust statistic",
+      "std after rejection"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2409.04346.layout.txt p7 §4.7 L496-501",
+     "quote": "We finally inspected for outliers that may affect our stan-"
+    },
+    {
+     "id": "DR2-B12",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "recommend testing results on pre-October 2019 half and applying Delta x1=-0.14 when comparing surveys",
+     "alternatives_visible": [
+      "full sample",
+      "pre-Nov-2019 subsample"
+     ],
+     "rejected_named": false,
+     "rejected_option": null,
+     "locator": "2409.04346.layout.txt p4 §4.1.2 L295-300",
+     "quote": "only including the 50% of the ZTF SN Ia DR2 sample with a"
+    },
+    {
+     "id": "DR2-B13",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "infer",
+     "choice": "future releases to use scene-modeling photometry instead of forced photometry",
+     "alternatives_visible": [
+      "forced photometry (DR2)",
+      "scene-modeling photometry"
+     ],
+     "rejected_named": true,
+     "rejected_option": "forced photometry on difference images",
+     "locator": "2409.04346.layout.txt p4 §4.1.2 L237-247",
+     "quote": "next ZTF SN Ia releases, we shall use scene-modeling photom-"
+    },
+    {
+     "id": "DR2-B14",
+     "episode_id": "E1",
+     "level": "per_study",
+     "kind": "intervene",
+     "choice": "observing strategy updated from early 2021 to obtain coverage in all three bands",
+     "alternatives_visible": [
+      "previous strategy (46% i-band coverage)",
+      "updated strategy"
+     ],
+     "rejected_named": true,
+     "rejected_option": "pre-2021 strategy with sparse i-band",
+     "locator": "2409.04346.layout.txt p4 §4.1.1 L283-287",
+     "quote": "Most targets acquired since early"
+    }
+   ]
+  }
+ ],
+ "completeness": "Covers the 12 seeds listed, each read in full (layout text L1 to last line incl. references). Tagging of generate vs infer for model-building and fitting-procedure branches is ambiguous in 9 branches, recorded in the notes' reason fields and not re-tagged. Seeds not covered: companion papers (DR2 fitting papers, AT2018cow X-ray/radio papers, Villar 2020 SuperRAENN, SALT3 F22 recalibration) were not read."
+}

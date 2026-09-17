@@ -1,0 +1,1796 @@
+                                                   Draft version December 17, 2020
+                                                   Typeset using LATEX twocolumn style in AASTeX63
+
+
+
+
+                                                       Photometric Classification of 2315 Pan-STARRS1 Supernovae with Superphot
+                                                    Griffin Hosseinzadeh ,1 Frederick Dauphin ,1, 2, 3 V. Ashley Villar ,1, 4 Edo Berger ,1 David O. Jones ,5
+                                                          Peter Challis,1 Ryan Chornock ,6 Maria R. Drout ,7, 8 Ryan J. Foley,5 Robert P. Kirshner ,9, 1
+                                                     Ragnhild Lunnan ,10 Raffaella Margutti ,6 Dan Milisavljevic ,11 Yen-Chen Pan ,12 Armin Rest ,3, 13
+                                                             Daniel M. Scolnic ,14 Eugene Magnier ,15 Nigel Metcalfe ,16 Richard Wainscoat ,15 and
+                                                                                            Christopher Waters 17
+arXiv:2008.04912v3 [astro-ph.HE] 16 Dec 2020
+
+
+
+
+                                                                1 Center for Astrophysics | Harvard & Smithsonian, 60 Garden Street, Cambridge, MA 02138-1516, USA
+                                                              2 Department of Physics, Carnegie Mellon University, 5000 Forbes Avenue, Pittsburgh, PA 15213-3815, USA
+                                                                      3 Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218-2410, USA
+                                                                4 Simons Junior Fellow, Department of Astronomy, Columbia University, New York, NY 10027-6601, USA
+                                                                5 Department of Astronomy and Astrophysics, University of California, Santa Cruz, CA 95064-1077, USA
+                                                          6 Center for Interdisciplinary Exploration and Research in Astrophysics and Department of Physics and Astronomy,
+
+                                                                              Northwestern University, 2145 Sheridan Road, Evanston, IL 60208-3112, USA
+                                                                         7 David A. Dunlap Department of Astronomy and Astrophysics, University of Toronto,
+
+                                                                                       50 St. George Street, Toronto, Ontario, M5S 3H4 Canada
+                                                             8 Observatories of the Carnegie Institute for Science, 813 Santa Barbara Street, Pasadena, CA 91101-1232, USA
+                                                                     9 Gordon and Betty Moore Foundation, 1661 Page Mill Road, Palo Alto, CA 94304-1209, USA
+                                                   10 Oskar Klein Centre, Department of Astronomy, Stockholm University, Albanova University Centre, SE-106 91 Stockholm, Sweden
+                                                      11 Department of Physics and Astronomy, Purdue University, 525 Northwestern Avenue, West Lafayette, IN 47907-2036, USA
+                                                         12 Graduate Institute of Astronomy, National Central University, 300 Jhongda Road, Zhongli, Taoyuan, 32001, Taiwan
+                                                    13 Department of Physics and Astronomy, The Johns Hopkins University, 3400 North Charles Street, Baltimore, MD 21218, USA
+                                                                       14 Department of Physics, Duke University, Campus Box 90305, Durham, NC 27708, USA
+                                                                15 Institute for Astronomy, University of Hawai‘i, 2680 Woodlawn Drive, Honolulu, HI 96822-1839, USA
+                                                                          16 Department of Physics, Durham University, South Road, Durham, DH1 3LE, UK
+                                                               17 Department of Astrophysical Sciences, Princeton University, 4 Ivy Lane, Princeton, NJ 08540-7219, USA
+
+
+
+                                                         (Received 2020 August 11; Revised 2020 October 2; Accepted 2020 October 20; Published 2020 December 17)
+
+                                                                                                              Abstract
+                                                           The classification of supernovae (SNe) and its impact on our understanding of explosion physics
+                                                         and progenitors have traditionally been based on the presence or absence of certain spectral features.
+                                                         However, current and upcoming wide-field time-domain surveys have increased the transient discovery
+                                                         rate far beyond our capacity to obtain even a single spectrum of each new event. We must therefore
+                                                         rely heavily on photometric classification—connecting SN light curves back to their spectroscopically
+                                                         defined classes. Here, we present Superphot, an open-source Python implementation of the machine-
+                                                         learning classification algorithm of Villar et al., and apply it to 2315 previously unclassified transients
+                                                         from the Pan-STARRS1 Medium Deep Survey for which we obtained spectroscopic host-galaxy red-
+                                                         shifts. Our classifier achieves an overall accuracy of 82%, with completenesses and purities of >80%
+                                                         for the best classes (SNe Ia and superluminous SNe). For the worst performing SN class (SNe Ibc), the
+                                                         completeness and purity fall to 37% and 21%, respectively. Our classifier provides 1257 newly classified
+                                                         SNe Ia, 521 SNe II, 298 SNe Ibc, 181 SNe IIn, and 58 SLSNe. These are among the largest uniformly
+                                                         observed samples of SNe available in the literature and will enable a wide range of statistical studies
+                                                         of each class.
+
+                                               Corresponding author: Griffin Hosseinzadeh
+                                               griffin.hosseinzadeh@cfa.harvard.edu
+2                                                 Hosseinzadeh et al.
+
+
+        Unified Astronomy Thesaurus concepts: Supernovae (1668); Astrostatistics (1882); Light curve classi-
+        fication (1954)
+
+                    1. Introduction                           light curve, (2) extracting features from that model
+   Starting with Minkowski (1941), supernovae (SNe)           light curve, and (3) using supervised machine learn-
+have been classified on the basis of their spectra,           ing to classify the SN based on those features. V19
+with hydrogen-poor events being labeled Type I and            tested 24 different pipelines—consisting of 4 different
+hydrogen-rich events Type II. Uomoto & Kirshner               methods of feature extraction, 2 different methods for
+(1985) and Wheeler & Levreault (1985) later separated         balancing the classes in the training set, and 3 differ-
+Type Ia SNe (SNe Ia), which show silicon absorption           ent machine-learning algorithms—that they trained on
+(as well as a secondary infrared light-curve peak; Elias      the spectroscopically classified transients in the Pan-
+et al. 1985), from the remaining SNe I, which were later      STARRS1 Medium Deep Survey (PS1-MDS; Chambers
+divided into helium-rich SNe Ib and helium-poor SNe Ic        et al. 2016). This is the largest real data set that has
+(Wheeler & Harkness 1986). Similarly, Schlegel (1990)         been used to train a multiclass classifier.
+separated SNe IIn, which show narrow hydrogen emis-              Here, we present an open-source Python implemen-
+sion lines, from the remaining SNe II. More recently,         tation of this method and apply it to 2315 previously
+Quimby et al. (2011) and Gal-Yam (2012) defined a class       unclassified transients from the same survey for which
+of superluminous SNe (SLSNe) that are 10×–100× more           we obtained spectroscopic host-galaxy redshifts. The
+luminous than the aforementioned classes; though orig-        code is available on GitHub and Zenodo (Hosseinzadeh
+inally identified photometrically, hydrogen-poor SLSNe        & Dauphin 2020) and listed on the Python Package In-
+are now considered a spectroscopic class (Quimby et al.       dex under the name Superphot.1,2
+2018; Gal-Yam 2019). Subsequent authors have further             For the purposes of this work, we restrict our classifi-
+subdivided all of the aforementioned classes (see Gal-        cation to the following five broad labels, adopting only
+Yam 2016 for a review).                                       slight refinements to the definitions discussed above that
+   With the advent of high-étendue time-domain facil-        are already in common use:
+ities like the Panoramic Survey Telescope and Rapid              1. “SN Ia” refers to hydrogen-poor SNe that show
+Response System 1 (Pan-STARRS1; Chambers et al.                     silicon absorption and a secondary infrared light-
+2016) and Zwicky Transient Facility (Bellm et al. 2019),            curve peak.
+as well as the upcoming Vera C. Rubin Observatory
+(Ivezić et al. 2019), the transient discovery rate has far      2. “SN Ibc” refers to all normal-luminosity,
+exceeded the worldwide capacity for spectroscopic clas-             hydrogen-poor SNe that are not SNe Ia. Due
+sification. We must therefore rely on photometric clas-             to the small number of these in our training sam-
+sification methods, despite the fact that the classes are           ple, we do not distinguish between SNe Ib and
+defined spectroscopically.                                          SNe Ic.
+   Many previous attempts at photometric classification
+have focused only on separating SNe Ia from all other            3. “SN IIn” refers to SNe that show narrow hydro-
+SN classes, for the purpose of measuring cosmological               gen emission lines in their spectra throughout their
+parameters (Riess et al. 2004a,b; Möller et al. 2016;              evolution.
+Kimura et al. 2017). This is a somewhat easier prob-             4. “SN II” refers to all hydrogen-rich SNe that are not
+lem because of the relative photometric uniformity of               SNe IIn. We do not distinguish between SNe IIL
+SNe Ia. Other attempts have relied on simulated data                and SNe IIP, because it is not clear that these pop-
+for their training sets (Richards et al. 2012; Charnock             ulations are separate (Sanders et al. 2015; Valenti
+& Moss 2017; Kimura et al. 2017; Boone 2019; Ishida                 et al. 2016).
+et al. 2019; Muthukrishna et al. 2019). The use of sim-
+ulated light curves implies that we understand the full          5. “SLSN” refers only to hydrogen-poor SLSNe.
+diversity of explosive transients, although it is a logical         Hydrogen-rich SLSNe are included in SNe IIn.
+way forward in the absence of large, uniformly observed
+                                                              1 Documentation: https://griffin-h.github.io/superphot/
+photometric data sets.
+                                                              2 “Superphot” is a blend (Algeo 1977) of the words “supernova
+   Villar et al. (2019, hereafter V19) presented a method
+for photometric classification that consists of (1) fit-       photometry” but is also intended to sound like the SN spectrum-
+                                                               fitting code Superfit (Howell et al. 2006) used for spectroscopic
+ting a highly flexible analytical model to the observed        classification.
+                                                             Superphot                                                                  3
+
+  In Section 2, we briefly present the photometric data             Digital Sky Survey (SDSS; Ahumada et al. 2020), and 5
+set we use for training and classification, as well as the          from Apache Point Observatory (APO). These spectra
+spectroscopic data set used to determine the host-galaxy            are available on Zenodo (Hosseinzadeh et al. 2020). We
+redshifts. In Section 3, we describe the implementation             used RVSAO (Kurtz & Mink 1998) to cross-correlate
+of the algorithm. In Section 4, we apply our algorithm              these spectra with a library of galaxy templates, includ-
+to the unclassified light curves and assess its perfor-             ing 6 built into RVSAO and an additional 10 from SDSS.
+mance. In Section 5, we discuss its utility for current             Table 1 logs these observations and lists the modes of
+and future time-domain surveys. In Section 6, we con-               the resulting redshift distribution from RVSAO, ignor-
+clude with some lessons learned from this case study in             ing matches with z < 0.005 (dL < 20 Mpc).
+photometric classification.                                            We excluded from our analysis 1177 spectra where all
+                                                                    template matches had a Tonry & Davis (1979) cross-
+                         2. Data Set                                correlation score RCC < 4, meaning that the cross-
+                                                                    correlation redshift may not be reliable, and 174 tran-
+   Pan-STARRS1 is a 1.8 m telescope near the summit of
+                                                                    sients with only a single template match in the range
+Haleakalā, Hawai‘i, equipped with a 1.4 gigapixel cam-
+                                                                    4 < RCC < 5. We then visually inspected approximately
+era with a 7 deg2 field of view (Chambers et al. 2016).
+                                                                    600 host spectra that met one of three criteria: (1) the
+PS1-MDS ran from 2009 July to 2014 July using 25%
+                                                                    best (highest RCC ), median, and modal redshifts did
+of the observing time on Pan-STARRS1 and consisted
+                                                                    not match; (2) no three redshift estimates matched each
+of 10 deep-drilling fields with a three-day cadence in
+                                                                    other; or (3) the best redshift could have been derived
+any of five bands: grizy (Chambers et al. 2016). Im-
+                                                                    from matching a telluric feature or a known instrumental
+ages were processed and calibrated using the Image Pro-
+                                                                    artifact to a feature in the galaxy template. In almost
+cessing Pipeline (Magnier et al. 2020a,b,c; Waters et al.
+                                                                    two-thirds of these cases, we were able to either verify
+2020). With the exception of y, PS1-MDS reached typi-
+                                                                    the redshift from RVSAO or determine a new redshift
+cal depths of 23.3 mag per visit (Chambers et al. 2016);
+                                                                    manually. We excluded the remaining third from further
+the y filter has lower throughput and cadence, so we
+                                                                    analysis. In addition to the redshifts from RVSAO, we
+exclude it from our analysis. As such, our data set is
+                                                                    supplemented our sample with redshifts from publicly
+very similar to the proposed depth and cadence of the
+                                                                    available catalogs4 using a 100 matching radius; in the
+Rubin Observatory Legacy Survey of Space and Time
+                                                                    case of a conflict with RVSAO, we manually inspected
+(LSST), but with ∼0.1% of the time-integrated sky cov-
+                                                                    our spectrum to determine a final redshift. Lastly, two
+erage (Ivezić et al. 2019).
+                                                                    transient spectra (of PSc110446 and PSc130816) yielded
+   Over the course of PS1-MDS, we detected a total of
+                                                                    redshifts but not confident classifications; we treat these
+5243 SN-like transients3 using photpipe (Rest et al.
+                                                                    as unclassified transients with known redshifts.
+2005, 2014). These light curves are presented in a com-
+                                                                       Finally, we excluded 199 unclassified transients whose
+panion paper by Villar et al. (2020a, hereafter V20) and
+                                                                    light curves are variable across multiple observing sea-
+are available on Zenodo (Villar et al. 2020b). We ob-
+                                                                    sons, indicating that they are unlikely to be SNe. The
+tained spectroscopic classifications of 573 of these tran-
+                                                                    remaining 2315 transients comprise our “test set” for
+sients. The 557 SNe belonging to one of the five classes
+                                                                    photometric classification. Jones et al. (2017) previously
+listed in Section 1 comprise our “training set.” The
+                                                                    used 1020 SNe Ia from this data set, some of which were
+17 SLSNe in our data set were previously published by
+                                                                    photometrically classified by a different method, to con-
+Lunnan et al. (2018), and 76 of the SN II light curves
+                                                                    strain cosmological parameters.
+were analyzed by Sanders et al. (2015). The remaining
+16 spectroscopically classified transients belong to less           4 Dressler & Gunn (1992); Im et al. (2001); Colless et al. (2003);
+common classes. Because these are too few in number                  Szokoly et al. (2004); Le Fèvre et al. (2005); Cannon et al. (2006);
+to be used as training samples, we exclude them from                 Norris et al. (2006); Garcet et al. (2007); Lilly et al. (2007); Tajer
+                                                                     et al. (2007); Bronder et al. (2008); Ross et al. (2008); Finkel-
+our analysis except to explore how they are labeled by               stein et al. (2009); Jones et al. (2009); Lamareille et al. (2009);
+our classifier (Section 5.2).                                        Owen & Morrison (2009); Scarlata et al. (2009); Trump et al.
+   We also obtained host-galaxy spectra for 4233 tran-               (2009); Balestra et al. (2010); Cowie et al. (2010); Drinkwater
+                                                                     et al. (2010); Hewett & Wild (2010); Stalin et al. (2010); Rovilos
+sients, 3600 of which were not classified spectroscopi-
+                                                                     et al. (2011); Cappellaro et al. (2012); Smith et al. (2012); New-
+cally: 3434 from MMT, 324 from the Anglo-Australian                  man et al. (2013); Drout et al. (2014); Karhunen et al. (2014);
+Telescope (AAT), 301 from WIYN, 169 from the Sloan                   Lunnan et al. (2014); Wen & Han (2015); Hasinger et al. (2018);
+                                                                     Masters et al. (2019); Ahumada et al. (2020); Lidman et al. (2020)
+3 Transients with three S/N ≥ 4 photometric observations in any
+
+ filter and no history of variability (Jones et al. 2018).
+4                                                     Hosseinzadeh et al.
+
+                                          Table 1. Host-galaxy Redshifts from RVSAO
+
+     Transient    Spec.      Host          Host        MJD of                     Final     RVSAO            Template    Maximum
+      Name        Class.   R.A. (deg)   Decl. (deg)   Observation   Telescope    Redshift   Redshift         Matches       RCC
+     PSc000006    SN Ia     53.3663      −28.3715          57013      AAT         0.231          0.230          8            6.56
+                                                                                                 0.109          2            2.40
+     PSc000010    SN Ia     149.7495       3.1576          57133     MMT          0.245          0.244          13           15.0
+     PSc000011    SN Ia     149.9760       2.4106          57013     AAT          0.380          0.731          3            6.77
+                                                                                                 0.361          2            2.58
+     PSc000012      ···     150.2308       1.8451          55296     MMT          0.623          0.179          3            3.12
+                                                                                                 0.341          2            2.67
+                                                                                                 0.727          2            1.89
+     PSc000013      ···     149.1394       1.5447          56564     MMT          0.372          0.372          5            5.81
+                                                                                                 0.927          2            3.60
+    Note—This table is available in its entirety in machine-readable form.
+
+
+
+
+           3. Description of the Algorithm                                           Table 2. Model Parameters
+                     3.1. Model Fitting                                         Parameter          Units                Prior
+   We use Equation 1 of V19 to model the single-band                  A         Amplitude           [flux]                       obs )
+                                                                                                                  Ulog (1, 100Fmax
+flux of a transient with the following form:                          β       Plateau Slope        days−1              U (0, 0.01)
+                                                                                                              2
+                                                                      γ      Plateau Duration       days      3
+                                                                                                                N (5, 25) + 13 N (60, 900)
+                                                                    t0     Reference Epoch        days             U (−50, 300)
+             A [1 − β min(∆t, γ)] exp − max(∆t,γ)−γ
+                                            τfall                    τrise      Rise Time           days              U (0.01, 50)
+ F (∆t) =                                                   (1)
+                           1 + exp(− τ∆t
+                                      rise
+                                           )                         τfall       Fall Time          days               U (1, 300)
+                                                                      ···    Intrinsic Scatter      [flux]              N (0, 1)
+where ∆t ≡ t − t0 is time with respect to a reference
+epoch in the observer frame. This function has six pa-
+rameters that are not strictly physical, but roughly cor-
+respond to an amplitude (A), the “plateau” slope and
+duration5 (β and γ), the reference epoch with respect               in the fit. However, prior to classification, we cannot as-
+to discovery (t0 ), and the (exponential) rise and decline          sume knowledge of the shape and evolution of the spec-
+times (τrise and τfall ).                                           tral energy distribution (SED). We also found it difficult
+   To obtain not only the best-fit parameters but a quan-           to achieve MCMC convergence within a reasonable time
+tification of the uncertainties, we use a Markov Chain              when simultaneously fitting more than 20 parameters.
+Monte Carlo (MCMC) routine to fit each of the observed              We therefore adopt V19’s two-iteration fitting approach
+griz light curves for these six parameters plus an addi-            that consists of fitting each filter separately, adding the
+tional intrinsic scatter term, which is added in quadra-            posteriors from those fits together, and using the result
+ture with the photometric uncertainties. The seven fit              as the prior for a second iteration of fitting (see Fig-
+parameters and their priors are listed in Table 2, where            ure 1). This effectively weights the filters toward being
+U (a, b) indicates a uniform distribution between a and             more similar to each other, but without excluding the
+b, Ulog (a, b) indicates a log-uniform distribution between         possibility that they are different. If a given SN was not
+a and b, and N (µ, σ 2 ) indicates a Gaussian distribution          observed in one or more filters, we average the posterior
+with mean µ and variance σ 2 . These are approximately              distributions for all the observed filters and treat that
+the same priors used by V19, with the exception of A,               as the posterior for all unobserved filters.
+for which they used a uniform prior. All parameters                   For all fits, we use the Metropolis–Hastings sampling
+apart from t0 are restricted from taking negative values.           algorithm (Metropolis et al. 1953; Hastings 1970) in
+   Because not all filters (griz) are well sampled for all          the PyMC3 package (Salvatier et al. 2016). We use 25
+events, we wish to include some cross-filter information            chains (walkers), each drawing 25,000 samples for tun-
+                                                                    ing (burn-in) plus 10,000 samples for the posterior. For
+5 In the parametrization of V19, β → − β and γ ≡ t − t .
+                                                  1   0
+                                                                    computational efficiency, we only fit points between −50
+                                       A
+                                                                                       Superphot                                                        5
+                              PS1_PS1MD_PSc000001                                             transient. In most cases, both statistics are close to their
+       4000                             g                                    z 1500
+                                                                                              optimal value of 1. Keep in mind that the reduced χ2 is
+       3000
+                                                                                 1000         infinite or negative when the light curve has 24 or fewer
+       2000
+Flux
+
+
+
+
+                                                                                       Flux
+                                                                                 500
+                                                                                              points across the four filters.
+       1000                                                                                     The resulting parameters are shown in Figure 2. As
+                                                                                 0
+          0                                                                                   expected, the parameters for each photometric class in
+                                                                                              the test set (small markers) overlap with the parameters
+       1500                             i                                    r
+                                                                                 1500         for the equivalent spectroscopic class in the training set
+       1000                                                                                   (large markers). However, there is also significant over-
+                                                                                 1000
+Flux
+
+
+
+
+                                                                                       Flux
+       500                                                                                    lap between different classes in this parameter space.
+                                                                                 500          In particular, SNe Ibc have peak magnitudes and evolu-
+          0
+                                                                                 0            tion timescales similar to some SNe II, although SNe Ibc
+        500                                                                                   typically do not have a long plateau. Some SNe Ia also
+               50   0    50 100 150         50       0     50 100 150
+                        Phase (d)                         Phase (d)                           have long fall times, either because the declining light
+                                                                                              curve was not well constrained or because the secondary
+                                                                                              infrared peak was modeled as a smooth decline. We dis-
+                                                                                              cuss this further in Section 4.1.
+
+
+
+ 103           104      105   0.000     0.005       0.010      0          100        200
+              Amplitude           Plateau Slope (d 1)              Plateau Duration (d)
+                                                                                                               3.2. Feature Extraction
+                                                                                                 V19 explored four methods of feature extraction from
+                                                                                              the model light curves: (1) directly using the model
+                                                                                              parameters (plus the peak absolute magnitude) as fea-
+                                                                                              tures, (2) hand-selecting features based on the model
+                                                                                              light curves, (3) performing a principal component anal-
+          10       0           0.0    2.5 5.0            7.5   0      100 200          300
+       Reference Epoch (d)           Rise Time (d)                    Fall Time (d)           ysis (PCA) on the model light curves and using the
+                                                                                              PCA coefficients (plus the peak absolute magnitude) as
+Figure 1. Two-step MCMC fit of Equation 1 to a sample                                         features, and (4) using the downsampled model light
+transient. The top panels show the light-curve models in                                      curves themselves as features. Among their 24 pipelines,
+each of the four filters. Dotted lines represent the results of
+                                                                                              there was no clear trend for which of these methods was
+the first iteration, and solid lines represent the results of the
+second. The bottom panels show how the first-iteration pos-
+                                                                                              best. However, as their best-performing pipeline used
+teriors are combined to produce the second-iteration priors.                                  the PCA method, we adopt that here. Our code also
+The gray dashed line is the first-iteration prior, the colored                                gives the option of using the model parameters directly,
+dotted lines represent the first-iteration posteriors for the                                 but we find that this gives slightly worse results (see
+four filters (same colors as the upper panels), and the gray                                  Appendix D).
+solid line is the second-iteration prior.                                                        For the training set, we generate one model light curve
+                                                                                              for each SN from the median of the posterior parame-
+and +180 days of the discovery date, which encompasses                                        ter distributions. For the validation and test sets, we
+>99% of the ≥3σ detections in the same observing sea-                                         generate 10 model light curves for each SN by ran-
+son. The computations in this paper were run on the                                           domly drawing from the posteriors; these uncertainties
+FASRC Cannon cluster supported by the FAS Division                                            will be accounted for in our classification probabilities
+of Science Research Computing Group at Harvard Uni-                                           later. We then convert the model fluxes to luminosities.
+versity.6 Tables 3–5 list the reduced χ2 goodness-of-fit                                      This requires that we know the extinction E(B − V )
+statistic (for the model with the median parameters)                                          and redshift z for each transient, where the latter can
+and the maximum (among the 28 model parameters)                                               be measured from the spectrum of either the transient
+Gelman & Rubin (1992) convergence statistic for each                                          or its host galaxy. In particular, we use luminosity dis-
+                                                                                              tances calculated with the cosmological parameters of
+6 The Cannon cluster is named after Annie Jump Cannon, one of
+                                                                                              the Planck Collaboration (2016), the Milky Way extinc-
+ the human computers at the Harvard College Observatory and a
+ pioneer in stellar classification.
+                                                                                              tion maps of Schlafly & Finkbeiner (2011), the extinc-
+                                                                                              tion law of Fitzpatrick (1999) with RV = 3.1, and a
+6                                                                      Hosseinzadeh et al.
+
+                                       r Light Curve Parameters                                                                 Principal Components
+                                                                                                                            g            r       i             z
+                          SLSN        SNII         SNIIn        SNIa        SNIbc
+                                                                                           0.06                             0.10                           0.10
+                                                                                                                                                           0.05
+                         100                                                               0.04
+                                                                                                                            0.05
+  Plateau Duration (d)
+
+
+
+
+                                                                                                                                                           0.00
+                                                                                                                            0.00
+                                                                                           0.02                                                            0.05
+                                                                                                                            0.05
+                         10                                                                                                                                0.10
+                                                                                                 0.1
+                                                                                                                             0.2                               0.0
+                                                                                                 0.0
+                          1                                                                      0.1                         0.0                               0.2
+
+                                                                                                                             0.2                               0.4
+                                 14       16      18      20     22    24                        0.2
+                                                                                                        0            200              0        200                   0         200
+                                                                                                                Phase (d)                 Phase (d)                       Phase (d)
+
+                                                                                                       1e18                     PS1_PS1MD_PS0909006
+                     10.0
+Rise Time (d)
+
+
+
+
+                                                                                                                                                Principal Component Projection
+                                                                                                   8                                          g = [-0.14 0.08 -0.22 -0.15 0.03 -0.31]
+                                                                                                                                              r = [-0.18 -0.06 0.14 -0.04 0.47 0.09]
+                                                                                                                                              i = [-0.14 0.08 0.06 0.05 -0.19 -0.35]
+                                                                                                                                              z = [-0.13 0.06 0.12 0.08 0.29 0.40]
+                         1.0                                                                       6
+
+                                                                                      Luminosity
+                                                                                                   4
+                                 14       16      18      20     22    24
+                                                                                                   2
+                         100
+                                                                                                   0
+  Fall Time (d)
+
+
+
+
+                                                                                                            0          50       100         150          200             250          300
+                                                                                                                                          Phase (d)
+                         10
+                                                                                                       1e17                     PS1_PS1MD_PSc000098
+                                                                                                 8                                              Principal Component Projection
+                                                                                                                                              g = [-0.22 -0.30 0.15 -0.10 0.28 -0.10]
+                                                                                                                                              r = [-0.24 0.09 -0.28 0.09 0.43 -0.34]
+                          1                                                                                                                   i = [-0.20 -0.10 -0.42 -0.03 -0.06 -0.12]
+                                 14       16     18      20      22    24                        6                                            z = [-0.19 -0.15 -0.18 -0.27 -0.47 -0.15]
+                                          Peak Absolute Magnitude
+                                                                                    Luminosity
+
+
+
+
+Figure 2. The plateau duration (top), rise time (center),                                        4
+and fall time (bottom) of each model r-band light curve
+plotted against its peak absolute magnitude. Large markers
+represent the training set and are colored by spectroscopic                                      2
+classification. Small markers represent the test set and are
+colored by photometric classification. The overlap between
+the SN classes in this parameter space demonstrates the chal-                                    0
+lenge of photometric classification.
+                                                                                                         0            50     100            150          200             250          300
+                                                                                                                                          Phase (d)
+cosmological K-correction factor of 1 + z for all filters.7
+                                                                                    Figure 3. Top: the top six principal components for light
+We do not consider host-galaxy extinction, because we
+                                                                                    curves in the training set. The projection of light curves onto
+have no way of estimating it for transients in the test                             these axes provides six of the features for each filter, the sev-
+set. V19 found that correcting to rest-frame times gave                             enth being peak absolute magnitude. Center: an example of
+worse results, so we leave all times in the observer frame.                         an SN Ia light curve (solid lines) that is reconstructed nearly
+                                                                                    perfectly (dotted lines) by its projection onto the principal
+7 Correcting to standard rest-frame filters would require detailed                  components. Bottom: an example of an SN II light curve,
+    knowledge of the SED and time evolution of each transient, which                which is not reconstructed as well. In both cases, these PCA
+    would in turn depend on its classification.                                     coefficients were sufficient to classify the SN correctly (see
+                                                                                    Table 4).
+                                                          Superphot                                                           7
+
+   For each filter, we then perform a PCA on the model           oversampler based on the multivariate normal func-
+light curves (in luminosity) in our training set. For the        tion in NumPy (Oliphant 2006).
+purposes of the PCA, we evaluate the model at 1000                  V19 tested three supervised machine-learning algo-
+phases 0 ≤ ∆t ≤ 300 days. Importantly, we only in-               rithms for classification: a random forest, a support
+clude SNe from the training set when calculating the             vector machine, and a multilayer perceptron (a type of
+principal components because our goal is to produce a            neural network). Our code includes implementations of
+self-contained classification pipeline that can be applied       all three algorithms from the scikit-learn package (Pe-
+to any new light curves. The light curves in the test set        dregosa et al. 2011), but our final classifications use the
+also tend to be sampled worse than those in the train-           random forest option with 100 decision trees, an entropy
+ing set, likely because brighter targets were prioritized        split criterion, and a maximum of five features, as this
+for spectroscopic follow-up. We then project the light           set of hyperparameters performed best for V19 (see also
+curves in our test set onto the same principal compo-            Appendix D). After training the random forest on the
+nents.                                                           oversampled training set, we apply it to the 10 sets of
+   We use the first six PCA coefficients (Figure 3, top),        features (from the 10 random posterior draws) for each
+which together explain >99.9% of the sample variance in          transient in the test set to get 10 sets of classification
+each filter, plus the peak absolute magnitude (from the          probabilities. We then average the 10 sets of classifica-
+model light curve), as features for each single-filter light     tion probabilities for each transient and adopt the clas-
+curve. These features do not have a simple physical in-          sification with the highest probability.
+terpretation, although coefficients on the first principal
+component (a generic rising and declining light curve)                         4. Results and Validation
+are strongly correlated with peak magnitude (see Ap-                Applying our classification pipeline to the test set de-
+pendix C). Light curves with a smooth exponential rise           scribed in Section 2 yields 1257 photometrically classi-
+and decline (Figure 3, center) are reconstructed nearly          fied SNe Ia, 521 SNe II, 298 SNe Ibc, 181 SNe IIn, and
+perfectly from the principal components, whereas light           58 SLSNe.8 Table 3 gives the full list of classifications,
+curves with a plateau (Figure 3, bottom) are not re-             and Figure 5 shows a sample of photometrically classi-
+constructed as well. Regardless, we find that the PCA            fied light curves. These are among the largest samples
+coefficients are useful features for classification; a perfect   of each of these classes of SNe in the literature from a
+reconstruction of the model light curve is not necessary.        single survey. In the remainder of this section, we assess
+   In total, each multiband SN light curve has 28 features       the performance of our algorithm in general and discuss
+(Figure 4). Before classification, we rescale each feature       how to use these classifications in practice.
+to have zero mean and unit variance in the training set
+                                                                                    4.1. Cross-validation
+and apply the same scaling to the test set.
+                                                                    We first validate our classifier using leave-one-out
+                                                                 cross-validation with the SNe in our training set. For
+                     3.3. Classification
+                                                                 each iteration of the cross-validation, we retrain the clas-
+   The differences in the observed rates of our five SN          sifier on all but one of the SNe in our training set (still
+classes mean that our training set is unbalanced: 404            using the median parameters) and then use it to classify
+Type Ia, 93 Type II, 24 Type IIn, 19 Type Ibc, and               10 sets of features derived from the posterior parameter
+17 SLSNe. For our classifier to perform effectively on           distributions for that SN. We then average the 10 sets
+the minority classes, and to increase our sample size            of probabilities to determine the cross-validation classi-
+in general, we augment each class with additional fea-           fications listed in Table 4. Figure 6 shows the resulting
+ture sets by oversampling our training set. V19 ex-              confusion matrices.
+plored two oversampling methods: the synthetic mi-                  In general our code performs well, with an overall clas-
+nority oversampling technique (SMOTE; Chawla et al.              sification accuracy of 82%. (See Appendix A for a glos-
+2002) and multivariate-Gaussian (MVG) oversampling.              sary of terms.) This is dominated by the photomet-
+We implement both options in our code but use the lat-           rically homogeneous SNe Ia, which are 85% complete.
+ter for our final classifications, oversampling all classes      SLSNe, which are 82% complete, are also easy to iden-
+to have 1000 members. In agreement with V19, we                  tify because they separate relatively cleanly by absolute
+find that MVG oversampling gives better results be-              magnitude. SNe IIn (50% complete) and Ibc (37% com-
+cause it allows for features outside the original distri-
+bution. We use the implementation of SMOTE in the                8 To exactly reproduce our results, a seed of 0 must be used in
+
+imbalanced-learn package (Lemaı̂tre et al. 2017) and              the pseudorandom number generators during feature extraction,
+implement our own imbalanced-learn-compatible MVG                 oversampling, and classification.
+8                                                 Hosseinzadeh et al.
+
+
+                                                       Spectroscopic Class
+                                 SLSN           SNII            SNIIn            SNIa          SNIbc
+
+                  g
+
+
+
+                  r
+
+
+
+                  i
+
+
+
+                  z
+
+                       18 24       0.2 0.1 0.5 0.0           0.8 0.0 0.8       0.0 0.4    1 0 1        1 0
+                  Peak Abs. Mag. PC1 Proj.   PC2 Proj.        PC3 Proj.      PC4 Proj.   PC5 Proj.     PC6 Proj.
+
+                                                 Photometric Classification
+                                 SLSN           SNII         SNIIn          SNIa               SNIbc
+
+                  g
+
+
+
+                  r
+
+
+
+                  i
+
+
+
+                  z
+
+                      18 24        0.2 0.1 0.6 0.0          0.8 0.0            0.0 0.4 1.5 0.0         1 0
+                  Peak Abs. Mag. PC1 Proj.   PC2 Proj.        PC3 Proj.      PC4 Proj.  PC5 Proj.       PC6 Proj.
+
+Figure 4. Histograms of the features (before rescaling) for each SN in the training (top) and test (bottom) sets, grouped by
+spectroscopic (top) and photometric (bottom) classification. Each row shows one filter. SN IIn and especially SLSN features
+extend outside the range of the axes. The classes do separate in this feature space. However, the significant overlap between
+SNe II and SNe Ibc, and to a lesser extent between SNe Ia and SNe Ibc, makes it difficult to identify members of the less
+numerous class (SNe Ibc).
+                                                                   Superphot                                                               9
+
+                                                      g 1          r+0         i+1        z+2
+                                   PSc550061 = SLSN (p = 1.000)                PSc130096 = SLSN (p = 0.709)
+                         24
+                                                                                                                    24
+    Absolute Magnitude
+
+
+
+
+                                                                                                                      Absolute Magnitude
+                         23
+                                                                                                                    22
+                         22
+                                                                                                                    20
+                         21                                                                                         18
+
+                                   PSc440641 = SNII (p = 0.973)                PSc130367 = SNII (p = 0.687)
+    Absolute Magnitude
+
+
+
+
+                                                                                                                      Absolute Magnitude
+                         18                                                                                         19
+                                                                                                                    18
+                         16
+                                                                                                                    17
+                         14                                                                                         16
+
+                                   PSc390605 = SNIIn (p = 0.949)               PSc390308 = SNIIn (p = 0.540)
+    Absolute Magnitude
+
+
+
+
+                                                                                                                      Absolute Magnitude
+                         21                                                                                         24
+
+                         20                                                                                         22
+                         19                                                                                         20
+                         18                                                                                         18
+                                   PSc370575 = SNIa (p = 1.000)                PSc440559 = SNIa (p = 0.759)
+                         21
+    Absolute Magnitude
+
+
+
+
+                                                                                                                      Absolute Magnitude
+                         20                                                                                         20
+                         19
+                         18                                                                                         18
+                         17
+                                   PSc360199 = SNIbc (p = 0.908)               PSc550053 = SNIbc (p = 0.560)
+                         19                                                                                         18
+    Absolute Magnitude
+
+
+
+
+                                                                                                                      Absolute Magnitude
+
+
+
+                                                                                                                    17
+                         18
+                                                                                                                    16
+                         17                                                                                         15
+                         16                                                                                         14
+                              50      0      50        100   150         50          0   50        100   150
+                                             Phase (d)                                   Phase (d)
+
+Figure 5. Sample observed (circles) and model (lines) light curves of photometrically classified SNe. Downward-pointing arrows
+indicate 3σ upper limits from nondetections. The left column shows the highest confidence classification in each class, and the
+right column shows the median-confidence classification. Notice that in three of the lower confidence classifications, the light
+curve is poorly sampled on either the rise or the decline because it was discovered close to the boundaries of the observing
+season.
+         10                                                         Hosseinzadeh et al.
+
+                                                               Table 3. Classification Results
+
+        Transient    Host-galaxy       Milky Way   Photometric      Classification   Reduced       Maximum              Classification Probabilities
+                                                                                                                   ——————————————————
+         Name         Redshift         E(B − V )   Classification    Confidence        χ2             R̂           SLSN SN II SN IIn SN Ia SN Ibc
+        PSc000012         0.6226        0.0181        SN Ia             0.858            1.1             1.0       0.001    0.023    0.089    0.858    0.029
+        PSc000013         0.3720        0.0216        SN Ibc            0.843            1.2             1.0       0.000    0.002    0.024    0.131    0.843
+        PSc000015         0.2090        0.0286         SN II            0.574            17.5            1.0       0.000    0.574    0.003    0.077    0.346
+        PSc000017         0.2570        0.0213         SN II            0.757            2.8             1.0       0.000    0.757    0.023    0.040    0.180
+        PSc000022         0.2530        0.0244         SN II            0.665            2.5             1.1       0.000    0.665    0.015    0.062    0.258
+        PSc000031         0.2190        0.0250        SN Ia             0.592            2.9             1.0       0.002    0.024    0.375    0.592    0.007
+        PSc000032         0.1650        0.0298         SN II            0.566            3.3             1.0       0.000    0.566    0.002    0.079    0.353
+        PSc000036         2.0260        0.0196        SLSN              0.891            1.2             1.0       0.891    0.000    0.009    0.100    0.000
+        PSc000051         0.1940        0.0123         SN II            0.838           −3.2             1.1       0.000    0.838    0.010    0.042    0.110
+        PSc000059         0.7800        0.0245        SN Ia             0.384            35.5            1.0       0.376    0.006    0.224    0.384    0.010
+        PSc000060         0.1470        0.0270         SN II            0.560            1.8             1.0       0.000    0.560    0.000    0.144    0.296
+        PSc000068         0.1950        0.0256         SN II            0.895            2.3             1.0       0.000    0.895    0.038    0.026    0.041
+        PSc000069         0.3360        0.0274        SN Ia             0.997             1.2            1.1       0.000    0.000    0.001    0.997    0.002
+        PSc000070         0.2030        0.0260        SN Ibc            0.480            1.1             1.0       0.000    0.456    0.001    0.063    0.480
+        PSc000075         0.0820        0.0263        SN Ibc            0.483            4.3             1.0       0.000    0.455    0.000    0.062    0.483
+        PSc000080         0.4510        0.0283        SN Ia             0.986             1.4            1.0       0.000    0.005    0.002    0.986    0.007
+        PSc000095         0.3300        0.0289        SN Ia             0.983             1.1            1.0       0.000    0.000    0.003    0.983    0.014
+        PSc000102         0.2390        0.0143        SN Ia             0.381           801.5            1.7       0.016    0.144    0.357    0.381    0.102
+        PSc000150         0.2060        0.0092        SN Ia             0.985             2.4            1.8       0.000    0.011    0.002    0.985    0.002
+
+      Note—This table is available in its entirety in machine-readable form.
+
+
+
+
+                                                             Table 4. Cross-validation Results
+
+  Transient   Transient     Milky Way     Spectroscopic    Photometric      Classification      Reduced        Maximum          Classification Probabilities
+                                                                                                                           ——————————————————
+   Name       Redshift      E(B − V )     Classification   Classification    Confidence           χ2              R̂       SLSN SN II SN IIn SN Ia SN Ibc
+ PS0909006      0.2840        0.0426          SN Ia            SN Ia            0.841              ∞             1.7       0.004    0.017    0.092    0.841    0.046
+ PS0909010      0.2700        0.0256          SN Ia            SN Ia            0.964              2.1           1.0       0.003    0.000    0.033    0.964    0.000
+ PS0910016      0.2300        0.0219          SN Ia            SN Ia            0.944              2.0           1.0       0.000    0.002    0.004    0.944    0.050
+ PS0910017      0.3200        0.0221          SN Ia            SN Ia            0.984              2.1           1.0       0.000    0.002    0.008    0.984    0.006
+ PS0910018      0.2650        0.0242          SN Ia            SN Ia            0.910              3.2           1.0       0.000    0.006    0.016    0.910    0.068
+ PS0910020      0.2420        0.0130          SN Ia            SN Ia            0.799              1.4           1.0       0.000    0.052    0.054    0.799    0.095
+ PS0910021      0.2560        0.0081          SN Ia            SN Ia            0.845              1.3           1.0       0.000    0.013    0.142    0.845    0.000
+ PSc000001      0.0710        0.0090          SN II             SN II           0.734            −12.9           1.7       0.000    0.734    0.030    0.095    0.141
+ PSc000006      0.2308        0.0083          SN Ia            SN Ia            0.469             16.9           1.0       0.000    0.061    0.018    0.469    0.452
+ PSc000010      0.2447        0.0224          SN Ia            SN Ia            0.942             2.6            1.0       0.000    0.008    0.001    0.942    0.049
+ PSc000011      0.3800        0.0177          SN Ia            SN Ibc           0.683              1.0           1.0       0.000    0.000    0.007    0.310    0.683
+ PSc000014      0.1369        0.0261          SN Ia            SN Ia            0.883             8.6            1.1       0.000    0.014    0.077    0.883    0.026
+ PSc000034      0.2500        0.0278          SN Ia            SN Ia            0.706             1.3            1.0       0.011    0.021    0.244    0.706    0.018
+ PSc000038      0.1500        0.0220          SN Ia            SN Ia            0.996             1.6            1.0       0.000    0.001    0.001    0.996    0.002
+ PSc000076      0.2600        0.0245          SN II             SN II           0.757              1.1           1.0       0.000    0.757    0.004    0.049    0.190
+ PSc000091      0.1520        0.0269          SN Ia            SN Ia            0.599             3.1            2.9       0.000    0.005    0.003    0.599    0.393
+ PSc000098      0.0570        0.0127          SN II             SN II           0.673              4.8           3.0       0.000    0.673    0.009    0.049    0.269
+ PSc000133      0.2440        0.0082          SN II            SN Ia            0.373              3.4           1.0       0.000    0.285    0.183    0.373    0.159
+ PSc000137      0.1183        0.0080          SN Ia            SN Ia            0.780             2.8            1.0       0.000    0.005    0.003    0.780    0.212
+
+Note—This table is available in its entirety in machine-readable form.
+                                                                                                            Superphot                                                         11
+
+                                           Completeness (N = 557, A = 0.82, F1 = 0.63)                             plete) are hardest to identify because their light curves
+                                                                                                                   are intrinsically more heterogeneous, and because we
+                                   SLSN     0.82       0.00      0.18                  0.00        0.00
+                                    (17)    (14)        (0)       (3)                   (0)         (0)            have relatively small numbers of each in the training
+                                                                                                                   set, so their diversity is not well sampled. SNe Ibc also
+                                    SNII    0.00       0.89      0.00                  0.06        0.04            overlap significantly with SNe II in feature space (Fig-
+    Spectroscopic Classification
+
+
+
+
+                                    (93)     (0)       (83)       (0)                   (6)         (4)            ure 4).
+                                                                                                                      In addition to being complete, most of our photomet-
+                                   SNIIn    0.12       0.17      0.50                  0.17        0.04            ric classes are relatively pure: 96% for SNe Ia, 73% for
+                                    (24)     (3)        (4)      (12)                   (4)         (1)
+                                                                                                                   SNe II, and 67% for SLSNe. For SNe IIn and Ibc, our
+                                                                                                                   purity falls to 39% and 21%, respectively. The latter
+                                    SNIa    0.01       0.05      0.04                   0.85       0.05            raises an important point: in a magnitude-limited sur-
+                                   (404)     (4)       (19)      (16)                  (343)       (22)
+                                                                                                                   vey, where SNe Ia make about 70% of observed SNe, a
+                                                                                                                   small fraction of misclassified SNe Ia can significantly
+                                   SNIbc    0.00       0.42      0.00                  0.21        0.37
+                                    (19)     (0)        (8)       (0)                   (4)         (7)            contaminate rarer classes. For example, in our data set,
+                                                                                                                   the 5% of SNe Ia misclassified as SNe Ibc represent 65%
+                                            SLSN       SNII     SNIIn        SNIa                  SNIbc           of our photometrically classified SNe Ibc.
+                                            (21)      (114)      (31)       (357)                   (34)
+                                                       Photometric Classification                                     The most common misclassification is labeling 42% of
+                                                                                                                   SNe Ibc as SNe II. Intriguingly, misclassifications in the
+                                               Purity (N = 557, A = 0.82, F1 = 0.63)                               opposite direction happen at much lower rates. This
+                                   SLSN     0.67       0.00      0.10                  0.00        0.00            shows that the random forest has labeled a larger re-
+                                    (17)    (14)        (0)       (3)                   (0)         (0)            gion of feature space as SN II (see also Figure 2). We
+                                                                                                                   suspect this is due to the fact that our SN II training
+                                    SNII    0.00       0.73      0.00                  0.02        0.12            set includes light curves with very flat plateaux as well
+    Spectroscopic Classification
+
+
+
+
+                                    (93)     (0)       (83)       (0)                   (6)         (4)
+                                                                                                                   as steep exponential declines (previously referred to as
+                                                                                                                   SNe IIP and IIL, respectively).
+                                   SNIIn    0.14       0.04      0.39                  0.01        0.03               If we aggregate all classes other than SNe Ia under the
+                                    (24)     (3)        (4)      (12)                   (4)         (1)
+                                                                                                                   label core-collapse SN (CCSN), this combined class is
+                                                                                                                   95% complete and 66% pure (Figure 6, bottom). This
+                                    SNIa    0.19       0.17      0.52                   0.96       0.65
+                                   (404)     (4)       (19)      (16)                  (343)       (22)            shows that most of our misclassifications are between
+                                                                                                                   subtypes of CCSNe, rather than between CCSNe and
+                                   SNIbc    0.00       0.07      0.00                  0.01        0.21            SNe Ia. In the case of the binary classification, our
+                                    (19)     (0)        (8)       (0)                   (4)         (7)            sample of SNe Ia is actually purer (98% vs. 94%), but
+                                                                                                                   less complete (81% vs. 91%), than the final photomet-
+                                            SLSN       SNII     SNIIn        SNIa                  SNIbc
+                                            (21)      (114)      (31)       (357)                   (34)           ric sample of SNe Ia from the SDSS-II SN Survey (Sako
+                                                       Photometric Classification                                  et al. 2011).
+                                           Completeness                                        Purity
+                                   CCSN     0.95     0.05                      CCSN      0.65       0.02                               4.2. Class Fractions
+                                   (153)   (145)      (8)                      (153)    (145)        (8)
+   Spec. Class.
+
+
+
+
+                                                                Spec. Class.
+
+
+
+
+                                                                                                                     If we ignore any biases in selecting targets for spectro-
+                                           0.19      0.81                                0.35        0.98          scopic follow-up,9 the true class fractions in the photo-
+                                    SNIa                                        SNIa
+                                   (404)   (78)     (326)                      (404)     (78)       (326)          metrically classified sample should approximately match
+                                                                                                                   the class fractions in the spectroscopically classified sam-
+                                           CCSN       SNIa                              CCSN       SNIa
+                                           (223) (334)                                  (223) (334)                ple. However, our algorithm has different misclassifica-
+                                             Phot. Class.                                 Phot. Class.             tion rates for each class of SNe, which we have measured
+                                                                                                                   using cross-validation. We can test the validity of these
+Figure 6. Confusion matrices of our validation results.
+                                                                                                                   measured misclassification rates by using them to “cor-
+Each cell lists and is colored by the fraction of each class,
+with the raw number in parentheses. The top matrix aggre-                                                          rect” the class fractions in the photometrically classified
+gates by true label, so its diagonal shows completeness. The                                                       sample and checking if the corrected fractions match the
+middle matrix aggregates by predicted label, so its diagonal                                                       fractions in the spectroscopically classified sample.
+shows purity. The bottom matrices are the same results but
+with all four non-SN Ia classes grouped together as CCSNe.                                                         9 Our spectroscopic follow-up program serviced multiple science
+
+N is the total size of the training set, A is the accuracy, and                                                     goals, so we consider the spectroscopic class fractions to be
+the F1 is a class-weighted average of completeness and purity                                                       roughly representative of a magnitude-limited survey.
+(see Appendix A for definitions).
+12                                                           Hosseinzadeh et al.
+
+     Spectroscopically      Photometrically   Phot. Class.              confidence in the test set (Figure 8, bottom left) are
+        Classified            Classified      (Corrected)
+         0.03 (17)             0.03 (58)        0.02 (56)      SLSN     similar to those in the training set. This suggests that
+         0.17 (93)                             0.20 (454)      SNII
+                                                                        our claims about misclassification rates may generalize
+                               0.23 (521)
+                                                                        to the test set.
+         0.04 (24)                             0.05 (117)      SNIIn       We can increase the completeness and/or purity of
+                               0.08 (181)
+                                                                        our photometrically classified samples by considering
+                                                                        only transients classified with confidence above a cer-
+                                                                        tain threshold, at the expense of decreasing their ab-
+         0.73 (404)           0.54 (1257)                               solute numbers. Figure 9 (top and center) shows how
+                                              0.68 (1582)      SNIa
+                                                                        our performance metrics vary as a function of the confi-
+                                                                        dence threshold chosen. There is no clear optimum for
+                                                                        all classes, so any threshold is arbitrary. However, a
+                                                                        threshold of p ≥ 0.75, for example, is better than using
+                               0.13 (298)
+         0.03 (19)                             0.05 (106)      SNIbc    the full sample for all classes but SNe Ibc, and only ex-
+                                                                        cludes 39% of the training set (48% of CCSNe). Figure 9
+Figure 7. Fractions of our spectroscopic (left) and photo-              (bottom) shows the confusion matrix that results from
+metric (center) samples belonging to each class. The dif-               imposing this threshold. With the exception of SNe Ibc
+ference in class breakdown is likely due to small fractions
+                                                                        (which are nearly eliminated), all classes are over 85%
+of SNe Ia being misclassified as SNe II and Ibc. The “cor-
+rected” fractions (right) account for our expected misclas-             complete.
+sification rates (i.e., Figure 6). Under the assumption that               Likewise, we can improve our photometrically classi-
+we performed random spectroscopic follow-up, similarity be-             fied samples by requiring a certain number of photo-
+tween the composition of our spectroscopic and corrected                metric observations in order to remove poorly sampled
+photometric samples would suggest that we understand the                light curves. Figure 8 shows analogous histograms of
+performance of our classifier.                                          the number of ≥ 5σ detections (in all bands) for each
+                                                                        spectroscopic (top right) and photometric (center right)
+   For example, we observe that our photometrically                     class. We do find that misclassifications are more fre-
+classified sample contains a larger fraction of SNe II and              quent for poorly sampled light curves, but the number of
+Ibc and a smaller fraction of SNe Ia compared to our                    points required for a correct classification varies signifi-
+spectroscopically classified sample (Figure 7). From our                cantly between the spectroscopic classes. For example,
+confusion matrix (Figure 6, center), we can see that this               most SNe IIn with fewer than 50 observations are mis-
+is due to small fractions of SNe Ia contaminating the                   classified, whereas most SNe Ia and SNe II require only
+photometric SN II and Ibc samples. If we correct these                  20–30 points. Light curves with fewer than 10 detections
+fractions for the measured misclassification rates in our               (∼2 per filter) are almost always misclassified. This is
+training set, we obtain a class breakdown similar to our                close to the median number of detections in our test set
+training set (Figure 7, center). This suggests that the                 (Figure 8, bottom right). Because of the clear difference
+numbers in our confusion matrix are a good representa-                  in the distributions of the training and test sets, we do
+tion of the performance of our classifier.                              not know if a threshold chosen for the training set will
+                                                                        have the desired effect on the test set. We also find that
+                      4.3. Confidence Thresholds                        a confidence threshold is more effective and removes a
+                                                                        smaller fraction of the sample, so we do not adopt a
+   We also assess how confident our classifier is in its
+                                                                        threshold on the number of detections.
+predictions by examining the classification confidence
+(the highest classification probability) for each SN in
+the training set. Figure 8 shows cumulative histograms                     4.4. Comparison to Other Photometric Classifiers
+of the classification confidences for each spectroscopic                   Although we cannot judge the correctness of individ-
+class (top left) and photometric class (center left). As                ual classifications in our test set, we can see how often
+expected, we find that on average the classifier is most                our algorithm agrees with other photometric classifiers
+confident in predicting SLSNe and SNe Ia, and least con-                applied to the same data set. In general, if two clas-
+fident in SNe Ibc and IIn. In fact, 9 of the 12 highest                 sifiers are independent for a given transient, we cannot
+confidence (p > 0.8) misclassifications are for spectro-                expect their agreement matrix to be much better than
+scopically classified SNe Ibc and IIn. We cannot assess                 the product of their confusion matrices (see Appendix B
+the correctness of the classifications in the test set, but             for a full derivation). Each has its own strengths and
+we observe that the distributions of the classification                 weaknesses, which can be assessed through validation.
+                                                                                        Superphot                                                                                             13
+
+                                 Training Set, Grouped by Spectroscopic Classification                                           Training Set, Grouped by Spectroscopic Classification
+                         1.0                                                                                           1.0
+                                      17 SLSN, 14 correct
+                                      93 SNII, 83 correct
+                         0.8          24 SNIIn, 12 correct                                                             0.8
+                                      404 SNIa, 343 correct
+
+
+
+
+                                                                                                 Cumulative Fraction
+   Cumulative Fraction
+
+
+
+                                      19 SNIbc, 7 correct
+                                      incorrect
+                         0.6                                                                                           0.6
+
+                         0.4                                                                                           0.4                                            17 SLSN, 14 correct
+                                                                                                                                                                      93 SNII, 83 correct
+                                                                                                                                                                      24 SNIIn, 12 correct
+                         0.2                                                                                           0.2                                            404 SNIa, 343 correct
+                                                                                                                                                                      19 SNIbc, 7 correct
+                                                                                                                                                                      incorrect
+                         0.0                                                                                           0.0
+                                     Training Set, Grouped by Photometric Classification                                         Training Set, Grouped by Photometric Classification
+                         1.0                                                                                           1.0
+                                      21 SLSN, 14 correct
+                                      114 SNII, 83 correct
+                         0.8          31 SNIIn, 12 correct                                                             0.8
+                                      357 SNIa, 343 correct
+
+
+
+
+                                                                                                 Cumulative Fraction
+   Cumulative Fraction
+
+
+
+
+                                      34 SNIbc, 7 correct
+                                      incorrect
+                         0.6                                                                                           0.6
+
+                         0.4                                                                                           0.4                                            21 SLSN, 14 correct
+                                                                                                                                                                      114 SNII, 83 correct
+                                                                                                                                                                      31 SNIIn, 12 correct
+                         0.2                                                                                           0.2                                            357 SNIa, 343 correct
+                                                                                                                                                                      34 SNIbc, 7 correct
+                                                                                                                                                                      incorrect
+                         0.0                                                                                           0.0
+                                      Test Set, Grouped by Photometric Classification                                              Test Set, Grouped by Photometric Classification
+                         1.0                                                                                           1.0
+                                      57 SLSN                                                                                                                                    57 SLSN
+                                      521 SNII                                                                                                                                   521 SNII
+                         0.8          180 SNIIn                                                                        0.8                                                       180 SNIIn
+                                      1259 SNIa                                                                                                                                  1259 SNIa
+                                                                                                 Cumulative Fraction
+   Cumulative Fraction
+
+
+
+
+                                      298 SNIbc                                                                                                                                  298 SNIbc
+                         0.6                                                                                           0.6
+
+                         0.4                                                                                           0.4
+
+                         0.2                                                                                           0.2
+
+                         0.0                                                                                           0.0
+                               0.3      0.4       0.5         0.6 0.7      0.8   0.9       1.0                               0       20     40 60 80 100 120                   140     160
+                                                              Confidence                                                                     Number of 5 Detections
+
+Figure 8. Cumulative histograms of the classification confidence (left column) and the number of ≥ 5σ detections (right
+column) for the training set (top and center rows) and the test set (bottom row), grouped by spectroscopic classification (top
+row) or photometric classification (center and bottom rows). Transients whose photometric and spectroscopic classifications do
+not match are marked by an ×. SLSNe and SNe Ia are typically classified with the highest confidence. With the exception of
+SNe Ibc, most false-positive classifications have low confidence and/or few detections.
+
+   In particular, we compare to the semisupervised                                                               (SNANA; Kessler et al. 2009) package, which compares
+machine-learning classifier of V20, SuperRAENN, which                                                            light curves to templates of SNe II, SNe Ia, and SNe Ibc;
+is somewhat less accurate than our classifier but has ad-                                                        and the “Nearest Neighbor” and “Fitprob” classifiers,
+vantages in terms of speed and extensibility (see V20                                                            which compare light curves to the SALT2 SN Ia tem-
+for more details). We also compare to three CCSN                                                                 plate (Jha et al. 2007) in parameter space and flux space,
+versus SN Ia classifiers applied by Jones et al. (2017):                                                         respectively. Figure 10 shows our “agreement matrices”
+the Photometric Supernova Identification (PSNID; Sako                                                            with these classifiers. The numbers in the title of each
+et al. 2011) code provided in the Supernova Analysis                                                             panel indicate the number of transients we have in com-
+ 14                                                                                        Hosseinzadeh et al.
+                                           SLSN        SNII        SNIIn       SNIa        SNIbc      mon (N ) and the fraction of classifications we agree on
+                                           accuracy           F1     frac.      CCSN frac.
+                               1.0                                                                    (A0 ), and the diagonals show the fraction of our classi-
+                                                                                                      fications that they agree with for each class.
+                               0.8                                                                       As expected, V20 agree with 74% of our classifications
+                                                                                                      overall, including large fractions of classes that we clas-
+Completeness
+
+
+
+
+                               0.6                                                                    sify most accurately: 92% of SNe Ia, 65% of SNe II,
+                                                                                                      and 48% of SLSNe. (Our agreement on cross-validation
+                               0.4                                                                    predictions on the training set, 83% overall, follows a
+                                                                                                      similar pattern.) Figure 10 (top) reveals three impor-
+                               0.2                                                                    tant trends. First, V20 agree with 43% of our SNe Ibc,
+                                                                                                      almost five times more than expected from from our
+                               0.0                                                                    cross-validation results. This implies that both of our
+                               1.0                                                                    classifiers tend to misclassify the same types of tran-
+                                                                                                      sients as SNe Ibc (i.e., they break the assumption of
+                                                                                                      independence in Appendix B). Second, V20 tend to clas-
+                               0.8
+                                                                                                      sify many more transients as SNe Ia than we do. This
+                                                                                                      may be a result of the imbalanced training set, which
+                               0.6                                                                    their method cannot fully account for (see V20 for fur-
+Purity
+
+
+
+
+                                                                                                      ther discussion). Third, they classify 24 of our SLSNe
+                               0.4                                                                    (41%) as SNe Ia. This is surprising because both SLSNe
+                                                                                                      and SNe Ia are relatively easy to identify photometri-
+                               0.2                                                                    cally.
+                                                                                                         A visual inspection of these light curves shows that
+                               0.0                                                                    most are missing either the rise or decline, due to the
+                                     0.3     0.4      0.5 0.6 0.7 0.8                0.9       1.0
+                                                         Minimum Confidence                           beginning or end of the observing season for that field.
+                                                                                                      This appears to lead to a failure mode where some of the
+                                       Purity for p 0.75 (N = 345, A = 0.97, F1 = 0.74)               model light curves peak around SLSN luminosities, even
+                                                                                                      if none of the observed photometry is that bright (see,
+                               SLSN        1.00       0.00         0.14      0.00       0.00          e.g., Figure 5, top right). In a way, this is the desired be-
+                                (14)       (13)        (0)          (1)       (0)        (0)
+                                                                                                      havior: if the peak is not observed, we want to include
+                                                                                                      the possibility that the transient may peak at a flux
+                                SNII       0.00       0.90         0.00      0.00       0.00
+Spectroscopic Classification
+
+
+
+
+                                                                                                      brighter than the brightest observed data point. How-
+                                (57)        (0)       (56)          (0)       (1)        (0)
+                                                                                                      ever, this introduces a bias toward higher luminosities,
+                                                                                                      because the model light curves will never peak signifi-
+                               SNIIn       0.00       0.03         0.86      0.00       0.00          cantly below the brightest observed point. This is one
+                                 (8)        (0)        (2)          (6)       (0)        (0)
+                                                                                                      reason we introduced a log-uniform prior on the ampli-
+                                                                                                      tude, a modification to the method of V19.
+                                SNIa       0.00       0.00         0.00       0.98      1.00             Jones et al. (2017) also agree with 68% (Fitprob) to
+                               (259)        (0)        (0)          (0)      (258)       (1)
+                                                                                                      83% (Nearest Neighbor) of our classifications, where we
+                                                                                                      have again aggregated all classes other than SNe Ia un-
+                               SNIbc       0.00       0.06         0.00      0.01       0.00          der the label CCSN. However, they had a more specific
+                                 (7)        (0)        (4)          (0)       (3)        (0)
+                                                                                                      goal than we do: to produce a pure sample of SNe Ia
+                                           SLSN       SNII     SNIIn        SNIa       SNIbc          for the purpose of measuring cosmological parameters.
+                                           (13)       (62)       (7)       (262)        (1)           Therefore, we expect their SN Ia samples to be less com-
+                                                      Photometric Classification
+                                                                                                      plete and their CCSN samples to be less pure than our
+                                                                                                      samples. Our agreement matrix with PSNID, which
+Figure 9. Completeness (top) and purity (center) for each
+                                                                                                      Jones et al. (2017) adopt as their preferred classifier,
+class as a function of the minimum acceptable confidence.
+The total accuracy (solid), F1 score (dashed), fraction of                                            can indeed be interpreted as reflecting their preference
+events remaining (dotted-dashed), and fraction of CCSNe                                               for SN Ia purity over CCSN purity.
+remaining (dotted) are shown in black on both panels for ref-                                            When deciding between two conflicting classifications,
+erence. By only considering photometrically classified events                                         one should take into account the purity of the samples
+above a certain threshold (e.g., p ≥ 0.75, bottom), we can                                            produced by each classifier, as well as the relative rates
+increase the purity of most of our samples, at the expense
+of decreasing the absolute number of events (in this case by
+39%).
+                                                                                                                                  Superphot                                                                                                               15
+
+                                                     Expected Agreement with Villar et al. (A 0 = 0.74)                                                                                           Actual Agreement with Villar et al. (A 0 = 0.74)
+                                             SLSN        0.52                             0.04       0.25         0.19      0.00                                                         SLSN       0.48        0.03      0.07        0.41       0.00
+                                                                                                                                                                                          (58)      (28)         (2)       (4)        (24)        (0)
+ Photometric Classification from This Work
+
+
+
+
+                                                                                                                                            Photometric Classification from This Work
+                                              SNII       0.00                             0.64       0.06         0.22      0.07                                                           SNII     0.00        0.65      0.02        0.09        0.23
+                                                                                                                                                                                         (521)       (1)       (340)      (12)        (49)       (119)
+
+
+                                             SNIIn       0.12                             0.10       0.25         0.52      0.01                                                         SNIIn      0.03        0.12      0.25         0.59      0.01
+                                                                                                                                                                                         (181)       (6)        (22)      (45)        (107)       (1)
+
+
+                                             SNIa        0.00                             0.06       0.03         0.89      0.02                                                          SNIa      0.00        0.02      0.04         0.92      0.02
+                                                                                                                                                                                        (1257)       (2)        (22)      (48)        (1161)     (24)
+
+
+                                             SNIbc       0.00                             0.21       0.04         0.65      0.09                                                        SNIbc       0.00        0.24      0.01        0.32        0.43
+                                                                                                                                                                                        (298)        (0)        (73)       (3)        (94)       (128)
+
+                                                        SLSN                              SNII       SNIIn        SNIa      SNIbc                                                                  SLSN       SNII       SNIIn       SNIa         SNIbc
+                                                                                                                                                                                                    (37)     (459)       (112)      (1435)        (272)
+                                                        Photometric Classification from Villar et al. (2020)                                                                                       Photometric Classification from Villar et al. (2020)
+
+                                                                                                 PSNID                             Nearest Neighbor                                                                  Fitprob
+                                                                                          (N = 1703, A 0 = 0.76)                 (N = 1735, A 0 = 0.83)                                                       (N = 1780, A 0 = 0.68)
+                                                         Phot. Class from This Work
+
+
+
+
+                                                                                 CCSN         0.83            0.17       CCSN        0.78                                                0.22         CCSN        0.43        0.57
+                                                                                 (799)       (660)           (139)       (809)      (628)                                               (181)         (849)      (366)       (483)
+
+                                                                                   SNIa       0.30            0.70        SNIa       0.13                                                0.87          SNIa       0.10        0.90
+                                                                                  (904)      (270)           (634)       (926)      (120)                                               (806)         (931)       (91)       (840)
+
+                                                                                             CCSN             SNIa                 CCSN        SNIa                CCSN                                                       SNIa
+                                                                                             (930)           (773)                 (748)      (987)                (457)                                                     (1323)
+                                                                                                               Photometric Classification from Jones et al. (2017)
+Figure 10. Top left: expected agreement between our classifier and that of V20, given our confusion matrices from validation
+(see Appendix B). We expect very low agreement on SNe IIn and Ibc, which both classifiers independently struggle with. Top
+right: actual agreement with V20. As expected, we agree on A0 = 74% of classifications overall, including a larger than expected
+fraction of SNe Ibc (43%). Bottom: agreement between our classifier and those of Jones et al. (2017), where all classes that are
+not SNe Ia are aggregated under the CCSN label.
+
+of the two classes in a magnitude-limited survey. For ex-                                                                                                               redshift. While we still used spectroscopy to determine
+ample, for the 94 transients that we classify as SNe Ibc                                                                                                                these redshifts, most of them were determined after the
+and V20 classify as SNe Ia, we prefer the SN Ia classifi-                                                                                                               transients had faded by observing their host galaxies
+cation for the majority of them, because these are much                                                                                                                 with a multifiber spectrograph, which is much less time
+more common in nature and we know that our SN Ibc                                                                                                                       consuming than classification spectroscopy of one tran-
+purity is only 21%. Of course, this type of analysis also                                                                                                               sient at a time. However, this is still not scalable to the
+depends on one’s science goals (e.g., purity or complete-                                                                                                               sample sizes expected from LSST. The performance of
+ness of a sample).                                                                                                                                                      the algorithm has not yet been tested with photomet-
+                                                                                                                                                                        ric redshifts. Graham et al. (2018) suggest that LSST
+                                                                                      5. Discussion                                                                     will determine photometric redshifts to ∼5% accuracy
+                                                                                                                                                                        for galaxies with r . 25 mag within the first two years
+                                                                           5.1. Future Applications
+                                                                                                                                                                        of survey operations. This would be only a small con-
+  Much of the success of our algorithm (unlike, e.g.,                                                                                                                   tribution to our classification uncertainties.
+Jones et al. 2017, 2018) depends on the discriminat-
+ing power of absolute magnitude, for which we need a
+16                                                       Hosseinzadeh et al.
+
+   Furthermore, our classifications rely on the full light             ten fast-evolving luminous transients (FELTs; Drout
+curves of these transients, in contrast to other algo-                 et al. 2014). Presumably there are additional examples
+rithms that aim to classify transients in real time (e.g.,             of these types of transients in our test set, but because
+Muthukrishna et al. 2019; Sravan et al. 2020). Our code                our classifier has no ability to identify them, they will
+will therefore be most successful at the end of an ob-                 contaminate our five photometric samples at a low level.
+serving season, when the user has a large training sam-                By passing the light curves of known rare transients to
+ple of spectroscopically classified transients in hand and             the classifier, we can investigate how it might classify
+wants to make scientific use of the remaining transients               unknown rare transients.
+with light curves only. However, our Bayesian light-                      Table 5 lists our classification results for these 16 tran-
+curve modeling allows for fitting only part of the light               sients. The SN Iax is classified as an SN II with high
+curve while keeping all possible future behavior within                confidence, likely because of its low luminosity. Both
+the parameter uncertainties. Future work will explore                  TDEs are classified as SNe IIn, likely because of their
+what fraction of the light curve is required for good re-              high luminosity and slow evolution. The lensed SN Ia
+sults.                                                                 is classified as an SLSN with high confidence, likely be-
+   Lastly, increasing the size of the training set would               cause of its high luminosity. The SN Ibn is classified
+likely improve our results significantly, especially for               as an SN Ia with relatively low confidence, likely be-
+SNe Ibc. With so few examples to train on, the algo-                   cause it peaks at about the same luminosity as SNe Ia.
+rithm is very sensitive to including or excluding even sin-            The possible SN IIb is classified as an SN Ibc. The
+gle events, as demonstrated by our low cross-validation                FELTs fall into all three classes that do not typically
+scores for that classes (Figure 6). However this is not                have slow evolution: SNe Ia, Ibc, and II. FELTs span
+a shortcoming of the algorithm, but rather a reflection                a range of peak luminosities (−16.5 > M > −20 mag;
+of the scarcity of large SN Ibc samples in the literature              Drout et al. 2014), and their fast evolution means that
+(Bianco et al. 2014; Taddia et al. 2015, 2018; Stritzinger             their light curves are not well sampled at the cadence
+et al. 2018).                                                          of PS1-MDS. In general, we conclude that our classifier
+   Our current classifier returns probabilities determined             behaves as expected for these rare transients based their
+entirely by the photometric data. In principle, we could               peak luminosities and evolution time scales, but we note
+multiply these probabilities by the relative rates of the              that in these cases a high confidence does not imply a
+various classes of SNe observed in previous surveys (e.g.,             correct classification.
+Graur et al. 2017a,b; Fremling et al. 2020; Holoien et al.
+2019). This would have the effect of biasing borderline                               5.3. Active Galactic Nuclei
+cases toward a more common classification; for example,
+                                                                          In constructing the set of “SN-like” transients, we
+it would decrease the number of transients that we clas-
+                                                                       excluded light curves with a history of variability, with
+sify as SLSNe and V20 classify as SNe Ia. We choose not
+                                                                       the intention of removing active galactic nuclei (AGNs)
+to adopt such a prior in this work so that future analy-
+                                                                       from the test set. However, if any AGNs survived this
+ses have the option of adopting the rate measurements
+                                                                       qualitative cut, they would likely be classified as SLSNe
+of their choice. In practice, users may also want to com-
+                                                                       due to their high luminosities and slow evolution. To
+bine photometric classification with contextual classifi-
+                                                                       check for this possibility, we inspect the host-galaxy
+cation (e.g., Foley & Mandel 2013; Baldeschi et al. 2020;
+                                                                       spectra of the photometric SLSNe to look for broad
+Gomez et al. 2020; N. Chou et al. 2020, in preparation).
+                                                                       emission lines (a signature of accretion onto the cen-
+                                                                       tral supermassive black hole). Not all of the spectra
+              5.2. Rare Classes of Transients
+                                                                       have a high enough signal-to-noise ratio to identify
+  Sixteen of our spectroscopically classified transients               broad lines, but in at least 17 cases, they are visi-
+did not belong to any of the five classes we consider                  ble. Of these, 14 of the transients are within 100 of
+here: one SN Iax (Narayan et al. 2011), two tidal disrup-              the host center—PSc000478, PSc010120, PSc010186,
+tion events (TDEs; Gezari et al. 2012; Chornock et al.                 PSc020026, PSc030013, PSc052281, PSc110163,
+2014), one lensed SN Ia (Quimby et al. 2013), one SN Ibn               PSc130394, PSc130732, PSc350614, PSc390545,
+(Sanders et al. 2013), one possible SN IIb (V20),10 and                PSc400050, PSc480585, PSc550061 (the latter is shown
+                                                                       in Figure 5)—meaning that the AGN and the transient
+10 Because SN IIb is a time-dependent classification (i.e., hydrogen
+                                                                       may be one and the same. Many (but not all) of these
+  features weaken during the evolution of the SN) and most of our
+  classifications are determined by a single spectrum per transient,   light curves are near the detection threshold, which
+  it is likely that other SNe IIb are “misclassified” as SNe II or     could either indicate a nuclear SN (or even a TDE) that
+  SNe Ibc.                                                             is faint compared to its AGN host, or a slight increase
+                                                                   Superphot                                                                17
+
+                                                             Table 5. Rare Transients
+
+Transient    Transient   Milky Way   Spectroscopic    Photometric      Classification   Reduced   Maximum        Classification Probabilities
+                                                                                                            ——————————————————
+ Name        Redshift    E(B − V )   Classification   Classification    Confidence        χ2         R̂     SLSN SN II SN IIn SN Ia SN Ibc
+PS0910012      0.0790     0.0073        SN Iax            SN II            0.830          4.8       3.0     0.000   0.830   0.002   0.056        0.112
+PSc010411      0.0740     0.0091        FELT              SN II            0.515          6.2       1.0     0.000   0.515   0.000   0.097        0.388
+PSc040777      0.1680     0.0134         TDE             SN IIn            0.772          1.2       1.0     0.000   0.036   0.772   0.186        0.006
+PSc080333      1.3883     0.0537     Lensed SN Ia        SLSN              0.853          1.0       1.0     0.853   0.000   0.038   0.109        0.000
+PSc091902      0.1120     0.0563        FELT             SN Ibc            0.477          1.4       1.0     0.000   0.322   0.003   0.198        0.477
+PSc120170      0.4046     0.0303         TDE             SN IIn            0.637          2.4       1.0     0.023   0.015   0.637   0.323        0.002
+PSc150020      0.3230     0.0191        FELT             SN Ia             0.741          1.5       1.0     0.046   0.000   0.140   0.741        0.073
+PSc340012      0.6460     0.0302        FELT             SN Ia             0.704          1.3       1.0     0.070   0.001   0.186   0.704        0.039
+PSc350224      0.1010     0.0300        FELT             SN Ibc            0.575          2.3       1.1     0.000   0.394   0.000   0.031        0.575
+PSc350352      0.4050     0.0118        FELT             SN Ia             0.727          1.4       1.1     0.032   0.000   0.164   0.727        0.077
+PSc370290      0.0535     0.0310        SN Ibn           SN Ia             0.567          6.0       2.2     0.000   0.060   0.159   0.567        0.214
+PSc370330      0.1760     0.0193       SN IIb?           SN Ibc            0.779          0.9       1.0     0.000   0.046   0.037   0.138        0.779
+PSc440088      0.2750     0.0970        FELT             SN Ia             0.692          1.8       1.0     0.003   0.022   0.066   0.692        0.217
+PSc570006      0.2693     0.0638        FELT             SN Ia             0.682          2.3       1.1     0.027   0.013   0.173   0.682        0.105
+PSc570060      0.2450     0.0620        FELT              SN II            0.813          3.1       1.0     0.000   0.813   0.012   0.055        0.120
+PSc580304      0.2960     0.0292        FELT              SN II            0.400          3.5       1.0     0.000   0.400   0.089   0.385        0.126
+
+
+
+
+      in the luminosity of the AGN itself. Because we cannot                            old on the number of light-curve points is not as
+      distinguish between these two cases, we urge caution in                           effective.
+      using these classification results.
+                                                                                    4. Agreement between two classifiers on a given tran-
+                             6. Conclusions                                            sient is not necessarily an indication that they are
+                                                                                       correct; they may both be biased to misclassify
+        We have presented the SN photometric classifica-                               certain transients in the same way.
+      tion package Superphot, based on the algorithm of
+      V19. Training and then validating the classifier on 557                       5. Users should take into account the relative rates
+      spectroscopically classified SNe from the Pan-STARRS1                            of different classes of SNe in addition to the pho-
+      PS1-MDS, we find that it has an overall accuracy of 82%                          tometric classification probabilities.
+      and completenesses (purities) of 89% (73%) for SNe II,                        6. Transients belonging to none of the target classes
+      85% (96%) for SNe Ia, 82% (67%) for SLSNe, 50% (39%)                             can be misclassified into one of these classes with
+      for SNe IIn, and 37% (21%) for SNe Ibc. We then apply                            relatively high confidence.
+      this to 2315 previously unclassified transients from PS1-
+      MDS for which we have robust host-galaxy redshifts,                           7. AGNs may be a significant contaminant in photo-
+      resulting in 1257 photometrically classified SNe Ia, 521                         metrically classified SLSN samples.
+      SNe II, 298 SNe Ibc, 181 SNe IIn, and 58 SLSNe.                              Along with V20, this is the first application of a mul-
+        In the process of validating our results, we raised sev-                ticlass machine-learning classifier to a large photometric
+      eral issues that will be relevant to future photometric                   data set. As such, it serves as an example of the utility
+      classification efforts.                                                   (and also the challenges) of photometric classification
+                                                                                in the era of large time-domain surveys. Given that
+            1. A small misclassification rate of SNe Ia can easily
+                                                                                currently only a small fraction of transients discovered
+               dominate photometric samples of minority classes
+                                                                                are classified spectroscopically, and the reality that this
+               like SNe Ibc.
+                                                                                fraction will only decrease as discovery rates increase,
+            2. SNe II overlap significantly with SNe Ibc in fea-                we will have to increasingly rely on methods like this to
+               ture space, likely due to the subset of SNe II with              extract as much science as possible from our data.
+               linearly declining light curves.                                    In addition, the photometric samples presented here
+                                                                                are among the largest in the literature for each class,
+            3. Adopting a threshold on the classification confi-                demonstrating the power of photometric classification
+               dence can improve the completeness and purity of                 to enable statistical studies of SNe. Importantly, how-
+               the photometric samples, but an analogous thresh-                ever, each classification comes with an uncertainty. In
+18                                                   Hosseinzadeh et al.
+
+the coming years, our field will have to learn how to                             Acknowledgments
+handle exactly this type of photometric data set, when
+we will never know with certainty whether an individual            We thank Jessica Mink and Brian Hsu for assisting
+classification is “correct.” No single classifier will likely   with the host-galaxy redshifts. We also thank the au-
+outperform the others for all use cases, but continued          thors of the “Scientific Python Cookiecutter” tutorial for
+testing of algorithms individually and in combination           advice on how to document, package, and release the
+will demonstrate how best to apply them toward a spe-           Superphot package. The Berger Time-Domain Group
+cific science goal.                                             is supported in part by NSF grant AST-1714498 and
+                                                                NASA grant NNX15AE50G. We acknowledge partial
+  Facilities: ADS, NED, PS1                                     funding support from the Harvard Data Science Ini-
+  Software: ArviZ (Kumar et al. 2019), Astropy (As-             tiative. G.H. thanks the LSSTC Data Science Fellow-
+tropy Collaboration 2018), extinction (Barbary 2016),           ship Program, which is funded by LSSTC, NSF Cy-
+imbalanced-learn (Lemaı̂tre et al. 2017), IPython (Perez        bertraining grant #1829740, the Brinson Foundation,
+& Granger 2007), Matplotlib (Hunter 2007), NumPy                and the Moore Foundation; his participation in the pro-
+(Oliphant 2006), PyMC3 (Salvatier et al. 2016), RVSAO           gram has benefited this work. F.D. thanks the SAO
+(Kurtz & Mink 1998), scikit-learn (Pedregosa et al.             REU program, funded in part by the National Science
+2011), SciPy (Virtanen et al. 2020), Theano (Theano De-         Foundation REU and Department of Defense ASSURE
+velopment Team 2016), tqdm (da Costa-Luis 2019)                 programs under NSF grant No. AST-1852268 and by
+                                                                the Smithsonian Institution. V.A.V. acknowledges sup-
+                                                                port by the Ford Foundation through a Dissertation
+                                                                Fellowship and the Simons Foundation through a Si-
+                                                                mons Junior Fellowship (#718240). D.O.J. is supported
+                                                                by a Gordon and Betty Moore Foundation postdoc-
+                                                                toral fellowship at the University of California, Santa
+                                                                Cruz. The UCSC team is supported in part by NASA
+                                                                grants 14-WPS14-0048, NNG16PJ34C, NNG17PX03C;
+                                                                NSF grants AST-1518052 and AST-1815935; NASA
+                                                                through grant No. AR-14296 from the Space Telescope
+                                                                Science Institute, which is operated by AURA, Inc., un-
+                                                                der NASA contract NAS 5-26555; the Gordon & Betty
+                                                                Moore Foundation; the Heising-Simons Foundation; and
+                                                                by fellowships from the Alfred P. Sloan Foundation and
+                                                                the David and Lucile Packard Foundation to R.J.F. R.L.
+                                                                is supported by a Marie Sklodowska-Curie Individual
+                                                                Fellowship within the Horizon 2020 European Union
+                                                                (EU) Framework Programme for Research and Inno-
+                                                                vation (H2020-MSCA-IF-2017-794467). D.M. acknowl-
+                                                                edges NSF support from from grants PHY-1914448 and
+                                                                AST-2037297.
+                                                                   The Pan-STARRS1 Surveys (PS1) and the PS1 public
+                                                                science archive have been made possible through con-
+                                                                tributions by the Institute for Astronomy, the Univer-
+                                                                sity of Hawaii, the Pan-STARRS Project Office, the
+                                                                Max-Planck Society and its participating institutes, the
+                                                                Max Planck Institute for Astronomy, Heidelberg, and
+                                                                the Max Planck Institute for Extraterrestrial Physics,
+                                                                Garching, Johns Hopkins University, Durham Univer-
+                                                                sity, the University of Edinburgh, Queen’s University
+                                                                Belfast, the Center for Astrophysics | Harvard & Smith-
+                                                                sonian, Las Cumbres Observatory, the National Central
+                                                                University of Taiwan, the Space Telescope Science Insti-
+                                                                tute, the National Aeronautics and Space Administra-
+                                                        Superphot                                                         19
+
+tion under grant No. NNX08AR22G issued through the             No. AST-1238877, the University of Maryland, Eötvös
+Planetary Science Division of the NASA Science Mis-            Loránd University (ELTE), Los Alamos National Labo-
+sion Directorate, the National Science Foundation grant        ratory, and the Gordon and Betty Moore Foundation.
+
+                                                         Appendix
+
+
+                      A. Glossary                                   4. The (macro-averaged) F1 score is the average of
+   For each SN, the classifier gives a set of five classifi-           the harmonic means of the completeness and pu-
+cation probabilities (pΦ ) corresponding to each of the                rity of each class:
+five photometric classes. They sum to 1 and are listed                          1 X     2      1 X 2NSΦ
+in Tables 3–5:                                                           F1 ≡        −1   −1 =            .
+                                                                                5   CS + PΦ    5  NS + NΦ
+                                                                                 S=Φ                         S=Φ
+                                                  X
+ pΦ ∈ {pSLSN , pSNII , pSNIIn , pSNIa , pSNIbc };   pΦ = 1.
+                                                Φ
+                                                                      B. Agreement between Two Classifiers
+                                                                  In Section 4.4, we compared our photometric classifi-
+An SN’s photometric classification (Φ) is determined by        cations to those of V20. Here we derive the expectation
+its highest classification probability. We take this prob-     for such a comparison given the confusion matrices for
+ability to be the classification confidence (p):               each classifier calculated from cross-validation.
+                                                                  The version of the confusion matrix with completeness
+                      p ≡ max{pΦ }.
+                                                               on the diagonal (Figure 6, top) shows the probability
+                                                               p(Φ|S) of our classifier giving the photometric classifi-
+   NSΦ is the number of SNe with spectroscopic classi-
+                                                               cation Φ for an SN with spectroscopic classification S.
+fication S and photometric classification Φ; these are
+                                                               In this section, we will refer to this as the “complete-
+the elements of thePconfusion matrix (the integers in
+                                                               ness matrix” C. The version of the confusion matrix
+Figure 6). NS ≡ Φ NSΦ is the total number         of SNe
+                                          P                    with purity on the diagonal (Figure 6, center) shows the
+with spectroscopic classification S, NΦ ≡ S NSΦ is the
+                                                               probability p(S|Φ) of an SN having spectroscopic classi-
+total number   of SNe with photometric classification Φ,
+          P P                                                  fication S if we gave it a photometric classification Φ. In
+and N ≡ S Φ NSΦ is the total sample size. NS=Φ is
+                                                               this section, we will refer to this as the “purity matrix”
+the number of correctly classified SNe in a given class.
+                                                               P.
+   We discuss four performance metrics for our classifier,
+                                                                  The “agreement matrix” A we wish to derive will show
+all of which range from 0 to 1:
+                                                               the probability p(Φ0 |Φ) of another classifier giving pho-
+   1. Completeness (CS ) is the fraction of a given spec-      tometric classification Φ0 to a transient that we classify
+      troscopic class that appears in the equivalent pho-      as Φ. Using the chain rule of probability, we can write
+      tometric class:                                                                          p(Φ, Φ0 )
+                                                                                  p(Φ0 |Φ) =             .
+                                 NS=Φ                                                            p(Φ)
+                          CS ≡        .
+                                  NS
+                                                               The joint probability p(Φ, Φ0 ) cannot be separated be-
+                                                               cause the classifiers are not independent. (If they were,
+   2. Purity (PΦ ) is the fraction of a given photometric      they would not be good classifiers.) However, we assume
+      class that belongs to the equivalent spectroscopic       that the classifiers are independent for a given spectro-
+      class:                                                   scopic class, meaning that, if they are biased, they are
+                                NS=Φ
+                         PΦ ≡          .                       not biased in the same way. We can then obtain a sep-
+                                  NΦ
+                                                               arable joint probability by undoing the marginalization
+   3. Accuracy (A) is the total fraction of correctly clas-    over spectroscopic classification:
+      sified SNe:                                                           X p(Φ, Φ0 |S)p(S)       X p(Φ|S)p(Φ0 |S)p(S)
+                                                               p(Φ0 |Φ) =
+                           P
+                                   NSΦ                                                          =                          .
+                      A ≡ S=Φ           .                                           p(Φ)                           p(Φ)
+                                 N                                          S                       S
+
+      A variant of accuracy is agreement (A0 ), in which       Lastly, we simplify using Bayes’s theorem (Bayes &
+      we compare two photometric classifications to each       Price 1763):
+      other, rather than comparing a photometric clas-                                 X
+      sification to a spectroscopic classification.                         p(Φ0 |Φ) =   p(S|Φ)p(Φ0 |S),
+                                                                                           S
+20                                                Hosseinzadeh et al.
+
+or in matrix notation,                                                          g                                                                                                                       1.0
+                                                               Peak Abs. Mag. ri
+
+
+
+
+                                                                                                                                                                                                          Spearman Rank Correlation Coefficient | |
+                                                                                z
+                                                                                g
+                      A = P TC 0,                                    PC1 Proj. ri                                                                                                                       0.8
+                                                                               z
+                                                                               g
+where C 0 is the completeness matrix of the other clas-              PC2 Proj. ri
+                                                                               z                                                                                                                        0.6
+sifier. Note that this matrix depends on the breakdown                         g
+                                                                     PC3 Proj. ri
+of spectroscopic classes in the data sets used to validate                     z
+                                                                               g                                                                                                                        0.4
+these classifiers. Figure 10 (top left) shows the expected           PC4 Proj. ri
+                                                                               z
+agreement matrix between our classifier and that of V20,                       g
+                                                                     PC5 Proj. ri                                                                                                                       0.2
+assuming that our test set has similar class fractions to                      z
+                                                                               g
+the training set.                                                    PC6 Proj. ri
+                                                                               z                                                                                                                        0.0
+
+
+
+
+                                                                                g
+
+                                                                                                g
+
+                                                                                                                     g
+
+                                                                                                                                     g
+
+                                                                                                                                                    g
+
+                                                                                                                                                                   g
+
+                                                                                                                                                                                  g
+                                                                                                z
+
+                                                                                                                     z
+
+                                                                                                                                     z
+
+                                                                                                                                                    z
+
+                                                                                                                                                                   z
+
+                                                                                                                                                                                  z
+
+                                                                                                                                                                                                 z
+                                                                                    Peak Abs. Mag. ri
+
+                                                                                                         PC1 Proj. ri
+
+                                                                                                                             PC2 Proj. ri
+
+                                                                                                                                            PC3 Proj. ri
+
+                                                                                                                                                           PC4 Proj. ri
+
+                                                                                                                                                                          PC5 Proj. ri
+
+                                                                                                                                                                                         PC6 Proj. ri
+              C. Feature Importances
+   Of interest to developers of future photometric clas-
+sification algorithms is the question of which features
+are most powerful for classifying SNe. V19 explore sev-
+                                                                                                 g                                                                                                      1.0
+eral combinations of features, and we adopt their best-
+
+
+
+
+                                                                                                                                                                                                               Spearman Rank Correlation Coefficient | |
+                                                                   Amplitude (mag) ri
+performing classifier, which uses peak absolute magni-                                           z
+                                                                                                 g                                                                                                      0.8
+tude in the griz filters plus coefficients of the top six
+                                                                 Plateau Slope (d 1) ri
+principal components of the griz light curves. Here we                                z
+                                                                                      g                                                                                                                 0.6
+explore the relative importances of each of those fea-
+                                                                Plateau Duration (d) ri
+tures.                                                                                z
+                                                                                      g                                                                                                                 0.4
+   The importance of a feature cannot be defined inde-
+                                                                       Rise Time (d) ri
+pendently of the other features used. For example, if                                 z
+                                                                                      g                                                                                                                 0.2
+two features are perfectly correlated, a classifier may
+                                                                        Fall Time (d) ri
+arbitrarily consider one of them to be very important                                 z                                                                                                                 0.0
+and the other to be useless. Therefore, before calculat-                                           g
+
+
+                                                                                                                                            g
+
+
+                                                                                                                                            g
+
+
+                                                                                                                                            g
+
+
+                                                                                                                                            g
+                                                                                                                                            z
+
+
+                                                                                                                                            z
+
+
+                                                                                                                                            z
+
+
+                                                                                                                                            z
+
+
+                                                                                                                                            z
+                                                                                                        Amplitude (mag) ri
+
+                                                                                                                       Plateau Slope (d 1) ri
+
+                                                                                                                      Plateau Duration (d) ri
+
+                                                                                                                             Rise Time (d) ri
+
+                                                                                                                              Fall Time (d) ri
+ing feature importances, we must examine correlations
+between the features in our set. Figure 11 shows the ab-
+solute value of the Spearman (1904) rank correlation co-
+efficient between every pair of features (top) and model
+parameters (bottom) in our training set.
+   As we might expect, there are strong correlations be-     Figure 11. Top: absolute values of the Spearman rank
+tween the four filters, both because physics demands a       correlation coefficients between each pair of features in our
+relatively smooth SED and because our two-iteration          training set. Note the strong correlations between the four
+fitting method forces the light-curve models in the four     filters, as well as a correlation between the peak absolute
+                                                             magnitude and the projection onto the first principal com-
+filters to be more similar. This means it is not possi-
+                                                             ponent of the light curves. Correlations among the remaining
+ble to judge whether, for example, the g peak absolute       features are weak. Bottom: the equivalent correlation matrix
+magnitude is more important than the r peak absolute         for the model parameters.
+magnitude. In addition, we find that the peak absolute
+magnitudes are strongly correlated with the light curves’
+                                                             consistent with zero for all filters. The results are shown
+projection onto their principal component. This tells us
+                                                             in Figure 12.
+that most of the variation among the light curves can
+                                                                In all cases, the peak absolute magnitude and the
+be attributed to differences in overall luminosity, rather
+                                                             projection onto the first principal component—we can-
+than differences in shape.
+                                                             not compare these to each other because they are
+   To obtain meaningful feature importances, we re-
+                                                             correlated—are by far the most discriminating between
+trained our classifier on only one filter (seven features)
+                                                             the classes. The remaining principal component coef-
+at a time. We then calculated two measures of feature
+                                                             ficients contribute roughly in order of their rank. We
+importance for each of the seven features: mean decrease
+                                                             again emphasize that cross-filter comparisons are mean-
+in impurity (Louppe 2015) and permutation importance
+                                                             ingless in our analysis, but the relative importances of
+(Breiman 2001). We also calculate the permutation im-
+                                                             the features are similar for each filter.
+portance of a random feature, for comparison, which is
+                                                                            Superphot                                                           21
+
+                   g
+                                                                                          3. max features ∈ {5, 10, 15, 20, 25}, the number of
+  Peak Abs. Mag. ri                                                                          features to consider when looking for the best split;
+                   z
+                   g
+        PC1 Proj. ri                                                                         and
+                   z
+                   g
+        PC2 Proj. ri
+                   z                                                                      4. n estimators ∈ {10, 20, 50, 100, 200, 500}, the
+                   g
+        PC3 Proj. ri                                                                         number of decision trees in the random forest.
+                   z
+                   g
+        PC4 Proj. ri
+                   z                                                                   For each of these 360 classifiers, we calculated 12 dif-
+                   g
+        PC5 Proj. ri                                                                ferent metrics on our training set: completeness and pu-
+                 z
+                 g                                                                  rity in each of our 5 classes, accuracy, and F1 score (see
+       PC6 Proj. ri
+                 z                                                                  Appendix A for definitions). Figure 13 shows the results
+                 g
+ Random Number ri                                    Mean Decrease in Impurity      when using entropy as the split criterion; switching to
+                 z                                   Permutation Importance
+                                                                                    the Gini impurity was neutral or slightly worse in most
+                  0.00   0.05   0.10      0.15     0.20     0.25     0.30
+                                       Feature Importance                           cases. There is no clear winner in all 12 metrics, but
+                                                                                    in general, we find it important not to limit the depth
+Figure 12. Feature importances for our training set. Cross-                         of the decision trees. The final classifier used in our
+filter comparisons, as well as comparison between the peak                          analysis uses an entropy criterion, no maximum depth,
+absolute magnitude and the projection onto the first prin-                          a maximum of 5 features, and 100 estimators.
+cipal component, are meaningless due to the correlations at
+                                                                                       In addition to optimizing the random forest (RF)
+left. Nonetheless, it is clear that peak absolute magnitude
+and the projection onto the first principal component are the                       hyperparameters, we repeated our analysis using two
+most important in all filters.                                                      other classification algorithms: a support vector ma-
+                                                                                    chine (SVM; with regularization parameter C = 1000
+            D. Hyperparameter Optimization                                          and kernel coefficient γ = 0.1) and a multilayer percep-
+                                                                                    tron (MLP; with two hidden layers of 10 and 5 neurons
+  Our random forest classifier has several hyperparam-                              and an L2 penalty parameter α = 10−5 ). We also re-
+eters that can be adjusted to obtain better results. We                             peated our analysis using the model parameters directly
+repeated our analysis, apart from the final classifica-                             as features, rather than performing a PCA. Table 6 lists
+tion, over a grid of four of these parameters (represented                          the same 12 metrics for our baseline procedure (which
+by their variable names in scikit-learn; Pedregosa et al.                           has the highest F1 score) in the top row and how these
+2011):                                                                              metrics change using the other classifiers and feature set.
+   1. criterion ∈ {Gini impurity, entropy}, the func-                               The RF with the model parameters and the SVM per-
+      tion to measure the quality of a split;                                       form similarly to our baseline algorithm, but with some
+                                                                                    important weaknesses (e.g., low SLSN completeness and
+   2. max depth ∈ {5, 10, 15, 20, 25, 29}, the maximum                              purity, respectively). The MLP performs worse in most
+      depth of a decision tree;                                                     metrics.
+
+
+                                                                             References
+Ahumada, R., Prieto, C. A., Almeida, A., et al. 2020, ApJS, 249,                    Cannon, R., Drinkwater, M., Edge, A., et al. 2006, MNRAS, 372,
+  3                                                                                   425
+Algeo, J. 1977, American Speech, 52, 47                                             Cappellaro, E., Benetti, S., Pastorello, A., et al. 2012, CBET,
+Astropy Collaboration, Price-Whelan, A. M., Sipőcz, B. M.,                           3274, 1
+  et al. 2018, AJ, 156, 123                                                         Chambers, K. C., Magnier, E. A., Metcalfe, N., et al. 2016,
+Baldeschi, A., Miller, A., Stroh, M., Margutti, R., & Coppejans,                      arXiv:1612.05560
+  D. L. 2020, ApJ, 902, 60                                                          Charnock, T., & Moss, A. 2017, ApJL, 837, L28
+Balestra, I., Mainieri, V., Popesso, P., et al. 2010, A&A, 512, A12                 Chawla, N. V., Bowyer, K. W., Hall, L. O., & Kegelmeyer, W. P.
+Barbary, K. 2016, extinction v0.3.0, Zenodo,                                          2002, Journal of Artificial Intelligence Research, 16, 321
+  doi:10.5281/zenodo.804967                                                         Chornock, R., Berger, E., Gezari, S., et al. 2014, ApJ, 780, 44
+Bayes, M., & Price, M. 1763, RSPT, 53, 370                                          Colless, M., Peterson, B. A., Jackson, C., et al. 2003,
+Bellm, E. C., Kulkarni, S. R., Graham, M. J., et al. 2019, PASP,                      arXiv:astro-ph/0306581
+  131, 018002                                                                       Cowie, L. L., Barger, A. J., & Hu, E. M. 2010, ApJ, 711, 928
+Bianco, F. B., Modjaz, M., Hicken, M., et al. 2014, ApJS, 213, 19                   da Costa-Luis, C. 2019, JOSS, 4, 1277
+Boone, K. 2019, AJ, 158, 257                                                        Dressler, A., & Gunn, J. E. 1992, ApJS, 78, 1
+Breiman, L. 2001, Machine Learning, 45, 5                                           Drinkwater, M. J., Jurek, R. J., Blake, C., et al. 2010, MNRAS,
+Bronder, T. J., Hook, I. M., Astier, P., et al. 2008, A&A, 477, 717                   401, 1429
+    22                                                                          Hosseinzadeh et al.
+
+
+                                                             classifier = RF, feature_set = PCA, classifier__criterion = entropy
+             0.76 < SLSN Compl. < 0.82                       0.64 < SLSN Purity < 0.87                       0.85 < SNII Compl. < 0.92                    0.66 < SNII Purity < 0.75
+                                        500                                             500                                            500                                           500
+
+
+
+
+                                              n_estimators
+
+
+
+
+                                                                                             n_estimators
+
+
+
+
+                                                                                                                                           n_estimators
+
+
+
+
+                                                                                                                                                                                        n_estimators
+                                        200                                             200                                            200                                           200
+                                        100                                             100                                            100                                           100
+                                         50                                              50                                             50                                            50
+                                         20                                              20                                             20                                            20
+                                        10                                              10                                             10                                            10
+                                      25 s                                            25 s                                           25 s                                          25 s
+               5 1015              1520 ature                 5 1015               1520 ature                 5 1015              1520 ature               5 1015               1520 ature
+                                 10
+              max_d 2025 30 5 x_fe                                               10
+                                                              max_d 2025 30 5 x_fe                                              10
+                                                                                                              max_d 2025 30 5 x_fe                        max_d 2025 30 5 x_fe10
+                    epth          ma                                epth          ma                                epth         ma                             epth           ma
+             0.42 < SNIIn Compl. < 0.62                      0.32 < SNIIn Purity < 0.47                      0.73 < SNIa Compl. < 0.86                    0.96 < SNIa Purity < 0.97
+                                        500                                             500                                           500                                          500
+                                              n_estimators
+
+
+
+
+                                                                                             n_estimators
+
+
+
+
+                                                                                                                                           n_estimators
+
+
+
+
+                                                                                                                                                                                        n_estimators
+                                        200                                             200                                           200                                          200
+                                        100                                             100                                           100                                          100
+                                         50                                              50                                            50                                           50
+                                         20                                              20                                            20                                           20
+                                        10                                              10                                            10                                           10
+                                      25      s                                       25      s                                      25     s                                    25      s
+               5 1015              1520 ature                 5 1015               1520 ature                 5 1015             1520 ature               5 1015              1520 ature
+                                 10
+               max_d 2025 30 5 x_fe                                              10
+                                                              max_d 2025 30 5 x_fe                                             10
+                                                                                                              max_d 2025 30 5 x_fe                                          10
+                                                                                                                                                          max_d 2025 30 5 x_fe
+                     epth         ma                                epth          ma                                epth        ma                             epth          ma
+             0.05 < SNIbc Compl. < 0.47                      0.01 < SNIbc Purity < 0.22                       0.73 < Accuracy < 0.83                      0.56 < F1 Score < 0.64
+                                           500                                           500                                            500                                          500
+                                              n_estimators
+
+
+
+
+                                                                                             n_estimators
+
+
+
+
+                                                                                                                                           n_estimators
+
+
+
+
+                                                                                                                                                                                        n_estimators
+                                           200                                           200                                            200                                          200
+                                           100                                           100                                            100                                          100
+                                            50                                            50                                             50                                           50
+                                            20                                            20                                             20                                           20
+                                           10                                            10                                             10                                           10
+                                         25 s                                          25 s                                           25 s                                         25 s
+               5 10                   1520 ature              5 10                  1520 ature                5 10                 1520 ature             5 10                  1520 ature
+               max_15               10                        max_15              10                          max_15             10                       max_15              10
+                      20
+                    depth25 30     5 x_fe                            20
+                                                                   depth25 30    5 x_fe                              20
+                                                                                                                   depth25 30   5 x_fe                           20
+                                                                                                                                                               depth25 30    5 x_fe
+                                     ma                                            ma                                             ma                                           ma
+
+         min                                                                                                                                                                          max
+
+
+   Figure 13. Results of varying the hyperparameters of our classifier over a three-dimensional grid, as measured by 12 metrics.
+   The range of each metric is shown above each plot, and the color of each point corresponds to where it lies in that range.
+   There is no single set of hyperparameters that optimizes all of the metrics, but in general, we find it important not to limit the
+   maximum depth of the decision trees. (The data used to create this figure are available.)
+
+
+
+
+                                                                 Table 6. Other Classifiers and Feature Sets
+
+                                            Completeness                                                               Purity
+Classifier     Feature Set       ————————————————————                                                       ————————————————————                                         Accuracy       F1 Score
+                                 SLSN SN II   SN IIn    SN Ia SN Ibc                                        SLSN SN II SN IIn SN Ia SN Ibc
+   RF             PCA             0.824     0.892              0.500       0.849       0.368                 0.667    0.728      0.387        0.961            0.206         0.824        0.628
+   RF          parameters        −0.176    −0.075             +0.125      −0.010      +0.105                +0.067   +0.024     −0.133       +0.002           +0.094        −0.016       −0.009
+  SVM             PCA            +0.118    +0.011             −0.125      +0.012      −0.053                −0.326   +0.050     +0.022       −0.002           +0.147        +0.007       −0.035
+  MLP             PCA            −0.176    −0.043             −0.083      −0.045      +0.053                −0.020   −0.016     −0.143       +0.012           −0.058        −0.047       −0.062
+                                                                Superphot                                                              23
+
+Drout, M. R., Chornock, R., Soderberg, A. M., et al. 2014, ApJ,         Magnier, E. A., Schlafly, E. F., Finkbeiner, D. P., et al. 2020a,
+   794, 23                                                                ApJS, 251, 6
+Elias, J. H., Matthews, K., Neugebauer, G., & Persson, S. E.            Magnier, E. A., Sweeney, W. E., Chambers, K. C., et al. 2020b,
+   1985, ApJ, 296, 379                                                    ApJS, 251, 5
+Finkelstein, S. L., Cohen, S. H., Malhotra, S., et al. 2009, ApJL,      Magnier, E. A., Chambers, K. C., Flewelling, H. A., et al. 2020c,
+   703, L162                                                              ApJS, 251, 3
+Fitzpatrick, E. L. 1999, PASP, 111, 63                                  Masters, D. C., Stern, D. K., Cohen, J. G., et al. 2019, ApJ, 877,
+Foley, R. J., & Mandel, K. 2013, ApJ, 778, 167                            81
+Fremling, C., Miller, A. A., Sharma, Y., et al. 2020, ApJ, 895, 32      Metropolis, N., Rosenbluth, A. W., Rosenbluth, M. N., Teller,
+Gal-Yam, A. 2012, Sci, 337, 927                                           A. H., & Teller, E. 1953, JChPh, 21, 1087
+Gal-Yam, A. 2016, in Handbook of Supernovae, ed. A. W.                  Minkowski, R. 1941, PASP, 53, 224
+   Alsabti & P. Murdin (Cham: Springer)                                 Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R., &
+Gal-Yam, A. 2019, ARA&A, 57, 305                                          Hložek, R. 2019, PASP, 131, 118002
+Garcet, O., Gandhi, P., Gosset, E., et al. 2007, A&A, 474, 473          Möller, A., Ruhlmann-Kleider, V., Leloup, C., et al. 2016, JCAP,
+Gelman, A., & Rubin, D. B. 1992, StaSc, 7, 457                            12, 008
+Gezari, S., Chornock, R., Rest, A., et al. 2012, Natur, 485, 217        Narayan, G., Foley, R. J., Berger, E., et al. 2011, ApJL, 731, L11
+Gomez, S., Berger, E., Blanchard, P. K., et al. 2020,                   Newman, J. A., Cooper, M. C., Davis, M., et al. 2013, ApJS,
+   arXiv:2009.01853                                                       208, 5
+Graham, M. L., Connolly, A. J., Ivezić, Ž., et al. 2018, AJ, 155, 1   Norris, R. P., Afonso, J., Appleton, P. N., et al. 2006, AJ, 132,
+Graur, O., Bianco, F. B., Huang, S., et al. 2017a, ApJ, 837, 120          2409
+Graur, O., Bianco, F. B., Modjaz, M., et al. 2017b, ApJ, 837, 121       Oliphant, T. E. 2006, A guide to NumPy (USA: Trelgol
+Hasinger, G., Capak, P., Salvato, M., et al. 2018, ApJ, 858, 77           Publishing)
+Hastings, W. K. 1970, Biometrika, 57, 97                                Owen, F. N., & Morrison, G. E. 2009, ApJS, 182, 625
+Hewett, P. C., & Wild, V. 2010, MNRAS, 405, 2302                        Pedregosa, F., Varoquaux, G., Gramfort, A., et al. 2011, Journal
+Holoien, T. W. S., Brown, J. S., Vallely, P. J., et al. 2019,             of Machine Learning Research, 12, 2825
+   MNRAS, 484, 1899                                                     Perez, F., & Granger, B. E. 2007, CSE, 9, 21
+Hosseinzadeh, G., & Dauphin, F. 2020, Superphot, Zenodo,                Planck Collaboration, Ade, P. A. R., Aghanim, N., et al. 2016,
+   doi:10.5281/zenodo.374789                                              A&A, 594, 13
+Hosseinzadeh, G., Dauphin, F., Villar, V. A., et al. 2020, Host         Quimby, R. M., Kulkarni, S. R., Kasliwal, M. M., et al. 2011,
+   Galaxy Spectra of Pan-STARRS1 Transients, Zenodo,                      Natur, 474, 487
+   doi:10.5281/zenodo.3973698                                           Quimby, R. M., Werner, M. C., Oguri, M., et al. 2013, ApJL,
+Howell, D. A., Sullivan, M., Nugent, P. E., et al. 2006, Natur,           768, L20
+   443, 308                                                             Quimby, R. M., Cia, A. D., Gal-Yam, A., et al. 2018, ApJ, 855, 2
+Hunter, J. D. 2007, CSE, 9, 90                                          Rest, A., Stubbs, C., Becker, A. C., et al. 2005, ApJ, 634, 1103
+Im, M., Faber, S. M., Gebhardt, K., et al. 2001, AJ, 122, 750           Rest, A., Scolnic, D., Foley, R. J., et al. 2014, ApJ, 795, 44
+Ishida, E. E. O., Beck, R., González-Gaitán, S., et al. 2019,         Richards, J. W., Homrighausen, D., Freeman, P. E., Schafer,
+   MNRAS, 483, 2                                                          C. M., & Poznanski, D. 2012, MNRAS, 419, 1121
+Ivezić, Ž., Kahn, S. M., Tyson, J. A., et al. 2019, ApJ, 873, 111     Riess, A. G., Strolger, L.-G., Tonry, J., et al. 2004a, ApJL, 600,
+Jha, S., Riess, A. G., & Kirshner, R. P. 2007, ApJ, 659, 122              L163
+Jones, D. H., Read, M. A., Saunders, W., et al. 2009, MNRAS,            Riess, A. G., Strolger, L.-G., Tonry, J., et al. 2004b, ApJ, 607,
+   399, 683                                                               665
+Jones, D. O., Scolnic, D. M., Riess, A. G., et al. 2017, ApJ, 843, 6    Ross, N. P., Shanks, T., Cannon, R. D., et al. 2008, MNRAS,
+Jones, D. O., Scolnic, D. M., Riess, A. G., et al. 2018, ApJ, 857,        387, 1323
+   51                                                                   Rovilos, E., Fotopoulou, S., Salvato, M., et al. 2011, A&A, 529,
+Karhunen, K., Kotilainen, J. K., Falomo, R., & Bettoni, D. 2014,          A135
+   MNRAS, 441, 1802                                                     Sako, M., Bassett, B., Connolly, B., et al. 2011, ApJ, 738, 162
+Kessler, R., Bernstein, J. P., Cinabro, D., et al. 2009, PASP, 121,     Salvatier, J., Wiecki, T. V., & Fonnesbeck, C. 2016, PeerJ
+   1028                                                                   Computer Science, 2, e55
+Kimura, A., Takahashi, I., Tanaka, M., et al. 2017, in 2017 IEEE        Sanders, N. E., Soderberg, A. M., Foley, R. J., et al. 2013, ApJ,
+   37th Int. Conf. Distributed Computing Systems Workshops                769, 39
+   (ICDCSW), 354, doi:10.1109/ICDCSW.2017.47                            Sanders, N. E., Soderberg, A. M., Gezari, S., et al. 2015, ApJ,
+Kumar, R., Carroll, C., Hartikainen, A., & Martin, O. A. 2019,            799, 208
+   JOSS, 4, 1143                                                        Scarlata, C., Colbert, J., Teplitz, H. I., et al. 2009, ApJL, 704,
+Kurtz, M. J., & Mink, D. J. 1998, PASP, 110, 934                          L98
+Lamareille, F., Brinchmann, J., Contini, T., et al. 2009, A&A,          Schlafly, E. F., & Finkbeiner, D. P. 2011, ApJ, 737, 103
+   495, 53                                                              Schlegel, E. M. 1990, MNRAS, 244, 269
+Le Fèvre, O., Vettolani, G., Garilli, B., et al. 2005, A&A, 439,       Smith, A. G., Hopkins, A. M., Hunstead, R. W., & Pimbblet,
+   845                                                                    K. A. 2012, MNRAS, 422, 25
+Lemaı̂tre, G., Nogueira, F., & Aridas, C. K. 2017, Journal of           Spearman, C. 1904, The American Journal of Psychology, 15, 72
+   Machine Learning Research, 18, 1                                     Sravan, N., Milisavljevic, D., Reynolds, J. M., Lentner, G., &
+Lidman, C., Tucker, B. E., Davis, T. M., et al. 2020, MNRAS,              Linvill, M. 2020, ApJ, 893, 127
+   496, 19                                                              Stalin, C. S., Petitjean, P., Srianand, R., et al. 2010, MNRAS,
+Lilly, S. J., Le Fèvre, O., Renzini, A., et al. 2007, ApJS, 172, 70      401, 294
+Louppe, G. 2015, PhD thesis, University of Liège,                      Stritzinger, M. D., Anderson, J. P., Contreras, C., et al. 2018,
+   arXiv:1407.7502                                                        A&A, 609, A134
+Lunnan, R., Chornock, R., Berger, E., et al. 2014, ApJ, 787, 138        Szokoly, G. P., Bergeron, J., Hasinger, G., et al. 2004, ApJS,
+Lunnan, R., Chornock, R., Berger, E., et al. 2018, ApJ, 852, 81           155, 271
+24                                                       Hosseinzadeh et al.
+
+Taddia, F., Sollerman, J., Leloudas, G., et al. 2015, A&A, 574,      Villar, V. A., Hosseinzadeh, G., Berger, E., et al. 2020b, Light
+  A60                                                                  Curves of Pan-STARRS1 SN-like Transients, Zenodo,
+Taddia, F., Stritzinger, M. D., Bersten, M., et al. 2018, A&A,         doi:10.5281/zenodo.3974950
+  609, A136                                                          Virtanen, P., Gommers, R., Oliphant, T. E., et al. 2020, NatMe,
+Tajer, M., Polletta, M., Chiappetti, L., et al. 2007, A&A, 467, 73     17, 261
+Theano Development Team. 2016, arXiv:1605.02688                      Waters, C. Z., Magnier, E. A., Price, P. A., et al. 2020, ApJS,
+Tonry, J., & Davis, M. 1979, AJ, 84, 1511                              251, 4
+Trump, J. R., Impey, C. D., Elvis, M., et al. 2009, ApJ, 696, 1195
+                                                                     Wen, Z. L., & Han, J. L. 2015, ApJ, 807, 178
+Uomoto, A., & Kirshner, R. P. 1985, A&A, 149, L7
+Valenti, S., Howell, D. A., Stritzinger, M. D., et al. 2016,         Wheeler, J. C., & Harkness, R. P. 1986, in Galaxy Distances and
+  MNRAS, 459, 3939                                                     Deviations from Universal Expansion, ed. B. F. Madore &
+Villar, V. A., Berger, E., Miller, G., et al. 2019, ApJ, 994, 83       R. B. Tully (Dordrecht: Springer Netherlands)
+Villar, V. A., Hosseinzadeh, G., Berger, E., et al. 2020a,           Wheeler, J. C., & Levreault, R. 1985, ApJL, 294, L17
+  arXiv:2008.04921
+

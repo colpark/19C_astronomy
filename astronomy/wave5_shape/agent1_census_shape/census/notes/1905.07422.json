@@ -1,0 +1,475 @@
+{
+ "seed_id": "1905.07422",
+ "title": "Supernova Photometric Classification Pipelines Trained on Spectroscopically Classified Supernovae from the Pan-STARRS1 Medium-Deep Survey (Villar et al. 2019)",
+ "arxiv_version_verified": "arXiv:1905.07422v2 (header L13; downloaded PDF sha256 9288e1ac...)",
+ "read_in_full": true,
+ "reader": "fork-E",
+ "layout_lines": 1625,
+ "pages": 21,
+ "episodes": [
+  {
+   "episode_id": "E1",
+   "level": "per_object",
+   "description": "Fit one spectroscopically classified PS1-MDS SN light curve with the piecewise parametric model by iterative MCMC and classify it with the chosen pipeline",
+   "practitioner_action": "publish_value",
+   "action_locator": "1905.07422.layout.txt p18 §7 L1426-1428",
+   "chain": [
+    {
+     "op": "require >=2 3-sigma detections in >=3 filters",
+     "locator": "1905.07422.layout.txt p4 §2 L208-212"
+    },
+    {
+     "op": "MCMC fit of Eq.1 (7 params) per filter independently with shared priors",
+     "locator": "1905.07422.layout.txt p6 §3 L346-350"
+    },
+    {
+     "op": "combine marginalized per-filter posteriors into a new prior",
+     "locator": "1905.07422.layout.txt p6 §3 L351-353"
+    },
+    {
+     "op": "second MCMC iteration with combined prior",
+     "locator": "1905.07422.layout.txt p6 §3 L353-356"
+    },
+    {
+     "op": "convert observer-frame model fits to absolute magnitudes with redshift and cosmological k-correction",
+     "locator": "1905.07422.layout.txt p6 §3 L324-330"
+    },
+    {
+     "op": "extract features (PCA, 6 components per filter + peak absolute magnitude)",
+     "locator": "1905.07422.layout.txt p7 §4.1 L409-417"
+    },
+    {
+     "op": "classify with trained RF (MVG-augmented) on posterior draws / median values",
+     "locator": "1905.07422.layout.txt p10 §5 L583-590"
+    },
+    {
+     "op": "report class and classification confidence",
+     "locator": "1905.07422.layout.txt p15 §5.1 L995-1004"
+    }
+   ],
+   "chain_length": 8
+  },
+  {
+   "episode_id": "E2",
+   "level": "per_study",
+   "description": "Design the light-curve model and fitting procedure, build and compare 24 classification pipelines (4 features x 2 augmentations x 3 classifiers) with leave-one-out CV, select a best pipeline",
+   "practitioner_action": "publish_object",
+   "action_locator": "1905.07422.layout.txt p10 §5 L574-590",
+   "chain": [
+    {
+     "op": "select 513 spectroscopically classified SNe in 5 classes",
+     "locator": "1905.07422.layout.txt p3 §2 L167-178"
+    },
+    {
+     "op": "exclude y band",
+     "locator": "1905.07422.layout.txt p2 §2 L131-134"
+    },
+    {
+     "op": "define 7-parameter piecewise model and priors",
+     "locator": "1905.07422.layout.txt p4 §3 L205-244"
+    },
+    {
+     "op": "iterative per-filter MCMC fitting",
+     "locator": "1905.07422.layout.txt p6 §3 L346-362"
+    },
+    {
+     "op": "four feature-extraction methods",
+     "locator": "1905.07422.layout.txt p7 §4.1 L418-432"
+    },
+    {
+     "op": "two augmentation methods (SMOTE, MVG)",
+     "locator": "1905.07422.layout.txt p9 §4.2 L514-530"
+    },
+    {
+     "op": "three classifiers with grid-searched hyperparameters",
+     "locator": "1905.07422.layout.txt p10 §4.3 L542-565"
+    },
+    {
+     "op": "leave-one-out cross-validation of 24 pipelines",
+     "locator": "1905.07422.layout.txt p10 §5 L574-590"
+    },
+    {
+     "op": "compare completeness/purity/accuracy by component",
+     "locator": "1905.07422.layout.txt p14 §5.1 L885-908"
+    },
+    {
+     "op": "select PCA+MVG+RF pipeline and report confusion matrices",
+     "locator": "1905.07422.layout.txt p15 §5.1 L985-1004"
+    }
+   ],
+   "chain_length": 10
+  }
+ ],
+ "branches": [
+  {
+   "id": "V19-B01",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "Build a new 7-parameter piecewise parametric model with a plateau",
+   "alternatives_visible": [
+    "Bazin et al. 2009 (5 params)",
+    "Karpenka et al. 2013 (6 params)",
+    "Sanders et al. 2015 piecewise model (11 params)",
+    "interpolating data points"
+   ],
+   "rejected_named": true,
+   "rejected_option": "Bazin, Karpenka, Sanders models; interpolation",
+   "reason": "existing analytic models best suited to SNe Ia with limited flexibility; ours fits IIP plateau better (Fig 3); Sanders model not robust without informative priors and has sharp transitions",
+   "locator": "1905.07422.layout.txt p4 §3 L205-214; p5 L262-289",
+   "quote": "majority of existing analytical light curve models are"
+  },
+  {
+   "id": "V19-B02",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "Omit the SN Ia secondary red peak from the model",
+   "alternatives_visible": [
+    "model including a second peak"
+   ],
+   "rejected_named": true,
+   "rejected_option": "explicit second-peak component",
+   "reason": "second peak manifests as a plateau in i/z; pipelines classify Ia reliably without it",
+   "locator": "1905.07422.layout.txt p5 §3 L290-298",
+   "quote": "One common Type Ia SN light curve feature missing"
+  },
+  {
+   "id": "V19-B03",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "Double-Gaussian prior on plateau duration gamma (peaks 5 and 60 d) instead of uniform",
+   "alternatives_visible": [
+    "uniform prior (used for all other parameters)"
+   ],
+   "rejected_named": true,
+   "rejected_option": "uniform prior on gamma",
+   "reason": "fits fall in two solution families (plateau / no plateau); removes degeneracy between steep exponential and linear decline",
+   "locator": "1905.07422.layout.txt p5 §3 L285-296",
+   "quote": "prior of γ to a double Gaussian peaked at 5 and 60 days."
+  },
+  {
+   "id": "V19-B04",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "Reparameterize t1 as gamma = t1 - t0",
+   "alternatives_visible": [
+    "fitting t1 directly"
+   ],
+   "rejected_named": true,
+   "rejected_option": "t1 parameterization",
+   "reason": "better represents plateau duration, fewer degeneracies when fitting",
+   "locator": "1905.07422.layout.txt p4 §3 L236-244",
+   "quote": "purposes of fitting, we reparameterize t1 into a new pa-"
+  },
+  {
+   "id": "V19-B05",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "Iterative two-pass fitting (per-filter fits, combined posterior as prior) and stop after one extra iteration",
+   "alternatives_visible": [
+    "single independent per-filter fits",
+    "repeating the iteration more times"
+   ],
+   "rejected_named": true,
+   "rejected_option": "independent per-filter fits (peak times disagree, Fig 4); further iterations",
+   "reason": "filters with few points give inconsistent peak times; a single iteration is sufficient for most events. Ambiguity: could be tagged infer (fit procedure for parameter values); tagged generate as model-construction choice",
+   "locator": "1905.07422.layout.txt p6 §3 L346-362; p6 L301-308",
+   "quote": "tion of fitting. We can apply this process repeatedly, but"
+  },
+  {
+   "id": "V19-B06",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "Check by eye each Type Ibc and SLSN member's SNID classification",
+   "alternatives_visible": [
+    "accept SNID label",
+    "flag SNID misclassification (low-SNR events match Ia)"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "SNID misclassifications may exist, smallest classes checked to ensure purity; per-object outcomes not reported",
+   "locator": "1905.07422.layout.txt p4 §2 L192-197",
+   "quote": "Tonry 2007). To partially counteract this, we check each"
+  },
+  {
+   "id": "V19-B07",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Exclude rare transient types from the class set",
+   "alternatives_visible": [
+    "include TDEs",
+    "include fast-evolving luminous transients"
+   ],
+   "rejected_named": true,
+   "rejected_option": "TDEs, FELTs",
+   "reason": "sample sizes too small",
+   "locator": "1905.07422.layout.txt p4 §2 L181-192",
+   "quote": "and fast-evolving luminous transients (Drout"
+  },
+  {
+   "id": "V19-B08",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Drop 7 SNe with fewer than two 3-sigma detections in three or more filters; footnote reruns final classifier on them",
+   "alternatives_visible": [
+    "keep the 7 events"
+   ],
+   "rejected_named": true,
+   "rejected_option": "the 7 excluded events (6 Ia, 1 II); 5 of 6 Ia and the II were classified correctly with low confidence",
+   "reason": "stated detection criterion",
+   "locator": "1905.07422.layout.txt p4 §2 L205-244",
+   "quote": "light curves that contain fewer than two 3σ detections in"
+  },
+  {
+   "id": "V19-B09",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Exclude y-band photometry",
+   "alternatives_visible": [
+    "use yP1 data"
+   ],
+   "rejected_named": true,
+   "rejected_option": "yP1-band data",
+   "reason": "significantly shallower depth and poorer cadence",
+   "locator": "1905.07422.layout.txt p2 §2 L131-159",
+   "quote": "of ≈ 21.7 mag; we do not use the yP1 -band data in this"
+  },
+  {
+   "id": "V19-B10",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "For LC features, renormalize for luminosity distance but do not correct time dilation",
+   "alternatives_visible": [
+    "apply time-dilation correction"
+   ],
+   "rejected_named": true,
+   "rejected_option": "time-dilation correction",
+   "reason": "neglecting it improves classification accuracy",
+   "locator": "1905.07422.layout.txt p7 §4.1 L419-432",
+   "quote": "tance; however, we find that neglecting time dila-"
+  },
+  {
+   "id": "V19-B11",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Number of PCA components: first 6 per filter",
+   "alternatives_visible": [
+    "other numbers of components (implied by explained-variance criterion)"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "explained variance ~99.9%",
+   "locator": "1905.07422.layout.txt p7 §4.1 L409-417",
+   "quote": "first 6 PCA components from each filter, corre-"
+  },
+  {
+   "id": "V19-B12",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Augment by SMOTE/MVG synthesis rather than by many MCMC posterior draws",
+   "alternatives_visible": [
+    "augment with posterior draws",
+    "SMOTE",
+    "MVG"
+   ],
+   "rejected_named": true,
+   "rejected_option": "augmentation with MCMC posterior draws",
+   "reason": "posterior draws would cluster solutions in feature space and bias training",
+   "locator": "1905.07422.layout.txt p9 §4.2 L514-519",
+   "quote": "from the MCMC posteriors. However, this would lead to"
+  },
+  {
+   "id": "V19-B13",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Classifier comparison: RF performs better and more uniformly",
+   "alternatives_visible": [
+    "SVM",
+    "RF",
+    "MLP"
+   ],
+   "rejected_named": true,
+   "rejected_option": "SVM, NN",
+   "reason": "classification method has largest impact on completeness; RF best",
+   "locator": "1905.07422.layout.txt p14 §5.1 L891-908",
+   "quote": "noticeably better, and more uniformly, than the SVM"
+  },
+  {
+   "id": "V19-B14",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Focus on PCA + MVG + RF pipeline (highest purity/completeness), while stating it does not significantly outperform others",
+   "alternatives_visible": [
+    "other 23 pipelines"
+   ],
+   "rejected_named": true,
+   "rejected_option": "the other 23 pipelines (Fig 8 labels)",
+   "reason": "highest purity (72%) and completeness (78%)",
+   "locator": "1905.07422.layout.txt p15 §5.1 L985-991",
+   "quote": "the 5 SN classes. This pipeline consists of PCA feature"
+  },
+  {
+   "id": "V19-B15",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Keep data augmentation after testing best pipeline without it",
+   "alternatives_visible": [
+    "no augmentation"
+   ],
+   "rejected_named": true,
+   "rejected_option": "original training set without augmentation",
+   "reason": "minority-class completeness (Ibc, IIn) falls by 20-40% without augmentation",
+   "locator": "1905.07422.layout.txt p19 §7 L1444-1458",
+   "quote": "classes, like Type Ibc and IIn SNe, falls by 20 − 40%."
+  },
+  {
+   "id": "V19-B16",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "Attribute three high-confidence misclassifications (Fig 12) to inherent feature-space overlap rather than data quality",
+   "alternatives_visible": [
+    "poorly sampled light curves",
+    "inherent overlap in feature space",
+    "rapid linear decline (IIL)"
+   ],
+   "rejected_named": true,
+   "rejected_option": "poor data quality",
+   "reason": "high data quality and narrow posteriors",
+   "locator": "1905.07422.layout.txt p15 §5.2 L980-1013",
+   "quote": "Given the high data quality, these misclassifications are due to inherent overlap"
+  }
+ ],
+ "conclusions_depth": [
+  {
+   "id": "V19-C1",
+   "conclusion": "Five-class photometric classification reaches ~90% average accuracy given complete light curves and redshift",
+   "channels_claimed": [
+    "gP1 photometry",
+    "rP1 photometry",
+    "iP1 photometry",
+    "zP1 photometry",
+    "spectroscopic redshift (absolute magnitude anchor)"
+   ],
+   "n_channels_claimed": 5,
+   "locator": "1905.07422.layout.txt p18 §7 L1426-1433",
+   "quote": "Our pipeline requires a redshift, which simplifies the",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "V19-C2",
+   "conclusion": "SLSNe easily separable due to high luminosity and long durations",
+   "channels_claimed": [
+    "light-curve duration (photometry)",
+    "luminosity (photometry + redshift)"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "1905.07422.layout.txt p12 §5.1 L793-796",
+   "quote": "ble from the other classes due to their high luminosity",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "V19-C3",
+   "conclusion": "Type II success mainly due to plateau phase",
+   "channels_claimed": [
+    "light-curve shape (plateau)"
+   ],
+   "n_channels_claimed": 1,
+   "locator": "1905.07422.layout.txt p14 §5.1 L824-832",
+   "quote": "This overall high success rate is mainly due to the pres-",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "V19-C4",
+   "conclusion": "Peak magnitudes are the most important interpretable features (RF gini importance, author-reported)",
+   "channels_claimed": [
+    "peak magnitude per filter (photometry + redshift)",
+    "durations/other parameters"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "1905.07422.layout.txt p14 §5.1 L955-962",
+   "quote": "peak magnitudes are the most important interpretable",
+   "measured_depth": "not_measured"
+  }
+ ],
+ "facts_for_shape": [
+  {
+   "id": "V19-F1",
+   "fact": "Label source: spectroscopic classifications via SNID template matching; SNID misclassification possible",
+   "locator": "1905.07422.layout.txt p3 §2 L167-197",
+   "quote": "classified using the SNID software package (Blondin &"
+  },
+  {
+   "id": "V19-F2",
+   "fact": "No held-out-epoch prediction: evaluation is leave-one-out CV on complete light curves; performance on partial light curves (real-time) not evaluated",
+   "locator": "1905.07422.layout.txt p18 §7 L1400-1412",
+   "quote": "While our method can work on partial light curves for"
+  },
+  {
+   "id": "V19-F3",
+   "fact": "Model parameters are partly degenerate (A not peak flux, t0 not explosion/peak time; correlations listed)",
+   "locator": "1905.07422.layout.txt p4 §3 L227-234; p6 L338-345",
+   "quote": "effect, some degeneracies between the parameters exist."
+  },
+  {
+   "id": "V19-F4",
+   "fact": "Posteriors well constrained for well-sampled light curves, poorly for sparse ones; posterior draws propagate to classification uncertainty",
+   "locator": "1905.07422.layout.txt p6 §3 L309-323",
+   "quote": "but more poorly constrained for sparse light curves (e.g.,"
+  },
+  {
+   "id": "V19-F5",
+   "fact": "No per-object fit-quality rejection criterion is reported; the only object cut is the detection count; authors state further information-content cuts may be necessary",
+   "locator": "1905.07422.layout.txt p19 §7 L1478-1492",
+   "quote": "that remove light curves with a minimal information"
+  },
+  {
+   "id": "V19-F6",
+   "fact": "Likelihood includes observational error plus a white-noise scatter term; PyMC Metropolis-Hastings",
+   "locator": "1905.07422.layout.txt p5 §3 L285-298",
+   "quote": "a scalar white noise scatter term added in quadrature."
+  },
+  {
+   "id": "V19-F7",
+   "fact": "Spectroscopic follow-up magnitude limit ~1.5 mag shallower than survey depth (selective labels relative to photometric sample)",
+   "locator": "1905.07422.layout.txt p4 §2 L198-204",
+   "quote": "low up was generally shallower by about 1.5 mag relative"
+  },
+  {
+   "id": "V19-F8",
+   "fact": "Pipeline code released on GitHub excluding the MCMC fitting step",
+   "locator": "1905.07422.layout.txt p10 §4.3 L567-569",
+   "quote": "An example of a complete pipeline, excluding the"
+  }
+ ],
+ "item_template_evidence": [
+  {
+   "id": "V19-I1",
+   "question_form": "infer: given a complete light curve, a redshift and a list of SN classes, what is the type of the transient",
+   "locator": "1905.07422.layout.txt p18 §7 L1422-1428",
+   "quote": "and a list of SN classes, what is the type of a given tran-"
+  },
+  {
+   "id": "V19-I2",
+   "question_form": "per-object fit of the 7-parameter model in each filter via iterative MCMC producing a posterior (parameter estimation; no held-out epochs scored)",
+   "locator": "1905.07422.layout.txt p6 §3 L346-356",
+   "quote": "We fit the light curve in each of the 4 filters indepen-"
+  }
+ ],
+ "zero_contribution": false,
+ "notes": "All 1625 layout lines read (21 pages incl. references). Branches are overwhelmingly per_study pipeline/model-design choices with named rejections; per_object human choices are limited to by-eye label checks (V19-B06) and a post-hoc explanation of three misclassifications (V19-B16). Per-object fitting is a uniform chain: no per-object model-family choice, no per-object fit rejection, no held-out epoch forecasting. Figure 12 events are not named in the text."
+}

@@ -1,0 +1,2289 @@
+Draft version October 28, 2019
+Typeset using LATEX twocolumn style in AASTeX62
+
+Supernova Photometric Classification Pipelines Trained on Spectroscopically Classified Supernovae from the
+Pan-STARRS1 Medium-Deep Survey
+V. A. Villar,1 E. Berger,1 G. Miller,1 R. Chornock,2 A. Rest,3 D. O. Jones,4 M. R. Drout,5 R. J. Foley,6
+R. Kirshner,1, 7 R. Lunnan,8 E. Magnier,9 D. Milisavljevic,10 N. Sanders,11 and D. Scolnic12
+
+arXiv:1905.07422v2 [astro-ph.HE] 25 Oct 2019
+
+1 Center for Astrophysics | Harvard & Smithsonian, 60 Garden Street, Cambridge, MA 02138-1516, USA
+2 Astrophysical Institute, Department of Physics and Astronomy, 251B Clippinger Lab, Ohio University, Athens, OH 45701-2942, USA
+3 Space Telescope Science Institute, 3700 San Martin Dr., Baltimore, MD 21218, USA
+4 Department of Astronomy and Astrophysics, University of California, Santa Cruz, CA 92064,USA
+5 Department of Astronomy and Astrophysics, University of Toronto, 50 George Street, Toronto, Ontario, M5S 3H4 Canada
+6 Department of Astronomy and Astrophysics, University of California, Santa Cruz, CA 95064
+7 Gordon and Betty Moore Foundation, 1661 Page Mill Road, Palo Alto, CA 94028
+8 The Oskar Klein Centre & Department of Astronomy, Stockholm University, AlbaNova, SE-106 91 Stockholm, Sweden
+9 Institute for Astronomy, University of Hawaii at Manoa, 2680 Woodlawn Dr., Honolulu, HI 96822, USA
+10 Department of Physics and Astronomy, Purdue University, 525 Northwestern Avenue, West Lafayette, IN 47906, USA
+11 WarnerMedia Applied Analytics, 535 Boylston St., Boston, MA 02116
+12 Department of Physics, Duke University, 120 Science Drive, Durham, NC, 27708, USA
+
+(Received; Revised; Accepted)
+
+Submitted to ApJ
+ABSTRACT
+Photometric classification of supernovae (SNe) is imperative as recent and upcoming optical timedomain surveys, such as the Large Synoptic Survey Telescope (LSST), overwhelm the available resources for spectrosopic follow-up. Here we develop a range of light curve classification pipelines,
+trained on 513 spectroscopically-classified SNe from the Pan-STARRS1 Medium-Deep Survey (PS1MDS): 357 Type Ia, 93 Type II, 25 Type IIn, 21 Type Ibc, and 17 Type I SLSNe. We present a new
+parametric analytical model that can accommodate a broad range of SN light curve morphologies,
+including those with a plateau, and fit this model to data in four PS1 filters (gP1 rP1 iP1 zP1 ). We test a
+number of feature extraction methods, data augmentation strategies, and machine learning algorithms
+to predict the class of each SN. Our best pipelines result in ≈ 90% average accuracy, ≈ 70% average
+purity, and ≈ 80% average completeness for all SN classes, with the highest success rates for Type Ia
+SNe and SLSNe and the lowest for Type Ibc SNe. Despite the greater complexity of our classification
+scheme, the purity of our Type Ia SN classification, ≈ 95%, is on par with methods developed specifically for Type Ia versus non-Type Ia binary classification. As the first of its kind, this study serves as
+a guide to developing and training classification algorithms for a wide range of SN types with a purely
+empirical training set, particularly one that is similar in its characteristics to the expected LSST main
+survey strategy. Future work will implement this classification pipeline on ≈ 3000 PS1/MDS light
+curves that lack spectroscopic classification.
+Keywords: astronomical databases: surveys — supernovae: general — techniques: photometric
+1. INTRODUCTION
+
+Corresponding author: Ashley Villar
+vvillar@cfa.harvard.edu
+
+Optical time-domain astronomy has entered a new
+era of large photometric datasets thanks to current
+and upcoming deep and wide-field surveys, such as the
+Panoramic Survey Telescope and Rapid Response System (Pan-STARRS; Kaiser et al. 2010), the Asteroid
+Terrestrial-impact Last Alert System (ATLAS; Jedicke
+
+2
+
+Villar et al.
+
+et al. 2012), the Zwicky Transient Facility (ZTF; Kulkarni 2018), the Large Synoptic Survey Telescope (LSST;
+Ivezic et al. 2011), and the Wide Field Infrared Survey
+Telescope (WFIRST; Spergel et al. 2015). The current
+surveys are already discovering ∼ 104 SNe per year, a
+hundred-fold increase over the rate of discovery only a
+decade ago. LSST will increase this discovery rate to
+∼ 106 SNe per year.
+Supernovae have traditionally been classified based on
+their spectra (Filippenko 1997). In the early days this
+was accomplished through visual inspection, then with
+template-matching techniques (e.g., SNID; Blondin &
+Tonry 2007), and most recently with deep learning techniques (e.g., Muthukrishna et al. 2019b). However, given
+the current discovery rate, and the anticipated LSST
+discovery rate, spectroscopic follow up is severely limited. The consequence of this fact is twofold. First,
+we need a way to effectively identify “needles” in the
+haystack – the events that will yield the greatest scientific return with detailed follow up observations (e.g.,
+spectroscopy, radio, X-ray). Second, we need to devise
+methods to extract as much information and physical
+insight as possible from the “haystack” of SNe for which
+no spectroscopy or other data will be available. Here,
+we specifically focus on the latter issue and explore the
+question: Given complete optical light curves, can we
+classify SNe into their main spectroscopic classes (Ia,
+Ibc, IIP, etc.)?
+Previous studies in this area have largely focused on
+the simpler task of separating thermonuclear Type Ia
+SNe from non-Type Ia SNe, motivated by the use of
+Type Ia SNe as standardizable cosmological candles, and
+taking advantage of their uniformity (e.g., Möller et al.
+2016; Kimura et al. 2017). Separating the classes of
+core-collapse SNe (CCSNe) is a broader and more challenging problem. First, unlike Type Ia SNe, CCSNe
+exhibit broad diversity between and within each class in
+terms of basic properties such as luminosity, timescale,
+and color (e.g., Drout et al. 2011; Taddia et al. 2013;
+Sanders et al. 2015; Nicholl et al. 2017; Villar et al.
+2017). This is due to their wide variety of progenitor systems, energy sources, and circumstellar environments. Second, the overall diversity of CCSNe is less
+thoroughly explored, due to small sample sizes and few
+published uniform studies. As a consequence, most previous works on photometric classification of CCSNe have
+relied on simulated datasets to train and test classification algorithms (e.g., Richards et al. 2011; Charnock &
+Moss 2017; Kimura et al. 2017; Ishida et al. 2018). Simulated datasets are based on strong assumptions about
+the underlying populations of each SN class and often
+
+do not reflect the true event diversity, or the effects of
+actual survey conditions.
+Here, we approach the question of SN photometric
+classification using a large and uniform dataset of 513
+spectroscopically-classified SNe from the PS1-MDS. Importantly, the characteristics of this dataset in terms
+of filters, depth, and cadence are the closest available
+analogue to the LSST main survey design. We fit the
+observed light curves with a flexible analytical model
+that can accommodate all existing light curve shapes,
+using a Markov chain Monte Carlo (MCMC) approach.
+We then train and evaluate 24 classification pipelines
+that span different feature extraction, data augmentation, and classifications methods. We further use the
+posteriors of our MCMC fits to determine overall uncertainties on our classifications.
+The paper is organized as follows. In §2 we introduce
+the PS1-MDS dataset utilized here. In §3 we describe
+our analytical light curve model and iterative MCMC
+fitting approach. In §4 we describe the key components
+of our various classification pipelines, including feature
+extraction, data augmentation, and classification approaches. We present the results of our classifications
+in §5, compare to previous classifications efforts in §6,
+and discuss limitations and future directions in §7.
+Throughout this paper, we assume a flat ΛCDM cosmology with ΩM = 0.286, ΩΛ = 0.712 and H0 = 69.3
+km s−1 Mpc−1 (Hinshaw et al. 2013).
+
+2. PS1-MDS SUPERNOVA LIGHT CURVES AND
+
+SPECTROSCOPIC CLASSIFICATIONS
+Pan-STARRS1 (PS1) is a wide-field survey telescope with a 1.8 m diameter primary mirror located
+on Haleakala, Hawaii (Kaiser et al. 2010). The PS1 1.4
+gigapixel camera (GPC1) is an array of 60 4800 × 4800
+pixel detectors with a pixel scale of 0.00 258 and an overall field of view of 7.1 deg2 . The PS1 survey used five
+broadband filters, gP1 rP1 iP1 zP1 yP1 . The details of the
+filters and the photometry system are given in Stubbs
+et al. (2010) and Tonry et al. (2012).
+The PS1-MDS, conducted in 2010 − 2014, consisted
+of ten single-pointing fields for a total area of about 70
+deg2 (Chambers et al. 2016). About 25% of the overall
+survey observing time was dedicated to the MDS fields,
+which were observed with a cadence of about 3 days
+per filter in gP1 rP1 iP1 zP1 to a 5σ depth of ≈ 23.3 mag
+per visit. The typical sequence consisted of gP1 and
+rP1 on the same night, followed by iP1 and then zP1
+on subsequent nights. Observations in yP1 -band were
+concentrated near full moon with a shallower 5σ depth
+of ≈ 21.7 mag; we do not use the yP1 -band data in this
+
+3
+
+Supernova Photometric Classification
+
+22.5
+Mi
+
+20.0
+17.5
+SLSNe
+SNII
+SNIIn
+
+15.0
+0.0
+
+0.5
+
+1.0
+
+Redshift
+
+SNIbc
+SNIa
+
+1.5
+
+Figure 1. Peak iP1 -band absolute magnitude versus redshift for the sample of PS1-MDS spectroscopically-classified SNe used
+in this study. We apply a cosmological k-correction to the peak magnitudes, but do not correct for the intrinsic spectral energy
+distribution of the various SNe. The sample includes five SN classes: Ia (green circle), Ibc (red downward triangle), II (blue
+sqaure), IIn (purple upward triangle), and SLSNe (yellow star).
+
+study due to its significantly shallower depth and poorer
+cadence.
+The reduction, astrometry, and stacking of the nightly
+images were carried out by the Pan-STARRS1 Image Processing Pipeline (IPP; Magnier et al. 2016b,a;
+Waters et al. 2016). The nightly stacks were then
+transferred to the Harvard FAS Research Computing Odyssey cluster for a transient search using the
+photpipe pipeline, previously used in the SuperMACHO and ESSENCE surveys (Rest et al. 2005; Miknaitis
+et al. 2007) and described in detail in our previous analyses of PS1-MDS data (Rest et al. 2014; Scolnic et al.
+2017; Jones et al. 2018).
+In the full PS1-MDS dataset we have identified 5235
+likely SNe (Jones et al. 2017, 2018). During the course
+of the survey, spectroscopic observations were obtained
+for over 500 events using the MMT 6.5-m telescope, the
+
+Magellan 6.5-m telescopes, and the Gemini 8-m telescopes. We further obtained spectroscopic host galaxy
+redshifts for 3147 SN-like transients. The transients
+spectroscopically and photometrically classified as Type
+Ia SNe were published in Jones et al. (2017); the light
+curves and photometric classification of the remaining
+objects will be presented in future work. Similarly, the
+bulk of the Type IIP SNe (76 events) were published in
+Sanders et al. (2015), and the Type I SLSNe (17 events)
+were published in Lunnan et al. (2018). Here we focus
+on 513 spectroscopically classified events, which were
+classified using the SNID software package (Blondin &
+Tonry 2007). The sample contains 357 Type Ia SNe, 93
+
+4
+
+Villar et al.
+
+3. ANALYTICAL LIGHT CURVE MODEL AND
+
+FITTING
+
+1 Three of the 17 SLSNe (PS1-12cil, PS1-10ahf, and PS1-13or)
+do not have spectroscopic host redshift measurements. Lunnan
+et al. (2018) estimated their redshifts (0.32, 1.10 and 1.52, respectively) from strong rest-frame UV features for the z > 1 objects
+and SN Ic-like post-peak features for PS1-12cil.
+2 For completeness, we ran our final classifier on these light
+curves as well and found that 5 of the 6 Type Ia SNe, as well as
+the one Type II SN were actually correctly classified, albeit with
+a low classification confidence.
+
+A
+
+Model Flux
+
+IIP/L SNe, 25 Type IIn SNe, 21 Type Ibc SNe, and 17
+Type I SLSNe1 .
+Our sample is limited events with high-confidence
+spectroscopic classifications with a statistically useful
+number of members in each class. As part of the PS1MDS we discovered several other rare transients, including tidal disruption events (Gezari et al. 2012; Chornock
+et al. 2014) and fast-evolving luminous transients (Drout
+et al. 2014), but the sample sizes for those are too small
+for inclusion in this study. It is possible that SNID misclassification exist in our dataset; e.g., low SNR events
+are more likely to match to Type Ia SNe (Blondin &
+Tonry 2007). To partially counteract this, we check each
+member of our Type Ibc and SLSNe classes (our smallest classes) by eye to ensure high purities. Finally, we
+note that the magnitude limit for our spectroscopic follow up was generally shallower by about 1.5 mag relative
+to the PS1-MDS nominal per-visit depth. This does not
+affect our ability to test classifiers on the spectroscopic
+sample itself, but will be considered when extending our
+method to the full photometric dataset in future work
+(see §6).
+The light curves range from a minimum of 3 to ≈ 150
+total data points in any filter with a signal-to-noise ratio
+of S/N > 3, with a median of about 30 data points in
+each light curve. We have only eliminated events with
+light curves that contain fewer than two 3σ detections in
+three or more filters, eliminating 7 SNe from our sample2
+(6 Type Ia SNe and 1 Type II SN) leaving 506 remaining
+SNe for our training set.
+In Figure 1 we plot the peak absolute iP1 magnitude
+versus redshift for our spectroscopic sample. The sample
+spans Mi ≈ −14.5 to −22.5 and extends in redshift to
+z ≈ 1.6, with only the brightest classes (SLSNe and
+Type IIn) being observed at z & 0.6. Specifically, we
+find a range of Mi ≈ −14.5 to −18.5 mag for the Type
+II SNe, ≈ −16.5 to −19.5 mag for the Type Ibc SNe,
+−16 to −20.5 for the Type IIn SNe, and ≈ −20.5 to
+−22.5 for the SLSNe.
+
+t0
+
+trise
+
+t1
+
+tfall
+
+Model Phase
+Figure 2. Example model light curves based on Equation 1
+highlighting how each of the free parameters affects the light
+curves. The parameters are individually varied from low
+(blue) to high (red) values.
+
+Rather than interpolating data points, a common
+method to standardize data is to fit a simple parametric
+model to the light curves (e.g., Bazin et al. 2009; Newling et al. 2011; Karpenka et al. 2013). However, the
+majority of existing analytical light curve models are
+best-suited for Type Ia SNe and have limited flexibility for the full observed range of SN light curve shapes.
+Here we present and fit our data with a new parametric
+piecewise model that is designed to be flexible enough
+for a broad range of light curve morphologies:
+
+
+
+A+β(t−t0 )
+−(t−t0 )/τrise
+1+e
+F =
+ (A+β(t1 −t0 ))e−(t−t1 )/τfall
+1+e−(t−t0 )/τrise
+
+t < t1
+
+(1)
+
+t ≥ t1
+
+The model contains seven free parameters, whose effects on the resulting light curves are shown in Figure 2.
+Although each parameter has a unique and interpretable
+effect, some degeneracies between the parameters exist.
+For example, the parameter A affects the amplitude of
+the light curve, although its value does not exactly correspond to the peak flux. Similarly, t0 acts as a temporal
+shift in the light curve, but does not directly correspond
+to the time of explosion or the time of peak. The parameters, trise , t1 , and tfall control the rise, plateau onset,
+and fall time of the light curve, respectively. For the
+purposes of fitting, we reparameterize t1 into a new parameter γ ≡ t1 − t0 , which better represents the plateau
+duration of the light curve and results in fewer degeneracies when fitting. Finally, the parameter β controls
+the slope of the plateau phase.
+
+5
+
+1.0
+
+SN IIP
+Normalized Flux
+
+Normalized Flux
+
+Supernova Photometric Classification
+
+0.5
+0.0
+
+0
+
+100
+
+Time (days)
+Our Model
+
+SN Ia
+
+1.0
+0.5
+0.0
+
+Bazin+ 2009
+
+0
+
+50
+
+Time (days)
+
+Karpenka+ 2012
+
+Figure 3. A comparison of our analytical light curve model (Equation 1; black line) to that of Bazin et al. (2009) (blue line)
+and Karpenka et al. (2013) (yellow line) for i-band lightcurves of both a Type IIP SN (Left) and a Type Ia SN (Right). Our
+model performs similarly for a Type Ia SN, but is superior at fitting SNe with a light curve plateau.
+
+This functional form is similar to those presented
+in Bazin et al. (2009) (with five free parameters) and
+Karpenka et al. (2013) (with six free parameters), but
+incorporates a plateau component. In Figure 3 we show
+examples of fits to a Type IIP SN and a Type Ia SN with
+our model, the Bazin model and the Karpenka model.
+Our model provides a better fit to both the fast rise time
+and plateau phase of the Type IIP SN light curve, and
+is flexible enough to also fit the smoother light curve of
+a Type Ia SN. We note that Sanders et al. (2015) presented a similar piecewise model with 11 free parameters
+to fit a sample of 76 PS1-MDS Type II SNe; however,
+Lochner et al. (2016) found that this model was not robust when fitting data without the use of informative
+priors, due to the large number of free parameters. Additionally, the sharp transitions between rise and decline
+in the Sanders model make it difficult to fit CCSNe with
+smooth peaks.
+One common Type Ia SN light curve feature missing
+from our model is the second peak in the red light curves
+at about 1 month post-explosion (e.g., Kasen 2006; Mandel et al. 2011; Dhawan et al. 2015). We find that this
+feature manifests itself as a “plateau” in our analytical
+model in the i- and z-bands. However, as we show in
+§5, our classification pipelines can reliably classify Type
+Ia SNe without explicitly including a second peak in our
+model.
+
+Table 1. Parameter Descriptions and Priors
+Parameter
+
+Description
+
+Prior
+
+τrise (days)
+τfall (days)
+t0 (MJD)
+A
+β (flux/day)
+c (flux)
+γ (days)
+
+Rise Time
+Decline Time
+“Start” Time
+Amplitude
+Plateau slope
+Baseline Flux
+Plateau duration
+
+U(0.01,50)
+U(1,300)
+U(tmin − 50, tmax + 300
+U(3σ,100 Fmax )
+U(−Fmax /150,0)
+U(−3σ,3σ)
+(2/3)N (5, 5) + (1/3)N (60, 30)
+
+We fit the light curves using PyMC (V2; Patil et al.
+2010), a Python module that implements a MetropolisHastings MCMC sampling algorithm. We assume uniform priors on all parameters with the exception of γ.
+We found that light curves typically fall in one of two
+solutions: light curves with a long plateau (in the case
+of Type IIP SNe) and light curves that lack a plateau
+(all other types). To best reflect this fact, we set the
+prior of γ to a double Gaussian peaked at 5 and 60 days.
+This prior helps to remove a degeneracy in which a steep
+exponential decline can resemble a linear decline. The
+priors are listed in Table 1. We use a standard likelihood
+function, incorporating both the observational error and
+a scalar white noise scatter term added in quadrature.
+
+6
+
+Villar et al.
+
+Flux
+
+Iteration 1
+
+g
+r
+
+i
+z
+
+1500
+1000
+500
+0
+Iteration 2
+1500
+1000
+500
+0
+0 50 100 150 200 250
+Observed Time (days)
+
+Figure 4. Example best-fit light curves in the 4 PS1 filters
+after the first (top) and second (bottom) MCMC iterations.
+Following the first iteration, the peak time varies significantly
+between the filters due to differences in the data quality and
+time sampling. The best-fit solution of the second iteration,
+using the combined posteriors from the first iteration, provides much better agreement in the light curve properties.
+
+shown in Figure 4. In this example, the peak times in gand i are in disagreement with r- and z due to poorlysampled data in the former two filters. Following the
+second iteration, this disagreement is removed, leading
+to more realistic fits.
+Representative light curves and their best fits are
+shown in Figure 5. The solutions are constrained for
+well-sampled light curves (e.g., the Type Ia SN shown)
+but more poorly constrained for sparse light curves (e.g.,
+the SLSN shown). Crucially, because we have access to
+the full posterior of light curve solutions, we can feed
+many samples of the posterior through our classification
+algorithm to quantify the classification uncertainty for
+each event.
+Unless otherwise specified, we use the observer-frame
+light curve fits to extract features. We then include the
+redshift to transform to absolute magnitudes, including
+a cosmological k-correction: M = m − 5 log(dL /10pc) +
+2.5 log(1 + z), where dL is the luminosity distance. We
+do not apply k-corrections to account for the intrinsic
+spectral energy distribution of the various SN types.
+
+4. CLASSIFICATION PIPELINES
+
+We find that several of our model parameters are correlated (degenerate) with one another. In particular, the
+amplitude (A) is negatively correlated with both the rise
+time (trise ) and plateau duration (γ) but negatively correlated with the start time (t0 ). Additionally, duration
+is negatively correlated to both the rise time and start
+time, while the rise time is positively correlated with the
+start time.
+We fit the light curve in each of the 4 filters independently, in the observer frame, but use an iterative fitting routine to incorporate combined information from
+all filters. We first run the MCMC to convergence on
+each filter independently with the same set of priors.
+We then combine the marginalized posteriors (i.e., we
+ignore parameter covariances) from each filter and use
+the combined posterior as a new prior for a second iteration of fitting. We can apply this process repeatedly, but
+we find that a single iteration is sufficient for the vast
+majority of events. Our iterative procedure is essential
+for fitting light curves in which some filters have significantly fewer data points, a situation that is common in
+photometric surveys due to differences in relative sensitivity, the intrinsic colors and color evolution of SNe, and
+varying observing conditions. An example of the bestfit solutions given by the first and second iterations is
+
+For each SN, our MCMC fitting generates posterior
+distributions for the model light curve parameters. To
+train a classifier, we need to extract features from the
+light curves generated by the fitted parameters. We test
+several methods of feature extraction, data augmentation and classification. We describe each method in the
+following subsections, and we compare the algorithms
+in terms of classification purity, completeness, and accuracy in §5. Purity (also called precision) is defined as
+the fraction of events in a predicted class that are correctly identified; for example, if our classifier predicts
+a total of 100 Type Ia SNe, but only 70 of those are
+spectroscopically-classified as Type Ia SNe, the purity
+would be 0.7. Completeness (also called recall ) is defined as the fraction of events in an observed class that
+are correctly identified; for example, if our sample contains 100 spectrosopically-classified Type Ia SNe, but
+our classifier has only identified 70 of those events as
+Type Ia SNe, then our completeness would be 0.7. Accuracy is defined as the total fraction of events that are
+classified correctly as being a member or not a member
+of a given class; for example, if a sample of 100 SNe
+contains 70 spectrosopically-classified Type Ia SNe, and
+our classifier correctly identifies the 70 Type Ia SNe but
+incorrectly classifies 20 more CCSNe as Type Ia SNe,
+the overall accuracy is 0.8. The three terms are mathe-
+
+7
+
+Supernova Photometric Classification
+
+1500
+
+PSc000011
+SNIa
+
+1000
+
+15000
+
+PSc000038
+SNIa
+
+4000
+
+PSc000091
+SNIa
+
+6000
+
+10000
+4000
+
+Flux
+
+500
+0
+
+5000
+50
+
+0
+
+50
+
+100
+
+0
+
+50
+
+0
+
+50
+
+100
+
+PSc020075
+SNIbc
+
+50
+
+0
+
+50
+
+100
+
+0
+
+0
+
+50
+
+0
+
+50
+
+100
+
+0
+
+50
+
+100
+
+0
+
+50
+
+0
+
+50
+
+100
+
+PSc070763
+SNIIn
+
+2000
+
+2000
+
+50
+
+0
+4000
+
+PSc110405
+SLSNe
+
+4000
+
+2000
+
+5000
+
+2000
+
+2000
+
+4000
+
+PSc000098
+SNII
+
+10000
+
+0
+
+PSc000174
+SNIa
+
+50
+
+MJD - t0, g
+
+0
+
+50
+
+100
+
+0
+
+50
+
+0
+
+50
+
+100
+
+Figure 5. Example light curves and sample posterior draws of associated model fits in the 4 filters for various SN types. The
+model is described by Equation 1 and the fitting procedure is described in §3.
+
+matically defined as follows:
+TP
+(2)
+TP + FP
+TP
+Completeness =
+(3)
+TP + FN
+TP + TN
+Accuracy =
+,
+(4)
+TS
+where TP (FP) is the number of true (false) positives,
+TN (FN) is the number true (false) negatives, and TS
+is the total sample size.
+Purity =
+
+4.1. Feature Selection
+Although our analytical model produces interpretable
+features for each light curve (albeit ones that are somewhat degenerate) we would like to explore various methods of feature extraction, based on the analytical fits.
+In particular, we explore the following four types of features:
+• Model Parameters (M): We use the analytical model parameters as features, as well as the
+peak absolute magnitude in each filter, including
+a cosmological k-correction but no correction for
+intrinsic SN colors and color evolution.
+• Hand-Selected Features (HS): We use handselected interpretable features: the peak absolute
+
+magnitude in each filter, including a cosmological k-correction but no correction for intrinsic SN
+colors and color evolution; and the rest-frame rise
+and fall times by 1, 2 and 3 mag relative to peak
+(where we do not correct the rise and fall times
+for cosmological time-dilation).
+• Principal Component Analysis (PCA): We
+fit a PCA decomposition model to the full set of
+analytical model fits (without any redshift corrections) independently for each filter. We use the
+first 6 PCA components from each filter, corresponding to an explained variance within the light
+curves of ∼ 99.9%. We also use the peak absolute
+magnitude, including a cosmological k-correction,
+in each filter in addition to the PCA components.
+• Light Curves (LC): We use the model light
+curves as the features. We renormalize the flux
+of each light curve, correcting for luminosity distance; however, we find that neglecting time dilation corrections improves classification accuracy,
+and therefore we do not make these corrections.
+We down-sample each filter model to 10 observations logarithmic-spacing between t0 and t0 + 300
+to decrease the number of features.
+
+8
+
+Absolute Magnitude
+
+Villar et al.
+
+22
+20
+18
+16
+22
+20
+18
+16
+101
+
+102
+
+g-band
+
+r-band
+
+i-band
+
+z-band
+
+101
+
+Duration (days)
+
+102
+
+Figure 6. Duration-luminosity feature space of the dataset in the 4 PS1 filters. Duration is defined as the total time for
+the light curves to rise and decline by 2 mag relative to the peak. The plotted values are from the median model fits to the
+light curves using Equation 1. The sample includes the five SN classes: Ia (green circle), Ibc (red downward triangle), II (blue
+square), IIn (purple upward triangle), and SLSNe (yellow star).
+
+To provide some intuition, we highlight a sub-space
+of the hand-selected features (Mpeak versus duration
+time to rise and fall by 2 mag) in Figure 6. We find
+that some SN classes, such as SLSNe versus Type II, or
+Type Ia versus Type IIn, easily separate in the durationluminosity feature space. However, other classes, such as
+Type Ibc versus Type Ia and IIP, have substantial overlap in this space, regardless of filter. This highlights
+that while simple heuristics can be used as first-order
+classifiers for some SN classes, other classes are intrinsically difficult to disentangle from light curve information
+alone.
+4.2. Data Augmentation
+Data augmentation is ubiquitous in machine learning
+applications, as a larger dataset can significantly improve the accuracy and generalizability of most classification algorithms. Data augmentation methods have
+
+already been utilized in the astrophysical context (e.g.,
+Hoyle et al. 2015).
+Here, we augment our training set with simulated
+events for two key reasons. First, our training set is
+unbalanced in terms of SN classes due to the differing
+observed rates of transients, with Type Ia SNe representing ≈ 70% of our sample (and more generally, of any
+magnitude-limited optical survey). Classification algorithms trained on unbalanced training sets tend to overclassify all objects as the dominant class. This is because
+the algorithms can minimize the decision-making complexity by ignoring minority classes in favor of correctly
+classifying the majority class. In our case, a classification algorithm may preferentially label all objects as
+Type Ia SNe to achieve an overall high accuracy. Second, our training set is small in the context of machine
+learning, with the smallest class (SLSNe) containing just
+17 events.
+
+9
+
+Feature 2
+
+Supernova Photometric Classification
+
+Original Set
+
+2.5
+2.0
+1.5
+1.0
+0.5
+
+1
+
+0
+1
+Feature 1
+
+Gaussian Resampling
+
+2.5
+2.0
+1.5
+1.0
+0.5
+
+Feature 2
+
+Feature 2
+
+2
+
+2
+
+1
+
+0
+1
+Feature 1
+
+2
+
+2.5
+2.0
+1.5
+1.0
+0.5
+2
+
+2
+
+SMOTE Resampling
+
+1
+
+0
+1
+Feature 1
+
+2
+
+Figure 7. Top: The original dataset plotted in terms of feature 1 versus feature 2, indicating both the span of the various SN
+classes and the imbalance in number of events per class. Bottom: The augmented dataset using MVG resampling (Left) and
+SMOTE resampling (Right).
+
+One approach to overcome this in the context of our
+method is to augment our training set with many draws
+from the MCMC posteriors. However, this would lead to
+clustering of solutions in feature-space that may bias the
+training algorithms. Instead, we address the issue of a
+small and imbalanced training set by synthesizing more
+event samples using two techniques. First, we use the
+Synthetic Minority Over-sampling Technique (SMOTE;
+Chawla et al. 2002) to over-sample all the non-Type Ia
+SN classes to be equally represented as the Type Ia SNe.
+SMOTE creates synthetic samples in feature space by
+randomly sampling along line segments joining the k
+nearest neighbors of a sample, where k is a free parameter of the algorithm. Here we find that k = 5 performs
+well for sampling the minority classes. An example of
+the SMOTE resampling algorithm is shown in Figure 7.
+A key feature of SMOTE resampling is that it produces
+
+realistic samples within each class, but it cannot produce samples outside the extent of the original sample.
+While this prevents the generation of unphysical models, it may overly constrain the properties of classes with
+only a few samples (e.g., SLSNe).
+Second, we augment the non-Type Ia SN classes by
+fitting the feature space of each class to a multivariateGaussian (MVG) and resampling from the fitted MVG.
+This is similar to the SMOTE algorithm in that it allows for the generation of new events that encompass a
+larger potential feature space. However, one key difference is that this method allows for synthesized events
+beyond the feature boundaries seen in the data. While
+this may lead to some unphysical models, it better reflects the potential spread in light curve parameters in
+poorly-sampled classes. An example of the MVG resampling is shown in Figure 7.
+
+10
+
+Villar et al.
+
+Both augmentation methods aim to increase our training set in a way which is representative of the set and
+therefore makes no attempt to correct for potential biases. This can potentially lead to increased misclassifications if our labelled training set is unrepresentative
+of a future test set; however, we expect no such effects
+within the training set of 513 objects.
+4.3. Classification
+Following the work of Lochner et al. (2016), we test
+three classification algorithms: a support vector machine (SVM), a random forest (RF), and a multilayer
+perceptron (MLP). We optimize the hyperparameters
+of each algorithm independently using a grid search.
+Each algorithm and its tunable hyperparameters are described below. We use the scikit-learn python package throughout the classification portion of our pipeline.
+4.3.1. Support Vector Machine (SVM)
+A SVM classifies the training set by finding the optimal hyperplane in feature space to minimize the number
+of misclassified samples. In particular, the SVM will select a hyperplane that maximizes the distance between
+class samples nearest the hyperplane (also known as the
+support vectors). In the majority of cases, the classes
+are not linearly separable within the feature space alone
+(i.e., there may be significant overlap between classes).
+Instead, the features are expanded into an infinite basis function using the so-called Kernel trick (Aizerman
+1964), allowing one to find a feature space in which the
+separating hyperplane is linear. We optimize the kernel and a regularization term using a coarse grid search,
+allowing the kernel size to logarithmically range from
+σ = 1 to σ = 100 and the normalization to logarithmically range from 1 to 1000. We find that a radial basis
+function kernel with width σ = 10 typically results in
+optimal classification, with normalization values ranging depending on the pipeline.
+4.3.2. Random Forest (RF)
+RF classifiers (Breiman 2001) are built on the idea of
+a decision tree, which is a model that generates a set
+of rules to map input features to classes. This mapping is based on a series of branching decisions based
+on feature values (e.g., “is the peak g-band magnitude
+brighter than −19?”). While single trees are theoretically sufficient for classification problems, they often
+lead to over-fitting due to specialized branching required
+for each class. Random forests overcome this problem
+by combining decision trees that are trained on different
+subsets of the training data and features. The ensemble of decision trees is then used as the classifier. There
+are a number of free parameters within a RF, including
+
+the number of decision trees, the number of nodes for
+each tree and the splitting rules for each node. Through
+a grid search of hyperparameters, we find that 100 decision trees utilizing the Gini impurity (the probability
+that a randomly chosen SN from a labelled class is misclassified) as a splitting criterion and allowing nodes to
+be split until all leaves are pure results in the highest
+accuracy.
+4.3.3. Multilayer Perceptron (MLP)
+A fully-connected MLP is the simplest artificial neural
+network (e.g., Schmidhuber 2015). It is composed of a
+series of layers of neurons, where each neuron is the dot
+product of the previous layer and a set of optimizable
+weights, passed through a nonlinear activation function.
+A “fully-connected” MLP means that each neuron is
+connected to all neurons in the preceding layer. The
+nonlinear activation function is what allows a MLP to
+model nonlinear mappings between the feature set and
+classes. MLPs have many tunable parameters, including the number of layers, the number of neurons within
+each layer, the learning rate and a regularization term.
+We optimize the hyperparameters using a grid search,
+finding that two layers with ten neurons each typically
+performs best, and use the Adam optimization algorithm
+(Kingma & Ba 2014) to train the MLP.
+An example of a complete pipeline, excluding the
+MCMC fitting step, is available on GitHub3 .
+5. CLASSIFICATION RESULTS
+
+We combine each of the four feature extraction methods (M, HS, PCA, and LC), two data augmentation
+methods (SMOTE and MVG), and three classification
+algorithms (SVM, RF, and MLP) to test a total of 24
+classification pipelines. For each pipeline, we use the
+full dataset to find the hyperparameters which optimize
+overall accuracy for the classification method. We optimize the hyperparameters over a coarse grid, due to the
+computational costs of performing a large grid search.
+We then perform leave-one-out cross-validation by iteratively removing one object from the sample, performing
+data augmentation on the remaining dataset, and training a classifier on the new set. We then test the trained
+classifier on the median posterior values of the removed
+object and record the predicted label. Due to computational costs, we only utilize the full posteriors for classification error estimation using our optimal pipeline.
+5.1. General Trends
+
+3 https://github.com/villrv/ps1ml
+
+Supernova Photometric Classification
+
+11
+
+Completeness
+
+M,S,S
+M,S,G
+M,RF,S
+M,RF,G
+M,NN,S
+M,NN,G
+HS,S,S
+HS,S,G
+HS,RF,S
+HS,RF,G
+HS,NN,S
+HS,NN,G
+PCA,S,S
+PCA,S,G
+PCA,RF,S
+PCA,RF,G
+PCA,NN,S
+PCA,NN,G
+LC,S,S
+LC,S,G
+LC,RF,S
+LC,RF,G
+LC,NN,S
+LC,NN,G
+
+SLSNe 75 75 91 91 83 91 78 92 100 91 83 83 64 100 91 91 42 83 100 100 91 100 71 85
+SNII 71 59 85 73 74 76 75 65 81 70 70 69 68 79 83 80 69 59 76 61 74 64 69 44
+SNIIn 48 76 64 64 56 44 72 56 64 72 64 64 60 48 64 68 60 48 24 44 72 68 68 56
+SNIa 90 84 90 89 86 84 85 90 90 89 83 88 83 85 91 87 81 83 84 83 91 87 83 81
+SNIbc 38 38 33 61 55 66 19 57 27 55 55 50 47 50 33 61 52 61 55 55 50 55 57 71
+
+Purity
+
+M,S,S
+M,S,G
+M,RF,S
+M,RF,G
+M,NN,S
+M,NN,G
+HS,S,S
+HS,S,G
+HS,RF,S
+HS,RF,G
+HS,NN,S
+HS,NN,G
+PCA,S,S
+PCA,S,G
+PCA,RF,S
+PCA,RF,G
+PCA,NN,S
+PCA,NN,G
+LC,S,S
+LC,S,G
+LC,RF,S
+LC,RF,G
+LC,NN,S
+LC,NN,G
+
+SLSNe 100 100 93 93 86 81 100 87 93 93 75 92 90 67 93 93 61 86 59 74 100 100 84 71
+SNII 68 73 71 82 82 76 73 84 78 86 83 79 71 69 75 76 82 72 68 66 76 77 83 77
+SNIIn 50 25 58 54 34 38 34 41 56 55 43 44 40 49 55 69 33 61 36 60 55 80 45 60
+SNIa 90 94 95 96 94 95 94 95 95 96 96 95 95 96 95 97 96 97 95 96 95 96 96 96
+SNIbc 36 24 37 23 25 23 15 22 17 20 16 20 16 23 27 24 14 12 23 14 30 15 15 12
+
+Accuracy
+
+M,S,S
+M,S,G
+M,RF,S
+M,RF,G
+M,NN,S
+M,NN,G
+HS,S,S
+HS,S,G
+HS,RF,S
+HS,RF,G
+HS,NN,S
+HS,NN,G
+PCA,S,S
+PCA,S,G
+PCA,RF,S
+PCA,RF,G
+PCA,NN,S
+PCA,NN,G
+LC,S,S
+LC,S,G
+LC,RF,S
+LC,RF,G
+LC,NN,S
+LC,NN,G
+
+SLSNe 99 99 99 99 99 99 99 99 99 99 98 99 98 98 99 99 97 99 98 99 99 100 98 98
+SNII 88 88 91 92 92 91 90 91 92 92 92 91 89 89 92 91 91 88 89 87 91 90 91 87
+SNIIn 95 87 96 95 92 93 91 94 95 95 94 94 93 95 95 96 92 95 94 95 95 97 94 96
+SNIa 86 85 90 90 87 86 86 90 90 90 86 88 85 87 90 89 84 86 86 86 90 88 86 84
+SNIbc 94 92 95 90 92 90 92 90 91 89 87 90 88 91 93 91 85 82 91 85 93 86 86 78
+
+Figure 8. Completeness (Top), Purity (Middle) and Accuracy (Bottom) for each of the five spectrosopic SN classes across the
+24 classification pipelines. Each pipeline is encoded by its feature extraction method (M, HS, PCA, LC), data augmentation
+method (S, G) and classification method (SVM, RF, NN).
+
+In Figures 8 and 9 we plot the purity, completeness
+and accuracy for each of the 24 pipelines and each of the
+5 SN classes. Figure 8 provides a matrix representation
+
+with the percentage score noted for each combination of
+pipeline and SN class, while Figure 9 shows the same results in histogram format to aid in visualizing the range
+
+12
+
+Villar et al.
+
+Completeness
+
+Purity
+
+Accuracy
+
+0.0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1.0
+
+Figure 9. Histograms of Completeness (Top), Purity (Middle) and Accuracy (Bottom) for each of the five spectroscopic SN
+classes across the 24 classification pipelines.
+
+of completeness, purity, and accuracy values across the
+24 pipelines for each SN class.
+We find that SLSNe and Type Ia SNe are consistently
+the classes with the highest purity and completeness,
+
+reaching & 90% for the best classification pipelines.
+This is due to the fact that SLSNe are easily separable from the other classes due to their high luminosity
+and longer durations (Figures 1 and 6), while Type Ia
+
+13
+
+Supernova Photometric Classification
+
+Classification Method
+RF
+SVM
+NN
+
+0.5
+
+0.6
+
+0.7
+
+0.8
+
+0.9
+
+Feature Extraction
+M PCA
+HS LC
+
+0.5
+
+0.6
+
+0.7
+
+0.8
+
+0.9
+
+Data Augmentation
+SMOTE
+Gaussian
+
+0.5
+
+0.6
+
+0.7
+
+Completeness
+
+0.8
+
+0.9
+
+Figure 10. Histograms of completeness across all 5 SN classes, grouped by classification method (Top), feature extraction
+method (Middle) and data augmentation method (Bottom).
+
+SNe are tightly clustered in feature space due to their
+intrinstic uniformity.
+
+In contrast, we find that Type Ibc SNe typically have
+the lowest purity and completeness, with ≈ 15 − 35%
+and ≈ 25 − 65%, respectively, and a much wider spread
+
+14
+
+Villar et al.
+
+SLSNe
+
+0.92
+
+0.00
+
+0.08
+
+0.00
+
+0.00
+
+SNII
+
+0.00
+
+0.80
+
+0.01
+
+0.05
+
+0.14
+
+SNIIn
+
+0.00
+
+0.17
+
+0.73
+
+0.09
+
+0.02
+
+SNIa
+
+0.00
+
+0.05
+
+0.03
+
+0.88
+
+0.05
+
+SNIbc
+
+0.00
+
+0.16
+
+0.00
+
+0.15
+
+0.69
+
+e
+
+SN
+II
+
+SN
+IIn
+
+Ia
+SN
+
+SN
+Ibc
+
+SL
+
+SN
+
+True label
+
+Complete Confusion Matrix
+
+Predicted label
+
+0.00
+
+0.08
+
+0.00
+
+0.00
+
+SNII
+
+0.00
+
+0.84
+
+0.01
+
+0.05
+
+0.10
+
+SNIIn
+
+0.00
+
+0.13
+
+0.77
+
+0.09
+
+0.01
+
+SNIa
+
+0.00
+
+0.02
+
+0.01
+
+0.95
+
+0.02
+
+SNIbc
+
+0.00
+
+0.07
+
+0.00
+
+0.14
+
+0.79
+
+SN
+e
+
+SN
+II
+
+SN
+
+SN
+
+n
+SN
+II
+
+Ibc
+
+0.92
+
+Ia
+
+SLSNe
+
+SL
+
+True label
+
+Confusion Matrix, p > 0.8
+
+Predicted label
+
+Figure 11. Confusion matrix for one of our best performing
+classification pipelines (PCA feature extraction, MVG data
+augmentation, and RF classifier) calculated using the full
+posterior distributions for each SN. We show the confusion
+matrix for both the full SN sample of 513 objects (Top) and
+only for the 429 events with a high classification confidence
+probability of p > 0.8 (Bottom).
+
+in performance for the various pipelines. The lower classification success rate is due to broader diversity within
+Type Ibc SNe, as well as their significant overlap with
+Type Ia SNe (e.g., Figure 6).
+
+For Type II SNe we find high values of purity and completeness of ≈ 65 − 85% and ≈ 60 − 80%, respectively.
+This overall high success rate is mainly due to the presence of a plateau phase that helps to distinguish most
+Type II SNe from the other classes. However, the failed
+classifications are most likely due to the faster evolving
+Type II SNe (often called Type IIL), which tend to be
+misclassified as Type Ibc or Type Ia SNe due to overlap
+in light curve shapes (e.g., Figure 6).
+Finally, for Type IIn SNe we find purity and completeness of ≈ 30 − 80% and ≈ 45 − 70%, respectively, reflecting the broad diversity of light curve morphologies and
+luminosities, with some events overlapping similar areas
+in feature space with Type Ia and Ibc SNe (e.g., Figure 6). As for the Type Ibc SNe, we find quite a broad
+dispersion in performance between the various pipelines.
+For the overall accuracy across the 5 SN classes, we
+find generally high values of ≈ 100% for SLSNe, ≈ 95%
+for Type IIn SNe, ≈ 90% for Type II SNe, ≈ 85−95% for
+Type Ibc SNe, and ≈ 85 − 90% for Type Ia SNe. These
+values are essentially independent of the classification
+pipeline used.
+To further explore the relative performance of the various pipelines, in Figure 10 we plot the distribution of
+completeness across the full dataset, grouping the classification pipelines by feature extraction method, classification method, and data augmentation method. We
+find that the classification method has the largest impact on completeness, with the RF classifiers performing
+noticeably better, and more uniformly, than the SVM
+and NN classifiers. In terms of feature extraction we
+find that use of the model parameters (M) and PCA
+are somewhat advantageous compared to hand-selected
+(HS) features and the LC approach, although the PCA
+extraction leads to a broader range of outcomes. Finally, the MVG augmentation method performs slightly
+better than SMOTE.
+The top three pipelines in terms of purity, completeness and accuracy share RF classification and PCA feature extraction, with both MVG and SMOTE augmentation. Between these pipelines, the overall accuracy
+differs by . 5% across the 5 SN classes. In addition to
+performing well, the RF classifier also has the advantage of allowing us to measure the relative important
+of each feature. For example, we test the relative importance of our hand-selected and model features in the
+RF classification pipeline using the “gini importance”,
+a measure of the average gini impurity decrease across
+descending nodes (Leo et al. 1984). We find that the
+peak magnitudes are the most important interpretable
+features, with durations and other parameters being
+roughly equally important.
+
+15
+
+Supernova Photometric Classification
+
+Absolute Magnitude
+
+20
+
+Spec: II
+Phot: Ibc
+
+19
+
+Spec: Ia
+Phot: Ibc
+
+Spec: Ibc
+Phot: Ia
+
+18
+17
+16
+15
+
+0
+
+50
+
+100 0
+
+50
+100 0
+Phase (days)
+
+50
+
+100
+
+Figure 12. Light curves of three SNe classified incorrectly, but with high confidence (p > 0.9). We note the spectroscopic
+and photometric classification of each event. Given the high data quality, these misclassifications are due to inherent overlap
+between SNe in feature space.
+
+For simplicity, below we focus on the results of our
+pipeline with the highest purity (72%) and completeness
+(78%) scores with an average accuracy of 93% across
+the 5 SN classes. This pipeline consists of PCA feature
+extraction, MVG data augmentation, and RF classifier;
+however, we emphasize that this pipeline does not significantly outperform the others. In Figure 11 we present
+the final confusion matrix for this pipeline across the
+full training set. The confusion matrix is a quick-look
+visualization of how each class is correctly or incorrectly
+classified. We generate the confusion matrix using the
+full posteriors for each SN, so the probability densities
+have been effectively smoothed out across the matrix.
+To specifically assess the role of poor quality classifications, we show the confusion matrix for the full sample,
+as well as separately for classifications with a confidence
+of p > 0.8 only (representing ∼ 85% of the original sample). In practice, one can optimize pipeline parameters
+to maximize sample purity, completeness or some other
+metric.
+5.2. Assessing Misclassifications
+Although the overall completeness for each SN class is
+high, we note several common misclassifications. First,
+Type II and Ia are the most likely classes to be misclassified as Type Ibc SNe. The Type II SNe that are misclassified as Type Ibc SNe are typically either poorly sampled or are rapidly evolving (the so-called IIL events).
+Second, Type Ibc, IIn, and II SNe are the most likely
+
+classes to be misclassified as Type Ia SNe. This is again
+due to specific events in those diverse classes that occupy the region in feature space that overlaps with the
+uniform Type Ia SNe. Finally, Type IIn and Ibc SNe
+are the most likely classes to be misclassified as Type II
+SNe, again due to overlaps in feature space. Comparing
+the full sample to the subset of events with high classification confidence (p > 0.8) we find that the fraction
+of misclassified events indeed declines (most notably for
+Type Ibc and Ia SNe), indicating that some misclassifications are simply due to poorly sampled light curves.
+However, the overall trends for which classes are most
+likely to be misclassified as others remains the same,
+indicating that there is an inherent limitation to the
+classification success rate that is due to real overlaps in
+feature space.
+We highlight several SNe that are misclassified, but
+with high confidence in Figure 12. In these examples,
+a spectroscopic Type II SN with a rapid linear decline
+is misclassified as a Type Ibc SN; a slightly dim Type
+Ia SN is misclassified as a Type Ibc SN; and a fairly
+luminous Type Ibc SN is misclassified as a Type Ia SN.
+In each of these cases, the posterior of the fitted light
+curves is narrow, leading to little variability (i.e., a high
+confidence) in the final classification. These events indicate that even with good photometric data quality there
+is inherent overlap of SNe in feature space that leads to
+misclassification.
+
+16
+
+Villar et al.
+
+SNIIn
+
+1.0
+
+12
+
+Spectroscopic Class: SNIIn
+
+25
+
+Spectroscopic Class: SNIa
+
+250
+
+300
+
+350
+
+SNIa
+
+200
+
+SNIIn
+
+SNII
+SNIbc
+
+20
+
+SNII
+
+15
+
+SNII
+
+SNIbc
+
+80
+
+SNII
+
+Spectroscopic Class: SNII
+
+60
+
+150
+
+SNIbc
+
+SNIbc
+
+SNIa
+SNIbc
+
+SNII
+
+100
+
+Spectroscopic Class: SLSNe
+
+10
+
+SNIa
+
+50
+
+10
+
+SNIbc
+
+SNII
+SNIbc
+
+SNII
+SNIbc
+
+SNIa
+
+SNIbc
+SNIbc
+SNIa
+
+SNIa
+
+SNIa
+
+SNII
+
+SNII
+
+SNIbc
+
+SNIbc
+SNIbc
+
+SNIbc
+
+0
+
+8
+
+SNII
+
+0.5
+
+5
+
+6
+
+40
+
+SNIa
+
+1.0
+
+0
+
+SNII
+SNII
+SNIbc
+SNII
+
+0.5
+
+20
+
+SNII
+
+1.0
+
+4
+
+0
+
+SNII
+
+0.5
+
+2
+
+SNII
+
+1.0
+
+SNII
+
+0.5
+
+0
+
+SNIbc
+SNII
+SNIbc
+SNIbc SNII SNII SNII
+SNIInSNIIn SNIbc SNIbc
+SNIbcSNIbc SNIbcSNII
+SNIIn SNIbc SNII SNIIn
+SNIbc
+
+1.0
+
+SNII
+
+Classification Confidence
+
+0.5
+
+Spectroscopic Class: SNIbc
+
+0.0
+
+SNe ID
+
+1.0
+
+Ia
+Ia
+
+Assigned Label: SNII
+100
+
+250
+
+Ibc
+
+Ibc
+
+20
+
+Assigned Label: SNIa
+300
+
+II
+
+200
+
+12
+
+Assigned Label: SNIIn
+
+Ia
+
+150
+
+Assigned Label: SLSNe
+
+II
+Ia
+Ia
+
+Ia
+Ia
+
+80
+
+Ia
+II
+
+100
+
+10
+
+15
+
+II
+II
+
+0.5
+
+50
+
+IIn
+SLSNe
+
+Ia
+
+IIn
+Ia
+
+Ibc
+
+Ia
+IIn
+
+Ia
+IaIa
+
+0
+
+8
+
+60
+
+10
+
+IIn
+II
+II
+
+5
+
+1.0
+
+0.0
+
+40
+
+Ia
+II
+Ia
+
+0.5
+
+6
+
+Ia
+
+0
+II
+IIn
+
+1.0
+
+Ia
+
+0.5
+
+4
+
+20
+Ia
+
+0
+
+IIn
+
+2
+
+Ibc
+
+1.0
+
+Ia
+
+0.5
+
+0
+IaIa
+Ia
+Ia
+Ibc
+Ia
+IIn
+Ibc
+Ia
+Ibc
+
+1.0
+
+Ia
+Ia
+Ia
+Ia
+Ia
+Ia
+Ia
+Ia
+II
+Ia
+II
+Ia
+II
+
+Classification Confidence
+
+0.5
+
+Assigned Label: SNIbc
+
+SNe ID
+
+Figure 13. Top: For each true spectroscopic class, we show the correct classifications (grey) and misclassifications (pink), with
+the classification confidence plotted on the ordinate. The misclassified label is given next to each misclassified event. We find
+that the bulk of the misclassifications are concentrated at low classification confidence. Bottom: For each assigned label, we
+again show the correct classifications (grey) and misclassifications (pink). The correct class label of each misclassified event is
+given.
+
+The misclassifications of SNe are further highlighted
+in Figure 13. Each panel in the top part of Figure 13
+represents a spectroscopically classified class, while in
+
+the bottom part each panel represents a photometrically assigned class. The misclassified events in both
+cases are labeled to provide insight into the most com-
+
+Classification Accuracy
+
+Supernova Photometric Classification
+
+1.0
+0.8
+0.6
+0.4
+0.2
+0.0
+
+0
+
+50
+
+100
+
+Number of Data Points
+
+150
+
+Figure 14. Classification accuracy as a function of number
+of light curve data points. The colors and shapes reflect the
+SN classes, and the black line represents a smoothed median
+to guide the eye. Filled symbols are SNe classified correctly,
+while open symbols are misclassified events. We find that
+misclassifications are more prevalent for light curves with
+fewer points, but also that some events are misclassified even
+with tens of data points, as also highlighted in Figure 12.
+
+mon misclassification. In all panels the ordinate represents the overall classification certainty, based on many
+draws from the posteriors of each event. In all cases,
+the majority of misclassifications occur at the low confidence end (p < 0.8), but there are also high confidence
+misclassifications.
+We explore the role of data quantity in Figure 14,
+where we plot the classification accuracy as a function
+of total light curve data points for all 5 SN classes. We
+again find that misclassifications are more likely in the
+regime of low number of data points, specifically . 20
+data points. However, as noted above, there are also
+high confidence misclassifications for events with a large
+number of data points.
+6. COMPARISON TO PREVIOUS PHOTOMETRIC
+
+CLASSIFICATION APPROACHES
+The photometric classification of optical transients has
+been previously explored in the existing literature. Previous studies on machine learning methods have focused
+almost exclusively on the binary problem of Type Ia
+versus non-Type Ia SN classifications (e.g., Campbell
+et al. 2013; Ishida & de Souza 2013; Jones et al. 2017),
+or have been trained and tested on simulated datasets
+(e.g., Kessler et al. 2010; Tonry et al. 2012; Möller et al.
+2016; Charnock & Moss 2017; Möller & de Boissière
+2019; Muthukrishna et al. 2019b). We highlight the
+strengths and weaknesses of both approaches (which we
+
+17
+
+note are disjoint) compared to our methodology. We
+emphasize that classification pipelines should ideally be
+compared using the same dataset and set of labels. No
+machine learning method, including the one presented in
+this paper, can be applied to a new test set without retraining or careful consideration of training-vs-test set
+biases. This is especially crucial when comparing our
+method to those created for simulated datasets, which
+have known biases, uncertainties and simulated physics.
+Identification of Type Ia SNe from photometric light
+curves is essential for precision cosmology in the era of
+large photometric surveys (Scolnic et al. 2014; Jones
+et al. 2017), which is why many studies have specifically focused on Type Ia SN classification. However,
+the binary problem of Type Ia vs non-Typa Ia SN classification is much narrower (and simpler) than full classification of CCSN classes. As standardizable candles,
+Type Ia SNe are fairly homogeneous with observational
+variations (excluding reddening) that are well described
+by two observable features: stretch and peak luminosity. As a result, it is easier to separate the small area of
+feature-space corresponding to Type Ia SNe from other
+transients. Studies that focus on this approach achieve a
+classification accuracy of & 0.95 (e.g., Ishida & de Souza
+2013; Charnock & Moss 2017; Jones et al. 2017; Narayan
+et al. 2018; Pasquet et al. 2019). Although our pipeline is
+trained and tested on an empirical dataset for 5 distinct
+SN classes, we find that our achieved purity (≈ 95%),
+completeness (≈ 90%) and accuracy (≈ 95%) for Type
+Ia SN classification are actually comparable to methods
+that specifically train on the binary classification. However, we note that studies such as Möller et al. (2016)
+achieve this high purity rate without redshift information, which our method currently requires.
+The vast majority of previous photometric classification studies used simulated datasets to train classifiers. This is largely due to the fact that few homogeneous photometric datasets with large numbers of
+spectroscopically-classified SNe exist. Most studies that
+train on simulated datasets use the Supernova Photometric Classification Challenge (SNPCC) training set
+(Kessler et al. 2010). The SNPCC dataset consists of
+20,000 simulated SNe with griz light curves, generated
+from templates of Type Ia, Ibc, IIP and IIn SNe (they
+do not include SLSNe). This dataset was presented as a
+community-wide classification challenge in preparation
+for the Dark Energy Survey, and was widely successful,
+with the top algorithms reaching an average Type Ia
+SN classification purity of ≈ 80% and completeness of
+≈ 95%. Works such as Möller & de Boissière (2019)and
+Moss (2018) have reported average classification accuracies of ≈ 90% for CCSNe classes (similar to our reported
+
+18
+
+Villar et al.
+
+accuracies here). Similarly, Lochner et al. 2016 report
+an average Type Ia classification accuracy of ∼ 84%
+using SALT2 light curve features. They further break
+down the CCSNe subclass into Type Ibc and Type II,
+where they report accuracies of ∼ 63% and ∼ 93%,
+respectively. We caution that the SNPCC dataset is
+not representative of the real diversity we encounter in
+on-going and future surveys, and should not be used
+as a benchmark for CCSN classification. In particular,
+to generate synthetic light curves, Kessler et al. (2010)
+fit well-sampled real light curves from each CCSN class
+with a Bazin function. Then they stretch Nugent CCSN
+templates4 to match the Bazin light curves. Variations
+within each class are included from both the sample of
+templates available and from random color variations
+derived from the Hubble scatter of Type Ia SNe and the
+peak luminosity derived from Richardson et al. (2002).
+While the collection of simulated Type Ia SNe likely
+samples the full phase-space of light curves, the nonType Ia templates used to build the model light curve
+were severely limited. For example, only 2 Type IIn
+SN templates were used to generate 800 template light
+curves, and only 16 Type Ibc SN templates were used
+to generate 3,200 light curves. Because of this, we can
+expect methods that rely on this dataset to overestimate
+the accuracy of classifications for CCSN classes.
+A new classification challenge, PLAsTiCC (Allam Jr
+et al. 2018; Kessler et al. 2019), is a more realistic simulated dataset that can be used as a benchmark for CCSN
+classification, although it too largely relies on theoretical models. Recent work by Muthukrishna et al. (2019)
+find an average completeness of ≈ 65% over the five SN
+classes that we have classified here (although we note
+that the PLAsTiCC challenge combines Type IIP/L and
+Type IIn SNe into one class). Our average completeness
+is significantly higher, at ≈ 77%.
+7. LIMITATIONS AND FUTURE DIRECTIONS
+
+The challenge of photometric classification for optical transients is broad and cannot be solved with one
+classification method alone. Like all methods, our classification pipeline aims to solve a simplified version of
+this problem: Given a complete light curve, a redshift,
+and a list of SN classes, what is the type of a given transient? Here we highlight several improvements that can
+be made to our pipeline, and more broadly outline outstanding problems in the field of transient classification.
+Our pipeline requires a redshift, which simplifies the
+problem of classification by anchoring the absolute magnitudes of every light curve. In our training set these
+4 https://c3.lbl.gov/nugent/nugent templates.html
+
+redshifts were obtained from spectra of the transients
+and their host galaxies. However, in the on-going and
+future surveys we expect that spectroscopic redshifts
+(from the SNe or host galaxies) will be rare. On the
+other hand, LSST will provide photometric redshifts
+(photo-z) for all galaxies with m < 27.5 mag, with an
+expected root-mean-square scatter of σz /(1 + z) . 0.05
+for galaxies with m < 25.3 (Abell et al. 2009), and a
+fraction of outliers of < 10% (Graham et al. 2017). A
+classification algorithm that can associate a transient to
+its host galaxy will therefore be able to utilize the photoz value. We anticipate that the additional uncertainty in
+the model fits due to the photo-z uncertainty will not be
+a dominant factor. We additionally note that by including redshift information as a feature (even when doing
+so indirectly) we have limited the use of our pipeline to
+surveys of similar depth.
+Additionally, our classification pipelines best utilizes
+full light curves, and are thus most naturally applicable
+for after-the-fact classification. The most natural use is
+on the yearly samples of ∼ 106 transients from LSST to
+enable large-scale population studies, as well as targeted
+studies of specific subsets (e.g., host galaxies of SLSNe).
+While our method can work on partial light curves for
+real-time classification, its performance in this context
+is yet to be evaluated. Several studies that have explored the specific issue of real-time classification have
+found that recurrent neural networks perform well for
+this purpose (e.g., Charnock & Moss 2017; Möller &
+de Boissière 2019; Muthukrishna et al. 2019a).
+Our algorithm currently relies exclusively on information derived from the transient light curves (other than
+the redshift). However, useful contextual information
+about a SN can be extracted from the host galaxy. For
+example, SLSNe prefer low metallicity, dwarf galaxies
+(Lunnan et al. 2014), other CCSN classes span a wide
+range of star forming galaxies, and Type Ia SNe are
+found in both star forming and elliptical galaxies. Simple galaxy features, such as Hubble type, color, and SN
+offset can be easily incorporated into the classification
+pipeline (e.g.,Foley & Mandel 2013). This will be explored in follow-up work.
+Furthermore, our algorithm is limited to classification
+within known SN classes (in this case 5 classes). To
+add additional classes under our current framework, we
+would need to incorporate new data into the training set
+and retrain the classification algorithms. Our pipeline
+is amenable to rapid training, so it is feasible to incorporate more classes in this way. For a more complex
+classification pipeline (e.g., one involving a large neural
+network), one could incorporate new classes cheaply using “one-shot” learning (Lv et al. 2006), in which a clas-
+
+Supernova Photometric Classification
+sifier learns the characteristics of a new class using very
+limited examples. However, the addition of new classes
+will not solve the issue of how to identify unforeseen
+classes of transients and entirely new phenomena. Such
+a classifier is challenging to train, since outlier events
+are (by definition) rare.
+Because our original training set is imbalanced and
+small, we needed to augment our dataset with simulated events drawn from the observed populations. For
+completeness, we test our best classification pipeline
+(PCA feature extraction and RF classifier) on the original training set without data augmentation. As expected, we find that we can classify classes with the
+most samples (Type Ia and II SNe) or those that are
+well-separated in feature space (SLSNe), as well as or
+better than our classification pipeline with data augmentation. However, the completeness of the minority
+classes, like Type Ibc and IIn SNe, falls by 20 − 40%.
+This is a good indication that data augmentation in the
+extracted feature space is a potential solution to the imbalanced classes.
+Our method neglects the possibility of a biased spectroscopic sample. For example, if the spectroscopic samples contains only the brighter end of the luminosity
+function for rare transients. In our presumed classification case in which we have access to the full light curves,
+one can use the full dataset to detect and minimize the
+effects of selection bias without knowing the true underlying distribution. For example, one can re-weight
+the importance of each SN in the spectroscopic training sample to better reflect the distribution of features
+from the full dataset (using, e.g., Huang et al. 2007 and
+Cortes et al. 2008). A detailed study of the effect of observational biases on transient classification is essential,
+but beyond the scope of this work.
+Finally, we note that classification is only the first step
+in understanding the uncovered transients. Even for the
+currently rare SLSN class, LSST will discover ∼ 104
+events per year (Villar et al. 2018). Additional data cuts
+that remove light curves with a minimal information
+content (or those from which we cannot extract physical
+parameters) may be necessary in order to realistically fit
+a representative set of light curves.
+8. CONCLUSIONS
+
+Given increasingly large datasets and limited spectroscopic resources, photometric classification of SNe is a
+pressing problem within the wide scope of time-domain
+astrophysics. Here we used the PS1-MDS spectroscopiccaly classified SNe dataset (513 events) to test a number
+of classification pipelines, varying the features extracted
+from each light curve, the augmentation method to bol-
+
+19
+
+ster the training set, and the classification algorithms.
+We used a flexible analytical model with an iterative
+MCMC process to model the gP1 rP1 iP1 zP1 light curves
+of each event, and to generate posterior distributions.
+We find that several pipelines (e.g., PCA feature extraction, MVG resampling, and RF classifier) perform
+well across the 5 relevant SN classes, achieving an average accuracy of about 90% and a Type Ia SN purity of
+about 95%.
+Our study is the first to use an empirical dataset to
+classify multiple classes of SNe, rather than just Type Ia
+versus non-Type Ia SN classification. Our overall results
+rival similar pipelines trained on simulated SN datasets,
+as well as those that utilize only a binary classification.
+This indicates that we can utilize this approach to generate robust samples of both common and rare SN type
+(e.g., Type IIn, SLSNe) from LSST.
+Finally, we highlight several areas for future exploration and improvement of our classification approach,
+including the use of contextual information and the possible application to real-time classification. We plan to
+extend this work and other classification approaches to
+the full set of PS1-MDS SN photometric light curves in
+future work.
+
+Facilities: ADS, Pan-STARRs
+Software: Astropy (Astropy Collaboration 2018),
+Matplotlib (Hunter 2007), NumPy (van der Walt et al.
+2011),SciPy(Oliphant2007),Scikit-learn(Pedregosaetal.
+2011), SNID (Blondin & Tonry 2007)
+The Berger Time-Domain Group is supported in
+part by NSF grant AST-1714498 and NASA grant
+NNX15AE50G. V.A.V. acknowledges support by the
+National Science Foundation through a Graduate Research Fellowship. The UCSC team is supported in
+part by NASA grant NNG17PX03C; NSF grants AST–
+1518052 and AST–1815935; the Gordon & Betty Moore
+Foundation; the Heising-Simons Foundation; and by a
+fellowship from the David and Lucile Packard Foundation to R.J.F. R.L. is supported by a Marie SklodowskaCurie Individual Fellowship within the Horizon 2020
+European Union (EU) Framework Programme for Research and Innovation (H2020-MSCA-IF-2017-794467).
+Some of the computations in this paper were run on the
+Odyssey cluster supported by the FAS Division of Science, Research Computing Group at Harvard University.
+The Pan-STARRS1 Surveys (PS1) and the PS1 public
+science archive have been made possible through contributions by the Institute for Astronomy, the University
+of Hawaii, the Pan-STARRS Project Office, the MaxPlanck Society and its participating institutes, the Max
+
+20
+
+Villar et al.
+
+Planck Institute for Astronomy, Heidelberg and the Max
+Planck Institute for Extraterrestrial Physics, Garching,
+The Johns Hopkins University, Durham University, the
+University of Edinburgh, the Queen’s University Belfast,
+the Harvard-Smithsonian Center for Astrophysics, the
+Las Cumbres Observatory Global Telescope Network
+Incorporated, the National Central University of Taiwan, the Space Telescope Science Institute, the National
+
+Aeronautics and Space Administration under Grant No.
+NNX08AR22G issued through the Planetary Science
+Division of the NASA Science Mission Directorate, the
+National Science Foundation Grant No. AST-1238877,
+the University of Maryland, Eotvos Lorand University
+(ELTE), the Los Alamos National Laboratory, and the
+Gordon and Betty Moore Foundation.
+
+REFERENCES
+Abell, P. A., Burke, D. L., Hamuy, M., et al. 2009, Lsst
+science book, version 2.0, Tech. rep.
+Aizerman, M. A. 1964, Automation and remote control, 25,
+821
+Allam Jr, T., Bahmanyar, A., Biswas, R., et al. 2018, arXiv
+preprint arXiv:1810.00001
+Astropy Collaboration. 2018, AJ, 156, 123
+Bazin, G., Palanque-Delabrouille, N., Rich, J., et al. 2009,
+Astronomy & Astrophysics, 499, 653
+Blondin, S., & Tonry, J. L. 2007, The Astrophysical
+Journal, 666, 1024
+Blondin, S., & Tonry, J. L. 2007, ApJ, 666, 1024
+Breiman, L. 2001, Machine learning, 45, 5
+Campbell, H., DAndrea, C. B., Nichol, R. C., et al. 2013,
+The Astrophysical Journal, 763, 88
+Chambers, K. C., Magnier, E. A., Metcalfe, N., et al. 2016,
+arXiv e-prints, arXiv:1612.05560
+Charnock, T., & Moss, A. 2017, The Astrophysical Journal
+Letters, 837, L28
+Chawla, N. V., Bowyer, K. W., Hall, L. O., & Kegelmeyer,
+W. P. 2002, Journal of artificial intelligence research, 16,
+321
+Chornock, R., Berger, E., Gezari, S., et al. 2014, ApJ, 780,
+44
+Cortes, C., Mohri, M., Riley, M., & Rostamizadeh, A. 2008,
+in International Conference on Algorithmic Learning
+Theory, Springer, 38–53
+Dhawan, S., Leibundgut, B., Spyromilio, J., & Maguire, K.
+2015, Monthly Notices of the Royal Astronomical
+Society, 448, 1345
+Drout, M. R., Soderberg, A. M., Gal-Yam, A., et al. 2011,
+The Astrophysical Journal, 741, 97
+Drout, M. R., Chornock, R., Soderberg, A. M., et al. 2014,
+The Astrophysical Journal, 794, 23
+Filippenko, A. V. 1997, Annual Review of Astronomy and
+Astrophysics, 35, 309
+Foley, R. J., & Mandel, K. 2013, The Astrophysical
+Journal, 778, 167
+Gezari, S., Chornock, R., Rest, A., et al. 2012, Nature, 485,
+217
+
+Graham, M. L., Connolly, A. J., Ivezić, Ž., et al. 2017,
+arXiv preprint arXiv:1706.09507
+Hinshaw, G., Larson, D., Komatsu, E., et al. 2013, The
+Astrophysical Journal Supplement Series, 208, 19
+Hoyle, B., Rau, M. M., Bonnett, C., Seitz, S., & Weller, J.
+2015, Monthly Notices of the Royal Astronomical
+Society, 450, 305
+Huang, J., Gretton, A., Borgwardt, K. M., Schölkopf, B., &
+Smola, A. J. 2007, in Advances in neural information
+processing systems, 601–608
+Hunter, J. D. 2007, CSE, 9, 90
+Ishida, E., Beck, R., Gonzalez-Gaitan, S., et al. 2018, arXiv
+preprint arXiv:1804.03765
+Ishida, E. E., & de Souza, R. S. 2013, Monthly Notices of
+the Royal Astronomical Society, 430, 509
+Ivezic, Z., Axelrod, T., Brandt, W., et al. 2011, Large
+Synoptic Survey Telescope: From science drivers to
+reference design, Tech. rep., SLAC National Accelerator
+Lab., Menlo Park, CA (United States)
+Jedicke, R., Tonry, J., Veres, P., et al. 2012, in
+AAS/Division for Planetary Sciences Meeting
+Abstracts# 44, Vol. 44
+Jones, D., Scolnic, D., Riess, A., et al. 2017, The
+Astrophysical Journal, 843, 6
+—. 2018, The Astrophysical Journal, 857, 51
+Kaiser, N., Burgett, W., Chambers, K., et al. 2010, in
+Proc. SPIE, Vol. 7733, Ground-based and Airborne
+Telescopes III, 77330E
+Karpenka, N. V., Feroz, F., & Hobson, M. P. 2013,
+MNRAS, 429, 1278
+Kasen, D. 2006, The Astrophysical Journal, 649, 939
+Kessler, R., et al., & et al. 2019
+Kessler, R., Bassett, B., Belov, P., et al. 2010, Publications
+of the Astronomical Society of the Pacific, 122, 1415
+Kimura, A., Takahashi, I., Tanaka, M., et al. 2017, arXiv
+preprint arXiv:1711.11526
+Kingma, D. P., & Ba, J. 2014, arXiv e-prints,
+arXiv:1412.6980
+Kulkarni, S. 2018, The Astronomer’s Telegram, 11266
+
+Supernova Photometric Classification
+Leo, B., Friedman, J. H., Olshen, R. A., & Stone, C. J.
+1984, Wadsworth International Group
+Lochner, M., McEwen, J. D., Peiris, H. V., Lahav, O., &
+Winter, M. K. 2016, The Astrophysical Journal
+Supplement Series, 225, 31
+Lunnan, R., Chornock, R., Berger, E., et al. 2014, The
+Astrophysical Journal, 787, 138
+Lunnan, R., Chornock, R., Berger, E., et al. 2018, ApJ,
+852, 81
+Lv, F., Zhao, T., Nevatia, R., et al. 2006, IEEE
+Transactions on Pattern Analysis & Machine Intelligence,
+1513
+Magnier, E., Schlafly, E., Finkbeiner, D. P., et al. 2016a,
+arXiv preprint arXiv:1612.05242
+Magnier, E. A., Chambers, K., Flewelling, H., et al. 2016b,
+arXiv preprint arXiv:1612.05240
+Mandel, K. S., Narayan, G., & Kirshner, R. P. 2011, The
+Astrophysical Journal, 731, 120
+Miknaitis, G., Pignata, G., Rest, A., et al. 2007, The
+Astrophysical Journal, 666, 674
+Möller, A., & de Boissière, T. 2019, arXiv preprint
+arXiv:1901.06384
+Möller, A., Ruhlmann-Kleider, V., Leloup, C., et al. 2016,
+Journal of Cosmology and Astro-Particle Physics, 2016,
+008
+Möller, A., Ruhlmann-Kleider, V., Leloup, C., et al. 2016,
+Journal of Cosmology and Astroparticle Physics, 2016,
+008
+Moss, A. 2018, arXiv preprint arXiv:1810.06441
+Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R.,
+& Hložek, R. 2019, arXiv e-prints, arXiv:1904.00014
+Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R.,
+& Hložek, R. 2019a, arXiv preprint arXiv:1904.00014
+Muthukrishna, D., Parkinson, D., & Tucker, B. 2019b,
+arXiv preprint arXiv:1903.02557
+Narayan, G., Zaidi, T., Soraisam, M. D., et al. 2018, The
+Astrophysical Journal Supplement Series, 236, 9
+Newling, J., Varughese, M., Bassett, B., et al. 2011,
+Monthly Notices of the Royal Astronomical Society, 414,
+1987
+Nicholl, M., Guillochon, J., & Berger, E. 2017, The
+Astrophysical Journal, 850, 55
+
+21
+
+Oliphant, T. E. 2007, CSE, 9, 10
+Pasquet, J., Pasquet, J., Chaumont, M., & Fouchez, D.
+2019, Astronomy & Astrophysics, 627, A21
+Patil, A., Huard, D., & Fonnesbeck, C. J. 2010, Journal of
+statistical software, 35, 1
+Pedregosa, F., Varoquaux, G., Gramfort, A., et al. 2011,
+Journal of machine learning research, 12, 2825
+Rest, A., Stubbs, C., Becker, A. C., et al. 2005, The
+Astrophysical Journal, 634, 1103
+Rest, A., Scolnic, D., Foley, R. J., et al. 2014, ApJ, 795, 44
+Richards, J. W., Homrighausen, D., Freeman, P. E.,
+Schafer, C. M., & Poznanski, D. 2011, Monthly Notices
+of the Royal Astronomical Society, 419, 1121
+Richardson, D., Branch, D., Casebeer, D., et al. 2002, The
+Astronomical Journal, 123, 745
+Sanders, N. E., Soderberg, A. M., Gezari, S., et al. 2015,
+The Astrophysical Journal, 799, 208
+Schmidhuber, J. 2015, Neural networks, 61, 85
+Scolnic, D., Rest, A., Riess, A., et al. 2014, The
+Astrophysical Journal, 795, 45
+Scolnic, D., Jones, D., Rest, A., et al. 2017, arXiv preprint
+arXiv:1710.00845
+Spergel, D., Gehrels, N., Baltay, C., et al. 2015, arXiv
+e-prints, arXiv:1503.03757
+Stubbs, C. W., Doherty, P., Cramer, C., et al. 2010, ApJS,
+191, 376
+Taddia, F., Stritzinger, M., Sollerman, J., et al. 2013,
+Astronomy & Astrophysics, 555, A10
+Tonry, J., Stubbs, C. W., Lykke, K. R., et al. 2012, The
+Astrophysical Journal, 750, 99
+van der Walt, S., Colbert, S. C., & Varoquaux, G. 2011,
+CSE, 13, 22
+Villar, V. A., Berger, E., Metzger, B. D., & Guillochon, J.
+2017, The Astrophysical Journal, 849, 70
+Villar, V. A., Nicholl, M., & Berger, E. 2018, The
+Astrophysical Journal, 869, 166
+Waters, C., Magnier, E., Price, P., et al. 2016, arXiv
+preprint arXiv:1612.05245
+
+

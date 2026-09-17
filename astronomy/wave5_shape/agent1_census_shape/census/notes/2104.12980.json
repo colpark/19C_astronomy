@@ -1,0 +1,580 @@
+{
+ "seed_id": "2104.12980",
+ "title": "SNIascore: Deep Learning Classification of Low-Resolution Supernova Spectra (Fremling et al.)",
+ "arxiv_version_verified": "arXiv:2104.12980v2 (layout L13)",
+ "read_in_full": true,
+ "reader": "fork-A",
+ "layout_lines": 715,
+ "pages": 12,
+ "episodes": [
+  {
+   "episode_id": "E1",
+   "level": "per_study",
+   "description": "Build and select the SNIascore binary SN Ia classifier",
+   "practitioner_action": "publish_object",
+   "action_locator": "2104.12980.layout.txt p4 §3 L253-267",
+   "chain": [
+    {
+     "op": "assemble 5550 SEDM spectra of 3463 BTS transients with BTS labels",
+     "locator": "p2 §2 L110-134"
+    },
+    {
+     "op": "split training (2018-03 to 2020-03 minus BTS18), validation (BTS18), testing (2020-03 to 2020-08)",
+     "locator": "p3 §2 L172-213"
+    },
+    {
+     "op": "interpolate to 3800-9150 A grid, 209 bins",
+     "locator": "p4 §2.2 L255-261"
+    },
+    {
+     "op": "median-normalise, divide by smoothed continuum, subtract one",
+     "locator": "p4 §2.2 L262-271"
+    },
+    {
+     "op": "grid of 1-5 BiLSTM-layer networks",
+     "locator": "p5 §4.1 L309-315"
+    },
+    {
+     "op": "hyperparameter grids (dropout, hidden units, learning rate, batch size)",
+     "locator": "p5 §4.1 L317-323"
+    },
+    {
+     "op": "train past overfitting, save every epoch",
+     "locator": "p5 §4.1 L335-340"
+    },
+    {
+     "op": "select optimal epoch and cuts on BTS18 by successful classifications at FPR 0% and 1%",
+     "locator": "p5 §4.1 L286-301, L341-342"
+    },
+    {
+     "op": "replace BiLSTM layers with GRU in combinations, keep middle-GRU network",
+     "locator": "p5 §4.1 L302-316"
+    },
+    {
+     "op": "MC dropout 100 reruns for sigma",
+     "locator": "p4 §3 L277-283"
+    },
+    {
+     "op": "compare ROC with SNID and DASH, test on independent data",
+     "locator": "p6-7 §5.1 L381-427"
+    }
+   ],
+   "chain_length": 11
+  },
+  {
+   "episode_id": "E2",
+   "level": "per_study",
+   "description": "Build the SNIascore redshift regression network",
+   "practitioner_action": "publish_object",
+   "action_locator": "2104.12980.layout.txt p5 §4.2 L326-339",
+   "chain": [
+    {
+     "op": "select SNe Ia with redshift known to three decimals (891 spectra)",
+     "locator": "p3 §2 L136-148"
+    },
+    {
+     "op": "augment to equalise redshift distribution (12810 spectra) with added noise",
+     "locator": "p3-4 §2.1 L199-252"
+    },
+    {
+     "op": "replace classification layers with regression layer",
+     "locator": "p5 §4.2 L327-330"
+    },
+    {
+     "op": "search forward/backward loss functions",
+     "locator": "p5-6 §4.2 L340-359"
+    },
+    {
+     "op": "select root MBE squared by residual fractions and linearity on BTS18",
+     "locator": "p6 §4.2 L360-379"
+    },
+    {
+     "op": "evaluate against host-galaxy and SNID redshifts",
+     "locator": "p7 §5.2 L415-449"
+    }
+   ],
+   "chain_length": 6
+  },
+  {
+   "episode_id": "E3",
+   "level": "per_object",
+   "description": "Live automated classification of one SEDM spectrum and TNS report",
+   "practitioner_action": "publish_value",
+   "action_locator": "2104.12980.layout.txt p9 §7 L523-531",
+   "chain": [
+    {
+     "op": "SEDM observation triggered for BTS target",
+     "locator": "p9 §7 L535-540"
+    },
+    {
+     "op": "automated SEDM data reduction",
+     "locator": "p9 §7 L525-529"
+    },
+    {
+     "op": "preprocess spectrum",
+     "locator": "p4 §2.2 L255-271"
+    },
+    {
+     "op": "SNIascore score and sigma by 100 MC reruns",
+     "locator": "p4 §3 L277-283"
+    },
+    {
+     "op": "apply threshold (0.9 initially)",
+     "locator": "p9 §7 L542-545"
+    },
+    {
+     "op": "predict redshift and report SN Ia classification to TNS within about 10 minutes",
+     "locator": "p9 §7 L526-535"
+    }
+   ],
+   "chain_length": 6
+  },
+  {
+   "episode_id": "E4",
+   "level": "per_object",
+   "description": "Investigation of high-quality false positives in validation and testing sets",
+   "practitioner_action": "publish_cause",
+   "action_locator": "2104.12980.layout.txt p8-9 §6 L508-542",
+   "chain": [
+    {
+     "op": "list false positives at recommended cut",
+     "locator": "p8 §6 L508-515"
+    },
+    {
+     "op": "inspect spectrum quality and host contamination",
+     "locator": "p8 §6 L511-513"
+    },
+    {
+     "op": "inspect SNID matches at rlap>5",
+     "locator": "p8 §6 L501-503"
+    },
+    {
+     "op": "compare light-curve evolution and SN Ia light-curve models",
+     "locator": "p8 §6 L503-507"
+    },
+    {
+     "op": "conclude on likely class and main contaminant type",
+     "locator": "p9 §6 L529-542"
+    }
+   ],
+   "chain_length": 5
+  }
+ ],
+ "branches": [
+  {
+   "id": "B01",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "use BTS18 sample as validation set",
+   "alternatives_visible": [
+    "BTS18",
+    "other BTS data"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "classifications and redshifts carefully vetted by humans",
+   "locator": "2104.12980.layout.txt p3 §2 L190-202",
+   "quote": "chosen for validation since the classifications and red-"
+  },
+  {
+   "id": "B02",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "train redshift regression only on SNe Ia with redshift known to three decimals",
+   "alternatives_visible": [
+    "all SN Ia redshifts",
+    "three-decimal redshifts"
+   ],
+   "rejected_named": true,
+   "rejected_option": "lower-precision redshifts",
+   "reason": "quality of known redshifts",
+   "locator": "2104.12980.layout.txt p3 §2 L136-148",
+   "quote": "where the redshift is known to three decimal places or"
+  },
+  {
+   "id": "B03",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "augment training data to equalise redshift distribution for regression (not for classification)",
+   "alternatives_visible": [
+    "no augmentation",
+    "weighting scheme",
+    "augmentation"
+   ],
+   "rejected_named": true,
+   "rejected_option": "no augmentation / weighting scheme",
+   "reason": "few spectra at z<0.03 and z>0.09 would bias regression",
+   "locator": "2104.12980.layout.txt p3 §2.1 L175-203",
+   "quote": "a weighting scheme, or data augmentation is needed."
+  },
+  {
+   "id": "B04",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "preprocess by median normalisation, continuum division and subtraction of one",
+   "alternatives_visible": [
+    "simple division by median",
+    "direct division by smoothed continuum",
+    "chosen procedure"
+   ],
+   "rejected_named": true,
+   "rejected_option": "simple median division; direct continuum division",
+   "reason": "chosen procedure significantly outperforms",
+   "locator": "2104.12980.layout.txt p4 §2.2 L272-274",
+   "quote": "nificantly outperforms a simple division by the median,"
+  },
+  {
+   "id": "B05",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "do not suppress bluest and reddest spectral regions",
+   "alternatives_visible": [
+    "suppress edges (as in DASH)",
+    "keep edges"
+   ],
+   "rejected_named": true,
+   "rejected_option": "suppressing spectral edges",
+   "reason": "decreases overall performance; not needed for SEDM",
+   "locator": "2104.12980.layout.txt p4 §2.2 L240-244",
+   "quote": "ing the bluest and reddest parts of the spectra (which"
+  },
+  {
+   "id": "B06",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "replace middle of three BiLSTM layers with a GRU layer",
+   "alternatives_visible": [
+    "three BiLSTM layers",
+    "GRU replacements in all combinations"
+   ],
+   "rejected_named": true,
+   "rejected_option": "three-BiLSTM architecture",
+   "reason": "reduced false positives with high SNIascore",
+   "locator": "2104.12980.layout.txt p5 §4.1 L302-316",
+   "quote": "of replacing the BiLSTM layers with GRU layers in all"
+  },
+  {
+   "id": "B07",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "no loss-based stopping; train past overfitting and pick optimal epoch after the fact",
+   "alternatives_visible": [
+    "loss-based stopping condition",
+    "post hoc epoch selection"
+   ],
+   "rejected_named": true,
+   "rejected_option": "stopping condition based on the loss",
+   "reason": "compare networks at their optimal epochs",
+   "locator": "2104.12980.layout.txt p5 §4.1 L335-342",
+   "quote": "a good performance. We do not employ any stopping"
+  },
+  {
+   "id": "B08",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "root mean bias error squared as forward loss with MAE derivative backward",
+   "alternatives_visible": [
+    "MSE",
+    "MAE",
+    "MPE",
+    "MBE",
+    "pairwise combinations"
+   ],
+   "rejected_named": true,
+   "rejected_option": "standard MSE or MAE",
+   "reason": "MSE/MAE give redshift-dependent systematic bias",
+   "locator": "2104.12980.layout.txt p5-6 §4.2 L326-363",
+   "quote": "(Fig. 3). However, we have found that the standard"
+  },
+  {
+   "id": "B09",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "classification cuts SNIascore>0.6 & sigma<0.3 or stricter >0.8 & sigma<0.275 instead of standard 0.5",
+   "alternatives_visible": [
+    "score>0.5",
+    "score>0.6, sigma<0.3",
+    "score>0.8, sigma<0.275"
+   ],
+   "rejected_named": true,
+   "rejected_option": "standard SNIascore>0.5",
+   "reason": "FPR<1% hard requirement; stricter cut for live TNS reporting",
+   "locator": "2104.12980.layout.txt p6-7 §5.1 L368-438",
+   "quote": "SNIascore > 0.5 to classify a spectrum as that of a"
+  },
+  {
+   "id": "B10",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "deploy with conservative threshold 0.9, plan to relax to 0.8 with sigma<0.275",
+   "alternatives_visible": [
+    "0.9",
+    "0.8 plus sigma cut"
+   ],
+   "rejected_named": true,
+   "rejected_option": "0.8 cut at initial deployment",
+   "reason": "conservative start for TNS reports",
+   "locator": "2104.12980.layout.txt p9 §7 L542-547",
+   "quote": "servative SNIascore threshold of 0.9. Based on the per-"
+  },
+  {
+   "id": "B11",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "keep RNN over DASH-like CNNs trained on SEDM",
+   "alternatives_visible": [
+    "convolutional networks as in DASH",
+    "optimized RNN"
+   ],
+   "rejected_named": true,
+   "rejected_option": "DASH-like CNN",
+   "reason": "unable to beat RNN performance",
+   "locator": "2104.12980.layout.txt p7 fn8 L442-447",
+   "quote": "We have investigated similar convolutional neural networks as"
+  },
+  {
+   "id": "B12",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "SNID baseline uses best match with highest rlap",
+   "alternatives_visible": [
+    "highest-rlap match",
+    "counting SN Ia among top 10 matches"
+   ],
+   "rejected_named": true,
+   "rejected_option": "counting multiple matches",
+   "reason": "performs better",
+   "locator": "2104.12980.layout.txt p11 App B L641-647",
+   "quote": "better than considering multiple matches (e.g., counting"
+  },
+  {
+   "id": "B13",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "DASH ROC over softmax 0.5-0.9; extreme softmax cuts not recommended",
+   "alternatives_visible": [
+    "softmax 0.5-0.9",
+    "softmax 0.92-0.99"
+   ],
+   "rejected_named": true,
+   "rejected_option": "extreme softmax cuts",
+   "reason": "unstable, noisy ROC except one narrow FPR",
+   "locator": "2104.12980.layout.txt p11 App B L645-655",
+   "quote": "consider this behavior to be unstable and do not rec-"
+  },
+  {
+   "id": "B14",
+   "episode_id": "E4",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "ZTF20aatxryt (SN 2020eyj), officially SN Ia, judged more likely a stripped-envelope SN",
+   "alternatives_visible": [
+    "SN Ia",
+    "SN Ic / stripped-envelope SN"
+   ],
+   "rejected_named": true,
+   "rejected_option": "SN Ia (official BTS classification)",
+   "reason": "light-curve evolution; SN Ia light-curve models do not match even near maximum; later CSM interaction to SN Ibn",
+   "locator": "2104.12980.layout.txt p8 §6 L497-520",
+   "quote": "light before the interaction sets in, it may be more likely"
+  },
+  {
+   "id": "B15",
+   "episode_id": "E4",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "ZTF18aaxmhvk (SN 2018cne) classified SN Ic despite SN Ia SNID matches; peculiar SN Ia left open",
+   "alternatives_visible": [
+    "normal SN Ia",
+    "SN Ic",
+    "peculiar SN Ia"
+   ],
+   "rejected_named": true,
+   "rejected_option": "normal SN Ia",
+   "reason": "light curve not consistent with normal SN Ia; SN Ic matches also present; no late-time spectrum to settle",
+   "locator": "2104.12980.layout.txt p8-9 §6 L512-528",
+   "quote": "is not consistent with a normal SN Ia. Based on this,"
+  },
+  {
+   "id": "B16",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "treat low SNIascore as not confident rather than as not-SN Ia, except <0.01",
+   "alternatives_visible": [
+    "low score means not SN Ia",
+    "low score means no confident classification"
+   ],
+   "rejected_named": true,
+   "rejected_option": "concluding the transient is not a SN Ia from a low score",
+   "reason": "low SNR, galaxy contamination, cosmic rays; only <0.01 has FNR about 1%",
+   "locator": "2104.12980.layout.txt p7 §5.1 L390-409",
+   "quote": "Finally, we note that a low SNIascore does not neces-"
+  },
+  {
+   "id": "B17",
+   "episode_id": "E4",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "RAPID early photometric classification not adopted",
+   "alternatives_visible": [
+    "RAPID",
+    "ZTF-trained light-curve classifiers in progress"
+   ],
+   "rejected_named": true,
+   "rejected_option": "RAPID",
+   "reason": "expected performance not reproduced on live ZTF data",
+   "locator": "2104.12980.layout.txt p9 §6 L556-563",
+   "quote": "been able to reproduce the expected performance in"
+  }
+ ],
+ "conclusions_depth": [
+  {
+   "id": "C01",
+   "conclusion": "ZTF20aatxryt more likely a stripped-envelope SN than SN Ia",
+   "channels_claimed": [
+    "SEDM peak spectrum and SNID matches",
+    "light-curve evolution",
+    "SN Ia light-curve model comparison",
+    "later spectrum (SN Ibn)"
+   ],
+   "n_channels_claimed": 4,
+   "locator": "2104.12980.layout.txt p8 §6 L497-520",
+   "quote": "the lightcurve evolution and the fact that SN Ia ligh-",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "C02",
+   "conclusion": "ZTF18aaxmhvk classified SN Ic, possibly peculiar SN Ia",
+   "channels_claimed": [
+    "SEDM spectrum",
+    "SNID matches",
+    "light curve"
+   ],
+   "n_channels_claimed": 3,
+   "locator": "2104.12980.layout.txt p8-9 §6 L512-528",
+   "quote": "and the fact that matches to SNe Ic can also be found in",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "C03",
+   "conclusion": "main high-score contaminants are SN Ic-like stripped-envelope SNe, removable with light curves",
+   "channels_claimed": [
+    "SEDM spectra (SNIascore)",
+    "light curves"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2104.12980.layout.txt p9 §6 L529-542",
+   "quote": "In conclusion, the main contaminants that may pro-",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "C04",
+   "conclusion": "SNIascore redshifts unbiased with scatter about 0.004",
+   "channels_claimed": [
+    "SEDM spectrum",
+    "host-galaxy spectrum redshifts"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2104.12980.layout.txt p7 §5.2 L425-439",
+   "quote": "We find that the performance of our network opti-",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "C05",
+   "conclusion": "SNIascore classifies 83-90% of SN Ia spectra at FPR about 0.5%, outperforming SNID and DASH",
+   "channels_claimed": [
+    "SEDM spectrum"
+   ],
+   "n_channels_claimed": 1,
+   "locator": "2104.12980.layout.txt p7 §5.1 L411-417",
+   "quote": "this comparison it is clear that SNIascore significantly",
+   "measured_depth": "not_measured"
+  }
+ ],
+ "facts_for_shape": [
+  {
+   "id": "F01",
+   "fact": "Training, validation and testing labels are BTS classifications (manual SNID template matching plus inspection); BTS18 human-vetted; testing labels subject to minor future change",
+   "locator": "2104.12980.layout.txt p2-3 §1-2 L91-213",
+   "quote": "classifications have up until now been based on manual"
+  },
+  {
+   "id": "F02",
+   "fact": "From 2021-04-15 SNIascore auto-reports SN Ia classifications and redshifts to TNS: later BTS SN Ia labels can be annotations derived from this model's output",
+   "locator": "2104.12980.layout.txt p9 §7 L523-531",
+   "quote": "Starting from 2021 April 15 we have fully deployed"
+  },
+  {
+   "id": "F03",
+   "fact": "An official BTS/TNS classification (SN 2020eyj as SN Ia) was later judged likely wrong: TNS labels are not measured truth in every case",
+   "locator": "2104.12980.layout.txt p8 §6 L507-511",
+   "quote": "that this was a stripped-envelope SN. We note that the"
+  },
+  {
+   "id": "F04",
+   "fact": "The only use of a light-curve model is a per-object check that SN Ia light-curve models fail to match, used to reject the SN Ia class (explain-type evidence, not a published fit)",
+   "locator": "2104.12980.layout.txt p8 §6 L503-507",
+   "quote": "turve models do not match well even around maximum"
+  },
+  {
+   "id": "F05",
+   "fact": "Evaluation is on held-out validation and later testing data against SNID and DASH baselines via ROC; FPR<1% is a hard requirement",
+   "locator": "2104.12980.layout.txt p5 §4.1 L297-301",
+   "quote": "We consider FPR < 1% to be a hard requirement for"
+  },
+  {
+   "id": "F06",
+   "fact": "Light-curve information is often unavailable at the time of the spectrum; many spectra are pre-maximum",
+   "locator": "2104.12980.layout.txt p9 §6 L549-555",
+   "quote": "limitation is the fact that we do not necessarily have"
+  },
+  {
+   "id": "F07",
+   "fact": "Proposed (not practised): objects whose SNIascore changes when the light curve is included may warrant further follow-up",
+   "locator": "2104.12980.layout.txt p9 §6 L543-548",
+   "quote": "ing at objects that change SNIascore significantly when"
+  },
+  {
+   "id": "F08",
+   "fact": "Spectral phase uses time of maximum from the BTS Sample Explorer brightest measurement, not a fitted model",
+   "locator": "2104.12980.layout.txt p3 §2 L164-171",
+   "quote": "time of maximum light from the BTS Sample Explorer"
+  },
+  {
+   "id": "F09",
+   "fact": "Planned relaxed cut would remove human interaction for most BTS SNe Ia (about 80% testing, 90% validation), i.e. more than 50% of BTS SNe (body text; the abstract's 60% figure is not used)",
+   "locator": "2104.12980.layout.txt p9 §7 L545-550",
+   "quote": "eliminate the need for human interaction in the classifi-"
+  }
+ ],
+ "item_template_evidence": [
+  {
+   "id": "T01",
+   "question_form": "infer: is this low-resolution spectrum a SN Ia, and at what redshift",
+   "locator": "2104.12980.layout.txt p2 §1 L102-107",
+   "quote": "method optimized to identify SNe Ia using SEDM spec-"
+  },
+  {
+   "id": "T02",
+   "question_form": "explain/infer: reconcile an SN Ia-like spectrum with a light curve that SN Ia models do not fit; which class",
+   "locator": "2104.12980.layout.txt p8-9 §6 L497-528",
+   "quote": "In the testing set, ZTF20aatxryt (SN 2020eyj; Tonry"
+  }
+ ],
+ "zero_contribution": false,
+ "notes": "Most branches are per_study model-building choices (tagged generate for the artifact being built, infer for thresholds/baselines). Per-object branches: 2 (B14, B15), both in E4, both reclassifications using light curve against spectrum. The E3 live episode is fully mechanical (chain only, no per-object branch). No light-curve fitting to cut epochs or held-out-epoch prediction is practised."
+}

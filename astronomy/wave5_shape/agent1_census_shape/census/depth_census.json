@@ -1,0 +1,990 @@
+{
+ "record": "D1 evidence-depth census, wave 5 agent 1",
+ "measured_depth_status": "not_measured for every conclusion; refusal 11: stratify on measured depth only, so all items are depth one until I2 runs leave-one-out",
+ "summary": {
+  "conclusions": 66,
+  "claimed_channel_count_distribution": {
+   "1": 4,
+   "2": 26,
+   "3": 25,
+   "4": 8,
+   "5": 3
+  },
+  "subset_of_channels_supported_wrong_conclusion_found": [
+   "1808.00969 early Ic-BL association from early spectra plus radio, overturned by later time series (see 1808.00969 notes COW-B09)",
+   "2104.12980 SN 2020eyj: spectrum-only SNID match to SN Ia overturned when light curve added (B14)",
+   "2104.12980 SN 2018cne: SN Ia SNID matches vs light curve inconsistent with normal Ia (B15)"
+  ],
+  "author_reported_ablations_not_measured_depth": [
+   "2403.07975 with vs without redshift F1 0.61 vs 0.71",
+   "2405.03078 light curve + metadata synergy +20-30% F1"
+  ]
+ },
+ "seeds": [
+  {
+   "seed_id": "1808.00969",
+   "conclusions": [
+    {
+     "id": "COW-C01",
+     "conclusion": "expansion speed/ejecta velocity exceeds 0.1c early",
+     "channels_claimed": [
+      "UV-optical SED photospheric radius",
+      "ASAS-SN pre-explosion limit",
+      "broad absorption in spectra"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "1808.00969.layout.txt p9 §3.4 L618-626",
+     "quote": "implies fast ejecta: given the ASAS-SN pre-explosion limit,",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "COW-C02",
+     "conclusion": "not explained by any known supernova model",
+     "channels_claimed": [
+      "optical light curve timescales",
+      "spectra",
+      "long-lived hot photosphere from SED",
+      "X-ray",
+      "radio"
+     ],
+     "n_channels_claimed": 5,
+     "locator": "1808.00969.layout.txt p17 §6 L1441-1447",
+     "quote": "tion within a star-forming region seems to imply the ex-",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "COW-C03",
+     "conclusion": "IMBH TDE describes qualitative behaviour but super-Eddington luminosity is a challenge",
+     "channels_claimed": [
+      "bolometric UV/optical light curve",
+      "late-time H/He spectra",
+      "temperature evolution",
+      "MOSFiT fit to g, r, UVW2"
+     ],
+     "n_channels_claimed": 4,
+     "locator": "1808.00969.layout.txt p17 §6 L1448-1455",
+     "quote": "hole provides an excellent description of the qualitative be-",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "COW-C04",
+     "conclusion": "early Ic-BL classification (from Fe II-like feature plus radio afterglow) was wrong; a subset of channels at early time supported it",
+     "channels_claimed": [
+      "early spectra",
+      "radio/submm afterglow",
+      "later light curve (no SN peak)"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "1808.00969.layout.txt p8 §3.3 L523-537",
+     "quote": "early suggestions of a Ic-BL classification (Xu et al. 2018;",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "COW-C05",
+     "conclusion": "the early broad feature is real",
+     "channels_claimed": [
+      "spectra from three independent spectrographs",
+      "B-V and g-r photometric colours"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "1808.00969.layout.txt p13 §fn8 L1157-1161",
+     "quote": "in at least three different independently-reduced spectrographs",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "COW-C06",
+     "conclusion": "H and He lines arise in receding ejecta, not CSM",
+     "channels_claimed": [
+      "late spectra line widths",
+      "line redshift offsets"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "1808.00969.layout.txt p13 §4.2 L1127-1131",
+     "quote": "net redshift in the emission component that we observe. The",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    }
+   ]
+  },
+  {
+   "seed_id": "1905.07422",
+   "conclusions": [
+    {
+     "id": "V19-C1",
+     "conclusion": "Five-class photometric classification reaches ~90% average accuracy given complete light curves and redshift",
+     "channels_claimed": [
+      "gP1 photometry",
+      "rP1 photometry",
+      "iP1 photometry",
+      "zP1 photometry",
+      "spectroscopic redshift (absolute magnitude anchor)"
+     ],
+     "n_channels_claimed": 5,
+     "locator": "1905.07422.layout.txt p18 §7 L1426-1433",
+     "quote": "Our pipeline requires a redshift, which simplifies the",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "V19-C2",
+     "conclusion": "SLSNe easily separable due to high luminosity and long durations",
+     "channels_claimed": [
+      "light-curve duration (photometry)",
+      "luminosity (photometry + redshift)"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "1905.07422.layout.txt p12 §5.1 L793-796",
+     "quote": "ble from the other classes due to their high luminosity",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "V19-C3",
+     "conclusion": "Type II success mainly due to plateau phase",
+     "channels_claimed": [
+      "light-curve shape (plateau)"
+     ],
+     "n_channels_claimed": 1,
+     "locator": "1905.07422.layout.txt p14 §5.1 L824-832",
+     "quote": "This overall high success rate is mainly due to the pres-",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "V19-C4",
+     "conclusion": "Peak magnitudes are the most important interpretable features (RF gini importance, author-reported)",
+     "channels_claimed": [
+      "peak magnitude per filter (photometry + redshift)",
+      "durations/other parameters"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "1905.07422.layout.txt p14 §5.1 L955-962",
+     "quote": "peak magnitudes are the most important interpretable",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    }
+   ]
+  },
+  {
+   "seed_id": "1910.12973",
+   "conclusions": [
+    {
+     "id": "C01",
+     "conclusion": "ZTF18abmrhom is very likely a SN Ia",
+     "channels_claimed": [
+      "ZTF SEDM spectrum",
+      "ePESSTO spectrum",
+      "ZTF r-band light curve"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "1910.12973.layout.txt p9 §3.2 L537-551",
+     "quote": "Taken together, it is very",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C02",
+     "conclusion": "ZTF18abtswjk is a SN IIn, not an AGN",
+     "channels_claimed": [
+      "optical spectrum",
+      "ZTF light curve over 2018-2019",
+      "WISE host colours"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "1910.12973.layout.txt p9 §3.2 L553-568",
+     "quote": "Furthermore, the WISE colors for the host galaxy",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C03",
+     "conclusion": "ZTF18aaqkdwf variability may be due to an AGN",
+     "channels_claimed": [
+      "ZTF light curve",
+      "spectrum (P-Cygni Halpha)",
+      "archival iPTF variability",
+      "radio host detection"
+     ],
+     "n_channels_claimed": 4,
+     "locator": "1910.12973.layout.txt p9 §3.2 L572-578",
+     "quote": "galaxy is a bright point source in the radio (Helfand et al.",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C04",
+     "conclusion": "ZTF18abuqhje consistent with AGN, unresolved",
+     "channels_claimed": [
+      "ZTF light curve",
+      "two spectra",
+      "archival iPTF variability"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "1910.12973.layout.txt p9 §3.2 L578-588",
+     "quote": "ity from this nucleus ∼2.5 yr prior to 2018 with iPTF, which",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C05",
+     "conclusion": "ZTF18aarcchg cannot be classified",
+     "channels_claimed": [
+      "ZTF r-band light curve",
+      "spectra",
+      "host galaxy classification"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "1910.12973.layout.txt p10 §3.2 L591-599",
+     "quote": "exhibit a blue continuum with superposed narrow emission",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C06",
+     "conclusion": "Ia vs Ic ambiguity resolved",
+     "channels_claimed": [
+      "spectrum (SNID)",
+      "ZTF r-band light curve secondary peak"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "1910.12973.layout.txt p7 §3.1 L403-411",
+     "quote": "the telltale secondary near-infrared (nIR) peak of SNe Ia can",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C07",
+     "conclusion": "SLSN membership",
+     "channels_claimed": [
+      "spectrum matches",
+      "peak absolute magnitude (photometry plus redshift)"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "1910.12973.layout.txt p11 §3.3.4 L694-699",
+     "quote": "poses of this analysis we use spectroscopic matches to previ-",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C08",
+     "conclusion": "91T-like and 91bg-like sub-type labels",
+     "channels_claimed": [
+      "spectrum line strengths",
+      "photometric luminosity and decline rate"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "1910.12973.layout.txt p10 §3.3.1 L601-608",
+     "quote": "Si II and Ca II) or photometric (over-luminous and a slow",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C09",
+     "conclusion": "RCF = 44% +/- 1%, falling with redshift",
+     "channels_claimed": [
+      "spectroscopic SN Ia classification",
+      "host identification (NED, PS1 images)",
+      "catalogued host redshifts",
+      "WISE W1 host photometry"
+     ],
+     "n_channels_claimed": 4,
+     "locator": "1910.12973.layout.txt p14 §5 L870-879",
+     "quote": "the RCF = 44% ± 1% (90% confidence interval).25 This es-",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C10",
+     "conclusion": "transient is a CV and is not followed up",
+     "channels_claimed": [
+      "light-curve rise/decline",
+      "g-r colour",
+      "absence of host counterpart"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "1910.12973.layout.txt p5 fn10 L312-315",
+     "quote": "and their gZTF − rZTF colors are persistently blue. We do not follow-",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    }
+   ]
+  },
+  {
+   "seed_id": "2008.04912",
+   "conclusions": [
+    {
+     "id": "SP-C1",
+     "conclusion": "Much of the classifier's success depends on absolute magnitude, which requires a redshift",
+     "channels_claimed": [
+      "griz photometry",
+      "host-galaxy spectroscopic redshift",
+      "Milky Way extinction"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2008.04912.layout.txt p15 §5.1 L1080-1082",
+     "quote": "Much of the success of our algorithm (unlike, e.g.,",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "SP-C2",
+     "conclusion": "SLSNe easy to identify because they separate cleanly by absolute magnitude",
+     "channels_claimed": [
+      "photometry",
+      "redshift"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2008.04912.layout.txt p7 §4.1 L492-495",
+     "quote": "tify because they separate relatively cleanly by absolute",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "SP-C3",
+     "conclusion": "AGNs may contaminate photometric SLSN sample; broad lines in host spectra, small host offsets",
+     "channels_claimed": [
+      "light curve (luminosity, slow evolution)",
+      "host-galaxy spectrum broad lines",
+      "transient-host offset"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2008.04912.layout.txt p16 §5.3 L1116-1142",
+     "quote": "check for this possibility, we inspect the host-galaxy",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "SP-C4",
+     "conclusion": "Peak absolute magnitude and first PC projection are the most discriminating features (author-reported single-filter retraining with impurity and permutation importance)",
+     "channels_claimed": [
+      "single-filter photometry",
+      "redshift"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2008.04912.layout.txt p20 §C L1497-1507",
+     "quote": "In all cases, the peak absolute magnitude and the",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "SP-C5",
+     "conclusion": "SLSN/Ia disagreements with V20 stem from light curves missing rise or decline",
+     "channels_claimed": [
+      "photometric sampling of the light curve"
+     ],
+     "n_channels_claimed": 1,
+     "locator": "2008.04912.layout.txt p14 §4.4 L967-973",
+     "quote": "A visual inspection of these light curves shows that",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    }
+   ]
+  },
+  {
+   "seed_id": "2009.01242",
+   "conclusions": [
+    {
+     "id": "C01",
+     "conclusion": "saved candidate is an AGN false positive",
+     "channels_claimed": [
+      "AGN catalog cross-match",
+      "WISE mid-IR colours",
+      "ZTF light curve variability"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2009.01242.layout.txt p3 §2.2 L158-163",
+     "quote": "a known AGN or a WISE source with AGN-like col-",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C02",
+     "conclusion": "saved candidate is a stellar flare/CV false positive",
+     "channels_claimed": [
+      "image (faint star-like counterpart)",
+      "ZTF light-curve history",
+      "TNS reports of previous flares"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2009.01242.layout.txt p3 §2.2 L162-165",
+     "quote": "ity, or if a faint star-like counterpart is visible in the",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C03",
+     "conclusion": "candidate is a dwarf nova, removed without spectroscopy",
+     "channels_claimed": [
+      "light-curve shape",
+      "g-r colour",
+      "PS1 reference counterpart"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2009.01242.layout.txt p7 §2.4 L402-411",
+     "quote": "tive fast rise to peak followed by a somewhat slower",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C04",
+     "conclusion": "rapidly evolving luminous transients are CSM/extended-envelope shock-breakout powered",
+     "channels_claimed": [
+      "peak luminosity (photometry plus redshift)",
+      "timescale",
+      "spectroscopic class evolution"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2009.01242.layout.txt p13 §4.1.1 L839-858",
+     "quote": "Shock-breakout into an extended envelope or circum-",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C05",
+     "conclusion": "AT2019cmw nature unresolved (extreme SN, TDE or AGN)",
+     "channels_claimed": [
+      "featureless spectrum",
+      "IGM absorption redshift",
+      "slow light curve",
+      "peak luminosity"
+     ],
+     "n_channels_claimed": 4,
+     "locator": "2009.01242.layout.txt p14 §4.1.3 L951-954",
+     "quote": "found one featureless, slow transient with M = −23.6",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C06",
+     "conclusion": "SN2020cxd is a massive-star explosion",
+     "channels_claimed": [
+      "spectrum Halpha velocity",
+      "IIP-like light curve",
+      "peak luminosity"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2009.01242.layout.txt p13 §4.1.2 L830-835",
+     "quote": "km s−1 in its spectrum and a SN IIP-like light curve, it is",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C07",
+     "conclusion": "SN Ia rate 2.35e4 and CC SN rate 1.01e5 Gpc-3 yr-1",
+     "channels_claimed": [
+      "spectroscopic classifications",
+      "peak magnitudes",
+      "redshifts",
+      "survey exposure history",
+      "Galactic dust map"
+     ],
+     "n_channels_claimed": 5,
+     "locator": "2009.01242.layout.txt p16 §4.3 L1072-1075",
+     "quote": "Based on these assumptions (and H0 = 70 km s−1",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C08",
+     "conclusion": "no significant host luminosity/colour difference between SN II and SN Ib/c",
+     "channels_claimed": [
+      "spectroscopic class",
+      "SDSS host photometry"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2009.01242.layout.txt p19 §4.4 L1263-1271",
+     "quote": "ence in the luminosities or colors of SN II and SN Ib/c",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C09",
+     "conclusion": "Phillips-like duration-luminosity correlations in SN classes",
+     "channels_claimed": [
+      "g and r timescales",
+      "redshift",
+      "spectroscopic class"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2009.01242.layout.txt p15 §4.2 L957-965",
+     "quote": "known Phillips (1993) correlation between timescale",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C10",
+     "conclusion": "SN2019fdr possibly AGN/NLSy1",
+     "channels_claimed": [
+      "late-time spectra"
+     ],
+     "n_channels_claimed": 1,
+     "locator": "2009.01242.layout.txt p31 App E Table 3 L1983",
+     "quote": "Possibly an AGN/NLSy1 based on late-time spectra",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    }
+   ]
+  },
+  {
+   "seed_id": "2104.07795",
+   "conclusions": [
+    {
+     "id": "SALT3-C01",
+     "conclusion": "SALT3.K21 reduces Hubble scatter by ~10-15% where additional red filters can be fit (CfA3 I, Foundation iz)",
+     "channels_claimed": [
+      "multi-band photometry incl. I/iz bands",
+      "spectra constraining red SED (kaepora)",
+      "redshift"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2104.07795.layout.txt p19 §5.2.1 L1308-1329",
+     "quote": "allows us to fit SNe with existing light curves in filters",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "SALT3-C02",
+     "conclusion": "Kaepora spectra are essential for deconvolving z-band data at >7500 A",
+     "channels_claimed": [
+      "broadband photometry",
+      "spectra"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2104.07795.layout.txt p15 §Fig.10 L1064-1065",
+     "quote": "spectra from kaepora are immensely impactful at wavelengths",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "SALT3-C03",
+     "conclusion": "UV divergence of trained model arises from sparse training data; data density must increase at least 2x",
+     "channels_claimed": [
+      "simulated photometry",
+      "spectral coverage density"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2104.07795.layout.txt p12 §3.4 L807-812",
+     "quote": "We conclude that because few SNe",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    }
+   ]
+  },
+  {
+   "seed_id": "2104.12980",
+   "conclusions": [
+    {
+     "id": "C01",
+     "conclusion": "ZTF20aatxryt more likely a stripped-envelope SN than SN Ia",
+     "channels_claimed": [
+      "SEDM peak spectrum and SNID matches",
+      "light-curve evolution",
+      "SN Ia light-curve model comparison",
+      "later spectrum (SN Ibn)"
+     ],
+     "n_channels_claimed": 4,
+     "locator": "2104.12980.layout.txt p8 §6 L497-520",
+     "quote": "the lightcurve evolution and the fact that SN Ia ligh-",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C02",
+     "conclusion": "ZTF18aaxmhvk classified SN Ic, possibly peculiar SN Ia",
+     "channels_claimed": [
+      "SEDM spectrum",
+      "SNID matches",
+      "light curve"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2104.12980.layout.txt p8-9 §6 L512-528",
+     "quote": "and the fact that matches to SNe Ic can also be found in",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C03",
+     "conclusion": "main high-score contaminants are SN Ic-like stripped-envelope SNe, removable with light curves",
+     "channels_claimed": [
+      "SEDM spectra (SNIascore)",
+      "light curves"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2104.12980.layout.txt p9 §6 L529-542",
+     "quote": "In conclusion, the main contaminants that may pro-",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C04",
+     "conclusion": "SNIascore redshifts unbiased with scatter about 0.004",
+     "channels_claimed": [
+      "SEDM spectrum",
+      "host-galaxy spectrum redshifts"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2104.12980.layout.txt p7 §5.2 L425-439",
+     "quote": "We find that the performance of our network opti-",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C05",
+     "conclusion": "SNIascore classifies 83-90% of SN Ia spectra at FPR about 0.5%, outperforming SNID and DASH",
+     "channels_claimed": [
+      "SEDM spectrum"
+     ],
+     "n_channels_claimed": 1,
+     "locator": "2104.12980.layout.txt p7 §5.1 L411-417",
+     "quote": "this comparison it is clear that SNIascore significantly",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    }
+   ]
+  },
+  {
+   "seed_id": "2109.13999",
+   "conclusions": [
+    {
+     "id": "PS-C1",
+     "conclusion": "ParSNIP reproduces out-of-sample light curves with ~0.06 mag (PS1) / ~0.04 mag (PLAsTiCC) model uncertainty",
+     "channels_claimed": [
+      "multi-band photometry",
+      "redshift (metadata input)"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2109.13999.layout.txt p24 §7 L1731-1734",
+     "quote": "able to reproduce out-of-sample light curves with model",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "PS-C2",
+     "conclusion": "ParSNIP predicts spectral time series despite training on photometry only (validated against observed spectra)",
+     "channels_claimed": [
+      "multi-band photometry",
+      "redshift",
+      "observed spectra (validation only)"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2109.13999.layout.txt p16 §4.4 L1059-1065",
+     "quote": "with the observed spectra despite the fact that the ParSNIP model was only trained using photometry.",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "PS-C3",
+     "conclusion": "SN Ia photometric classification with 2x/2.3x less contamination",
+     "channels_claimed": [
+      "multi-band photometry",
+      "redshift (via pseudo-luminosity)",
+      "spectroscopic labels (training)"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2109.13999.layout.txt p17 §5.1 L1138-1141",
+     "quote": "although the redshift is used to calculate the luminosity.",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "PS-C4",
+     "conclusion": "SN Ia distances with RMS 0.150 mag vs 0.155 for SALT2",
+     "channels_claimed": [
+      "multi-band photometry",
+      "redshift",
+      "SALT2 fit-quality selection"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2109.13999.layout.txt p21 §5.5 L1480-1482",
+     "quote": "tance estimates is 0.155±0.008 mag and the RMS of the",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    }
+   ]
+  },
+  {
+   "seed_id": "2401.15167",
+   "conclusions": [
+    {
+     "id": "C1",
+     "conclusion": "multi-modal input chosen because images and extracted features give complementary information (host galaxy prominence, PS1 star-galaxy score and distance)",
+     "channels_claimed": [
+      "science/reference/difference image cutouts",
+      "ZTF alert packet features",
+      "PS1 crossmatch (sgscore, distpsnr)",
+      "custom light-curve history features"
+     ],
+     "n_channels_claimed": 4,
+     "locator": "2401.15167.layout.txt p8 §3 L505-532",
+     "quote": "that the images and the extracted features provide com-",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C2",
+     "conclusion": "MM-CNN outperforms image-only and metadata-only networks in completeness and purity (author-reported ablation, one branch removed)",
+     "channels_claimed": [
+      "image cutouts",
+      "metadata features"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2401.15167.layout.txt p22 §B L1356-1365",
+     "quote": "Each architecture outperforms the others in some metrics, but the MM-CNN delivers the best overall performance.",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C3",
+     "conclusion": "scanners identify bright transients faster in present-day sample partly because they see partnership photometry BTSbot is blinded from",
+     "channels_claimed": [
+      "ZTF public photometry",
+      "ZTF partnership photometry"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2401.15167.layout.txt p15 §4.2 L936-943",
+     "quote": "nership data from the present-day sample, but scanners",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C4",
+     "conclusion": "at first detection images carry more constraining information than the light curve for very young transients",
+     "channels_claimed": [
+      "image cutouts",
+      "light curve"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2401.15167.layout.txt p18 §5.3 L1082-1091",
+     "quote": "would expect that an image-based model, like BTSbot,",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C5",
+     "conclusion": "SN 2023tyk fully automatically detected, identified, spectroscopically classified as SN Ia and reported",
+     "channels_claimed": [
+      "ZTF alert images and metadata",
+      "SEDM spectrum"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2401.15167.layout.txt p17 §5.1 L1026-1034",
+     "quote": "sients. SN 2023tyk (ZTF23abhvlji) is a Type Ia super-",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    }
+   ]
+  },
+  {
+   "seed_id": "2403.07975",
+   "conclusions": [
+    {
+     "id": "C1",
+     "conclusion": "Redshift-independent five-class classification F1 0.61, accuracy 0.83",
+     "channels_claimed": [
+      "ZTF g-band photometry",
+      "ZTF r-band photometry",
+      "Milky Way E(B-V) dust map (preprocessing)"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2403.07975.layout.txt p13 §5.1 L883-888",
+     "quote": "troscopic dataset with a F1 -score of 0.61 ± 0.02 and an",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C2",
+     "conclusion": "Adding host redshift and k-corrected peak absolute magnitude raises F1 to 0.71 (author-reported ablation with vs without redshift)",
+     "channels_claimed": [
+      "ZTF g-band photometry",
+      "ZTF r-band photometry",
+      "host redshift (TNS)",
+      "Milky Way E(B-V) dust map"
+     ],
+     "n_channels_claimed": 4,
+     "locator": "2403.07975.layout.txt p21 §5.5 L1704-1716",
+     "quote": "are shown in Figure 15. By including redshift informa-",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C3",
+     "conclusion": "Luminosity (redshift) is important to separate SLSN-I, SN II, SN IIn",
+     "channels_claimed": [
+      "light curve shape",
+      "redshift/luminosity"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2403.07975.layout.txt p18 §Fig 15 L1414-1421",
+     "quote": "luminosity in distinguishing between light curves of these",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C4",
+     "conclusion": "Baseline using only z, peak magnitude and peak colour reaches accuracy 0.77, F1 0.56, near Superphot (author-reported ablation of shape channel)",
+     "channels_claimed": [
+      "redshift",
+      "peak absolute magnitude",
+      "peak g/r colour"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2403.07975.layout.txt p22 §6 L1752-1760",
+     "quote": "shift information yields an accuracy of 0.77 ± 0.01 and",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C5",
+     "conclusion": "Photometric set of SN-like objects requires light-curve classifier plus image-stamp classifier plus fit-quality cut",
+     "channels_claimed": [
+      "ALeRCE light-curve classifier (photometry)",
+      "ALeRCE stamp classifier (image cutouts)",
+      "Superphot+ fit chi2"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2403.07975.layout.txt p6 §2.5 L304-312",
+     "quote": "any light curve not marked as a SN by the ALeRCE",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C6",
+     "conclusion": "Redshift information biases classifier to label high-redshift events SLSN-I",
+     "channels_claimed": [
+      "redshift",
+      "light curve"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2403.07975.layout.txt p21 §5.5 L1702-1713",
+     "quote": "that redshift information is biasing our classifier to label",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "C7",
+     "conclusion": "SNe Ia in high-extinction hosts misclassified as Ib/c because only MW extinction corrected (missing host-extinction channel)",
+     "channels_claimed": [
+      "g-r colour",
+      "host extinction (absent)"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2403.07975.layout.txt p15 §5.1 L1112-1122",
+     "quote": "galaxies with exceptionally high extinction will ap-",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    }
+   ]
+  },
+  {
+   "seed_id": "2405.03078",
+   "conclusions": [
+    {
+     "id": "D1",
+     "conclusion": "combining light curves and metadata gives the highest synergy; adding metadata improves F1 by 20-30%",
+     "channels_claimed": [
+      "multiband light curve (ugrizY difference flux)",
+      "alert metadata (host redshift/photo-z, MW extinction, host properties)"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2405.03078.layout.txt p6 §3.2 L440-455",
+     "quote": "the light-curve and metadata, where adding metadata yields a",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "D2",
+     "conclusion": "engineered features help mainly periodic classes",
+     "channels_claimed": [
+      "light curve",
+      "metadata",
+      "engineered light-curve features"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2405.03078.layout.txt p7 §3.2 L566-570",
+     "quote": "except for periodic classes where the feature-based variant is",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "D3",
+     "conclusion": "classification possible without human-engineered features, but host-galaxy metadata is important",
+     "channels_claimed": [
+      "light curve",
+      "host galaxy metadata"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2405.03078.layout.txt p10 §4 L1250-1255",
+     "quote": "of including metadata information such as the properties of the",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "D4",
+     "conclusion": "before ~32 days RF outperforms tabular-only ATAT; metadata-only ATAT beats features-only for <8 days",
+     "channels_claimed": [
+      "metadata",
+      "engineered features"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2405.03078.layout.txt p6 §3.2 L428-434",
+     "quote": "when considering MTA after ∼32 days. Before 32 days, the RF",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    }
+   ]
+  },
+  {
+   "seed_id": "2409.04346",
+   "conclusions": [
+    {
+     "id": "DR2-C01",
+     "conclusion": "normal DR2 SNe Ia are volume-limited (free of selection) up to z=0.06",
+     "channels_claimed": [
+      "SALT2 colour distribution from light curves",
+      "realistic simulations from observing logs",
+      "spectroscopic selection function (BTS completeness)",
+      "assumed parent population model"
+     ],
+     "n_channels_claimed": 4,
+     "locator": "2409.04346.layout.txt p6 §4.6 L450-462",
+     "quote": "We draw two conclusions from this figure. First, since the",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "DR2-C02",
+     "conclusion": "SN-feature redshifts are unbiased with ~3e-3 scatter",
+     "channels_claimed": [
+      "SN spectra (snid template matching)",
+      "host galaxy redshifts (mostly DESI)"
+     ],
+     "n_channels_claimed": 2,
+     "locator": "2409.04346.layout.txt p6 §4.5 L438-445",
+     "quote": "magnac et al. 2024). We conclude that SN-feature redshifts are",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    },
+    {
+     "id": "DR2-C03",
+     "conclusion": "pocket effect biases stretch by Delta x1=-0.14 but not colours",
+     "channels_claimed": [
+      "simulated light curves perturbed by nonlinearity model",
+      "scene-modeling photometry comparison",
+      "SALT2 fits"
+     ],
+     "n_channels_claimed": 3,
+     "locator": "2409.04346.layout.txt p4 §4.1.2 L262-275",
+     "quote": "of this effect on our results, we simulated realistic light curves,",
+     "measured_depth": "not_measured",
+     "measured_depth_method": "not_measured (I2 leave-one-out not run)"
+    }
+   ]
+  }
+ ],
+ "completeness": "Every channel-combining conclusion the readers recorded in the 12 seeds; channels are as the authors claim them. No leave-one-out has been run, so no measured depth exists. Independent systems measured at each depth (supply) are not counted: P3 is refused before shape ratification (shape.md refusal 1)."
+}

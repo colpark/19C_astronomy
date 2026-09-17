@@ -1,0 +1,847 @@
+{
+ "seed_id": "2403.07975",
+ "title": "Superphot+: Realtime Fitting and Classification of Supernova Light Curves (de Soto et al. 2024)",
+ "arxiv_version_verified": "arXiv:2403.07975v1 (L13)",
+ "read_in_full": true,
+ "reader": "fork-C",
+ "layout_lines": 2915,
+ "pages": 37,
+ "episodes": [
+  {
+   "episode_id": "E1",
+   "level": "per_object",
+   "description": "Archival photometric-set object: an ALeRCE-selected SN-like ZTF light curve with no spectrum is preprocessed, fit with the 14-parameter Villar model by nested sampling, fit-quality cut, and assigned five-class pseudo-probabilities and a label (Table 5).",
+   "practitioner_action": "publish_value",
+   "action_locator": "2403.07975.layout.txt p24 §7.1 L1854-1879",
+   "chain": [
+    {
+     "op": "select via ALeRCE light-curve classifier SN-like >=50%",
+     "locator": "2403.07975.layout.txt p6 §2.5 L294-298"
+    },
+    {
+     "op": "download g/r photometry via ALeRCE API",
+     "locator": "2403.07975.layout.txt p4 §2.1 L185-190"
+    },
+    {
+     "op": "magnitudes to flux, zp=26.3",
+     "locator": "2403.07975.layout.txt p4 §2.2 L194-197"
+    },
+    {
+     "op": "Milky Way extinction correction (SFD/SF11, F07 R_V=3.1)",
+     "locator": "2403.07975.layout.txt p4 §2.2 L205-209"
+    },
+    {
+     "op": "clip spurious light-curve tails (App. A slope rule)",
+     "locator": "2403.07975.layout.txt p4 §2.2 L229-233"
+    },
+    {
+     "op": "N-obs cut: >=5 points SNR>3 per band",
+     "locator": "2403.07975.layout.txt p5 §2.3 L247-256"
+    },
+    {
+     "op": "variability cuts (amplitude, std vs mean uncertainty)",
+     "locator": "2403.07975.layout.txt p5 §2.3 L257-264"
+    },
+    {
+     "op": "remove objects not marked SN by ALeRCE stamp classifier",
+     "locator": "2403.07975.layout.txt p6 §2.5 L304-312"
+    },
+    {
+     "op": "nested-sampling fit of 14-parameter joint g/r model with refined priors",
+     "locator": "2403.07975.layout.txt p8 §3 L478-481"
+    },
+    {
+     "op": "median reduced chi2 <=1.2 cut",
+     "locator": "2403.07975.layout.txt p11 §3.1 L630-638"
+    },
+    {
+     "op": "12-parameter feature vector (exclude A_r, t0_r)",
+     "locator": "2403.07975.layout.txt p12 §4.3 L709-714"
+    },
+    {
+     "op": "LightGBM five-class pseudo-probabilities",
+     "locator": "2403.07975.layout.txt p13 §4.3 L821-826"
+    },
+    {
+     "op": "label = highest pseudo-probability",
+     "locator": "2403.07975.layout.txt p13 §4.3 L832-837"
+    }
+   ],
+   "chain_length": 13
+  },
+  {
+   "episode_id": "E2",
+   "level": "per_object",
+   "description": "Realtime ANTARES filter: ZTF alert light curve fit with SVI, fallback to nested sampling if SVI fit poor, full-phase classifier label, fit parameters saved on ANTARES; strange events visually inspected.",
+   "practitioner_action": "publish_value",
+   "action_locator": "2403.07975.layout.txt p29 §8 L2337-2344",
+   "chain": [
+    {
+     "op": "receive ZTF alert light curve in ANTARES filter; cross-check star catalogs",
+     "locator": "2403.07975.layout.txt p29 §8 L2399-2408"
+    },
+    {
+     "op": "SVI fit (default)",
+     "locator": "2403.07975.layout.txt p33 §App B L2650-2655"
+    },
+    {
+     "op": "switch to nested sampling per light curve if SVI fit is poor",
+     "locator": "2403.07975.layout.txt p33 §App B L2650-2655"
+    },
+    {
+     "op": "full-phase classifier label",
+     "locator": "2403.07975.layout.txt p19 §5.2 L1474-1500"
+    },
+    {
+     "op": "save fit parameters as light curve properties on ANTARES",
+     "locator": "2403.07975.layout.txt p29 §8 L2337-2344"
+    }
+   ],
+   "chain_length": 5
+  },
+  {
+   "episode_id": "E3",
+   "level": "per_study",
+   "description": "Build, tune and evaluate the Superphot+ pipeline (data assembly, pruning, taxonomy, priors, sampler, fit-quality metric, oversampling, classifier architecture, K-fold evaluation, redshift variant, comparisons, apply to 3,558 unlabeled objects, class-fraction correction). Published objects: code/package and ANTARES filter; published values: photometric labels.",
+   "practitioner_action": "publish_object",
+   "action_locator": "2403.07975.layout.txt p2 §1 L96-97",
+   "chain": [
+    {
+     "op": "query TNS for spectroscopically classified ZTF transients (9,526)",
+     "locator": "2403.07975.layout.txt p4 §2 L175-181"
+    },
+    {
+     "op": "preprocess + prune (Table 1)",
+     "locator": "2403.07975.layout.txt p3 §Table 1 L118-168"
+    },
+    {
+     "op": "select five training classes",
+     "locator": "2403.07975.layout.txt p5 §2.4 L281-286"
+    },
+    {
+     "op": "iterate priors to population posteriors",
+     "locator": "2403.07975.layout.txt p8 §3 L485-496"
+    },
+    {
+     "op": "select sampler (App. B)",
+     "locator": "2403.07975.layout.txt p31 §App B L2531-2545"
+    },
+    {
+     "op": "fit all light curves",
+     "locator": "2403.07975.layout.txt p10 §3 L595-602"
+    },
+    {
+     "op": "reduced chi2 cut",
+     "locator": "2403.07975.layout.txt p11 §3.1 L674-680"
+    },
+    {
+     "op": "Bayesian oversampling for class balance",
+     "locator": "2403.07975.layout.txt p12 §4.1 L691-698"
+    },
+    {
+     "op": "choose classifier architecture (App. D)",
+     "locator": "2403.07975.layout.txt p13 §4.3 L872-879"
+    },
+    {
+     "op": "10-fold stratified CV evaluation",
+     "locator": "2403.07975.layout.txt p11 §4.1 L666-670"
+    },
+    {
+     "op": "single-class thresholds and calibration",
+     "locator": "2403.07975.layout.txt p19 §5.3 L1509-1526"
+    },
+    {
+     "op": "partial light curve evaluation",
+     "locator": "2403.07975.layout.txt p18 §5.2 L1375-1431"
+    },
+    {
+     "op": "redshift-inclusive variant",
+     "locator": "2403.07975.layout.txt p21 §5.5 L1704-1716"
+    },
+    {
+     "op": "comparison with Superphot, SuperRAENN, ParSNIP, ALeRCE-SN",
+     "locator": "2403.07975.layout.txt p22 §6 L1727-1751"
+    },
+    {
+     "op": "classify 3,558 photometric light curves",
+     "locator": "2403.07975.layout.txt p23 §7.1 L1829-1834"
+    },
+    {
+     "op": "correct class fractions with purity matrix",
+     "locator": "2403.07975.layout.txt p27 §7.3 L2282-2284"
+    }
+   ],
+   "chain_length": 16
+  },
+  {
+   "episode_id": "E4",
+   "level": "per_study",
+   "description": "Partial light curve (cut-epoch analogue) experiment: up to 20 SNe per fold per class truncated at increasing phases after r-band peak, refit, classified by early-phase and full-phase classifiers; graded only by classification metrics against spectroscopic labels, not by prediction of held-out photometry.",
+   "practitioner_action": "publish_value",
+   "action_locator": "2403.07975.layout.txt p18 §5.2 L1423-1431",
+   "chain": [
+    {
+     "op": "randomly select up to 20 SNe per K-fold per class",
+     "locator": "2403.07975.layout.txt p18 §5.2 L1428-1431"
+    },
+    {
+     "op": "truncate light curves at a series of increasing phases",
+     "locator": "2403.07975.layout.txt p18 §5.2 L1423-1431"
+    },
+    {
+     "op": "fit each truncated light curve",
+     "locator": "2403.07975.layout.txt p18 §5.2 L1423-1427"
+    },
+    {
+     "op": "classify with early-phase and full-phase classifiers",
+     "locator": "2403.07975.layout.txt p18 §5.2 L1423-1427"
+    },
+    {
+     "op": "compute completeness/purity/F1 vs phase (Fig. 10)",
+     "locator": "2403.07975.layout.txt p18 §5.2 L1423-1431"
+    }
+   ],
+   "chain_length": 5
+  }
+ ],
+ "branches": [
+  {
+   "id": "B01",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "no constant flux-offset term in the parametric model; filter spurious tail points before fitting instead",
+   "alternatives_visible": [
+    "add constant offset term to model",
+    "clip spurious points before fitting"
+   ],
+   "rejected_named": true,
+   "rejected_option": "constant flux offset term",
+   "reason": "including an offset leads to over-subtraction among SNe with long plateaus",
+   "locator": "2403.07975.layout.txt p4 §2.2 L224-232",
+   "quote": "offset, we find that including such an offset leads to over-"
+  },
+  {
+   "id": "B02",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "tail-clipping slope cutoff 0.2 of maximum slope, chosen empirically; side effects (SN IIP tails, Ia secondary bumps clipped) accepted",
+   "alternatives_visible": [
+    "various cutoff slopes (values not given)"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "determined empirically by experimenting; clipped Ia bumps said to help avoid plateau misfits. Ambiguity: preprocessing choice tagged generate (pipeline artifact) rather than infer.",
+   "locator": "2403.07975.layout.txt p30 §App A L2449-2465",
+   "quote": "empirically by experimenting with various cutoff slopes."
+  },
+  {
+   "id": "B03",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "require >=5 points SNR>3 in each band",
+   "alternatives_visible": [],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "reason only (constrained fit parameters); no alternative threshold visible in text. Counted as reason-only, not as branch with visible alternative.",
+   "locator": "2403.07975.layout.txt p5 §2.3 L247-256",
+   "quote": "This number is selected so all"
+  },
+  {
+   "id": "B04",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "merge SLSN-II into SN IIn class",
+   "alternatives_visible": [
+    "group SLSN-II with SLSN-I",
+    "SLSN-II as distinct label",
+    "merge with SN IIn"
+   ],
+   "rejected_named": true,
+   "rejected_option": "grouping with SLSN-I; separate SLSN-II label",
+   "reason": "merging gives improved classifier performance. Ambiguity: taxonomy choice, tagged generate (defines output of the classifier artifact).",
+   "locator": "2403.07975.layout.txt p5 §2.4 L286-295",
+   "quote": "compared to grouping SLSNe-II with SLSNe-I or"
+  },
+  {
+   "id": "B05",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "include SN IIL and IIP in SN II class",
+   "alternatives_visible": [
+    "IIL/IIP as distinct classes"
+   ],
+   "rejected_named": true,
+   "rejected_option": "IIL and IIP as distinct subclasses",
+   "reason": "debate whether these subclasses are truly distinct",
+   "locator": "2403.07975.layout.txt p5 §2.4 L269-273",
+   "quote": "in this category, as there is debate whether these"
+  },
+  {
+   "id": "B06",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "do not add SN Iax, Ibn, IIb, TDE, LBV as output classes",
+   "alternatives_visible": [
+    "add rarer classes as outputs",
+    "exclude them"
+   ],
+   "rejected_named": true,
+   "rejected_option": "rarer classes as additional output labels",
+   "reason": "rare types are minor contaminants (Table 3); a Rubin variant may add them",
+   "locator": "2403.07975.layout.txt p21 §5.4 L1693-1702",
+   "quote": "rity. This supports our decision not to include the rarer"
+  },
+  {
+   "id": "B07",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "photometric set additionally filtered by ALeRCE stamp classifier after visual inspection showed cuts insufficient",
+   "alternatives_visible": [
+    "observational+variability cuts only",
+    "add stamp-classifier SN filter"
+   ],
+   "rejected_named": true,
+   "rejected_option": "relying on quality cuts alone",
+   "reason": "visual inspection found bogus, AGN-like and noisy variables remaining",
+   "locator": "2403.07975.layout.txt p6 §2.5 L304-312",
+   "quote": "Through visual inspection, we find that these cuts"
+  },
+  {
+   "id": "B08",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "fit g and r jointly in 14-D with g-band priors as log ratios to r-band",
+   "alternatives_visible": [
+    "fit each band independently twice with averaged posterior prior (Villar 2019; Hosseinzadeh 2020)",
+    "joint 14-parameter fit"
+   ],
+   "rejected_named": true,
+   "rejected_option": "independent per-band fitting of Villar et al. 2019 / Hosseinzadeh et al. 2020",
+   "reason": "defines expected inter-band variation a priori; less skewed by sparse bands; cost: harder, slower; may bias fits under extreme host reddening or partial light curves",
+   "locator": "2403.07975.layout.txt p8 §3 L491-501",
+   "quote": "eter space. This differs from the method used in Villar"
+  },
+  {
+   "id": "B09",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "r-band as reference band for priors",
+   "alternatives_visible": [
+    "r-band reference",
+    "g-band reference (implicit)"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "most light curves have better r-band coverage; g-band alternative not explicitly named as rejected",
+   "locator": "2403.07975.layout.txt p7 §3 L428-436",
+   "quote": "light curves have better coverage in the r-band"
+  },
+  {
+   "id": "B10",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "iteratively refine priors to population marginal posteriors until stable (stopping rule), final truncated (log-)Gaussians",
+   "alternatives_visible": [
+    "broad uniform priors",
+    "iterated data-driven priors"
+   ],
+   "rejected_named": true,
+   "rejected_option": "broad, uniform priors (Superphot 'suffers tremendously from broad, uniform priors', L1759-1760)",
+   "reason": "sampler efficiency depends on prior volume; note priors derived from the same dataset",
+   "locator": "2403.07975.layout.txt p8 §3 L483-496",
+   "quote": "broad, uniform priors, and then iteratively alternate be-"
+  },
+  {
+   "id": "B11",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "nested sampling (dynesty) for archival fits, SVI for realtime; per-light-curve fallback from SVI to nested sampling when SVI fit is poor",
+   "alternatives_visible": [
+    "nested sampling",
+    "NUTS",
+    "SVI",
+    "MIGRAD",
+    "CERES / Levenberg-Marquardt (scipy curve_fit)",
+    "Metropolis-Hastings MCMC"
+   ],
+   "rejected_named": true,
+   "rejected_option": "NUTS (order of magnitude slower), MIGRAD and CERES (fail >50% of fits), MH-MCMC (slow, piecewise discontinuity), gradient-descent optimizers",
+   "reason": "runtime vs fit accuracy tradeoff on 20 LCs per class (Fig. 23-24). Ambiguity: tool substitution tagged generate.",
+   "locator": "2403.07975.layout.txt p33 §App B L2640-2655",
+   "quote": "we use SVI as the default fitting method but switch to"
+  },
+  {
+   "id": "B12",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "modified reduced chi2 without degrees-of-freedom correction as fit-quality metric",
+   "alternatives_visible": [
+    "traditional reduced chi2",
+    "modified reduced chi2"
+   ],
+   "rejected_named": true,
+   "rejected_option": "traditional reduced chi-squared",
+   "reason": "traditional breaks down for <8 points per band (infinite values)",
+   "locator": "2403.07975.layout.txt p11 §3.1 L663-672",
+   "quote": "grees of freedom). We opt for our modified metric as"
+  },
+  {
+   "id": "B13",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "fit-quality cut at median reduced chi2 <= 1.2",
+   "alternatives_visible": [
+    "no chi2 cut",
+    "more lenient threshold",
+    "1.2 cutoff"
+   ],
+   "rejected_named": true,
+   "rejected_option": "no cut; more lenient threshold",
+   "reason": "without cut or with lenient threshold significantly more bogus fits pass; ~15 well-fit LCs removed unnecessarily; accuracy vs chi2 (Fig. 5)",
+   "locator": "2403.07975.layout.txt p11 §3.1 L620-639",
+   "quote": "or using a more lenient threshold lets significantly more"
+  },
+  {
+   "id": "B14",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "visual diagnosis of each of the 62 spectroscopic light curves failing the chi2 cut: 48 unfit-able (poor template subtraction, extreme outliers, extreme secondary peaks), 4 could be fit better, ~15 well fit",
+   "alternatives_visible": [
+    "poor template subtraction",
+    "extreme outlier points",
+    "extreme secondary peaks",
+    "fit could have been better",
+    "well-fit, unnecessarily removed"
+   ],
+   "rejected_named": true,
+   "rejected_option": "'well-fit' reading for the 48; 'bad fit' reading for ~15",
+   "reason": "object-specific human inspection assigning cause of poor fit; photometric-set removals likewise confirmed by visual inspection (L630-638)",
+   "locator": "2403.07975.layout.txt p11 §3.1 L604-629",
+   "quote": "that 48 cannot be fit adequately by our empirical model"
+  },
+  {
+   "id": "B15",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "exclude A_r and t0_r from redshift-independent feature set (re-add A_r for redshift variant)",
+   "alternatives_visible": [
+    "all 14 parameters",
+    "12 parameters without A_r, t0_r"
+   ],
+   "rejected_named": true,
+   "rejected_option": "using A_r and t0_r",
+   "reason": "neither is intrinsic: A_r depends on observed phases, t0_r on absolute MJD",
+   "locator": "2403.07975.layout.txt p12 §4.3 L709-714",
+   "quote": "properties; the former is dependent on the phases each"
+  },
+  {
+   "id": "B16",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "keep beta, gamma, tau_rise, tau_fall rather than redshift-cancelling ratios theta1-3 for ZTF",
+   "alternatives_visible": [
+    "raw shape parameters",
+    "theta1=beta*tau_rise, theta2=tau_rise/tau_fall, theta3=tau_rise/gamma"
+   ],
+   "rejected_named": true,
+   "rejected_option": "alternate (1+z)-cancelling feature set",
+   "reason": "alternate set reduces F1 by ~10% on ZTF; may help deeper surveys",
+   "locator": "2403.07975.layout.txt p13 §4.3 L807-818",
+   "quote": "(1 + z) multiplicative factors. We find that this alter-"
+  },
+  {
+   "id": "B17",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "LightGBM GBM as default classifier",
+   "alternatives_visible": [
+    "MLP (grid over layers/neurons)",
+    "LightGBM GBM"
+   ],
+   "rejected_named": true,
+   "rejected_option": "multi-layer perceptron",
+   "reason": "overlapping CIs; GBM two orders of magnitude faster to train",
+   "locator": "2403.07975.layout.txt p34 §App D L2697-2718",
+   "quote": "finalize the LightGBM model as the default classifier, as"
+  },
+  {
+   "id": "B18",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "Bayesian oversampling of posterior fit draws per minority-class light curve (22,730 sets per class)",
+   "alternatives_visible": [
+    "class-weighted loss on median fits",
+    "SMOTE",
+    "Bayesian oversampling of posterior draws",
+    "more / fewer draws"
+   ],
+   "rejected_named": true,
+   "rejected_option": "class weights; SMOTE; more or fewer samples",
+   "reason": "improved accuracy and robustness across K-folds; more draws did not help, fewer hurt SN Ia",
+   "locator": "2403.07975.layout.txt p33 §App C L2659-2693",
+   "quote": "we try a Bayesian oversampling approach where we draw"
+  },
+  {
+   "id": "B19",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "purity-completeness curves instead of ROC curves for binary evaluation",
+   "alternatives_visible": [
+    "ROC curves",
+    "purity-completeness curves"
+   ],
+   "rejected_named": true,
+   "rejected_option": "ROC curves",
+   "reason": "ROC overly optimistic for highly imbalanced datasets",
+   "locator": "2403.07975.layout.txt p20 §5.3 L1591-1600",
+   "quote": "optimistic for highly imbalanced datasets, such as our"
+  },
+  {
+   "id": "B20",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "SN Ia vs CC binary confidence threshold chosen by maximizing F1 over thresholds",
+   "alternatives_visible": [
+    "range of confidence thresholds (Fig. 13)"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "F1-optimal threshold; text reports p>=0.142 (Fig. 13 caption) and p=0.175 (Sec. 5.3), an internal disagreement",
+   "locator": "2403.07975.layout.txt p17 §Fig 13 L1268-1278",
+   "quote": "a SN Ia threshold of p"
+  },
+  {
+   "id": "B21",
+   "episode_id": "E4",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "train early-phase classifier without gamma, tau_fall (and g/r ratios) for partial light curves; ANTARES deploys only full-phase",
+   "alternatives_visible": [
+    "full-phase classifier",
+    "early-phase classifier"
+   ],
+   "rejected_named": true,
+   "rejected_option": "full-phase features for early light curves (unconstrained post-peak parameters reflect priors)",
+   "reason": "early-phase better before ~20 days, full-phase after",
+   "locator": "2403.07975.layout.txt p18 §5.2 L1413-1427",
+   "quote": "an alternate version of our GBM classifier without γ,"
+  },
+  {
+   "id": "B22",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "do not analyze redshift-inclusive variant on photometric set",
+   "alternatives_visible": [
+    "analyze with-z variant",
+    "analyze no-z variant only"
+   ],
+   "rejected_named": true,
+   "rejected_option": "redshift-inclusive variant analysis",
+   "reason": "negligible change in photometric class fractions",
+   "locator": "2403.07975.layout.txt p24 §7.1 L1873-1878",
+   "quote": "as described in Section 5.5 yields a negligible change in"
+  },
+  {
+   "id": "B23",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "exclude AGNs and CVs from rare-class analysis",
+   "alternatives_visible": [
+    "include AGN/CV",
+    "exclude AGN/CV"
+   ],
+   "rejected_named": true,
+   "rejected_option": "analyzing AGNs and CVs",
+   "reason": "assume a general classifier (e.g. ALeRCE light curve classifier) separates them",
+   "locator": "2403.07975.layout.txt p6 §2.4 L316-321",
+   "quote": "clude AGNs and cataclysmic variables (CVs) from this"
+  },
+  {
+   "id": "B24",
+   "episode_id": "E3",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "manual inspection assigning confounding causes to misclassified light curves (partial LCs, secondary r-band peaks, host extinction/red colour, missing plateau constraints, long timescales, sparse/noisy data)",
+   "alternatives_visible": [
+    "partial light curve",
+    "secondary peak",
+    "host extinction",
+    "missing plateau sampling",
+    "long evolution timescale",
+    "sparse/noisy data"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "object-level cause attribution by inspection; no rival cause explicitly rejected for a given object",
+   "locator": "2403.07975.layout.txt p15 §5.1 L1105-1122",
+   "quote": "manual inspection, the main confounding factors among"
+  },
+  {
+   "id": "B25",
+   "episode_id": "E2",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "visually inspect 'strange' realtime events (possible AGNs/TDEs) rather than add a top-level classifier",
+   "alternatives_visible": [
+    "top-level classifier",
+    "star-catalog cross-check + visual inspection"
+   ],
+   "rejected_named": true,
+   "rejected_option": "top-level classifier to isolate SNe",
+   "reason": "cuts reduce nightly SN counts enough for visual inspection. Ambiguity: judging SN vs non-SN could be explain.",
+   "locator": "2403.07975.layout.txt p29 §8 L2337-2344",
+   "quote": "reduce nightly SN counts such that we can visually in-"
+  },
+  {
+   "id": "B26",
+   "episode_id": "E3",
+   "level": "per_object",
+   "kind": "generate",
+   "choice": "per-light-curve judgment of which pipeline's model reproduces a given light curve (Fig. 17): ParSNIP alone captures SN Ia secondary bump; Superphot fails from broad priors; parametric models best for slow-rise SN IIn",
+   "alternatives_visible": [
+    "Superphot+",
+    "Superphot",
+    "SuperRAENN",
+    "ParSNIP"
+   ],
+   "rejected_named": true,
+   "rejected_option": "Superphot (broad priors) for bottom-left SN Ia; non-parametric models for SN IIn; parametric models for Ia bump",
+   "reason": "comparison of model families on individual light curves",
+   "locator": "2403.07975.layout.txt p23 §Fig 17 L1814-1819",
+   "quote": "The top left light curve is fitted fairly well by Superphot+"
+  }
+ ],
+ "conclusions_depth": [
+  {
+   "id": "C1",
+   "conclusion": "Redshift-independent five-class classification F1 0.61, accuracy 0.83",
+   "channels_claimed": [
+    "ZTF g-band photometry",
+    "ZTF r-band photometry",
+    "Milky Way E(B-V) dust map (preprocessing)"
+   ],
+   "n_channels_claimed": 3,
+   "locator": "2403.07975.layout.txt p13 §5.1 L883-888",
+   "quote": "troscopic dataset with a F1 -score of 0.61 ± 0.02 and an",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "C2",
+   "conclusion": "Adding host redshift and k-corrected peak absolute magnitude raises F1 to 0.71 (author-reported ablation with vs without redshift)",
+   "channels_claimed": [
+    "ZTF g-band photometry",
+    "ZTF r-band photometry",
+    "host redshift (TNS)",
+    "Milky Way E(B-V) dust map"
+   ],
+   "n_channels_claimed": 4,
+   "locator": "2403.07975.layout.txt p21 §5.5 L1704-1716",
+   "quote": "are shown in Figure 15. By including redshift informa-",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "C3",
+   "conclusion": "Luminosity (redshift) is important to separate SLSN-I, SN II, SN IIn",
+   "channels_claimed": [
+    "light curve shape",
+    "redshift/luminosity"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2403.07975.layout.txt p18 §Fig 15 L1414-1421",
+   "quote": "luminosity in distinguishing between light curves of these",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "C4",
+   "conclusion": "Baseline using only z, peak magnitude and peak colour reaches accuracy 0.77, F1 0.56, near Superphot (author-reported ablation of shape channel)",
+   "channels_claimed": [
+    "redshift",
+    "peak absolute magnitude",
+    "peak g/r colour"
+   ],
+   "n_channels_claimed": 3,
+   "locator": "2403.07975.layout.txt p22 §6 L1752-1760",
+   "quote": "shift information yields an accuracy of 0.77 ± 0.01 and",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "C5",
+   "conclusion": "Photometric set of SN-like objects requires light-curve classifier plus image-stamp classifier plus fit-quality cut",
+   "channels_claimed": [
+    "ALeRCE light-curve classifier (photometry)",
+    "ALeRCE stamp classifier (image cutouts)",
+    "Superphot+ fit chi2"
+   ],
+   "n_channels_claimed": 3,
+   "locator": "2403.07975.layout.txt p6 §2.5 L304-312",
+   "quote": "any light curve not marked as a SN by the ALeRCE",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "C6",
+   "conclusion": "Redshift information biases classifier to label high-redshift events SLSN-I",
+   "channels_claimed": [
+    "redshift",
+    "light curve"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2403.07975.layout.txt p21 §5.5 L1702-1713",
+   "quote": "that redshift information is biasing our classifier to label",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "C7",
+   "conclusion": "SNe Ia in high-extinction hosts misclassified as Ib/c because only MW extinction corrected (missing host-extinction channel)",
+   "channels_claimed": [
+    "g-r colour",
+    "host extinction (absent)"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2403.07975.layout.txt p15 §5.1 L1112-1122",
+   "quote": "galaxies with exceptionally high extinction will ap-",
+   "measured_depth": "not_measured"
+  }
+ ],
+ "facts_for_shape": [
+  {
+   "id": "F01",
+   "fact": "Per-object published output: five class probabilities plus fit reduced chi2 and ALeRCE label, machine-readable on Zenodo (Table 5).",
+   "locator": "2403.07975.layout.txt p24 §7.1 L1854-1879",
+   "quote": "shown in Table 5; a full version of this table is available"
+  },
+  {
+   "id": "F02",
+   "fact": "Fit parameters are saved as light-curve properties on ANTARES (a published per-object fit exists for objects processed in realtime).",
+   "locator": "2403.07975.layout.txt p29 §8 L2337-2344",
+   "quote": "We save the fit parameters as"
+  },
+  {
+   "id": "F03",
+   "fact": "Training set keeps partial light curves: 91 pre-peak-only, 503 post-peak-only; poorly sampled fits are prior-dominated.",
+   "locator": "2403.07975.layout.txt p7 §2.6 L429-445",
+   "quote": "scopic sample includes 91 light curves (1.5%) with only"
+  },
+  {
+   "id": "F04",
+   "fact": "Truncation experiment fits and classifies truncated light curves and grades by classification metrics; no prediction of held-out later photometry is evaluated anywhere in the paper.",
+   "locator": "2403.07975.layout.txt p18 §5.2 L1423-1431",
+   "quote": "cated light curve is fit and classified, and the complete-"
+  },
+  {
+   "id": "F05",
+   "fact": "6,061 (~99%) spectroscopic light curves pass median reduced chi2 < 1.2.",
+   "locator": "2403.07975.layout.txt p11 §3.1 L674-680",
+   "quote": "(∼99%) light curves in our spectroscopic dataset are fit"
+  },
+  {
+   "id": "F06",
+   "fact": "Labels come from TNS spectroscopic classifications; 66% of training light curves are also in ZTF BTS.",
+   "locator": "2403.07975.layout.txt p6 §2.6 L336-340",
+   "quote": "We find that 66% of these light curves are also in the"
+  },
+  {
+   "id": "F07",
+   "fact": "Priors are set from marginal posteriors of fits to the same dataset (data-derived priors).",
+   "locator": "2403.07975.layout.txt p8 §3 L485-491",
+   "quote": "tween fitting our dataset and replacing our priors with"
+  },
+  {
+   "id": "F08",
+   "fact": "Parametric model cannot capture SN Ia secondary r-band bumps; ParSNIP can.",
+   "locator": "2403.07975.layout.txt p22 §6 L1766-1770",
+   "quote": "since it can nonparametrically encode secondary r-band"
+  },
+  {
+   "id": "F09",
+   "fact": "Tail clipping touches 4,324 of 9,526 light curves (45%), due to template-subtraction artefacts.",
+   "locator": "2403.07975.layout.txt p30 §App A L2466-2472",
+   "quote": "Our procedure clips at least one datapoint from 4,324"
+  },
+  {
+   "id": "F10",
+   "fact": "Early-phase classifier outperforms full-phase before ~20 days but is not deployed on ANTARES.",
+   "locator": "2403.07975.layout.txt p19 §5.2 L1568-1570",
+   "quote": "We find that the early-phase classifier outperforms the"
+  },
+  {
+   "id": "F11",
+   "fact": "ANTARES filter has not yet incorporated the early-phase variant.",
+   "locator": "2403.07975.layout.txt p29 §8 L2399-2408",
+   "quote": "have not yet incorporated the early-phase variant de-"
+  },
+  {
+   "id": "F12",
+   "fact": "SuperRAENN decodings of the same encoding vary with number of requested timestamps (forward-model instability of an alternative generator).",
+   "locator": "2403.07975.layout.txt p22 §6 L1762-1766",
+   "quote": "the same encoded light curve vary depending on the re-"
+  },
+  {
+   "id": "F13",
+   "fact": "Internal disagreement: binary SN Ia threshold p>=0.142 (Fig. 13 caption) vs p=0.175 (Sec. 5.3 text).",
+   "locator": "2403.07975.layout.txt p20 §5.3 L1584-1588",
+   "quote": "optimal confidence threshold is at p = 0.175, with a"
+  },
+  {
+   "id": "F14",
+   "fact": "sigma_extra per band added in quadrature to account for empirical model limitations.",
+   "locator": "2403.07975.layout.txt p7 §3 L414-422",
+   "quote": "uncertainty accounts for the limitations in the empirical"
+  },
+  {
+   "id": "F15",
+   "fact": "Fits from light curves with only rise or decline information are more likely prior-dominated.",
+   "locator": "2403.07975.layout.txt p10 §3 L599-602",
+   "quote": "(e.g., those with only rise or decline information) are"
+  }
+ ],
+ "item_template_evidence": [
+  {
+   "id": "T1",
+   "question_form": "Given one ZTF g/r light curve without a spectrum, fit the parametric model and report class probabilities (per-object label publication)",
+   "locator": "2403.07975.layout.txt p24 §7.1 L1873-1882",
+   "quote": "Superphot+ classifies 58.6% of the photometric"
+  },
+  {
+   "id": "T2",
+   "question_form": "Given a light curve truncated at a phase, fit and classify (cut-epoch analogue graded against spectroscopic label, not held-out photometry)",
+   "locator": "2403.07975.layout.txt p18 §5.2 L1428-1431",
+   "quote": "phase and full-phase classifiers (both without redshift in-"
+  },
+  {
+   "id": "T3",
+   "question_form": "Is this fit adequate, and if not, why (poor subtraction, outliers, secondary peak)?",
+   "locator": "2403.07975.layout.txt p11 §3.1 L604-629",
+   "quote": "could have been fit better to lower the chi-squared value,"
+  },
+  {
+   "id": "T4",
+   "question_form": "Which model family best reproduces this light curve (parametric vs VAE vs RNN autoencoder)?",
+   "locator": "2403.07975.layout.txt p23 §Fig 17 L1814-1819",
+   "quote": "Three SN Ia and one SN IIn light curve"
+  }
+ ],
+ "zero_contribution": false,
+ "notes": "Read lines 1-2915 in chunks (all 37 pages incl. appendices A-D and references). Branches are dominated by per-study pipeline design (23 of 26); per-object branches are human inspection judgments (B14, B24, B25) and a figure-level model-family comparison (B26). The per-object fit itself is chain: one model family (Villar piecewise), fixed priors, fixed sampler rule, fixed chi2 cut. No held-out-epoch forecasting is performed or graded. B03 has a reason but no visible alternative and should not be counted among branches with a visible alternative. Taxonomy/tool/feature choices tagged generate are ambiguous with infer (see each reason)."
+}

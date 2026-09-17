@@ -1,0 +1,415 @@
+{
+ "seed_id": "2405.03078",
+ "title": "ATAT: Astronomical Transformer for time series And Tabular data",
+ "arxiv_version_verified": "arXiv:2405.03078v2 (layout L23)",
+ "read_in_full": true,
+ "reader": "fork-B",
+ "layout_lines": 1430,
+ "pages": 12,
+ "episodes": [
+  {
+   "episode_id": "E1",
+   "level": "per_study",
+   "description": "Build and evaluate ATAT variants and a BHRF baseline on the simulated ELAsTiCC training set; select variants for production.",
+   "practitioner_action": "publish_object",
+   "action_locator": "2405.03078.layout.txt p6 §3.2 L454-463",
+   "chain": [
+    {
+     "op": "take ELAsTiCC training set (1,845,146 simulated light curves, 32 classes)",
+     "locator": "2405.03078.layout.txt p2 §2.1 L106-109"
+    },
+    {
+     "op": "map to broker taxonomy (20 classes)",
+     "locator": "2405.03078.layout.txt p2 §2.1 L109-111"
+    },
+    {
+     "op": "select 64 metadata attributes",
+     "locator": "2405.03078.layout.txt p2 §2.1 L112-124"
+    },
+    {
+     "op": "test set 1000/class, 5 stratified folds",
+     "locator": "2405.03078.layout.txt p2 §2.1 L126-142"
+    },
+    {
+     "op": "discard information absent from alert stream (PHOTFLAG, -30 d window)",
+     "locator": "2405.03078.layout.txt p2 §2.1 L144-158"
+    },
+    {
+     "op": "Time Modulation for light curves",
+     "locator": "2405.03078.layout.txt p3 §2.2.1 L259-266"
+    },
+    {
+     "op": "Quantile Feature Tokenizer for tabular data",
+     "locator": "2405.03078.layout.txt p4 §2.2.2 L330-349"
+    },
+    {
+     "op": "Masked Temporal Augmentation",
+     "locator": "2405.03078.layout.txt p5 §2.2.4 L382-395"
+    },
+    {
+     "op": "train with Adam and early stopping",
+     "locator": "2405.03078.layout.txt p5 §2.2.5 L400-414"
+    },
+    {
+     "op": "compute 429 engineered features and train BHRF baseline",
+     "locator": "2405.03078.layout.txt p5 §2.3-2.4 L416-433"
+    },
+    {
+     "op": "evaluate F1 vs days after first alert, per-class metrics",
+     "locator": "2405.03078.layout.txt p6 §3.1 L437-469"
+    },
+    {
+     "op": "ablation of PE and tokenizer",
+     "locator": "2405.03078.layout.txt p7 §3.3 L573-579"
+    },
+    {
+     "op": "computational timing",
+     "locator": "2405.03078.layout.txt p8 §3.4 L622-645"
+    },
+    {
+     "op": "put two LC+MD+MTA variants into production",
+     "locator": "2405.03078.layout.txt p6 §3.2 L460-463"
+    }
+   ],
+   "chain_length": 14
+  },
+  {
+   "episode_id": "E2",
+   "level": "per_object",
+   "description": "Production classification of one alert light curve in the ALeRCE pipeline for the ELAsTiCC stream.",
+   "practitioner_action": "publish_value",
+   "action_locator": "2405.03078.layout.txt p9 §4 L1191-1194",
+   "chain": [
+    {
+     "op": "ingest alert light curve and metadata",
+     "locator": "2405.03078.layout.txt p2 §2.2 L174-180"
+    },
+    {
+     "op": "ATAT inference",
+     "locator": "2405.03078.layout.txt p8 §3.4 L624-641"
+    },
+    {
+     "op": "class prediction annotated to alert",
+     "locator": "2405.03078.layout.txt p9 §4 L1191-1194"
+    }
+   ],
+   "chain_length": 3
+  }
+ ],
+ "branches": [
+  {
+   "id": "A01",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "SN-like/Other class restricted to SNe IIb",
+   "alternatives_visible": [
+    "ELAsTiCC broker taxonomy",
+    "modified class with SNe IIb only"
+   ],
+   "rejected_named": true,
+   "rejected_option": "broker taxonomy's SN-like/other definition",
+   "reason": "no reason stated; alternative visible",
+   "locator": "2405.03078.layout.txt p2 §2.1 L109-111",
+   "quote": "SN-like/other class that includes only SNe IIb (see Figure 2 b)."
+  },
+  {
+   "id": "A02",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "model size limited although larger models performed better",
+   "alternatives_visible": [
+    "larger models",
+    "smaller models"
+   ],
+   "rejected_named": true,
+   "rejected_option": "larger models",
+   "reason": "memory requirements in production",
+   "locator": "2405.03078.layout.txt p3 §2.2 L253-255",
+   "quote": "Implementation details section. We noted larger models showed"
+  },
+  {
+   "id": "A03",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "MTA truncation times drawn from discrete set {8,128,2048}",
+   "alternatives_visible": [
+    "arbitrary truncation times",
+    "discrete set"
+   ],
+   "rejected_named": true,
+   "rejected_option": "arbitrary truncation times",
+   "reason": "unfeasible to compute features at arbitrary times",
+   "locator": "2405.03078.layout.txt p5 §2.2.4 L384-391",
+   "quote": "a limited discrete set since it is unfeasible to compute the fea-"
+  },
+  {
+   "id": "A04",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "drop features not simulated (star-galaxy score, ALLWISE colours) and object coordinates",
+   "alternatives_visible": [
+    "original Sanchez-Saez 2021 feature set",
+    "reduced set"
+   ],
+   "rejected_named": true,
+   "rejected_option": "coordinates, sgscore, ALLWISE colours",
+   "reason": "not simulated, or not simulated realistically per class",
+   "locator": "2405.03078.layout.txt p5 §2.3 L370-375",
+   "quote": "nates of the objects are not used because they were not simu-"
+  },
+  {
+   "id": "A05",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "supernova parametric model modified for six bands, redshift and MW extinction (metadata enters features)",
+   "alternatives_visible": [
+    "original SPM",
+    "modified SPM"
+   ],
+   "rejected_named": true,
+   "rejected_option": "original ZTF SPM",
+   "reason": "handle six bands and extra redshift/extinction information",
+   "locator": "2405.03078.layout.txt p5 §2.3 L360-370",
+   "quote": "from Sánchez-Sáez et al. (2021) was modified to better handle"
+  },
+  {
+   "id": "A06",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "BHRF hyperparameters by grid search: entropy, 350 trees, depth 100",
+   "alternatives_visible": [
+    "Gini/entropy",
+    "10/100/350/500 trees",
+    "depth 10/100/none"
+   ],
+   "rejected_named": true,
+   "rejected_option": "other grid points",
+   "reason": "best mean macro F1 on full light curves",
+   "locator": "2405.03078.layout.txt p5 §2.4 L420-429",
+   "quote": "criterion (Gini impurity, entropy), number of trees (10, 100, 350,"
+  },
+  {
+   "id": "A07",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "BHRF uses only top 100 features per forest",
+   "alternatives_visible": [
+    "all features",
+    "top 100 by importance"
+   ],
+   "rejected_named": true,
+   "rejected_option": "full feature set",
+   "reason": "statistically similar F1; smaller model eases deployment",
+   "locator": "2405.03078.layout.txt p6 §2.4 L429-433",
+   "quote": "standard deviation). These decisions were made to diminish the"
+  },
+  {
+   "id": "A08",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "two LC+MD+MTA variants put into production among eleven variants",
+   "alternatives_visible": [
+    "LC only",
+    "tabular only",
+    "LC+MD+Features",
+    "with/without MTA"
+   ],
+   "rejected_named": true,
+   "rejected_option": "variants without MTA or without metadata",
+   "reason": "highest synergy of light curve and metadata; MTA beneficial early",
+   "locator": "2405.03078.layout.txt p6 §3.2 L454-463",
+   "quote": "put into production within the pipeline that processes the ELAs-"
+  },
+  {
+   "id": "A09",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "time modulation over fixed sinusoidal PE; quantile feature tokenizer over plain FT",
+   "alternatives_visible": [
+    "TM",
+    "fixed sinusoidal PE",
+    "QFT",
+    "FT",
+    "no tabular data"
+   ],
+   "rejected_named": true,
+   "rejected_option": "fixed sinusoidal PE and non-quantile FT",
+   "reason": "ablation F1 gains >5% and >2%",
+   "locator": "2405.03078.layout.txt p7 §3.3 L566-579",
+   "quote": "is able to increase the performance of our model by over 2%."
+  },
+  {
+   "id": "A10",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "ablation uses metadata rather than features for tabular branch",
+   "alternatives_visible": [
+    "metadata",
+    "features"
+   ],
+   "rejected_named": true,
+   "rejected_option": "features",
+   "reason": "no more than 2 sigma F1 difference with and without features",
+   "locator": "2405.03078.layout.txt p7 §3.3 L562-566",
+   "quote": "tabular data we consider the metadata and not the features, given"
+  },
+  {
+   "id": "A11",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "LC+MD+MTA without engineered features preferred as trade-off",
+   "alternatives_visible": [
+    "LC+MD+MTA",
+    "LC+MD+Features+MTA",
+    "RF"
+   ],
+   "rejected_named": true,
+   "rejected_option": "feature-based variants",
+   "reason": "99.75% less compute for 0.3% F1 loss; to be re-evaluated if LSST streams features",
+   "locator": "2405.03078.layout.txt p8 §3.4 L638-645",
+   "quote": "variant as a very interesting trade-off, reducing computational"
+  },
+  {
+   "id": "A12",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "detection defined as |flux| >= 3 sigma for supernova features",
+   "alternatives_visible": [
+    "stream alert flag",
+    "3-sigma flux criterion"
+   ],
+   "rejected_named": true,
+   "rejected_option": "relying on the stream to flag alerts vs forced photometry",
+   "reason": "authors unsure the stream would indicate it",
+   "locator": "2405.03078.layout.txt p12 §A L1396-1401",
+   "quote": "if the absolute value of the difference flux was at least 3 times"
+  },
+  {
+   "id": "A13",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "SPM fitted per band but optimised jointly with a dispersion penalty; coefficients, initial guesses and bounds tuned",
+   "alternatives_visible": [
+    "independent per-band fits",
+    "joint penalised fit"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "coefficients found experimentally; bounds tuned to ELAsTiCC value range; rival not explicitly rejected",
+   "locator": "2405.03078.layout.txt p12 §A L1402-1426",
+   "quote": "ted to the data, but the optimization was done simultaneously"
+  }
+ ],
+ "conclusions_depth": [
+  {
+   "id": "D1",
+   "conclusion": "combining light curves and metadata gives the highest synergy; adding metadata improves F1 by 20-30%",
+   "channels_claimed": [
+    "multiband light curve (ugrizY difference flux)",
+    "alert metadata (host redshift/photo-z, MW extinction, host properties)"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2405.03078.layout.txt p6 §3.2 L440-455",
+   "quote": "the light-curve and metadata, where adding metadata yields a",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "D2",
+   "conclusion": "engineered features help mainly periodic classes",
+   "channels_claimed": [
+    "light curve",
+    "metadata",
+    "engineered light-curve features"
+   ],
+   "n_channels_claimed": 3,
+   "locator": "2405.03078.layout.txt p7 §3.2 L566-570",
+   "quote": "except for periodic classes where the feature-based variant is",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "D3",
+   "conclusion": "classification possible without human-engineered features, but host-galaxy metadata is important",
+   "channels_claimed": [
+    "light curve",
+    "host galaxy metadata"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2405.03078.layout.txt p10 §4 L1250-1255",
+   "quote": "of including metadata information such as the properties of the",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "D4",
+   "conclusion": "before ~32 days RF outperforms tabular-only ATAT; metadata-only ATAT beats features-only for <8 days",
+   "channels_claimed": [
+    "metadata",
+    "engineered features"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2405.03078.layout.txt p6 §3.2 L428-434",
+   "quote": "when considering MTA after ∼32 days. Before 32 days, the RF",
+   "measured_depth": "not_measured"
+  }
+ ],
+ "facts_for_shape": [
+  {
+   "id": "G1",
+   "fact": "All training and evaluation are on simulated ELAsTiCC data; labels are simulation truth; authors warn real LSST performance may differ",
+   "locator": "2405.03078.layout.txt p10 §4 L1260-1268",
+   "quote": "tive of the real LSST alert stream, and this may result in dif-"
+  },
+  {
+   "id": "G2",
+   "fact": "Metadata channel includes host spectroscopic/photometric redshift and MW extinction",
+   "locator": "2405.03078.layout.txt p2 §2.1 L112-124",
+   "quote": "liocentric redshift, Milky Way extinction between the blue and"
+  },
+  {
+   "id": "G3",
+   "fact": "Grader is an answer key: held-out test set of 1000 light curves per class",
+   "locator": "2405.03078.layout.txt p2 §2.1 L126-142",
+   "quote": "test sets. The test set contains one-thousand light-curves of each"
+  },
+  {
+   "id": "G4",
+   "fact": "The only forward-model fit (SPM) is a feature extractor with tuned bounds; fit quality is never graded on held-out epochs",
+   "locator": "2405.03078.layout.txt p12 §A L1355-1357",
+   "quote": "the parameter optimization were tuned for the range of values in"
+  },
+  {
+   "id": "G5",
+   "fact": "Early classification evaluated on light curves truncated at days after first alert (partial light curves), graded against class labels",
+   "locator": "2405.03078.layout.txt p6 §3.1 L439-446",
+   "quote": "of days after the first alert. The analysis begins on the day of"
+  },
+  {
+   "id": "G6",
+   "fact": "Practitioner action: model put into production in the ALeRCE broker (tool built; per-object outputs are class predictions)",
+   "locator": "2405.03078.layout.txt p9 §4 L1191-1194",
+   "quote": "Our model was put into production within the ALeRCE broker"
+  }
+ ],
+ "item_template_evidence": [
+  {
+   "id": "T1",
+   "question_form": "Given one alert light curve truncated at t days after first alert (plus metadata), which of 20 classes",
+   "locator": "2405.03078.layout.txt p7 §Fig.3 L552-555",
+   "quote": "Fig. 3. F1-score vs time since first alert for a selection of models."
+  }
+ ],
+ "zero_contribution": false,
+ "notes": "All 1430 layout lines (12 pages) read in chunks 1-330, 330-700, 700-1430; pdfinfo 12 pages matches layout page count, all sections present, so the raw .txt was not needed. In L700-1188 purely numeric confusion-matrix cell rows (Fig. 4) were filtered from display; their row/column labels and caption were read. No per-object branches: the paper reports no object-specific human decision. All branches are per_study design choices. No light-curve forecasting of held-out epochs, no model-family choice per object, no cause diagnosis, no follow-up selection is practised. Data are simulations only."
+}

@@ -1,0 +1,489 @@
+{
+ "seed_id": "2409.04346",
+ "title": "ZTF SN Ia DR2: Overview (Rigault, Smith et al. 2024/2025)",
+ "arxiv_version_verified": "arXiv:2409.04346v2 (layout L19)",
+ "read_in_full": true,
+ "reader": "fork-D",
+ "layout_lines": 912,
+ "pages": 11,
+ "episodes": [
+  {
+   "episode_id": "E1",
+   "level": "per_study",
+   "description": "Assemble, classify, fit and publish the DR2 SN Ia sample (3628 SNe Ia; 2667 pass quality cuts)",
+   "practitioner_action": "publish_value",
+   "action_locator": "2409.04346.layout.txt p9 §7 L678-693",
+   "chain": [
+    {
+     "op": "build master list from internal databases and TNS",
+     "locator": "2409.04346.layout.txt p3 §3 L196-200"
+    },
+    {
+     "op": "drop targets without ZTF light curve",
+     "locator": "2409.04346.layout.txt p3 §3 L200-202"
+    },
+    {
+     "op": "require releasable classification spectrum",
+     "locator": "2409.04346.layout.txt p3 §3 L203-208"
+    },
+    {
+     "op": "require secure Ia classification",
+     "locator": "2409.04346.layout.txt p3 §3 L208-211"
+    },
+    {
+     "op": "extract forced-photometry g,r,i light curves",
+     "locator": "2409.04346.layout.txt p4 §4.1.2 L227-229"
+    },
+    {
+     "op": "snid template matching of all spectra",
+     "locator": "2409.04346.layout.txt p5 §4.2 L391-394"
+    },
+    {
+     "op": "crowd visual (sub)classification feeding decision tree, expert check of edge cases",
+     "locator": "2409.04346.layout.txt p5 §4.4 L361-374"
+    },
+    {
+     "op": "assign redshift by source preference",
+     "locator": "2409.04346.layout.txt p5 §4.5 L387-391"
+    },
+    {
+     "op": "identify host by DLR and measure host photometry/mass",
+     "locator": "2409.04346.layout.txt p5 §4.3 L324-356"
+    },
+    {
+     "op": "two-pass SALT2-T21 fit",
+     "locator": "2409.04346.layout.txt p6 §4.7 L466-477"
+    },
+    {
+     "op": "apply good-sampling cut",
+     "locator": "2409.04346.layout.txt p3 §3 L215-219"
+    },
+    {
+     "op": "apply SALT2 parameter/fit-quality cuts",
+     "locator": "2409.04346.layout.txt p3 §3 L213-221"
+    },
+    {
+     "op": "standardize and build Hubble diagram",
+     "locator": "2409.04346.layout.txt p7 §4.7 L534-540"
+    },
+    {
+     "op": "outlier rejection with Chauvenet criterion",
+     "locator": "2409.04346.layout.txt p7 §4.7 L496-501"
+    },
+    {
+     "op": "release light curves, spectra, SALT2 tables, host tables, logs",
+     "locator": "2409.04346.layout.txt p8 §6 L629-643"
+    }
+   ],
+   "chain_length": 15
+  },
+  {
+   "episode_id": "E2",
+   "level": "per_object",
+   "description": "Fit one ZTF SN Ia light curve with SALT2-T21 and flag it against the cuts",
+   "practitioner_action": "publish_value",
+   "action_locator": "2409.04346.layout.txt p9 §Table 3 L671-686",
+   "chain": [
+    {
+     "op": "guess t0 from light-curve data",
+     "locator": "2409.04346.layout.txt p6 §4.7 L474-475"
+    },
+    {
+     "op": "cut phases to [-15,+50] d and fit SALT2 for robust t0",
+     "locator": "2409.04346.layout.txt p6 §4.7 L475-475"
+    },
+    {
+     "op": "cut phases to [-10,+40] d and refit",
+     "locator": "2409.04346.layout.txt p6 §4.7 L476-477"
+    },
+    {
+     "op": "store SALT2 parameters, errors, covariances",
+     "locator": "2409.04346.layout.txt p6 §4.7 L477-477"
+    },
+    {
+     "op": "set lccoverage_flag and fitquality_flag",
+     "locator": "2409.04346.layout.txt p9 §Table 3 L683-686"
+    }
+   ],
+   "chain_length": 5
+  },
+  {
+   "episode_id": "E3",
+   "level": "per_object",
+   "description": "Classify one target as SN Ia and subtype",
+   "practitioner_action": "publish_value",
+   "action_locator": "2409.04346.layout.txt p9 §Table 3 L679-681",
+   "chain": [
+    {
+     "op": "match spectra with snid custom templates",
+     "locator": "2409.04346.layout.txt p5 §4.2 L391-394"
+    },
+    {
+     "op": "members visually inspect data in web app",
+     "locator": "2409.04346.layout.txt p5 §4.4 L365-368"
+    },
+    {
+     "op": "decision tree aggregates individual classifications",
+     "locator": "2409.04346.layout.txt p5 §4.4 L368-370"
+    },
+    {
+     "op": "experts double-check edge cases (volume-limited sample)",
+     "locator": "2409.04346.layout.txt p5 §4.4 L371-375"
+    }
+   ],
+   "chain_length": 4
+  }
+ ],
+ "branches": [
+  {
+   "id": "DR2-B01",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "strict good-sampling cut (7 phases, 2 pre- and 2 post-peak)",
+   "alternatives_visible": [
+    "relaxed norm: a detection prior to phase +5 d (3244 objects)",
+    "strict criterion (2960)"
+   ],
+   "rejected_named": true,
+   "rejected_option": "relaxed 'detection prior to +5 d' criterion used in the cosmology field",
+   "reason": "good sampling pre- and post-maximum preferred to ensure correct light-curve parameter estimation",
+   "locator": "2409.04346.layout.txt p3 §3 L203-208",
+   "quote": "post-maximum is preferred to ensure the correct estimation of"
+  },
+  {
+   "id": "DR2-B02",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "fit phase range [-10,+40] d",
+   "alternatives_visible": [
+    "[-20|-15|-10|-5, +30|+40|+45|+50] d ranges provided in extra tables"
+   ],
+   "rejected_named": true,
+   "rejected_option": "other phase windows (e.g. starting -20/-15/-5, ending +30/+45/+50)",
+   "reason": "study of light-curve fit residuals concluded this range is sufficiently trained",
+   "locator": "2409.04346.layout.txt p3 §3 L212-215",
+   "quote": "concluded in Rigault et al. (2024,b) that the rest-frame phase"
+  },
+  {
+   "id": "DR2-B03",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "SALT2-T21 as the fitting model for released parameters",
+   "alternatives_visible": [
+    "SALT2.4 (Betoule 2014)",
+    "SALT3 (Kenworthy 2021)",
+    "SALT2-T21"
+   ],
+   "rejected_named": true,
+   "rejected_option": "SALT2.4 and SALT3 (released only as extra tables)",
+   "reason": "no reason stated in this seed for T21 over alternatives; modeling discussion deferred to Rigault 2024b. Ambiguity: model-family choice could be tagged generate, but the published output is parameter values",
+   "locator": "2409.04346.layout.txt p9 §6 L718-722",
+   "quote": "2014 or SALT3 Kenworthy et al. 2021, see modeling discus-"
+  },
+  {
+   "id": "DR2-B04",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "two-pass fit: wide window for t0 then refit in narrow window",
+   "alternatives_visible": [
+    "single fit",
+    "two-pass fit"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "obtain a robust t0 before applying the trained phase window",
+   "locator": "2409.04346.layout.txt p6 §4.7 L473-477",
+   "quote": "twice. First, given a t0 guess coming from the light curve data,"
+  },
+  {
+   "id": "DR2-B05",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "SALT2 quality cuts x1 in [-3,3], c in [-0.2,0.8], sigma_x1<1, sigma_c<0.1, sigma_t0<1, fitprob>=1e-7",
+   "alternatives_visible": [
+    "objects failing each cut (Table 1 counts)"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "ensure resulting parameters are reasonable for cosmological measurements",
+   "locator": "2409.04346.layout.txt p3 §3 L214-221",
+   "quote": "ensure the resulting parameters are reasonable for use in cos-"
+  },
+  {
+   "id": "DR2-B06",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "discard 110 SN Ia-flagged targets without a releasable spectrum",
+   "alternatives_visible": [
+    "keep targets flagged Ia without public spectrum",
+    "discard"
+   ],
+   "rejected_named": true,
+   "rejected_option": "targets flagged SN Ia without spectrum or with non-public spectra",
+   "reason": "release must include a spectrum that leads to the classification",
+   "locator": "2409.04346.layout.txt p3 §3 L203-208",
+   "quote": "cation for each target. Therefore, 110 objects flagged as “SN Ia”"
+  },
+  {
+   "id": "DR2-B07",
+   "episode_id": "E3",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "40 targets excluded where secure Ia classification not possible",
+   "alternatives_visible": [
+    "classify as Ia",
+    "exclude"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "object-specific judgement that classification is not secure; objects not named",
+   "locator": "2409.04346.layout.txt p3 §3 L208-211",
+   "quote": "3668 SNe with at least one spectrum, there were 40 for which"
+  },
+  {
+   "id": "DR2-B08",
+   "episode_id": "E3",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "per-target visual (sub)classification with expert double-check of ambiguous subtypes",
+   "alternatives_visible": [
+    "subtypes e.g. 91T-like, 99aa-like, 91bg-like, Ia-CSM, 03fg-like"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "ensure each target is indeed SN Ia and subclassify; ambiguous subtypes re-checked by experts",
+   "locator": "2409.04346.layout.txt p5 §4.4 L361-375",
+   "quote": "spected each target to ensure they were indeed an SN Ia and"
+  },
+  {
+   "id": "DR2-B09",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "exclude peculiar subclasses (91bg-like, Ia-CSM) from cosmology subset but keep 91T-like and 99aa-like",
+   "alternatives_visible": [
+    "include all subclasses",
+    "exclude all peculiar",
+    "exclude only non-cosmology subclasses"
+   ],
+   "rejected_named": true,
+   "rejected_option": "91bg-like and Ia-csm objects",
+   "reason": "non-peculiar objects are suitable for SN cosmology",
+   "locator": "2409.04346.layout.txt p4 §3 L252-259",
+   "quote": "jects. This involves removing peculiar subclasses like “91bg-"
+  },
+  {
+   "id": "DR2-B10",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "redshift source order of preference: galaxy catalog > SEDm host lines in target > SEDm lines > snid",
+   "alternatives_visible": [
+    "public galaxy catalog",
+    "emission lines in non-SEDm spectra",
+    "SEDm emission lines",
+    "snid SN-feature redshift"
+   ],
+   "rejected_named": true,
+   "rejected_option": "snid SN-feature redshifts ranked last",
+   "reason": "galaxy redshifts precision sigma_z<=1e-4 vs SN redshifts ~1e-3",
+   "locator": "2409.04346.layout.txt p5 §4.5 L387-391",
+   "quote": "Each of our 3628 targets has a redshift that comes from one"
+  },
+  {
+   "id": "DR2-B11",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "Chauvenet 4.1 sigma outlier rejection for std measurement",
+   "alternatives_visible": [
+    "nMAD robust statistic",
+    "std after rejection"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "outliers may affect std; nMAD already robust",
+   "locator": "2409.04346.layout.txt p7 §4.7 L496-501",
+   "quote": "We finally inspected for outliers that may affect our stan-"
+  },
+  {
+   "id": "DR2-B12",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "recommend testing results on pre-October 2019 half and applying Delta x1=-0.14 when comparing surveys",
+   "alternatives_visible": [
+    "full sample",
+    "pre-Nov-2019 subsample"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "pocket-effect nonlinearity affects targets after November 2019",
+   "locator": "2409.04346.layout.txt p4 §4.1.2 L295-300",
+   "quote": "only including the 50% of the ZTF SN Ia DR2 sample with a"
+  },
+  {
+   "id": "DR2-B13",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "future releases to use scene-modeling photometry instead of forced photometry",
+   "alternatives_visible": [
+    "forced photometry (DR2)",
+    "scene-modeling photometry"
+   ],
+   "rejected_named": true,
+   "rejected_option": "forced photometry on difference images",
+   "reason": "reference stars are not measurable in difference imaging, limiting calibration",
+   "locator": "2409.04346.layout.txt p4 §4.1.2 L237-247",
+   "quote": "next ZTF SN Ia releases, we shall use scene-modeling photom-"
+  },
+  {
+   "id": "DR2-B14",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "intervene",
+   "choice": "observing strategy updated from early 2021 to obtain coverage in all three bands",
+   "alternatives_visible": [
+    "previous strategy (46% i-band coverage)",
+    "updated strategy"
+   ],
+   "rejected_named": true,
+   "rejected_option": "pre-2021 strategy with sparse i-band",
+   "reason": "only 46% of targets have i-band detections in the fit range",
+   "locator": "2409.04346.layout.txt p4 §4.1.1 L283-287",
+   "quote": "Most targets acquired since early"
+  }
+ ],
+ "conclusions_depth": [
+  {
+   "id": "DR2-C01",
+   "conclusion": "normal DR2 SNe Ia are volume-limited (free of selection) up to z=0.06",
+   "channels_claimed": [
+    "SALT2 colour distribution from light curves",
+    "realistic simulations from observing logs",
+    "spectroscopic selection function (BTS completeness)",
+    "assumed parent population model"
+   ],
+   "n_channels_claimed": 4,
+   "locator": "2409.04346.layout.txt p6 §4.6 L450-462",
+   "quote": "We draw two conclusions from this figure. First, since the",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "DR2-C02",
+   "conclusion": "SN-feature redshifts are unbiased with ~3e-3 scatter",
+   "channels_claimed": [
+    "SN spectra (snid template matching)",
+    "host galaxy redshifts (mostly DESI)"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2409.04346.layout.txt p6 §4.5 L438-445",
+   "quote": "magnac et al. 2024). We conclude that SN-feature redshifts are",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "DR2-C03",
+   "conclusion": "pocket effect biases stretch by Delta x1=-0.14 but not colours",
+   "channels_claimed": [
+    "simulated light curves perturbed by nonlinearity model",
+    "scene-modeling photometry comparison",
+    "SALT2 fits"
+   ],
+   "n_channels_claimed": 3,
+   "locator": "2409.04346.layout.txt p4 §4.1.2 L262-275",
+   "quote": "of this effect on our results, we simulated realistic light curves,",
+   "measured_depth": "not_measured"
+  }
+ ],
+ "facts_for_shape": [
+  {
+   "id": "DR2-F01",
+   "fact": "Per object DR2 publishes SALT2 t0, x0, x1, c with errors and covariances, fitprob, coverage and fit-quality flags, redshift, type and subtype: a published fit exists for every released DR2 SN Ia",
+   "locator": "2409.04346.layout.txt p9 §Table 3 L671-686",
+   "quote": "passes all other Basic cuts (bool, Table 1)"
+  },
+  {
+   "id": "DR2-F02",
+   "fact": "Released forced-photometry g,r,i light curves for 3591 SNe Ia plus 5138 spectra; also on WISeREP",
+   "locator": "2409.04346.layout.txt p8 §6 L635-637",
+   "quote": "– 3591 SNe Ia light curves (g, r, and i band),"
+  },
+  {
+   "id": "DR2-F03",
+   "fact": "Extra tables publish alternative per-object fits: SALT2.4 or SALT3 templates, alternative phase windows, with or without i band",
+   "locator": "2409.04346.layout.txt p8 §6 L646-648",
+   "quote": "changing the used SALT template (SALT2.4 Betoule et al."
+  },
+  {
+   "id": "DR2-F04",
+   "fact": "Label source: spectroscopic classification, snid matching plus crowd visual vetting (each SN vetted at least twice), experts on edge cases",
+   "locator": "2409.04346.layout.txt p5 §4.4 L368-370",
+   "quote": "tomatically (sub)-classify the objects. This way, each SN Ia from"
+  },
+  {
+   "id": "DR2-F05",
+   "fact": "79% of DR2 targets are covered by the BTS program (overlap with BTS supply)",
+   "locator": "2409.04346.layout.txt p3 §2 L183-184",
+   "quote": "jority of our targets (79%) are covered by the BTS program. The"
+  },
+  {
+   "id": "DR2-F06",
+   "fact": "Light-curve model accuracy (fit residuals) and an extra stretch-like parameter are studied in companion papers (Rigault 2024b, Kenworthy 2024); not in this seed",
+   "locator": "2409.04346.layout.txt p7 §5 L527-532",
+   "quote": "The accuracy of the light curve modeling is reviewed in"
+  },
+  {
+   "id": "DR2-F07",
+   "fact": "Photometry has percent-level nonlinearity (pocket effect) after Nov 2019; zero point known at 5%",
+   "locator": "2409.04346.layout.txt p4 §4.1.2 L255-261",
+   "quote": "prep.). However, Lacroix et al. (in prep.) identified a nonlinear"
+  },
+  {
+   "id": "DR2-F08",
+   "fact": "Light curves of 37 normal SNe Ia at z<0.015 withheld for an H0 program",
+   "locator": "2409.04346.layout.txt p8 §6 L645-648",
+   "quote": "We have not released light curve data and derived light curve"
+  },
+  {
+   "id": "DR2-F09",
+   "fact": "Typical sampling: ~40 detections in [-10,+40], median 9 pre-max and 27 post-max; detected 12 d before max",
+   "locator": "2409.04346.layout.txt p4 §4.1.1 L289-295",
+   "quote": "these 2960 targets, we typically have 40 detections (median) in"
+  },
+  {
+   "id": "DR2-F10",
+   "fact": "Spectroscopic follow-up selection modelled as sigmoid with m0=18.8, matching BTS completeness",
+   "locator": "2409.04346.layout.txt p6 §4.6 L467-473",
+   "quote": "ure 4 (top) presents our effective selection function, modeled as"
+  }
+ ],
+ "item_template_evidence": [
+  {
+   "id": "DR2-T01",
+   "question_form": "fit a SALT model to one ZTF light curve in a restricted phase window and judge sampling/fit quality (worst/average/best examples)",
+   "locator": "2409.04346.layout.txt p3 §Fig.1 L187-194",
+   "quote": "tom, the worst, average, and best sampling of DR2. Photometric points"
+  },
+  {
+   "id": "DR2-T02",
+   "question_form": "refit one object under alternative template, phase window or band set and compare parameters",
+   "locator": "2409.04346.layout.txt p9 §6 L718-722",
+   "quote": "range (starting at −20, −15, −10 or −5 d, and/or finishing at"
+  },
+  {
+   "id": "DR2-T03",
+   "question_form": "visually inspect one target's data to confirm and subclassify SN Ia",
+   "locator": "2409.04346.layout.txt p5 §4.4 L365-368",
+   "quote": "ally inspected the data through a specially designed web appli-"
+  }
+ ],
+ "zero_contribution": false,
+ "notes": "Per-object light-curve fitting is a uniform two-pass pipeline with fixed cuts; object-specific judgement appears only in classification (40 insecure, visual subclassification). Model-choice alternatives are published as extra tables but their comparison is in companion papers not read here. No held-out-epoch forecasting of light curves appears. Every released object has a published SALT2 fit (contamination under a generate root)."
+}

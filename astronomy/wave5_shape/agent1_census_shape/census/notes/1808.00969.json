@@ -1,0 +1,572 @@
+{
+ "seed_id": "1808.00969",
+ "title": "The Fast, Luminous Ultraviolet Transient AT2018cow: Extreme Supernova, or Disruption of a Star by an Intermediate-Mass Black Hole? (Perley et al. 2019)",
+ "arxiv_version_verified": "arXiv:1808.00969v4 (layout L10)",
+ "read_in_full": true,
+ "reader": "fork-D",
+ "layout_lines": 1696,
+ "pages": 20,
+ "episodes": [
+  {
+   "episode_id": "E1",
+   "level": "per_object",
+   "description": "Observe AT2018cow across UV/optical/NIR photometry and spectroscopy and weigh physical origins (SN variants vs IMBH TDE)",
+   "practitioner_action": "publish_cause",
+   "action_locator": "1808.00969.layout.txt p17 §6 L1437-1455",
+   "chain": [
+    {
+     "op": "discovery and pre-explosion limits from ATLAS/ZTF/ASAS-SN",
+     "locator": "1808.00969.layout.txt p2 §2.1 L118-149"
+    },
+    {
+     "op": "launch GROWTH worldwide follow-up campaign",
+     "locator": "1808.00969.layout.txt p3 §2.1 L150-160"
+    },
+    {
+     "op": "ground-based imaging with host-galaxy image subtraction and calibration",
+     "locator": "1808.00969.layout.txt p3 §2.2 L165-187"
+    },
+    {
+     "op": "Swift UVOT/XRT photometry with host subtraction in flux space",
+     "locator": "1808.00969.layout.txt p3 §2.3 L190-290"
+    },
+    {
+     "op": "AstroSat FUV photometry",
+     "locator": "1808.00969.layout.txt p5 §2.4 L293-305"
+    },
+    {
+     "op": "add public/literature photometry (GROND, ATLAS, ZTF, ASAS-SN)",
+     "locator": "1808.00969.layout.txt p5 §2.5 L309-328"
+    },
+    {
+     "op": "high-cadence spectroscopic monitoring and flux/colour calibration of spectra",
+     "locator": "1808.00969.layout.txt p5 §2.6 L331-393"
+    },
+    {
+     "op": "environment and pre-explosion constraints",
+     "locator": "1808.00969.layout.txt p6 §3.1 L399-451"
+    },
+    {
+     "op": "characterise photometric properties (rise, decline, colour)",
+     "locator": "1808.00969.layout.txt p7 §3.2 L454-500"
+    },
+    {
+     "op": "describe spectral evolution and line identifications",
+     "locator": "1808.00969.layout.txt p8 §3.3 L509-566"
+    },
+    {
+     "op": "fit blackbody plus power-law SEDs per epoch",
+     "locator": "1808.00969.layout.txt p8 §3.4 L510-563"
+    },
+    {
+     "op": "host galaxy SED fit with LePhare",
+     "locator": "1808.00969.layout.txt p10 §3.5 L714-797"
+    },
+    {
+     "op": "compare light curve and spectra to other transient classes",
+     "locator": "1808.00969.layout.txt p10 §4 L788-1145"
+    },
+    {
+     "op": "evaluate supernova models",
+     "locator": "1808.00969.layout.txt p13 §5.1 L1148-1389"
+    },
+    {
+     "op": "evaluate IMBH TDE model with scaling relation and MOSFiT MCMC",
+     "locator": "1808.00969.layout.txt p16 §5.2 L1392-1450"
+    },
+    {
+     "op": "conclude with open hypothesis set",
+     "locator": "1808.00969.layout.txt p17 §6 L1437-1455"
+    }
+   ],
+   "chain_length": 16
+  }
+ ],
+ "branches": [
+  {
+   "id": "COW-B01",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "intervene",
+   "choice": "initiate worldwide GROWTH observing campaign",
+   "alternatives_visible": [
+    "follow up",
+    "not follow up"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "motivated by the unusually fast rise to very high optical luminosity",
+   "locator": "1808.00969.layout.txt p3 §2.1 L150-160",
+   "quote": "tory paragraph. Motivated by these unusual characteristics,"
+  },
+  {
+   "id": "COW-B02",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "intervene",
+   "choice": "spectroscopic cadence at least nightly, 2-3 times nightly in first 12 days; larger telescopes at later phases",
+   "alternatives_visible": [
+    "small robotic spectrographs at sub-night cadence",
+    "larger telescopes less regularly"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "sub-night cadence enabled across longitudes; larger telescopes needed as it faded",
+   "locator": "1808.00969.layout.txt p5 §2.6 L333-341",
+   "quote": "monitor the evolution of the transient at high cadence. Spec-"
+  },
+  {
+   "id": "COW-B03",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "use SDSS z-band image as NIR host-subtraction reference instead of 2MASS",
+   "alternatives_visible": [
+    "2MASS pre-explosion reference",
+    "SDSS z-band with visually adjusted flux scale"
+   ],
+   "rejected_named": true,
+   "rejected_option": "2MASS reference",
+   "reason": "2MASS is shallow and has a very broad PSF",
+   "locator": "1808.00969.layout.txt p3 §2.2 L150-155",
+   "quote": "Micron All Sky Survey (2MASS), which is shallow and has"
+  },
+  {
+   "id": "COW-B04",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "UVOT: discard frames with large pointing smearing; 5 arcsec aperture for slightly smeared frames; manual centroids for astrometric errors",
+   "alternatives_visible": [
+    "3 arcsec aperture",
+    "5 arcsec aperture",
+    "discard frame"
+   ],
+   "rejected_named": true,
+   "rejected_option": "frames with large pointing smearing",
+   "reason": "smearing and astrometric errors",
+   "locator": "1808.00969.layout.txt p5 §2.3 L340-343",
+   "quote": "with large pointing smearing were thrown away. For a small"
+  },
+  {
+   "id": "COW-B05",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "subtract UVOT host contribution in flux space using a final epoch rather than image subtraction",
+   "alternatives_visible": [
+    "image subtraction",
+    "flux-space subtraction"
+   ],
+   "rejected_named": true,
+   "rejected_option": "image subtraction",
+   "reason": "UVOT PSF is stable; late UVOT fading negligible so residual transient flux small",
+   "locator": "1808.00969.layout.txt p5 §2.3 L273-282",
+   "quote": "As the UVOT PSF is stable, we subtracted off the es-"
+  },
+  {
+   "id": "COW-B06",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "model red SED excess as power-law rather than second (warm) blackbody",
+   "alternatives_visible": [
+    "second blackbody (~3000 K)",
+    "power-law alpha ~ -0.75"
+   ],
+   "rejected_named": true,
+   "rejected_option": "warm second blackbody",
+   "reason": "warm blackbody not theoretically justified (too hot for dust); synchrotron power-law expected given bright radio afterglow. Ambiguity: component-model choice could be tagged generate",
+   "locator": "1808.00969.layout.txt p8 §3.4 L538-546",
+   "quote": "model: a warm blackbody is not well-justified theoretically"
+  },
+  {
+   "id": "COW-B07",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "exclude uBg filters (dip) and late-time z-band from SED fits",
+   "alternatives_visible": [
+    "fit all bands",
+    "exclude uBg and late z"
+   ],
+   "rejected_named": true,
+   "rejected_option": "uBg filters and late z-band",
+   "reason": "single Planck cannot explain persistent dip; strong z excess relative to either model",
+   "locator": "1808.00969.layout.txt p8 §3.4 L531-550",
+   "quote": "early optical observations (Figure 7). We thus exclude the"
+  },
+  {
+   "id": "COW-B08",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "early emission is thermal, not synchrotron",
+   "alternatives_visible": [
+    "thermal (Rayleigh-Jeans)",
+    "synchrotron"
+   ],
+   "rejected_named": true,
+   "rejected_option": "synchrotron emission",
+   "reason": "UVOIR slope alpha=1.2 near Rayleigh-Jeans 2 and inconsistent with synchrotron slopes",
+   "locator": "1808.00969.layout.txt p8 §3.4 L518-523",
+   "quote": "Rayleigh-Jeans α = 2 and inconsistent (in particular) with"
+  },
+  {
+   "id": "COW-B09",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "reject SN Ic-BL association suggested early",
+   "alternatives_visible": [
+    "Ic-BL supernova",
+    "other origin"
+   ],
+   "rejected_named": true,
+   "rejected_option": "SN Ic-BL (early ATel suggestions; SN1998bw, SN2002ap, SN2008D comparisons)",
+   "reason": "broad feature vanished by day 8 with no SN peak; continuum-subtracted match too blue and too broad",
+   "locator": "1808.00969.layout.txt p8 §3.3 L523-537",
+   "quote": "This is not what happened: while the feature strength-"
+  },
+  {
+   "id": "COW-B10",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "reject Type IIn / Thomson-broadened CSM interaction as source of H/He lines",
+   "alternatives_visible": [
+    "Type IIn",
+    "H and He in ejecta"
+   ],
+   "rejected_named": true,
+   "rejected_option": "Type IIn supernova (SN 1998S) and Thomson scattering broadening",
+   "reason": "lines ~6000 km/s not narrow; Thomson scattering would not produce net redshift",
+   "locator": "1808.00969.layout.txt p13 §4.2 L1124-1131",
+   "quote": "not narrow for most of their evolution (v ∼ 6000 km/s, ver-"
+  },
+  {
+   "id": "COW-B11",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "reject afterglow wash-out of SN features",
+   "alternatives_visible": [
+    "SN features hidden by bright afterglow (as SN2003dh/GRB030329)",
+    "no hidden SN"
+   ],
+   "rejected_named": true,
+   "rejected_option": "afterglow wash-out as in SN 2003dh / GRB 030329",
+   "reason": "continuum far too blue to be predominantly synchrotron",
+   "locator": "1808.00969.layout.txt p13 §fn9 L1162-1166",
+   "quote": "This cannot be because the SN features are washed out by a"
+  },
+  {
+   "id": "COW-B12",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "reject radioactive 56Ni heating as power source of the rise",
+   "alternatives_visible": [
+    "56Ni heating",
+    "shock heating"
+   ],
+   "rejected_named": true,
+   "rejected_option": "radioactive 56Ni heating",
+   "reason": "would need >=5 Msun Ni, orders of magnitude above ejecta mass implied by fast rise",
+   "locator": "1808.00969.layout.txt p14 §5.1 L1229-1236",
+   "quote": "Heating from radioactive 56 Ni certainly"
+  },
+  {
+   "id": "COW-B13",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "reject shock cooling of standard or extended progenitor; require breakout into dense wind/shell",
+   "alternatives_visible": [
+    "standard progenitor shock cooling",
+    "extended R~1e14 cm envelope",
+    "breakout into dense wind"
+   ],
+   "rejected_named": true,
+   "rejected_option": "shock cooling of standard progenitor; massive extended envelope",
+   "reason": "standard rise too fast; extended envelope would produce plateau instead of fading",
+   "locator": "1808.00969.layout.txt p14 §5.1 L1226-1239",
+   "quote": "types of stellar progenitor the shock-cooling rise time is far"
+  },
+  {
+   "id": "COW-B14",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "reject neutron star merger and white-dwarf explosion progenitors",
+   "alternatives_visible": [
+    "neutron star merger",
+    "white-dwarf explosion / AIC",
+    "core collapse"
+   ],
+   "rejected_named": true,
+   "rejected_option": "neutron star merger; white-dwarf explosions",
+   "reason": "should lack H and He, unlike GW170817 counterpart; WD events suppress UV",
+   "locator": "1808.00969.layout.txt p16 §5.1 L1351-1371",
+   "quote": "Alternative stellar progenitor scenarios beyond core-"
+  },
+  {
+   "id": "COW-B15",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "propose jet-driven failed supernova with choked jet but record its difficulties",
+   "alternatives_visible": [
+    "classical neutrino-driven SN",
+    "jet from BH after direct collapse"
+   ],
+   "rejected_named": true,
+   "rejected_option": "classical neutrino mechanism",
+   "reason": "modest Ni mass hard to reconcile with energetic shock; lack of expected narrow-line emission and photospheric expansion remain problems",
+   "locator": "1808.00969.layout.txt p15 §5.1 L1305-1312",
+   "quote": "Perhaps the shock in this SN was driven not by the"
+  },
+  {
+   "id": "COW-B16",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "consider IMBH tidal disruption; reject anisotropic beaming as resolution of super-Eddington luminosity; leave circularization open",
+   "alternatives_visible": [
+    "anisotropic radiation",
+    "heating not from accretion (circularization)"
+   ],
+   "rejected_named": true,
+   "rejected_option": "anisotropic/beamed emission",
+   "reason": "optical radiation is unambiguously thermal and not easily beamed",
+   "locator": "1808.00969.layout.txt p17 §5.2 L1428-1431",
+   "quote": "minosity estimates is unambiguously thermal and not easily"
+  },
+  {
+   "id": "COW-B17",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "explain",
+   "choice": "reject transient dust extinction as origin of broad feature",
+   "alternatives_visible": [
+    "velocity-broadened absorption",
+    "transient dust extinction"
+   ],
+   "rejected_named": true,
+   "rejected_option": "transient dust extinction with unknown broad feature",
+   "reason": "multiple emission components cannot reproduce profile; alternatives unlikely",
+   "locator": "1808.00969.layout.txt p15 §fn10 L1319-1324",
+   "quote": "from what is otherwise an excellent fit to a single thermal SED;"
+  },
+  {
+   "id": "COW-B18",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "retain AT designation rather than SN2018cow",
+   "alternatives_visible": [
+    "SN2018cow (TNS redesignation)",
+    "AT2018cow"
+   ],
+   "rejected_named": true,
+   "rejected_option": "SN designation",
+   "reason": "SN association not definite",
+   "locator": "1808.00969.layout.txt p2 §fn1 L126-130",
+   "quote": "features in the spectrum, although we argue here that a SN associ-"
+  },
+  {
+   "id": "COW-B19",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "generate",
+   "choice": "relax MOSFiT TDE model (allow super-Eddington peak and larger photosphere) to obtain a fit",
+   "alternatives_visible": [
+    "default MOSFiT TDE model",
+    "adjusted model"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "two adjustments were required to obtain a good fit. Ambiguity: published output is BH/star mass values (infer)",
+   "locator": "1808.00969.layout.txt p16 §5.2 L1376-1381",
+   "quote": "light curves. Two adjustments to the model were required to"
+  },
+  {
+   "id": "COW-B20",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "infer",
+   "choice": "associate AT2018cow with PS1 fast blue transients rather than other fast classes",
+   "alternatives_visible": [
+    "GRB-SNe",
+    "TDEs",
+    "GRB afterglows",
+    "SLSN",
+    "PS1/Kepler fast transients"
+   ],
+   "rejected_named": true,
+   "rejected_option": "GRB-SNe, known TDEs, GRB afterglows",
+   "reason": "too faint late and too blue for GRB-SNe, too fast for TDEs, thermal SED unlike afterglows",
+   "locator": "1808.00969.layout.txt p14 §Fig.10 L1220-1223",
+   "quote": "and also far too blue. It is much faster than any known TDE and the thermal SED is entirely unlike the optically thin spectra of GRB"
+  }
+ ],
+ "conclusions_depth": [
+  {
+   "id": "COW-C01",
+   "conclusion": "expansion speed/ejecta velocity exceeds 0.1c early",
+   "channels_claimed": [
+    "UV-optical SED photospheric radius",
+    "ASAS-SN pre-explosion limit",
+    "broad absorption in spectra"
+   ],
+   "n_channels_claimed": 3,
+   "locator": "1808.00969.layout.txt p9 §3.4 L618-626",
+   "quote": "implies fast ejecta: given the ASAS-SN pre-explosion limit,",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "COW-C02",
+   "conclusion": "not explained by any known supernova model",
+   "channels_claimed": [
+    "optical light curve timescales",
+    "spectra",
+    "long-lived hot photosphere from SED",
+    "X-ray",
+    "radio"
+   ],
+   "n_channels_claimed": 5,
+   "locator": "1808.00969.layout.txt p17 §6 L1441-1447",
+   "quote": "tion within a star-forming region seems to imply the ex-",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "COW-C03",
+   "conclusion": "IMBH TDE describes qualitative behaviour but super-Eddington luminosity is a challenge",
+   "channels_claimed": [
+    "bolometric UV/optical light curve",
+    "late-time H/He spectra",
+    "temperature evolution",
+    "MOSFiT fit to g, r, UVW2"
+   ],
+   "n_channels_claimed": 4,
+   "locator": "1808.00969.layout.txt p17 §6 L1448-1455",
+   "quote": "hole provides an excellent description of the qualitative be-",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "COW-C04",
+   "conclusion": "early Ic-BL classification (from Fe II-like feature plus radio afterglow) was wrong; a subset of channels at early time supported it",
+   "channels_claimed": [
+    "early spectra",
+    "radio/submm afterglow",
+    "later light curve (no SN peak)"
+   ],
+   "n_channels_claimed": 3,
+   "locator": "1808.00969.layout.txt p8 §3.3 L523-537",
+   "quote": "early suggestions of a Ic-BL classification (Xu et al. 2018;",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "COW-C05",
+   "conclusion": "the early broad feature is real",
+   "channels_claimed": [
+    "spectra from three independent spectrographs",
+    "B-V and g-r photometric colours"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "1808.00969.layout.txt p13 §fn8 L1157-1161",
+   "quote": "in at least three different independently-reduced spectrographs",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "COW-C06",
+   "conclusion": "H and He lines arise in receding ejecta, not CSM",
+   "channels_claimed": [
+    "late spectra line widths",
+    "line redshift offsets"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "1808.00969.layout.txt p13 §4.2 L1127-1131",
+   "quote": "net redshift in the emission component that we observe. The",
+   "measured_depth": "not_measured"
+  }
+ ],
+ "facts_for_shape": [
+  {
+   "id": "COW-F01",
+   "fact": "Practitioner action is publishing a cause, but as an unresolved hypothesis set (jet-driven failed SN vs IMBH TDE); no adjudicated cause exists in this seed",
+   "locator": "1808.00969.layout.txt p2 §1 L102-109",
+   "quote": "two possible explanations for its origin: a jet-driven super-"
+  },
+  {
+   "id": "COW-F02",
+   "fact": "Rival hypotheses were weighed qualitatively across channels; only the TDE hypothesis received a quantitative forward-model fit (MOSFiT MCMC); no likelihood comparison between hypotheses",
+   "locator": "1808.00969.layout.txt p16 §5.2 L1368-1371",
+   "quote": "and UVOT w2 bands with the MOSFiT TDE model"
+  },
+  {
+   "id": "COW-F03",
+   "fact": "Follow-up (intervene) decision taken in real time via GROWTH marshal to filter alerts and coordinate follow-up",
+   "locator": "1808.00969.layout.txt p18 §ack L1492-1493",
+   "quote": "marshal to filter alerts and co-ordinate follow-up."
+  },
+  {
+   "id": "COW-F04",
+   "fact": "Object is also ZTF18abcfcoo; its cause discussion is published and indexed (contamination under explain)",
+   "locator": "1808.00969.layout.txt p2 §fn1 L129-130",
+   "quote": "is also known as ATLAS18qqn and as ZTF18abcfcoo."
+  },
+  {
+   "id": "COW-F05",
+   "fact": "X-ray and radio channels analysed in companion papers (Ho et al. 2018; Margutti et al. 2018), not in this seed",
+   "locator": "1808.00969.layout.txt p17 §5.2 L1425-1426",
+   "quote": "The bright (and variable) X-ray and radio emission from"
+  },
+  {
+   "id": "COW-F06",
+   "fact": "Early subset-of-channels conclusion (Ic-BL) was later overturned by further time-series data: an instance where a conclusion reached at a cut epoch was wrong",
+   "locator": "1808.00969.layout.txt p8 §3.3 L527-533",
+   "quote": "feature, a very bright radio/submillimeter afterglow was"
+  },
+  {
+   "id": "COW-F07",
+   "fact": "949 photometric points released machine-readable",
+   "locator": "1808.00969.layout.txt p5 §Table 1 L273-274",
+   "quote": "A machine-readable table of all 949 photometric data points will"
+  },
+  {
+   "id": "COW-F08",
+   "fact": "Rival SN hypothesis ruled out by forward reasoning on light curve (Ni mass, no second peak), not by fitting a SN light-curve model",
+   "locator": "1808.00969.layout.txt p15 §5.1 L1310-1314",
+   "quote": "Further constraints on the explosion can be imposed"
+  }
+ ],
+ "item_template_evidence": [
+  {
+   "id": "COW-T01",
+   "question_form": "diagnose the physical origin of one anomalous transient from photometry, spectra, SED and host, naming and rejecting rival causes",
+   "locator": "1808.00969.layout.txt p13 §5.1 L1146-1155",
+   "quote": "consider a supernova as the most natural interpretation of"
+  },
+  {
+   "id": "COW-T02",
+   "question_form": "fit a physical forward model (MOSFiT TDE) to one object's multi-band light curve and read off parameters",
+   "locator": "1808.00969.layout.txt p16 §5.2 L1368-1371",
+   "quote": "Additionally, we fit the light curve in the g, r,"
+  },
+  {
+   "id": "COW-T03",
+   "question_form": "compare one object's light curve to reference objects of several classes and state which match",
+   "locator": "1808.00969.layout.txt p14 §Fig.10 L1218-1219",
+   "quote": "Figure 10. Comparison of the light curve of AT2018cow to other classes of fast-rising or luminous events. The dotted lines show"
+  },
+  {
+   "id": "COW-T04",
+   "question_form": "decide from an early fast, luminous rise whether to launch a follow-up campaign",
+   "locator": "1808.00969.layout.txt p3 §2.1 L150-154",
+   "quote": "we initiated a campaign of observations via the GROWTH"
+  }
+ ],
+ "zero_contribution": false,
+ "notes": "Single-object explain seed. Rich per_object explain branches with named rejected causes (Ic-BL, IIn, 56Ni, shock cooling, NS merger, WD, afterglow wash-out, dust, beaming). Final cause not adjudicated. Two intervene branches (campaign, spectroscopic cadence). The one quantitative forward-model fit (MOSFiT) was applied to only one hypothesis after relaxing model constraints. X-ray/radio channels in companion papers."
+}

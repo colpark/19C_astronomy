@@ -1,0 +1,533 @@
+{
+ "seed_id": "2109.13999",
+ "title": "ParSNIP: Generative Models of Transient Light Curves with Physics-Enabled Deep Learning (Boone 2021)",
+ "arxiv_version_verified": "2109.13999v1",
+ "read_in_full": true,
+ "reader": "agent1",
+ "layout_lines": 1894,
+ "pages": 27,
+ "episodes": [
+  {
+   "episode_id": "E1",
+   "level": "per_study",
+   "description": "Build and train the ParSNIP hybrid physics-VAE generative model on PS1 and PLAsTiCC, select hyperparameters and latent dimension, validate by out-of-sample light-curve residuals",
+   "practitioner_action": "publish_object",
+   "action_locator": "2109.13999.layout.txt p25 §7 L1759-1764",
+   "chain": [
+    {
+     "op": "estimate t_max as median time of five highest S/N points",
+     "locator": "2109.13999.layout.txt p3 §2.1 L166-172"
+    },
+    {
+     "op": "subtract background with biweight on points >=250 d from t_max; MW extinction correction (PS1)",
+     "locator": "2109.13999.layout.txt p3 §2.1 L174-178"
+    },
+    {
+     "op": "normalize by max flux (S/N>=5); add 0.01 error floor",
+     "locator": "2109.13999.layout.txt p3 §2.1 L124-142"
+    },
+    {
+     "op": "grid on 300 sidereal days incl. redshift row",
+     "locator": "2109.13999.layout.txt p3 §2.1 L157-177"
+    },
+    {
+     "op": "decoder: MLP intrinsic spectra + physics layer (redshift, dust C(c), bandpass)",
+     "locator": "2109.13999.layout.txt p5 §3.3 L268-287"
+    },
+    {
+     "op": "encoder with residual blocks and time-indexing layer",
+     "locator": "2109.13999.layout.txt p7 §3.6 L349-405"
+    },
+    {
+     "op": "marginalize amplitude analytically",
+     "locator": "2109.13999.layout.txt p7 §3.7 L407-496"
+    },
+    {
+     "op": "spectral smoothness regularization eta",
+     "locator": "2109.13999.layout.txt p8 §3.8 L454-466"
+    },
+    {
+     "op": "augmentation (shift, scale, drop, noise)",
+     "locator": "2109.13999.layout.txt p8 §3.9 L468-504"
+    },
+    {
+     "op": "train with Adam lr 1e-3, ReduceLROnPlateau until lr<1e-5",
+     "locator": "2109.13999.layout.txt p9 §3.10 L516-531"
+    },
+    {
+     "op": "hyperparameter search over 56 models on 90/10 split",
+     "locator": "2109.13999.layout.txt p9 §3.11 L534-556"
+    },
+    {
+     "op": "select latent dimensionality",
+     "locator": "2109.13999.layout.txt p9 §3.12 L559-584"
+    },
+    {
+     "op": "compute residuals on held-out 10% light curves",
+     "locator": "2109.13999.layout.txt p10 §4.1 L613-642"
+    }
+   ],
+   "chain_length": 13
+  },
+  {
+   "episode_id": "E2",
+   "level": "per_object",
+   "description": "Fit (encode) one light curve and reconstruct it; report residuals / reduced chi2 against SALT2 for SNe Ia",
+   "practitioner_action": "publish_value",
+   "action_locator": "2109.13999.layout.txt p13 §4.3 L812-829",
+   "chain": [
+    {
+     "op": "preprocess light curve (E1 steps 1-4)",
+     "locator": "2109.13999.layout.txt p3 §2.1 L166-178"
+    },
+    {
+     "op": "encoder gives approximate MAP latent values",
+     "locator": "2109.13999.layout.txt p13 §4.3 L821-824"
+    },
+    {
+     "op": "decoder renders model photometry",
+     "locator": "2109.13999.layout.txt p5 §3.3 L268-287"
+    },
+    {
+     "op": "compute residuals / reduced chi2",
+     "locator": "2109.13999.layout.txt p13 §4.3 L815-818"
+    }
+   ],
+   "chain_length": 4
+  },
+  {
+   "episode_id": "E3",
+   "level": "per_object",
+   "description": "Photometric classification of one transient from ParSNIP features with LightGBM",
+   "practitioner_action": "publish_value",
+   "action_locator": "2109.13999.layout.txt p18 §5.2 L1207-1227",
+   "chain": [
+    {
+     "op": "augment training light curves 100x",
+     "locator": "2109.13999.layout.txt p17 §5.1 L1133-1135"
+    },
+    {
+     "op": "infer latent representation",
+     "locator": "2109.13999.layout.txt p17 §5.1 L1139-1141"
+    },
+    {
+     "op": "convert amplitude to pseudo-luminosity using redshift",
+     "locator": "2109.13999.layout.txt p17 §5.1 L1121-1132"
+    },
+    {
+     "op": "assemble 11 features",
+     "locator": "2109.13999.layout.txt p17 §5.1 L1133-1138"
+    },
+    {
+     "op": "LightGBM with class weights, 10-fold CV",
+     "locator": "2109.13999.layout.txt p18 §5.1 L1147-1167"
+    },
+    {
+     "op": "average classifiers for unlabeled set",
+     "locator": "2109.13999.layout.txt p18 §5.1 L1200-1203"
+    }
+   ],
+   "chain_length": 6
+  },
+  {
+   "episode_id": "E4",
+   "level": "per_object",
+   "description": "Distance estimation for one SN Ia with linear zeropoint model over latents",
+   "practitioner_action": "publish_value",
+   "action_locator": "2109.13999.layout.txt p21 §5.5 L1507-1532",
+   "chain": [
+    {
+     "op": "select SNe Ia with good SALT2 fits (Section 4.3 cuts)",
+     "locator": "2109.13999.layout.txt p21 §5.5 L1476-1477"
+    },
+    {
+     "op": "fit M, alpha_i, beta against Planck distance moduli",
+     "locator": "2109.13999.layout.txt p21 §5.5 L1527-1532"
+    },
+    {
+     "op": "Chauvenet outlier rejection (8 of 265)",
+     "locator": "2109.13999.layout.txt p21 §5.5 L1477-1479"
+    },
+    {
+     "op": "report RMS / NMAD",
+     "locator": "2109.13999.layout.txt p21 §5.5 L1479-1489"
+    }
+   ],
+   "chain_length": 4
+  }
+ ],
+ "branches": [
+  {
+   "id": "PS-B1",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "intrinsic latent dimensionality = 3",
+   "alternatives_visible": [
+    "1 to 10 dimensions (Figure 4)"
+   ],
+   "rejected_named": true,
+   "rejected_option": "more than three dimensions (little benefit; dimensions unused, uninformative posteriors)",
+   "reason": "validation VAE loss plateaus beyond three",
+   "locator": "2109.13999.layout.txt p9 §3.12 L562-584",
+   "quote": "ing and validation sets, but there is little benefit from"
+  },
+  {
+   "id": "PS-B2",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "hyperparameters from a 56-model sweep; prefer the more computationally efficient of equally good configurations",
+   "alternatives_visible": [
+    "Table 1 grid of batch size, learning rate, scheduler factor, block types and widths, decoder architectures"
+   ],
+   "rejected_named": true,
+   "rejected_option": "non-bold Table 1 values",
+   "reason": "smallest loss; tie broken on computational efficiency",
+   "locator": "2109.13999.layout.txt p9 §3.11 L538-556",
+   "quote": "forms similarly well on two different configurations, we"
+  },
+  {
+   "id": "PS-B3",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "marginalize over amplitude instead of predicting it",
+   "alternatives_visible": [
+    "amplitude as explicit encoder parameter"
+   ],
+   "rejected_named": true,
+   "rejected_option": "explicit amplitude parameter",
+   "reason": "empirically hard to predict; marginalized model much easier to train",
+   "locator": "2109.13999.layout.txt p8 §3.7 L494-496",
+   "quote": "the amplitude is much easier to train than a model where"
+  },
+  {
+   "id": "PS-B4",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "custom symmetry-aware (time-indexing) layers for explicit latents",
+   "alternatives_visible": [
+    "fully connected layers as in a traditional VAE"
+   ],
+   "rejected_named": true,
+   "rejected_option": "fully connected posterior layers",
+   "reason": "very unstable and difficult to train",
+   "locator": "2109.13999.layout.txt p6 §3.5 L339-347",
+   "quote": "works are very unstable and difficult to train. To address"
+  },
+  {
+   "id": "PS-B5",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "no redshift augmentation",
+   "alternatives_visible": [
+    "redshift augmentation as in Boone (2019)"
+   ],
+   "rejected_named": true,
+   "rejected_option": "redshift augmentation",
+   "reason": "cannot be done without assumptions about the spectrum shape",
+   "locator": "2109.13999.layout.txt p8 §3.9 L497-501",
+   "quote": "we do not attempt to augment our light curves in red-"
+  },
+  {
+   "id": "PS-B6",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "spectral regularization eta = 0.001",
+   "alternatives_visible": [
+    "stronger regularization (oversmoothing)",
+    "weaker (noise)"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "reasonable balance between noise and oversmoothing; little impact on photometry",
+   "locator": "2109.13999.layout.txt p8 §3.8 L458-463",
+   "quote": "pirically that a value of η = 0.001 results in a reasonable"
+  },
+  {
+   "id": "PS-B7",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "add 0.01 flux error floor",
+   "alternatives_visible": [
+    "reported statistical uncertainties as given"
+   ],
+   "rejected_named": true,
+   "rejected_option": "unmodified reported uncertainties (underestimated at high S/N)",
+   "reason": "prevent excessive weights from underestimated uncertainties",
+   "locator": "2109.13999.layout.txt p3 §2.1 L133-142",
+   "quote": "ily underestimate the true uncertainties for very high"
+  },
+  {
+   "id": "PS-B8",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "fixed weak priors on explicit latent variables",
+   "alternatives_visible": [
+    "priors estimated by modelling survey selection functions",
+    "priors from theoretical/empirical models"
+   ],
+   "rejected_named": true,
+   "rejected_option": "learned/selection-modelled priors",
+   "reason": "training sets highly biased; weak prior makes no assumption about biases",
+   "locator": "2109.13999.layout.txt p22 §6.4 L1546-1554",
+   "quote": "the explicitly-modeled latent variables. We made this"
+  },
+  {
+   "id": "PS-B9",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "train separate models per dataset (joint PS1+PLAsTiCC model tested)",
+   "alternatives_visible": [
+    "joint training on PS1 and PLAsTiCC"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "joint model reported similar performance; no rejection stated",
+   "locator": "2109.13999.layout.txt p24 §6.8 L1725-1731",
+   "quote": "ParSNIP model simultaneously on the PS1 and PLAs-"
+  },
+  {
+   "id": "PS-B10",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "compare SALT2 and ParSNIP only with the PS1-trained ParSNIP",
+   "alternatives_visible": [
+    "PLAsTiCC-trained ParSNIP"
+   ],
+   "rejected_named": true,
+   "rejected_option": "PLAsTiCC-trained model (PLAsTiCC SNe Ia simulated with SALT2)",
+   "reason": "fair comparison independent of SALT2",
+   "locator": "2109.13999.layout.txt p13 §4.3 L808-812",
+   "quote": "were simulated using SALT2. For a fair comparison, we"
+  },
+  {
+   "id": "PS-B11",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "ParSNIP parameters from encoder approximate MAP rather than full maximum-likelihood fit (SALT2 fitted exactly)",
+   "alternatives_visible": [
+    "full fit for maximum likelihood",
+    "MCMC via SNCosmo"
+   ],
+   "rejected_named": true,
+   "rejected_option": "full fit (reduced chi2 would decrease)",
+   "reason": "not stated beyond computational cost discussion in 6.5",
+   "locator": "2109.13999.layout.txt p13 §4.3 L821-826",
+   "quote": "reduced χ2 values would decrease if a full fit were per-"
+  },
+  {
+   "id": "PS-B12",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "exclude redshift as a classifier feature",
+   "alternatives_visible": [
+    "redshift as explicit feature"
+   ],
+   "rejected_named": true,
+   "rejected_option": "redshift feature",
+   "reason": "labeled and unlabeled redshift distributions differ",
+   "locator": "2109.13999.layout.txt p17 §5.1 L1138-1141",
+   "quote": "as an explicit feature as the redshift distributions of the"
+  },
+  {
+   "id": "PS-B13",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "LightGBM min child weight 1000 (otherwise defaults)",
+   "alternatives_visible": [
+    "lightgbm default min child weight"
+   ],
+   "rejected_named": true,
+   "rejected_option": "default value",
+   "reason": "avoid overfitting augmented light curves",
+   "locator": "2109.13999.layout.txt p18 §5.1 L1156-1162",
+   "quote": "rameter to 1000 to avoid overfitting the augmented light"
+  },
+  {
+   "id": "PS-B14",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "retrain the Avocado comparator with true redshifts",
+   "alternatives_visible": [
+    "Avocado with photometric redshifts as in the challenge"
+   ],
+   "rejected_named": true,
+   "rejected_option": "Avocado with photometric redshifts",
+   "reason": "fair comparison since ParSNIP assumes known redshift",
+   "locator": "2109.13999.layout.txt p18 §5.3 L1242-1245",
+   "quote": "retrained the Avocado classifier using the true redshifts"
+  },
+  {
+   "id": "PS-B15",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "novelty score = latent distance to nearest augmented training transient",
+   "alternatives_visible": [
+    "isolation forest (Villar et al. 2021)",
+    "outlier-from-bulk methods"
+   ],
+   "rejected_named": true,
+   "rejected_option": "isolation-forest style anomaly detection",
+   "reason": "those return mostly rare-but-known types; choice depends on science goal",
+   "locator": "2109.13999.layout.txt p20 §5.4 L1407-1416",
+   "quote": "In this work, we instead explore an alternative ap-"
+  }
+ ],
+ "conclusions_depth": [
+  {
+   "id": "PS-C1",
+   "conclusion": "ParSNIP reproduces out-of-sample light curves with ~0.06 mag (PS1) / ~0.04 mag (PLAsTiCC) model uncertainty",
+   "channels_claimed": [
+    "multi-band photometry",
+    "redshift (metadata input)"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2109.13999.layout.txt p24 §7 L1731-1734",
+   "quote": "able to reproduce out-of-sample light curves with model",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "PS-C2",
+   "conclusion": "ParSNIP predicts spectral time series despite training on photometry only (validated against observed spectra)",
+   "channels_claimed": [
+    "multi-band photometry",
+    "redshift",
+    "observed spectra (validation only)"
+   ],
+   "n_channels_claimed": 3,
+   "locator": "2109.13999.layout.txt p16 §4.4 L1059-1065",
+   "quote": "with the observed spectra despite the fact that the ParSNIP model was only trained using photometry.",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "PS-C3",
+   "conclusion": "SN Ia photometric classification with 2x/2.3x less contamination",
+   "channels_claimed": [
+    "multi-band photometry",
+    "redshift (via pseudo-luminosity)",
+    "spectroscopic labels (training)"
+   ],
+   "n_channels_claimed": 3,
+   "locator": "2109.13999.layout.txt p17 §5.1 L1138-1141",
+   "quote": "although the redshift is used to calculate the luminosity.",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "PS-C4",
+   "conclusion": "SN Ia distances with RMS 0.150 mag vs 0.155 for SALT2",
+   "channels_claimed": [
+    "multi-band photometry",
+    "redshift",
+    "SALT2 fit-quality selection"
+   ],
+   "n_channels_claimed": 3,
+   "locator": "2109.13999.layout.txt p21 §5.5 L1480-1482",
+   "quote": "tance estimates is 0.155±0.008 mag and the RMS of the",
+   "measured_depth": "not_measured"
+  }
+ ],
+ "facts_for_shape": [
+  {
+   "id": "PS-F1",
+   "fact": "Generative-model validation practised = residuals of whole held-out light curves (random 10% of objects), not forecasting later epochs of a partially observed object",
+   "locator": "2109.13999.layout.txt p10 §4.1 L613-642",
+   "quote": "with a randomly selected 10% of the light curves held"
+  },
+  {
+   "id": "PS-F2",
+   "fact": "Training-set residuals consistent with statistical uncertainties, author suspects overfitting; validation core dispersion ~0.06 mag",
+   "locator": "2109.13999.layout.txt p10 §4.1 L627-634",
+   "quote": "tistical uncertainties which suggests that may we have"
+  },
+  {
+   "id": "PS-F3",
+   "fact": "Large residuals for transient types poorly represented in training: a learned forward model as grader penalizes rare types (I4 risk)",
+   "locator": "2109.13999.layout.txt p10 §4.1 L636-639",
+   "quote": "large residuals for some light curves, particularly ones"
+  },
+  {
+   "id": "PS-F4",
+   "fact": "Per-object comparison of two model families practised: median reduced chi2 1.42 (1.68) ParSNIP vs 1.40 (1.21) SALT2 on SNe Ia",
+   "locator": "2109.13999.layout.txt p13 §4.3 L815-818",
+   "quote": "we find a median reduced χ2 of 1.42 (1.68) for ParSNIP"
+  },
+  {
+   "id": "PS-F5",
+   "fact": "SALT2 well-fit cuts used: converged fit, x1 in [-5,5], sigma_x1<0.5, sigma_c<0.1, >=1 pre-max observation",
+   "locator": "2109.13999.layout.txt p13 §4.3 L819-824",
+   "quote": "that are well-fit by SALT2, which we define as having"
+  },
+  {
+   "id": "PS-F6",
+   "fact": "Model assumes known redshift; photo-z path not implemented in the paper (only proposed)",
+   "locator": "2109.13999.layout.txt p3 §2 L148-153",
+   "quote": "For this analysis, we assume that the redshifts of all"
+  },
+  {
+   "id": "PS-F7",
+   "fact": "Preprocessing requires a stable background before and after the transient and estimates background from points >=250 d from peak, i.e. it presupposes the full light curve (bears on a cut-epoch item)",
+   "locator": "2109.13999.layout.txt p3 §2 L157-159",
+   "quote": "has a stable background level before and after this time"
+  },
+  {
+   "id": "PS-F8",
+   "fact": "Spectra-comparison objects PS1-12cht and PS1-12baa were included in training for that run (in-sample demonstration)",
+   "locator": "2109.13999.layout.txt p14 §4.4 L937-938",
+   "quote": "are from classes that are not well-sampled in the PS1"
+  },
+  {
+   "id": "PS-F9",
+   "fact": "Decoder claimed usable for any instrument/bandpass without modification (wave-1 tool card lists a code disagreement)",
+   "locator": "2109.13999.layout.txt p23 §6.8 L1630-1634",
+   "quote": "the photometry for any instrument or bandpass without"
+  },
+  {
+   "id": "PS-F10",
+   "fact": "Posterior Gaussian approximation holds even for partially sampled light curves (MCMC check), no multimodality seen",
+   "locator": "2109.13999.layout.txt p23 §6.5 L1614-1616",
+   "quote": "tions. This statement holds even for light curves that are"
+  },
+  {
+   "id": "PS-F11",
+   "fact": "Novel-transient detection is framed as needing a follow-up feedback loop that spends resources (intervene named, not practised)",
+   "locator": "2109.13999.layout.txt p21 §5.4 L1489-1492",
+   "quote": "volve a feedback loop where resources are dedicated to"
+  }
+ ],
+ "item_template_evidence": [
+  {
+   "id": "PS-IT1",
+   "question_form": "Given a light curve not in training, reproduce it with a generative model and report per-observation residuals",
+   "locator": "2109.13999.layout.txt p11 §4.1 L669-673",
+   "quote": "Figure 5. Examples of out-of-sample predictions of the ParSNIP model on the validation subset of the PS1 dataset."
+  },
+  {
+   "id": "PS-IT2",
+   "question_form": "For one SN Ia light curve, fit two model families (SALT2, ParSNIP) and compare reduced chi2",
+   "locator": "2109.13999.layout.txt p13 §4.3 L812-818",
+   "quote": "els are able to reproduce light curves. An example of the"
+  },
+  {
+   "id": "PS-IT3",
+   "question_form": "For one transient, predict spectra at given phases from the photometric fit and compare to observed spectra",
+   "locator": "2109.13999.layout.txt p16 §4.4 L1061-1063",
+   "quote": "photometry. The bottom two panels show observed spectra for each of these supernovae from PESSTO"
+  }
+ ],
+ "zero_contribution": false,
+ "notes": "No per_object branch with object-specific human judgment is visible: per-object fitting, classification and distance steps are mechanical (chain). All 15 branches are per_study design choices. No evaluation of forecasting unseen later epochs from a cut epoch appears anywhere in the paper; the held-out unit is a whole light curve."
+}

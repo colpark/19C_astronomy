@@ -1,0 +1,1431 @@
+                                               Astronomy & Astrophysics manuscript no. ATAT_AA                                                                                     ©ESO 2024
+                                               May 20, 2024
+
+
+
+
+                                                   ATAT: Astronomical Transformer for time series And Tabular data
+                                                                           ⋆
+                                               G. Cabrera-Vives1, 2, 3 , D. Moreno-Cartagena1, 2 , N. Astorga3, 4, 5 , I. Reyes-Jainaga3, 4 , F. Förster6, 3 , P. Huijse7, 8, 3 ,
+                                                       J. Arredondo3, 4 , A. M. Muñoz Arancibia3, 4 , A. Bayo9, 10 , M. Catelan11, 3 , P. A. Estévez5, 3 , P.
+                                                     Sánchez-Sáez9, 3 , A. Álvarez3, 4 , P. Castellanos2 , P. Gallardo2, 3, 4 , A. Moya3, 4 , D. Rodriguez-Mancini12
+
+                                                        1
+                                                          Department of Computer Science, Universidad de Concepción, Chile
+                                                        2
+                                                          Center for Data and Artificial Intelligence, Universidad de Concepción, Edmundo Larenas 310, Concepción, Chile
+                                                        3
+                                                          Millennium Institute of Astrophysics (MAS), Nuncio Monseñor Sotero Sanz 100, Of. 104, Providencia, Santiago, Chile
+                                                        4
+                                                          Center for Mathematical Modeling (CMM), Universidad de Chile, Beauchef 851, Santiago 8320000, Chile
+                                                        5
+                                                          Department of Electrical Engineering, Universidad de Chile, Av. Tupper 2007, Santiago 8320000, Chile
+arXiv:2405.03078v2 [astro-ph.IM] 16 May 2024
+
+
+
+
+                                                        6
+                                                          Data and Artificial Intelligence Initiative (ID&IA), University of Chile, Santiago, Chile
+                                                        7
+                                                          Institute of Astronomy (IvS), Department of Physics and Astronomy, KU Leuven, Celestijnenlaan 200D, 3001 Leuven, Belgium
+                                                        8
+                                                          Instituto de Informática, Facultad de Ciencias de la Ingeniería, Universidad Austral de Chile, General Lagos 2086, Valdivia, Chile
+                                                        9
+                                                          European Southern Observatory, Karl-Schwarzschild-Strasse 2, 85748 Garching bei München, Germany
+                                                       10
+                                                          Instituto de Física y Astronomía, Universidad de Valparaíso, Av. Gran Bretaña 1111, Playa Ancha, Casilla 5030, Chile
+                                                       11
+                                                          Centro de Astroingeniería, Pontificia Universidad Católica de Chile, Av. Vicuña Mackenna 4860, 7820436 Macul, Santiago, Chile
+                                                       12
+                                                          Data Observatory Foundation, Diagonal Las Torres N°2640, edificio E, Peñalolén, Santiago, Chile
+
+                                                       Received September 15, 1996; accepted March 16, 1997
+
+                                                                                                                  ABSTRACT
+
+                                                       Context. The advent of next-generation survey instruments, such as the Vera C. Rubin Observatory and its Legacy Survey of Space
+                                                       and Time (LSST), is opening a window for new research in time-domain astronomy. The Extended LSST Astronomical Time-Series
+                                                       Classification Challenge (ELAsTiCC) was created to test the capacity of brokers to deal with a simulated LSST stream.
+                                                       Aims. We aim to develop a next-generation model for classification of variable astronomical objects. We describe ATAT, the As-
+                                                       tronomical Transformer for time series And Tabular data, a classification model conceived by the ALeRCE alert broker to classify
+                                                       light-curves from next-generation alert streams. ATAT was tested in production during the first round of the ELAsTiCC campaigns.
+                                                       Methods. ATAT consists of two Transformer models that encode light curves and features using novel time modulation and quan-
+                                                       tile feature tokenizer mechanisms, respectively. ATAT was trained on different combinations of light curves, metadata, and features
+                                                       calculated over the light curves. We compare ATAT against the current ALeRCE classifier, a Balanced Hierarchical Random Forest
+                                                       (BHRF) trained on human-engineered features derived from light curves and metadata.
+                                                       Results. When trained on light curves and metadata, ATAT achieves a macro F1-score of 82.9 ± 0.4 in 20 classes, outperforming the
+                                                       BHRF model trained on 429 features, which achieves a macro F1-score of 79.4 ± 0.1.
+                                                       Conclusions. The use of Transformer multimodal architectures, combining light curves and tabular data, opens new possibilities for
+                                                       classifying alerts from a new generation of large etendue telescopes, such as the Vera C. Rubin Observatory, in real-world brokering
+                                                       scenarios.
+                                                       Key words. transformers – stars: variables: general – supernovae: general – surveys – methods: statistical – methods: data analysis
+
+
+
+                                               1. Introduction                                                            Deep Learning (DL) have been applied extensively in astronom-
+                                                                                                                          ical data applications, such as light-curve and image-based clas-
+                                               A new generation of synoptic telescopes are carrying out data-             sification (e.g., Dieleman et al. 2015; Cabrera-Vives et al. 2016,
+                                               intensive observation campaigns. An emblematic example is the              2017; Carrasco-Davis et al. 2021; Russeil et al. 2022), clustering
+                                               Vera C. Rubin Observatory and its Legacy Survey of Space and               (Mackenzie et al. 2016; Astorga et al. 2018), physical param-
+                                               Time (LSST) (Ivezić et al. 2019). Starting in 2025, the Rubin             eter estimation (Förster et al. 2018; Sánchez et al. 2021; Vil-
+                                               Observatory will generate an average of 10 million alerts and              lar 2022), and outlier detection (Nun et al. 2016; Pruzhinskaya
+                                               ∼20 TB of raw data every night. The massive data-stream of                 et al. 2019; Sánchez-Sáez et al. 2021; Ishida et al. 2021; Pérez-
+                                               LSST is to be distributed to Community Brokers1 that will be               Carrasco et al. 2023; Perez-Carrasco et al. 2023). The Vera C.
+                                               in charge of ingesting, processing and serving the annotated               Rubin Community Brokers: ALeRCE (Förster et al. 2021), AM-
+                                               alerts to the astronomical community. Collaboration between                PEL (Nordin et al. 2019), ANTARES (Matheson et al. 2021),
+                                               astronomers, computer scientists, statisticians and engineers is           BABAMUL, Fink (Möller et al. 2021), Lasair (Smith et al.
+                                               key to solve the rising astronomical big-data challenges (Borne            2019), and Pitt-Google2 are processing or will process massive
+                                               2010; Huijse et al. 2014).                                                 amounts of data that is annotated with cross-matches, ML model
+                                                   Automatic data processing based on Feature Engineering                 predictions, and/or other information that is distributed to the
+                                               (FE, e.g., Nun et al. 2015) and Machine learning (ML), including           community. These scientific products allow astronomers to study
+                                                                                                                          transient and variable objects in almost real-time or in an offline
+                                                   ⋆
+                                                    e-mail: guillecabrera@inf.udec.cl
+                                               1                                                                           2
+                                                   https://www.lsst.org/scientists/alert-brokers                               https://pitt-broker.readthedocs.io/en/latest/
+
+                                                                                                                                                                     Article number, page 1 of 12
+                                                  A&A proofs: manuscript no. ATAT_AA
+
+fashion for a systematic analysis of large numbers of objects.              sampled light-curves in combination with metadata and/or
+To enable the former, ML models should be integrated into a                 extracted features.
+complex infrastructure and allow for accurate, rapid and scalable         – A thorough comparison between ATAT and a RF-based base-
+evaluation of tens of thousands of alerts received every minute             line (historically the most competitive model of ALeRCE
+(Narayan et al. 2018; Rodriguez-Mancini et al. 2022; Cabrera-               when applied to real data streams) in the ELAsTiCC dataset.
+Vives et al. 2022). In the past, the most common choices have
+been decision tree-based ensembles (e.g., Random Forest, RF,              The code for replicating our experiments will be made pub-
+or Light Gradient Boosting Machine, LightGBM), models with            licly available once this article is accepted 5 . Our code uses the
+high predictive performance, but high resource usage, due to the      publicly available ELAsTiCC dataset6 .
+FE step. Several efforts have applied faster DL-based approaches
+to the problem of classifying astronomical time series (e.g., Re-     2. ELAsTiCC Overview and Machine Learning
+current Neural Networks, RNN, Charnock & Moss (2017); Naul               Approaches
+et al. (2018); Carrasco-Davis et al. (2019); Muthukrishna et al.
+(2019); Becker et al. (2020); Gómez et al. (2020); Jamal &            2.1. ELAsTiCC
+Bloom (2020); Donoso-Oliva et al. (2021)). These approaches
+usually focus on a specific type of object, e.g. variable stars       The ELAsTiCC dataset contains 1,845,146 light-curves in six
+(Naul et al. 2018; Becker et al. 2020; Jamal & Bloom 2020) or         bands (ugrizY) from simulated astronomical objects distributed
+transients (Charnock & Moss 2017; Muthukrishna et al. 2019;           in 32 classes as shown in Figure 2 (a). This work uses the training
+Möller & de Boissière 2019; Fraga et al. 2024). Until this work,      dataset from the first ELAsTiCC campaign. We use the same
+ALeRCE had not been able to outperform tree-based ensembles           taxonomy as the ELAsTiCC broker’s taxonomy, except for the
+(Boone 2019; Hložek et al. 2020; Neira et al. 2020; Sánchez-          SN-like/other class that includes only SNe IIb (see Figure 2 b).
+Sáez et al. 2021; Sánchez-Sáez, P. et al. 2023) with deep learning        We consider 64 attributes from the metadata provided in the
+approaches for real-time alert classification across a broad tax-     alert stream of ELAsTiCC. These attributes include the best he-
+onomy encompassing transient, stochastic, and periodic variable       liocentric redshift, Milky Way extinction between the blue and
+objects simultaneously.                                               visual (and its error), and for the first and second galaxy host
+                                                                      match: ellipticity, magnitudes on each band (and their error),
+     More recently, Multi-Head Attention (MHA; Vaswani et al.
+                                                                      transient-host separation, radius, photometric redshift (and its
+2017) and Transformers have appeared as promising alterna-
+                                                                      error), deciles of the estimated photometric redshift probability
+tives to time series encoders in astronomy (Allam & McEwen
+                                                                      density function, and spectroscopic redshift if available (and its
+2021; Pimentel et al. 2022; Donoso-Oliva et al. 2022; Moreno-
+                                                                      error).
+Cartagena et al. 2023). These models are faster than RNNs since
+                                                                          We split the ELAsTiCC dataset into training, validation, and
+they have access to all the input simultaneously and not sequen-
+                                                                      test sets. The test set contains one-thousand light-curves of each
+tially. The above mentioned attention-based models have not ex-
+                                                                      class, ensuring a balanced representation. The remaining data is
+plored training with multiple data sources (time series, metadata
+                                                                      further stratified into five folds, from which we train five separate
+and human-engineered features) simultaneously.
+                                                                      models (same folds for all neural networks and random forest).
+     The astronomical community has made great efforts to cre-
+                                                                      In each training iteration, one fold serves as a validation set for
+ate realistic scenarios to test ML models (Hložek et al. 2020), but
+                                                                      hyperparameter tuning and early stopping. All the metrics pre-
+none of them have contemplated an end-to-end ML pipeline, i.e.
+                                                                      sented in this paper are derived from evaluations performed on
+from the data ingestion to the ML model’s outputs. The recent
+                                                                      the test set.
+Extended LSST Astronomical Time-Series Classification Chal-
+                                                                          Additionally, the ELAsTiCC dataset was modified by dis-
+lenge (ELAsTiCC3,4 , see Methods) has appeared as a unique op-
+                                                                      carding information that is not available in the ELAsTiCC alert
+portunity to test broker’s pipelines and ML models in produc-
+                                                                      stream. For this purpose, we use the PHOTFLAG7 key to select
+tion. ELAsTiCC is a challenge created by the Dark Energy Sci-
+                                                                      only non-saturated data. We consider alerts and forced photom-
+ence Collaboration (DESC) that simulates LSST-like astronom-
+                                                                      etry points in each light-curve spanning from thirty days prior to
+ical alerts with the goal of connecting the LSST project, bro-
+                                                                      the initial alert (forced photometry data for the first alert) to the
+kers, and DESC by testing end-to-end pipelines in real-time. To
+                                                                      final detection. If there are non-detections after the last detection,
+fulfill this objective, ELAsTiCC started an official data stream
+                                                                      these are not included.
+on September 28th, 2022. Additionally, ELAsTiCC provided a
+dataset to train ML models.
+     In this work, we present the methods that ALeRCE used for        2.2. ATAT
+the first round of ELAsTiCC. We propose ATAT, an Astronom-
+                                                                      Here we describe our proposed transformed-based model, ATAT,
+ical Transformer for time series And Tabular data, a model that
+                                                                      and the techniques developed to process time series information
+is based on a Transformer architecture. ATAT is trained with the
+                                                                      (light-curves) and tabular data information (metadata and/or pro-
+dataset provided by ELAsTiCC previous to the start of the real-
+                                                                      cessed features). For the rest of the paper, we will call these
+time infrastructure challenge and implemented as an end-to-end
+                                                                      models ATAT’s variants since different input combinations can
+pipeline within the ALeRCE (Förster et al. 2021) broker. ATAT
+                                                                      be used.
+can use time series information and all the available metadata
+                                                                          For each astronomical source, we consider two types of data:
+and/or features obtained from other pre-processing steps (see
+                                                                      the light-curve and tabular data composed of static metadata
+Figure 1). In summary, our contributions are:
+                                                                      (e.g., host galaxy redshifts, if any) and features calculated from
+                                                                      the light-curves (e.g., the period of a periodic source). For a par-
+    – A new state-of-the-art Transformer model called ATAT,           ticular source, an observation j in band b of its light-curve is
+      which encodes multivariate, variable length, and irregularly-
+                                                                      5
+                                                                        https://github.com/alercebroker/ATAT
+3                                                                     6
+  ELAsTiCC Challenge, link 1                                            ELAsTiCC dataset
+4                                                                     7
+  ELAsTiCC Challenge, link 2                                            Specific format information for the ELAsTiCC dataset.
+
+Article number, page 2 of 12
+                             G. Cabrera-Vives et al.: ATAT: Astronomical Transformer for time series And Tabular data
+
+
+
+
+                                        Add token as first
+                                         element of seq.
+
+
+                                                         Take first element of seq.
+
+
+
+
+                                                         Take first element of seq.
+
+
+                                        Add token as first
+                                         element of seq.
+
+
+Fig. 1. Diagram of ATAT, which consists of two branches: 1) on top a Transformer to process light-curves (matrices x, t and M) and 2) at the
+bottom a Transformer to process tabular data (matrix f ). Both information sources are processed by Time Modulation (TM) and Quantile Feature
+Tokenizer (QFT), respectively, represented as white rectangles. In both cases, the results of this processing are sequences. Subsequently, a learnable
+token is added as the first element of the sequence. These sequences are processed by the Transformer architectures T lc (light-curves) and T tab
+(tabular data). Finally, the processed token is transformed linearly and used for label prediction (ŷlc or ŷtab ). In training we use cross-entropy
+H(·, y) to optimize the model (purple rectangle). If both light-curves and tabular information are used at the same time, we additionally minimize
+the cross-entropy of the prediction ŷmix resulted from the concatenation of both processed tokens. In the diagram MLP, LL and CAT refers to
+Multi-Layer Perceptron, Linear Layer and concatenation in the embedding dimension, respectively. For more details see Methods.
+
+
+described by the observation time t j,b and by the photometric                 a Fourier decomposition. For each observation j and band b of
+data x j,b = (µ j,b , σ j,b ), where µ j,b represents the difference flux8 ,   the light-curve we perform a linear transformation on the input
+and σ j,b the flux error. Not all light-curves have the same num-              vector, transforming x j,b = (µ j,b , σ j,b ) to a vector LLTM (x j,b ) of
+ber of observations. In order to represent this in the model input,            dimension ETM 9 . We modulate this vector by doing an element-
+we consider fixed size light-curves of the length of the largest               wise product with the output of a vector function γb1 (t j,b ) and add
+light-curve in the dataset, consisting of 65 observations, and per-            the output of a second vector function γb2 (t j,b ):
+form zero padding (add zeros for observations after the maxi-
+mum time in each band, both for x j,b and t j,b ). At the same time,           TM(x j,b , t j,b ) = LLTM (x j,b ) ⊙ γb1 (t j,b ) + γb2 (t j,b ).            (1)
+not all bands are observed simultaneously. This is represented by
+adding zeros to µ j,b and σ j,b of the unobserved bands of obser-
+                                                                                    We define the functions γb1 (t j,b ) and γb2 (t j,b ) as Fourier series
+vation j. In order to mask attention for these unobserved values,
+we use a binary mask M j,b such that M j,b = 1 if observation j                            H
+is observed at band b, and M j,b = 0 if not (Vaswani et al. 2017;
+                                                                                                              !                   !
+                                                                                           X           2πh                 2πh
+                                                                               γb1 (t) =       α1b,h sin     t + βb,h cos
+                                                                                                                   1
+                                                                                                                                 t ,
+Devlin et al. 2018). For each source, tabular data consists of K                                       T max               T max
+                                                                                         h=1
+features fk , k ∈ {1, . . . , K} which, as explained above, may be
+                                                                                          H                   !                   !
+metadata or features calculated from the light-curves.                                   X             2πh                 2πh
+                                                                               γb2 (t) =     α2b,h sin       t + β2b,h cos       t ,                        (2)
+    As a first step, time series and tabular data are processed us-                                    T max               T max
+                                                                                         h=1
+ing Time Modulation and a Quantile Feature Tokenizer, respec-
+tively. These steps return sequences that can be used as inputs                where T max is an hyperparameter that is set higher than the max-
+for common Transformer architectures. Figure 1 shows a gen-                    imum timespan of the longest light-curve in the dataset, H is the
+eral scheme of ATAT. Its hyperparameters are further specified in              number of harmonics in the Fourier series, and α1b,h , β1b,h , α2b,h ,
+Implementation details section. We noted larger models showed
+better performance, but we limited their size to reduce the mem-               and β2b,h are learnable Fourier coefficients. In this work, t is the
+ory requirements in production. For the rest of the paper we will              number of days since the first forced photometry point in the
+denote a linear layer as LL.                                                   light curve.
+                                                                                   Eq. (1) applies a linear transformation to x j,b , expanding its
+                                                                               dimension. After that, a scale and bias are created as Fourier se-
+2.2.1. Time Modulation                                                         ries (Eq. 2) using time t j,b . Note that a Fourier series can have
+                                                                               enough expressive power for large H. Eq. (1) is applied sepa-
+Time Modulation (TM) incorporates time information of obser-                   rately for each band, and their output vectors are later concate-
+vation j and band b, t j,b , into the difference flux µ j,b and flux           nated in the sequence dimension. Consequently, the output of
+error σ j,b . Previous works have successfully applied TM in at-               TM for a light-curve is a matrix of dimension L · B × ETM , where
+tention models, using processes similar to positional encoding                 B is the number of bands, and L is the maximum number of ob-
+(Vaswani et al. 2017). We construct a variant of the time mod-                 servations that a band can have for all bands and light-curves in
+ulation proposed by Pimentel et al. (2022), which is based on                  the dataset.
+8
+    Source flux density measured from a difference image.                      9
+                                                                                   LLTM (x) = WTM x, where WTM is a ETM × 2 matrix.
+
+                                                                                                                                    Article number, page 3 of 12
+                                                               A&A proofs: manuscript no. ATAT_AA
+
+
+
+ SNIIb+HostXT V19 (SN-like/Other)                                   103,683 (5.62%)                    CART                            15,719 (0.85%)
+                  SNIa-SALT2 (Ia)                                        211,892 (11.48%)
+          SNIb+HostXT V19 (Ib/c)                                    102,883 (5.58%)                         Iax                               53,727 (2.91%)
+             SNIb-Templates (Ib/c)                           40,065 (2.17%)
+                                                                                                          91bg                                53,414 (2.89%)
+          SNIc+HostXT V19 (Ib/c)                                    103,885 (5.63%)
+             SNIc-Templates (Ib/c)                       20,617 (1.12%)                                       Ia                                        211,892 (11.48%)
+        SNIcBL+HostXT V19 (Ib/c)                              42,878 (2.32%)
+                                                                    103,189 (5.59%)                        Ib/c                                           310,328 (16.82%)
+             SNII+HostXT V19 (II)
+                     SNII-NMF (II)                                  102,251 (5.54%)                                                                         445,419 (24.14%)
+                                                                                                              II
+                SNII-Templates (II)                                 103,536 (5.61%)
+            SNIIn+HostXT V19 (II)                                   105,281 (5.71%)             SN-like/Other                                     103,683 (5.62%)
+                SNIIn-MOSFIT (II)                           31,162 (1.69%)
+                                                                                                          SLSN                                    105,238 (5.70%)
+                        SNIax (Iax)                             53,727 (2.91%)
+                 SNIa-91bg (91bg)                               53,414 (2.89%)                            PISN                                    105,446 (5.71%)
+                     KN B19 (KN)          2,091 (0.11%)
+                                                 6,031 (0.33%)                                             TDE                                    103,067 (5.59%)
+                     KN K17 (KN)
+      Mdwarf-flare (M-dwarf Flare)          2,640 (0.14%)                                                                             14,253 (0.77%)
+                                                                                                          ILOT
+        dwarf-nova (Dwarf Novae)                       12,385 (0.67%)
+             uLens-Binary (uLens)                5,626 (0.30%)                                              KN                   8,122 (0.44%)
+     uLens-Single-GenLens (uLens)                    10,143 (0.55%)
+                                                                                                M-dwarf Flare              2,640 (0.14%)
+      uLens-Single PyLIMA (uLens)                     11,494 (0.62%)
+               SLSN-I+host (SLSN)                                     100,977 (5.47%)                  uLens                               27,263 (1.48%)
+            SLSN-I no host (SLSN)              4,261 (0.23%)
+                                                                      103,067 (5.59%)           Dwarf Novae                           12,385 (0.67%)
+                        TDE (TDE)
+                      ILOT (ILOT)                       14,253 (0.77%)                                                                            99,461 (5.39%)
+                                                                                                          AGN
+                    CART (CART)                          15,719 (0.85%)
+                      PISN (PISN)                                     105,446 (5.71%)              Delta Scuti                             29,840 (1.62%)
+                Cepheid (Cepheid)                           25,371 (1.38%)
+                                                                                                    RR Lyrae                            21,100 (1.14%)
+                   RRL (RR Lyrae)                          21,100 (1.14%)
+                 d-Sct (Delta Scuti)                         29,840 (1.62%)                          Cepheid                             25,371 (1.38%)
+                            EB (EB)                                  96,778 (5.25%)
+                      AGN (AGN)                                       99,461 (5.39%)                         EB                                   96,778 (5.25%)
+
+
+
+                                   103            104             105            106                           103              104             105            106           107
+                                                    Number of samples                                                                 Number of samples
+
+                                         (a) Original data class distribution                                        (b) Modified data class distribution
+
+Fig. 2. ELAsTiCC dataset class histogram. In (a) the original taxonomy class distribution is shown. In (b) the taxonomy class distribution selected
+by Vera Rubin’s brokers is shown. Note that we use the SN-like/Other class to include SNe IIb.
+
+
+2.2.2. Quantile Feature Tokenizer                                                       each feature of the tabular data. The output dimension EQFT is
+                                                                                        an hyperparameter to be chosen. This methodology is similar to
+Tabular data in ELAsTiCC may include processed light-curve                              Gorishniy et al. (2021), but we additionally apply the quantile
+features, static metadata, or a concatenation of both. We pro-                          transformation to each feature that is fitted before training the
+cess this data before feeding it into a Transformer. We call this                       model.
+process Quantile Feature Tokenizer (QFT) and it comprises two
+steps. First, a quantile transformation10 QTk ( fk ) is applied to
+each feature fk of the tabular data of each object, to normalize                        2.2.3. Transformers
+them as a way to deal with complex distributions (e.g. skewed)
+and help the predictive model perform better. Second, an affine                         The Transformer architecture is based on Bidirectional Encoder
+transformation is used to vectorize each scalar value of the at-                        Representations from Transformers (BERT, Devlin et al. 2018)
+tributes recorded in the tabular data                                                   and Vision Transformers (Dosovitskiy et al. 2021) which aim at
+                                                                                        processing sequential information. The architecture consists of a
+QFTk ( fk ) = Wk · QTk ( fk ) + bk ,                                              (3)   multi-head attention (MHA) step and a forward fully-connected
+                                                                                        (FF) neural network step with skip connections.
+where · stands for matrix multiplication, k refers to the index fea-                        The transformer architecture used in this work can be de-
+ture, and Wk and bk are vectors of learnable parameters with di-                        scribed as follows: consider a layer l which receives as input the
+mensions EQFT . In other words, the kth scalar feature fk is trans-                     output of layer l − 1. Then, our transformer can be described as
+formed by QTk and then vectorized by multiplying it by Wk and
+adding bk . Notice that a different transformation is applied to                        hl∗ = MHAl−1 (hl−1 ) + hl−1 ,                                                              (4)
+10
+   A quantile transformation transforms features into a desired distri-                 h = FF
+                                                                                            l       l−1
+                                                                                                          (hl∗ ) + hl∗ ,                                                           (5)
+bution (a normal distribution in this work) by mapping the cumulative
+distribution function of the features to the quantile function of the de-               where l ∈ [1 . . . nlayers ] (nlayers being the number of layers of
+sired distribution.                                                                     the Transformer), hl is the output of layer l, and hl∗ is the output
+Article number, page 4 of 12
+                            G. Cabrera-Vives et al.: ATAT: Astronomical Transformer for time series And Tabular data
+
+of the MHA step which includes a skip connection. Notice hl∗                 curve based features were modified to use fluxes as input in-
+serves as input to a feed-forward network with a skip connec-                stead of magnitudes. The supernova parametric model (SPM)
+tion which outputs hl . Relevant Transformer hyperparameters                 from Sánchez-Sáez et al. (2021) was modified to better handle
+include the number of heads nheads and the embedding dimen-                  the six bands available and the extra information of redshift and
+sionality ET , which are specified in Section 2.2.5. Additionally,           Milky Way dust extinction. The fluxes were scaled using the red-
+we use a learnable classification token of dimension ET that is              shift information available and the WMAP5 cosmological model
+concatenated at the beginning of the input sequence. This token              (Komatsu et al. 2009; Astropy Collaboration et al. 2022), and
+representation after the Transformer is fed into an output layer             also deattenuated using the extinction information and the model
+that performs the classification task. The dimension number of               from O’Donnell (1994). This means that some of metadata in-
+ET is equal to ETM for the light-curve Transformer and EQFT for              formation was used in the computation of features. We remove
+the tabular data Transformer (equal to their input).                         some features from Sánchez-Sáez et al. (2021) that were not sim-
+    When only a single data source is considered (e.g., only                 ulated by ELAsTiCC, e.g., the star-galaxy score from the ZTF
+light-curves data), we take the first element of the Transformer’s           stream and the color information from ALLWISE. The coordi-
+output sequence, and apply a linear layer plus a softmax activa-             nates of the objects are not used because they were not simu-
+tion function. When two data sources are considered, two Trans-              lated in a realistic way for each of the astrophysical classes. We
+formers T lc and T tab are used to process light-curve and tabular           ended up with a total of 429 features: 69 features per band plus
+data information, respectively. The first output elements of both            15 multi-band (e.g. colors, multi-band periodogram, among oth-
+sequences are concatenated, and a multilayer perceptron plus a               ers). These engineered features are also used for ATAT in Section
+softmax activation function are applied to produce the label pre-            3. In Appendix A we give a comprehensive list of the modified
+diction (see Figure 1).                                                      features.
+                                                                                 We calculate features for all light-curves with a total of more
+                                                                             than 5 points across all bands. Since we are using forced pho-
+2.2.4. Mask temporal augmentation                                            tometry, the source with fewer observations has 11 points. Con-
+                                                                             sequently, we calculate features for all objects.
+To improve early classification performance, we train ATAT on
+light-curves reduced up to a randomly selected time instant. Dur-
+ing training, a day t∗ ∈ {8, 128, 2048} is randomly selected for             2.4. Balanced Hierarchical Random Forest
+each light-curve, and the values of mask M corresponding to
+times t > t∗ are set to zero. Note that t∗ = 2048 is equiva-                 We compare our Transformer models against the Balanced Hi-
+lent to using the complete light-curves. Times are selected from             erarchical Random Forest (BHRF) model of Sánchez-Sáez et al.
+a limited discrete set since it is unfeasible to compute the fea-            (2021) adapted for the ELAsTiCC dataset. This section describes
+tures at arbitrary times. Hereafter, we refer to this augmentation           the differences between the original BHRF and its ELAsTiCC
+method as Masked Temporal Augmentation (MTA). Consider-                      adaptation.
+ing the lengths of the light-curves during training is a standard                The original BHRF described in Sánchez-Sáez et al. (2021)
+procedure that has been used in the past (Möller & de Boissière              is composed of four balanced random forest models (Chen et al.
+2019; Donoso-Oliva et al. 2021; Gagliano et al. 2023).                       2004) that are used in a hierarchical structure. The top model
+                                                                             classifies each light-curve into Transient, Stochastic and Peri-
+                                                                             odic classes. Then each one of these three groups is further
+2.2.5. Implementation details                                                classified using its own Balanced Random Forest model. In
+                                                                             this work, the Transient group includes the following classes:
+ATAT variants are evaluated every twenty-thousand iterations,                Calcium Rich Transients (CART), SNe Iax (Iax), SNe 91bg-
+and early stopping with a patience of three evaluations is used.             like (91bg), SNe Ia (Ia), SNe Ib/c (Ib/c), SNe II (II), SNe IIb
+Models are trained using the Adam optimizer Kingma & Ba                      (SN-like/Other), Superluminous SNe (SLSN), Pair Instability
+(2014) until early stopping with learning rate of 2 · 10−4 and a             SNe (PISN), Tidal Disruption Events (TDE), Intermediate Lu-
+batch size of 256. We use class balanced batches. The fully con-             minosity Optical Transients (ILOT), and Kilonovae (KN). The
+nected neural network of Eq. 5 consists of two layers. The first             Stochastic group includes the following classes: M-dwarf flare,
+layer employs a Gaussian Error Linear Unit (GELU; Hendrycks                  Dwarf novae, active galactic nuclei (AGN), and gravitational mi-
+& Gimpel 2016) while the second layer is a linear layer. For both            cro lensing events (uLens). The Periodic group includes the fol-
+T lc and T tab , nheads = 4 and nlayers = 3. For T lc /T tab all input and   lowing classes: Delta Scuti, RR Lyrae, Cepheid, and Eclipsing
+output dimensions of linear layers are 48/32 with the exception              Binary.
+of the hidden layers of FF (Eq. 5) which are 96/64. Note that this               During training, the balanced random forest models draw
+implies that ETM = 48 · 4 = 192 and ETT = 36 · 4 = 144. We                   bootstrap samples from the minority class and sample with re-
+select T max = 1500 days and H = 64. We use a dropout of 0.2                 placement the same number of samples from the other classes
+for training. All Nans, inf and − inf in features and metadata are           for each tree. In order to be consistent with ATAT, the balanced
+replaced by -9999.                                                           random forest models were trained using light-curves trimmed
+                                                                             to 8, 128 and 2048 days long. We sampled 15,000, 9,000, and
+2.3. Features                                                                3,900 light-curves from each class to train each tree of the tran-
+                                                                             sient, periodic, and stochastic balanced random forests, respec-
+The ELAsTiCC dataset has six bands and its light-curves con-                 tively. Notice that all data was fed to the model during training,
+tain difference fluxes. In comparison, the alert stream from ZTF             but each tree only uses a randomly sampled balanced subset of
+(Bellm et al. 2018; Graham et al. 2019) classified by the original           the data. We performed a hyperparameter grid search for the split
+Balanced Hierarchical Random Forest model from ALeRCE has                    criterion (Gini impurity, entropy), number of trees (10, 100, 350,
+only two fully-public bands and it offers light-curves in differ-            500), and maximum depth (10, 100, and no maximum depth).
+ence magnitudes. In order to deal with this, we modified some of             The best combination of hyperparameters in terms of the mean
+the original features from Sánchez-Sáez et al. (2021). All light-            macro F1-score over predictions for the full light-curves were
+                                                                                                                    Article number, page 5 of 12
+                                                   A&A proofs: manuscript no. ATAT_AA
+
+obtained for an entropy split criterion, 350 trees, and a maxi-         increases considerably when metadata is incorporated (purple
+mum depth of 100. We also calculated the feature importance             line), and even outperforms the RF-based baseline (red line)
+on the random forest and used only 100 features for each forest         when considering MTA after ∼32 days. Before 32 days, the RF
+which lead to a statistically similar macro F1-score (within one        model outperforms all other ATAT models that only use tabular
+standard deviation). These decisions were made to diminish the          data. The ATAT model that uses only MD (cyan line) outper-
+final size of the model in order to facilitate deployment.              forms the ATAT that use only features for light-curves shorter
+                                                                        than ∼8 days. The MTA strategy applied to feature computa-
+                                                                        tion has a positive effect in early classification performance in
+3. Results                                                              all cases.
+3.1. Comparison between ATAT and BHRF                                        Figure 3 (d) shows the performance of four ATAT variants
+                                                                        trained with both the light-curves and the metadata, with and
+We calculate measures of classification performance by aver-            without features, and with and without the MTA strategy. This
+aging predictions for each object. Figure 3 (a) shows the test-         figure suggests a low synergy between the light-curve and fea-
+set F1-score of two selected ATAT variants using different data         ture data and that ATAT can extract the most relevant class in-
+sources with MTA and the BHRF as a function of the number               formation using only the light-curve and metadata. Moreover, a
+of days after the first alert. The analysis begins on the day of        comparison with Figure 3 (b) suggests a high synergy between
+the first detection and progressively increases in powers of two        the light-curve and metadata, where adding metadata yields a
+until reaching the maximum duration of the longest light-curve,         performance improvement between 20% and 30% depending on
+which spans 1,104 days. These ATAT variants outperform the              the length of light-curves. The ATAT variant that uses all infor-
+BHRF model for all light-curve lengths, specially for shorter           mation sources (blue solid-line) without the MTA strategy has a
+light-curves. We further compare these models by measuring the          worse performance for light-curves shorter than 128 days than
+F1-score, recall and precision in a per-class basis as shown in Ta-     the model that uses only light-curve and metadata information
+ble 1. The labels indicate whether the models were trained using        (green solid-line). When the MTA strategy is applied, the model
+the light-curve (LC) data, metadata (MD), engineered features           that uses all the data sources is only marginally superior after
+(Features), or combinations of these. MD is the data coming to-         ∼32 days. Before ∼ 32 days, not using features leads to a higher
+gether with the alerts (e.g., host galaxies redshift), while features   macro F1-score.
+are extracted from the light curves (e.g., period). The ATAT’s               Summarizing, models combining light-curves and metadata
+variants surpass the BHRF in 16 out of 20 classes. In particular,       information yield the highest performance (highest synergy).
+the ATAT variant based on LC and MD performs better in the SN           The addition of features to ATAT marginally improves the macro
+subclasses, but the ATAT variants that use all data sources obtain      F1-score when calculated over the entire light-curves when us-
+better scores in the periodic sub-classes. Three of the four classes    ing the MTA strategy. Additionally, applying the MTA strategy
+where the BHRF outperforms (F1-Score) ATAT, namely KN,                  is always beneficial for early classification in the models using
+CART and M-dwarf flares are also the ones with fewer exam-              light-curves and/or feature data. The two ATAT variants that use
+ples in the dataset (see Figure 2). This may be explained by the        light-curves plus metadata and MTA shown in Figure 3 (a) were
+differences in the class-balancing strategies, with the BHRF be-        put into production within the pipeline that processes the ELAs-
+ing more robust to overfitting in the minority classes. The BHRF        TiCC stream.
+model also outperforms ATAT in terms of the F1-Score for the                 Figure 4 shows the confusion matrices of: (a) the ATAT vari-
+Eclipsing Binaries (EBs), primarily because ATAT achieves a             ant that uses LC, metadata and MTA; (b) the ATAT variant that
+relatively low precision for this class. As illustrated in Figure 4,    uses LC, features, metadata, and MTA; and (c) the RF-based
+about 10% of the M-dwarf flares are classified as EBs by ATAT,          baseline. These results where obtained by evaluating the light-
+which can be explained by the low support of M-dwarf flares in          curves at their maximum length. The ATAT (LC + MD + Fea-
+our dataset.                                                            tures + MTA) model outperformed the RF in 15 out of 20 classes
+                                                                        in the dataset. In particular the ATAT performs better in all the
+3.2. Classification performance of ATAT variants                        SNe subclasses, namely: Iax, 91bg, Ia, Ib/c, II, SLSN, PISN
+                                                                        and SN-like/Other. This is specially noticeable for types Ib/c
+To explore the influence of the number and type of data sources         and II where the difference in recall is 26% and 23%, respec-
+on the classification performance, eleven ATAT variants are com-        tively. In the case of transient types, besides the aforementioned
+pared in Figures 3 (b), (c) and (d). In all figures the dashed lines    SNe subclasses, noticeable differences between the models arise.
+correspond to the cases where the MTA strategy is used.                 For example the RF-based baseline outperforms ATAT by 13%
+     Figure 3 (b) shows the performance of the ATAT variants            and 16% in the case of KN and CART, respectively. The former
+using only the light-curve as input source, with and without the        model confused these classes mainly with SNe types Ib/c and
+MTA strategy. The MTA strategy significantly improves the clas-         Iax. The baseline is also 10% better at detecting ILOT. ATAT
+sifier performance at early times, saturating at about 128 days         confuses this class mainly with TDEs, whereas the baseline does
+and after that having only marginal increments. This could be           not present such confusion. On the other hand, ATAT outper-
+related with the majority of the classes in the dataset being tran-     forms the baseline by 16% and 13% in the case of TDE and
+sients and with the absence of longer timescales variable objects       uLens, respectively. Cataclysmic types also present interesting
+(e.g., Miras and other LPVs).                                           differences between models. For example the ATAT outperforms
+     Figure 3 (c) shows the performance of the ATAT variants            the baseline by 10% for the Dwarf-novae class. On the other
+trained using only tabular data information. This includes meta-        hand, the RF-based baseline outperforms the ATAT model by
+data from the first alert and features that are a function of the       10% in the case of M-dwarf flares. The latter model has 9% con-
+available light-curve data, where a strategy similar to MTA can         fusion between this class and the EB periodic subtype, whereas
+also be applied. Note that the feature-based model (orange line)        the baseline does not present such confusion. Finally, the con-
+outperforms the LC-based model (grey line in Figure 3 b). We            fusion matrices show that both models achieve almost perfect
+can also observe that the performance of the feature-based model        detection for periodic variable star classes and for the stochas-
+Article number, page 6 of 12
+                                         G. Cabrera-Vives et al.: ATAT: Astronomical Transformer for time series And Tabular data
+
+                                                                                 (a) Comparison between two ATAT variants
+                                                                                              and RF baseline
+                                                                        90
+
+                                                                        80
+
+                                                                        70
+
+                                                                        60
+
+
+
+
+                                                             F1-Score
+                                                                        50
+
+                                                                        40
+
+                                                                        30
+
+                                                                        20
+                                                                                                          ATAT (LC + MD + MTA)
+                                                                        10                                ATAT (LC + MD + Features + MTA)
+                                                                                                          RF (Features + MD)
+                                                                         0
+                                                                             1       2        4       8   16     32   64   128 256 512 1024
+                                                                                             Evaluated time (days after first alert)
+
+                    (b) Light-curve only ATAT variants                                   (c) Tabular data only ATAT variants                      (d) Combined Light-curve and tabular
+                                                                                                   plus RF baseline                                       data ATAT variants
+           90
+
+           80
+
+           70
+
+           60
+F1-Score
+
+
+
+
+           50
+
+           40
+                                                                                                               ATAT (Features)
+           30                                                                                                  ATAT (Features + MTA)
+                                                                                                               ATAT (Features + MD)                            ATAT (LC + MD)
+           20                                                                                                                                                  ATAT (LC + MD + MTA)
+                                                                                                               ATAT (Features + MD + MTA)
+                                                  ATAT (LC)                                                    ATAT (MD)                                       ATAT (LC + MD + Features)
+           10
+                                                  ATAT (LC + MTA)                                              RF (Features + MD)                              ATAT (LC + MD + Features + MTA)
+            0
+                1   2     4     8   16    32   64 128 256 512 1024               1       2        4   8   16     32   64 128 256 512 1024     1    2     4     8   16    32   64 128 256 512 1024
+                        Evaluated time (days after first alert)                              Evaluated time (days after first alert)                   Evaluated time (days after first alert)
+
+Fig. 3. F1-score vs time since first alert for a selection of models. We show the better performing ATAT variants and the RF-based baseline (a),
+the light-curve only ATAT variants (b), the tabular data only ATAT variants (c), and the combined light-curve and tabular data ATAT variants (d).
+LC/MD/Features refers to models that are optimized using the light-curve, metadata and feature information, respectively. Models can use more
+than one information source, e.g., LC + MD + Features. Dotted lines refer to models that are optimized with MTA (see Section 2.2.4).
+
+
+tic AGN class, with the proposed model being marginally su-                                                      nal fixed sinusoidal Vaswani et al. (2017), and not using the light
+perior than the baseline. It is worth noting that in three of the                                                curves at all (hence, no light curve transformer). For the tabular
+four classes where the RF-based baseline outperforms ATAT,                                                       data transformer we consider our proposed Quantile Feature To-
+namely KN, CART and M-dwarf are also the ones with fewer                                                         kenizer (QFT), the original feature tokenizer from Gorishniy et
+examples in the dataset (see Figure 2). This suggests that the                                                   al. Gorishniy et al. (2021), and using no tabular metadata. For the
+RF is more efficient for highly class-imbalanced datasets than                                                   tabular data we consider the metadata and not the features, given
+the Transformer-based approach. Additional data-augmentation                                                     that there is not more than 2σ difference in the F1-Score with
+strategies may be required to improve the performance of ATAT                                                    and without the features as shown in Figure 3. All experiments
+in these data-scarce classes. The ATAT variant that does not use                                                 include the MTA described in Section 2.2.4. The combination
+features (LC + MD + MTA) shows a similar performance than                                                        of the TM and the QFT outperform other experiments. By using
+the ATAT variant that uses them (LC + MD + Features + MTA),                                                      our proposed TM we increase the F1-Scores significantly (over
+except for periodic classes where the feature-based variant is                                                   5%) as compared to the sinusoidal PE, while our proposed QFT
+consistently better.                                                                                             is able to increase the performance of our model by over 2%.
+
+                                                                                                                     Figure 5 shows the performance of the models as a function
+3.3. Ablation study                                                                                              of the days since the first alert for each of the combinations of
+                                                                                                                 PEs and tokenizers. This Figure shows the superiority of TM
+In this Section, we test the different design choices introduced                                                 and QFT over the models that use a fixed sinusoidal PE or a
+in ATAT. Table 2 shows the F1-Scores (mean and standard de-                                                      non-quantile tabular data tokenizer. We conclude that there is a
+viation) for combinations of positional encodings (PE) and tok-                                                  significant contribution of our proposed modification to the light
+enizers used in the feature transformer for the metadata. For the                                                curves and tabular data transformers for the classification of as-
+PE we consider our proposed time modulation (TM), the origi-                                                     tronomical data streams from the ELAsTiCC challenge.
+                                                                                                                                                                    Article number, page 7 of 12
+                                                       A&A proofs: manuscript no. ATAT_AA
+
+      Classnames                  ATAT (LC + MD)                     ATAT (LC + MD + Features)                        RF (MD + Features)
+                     Precision        Recall        F1-Score     Precision         Recall       F1-Score      Precision       Recall      F1-Score
+        CART         72.8 ± 2.9      40.3 ± 3.8     51.7 ± 2.9   75.3 ± 2.5      40.0 ± 4.6    52.0 ± 3.3    59.2 ± 0.4      56.2 ± 0.6   57.6 ± 0.5
+          Iax        59.8 ± 1.3     70.1 ± 2.2      64.5 ± 1.2   59.8 ± 2.1      65.1 ± 5.4    62.2 ± 1.9    57.6 ± 0.5      55.9 ± 0.6   56.8 ± 0.5
+         91bg        89.4 ± 0.4      92.4 ± 1.1     90.9 ± 0.4   88.8 ± 2.2     92.5 ± 1.9     90.5 ± 0.6    75.2 ± 0.4      90.2 ± 0.2   82.0 ± 0.2
+           Ia        75.7 ± 1.6      84.0 ± 1.7     79.6 ± 0.6   76.3 ± 1.2      81.4 ± 1.7    78.8 ± 0.7    61.4 ± 0.4      76.7 ± 0.2   68.2 ± 0.3
+          Ib/c       53.8 ± 3.1      63.9 ± 1.9     58.3 ± 1.3   50.0 ± 3.8     65.8 ± 3.4     56.6 ± 1.2    58.0 ± 0.3      39.6 ± 0.4   47.1 ± 0.2
+           II        65.8 ± 2.3      65.2 ± 1.0     65.5 ± 1.3   63.9 ± 3.5     66.4 ± 2.8     65.0 ± 1.3    66.8 ± 0.6      42.7 ± 0.5   52.1 ± 0.5
+     SN-like/Other   66.7 ± 1.5     62.9 ± 2.4      64.7 ± 1.7   64.3 ± 2.2      60.5 ± 2.9    62.3 ± 1.5    59.0 ± 0.5      54.1 ± 0.8   56.5 ± 0.6
+        SLSN         89.0 ± 1.1      95.3 ± 0.3     92.0 ± 0.5   89.6 ± 0.9     95.4 ± 0.4     92.4 ± 0.4    90.3 ± 0.1      90.0 ± 0.1   90.2 ± 0.1
+        PISN         93.1 ± 1.1      97.5 ± 0.5     95.2 ± 0.4   95.9 ± 0.4      96.7 ± 0.9    96.3 ± 0.4    85.6 ± 0.1      96.7 ± 0.1   90.8 ± 0.0
+         TDE         77.2 ± 2.9      92.7 ± 0.8     84.2 ± 1.6   79.0 ± 4.9      92.5 ± 1.0    85.1 ± 2.6    83.2 ± 0.4      76.8 ± 0.3   79.9 ± 0.2
+        ILOT         89.6 ± 0.8      85.9 ± 2.9     87.7 ± 1.1   92.1 ± 0.9      84.0 ± 3.1    87.8 ± 1.3    76.3 ± 0.3      93.6 ± 0.2   84.1 ± 0.2
+          KN         97.7 ± 0.3      71.5 ± 2.6     82.6 ± 1.7   97.1 ± 0.4      77.1 ± 2.5    85.9 ± 1.4    86.8 ± 0.2      90.3 ± 0.1   88.5 ± 0.1
+     M-dwarf Flare   98.9 ± 0.4      67.5 ± 1.2     80.2 ± 0.8   99.1 ± 0.3      70.4 ± 1.9    82.3 ± 1.3    95.0 ± 0.3      79.4 ± 0.3   86.5 ± 0.3
+        uLens        85.8 ± 1.8      95.3 ± 0.9     90.3 ± 0.8   86.8 ± 1.7     95.6 ± 0.7     91.0 ± 0.7    96.9 ± 0.4      82.8 ± 0.2   89.3 ± 0.3
+     Dwarf Novae     87.9 ± 1.8      86.3 ± 0.9     87.1 ± 0.7   86.2 ± 1.8     92.0 ± 0.9     89.0 ± 0.9    78.5 ± 0.2      82.9 ± 0.3   80.6 ± 0.2
+         AGN         99.8 ± 0.0     100.0 ± 0.0     99.9 ± 0.0   99.7 ± 0.1     100.0 ± 0.0    99.8 ± 0.1    95.4 ± 0.4      99.9 ± 0.1   97.6 ± 0.2
+      Delta Scuti    92.3 ± 0.7      95.0 ± 0.4     93.6 ± 0.3   98.7 ± 0.3     99.5 ± 0.1     99.1 ± 0.1    90.8 ± 0.3      98.9 ± 0.0   94.7 ± 0.2
+      RR Lyrae       93.5 ± 1.0      96.0 ± 0.9     94.7 ± 0.3   99.5 ± 0.2     99.1 ± 0.2     99.3 ± 0.1    91.6 ± 0.4      98.9 ± 0.1   95.1 ± 0.2
+       Cepheid       96.0 ± 0.8      97.9 ± 0.3     97.0 ± 0.4   99.2 ± 0.3     99.5 ± 0.1     99.3 ± 0.1    92.6 ± 0.5      98.9 ± 0.1   95.6 ± 0.3
+          EB         87.0 ± 0.3      98.8 ± 0.3     92.5 ± 0.1   90.4 ± 1.7      99.6 ± 0.1    94.8 ± 0.9    93.5 ± 0.3      97.5 ± 0.1   95.5 ± 0.2
+      Macro avg      83.6 ± 0.4      82.9 ± 0.5     82.6 ± 0.5   84.6 ± 0.3      83.7 ± 0.6    83.5 ± 0.6    79.7 ± 0.1      80.1 ± 0.1   79.4 ± 0.1
+
+Table 1. Classification precision, recall and F1-score per class and macro average of the models put into production. We include the two best-
+performing ATAT variants (with MTA) and the RF-based baseline.
+
+
+                                               PE                                                                     time modulation
+                                                     no lightcurve    fixed sinusoidal Vaswani et al. (2017)
+              Tab. tokenizer                                                                                             (this work)
+              No tabular data                              -                          52.56 ± 0.62                        62.70 ± 0.38
+              FT                                     36.10 ± 0.28                     73.67 ± 0.33                        79.99 ± 0.63
+              QFT (this work)                        39.44 ± 0.50                     76.77 ± 0.45                        82.61 ± 0.59
+Table 2. Ablation study F1-Scores. Each row represents a different feature tokenizer used for the tabular transformer. Each column represents a
+different positional encoder.
+
+
+
+3.4. Computational time performance                                           ATAT (LC + MD + MTA) variant. The selection of the best
+                                                                              trade-off may also need to be reevaluated as future surveys such
+Table 3 shows the average computational time to predict the class             as LSST are expected to incorporate some features (e.g., period)
+of a single light-curve11 with the selected ATAT variants and the             in the alert stream.
+RF-based baseline. The table also shows the average time per
+light-curve to compute the complete set of engineered features.
+Note that only the RF-based baseline and ATAT (LC + MD +                         Inference step                                 Average time [s]
+Features + MTA) require features to be computed. In light of the
+LSST emitting millions of alerts per night, evaluating inference                 CPU
+times in batches is essential for assessing the practical feasibil-              Feature computation                               1.88 · 10−1
+ity of our approach. Inference times for ATAT on the GPU are                     RF (MD + Features)                                2.15 · 10−4
+shown for both a batch of 2,000 light-curves and one light-curve                 ATAT (LC + MD + MTA)                              6.44 · 10−3
+at a time (averaged over 20,000 batches of one light-curve each).                ATAT (LC + MD + Features + MTA)                   1.34 · 10−2
+     From Table 3, we observe that the computational time re-                    GPU (2,000 light-curves per batch)
+quired to perform inference with any of the models is negligi-                   ATAT (LC + MD + MTA)                              4.75 · 10−4
+ble in comparison with the time required to compute features.                    ATAT (LC + MD + Features + MTA)                   8.29 · 10−4
+This means that in total, the ATAT (LC + MD + MTA) vari-
+ant, is orders of magnitude faster than the RF-based baseline and                GPU (1 light-curve per batch)
+feature-based ATAT variants. This sets the LC + MD + MTA                         ATAT (LC + MD + MTA)                              8.14 · 10−3
+variant as a very interesting trade-off, reducing computational                  ATAT (LC + MD + Features + MTA)                   8.45 · 10−3
+time in 99.75% with only a 0.3% decrease in F1-score. We note,                Table 3. Average computational time per light-curve in seconds re-
+however, that some classes are more affected when features are                quired to perform the inference step for selected classification models.
+excluded, e.g., periodic variables. As future work we plan to                 We used a single core of an AMD EPYC 7662 processor and a NVIDIA
+explore which subset of features are more synergistic with the                A100 GPU for these experiments.
+11
+   Averages are estimated using the whole dataset and full-length light-
+curves.
+
+Article number, page 8 of 12
+                                                          G. Cabrera-Vives et al.: ATAT: Astronomical Transformer for time series And Tabular data
+
+                                                                                  (a) ATAT (LC + MD + MTA)                                                                                                                                                                                                             (b) ATAT (LC + MD + Features + MTA)
+                                 0.4      0.2   0.03            0.1 0.05 0.04                           0.01 0.1 0.06 0.01                                                                                                                                     0.4 0.19 0.03                             0.12 0.06 0.04                                                     0.09 0.04 0.01
+                       CART ±0.04 ±0.02 ±0.0             0.0
+                                                               ±0.02 ±0.01 ±0.0
+                                                                                                0.0
+                                                                                                        ±0.0 ±0.02 ±0.01 ±0.0
+                                                                                                                                          0.0              0.0        0.0             0.0       0.0                   0.0             0.0         0.0
+                                                                                                                                                                                                                                                              ±0.05 ±0.03 ±0.01
+                                                                                                                                                                                                                                                                                                0.0
+                                                                                                                                                                                                                                                                                                        ±0.03 ±0.02 ±0.01
+                                                                                                                                                                                                                                                                                                                                                     0.0          0.0
+                                                                                                                                                                                                                                                                                                                                                                           ±0.03 ±0.01 ±0.0
+                                                                                                                                                                                                                                                                                                                                                                                                    0.0              0.0     0.0           0.0    0.0            0.0         0.0        0.0
+
+                                 0.03     0.7   0.01    0.04 0.1 0.02 0.04                              0.01 0.03 0.01                                                                                                                                         0.04 0.65 0.02 0.05 0.12 0.03 0.04                                                                           0.04 0.01
+                          Iax ±0.01 ±0.02 ±0.0          ±0.0 ±0.01 ±0.01 ±0.01
+                                                                                                0.0
+                                                                                                        ±0.0 ±0.01 ±0.0
+                                                                                                                                 0.0      0.0              0.0        0.0             0.0       0.0                   0.0             0.0         0.0
+                                                                                                                                                                                                                                                              ±0.01 ±0.05 ±0.0 ±0.01 ±0.03 ±0.02 ±0.01
+                                                                                                                                                                                                                                                                                                                                                     0.0          0.0
+                                                                                                                                                                                                                                                                                                                                                                           ±0.01 ±0.0
+                                                                                                                                                                                                                                                                                                                                                                                             0.0    0.0              0.0     0.0           0.0    0.0            0.0         0.0        0.0
+
+                                 0.01 0.01 0.92 0.01           0.02           0.01                              0.01                                                                                                                                          0.01    0.01 0.92 0.01 0.03                                       0.01                                       0.01
+                         91bg    ±0.0 ±0.01 ±0.01 ±0.0         ±0.0
+                                                                       0.0
+                                                                              ±0.0
+                                                                                                0.0     0.0
+                                                                                                                ±0.0
+                                                                                                                        0.0      0.0      0.0              0.0        0.0             0.0       0.0                   0.0             0.0         0.0
+                                                                                                                                                                                                                                                              ±0.0    ±0.0 ±0.02 ±0.0 ±0.01
+                                                                                                                                                                                                                                                                                                                        0.0
+                                                                                                                                                                                                                                                                                                                                ±0.0
+                                                                                                                                                                                                                                                                                                                                                     0.0          0.0
+                                                                                                                                                                                                                                                                                                                                                                           ±0.0
+                                                                                                                                                                                                                                                                                                                                                                                      0.0    0.0    0.0              0.0     0.0           0.0    0.0            0.0         0.0        0.0
+
+                                         0.04            0.84 0.06 0.03       0.02                      0.01    0.01                                                                                                                                                   0.04                     0.81 0.07 0.03 0.02                                                        0.01
+                            Ia   0.0
+                                         ±0.0
+                                                0.0
+                                                        ±0.02 ±0.01 ±0.0      ±0.0
+                                                                                                0.0
+                                                                                                        ±0.0    ±0.0
+                                                                                                                        0.0      0.0      0.0              0.0        0.0             0.0       0.0                   0.0             0.0         0.0          0.0
+                                                                                                                                                                                                                                                                      ±0.01
+                                                                                                                                                                                                                                                                               0.0
+                                                                                                                                                                                                                                                                                               ±0.02 ±0.01 ±0.01 ±0.01
+                                                                                                                                                                                                                                                                                                                                                     0.0          0.0
+                                                                                                                                                                                                                                                                                                                                                                           ±0.0
+                                                                                                                                                                                                                                                                                                                                                                                      0.0    0.0    0.0              0.0     0.0           0.0    0.0            0.0         0.0        0.0
+
+                                 0.01    0.06   0.02 0.12 0.64 0.05 0.09 0.01                           0.01    0.01                                                                                                                                          0.01 0.05 0.02 0.1 0.66 0.05 0.09 0.01                                                            0.01
+                         Ib/c    ±0.0    ±0.0   ±0.0 ±0.01 ±0.02 ±0.01 ±0.01 ±0.0                       ±0.0    ±0.0
+                                                                                                                        0.0      0.0      0.0              0.0        0.0             0.0       0.0                   0.0             0.0         0.0
+                                                                                                                                                                                                                                                              ±0.0 ±0.01 ±0.0 ±0.01 ±0.03 ±0.01 ±0.01 ±0.0                                                      ±0.0
+                                                                                                                                                                                                                                                                                                                                                                            0.0       0.0    0.0    0.0              0.0     0.0           0.0    0.0            0.0         0.0        0.0
+
+                                         0.02            0.05 0.05 0.65 0.11 0.08 0.01                          0.03                                                                                                                                                  0.02                      0.04 0.06 0.66 0.11 0.07                                                   0.03
+                            II   0.0
+                                         ±0.0
+                                                0.0
+                                                        ±0.01 ±0.01 ±0.01 ±0.0 ±0.01 ±0.0                       ±0.0
+                                                                                                                        0.0      0.0      0.0              0.0        0.0             0.0       0.0                   0.0             0.0         0.0          0.0
+                                                                                                                                                                                                                                                                      ±0.0
+                                                                                                                                                                                                                                                                               0.0
+                                                                                                                                                                                                                                                                                               ±0.01 ±0.01 ±0.03 ±0.01 ±0.01
+                                                                                                                                                                                                                                                                                                                                                                  0.0
+                                                                                                                                                                                                                                                                                                                                                                           ±0.0
+                                                                                                                                                                                                                                                                                                                                                                                      0.0    0.0    0.0              0.0     0.0           0.0    0.0            0.0         0.0        0.0
+
+                                          0.04 0.01 0.04 0.11 0.16 0.63                                         0.01                                                                                                                                                   0.04 0.01               0.04 0.14 0.15 0.61
+                SN-like/Other    0.0
+                                         ±0.01 ±0.0 ±0.01 ±0.02 ±0.02 ±0.02
+                                                                                                0.0     0.0
+                                                                                                                ±0.0
+                                                                                                                        0.0      0.0      0.0              0.0        0.0             0.0       0.0                   0.0             0.0         0.0          0.0
+                                                                                                                                                                                                                                                                      ±0.01 ±0.0               ±0.0 ±0.02 ±0.02 ±0.03
+                                                                                                                                                                                                                                                                                                                                                     0.0          0.0       0.0       0.0    0.0    0.0              0.0     0.0           0.0    0.0            0.0         0.0        0.0
+
+                                                        0.01   0.01                             0.95    0.02                                                                                                                                                                                            0.01            0.01                        0.95        0.01
+                        SLSN     0.0      0.0   0.0
+                                                        ±0.0   ±0.0
+                                                                       0.0     0.0
+                                                                                                ±0.0    ±0.0
+                                                                                                                 0.0    0.0      0.0      0.0              0.0        0.0             0.0       0.0                   0.0             0.0         0.0          0.0     0.0     0.0              0.0
+                                                                                                                                                                                                                                                                                                        ±0.0            ±0.0
+                                                                                                                                                                                                                                                                                                                                 0.0
+                                                                                                                                                                                                                                                                                                                                                    ±0.0        ±0.0
+                                                                                                                                                                                                                                                                                                                                                                            0.0       0.0    0.0    0.0              0.0     0.0           0.0    0.0            0.0         0.0        0.0
+
+                                                                                                0.01    0.97                                                                                                                                                                                            0.01                                        0.01 0.97
+                        PISN     0.0      0.0   0.0      0.0    0.0    0.0     0.0
+                                                                                                ±0.0    ±0.0
+                                                                                                                 0.0    0.0      0.0      0.0              0.0        0.0             0.0       0.0                   0.0             0.0         0.0          0.0     0.0     0.0              0.0
+                                                                                                                                                                                                                                                                                                        ±0.0
+                                                                                                                                                                                                                                                                                                                        0.0      0.0
+                                                                                                                                                                                                                                                                                                                                                   ±0.01 ±0.01
+                                                                                                                                                                                                                                                                                                                                                                            0.0       0.0    0.0    0.0              0.0     0.0           0.0    0.0            0.0         0.0        0.0
+   True Label
+
+
+
+
+                                 0.01    0.02   0.01           0.01    0.01                             0.01 0.93                                                                                                                                             0.01    0.02    0.01                      0.01            0.01                                                0.93
+                         TDE     ±0.0    ±0.0   ±0.0
+                                                         0.0
+                                                               ±0.0    ±0.0
+                                                                               0.0              0.0
+                                                                                                        ±0.0 ±0.01
+                                                                                                                        0.0      0.0      0.0              0.0        0.0             0.0       0.0                   0.0             0.0         0.0
+                                                                                                                                                                                                                                                              ±0.0    ±0.0    ±0.0
+                                                                                                                                                                                                                                                                                                0.0
+                                                                                                                                                                                                                                                                                                        ±0.0            ±0.0
+                                                                                                                                                                                                                                                                                                                                 0.0                 0.0          0.0
+                                                                                                                                                                                                                                                                                                                                                                           ±0.01
+                                                                                                                                                                                                                                                                                                                                                                                      0.0    0.0    0.0              0.0     0.0           0.0    0.0            0.0         0.0        0.0
+
+                                 0.03    0.03   0.01           0.02    0.01                                      0.04 0.86                                                                                                                                    0.03    0.03    0.01                       0.02 0.01 0.01                                                     0.05 0.84
+                        ILOT ±0.01 ±0.0         ±0.0
+                                                         0.0
+                                                               ±0.0    ±0.0
+                                                                               0.0              0.0     0.0
+                                                                                                                ±0.01 ±0.03
+                                                                                                                                 0.0      0.0              0.0        0.0             0.0       0.0                   0.0             0.0         0.0
+                                                                                                                                                                                                                                                              ±0.0    ±0.0    ±0.0
+                                                                                                                                                                                                                                                                                                0.0
+                                                                                                                                                                                                                                                                                                        ±0.01 ±0.01 ±0.0
+                                                                                                                                                                                                                                                                                                                                                     0.0          0.0
+                                                                                                                                                                                                                                                                                                                                                                           ±0.02 ±0.03
+                                                                                                                                                                                                                                                                                                                                                                                             0.0    0.0              0.0     0.0           0.0    0.0            0.0         0.0        0.0
+
+                                 0.06    0.06   0.02            0.07          0.01                               0.03 0.02 0.72                                                                                                                                0.04 0.05 0.02                            0.08 0.0               0.01                                        0.02 0.01 0.77
+                          KN ±0.02 ±0.01 ±0.0            0.0
+                                                               ±0.01
+                                                                       0.0
+                                                                              ±0.0
+                                                                                                0.0     0.0
+                                                                                                                ±0.01 ±0.0 ±0.03
+                                                                                                                                          0.0              0.0        0.0             0.0       0.0                   0.0             0.0         0.0
+                                                                                                                                                                                                                                                              ±0.01 ±0.01 ±0.01
+                                                                                                                                                                                                                                                                                                0.0
+                                                                                                                                                                                                                                                                                                        ±0.02 ±0.0              ±0.0
+                                                                                                                                                                                                                                                                                                                                                     0.0          0.0
+                                                                                                                                                                                                                                                                                                                                                                           ±0.01 ±0.0 ±0.02
+                                                                                                                                                                                                                                                                                                                                                                                                    0.0              0.0     0.0           0.0    0.0            0.0         0.0        0.0
+
+                                                                                                0.01                                     0.68 0.07 0.09                                         0.02                0.01           0.01 0.11                                                                                                        0.01                                            0.7 0.07 0.11                                 0.01                       0.01 0.09
+                M-dwarf Flare    0.0      0.0   0.0      0.0    0.0    0.0     0.0
+                                                                                                ±0.0
+                                                                                                        0.0      0.0    0.0      0.0
+                                                                                                                                        ±0.01 ±0.01 ±0.02
+                                                                                                                                                                                      0.0
+                                                                                                                                                                                                ±0.0                ±0.0           ±0.0 ±0.01
+                                                                                                                                                                                                                                                               0.0     0.0     0.0              0.0      0.0            0.0      0.0
+                                                                                                                                                                                                                                                                                                                                                    ±0.0
+                                                                                                                                                                                                                                                                                                                                                                  0.0       0.0       0.0    0.0
+                                                                                                                                                                                                                                                                                                                                                                                                   ±0.02 ±0.02 ±0.02
+                                                                                                                                                                                                                                                                                                                                                                                                                                           0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  ±0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                 0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ±0.0 ±0.02
+                                                                                                                                                           0.95 0.02                                                 0.0                         0.01                                                                                                                                                                0.96 0.04
+                       uLens     0.0      0.0   0.0      0.0    0.0    0.0     0.0              0.0     0.0      0.0    0.0      0.0      0.0
+                                                                                                                                                          ±0.01 ±0.0
+                                                                                                                                                                                      0.0       0.0
+                                                                                                                                                                                                                    ±0.0
+                                                                                                                                                                                                                                      0.0
+                                                                                                                                                                                                                                                 ±0.0
+                                                                                                                                                                                                                                                               0.0     0.0     0.0              0.0      0.0            0.0      0.0                 0.0          0.0       0.0       0.0    0.0    0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                    ±0.01 ±0.01
+                                                                                                                                                                                                                                                                                                                                                                                                                                           0.0    0.0            0.0         0.0        0.0
+
+                                                                                                                                                           0.08 0.86                            0.01                0.02 0.01 0.01                                                                                                                                                                  0.0 0.07 0.92
+                Dwarf Novae      0.0      0.0   0.0      0.0    0.0    0.0     0.0              0.0     0.0      0.0    0.0      0.0      0.0
+                                                                                                                                                          ±0.01 ±0.01
+                                                                                                                                                                                      0.0
+                                                                                                                                                                                                ±0.0                ±0.0 ±0.01 ±0.0
+                                                                                                                                                                                                                                                               0.0     0.0     0.0              0.0      0.0            0.0      0.0                 0.0          0.0       0.0       0.0    0.0
+                                                                                                                                                                                                                                                                                                                                                                                                   ±0.0 ±0.01 ±0.01
+                                                                                                                                                                                                                                                                                                                                                                                                                                           0.0    0.0            0.0         0.0        0.0
+
+                                                                                                                                                                                      1.0                                                                                                                                                                                                                                                   1.0
+                        AGN      0.0      0.0   0.0      0.0    0.0    0.0     0.0              0.0     0.0      0.0    0.0      0.0      0.0              0.0        0.0
+                                                                                                                                                                                     ±0.0
+                                                                                                                                                                                                0.0                   0.0             0.0         0.0          0.0     0.0     0.0              0.0      0.0            0.0      0.0                 0.0          0.0       0.0       0.0    0.0    0.0              0.0     0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                           ±0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  0.0            0.0         0.0        0.0
+
+                                                                                                                                                                                                0.95 0.02 0.02 0.01                                                                                                                                                                                                                               0.99
+                   Delta Scuti   0.0      0.0   0.0      0.0    0.0    0.0     0.0              0.0     0.0      0.0    0.0      0.0      0.0              0.0        0.0             0.0
+                                                                                                                                                                                                ±0.0 ±0.01 ±0.0 ±0.01
+                                                                                                                                                                                                                                                               0.0     0.0     0.0              0.0      0.0            0.0      0.0                 0.0          0.0       0.0       0.0    0.0    0.0              0.0     0.0           0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  ±0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                 0.0         0.0        0.0
+
+                                                                                                                                                                                                0.02 0.96                                        0.02                                                                                                                                                                                                            0.99                   0.01
+                    RR Lyrae     0.0      0.0   0.0      0.0    0.0    0.0     0.0              0.0     0.0      0.0    0.0      0.0      0.0              0.0        0.0             0.0
+                                                                                                                                                                                                ±0.0 ±0.01
+                                                                                                                                                                                                                                      0.0
+                                                                                                                                                                                                                                                 ±0.0
+                                                                                                                                                                                                                                                               0.0     0.0     0.0              0.0      0.0            0.0      0.0                 0.0          0.0       0.0       0.0    0.0    0.0              0.0     0.0           0.0    0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ±0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                             0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ±0.0
+                                                                                                                                                                                                0.02                               0.98                                                                                                                                                                                                                                      0.99
+                     Cepheid     0.0      0.0   0.0      0.0    0.0    0.0     0.0              0.0     0.0      0.0    0.0      0.0      0.0              0.0        0.0             0.0
+                                                                                                                                                                                                ±0.0
+                                                                                                                                                                                                                      0.0
+                                                                                                                                                                                                                                   ±0.0
+                                                                                                                                                                                                                                                  0.0          0.0     0.0     0.0              0.0      0.0            0.0      0.0                 0.0          0.0       0.0       0.0    0.0    0.0              0.0     0.0           0.0    0.0            0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ±0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        0.0
+
+                                                                                                                                                                                                                     0.0                         0.99                                                                                                                                                                                                                                    1.0
+                           EB    0.0      0.0   0.0      0.0    0.0    0.0     0.0              0.0     0.0      0.0    0.0      0.0      0.0              0.0        0.0             0.0       0.0
+                                                                                                                                                                                                                    ±0.0
+                                                                                                                                                                                                                                      0.0
+                                                                                                                                                                                                                                                 ±0.0
+                                                                                                                                                                                                                                                               0.0     0.0     0.0              0.0      0.0            0.0      0.0                 0.0          0.0       0.0       0.0    0.0    0.0              0.0     0.0           0.0    0.0            0.0         0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ±0.0
+                                  CART
+
+                                          Iax
+
+                                                 91bg
+
+                                                         Ia
+
+                                                                Ib/c
+
+                                                                        II
+
+
+
+
+                                                                                                                                                                                                                                                                        Iax
+
+                                                                                                                                                                                                                                                                                91bg
+
+                                                                                                                                                                                                                                                                                                 Ia
+                                                                                                 SLSN
+
+                                                                                                         PISN
+
+                                                                                                                 TDE
+
+
+
+                                                                                                                                  KN
+                                                                                                                         ILOT
+
+
+
+
+                                                                                                                                                                                          AGN
+
+
+
+
+                                                                                                                                                                                                                                                   EB
+                                                                                                                                                            uLens
+
+
+
+
+                                                                                                                                                                                                                                                               CART
+
+
+
+
+                                                                                                                                                                                                                                                                                                           Ib/c
+
+                                                                                                                                                                                                                                                                                                                         II
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                             KN
+                                                                                                                                                                                                                                                                                                                                                       SLSN
+
+                                                                                                                                                                                                                                                                                                                                                                   PISN
+
+                                                                                                                                                                                                                                                                                                                                                                                TDE
+
+                                                                                                                                                                                                                                                                                                                                                                                      ILOT
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                            AGN
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         EB
+                                                                                                                                                                                                                        RR Lyrae
+
+                                                                                                                                                                                                                                       Cepheid
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                     uLens
+                                                                                                                                          M-dwarf Flare
+
+
+
+                                                                                                                                                                      Dwarf Novae
+
+
+
+                                                                                                                                                                                                  Delta Scuti
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                    M-dwarf Flare
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                             Dwarf Novae
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                  RR Lyrae
+                                                                                                                                                                                                                                                                                                                                                                                                                                                   Delta Scuti
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Cepheid
+                                                                                SN-like/Other
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                   SN-like/Other
+                                                                                                         Predicted Label                                                                                                                                                                                                                                             Predicted Label
+
+                                                                                                                                                                                                                     (c) RF (MD + Features)
+                                                                                                                                0.56     0.1          0.06                     0.03         0.01         0.01                               0.01    0.04      0.11    0.06                                             0.01
+                                                                                                                CART            ±0.0    ±0.0          ±0.0
+                                                                                                                                                                    0.0
+                                                                                                                                                                               ±0.0         ±0.0         ±0.0
+                                                                                                                                                                                                                                0.0
+                                                                                                                                                                                                                                            ±0.0    ±0.0      ±0.0    ±0.0
+                                                                                                                                                                                                                                                                              0.0              0.0      0.0
+                                                                                                                                                                                                                                                                                                                       ±0.0
+                                                                                                                                                                                                                                                                                                                               0.0                 0.0         0.0        0.0
+
+                                                                                                                                0.13    0.55          0.05       0.08          0.06          0.0         0.02                               0.02    0.02      0.04    0.03
+                                                                                                                       Iax      ±0.0    ±0.0          ±0.0       ±0.0          ±0.0         ±0.0         ±0.0
+                                                                                                                                                                                                                                0.0
+                                                                                                                                                                                                                                            ±0.0    ±0.0      ±0.0    ±0.0
+                                                                                                                                                                                                                                                                              0.0              0.0      0.0            0.0     0.0                 0.0         0.0        0.0
+
+                                                                                                                                0.03    0.01           0.9                     0.01                      0.01                                       0.01      0.01    0.01
+                                                                                                                  91bg          ±0.0    ±0.0          ±0.0
+                                                                                                                                                                    0.0
+                                                                                                                                                                               ±0.0
+                                                                                                                                                                                            0.0
+                                                                                                                                                                                                         ±0.0
+                                                                                                                                                                                                                                0.0         0.0
+                                                                                                                                                                                                                                                    ±0.0      ±0.0    ±0.0
+                                                                                                                                                                                                                                                                              0.0              0.0      0.0            0.0     0.0                 0.0         0.0        0.0
+
+                                                                                                                                        0.04          0.02       0.77          0.06         0.03         0.02                   0.01        0.03    0.01      0.01
+                                                                                                                        Ia      0.0
+                                                                                                                                        ±0.0          ±0.0       ±0.0          ±0.0         ±0.0         ±0.0                   ±0.0        ±0.0    ±0.0      ±0.0
+                                                                                                                                                                                                                                                                       0.0    0.0              0.0      0.0            0.0     0.0                 0.0         0.0        0.0
+
+                                                                                                                                0.05    0.08          0.07       0.18           0.4         0.04         0.12                   0.01        0.02              0.01    0.01                                              0.0
+                                                                                                                   Ib/c         ±0.0    ±0.0          ±0.0       ±0.0          ±0.0         ±0.0         ±0.0                   ±0.0        ±0.0
+                                                                                                                                                                                                                                                        0.0
+                                                                                                                                                                                                                                                              ±0.0    ±0.0
+                                                                                                                                                                                                                                                                              0.0              0.0      0.0
+                                                                                                                                                                                                                                                                                                                       ±0.0
+                                                                                                                                                                                                                                                                                                                               0.0                 0.0         0.0        0.0
+
+                                                                                                                                0.03    0.05          0.01       0.11          0.02         0.43         0.19                   0.06        0.02    0.05      0.03    0.01
+                                                                                                                        II      ±0.0    ±0.0          ±0.0       ±0.0          ±0.0         ±0.0         ±0.0                   ±0.0        ±0.0    ±0.0      ±0.0    ±0.0
+                                                                                                                                                                                                                                                                              0.0              0.0      0.0            0.0     0.0                 0.0         0.0        0.0
+
+                                                                                                                                0.04    0.09          0.05       0.09          0.06          0.1         0.54                               0.01    0.01      0.01    0.01
+                                                                                                SN-like/Other                   ±0.0    ±0.0          ±0.0       ±0.0          ±0.0         ±0.0         ±0.0
+                                                                                                                                                                                                                                0.0
+                                                                                                                                                                                                                                            ±0.0    ±0.0      ±0.0    ±0.0
+                                                                                                                                                                                                                                                                              0.0              0.0      0.0            0.0     0.0                 0.0         0.0        0.0
+
+                                                                                                                                                                 0.01          0.01         0.02                                 0.9        0.04                                               0.01
+                                                                                                                 SLSN           0.0     0.0               0.0
+                                                                                                                                                                 ±0.0          ±0.0         ±0.0
+                                                                                                                                                                                                           0.0
+                                                                                                                                                                                                                                ±0.0        ±0.0
+                                                                                                                                                                                                                                                        0.0    0.0     0.0    0.0
+                                                                                                                                                                                                                                                                                               ±0.0
+                                                                                                                                                                                                                                                                                                        0.0            0.0     0.0                 0.0         0.0        0.0
+
+                                                                                                                                                                  0.0           0.0                                             0.01        0.97
+                                                                                                                 PISN           0.0     0.0               0.0
+                                                                                                                                                                 ±0.0          ±0.0
+                                                                                                                                                                                            0.0            0.0
+                                                                                                                                                                                                                                ±0.0        ±0.0
+                                                                                                                                                                                                                                                        0.0    0.0     0.0    0.0              0.0      0.0            0.0     0.0                 0.0         0.0        0.0
+                                                                              True Label
+
+
+
+
+                                                                                                                                0.04    0.04          0.03       0.02          0.01         0.02                                0.01        0.03    0.77      0.03                                                     0.01
+                                                                                                                  TDE           ±0.0    ±0.0          ±0.0       ±0.0          ±0.0         ±0.0
+                                                                                                                                                                                                           0.0
+                                                                                                                                                                                                                                ±0.0        ±0.0    ±0.0      ±0.0
+                                                                                                                                                                                                                                                                       0.0    0.0              0.0      0.0
+                                                                                                                                                                                                                                                                                                                       ±0.0
+                                                                                                                                                                                                                                                                                                                               0.0                 0.0         0.0        0.0
+
+                                                                                                                                0.03    0.01                                                                                                                  0.94    0.01
+                                                                                                                 ILOT           ±0.0    ±0.0
+                                                                                                                                                          0.0       0.0             0.0     0.0            0.0                  0.0         0.0         0.0
+                                                                                                                                                                                                                                                              ±0.0    ±0.0
+                                                                                                                                                                                                                                                                              0.0              0.0      0.0            0.0     0.0                 0.0         0.0        0.0
+
+                                                                                                                                0.02     0.0          0.01                     0.01                                                                           0.05     0.9
+                                                                                                                       KN       ±0.0    ±0.0          ±0.0
+                                                                                                                                                                    0.0
+                                                                                                                                                                               ±0.0
+                                                                                                                                                                                            0.0            0.0                  0.0         0.0         0.0
+                                                                                                                                                                                                                                                              ±0.0    ±0.0
+                                                                                                                                                                                                                                                                              0.0              0.0      0.0            0.0     0.0                 0.0         0.0        0.0
+
+                                                                                                                                                                                                                                                                               0.8                      0.11                   0.02                0.03        0.02       0.02
+                                                                                                M-dwarf Flare                   0.0     0.0               0.0       0.0             0.0     0.0            0.0                  0.0         0.0         0.0    0.0     0.0
+                                                                                                                                                                                                                                                                              ±0.0
+                                                                                                                                                                                                                                                                                               0.0
+                                                                                                                                                                                                                                                                                                        ±0.0
+                                                                                                                                                                                                                                                                                                                       0.0
+                                                                                                                                                                                                                                                                                                                               ±0.0                ±0.0        ±0.0       ±0.0
+                                                                                                                                                                                                                                                                              0.01             0.83     0.11                   0.02                0.01        0.02       0.01
+                                                                                                                uLens           0.0     0.0               0.0       0.0             0.0     0.0            0.0                  0.0         0.0         0.0    0.0     0.0
+                                                                                                                                                                                                                                                                              ±0.0             ±0.0     ±0.0
+                                                                                                                                                                                                                                                                                                                       0.0
+                                                                                                                                                                                                                                                                                                                               ±0.0                ±0.0        ±0.0       ±0.0
+                                                                                                                                                                                                                                                                              0.02             0.01     0.82                   0.06                0.04        0.03       0.01
+                                                                                                  Dwarf Novae                   0.0     0.0               0.0       0.0             0.0     0.0            0.0                  0.0         0.0         0.0    0.0     0.0
+                                                                                                                                                                                                                                                                              ±0.0             ±0.0     ±0.0
+                                                                                                                                                                                                                                                                                                                       0.0
+                                                                                                                                                                                                                                                                                                                               ±0.0                ±0.0        ±0.0       ±0.0
+                                                                                                                                                                                                                                                                                                                        1.0
+                                                                                                                 AGN            0.0     0.0               0.0       0.0             0.0     0.0            0.0                  0.0         0.0         0.0    0.0     0.0    0.0              0.0      0.0
+                                                                                                                                                                                                                                                                                                                       ±0.0
+                                                                                                                                                                                                                                                                                                                               0.0                 0.0         0.0        0.0
+
+                                                                                                                                                                                                                                                                                                                               0.99
+                                                                                                        Delta Scuti             0.0     0.0               0.0       0.0             0.0     0.0            0.0                  0.0         0.0         0.0    0.0     0.0    0.0              0.0      0.0            0.0
+                                                                                                                                                                                                                                                                                                                               ±0.0
+                                                                                                                                                                                                                                                                                                                                                   0.0         0.0        0.0
+
+                                                                                                                                                                                                                                                                                                                                                   0.99                   0.01
+                                                                                                          RR Lyrae              0.0     0.0               0.0       0.0             0.0     0.0            0.0                  0.0         0.0         0.0    0.0     0.0    0.0              0.0      0.0            0.0     0.0
+                                                                                                                                                                                                                                                                                                                                                   ±0.0
+                                                                                                                                                                                                                                                                                                                                                               0.0
+                                                                                                                                                                                                                                                                                                                                                                          ±0.0
+                                                                                                                                                                                                                                                                                                                                                               0.99
+                                                                                                           Cepheid              0.0     0.0               0.0       0.0             0.0     0.0            0.0                  0.0         0.0         0.0    0.0     0.0    0.0              0.0      0.0            0.0     0.0                 0.0
+                                                                                                                                                                                                                                                                                                                                                               ±0.0
+                                                                                                                                                                                                                                                                                                                                                                          0.0
+
+                                                                                                                                                                                                                                                                                                                               0.01                0.01        0.01       0.98
+                                                                                                                       EB       0.0     0.0               0.0       0.0             0.0     0.0            0.0                  0.0         0.0         0.0    0.0     0.0    0.0              0.0      0.0            0.0
+                                                                                                                                                                                                                                                                                                                               ±0.0                ±0.0        ±0.0       ±0.0
+                                                                                                                                         Iax
+                                                                                                                                                          91bg
+                                                                                                                                                                    Ia
+
+
+                                                                                                                                                                                                II
+
+
+
+
+                                                                                                                                                                                                                                                                       KN
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                           EB
+                                                                                                                                 CART
+
+
+
+
+                                                                                                                                                                                    Ib/c
+
+
+
+
+                                                                                                                                                                                                                                 SLSN
+                                                                                                                                                                                                                                             PISN
+                                                                                                                                                                                                                                                        TDE
+                                                                                                                                                                                                                                                               ILOT
+
+
+
+
+                                                                                                                                                                                                                                                                                                                        AGN
+                                                                                                                                                                                                                                                                                                uLens
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                    RR Lyrae
+                                                                                                                                                                                                                                                                                                         Dwarf Novae
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                Cepheid
+                                                                                                                                                                                                                                                                               M-dwarf Flare
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                Delta Scuti
+                                                                                                                                                                                                                SN-like/Other
+
+
+
+
+                                                                                                                                                                                                                                          Predicted Label
+
+
+Fig. 4. Confusion matrix of two ATAT variants, and the Random Forest (RF) baseline. ATAT (LC + MD + MTA) has an F1-Score of 82.6%, ATAT
+(LC + MD + Features + MTA) has an F1-Score of 83.5%, and RF (MD + Features) has an F1-Score of 79.4%.
+
+
+4. Discussion and Conclusions                                                                                                                                                                                                               performance metrics in the training set provided by ELAsTiCC.
+                                                                                                                                                                                                                                            Our model was put into production within the ALeRCE broker
+We presented the models used by the ALeRCE team during the                                                                                                                                                                                  in preparation for the real-time classification of the LSST alert
+first round of ELAsTiCC. We introduced ATAT, a novel Deep                                                                                                                                                                                   stream.
+Learning Transformer model that combines time series and tab-                                                                                                                                                                                   Our results show that, using the ELAsTiCC dataset, ATAT
+ular data information. The proposed model was developed for                                                                                                                                                                                 outperforms a Balanced Hierarchical RF model similar to
+the ELAsTiCC challenge that simulates an LSST-like stream,                                                                                                                                                                                  the current ALeRCE’s light-curve classifier. This RF obtains
+with the objective of testing end-to-end alert stream pipelines.                                                                                                                                                                            a macro precision/recall/f1-score of 0.777/0.782/0.772, while
+We were able to evaluate both classification and infrastructure                                                                                                                                                                             ATAT achieves 0.841/0.827/0.825 when using light-curves,
+                                                                                                                                                                                                                                                                                                                                                                                                   Article number, page 9 of 12
+                                                             A&A proofs: manuscript no. ATAT_AA
+
+              90                                                               We acknowledge support from REUNA Chile. This work has been possible
+                                                                               thanks to the use of Amazon Web Services (AWS) credits managed by the Data
+              80                                                               Observatory. ELAsTiCC is a project of the U.S. Department of Energy-supported
+                                                                               Dark Energy Science Collaboration. ELAsTiCC used resources of the National
+              70                                                               Energy Research Scientific Computing Center (NERSC), a U.S. Department
+                                                                               of Energy Office of Science User Facility located at Lawrence Berkeley Na-
+              60                                                               tional Laboratory. We are grateful to the team that created the public ELAsTiCC
+                                                                               challenge: Gautham Narayan, Alex Gagliano, Alex Malz, Catarina Alves, Deep
+                                                                               Chatterjee, Emille Ishida, Heather Kelly, John Franklin Crenshaw, Konstantin
+   F1-Score
+
+
+
+
+              50
+                                                                               Malanchev, Laura Salo, Maria Vincenzi, Martine Lokken, Qifeng Cheng, Rahul
+                                                                               Biswas, Renée Holžek, Rick Kessler, Robert Knop, Ved Shah Gautam.
+              40
+                                                       TM (LC) + QFT (MD)
+              30                                       TM (LC) + FT (MD)
+                                                       FS (LC) + QFT (MD)      References
+              20
+                                                       FS (LC) + FT (MD)
+                                                                               Allam, T. & McEwen, J. D. 2021, Paying Attention to Astronomical Transients:
+              10                                       TM (LC)                    Photometric Classification with the Time-Series Transformer
+                                                       FS (LC)                 Astorga, N., Huijse, P., Estévez, P. A., & Förster, F. 2018, in 2018 International
+               0                                                                  Joint Conference on Neural Networks (IJCNN), 1–8
+                   1   2    4     8    16    32   64    128 256 512 1024       Astropy Collaboration, Price-Whelan, A. M., Lim, P. L., et al. 2022, ApJ, 935,
+                                                                                  167
+                           Evaluated time (days after first alert)
+                                                                               Becker, I., Pichara, K., Catelan, M., et al. 2020, Monthly Notices of the Royal
+                                                                                  Astronomical Society, 493, 2981
+Fig. 5. Ablation study in time. We compare combinations of our pro-            Bellm, E. C., Kulkarni, S. R., Graham, M. J., et al. 2018, Publications of the
+posed time modulation (TM) and quantile feature tokenizer (QFT) as                Astronomical Society of the Pacific, 131, 018002
+compared to a fixed sinusoid (FS) positional encoding (PE) and non-            Boone, K. 2019, The Astronomical Journal, 158, 257
+quantile feature tokenizer (FT). The combination of TM and QFT out-            Borne, K. D. 2010, Earth Science Informatics, 3, 5
+performs other combinations of PEs and tabular tokenizers independent          Cabrera-Vives, G., Li, Z., Rainer, A., et al. 2022, in International Conference on
+                                                                                  Product-Focused Software Process Improvement, Springer, 21–36
+of the time the models are evaluated.                                          Cabrera-Vives, G., Reyes, I., Förster, F., Estévez, P. A., & Maureira, J.-C. 2016,
+                                                                                  in 2016 International Joint Conference on Neural Networks (IJCNN), IEEE,
+                                                                                  251–258
+metadata and features calculated over the light-curves. Further-               Cabrera-Vives, G., Reyes, I., Förster, F., Estévez, P. A., & Maureira, J.-C. 2017,
+more, if only the light-curves and metadata are considered for                    The Astrophysical Journal, 836, 97
+ATAT, we achieved values of 0.838/0.825/0.823 for the previ-                   Carrasco-Davis, R., Cabrera-Vives, G., Förster, F., et al. 2019, Publications of
+ous metrics, and, when performing inference in batches of 2,000                   the Astronomical Society of the Pacific, 131, 108006
+                                                                               Carrasco-Davis, R., Reyes, E., Valenzuela, C., et al. 2021, The Astronomical
+light-curves, about 400 times faster inference times than with                    Journal, 162, 231
+the RF. Importantly, our work suggests that it is possible to clas-            Charnock, T. & Moss, A. 2017, The Astrophysical Journal Letters, 837, L28
+sify light-curves excluding human-engineered features with no                  Chen, C., Liaw, A., Breiman, L., et al. 2004, University of California, Berkeley,
+significant loss in performance, and highlights the importance                    110, 24
+                                                                               Devlin, J., Chang, M.-W., Lee, K., & Toutanova, K. 2018, BERT: Pre-
+of including metadata information such as the properties of the                   training of Deep Bidirectional Transformers for Language Understanding,
+host galaxy (e.g., Förster et al. (2022)). These results may be                   cite arxiv:1810.04805Comment: 13 pages
+improved for data-scarce classes by class-weighting and/or ad-                 Dieleman, S., Willett, K. W., & Dambre, J. 2015, Monthly notices of the royal
+ditional data-augmentation strategies (Boone 2019). We plan to                    astronomical society, 450, 1441
+                                                                               Donoso-Oliva, C., Becker, I., Protopapas, P., et al. 2022, ASTROMER: A
+explore these alternatives in the future.                                         transformer-based embedding for the representation of light curves
+    The metrics presented in this work, e.g., in Table 1 or Fig-               Donoso-Oliva, C., Cabrera-Vives, G., Protopapas, P., Carrasco-Davis, R., & Es-
+ure 3, are representative of the dataset provided by ELAsTiCC                     tévez, P. A. 2021, Monthly Notices of the Royal Astronomical Society, 505,
+to prepare machine learning models previous to the end-to-end                     6069
+challenge. The ELAsTiCC simulated data may not representa-                     Dosovitskiy, A., Beyer, L., Kolesnikov, A., et al. 2021, ICLR
+                                                                               Förster, F., Moriya, T., Maureira, J., et al. 2018, Nature Astronomy, 2, 808
+tive of the real LSST alert stream, and this may result in dif-                Förster, F., Muñoz Arancibia, A. M., Reyes-Jainaga, I., et al. 2022, AJ, 164, 195
+ferent performance metrics than those reported in this work. In                Fraga, B. M. O., Bom, C. R., Santos, A., et al. 2024, Transient Classifiers for
+order to tackle these differences, we suggest the application of                  Fink: Benchmarks for LSST
+fine-tuning and domain adaptation techniques.                                  Förster, F., Cabrera-Vives, G., Castillo-Navarrete, E., et al. 2021, The Astronom-
+                                                                                  ical Journal, 161, 242
+    ATAT has proven to be competitive against feature-based tree               Gagliano, A., Contardo, G., Foreman-Mackey, D., Malz, A. I., & Aleo, P. D.
+ensembles in a large, complex and multi-class alerts light-curve                  2023, The Astrophysical Journal, 954, 6
+classification setting, including very different variability classes.          Gómez, C., Neira, M., Hernández Hoyos, M., Arbeláez, P., & Forero-Romero,
+Transformer-based models represent a paradigm shift and we be-                    J. E. 2020, Monthly Notices of the Royal Astronomical Society, 499, 3130
+                                                                               Gorishniy, Y., Rubachev, I., Khrulkov, V., & Babenko, A. 2021, in Advances
+lieve that more astronomical applications based on these models                   in Neural Information Processing Systems, ed. M. Ranzato, A. Beygelzimer,
+will be developed. Particularly, ATAT opens the door for more                     Y. Dauphin, P. Liang, & J. W. Vaughan, Vol. 34 (Curran Associates, Inc.),
+multi-modal applications, e.g., a third branch for stamps in Fig                  18932–18943
+1.                                                                             Graham, M. J., Kulkarni, S., Bellm, E. C., et al. 2019, Publications of the Astro-
+                                                                                  nomical Society of the Pacific, 131, 078001
+Acknowledgements. The authors acknowledge support from the Chilean Min-        Hendrycks, D. & Gimpel, K. 2016, arXiv preprint arXiv:1606.08415
+istry of Economy, Development, and Tourism’s Millennium Science Initia-        Hložek, R., Ponder, K., Malz, A., et al. 2020, arXiv preprint arXiv:2012.12392
+tive through grant ICN12_009, awarded to the Millennium Institute of Astro-    Huijse, P., Estevez, P. A., Protopapas, P., Principe, J. C., & Zegers, P. 2014, IEEE
+physics, and from the National Agency for Research and Development (ANID)         Computational Intelligence Magazine, 9, 27
+grants: BASAL Center of Mathematical Modeling Grant PAI AFB-170001             Ishida, E., Mondon, F., Sreejith, S., et al. 2021, Astronomy and Astrophysics,
+(NA, IRJ, FF, JA, AMA, AA), BASAL projects ACE210002 and FB210003                 650, A195
+(AB, MC), FONDEQUIP Patagón supercomputer of Universidad Austral de            Ivezić, Ž., Kahn, S. M., Tyson, J. A., et al. 2019, The Astrophysical Journal, 873,
+Chile EQM180042 (NA, GCV, PH), FONDECYT Iniciación 11191130 (GCV),                111
+FONDECYT Regular 1200710 (FF), FONDECYT Regular 1211374 (PH),                  Jamal, S. & Bloom, J. S. 2020, The Astrophysical Journal Supplement Series,
+FONDECYT Regular 1220829 (PAE), and infrastructure fund QUIMAL190012.             250, 30
+
+Article number, page 10 of 12
+                               G. Cabrera-Vives et al.: ATAT: Astronomical Transformer for time series And Tabular data
+
+Kingma, D. P. & Ba, J. 2014, Adam: A Method for Stochastic Optimization,
+   cite arxiv:1412.6980Comment: Published as a conference paper at the 3rd
+   International Conference for Learning Representations, San Diego, 2015
+Komatsu, E., Dunkley, J., Nolta, M., et al. 2009, The Astrophysical Journal Sup-
+   plement Series, 180, 330
+Mackenzie, C., Pichara, K., & Protopapas, P. 2016, The Astrophysical Journal,
+   820
+Matheson, T., Stubens, C., Wolf, N., et al. 2021, The Astronomical Journal, 161,
+   107
+Möller, A., Peloton, J., Ishida, E. E. O., et al. 2021, MNRAS, 501, 3272
+Moreno-Cartagena, D. A., Cabrera-Vives, G., Protopapas, P., et al. 2023, in Ma-
+   chine Learning for Astrophysics. Workshop at the Fortieth International Con-
+   ference on Machine Learning (ICML 2023), 23
+Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R., & Hložek, R. 2019,
+   Publications of the Astronomical Society of the Pacific, 131, 118002
+Möller, A. & de Boissière, T. 2019, Monthly Notices of the Royal Astronomical
+   Society, 491, 4277
+Narayan, G., Zaidi, T., Soraisam, M. D., et al. 2018, ApJS, 236, 9
+Naul, B., Bloom, J., Perez, F., & van der Walt, S. 2018, Nature Astronomy, 2
+Neira, M., Gómez, C., Suárez-Pérez, J. F., et al. 2020, The Astrophysical Journal
+   Supplement Series, 250, 11
+Nordin, J., Brinnel, V., van Santen, J., et al. 2019, A&A, 631, A147
+Nun, I., Protopapas, P., Sim, B., & Chen, W. 2016, The Astronomical Journal,
+   152, 71
+Nun, I., Protopapas, P., Sim, B., et al. 2015, arXiv e-prints, arXiv:1506.00010
+O’Donnell, J. E. 1994, The Astrophysical Journal, 422, 158
+Pérez-Carrasco, M., Cabrera-Vives, G., Hernández-Garcıa, L., et al. 2023, in
+   Machine Learning for Astrophysics. Workshop at the Fortieth International
+   Conference on Machine Learning (ICML 2023), 23
+Perez-Carrasco, M., Cabrera-Vives, G., Hernandez-García, L., et al. 2023, The
+   Astronomical Journal, 166, 151
+Pimentel, O., Estévez, P. A., & Forster, F. 2022, Deep Attention-Based Super-
+   novae Classification of Multi-Band Light-Curves
+Pruzhinskaya, M. V., Malanchev, K. L., Kornilov, M. V., et al. 2019, Monthly
+   Notices of the Royal Astronomical Society, 489, 3591
+Rodriguez-Mancini, D., Li, Z., Valenzuela, C., Cabrera-Vives, G., & Förster, F.
+   2022, IEEE Software, 39, 28
+Russeil, E., Ishida, E., Peloton, J., Anais, M., & Le Montagner, R. 2022, in
+   Machine Learning and the Physical Sciences Workshop, 36th Conference on
+   Neural Information Processing Systems (NeurIPS)
+Sánchez, A., Cabrera, G., Huijse, P., & Förster, F. 2021, in Machine Learning
+   and the Physical Sciences Workshop, 35th Conference on Neural Information
+   Processing Systems (NeurIPS)
+Sánchez-Sáez, P., Lira, H., Martí, L., et al. 2021, The Astronomical Journal, 162,
+   206
+Smith, K. W., Williams, R. D., Young, D. R., et al. 2019, Research Notes of the
+   American Astronomical Society, 3, 26
+Sánchez-Sáez, P., Reyes, I., Valenzuela, C., et al. 2021, The Astronomical Jour-
+   nal, 161, 141
+Sánchez-Sáez, P., Arredondo, J., Bayo, A., et al. 2023, A&A, 675, A195
+Vaswani, A., Shazeer, N., Parmar, N., et al. 2017, in Advances in Neural Informa-
+   tion Processing Systems, ed. I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach,
+   R. Fergus, S. Vishwanathan, & R. Garnett, Vol. 30 (Curran Associates, Inc.)
+Villar, V. A. 2022, arXiv preprint arXiv:2211.04480
+
+
+
+
+                                                                                                                    Article number, page 11 of 12
+                                                       A&A proofs: manuscript no. ATAT_AA
+
+Appendix A: Processed features details                                        using the JAX library 12 . The initial guess and the boundaries for
+                                                                              the parameter optimization were tuned for the range of values in
+To extract color information from the difference light-curves, on             the ELAsTiCC dataset.
+each band we take the absolute value of the flux, compute the
+percentile 90 and save that value. Following the order ugrizY, we
+take the value of the percentile 90 previously saved for one band
+and divide it by the value of the next band. To avoid dividing by
+zero, we add 1 to the denominator.
+    Most differences in the features used are related to extracting
+information from supernova-like light-curves. This is the list of
+supernova features, which are computed for each band:
+
+ – positive_fraction: fraction of observations with a posi-
+   tive flux value.
+ – dflux_first_det_band: difference between the flux of the
+   first detection (in any band) and the last non-detection (in the
+   same selected band) just before the first detection.
+ – dflux_non_det_band: same as dflux_first_det_band,
+   but instead of using the last non-detection before the first de-
+   tection, we take all the non-detections before the first detec-
+   tion and compute the median. Later, this median is subtracted
+   from the flux of the first detection (in any band).
+ – last_flux_before_band: flux of the last non-detection (in
+   the selected band) before the first detection (in any band).
+ – max_flux_before_band: maximum flux of the non-
+   detections (in the selected band) before the first detection (in
+   any band).
+ – max_flux_after_band: maximum flux of the non-
+   detections (in the selected band) after the first detection (in
+   any band).
+ – median_flux_before_band: median flux of the non-
+   detections (in the selected band) before the first detection (in
+   any band).
+ – median_flux_after_band: median flux of the non-
+   detections (in the selected band) after the first detection (in
+   any band).
+ – n_non_det_before_band: number of non-detections (in
+   the selected band) before the first detection (in any band).
+ – n_non_det_after_band: number of non-detections (in the
+   selected band) after the first detection (in any band).
+
+                     As we were not sure if the ELAsTiCC stream would indi-
+cate if the observations were alerts or forced photometry (i.e. if
+the signal was strong enough compared with the noise), for the
+supernova features we considered an observation as a detection
+if the absolute value of the difference flux was at least 3 times
+larger than the observation error.
+                     With respect to the Supernova Parametric Model (SPM,
+Sánchez-Sáez et al. 2021), one SPM model per band was fit-
+ted to the data, but the optimization was done simultaneously
+and penalizing the dispersion between the parameters on differ-
+ent bands. The extra term added to the cost function is
+     Var(A) + 1   0.0 
+     d                                  
+
+* Var(t0 ) + 0.05   1.0 +
+       d                                         
+                                                           
+         Var(γ)              +  0.05      0.1 
+                    d + 0.005  , 20.0
+                     d
+                                                             (A.1)
+             Var(β)                        0.7 
+                                                  
+                 Var(trise ) + 0.05 0.01
+                d                                        
+                    Var(t f all ) + 0.05
+                    d
+
+where the variances are estimated over the different bands and
+the coefficients were found experimentally. The original SPM
+code was modified to avoid numerical instabilities. To speed up
+                                                                              12
+the optimization, the gradient of the cost function is computed                    http://github.com/google/jax
+
+Article number, page 12 of 12
+

@@ -1,0 +1,3142 @@
+1
+
+arXiv:1808.00969v4 [astro-ph.HE] 23 Nov 2018
+
+The Fast, Luminous Ultraviolet Transient AT2018cow:
+Extreme Supernova, or Disruption of a Star by an
+Intermediate-Mass Black Hole?
+Daniel A. Perley,1 Paolo A. Mazzali,1,2 Lin Yan,3 S. Bradley Cenko,4,5 Suvi Gezari,5
+Kirsty Taggart,1 Nadia Blagorodnova,3 Christoffer Fremling,3 Brenna Mockler,6,7
+Avinash Singh,8,9 Nozomu Tominaga,10,11 Masaomi Tanaka,12 Alan M. Watson,13
+Tomás Ahumada,5 G. C. Anupama,8 Chris Ashall,14 Rosa L. Becerra,13
+David Bersier,1 Varun Bhalerao,15 Joshua S. Bloom,16 Nathaniel R. Butler,17
+Chris Copperwheat,1 Michael W. Coughlin,3 Kishalay De,3 Andrew J. Drake,3
+Dmitry A. Duev,3 Sara Frederick,5 J. Jesús González,13 Ariel Goobar,19
+Marianne Heida,3 Anna Y. Q. Ho,3 John Horst,20 Tiara Hung,5 Ryosuke Itoh,21
+Jacob E. Jencson,3 Mansi M. Kasliwal,3 Nobuyuki Kawai,21 Tanazza Khanam,15
+Shrinivas R. Kulkarni,3,18 Brajesh Kumar,8 Harsh Kumar,15 Alexander S. Kutyrev,4,5
+William H. Lee,13 Keiichi Maeda,22 Ashish Mahabal,3,23 Katsuhiro L. Murata,21
+James D. Neill,3 Chow-Choong Ngeow,24 Bryan Penprase,25 Elena Pian,26
+Robert Quimby,20,10 Enrico Ramirez-Ruiz,6,27 Michael G. Richer,13
+Carlos G. Román-Zúñiga,28 D. K. Sahu,8 Shubham Srivastav,15 Quentin Socia,20
+Jesper Sollerman,29 Yutaro Tachibana,21 Francesco Taddia,29 Samaporn Tinyanont,3
+4,5
+5
+30
+24
+Eleonora
+Troja,
+Charlotte
+Ward,
+Jerrick
+Wee,
+Po-Chieh
+Yu
+1
+Astrophysics Research Institute, Liverpool John Moores University, 146 Brownlow Hill, Liverpool L3 5RF, UK
+
+2 Max-Planck Institut für Astrophysik, Karl-Schwarzschild-Str. 1, 84741 Garching, Germany
+3 Division of Physics, Math, and Astronomy, California Institute of Technology, Pasadena, CA 91125, USA
+4 Astrophysics Science Division, NASA Goddard Space Flight Center, 8800 Greenbelt Road, Greenbelt, MD 20771, USA
+6 Department of Astronomy and Astrophysics, University of California, Santa Cruz, CA 95064, USA
+7 Dark Cosmology Centre, Niels Bohr Institute, University of Copenhagen, Blegdamsvej 17, 2100 Copenhagen, Denmark
+5 Department of Astronomy, University of Maryland, College Park, MD 20742, USA
+8 Indian Institute of Astrophysics, II Block Koramangala, Bengaluru 560034, India
+9 Joint Astronomy Programme, Department of Physics, Indian Institute of Science, Bengaluru 560012, India
+10 Kavli IPMU (WPI), The University of Tokyo Institutes for Advanced Study, The University of Tokyo, Kashiwa, Chiba 277-8583, Japan
+11 Department of Physics, Faculty of Science and Engineering, Konan University, 8-9-1 Okamoto, Kobe, Hyogo 658-8501, Japan
+12 Astronomical Institute, Tohoku University, Aoba, Sendai 980-8578, Japan
+13 Instituto de Astronomı́a, Universidad Nacional Autónoma de México, Apartado Postal 70-264, 04510 México, CDMX, México
+14 Department of Physics, Florida State Universiy, Tallahassee, FL 32306, USA
+15 Physics Department, Indian Institute of Technology Bombay, Powai, Mumbai 400076, India
+16 Department of Astronomy, University of California, Berkeley, 94720, USA
+17 School of Earth and Space Exploration, Arizona State University, Tempe, AZ 85287, USA
+18 Caltech Optical Observatories, California Institute of Technology, Pasadena, CA 91125, USA
+19 The Oskar Klein Centre, Department of Physics, AlbaNova, Stockholm University, SE-106 91 Stockholm, Sweden
+20 Department of Astronomy/Mount Laguna Observatory, San Diego State University, 5500 Campanile Drive, San Diego, CA 92812-1221, USA
+21 Department of Physics, School of Science, Tokyo Institute of Technology, 2-12-1 Ohokayama, Meguro, Tokyo 152-8551, Japan
+22 Department of Astronomy, Kyoto University, Kitashirakawa-Oiwake-cho, Sakyo-ku, Kyoto 606-8502, Japan
+23 Center for Data Driven Discovery, California Institute of Technology, Pasadena, CA 91125, USA
+24 Graduate Institute of Astronomy, National Central University, 32001, Taiwan
+25 Soka University of America, 1 University Drive, Aliso Viejo, CA 92656, USA
+26 INAF OAS, Via Piero Gobetti, 101, I-40129 Bologna, Italy
+27 Niels Bohr Institute, University of Copenhagen, Blegdamsvej 17, 2100 Copenhagen, Denmark
+28 Instituto de Astronomı́a UNAM, Unidad Académica en Ensenada, Ensenada BC, 22860, México
+29 The Oskar Klein Centre, Department of Astronomy, AlbaNova, Stockholm University, SE-106 91 Stockholm, Sweden
+30 Yale-NUS College, 16 College Avenue West, Singapore 138527, Singapore
+
+MNRAS 000, 000–000 (2018)
+
+MNRAS 000, 000–000 (2018)
+
+Preprint November 26, 2018
+
+Compiled using MNRAS LATEX style file v3.0
+
+ABSTRACT
+
+Wide-field optical surveys have begun to uncover large samples of fast (trise . 5d),
+luminous (Mpeak < −18), blue transients. While commonly attributed to the breakout of a supernova shock into a dense wind, the great distances to the transients of
+this class found so far have hampered detailed investigation of their properties. We
+present photometry and spectroscopy from a comprehensive worldwide campaign to
+observe AT 2018cow (ATLAS 18qqn), the first fast-luminous optical transient to be
+found in real time at low redshift. Our first spectra (< 2 days after discovery) are
+entirely featureless. A very broad absorption feature suggestive of near-relativistic velocities develops between 3 − 8 days, then disappears. Broad emission features of H
+and He develop after > 10 days. The spectrum remains extremely hot throughout its
+evolution, and the photospheric radius contracts with time (receding below R < 1014
+cm after 1 month). This behaviour does not match that of any known supernova, although a relativistic jet within a fallback supernova could explain some of the observed
+features. Alternatively, the transient could originate from the disruption of a star by
+an intermediate-mass black hole, although this would require long-lasting emission of
+highly super-Eddington thermal radiation. In either case, AT 2018cow suggests that
+the population of fast luminous transients represents a new class of astrophysical event.
+Intensive follow-up of this event in its late phases, and of any future events found at
+comparable distance, will be essential to better constrain their origins.
+1
+
+INTRODUCTION
+
+The development of sensitive, wide-area digital optical sky
+surveys has led to the discovery of populations of rare, luminous extragalactic transients that evolve on timescales
+of just a few days—much faster than typical supernovae,
+whose light curves are governed by the decay of 56 Ni
+within a massive envelope and typically take weeks to
+months to fade. Many of these have been reasonably wellexplained by known phenomena: shock-breakout flashes
+from supernovae (e.g., Ofek et al. 2010; Shivvers et al. 2016;
+Arcavi et al. 2017), early emission from relativistic supernovae (Whitesides et al. 2017), or the shockwave afterglows from gamma-ray bursts (Cenko et al. 2013, 2015;
+Stalder et al. 2017; Bhalerao et al. 2017).
+Other objects are more mysterious, however, and still
+lack a convincing explanation or firm spectroscopic identification. In particular, populations of optical transients with
+luminosities comparable to or exceeding those of the most
+luminous core-collapse supernovae, but rise times of only
+a few days, have been reported by a variety of different
+surveys (Arcavi et al. 2016; Drout et al. 2014; Tanaka et al.
+2016; Pursiainen et al. 2018; Rest et al. 2018). Nearly all of
+these events (dubbed fast-evolving luminous transients by
+Rest et al. 2018) were found at great distances (z > 0.1)
+where they are difficult to study. Furthermore most were
+not recognized as unusual events in real time, preventing
+the acquisition of essential follow-up observations. The few
+spectra that are available tend to show only featureless blue
+continuua. Because of their origins in star-forming galaxies
+these transients are widely interpreted as supernovae, but
+strong constraints are lacking.
+Fortunately, our ability to find and identify fast transients continues to improve, and several surveys are now
+monitoring almost the entire sky at cadences of a few days
+or less. The Asteroid Terrestrial-impact Last Alert System
+(ATLAS; Tonry et al. 2018) observes most of the visible
+Northern sky down to 19 mag every ∼ 2 nights. The Zwicky
+Transient Facility (ZTF; Kulkarni 2018) observes a similar
+area to 20.5 mag every 3 nights, and a significant fraction of
+it at much higher cadence. ASAS-SN (Shappee et al. 2014)
+
+monitors both hemispheres nightly to ∼17 mag. With these
+capabilities, it is now possible to find and identify transients
+in (almost) real time over most of the night sky.
+In this paper, we present a detailed observational study
+of the first fast high-luminosity transient to be identified
+in the nearby universe in real time: AT 2018cow, discovered
+by the ATLAS survey and independently detected by ZTF
+and ASAS-SN. We present our extensive, worldwide observational campaign in §2, focusing on observations at ultraviolet, optical, and near-infrared wavelengths (the multiwavelength view of this transient is presented by Ho et al. 2018).
+We summarize the key properties of this event in §3, and
+illustrate the ways in which AT 2018cow is distinct from any
+well-established class of transient in §4. In §5 we consider
+two possible explanations for its origin: a jet-driven supernova erupting into a dense envelope of circumstellar matter, or alternatively the tidal disruption of a star around an
+intermediate-mass black hole located in a small galaxy’s spiral arm. Both models have significant difficulties explaining
+the full suite of observations, and our observations suggest
+that the origins of fast luminous transients may be significantly more exotic and complex than previously assumed.
+We summarize our results and examine future directions in
+fast-transient research in §6.
+
+2
+2.1
+
+OBSERVATIONS
+Discovery and Pre-Imaging Constraints
+
+AT2018cow1 was discovered and promptly announced via
+the Astronomers Telegram (Smartt et al. 2018) by ATLAS;
+the discovery and early data are described in detail by
+Prentice et al. 2018. The first detection of the transient was
+
+1
+
+The name of this transient was assigned automatically by the
+Transient Name Server (https://wis-tns.weizmann.ac.il/). It was
+later redesignated SN2018cow following the emergence of broad
+features in the spectrum, although we argue here that a SN association is not definite and retain the AT designation. The transient
+is also known as ATLAS18qqn and as ZTF18abcfcoo.
+© 2018 The Authors
+
+3
+an image taken at 2018-06-16 10:35:02 UT (MJD 58285.441),
+appearing as a strikingly bright (14.7 ± 0.1 mag in the
+ATLAS o-band) optical source coincident with the galaxy
+CGCG 137-068 (z = 0.0141, d = 60 Mpc2 ; Abolfathi et al.
+2018). The preceding ATLAS observation of the field, four
+days earlier (MJD 58281.48), registered no detection of any
+transient object at the same location to a magnitude limit of
+o > 20.2 mag, implying brightening by almost 5 mag within
+this period. Independent imaging by the Palomar 48-inch
+telescope (P48) as part of the ZTF public Northern Sky
+Survey later moved the time of last non-detection one day
+closer, to only three days before the first ATLAS detection
+(i > 19.5 at MJD 58282.172; Fremling 2018). The ASAS-SN
+non-detection reported by Prentice et al. 2018 (g > 18.9 at
+MJD 58284.13) provides an even tighter constraint: a rise of
+> 4.2 magnitudes over <1.3 days.
+A fast rise to a very high optical luminosity (M < −19
+mag) is unusual for supernovae but similar to cosmological fast-transients of the types discussed in the introductory paragraph. Motivated by these unusual characteristics,
+we initiated a campaign of observations via the GROWTH
+(Global Relay of Observatories Watching Transients Happen) network, a world-wide collaboration of predominantly
+small telescopes co-operating in the study of energetic timedomain phenomena. We also observed it under other telescopic programs. Our observing campaign is described in
+detail below.
+
+2.2
+
+Ground-Based Imaging Observations
+
+Nightly imaging observations were acquired with the
+Infrared-Optical imager on the robotic Liverpool Telescope
+(LT; Steele et al. 2004) in both optical (IO:O) and nearinfrared (IO:I) bands. We typically observed with the full
+suite of available filters (uBgVrizH) although on some nights
+a more limited set was obtained. We also obtained frequent imaging from a variety of other facilities. These include the CCD imager on the Mount Laguna Observatory
+(MLO; Smith & Nelson 1969) 1m telescope, the EMCCD
+demonstrator camera on the Kitt Peak 84-inch telescope
+(KP84), ANDICAM on the 1.5m telescope at the Cerro
+Tololo Interamerican Observatory, the Himalayan Faint Object Spectrograph Camera (HFOSC) on the 2-m Himalayan
+Chandra Telescope (HCT), the COATLI 50-cm Telescope
+(Watson et al. 2016) at the Observatorio Astronómico Nacional in Sierra San Pedro Mártir, and the Reionization
+and Transients Infrared instrument (RATIR; Butler et al.
+2012; Watson et al. 2012) on the 1.5-meter Harold L. Johnson telescope (also at San Pedro Mártir). Observations were
+taken less regularly with the 0.4m (SLT) and 1.0m (LOT)
+telescopes at Lulin Observatory in Taiwan, the MITSuME
+50 cm telescope of Akeno Observatory in Japan, and with
+the Wide-Field Infrared Camera (WIRC) at the Palomar
+200-inch Hale Telescope. Finally, a single epoch of deep rband imaging was acquired using the Auxiliary Port Camera
+(ACAM) on the William Herschel Telescope.
+Images were reduced using standard methods. A
+dithered sequence of NIR frames was not available for the
+
+2
+
+We assume h = 0.7, Ω M = 0.3, ΩΛ = 0.7.
+
+MNRAS 000, 000–000 (2018)
+
+ANDICAM NIR images and simple pair subtraction was
+used to remove the sky.
+Host galaxy contribution to the transient flux is not
+insignificant (especially at late times; Figure 1). We used a
+custom image-subtraction tool written in IDL to remove the
+host galaxy flux from all ground-based optical images consistently by convolving both the transient image and a template image to a common PSF, then subtracting. Imaging
+from the Sloan Digital Sky Survey (SDSS; Abolfathi et al.
+2018) was used to subtract the ugriz measurements. For nonSDSS optical filters (UBV RI) we averaged two adjacent filters: e.g., to simulate a B-band image we took a weighted
+average of the aligned u and g images. The relative weights
+for each synthetic filter were estimated based on the relative
+magnitude weights from the Lupton transformation equations.3
+Host subtraction for the NIR images is more challenging: the only available pre-explosion reference is the Two
+Micron All Sky Survey (2MASS), which is shallow and has
+a very broad PSF. We instead used an SDSS z-band image,
+but adjusted the flux scale visually to ensure that the extended features of the host galaxy are removed. Photometry
+was performed uniformly on the subtracted images using a
+custom IDL-based aperture photometry tool. Calibration of
+the field was established by comparison of stars in unsubtracted images to SDSS (or, for NIR images, to 2MASS).
+SDSS ugriz magnitudes of calibration stars are transformed
+via the Lupton equations to BV RI.
+The transient is very blue compared to any other object
+in the field: for example, the transient u − g colour is typically ∼ −0.4 for most of its evolution, compared to a range
+between +1.48 and +3.04 for bright stars within 5′ . This
+greatly magnifies the impact of small differences between
+filter transmission curves for different telescopes (and other
+wavelength-dependent transmission differences), leading to
+offsets between different instruments.
+Colour terms for the LT optical filters have been determined by Smith & Steele (2017). We colour-corrected SDSS
+reference stars in the field to the LT system, setting the
+zeropoint of the transformation as appropriate for an AB
+colour of 0.0 in all filters. We then re-calculated the magnitudes of a series of SDSS bright reference star magnitudes
+using a set of LT exposures taken under the best weather
+conditions, and used these as secondary standards for the
+photometry of all LT images (we employ aperture photometry via a custom routine and seeing-matched apertures.) An
+additional minor adjustment was made to the B filter (−0.05
+mag) to match our spectrophotometry (§2.6). For all other
+telescopes, we calibrated directly to the SDSS magnitudes,
+but applied an additional, filter-specific constant adjustment
+to align each filter to the interpolated LT curve in the same
+filter and remove any systematic offset.
+A subset of our photometry is presented in Table 1, and
+the light curves are plotted in Figure 2.
+2.3
+
+Swift Observations
+
+Observations of AT2018cow using the Neil Gehrels
+Swift Observatory (Swift; Gehrels et al. 2004) began at
+3
+
+http://www.sdss3.org/dr8/algorithms/sdssUBVRITransform.php
+
+4
+
+Perley et al.
+
+Figure 1. Pre-explosion imaging of AT 2018cow from the Sloan Digital Sky Survey compared to imaging with the Liverpool Telescope
+taken shortly after peak and deep later-time imaging from the William Herschel Telescope. The transient is significantly brighter than
+its host galaxy at peak. The galaxy itself shows a barred morphology and weak spiral features, one of which underlies the transient. A
+point-source located at the galaxy nucleus is likely to be a weak AGN, while a fainter compact source slightly southeast of the transient
+is likely an H II region. No point source lies under the transient itself (position designated by a green circle in left panel), and there are
+no obvious merger indicators.
+
+10
+F172M−3
+
+12
+
+w2−3
+m2−2.7
+w1−2
+
+−22
+
+u−1.12
+
+u−1.2
+U−1.15
+b−0.85
+
+−20
+
+B−0.8
+g−0.5
+
+AB magnitude
+
+v−0.35
+
+16
+
+V−0.3
+r
+
+−18
+
+R−0.06
+
+i+0.3
+I+0.24
+
+18
+
+z+0.8
+J+0.9
+H+1.1
+K+1.3
+
+Absolute magnitude
+
+14
+
+−16
+
+−14
+
+20
+
+22
+
+−12
+0
+
+20
+
+40
+
+60
+
+MJD−58285
+Figure 2. Multi-band light curves of the ultraviolet, optical, and near-infrared transient AT2018cow. Small offsets have been applied
+to the filters for clarity (shown at left). The offsets for the R, I , and U bands, and of the Swift optical filters, have been chosen to
+align them with the closest optical bands. Only the earliest ZTF and ATLAS observations show a rise: from the first epoch of follow-up
+the transient fades monotonically with time and experiences no subsequent rise in any band, except for short-lived 1–2 day flares in
+the near-IR. The coloured curves show a non-parametric interpolation of the observed points in each filter. The line segments on the
+rise show a simple linear interpolation or the early transient based on available ATLAS, ZTF, and ASAS-SN data assuming no colour
+evolution. Circles show our ground-based data, diamonds show space-based data, and squares indicate photometric measurements from
+the literature. Arrows on error bars indicate marginal (< 2σ) UVOT detections.
+
+MNRAS 000, 000–000 (2018)
+
+5
+Table 1. Early photometric observations of AT 2018cow from our
+campaign. No correction for Galactic extinction has been applied.
+A machine-readable table of all 949 photometric data points will
+be made available online.
+MJD
+
+Instrument
+
+Filter
+
+AB magnitude
+
+58287.2674
+58288.3405
+58288.4416
+58288.4421
+58288.4426
+58288.4442
+58288.4448
+58288.4464
+58289.0227
+58289.0234
+58289.0241
+58289.0248
+58289.0255
+58289.1889
+58289.1901
+58289.1904
+58289.1963
+58289.2108
+58289.2229
+58289.2246
+58289.2263
+58289.2281
+58289.2298
+58289.2331
+58289.3493
+58289.6299
+58289.6336
+58289.6365
+58289.6397
+58289.6434
+58289.9081
+58289.9131
+58289.9136
+58289.9142
+58289.9147
+58289.9154
+
+P60/SEDM
+P60/SEDM
+Swift/UVOT
+Swift/UVOT
+Swift/UVOT
+Swift/UVOT
+Swift/UVOT
+Swift/UVOT
+LT/IO:O
+LT/IO:O
+LT/IO:O
+LT/IO:O
+LT/IO:O
+KP84/KPED
+KP84/KPED
+P60/SEDM
+KP84/KPED
+P60/SEDM
+Swift/UVOT
+Swift/UVOT
+Swift/UVOT
+Swift/UVOT
+Swift/UVOT
+Swift/UVOT
+P60/SEDM
+HCT/HFOSC
+HCT/HFOSC
+HCT/HFOSC
+HCT/HFOSC
+HCT/HFOSC
+LT/IO:I
+LT/IO:O
+LT/IO:O
+LT/IO:O
+LT/IO:O
+LT/IO:O
+
+r
+r
+w1
+u
+b
+w2
+v
+m2
+u
+g
+r
+i
+z
+g
+r
+r
+U
+r
+w1
+u
+b
+w2
+v
+m2
+r
+R
+I
+V
+B
+U
+H
+z
+i
+r
+g
+u
+
+13.93 ± 0.03
+14.18 ± 0.03
+13.34 ± 0.05
+13.57 ± 0.05
+13.85 ± 0.04
+13.29 ± 0.06
+14.06 ± 0.05
+13.40 ± 0.05
+13.97 ± 0.03
+14.10 ± 0.03
+14.35 ± 0.03
+14.78 ± 0.03
+15.01 ± 0.03
+14.18 ± 0.03
+14.43 ± 0.04
+14.38 ± 0.03
+14.03 ± 0.10
+14.39 ± 0.03
+13.55 ± 0.03
+13.92 ± 0.05
+14.14 ± 0.04
+13.58 ± 0.03
+14.23 ± 0.04
+13.63 ± 0.05
+14.34 ± 0.03
+14.67 ± 0.03
+15.00 ± 0.03
+14.37 ± 0.03
+14.39 ± 0.03
+14.24 ± 0.03
+15.66 ± 0.03
+15.15 ± 0.03
+14.99 ± 0.03
+14.62 ± 0.03
+14.48 ± 0.03
+14.31 ± 0.03
+
+MJD 58288.442. Data were collected with both the
+Ultraviolet-Optical Telescope (UVOT; Roming et al. 2005)
+and the X-ray Telescope (XRT; Burrows et al. 2005). The
+transient was well-detected in both instruments (e.g.,
+Rivera Sandoval & Maccarone 2018) and remained so for
+the entire monitoring period discussed in this paper.
+Raw UVOT images were processed by the pipeline provided by the Swift Data Center at the Goddard Space Flight
+Center (GSFC). The reduced level 2 sky images were downloaded for photometry. We used the software package uvotsource and an aperture radius of 3′′ , chosen to minimize
+the contamination from the extended host galaxy. The final photometry output from uvotsource was corrected for
+aperture loss using the curve-of-growth method.
+The background was computed from an off-target sky
+region without any other sources using an aperture radius of
+10′′ . The image frames were visually inspected and frames
+with large pointing smearing were thrown away. For a small
+number of frames with slight PSF smearing, we used an
+aperture radius of 5′′ . For frames with astrometric errors,
+MNRAS 000, 000–000 (2018)
+
+we manually provide the correct centroids as the input to
+uvotsource.
+As the UVOT PSF is stable, we subtracted off the estimated host galaxy contribution to the UVOT PSF in flux
+space rather than via image subtraction. Photometry from a
+final epoch (acquired 120.45 days after the reference epoch)
+was used to estimate the magnitudes within our aperture.
+In principle, this final epoch could have contained a small
+amount of transient flux, although the fact that the optical
+bands are fading steeply between 50–80 days while negligible fading is seen in the UVOT between 60–120 days suggest
+that this contribution is very small.)
+The XRT data were analysed using an automated reduction routine following the techniques of
+Butler & Kocevski 2007 and binned to increase the S/N.
+We assume negligible host contamination (although we note
+that the galaxy likely hosts a weak AGN; §3.1).
+
+2.4
+
+Astrosat Observations
+
+AT2018cow was observed by the UltraViolet Imaging Telescope (UVIT; Kumar et al. 2012) on-board AstroSat on
+2018-07-03 from 13:45:58 UT to 19:54:12 UT (ToO). These
+observations were performed in the FUV F172M filter with
+a total exposure time of 5667 seconds. Images were preprocessed with UVIT L2 pipeline. Aperture photometry was
+performed using IRAF using an 18-pixel (7.5′′ ) aperture,
+and calibrated following the calibration procedure mentioned in Tandon et al. (2017).
+
+2.5
+
+Other Photometry
+
+In addition to our own photometry we also acquire data from
+public sources and the literature. In particular, we use the
+first two epochs of GROND observations from Prentice et al.
+(2018) to extend our multicolour optical-NIR coverage to
+earlier times: we caution that these observations are not
+host-subtracted or colour-corrected and the aperture size is
+unknown, although the transient was extremely bright at
+this time (∼ 14 mag) and the host contribution should be
+negligible. We also use the first epoch of ATLAS photometry
+from Prentice et al. (2018), r-band data from the Palomar
+48-inch telescope taken as part of the public ZTF Northern Sky Survey, the ZTF i-band point reported by Fremling
+(2018), and the ASAS-SN limit from Prentice et al. (2018).
+As these come from imaging-differenced surveys, no host
+correction is necessary.
+
+2.6
+
+Optical and Near-IR Spectroscopy
+
+We conducted an extensive campaign to spectroscopically
+monitor the evolution of the transient at high cadence. Spectroscopic observations began at MJD 58287.268 (1.82 days
+after the first ATLAS detection, making this the earliest
+spectrum obtained of the transient that has been reported
+so far), and continued at least nightly and usually 2–3 times
+nightly during the first 12 days after peak. Sub-night cadence during this period was enabled by observations using spectrographs in California, the Canary Islands, and
+India: specifically, the SED Machine (SEDM) on the Palomar 60-inch Telescope (Blagorodnova et al. 2018), the Spec-
+
+Perley et al.
+
+trograph for the Rapid Acquisition of Transients (SPRAT;
+Piascik et al. 2014) on the Liverpool Telescope, and the Himalayan Faint Object Spectrograph Camera (HFOSC) on
+the the Himalayan Chandra Telescope.
+Additional spectra were obtained less regularly and at
+later phases using larger telescopes: the DeVeny spectrograph at the Discovery Channel Telescope (DCT), the Andalucia Faint Object Spectrograph and Camera (ALFOSC)
+on the Nordic Optical Telescope (NOT), the Double-Beam
+Spectrograph (DBSP; Oke & Gunn 1982) and the TripleSpec near-infrared spectrograph on the 200-inch Hale Telescope, the Gemini Multi-Object Spectrograph (GMOS) on
+Gemini-North, and the Low-Resolution Imaging Spectrograph (LRIS; Oke et al. 1995) at Keck Observatory. A log of
+all spectroscopic observations can be found in Table 2, and
+all spectra are plotted in Figure 3.
+LT/SPRAT and P60/SEDM data were processed by automated reduction pipelines designed for each facility4 . The
+LPipe reduction pipeline5 (Perley et al. 2018, in prep) was
+used to process the LRIS data. Reductions for the remaining spectrographs were performed manually using standard
+IRAF tools.
+After initial reduction and flux calibration, all spectra
+were absolutely calibrated by comparing synthetic photometry of the spectrum to photometry from our imaging data.
+The absolute flux scale is established by comparing synthetic
+r-band photometry calculated from each spectrum to our
+(true) r-band photometry, interpolated to the appropriate
+epoch. To correct for imperfections in the calibration related to atmospheric attenuation or wavelength-dependent
+slit losses, we next colour-correct the spectrum by comparing a synthetic g − r colour to the true photometric g − r
+colour, and warping the spectra by a power-law correction
+factor.6 Since the spectra unavoidably include some hostgalaxy light, we re-add an estimate of the host galaxy flux
+within the slit to the photometry (estimated given the size of
+the slit and using our host-galaxy model; §3.5) prior to the
+photometric correction, and subtract the host galaxy model
+after correction.
+
+3
+3.1
+
+t = 2.2 d
+2.9
+3.3
+4
+4.5
+5
+5.5
+6
+10−14
+
+7
+8
+
+Flux fλ (erg cm−2 s−1 Å−1)
+
+6
+
+9
+10
+11
+12
+14
+15
+16
+17
+18
+19
+10−15
+
+22
+26.4
+
+31.3
+33.3
+39.3
+44.2
+10−16
+53.4 (x1.4)
+
+OBSERVATIONAL PROPERTIES
+Environment and Pre-Explosion Constraints
+
+The transient lies on the sky coincident with the catalogued
+galaxy CGCG 137-068, an unremarkable dwarf spiral galaxy
+showing a faint bar and spiral arms (Figure 1). Two sources
+are present within the SDSS and PS1 pre-imaging: a reddish
+point source at the galaxy nucleus (likely a weak AGN) and a
+compact, but not truly pointlike, source approximately 1.9′′
+east-southeast of the transient (probably an HII region).
+AT 2018cow is located far from the centre of the galaxy (5.9′′
+or 1.7 kpc from the nucleus), and no point or pointlike source
+
+10−17
+3000
+
+5000
+Rest wavelength (Å)
+
+9000
+
+Figure 3. Our full sequence of spectroscopic observations of
+AT2018cow. Numbers indicate the time in days since MJD 58285;
+between days 4–22 they indicate approximate times. No scaling
+has been applied: the relative offsets are due to the intrinsic,
+steady fading of the source. (The t = 31.3d and t =53.4d spectra have been slightly scaled for clarity.) We interpolate over host
+narrow features and (when not corrected) over the telluric A+B
+bands. Obvious spectral features develop only at late times, although a very broad, blue dip is visible in all spectra between 4–8
+days post-explosion.
+
+4
+
+The
+SEDM
+pipeline
+is
+described
+at
+http://www.astro.caltech.edu/sedm/Pipeline.html; the SPRAT
+pipeline is a modification of the pipeline for FrodoSpec
+(Barnsley et al. 2012)
+5 http://www.astro.caltech.edu/ dperley/programs/lpipe.html
+6 The colour correction was typically quite small: <0.1 mag in
+nearly all cases.
+MNRAS 000, 000–000 (2018)
+
+7
+Table 2. Log of spectroscopic observations of AT 2018cow. Times
+are relative to the reference epoch of MJD 58285.
+MJD
+
+t (d)
+
+Exp. (s)
+
+Telescope
+
+Instrument
+
+58287.268
+58287.949
+58288.341
+58289.000
+58289.191
+58289.211
+58289.350
+58289.651
+58289.946
+58290.097
+58290.196
+58290.261
+58290.353
+58290.327
+58290.618
+58291.020
+58291.224
+58291.276
+58291.337
+58291.636
+58291.939
+58292.027
+58292.145
+58292.181
+58292.374
+58292.648
+58292.955
+58293.018
+58293.182
+58293.212
+58293.288
+58293.821
+58293.892
+58294.182
+58294.656
+58294.989
+58295.894
+58296.017
+58296.103
+58296.913
+58297.245
+58297.349
+58298.916
+58299.212
+58299.766
+58300.180
+58300.389
+58300.622
+58300.896
+58301.990
+58302.275
+58302.908
+58303.180
+58304.000
+58307.034
+58307.301
+58311.397
+58316.345
+58318.295
+58324.300
+58329.254
+58338.359
+
+2.268
+2.949
+3.341
+4.000
+4.191
+4.211
+4.350
+4.651
+4.946
+5.097
+5.196
+5.261
+5.353
+5.327
+5.618
+6.020
+6.224
+6.276
+6.337
+6.636
+6.939
+7.027
+7.145
+7.181
+7.374
+7.648
+7.955
+8.018
+8.182
+8.212
+8.288
+8.821
+8.892
+9.182
+9.656
+9.989
+10.894
+11.017
+11.103
+11.913
+12.245
+12.349
+13.916
+14.212
+14.767
+15.180
+15.389
+15.622
+15.896
+16.990
+17.275
+17.908
+18.180
+19.028
+22.034
+22.301
+26.397
+31.345
+33.295
+39.300
+44.254
+53.359
+
+1600
+300
+1600
+180
+1600
+1600
+1600
+900
+180
+450
+2500
+250
+300
+1800
+1200
+450
+2500
+4800
+1800
+1000
+240
+450
+180
+2500
+1800
+1200
+300
+450
+2500
+2500
+1800
+1200
+300
+2500
+1200
+300
+240
+600
+450
+240
+2500
+1800
+240
+2500
+2400
+2500
+900
+2400
+240
+600
+2500
+360
+2500
+900
+900
+1200
+1800
+600
+1200
+1800
+1800
+3180
+
+P60
+LT
+P60
+LT
+P60
+P60
+P60
+HCT
+LT
+LT
+P60
+DCT
+P200
+Gemini-N
+HCT
+LT
+P60
+P200
+Gemini-N
+HCT
+LT
+LT
+DCT
+P60
+Gemini-N
+HCT
+LT
+LT
+P60
+P60
+Gemini-N
+HCT
+LT
+P60
+HCT
+LT
+LT
+NOT
+LT
+LT
+P60
+P200
+LT
+P60
+HCT
+P60
+Gemini-N
+HCT
+LT
+LT
+P60
+LT
+P60
+NOT
+NOT
+P200
+Keck I
+P200
+Gemini-N
+Gemini-N
+Gemini-N
+Keck I
+
+SEDM
+SPRAT
+SEDM
+SPRAT
+SEDM
+SEDM
+SEDM
+HFOSC
+SPRAT
+SPRAT
+SEDM
+DeVeny
+DBSP
+GMOS
+HFOSC
+SPRAT
+SEDM
+TripleSpec
+GMOS
+HFOSC
+SPRAT
+SPRAT
+DeVeny
+SEDM
+GMOS
+HFOSC
+SPRAT
+SPRAT
+SEDM
+SEDM
+GMOS
+HFOSC
+SPRAT
+SEDM
+HFOSC
+SPRAT
+SPRAT
+ALFOSC
+SPRAT
+SPRAT
+SEDM
+TripleSpec
+SPRAT
+SEDM
+HFOSC
+SEDM
+GMOS
+HFOSC
+SPRAT
+SPRAT
+SEDM
+SPRAT
+SEDM
+ALFOSC
+ALFOSC
+DBSP
+LRIS
+DBSP
+GMOS
+GMOS
+GMOS
+LRIS
+
+MNRAS 000, 000–000 (2018)
+
+Table 3. Key properties of AT 2018cow
+z
+trise
+trise,1/2
+tdecline,1/2
+M g,peak
+Mr,peak
+Lbol,peak
+Tchar
+Erad
+vspec
+M∗,host
+SFRhost
+
+0.0140
+∼2.5 d
+∼1.5 d
+∼3 d
+−20.4
+−19.9
+4×1044 erg s−1
+17000 K
+5×1049 erg
+6000 km s−1
+1.4×109 M⊙
+0.22 M⊙ yr−1
+
+Redshift (from host emission)
+Rise time to peak (g)
+Time to rise from half-max (r)
+Time to decay to half-max (r)
+Peak g absolute magnitude
+Peak r absolute magnitude
+UVOIR luminosity at optical peak
+Characteristic temperature
+Total UVOIR radiative output
+Velocity width of late emission lines
+Host stellar mass
+Host star-formation rate
+
+is visible at the location of the transient itself. Forced photometry on a median filtered PS1 image limits any contribution from an unresolved source to g > 22.2, r > 22.3, i > 21.9:
+more than 8 magnitudes below the transient at peak.
+Additionally, we checked for evidence of pre-explosion
+variability in both the Catalina Real-Time Survey and iPTF
+archives. We found no evidence for any previous outbursts
+from the location of the transient.
+3.2
+
+A Fast, Consistently Blue Transient
+
+Light curves of the transient, assembled by our worldwide
+telescope network, are shown in Figure 2. The photometric
+properties alone exhibit several remarkable features unprecedented for any other extragalactic transient observed at this
+level of detail.
+As we have already noted, the rise time is very fast.
+Comparing the ATLAS o discovery magnitude (which is
+dominated by r flux for this blue transient) to the GROND
+r magnitude indicates a rise from half-max of only 1–2 days.
+The ASAS-SN g−band limit suggests an explosion time of no
+more than 1 day prior to the discovery observation, giving
+a total time from explosion to peak of between 2–3 days.
+The transient is extremely luminous at peak (Mr ∼
+−19.9 or Mg ∼ −20.4). This is more luminous than any corecollapse supernova with the exception of a small fraction
+of Type IIn and superluminous supernovae, both of which
+exhibit very long rise and decay times.
+The fading, like the rise, is quite rapid. The time to
+decline to half of its peak flux is only about 4 days, and
+there is no subsequent rise to a second, radioactively powered peak: the light curve fades monotonically (except in the
+NIR, which exhibits minor but significant fluctuations on
+timescales of 2–3 days). By around 25 days post-discovery
+the transient has a luminosity (Mr ∼ −16) well below that
+of a typical core-collapse supernova at the same phase.
+Finally, the colour is extremely and persistently blue. In
+early observations the colours are close to the Rayleigh-Jeans
+power-law limit, indicating a thermal origin with a spectral
+peak far into the UV (§3.4). Hot, blue early phases of supernovae are common (shortly after shock breakout and before
+adiabatic losses have cooled the ejecta), but AT 2018cow retains a high temperature for a remarkably long period: after
+a month, the optical colours are bluer than most SNe are
+even in their earliest phases and it remains well-detected in
+all UV filters.
+These properties are summarized in Table 3.
+
+8
+
+Perley et al.
+
+Prentice et al. (2018) also independently report the
+exceptionally fast evolution and blue color of this transient,
+as does the recent analysis by Margutti et al. (2018).
+
+than would be expected from this feature alone if it has a
+similar profile as the H and He lines, especially on the blue
+wing.
+
+3.3
+
+3.4
+
+Spectral evolution
+
+The behaviour seen in the spectra is also unprecedented. The
+earliest spectra in our sequence (Figure 4), sampling close to
+the peak time of the transient, show only a hot and smooth
+continuum: they are particularly lacking in emission or absorption features, except for weak emission from host galaxy
+Hα (not shown in our figures since we interpolate over the
+host narrow lines). There is no sign of any flash-ionized emission features (e.g., Gal-Yam et al. 2014; Yaron et al. 2017;
+Khazov et al. 2016).
+Beginning around MJD 58299 (day 4 on our plots), a
+single, extremely broad feature begins to emerge in all of
+our spectra and in our photometry. If interpreted as an absorption trough, its centre is at approximately 4600 Å with
+a full-width of 1500 Å. It is vaguely reminiscent of the Fe
+II feature seen in broad-lined Ic supernovae around peak
+light (e.g. Galama et al. 1998), a resemblance that led to
+early suggestions of a Ic-BL classification (Xu et al. 2018;
+Izzo et al. 2018). Simultaneously with the emergence of this
+feature, a very bright radio/submillimeter afterglow was
+detected (de Ugarte Postigo et al. 2018; Bright et al. 2018;
+Dobie et al. 2018) which—at the time—seemed to seal the
+Ic-BL association and led to anticipation that these features would strengthen and a supernova peak would emerge
+shortly in the light curve.
+This is not what happened: while the feature strengthens slightly between days 4 and 5, from then on it begins
+to dissipate and by day 8 it vanishes entirely, returning to a
+largely featureless blue continuum (Perley et al. 2018).
+Very different evolution sets in after this time. First, a
+weak and moderately-broad (full-width ∼ 200Å; v ∼ 10000
+km/s) emission feature centred at ≈ 4850 Å begins to emerge:
+it is difficult to recognize because spectra during this period
+are of low quality owing to the presence of the nearly-full
+moon, but is seen consistently in both the LT and the SEDM
+spectra on days 9, 11, 12, and 14 (Figure 5); it was also independently seen in NOT spectra reported by (Benetti et al.
+2018). Its most likely interpretation is He ii λ4686. The line
+fades thereafter, but a variety of other lines of similar velocity width and offset begin to appear between 20–30 days.
+Emission features of He i λ5876 and He i λ5015 are clearly
+visible starting at ∼15 days, along with emission from Hα
+(in a blend with He i λ6678), Hβ, Hγ, Hδ, and a blend of
+several higher Balmer lines. All of these lines are significantly and consistently offset to the red by about +3000
+km/s at the time of first detection. However, over the subsequent 10–20 days the profiles evolve blueward, developing a
+“wedge” shape: the peak (which often contains a weak narrow component) is very close to the rest-frame wavelength,
+with a steep fall towards the blue and a very gradual one
+towards the red (Figure 6). Additional lines, including He i
+λ7065, weak Ca ii] λλ7291,7324, and (possibly) O i λλ6300,
+6363 also begin to emerge at later times (> 30 days). A very
+strong, broad upturn between 8000–9000 (also easily visible
+in the photometry as a z-band excess) emerges around this
+time as well, although its origin is unclear: its wavelength is
+close to that of the Ca ii IR triplet but it is much broader
+
+Physical Properties
+
+To characterize the early SED, we first construct coeval sets
+of photometry by performing a nonparametric interpolation of the light curve for each filter (the same procedure
+was used in the g and r bands to colour-correct the spectroscopy; Section 2.6). Galactic extinction is corrected using
+the Fitzpatrick (1999) attenuation curve and EB−V = 0.07
+(Schlafly & Finkbeiner 2011). We assume no extinction in
+the host galaxy.
+The early SEDs are unambiguously thermal. The
+UVOIR slope (Fν ∝ ν α ) during the first epoch is α=1.2 ± 0.1
+as measured between the u and the z bands: close to the
+Rayleigh-Jeans α = 2 and inconsistent (in particular) with
+synchrotron emission, which exhibits α= 0.33 below the peak
+frequency and −0.5 to −1.25 above it (e.g., Sari et al. 1998).
+The colour of the transient becomes gradually less blue as
+time passes, but it remains effectively thermal throughout,
+with the peak (in νFν ) remaining in the UV at all times.
+To characterize the evolution of the photosphere, we
+fit a Planck function to the UV-optical data at the time of
+each UVOT epoch. A single Planck function fits the UV and
+most optical filters well at essentially every epoch, but underpredicts the NIR fluxes after a few days; it also cannot
+explain the persistent “dip” seen in the uBg filters in several
+early optical observations (Figure 7). We thus exclude the
+uBg filters from the fits, and add an additional red component to the model. The form of this red component is not
+well-constrained by our data (our light curve coverage in
+the NIR is very incomplete outside the H-band). We tried
+both a second blackbody and a power-law; we obtain acceptable fits to most bands for a blackbody with a constant,
+low (∼3000 K) temperature and a power-law with spectral
+index (Fν ∝ ν α ) of α ∼ −0.75. We prefer the power-law
+model: a warm blackbody is not well-justified theoretically
+(the observed temperature is too hot to be easily explained
+as dust, although similar red components have been seen in
+some SNe; e.g., Kangas et al. 2016), whereas a synchrotron
+power-law of α ∼ 0.5 − 1.0 is expected given the bright radio
+afterglow (and an extrapolation of the flux to the millimeter band provides reasonable consistency with reported millimeter fluxes). The z-band at late times shows strong excess
+relative to either model and is excluded from our final fits.
+We fix the spectral index at α = −0.75 for all epochs.
+At very late times (> 45d) our ground-based coverage
+becomes sparse, due to both the fading of the transient and
+the shortening window of observations each night. At these
+times we fix our epochs to the ground-based (LT) epochs,
+interpolating the low-S/N (but numerous) UVOT fluxes via
+local regression. We caution that derived parameters in this
+regime are particularly uncertain due to the absence of NIR
+coverage, presence of emission features, and systematics associated with the host subtraction. For the last epoch (65
+days) the power-law component could not be constrained
+and is fixed by extrapolation of the preceding epochs.
+Results are plotted in Figure 8 and listed in Table 4.
+At peak, the object is very hot (30000 K) and already quite
+large in size, with an inferred radius of almost 1015 cm. This
+MNRAS 000, 000–000 (2018)
+
+9
+
+Flux density (µJy)
+
+104
+
+3
+
+10
+
+2.2
+14
+
+16
+
+19
+23
+26
+18
+
+AB magnitude
+
+2.9
+3.5
+4.2
+5.2
+6.2
+7.5
+9.2
+11
+14
+16
+
+31
+37
+
+102
+
+44
+20
+
+53
+
+101
+
+2000
+
+5000
+
+10000
+
+Rest wavelength (Å)
+Figure 4. Spectral energy distribution (in fν ) sequence of AT2018cow from the UV to the NIR, with selected spectra overplotted. (The
+closest high-quality spectrum to each photometric reference epoch is shown, rescaled by a constant factor to match the absolute flux
+level). The spectrum is initially (days 2–3) hot and featureless. A broad absorption feature develops in the UV/blue region of the spectrum
+starting around day 4, but disappears again by day 9. Narrower features begin to emerge after > 10 days, and the NIR bands become
+dominated by a red SED component that peaks around 10000 Å. Our photometry and spectroscopy show good consistency (except in
+z-band at late times). In particular, both show the early, broad spectral feature between 3500–5500 Å.
+
+implies fast ejecta: given the ASAS-SN pre-explosion limit,
+the time of the first SED was only ∼ 4 days after the initial
+explosion time and thus the expansion speed must exceed
+> 0.1c. Alternatively, the rapid expansion of the photosphere
+could imply a high-velocity shock traversing pre-existing, optically thick material. However, the broad absorption feature
+independently implies that this material must also be traveling at of > 0.1c at this time, so if the transient is due to
+an explosion (c.f. §5.2) it must represent part of the ejecta.
+Surprisingly, after this initial rise no further expansion
+is inferred: the photospheric radius declines continuously
+throughout our observations. This is extremely unusual for
+a supernova: normally, the photosphere expands with the
+expanding material in the early, optically-thick phases.
+The temperature initially declines with time, as expected for most explosive transients. However this parameter, too, begins to exhibit unusual evolution at later epochs:
+after 20 days the temperature curve levels off and in subsequent epochs it actually increases, levelling off at about
+17000 K before possibly falling again in the last epoch. The
+significance of the late increase is dependent on the SED
+model (and in particular the treatment of the red excess)
+and on the UV host subtraction procedure, but the temperMNRAS 000, 000–000 (2018)
+
+ature is, in any case, still extremely high 1–2 months after
+peak light.
+The bolometric luminosity of the transient decays in a
+remarkably simple fashion similar to a power-law in time.
+Setting t=0 to our reference epoch of MJD 58285, the temporal index (F ∝ t β ) is β ∼ −2.5, steeper than but not remarkably different from the classical -5/3 expected for TDEs
+and similar accretion-powered events.
+We have plotted the luminosity of the two fitted components (the thermal peak and the possibly non-thermal red
+component) separately in the top panel of Figure 8; the
+non-thermal component is integrated only at λ > 1000 Å.
+The non-thermal flux shows a similar average decay as the
+X-ray (supporting the notion that it arises from a physically distinct region from the thermal emission) but does
+not show the same strong temporal variations (see also
+Rivera Sandoval et al. 2018), so it is not clear whether they
+truly represent the same component. However, the red bands
+do show much greater variability than the bluer filters at
+early times: this is best illustrated by an apparent i-band
+bump at 20 days visible in Figure 2. (Unfortunately, this
+event coincided with the only gap in LT coverage during the
+
+Perley et al.
+3.0
+
+5
+
+11
+
+2.2
+2.9
+
+19
+
+Flux fλ (normalized+offset)
+
+4
+4.3
+4.7
+5.2
+5.6
+
+26.4
+
+1.5
+
+33.3
+39.3
+
+1.0
+
+44.3
+
+7.1
+
+9.2
+
+Hα
+
+3
+
+CaII 7291+7324
+
+53.4
+
+0.5
+
+8.3
+
+He I 5876
+
+Flux normalized to continuum model (+offset)
+
+6.2
+
+22
+
+2.0
+
+He I 7065
+
+4
+
+15.4
+
+2.5
+
+3.5
+
+He I 6678
+
+10
+
+0.0
+11
+
+6000
+
+6500
+Rest wavelength (Å)
+
+7000
+
+12.2
+
+Figure 6. Late-time spectra of AT 2018cow showing the central
+region of the spectrograph. Host-galaxy emission has not been
+removed; the gap is the telluric band. The helium lines are completely absent at +11 days, but begin to appear at +15 days. At
++30 days they develop a weak blueshifted narrow component.
+
+14
+15.4
+19
+
+2
+
+22.5
+26.4
+
+31.3
+33.3
+
+1
+
+CaII 7291+7324
+
+He I 7065
+
+Hα
+He I 6678
+
+OI 6300+6363
+
+44.3
+
+He I 5876
+
+Hβ
+He I 4922
+He I 5015
+
+He II 4686
+
+He I 4471
+
+Hγ
+
+Hδ
+
+Hε
+
+39.3
+
+0
+4000
+
+5000
+6000
+7000
+Rest wavelength (Å)
+
+8000
+
+9000
+
+Figure 5. Sequence showing a subset of our spectra after division and normalization by a blackbody model, fit to the coeval
+photometry (Figure 7). Line identifications are shown as vertical coloured bars, all of which emerge only at later times. Thin
+dashed lines show the rest wavelength of each transition, while
+the shaded bands show the approximate observed widths of the
+emission component.
+
+first month, so we lack H and z photometry to confirm its
+origin.)
+3.5
+
+Host Galaxy Properties
+
+To characterize the host galaxy in more detail, we gather
+multi-wavelength photometry from UV to NIR. We use
+photometry from the NASA Sloan Atlas, which includes
+both optical photometry from the Sloan Digital Sky Survey (SDSS; York et al. 2000) and UV photometry from the
+Galaxy Evolution Explorer (GALEX; Martin et al. 2005) using the elpetrosian aperture flux (Blanton et al. 2011). We
+also perform our own photometry using images from the
+
+Pan-STARRS 3pi survey (Kaiser et al. 2010), the Two Micron All-Sky Survey (2MASS; Huchra et al. 2012) and the
+Wide-field Infrared Survey Explorer (WISE; Wright et al.
+2010). Our photometry (AB mags, not corrected for Galactic extinction) is presented in Table 5.
+We fit the broad-band spectral energy distribution using LePhare (Ilbert et al. 2006), correcting for foreground
+extinction before fitting the SED. We assume a Chabrier
+(2003) IMF, a metallicity between 0.2Z ⊙ < Z < Z ⊙ , a
+Calzetti et al. (2000) extinction law, and otherwise use an
+identical procedure to that employed in Taggart et al. 2018
+(in prep). The W3 and W4 filters (which are dominated by
+PAH emission features) were not included in the fit. We de+0.17 ×109 M and a total
+rive a stellar mass of M∗ = 1.42−0.29
+⊙
++0.03 M yr−1 . The galaxy
+star-formation rate of SFR = 0.22−0.04
+⊙
+photometry and final SED fit are shown in Figure 9.
+These properties suggest a star-forming dwarf spiral
+similar to the Large Magellanic Cloud. Its mass is smaller
+than that of the majority of galaxies that produce corecollapse supernovae, but is well within the distribution.
+While clearly star-forming, the galaxy is not particularly
+young nor is it undergoing a notable burst of star-formation.
+
+4
+
+COMPARISONS TO PREVIOUS EVENTS
+
+4.1
+
+A Fast Extreme-Luminosity Transient Seen
+Up-Close
+
+The fast rise, early peak, and subsequent rapid decay do
+not resemble any common class of extragalactic transient.
+While supernovae can show early, luminous peaks associated with shock heating, these are inevitably followed by
+either a long plateau (as in SNe IIP or IIn) or by a second, radioactively powered peak (in SNe IIb, SNe Ib/c, and
+GRB-SNe). A few classical examples of this are shown in
+the top row of Figure 10: SN 1993J (Richmond et al. 1996;
+MNRAS 000, 000–000 (2018)
+
+11
+
+t= 3.44
+
+t= 4.22
+
+t= 5.69
+
+t= 6.56
+
+t= 7.28
+
+t= 8.81
+
+t= 9.61
+
+t=10.58
+
+t=11.68
+
+t=13.39
+
+t=14.62
+
+t=15.65
+
+t=16.79
+
+t=17.04
+
+t=18.17
+
+t=18.78
+
+t=20.64
+
+t=21.77
+
+t=22.16
+
+t=23.15
+
+t=24.23
+
+t=25.22
+
+t=26.16
+
+t=27.42
+
+t=29.75
+
+t=31.52
+
+t=33.93
+
+t=35.24
+
+t=37.23
+
+t=40.36
+
+t=42.15
+
+t=44.22
+
+t=49.88
+
+t=54.90
+
+t=61.92
+
+t=69.46
+
+104
+
+1034
+10
+
+103
+
+Flux fν (µJy)
+
+103
+
+103
+
+102
+103
+
+102
+
+102
+
+101
+103
+
+104 103
+
+104 103
+
+104 103
+
+104 103
+
+104 103
+
+104
+
+Wavelength (Å)
+Figure 7. Fits to the multi-epoch photometry using a combined blackbody (blue curve) and power-law (red curve) model. The green
+curve shows the sum of these models. Data points that are not enclosed in circles are excluded from the fits, usually due to contamination
+by strong emission or absorption features.
+
+Barbon et al. 1995) and SN 2006aj (Campana et al. 2006;
+Ferrero et al. 2006), as well as the double-peaked superluminous supernova SN 2006oz (Leloudas et al. 2012). In all
+cases the late-time flux of these reference objects exceeds
+that of AT 2018cow by several magnitudes.
+
+include iPTF16asu (Whitesides et al. 2017), an initially featureless transient that later developed into a SN Ic-BL; all
+members of the Arcavi et al. (2016) sample (SNLS04D4ec,
+the fastest of these, is shown); and the unknown transient
+“Dougie” (Vinkó et al. 2015).
+
+The rest of Figure 10 shows comparisons between the
+light curve of AT 2018cow and a variety of luminous, fastrising transients from different surveys. These transients are
+diverse, exhibiting differences in both temporal and colour
+evolution. Several retain a high luminosity for a long period
+and fail to replicate the fast fading of AT 2018cow. These
+
+The most convincing matches by far are the luminous
+members of the PS1 sample from Drout et al. (2014): PS111qr and PS1-12bv, shown at bottom right. While not quite
+as luminous or as fast-evolving as AT 2018cow, these events
+manage to replicate the fast rise, fast decay, and consistent
+blue colours around the peak time. (The less luminous ob-
+
+MNRAS 000, 000–000 (2018)
+
+12
+
+Perley et al.
+1011
+1044
+
+4x105
+
+1010
+
+2x105
+105
+
+1043
+
+MJD
+
+5x104
+
+109
+
+2x104
+104
+
+1042
+
+(Lsun)
+
+Luminosity (erg s−1)
+
+Table 4. Photospheric parameters derived from a combined synchrotron+blackbody fit to the UV-optical-NIR data. Uncertainty
+estimates are statistical errors only.
+
+Eddington limit for MBH = 106 Msun
+
+58288.44
+58289.22
+58290.69
+58291.56
+58292.28
+58293.81
+58294.61
+58295.58
+58296.68
+58298.39
+58299.62
+58300.65
+58301.79
+58302.04
+58303.17
+58303.78
+58305.64
+58306.77
+58307.16
+58307.70
+58308.15
+58309.23
+58310.22
+58310.70
+58311.16
+58311.76
+58312.42
+58314.75
+58316.52
+58318.93
+58320.24
+58322.23
+58324.03
+58325.36
+58326.17
+58327.15
+58329.22
+58334.88
+58339.90
+58346.92
+58354.46
+
+108
+41
+
+10
+
+All UVOIR
+Thermal UVOIR
+X−ray
+Nonthermal UVOIR
+
+107
+
+1×1015
+v = 0.1c
+
+60
+50
+/s
+
+6×1014
+
+00
+
+v=
+
+14
+
+km
+
+40
+
+30
+
+30
+
+4×10
+
+20
+2×1014
+
+10
+
+v = 300 km/s
+
+0
+
+0
+
+3×104
+
+30
+
+2×104
+
+20
+
+1×104
+
+10
+
+(103 K)
+
+Temperature (K)
+
+(AU)
+
+Radius (cm)
+
+8×1014
+
+0
+10
+
+20
+
+30
+40
+MJD−58285
+
+50
+
+60
+
+0
+70
+
+Figure 8. Physical properties based on the blackbody fits shown
+in Figure 7. In the top panel, the green data points show the luminosity inferred by summing the total Stefan-Boltzmann luminosity of the thermal component and an integral of the power-law
+component for λ > 1000 Å. (Each component is also shown separately as blue and red points, respectively.) The X-ray light curve
+is also shown in grey.
+13
+
+AB magnitude
+
+15
+
+16
+103
+
+Flux density (µJy)
+
+104
+
+14
+
+17
+
+18
+103
+
+104
+Wavelength (Å)
+
+Figure 9. Spectral energy distribution for the host galaxy
+of AT2018cow. Multi-band photometry from GALEX, SDSS,
+2MASS, and WISE is shown in purple and the best-fit SED model
+(with M∗ = 1.42+0.17
+×109 M ⊙ , SFR = 0.22+0.03
+M ⊙ yr−1 ) is shown
+−0.29
+−0.04
+as a curve.
+
+L (L⊙ )
+
+R (AU)
+
+T (kK)
+
++2.32e+10
+8.96e+10−1.19e+10
++2.46e+10
+6.64e+10−8.66e+09
++6.67e+09
+2.75e+10−1.70e+09
++4.81e+09
+2.13e+10−2.04e+09
++3.91e+09
+1.53e+10−1.06e+09
++1.17e+09
+9.47e+09−8.92e+08
++5.24e+08
+7.53e+09−1.02e+09
++6.60e+08
+6.23e+09−5.08e+08
++5.53e+08
+5.15e+09−3.42e+08
++3.19e+08
+4.29e+09−4.10e+08
++2.12e+08
+3.22e+09−2.46e+08
++2.74e+08
+2.64e+09−1.64e+08
++2.02e+08
+2.06e+09−9.79e+07
++1.64e+08
+1.95e+09−1.24e+08
++1.05e+08
+1.61e+09−9.91e+07
++1.12e+08
+1.54e+09−1.16e+08
++8.66e+07
+1.41e+09−1.06e+08
++8.69e+07
+1.13e+09−6.57e+07
++7.78e+07
+1.06e+09−7.25e+07
++7.34e+07
+9.69e+08−5.53e+07
++8.19e+07
+9.27e+08−5.71e+07
++5.32e+07
+9.04e+08−5.56e+07
++4.16e+07
+7.73e+08−5.47e+07
++5.02e+07
+6.79e+08−4.02e+07
++5.06e+07
+6.29e+08−3.89e+07
++4.82e+07
+6.26e+08−3.94e+07
++4.23e+07
+6.23e+08−5.01e+07
++2.74e+07
+4.82e+08−3.48e+07
++2.91e+07
+3.96e+08−2.75e+07
++2.72e+07
+3.46e+08−2.22e+07
++2.92e+07
+3.00e+08−2.24e+07
++2.42e+07
+2.78e+08−1.63e+07
++2.54e+07
+2.41e+08−1.14e+07
++1.94e+07
+2.10e+08−1.20e+07
++1.70e+07
+1.99e+08−1.87e+07
++2.66e+07
+1.81e+08−1.22e+07
++2.16e+07
+1.60e+08−8.68e+06
++2.32e+07
+9.52e+07−1.52e+07
++1.67e+07
+5.63e+07−1.90e+07
++2.52e+07
+3.94e+07−8.20e+06
++1.02e+07
+1.68e+07−9.16e+05
+
+52.77+4.70
+−3.98
+47.72+3.89
+−4.51
+44.29+1.89
+−4.35
+38.99+2.44
+−3.74
+39.04+2.18
+−4.88
+36.39+1.45
+−3.94
+32.99+3.97
+−1.54
+29.24+2.29
+−2.59
+27.07+2.10
+−1.84
+24.51+2.08
+−0.78
+24.96+1.28
+−1.25
+23.50+1.31
+−1.37
+22.19+1.52
+−1.40
+21.69+1.43
+−1.35
+19.86+1.42
+−1.23
+19.47+1.79
+−1.20
+18.46+1.76
+−1.66
+18.62+1.13
+−1.05
+18.46+1.66
+−1.64
+18.07+1.22
+−1.34
+17.70+1.39
+−1.42
+16.00+1.34
+−1.22
+15.19+1.31
+−0.78
+14.78+1.37
+−1.18
+14.30+1.18
+−1.39
+13.33+1.28
+−1.45
+12.88+1.67
+−1.21
+12.82+1.25
+−1.10
+11.38+1.32
+−1.11
+9.34+0.84
+−1.00
+9.13+0.85
+−0.96
+7.70+0.57
+−0.80
+6.64+0.65
+−0.79
+6.06+0.60
+−0.64
+5.91+0.88
+−0.69
+5.46+0.45
+−0.72
+5.09+0.64
+−0.75
+4.41+1.01
+−1.16
+3.56+1.38
+−0.86
+3.37+0.90
+−1.33
+4.14+1.09
+−1.70
+
+31.39+3.10
+−2.04
+30.58+4.12
+−2.06
+25.42+3.19
+−0.60
+25.42+2.98
+−1.08
+23.37+3.40
+−0.77
+21.20+2.22
+−0.80
+20.91+0.90
+−1.49
+21.25+1.37
+−1.02
+20.90+1.24
+−0.76
+20.91+0.78
+−1.17
+19.32+0.73
+−0.83
+18.84+1.11
+−0.76
+18.04+0.97
+−0.64
+18.00+0.85
+−0.80
+17.57+0.75
+−0.74
+17.28+0.81
+−0.89
+17.09+1.00
+−0.87
+16.23+0.70
+−0.62
+16.01+0.87
+−0.68
+15.84+0.75
+−0.66
+15.81+0.96
+−0.71
+16.55+0.62
+−0.76
+16.10+0.68
+−0.69
+15.55+0.84
+−0.60
+15.30+0.83
+−0.55
+15.67+0.98
+−0.84
+15.71+0.81
+−0.93
+14.82+0.76
+−0.86
+15.34+0.95
+−0.73
+15.94+1.22
+−0.70
+15.66+1.12
+−0.74
+16.83+1.46
+−0.76
+17.53+1.64
+−0.98
+17.31+1.16
+−1.15
+17.43+1.13
+−1.37
+17.81+2.07
+−0.88
+17.43+2.27
+−1.21
+16.96+3.17
+−1.93
+17.14+3.79
+−2.95
+16.30+7.28
+−1.86
+10.74+6.65
+−1.54
+
+jects in that sample are more questionable: in addition to
+being less luminous by a factor of ∼10 they fade more slowly
+and clearly become redder at late times.)7
+Additionally, both PTF 09uj (Ofek et al. 2010) and
+KSN-2015K (Rest et al. 2018) also represent good light-
+
+7
+
+The DES fast transients of Pursiainen et al. (2018) do not yet
+have publicly available light curves and are not shown in Figure
+10. Like the PS1 transients, they exhibit a variety of luminosities but all are fast-evolving and most are blue at peak. Some
+also show evidence of sustained high temperatures and contracting photospheres, similar to what observed in AT 2018cow. The
+HSC transients of Tanaka et al. (2016) were observed only in g
+and r and generally only during the rising phase, so post-peak
+constraints are not available.
+MNRAS 000, 000–000 (2018)
+
+13
+Table 5. Host-galaxy photometry from pre-imaging observations.
+Filter
+
+AB mag
+
+uncertainty
+
+FUV
+NUV
+u
+g
+g
+r
+r
+i
+i
+z
+z
+Y
+J
+H
+Ks
+W1
+W2
+W3
+W4
+
+18.376
+17.880
+16.763
+15.578
+15.573
+15.021
+15.048
+14.725
+14.814
+14.544
+14.626
+14.481
+14.153
+14.073
+14.320
+15.370
+16.007
+14.989
+14.673
+
+0.210
+0.038
+0.036
+0.003
+0.010
+0.002
+0.017
+0.009
+0.018
+0.020
+0.024
+0.046
+0.054
+0.081
+0.106
+0.007
+0.017
+0.032
+0.242
+
+Survey
+GALEX
+GALEX
+SDSS
+SDSS
+Pan-STARRS
+SDSS
+Pan-STARRS
+SDSS
+Pan-STARRS
+SDSS
+Pan-STARRS
+Pan-STARRS
+2MASS
+2MASS
+2MASS
+WISE
+WISE
+WISE
+WISE
+
+curve matches to AT 2018cow. Neither has multi-epoch
+colour information and they are 1–2 mag fainter at peak,
+although the pre-peak UV-optical colour of PTF 09uj and
+the single-epoch colours of KSN-2015K suggest that these
+transients were indeed similarly blue.
+None of these transients have been characterized in detail, although the few spectra that exist are generally featureless (PTF 09uj exhibited weak, narrow emission lines
+of hydrogen.) All were found in star-forming galaxies offset
+from their host nuclei.
+The rate of fast, blue transients was estimated from the
+Pan-STARRS sample (Drout et al. 2014): they measured a
+value of 4–7% of the core-collapse supernova rate, equivalent
+to 1 per year within a radius of 40 Mpc. Given this rate, it
+seems credible that one might be detected at 60 Mpc in the
+first few years of high-cadence all-sky observations by ATLAS or ZTF. (Conversely, given the detection of an event
+this close within ATLAS/ZTF, it would be surprising if similar events were not present in PS1 and other surveys.)
+For these reasons, we argue that AT 2018cow is very
+likely related to the population of fast, blue, luminous
+transients seen by PS1 (and also by DES and HSC;
+Pursiainen et al. 2018; Tanaka et al. 2016). Earlier studies
+almost universally attributed these transients to supernovae
+undergoing shock breakout into, or interaction with, a dense
+wind or shell close to the progenitor (Ofek et al. 2010). The
+extensive additional observations available for AT 2018cow
+allow us to examine this connection in much more detail.
+
+The early, broad feature8 has no obvious analogue in
+any previous event. It bears some loose resemblance to the Fe
+II P-Cygni absorption trough seen in SNe Ic-BL, but overlying a much hotter continuum. We attempted to subtract the
+hot continuum to test this connection more rigorously, but
+the match is poor, being both too blue and too broad (Figure 11) compared to even the earliest spectra of SN1998bw
+or SN2002ap (Patat et al. 2001; Kinugasa et al. 2002), or of
+the spectrum of SN2008D (Modjaz et al. 2009) during its
+shock-cooling phase.9 As of yet we have no convincing explanation for the origin of this feature, other than that it
+implies very fast (nearly relativistic) ejecta.
+The identities of the features seen in later spectra (H
+and He in broad emission) are secure. In spite of this, these
+later spectra bear no obvious resemblance to any class of
+known supernova. The strongest similarities are to Type IIn
+supernovae (which can also remain hot for several weeks after explosion, and are emission-dominated by definition): in
+the bottom panel of Figure 11 we plot AT 2018cow versus an
+early spectrum of SN 1998S from Fassia et al. (2001), which
+shows a similar blue continuum and most of the same H
+and He transitions. However, the lines in AT 2018cow are
+not narrow for most of their evolution (v ∼ 6000 km/s, versus a few hundred km/s for SN 1998S). Thomson scattering
+within ionized matter could broaden a line enough to wash
+out the narrow component, but this would not produce the
+net redshift in the emission component that we observe. The
+H and He thus must be in the ejecta itself (and seemingly
+preferentially in receding ejecta given the net redshift).
+In fact, the best spectroscopic analogues to AT 2018cow
+are not supernovae at all. Our spectra bear a striking resemblance to tidal disruption events: the high temperatures, presence of helium and hydrogen features in emission, and moderate velocities all match what is observed for
+TDEs. The spectral features in AT 2018cow are substantially
+weaker than in the examples of TDEs that we are aware of
+(bottom panel of Figure 11; comparison spectra are from
+Holoien et al. 2014, 2016), but the resemblance to a TDE is
+much stronger than to any supernova.
+We summarize the key observational features of
+AT 2018cow in Table 3.
+
+5
+5.1
+
+A Spectroscopically Unique Transient
+
+AT 2018cow shows at least two distinct spectral phases.
+Prior to 10 days it is effectively featureless, save for the
+short-lived, broad blue absorption feature. After 12 days it
+remains hot and blue but exhibits weak features of (redshifted) H, He, and other light elements in emission.
+MNRAS 000, 000–000 (2018)
+
+Supernova Models: A Jet from a Failed
+Supernova?
+
+The location of AT2018cow, and its apparent connection to
+other cosmological events that have also been found outside
+the nuclei of their host galaxies, give ample justification to
+consider a supernova as the most natural interpretation of
+8
+
+4.2
+
+INTERPRETATION
+
+We emphasize that the existence of this feature is secure: it is
+seen with a consistent shape and consistent temporal evolution
+in at least three different independently-reduced spectrographs
+(SEDM, SPRAT, HFOSC) and is also evident in our photometry
+via the evolution of the B − V and g − r colours.
+9 This cannot be because the SN features are washed out by a
+bright afterglow, as was the case for early spectra of SN 2003dh
+/ GRB 030329 (e.g., Hjorth et al. 2003; Deng et al. 2005): the
+continuum is far too blue to be predominantly synchrotron in
+origin (§3.4).
+
+14
+
+Perley et al.
+SN1993J (IIb)
+
+SN2006aj (Ic−BL)
+
+SN2006oz (SLSN)
+
+Dougie +2 mag (TDE?)
+
+iPTF16asu (Ic−BL)
+
+SNLS04D4ec
+
+PTF09uj
+
+KSN−2015K
+
+PS1−10ah
+
+PS1−10bjp
+
+PS1−11qr
+
+PS1−12bv
+
+−20
+−19
+−18
+−17
+−16
+−15
+
+Absolute magnitude
+
+−20
+−19
+−18
+−17
+−16
+−15
+−20
+−19
+−18
+−17
+−16
+−15
+0
+
+5
+
+10
+
+15
+
+20
+
+25
+
+0
+
+5
+
+10
+
+15
+
+20 25
+0
+5
+Rest−frame time (d)
+
+10
+
+15
+
+20
+
+25
+
+0
+
+5
+
+10
+
+15
+
+20
+
+25
+
+Figure 10. Comparison of the light curve of AT2018cow to other classes of fast-rising or luminous events. The dotted lines show
+AT2018cow; solid lines indicate comparison objects with dashed lines connecting upper limits to detections. Filter colour codes are the
+same as in Figure 2 and are matched to rest-frame wavelengths. AT2018cow is insufficiently luminous at late times compared to GRB-SNe
+and also far too blue. It is much faster than any known TDE and the thermal SED is entirely unlike the optically thin spectra of GRB
+afterglows. However, it matches well with the cosmological fast transients found in PS1 and Kepler (and to a lesser extent SNLS) in
+colour, luminosity, and timescale.
+
+this event. However, the observational aspects of this event
+impose severe constraints on any type of stellar explosion.
+The first problem for any supernova model is the need to
+explain the fast rise. Heating from radioactive 56 Ni certainly
+cannot produce it: at least 5 M ⊙ of Nickel would be needed to
+power the luminosity of AT 2018cow at peak, which is orders
+of magnitude greater than the total ejecta mass that would
+be inferred from the fast rise given standard assumptions
+trise 2
+about diffusion (Mej ∼ ( 20d
+) M ⊙ or approximately 0.01 M ⊙ ;
+Arnett 1982; Rest et al. 2018).
+A natural alternative is shock heating. Most corecollapse SNe are believed to exhibit an early shock-breakout
+and shock-cooling phase in which the stellar photosphere is
+nearly-instantaneously heated to X-ray temperatures by the
+emergence of the SN shock, producing a rapid rise in the
+
+light curve (Waxman & Katz 2017). However, for standard
+types of stellar progenitor the shock-cooling rise time is far
+too fast to explain AT 2018cow’s 2–3 day rise. A multi-day
+rise could be achieved only if the progenitor was quite extended (R ∼ 1014 cm, or about 10 AU).
+This radius is similar to that of the largest red supergiants. However, a massive stellar envelope of this nature
+would greatly slow down the later evolution of the SN, producing a “plateau” phase rather than sudden fading. The
+photosphere at the time of shock breakout thus would have
+to be unbound, with the shock breaking out into a dense
+wind or ejected shell associated with recent, intense mass
+loss.
+Evidence has been accumulating in recent years that
+extreme mass loss shortly before explosion is common
+MNRAS 000, 000–000 (2018)
+
+15
+
+Relative flux Fλ (cgs)
+
+1.0
+0.8
+
+AT2018cow (5.3 d)
+
+0.2
+
+SN2008D
+SN1998bw
+SN2002ap
+
+0.1
+
+Continuum subtracted
+
+0.6
+0.0
+
+0.4
+
+−0.1
+
+0.2
+0.0
+
+−0.2
+4000
+
+5000
+6000
+7000
+Rest wavelength (Å)
+
+8000
+
+1.0
+
+4000
+
+8000
+
+0.3
+
+AT2018cow (26.4 d)
+vs. SN 1998S
+vs. ASASSN−15oi
+vs. ASASSN−14ae
+
+0.8
+Relative flux Fλ
+
+5000
+6000
+7000
+Rest wavelength (Å)
+
+Continuum subtracted
+0.2
+
+0.6
+0.1
+0.4
+0.0
+
+0.2
+0.0
+
+−0.1
+4000
+
+5000
+6000
+7000
+Rest wavelength (Å)
+
+8000
+
+4000
+
+5000
+6000
+7000
+Rest wavelength (Å)
+
+8000
+
+Figure 11. Comparison of an early spectrum of AT 2018cow to the early spectrum of SN 2008D (Ib) and two SNe Ic-BL (top row),
+and of a later-time spectrum to SN 1998S (IIn) and two tidal disruption events (bottom row). The extremely blue, smooth continuum
+bears little resemblance to SN Ib/c, even after attempting to subtract the blue continuum. (A power-law plus a constant have been
+subtracted from AT 2018cow; the reference SN spectra have been subtracted by a constant only. The strength of the features in the SNe
+after subtraction has been suppressed by a factor of 2.) The later-time spectra are dominated by weak emission features of hydrogen and
+helium; these features are also present in IIn SNe but are much narrower compared to what is seen in AT 2018cow. These features are
+seen in known TDEs with similarly broad widths, although typically much greater strengths.
+
+(Ofek et al. 2014; Gal-Yam et al. 2014; Yaron et al. 2017),
+so this may not be surprising. However, other observations
+place further strong constraints on the nature of this recent
+mass loss: the lack of any flash-ionization features, the lack
+of shocked hydrogen or helium, and the lack of further rebrightenings in the light curve all require that the CSM shell
+be quite localized in extent. This may also be possible, if the
+previous mass-loss episode is both singular and explosive.
+Further constraints on the explosion can be imposed
+based on the lack of a second, radioactively powered peak
+in the light curve. Using the bolometric luminosity at 20
+days and scaling relative to SN 2002ap (Mazzali et al. 2002;
+Foley et al. 2003), we estimate MNi < 0.05M ⊙ . While this
+is in the range of masses inferred for “normal” core-collapse
+supernovae (Rubin et al. 2016; Müller et al. 2017), a modest 56 Ni mass seems hard to reconcile with the energetic
+shockwave necessary to produce the extraordinary shockbreakout flash and accelerate substantial ejecta to > 0.1c,
+as inferred from the broad absorption seen in the spectra at
+∼ 1 week10 and by the luminous radio counterpart. (Veloci10
+
+It could be contested whether the broad feature truly rep-
+
+MNRAS 000, 000–000 (2018)
+
+ties this high have been previously seen observationally only
+in GRB-SNe, which have universally high ejecta and nickel
+masses: Mazzali et al. 2014, although c.f. Fynbo et al. 2006).
+Perhaps the shock in this SN was driven not by the
+classical neutrino mechanism (or other forms of energy input from a proto-NS), but solely by an energetic jet driven
+by a black hole following direct collapse of a massive star
+to a black hole (analogous to the original “failed supernova”
+model of Woosley 1993). No high-energy prompt emission
+was observed from AT 2018cow, but the jet could have been
+off-axis or (more likely) choked by the stellar envelope. We
+may then just have seen a short-lived high-velocity pseudophotosphere in the early spectra, which may be supported
+
+resents Doppler-broadened absorption, given the lack of a clear
+identification of the line(s) responsible. However, as the SEDs in
+Figure 4 make clear, this feature shows up clearly as missing flux
+from what is otherwise an excellent fit to a single thermal SED;
+multiple emission components or non-thermal features cannot reproduce this profile. Alternative, non-velocity-broadened sources
+of absorption (e.g. transient dust extinction with an unknown
+broad feature) are unlikely.
+
+16
+
+Perley et al.
+
+by a small amount of material surrounding the jet, either
+dragged by the jet itself or ejected in a disc wind. This material would contain only a small amount of 56 Ni, explaining
+the lack of a radioactive second peak.
+This model (which is similar to that of
+Quataert & Kasen 2012, but with the addition of circumstellar interaction: see also Kashiyama & Quataert
+2015) has some appeal, especially given the observation of
+bright, self-absorbed radio emission which independently
+implies substantial interaction (Ho et al. 2018). Even so, it
+faces formidable challenges. The high-velocity absorption
+implied by our early spectra suggests material that is
+expanding outward rapidly (> 0.1c), but the spectral features seen only two weeks later are quite narrow (∼ 0.02c).
+This could be achieved if the high-velocity ejecta collided
+with a second dense shell of comparable mass—eliminating
+the broad lines and largely halting the expansion of the
+photosphere that would normally be expected in a young
+supernova. But the resulting shock-wave should then have
+excited narrow-line emission of H and perhaps He which
+we do not see. (The H and He lines that eventually emerge
+originate too late and have velocities too broad to be
+attributed to shock interaction).
+Alternative stellar progenitor scenarios beyond corecollapse do not provide any appreciable resolution to these
+contradictions. Large energies and small 56 Ni masses are
+expected for neutron star merger models, but such events
+should not possess significant hydrogen or helium. Furthermore, AT2018cow empirically bears no relation to the
+(much dimmer, fast-cooling, fast-expanding) optical counterpart of GW 170817 (McCully et al. 2017; Kasliwal et al.
+2017; Evans et al. 2017; Villar et al. 2017; Pian et al. 2017).
+White-dwarf explosions (variants on Ia or accretion-induced
+collapse models; e.g., Brooks et al. 2017; Poznanski et al.
+2010) are also likely to be poor in H and He, and heavily
+suppress the UV via iron line blanketing in the ejecta.
+Perhaps the biggest challenge for any supernova model
+is the lack of expansion of the photosphere. Pursiainen et al.
+(2018) noted that a hot, receding photosphere is expected in
+the wind shock-breakout model due to the rapid expansion
+of the unbound shock-heated material, but this will only be
+true during the early phases: the photosphere should eventually reach the dense stellar envelope, after which its evolution
+should follow that of typical supernovae. Regardless of the
+progenitor structure, it is difficult to understand how freelyexpanding ejecta would maintain a photosphere on a scale
+of only 1014 cm 40 days after the explosion: the material
+at the photosphere could be expanding no faster than 300
+km/s (much slower than the width inferred by the observed
+lines at late times.)
+5.2
+
+Tidal Disruption Models: Disruption of a Star
+by an IMBH?
+
+In spite of the circumstantial evidence for a SN origin (the
+event occurred in a spiral arm) there are many reasons to
+look more broadly at progenitor models, and in particular
+to consider a tidal disruption event as an alternative.
+Many of the properties of the transient that cause the
+most difficulty for the SN interpretation are natural components of TDE models. The bolometric light curve declines
+as a power-law, as expected under simple TDE models (al-
+
+though the decay is steeper than the canonical t −5/3 ). The
+lack of an early free-expansion phase and the maintenance
+of a high temperature are also similar to expectations for
+TDEs, which provide continued energy input via BH accretion and whose potential well hampers free expansion of
+the ejecta. And a TDE origin would also explain the H and
+He-rich late-time spectra (which empirically resemble known
+TDEs more closely than any SN).
+Aside from its peculiar location, the primary feature
+that distinguishes AT2018cow from known TDEs is its
+timescale: typical TDEs have rise times of weeks to months
+and decay times even longer. Faster TDEs have been found
+more recently (Blagorodnova et al. 2017), but even these
+have characteristic timescales an order of magnitude longer
+than AT 2018cow.
+A possible resolution is a smaller black hole mass:
+known TDEs appear to show an empirical timescalemass correlation (e.g., Blagorodnova et al. 2017), and
+there are also reasons to expect one theoretically
+(Guillochon & Ramirez-Ruiz 2013). To better constrain the
+black hole mass under a TDE model, we fit the UV/optical
+data using two different methods: using simple scaling relations, and using a full MCMC fit to the light curve.
+We first fit the bolometric (UVOIR) light curve to a
+t−t0 −n
+) . We obtain
+power-law decay of the form L(t) = L0 ( t−t
+D
+an excellent fit with a power-law index of n = 3.0 ± 0.1
+and a time of disruption (tD ) of −1.5 ± 0.3 (relative to
+MJD 58285). Under this scenario the implied rise-time-to
+peak of tpeak = t0 − tD = 5.0d, according to the simulations
+of Guillochon & Ramirez-Ruiz (2013) for a solar-type star,
+would correspond to a black hole of 1.5 × 104 M ⊙ .
+Additionally, we fit the light curve in the g, r,
+and UVOT w2 bands with the MOSFiT TDE model
+(Guillochon et al. 2018; Mockler et al. 2018). The MOSFiT
+TDE model uses hydrodynamic simulations of tidal disruption events from (Guillochon & Ramirez-Ruiz 2013) to calculate the fallback rate of stellar debris to the black hole.
+MOSFiT then converts these fallback rates into bolometric
+luminosities and passes them through viscosity and reprocessing transformation functions to create optical and UV
+light curves. Two adjustments to the model were required to
+obtain a good fit: the peak luminosity was allowed to exceed
+the Eddington limit, and the maximum photosphere radius
+was allowed to reach beyond the apocentres of the Keplerian
+orbits of the stellar debris. Under these circumstances, our
++1.2 × 104 M
+fit prefers a black hole with a mass of Mh = 1.9−0.8
+⊙
+and a star with mass M∗ = 0.6+2
+M
+.
+This
+is
+fully
+consis−0.5 ⊙
+tent with the scaling-relation solution. Fitted light curves
+are presented in Figure 12.
+These parameters correspond to the disruption of
+a main-sequence star around an intermediate-mass black
+hole (IMBH). This would be a significant discovery:
+IMBH disruptions were recently theoretically predicted
+(Fragione & Leigh 2018; Chen & Shen 2018) and if confirmed, would represent evidence for the existence of IMBHs
+in the low-redshift universe, a topic that remains broadly
+controversial. A black hole in this mass range would also
+not conflict with the off-nuclear location: it could originate
+from a globular cluster or from a massive young star cluster.
+However, as the above discussion suggests, the peak luminosity of the transient (∼ 3×1044 erg) is much greater than
+MNRAS 000, 000–000 (2018)
+
+17
+
+6
+
+CONCLUSIONS
+
+Prior to AT 2018cow, fast high-luminosity transients were
+widely attributed to an extreme variant of the shockbreakout scenario that has already been widely appealed
+to in order to explain a variety of nearby supernovae. To
+our surprise, the first real-time detection of a nearby event
+
+14
+
+Super-Eddington-luminosity disruptions by more massive
+black holes are also of interest: the transient “Dougie” was slower
+than AT 2018cow (Figure 10) but was vastly more luminous, and
+the preferred TDE model fit by Vinkó et al. (2015) also indicated
+a highly super-Eddington luminosity, in this case from a somewhat more massive black hole (Mh = 2.0+13.9
+× 105 M⊙ ).
+−1.3
+MNRAS 000, 000–000 (2018)
+
+16
+18
+20
+22
+0
+
+10
+
+20
+
+30
+
+MJD - 58285
+
+40
+
+50
+
+60
+
+Figure 12. Results from an MCMC fit to the data using
+the TDE implementation of MOSFiT (Guillochon et al. 2018;
+Mockler et al. 2018). The rising and falling timescales of this
+transient, along with the slow temperature evolution, are wellreproduced by a model involving the disruption of a Solar-type
+star around an intermediate-mass black hole (∼ 2 × 104 M⊙ ).
+
+belonging to this empirical class has only deepened the mystery surrounding these events. While the off-nuclear location within a star-forming region seems to imply the explosion of a star as a supernova, the actual observational
+properties—including high-velocity absorption in early spectra, a long-lived hot photosphere, a complete lack of narrow
+lines during the first week, and luminous X-ray through radio emission— are all difficult to explain under any existing
+supernova model. If nothing else, any stellar explosion must
+involve a radically different progenitor structure and/or explosion mechanism compared to known SNe.
+In contrast, disruption by an intermediate-mass black
+hole provides an excellent description of the qualitative behaviour of the transient and its later-time spectra. However,
+the highly super-Eddington luminosity of the transient is a
+formidable challenge for IMBH TDE models, and it remains
+to be seen whether alternative explanations for the early
+heating (e.g. circularization of infalling material) provide an
+adequate explanation.
+Studies of fast optical transients are still in their infancy,
+and there is much more to learn both observationally and
+theoretically. While an event as close as AT 2018cow may
+not be a regular occurrence, its sheer brightness suggests
+that others of a similar nature are likely to be observed in
+the near future at somewhat greater distances. Samples of
+the spatially-resolved galaxy environments, total energetics,
+and spectroscopic properties of such events are likely to shed
+light on their nature.
+
+7
+11
+
+UVW2 -1.8
+g -0.7
+r
+
+12
+
+AB magnitude
+
+the Eddington luminosity for a black hole of the mass needed
+to explain its short timescale (∼ 1042 erg for MBH = 104 M ⊙ ).
+While TDEs are expected to have super-Eddington mass
+fallback rates (e.g., Strubbe & Quataert 2009), the radiated
+luminosity is generally expected to be capped at close to
+the Eddington luminosity (Chen & Shen 2018), since higher
+luminosities would disrupt the accretion and drive the luminosity back down. Super-Eddington luminosities could be
+achieved in two ways: by an anisotropic radiation process, or
+by a heating source not directly associated with accretion.
+There is evidence that some TDEs can indeed produce highly anisotropic, relativistic jets (Bloom et al. 2011;
+Levan et al. 2011; Cenko et al. 2012; Burrows et al. 2011).
+The bright (and variable) X-ray and radio emission from
+AT 2018cow (see also Ho et al. 2018; Margutti et al. 2018)
+suggest a similar phenomenon could be present here as well.
+However, the optical radiation which gives rise to our luminosity estimates is unambiguously thermal and not easily
+beamed, so anisotropy is unlikely to resolve the conflict.
+Alternatively, it is possible that the early UV/optical
+emission is related to the circularization process (Piran et al.
+2015; Dai et al. 2018), rather than accretion. The similarity of the peak luminosity of AT2018cow to other
+UV/optical TDEs (Hung et al. 2017) and the expected energy dissipation rate from the circularization process of
+1044 (MBH /106 M ⊙ )−1/6 erg s−1 (Piran et al. 2015) support
+this interpretation. The self-intersection radius for debris
+streams around a 104 M ⊙ black hole is ∼ 5 × 1013 cm
+(Wevers et al. 2017), which is a factor of 10 smaller than
+the observed photosphere radius for AT2018cow. If the luminosity is powered by stream-stream intersections, then the
+photosphere would engulf both the intersection point and
+the black hole. This optically thick reprocessing layer would
+need to be in place by the time of our first observations
+to explain the colour and luminosity of AT2018cow. This
+could be associated with matter blown to larger radii during an early wind phase (Jiang et al. 2016; Metzger & Stone
+2016).
+Further modeling will be needed to examine the behaviour of tidal disruptions around IMBHs during the superEddington phase. If even some of the PS1 and DES events
+belong to the same class as AT 2018cow, there is reason to
+believe that these events are reasonably common and the
+current generation of fast-cadence optical surveys may find
+future examples at similar rates as ordinary, SMBH TDEs.11
+
+ACKNOWLEDGMENTS
+
+DAP acknowledges useful discussions with Matt Darnley
+and Helen Jermak. We thank the referee for helpful comments which improved the quality of this paper.
+This work was supported by the GROWTH project
+funded by the National Science Foundation under Grant No
+1545949. GROWTH is a collaborative project between Cal-
+
+18
+
+Perley et al.
+
+ifornia Institute of Technology, Pomona College, San Diego
+State University, Los Alamos National Laboratory, University of Maryland College Park, University of Wisconsin Milwaukee (USA), Tokyo Institute of Technology (Japan), National Central University (Taiwan), Indian Institute of Astrophysics (India), Weizmann Institute of Science (Israel),
+The Oskar Klein Centre at Stockholm University (Sweden), Humboldt University (Germany), and Liverpool John
+Moores University (UK). This paper used the GROWTH
+marshal to filter alerts and co-ordinate follow-up.
+FT and JS gratefully acknowledge support from the
+Knut and Alice Wallenberg Foundation. JS acknowledges
+the support of Vetenskapsrådet through VR grants 20122265 and 2017-03699.
+AYQH was supported by a National Science Foundation Graduate Research Fellowship under Grant No. DGE1144469. MC was supported by the David and Ellen Lee
+Postdoctoral Fellowship at the California Institute of Technology. JSB was supported by a Data-Driven Discovery
+grant from the Moore Foundation.
+C.-C. Ngeow and P.-C. Yu thank the Ministry of Science and Technology (MoST, Taiwan) for funding under
+grant 104-2923-M-008-004-MY5 and 106-2112-M-008-007.
+This publication has made use of data collected at Lulin
+Observatory, partly supported by MoST grant 105-2112-M008-024-MY3.
+RI is supported by JSPS and NSF under the JSPSNSF Partnerships for International Research and Education
+(PIRE), YT and NK supported by JSPS KAKENHI Grant
+Numbers JP16J05742 and JP17H06362. YT is also financially supported by Academy for Global Leadership (AGL)
+of Tokyo Institute of Technology. MITSuME Akeno 50cm
+telescope is also supported by the joint research program
+of the Institute for Cosmic Ray Research (ICRR), the University of Tokyo, and Optical and Near-Infrared Astronomy
+Inter-University Cooperation Program in Japan (KLM).
+GCA and VB acknowledge the support of the Science and Engineering Research Board, Department of Science and Technology, India and the Indo-US Science and
+Technology Forum for the GROWTH-India project. BK acknowledges the Science and Engineering Research Board under the Department of Science & Technology, Govt. of India, for financial assistance in the form of National PostDoctoral Fellowship (PDF/2016/001563) and BRICS grant
+DST/IMRCD/BRICS/PilotCall1/MuMeSTU/2017(G).
+The Liverpool Telescope is operated on the island of La
+Palma by Liverpool John Moores University in the Spanish Observatorio del Roque de los Muchachos of the Instituto de Astrofisica de Canarias with financial support from
+the UK Science and Technology Facilities Council. We acknowledge helpful support from the entire LT staff, including Robert Smith, Jon Marchant, and Iain Steele, and to
+the LT review panel for approving our requests for Reactive
+time (JQ18A01).
+We acknowledge the use of public data from the Swift
+data archive, and thank the Swift team for executing such a
+thorough observing campaign of this transient.
+This work is partly based on observations made with
+the Nordic Optical Telescope, operated by the Nordic Optical Telescope Scientific Association at the Observatorio del
+Roque de los Muchachos, La Palma, Spain, of the Instituto
+de Astrofisica de Canarias. The data presented here were
+
+obtained in part with ALFOSC, which is provided by the
+Instituto de Astrofisica de Andalucia (IAA) under a joint
+agreement with the University of Copenhagen and NOTSA.
+The William Herschel Telescope is operated on the island of
+La Palma by the Isaac Newton Group of Telescopes in the
+Spanish Observatorio del Roque de los Muchachos of the
+Instituto de Astrofı́sica de Canarias.
+These results made use of the Discovery Channel Telescope at Lowell Observatory. Lowell is a private, non-profit
+institution dedicated to astrophysical research and public
+appreciation of astronomy and operates the DCT in partnership with Boston University, the University of Maryland,
+the University of Toledo, Northern Arizona University and
+Yale University. The upgrade of the DeVeny optical spectrograph has been funded by a generous grant from John and
+Ginger Giovale. We thank Debra Fischer for graciously assisting with our Target of Opportunity request at the DCT.
+This work is partly based on observations made with the
+Kitt Peak EMCCD Demonstrator (KPED) camera on the
+Kitt Peak 84 inch telescope. The KPED team thanks the
+National Science Foundation, discretionary funds of SRK,
+and donors to SRK for support in the building and operation
+of KPED. In addition, they thank the Chimera project for
+use of the EMCCD.
+Some of the data used in this paper were acquired with
+the COATLI telescope and interim instrument, and with
+the RATIR instrument on the 1.5-meter Harold L. Johnson
+telescope; both at the Observatorio Astronómico Nacional
+on the Sierra de San Pedro Mártir, Baja California, México.
+COATLI is funded by CONACyT (LN 232649, 260369, and
+271117) and the Universidad Nacional Autónoma de México (CIC and DGAPA/PAPIIT IT102715, IG100414, and
+IN109408). RATIR is funded by the University of California
+and NASA Goddard Space Flight Center. COATLI and the
+Johnson 1.5-m telescope are operated and maintained by the
+Observatorio Astronómico Nacional and the Instituto de Astronomı́a of the Universidad Nacional Autónoma de México.
+We acknowledge the contribution of Leonid Georgiev and
+Neil Gehrels to the development of RATIR.
+Based partially on data from the Gemini Observatory,
+which is operated by the Association of Universities for Research in Astronomy, Inc., under a cooperative agreement
+with the NSF on behalf of the Gemini partnership: the National Science Foundation (United States), the National Research Council (Canada), CONICYT (Chile), Ministerio de
+Ciencia, Tecnologı́a e Innovación Productiva (Argentina),
+and Ministério da Ciência, Tecnologia e Inovação (Brazil).
+Data were taken under program GN-2018A-Q-902 and acquired through the Gemini Observatory Archive.
+Some data presented herein were obtained at the W.
+M. Keck Observatory, which is operated as a scientific partnership among the California Institute of Technology, the
+University of California and the National Aeronautics and
+Space Administration. The Observatory was made possible
+by the generous financial support of the W. M. Keck Foundation. The authors wish to recognize and acknowledge the
+very significant cultural role and reverence that the summit
+of Maunakea has always had within the indigenous Hawaiian
+community. We are most fortunate to have the opportunity
+to conduct observations from this mountain.
+The 2m Himalayan Chandra Telescope at the Indian Astronomical Observatory is operated by the Indian Institute
+MNRAS 000, 000–000 (2018)
+
+19
+of Astrophysics. Support from IAO staff and HCT observation assistants is acknowledged. We also thank all HCT
+observers who provided part of their time for the observations. The HCT data of 22, 23, 25 and 29 June were obtained
+under the ToO proposals of both D.K.Sahu (PI) and F. Sutaria (PI).
+AstroSat is a dedicated multi-wavelength space observatory funded and facilitated by the Indian Space Research
+Organisation (ISRO). We thank the AstroSat ToO Time Allocation Committee for granting ToO time, and the operations team for carrying out these observations.
+Funding for the SDSS and SDSS-II has been provided
+by the Alfred P. Sloan Foundation, the Participating Institutions, the National Science Foundation, the U.S. Department
+of Energy, the National Aeronautics and Space Administration, the Japanese Monbukagakusho, the Max Planck Society, and the Higher Education Funding Council for England.
+The SDSS Web Site is http://www.sdss.org/. The SDSS is
+managed by the Astrophysical Research Consortium for the
+Participating Institutions.
+The Pan-STARRS1 Surveys (PS1) and the PS1 public science archive have been made possible through contributions by the Institute for Astronomy, the University of
+Hawaii, the Pan-STARRS Project Office, the Max-Planck
+Society and its participating institutes, the Max Planck Institute for Astronomy, Heidelberg and the Max Planck Institute for Extraterrestrial Physics, Garching, The Johns
+Hopkins University, Durham University, the University of
+Edinburgh, the Queen’s University Belfast, the HarvardSmithsonian Center for Astrophysics, the Las Cumbres Observatory Global Telescope Network Incorporated, the National Central University of Taiwan, the Space Telescope
+Science Institute, the National Aeronautics and Space Administration under Grant No. NNX08AR22G issued through
+the Planetary Science Division of the NASA Science Mission Directorate, the National Science Foundation Grant No.
+AST-1238877, the University of Maryland, Eotvos Lorand
+University (ELTE), the Los Alamos National Laboratory,
+and the Gordon and Betty Moore Foundation.
+Finally, we thank the developers and maintainers of the
+Open Supernova Catalog and the Weizmann Spectral Repository, whose databases greatly facilitated the comparisons of
+this event to other transients.
+
+References
+Abolfathi B., et al., 2018, ApJS, 235, 42
+Arcavi I., et al., 2016, ApJ, 819, 35
+Arcavi I., et al., 2017, ApJ, 837, L2
+Arnett W. D., 1982, ApJ, 253, 785
+Barbon R., Benetti S., Cappellaro E., Patat F., Turatto M., Iijima
+T., 1995, A&AS, 110, 513
+Barnsley R. M., Smith R. J., Steele I. A., 2012,
+Astronomische Nachrichten, 333, 101
+Benetti S., Pastorello A., Cappellaro E., Turatto M., Tomasella
+L., Fiore A., Reguitti A., Gromadzki M., 2018, The Astronomer’s Telegram, 11836
+Bhalerao V., et al., 2017, ApJ, 845, 152
+Blagorodnova N., et al., 2017, ApJ, 844, 46
+Blagorodnova N., et al., 2018, PASP, 130, 035003
+Blanton M. R., Kazin E., Muna D., Weaver B. A., Price-Whelan
+A., 2011, AJ, 142, 31
+Bloom J. S., et al., 2011, Science, 333, 203
+MNRAS 000, 000–000 (2018)
+
+Bright J., Horesh A., Fender R., Motta S., Sfaradi I., Titterington D., Perrott Y., Ho A., 2018, The Astronomer’s Telegram,
+11774
+Brooks J., Schwab J., Bildsten L., Quataert E., Paxton B., Blinnikov S., Sorokina E., 2017, ApJ, 850, 127
+Burrows D. N., et al., 2005, Space Sci. Rev., 120, 165
+Burrows D. N., et al., 2011, Nature, 476, 421
+Butler N. R., Kocevski D., 2007, ApJ, 663, 407
+Butler N., et al., 2012, in Ground-based and Airborne Instrumentation for Astronomy IV. p. 844610, doi:10.1117/12.926471
+Calzetti D., Armus L., Bohlin R. C., Kinney A. L., Koornneef J.,
+Storchi-Bergmann T., 2000, ApJ, 533, 682
+Campana S., et al., 2006, Nature, 442, 1008
+Cenko S. B., et al., 2012, ApJ, 753, 77
+Cenko S. B., et al., 2013, ApJ, 769, 130
+Cenko S. B., et al., 2015, ApJ, 803, L24
+Chabrier G., 2003, ApJ, 586, L133
+Chen J.-H., Shen R.-F., 2018, preprint (arXiv:1806.08093)
+Dai L., McKinney J. C., Roth N., Ramirez-Ruiz E., Miller M. C.,
+2018, ApJ, 859, L20
+Deng J., Tominaga N., Mazzali P. A., Maeda K., Nomoto K.,
+2005, ApJ, 624, 898
+Dobie D., Ravi V., Ho A., Kasliwal M., Murphy T., 2018, The
+Astronomer’s Telegram, 11795
+Drout M. R., et al., 2014, ApJ, 794, 23
+Evans P. A., et al., 2017, Science, 358, 1565
+Fassia A., et al., 2001, MNRAS, 325, 907
+Ferrero P., et al., 2006, A&A, 457, 857
+Fitzpatrick E. L., 1999, PASP, 111, 63
+Foley R. J., et al., 2003, PASP, 115, 1220
+Fragione G., Leigh N., 2018, MNRAS
+Fremling C., 2018, The Astronomer’s Telegram, 11738
+Fynbo J. P. U., et al., 2006, Nature, 444, 1047
+Gal-Yam A., et al., 2014, Nature, 509, 471
+Galama T. J., et al., 1998, Nature, 395, 670
+Gehrels N., et al., 2004, ApJ, 611, 1005
+Guillochon J., Ramirez-Ruiz E., 2013, ApJ, 767, 25
+Guillochon J., Nicholl M., Villar V. A., Mockler B., Narayan G.,
+Mandel K. S., Berger E., Williams P. K. G., 2018, ApJS,
+236, 6
+Hjorth J., et al., 2003, Nature, 423, 847
+Ho A. Y. Q., et al., 2018, preprint, (arXiv:1810.10880)
+Holoien T. W.-S., et al., 2014, MNRAS, 445, 3263
+Holoien T. W.-S., et al., 2016, MNRAS, 463, 3813
+Huchra J. P., et al., 2012, ApJS, 199, 26
+Hung T., et al., 2017, ApJ, 842, 29
+Ilbert O., et al., 2006, A&A, 457, 841
+Izzo L., et al., 2018, The Astronomer’s Telegram, 11753
+Jiang Y.-F., Guillochon J., Loeb A., 2016, ApJ, 830, 125
+Kaiser N., et al., 2010, in Ground-based and Airborne Telescopes
+III. p. 77330E, doi:10.1117/12.859188
+Kangas T., et al., 2016, MNRAS, 456, 323
+Kashiyama K., Quataert E., 2015, MNRAS, 451, 2656
+Kasliwal M. M., et al., 2017, Science, 358, 1559
+Khazov D., et al., 2016, ApJ, 818, 3
+Kinugasa K., et al., 2002, ApJ, 577, L97
+Kulkarni S. R., 2018, The Astronomer’s Telegram, 11266
+Kumar A., et al., 2012, in Space Telescopes and Instrumentation 2012: Ultraviolet to Gamma Ray. p. 84431N
+(arXiv:1208.4670), doi:10.1117/12.924507
+Leloudas G., et al., 2012, A&A, 541, A129
+Levan A. J., et al., 2011, Science, 333, 199
+Margutti R., et al., 2018, preprint, (arXiv:1810.10720)
+Martin D. C., et al., 2005, ApJ, 619, L1
+Mazzali P. A., et al., 2002, ApJ, 572, L61
+Mazzali P. A., McFadyen A. I., Woosley S. E., Pian E., Tanaka
+M., 2014, MNRAS, 443, 67
+McCully C., et al., 2017, ApJ, 848, L32
+
+20
+
+Perley et al.
+
+Metzger B. D., Stone N. C., 2016, MNRAS, 461, 948
+Mockler B., Guillochon J., Ramirez-Ruiz E., 2018, preprint
+(arXiv:1801.08221)
+Modjaz M., et al., 2009, ApJ, 702, 226
+Müller T., Prieto J. L., Pejcha O., Clocchiatti A., 2017, ApJ,
+841, 127
+Ofek E. O., et al., 2010, ApJ, 724, 1396
+Ofek E. O., et al., 2014, ApJ, 789, 104
+Oke J. B., Gunn J. E., 1982, PASP, 94, 586
+Oke J. B., et al., 1995, PASP, 107, 375
+Patat F., et al., 2001, ApJ, 555, 900
+Perley D. A., Blagorodnova N., Neill J. D., Walters R., 2018, The
+Astronomer’s Telegram, 11776
+Pian E., et al., 2017, Nature, 551, 67
+Piascik A. S., Steele I. A., Bates S. D., Mottram C. J., Smith
+R. J., Barnsley R. M., Bolton B., 2014, in Ground-based
+and Airborne Instrumentation for Astronomy V. p. 91478H,
+doi:10.1117/12.2055117
+Piran T., Svirski G., Krolik J., Cheng R. M., Shiokawa H., 2015,
+ApJ, 806, 164
+Poznanski D., et al., 2010, Science, 327, 58
+Prentice S. J., et al., 2018, preprint (arXiv:1807.05965)
+Pursiainen M., et al., 2018, preprint (arXiv:1803.04869)
+Quataert E., Kasen D., 2012, MNRAS, 419, L1
+Rest A., et al., 2018, Nature Astronomy, 2, 307
+Richmond M. W., Treffers R. R., Filippenko A. V., Paik Y., 1996,
+AJ, 112, 732
+Rivera Sandoval L. E., Maccarone T., 2018, The Astronomer’s
+Telegram, 11737
+Rivera Sandoval L. E., Maccarone T. J., Corsi A., Brown P. J.,
+Pooley D., Wheeler J. C., 2018, preprint, (arXiv:1807.06369)
+Roming P. W. A., et al., 2005, Space Sci. Rev., 120, 95
+Rubin A., et al., 2016, ApJ, 820, 33
+Sari R., Piran T., Narayan R., 1998, ApJ, 497, L17
+Schlafly E. F., Finkbeiner D. P., 2011, The Astrophysical Journal,
+737, 103
+Shappee B. J., et al., 2014, ApJ, 788, 48
+Shivvers I., et al., 2016, MNRAS, 461, 3057
+Smartt S. J., et al., 2018, The Astronomer’s Telegram, 11727
+Smith C. E., Nelson B., 1969, PASP, 81, 74
+Smith R. J., Steele I. A., 2017, Liverpool Telescope Technical
+Note 1: Telescope and IO:O Throughput
+Stalder B., et al., 2017, ApJ, 850, 149
+Steele I. A., et al., 2004, in Oschmann Jr. J. M., ed.,
+Proc. SPIEVol. 5489, Ground-based Telescopes. pp 679–692,
+doi:10.1117/12.551456
+Strubbe L. E., Quataert E., 2009, MNRAS, 400, 2070
+Tanaka M., et al., 2016, ApJ, 819, 5
+Tandon S. N., et al., 2017, AJ, 154, 128
+Tonry J. L., et al., 2018, PASP, 130, 064505
+Villar V. A., et al., 2017, ApJ, 851, L21
+Vinkó J., et al., 2015, ApJ, 798, 12
+Watson A. M., et al., 2012, in Ground-based and Airborne Telescopes IV. p. 84445L, doi:10.1117/12.926927
+Watson A. M., et al., 2016, in Ground-based and Airborne Instrumentation for Astronomy VI. p. 99085O (arXiv:1606.00690),
+doi:10.1117/12.2233000
+Waxman E., Katz B., 2017, Shock Breakout Theory. Springer International Publishing AG, p. 967,
+doi:10.1007/978-3-319-21846-5 33
+Wevers T., van Velzen S., Jonker P. G., Stone N. C., Hung
+T., Onori F., Gezari S., Blagorodnova N., 2017, MNRAS,
+471, 1694
+Whitesides L., et al., 2017, ApJ, 851, 107
+Woosley S. E., 1993, ApJ, 405, 273
+Wright E. L., et al., 2010, AJ, 140, 1868
+Xu D., et al., 2018, The Astronomer’s Telegram, 11740
+Yaron O., et al., 2017, Nature Physics, 13, 510
+
+York D. G., et al., 2000, AJ, 120, 1579
+de Ugarte Postigo A., et al., 2018, The Astronomer’s Telegram,
+11749
+
+MNRAS 000, 000–000 (2018)
+
+

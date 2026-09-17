@@ -1,0 +1,492 @@
+{
+ "seed_id": "2104.07795",
+ "title": "SALT3: An Improved Type Ia Supernova Model for Measuring Cosmic Distances (Kenworthy et al. 2021)",
+ "arxiv_version_verified": "arXiv:2104.07795v1 (layout L13)",
+ "read_in_full": true,
+ "reader": "fork-D",
+ "layout_lines": 1677,
+ "pages": 25,
+ "episodes": [
+  {
+   "episode_id": "E1",
+   "level": "per_study",
+   "description": "Build and publish the SALT3.K21 SED model with SALTshaker from the K21 compilation (1083 SNe, 1207 spectra)",
+   "practitioner_action": "publish_object",
+   "action_locator": "2104.07795.layout.txt p16 §5.2 L1131-1136",
+   "chain": [
+    {
+     "op": "recalibrate training photometry with Supercal",
+     "locator": "2104.07795.layout.txt p9 §3.2 L626-627"
+    },
+    {
+     "op": "compile JLA + Foundation + PS1 + DES + CfA4 + CSP + kaepora spectra",
+     "locator": "2104.07795.layout.txt p12 §4 L811-824"
+    },
+    {
+     "op": "apply spectroscopic-class and light-curve coverage cuts",
+     "locator": "2104.07795.layout.txt p14 §4.4 L906-928"
+    },
+    {
+     "op": "clean low-z spectra (clip host lines, mask telluric, drop noisy regions)",
+     "locator": "2104.07795.layout.txt p14 §4.4 L945-953"
+    },
+    {
+     "op": "initialise SALTshaker with fixed configuration (Table 1)",
+     "locator": "2104.07795.layout.txt p7 §2.5 L511-513"
+    },
+    {
+     "op": "alternate Levenberg-Marquardt fit of flux-model and nuisance parameters",
+     "locator": "2104.07795.layout.txt p7 §2.5 L522-533"
+    },
+    {
+     "op": "fit model-uncertainty parameters by likelihood with iMinuit",
+     "locator": "2104.07795.layout.txt p8 §2.5 L540-551"
+    },
+    {
+     "op": "fit colour scatter with colour law free after convergence",
+     "locator": "2104.07795.layout.txt p8 §2.5 L552-555"
+    },
+    {
+     "op": "estimate out-of-sample variance from Hessian and add to model uncertainty",
+     "locator": "2104.07795.layout.txt p8 §2.5 L555-562"
+    },
+    {
+     "op": "validate on held-out half (K21train model on K21valid) via Hubble residuals",
+     "locator": "2104.07795.layout.txt p15 §5.1 L1074-1084"
+    },
+    {
+     "op": "retrain on full K21 and compare distances/Hubble scatter to SALT2.JLA",
+     "locator": "2104.07795.layout.txt p16 §5.2 L1128-1139"
+    }
+   ],
+   "chain_length": 11
+  },
+  {
+   "episode_id": "E2",
+   "level": "per_study",
+   "description": "Validate SALTshaker by training on a SNANA simulation of JLA with SALT2.JLA as truth",
+   "practitioner_action": "publish_value",
+   "action_locator": "2104.07795.layout.txt p12 §3.4 L813-830",
+   "chain": [
+    {
+     "op": "simulate every JLA event with SNANA from best-fit z,t0,x1,c and cadence",
+     "locator": "2104.07795.layout.txt p9 §3.3 L599-611"
+    },
+    {
+     "op": "train SALT3.simJLA",
+     "locator": "2104.07795.layout.txt p11 §3.4 L784-786"
+    },
+    {
+     "op": "compare synthetic photometry to truth model",
+     "locator": "2104.07795.layout.txt p11 §3.4 L786-797"
+    },
+    {
+     "op": "compare distances on a large (~3000 SN) simulation",
+     "locator": "2104.07795.layout.txt p12 §3.4 L813-830"
+    }
+   ],
+   "chain_length": 4
+  },
+  {
+   "episode_id": "E3",
+   "level": "per_object",
+   "description": "Fit one SN Ia light curve with a trained SALT model and convert to a distance modulus",
+   "practitioner_action": "publish_value",
+   "action_locator": "2104.07795.layout.txt p8 §3.1 L555-560",
+   "chain": [
+    {
+     "op": "fit light curve with SNANA to obtain mB, x1, c",
+     "locator": "2104.07795.layout.txt p8 §3.1 L555-557"
+    },
+    {
+     "op": "apply Tripp estimator for distance modulus",
+     "locator": "2104.07795.layout.txt p8 §3.1 L557-560"
+    },
+    {
+     "op": "estimate nuisance parameters with SALT2mu in redshift bins",
+     "locator": "2104.07795.layout.txt p8 §3.1 L571-574"
+    }
+   ],
+   "chain_length": 3
+  }
+ ],
+ "branches": [
+  {
+   "id": "SALT3-B01",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "fourth-order colour-law polynomial",
+   "alternatives_visible": [
+    "third-order polynomial (SALT2.JLA)",
+    "fourth-order polynomial"
+   ],
+   "rejected_named": true,
+   "rejected_option": "third-order polynomial used for SALT2.JLA",
+   "reason": "model the colour law over the increased wavelength range with 2.5x more data",
+   "locator": "2104.07795.layout.txt p15 §5 L1083-1084",
+   "quote": "nomial, rather than the third-order polynomial used for"
+  },
+  {
+   "id": "SALT3-B02",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "colour scatter model changed from third- to fourth-order polynomial",
+   "alternatives_visible": [
+    "third-order",
+    "fourth-order"
+   ],
+   "rejected_named": true,
+   "rejected_option": "third-order colour scatter polynomial",
+   "reason": "additional flexibility over the increased wavelength range",
+   "locator": "2104.07795.layout.txt p15 §5 L1069-1071",
+   "quote": "the color scatter model is changed from a third to a"
+  },
+  {
+   "id": "SALT3-B03",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "extend SED wavelength range to 11000 A",
+   "alternatives_visible": [
+    "SALT2.JLA range to 9200 A",
+    "11000 A"
+   ],
+   "rejected_named": true,
+   "rejected_option": "SALT2.JLA 9200 A range",
+   "reason": "so rest-frame filters up to ~8500 A (Foundation z) can be fit",
+   "locator": "2104.07795.layout.txt p15 §5 L1076-1080",
+   "quote": "extend the SED wavelength range to 11000"
+  },
+  {
+   "id": "SALT3-B04",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "model definition 7: x1 and c uncorrelated in training sample",
+   "alternatives_visible": [
+    "SALT2 definition fixing M1 V-band flux to 0 at peak",
+    "no x1-c correlation constraint"
+   ],
+   "rejected_named": true,
+   "rejected_option": "SALT2 approach fixing V-band flux of M1 at peak",
+   "reason": "physically intuitive separation of dust-like colour from stretch; easier inference on latent populations",
+   "locator": "2104.07795.layout.txt p4 §2.1 L234-248",
+   "quote": "differ only in the last definition, intended to separate"
+  },
+  {
+   "id": "SALT3-B05",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "in-sample variance fitted by maximum likelihood as separate B-spline terms",
+   "alternatives_visible": [
+    "SALT2 error snake scaling out-of-sample variance to chi2_nu=1",
+    "ML-estimated in-sample variance"
+   ],
+   "rejected_named": true,
+   "rejected_option": "SALT2 error snake from leave-one-out tests",
+   "reason": "in-sample variance reflects population variability, out-of-sample reflects training data",
+   "locator": "2104.07795.layout.txt p5 §2.2 L288-310",
+   "quote": "of SALT2, which took the in-sample variance to have"
+  },
+  {
+   "id": "SALT3-B06",
+   "episode_id": "E2",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "use C11 scatter model in the simulation",
+   "alternatives_visible": [
+    "default G10 scatter model",
+    "C11 scatter model"
+   ],
+   "rejected_named": true,
+   "rejected_option": "G10 (Guy et al. 2010) scatter model",
+   "reason": "G10 has non-physical scatter at extremely red wavelengths",
+   "locator": "2104.07795.layout.txt p9 §3.3 L614-619",
+   "quote": "hereafter G10), as the G10 model has non-physical scat-"
+  },
+  {
+   "id": "SALT3-B07",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "hold colour scatter fixed at zero during main training stage",
+   "alternatives_visible": [
+    "nonzero colour scatter during training",
+    "k fixed to 0"
+   ],
+   "rejected_named": true,
+   "rejected_option": "allowing nonzero colour scatter",
+   "reason": "results in biased flux surfaces due to the regularization procedure",
+   "locator": "2104.07795.layout.txt p8 §2.5 L529-531",
+   "quote": "lowing nonzero color scatter results in biased flux sur-"
+  },
+  {
+   "id": "SALT3-B08",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "iMinuit likelihood fit for model uncertainties instead of Schubert rank-one Jacobian method",
+   "alternatives_visible": [
+    "Schubert's method",
+    "iMinuit likelihood"
+   ],
+   "rejected_named": true,
+   "rejected_option": "Schubert's method for uncertainty parameters",
+   "reason": "technique is unsuitable for determining the model uncertainties",
+   "locator": "2104.07795.layout.txt p8 §2.5 L535-549",
+   "quote": "for determining the model uncertainties."
+  },
+  {
+   "id": "SALT3-B09",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "native spectral binning rather than 29-A binning",
+   "alternatives_visible": [
+    "29-A binning (SALT2.JLA, faster)",
+    "native binning"
+   ],
+   "rejected_named": true,
+   "rejected_option": "29-A spectral binning",
+   "reason": "offered as option for speed; models use native binning (reason for rejection not stated beyond speed trade-off)",
+   "locator": "2104.07795.layout.txt p8 §2.5 L570-575",
+   "quote": "SALTshaker but the models in this work use the native"
+  },
+  {
+   "id": "SALT3-B10",
+   "episode_id": "E3",
+   "level": "per_study",
+   "kind": "infer",
+   "choice": "do not use SALT2mu selection-bias correction in validation",
+   "alternatives_visible": [
+    "apply SALT2mu bias correction",
+    "no bias correction"
+   ],
+   "rejected_named": true,
+   "rejected_option": "SALT2mu selection-bias correction",
+   "reason": "light-curve parameter distributions similar, so selection biases expected common between models",
+   "locator": "2104.07795.layout.txt p8 §3.1 L576-580",
+   "quote": "therefore we do not use SALT2mu to correct for selection"
+  },
+  {
+   "id": "SALT3-B11",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "add a pre-peak measurement cut not used in SALT2 training",
+   "alternatives_visible": [
+    "SALT2 training cut set",
+    "SALT2 cuts plus pre-peak requirement"
+   ],
+   "rejected_named": true,
+   "rejected_option": "original SALT2 training cuts without pre-peak requirement",
+   "reason": "ensure a well-measured time of maximum light; removes 5 of 420 JLA SNe",
+   "locator": "2104.07795.layout.txt p14 §4.4 L925-928",
+   "quote": "of maximum light. This is the only cut that was"
+  },
+  {
+   "id": "SALT3-B12",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "include 1991T-like SNe Ia in training sample",
+   "alternatives_visible": [
+    "Branch-normal only",
+    "Branch-normal plus 1991T-like"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "following the original SALT2 training procedure",
+   "locator": "2104.07795.layout.txt p14 §4.4 L908-911",
+   "quote": "SN Ia (Branch et al. 1993; we include 1991T-like SNe Ia"
+  },
+  {
+   "id": "SALT3-B13",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "do not subtract host-galaxy continuum from low-z spectra; clip lines and mask tellurics",
+   "alternatives_visible": [
+    "Guy et al. 2007 galaxy-template fit and removal of contaminated spectra",
+    "clip/mask without continuum subtraction"
+   ],
+   "rejected_named": true,
+   "rejected_option": "host-galaxy continuum subtraction / template fit as in Guy et al. 2007",
+   "reason": "low-z SNe are much brighter relative to hosts than at SNLS/SDSS redshifts",
+   "locator": "2104.07795.layout.txt p14 §4.4 L945-952",
+   "quote": "spectrum, but do not attempt to subtract a host galaxy"
+  },
+  {
+   "id": "SALT3-B14",
+   "episode_id": "E1",
+   "level": "per_object",
+   "kind": "generate",
+   "choice": "remove a handful of spectra judged poor quality by visual inspection",
+   "alternatives_visible": [
+    "keep spectrum",
+    "remove spectrum"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "poor quality from visual inspection; individual spectra not named",
+   "locator": "2104.07795.layout.txt p14 §4.4 L952-953",
+   "quote": "We remove a handful of spectra with poor"
+  },
+  {
+   "id": "SALT3-B15",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "tune regularization weights so regularization does not contribute significantly to total chi2",
+   "alternatives_visible": [
+    "JLA training weights (Table 1)",
+    "SALT3 weights"
+   ],
+   "rejected_named": true,
+   "rejected_option": "JLA regularization weights (APhase 0, Awave 10)",
+   "reason": "regularization can bias surfaces by over-smoothing",
+   "locator": "2104.07795.layout.txt p7 §2.4 L477-484",
+   "quote": "weights to ensure that the regularization terms do not"
+  },
+  {
+   "id": "SALT3-B16",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "set spectral suppression so spectra and photometry contribute roughly equally",
+   "alternatives_visible": [
+    "unsuppressed spectra",
+    "ASpec=0.75"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "reduce sensitivity to unknown systematic errors in spectra",
+   "locator": "2104.07795.layout.txt p7 §2.5 L520-526",
+   "quote": "the spectral and photometric data have roughly equal"
+  },
+  {
+   "id": "SALT3-B17",
+   "episode_id": "E1",
+   "level": "per_study",
+   "kind": "generate",
+   "choice": "validate first on random half split (K21train vs K21valid) before training on all data",
+   "alternatives_visible": [
+    "train on full K21 only",
+    "half split validation then full"
+   ],
+   "rejected_named": false,
+   "rejected_option": null,
+   "reason": "characterize performance on data not part of training",
+   "locator": "2104.07795.layout.txt p12 §4 L835-841",
+   "quote": "We initially characterize our performance with the"
+  }
+ ],
+ "conclusions_depth": [
+  {
+   "id": "SALT3-C01",
+   "conclusion": "SALT3.K21 reduces Hubble scatter by ~10-15% where additional red filters can be fit (CfA3 I, Foundation iz)",
+   "channels_claimed": [
+    "multi-band photometry incl. I/iz bands",
+    "spectra constraining red SED (kaepora)",
+    "redshift"
+   ],
+   "n_channels_claimed": 3,
+   "locator": "2104.07795.layout.txt p19 §5.2.1 L1308-1329",
+   "quote": "allows us to fit SNe with existing light curves in filters",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "SALT3-C02",
+   "conclusion": "Kaepora spectra are essential for deconvolving z-band data at >7500 A",
+   "channels_claimed": [
+    "broadband photometry",
+    "spectra"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2104.07795.layout.txt p15 §Fig.10 L1064-1065",
+   "quote": "spectra from kaepora are immensely impactful at wavelengths",
+   "measured_depth": "not_measured"
+  },
+  {
+   "id": "SALT3-C03",
+   "conclusion": "UV divergence of trained model arises from sparse training data; data density must increase at least 2x",
+   "channels_claimed": [
+    "simulated photometry",
+    "spectral coverage density"
+   ],
+   "n_channels_claimed": 2,
+   "locator": "2104.07795.layout.txt p12 §3.4 L807-812",
+   "quote": "We conclude that because few SNe",
+   "measured_depth": "not_measured"
+  }
+ ],
+ "facts_for_shape": [
+  {
+   "id": "SALT3-F01",
+   "fact": "Model validation grader is distance-level (Hubble residual RMS, alpha/beta, Diff(dz mu)) on held-out SNe or simulated truth, not prediction of held-out epochs of individual light curves",
+   "locator": "2104.07795.layout.txt p8 §3.1 L581-584",
+   "quote": "uals relative to a nominal ΛCDM cosmology (∆µ) for"
+  },
+  {
+   "id": "SALT3-F02",
+   "fact": "Held-out validation design exists at study level: random half split K21train/K21valid (541/541)",
+   "locator": "2104.07795.layout.txt p10 §Table 3 L657-661",
+   "quote": "The other half of the K21 SNe, used as a validation"
+  },
+  {
+   "id": "SALT3-F03",
+   "fact": "Training label source: spectroscopically classified Branch-normal SNe Ia (incl. 91T-like); many training spectra are TNS classification spectra",
+   "locator": "2104.07795.layout.txt p14 §4.4 L906-909",
+   "quote": "pilation is a spectroscopically classified, Branch-normal"
+  },
+  {
+   "id": "SALT3-F04",
+   "fact": "K21 compilation contains no ZTF photometry (surveys listed: Calan-Tololo, CfA1-4, SDSS, SNLS, CSP, Foundation, PS1 MDS, DES)",
+   "locator": "2104.07795.layout.txt p16 §Table 4 L1089-1107",
+   "quote": "(originally 420) and the new data adds 668 SNe, for a total of 1083 SNe."
+  },
+  {
+   "id": "SALT3-F05",
+   "fact": "SALT3.K21 is integrated in sncosmo and SNANA; training code, data, model public (forward model available to any arm)",
+   "locator": "2104.07795.layout.txt p20 §6 L1349-1351",
+   "quote": "the latest versions of SNANA and sncosmo."
+  },
+  {
+   "id": "SALT3-F06",
+   "fact": "The SED model is itself a generative forward model: F(p,lambda)=x0[M0+x1 M1]exp(c CL), integrated through bandpass at redshift",
+   "locator": "2104.07795.layout.txt p4 §2 L238-243",
+   "quote": "For a given photometric observation of a SN Ia at he-"
+  },
+  {
+   "id": "SALT3-F07",
+   "fact": "Model is SN Ia-only (single stretch parameter); authors state one SED parameter will not capture full diversity",
+   "locator": "2104.07795.layout.txt p4 §2.2 L253-255",
+   "quote": "case) will not capture the full diversity of the population."
+  },
+  {
+   "id": "SALT3-F08",
+   "fact": "Per-object light-curve fitting is a uniform pipeline step (SNANA fit then Tripp); no per-object model-family choice is described",
+   "locator": "2104.07795.layout.txt p8 §3.1 L555-560",
+   "quote": "We use the SNANA light curve fitting program to fit val-"
+  }
+ ],
+ "item_template_evidence": [
+  {
+   "id": "SALT3-T01",
+   "question_form": "compare two model versions on the same objects by Hubble residual binned by number of additional usable filters",
+   "locator": "2104.07795.layout.txt p19 §5.2.1 L1308-1312",
+   "quote": "ber of additional filters used in the SALT3.K21 light-"
+  },
+  {
+   "id": "SALT3-T02",
+   "question_form": "simulate a single object's light curve and spectra from its best-fit parameters and compare to the real data (SN 1992A)",
+   "locator": "2104.07795.layout.txt p10 §Fig.3 L670-672",
+   "quote": "Figure 3. SN 1992A light curves (left) and spectra (right) for real data (black) and SNANA simulation (orange) generated"
+  }
+ ],
+ "zero_contribution": false,
+ "notes": "Branches are almost all per_study model-building (generate) choices with named SALT2 alternatives. Only one per_object branch (visual removal of spectra, unnamed). Held-out validation is at SN level with distance metrics; no held-out-epoch light-curve forecasting grader appears. Model trained without ZTF data."
+}

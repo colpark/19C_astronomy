@@ -1,0 +1,1678 @@
+                                                 Draft version April 19, 2021
+                                                 Typeset using LATEX twocolumn style in AASTeX62
+
+
+
+
+                                                                  SALT3: An Improved Type Ia Supernova Model for Measuring Cosmic Distances
+                                                     W. D. Kenworthy,1 D. O. Jones,2, ∗ M. Dai,1, 3 R. Kessler,4 D. Scolnic,5 D. Brout,6, ∗ M. R. Siebert,2
+                                               J. D. R. Pierel,7 K. G. Dettman,3 G. Dimitriadis,2 R. J. Foley,2 S. W. Jha,3 Y.-C. Pan,8 A. Riess,1, 9 S. Rodney,7
+                                                                                           and C. Rojas-Bravo2
+                                                                  1 Department of Physics and Astronomy, The Johns Hopkins University, Baltimore, MD 21218.
+                                                               2 Department of Astronomy and Astrophysics, University of California, Santa Cruz, CA 95064, USA
+arXiv:2104.07795v1 [astro-ph.CO] 15 Apr 2021
+
+
+
+
+                                               3 Department of Physics and Astronomy, Rutgers, The State University of New Jersey, 136 Frelinghuysen Road, Piscataway, NJ 08854,
+
+                                                                                                               USA
+                                                                       4 University of Chicago, Kavli Institute for Cosmological Physics, Chicago, IL, USA.
+                                                                         5 Department of Physics, Duke University, Durham North Carolina 27708, USA
+                                                                  6 Harvard-Smithsonian Center for Astrophysics, 60 Garden Street, Cambridge, MA 02138, USA
+                                                       7 Department of Physics and Astronomy, University of South Carolina, 712 Main Street, Columbia, SC 29208, USA†
+                                                       8 Graduate Institute of Astronomy, National Central University, 300 Zhongda Road, Zhongli, Taoyuan 32001, Taiwan
+                                                                                    9 Space Telescope Science Institute, Baltimore, MD 21218.
+
+
+
+                                                                                                         ABSTRACT
+                                                           A spectral-energy distribution (SED) model for Type Ia supernovae (SNe Ia) is a critical tool for
+                                                        measuring precise and accurate distances across a large redshift range and constraining cosmological
+                                                        parameters. We present an improved model framework, SALT3, which has several advantages over
+                                                        current models including the leading SALT2 model (SALT2.4). While SALT3 has a similar philosophy,
+                                                        it differs from SALT2 by having improved estimation of uncertainties, better separation of color and
+                                                        light-curve stretch, and a publicly available training code. We present the application of our training
+                                                        method on a cross-calibrated compilation of 1083 SNe with 1207 spectra. Our compilation is 2.5×
+                                                        larger than the SALT2 training sample and has greatly reduced calibration uncertainties. The re-
+                                                        sulting trained SALT3.K21 model has an extended wavelength range 2000-11000 Å (1800 Å redder)
+                                                        and reduced uncertainties compared to SALT2, enabling accurate use of low-z I and iz photometric
+                                                        bands. Including these previously discarded bands, SALT3.K21 reduces the Hubble scatter of the
+                                                        low-z Foundation and CfA3 samples by 15% and 10%, respectively. To check for potential systematic
+                                                        uncertainties we compare distances of low (0.01 < z < 0.2) and high (0.4 < z < 0.6) redshift SNe in
+                                                        the training compilation, finding an insignificant 2 ± 14 mmag shift between SALT2.4 and SALT3.K21.
+                                                        While the SALT3.K21 model was trained on optical data, our method can be used to build a model
+                                                        for rest-frame NIR samples from the Roman Space Telescope. Our open-source training code, public
+                                                        training data, model, and documentation are available at https://saltshaker.readthedocs.io/en/latest/,
+                                                        and the model is integrated into the sncosmo and SNANA software packages.
+                                                                   1. INTRODUCTION                               shift (z ≤ 0.15) for distance ladder measurements of
+                                                 Type Ia supernovae (SNe Ia) have been used as cos-              the Hubble constant (H0 ; Riess et al. 2021; Freedman
+                                               mological distance indicators for more than two decades,          et al. 2019), currently the subject of a 4 − 6σ tension
+                                               providing early evidence of the accelerating expansion            (see Verde et al. 2019 for a review), as well as measure-
+                                               of the Universe (Riess et al. 1998; Perlmutter et al.             ments   of the dark energy equation-of-state parameter,
+                                               1999). Today, SN Ia distances are used at low red-                w  which   incorporate SNe at z ≤ 2.2 (currently consis-
+                                                                                                                 tent with w = −1; Scolnic et al. 2018; Abbott et al.
+                                                                                                                 2019; Jones et al. 2019). Recent measurements of H0
+                                               Corresponding author: W. D. Kenworthy                             (Riess et al. 2016), as well as most large studies of SNe
+                                               wkenwor1@jhu.edu                                                  across the observed redshift range for the last decade
+                                               Corresponding author: D. O. Jones                                 (Guy et al. 2010; Conley et al. 2011; Sako et al. 2018;
+                                               david.jones@ucsc.edu                                              Betoule et al. 2014; Riess et al. 2018; Scolnic et al. 2018;
+                                               ∗ NASA Einstein Fellow                                            Brout et al. 2019a; Jones et al. 2019), have relied upon
+                                               † Now at Space Telescope Science Institute
+                                                                                                                 the SALT2 light-curve model (Guy et al. 2007, 2010) for
+2
+
+the brightness standardization of SNe Ia in their analy-             6. The model has been tested by many independent
+sis.                                                                    groups as a consequence of its use in cosmology
+   SN Ia distances are typically estimated by fitting their             analyses.
+light curves with a model to determine an overall flux,
+                                                                     Despite these advantages, Scolnic et al. (2018) found
+a color, and one (or more) light-curve shape parame-
+                                                                  that the calibration of the training sample used to cre-
+ters. The apparent magnitude (as computed from the
+                                                                  ate the SALT2.JLA model was the largest single system-
+flux) is standardized with a linear combination of color
+                                                                  atic uncertainty in their measurement of w (σw = 0.014,
+and light-curve parameters (referred to as the Tripp es-
+                                                                  30% of the total systematic uncertainty), though a new
+timator; Tripp 1998) to produce a standardized appar-
+                                                                  analysis methodology could somewhat reduce this uncer-
+ent magnitude relative to a fiducial SN Ia. The SALT2
+                                                                  tainty (Brout et al. 2020). Achieving the science goals
+( Spectral Adaptive Light-curve Template) model de-
+                                                                  of the Vera C. Rubin Observatory’s Legacy Survey of
+scribes SN Ia light curves as a combination of com-
+                                                                  Space and Time (LSST) will require that systematic un-
+ponent spectral energy distributions (flux surfaces de-
+                                                                  certainty in the calibration of the light-curve model be
+fined in wavelength and time), multiplied by a color-
+                                                                  decreased by a factor of 5 for the year-one analysis (The
+dependent term described by a color law that is similar
+                                                                  LSST Dark Energy Science Collaboration et al. 2018).
+to that of the Milky Way. These components are de-
+                                                                     The SALT2.JLA model does not fully reproduce ob-
+termined through a “model training” process; the last
+                                                                  served spectral features such as varying absorption line
+trained model to be used in a published cosmological
+                                                                  velocities (Foley & Kasen 2011; Siebert et al. 2020).
+analysis was SALT2.4 (which we hereafter refer to as
+                                                                  Similarly, studies have found evidence that standard-
+SALT2.JLA1 ), presented in Betoule et al. (2014) and
+                                                                  ized distances based on SALT2 with the Tripp estima-
+Mosher et al. (2014), although a retrained model has
+                                                                  tor (SALT2+Tripp) are dependent on SN Ia host galaxy
+recently been presented in Taylor et al. (2021). The
+                                                                  properties (Kelly et al. 2010; Sullivan et al. 2010), al-
+ubiquity of the SALT2 model in cosmology analyses of
+                                                                  though the best way to characterize this effect is still in
+the last decade can be attributed to:
+                                                                  question (Rigault et al. 2013; Betoule et al. 2014; Jones
+    1. The spectrophotometric model can be integrated             et al. 2018; Rigault et al. 2018; Brout & Scolnic 2020;
+       over filter bands using the appropriate rest-frame         Smith et al. 2020b). Since these astrophysical effects
+       wavelengths, which removes the need for explicit           are not explicitly included in the training process, differ-
+       k-corrections.                                             ences between the training sample and cosmology sam-
+                                                                  ples can lead to subtle biases in the cosmology results.
+    2. The training process is cosmology independent, as          To characterize and correct for such untrained effects,
+       the overall normalization of a light curve is a fitted     it is essential to perform training studies on simulated
+       parameter.                                                 data that incorporates a broad range of physical effects.
+                                                                  Therefore, in parallel with the the SALT3 development
+                                                                  our team has developed a more general SED-simulation
+    3. The training set incorporates photometric data
+                                                                  framework described in Pierel et al. (2020).
+       from multiple surveys, reducing the sensitivity of
+                                                                     Extending the wavelength range of the SALT model
+       the model to the calibration of any one survey.
+                                                                  shows promise in the reduction of statistical uncertainty.
+                                                                  Distance standardization based on SALT2+Tripp re-
+    4. The training sample incorporates high redshift
+                                                                  sults in scatter about the Hubble diagram that is ∼
+       photometric data, allowing the use of well-
+                                                                  0.1 mag larger than expected from photometric uncer-
+       calibrated observer-frame optical data to extend
+                                                                  tainties (which we refer to as “intrinsic scatter”). Nu-
+       the model into the rest-frame ultra-violet (UV).
+                                                                  merous studies over the last two decades have found
+                                                                  that NIR peak magnitudes show smaller Hubble residu-
+    5. Publicly available analysis tools such as SNANA            als than SALT2+Tripp distances (Krisciunas et al. 2004,
+       (Kessler et al. 2009b) and sncosmo. (Barbary               2007; Wood-Vasey et al. 2008; Burns et al. 2011; Man-
+       et al. 2015, 2016) include infrastructure to fit           del et al. 2011; Dhawan et al. 2018; Avelino et al. 2019;
+       lightcurves and generate simulated data using the          Mandel et al. 2020). However, the SALT2.JLA SED
+       SALT2 model.                                               model extends only to 9200 Å (extrapolated further for
+                                                                  use in simulations in Pierel et al. 2018) with substantial
+  1 JLA refers to ”Joint Lightcurve Analysis” that included the   model uncertainties past ∼ 7000 Å that preclude the use
+SDSS-SN and SNLS teams, and produced cosmology results in         of existing low-redshift optical data. By extending the
+Betoule et al. (2014)                                             wavelength range to reliably include existing rest-frame
+                                                                                                                                                  3
+
+i and z band photometry we can improve on cosmology                                             Initial M0 Component
+constraints on current data sets. Further extension of
+the model into the NIR would allow future SN Ia cos-                     a)
+mology programs to make use of a wavelength range in
+which SNe Ia are intrinsically more precise.
+  As a step toward these goals, we have defined a                       3000       4000         5000      6000        7000        8000        9000
+SALT3 spectrophotometric model formalism and devel-                                                        (Å)
+oped SALTshaker, a flexible and open source Python-                                             Add M1 scaled by x1
+based code for training a SALT3 model, accepting both
+spectra and photometry in the training process. The                      b)
+SALT3 formalism has been defined similarly to SALT2
+to retain the compatibility of our model with existing
+analysis frameworks. As part of an overall testing and                  3000       4000         5000      6000        7000        8000        9000
+validation framework (Dai et al. in prep), SALTshaker                                                      (Å)
+enables new SN Ia light-curve models to be quickly                                            Multiply by exp(c CL( ))
+trained for new samples of cosmological SNe, allowing
+uncertainties from the modeling process to improve as                    c)
+larger and more accurately calibrated samples are col-
+lected. In Section 2 we define our SALT3 model, and
+describe the procedure of our training code. In Section                 3000       4000         5000      6000        7000        8000        9000
+3 we apply SALTshaker on training data similar to that                                                     (Å)
+of the SALT2.JLA model, allowing a direct comparison                           Redshift and multiply by bandpass transmission
+of our training process to that of SALT2. Next we add                                                                                         B
+                                                                                                                                              V
+recalibrated data from past and recent SN Ia surveys to                  d)                                                                   R
+our training sample, described in Section 4, to increase
+the size of the training sample by a factor of ∼ 2.5. Fi-
+nally, we build the SALT3.K21 model and present our                     3000       4000         5000      6000        7000        8000        9000
+results in Section 5.                                                                                      (Å)
+                                                                                Integrate across wavelength at every phase
+       2. THE SALT3 MODEL AND SALTSHAKER                                                                                                      B
+                                                                                                                                              V
+   Using the framework of SALT, the SALT3 model de-                      e)                                                                   R
+fines the spectral flux of a SN Ia as a function of rest-
+frame wavelength λ and phase p. Given three light-curve
+parameters for a given SN x0 (the overall flux normal-                    15     10       5      0      5       10     15    20          25       30
+                                                                                                       Phase (Days)
+ization), x1 (associated with the light-curve “stretch” ),
+and c (a fitted color parameter), the spectral flux2 (in                                      Realize model covariance
+energy units) is                                                                                                                              B
+                                                                                                                                              V
+                                                                         f)                                                                   R
+      F (p, λ) =x0 [M0 (p, λ; m0 ) + x1 M1 (p, λ; m1 )]
+                   · exp(c · CL(λ; cl)),                        (1)
+                                                                          15     10       5      0      5       10     15    20          25       30
+                                                                                                       Phase (Days)
+where M0 (p, λ; m0 ) and M1 (p, λ; m1 ) are flux surfaces
+similar to principal components, representing respec-                  Figure 1. Construction of a SALT light curve for a given
+tively the SED of a fiducial SN Ia and a first order cor-              SN Ia, here shown using the SALT2.JLA model. In panels
+rection. The two flux surfaces are defined on a basis                  a-c, we apply the M1 component and the color law to the
+of second-order B-splines, with NPhase × Nλ basis func-                base M0 spectral flux at a phase of +10 days. In panel d,
+tions for each surface, with coefficients m0 , m1 that are             the spectrum is redshifted, and integrated across a bandpass
+model parameters. The number of basis functions along                  transmission. In panel e, this process is repeated at every
+each axis are determined based on the desired wave-                    phase to produce a lightcurve. Panel f) shows realizations
+                                                                       of the model uncertainties. Color scatter can be seen as the
+                                                                       coherent offset within each band, clearly seen at the peak of
+  2 In all cases we use F to refer to a spectral flux and f to refer   V band. At later phases in V the uncorrelated uncertainties
+to a flux integrated over an appropriate bandpass                      dominate the realizations.
+4
+
+length and phase resolution; in our work we have cho-           4. The distribution of x1 has standard deviation 1
+sen wavelength resolution 70 Å and phase resolution of
+3 days. CL(λ; cl) is a single color law which combines          5. The distribution of the light-curve parameter c in
+the effects of intrinsic color variation and host galaxy           the training sample is defined to have 0 mean
+dust extinction. The color law is polynomial with NCL           6. The color law is defined such that CL(4300 Å) = 0
+coefficients cl within a specified wavelength range λ−             and CL(5430 Å) = −1 , corresponding to central
+to λ+ and linearly extrapolated for the rest of the SED            wavelengths for B and V bandpasses
+wavelength range of the model. Thus the color law is
+defined as                                                      7. The distributions of x1 and c have no correlation
+            N CL
+                                                                   in the training sample
+            X
+CLp (λ) =          cli λi ,
+                                                               The location and scale of the x1 distribution in-
+            i=0
+            
+                0                                            ferred for any cosmological sample are thus relative to
+            CLp (λ− )(λ − λ− ) + CLp (λ− )    λ < λ−
+            
+                                                            the demographics of the training sample for a partic-
+ CL(λ) =     CL0 (λ )(λ − λ+ ) + CLp (λ+ )     λ > λ+        ular model, while c is fixed to correspond to a phase-
+             p +
+            
+            
+                CLp (λ)                        otherwise     independent inferred B − V color relative to the mean of
+                                                             the training sample. Our model definitions and SALT2
+The object of the model training process is to deter-        differ only in the last definition, intended to separate
+mine the model parameters {m0 , m1 , cl} and estimate        the phase-independent color from the phase-dependent
+un-modeled variability in the flux surfaces; the model       M1 component. The SALT2 training code does not con-
+training is detailed in Section 2.5.                         strain the correlation between x1 and c, and instead fixes
+   For a given photometric observation of a SN Ia at he-     the V -band flux (and B-band flux following definition 2)
+liocentric redshift zHel in a filter X with observer-frame   of the M1 component to be 0 at peak brightness, imply-
+transmission function TX (λ) in photon units, the broad-     ing that SALT2 x1 has no effect on observed B −V color
+band flux as a function of phase is                          at peak. For SALT3, removing the correlation between
+            Z                                                the parameters x1 and c has a physically intuitive mean-
+   fX (p) = TX (λ/(1 + zHel ))F (p, λ; x0 , x1 , c)λdλ (2)   ing; the dust-like color term does not depend on the pro-
+                                                             cesses associated with light-curve stretch. Further, it is
+We illustrate this procedure for modeling a light curve      easier to make inferences about the latent populations
+in Figure 1. The fixed configuration parameters used to      when the stretch and color parameters are uncorrelated,
+specify the model are listed in Table 1, while the fitted    as correlated parameters imply that there is redundant
+model parameters ( {m0 , m1 , cl}) are listed in Table 2.    information in the two parameters.
+
+                    2.1. Model Definitions                            2.2. Photometric model uncertainties
+  The specification of the model given above is degen-         As Rubin (2020) and Rose et al. (2020) suggest that
+erate; for example, the scale of the flux surfaces may       SN Ia SEDs are determined by 3-5 SED parameters and
+be changed by reducing M0 and M1 and increasing x0           a color, a model with a single SED parameter (x1 in our
+by the same factor. To remove degeneracies we apply          case) will not capture the full diversity of the population.
+further model definitions, which are used as constraints     We refer to the variation unexplained by our model as
+during the training process. These definitions are arbi-     “in-sample variance”. This variation can be contrasted
+trary, and have been chosen to define a “fiducial” su-       with the uncertainty in the model parameters due to
+pernova whose SED is the M0 flux surface at the mean         training with a finite sample of SNe with finite signal-
+of the observed distributions of lightcurve parameters.      to-noise photometry, which we refer to as “out-of-sample
+The definitions are:                                         variance”. For a photometric observation in a filter with
+                                                             central wavelength λc and phase p, in-sample variance is
+    1. The rest-frame synthetic B-band flux of the M0
+                                                             addressed by a “model variance” composed of two terms.
+       component at peak is fixed such that mpeak
+                                             B    = 10.5
+                                                             The first is a diagonal uncertainty defined as
+       when x0 = 1
+                                                                                                Z                   2
+    2. The rest-frame synthetic B-band flux of the M1                                                       λ
+                                                              σf2 (p, λc ) = x0 exp(c · CL(λc )) T                 λdλ
+       component at peak is defined to be 0                                                             1 + zHel
+                                                                               2             2 2
+                                                                            × σM0 (p, λc ) + x1 σM1 (p, λc )+
+    3. The distribution of the light-curve parameter x1
+       in the training sample is defined to have 0 mean                    2x1 CM0 M1 (p, λc )σM0 (p, λc )σM1 (p, λc )] (3)
+                                                                                                                                 5
+
+where σM0 (p, λc ; σM0 ) and σM1 (p, λc ; σM1 ) represent           spectrum. We modify the spectral flux equation (Equa-
+variability in the flux surfaces and CM0 M1 (p, λc ; CM0 ,M1 )      tion 1) for use with spectra during the training by re-
+is the correlation between flux surfaces. These variance            moving the color term and replacing it with a recalibra-
+terms are described by zeroth order B-splines (equiva-              tion term of similar form,
+lent to binning the data by phase and wavelength) with
+8 basis functions in wavelength and 12 basis functions in
+phase. As detailed in Section 2.5 we use a maximum like-                                                             Xn
+
+lihood estimator to determine the B-spline coefficients             Fspec (p, λ) = x0 [M0 (p, λ) + x1 M1 (p, λ)] exp(   yi λi /i!),
+                                                                                                                       i
+σM0 , σM1 , CM0 ,M1 . This is distinct from the approach
+                                                                                                                          (5)
+of SALT2, which took the in-sample variance to have
+                                                                    where the spectral recalibration nuisance parameters yi
+the same form as that of the out-of-sample variance,
+                                                                    are fitted during the training procedure. In the limit
+scaling the latter (evaluated by leave-one-out tests) us-
+                                                                    of perfectly calibrated spectra, the fitted recalibration
+ing a smooth function or “error snake” to fix the χ2ν of
+                                                                    term will reproduce the effect of the color parameter on
+the photometry of the training sample to 1. Because
+                                                                    the spectrum; by removing the color law entirely from
+the in-sample variance is determined by variability of
+                                                                    the spectral flux equation, we mitigate the impact of
+the underlying population of SNe light curves while the
+                                                                    mis-calibrated spectra on the color law. The quantity n
+out-of-sample variance is determined by the distribution
+                                                                    controls how many recalibration parameters are allowed
+of available training data, we consider our approach to
+                                                                    for each spectrum, and is determined based on the wave-
+be a better account of the remaining variance of the SN
+                                                                    length extent of the spectrum and the number of filter
+Ia population.
+                                                                    bands available for that SN (additional filter bands bet-
+   The second term of the in-sample variance is a covari-
+                                                                    ter constrain the recalibration term, allowing for more
+ant “color scatter” that allows light curves of the same
+                                                                    free parameters). The model variances are defined simi-
+supernova in different bands to be coherently offset rel-
+                                                                    larly to the photometry, without the contribution of the
+ative to one another. The color scatter term between
+                                                                    color scatter:
+photometric measurements using the same bandpass is
+correlated, with no correlation between measurements
+in different bandpasses. This model is similar to chro-                               "                   #2
+                                                                                              n
+matic models of intrinsic scatter like those of Guy et al.                                   X
+                                                                       σF2 (p, λ) =   x0 exp(       i
+                                                                                                yi λ /i!)) ×
+(2010) and the diagonal terms of the covariance ma-                                           i
+trix from Chotard et al. (2011). The relative covariance
+                                                                                   [σM0 (p, λ) + x21 σM
+                                                                                     2                2
+                                                                                                          (p, λ)
+k 2 (λc ; a) is described by the exponential of a fourth or-                                            1
+
+
+der polynomial in wavelength, where the polynomial co-                           +2x1 CM0 M1 (p, λ)σM0 (p, λ)σM1 (p, λ)].      (6)
+efficients a are fitted parameters. Thus, the model co-
+variance matrix for two photometric observations i and
+j in broadband filters Xi ,Xj of a given supernova with
+                                                                                          2.4.   Regularization
+model fluxes f~Model is
+                                                                      In regions of phase-wavelength space that are poorly
+ (ΣModel )ij =δij σf2 (pi , λc(i) )                                 constrained by spectra, the M0 and M1 components
+                                                                   can acquire artifacts such as high-frequency ringing,
+                  k 2 ([λ ])(f~          ~
+                          c     Model )i (fModel )j   Xi = Xj       or deconvolution noise. To reduce these artifacts, we
+              +
+                  0                                  otherwise     use a “regularization” procedure that penalizes large
+                                                              (4)   derivatives in the model where there is an absence of
+                                                                    spectroscopic data, as parameterized by a binned spec-
+              2.3. Modeling of Spectral Data                        tral density function Neff (p, λ), with every spectrum as-
+                                                                    signed equal weight. We implement three kinds of reg-
+  Although the SALT3 model is intended for use as a                 ularization: phase gradient, wave gradient, and dyadic.
+photometric light-curve model, spectral data is included            These are applied to the two flux surfaces M0 (p, λ) and
+in the training process to better constrain the shape               M1 (p, λ). For a flux surface S(p, λ) the regularization
+of spectral features. However, given that spectral data             terms are defined as
+have larger calibration uncertainties compared to broad-
+band fluxes, we follow the SALT2 training code in “re-
+calibrating” spectral data, modulating the model by a                  1. Phase gradient regularization penalizes large
+smooth function to match the continuum of the observed                    derivatives with respect to phase in less-constrained
+6
+
+                                                            Table 1. Fixed Model Parameters
+
+ Parameter                                                                                          Description           JLA Training               SALT3 Training
+
+ ASpec                                                               Spectral Suppression                                                  ···                     0.75
+ NPhase                                 Number of phase basis functions for flux surfaces                                                   11                       20
+ Nλ                        Number of basis functions on wavelength axis for flux surfaces                                                   97                      127
+ Nσ,Phase                   Number of phase basis functions for flux uncertainty surfaces                                                  ···                        9
+ Nσ,λ           Number of basis functions on wavelength axis for flux uncertainty surfaces                                                 ···                        5
+ APhase                                             Phase gradient regularization weight                                                     0                     1000
+ Aλ                                                  Wave gradient regularization weight                                                    10                    10000
+ ADyadic                                                    Dyadic regularization weight                                                  1000                     1000
+ Model parameters for SALT2.JLA training and SALT3.K21 training. We note that given our adjusted regularization scheme,
+ regularization weights are not directly comparable. We were unable to determine the exact spectral suppression in the JLA
+ training, but from Mosher et al. (2014) we expect that this is fine-tuned for a given training sample.
+
+
+                Inputs                                          Model and Error Fitting                                                    Validation
+
+                                                            Model ?2 Fitting
+               Input Data                                 Levenberg-Marquardt
+              Light curves                                     M0, M1, cl
+               Spectra                                          x0,x1,c
+             Metadata: z,                                          y
+            MW E(B-V), ...                                                                                                          Diagnostic
+                                                                                                                                       Figures
+
+
+
+
+                                                                                                                   Write Outputs
+                                     Initialization
+
+
+
+
+                                                                                                Color                                   Model
+                                                                  Fit has                      Scatter                             visualizations,
+                                                                converged?
+                                                                                    Yes        Fitting                               fits to light
+           Model Config                                                                          cl, a                               curves and
+                                                                                                                                       spectra           Light curve
+       Phase/wavelength
+     Range and Resolution                                           No                                                                                   fitting and
+                                                                                                                                                         cosmology
+    Regularization strength
+      Color Law Order                                       ℒLPhot.       Fitting
+                                                                    err. Fitting
+                                                              phot. Errs.
+    Spectral Suppression                                            iMinuit
+                                                               ?M0, ?M1, CM0,M1
+
+
+
+Figure 2. Activity diagram of the SALTshaker training process, with variable names in the model and model error fitting
+sections corresponding to the descriptions in Table 2.
+
+      regions                                                                                3. Dyadic regularization encourages the flux surfaces
+                                                                                                to be separable in phase and wavelength, and is
+                                                                           2
+                                                               ∂S                               0 when a flux surface takes the form S(p, λ) =
+                                    2NX
+                                      Phase 2N
+                                            Xλ                 ∂p p=pi
+                                                                  λ=λj                          g(p) × h(λ)
+       χ2Phase [S(p, λ)] = APhase
+                                              i       j
+                                                            Neff (pi , λj )
+                                                                                                                                           2NX
+                                                                                                                                             Phase 2N
+                                                                                                                                                   Xλ
+                                                                            (7)                                                                                 1
+                                                                                                χ2 Dyadic [S(p, λ)] = ADyadic
+                                                                                                                                                 i   j
+                                                                                                                                                          Neff (pi , λj )
+
+    2. Wave gradient regularization similarly penalizes
+                                                                                                         h ∂S     ∂S                    ∂2S       i2
+                                                                                                   ×                      − S(pi , λj )
+       large derivatives with respect to wavelength in                                                    ∂p p=pi ∂λ p=pi               ∂p∂λ p=pi
+                                                                                                                λ=λj               λ=λj                          λ=λj
+       less-constrained regions                                                                                                                                        (9)
+                                                                           2
+                                                               ∂S
+                                    2NX
+                                      Phase 2N                    p=p                        The relative strength of the three regularization terms
+                                            Xλ                 ∂λ λ=λi
+       χ2Phase [S(p, λ)] = AWave                                        j
+                                                                                          is determined by the weights {APhase , AWave , ADyadic },
+                                             i        j
+                                                           Neff (pi , λj )
+                                                                                          which are inputs to the SALTshaker code. The sum-
+                                                                            (8)           mations over phase and wavelength points are evenly
+                                                                                                                                                   7
+
+                                             Table 2. Model and Model Uncertainty Parameters
+
+                          Parameter           Category         Number                                    Description
+
+                          m0             Flux Model       NPhase × Nλ                  M0 B-spline coefficients
+                          m1             Flux Model       NPhase × Nλ                  M1 B-spline coefficients
+                          cl             Flux Model              NCL                                 Color law
+                          x0                Nuisance              NSN   Overall flux normalization for each SN
+                          x1                Nuisance              NSN                       Stretch of each SN
+                          c                 Nuisance              NSN                        Color for each SN
+                          y                 Nuisance          ∝ Nspec                    Spectral recalibration
+                          σM0            Uncertainty               72                       Uncertainty in M0
+                          σM1            Uncertainty               72                       Uncertainty in M1
+                          CM0 ,M1        Uncertainty               72        Correlation between M0 and M1
+                          a             Color Scatter               4                             Color scatter
+
+
+
+spaced over the model phase and wavelength ranges,                       term is then defined
+with twice as many points as basis functions along each                              SN Nspec Npoints                      (n,i)          (n,i)
+axis. As regularization can bias the model surfaces by
+                                                                                    N
+                                                                                    X   X      X         [Fspec (p(n,i) , λj       ) − (f~obs )j ]2
+                                                                         χ2Spec =                                                            (n,i) 2
+                                                                                                                                                    ,
+over-smoothing them (Mosher et al. 2014), we tune the                                n     i         j    (σobs )2j + σModel (p(n,i) , λj        )
+weights to ensure that the regularization terms do not                                                                                          (12)
+contribute significantly to the total χ2 . Further work
+                                                                                                                                     (n,i)
+to determine how this regularization scheme affects the                  where for the nth supernova, Fspec (p(n,i) , λj ) is the
+model and to choose optimal model configurations will                    model spectral flux at the jth wavelength bin of the ith
+                                                                                        (n,i)
+require applying our training and analysis framework to                  spectrum, (f~obs )j is the observed spectral flux, (σobs )j
+simulations (Dai et al. in prep; Pierel et al. 2020).                                                                          (n,i)
+                                                                         is the photometric uncertainty, and σModel (p(n,i) , λj )
+                                                                         is the model uncertainty in Equation 6. In χ2phot and
+                     2.5. Training Procedure
+                                                                         χ2spec , we redden the model to account for the Milky Way
+  Based on the model definitions above, we construct                     E(B − V ) along the line of sight to each SN, but do not
+the training χ2 for the model as                                         include this term in the equations above for simplicity.
+                                                                         The χ2Constraints is composed of penalty terms used to
+ χ2Total =χ2Phot + ASpec χ2Spec + χ2Constraints + χ2Reg . (10)           enforce the model definitions described in Section 2.1,
+                                                                         and the regularization term is defined as
+The photometric χ2 term is
+                                                                                         {M0 ,M1 }
+            N
+                                                                                           X
+            XSN
+                     (n)     (n)        (n)          (n)     (n)              χ2Reg =                χ2Phase [S(p, λ)] + χ2Wave [S(p, λ)]
+ χ2Phot =         (f~obs − f~Model )T (ΣTotal )−1 (f~obs − f~Model )
+                                                                                          S(p,λ)
+             n
+     (n)                 (n)           (n)                                                           + χ2Dyadic [S(p, λ)].                      (13)
+   ΣTotal = diag((σP hot )2 ) + ΣModel                          (11)
+                                                                           The SALTshaker code is initialized with the configura-
+                                 (n)
+where for the nth supernova f~obs is the vector of ob-                   tion parameters shown in Table 1. SALTshaker then de-
+                                 (n)
+served photometric fluxes, and f~Model is the vector of the              termines best-fit values of the model parameters. These
+model fluxes integrated over the photometric bandpass.                   parameters are shown in Table 2. We define flux model
+                  (n)
+The covariance ΣTotal combines photometric uncertain-                    parameters as those which control the flux surfaces and
+ties and the model uncertainty covariance described in                   color law, uncertainty model parameters as those which
+Equation 4. The factor ASpec is a constant “spectral                     control the output model uncertainties, and nuisance pa-
+suppression” term that downweights the contribution of                   rameters as those which describe individual supernovae.
+spectra to the training χ2 to reduce the sensitivity of                    SALTshaker alternates between simultaneously fitting
+the training to unknown systematic errors in the spec-                   the nuisance parameters and model flux parameters
+tral data (Guy et al. 2007). We set this term such that                  while keeping uncertainties fixed and fitting the model
+the spectral and photometric data have roughly equal                     uncertainty parameters while keeping model fluxes fixed.
+contributions to the total training χ2 . The spectral χ2                 The color scatter is kept fixed at k(λc ) = 0 during
+8
+
+this stage of the training process, as we find that al-                 An overview of the SALTshaker training procedure is
+lowing nonzero color scatter results in biased flux sur-              given in Figure 2.
+faces due to the regularization procedure. The flux and
+nuisance parameters are fit using an iterative Levenberg-                          3. SALTSHAKER VALIDATION
+Marquardt algorithm. To reduce the number of (compu-                    Here, we show that our method is capable of produc-
+tationally expensive) Jacobian evaluations of the model               ing a trained model that reproduces inferred distances
+residuals required, we use Schubert’s method to perform               from SALT2 by comparing trained SALT3 models with
+a rank one update on the Jacobian after each iteration                SALT2.JLA. We show comparisons between synthetic
+while maintaining its sparsity structure (Marwil 1979;                photometry in multiple rest-frame filters as well as the
+Schubert 1970). However this technique is unsuitable                  spectral models, and compare distances between the
+for determining the model uncertainties.                              models.We describe our metrics in Section 3.1, the JLA
+   To fit the model uncertainty parameters defined in                 training sample of Betoule et al. (2014) and Mosher et al.
+Equation 4 we define a log-likelihood (LPhot. Errs. given             (2014) in 3.2, a simulated sample that mimics the de-
+as                                                                    mographics of JLA in 3.3, then train on these samples
+                                      N SN                            in 3.4, 3.5.
+                                                    (n)
+                                      X
+    −2 log(LPhot. Errs. ) =χ2Phot −          log(|ΣTotal |).   (14)
+                                       n                                       3.1. Validation Procedure and Metrics
+The model uncertainty parameters are chosen to maxi-                    To distinguish between models trained on different in-
+mize the log-likelihood using the optimizer iMinuit while             put data, we define “SALT3.X ” as the SALT3 model
+the flux model and nuisance parameters are kept fixed                 created with SALTshaker using training sample X. We
+(James & Roos 1975; Dembinski et al. 2020). After the                 refer to the samples used to evaluate the performance
+training has converged with k fixed to 0, we use iMi-                 of a given SALT3 model as “validation” samples, as it
+nuit to fit the parameters controlling the color scatter;             will be expedient to evaluate the trained model in some
+during this final fit, the color law is allowed to vary (hav-         cases on data that was not used in the model training.
+ing previously been fit as a flux model parameter). The               We use the SNANA light curve fitting program to fit val-
+out-of-sample variance is then estimated by inverting                 idation samples with both SALT2.JLA and SALT3.X.
+the Hessian matrix of the flux parameters obtained from                 Given fitted SALT parameters mB , x1 , c and their un-
+the model fitting process, with the regularization terms              certainties, the Tripp estimator for distance modulus is
+suppressed by a factor of 100, and propagating those pa-
+rameter uncertainties into the flux surfaces. The model                             µ = mB + α · x1 − β · c − M              (15)
+uncertainties and out-of-sample variance are added to-
+gether as the total model uncertainty surface.                        with distance uncertainties
+  The computation time required for the SALT3.JLA
+                                                                              2      2      2       2
+training sample with SALTshaker is approximately three                   σµ =σint + σµ,z + σlens + σm B
+                                                                                                        + (ασx1 )2 + (βσc )2
+minutes per iteration, with ∼25 iterations required for                        + 2αβσc,x1 + 2ασmB ,x1 + 2βσmB ,c             (16)
+convergence. On the larger SALT3.K21 sample, itera-
+tions are significantly longer, with ∼25 minutes required             where σint , α, β and M are nuisance parameters, σµ,z
+per iteration. We note that 29-Å spectral binning, which             is computed from a peculiar velocity uncertainty of
+was used in the SALT2.JLA training, improves speeds                   250 km s−1 , and σlens = 0.055z. We use the SALT2mu
+substantially by reducing the amount of data by up to                 method (Marriner et al. 2011; Kessler & Scolnic 2017)
+an order of magnitude. We include this as an option in                implemented in SNANA to estimate the nuisance parame-
+SALTshaker but the models in this work use the native                 ters as well as distances in 5 redshift bins. Allowing for a
+binning of the input spectra. Finally, the slowest com-               shift in location and scale of the light-curve parameters,
+ponent of the code is the iterative fitting of the error              the observed distributions are similar as compared to
+model, which for SALT3.K21 requires approximately 4                   SALT2.JLA (see Section 5.2.2). We thus expect selec-
+hours to perform 80 iterations and reach convergence                  tion biases to be common between the two models, and
+through iMinuit. Error model iterations are performed                 therefore we do not use SALT2mu to correct for selection
+every five iterations by default but could likely be per-             biases.
+formed less often without adversely affecting the final                 Given estimated distance moduli µ and Hubble resid-
+model. Faster methods of error model fitting will be an               uals relative to a nominal ΛCDM cosmology (∆µ) for
+important avenue for future improvement and should                    both models we define two metrics. First RMS(∆µ)
+improve speeds considerably.                                          across the validation sample and the relative distance
+                                                                                                                             9
+
+difference between models defined as                                   3.3. Simulated JLA Training Sample
+                h
+    Diff(∆z µ) = µ(0.40 < z < 0.6|SALT3.X )                     To test SALTshaker with a known input model and
+                                           i                 cosmology, we first simulate the SALT2.JLA training
+              − µ(0.40 < z < 0.6|SALT2.JLA)                  data to produce our “simJLA” training sample. Train-
+                h                                            ing on the actual JLA training sample is also a useful
+              − µ(0.01 < z < 0.2|SALT3.X )                   test (Section 3.5), but it does not provide a known truth
+                                           i                 model to validate the training outputs. For this simJLA
+              − µ(0.01 < z < 0.2|SALT2.JLA) ,        (17)
+                                                             test, every simulated SN that goes into the training sam-
+where µ(Z|M ) indicates a weighted average distance          ple has SALT2.JLA as the “truth” model, allowing us
+across a redshift range Z given a model M . Addition-        to test the consistency of input and output models.
+ally we will show binned Hubble residuals across the            We use the SNANA software (Kessler et al. 2009c) to
+redshift range. We discuss differences in the nuisance       generate Monte Carlo realizations of SN photometry and
+parameter β, as this has physical implications for dust      spectroscopy mimicking the demographics of the JLA
+properties, however α depends on both the demograph-         training sample of 420 SNe. SNANA simulations are fre-
+ics of the training sample and our revised separation        quently used to simulate a random realization for a sam-
+of stretch and color, and thus has no useful compari-        ple, in order to explore SN distance biases as a function
+son across models (see Section 2.1). Similarly we com-       of redshift.Our goal here is different: we aim to accu-
+pare synthetic photometry, but these comparisons are         rately simulate every individual event in the JLA sam-
+most relevant for simulated data when the truth model        ple, including cadence and signal-to-noise for both pho-
+is known. We train on multiple simulated and real data       tometric and spectroscopic observations. We therefore
+samples to assess how our models perform; in Table 3         use the cadence, redshift, and best fit c and x1 from each
+we summarize the abbreviations used for these training       JLA light curve as input to the simulation. Each set of
+samples.                                                     measured SN properties (z, t0 , x1 ,c) is used to simulate
+                                                             a rest-frame SED with the SALT2.JLA model. Spectral
+               3.2. JLA Training Sample                      variations (intrinsic scatter) are added to the rest-frame
+   The JLA data used to train the SALT2.JLA model            SED using the method in K13 and the covariance model
+consist of 420 SNe with light curves, 83 of which in-        from the Chotard et al. (2011, hereafter C11) scatter
+clude spectroscopy, from a compilation of low-z samples      model3 . We do not use the default Guy et al. (2010,
+(see Table 4 for details and citations), the Sloan Digital   hereafter G10), as the G10 model has non-physical scat-
+Sky Survey (SDSS; Holtzman et al. 2008; Kessler et al.       ter at extremely red wavelengths that does not match
+2009a; Sako et al. 2018), and the Supernova Legacy Sur-      observations. As described in Kessler et al. (2019) the
+vey (Astier et al. 2006, with spectra from Walker et al.     simulation applies cosmological dimming, lensing, pecu-
+2011; Balland et al. 2018 and private communication          liar velocity, galactic extinction, and redshifting to pro-
+with M. Betoule, C. Balland). These data are summa-          duce a redshifted SED at the top of the atmosphere.
+rized in Table 4, along with the new training data dis-      The filter transmissions and cadence are used to deter-
+cussed in Section 4, and are included in the data release    mine measured fluxes and uncertainties. Finally, the
+at http://saltshaker.readthedocs.io/.                        noise properties of each measured spectrum are applied
+   We use the “Supercal” procedure (Scolnic et al. 2015)     to the simulated SED.
+to update the calibration of the JLA training sample.           This simulation does not exactly reproduce the data
+Supercal uses the 3π sky coverage of the PS1 system          set because of random fluctuations in photometric noise
+and its observations of secondary standard stars to pre-     and intrinsic scatter, and also because the underlying
+cisely determine the offsets between different photomet-     SALT2 model formalism is an approximation as dis-
+ric systems. Scolnic et al. (2015) found that applying       cussed in Pierel et al. (2020). Nonetheless the simu-
+these calibration corrections to the sample of SN Ia used    lation is very similar to the data and is therefore suffi-
+to measure the Hubble flow without updating the train-       cient for testing SALTshaker, as illustrated in Figure 3
+ing calibration could shift w by 0.026. While we do not      for a representative low-z SN Ia. Comparisons between
+study the impact of the calibration on the trained model,    the parameters of simulations and data after fitting with
+Taylor et al. (2021) examines this with a full reanalysis
+of the DES-SNIa cosmology results using a retrained            3 We simulate α = 0.14 and β = 3.5. Note that the fit value
+SALT2 model. We also use the Schlafly & Finkbeiner           of β will be lower than the simulated value by ∼0.6 due to the
+(2011) corrections to the Schlegel et al. (1998) Milky       characteristics of the C11 scatter model (Scolnic & Kessler 2016).
+Way dust maps.
+10
+
+
+
+                                                 Table 3. Data Abbreviations
+
+            Abbreviation    Size   Description                                            Data    Trained Model
+
+            JLA              420   Mixture of low-redshift SNe from many surveys and        3.2              3.5
+                                   high-redshift SNe from SNLS and SDSS; see Mosher
+                                   et al. (2014)
+            simJLA          420    Simulated data that emulates the JLA training sample     3.3              3.4
+            K21            1083    Compilation of the JLA training sample combined            4              5.2
+                                   with new SNe from Foundation, Pan-STARRS, the
+                                   Dark Energy Survey, CfA4, and CSP, with additional
+                                   spectra from kaepora
+            K21train         541   Half of the SNe from the K21 compilation chosen at         4              5.1
+                                   random for use as a training sample
+            K21valid         541   The other half of the K21 SNe, used as a validation        4             ···
+                                   sample to see how the SALT3 model performs on data
+                                   that was not part of the training
+
+        Abbreviations we use to refer to compilations of cosmological SNe Ia in this work, number of SNe in each,
+        a brief description, the section in which we discuss the data itself, and the section in which we discuss a
+        SALT3 model trained on each
+
+
+
+
+Figure 3. SN 1992A light curves (left) and spectra (right) for real data (black) and SNANA simulation (orange) generated
+with best-fit x1 , c, z, and time of maximum light. Photometric data are shown on the left and spectroscopic data on the
+right. Random offsets between data and simulations are expected due to the C11 scatter model and spectral recalibration. The
+simulated spectra at red wavelengths have better SNR than the data because we model the average spectral SNR rather than
+its wavelength dependence.
+                                                                                                                                                                              11
+
+   A)                                                        B)
+   100                                 data
+                                       Sim. SNe Ia
+                                                             100                                                                  U (3500 Å)               V (5500 Å)
+       80                                                        80
+                                                                                                                                  B (4500 Å)               R (6500 Å)
+NSNe
+
+
+
+
+                                                          NSNe
+       60                                                        60
+       40                                                        40
+                                                                                                                                     Simulated Model Training
+       20                                                        20
+                                                                                                                           5.0%
+
+
+
+
+                                                                                                                   M0/M0
+                                                                 0
+
+   C)
+             0.1    0.2     0.3
+                             zCMB
+                                      0.4     0.5   0.6
+                                                             D)
+                                                                        16       18
+                                                                                       mB
+                                                                                         20         22       24
+                                                                                                                           0.0%
+   175                                                           80                                                        5.0%
+   150
+   125                                                           60
+   100                                                                                                                     5.0%
+NSNe
+
+
+
+
+                                                          NSNe
+
+
+
+
+                                                                                                                   M1/M0
+    75                                                           40
+    50
+    25
+                                                                 20                                                        0.0%
+     0                                                           0                                                         5.0%
+   E)
+            0.03 0.04 0.05 0.06 0.07 0.08 0.09
+                                  mB                         F)
+                                                                             2    1      0
+                                                                                        x1
+                                                                                                1        2
+                                                                                                                                    10       0       10       20           30
+   120
+                                                             100
+                                                                                                                                                 Phase (days)
+   100
+       80                                                        80
+                                                                 60
+NSNe
+
+
+
+
+                                                          NSNe
+
+
+
+
+       60                                                                                                         Figure 5. Relative difference between integrated model sur-
+       40                                                        40                                               faces of the input SALT2.JLA truth model and SALTshaker
+       20                                                        20                                               model trained on simulated data. Grey shading shows ±1%.
+       0                                                         0                                                Lightcurves are integrated over square U BV R-like band-
+              0.2     0.1     0.0           0.1     0.2               20 40 60 80 100 120 140 160 180
+                                  c                                                   max S/N                     passes 1000 Å wide, centered at 1000 Å intervals from 3500 Å
+                                                                                                                  to 6500 Å. Significant discrepancies are seen in the ultravi-
+ Figure 4. Distributions of parameters for the simulated (red                                                     olet where there is sparse data and regularization schemes
+ lines) versus real (black dots) SALT2.JLA training samples.                                                      have largest impact.
+ Comparisons are shown for redshift (A), mB (B), uncertainty
+ on mB (C), x1 (D), c (E), and the maximum S/N in each SN
+ light curve (F). All distributions are well-matched except for
+ the uncertainty on mB , which is slightly higher in the real
+ data, perhaps due to the C11 model resulting in fainter SNe
+                                                                                                                           0.05
+                                                                                                                                    Simulated Model Training
+ than the data in some bandpasses.
+                                                                                                                   CL( )
+
+
+
+
+ the SALT2.JLA model are shown in Figure 4, with only
+ slight observed differences in average mB uncertainty.
+                                                                                                                           0.00
+                                                                                                                     c
+
+
+
+
+ 3.4. Training on a Simulated SALT2.JLA Training Set
+   We use SALTshaker to train a model using our
+ simulated JLA sample, producing a model we call                                                                           0.05
+ SALT3.simJLA. In Figure 5 we show the relative dif-                                                                          2000           4400          6800          9200
+ ference between the input SALT2.JLA synthetic pho-                                                                                                  (Å)
+ tometry and the corresponding synthetic photometry
+ recovered from the SALT3.simJLA model. There is sig-
+ nificant discrepancy in the ultraviolet where regulariza-                                                        Figure 6. Change between color law of input truth model
+                                                                                                                  and model trained on simulated data, multiplied by σc =
+ tion strongly impacts the recovered model spectra, but
+                                                                                                                  0.1 to show the impact on a typical SN Ia light curve in
+ at central passband wavelengths 4000 Å < λ < 7000 Å                                                            magnitudes. Dashed lines show ±0.01 mag. Grey shaded
+ and −10 days < p < 30 days the other three light curves                                                          regions indicate the wavelengths for which the color law is
+ (B, V , and R) are consistent with the truth model at a                                                          linear. The slopes of the color law match closely at > 7000
+ level better than 1%. To illustrate the impact of changes                                                        Å, leading to very small differences across the wavelength
+ in the color law on a “typical” light curve in units of                                                          range where the color law is linear.
+ magnitudes, we use the quantity σc · ∆CL(λ), where the
+ standard deviation of the distribution of the SALT color                                                         color law difference is > 0.05 mag when λ < 3000 Å, the
+ parameter c is ∼ 0.1. As can be seen from Figure 6, the                                                          regime where the color law is least constrained.
+12
+
+   We find that the RMS of σc ∆CL(λ) is 0.01 mag be-         the SALT3.JLA, and the model surfaces are consistent
+tween wavelengths 3500Å < λ < 7000 Å, central filter       within the uncertainties. We show the Hubble residu-
+wavelengths for which the SALT2.JLA model is con-            als of this model in Figure 8 (along with our extended
+sidered reliable. We conclude that because few SNe           SALT3 models discussed in Section 5).
+constrain the SED at λ < 3000 Å, the limited set of
+lightcurve parameters c,x1 in this wavelength region             4. EXPANDED TRAINING DATA: THE K21
+poorly constrain the color law and the spectral com-                              COMPILATION
+ponents. In Sections 4 and 5 we substantially expand            To create a next-generation SALT model with ex-
+the training data to address this issue.                     tended wavelength range and reduced uncertainties, we
+   Next we compare distances from the two models. To         add high-quality data from the Dark Energy Survey
+avoid the statistics of the training sample limiting the     (Brout et al. 2019b), the Foundation Supernova Sur-
+precision of our validation, we simulate a “large” JLA       vey (Foley et al. 2018), and the Pan-STARRS Medium
+simulation for validation, with summary statistics for       Deep Survey (Scolnic et al. 2018). For SNe with pho-
+the Hubble diagram fits shown in Table 5, row 1. Instead     tometric data in the training sample, we add 693 low-z
+of simulating exact x1 and c values for an “apples-to-       spectra from the Kaepora database (Siebert et al. 2019),
+apples” comparison with the SALT2.JLA training sam-          the majority of which originate from the Berkeley SN Ia
+ple, we generate ∼3000 SNe mimicking a combination of        Program (BSNIP; Silverman et al. 2012a; Stahl et al.
+CfA3 (Hicken et al. 2009a), SDSS, and SNLS by using x1       2020). We show the density of photometric and spectral
+and c distributions from Scolnic & Kessler (2016). We        data in phase and wavelength space with the original
+show an example of Hubble residuals in Figure 7. We          JLA training sample and the additional data included
+observe consistent measurements of β and RMS(∆µ),            in the K21 compilation in Figure 10. Our final training
+with σint higher by 0.005 mag due to our treatment of        sample adds data across the phase space, but is most
+uncertainties. We also observe a slightly higher value of    impactful in the red and blue regions of our wavelength
+α, which is attributed to the x1 /M1 degeneracy. The         range, where the JLA training data were limited. Wave-
+distance difference between the models (Eq. 17) is con-      lengths < 3500 Å are on average covered by 1.8× more
+sistent (Diff(∆z µ) = 7(11) mmag) despite the U-band         light curves, while wavelengths > 7500 Å are covered
+discrepancies in the light curves seen in Figures 5 and 6.   by an average of 2.1× as many light curves and 5.7× as
+As the validation sample here has similar demograph-         many spectra. Additional photometric data makes the
+ics to the training sample, the same sparsity of data        distribution across phase space more uniform, where the
+that allows the observed ultraviolet divergences causes      JLA data has comparatively little data in the gap be-
+those same divergences to have little effect on the in-      tween low-redshift B and V bandpasses.
+ferred distances. We conclude that for a SALT model             We initially characterize our performance with the
+to be reliable at these wavelengths, the density of data     extended set of data using separate samples for train-
+in this region must be increased to match the density        ing and validation. We define the “K21valid” and
+of data where we recover the input model to ∼ 1%, at         “K21train” compilations by randomly assigning half of
+least a factor of two increase (see Section 4, where we      the supernovae to each. Finally, to produce our best
+discuss the density of photometric data across the JLA       model, we combine all available data to create the “K21”
+wavelength range).                                           compilation, and summarize the data included below
+                                                             and in Table 4. The redshift distributions of these data
+        3.5. Training on the JLA Training Set                are shown in Figure 9. Trained models using these com-
+   Next, we run SALTshaker on the real JLA training          pilations as training samples are discussed in Section 5.
+sample; we refer to this trained model as SALT3.JLA.
+We follow the validation procedure of Section 3.1 us-             4.1. The Pan-STARRS Medium Deep Survey
+ing the JLA training set for our validation sample. As         The Pan-STARRS medium deep survey covered 70
+shown in row 2 of Table 5, we find a similar α, a            square degrees of sky over four years, discovering ap-
+slightly lower β, and consistent RMS(∆µ). We find            proximately 5200 SNe (Jones et al. 2017; Villar et al.
+that Diff(∆z µ) = 32(28) mmag is consistent with zero.       2020) and spectroscopically classifying ∼10% of these at
+σint is slightly higher for SALT3.JLA, attributable to       a median redshift of ∼0.35 (Rest et al. 2014). The Pan-
+greatly decreased model uncertainties. Given the equiv-      theon analysis, which combined these data with JLA,
+alent RMS scatter, this σint difference does not result      includes 279 PS1-observed SNe Ia with an average of ap-
+in reduced distance precision. The distance moduli are       proximately 6 observations per 10 days in griz (Scolnic
+consistent at the 1-σ level between SALT2.JLA and            et al. 2018). We use these SNe Ia in our training data.
+                                                                                                                             13
+
+
+
+
+Figure 7. Hubble residual comparison with SALT2.JLA and SALT3.simJLA fits to simulated data. Each point represents
+a simulated SN light curve from the simJLA sample, which has been fit with either the SALT2.JLA model (blue) or the
+SALT3.simJLA model (red) with larger points showing the binned distances from each model. We do not expect SALT3 to
+outperform SALT2 here because SALT2 is the “truth” model, but we find consistent results.
+
+
+            0.6                                                                                                       0.6
+                     SALT2               SALT3                                                    SALT2 RMS = 0.144
+                       = 0.139 ± 0.005     = 0.140 ± 0.005                                          5 outliers (0.5%)
+            0.4        = 3.01 ± 0.06       = 2.83 ± 0.06
+                      int = 0.103         int = 0.110                                             SALT3 RMS = 0.142 0.4
+CDM (mag)
+
+
+
+
+                     med. 2 = 1.07       med. 2 = 0.93                                              7 outliers (0.8%)
+            0.2                                                                                                       0.2
+
+            0.0                                                                                                        0.0
+
+            0.2         SALT2.JLA                                                                                       0.2
+                        SALT3.JLA
+                        SALT3.K21train
+            0.4         SALT3.K21                                                                                       0.4
+              0.01          0.02          0.05         0.1               0.3           0.7
+                                                       zCMB
+Figure 8. Comparison of the SALT2.JLA (blue) versus SALT3.K21 (red) Hubble residuals for the full K21 compilation, with
+results from SALT3.JLA and SALT3.K21train shown in orange and teal, respectively. The same number of 3σ outliers are seen
+when using either SALT2.JLA and SALT3.K21a . A small change in beta can be attributed to a modified separation of color and
+stretch, along with improved parameter constraints on color. Additional details regarding the nuisance parameters in different
+training sets are shown in Table 5.
+     a
+         SALT3 3σ outliers are the SNe 1998ab, 05D2ci, 1995ac, 5635, 40166, 160214, and 370369. SALT2 outliers are the SNe
+                                           05D2ci, 40166, 90037, 160214, and 2002hu.
+            4.2. The Foundation Supernova Survey                    selected low-z galaxies, Foundation primarily followed
+  The Foundation Supernova Survey (Foley et al. 2018)               SNe discovered by untargeted surveys such as the All-
+followed SNe using the Pan-STARRS1 telescope, and                   Sky Automated Survey for Supernovae (Shappee et al.
+measured well-calibrated SN light curves in griz filters            2014), the Asteroid Terrestrial-impact Last Alert Sys-
+with a five-day cadence near maximum light and an ap-               tem (Tonry et al. 2018), Gaia (Gaia Collaboration et al.
+proximately 8-day cadence beginning at +10 days af-                 2016), and the Pan-STARRS Survey for Transients (Hu-
+ter maximum light. To achieve reduced selection effects             ber et al. 2015) .
+compared to previous surveys that targeted bright, pre-
+14
+
+                                                                   To ensure that SNe are suitable for inclusion in a train-
+                                                                 ing sample, we first require that every SN in the com-
+                                                                 pilation is a spectroscopically classified, Branch-normal
+                                                                 SN Ia (Branch et al. 1993; we include 1991T-like SNe Ia
+                                                                 following the original SALT2 training procedure; Guy
+                                                                 et al. 2007). For the SN light curves, we make the fol-
+                                                                 lowing selection requirements (cuts):
+
+                                                                     • At least four epochs at phases between −10 < p <
+                                                                       35 days, where p is the rest-frame phase relative
+                                                                       to time of B-band peak.
+Figure 9. Redshift distribution of the JLA training data
+for SALT2.JLA (black dashed) and our training data for               • At least one measurement after peak brightness
+SALT3.K21 (red solid), which adds Foundation (blue), PS1               (5 < p < 20), to constrain the shape.
+(green) and DES (orange) to the JLA training sample as
+well as small samples from CSP and CfA4. At the top, we              • At least one measurement in each of at least two
+label the rest-frame central filter wavelengths of each added          filters at −8 < p < 20 to constrain the color of the
+dataset, with the full filter widths in conjunction with spec-         SN.
+troscopy constraining the full SALT3.K21 wavelength range.
+The combined dataset contains approximately three times              • At least one measurement prior to peak brightness
+as many spectra as the previous SALT2 training sample and              (−10 < p < −1) to ensure a well-measured time
+contains approximately 2.5 times as many SNe.                          of maximum light. This is the only cut that was
+                                                                       not included in the original SALT2 training4 .
+  The Foundation first data release in Foley et al. (2018)
+contains 225 SNe Ia, 180 of which are cosmologically use-          For the spectra, we include the original SALT2.JLA
+ful. These data have been used to measure cosmological           training spectra in addition to spectra taken from the
+parameters in Jones et al. (2019) and the correlation of         kaepora database and spectra taken as part of the Foun-
+host galaxy properties with SN distances in Jones et al.         dation Supernova Survey. A number of these spectra
+(2018). The iz band coverage of Foundation is particu-           were taken by the Foundation team, but most have been
+larly critical to creating a SALT3 model that is trained         published on the Transient Name Server5 as classifica-
+to redder wavelengths than enabled by the JLA data               tion spectra.
+alone. We include spectra for 114 Foundation SNe from              To ensure minimal host galaxy contamination in the
+the Dettman et al. (2021) data release.                          high-z SN spectra used for model training, Guy et al.
+                                                                 (2007) fit the spectra with a combined model includ-
+                                                                 ing the predicted SN spectrum, the spectral recalibra-
+              4.3. The Dark Energy Survey                        tion parameters, and a galaxy model (elliptical, S0, Sa,
+   The Dark Energy Survey (DES) three-year spectro-              Sb, and Sc templates). They removed spectra for which
+scopically classified SN sample contains 207 SNe Ia at           there was evidence for host galaxy contamination at the
+a median redshift of 0.36 (Abbott et al. 2019). These            68% confidence level.
+SNe were discovered by imaging eight 2.7 deg2 “shal-               For Foundation and the additional low-z SN spec-
+low” fields (depth ≈ 23.5 mag) and two 2.7 deg2 “deep”           tra included here, low-z SNe are much brighter rela-
+fields (depth ≈ 24.5 mag) approximately once per week            tive to their host galaxies than at the redshifts probed
+(Smith et al. 2020a). Transients were discovered using a         by SNLS and SDSS. We clip host galaxy lines, mask
+difference-imaging pipeline (Kessler et al. 2015) and fi-        regions with uncorrected telluric features, and remove
+nal photometry was performed with a “scene modeling”             excessively noisy or poorly calibrated regions of each
+pipeline described in Brout et al. (2019b). See Abbott           spectrum, but do not attempt to subtract a host galaxy
+et al. (2019) and Brout et al. (2019a) for additional de-        continuum. We remove a handful of spectra with poor
+tails regarding the DES SN Ia data and analyses. These           quality from visual inspection. After cuts there are 114
+data have a maximum redshift of ∼0.85 and complement             spectra from Foundation and 693 from Kaepora, a sub-
+SNLS in probing rest-frame near-UV wavelengths with              set of which are shown in Section 5. All but five Foun-
+well-calibrated (sub-percent) photometric data (Burke            dation SNe have redshifts measured from host galaxy
+et al. 2018).
+                                                                   4 5 of 420 SNe from the JLA sample are removed with this cut.
+               4.4. Sample Selection Cuts                          5 https://wis-tns.org/
+                                                                                                                                15
+
+
+                                JLA                      K21 add.                    K21 Full
+                -20                                                                                        2000
+
+                 -2
+
+
+
+
+                                                                                                                 light curves
+                                                                                                                 Number of
+                15                              +                         =                                1000
+
+                32
+ Phase (days)
+
+
+
+
+                 50                                                                                        0
+                -20
+
+                 -2                                                                                        100
+
+
+
+
+                                                                                                                  Number of
+                                                +                         =
+
+
+
+
+                                                                                                                   spectra
+                15
+                                                                                                           50
+                32
+
+                50                                                                                         0
+                 20
+
+                           50
+
+                                  80
+
+                                           11
+
+                                                    20
+
+                                                         50
+
+                                                              80
+
+                                                                     11
+
+                                                                              20
+
+                                                                                    50
+
+                                                                                           80
+
+                                                                                                  11
+                      00
+
+                           00
+
+                                      00
+
+                                           00
+
+                                                    00
+
+                                                         00
+
+                                                              00
+
+                                                                      00
+
+                                                                              00
+
+                                                                                      00
+
+                                                                                             00
+
+                                                                                                    00
+                                            0
+
+
+
+
+                                                                        0
+
+
+
+
+                                                                                                      0
+                                                     Wavelength (Å)
+Figure 10. Number of light curves or spectra constraining each bin in our phase/wavelength space. Panels show coverage
+of photometric data (upper panels) and spectral data (lower panels) in the JLA training sample (left panels), the PS1, DES,
+and Foundation data added in the K21 compilation (middle panels), and the complete K21 compilation (right panels). A bin
+is considered “covered” by a given light curve if it is within the FWHM of the rest-frame bandpass. Foundation photometry
+provides much more extensive photometric coverage of red wavelengths, while PS1 and DES photometry provides additional
+rest-frame blue photometry, and the new photometric data covers the phase space more uniformly than JLA alone. Similarly,
+spectra from kaepora are immensely impactful at wavelengths λ > 7500 Å, greatly assisting the deconvolution of z band data.
+
+features. The complete training data are available at               SALT2.JLA, to model the color law over the increased
+https://saltshaker.readthedocs.io.                                  wavelength range with ×2.5 more training data. Third,
+                                                                    the color scatter model is changed from a third to a
+        5. THE SALT3 MODEL: EXTENDING THE                           fourth-order polynomial to allow additional flexibility
+        WAVELENGTH RANGE AND TRAINING ON                            over the increased wavelength range.
+        PANTHEON, FOUNDATION, AND DES DATA
+  Having demonstrated the effectiveness of SALTshaker
+on the original JLA training data, we now train a SALT3                5.1. Validation on Extended Wavelength Range
+model using additional data, extending the free model                 Before presenting our model trained on all data
+parameters in SALTshaker in three ways. First, we                   in Section 5.2, we check the performance on sepa-
+extend the SED wavelength range to 11000 Å so that                 rate training and validation samples. We take the
+rest frame filters centered at wavelengths up to ∼ 8500             “K21valid” compilation as our cosmology sample us-
+angstroms, such as the Foundation z-band, can be fit                ing our “SALT3.K21train” model as described in Sec-
+with the model. Secondly, we extend the SED wave-                   tion 3.1, and show the resulting Hubble residuals in
+length range over which the color law is fit with a poly-           Figure 8 and in row 3 of Table 5. We find that nui-
+nomial (Eq. 2) to 8000 Å , just below the central wave-            sance parameters are similar between SALT2.JLA and
+length of the PS1 z band. We use a fourth-order poly-               the SALT3.K21train model, with σint slightly higher by
+nomial, rather than the third-order polynomial used for             0.01 mag but with a consistent RM S(∆µ) (the SALT3
+16
+
+                                                  Table 4. The K21 Compilation
+
+       Survey                  NSN    Naspectra   Naspectra   zmin    zmed     zmax       Filters                      Ref.
+                                       (JLA)      (Total)
+
+       Calan-Tololo               5         0           0     0.015   0.020    0.051     BV RI b       Hamuy et al. (1996)
+       CfA1                       8        46          66     0.004   0.011    0.050   U BV RI b         Riess et al. (1999)
+       CfA2                      13       108         166     0.008   0.014    0.031   U BV RI b           Jha et al. (2006)
+       CfA3c                     51        31         534     0.004   0.023    0.041   U BV RIri      Hicken et al. (2009b)
+       SDSSc                    202         0          12     0.037   0.166    0.250       ugriz    Holtzman et al. (2008)
+       SNLS                     111        63          63     0.149   0.499    0.700        griz        Astier et al. (2006)
+       Misc. low-z c             25       152         216     0.001   0.009    0.077   U BV RI b           Jha et al. (2007)
+       SALT2.JLA Total          415       400        1057     0.001   0.172    0.700         ···                        ···
+       CfA4c                     30         0           0     0.009   0.029    0.070       BV ri       Hicken et al. (2012)
+       CSP                       13         0          36     0.011   0.029    0.058     uBV gri    Krisciunas et al. (2017)
+       Foundation               153         0         114     0.005   0.034    0.111        griz         Foley et al. (2018)
+       PS1 MDSc                 266         0           0     0.026   0.297    0.630        griz       Scolnic et al. (2018)
+       DES-spec                 206         0           0     0.078   0.362    0.850        griz       Abbott et al. (2019)
+       New Data Total           668         0         150     0.005   0.244    0.850         ···                        ···
+
+       SALT3 Total             1083       400        1207     0.001   0.201    0.850         ···                        ···
+       Note. SNe Ia in the K21 compilation, after cuts: the original JLA training sample is reduced to 415 SNe
+       (originally 420) and the new data adds 668 SNe, for a total of 1083 SNe.
+       a
+         Total number of spectra, rather than number of SNe with spectra, which is 83 for the JLA sample and an
+       additional 297 from the new data included here. Spectra are from Filippenko et al. (1992); Wells et al. (1994);
+       Patat et al. (1996); NAT (1997); Li et al. (2001); Salvo et al. (2001); Valentini et al. (2003); Anupama et al.
+       (2005); Benetti et al. (2004); Kotak et al. (2005); Leonard et al. (2005); Garavini et al. (2007); Stanishev
+       et al. (2007); Thomas et al. (2007); Foley et al. (2008); Pignata et al. (2008); Wang et al. (2009); Foley et al.
+       (2010); Östman et al. (2011); Walker et al. (2011); Blondin et al. (2012); Silverman et al. (2012b); Folatelli
+       et al. (2013); Balland et al. (2018) and from private communication with M. Betoule and C. Balland.
+       b
+         We note that these filter transmission curves were not provided for these samples.
+       c
+         11 SNe in these samples have additional data from the CSP (Contreras et al. 2010; Krisciunas et al. 2017),
+       while SDSS SNe 2006oa, 2006ob, 2006on, and 2006nz also have data from CfA3 (Hicken et al. 2009b).
+       c
+         See also Rest et al. (2014) and Jones et al. (2018).
+
+RMS is negligibly smaller). Diff(∆z µ) is consistent with              SALT2.JLA to within 1% across the entire wavelength
+zero at the mmag level.                                                range.
+                                                                         We compare Hubble residuals of the SALT3.K21 and
+                                                                       SALT2.JLA models in Figure 8. Individual standard-
+     5.2. Training on Complete K21 Compilation                         ized distances are consistent to 0.05 mag between the
+  Finally, we train our best SALT3 model, which we                     two models, and the effects on the Hubble diagram are
+call SALT3.K21, using all of the data described in pre-                found in row 4 of Table 5. Diff(∆z µ) is consistent with
+vious sections as a training sample. The sample includes               zero at 2(14) mmag. Finally, row 4 of Table 5 shows nui-
+1083 SNe, a factor of 2.5 more SNe than the JLA train-                 sance parameters and Hubble diagram metrics, demon-
+ing sample, and 1207 spectra, a factor of three increase               strating that SALTshaker produces a new SALT3 model
+in the number of spectra. Synthetic light curves from                  with slightly lower total dispersion, consistent σint , and
+SALT3.K21 and SALT2.JLA are compared in Figure                         consistent distances. We note that the β parameter is
+12 and the model uncertainties are compared in Fig-                    lower by 0.24 in the SALT3 model, likely due to a re-
+ure 13. We see good consistency between SALT2.JLA                      considered separation of color and stretch.
+and SALT3.K21, with modest differences in the u-band
+and some additional differences in redder bands; at both                      5.2.1. Model Uncertainties and Hubble Scatter of
+                                                                                                    SALT3.K21
+wavelength ranges we have substantially increased the
+training sample (see Figure 10). Similarly, as shown                     The uncertainties in Figure 13 show that both the
+in Figure 14, the color law is consistent with that of                 color scatter and light-curve uncertainties in redder
+                                                                                                                            17
+
+            0.200                                                    0.200
+            0.175        a)                                          0.175        b)
+
+
+
+
+                                                             (mag)
+ (mag)
+
+
+            0.150                                                    0.150
+            0.125                                                    0.125
+
+
+
+
+                                                             Mean
+ RMS
+
+
+
+
+            0.100                                                    0.100
+
+                  0.15                                                  0.15
+                         c)                                                       d)
+  Mean mB (mag)
+
+
+
+
+                                                              c (mag)
+                  0.10                                                  0.10
+
+                  0.05                                                  0.05
+
+                  0.00                                        Mean      0.00                        z
+                  0.15
+                         e)
+  x1 (mag)
+
+
+
+
+                  0.10                                                         SALT2.JLA
+                                                                               SALT3.K21
+                  0.05
+  Mean
+
+
+
+
+                  0.00
+                                 10 1
+                                    z
+
+Figure 11. RMS of Hubble residuals (panel a) and quadratic means of uncertainties in distances and light-curve parameters
+(panels b-e) of our compilation using two SALT models in four logarithmically spaced redshift bins from 0.015 < z < 1.
+SALT3.K21 improves measured RMS Hubble scatter across our entire redshift range. The smallest improvements appear to be
+in the intermediate redshift range z ∼ 0.2, with larger improvements at both lower and higher redshifts where improvements to
+the red and blue regions of the rest-frame model are most important.
+
+bands are much lower in SALT3.K21 than SALT2.JLA.                      Fitting the light curves using the SALT3.K21 model,
+The SALT2 color scatter was effectively unconstrained                we compare the uncertainties in distances and light-
+by the JLA data past mean passband wavelengths ∼                     curve parameters to those found using SALT2.JLA. In
+8000 Å, and we find that while the color scatter is sig-            Figure 11 we compare performance across the redshift
+nificant at these wavelengths, it is much smaller than               range. Our model shows reduced Hubble scatter and
+implied by the SALT2.JLA model. Our additional data                  distance uncertainties over the SALT2.JLA model at
+constrains this region up to ∼ 8500 Å, and redder data              nearly every redshift, with the least improvement at
+will be required to see how this effect carries into the             moderate redshifts z ∼ 0.2, where signal to noise is
+NIR. We also note lower color scatter by ∼ 1% in the                 high and the SALT2.JLA model is already perform-
+blue, which we attribute to improved relative calibration            ing well. Light-curve parameters from SALT3.K21train
+of the training sample.                                              have smaller uncertainties across the redshift range, with
+                                                                     the exception of x1 uncertainties. Our largest improve-
+18
+
+
+
+
+                      Bessell U    Bessell B    Bessell V         Bessell R           Bessell I
+                                                                                                               SALT2.JLA
+ M0 Flux
+
+
+                                                                                                               SALT3.K21
+ SALT3 Flux M1 Flux
+
+
+
+
+                                                                                                                      Stretch (x1 parameter)
+                                                                                                                  2
+                                                                                                                  1
+                                                                                                                  0
+                                                                                                                      1
+                                                                                                                      2
+                       0      50    0      50    0        50 0          50              0         50
+                                                 Time since peak (days)
+Figure 12. Comparisons of synthetic light curves. Upper two panels show light curves from both SALT2.JLA and SALT3.K21
+in arbitrary units of flux. Differences are most prominent in Bessell I band. Lower panels show a family of SALT3 lightcurves
+created by varying the x1 parameter.
+
+
+
+
+Figure 13. Color scatter as a function of central filter wavelength (left) and example light curves (right) with model uncer-
+tainties from SALT2.JLA (blue) and SALT3.K21 (red). SALT3 has comparable errors in the u and g bands but much smaller
+uncertainties in the r and i bands due to training data with much better coverage at those wavelengths, especially at large or
+small x1 (with errors in both models blowing up at very early phases). Only the SALT3 model covers the z band (right-most
+panel). On the left, dashed lines illustrate the wavelengths where the color scatter is unconstrained by data from the JLA
+sample (blue) or the K21 compilation (red; grey shading).
+                                                                                                                                       19
+
+                                                                                 0.17
+                 40                 SALT3.K21                                                    SALT2.JLA
+ AB)(RV = 3.1)
+                                    SALT2.JLA                                    0.16            SALT3.K21               395 SNe
+
+
+
+
+                                                                  RMS( ) (mag)
+                                    Cardelli et al 1989                                                                med. z = 0.40
+                 20                 Fitzpatrick 1999                             0.15                    387 SNe
+                                                                                                       med. z = 0.18
+                                                                                           143 SNe
+                                                                                         med. z = 0.04
+                                                                                 0.14
+                 0                                                               0.13
+ (A
+
+
+
+
+                                                                                 0.12
+                  2000   4000        6000         8000                                       2             1          0
+                                     /Å                                                 # Additional filters used in SALT3 fit
+
+Figure 14. Comparison of SALT2.JLA versus SALT3.K21
+                                                                                 0.18
+
+
+
+
+                                                                  RMS( ) (mag)
+color law, along with the extinction curves of Cardelli et al.
+(1989) and Fitzpatrick (1999) for comparison. For all four                       0.16
+curves RV is fixed to 3.1.
+                                                                                 0.14
+ments, particularly in color uncertainty, are found at low
+redshift, where the improved red wavelength coverage of                          0.12
+our model allows the use of additional light curve bands
+in fitting these SNe, providing stronger constraints.
+                                                                                 0.10
+   There is a slight improvement in RMS Hubble residu-
+                                                                                          3 N S D S S
+als, largely attributable to decreased color uncertainties                           CFADATIO SDS PS1M DE SNL
+                                                                                        N
+                                                                                    FOU
+in the low redshift sample. Breaking this down further,
+Figure 15 shows the Hubble scatter binned by the num-
+ber of additional filters used in the SALT3.K21 light-
+curve fit as compared to the SALT2.JLA light-curve fit           Figure 15. Upper panel: RMS(∆µ) versus the number of
+in Figure 15. Where two additional filters are available,        additional filters used in SALT3.K21 (red) light-curve fits as
+RMS(∆µ) improves by ∼ 10%. We conclude improve-                  compared to fits made using SALT2.JLA (blue). The num-
+ment in the SALT3 model is most noticeable when it               ber of SNe and median redshift are printed above each bin.
+allows us to fit SNe with existing light curves in filters       Lower panel: RMS(∆µ) versus sample for SALT3.K21 (red)
+out of the SALT2.JLA wavelength range. At high red-              and SALT2.JLA (blue), for all samples which have more than
+                                                                 30 SNe Ia in our compilation. As we move to surveys dedi-
+shift, SALT3’s improved constraints on the NUV model
+                                                                 cated to searches at higher redshift, fewer SNe have data that
+reduce Hubble scatter by ∼ 0.01 mag, although there              could not be fit with SALT2, and the advantage of SALT3’s
+is typically not sufficiently red data to take full advan-       wavelength range becomes less important.
+tage of the extended wavelength range at these redshifts.
+Similarly, when breaking down results by survey, as we           the SALT3 model is defined, while others are from the
+show in Figure 15, the greatest improvement is in the            demographics of the training sample. For example, a
+low-z CFA3 and Foundation samples where we can make              x1 /M1 degeneracy is broken by setting a constraint on
+use of I and iz band observations (respectively) previ-          the standard deviation σx1 = 1, both in our proce-
+ously unused in SALT2.JLA-based analyses at low red-             dure and in the original training procedure; therefore
+shift. We are able to reduce the RMS(∆µ) of the Foun-            including additional data with higher stretch increases
+dation sample from 0.144 ± 0.001 mag to 0.125 mag, an            the scale of the M1 component.
+improvement of 15%.                                                In Figure 16 we compare the distributions of the x1
+      5.2.2. Comparison of SALT3.K21 and SALT2.JLA               and c parameters from both models. We note a slight
+                         Light-curve Parameters                  rotation, shift, and scale change of the color/stretch dis-
+  The SALTshaker training procedure results in differ-           tribution relative to SALT2.JLA. These linear transfor-
+ent distributions of light-curve parameters compared to          mations cancel in the Tripp standardization of distance,
+SALT2.JLA. Some differences are due to changes in how            absorbed into the nuisance parameters α, β, M. The
+20
+
+offset in color in particular is from including bluer high                          6. CONCLUSIONS
+redshift SNe from PS1 and DES in the training sam-                    We have presented SALTshaker, a new Python-
+ple. The rotation is due to the distinct procedures for            based training code to train a phenomenologically
+separating stretch and color between the SALT2 train-              motivated light-curve model using the SALT frame-
+ing code and SALTshaker. SALT3.K21 x1 and c values                 work, in addition to a retrained SALT model we call
+can be approximated from the SALT2.JLA values by the               SALT3. SALTshaker is publicly available at https:
+transformations                                                    //github.com/djones1040/SALTShaker with documen-
+                                                                   tation at https://saltshaker.readthedocs.io/en/latest/.
+   (SALT3)           (SALT2)
+ x1          ≈1.028x1          + 0.138c(SALT2) + 0.005 (18)        The SALTshaker documentation includes links to the
+                     (SALT2)                                       training data and the SALT3.K21 model, and the
+ c(SALT3) ≈0.002x1             + 0.985c(SALT2) + 0.013.
+                                                                   SALT3.K21 model is compatible with and included in
+                                                           (19)
+                                                                   the latest versions of SNANA and sncosmo.
+   To test the similarity of the shape of the distribu-               The SALT3.K21 model itself includes updated calibra-
+tions, we use the two dimensional Kolmogorov-Smirnov               tion with Supercal, a training sample with 1083 SNe −
+-like test statistic of Press & Teukolsky (1988). We mod-          2.5 times larger than previous training samples − and
+ify the procedure by linearly transforming both sets of            extends to the rest-frame iz bands. Due to its larger
+light-curve parameters to have the same mean, standard             wavelength range, we find that SALT3.K21 distances
+deviation, and x1 -c correlation before calculating the            for both legacy low-z data and Foundation data are ap-
+statistic. We find the test statistic for the SALT2.JLA            proximately 15% more precise, equivalent to increasing
+and SALT3.K21 x1 and c parameters, then bootstrap                  the low-z sample size by 30%. The SALT3.K21 model
+resample the data and calculate the test statistic with            is based on updated calibration with Supercal (Scolnic
+the resampled data. We derive a p-value= 0.895, and                et al. 2015) and revised MW E(B-V) estimates from
+conclude that we cannot distinguish the shape of the               Schlafly & Finkbeiner (2011). As part of an upcom-
+underlying distributions.                                          ing cosmology analysis we have employed SALT3.K21
+                                                                   within the PIPPIN (Hinton & Brout 2020) framework,
+                                                 SALT2             generating simulations and performing bias corrections
+                                                 r: -0.100         following the methodologies of Kessler et al. (2019) and
+                                                 SALT3             Kessler & Scolnic (2017). Although this work is pre-
+                                                 r: -0.042         liminary, we find that cosmological parameters found
+                                                                   using a larger light-curve dataset of ∼ 2000 SNe Ia (to
+       3                                                           be released in Brout+ in prep) are consistent between
+                                                                   SALT3.K21 and SALT2.JLA. Looking to future mis-
+       2                                                           sions, we find that for the forecast SN Ia survey of the
+                                                                   Roman Space Telescope, assuming the ALLz strategy
+       1                                                           (Hounsell et al. 2018), the extended wavelength range
+                                                                   in SALT3.K21 makes use of ∼ 20% more observations
+       0
+x1
+
+
+
+
+                                                                   compared to SALT2.JLA; this increase is about a fac-
+                                                                   tor of 2 for redshifts z < 0.5, and falls to about a 10%
+       1                                                           increase at z = 1.5.
+                                                                      Several light-curve models have been developed for
+       2                                                           cosmological supernovae, including MLCS (Riess et al.
+                                                                   1996), MLCS2k2 (Jha et al. 2007), SiFTO (Conley et al.
+       3       0.2         0.0          0.2                        2008), SNooPy (Burns et al. 2011), SNEMO (Saunders
+                            c                                      et al. 2018), SUGAR (Léget et al. 2019), and BayesSN
+                                                                   (Mandel et al. 2011; Mandel et al. 2020). In the con-
+Figure 16. Scatterplot of the x1 and c light-curve param-          text of other modern light-curve models, SALT3 offers
+eters measured with SALT2.JLA and SALT3.K21. We ob-
+                                                                   an approach to model design and training process that
+serve a linear transformation of the parameters, as expected
+from changes in the demographics of the training sample and        prioritizes the use of heterogeneous spectral and photo-
+our procedure for separating stretch and color. Best fit c-x1      metric data to provide extensive phase and wavelength
+lines and correlation coefficients r are shown to illustrate the   coverage and native k-corrections through cosmology-
+rotation of the distribution as SALT3 forces the indepen-          independent training. The model framework is mini-
+dence of x1 and c.                                                 mally changed from SALT2, so SNANA simulations, bias
+                                                                                                                              21
+
+    Table 5. Summary of SALT Model Nuisance Parameters and Relative Distance Difference for Different Training Sets
+
+                    Sample                                     Nuisance Parameters                  Hubble Flow Dist.
+         Model      NTraining Validation Sample                    α               β         σint RMS(∆µ)      Diff(∆z µ)
+       SALT2.JLA         420 large sim. JLAb           0.151 ± 0.003   3.101 ± 0.031      0.098      0.173           ···
+   1   SALT3.simJLA      420 large sim. JLAb           0.165 ± 0.003   2.854 ± 0.028      0.103      0.182 −0.007 ± 0.011
+       SALT2.JLA         420               JLA         0.131 ± 0.009   3.230 ± 0.114      0.128      0.153           ···
+   2   SALT3.JLA         420               JLA         0.142 ± 0.011   2.952 ± 0.124      0.145      0.155 0.032 ± 0.028
+
+       SALT2.JLA             420         K21 Valid     0.151 ± 0.008     3.064 ± 0.086    0.103       0.148            ···
+   3   SALT3.K21train        541         K21 Valid     0.115 ± 0.008     2.967 ± 0.091    0.118       0.152   0.013 ± 0.020
+
+       SALT2.JLA             420           K21 Full    0.139 ± 0.005     3.011 ± 0.060    0.103       0.146           ···
+   4   SALT3.K21            1083           K21 Full    0.140 ± 0.005     2.833 ± 0.057    0.110       0.143 −0.002 ± 0.014
+   Cosmological results from light-curve fits using SALT3 models created with different training sets, compared to results
+   when using the SALT2.JLA model. Training sets include a simulated JLA training sample (simJLA, Row 1), the real
+   JLA training sample (JLA, Row 2), an expanded training sample using the full JLA training sample but including
+   only half the additional data we use, with the remainder used for validation (K21train, Row 3), and the full K21
+   compilation (highlighted in Row 4), which is the training sample used to create the SALT3 model published in this
+   work. Our best model using the complete K21 compilation results in nuisance parameters and distances statistically
+   consistent but slightly lower Hubble scatter as compared to SALT2.
+   a
+     Relative to the equivalent SALT2 fitting results, the distance between average Hubble residual at 0.01 < z < 0.2
+   and the average Hubble residual at 0.4 < z < 0.6.
+   b
+     Large, combined simulations of CfA3, SDSS, and SNLS with a total of ∼3000 SNe to measure distance biases more
+   precisely than is possible from a sample with the size of the JLA training sample
+
+corrections, and other analysis products are expected to           tifying the reduced calibration uncertainties as a topic
+require little revision.                                           for further work.
+   Over the coming years, we expect SALTshaker will                   The BYOSED code (Pierel et al. 2020) implements a
+continue to be developed and improved as additional                range of simulated effects to a base SED template, such
+SN data becomes available and additional SN standard-              as perturbations to line velocity, multiple sources of red-
+ization parameters (e.g., host mass) are discovered and            dening with distinct effects, and correlations of host
+explored. Further development work could focus on                  galaxy properties with the SN Ia SED. Future work
+the error model, which is currently based on central fil-          could perform the SALTshaker method on a BYOSED-
+ter wavelengths rather than integrated quantities. This            produced training sample with such underlying effects.
+is a potential source of systematic uncertainty because            By propagating any biases introduced by the training
+observer-frame filter functions are contracted in the rest         code into cosmology, we may quantify the potential im-
+frame. Additionally, SALTshaker enables a more rigor-              pact of currently unmodeled supernova phenomenology
+ous evaluation of systematic uncertainties such as those           on cosmology.
+arising from limited training data, photometric calibra-              Samples of SN Ia light curves will increase by orders
+tion uncertainties, or treatment of SN spectra. These              of magnitude with the Vera Rubin Telescope’s LSST
+can be evaluated in a straightforward and rigorous way             (Ivezić et al. 2019) and the Roman Space Telescope
+by re-training the SALT3 model surfaces on simulated               (Hounsell et al. 2018). For error budgets to continue
+data. Although we have demonstrated that SALTshaker                improvement, light-curve models should not be tied to
+can faithfully recover a truth model at the ∼1% level,             outdated calibration standards, and it is essential that
+future work will also be able to fully validate the model          the model training process be regarded as a key com-
+training process using an entire analysis chain that in-           ponent of an integrated cosmology analysis, as has been
+cludes training, bias corrections, and cosmology fitting           done in Betoule et al. (2014) and Mosher et al. (2014).
+(Dai et al in prep). Similarly, while the SALT3 model
+                                                                     Software: AstroPy (Astropy Collaboration et al.
+surfaces presented in this work have been trained on
+                                                                   2013, 2018),Astroquery (Ginsburg et al. 2019),extinc-
+data recalibrated to the level of 1% via the Supercal
+                                                                   tion(Barbary 2016),iMinuit (James & Roos 1975; Dembin-
+procedure (Scolnic et al. 2015, 2018), we have left quan-
+                                                                   ski et al. 2020), Matplotlib (Hunter 2007), NumPy (Harris
+22
+
+etal.2020),SciPy(Virtanenetal.2020),sncosmo(Barbary                 This paper is based in part on observations made with
+et al. 2015, 2016), tqdm (da Costa-Luis et al. 2021)             the Southern African Large Telescope (SALT) using the
+                                                                 Robert Stobie Spectrograph (RSS), through allocations
+   We thank Julien Guy and the developers of the SALT            made to Rutgers University via programs 2015-1-MLT-
+and SALT2 models for their contributions to the field,           002, 2016-1-MLT-007, and 2017-1-MLT-002 (PI: S.W.
+Julien Guy, Chris Lidman, and Georgie Taylor for valu-           Jha).
+able assistance and discussion, and Julien Guy, Marc                Based in part on observations obtained at the South-
+Betoule, and the SNLS team for providing the original            ern Astrophysical Research (SOAR) telescope (NOIR-
+snpca code and JLA training sample. We are grateful              Lab Prop. IDs 2015A-0253, 2015B-0313, 2017A-0306,
+for all astronomers who acquired the photometry and              2017B-0169, 2018A-0277; PI: R. Foley), which is a joint
+spectroscopy used to train the SALT3.K21 model.                  project of the Ministério da Ciência, Tecnologia e In-
+   D.O.J. is supported by a Gordon and Betty Moore               ovações do Brasil (MCTI/LNA), the US National Sci-
+Foundation postdoctoral fellowship at the University of          ence Foundation’s NOIRLab, the University of North
+California, Santa Cruz and by NASA through the NASA              Carolina at Chapel Hill (UNC), and Michigan State Uni-
+Hubble Fellowship grant HF2-51462.001 awarded by the             versity (MSU).
+Space Telescope Science Institute, which is operated by             Based in part on observations at Kitt Peak Na-
+the Association of Universities for Research in Astron-          tional Observatory at NSF’s NOIRLab (NOIRLab Prop.
+omy, Inc., for NASA, under contract NAS5-26555. Sup-             IDs 2015A-0253, 2015B-0313, 2017A-0306, 2017B-0169,
+port for this work was provided by the STScI Director’s          2018A-0277; PI: R. Foley), which is managed by the
+Discretionary Fund. This research at Rutgers Univer-             Association of Universities for Research in Astronomy
+sity (S.W.J., M.D.) was supported by NASA contract               (AURA) under a cooperative agreement with the Na-
+NNG16PJ34C and DOE award DE-SC0011636. M.D. is                   tional Science Foundation. The authors are honored
+also supported by the Horizon Fellowship at the Johns            to be permitted to conduct astronomical research on
+Hopkins University. This work at the University of               Iolkam Du’ag (Kitt Peak), a mountain with particular
+South Carolina (S. Rodney, J. D. R. Pierel) was sup-             significance to the Tohono O’odham.
+ported by grant HST-AR-15808 from the Space Tele-                   A major upgrade of the Kast spectrograph on the
+scope Science Institute. This work was supported by              Shane 3 m telescope at Lick Observatory was made pos-
+NASA contract No. NNG17PX03C issued through the                  sible through generous gifts from the Heising-Simons
+Nancy G. Roman Science Investigation Teams Program.              Foundation as well as William and Marina Kast. Re-
+   This research is based on observations made with              search at Lick Observatory is partially supported by a
+the NASA/ESA Hubble Space Telescope obtained from                generous gift from Google.
+the Space Telescope Science Institute, which is oper-               Some of the data presented herein were obtained at the
+ated by the Association of Universities for Research in          W. M. Keck Observatory, which is operated as a scien-
+Astronomy, Inc., under NASA contract NAS 5–26555.                tific partnership among the California Institute of Tech-
+These observations are associated with programs GO-              nology, the University of California and the National
+4016, GO-4252, GO-8611, GO-9114, and GO-10182.                   Aeronautics and Space Administration. The Observa-
+   This research is based on observations made with the          tory was made possible by the generous financial sup-
+International Ultraviolet Explorer, obtained from the            port of the W. M. Keck Foundation. The authors wish
+MAST data archive at the Space Telescope Science In-             to recognize and acknowledge the very significant cul-
+stitute, which is operated by the Association of Univer-         tural role and reverence that the summit of Maunakea
+sities for Research in Astronomy, Inc., under NASA con-          has always had within the indigenous Hawaiian commu-
+tract NAS 5–26555. These observations are associated             nity. We are most fortunate to have the opportunity to
+with programs METOO, SNMRK, SNNRK, STKRK,                        conduct observations from this mountain.
+and VILSP.
+
+
+                                                          REFERENCES
+1997, NATO Advanced Study Institute (ASI) Series C, Vol.         Anupama, G. C., Sahu, D. K., & Jose, J. 2005, A&A, 429,
+  486, Thermonuclear supernovae                                    667
+                                                                 Astier, P., Guy, J., Regnault, N., et al. 2006, A&A, 447, 31
+Abbott, T. M. C., Allam, S., Andersen, P., et al. 2019,
+                                                                 Astropy Collaboration, Robitaille, T. P., Tollerud, E. J.,
+  ApJL, 872, L30                                                   et al. 2013, A&A, 558, A33
+                                                                                                                              23
+
+Astropy Collaboration, Price-Whelan, A. M., Sipőcz, B. M.,     Folatelli, G., Morrell, N., Phillips, M. M., et al. 2013, ApJ,
+  et al. 2018, AJ, 156, 123                                       773, 53
+Avelino, A., Friedman, A. S., Mandel, K. S., et al. 2019,       Foley, R. J., Filippenko, A. V., & Jha, S. W. 2008, ApJ,
+  ApJ, 887, 106                                                   686, 117
+Balland, C., Cellier-Holzem, F., Lidman, C., et al. 2018,       Foley, R. J., & Kasen, D. 2011, ApJ, 729, 55
+  A&A, 614, A134                                                Foley, R. J., Narayan, G., Challis, P. J., et al. 2010, ApJ,
+Barbary, K. 2016, extinction v0.3.0                               708, 1748
+Barbary, K., rbiswas4, Rodney, S., et al. 2015, Sncosmo:        Foley, R. J., Scolnic, D., Rest, A., et al. 2018, MNRAS, 475,
+  V1.0.0                                                          193
+Barbary, K., Barclay, T., Biswas, R., et al. 2016, SNCosmo:     Freedman, W. L., Madore, B. F., Hatt, D., et al. 2019, The
+  Python library for supernova cosmology                          Astrophysical Journal, 882, 34
+Benetti, S., Meikle, P., Stehle, M., et al. 2004, MNRAS,        Gaia Collaboration, Prusti, T., de Bruijne, J. H. J., et al.
+  348, 261                                                       2016, A&A, 595, A1
+Betoule, M., Kessler, R., Guy, J., et al. 2014, Astronomy &     Garavini, G., Nobili, S., Taubenberger, S., et al. 2007,
+  Astrophysics, 568, A22                                         A&A, 471, 527
+Blondin, S., Matheson, T., Kirshner, R. P., et al. 2012, AJ,    Ginsburg, A., Sipőcz, B. M., Brasseur, C. E., et al. 2019,
+  143, 126                                                        AJ, 157, 98
+Branch, D., Fisher, A., & Nugent, P. 1993, AJ, 106, 2383
+                                                                Guy, J., Astier, P., Baumont, S., et al. 2007, Astronomy &
+Brout, D., Hinton, S., & Scolnic, D. 2020, arXiv e-prints,
+                                                                 Astrophysics, 466, 11
+  arXiv:2012.05900
+                                                                Guy, J., Sullivan, M., Conley, A., et al. 2010, Astronomy &
+Brout, D., & Scolnic, D. 2020
+                                                                 Astrophysics, 523, A7
+Brout, D., Scolnic, D., Kessler, R., et al. 2019a, ApJ, 874,
+                                                                Hamuy, M., Phillips, M. M., Suntzeff, N. B., et al. 1996,
+  150
+                                                                  AJ, 112, 2408
+Brout, D., Sako, M., Scolnic, D., et al. 2019b, ApJ, 874, 106
+                                                                Harris, C. R., Millman, K. J., van der Walt, S. J., et al.
+Burke, D. L., Rykoff, E. S., Allam, S., et al. 2018, AJ, 155,
+                                                                  2020, Nature, 585, 357
+  41
+                                                                Hicken, M., Wood-Vasey, W. M., Blondin, S., et al. 2009a,
+Burns, C. R., Stritzinger, M., Phillips, M. M., et al. 2011,
+                                                                  The Astrophysical Journal, 700, 1097
+  The Astronomical Journal, 141, 19
+                                                                Hicken, M., Challis, P., Jha, S., et al. 2009b, The
+Cardelli, J. A., Clayton, G. C., & Mathis, J. S. 1989, ApJ,
+                                                                  Astrophysical Journal, 700, 331
+  345, 245
+                                                                Hicken, M., Challis, P., Kirshner, R. P., et al. 2012, The
+Chotard, N., Gangler, E., Aldering, G., et al. 2011,
+                                                                  Astrophysical Journal Supplement Series, 200, 12
+  Astronomy & Astrophysics, 529, L4
+                                                                Hinton, S., & Brout, D. 2020, Journal of Open Source
+Conley, A., Sullivan, M., Hsiao, E. Y., et al. 2008, The
+                                                                  Software, 5, 2122
+  Astrophysical Journal, 681, 482
+Conley, A., Guy, J., Sullivan, M., et al. 2011, The             Holtzman, J. A., Marriner, J., Kessler, R., et al. 2008, AJ,
+  Astrophysical Journal Supplement Series, 192, 1                 136, 2306
+Contreras, C., Hamuy, M., Phillips, M. M., et al. 2010, The     Hounsell, R., Scolnic, D., Foley, R. J., et al. 2018, ApJ, 867,
+  Astronomical Journal, 139, 519                                  23
+da Costa-Luis, C., Larroque, S. K., Altendorf, K., et al.       Huber, M., Chambers, K. C., Flewelling, H., et al. 2015,
+  2021, tqdm: A fast, Extensible Progress Bar for Python         The Astronomer’s Telegram, 7153, 1
+  and CLI                                                       Hunter, J. D. 2007, Computing in Science & Engineering, 9,
+Dembinski, H., Ongmongkolkul, P., Deil, C., et al. 2020,         90
+  scikit-hep/iminuit: v1.4.9                                    Ivezić, Ž., Kahn, S. M., Tyson, J. A., et al. 2019, ApJ, 873,
+Dettman, K. G., Jha, S. W., Dai, M., et al. 2021, arXiv           111
+  e-prints, arXiv:2102.06524                                    James, F., & Roos, M. 1975, Computer Physics
+Dhawan, S., Jha, S. W., & Leibundgut, B. 2018, Astronomy          Communications, 10, 343
+  & Astrophysics, 609, A72                                      Jha, S., Riess, A. G., & Kirshner, R. P. 2007, The
+Filippenko, A. V., Richmond, M. W., Matheson, T., et al.          Astrophysical Journal, 659, 122
+  1992, ApJL, 384, L15                                          Jha, S., Kirshner, R. P., Challis, P., et al. 2006, The
+Fitzpatrick, E. L. 1999, PASP, 111, 63                            Astronomical Journal, 131, 527
+24
+
+Jones, D. O., Scolnic, D. M., Riess, A. G., et al. 2017, ApJ,    Patat, F., Benetti, S., Cappellaro, E., et al. 1996, MNRAS,
+  843, 6                                                           278, 111
+Jones, D. O., Riess, A. G., Scolnic, D. M., et al. 2018, The     Perlmutter, S., Aldering, G., Goldhaber, G., et al. 1999,
+  Astrophysical Journal, 867, 108                                  The Astrophysical Journal, 517, 565
+Jones, D. O., Scolnic, D. M., Foley, R. J., et al. 2019, The     Pierel, J. D. R., Rodney, S., Avelino, A., et al. 2018, PASP,
+  Astrophysical Journal, 881, 19                                   130, 114504
+Kelly, P. L., Hicken, M., Burke, D. L., Mand el, K. S., &        Pierel, J. D. R., Jones, D. O., Dai, M., et al. 2020, arXiv
+  Kirshner, R. P. 2010, ApJ, 715, 743                              e-prints, arXiv:2012.07811
+Kessler, R., & Scolnic, D. 2017, ApJ, 836, 56                    Pignata, G., Benetti, S., Mazzali, P. A., et al. 2008,
+Kessler, R., & Scolnic, D. 2017, The Astrophysical Journal,        MNRAS, 388, 971
+  836, 56                                                        Press, W. H., & Teukolsky, S. A. 1988, Computers in
+Kessler, R., Becker, A. C., Cinabro, D., et al. 2009a, The         Physics, 2, 74
+  Astrophysical Journal Supplement Series, 185, 32               Rest, A., Scolnic, D., Foley, R. J., et al. 2014, ApJ, 795, 44
+Kessler, R., Bernstein, J. P., Cinabro, D., et al. 2009b,        Riess, A. G., Casertano, S., Yuan, W., et al. 2021, ApJL,
+  Publications of the Astronomical Society of the Pacific,         908, L6
+  121, 1028                                                      Riess, A. G., Press, W. H., & Kirshner, R. P. 1996, ApJ,
+                                                                   473, 88
+—. 2009c, Publications of the Astronomical Society of the
+                                                                 Riess, A. G., Filippenko, A. V., Challis, P., et al. 1998, The
+ Pacific, 121, 1028
+                                                                   Astronomical Journal, 116, 1009
+Kessler, R., Marriner, J., Childress, M., et al. 2015, AJ,
+                                                                 Riess, A. G., Kirshner, R. P., Schmidt, B. P., et al. 1999,
+  150, 172
+                                                                   The Astronomical Journal, 117, 707
+Kessler, R., Brout, D., D’Andrea, C. B., et al. 2019,
+                                                                 Riess, A. G., Macri, L. M., Hoffmann, S. L., et al. 2016,
+  MNRAS, 485, 1171
+                                                                   The Astrophysical Journal, 826, 56
+Kessler, R., et al. 2019, Mon. Not. Roy. Astron. Soc., 485,
+                                                                 Riess, A. G., Rodney, S. A., Scolnic, D. M., et al. 2018, The
+  1171
+                                                                   Astrophysical Journal, 853, 126
+Kotak, R., Meikle, W. P. S., Pignata, G., et al. 2005, A&A,
+                                                                 Rigault, M., Copin, Y., Aldering, G., et al. 2013, A&A,
+ 436, 1021
+                                                                   560, A66
+Krisciunas, K., Suntzeff, N. B., Phillips, M. M., et al. 2004,
+                                                                 Rigault, M., Brinnel, V., Aldering, G., et al. 2018
+  AJ, 128, 3034
+                                                                 Rose, B. M., Dixon, S., Rubin, D., et al. 2020, ApJ, 890, 60
+Krisciunas, K., Garnavich, P. M., Stanishev, V., et al. 2007,
+                                                                 Rubin, D. 2020, ApJ, 897, 40
+  AJ, 133, 58                                                    Sako, M., Bassett, B., Becker, A. C., et al. 2018,
+Krisciunas, K., Contreras, C., Burns, C. R., et al. 2017,          Publications of the Astronomical Society of the Pacific,
+  The Astronomical Journal, 154, 211                               130, 064002
+Léget, P. F., Gangler, E., Mondon, F., et al. 2019              Salvo, M. E., Cappellaro, E., Mazzali, P. A., et al. 2001,
+Leonard, D. C., Li, W., Filippenko, A. V., Foley, R. J., &         MNRAS, 321, 254
+  Chornock, R. 2005, ApJ, 632, 450                               Saunders, C., Aldering, G., Antilogus, P., et al. 2018, The
+Li, W., Filippenko, A. V., Treffers, R. R., et al. 2001, ApJ,      Astrophysical Journal, 869, 167
+  546, 734                                                       Schlafly, E. F., & Finkbeiner, D. P. 2011, ApJ, 737, 103
+Mandel, K. S., Narayan, G., & Kirshner, R. P. 2011, The          Schlegel, D. J., Finkbeiner, D. P., & Davis, M. 1998, ApJ,
+ Astrophysical Journal, 731, 120                                   500, 525
+Mandel, K. S., Thorp, S., Narayan, G., Friedman, A. S., &        Schubert, L. K. 1970, Mathematics of Computation, 24, 27
+ Avelino, A. 2020, arXiv e-prints, arXiv:2008.07538              Scolnic, D., & Kessler, R. 2016, ApJL, 822, L35
+Marriner, J., Bernstein, J. P., Kessler, R., et al. 2011, The    Scolnic, D., Casertano, S., Riess, A., et al. 2015, The
+ Astrophysical Journal, 740, 72                                    Astrophysical Journal, 815, 117
+Marwil, E. 1979, SIAM Journal on Numerical Analysis, 16,         Scolnic, D. M., Jones, D. O., Rest, A., et al. 2018, The
+ 588                                                               Astrophysical Journal, 859, 101
+Mosher, J., Guy, J., Kessler, R., et al. 2014, The               Shappee, B. J., Prieto, J. L., Grupe, D., et al. 2014, ApJ,
+ Astrophysical Journal, 793, 16                                    788, 48
+Östman, L., Nordin, J., Goobar, A., et al. 2011, A&A, 526,      Siebert, M. R., Foley, R. J., Jones, D. O., & Davis, K. W.
+   A28                                                             2020, MNRAS, 493, 5713
+                                                                                                                            25
+
+Siebert, M. R., Foley, R. J., Jones, D. O., et al. 2019,        Tonry, J. L., Denneau, L., Heinze, A. N., et al. 2018, PASP,
+   MNRAS, 486, 5785                                               130, 064505
+Silverman, J. M., Foley, R. J., Filippenko, A. V., et al.
+                                                                Tripp, R. 1998, A&A, 331, 815
+   2012a, MNRAS, 425, 1789
+                                                                Valentini, G., Di Carlo, E., Massi, F., et al. 2003, ApJ, 595,
+—. 2012b, MNRAS, 425, 1789
+Smith, M., D’Andrea, C. B., Sullivan, M., et al. 2020a, AJ,       779
+   160, 267                                                     Verde, L., Treu, T., & Riess, A. G. 2019
+Smith, M., Sullivan, M., Wiseman, P., et al. 2020b,             Villar, V. A., Hosseinzadeh, G., Berger, E., et al. 2020,
+   MNRAS, 494, 4426                                               arXiv e-prints, arXiv:2008.04921
+Stahl, B. E., Zheng, W., de Jaeger, T., et al. 2020,
+                                                                Virtanen, P., Gommers, R., Oliphant, T. E., et al. 2020,
+   MNRAS, 492, 4325
+                                                                  Nature Methods, 17, 261
+Stanishev, V., Goobar, A., Benetti, S., et al. 2007, A&A,
+   469, 645                                                     Walker, E. S., Hook, I. M., Sullivan, M., et al. 2011,
+Sullivan, M., Conley, A., Howell, D. A., et al. 2010, Monthly     MNRAS, 410, 1262
+   Notices of the Royal Astronomical Society, 406, no           Wang, X., Li, W., Filippenko, A. V., et al. 2009, ApJ, 697,
+Taylor, G., Lidman, C., Tucker, B. E., et al. 2021, arXiv
+                                                                  380
+   e-prints, arXiv:2104.00172
+                                                                Wells, L. A., Phillips, M. M., Suntzeff, B., et al. 1994, AJ,
+The LSST Dark Energy Science Collaboration,
+   Mandelbaum, R., Eifler, T., et al. 2018, arXiv e-prints,       108, 2233
+   arXiv:1809.01669                                             Wood-Vasey, W. M., Friedman, A. S., Bloom, J. S., et al.
+Thomas, R. C., Aldering, G., Antilogus, P., et al. 2007,          2008, ApJ, 689, 377
+   ApJL, 654, L53
+

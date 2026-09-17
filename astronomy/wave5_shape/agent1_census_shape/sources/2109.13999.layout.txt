@@ -1,0 +1,1895 @@
+                                                 Draft version September 30, 2021
+                                                 Typeset using LATEX twocolumn style in AASTeX63
+
+
+
+
+                                                    ParSNIP: Generative Models of Transient Light Curves with Physics-Enabled Deep Learning
+                                                                                                                     1
+                                                                                                    Kyle Boone
+                                                      1 DiRAC Institute, Department of Astronomy, University of Washington, 3910 15th Ave NE, Seattle, WA, 98195, USA
+
+
+
+                                                                    (Received May 21, 2021; Revised September 8, 2021; Accepted September 24, 2021)
+arXiv:2109.13999v1 [astro-ph.IM] 28 Sep 2021
+
+
+
+
+                                                                                                    Submitted to AJ
+
+                                                                                                      ABSTRACT
+                                                          We present a novel method to produce empirical generative models of all kinds of astronomical tran-
+                                                       sients from datasets of unlabeled light curves. Our hybrid model, that we call ParSNIP, uses a neural
+                                                       network to model the unknown intrinsic diversity of different transients and an explicit physics-based
+                                                       model of how light from the transient propagates through the universe and is observed. The ParSNIP
+                                                       model predicts the time-varying spectra of transients despite only being trained on photometric ob-
+                                                       servations. With a three-dimensional intrinsic model, we are able to fit out-of-sample multiband light
+                                                       curves of many different kinds of transients with model uncertainties of 0.04–0.06 mag. The represen-
+                                                       tation learned by the ParSNIP model is invariant to redshift, so it can be used to perform photometric
+                                                       classification of transients even with heavily biased training sets. Our classification techniques signif-
+                                                       icantly outperform state-of-the-art methods on both simulated (PLAsTiCC) and real (PS1) datasets
+                                                       with 2.3× and 2× less contamination respectively for classification of Type Ia supernovae. We demon-
+                                                       strate how our model can identify previously-unobserved kinds of transients and produce a sample
+                                                       that is 90% pure. The ParSNIP model can also estimate distances to Type Ia supernovae in the PS1
+                                                       dataset with an RMS of 0.150 ± 0.007 mag compared to 0.155 ± 0.008 mag for the SALT2 model on the
+                                                       same sample. We discuss how our model could be used to produce distance estimates for supernova
+                                                       cosmology without the need for explicit classification.
+
+                                                       Keywords: Classification — Transient sources — Supernovae
+
+                                                                 1. INTRODUCTION                                 field (Graziani et al. 2020). These surveys will also ob-
+                                                 Upcoming surveys such as the Legacy Survey of Space             serve large numbers of other kinds of transients, such as
+                                               and Time (LSST; Ivezić et al. 2019) that will be con-            superluminous supernovae (SLSN), which will be helpful
+                                               ducted at the Vera C. Rubin Observatory, and the                  both to elucidate the origins of these transients (Villar
+                                               Nancy Grace Roman Space Telescope (Spergel et al.                 et al. 2018) and to use them as new cosmological probes
+                                               2015) will obtain light curves for millions of astronomical       (Scovacricchi et al. 2016). It is also likely that new kinds
+                                               transients. These large datasets will enable many novel           of rare transients that have not previously been observed
+                                               science applications. The number of observed Type Ia              will be discovered in the datasets from these surveys.
+                                               supernovae (SNe Ia) will increase by more than two or-               All of these science applications rely on being able
+                                               ders of magnitude compared to current samples (LSST               to extract information from light curves and distinguish
+                                               Science Collaboration et al. 2009; Scolnic et al. 2018).          between light curves of different kinds of transients. Ob-
+                                               These large samples of SNe Ia will be used to constrain           servations can be compared directly to simulations and
+                                               cosmological parameters both by improving measure-                theory (Kerzendorf et al. 2021), but these models are
+                                               ments of the expansion history of the universe and by             not currently accurate enough to characterize observed
+                                               performing novel measurements of local peculiar velocity          light curves at the precision required for many science
+                                                                                                                 applications. For SNe Ia, a range of different empirical
+                                                                                                                 models have been created to describe their light curves
+                                               Corresponding author: Kyle Boone                                  and spectra (Guy et al. 2007; Saunders et al. 2018; Léget
+                                               kyboone@uw.edu                                                    et al. 2020; Mandel et al. 2020). These are generative
+2                                                             Boone
+
+models in that they predict the full time-varying spec-           are not flexible enough to describe most other kinds of
+trum of a transient in terms of a small number of pa-             transients. Furthermore, the techniques used to build
+rameters whose distribution is reasonably well known.             these models require large datasets of well-measured
+   These models all include explicit descriptions of how          light curves and spectra (Betoule et al. 2014) that are
+the light propagates through the universe and is ob-              not available for transients other than SNe Ia.
+served on a detector. Propagation effects include red-               Instead, we learn a generative model directly from
+shifting of the light from the transient, dust along the          large samples of light curves using a modified version
+line of sight, and luminosity variation due to effects such       of a variational autoencoder (VAE; Kingma & Welling
+as weak gravitational lensing. A light curve can be ob-           2014). A VAE learns a low-dimensional representation
+served with different cadences, with different telescopes,        of its input that we call a latent space. First, an encoder
+in different bandpasses, at different signal-to-noises, or        model uses variational inference to approximate the pos-
+at different times. All of these effects will change the          terior distribution over the latent space for a given in-
+observed light curve for a transient, but they do not             put. A generative model, also referred to as a decoder,
+affect the intrinsic physics of the underlying transient.         then reconstructs the input given a point in the latent
+We therefore refer to them as “symmetries”. By explic-            space. The VAE can be trained by applying both the
+itly handling these symmetries, the previously-described          encoder and decoder to a given input and by comparing
+models of SNe Ia obtain consistent values of the model            the original input to the reconstructed one.
+parameters when fitting light curves observed under dif-             Autoencoders have previously been applied to astro-
+ferent conditions. In particular, these models can obtain         nomical light curves (Naul et al. 2018; Pasquet et al.
+consistent estimates of the luminosity when fitting light         2019; Martı́nez-Palomera et al. 2020; Villar et al. 2020,
+curves at different redshifts which is essential for esti-        2021) and shown to be effective for tasks such as pho-
+mating distances to SNe Ia.                                       tometric classification and outlier identification. How-
+   Similar models do not exist for other kinds of tran-           ever, these models do not include explicit descriptions
+sients. Instead, previous work using light curves of non-         of observing symmetries, so the same transient observed
+SNe Ias has typically focused on extracting features from         under different conditions (e.g. redshift) will be as-
+the light curves rather than building a generative model.         signed to different locations in the latent space. In this
+Features can be extracted by fitting an empirical func-           work, we produce a hybrid physics-VAE model where
+tional form to the light curve (Bazin et al. 2009; Sanders        we use a neural network to describe the intrinsic time-
+et al. 2015), by fitting parameters of a theoretical model        varying spectra of astronomical transients and an ex-
+to match the light curve (Guillochon et al. 2018), by             plicit physical model for known symmetries. Our model
+estimating a smooth approximation to the light curve              produces a three-dimensional representation of the in-
+from which arbitrary empirical features can be measured           trinsic diversity of transients that is insensitive to ob-
+(Lochner et al. 2016; Boone 2019; Alves et al. 2021), or          serving conditions, including redshift. We call the re-
+by using a neural network (Muthukrishna et al. 2019;              sulting model “ParSNIP” (Parameterization of Super-
+Möller & de Boissière 2020). These methods produce a            Nova Intrinsic Properties).
+large number of features that can be used to characterize            We describe the datasets that we use for this work in
+a given light curve, but these features are not typically         Section 2. In Section 3, we describe the ParSNIP model
+invariant to the symmetries of how the light curve was            and how it is trained. We evaluate the performance of
+observed. In particular, the features produced by all of          the ParSNIP model as a generative model in Section 4
+these models tend to be highly dependent on redshift.             and show how it is able to learn the full time-varying
+This is a major challenge for science applications such as        spectra for transients despite only being trained on light
+photometric classification where labeled datasets tend to         curve data. In Section 5, we show how the ParSNIP
+be heavily biased towards bright, low-redshift transients         model achieves state-of-the-art performance for tasks
+(Lochner et al. 2016; Boone 2019).                                such as photometric classification, identification of new
+   In this work, we address these challenges by building          transients, or cosmological distance estimation. Finally,
+a generative model of all transient light curves that is          in Section 6 we discuss how the ParSNIP model can be
+invariant to observing conditions. Most techniques that           applied to other datasets and how it could be improved.
+have previously been used to build generative models of
+SNe Ia assume that the diversity of SNe Ia can be de-                                   2. DATASET
+scribed by a simple linear model. Such models provide
+                                                                    We evaluate the techniques described in this work
+a good description of most normal SNe Ia, but they fail
+                                                                  on two different datasets of supernova-like light curves.
+to describe peculiar SNe Ia (Boone et al. 2021a,b) and
+                                                                  First, we use a dataset of observed supernova-like light
+                          ParSNIP: Generative Models of Transient Light Curves                                        3
+
+curves from the Pan-STARRS1 Medium-Deep Survey                We subtract this estimate of the background level from
+(PS1) (Chambers et al. 2016), the details of which are        each light curve. For the PS1 dataset, we also correct
+described in Villar et al. (2020). This dataset contains      the light curves for Milky Way extinction using the dust
+2,885 light curves with host-galaxy redshifts of which        map from Schlafly & Finkbeiner (2011).
+557 have spectroscopically-confirmed types. The light            Neural networks typically perform better if their in-
+curves were observed in the Pan-STARRS g, r, i, and z         puts have a limited range, but flux values can vary over
+bandpasses with a cadence of ∼7 days per filter.              many orders of magnitude. To address this, we normal-
+   We also evaluate the ParSNIP model on the PLAs-            ize the brightness of each light curve by its maximum
+TiCC dataset of simulated light curves described in           flux in observations in any band with a signal-to-noise
+(Kessler et al. 2019). This dataset contains 3,006,109        of at least five. After this procedure, most flux values
+simulated supernova-like light curves with observations       lie between zero and one. We record the normalization
+in the Rubin Observatory’s u, g, r, i, z, and y band-         scale, and use it in future analyses such as distance es-
+passes, and the authors aimed to simulate a realistic         timation.
+dataset of light curves from three years of operation of         We find that the statistical uncertainties that are re-
+the Rubin Observatory. This simulation consists of two        ported for both the PLAsTiCC and PS1 datasets heav-
+distinct surveys. The vast majority of the light curves       ily underestimate the true uncertainties for very high
+(2,972,316) are from the Wide-Fast-Deep (WFD) survey          signal-to-noise observations. This is partially due to un-
+which covers around half of the sky with observations         certainties in our background subtraction procedure. To
+roughly twice per week in at least one of the six band-       prevent these underestimated uncertainties from having
+passes. 33,793 light curves are from the Deep-Drilling-       excessively large weights in our model, we add an error
+Fields (DDF) survey which covers ∼50 deg2 with sig-           floor of 0.01 to all of our flux uncertainties when train-
+nificantly deeper and more frequent observations. The         ing the model. With our normalization, this roughly
+authors of the PLAsTiCC dataset also simulated a spec-        corresponds to an error floor of 1% of the peak flux.
+troscopic followup strategy which produces type labels           Astronomical light curves are typically sparsely sam-
+for 5,153 of the light curves in this dataset. This labeled   pled, but most neural network architectures require in-
+dataset is highly biased towards bright transients, and       puts that are sampled on an evenly-spaced grid. To be
+has a mean redshift of 0.32 compared to 0.50 for the full     able to use these architectures, we evaluate our light
+dataset.                                                      curves on a grid following a procedure similar to the one
+   For this analysis, we assume that the redshifts of all     described in Pasquet et al. (2019). Note that astronom-
+of the transients are known. This assumption is not re-       ical observations from a given telescope typically only
+quired for our analysis, but it does simplify our method-     occur during a short time interval each night when the
+ology. We will discuss how our methods can be applied         target is near the zenith. All observations of the same
+to datasets where the redshift is not available in Sec-       target will be separated in time by some integer number
+tion 6.3.                                                     of sidereal days with residuals of only ∼1 hour. We can
+   We restrict our analysis to supernova-like light curves.   therefore evaluate the light curve on a grid of sidereal
+By this, we mean that we consider any extragalactic           days and preserve almost all of the temporal informa-
+light curves where there is an excess of flux for a sin-      tion.
+gle well-defined time period, and where the light curve          For each transient, we build a grid of observations
+has a stable background level before and after this time      that has a length of 300 sidereal days centered on the
+period. The PS1 dataset that we use was already re-           estimated time of maximum light. The grid has rows
+stricted to these kinds of light curves. For the PLAs-        for the flux and inverse flux variance in each bandpass.
+TiCC dataset, we reject all of the galactic and AGN           For nights where the transient was observed in a given
+light curves but keep all other kinds of transients.          bandpass, we include the observed flux value and inverse
+                                                              flux variance in the grid. For nights when the transient
+                   2.1. Preprocessing                         was not observed, we simply input zero for both the
+                                                              flux and inverse flux variance. We also include one row
+  To preprocess our light curves, we first make a rough
+                                                              in the grid for the redshift, with the same value repeated
+estimate of the time of maximum light of the light curve
+                                                              at all times. After this procedure, our light curves are
+by taking the median time of the five highest signal-to-
+                                                              represented by a two-dimensional grid of size 300×(2N +
+noise observations in the light curve. In each bandpass,
+                                                              1) where N is the number of bandpasses that we are
+we estimate the background level using a biweight es-
+                                                              modeling. We can then use standard neural network
+timator (Beers et al. 1990) on all observations at least
+                                                              architectures to process our light curves.
+250 days from our estimated time of maximum light.
+4                                                              Boone
+
+                     3. METHODS                                    bounded by:
+                      3.1. Overview
+                                                                             log pθ (y) ≥ Eqφ (s|y) [log pθ (y|s)]
+   The overall design goal for our model is to build a rep-
+                                                                                            − DKL (qφ (s|y)||pθ (s))     (1)
+resentation of the diversity of transients that disentan-
+gles intrinsic diversity related to the physics of the tran-         The right side of this equation is referred to as the
+sient from diversity related to the symmetries of how the          “evidence lower bound” or ELBO. The first term of
+transient was observed. A transient should be assigned             the ELBO captures the likelihood of the data under
+the same intrinsic representation regardless of how it was         our model, and can be interpreted as the reconstruc-
+observed. In particular, we would like for out model to            tion error of the model. The second term represents the
+be invariant to redshift, meaning that a transient is as-          Kullback-Leibler divergence (Kullback & Leibler 1951)
+signed the same intrinsic representation regardless of the         between the approximate posterior qφ (s|y) and the prior
+redshift that it is observed at.                                   pθ (s), and is effectively a constraint on the form of the
+   Many different approaches exist for modeling disen-             approximate posterior.
+tangled representations with autoencoders (Tschannen                 Typically, an isotropic multivariate Gaussian is as-
+et al. 2018). These approaches mostly rely on either               sumed for the prior over the latent representation s:
+using a supervised training procedure (which would re-
+quire labels that we do not have) (e.g. Kulkarni et al.                                 pθ (s) = N (0, I)                (2)
+2015) or using regularization to encourage an implicit
+disentangled representation (e.g. Higgins et al. 2017).            and pθ (y|s) is assumed to be described by a Gaussian
+We adopt an approach similar to that of spatial-VAE                distribution with a diagonal covariance matrix whose
+(Bepler et al. 2019) where we generate a disentangled              mean is given by some deterministic function dθ (s):
+representation by explicitly including known symmetries
+in our generative model.                                                           pθ (y|s) = N (dθ (s), σy2 I)          (3)
+   Our generative model first uses a neural network to
+                                                                     Finally, we assume that qφ (s|y) is described by a
+predict the intrinsic spectra of a given transient as a
+                                                                   Gaussian distribution with a diagonal covariance ma-
+function of three intrinsic latent variables. The intrin-
+                                                                   trix:
+sic spectra are then passed through a physics layer that
+explicitly models how the light propagates through the                           qφ (s|y) = N (µφ (y), σφ (y)2 I)        (4)
+universe and is observed. The physics layer also takes as
+input a set of explicit latent variables and metadata de-          where µφ (y) and σφ (y) are some deterministic functions
+scribing the observing conditions. A schematic overview            of y. The validity of this assumption will be discussed
+of our model is shown in Figure 1.                                 in Section 6.5.
+                                                                     Training a VAE then consists of finding appropriate
+                                                                   functions for dθ (s), µφ (y), and σφ (y) that maximize
+                                                                   the ELBO in Equation 1. These functions are typically
+                                                                   implemented as neural networks. A VAE has an ar-
+             3.2. Variational Autoencoders
+                                                                   chitecture that resembles a classical autoencoder. The
+  To build this model, we developed a modified version             function µφ (y) is analogous to the encoder that takes a
+of a VAE (Kingma & Welling 2014). As traditionally                 set of observations y and outputs a location in the latent
+formulated, a VAE is used to model some observed ran-              representation s. dθ (s) can be interpreted as a decoder
+dom variables y in terms of some unobserved random                 that generates a forward model of the observations from
+variables s. We assume that s are drawn from some                  the latent representation. The full decoder model of the
+prior distribution pθ (s), and that y are then drawn from          VAE given by
+the conditional distribution pθ (y|s). These distributions
+are assumed to be part of some family of distributions                              pθ (y, s) = pθ (y|s)pθ (s)           (5)
+parameterized by the hyperparameters θ.
+  The posterior distribution pθ (s|y) is in general in-            is a generative model.
+tractable. Instead of modeling it directly, in a VAE we
+instead assume that the posterior can be parameterized                 3.3. Incorporating Symmetries into Variational
+using some family of distributions qφ (s|y) with hyper-                                   Autoencoders
+parameters φ. As shown in Kingma & Welling (2014),                   In this work we modify the standard VAE architec-
+the marginal likelihood of a given observation y is then           ture to explicitly incorporate symmetries into our model.
+                                ParSNIP: Generative Models of Transient Light Curves                                                                      5
+
+                                                                                       Generative Model dӨ
+                   Metadata m
+                    (z, B, t)
+                                               Explicit Latent
+                                                Variables se
+                                                 (t0, A, c)
+                Input: Light Curve                                                  Intrinsic Spectra                      Output: Light Curve
+
+
+                                               Intrinsic Latent   Intrinsic
+                                     Encoder     Variables si     Decoder                                    Physics
+                                                   (s1, s2, s3)     dint,Ө                                    Layer
+
+
+
+
+                                                                       Comparison
+
+
+Figure 1. Schematic overview of the ParSNIP model. An encoder model predicts the posterior distribution over a set of
+latent variables for a given input light curve. We label a subset of these latent variables as intrinsic latent variables, and use
+them as input to an intrinsic decoder model that predicts the full intrinsic time-varying spectrum of the transient. A physics
+layer then describes how light propagates through the universe and is observed on a detector. The physics layer takes as input
+a set of explicit latent variables and metadata describing the observing conditions. The encoder and intrinsic decoder are
+implemented as neural networks. The physics layer uses only physical relations with known functional forms and it has no free
+model parameters.
+
+Note that the functions dθ (s), µφ (y), and σφ (y) are                         m = {z, t, B(λ)}. We incorporate the known effects
+arbitrary functions. Rather than implementing these                            of each of these terms on astronomical observations into
+purely as neural networks, we instead use a hybrid im-                         the f1 and f2 functions to produce the following decoder
+plementation where we explicitly model symmetries of
+the observations where the functional form is known,                           dθ (si , A, c, t0 , z, t, B(λ))                                          (7)
+                                                                                                                                                              
+                                                                                                                                             t − t0
+                                                                                   Z
+and where we use neural networks for parts of the model                                                                 λ                             λ
+                                                                                = dλ · A · B(λ) · C(c,                     ) · dint,θ               ,   , si
+whose functional forms are a priori unknown.                                                                           1+z                   1+z 1+z
+  Formally, we identify the subset of latent variables
+that represent known symmetries of the model as “ex-                           where C(c, λ) is a fixed dust extinction law that is ap-
+plicit latent variables”, and we label them se . We call                       plied in the rest frame, and B(λ) are the bandpasses
+the remaining latent variables that represent diversity                        used for each observation with known throughput. We
+whose functional form is unknown “intrinsic latent vari-                       choose to use the color law C(c, λ) from Fitzpatrick
+ables”, and we label them si . Then s = {se , si }. We                         & Massa (2007) in this work with RV = 3.1 as im-
+also allow for additional metadata of the observations                         plemented in the extinction package (Barbary 2016).
+m that describe known observing conditions (e.g. the                           dint,θ is then effectively modeling the time-evolution of
+time that an observation was taken at). With these def-                        the rest frame spectrum of the transient.
+initions, we model the decoder as                                                The SALT2 model that is often used to fit SNe Ia (Guy
+                                                                               et al. 2007) is actually a special case of the general model
+   dθ (si , se , m) = f1 (se , m, dint,θ (f2 (se , si , m)))        (6)        described in Equation 7 with the a single intrinsic latent
+                                                                               parameter x1 describing the width of the light curve, i.e.
+where dint,θ is an arbitrary function that models the                          si = {x1 }. For SALT2, the intrinsic diversity is modeled
+intrinsic diversity. f1 and f2 are fixed functions that                        by a linear sum of two spline template functions M0 (λ, t)
+apply known symmetries to the inputs and outputs of                            and M1 (λ, t):
+dint,θ .
+   To model transient light curves, we choose to use ex-                                   dint,SALT2 (t, λ, x1 ) = M0 (λ, t) + x1 M1 (λ, t)            (8)
+plicit functional forms for the amplitude of the light
+curve A, the color (capturing dust reddening of the light                      The SALT2 model provides a good description of most
+curve) c, and a reference time for the light curve t0 .                        SNe Ia, but its model of intrinsic diversity is linear which
+Each observation also has associated metadata for the                          is insufficient for some SNe Ia (Boone et al. 2021a,b) and
+redshift of the light curve z, the time of the observation                     most other kinds of transients.
+t, and the bandpass that was used for the observation
+                                                                                         3.4. Modeling Spectra with a Neural Network
+B(λ). In our formalism, we have se = {A, c, t0 } and
+6                                                                   Boone
+
+  In order to model a wide range of transients, we choose               or to the intrinsic latent variables si . This is a major dif-
+to implement dint,θ as a multilayer perceptron (MLP).                   ference from previous autoencoder models that predict
+This function takes as input both the time of an obser-                 the light curve in specific bands directly, and that there-
+vation and the intrinsic latent variables si . A large part             fore have a representation where the intrinsic properties
+of the spectrum is typically needed to compute bandpass                 are entangled with properties of how the observations
+photometry, so for computational reasons we choose to                   were taken (e.g. Pasquet et al. 2019; Villar et al. 2020).
+predict the full restframe spectrum with the MLP on
+a grid of wavelength elements rather than having the                                 3.5. Symmetry-Aware Encoders
+wavelength as an additional input. Synthetic photom-                       We choose to model the posterior distribution of the
+etry can then be computed by numerically evaluating                     latent variables for a given light curve as a Gaussian dis-
+the integral in Equation 7. Labeling the index of each                  tribution with a diagonal covariance matrix, as shown
+restframe wavelength bin as n, our implementation of                    in Equation 4. We assume a N (0, I) prior for the intrin-
+the decoder can then be written as                                      sic latent variables. For the color c, we assume a weak
+     dθ (si , A, c, t0 , z, t, B(λ))                          (9)       prior of N (0, 0.32 ) which is much larger than the true
+                                                                      dust distribution. Similarly, we assume a weak prior of
+         X
+                     0           0            t − t0
+      =       A · Bn · C(c, λn ) · dint,θ,n          , si               N (0, (20 days)2 ) for the reference time t0 which should
+                                              1+z
+          n                                                             be much wider than the uncertainty from the estimated
+Here λ0n is the central rest-frame wavelength for bin n.                times of maximum light from the preprocessing step in
+Bn0 are the integrated bandpasses for bin n which can                   Section 2.1. As will be discussed in Section 3.7, we
+be computed by integrating the bandpasses over each                     marginalize over the amplitude and evaluate its pos-
+wavelength bin                                                          terior directly so it is ultimately not predicted by our
+                   Z λ0n,max                                            encoder.
+             Bn0 =           dλ · B((1 + z)λ)       (10)                   We implement the encoder using residual blocks with
+                      λ0n,min                                           convolutional layers (He et al. 2016). Each block has two
+  We choose to use a grid of 300 spectral elements                      convolutional layers with a kernel size of 3, and we use
+with rest frame wavelengths that are logarithmically-                   ReLU activation functions. A schematic of each block
+spaced between 1,000 and 11,000 Å. Logarithmically-                    is shown in Figure 2. We chain a series of seven these
+spaced wavelength elements simplify computing the in-                   blocks together with increasing dilation sizes so that af-
+tegrated bandpasses Bn0 because redshifting the band-                   ter all seven blocks the receptive field of the network con-
+pass is equivalent to a translation of the wavelength el-               tains the full light curve. In a traditional VAE, the pos-
+ements. We precompute the integrated bandpasses Bn0                     teriors of the latent variables would be predicted using
+by numerically evaluating the integral in Equation 10                   fully connected layers. While such a network should be
+with 51 times oversampling. With this configuration,                    theoretically capable of representing the encoding func-
+we find that the numerical uncertainties in our synthetic               tions for our model, in practice, we find that these net-
+photometry are ∼0.0002 mag which is much smaller                        works are very unstable and difficult to train. To address
+than typical measurement uncertainties.                                 this challenge, we add custom layers that are aware of
+  To summarize, we implement dint,θ as an MLP that                      the symmetries in our data to predict the explicit latent
+takes as inputs the intrinsic latent variables si and a                 variables.
+time. The output of this MLP is a restframe spectrum
+on a grid of 300 spectral elements. We then use an ex-                               3.6. A Time-Invariant Encoder
+plicit physics model of host-galaxy dust, redshift, and                   The main challenge for convergence is computing the
+the bandpasses of the telescope to calculate synthetic                  reference time t0 for a light curve. At the start of train-
+photometry from the predicted spectrum and compare                      ing, the decoder will not be producing functions that
+with observations. The MLP has several hyperparame-                     look light light curves, so the gradient of the loss func-
+ters, namely the number of layers, width of each layer,                 tion with respect to t0 will not be meaningful and the
+and activation function. The values of these hyperpa-                   training will progress very slowly if at all. We address
+rameters will be discussed in Section 3.11.                             this by constructing a novel neural network architecture
+  With this architecture, the full decoder model dθ nat-                that is mathematically invariant to time translation.
+urally handles all of the previously-described symmetries                 The encoder predicts the hyperparameters µ and σ 2
+of how the transient was observed. We can evaluate the                  describing the posterior distributions over the latent
+full model in different bandpasses or at different red-                 variables in our model. To predict the mean reference
+shifts without making any changes to the intrinsic model                time µt0 , we require our encoder to be a time-equivariant
+                             ParSNIP: Generative Models of Transient Light Curves                                      7
+                          Input:
+                    N channels x T times
+                                                              is mathematically invariant to any shift in time of the
+                                                              input light curves by an integer number of days.
+                      Conv1D(3, C, D)                            To product a time-equivariant function, we begin with
+                                                              the previously-discussed (300 days) × (200 channels) ar-
+                           ReLU            Pad                ray that was output from the residual blocks. We use
+                                                              a fully-connected layer applied to each bin in the time
+                      Conv1D(3, C, D)                         dimension individually to collapse the channel dimen-
+                                                              sion and obtain a one-dimensional vector v with a single
+                                                              value for each of the 300 time bins. We then apply a
+                                                              softmax transformation to this vector to obtain a 300-
+                           ReLU
+                                                              dimensional vector that sums to one. The entries in this
+                         Output:
+                                                              vector can be thought of as weights for whether µt0 ap-
+                    C channels x T times                      pears in a specific bin. We predict the value of µt0 by
+                                                              taking the dot product of this vector with the index of
+Figure 2. Architecture of the residual blocks used for the
+                                                              each element in the vector (i.e. a vector of increasing
+encoder of our model. Each block takes as input a 2D array
+consisting of N channels at T times. Two one-dimensional
+                                                              integers from 1 to 300).
+convolutional layers are applied along the time dimension
+with a kernel size of 3 and a dilation of D elements. The                   µt0 = SoftMax[v] × Index[v]             (13)
+input is then padded with zeros in the channel dimension
+and added with the output of the second convolutional layer     Mathematically, if the input light curve is shifted by
+to produce a 2D output with C channels at T times. We         some integer number of days, then this function outputs
+label this block as “ResidualBlock(D, C)”.                    a value for µt0 that is incremented by the same number
+                                                              of days as desired. We call this layer a “time-indexing
+function, i.e. a function f (t) that satisfies                layer”. By combining the time-indexing layer with the
+                                                              global max-pooling layer, we produce an encoder that is
+                  f (t + ∆t) = f (t) + ∆t             (11)    mathematically invariant to a translation in the input
+                                                              of any integer number of days with appropriate trans-
+For all of the other model hyperparameters, we require
+                                                              formations for all of the latent variables. Note that we
+our encoder to be a time-invariant function, i.e. one that
+                                                              do not force the reference time to correspond with any
+satisfies:
+                                                              specific feature of the light curve other than having a
+                     f (t + ∆t) = f (t)               (12)    weak prior on the time of maximum light. We allow the
+                                                              model to automatically determine a relevant definition
+   Convolutional layers on their own are equivariant: if      of reference time on its own.
+the input to a convolutional layer is shifted, the output
+is identical but shifted by the same amount as the in-                3.7. Marginalizing Over the Amplitude
+put. By applying a series of the residual blocks shown
+                                                                 With the time-indexing layer the model is able to con-
+in Figure 2 without applying any pooling operations, we
+                                                              verge and give reasonable predictions. However, we find
+obtain an output that is mathematically equivariant to
+                                                              empirically that it is challenging for the model to pre-
+any shift in the input light curve by an integer number
+                                                              dict the amplitude A. The amplitude corresponds to an
+of days. The output of this layer is a two-dimensional
+                                                              overall scaling of the model, and is degenerate with a
+array that has a length that is identical to the length
+                                                              global scale of all of the outputs. We find that we can
+of the input light curve (in our case 300 days) and 200
+                                                              significantly improve the convergence of the model by
+channels.
+                                                              modifying the architecture to marginalize over the am-
+   To produce a time-invariant function, we throw away
+                                                              plitude rather than have it as an explicit parameter. To
+all of the time information by applying a global max-
+                                                              do this, note that given all of the other latent parameters
+pooling layer to this array. This operation involves tak-
+                                                              s0 , we can analytically evaluate the conditional posterior
+ing the maximum value of the array over the time dimen-
+                                                              distribution of A as:
+sion to collapse it in the time dimension and produce a
+one-dimensional array with 200 channels. We use fully-                                     p(y|s0 , A)p(A|s0 )
+connected layers over the collapsed array to predict all                   p(A|s0 , y) =                            (14)
+                                                                                                p(y|s0 )
+of the hyperparameters µ and σ 2 describing the poste-
+rior distributions over the latent variables in our model       Here p(y|s0 ) is a constant that does not depend on
+except for the mean reference time µt0 . This procedure       A. Assuming a Jeffreys (flat) prior for p(A|s0 ), this be-
+8                                                             Boone
+
+comes:                                                            Given the set of wavelength bins with index n, we apply
+                                                                  a penalty on the flux difference between adjacent bins
+ p(A|s0 , y) ∝ p(y|s0 , A)                             (15)       given by:
+                                         0         2
+                                                    
+               Y           (y − A · dθ (s , A = 1))
+             ∝    exp −                                (16)                X  dint,θ,n (t, si ) − dint,θ,n+1 (t, si ) 2
+                                     2σy2                              η                                                    (22)
+                                                                                 dint,θ,n (t, si ) + dint,θ,n+1 (t, si )
+                                (A − µA )2
+                                            
+                  1                                                         i
+             =p          exp −         2               (17)
+                 2πσA  2            2σA                             Here η is a tunable parameter that can be adjusted
+                                                                  to determine the strength of the regularization. We ap-
+where:
+                                                                  ply this penalty to the full spectra that are predicted at
+              2               1                                   every time where we have an observation. We find em-
+             σA =P                                    (18)
+                   dθ (s0 , A = 1)2 /σy2                          pirically that a value of η = 0.001 results in a reasonable
+                 P
+                   y · dθ (s0 , A = 1)/σy2                        balance between reducing noise and oversmoothing the
+             µA = P                                   (19)        spectrum. We find that this regularization term con-
+                    dθ (s0 , A = 1)2 /σy2
+                                                                  tributes only ∼0.01% to the loss function at the end of
+  We can then evaluate the log-likelihood log pθ (y|s0 )          training for both of the datasets that we consider.
+necessary for the VAE loss function in Equation 1 as:
+                                                                                        3.9. Augmentation
+                    Z
+     log pθ (y|s ) = dA · p(y|s0 , A) · p(A|s0 )
+                0
+                                                   (20)             As shown in Boone (2019), augmentation can be used
+                    Z                                             to generate a wide range of different light curves from
+                   = dA · p(y|s0 , A) + C          (21)           observations of a single transient. When training our
+                                                                  model, we apply a series of different random transforma-
+                                                                  tions to our data. These transformations are all applied
+where C is some arbitrary normalization constant that
+                                                                  independently, and we choose different transformations
+can be ignored because it will not affect the minimiza-
+                                                                  in each epoch.
+tion. We estimate this integral numerically using impor-
+tance sampling with A drawn from its posterior distri-                • Shift the observations by a constant offset sampled
+bution shown in Equation 17. As is typically done when                  from a Normal[0, 20 days] distribution.
+training deep learning models, while training we use a
+single sample for our numerical estimate of the integral.             • Scale the observations by a constant factor sam-
+  With this procedure, we analytically marginalize over                 pled from a Lognormal[0, 0.5] distribution.
+the amplitude A and it is no longer an explicit param-
+eter of our model. The Jeffreys prior that we impose                  • Drop observations randomly, with the fraction to
+on p(A|s0 ) is improper, which means that we are not                    drop sampled from a Uniform[0, 0.5] distribution.
+learning a generative model for the amplitude. This is                • With probability 50%, add noise to the observa-
+not a problem for most science applications as discussed                tions with a standard deviation sampled from a
+in Section 6.4, and a similar approach is taken for most                Lognormal[-4, 1] distribution.
+generative models of SNe Ia (e.g. SALT2; Guy et al.
+2007). We find that this model that marginalizes over               These transformations produce a wide range of light
+the amplitude is much easier to train than a model where          curves, with some resembling the original light curves
+the amplitude is an explicit parameter.                           and others at much lower signal-to-noises with signifi-
+                                                                  cantly fewer observations. In contrast to Boone (2019),
+           3.8. Regularization of the Spectra                     we do not attempt to augment our light curves in red-
+  As discussed in Section 3.3, we are training our model          shift as that cannot be done without making assump-
+to predict the full spectra of transients. We are only            tions about the shape of the spectrum. We also do not
+training using photometry in this work, which means               attempt to reproduce the observational properties of the
+that we are effectively performing a deconvolution. As            instrument. Instead, we simply attempt to cover a wide
+a result, the high-frequency components of the spectra            range of signal-to-noises ranging from the original values
+will not be well-constrained. To prevent the model from           to signal-to-noises well-below the detection threshold.
+adding high-frequency noise to the spectra, we add a
+regularization term to our loss function following a pro-                          3.10. The ParSNIP model
+cedure similar to the one used by Crenshaw & Connolly               We combine all of the different elements described
+(2020) for estimating galaxy spectra from photometry.             in this Section to build a hybrid physics-VAE model
+                          ParSNIP: Generative Models of Transient Light Curves                                              9
+                                                                                     Input: Gridded fluxes and
+that can describe transient light curves. We call this                             uncertainties in each bandpass
+model “ParSNIP” (Parametrization of SuperNova In-                                            and redshift
+
+trinsic Properties). A schematic of the full ParSNIP
+architecture is shown in Figure 3.
+  We implemented this model in PyTorch (Paszke et al.
+2019). We fit the model separately to the PS1 and                                       ResidualBlock(1, 40)
+PLAsTiCC datasets of transient light curves described
+in Section 2 using the Adam optimizer (Kingma & Ba                                      ResidualBlock(2, 80)
+
+2015) with a learning rate of 10−3 and batch sizes of 128.
+                                                                                       ResidualBlock(4, 120)
+We use the ReduceLROnPlateau feature in PyTorch to
+scale the learning rate by a factor of 0.5 whenever the op-
+                                                                                       ResidualBlock(8, 160)
+timizer fails to reduce the loss function after 10 epochs,
+and we train until the learning rate is decreased to below                             ResidualBlock(16, 200)
+10−5 . This training procedure takes approximately 300
+epochs. The computation times and requirements for                                     ResidualBlock(32, 200)
+
+both training and inference are discussed in Section 6.1.
+                                                                                       ResidualBlock(64, 200)
+
+                 3.11. Hyperparameters                                                    Conv1D(1, 200)
+  Our model has many different hyperparameters that
+can be tuned, including the architecture of the network                         Conv1D(1, 200)            Conv1D(1, 200)
+
+and the parameters of the optimizer. We trained 56
+                                                                                 Conv1D(1, 1)                MaxPool
+models on the PS1 dataset using a wide range of differ-
+ent hyperparameter values. We trained on 90% of the                              TimeIndexing                FC(200)
+dataset, and kept 10% back for validation. We find that
+the model is not highly sensitive to most hyperparame-                                                FC(4)         FC(5)
+
+ters other than the learning rate, with the loss function
+typically varying by < 5%. The results are consistent for                       Encoding Mean          Encoding Logvar
+
+the training and validation sets. When the model per-
+                                                                                                 Sample
+forms similarly well on two different configurations, we
+                                                                  Observation
+choose the one that is more computationally efficient.              Times                        Repeat
+We show the range of hyperparameter values that we
+considered along with the optimal values from our tests                                     Concatenate
+
+in Table 1.
+                                                                                           Conv1D(1, 40)
+
+     3.12. Dimensionality of the Intrinsic Latent
+                                                                                           Conv1D(1, 80)
+                     Representation
+  Another important hyperparameter is the dimension-                                      Conv1D(1, 160)
+
+ality of the intrinsic latent representation. We trained
+                                                                                          Conv1D(1, 300)
+the ParSNIP model with varying numbers of intrinsic
+dimensions and with all of the other hyperparameters                                               Output: Spectral
+                                                                                                        time series
+kept at their optimal values shown in Table 1. For each
+model, we evaluated the VAE loss function shown in
+                                                                  Bandpasses
+Equation 1 on both the training and validation subsets
+of the PS1 dataset. The results of this procedure are
+                                                                                           Physics Layer
+shown in Figure 4.
+  We find that the loss function improves when increas-                                                      Output:
+                                                                                                          Light curve
+ing the dimensionality up to three for both the train-
+ing and validation sets, but there is little benefit from
+adding more dimensions beyond three. For models with
+large numbers of dimensions, we find that most of the
+                                                              Figure 3. Architecture of the ParSNIP model.
+dimensions are not used by the VAE, and it simply out-
+puts uninformative N (0, 1) posteriors for all of the tran-
+10                                                                                             Boone
+
+                                  Table 1. Hyperparameter optimization for the ParSNIP model. We show the range of values
+                                  considered for each hyperparameter along with the value that resulted in the model with the smallest
+                                  loss function in bold. When arrays are given, each element in the array refers to the hyperparameter
+                                  value for a different block in the architecture. The optimal configuration is shown in Figure 3.
+
+                                               Hyperparameter                                                      Value
+                                               Batch size                                                16, 32, 64, 128, 256, 512
+                                             Learning rate                             10−4 , 2 × 10−4 , 5 × 10−4 , 10−3 , 2 × 10−3 , 5 × 10−3 , 10−2
+                                            Scheduler factor                                                    0.1, 0.2, 0.5
+                                   Encoder convolutional block types                                     Conv1d, ResidualBlock
+                                   Encoder convolutional block widths                                 [20, 40, 60, 80, 100, 100, 100]
+                                                                                                   [40, 80, 120, 160, 200, 200, 200]
+                                                                                                     [32, 64, 128, 128, 128, 128, 128]
+                                                                                                     [32, 64, 128, 256, 256, 256, 256]
+                                                                                                     [32, 64, 128, 256, 512, 512, 512]
+                                   Encoder fully connected block sizes                                 100, 128, 200, 256, 400, 512
+                                         Decoder architecture                                                       [100]
+                                                                                                                  [50, 100]
+                                                                                                                 [100, 200]
+                                                                                                               [40, 80, 160]
+                                                                                                               [64, 128, 256]
+                                                                                                             [32, 64, 128, 256]
+
+
+
+
+                         80                                                Validation set            light curves in the PS1 dataset described in Section 2
+                                                                           Training set
+                                                                                                     with a randomly selected 10% of the light curves held
+                                                                                                     out for validation. We show examples of the models for
+                         75
+                                                                                                     different light curves in the validation subset in Figure 5.
+     VAE loss function
+
+
+
+
+                                                                                                     We find that the ParSNIP model is able to generalize
+                         70                                                                          well on the PS1 dataset with accurate models for the
+                                                                                                     vast majority of transients.
+                         65                                                                             We calculated the model residuals for all of the ob-
+                                                                                                     servations in our dataset. For the PS1 training set, we
+                                                                                                     find that the model residuals are consistent with the sta-
+                         60
+                                                                                                     tistical uncertainties which suggests that may we have
+                              1     2     3     4      5       6      7      8   9    10             somewhat overfit the training set. For the validation set,
+                                        Dimensionality of intrinsic latent space                     we find that the distribution of the residuals has a tight
+                                                                                                     core with a dispersion of ∼0.06 mag when statistical un-
+Figure 4. VAE loss function for different dimensionalities
+of the intrinsic latent representation. For each number of                                           certainties are taken into account. We do however see
+dimensions we train three models (shown as black dots), and                                          large residuals for some light curves, particularly ones
+we shown the mean value of the loss function across all three                                        of transient types that are not well represented in the
+models with colored markers. Beyond three dimensions we                                              training set. For observations with a statistical uncer-
+see little improvement in the VAE loss function.                                                     tainty of less that 0.05 mag, we find that 94% of obser-
+                                                                                                     vations have residuals of less than 0.2 mag, and 99.2%
+sients in some dimensions. We choose to use a three-                                                 of observations have residuals of less than 0.5 mag.
+dimensional model for the rest of our experiments.                                                      We performed the same comparison for a version of
+                                                                                                     the ParSNIP model trained on 90% of the light curves
+                                  4. MODEL PERFORMANCE                                               in the PLAsTiCC dataset. In this case, we find that the
+                                  4.1. Reproducing Light Curves                                      model residuals have a tight core with a dispersion of
+                                                                                                     ∼0.04 mag when statistical uncertainties are taken into
+  To study how well our model can reproduce light                                                    account. For observations with a statistical uncertainty
+curves, we trained the ParSNIP model on 90% of the
+                                       ParSNIP: Generative Models of Transient Light Curves                                           11
+                               PS1-13p (SNIa)                    PS1-11asz (SNII)                          PS1-11tt (SLSN)
+                   1.2                      ParSNIP Model
+                                            ps1::g
+                   1.0                      ps1::i
+                                            ps1::r
+                   0.8                      ps1::z
+ Normalized Flux
+
+
+
+
+                   0.6
+                   0.4
+                   0.2
+                   0.0
+                   0.2
+                         50         0        50       100     0         50         100      150   150 100 50 0            50 100 150
+                         Relative Time (days + 56323.42)    Relative Time (days + 55831.57)          Relative Time (days + 55714.47)
+Figure 5. Examples of out-of-sample predictions of the ParSNIP model on the validation subset of the PS1 dataset. These
+light curves were not included in the dataset that was used to train the model. Each panel shows the predictions for a different
+light curve. The observations are shown as individual points with their uncertainties, and the different colors correspond to the
+different bands as shown in the legend. The mean model predictions are shown as a solid line, and the 1-sigma uncertainties
+from varying the VAE latent parameters are shown with shaded contours.
+
+of less than 0.05 mag, we find that 97% of observations                     ejecta mass that went into the simulations. The SNe II
+have residuals of less than 0.2 mag and 99.7% of observa-                   were simulated using a small number of discrete tem-
+tions have residuals of less than 0.5 mag, with no major                    plates, and we show where light curves simulated from
+differences between the training and validation sets. The                   some of these templates are located in the latent space
+PLAsTiCC dataset was simulated and the subset that                          in the right panel of Figure 7. The ParSNIP model iden-
+we used to train the model contains more than 100 times                     tifies these discrete templates and clusters light curves
+as many transients as the PS1 dataset which likely ex-                      simulated from each of them in the latent space.
+plains the difference in training/validation performance                       As discussed in Section 3, the ParSNIP model was
+between the PS1 and PLAsTiCC datasets. Overall, we                          constructed to produce an intrinsic latent space that
+find that the ParSNIP model is able to produce good                         is invariant to how the light curve was observed. As
+models for the vast majority of the light curves in both                    expected, we find that well-measured light curves sim-
+datasets.                                                                   ulated with similar parameters are embedded at very
+                                                                            similar locations in the intrinsic latent space even when
+                    4.2. The ParSNIP Intrinsic Latent Space                 those light curves are observed at different redshifts,
+   As described in Section 3.3, the ParSNIP model learns                    with different brightnesses, or with different amounts
+a three dimensional intrinsic latent space si describing                    of host galaxy dust. There are no major correlations
+the intrinsic diversity of transients. To study the struc-                  between any of these properties of the observations and
+ture of the learned latent spaces, we look at where tran-                   the intrinsic latent variables si .
+sients with known labels are located in the latent space                       To demonstrate the invariance of the ParSNIP model
+for both of our datasets. The results of this procedure                     to redshift, we show the recovered intrinsic latent space
+are shown in Figure 6. Most of the different transient                      for the PLAsTiCC dataset in different redshift slices in
+types are well separated despite the fact that the type                     Figure 8. We find that the recovered latent space is al-
+labels were not used when training the ParSNIP model.                       most identical in all of the different redshift slices. There
+   For transients of the same type, we find that differ-                    are minor differences across redshift bins for some of the
+ences in the ParSNIP intrinsic latent variables si cor-                     transient types. For example, the SNe II have a much
+respond to differences in the intrinsic properties of the                   broader distribution in the lower redshift bins compared
+transients. This can easily be see using the PLAsTiCC                       to the higher redshift bins. These differences are due to
+dataset where all of the parameters that were used for                      Malmquist bias rather than a limitation of the ParSNIP
+simulating each light curve are known. In the left panel                    model. At low redshifts nearly all SNe II are detected,
+of Figure 7, we show that the ParSNIP latent space of                       but at high redshifts only the SNe II that are intrin-
+superluminous supernovae is capturing the variation in                      sically very bright are detected. For the PLAsTiCC
+12                                                                                            Boone
+
+
+                                              PS1                                                                               PLAsTiCC
+     4                                                                                                  6
+
+     3
+                                                                                                        4
+     2
+                                                                                                        2
+     1
+
+     0                                                                                                  0
+s3
+
+
+
+
+                                                                                                  s2
+     1
+                                                                                                        2
+
+     2
+                  Unknown
+                  SNIa                                                                                  4                                             SNIa                KN
+     3            SNIbc                                                                                                                               SNIax               TDE
+                  SNII                                                                                                                                SNIa-91bg           CaRT
+                  SNIIn                                                                                                                               SNIbc               ILOT
+     4            SLSN                                                                                  6                                             SNII                PISN
+                  FELT                                                                                                                                SLSN-I
+              4        3        2        1         0       1       2   3                      4                 6   4       2            0        2            4          6
+                                              s1                                                                                         s1
+
+Figure 6. Visualization of the intrinsic latent spaces learned when trained on the PS1 (left panel) and PLAsTiCC (right
+panel) datasets. We show two of the si latent variables for each transient in the dataset, and we color each transient by its
+type if known. We limit this plot to show a maximum of 200 transients for each type to highlight rarer types. Despite the
+fact that the types were not used when training the ParSNIP model, the model groups transients of the same type at similar
+locations in the latent space. Note that these plots show only two dimensions of the intrinsic latent space: each light curve also
+has measurements of another si latent variable, color, and amplitude.
+
+
+
+
+                                    PLAsTiCC SLSN                                                                           PLAsTiCC SNII
+                                                                                                                                                           Template 201
+                                                                                                                                                           Template 204
+              4                                                                                             8                                              Template 210
+                                                                                                                                                           Template 216
+                                                                                                            6                                              Template 225
+              2                                                                                                                                            Template 235
+                                                                                                            4
+                                                                           Ejecta Mass (M )
+
+
+
+
+                                                                       101
+              0                                                                                             2
+         s2
+
+
+
+
+                                                                                                       s3
+
+
+
+
+                                                                                                            0
+              2
+                                                                                                            2
+              4
+                                                                                                            4
+
+                                                                       100
+                   5        4       3    2         1   0       1                                                6       4       2             0            2
+                                         s1                                                                                         s2
+
+Figure 7. Examples of diversity of the ParSNIP intrinsic representations for transients of the same type in the PLAsTiCC
+dataset. Left panel: The variation of ParSNIP s1 and s2 latent variables for superluminous supernovae is explained by differences
+in the ejecta mass parameter (shown in color) that went into the simulations. Right panel: Some of the Type II supernovae
+in the PLAsTiCC dataset were simulated using discrete templates. We show the s2 and s3 latent variables for light curves
+simulated from six of these templates, and find that the light curves simulated from each template cluster at similar locations
+in the ParSNIP intrinsic latent space.
+                          ParSNIP: Generative Models of Transient Light Curves                                         13
+
+dataset, this means that at low redshifts the SNe II come      difference in the median colors between both datasets to
+from a wide range of templates giving a wide distribution      account for different arbitrary zeropoints. We are able
+in latent space, but at high redshifts the majority of the     to accurately predict the SALT2 x1 and c parameters
+observed SNe II come from a single template (number            from the ParSNIP latent space for all of these SNe Ia,
+235) and are clustered tightly in the latent space.            with 88% and 89% of the variance explained respec-
+                                                               tively. The residuals from the predictions for x1 have an
+             4.3. Comparison with SALT2                        NMAD of 0.24 and a standard deviation of 0.34. The
+   The SALT2 model (Guy et al. 2007) is commonly used          differences between the ParSNIP c and SALT2 c values
+to model the light curves of SNe Ia. This model is a           have an NMAD of 0.037 mag and a standard deviation
+linear model with one parameter x1 describing the vari-        of 0.044 mag. The differences between the ParSNIP c
+ability in the observed widths of SN Ia light curves, and      and SALT2 c values are highly correlated with the s3
+a second parameter c describing the differences in color       parameter (ρ=0.64) which simply reflects the fact that
+(which will capture host galaxy dust). As described in         the color zeropoint is arbitrary and can vary across the
+Section 3.3, the ParSNIP model is effectively a gener-         parameter space. Our prediction of SALT c could be fur-
+alization of the SALT2 model. In this subsection, we           ther improved if this were taken into account. To sum-
+compare the performance of both of these models for            marize, given the location of an SN Ia in the ParSNIP
+SNe Ia. Note that the PLAsTiCC SN Ia light curves              latent space we are able to accurately predict its SALT2
+were simulated using SALT2. For a fair comparison, we          parameters. This implies that the ParSNIP latent space
+only consider the version of the ParSNIP model that was        contains all of the information that is captured by the
+trained on real PS1 light curves and is thus independent       SALT2 parameterization of SNe Ia.
+of SALT2.                                                         We compared how well the SALT2 and ParSNIP mod-
+   We investigated whether the latent space that the           els are able to reproduce light curves. An example of the
+ParSNIP model learns for SNe Ia captures the x1 and            light curve fits of both models to PS1-11bk is shown in
+c parameters of the SALT2 model. To do this, we fit            the top panel of Figure 10. The quality of the light curve
+the SALT2 model to all of the light curves that were           fits are comparable. For the training set (validation set),
+labeled as SNe Ia in the PS1 dataset and compared the          we find a median reduced χ2 of 1.42 (1.68) for ParSNIP
+results with the ParSNIP model on the same subset of           fits to SNe Ia and 1.40 (1.21) for SALT2 fits. Note that
+light curves. We limited our comparison to light curves        for SALT2 we found the exact maximum likelihood val-
+that are well-fit by SALT2, which we define as having          ues of the model parameters by fitting the model to the
+a fit that converges, a best-fit SALT2 x1 parameter be-        light curves. For the ParSNIP model, we instead used
+tween −5 and +5, an uncertainty on x1 of less than 0.5,        the encoder to approximate the maximum-a-posteriori
+an uncertainty on SALT2 c of less than 0.1, and at least       values of the model parameters. All of the ParSNIP
+one observation before maximum light.                          reduced χ2 values would decrease if a full fit were per-
+   The ordering of the intrinsic latent variables si in the    formed to find the true maximum likelihood values of
+ParSNIP model is arbitrary. To effectively compare our         the model parameters. Nevertheless, we find that the
+parameterization of the intrinsic diversity to x1 , we solve   ParSNIP model is achieving comparable reconstruction
+for the linear combination of the ParSNIP latent vari-         performance to the SALT2 model despite being trained
+ables si that best models x1 :                                 on a much lower quality dataset.
+                                  X                               Both SALT2 and ParSNIP predict the full spectral
+                xParSNIP
+                 1       = γ0 +      γn si,n            (23)   time series of the light curves that they fit. We compare
+                                  n                            the predicted spectra for PS1-11bk at a range of differ-
+                                                               ent times in the lower panel of Figure 10. The SALT2
+We solve for the coefficients γn that minimize the sum
+                                                               model was trained using spectra of a large number of
+of squared differences between xParSNIP
+                                    1      and x1 . Note
+                                                               SNe Ia and is known to provide a good description of
+that we do not include measurement uncertainties in
+                                                               the spectra of SNe Ia. In contrast, the ParSNIP model
+this procedure because both the SALT2 and ParSNIP
+                                                               was trained using only photometric observations. Nev-
+models were fit to the same observations and the un-
+                                                               ertheless, the ParSNIP model accurately reproduces all
+certainties on the si and x1 latent variables are likely
+                                                               of the major spectral features of SNe Ia as seen in the
+very highly correlated. The results of this procedure are
+                                                               SALT2 model. The ParSNIP model does have some non-
+shown in the left panel of Figure 9.
+                                                               physical behavior at UV and IR wavelengths (as does
+  In the right panel of Figure 9, we show the SALT2
+                                                               SALT2) where the PS1 bandpasses have limited cover-
+c parameter in terms of the ParSNIP c parameter. We
+                                                               age. This could be improved by including additional fol-
+include a constant offset in this comparison given by the
+14                                                                                     Boone
+                         0 < z < 0.25                           0.25 < z < 0.5                                      0.5 < z < 1                                    1<z<2
+      6
+                                                                                                                                                                                    SNIa
+                                                                                                                                                                                    SNIax
+      4                                                                                                                                                                             SNIa-91bg
+                                                                                                                                                                                    SNIbc
+      2                                                                                                                                                                             SNII
+                                                                                                                                                                                    SLSN-I
+                                                                                                                                                                                    KN
+      0                                                                                                                                                                             TDE
+ s2
+
+
+
+
+                                                                                                                                                                                    CaRT
+                                                                                                                                                                                    ILOT
+      2                                                                                                                                                                             PISN
+
+      4
+
+      6
+             6       4   2    0      2    4    6       6    4    2    0        2   4    6             6         4   2     0    2      4    6       6     4     2     0          2   4     6
+                              s1                                      s1                                                  s1                                         s1
+
+Figure 8. Visualization of the intrinsic latent space learned for the PLAsTiCC dataset in different redshift ranges. The
+redshift range of each panel is shown above the panel. In each panel, we show the s1 and s2 latent variables for 200 transients of
+each type, and we color each point by its type. The ParSNIP model was constructed to produce an intrinsic latent space that is
+invariant to observing conditions such as redshift, and we find that the latent spaces are nearly identical in each of the different
+redshift slices. The slight differences such as the narrowing of the SNe II distribution at high redshifts are due to Malmquist bias
+rather than a limitation of the ParSNIP model. Note that some transient types have a limited redshift range in the PLAsTiCC
+simulations so they do not appear in some of the redshift slices.
+
+
+
+
+                     3                                                                                    0.8
+
+                     2                                                                                    0.6
+
+                     1
+                                                                                                          0.4
+          SALT2 x1
+
+
+
+
+                                                                                            SALT2 c
+
+
+
+
+                     0
+                                                                                                          0.2
+                     1
+
+                     2                                                                                    0.0
+
+                     3                                                                                    0.2
+
+                     4
+                         3          2     1     0        1        2        3                                            0.2    0.0        0.2      0.4       0.6          0.8
+                                   0.49 0.41 s1 0.14 s2 + 1.54 s3                                                                    ParSNIP c + 0.079
+
+Figure 9. Reproducing the SALT2 model parameters from the ParSNIP latent space. Left panel: SALT2 x1 as a function
+of the best-fit linear combination of the ParSNIP intrinsic latent variables si . Right panel: SALT2 color as a function of the
+ParSNIP color with a constant offset. The one-to-one line is shown in blue in both plots. We are able to recover both SALT2
+x1 and c from the ParSNIP latent space with high accuracy.
+
+lowup observations in the training. We discuss this fur-                                       plex variability. Our techniques produce a generative
+ther in Section 6.7. We stress that the ParSNIP model                                          model for the spectral time series of all of these tran-
+was able to learn the spectrum of an SN Ia by effec-                                           sients. To evaluate the performance of these models, we
+tively deconvolving photometric observations of SNe Ia                                         compare the spectral time series predicted by ParSNIP
+at a wide range of different redshifts, and no spectra                                         to observed spectra for two different core-collapse super-
+were included in the training dataset.                                                         novae: PS1-12cht, a Type IIn supernova and PS1-12baa,
+                                                                                               a peculiar Type Ic supernova. We retrieved spectra for
+          4.4. Models of Other Kinds of Transients                                             these two supernovae from the Open Supernova Cata-
+  While empirical models such as SALT2 have been pre-                                          log (Guillochon et al. 2017). Both of these supernovae
+viously developed for SNe Ia, models of other kinds                                            are from classes that are not well-sampled in the PS1
+of transients are typically much more primitive due to                                         dataset, so we show results from a run where these su-
+the lack of spectroscopic observations and more com-
+                                                        ParSNIP: Generative Models of Transient Light Curves                                              15
+
+                                                                             ParSNIP Model        of the observed spectral features. At later times, we
+                               800                                           SALT2 Model
+                                                                             ps1::g               find that the ParSNIP model is able to predict the broad
+                                                                             ps1::i               structure of the spectrum, but it struggles to predict the
+                               600                                           ps1::r
+                                                                             ps1::z               exact locations and widths of all of the emission lines.
+    Flux (ZPAB=25)
+
+
+
+
+                                                                                                     This is not surprising: the ParSNIP model was only
+                               400                                                                trained on photometry, so the estimates of the spectra
+                                                                                                  come from effectively deconvolving the photometry of
+                               200                                                                many transients at different redshifts. PS1-12baa is a
+                                                                                                  peculiar Type Ic supernova, and there are very few ex-
+                                   0                                                              amples of similar supernovae in the PS1 dataset. The
+                                                                                                  deconvolved spectra are therefore not very well con-
+                                       75   50    25 0          25     50    75       100   125   strained. This could be addressed by training on a larger
+                                                 Relative Time (days + 55585.05)                  dataset, such as the one that the Rubin Observatory will
+                               6                                               ParSNIP Model      produce, or by including spectra or additional followup
+                                                                               SALT2 Model        observations in the training process. These options are
+                               5                                                                  discussed in Section 6.7.
+    Normalized Flux + Offset
+
+
+
+
+                               4                                                                             4.5. Comparison with Simulations
+                                                                          +0.0 days
+                               3                                                                     The PLAsTiCC dataset was simulated, so we can com-
+                                                                          +10.0 days              pare the spectra predicted by the ParSNIP model di-
+                               2                                                                  rectly to those that were used in the simulation. The
+                                                                          +20.0 days
+                                                                                                  result of this procedure is shown for well-measured light
+                               1
+                                                                          +30.0 days              curves of a range of different types of transients in Fig-
+                               0                                                                  ure 12. Some classes, such as Type II supernovae, were
+                                   2000 3000 4000 5000 6000 7000 8000 9000 10000                  simulated using several different models with very differ-
+                                                    Wavelength (Å)                                ent spectral properties. We find that the ParSNIP model
+                                                                                                  is able to identify the different models and recover the
+Figure 10. Comparison of the SALT2 and ParSNIP models
+                                                                                                  underlying spectral time series for each of them.
+for the SN Ia PS1-11bk. Top panel: Comparison of the light
+curves. The ParSNIP model is shown with solid lines, and                                             The spectra that are recovered by the ParSNIP model
+the SALT2 model is shown with a dashed line. Bottom panel:                                        tend to be overly smooth compared to the input simu-
+Comparison of the spectra predicted by both models at a                                           lations. This is primarily due to the fact that we are
+range of different times. We find good agreement between                                          learning the spectra by deconvolving photometry. The
+the SALT2 and ParSNIP models other than in the UV and                                             regularization term described in Section 3.8 can be ad-
+IR regions that are not covered by many observations.                                             justed to recover more of the spectral features, but this
+                                                                                                  comes at the cost of introducing additional noise into
+pernovae were included in the training of the ParSNIP                                             the model. In practice, we find that they choice of regu-
+model.                                                                                            larization term has little impact on the final photometry
+   In the left panel of Figure 11, we show the light curve                                        because all of the high frequency information is lost after
+and spectra of PS1-12cht, a Type IIn supernova. These                                             the convolution with the bandpass.
+spectra were obtained by the PESSTO collaboration
+(Smartt et al. 2015) and are relatively featureless. We                                                             5. APPLICATIONS
+find that the ParSNIP model produces good predictions                                               There are many different applications for a generative
+of the overall shape of the spectra and the photometry,                                           model of all transient light curves. We discuss three
+although we do see some ringing of the spectra at bluer                                           of them in this section. In Section 5.1, we show how
+wavelengths.                                                                                      the ParSNIP model can be used to perform photometric
+   In the right panel of Figure 11, we show the light curve                                       classification even with heavily biased training sets. In
+and spectra of PS1-12baa, a peculiar Type Ic supernova.                                           Section 5.4, we demonstrate a novel method of searching
+These spectra were obtained by the LOSS collaboration                                             for new kinds of transients. In Section 5.5, we show how
+(Shivvers et al. 2019). The spectra of this supernova                                             the ParSNIP model can be used to estimate cosmological
+show many different emission lines, especially at later                                           distances to SNe Ia.
+times. The ParSNIP model predictions agree well with
+the observed spectra at early times and reproduce most                                                        5.1. Photometric Classification
+16                                                                                                        Boone
+                                                              PS1-12cht (SNIIn)                                                                               PS1-12baa (SNIbc)
+                                                                                      ParSNIP Model                                                                                   ParSNIP Model
+                                     1.2                                              ps1::g                                            1.0                                           ps1::g
+                                                                                      ps1::i                                                                                          ps1::i
+                                     1.0                                              ps1::r                                                                                          ps1::r
+                                                                                      ps1::z                                            0.8                                           ps1::z
+                                     0.8
+      Normalized Flux
+
+
+
+
+                                                                                                             Normalized Flux
+                                                                                                                                        0.6
+                                     0.6
+                                                                                                                                        0.4
+                                     0.4
+                                     0.2                                                                                                0.2
+
+                                     0.0                                                                                                0.0
+                                     0.2
+                                           100          50         0         50        100          150                                       50      0            50         100        150          200
+                                                         Relative Time (days + 56277.50)                                                                  Relative Time (days + 56147.91)
+                                                                                   ParSNIP Model                                                                                    ParSNIP Model
+                                 7                                                 Observed Spectra                                     7                                           Observed Spectra
+                                                                                                                                                                                             3.5 days
+                                 6                                                                                                      6
+                                                                                                                                                                                               14.5 days
+                                 5                                                                                                      5
+                                                                                              2.5 days                                                                                         29.3 days
+      Normalized Flux + Offset
+
+
+
+
+                                                                                                             Normalized Flux + Offset
+                                 4                                                                                                      4
+                                                                                              4.5 days                                                                                         47.3 days
+                                 3                                                                                                      3
+                                                                                             26.5 days                                                                                         58.4 days
+                                 2                                                                                                      2
+                                                                                             34.5 days                                                                                         69.1 days
+                                 1                                                                                                      1
+                                                                                             45.5 days                                                                                         97.3 days
+                                 0                                                                                                      0
+
+                                     2000        3000   4000 5000 6000 7000             8000     9000                                         3000 4000 5000 6000 7000 8000 9000 10000 11000
+                                                          Rest-Frame Wavelength (Å)                                                                       Rest-Frame Wavelength (Å)
+
+Figure 11. Comparison of the ParSNIP model to observed spectra of core-collapse supernovae. The left two panels show
+the model and data for PS1-12cht, a Type IIn supernova, and the right two panels show the model and data for PS1-12baa,
+a peculiar Type Ic supernova. The top two panels show the observed PS1 photometry and the ParSNIP model fit to that
+photometry. The bottom two panels show observed spectra for each of these supernovae from PESSTO (Smartt et al. 2015)
+and LOSS (Shivvers et al. 2019) respectively along with spectra from the ParSNIP model evaluated at the same phases. We
+normalize all of the spectra to the flux at 6000Å. We find that the broad structure of the ParSNIP predicted spectra agree well
+with the observed spectra despite the fact that the ParSNIP model was only trained using photometry.
+
+   Upcoming surveys such as the LSST with the Rubin                                                                This representation is a set of very informative features
+Observatory will obtain photometric observations of mil-                                                           which can be used to train a photometric classifier on
+lions of transients, but will only have the spectroscopic                                                          the small labeled dataset. This approach has previously
+resources to obtain spectroscopy of and label a small                                                              been demonstrated in Pasquet et al. (2019) and Villar
+fraction of these transients. Traditional classification                                                           et al. (2020).
+techniques only use this small dataset of labeled tran-                                                              The main advantage of ParSNIP over previous autoen-
+sients for training (e.g. Lochner et al. (2016); Boone                                                             coders is that the representation that it learns was con-
+(2019)). In contrast, autoencoder-based methods can                                                                structed to disentangle intrinsic properties of transients
+learn a low-dimensional representation from the much                                                               from properties describing how transients were observed.
+larger dataset of both labeled and unlabeled transients.                                                           In particular, the intrinsic representation is disentangled
+                                                ParSNIP: Generative Models of Transient Light Curves                                               17
+                                          SNII - Template                    SNII - NMF                              SNII - MOSFIT
+                                                                                                                                ParSNIP Model
+                              5                                                                                                 Simulated Model
+   Normalized Flux + Offset
+
+
+                              4                                                                                                 +0.0 days
+                                                      +0.0 days                           +0.0 days
+                              3                                                                                                 +10.0 days
+                                                      +10.0 days                          +10.0 days
+                                                                                                                                +20.0 days
+                              2
+                                                      +20.0 days                          +20.0 days                            +30.0 days
+                              1
+                                                      +30.0 days                          +30.0 days
+                              0
+                                          SLSN-I - MOSFIT                 SNIbc - Template                          SNIbc - MOSFIT
+                              5
+
+                              4
+                                                                                          +0.0 days
+   Normalized Flux + Offset
+
+
+
+
+                                                      +0.0 days                                                                 +0.0 days
+                              3                                                           +10.0 days                            +10.0 days
+                                                      +10.0 days
+                              2                                                                                                 +20.0 days
+                                                      +20.0 days                          +20.0 days
+                              1                                                                                                 +30.0 days
+                                                      +30.0 days                          +30.0 days
+                              0
+                                  2000   4000 6000 8000 10000      2000   4000 6000 8000 10000              2000   4000 6000 8000 10000
+                                            Wavelength (Å)                   Wavelength (Å)                           Wavelength (Å)
+
+Figure 12. Comparison of the spectra predicted by the ParSNIP model to the true spectra in the PLAsTiCC simulations.
+Each panel shows the simulated spectra for a given transient in grey at a range of different times. The spectra predicted by
+the ParSNIP model for that transient are shown in green. The titles of each panel indicate the type of transient and model
+that was used for the simulation. We find that the ParSNIP model is able to accurately recover the spectral time series of all
+of these different kinds of transients despite only being trained on photometry.
+
+from redshift. The labeled training sets tend to be heav-                          ters from Planck Collaboration et al. (2020) with the
+ily biased towards low-redshift transients, so redshift is                         following formula:
+not a good feature to use for classification. Pasquet et al.
+                                                                                                L = −2.5 log10 (A) − µPlanck20 (z) + 25           (24)
+(2019) attempted to construct a similar representation
+using a contrastive loss function that adds a penalty                                 The offset of 25 comes from the fact that the input
+when transients with the same label have very different                            fluxes for both the ParSNIP and PLAsTiCC datsets
+representations. This technique is effective, but requires                         were measured on the AB system with a zeropoint of
+a representative sample of labeled high redshift tran-                             25. We refer to L as a pseudo-luminosity because it con-
+sients that is often not available. In contrast, ParSNIP                           tains an arbitrary offset from the unknown zeropoint of
+can generate such a representation with only the unla-                             the ParSNIP model. This offset will be identical for all
+beled dataset because it is a full generative model.                               light curves with the same intrinsic representation. We
+   To perform photometric classification with ParSNIP,                             use the full ParSNIP representation as the features for
+we first augment each light curve in the training set 100                          our classifier, consisting of the intrinsic latent variables
+times following the procedure in Section 3.9. Note that                            s1 , s2 , s3 , the pseudo-luminosity L, and the color c. We
+we do not perform redshift augmentation as in Boone                                also include the predicted uncertainties on all of these
+(2019), we only use augmentation to obtain light curves                            measurements and the uncertainty on the reference time
+at a wide range of signal-to-noises and observing con-                             for a total of eleven features. We do not include redshift
+ditions. We then perform inference using the ParSNIP                               as an explicit feature as the redshift distributions of the
+model to estimate the latent representations for all of                            labeled and unlabeled datasets tend to be very different,
+the transients in the augmented training set. We con-                              although the redshift is used to calculate the luminosity.
+vert the amplitude measured by the ParSNIP model to                                   We train a gradient boosted decision tree on these
+a pseudo-luminosity L using the cosmological parame-                               features using the lightgbm package (Ke et al. 2017).
+                                                                                   When training this classifier, we weight each transient
+18                                                             Boone
+                                                                                                          PS1 ParSNIP
+in the training set so that the sum of weights for each                                                                                1.0
+label is equal and so that the average weight across all                             SLSN    0.82    0.00      0.12    0.00     0.06
+transients is one. We use the default hyperparameter                                                                                   0.8
+values from lightgbm with a multi logloss objective                                   SNII   0.00    0.84      0.08    0.01     0.08
+
+
+
+
+                                                                                                                                         Fraction of objects
+function, except that we set the min child weight pa-                                                                                  0.6
+
+
+
+
+                                                                         True Type
+rameter to 1000 to avoid overfitting the augmented light                             SNIIn   0.17    0.17      0.67    0.00     0.00
+curves. We train the classifiers with 10-fold cross vali-                                                                              0.4
+dation: we train each classifier on 90% of the data and                              SNIa    0.00    0.00      0.01    0.93     0.06
+evaluate the model on the remaining 10%. We repeat                                                                                     0.2
+this procedure ten times to obtain ten separate classifiers                          SNIbc   0.00    0.21      0.00    0.11     0.68
+and out-of-sample predictions for all of the transients in                                                                             0.0
+
+
+
+
+                                                                                            N
+
+                                                                                                    I
+
+                                                                                                                In
+
+                                                                                                                      a
+
+                                                                                                                              bc
+                                                                                                    SNI
+the training set. To avoid data leakage, we ensure that
+
+
+
+
+                                                                                                                      SNI
+                                                                                         SLS
+
+
+
+
+                                                                                                            SNI
+
+
+
+
+                                                                                                                              SNI
+all augmentations of the same light curve are in the same                                                 Predicted Type
+fold for this procedure. For the unlabeled dataset, we
+                                                                  Figure 13.         Confusion matrix for the cross-validated
+generate predictions by averaging over the outputs of all         ParSNIP predictions on the PS1 dataset. Each entry shows
+of the classifiers.                                               the fraction of transients of the type labeled on the left side
+                                                                  of the plot that are assigned the corresponding type labeled
+  5.2. Photometric Classification on the PS1 Dataset              on the bottom of the plot.
+
+   For the PS1 dataset, we only have labels for a subset
+                                                                  to perform well even when the training set differs sig-
+of 557 transients. We predict the labels for each of these
+                                                                  nificantly from the dataset that the classifier is applied
+transients using 10-fold cross-validation. In Figure 13,
+                                                                  to. We expect that the improvement in performance of
+we show a confusion matrix for this dataset. Each row
+                                                                  ParSNIP over previous models such as SuperRAENN
+of the confusion matrix shows what fraction of the tran-
+                                                                  or Superphot will be even larger when applied to the
+sients of a given type are assigned to each label by the
+                                                                  non-representative datasets such as the ones that will
+classifier. We find that the ParSNIP model is able to
+                                                                  be produced by the Rubin Observatory or the Rubin
+accurately classify all of the different types of transients
+                                                                  Space Telescope. Unfortunately it is impossible to test
+in this dataset, with 63% to 92% of the transients of
+                                                                  this performance on real data since we do not have ac-
+each type being correctly identified in a five-way classi-
+                                                                  cess to the true labels for the higher redshift transients,
+fication.
+                                                                  although we can test it on simulations.
+   Our results are a significant improvement from both
+the SuperRAENN (Villar et al. 2020) and Superphot
+(Hosseinzadeh et al. 2020) models that have previously                 5.3. Photometric Classification on the PLAsTiCC
+been applied to this dataset. We achieve an overall                                           Dataset
+accuracy of 89% for the five-way classification com-                 The PLAsTiCC dataset is a simulation of the LSST
+pared to 87% for SuperRAENN on the same dataset.                  light curve sample, and has a labeled training set that
+For the metric of the“macro-average completeness” de-             is highly nonrepresentative of the full dataset. We com-
+fined in Villar et al. (2020) (the mean of the diagonal           pare the performance of the ParSNIP model for classifi-
+terms in the confusion matrix), we achieve a value of             cation of the PLAsTiCC light curves to the performance
+79% with ParSNIP compared to 69% for both Super-                  of the Avocado model (Boone 2019) that was the best
+RAENN and Superphot. For a two-way classification                 performing classifer in the PLAsTiCC challenge (Hložek
+of SNe Ia compared to all other labels, we achieve a              et al. 2020). In the version of ParSNIP discussed in
+macro-averaged completeness of 96% compared to 92%                this work, we assume that we know the redshift of each
+for SuperRAENN. This implies that a sample of SNe Ia              transient but this information was not available in the
+that was photometrically classified with ParSNIP would            original PLAsTiCC dataset. For a fair comparison, we
+have ∼2 times less contamination than a sample classi-            retrained the Avocado classifier using the true redshifts
+fied with SuperRAENN.                                             instead of photometric redshifts. We show the confusion
+   These predictions were all made through cross-                 matrices for both the ParSNIP and Avocado classifiers
+validation, so the classifiers were evaluated on datasets         in Figure 14.
+that have very similar properties to the datasets that               The ParSNIP model achieves similar or better per-
+they were trained on. The major advantage of ParSNIP              formance than Avocado for each of the different kinds
+over previous models is that its representation is invari-        of transients. We evaluated the weighted log-loss met-
+ant to symmetries such as redshift, and it is designed            ric developed for the PLAsTiCC challenge (Malz et al.
+                                    ParSNIP: Generative Models of Transient Light Curves                                                                                                                 19
+                                  PLAsTiCC ParSNIP                                                                                           PLAsTiCC Avocado
+                                                                  1.0                                                                                                                  1.0
+                   KN 0.98 0.00 0.00 0.00 0.01 0.00 0.01 0.00                                                       KN 0.94 0.00 0.00 0.01 0.01 0.00 0.05 0.00
+
+                SLSN-I 0.00 0.97 0.01 0.00 0.00 0.00 0.00 0.01    0.8                                   SLSN-I 0.00 0.96 0.02 0.01 0.00 0.00 0.01 0.01                                 0.8
+                  SNII 0.01 0.00 0.72 0.04 0.01 0.05 0.04 0.14                                                SNII 0.00 0.00 0.67 0.10 0.03 0.09 0.07 0.04
+
+
+
+
+                                                                    Fraction of objects
+
+
+
+
+                                                                                                                                                                                         Fraction of objects
+                                                                  0.6                                                                                                                  0.6
+                  SNIa 0.00 0.00 0.03 0.88 0.02 0.04 0.01 0.02                                             SNIa 0.00 0.00 0.03 0.89 0.04 0.02 0.02 0.01
+  True Type
+
+
+
+
+                                                                                          True Type
+              SNIa-91bg 0.00 0.00 0.02 0.02 0.87 0.04 0.05 0.00                                       SNIa-91bg 0.00 0.00 0.02 0.03 0.82 0.04 0.09 0.00
+                                                                  0.4                                                                                                                  0.4
+                 SNIax 0.02 0.00 0.08 0.11 0.10 0.56 0.10 0.02                                           SNIax 0.01 0.00 0.08 0.23 0.09 0.47 0.11 0.02
+
+                 SNIbc 0.03 0.00 0.11 0.02 0.12 0.10 0.59 0.02    0.2                                    SNIbc 0.02 0.00 0.08 0.06 0.14 0.10 0.59 0.01                                 0.2
+
+                  TDE 0.00 0.01 0.03 0.01 0.00 0.01 0.01 0.93                                                 TDE 0.00 0.00 0.02 0.02 0.01 0.01 0.01 0.93
+                                                                  0.0                                                                                                                  0.0
+                                          bg
+                     KN
+
+                           N-I
+
+                                            I
+                                           a
+
+
+                                          ax
+
+                                          bc
+                                                         TDE
+
+
+
+
+                                                                                                                               KN
+
+                                                                                                                                      N-I
+
+                                                                                                                                                       I
+                                                                                                                                                      a
+                                                                                                                                                     bg
+
+                                                                                                                                                     ax
+
+                                                                                                                                                     bc
+                                                                                                                                                                          TDE
+                                        SNI
+
+
+
+
+                                                                                                                                                   SNI
+                                       SNI
+
+
+
+
+                                                                                                                                                  SNI
+                                      SNI
+
+
+
+
+                                                                                                                                                 SNI
+                                      SNI
+
+
+
+
+                                                                                                                                                 SNI
+                                     a-91
+
+
+
+
+                                                                                                                                                a-91
+                          SLS
+
+
+
+
+                                                                                                                                     SLS
+                                 SNI
+
+
+
+
+                                                                                                                                            SNI
+                                     Predicted Type                                                                                               Predicted Type
+
+Figure 14. Confusion matrices for the ParSNIP (left panel) and Avocado (right panel) predictions on the PLAsTiCC test set.
+Each entry shows the fraction of transients of the type labeled on the left side of the plot that are assigned the corresponding
+type labeled on the bottom of the plot. We find that the ParSNIP model has similar or better performance than the Avocado
+model for every kind of transient.
+
+2019) limited to the subset of transient types used in
+this analysis. Avocado scores 0.599 on this metric while                                                                       1.0
+ParSNIP scores 0.535 which is a major improvement. To
+illustrate how this difference in performance will affect                                                                      0.8
+astrophysical analyses, we evaluated the receiver oper-
+                                                                                                          True positive rate
+
+
+
+
+ating characteristic (ROC) curve for both of these clas-                                                                       0.6
+sifiers for SNe Ia. This curve measures the true positive
+rate (the fraction of SNe Ia that are correctly classified                                                                     0.4
+as SNe Ia) as a function of the false positive rate (the
+                                                                                                                               0.2
+fraction of non-SNe Ia that are misclassified as SNe Ia)                                                                                                       ParSNIP (AUC = 0.977)
+for different thresholds of the classifier output. We show                                                                     0.0                             Avocado (AUC = 0.962)
+the ROC curve for both the ParSNIP and Avocado clas-                                                                                 0.0    0.2      0.4        0.6      0.8     1.0
+sifiers in Figure 15.                                                                                                                              False positive rate
+   Measuring the Area Under the ROC Curve (AUC)
+                                                                                                Figure 15. Receiver operating characteristic (ROC) curve
+(the integral of this curve), we find a value of 0.977 for                                      for SN Ia classification on the PLAsTiCC dataset. The
+the ParSNIP model compared to 0.962 for the Avocado                                             ParSNIP model (shown in blue) performs significantly bet-
+model. The improvement of the ParSNIP model mainly                                              ter than the Avocado model (shown in orange), especially
+comes from a major reduction in the false positive rate                                         for thresholds corresponding to low false positive rates that
+for true positive rates below ∼ 90%. For a true posi-                                           are most interesting for supernova cosmology analyses.
+tive rate of 50%, the ParSNIP model has a false positive
+rate of only 0.44% which is 2.3 times smaller than the                                             Finally, we evaluated the performance of both the
+false positive rate of 1.04% for the Avocado model. We                                          ParSNIP and Avocado models as a function of redshift.
+find similar results for any true positive rate below 0.9.                                      We evaluated the AUC for classification of SNe Ia in 100
+This is of particular importance for cosmology analy-                                           evenly-spaced redshift bins between redshifts of 0 and
+ses with SNe Ia where it is more important to have                                              1.5. The results for both the Avocado and ParSNIP
+a clean dataset than include all transients that were                                           models are shown in Figure 16. We find that the
+discovered. A SN Ia cosmology analysis that uses the                                            ParSNIP model is stable across different redshifts, and
+ParSNIP model for classification will have 2.3 times less                                       outperforms the Avocado model at all redshifts. Of par-
+contamination from other supernova types compared to                                            ticular note is the decrease in performance for the Av-
+an analysis that uses the Avocado model.                                                        ocado model at very low redshifts where we would ex-
+                                                                                                pect to have very high signal-to-noise and well-measured
+20                                                                Boone
+
+                                                                     transients. As a result, these methods typically produce
+           1.00                                                      a sample of transients that consists mostly of rare tran-
+           0.98                                                      sients (e.g. superluminous supernovae) rather than ones
+           0.96                                                      that have truly never been observed.
+                                                                        In this work, we instead explore an alternative ap-
+           0.94
+                                                                     proach to anomaly detection enabled by the ParSNIP
+           0.92
+     AUC
+
+
+
+
+                                                                     model that takes prior knowledge into account. The
+           0.90                                                      ParSNIP model was constructed so that transients with
+           0.88                                                      the same intrinsic properties are embedded at the same
+           0.86                                         ParSNIP      location in the intrinsic latent space regardless of how
+                                                        Avocado      they were observed. Assuming that we have known la-
+           0.84
+                  0.0   0.2   0.4   0.6 0.8 1.0   1.2     1.4        bels for some subset of the transients in a given dataset,
+                                       Redshift                      we can identify novel transients by finding unlabeled
+                                                                     transients whose locations in the ParSNIP latent space
+Figure 16. AUC for classification of SNe Ia as a function
+of redshift for both the ParSNIP model (shown in blue) and           are different from those of the transients in the labeled
+Avocado model (shown in orange) on the PLAsTiCC dataset.             subset. Note that this approach cannot be used with
+The ParSNIP model outperforms the Avocado model at all               most previously-used feature extraction methods be-
+redshifts.                                                           cause their features are correlated with properties of the
+                                                                     observations such as redshift.
+light curves. The Avocado model attempts to augment                     We demonstrate this approach on the PLAsTiCC
+the training dataset by simulating light curves at red-              dataset. The authors of the PLAsTiCC dataset included
+shifts that are more representative of the full dataset,             several different kinds of transients in the full PLAs-
+but struggles to produce good simulations of very low                TiCC dataset that were not present in the labeled train-
+redshift transients because light curves at those redshifts          ing set, including pair-instability supernovae (PISN), in-
+are much higher signal-to-noise than most of the light               termediate luminosity optical transients (ILOT), and
+curves in the training set. Fundamentally, the Avocado               calcium-rich transients (CaRT) (Kessler et al. 2019).
+augmentation process must be heavily tuned for each                  As can be seen in Figure 6, the PISNe and ILOTs are
+dataset that it is applied to in order to minimize differ-           well-separated from all other kinds of transients in the
+ences between the training and test sets.                            ParSNIP latent space. We generate an augmented ver-
+   In contrast, the ParSNIP model builds a redshift-                 sion of the PLAsTiCC training set with 100 realizations
+independent representation of light curves from the                  of each light curve following the procedure described in
+full dataset, and is mostly agnostic to differences in               Section 3.9 to cover a wide range of different observ-
+the redshift distributions between the training and full             ing conditions. For each transient in the full dataset,
+datasets. Other than definitions of the bandpasses, there            we then calculate the Euclidean distance between the
+are no instrument-specific elements of the ParSNIP                   ParSNIP intrinsic latent variables si of that transient
+model. The same ParSNIP model was able to fit both                   and the nearest transient in the augmented training
+the PLAsTiCC and PS1 datasets. We find that the                      dataset. This distance measure can be interpreted as a
+ParSNIP model has good performance at all redshifts                  novelty score, where transients with large distances are
+without the need for procedures such as redshift aug-                very different from all of the transients in the training
+mentation.                                                           set.
+                                                                        Of the top 100 transients ranked by this novelty score,
+                   5.4. Detecting Novel Transients                   87 are ILOTs and 3 are PISNe, meaning that 90% of the
+                                                                     transients in this sample of “novel transients” are in fact
+   Upcoming surveys such as LSST will produce samples
+                                                                     a new kind of transient that isn’t present in the labeled
+of transients that are more than two orders of magni-
+                                                                     training set. For comparison, Villar et al. (2021) use
+tude larger than current samples, and could contain en-
+                                                                     an isolation forest on the same dataset. They obtain
+tirely new kinds of “novel” transients that have never
+                                                                     a sample of rare transients that is 95% pure according
+been previously observed. Previous work on detect-
+                                                                     to their definition, but the vast majority of these rare
+ing novel transients has typically focused on identifying
+                                                                     transients are superluminous supernovae, examples of
+transients that are in some way different from the bulk
+                                                                     which are available in the training set, and only < 5% of
+of the sample (Pruzhinskaya et al. 2019; Ishida et al.
+                                                                     the transients in their sample come from the types that
+2019; Martı́nez-Galarza et al. 2021; Villar et al. 2021)
+                                                                     are not included in the training dataset. We stress that
+without considering what was previously known about
+                         ParSNIP: Generative Models of Transient Light Curves                                       21
+
+these are two entirely different approaches to anomaly       of PS1 SNe Ia with good SALT2 fits described in Sec-
+detection. Which one is more applicable will depend          tion 4.3. We use Chauvenet’s criterion to reject SNe Ia
+on the science goals of a given project. However, the        that are large outliers for either model which removes
+ParSNIP representation enables alternative approaches        8 of the 265 SNe Ia in our sample. For the same set
+to anomaly detection that can take prior knowledge into      of SNe Ia, we find that the RMS of the SALT2 dis-
+account.                                                     tance estimates is 0.155±0.008 mag and the RMS of the
+   The methodology that we demonstrated here is very         ParSNIP distance estimates is 0.150 ± 0.007 mag. When
+simple, and we only considered the intrinsic ParSNIP         looking at only the core of the distribution, we find that
+representation. More advanced techniques could also          ParSNIP is able to estimate distances with an NMAD
+take advantage of luminosity, color, and redshift infor-     of 0.126 ± 0.009 mag compared to 0.139 ± 0.011 mag
+mation or even additional information such as properties     for SALT2. Hence, the ParSNIP model can be used to
+of the host galaxies. They could also look at the density    estimate accurate distances to SNe Ia, and it performs
+of transients in each of the training and full datasets.     slightly better than the SALT2 model for distance esti-
+In practice, the detection of novel transients should in-    mation on this sample of SNe Ia.
+volve a feedback loop where resources are dedicated to          One important caveat is that precision cosmology
+followup candidates, and where these are then added          analyses require a thorough understanding of light curve
+back into the training set. This form of “active learn-      modeling uncertainties to avoid biases. SALT2 includes
+ing” is discussed in detail in Ishida et al. (2019) and an   an explicit description of the model covariance at every
+application to isolation forests for anomaly detection is    time/wavelength that can be used to identify regions
+discussed in Ishida et al. (2021). The ParSNIP model         of the spectrum where the model is unreliable, such as
+is ideally suited to being used with these techniques. It    the UV/IR as seen in Figure 10. The ParSNIP model
+extracts a robust representation of transients in an un-     uncertainties for Type Ia supernova light curves should
+supervised manner, so it can be trained on unlabeled         be thoroughly investigated and understood before using
+datasets containing novel transients. Furthermore, the       ParSNIP in precision cosmology analyses.
+representation only consists of a small number of pa-
+rameters, so it is very computationally efficient to use                         6. DISCUSSION
+the ParSNIP representation instead of other feature ex-
+                                                                        6.1. Computational Requirements
+traction methods that can produce tens or hundreds of
+features.                                                       All of the training and inference in this work was done
+                                                             using an NVIDIA GeForce RTX 2080 Ti GPU. Train-
+         5.5. Estimating Distances to SNe Ia                 ing a new model takes approximately 2 hours for the
+   One major application of the SALT2 model is esti-         PS1 dataset and 23 hours for the PLAsTiCC dataset.
+mating distances to transients. As a similar generative      The training time could also be decreased significantly
+model, the ParSNIP model can also be used for dis-           by adjusting the learning rate scheduler without hav-
+tance estimation. SALT2 and ParSNIP both estimate            ing a major impact on model performance. Inference
+the brightnesses of transients relative to some arbitrary    takes approximately 11 seconds for the PS1 dataset or
+zeropoint that can vary over the latent space. By sub-       2 hours for the full PLAsTiCC dataset of over 3 mil-
+tracting off the zeropoint, we obtain a distance estimate.   lion light curves. The model can also be trained and
+For SALT2, the zeropoint is typically modelled using a       evaluated on a CPU. When running on 8 cores of an
+linear function of the SALT2 x1 and c parameters re-         AMD Ryzen Threadripper 3970X, we find that the per-
+sulting in the following model for estimating distances      formance is roughly 6 times slower than the numbers
+                                                             quoted previously for the GPU.
+                µSALT2 = M + αx1 + βc                (25)       These computational times are not prohibitive even
+                                                             for large surveys such as LSST. With a single GPU, the
+For ParSNIP, we use a similar model with linear correc-
+                                                             ParSNIP model could be retrained on a near nightly
+tions for all of the intrinsic latent variables
+                                                             basis and used to perform inference on the entire dataset
+     µParSNIP = M + α1 s1 + α2 s2 + α3 s3 + βc       (26)    of LSST light curves. We can perform inference at a rate
+                                                             of approximately 500 LSST light curves per second with
+  We fit for the values of M , αi and β in both of these     a single GPU, so inference could easily be performed live
+models by comparing the estimated distance moduli to         on the LSST alert stream.
+the distance moduli from the corresponding redshifts us-
+ing the cosmological parameters from Planck Collabo-
+                                                               6.2. Supernova Cosmology Without Classification
+ration et al. (2020). In both cases, we use the sample
+22                                                             Boone
+
+   As discussed in Section 5.1, surveys such as LSST              covered intrinsic representation coordinates change with
+will rely on photometric classification to identify sam-          an RMS of 0.20, 0.10, and 0.11 for s1 , s2 , and s3 re-
+ples of SNe Ia. Previous cosmological analyses with               spectively. These differences are negligible for applica-
+photometrically-classified SNe Ia have used one model             tions such as photometric classification. Photometric
+to identify whether a transient is an SN Ia, and a sec-           redshifts could therefore likely be used directly as in-
+ond model to estimate the distance to that transient              puts to a pretrained ParSNIP model without a signifi-
+assuming that it is an SN Ia (Hlozek et al. 2012; Jones           cant degradation in performance.
+et al. 2018). As a result, the distance estimates for any
+non SNe Ia that leak into the sample are heavily biased.                        6.4. Latent Variable Priors
+   The ParSNIP model can be used both for classifying               The ParSNIP model learns priors on the intrinsic la-
+transients (as discussed in Section 5.1 and estimating            tent variables, but we assumed fixed weak priors on
+distances (as discussed in Section 5.5), so these two steps       the explicitly-modeled latent variables. We made this
+could be done simultaneously in a supernova cosmology             assumption because the light curve datasets that the
+analysis. As part of the cosmology fit, one would fit for         model was trained on are highly biased. Astronomi-
+the distance modulus zeropoint across the ParSNIP la-             cal surveys have some limiting magnitude beyond which
+tent representation as we did for the SN Ia subset in Sec-        they will not detect transients, so the populations of ob-
+tion 5.5. Fitting distances to all transients will require        served transients are biased towards brighter, bluer, and
+a more complex zeropoint model than the simple linear             lower-redshift transients. By using a fixed weak prior,
+one that we used for SNe Ia because some transients               we make no assumptions about these biases and they
+have much larger ranges of dispersion in luminosity.              can be corrected for in further analyses if necessary.
+   Given such a zeropoint model, distances estimates to             The explicitly-modeled latent variables tend to be very
+individual transients could be obtained by marginal-              well constrained. For the PS1 dataset, the median pos-
+izing over the latent representation using the poste-             terior uncertainty on the reference time is 0.7 days com-
+rior distribution from the ParSNIP model. This pro-               pared to the prior of 20 days, the median uncertainty
+cedure would effectively marginalize over all of the dif-         on the color is 0.049 compared to the prior of 0.3, and
+ferent kinds of transients that each light curve is com-          the median uncertainty on the amplitude is 3%. All of
+patible with, and would estimate distances to all tran-           these variables are well constrained even for low signal-
+sients, not just SNe Ia. This procedure would reduce              to-noise light curves, so the choice of prior has minimal
+many of the biases present in current cosmology analyses          impact on the posterior distributions. Applications such
+with photometrically-classified supernovae because it es-         as photometric classification or distance estimation only
+timates distances to non-SNe Ia using a model trained on          depend on the posterior distributions, so they will not
+those transients rather than a model trained on SNe Ia.           be significantly impacted by different choices of the prior
+We plan on developing such a model in future work.                distribution.
+                                                                    Simulating new light curves from the ParSNIP model
+               6.3. Photometric Redshifts                         is one application that does require knowledge of the
+   The current implementation of the ParSNIP model re-            prior distributions of the explicitly-modeled latent vari-
+lies on spectroscopic redshifts. These redshifts will not         ables. These prior distributions could be estimated di-
+be available for all transients, and this is especially true      rectly from a large dataset of light curves by explicitly
+when surveys are in progress. In principle, the redshift          modeling the selection functions, although this would be
+could be treated as an additional explicitly-modeled la-          very challenging. Alternatively, the prior distributions
+tent variable in the VAE. Upcoming experiments such               can simply be estimated from theoretical or empirical
+as the Rubin Observatory or the Roman Space Tele-                 models as was done for the PLAsTiCC simulations.
+scope will have photometric redshift models for the host
+galaxies of most of the transients they observe, and these                    6.5. Latent Variable Posteriors
+could be used as a prior for the VAE. This kind of anal-            The decoder of the ParSNIP model is a generative
+ysis would rely on understanding the posteriors of the            model with a well-defined likelihood. The encoder model
+photometric redshift models and would have to be tuned            uses variational inference to approximate the posterior
+to specific experiments.                                          distribution over the latent variables for a given light
+   We also find that the encoder is not very sensitive to         curve, but it is also possible to evaluate this posterior
+changes in the input redshift. We performed inference             distribution directly. In particular, optimizers can be
+on the PS1 dataset with noise added to all of the input           used to find the maximum-a-posteriori values of the la-
+redshifts with a standard deviation of 0.05 mag. The re-          tent variables for a given light curve, and techniques
+                         ParSNIP: Generative Models of Transient Light Curves                                      23
+
+such as Markov chain Monte Carlo (MCMC) can be used          curves (e.g. not subtracting the background for variable
+to sample from the posterior distribution directly. These    stars).
+approaches are currently used in supernova cosmology
+analyses with models such as SALT2, and provide much         6.7. Including Additional Observations in the Training
+more detailed information about the posteriors but tend         In this work we assumed that we only have photom-
+to be very computationally intensive. We added an in-        etry available for all of the light curves in our sample.
+terface for the ParSNIP model to the SNCosmo package         Large spectroscopic followup campaigns are planned for
+(Barbary et al. 2016) that implements several methods        most upcoming surveys. As an example, the 4MOST
+of fitting light curves and evaluating posteriors.           consortium projects that they will obtain 30,000 spec-
+   When training ParSNIP model using variational infer-      tra of live transients (Swann et al. 2019). These spec-
+ence, we assumed that the posterior of the latent vari-      tra could be used to train the ParSNIP model. The
+ables can be described by a Gaussian distribution with       ParSNIP model already predicts the spectra at every
+a diagonal covariance matrix. To test this assumption,       phase when the model is compared to photometry, and
+we used the emcee (Foreman-Mackey et al. 2013) imple-        these model spectra could instead be compared to ob-
+mentation of MCMC in SNCosmo to draw a large number          served spectra directly.
+of samples from the posterior distributions of individual       When trained only on photometry, the ParSNIP
+light curves. An example of the sampled posterior dis-       model is required to learn spectra by deconvolving the
+tribution for a typical light curve from the PLAsTiCC        photometry. Including spectra of even a subset of
+dataset is shown in Figure 17.                               the transients would constrain the underlying spectral
+   We find that the posterior distributions over the la-     model. This would be especially helpful for rare tran-
+tent variables other than amplitude are typically well-      sients, such as PS1-12baa discussed in Section 4.4, where
+described by a Gaussian distribution with a diagonal co-     there is limited photometry of similar transients to con-
+variance matrix, and the predicted means and standard        strain the positions and widths of spectral features.
+deviations that we obtain from variational inference are        Additional followup photometry in different bands
+generally consistent with the true posterior distribu-       could similarly be included to constrain the model at
+tions. This statement holds even for light curves that are   wavelengths where spectral coverage is typically lack-
+only partially sampled, and we do not see any evidence       ing, especially the UV and IR bands. Including a mod-
+of multi-modal posterior distributions. The amplitude        est amount of IR photometry in the ParSNIP training
+and color latent variables are always highly correlated      dataset would allow ParSNIP to learn a coarse IR spec-
+which justifies our decision to marginalize over the am-     tral model. Such models only currently exist for Type Ia
+plitude as described in Section 3.7. In general, we find     supernovae, but are essential for simulating and plan-
+that the posteriors estimated by variational inference are   ning upcoming experiments such as the Roman Space
+reasonably accurate, but it may be desirable to evalu-       Telescope.
+ate the full posteriors for applications such as supernova
+cosmology that require very high precision.                   6.8. Combining Light Curves from Multiple Surveys
+                                                                Transient light curves have been collected by many
+ 6.6. Applying the ParSNIP Model to Other Kinds of           different surveys, and the ParSNIP model could be im-
+                      Light Curves                           proved by training on a larger sample of light curves
+  The model described in this paper was designed to be       observed by different instruments. The neural network
+applied to short-lived transient light curves, and should    in the decoder of the ParSNIP model predicts spectra,
+not be applied to other kinds of light curves without        and we explicitly compute photometry from those spec-
+modifications. In particular, the preprocessing proce-       tra using the known bandpasses for an instrument. As
+dure described in Section 2.1 roughly aligns and scales      a result, the ParSNIP decoder can be used to predict
+all of the light curves assuming that they have a well-      the photometry for any instrument or bandpass without
+defined maximum. This is not a valid assumption for          any modification to the architecture or neural network
+sources such as variable stars or active galactic nuclei.    weights.
+We also subtract the background level of each light curve       The ParSNIP encoder, on the other hand, treats all
+using observations away from maximum light, and we           of the individual bandpasses separately. Nevertheless,
+constrain the model to only output positive flux val-        it can operate on multiple instruments by adding ad-
+ues. None of these assumptions are fundamental to the        ditional channels to the input representing the indi-
+ParSNIP model, and they should all be adjusted as ap-        vidual bandpasses from each instrument. For instru-
+propriate if applying the model to other kinds of light      ment/bandpass combinations in which a transient was
+24                                                                                                  Boone
+
+
+
+
+                             1e 19
+                       3.2
+           Amplitude
+                       2.4
+                       1.6
+                       0.8
+                       0.2
+                       0.1
+           Color
+                       0.0
+                       0.1
+                       0.2
+                       1.6
+                       1.2
+           s1
+                       0.8
+                       0.4
+                       0.0
+                       2
+                       1
+           s2
+
+                       0
+                       1
+                       2
+                       3.0
+                       1.5
+           s3
+                       0.0
+                       1.5
+
+                             4.0
+                                     5.5
+                                           7.0
+                                                 8.5
+
+                                                         0.8
+
+                                                               1.6
+
+                                                                     2.4
+
+                                                                            3.2
+
+                                                                                    0.2
+                                                                                          0.1
+                                                                                          0.0
+                                                                                                   0.1
+                                                                                                         0.2
+                                                                                                               0.0
+                                                                                                                     0.4
+                                                                                                                           0.8
+                                                                                                                                 1.2
+                                                                                                                                       1.6
+                                                                                                                                             2
+                                                                                                                                                 1
+                                                                                                                                                     0
+                                                                                                                                                          1
+                                                                                                                                                              2
+
+
+                                                                                                                                                                  1.5
+                                                                                                                                                                  0.0
+
+                                                                                                                                                                         1.5
+
+                                                                                                                                                                               3.0
+                                              +6.057e4                      1e 19
+                                   Reference Time               Amplitude                  Color                            s1                       s2             s3
+
+
+Figure 17. Example of the posterior distributions of the latent variables in the ParSNIP model for a typical light curve in the
+PLAsTiCC dataset, sampled with MCMC. Each panel shows the distribution for two different latent variables, and the diagonal
+panels show the histograms of individual latent variables.
+
+not observed, we input zero at all times. With this ap-                                                            The ParSNIP model developed in this work is a novel
+proach, the model can be trained simultaneously on light                                                        generative model that describes how the spectra of tran-
+curves from different surveys to produce a single latent                                                        sients evolve over time. This model combines both a
+representation and decoder model that can be applied                                                            neural network to describe the intrinsic diversity of tran-
+to all surveys. We tested this approach by training the                                                         sients and an explicit physics model of how light from
+ParSNIP model simultaneously on the PS1 and PLAs-                                                               transients propagates through the universe and is ob-
+TiCC datasets. We found that the resulting model had                                                            served. It can be trained using only a large dataset of
+a similar performance to the models trained on the in-                                                          light curves without requiring spectra or labels.
+dividual datasets, and transients with the same label                                                              We demonstrated the effectiveness of our model both
+in both datasets are encoded at similar locations in the                                                        on both real (PS1) and simulated (PLAsTiCC) data.
+intrinsic representation.                                                                                       With a three-parameter intrinsic representation, we are
+                                                                                                                able to reproduce out-of-sample light curves with model
+                                                                                                                uncertainties of ∼0.06 mag for the PS1 dataset and
+                               7. CONCLUSIONS                                                                   ∼0.04 mag for the PLAsTiCC dataset. We also find
+                           ParSNIP: Generative Models of Transient Light Curves                                             25
+
+that we are able to accurately predict the spectra of                          ACKNOWLEDGMENTS
+the transients despite only training on photometry. The
+ParSNIP model can estimate the distances to well-                We thank Andrew Connolly, Kara Ponder, Stephen
+observed light curves of SNe Ia with an uncertainty of         Portillo, John Franklin Crenshaw, Greg Aldering, Saul
+0.150 ± 0.007 mag compared to 0.155 ± 0.008 mag for            Perlmutter, and the anonymous referee for valuable feed-
+the SALT2 model on the same sample of SNe Ia.                  back and discussions. K. B. acknowledges support from
+  Our model achieves state-of-the-art results for photo-       the DiRAC Institute in the Department of Astronomy
+metric classification. It produces an intrinsic representa-    at the University of Washington. The DiRAC Institute
+tion that is independent of redshift, which means that it      is supported through generous gifts from the Charles
+not highly sensitive to the biases in training sets that are   and Lisa Simonyi Fund for Arts and Sciences, and the
+a major challenge for other methods. For classification        Washington Research Foundation.
+of SNe Ia, the ParSNIP model produces a sample that              The Pan-STARRS1 Surveys (PS1) and the PS1 public
+has 2 times less contamination compared to the Super-          science archive have been made possible through contri-
+RAENN model on the PS1 dataset, and 2.3 times less             butions by the Institute for Astronomy, the University
+contamination compared to the Avocado model on the             of Hawaii, the Pan-STARRS Project Office, the Max-
+PLAsTiCC dataset. The performance of the ParSNIP               Planck Society and its participating institutes, the Max
+model is stable across all redshifts and does not require      Planck Institute for Astronomy, Heidelberg and the Max
+the use of techniques such as redshift augmentation. Our       Planck Institute for Extraterrestrial Physics, Garching,
+model can also be used to detect novel transients. In a        The Johns Hopkins University, Durham University, the
+simulated dataset, of 100 novel transients suggested by        University of Edinburgh, the Queen’s University Belfast,
+our algorithm, 90% of them are a new kind of transient         the Harvard-Smithsonian Center for Astrophysics, the
+that had never previously been observed.                       Las Cumbres Observatory Global Telescope Network
+  All of the results in this paper can be reproduced with      Incorporated, the National Central University of Tai-
+the publicly available parsnip software package 1 . This       wan, the Space Telescope Science Institute, the National
+package contains instructions for how to access all of         Aeronautics and Space Administration under Grant No.
+the data that was used in our analyses. It also contains       NNX08AR22G issued through the Planetary Science Di-
+Jupyter notebooks that can be used to reproduce all of         vision of the NASA Science Mission Directorate, the
+the figures in this paper.                                     National Science Foundation Grant No. AST-1238877,
+                                                               the University of Maryland, Eotvos Lorand University
+                                                               (ELTE), the Los Alamos National Laboratory, and the
+                                                               Gordon and Betty Moore Foundation.
+
+
+                                                                 Facilities: PS1
+                                                                 Software: Astropy (Astropy Collaboration et al.
+                                                               2013, 2018), corner (Foreman-Mackey 2016), emcee
+                                                               (Foreman-Mackey et al. 2013), Extinction (Barbary
+                                                               2016) Jupyter (Kluyver et al. 2016), LightGBM (Ke
+                                                               et al. 2017), Matplotlib (Hunter 2007), NumPy (van der
+                                                               Walt et al. 2011), PyTorch (Paszke et al. 2019), scikit-
+                                                               learn (Pedregosa et al. 2011), SciPy (Jones et al. 2001),
+                                                               SNCosmo (Barbary et al. 2016)
+
+
+                                                        REFERENCES
+Alves, C. S., Peiris, H. V., Lochner, M., et al. 2021, arXiv   Astropy Collaboration, Robitaille, T. P., Tollerud, E. J.,
+                                                                 et al. 2013, A&A, 558, A33,
+  e-prints, arXiv:2107.07531.
+                                                                 doi: 10.1051/0004-6361/201322068
+  https://arxiv.org/abs/2107.07531                             Astropy Collaboration, Price-Whelan, A. M., Sipőcz, B. M.,
+                                                                 et al. 2018, AJ, 156, 123, doi: 10.3847/1538-3881/aabc4f
+                                                               Barbary, K. 2016, extinction v0.3.0, Zenodo,
+  1 https://doi.org/10.5281/zenodo.5493509
+                                                                 doi: 10.5281/zenodo.804967
+26                                                               Boone
+
+Barbary, K., Biswas, R., Goldstein, G., et al. 2016,                Hlozek, R., Kunz, M., Bassett, B., et al. 2012, ApJ, 752, 79,
+  sncosmo, Zenodo, doi: 10.5281/zenodo.592747                         doi: 10.1088/0004-637X/752/2/79
+Bazin, G., Palanque-Delabrouille, N., Rich, J., et al. 2009,        Hosseinzadeh, G., Dauphin, F., Villar, V. A., et al. 2020,
+  A&A, 499, 653, doi: 10.1051/0004-6361/200911847                     ApJ, 905, 93, doi: 10.3847/1538-4357/abc42b
+Beers, T. C., Flynn, K., & Gebhardt, K. 1990, AJ, 100, 32,          Hunter, J. D. 2007, Computing in Science & Engineering, 9,
+  doi: 10.1086/115487                                                 90, doi: 10.1109/MCSE.2007.55
+Bepler, T., Zhong, E., Kelley, K., Brignole, E., & Berger, B.       Ishida, E. E. O., Beck, R., González-Gaitán, S., et al. 2019,
+  2019, in Advances in Neural Information Processing                  MNRAS, 483, 2, doi: 10.1093/mnras/sty3015
+  Systems, ed. H. Wallach, H. Larochelle, A. Beygelzimer,           Ishida, E. E. O., Kornilov, M. V., Malanchev, K. L., et al.
+  F. d'Alché-Buc, E. Fox, & R. Garnett, Vol. 32 (Curran              2021, A&A, 650, A195,
+  Associates, Inc.). https://proceedings.neurips.cc/paper/            doi: 10.1051/0004-6361/202037709
+  2019/file/5a38a1eb24d99699159da10e71c45577-Paper.pdf              Ivezić, Ž., Kahn, S. M., Tyson, J. A., et al. 2019, ApJ, 873,
+Betoule, M., Kessler, R., Guy, J., et al. 2014, A&A, 568,             111, doi: 10.3847/1538-4357/ab042c
+  A22, doi: 10.1051/0004-6361/201423413                             Jones, D. O., Scolnic, D. M., Riess, A. G., et al. 2018, ApJ,
+Boone, K. 2019, AJ, 158, 257,                                         857, 51, doi: 10.3847/1538-4357/aab6b1
+  doi: 10.3847/1538-3881/ab5182                                     Jones, E., Oliphant, T., Peterson, P., et al. 2001, SciPy:
+Boone, K., Aldering, G., Antilogus, P., et al. 2021a, ApJ,            Open source scientific tools for Python.
+  912, 70, doi: 10.3847/1538-4357/abec3c                              http://www.scipy.org/
+—. 2021b, ApJ, 912, 71, doi: 10.3847/1538-4357/abec3b               Ke, G., Meng, Q., Finley, T., et al. 2017, in Advances in
+Chambers, K. C., Magnier, E. A., Metcalfe, N., et al. 2016,           Neural Information Processing Systems 30, ed. I. Guyon,
+  arXiv e-prints, arXiv:1612.05560.                                   U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus,
+  https://arxiv.org/abs/1612.05560                                    S. Vishwanathan, & R. Garnett (Curran Associates,
+Crenshaw, J. F., & Connolly, A. J. 2020, AJ, 160, 191,                Inc.), 3146–3154
+  doi: 10.3847/1538-3881/abb0e2                                     Kerzendorf, W. E., Vogl, C., Buchner, J., et al. 2021, ApJL,
+Fitzpatrick, E. L., & Massa, D. 2007, ApJ, 663, 320,                  910, L23, doi: 10.3847/2041-8213/abeb1b
+  doi: 10.1086/518158                                               Kessler, R., Narayan, G., Avelino, A., et al. 2019, PASP,
+Foreman-Mackey, D. 2016, The Journal of Open Source                   131, 094501, doi: 10.1088/1538-3873/ab26f1
+  Software, 1, 24, doi: 10.21105/joss.00024                         Kingma, D. P., & Ba, J. 2015, in 3rd International
+Foreman-Mackey, D., Hogg, D. W., Lang, D., & Goodman,                 Conference on Learning Representations, ICLR 2015, San
+  J. 2013, PASP, 125, 306, doi: 10.1086/670067                        Diego, CA, USA, May 7-9, 2015, Conference Track
+Graziani, R., Rigault, M., Regnault, N., et al. 2020, arXiv           Proceedings, ed. Y. Bengio & Y. LeCun.
+  e-prints, arXiv:2001.09095.                                         http://arxiv.org/abs/1412.6980
+  https://arxiv.org/abs/2001.09095                                  Kingma, D. P., & Welling, M. 2014, in 2nd International
+Guillochon, J., Nicholl, M., Villar, V. A., et al. 2018, ApJS,        Conference on Learning Representations, ICLR 2014,
+  236, 6, doi: 10.3847/1538-4365/aab761                               Banff, AB, Canada, April 14-16, 2014, Conference Track
+Guillochon, J., Parrent, J., Kelley, L. Z., & Margutti, R.            Proceedings, ed. Y. Bengio & Y. LeCun.
+  2017, ApJ, 835, 64, doi: 10.3847/1538-4357/835/1/64                 http://arxiv.org/abs/1312.6114
+Guy, J., Astier, P., Baumont, S., et al. 2007, A&A, 466, 11,        Kluyver, T., Ragan-Kelley, B., Pérez, F., et al. 2016, in
+  doi: 10.1051/0004-6361:20066930                                     Positioning and Power in Academic Publishing: Players,
+He, K., Zhang, X., Ren, S., & Sun, J. 2016, in 2016 IEEE              Agents and Agendas, ed. F. Loizides & B. Schmidt, IOS
+  Conference on Computer Vision and Pattern Recognition               Press, 87 – 90
+  (CVPR), 770–778, doi: 10.1109/CVPR.2016.90                        Kulkarni, T. D., Whitney, W. F., Kohli, P., & Tenenbaum,
+Higgins, I., Matthey, L., Pal, A., et al. 2017, in 5th                J. 2015, in Advances in Neural Information Processing
+  International Conference on Learning Representations,               Systems, ed. C. Cortes, N. Lawrence, D. Lee,
+  ICLR 2017, Toulon, France, April 24-26, 2017,                       M. Sugiyama, & R. Garnett, Vol. 28 (Curran Associates,
+  Conference Track Proceedings (OpenReview.net).                      Inc.). https://proceedings.neurips.cc/paper/2015/file/
+  https://openreview.net/forum?id=Sy2fzU9gl                           ced556cd9f9c0c8315cfbe0744a3baf0-Paper.pdf
+Hložek, R., Ponder, K. A., Malz, A. I., et al. 2020, arXiv         Kullback, S., & Leibler, R. A. 1951, The Annals of
+  e-prints, arXiv:2012.12392.                                         Mathematical Statistics, 22, 79 ,
+  https://arxiv.org/abs/2012.12392                                    doi: 10.1214/aoms/1177729694
+                           ParSNIP: Generative Models of Transient Light Curves                                             27
+
+Léget, P. F., Gangler, E., Mondon, F., et al. 2020, A&A,        Planck Collaboration, Aghanim, N., Akrami, Y., et al.
+   636, A46, doi: 10.1051/0004-6361/201834954                      2020, A&A, 641, A6, doi: 10.1051/0004-6361/201833910
+Lochner, M., McEwen, J. D., Peiris, H. V., Lahav, O., &          Pruzhinskaya, M. V., Malanchev, K. L., Kornilov, M. V.,
+  Winter, M. K. 2016, ApJS, 225, 31,                               et al. 2019, MNRAS, 489, 3591,
+  doi: 10.3847/0067-0049/225/2/31                                  doi: 10.1093/mnras/stz2362
+LSST Science Collaboration, Abell, P. A., Allison, J., et al.    Sanders, N. E., Betancourt, M., & Soderberg, A. M. 2015,
+  2009, arXiv e-prints, arXiv:0912.0201.                           ApJ, 800, 36, doi: 10.1088/0004-637X/800/1/36
+  https://arxiv.org/abs/0912.0201                                Saunders, C., Aldering, G., Antilogus, P., et al. 2018, ApJ,
+                                                                   869, 167, doi: 10.3847/1538-4357/aaec7e
+Malz, A. I., Hložek, R., Allam, T., J., et al. 2019, AJ, 158,
+                                                                 Schlafly, E. F., & Finkbeiner, D. P. 2011, ApJ, 737, 103,
+ 171, doi: 10.3847/1538-3881/ab3a2f
+                                                                   doi: 10.1088/0004-637X/737/2/103
+Mandel, K. S., Thorp, S., Narayan, G., Friedman, A. S., &
+                                                                 Scolnic, D. M., Jones, D. O., Rest, A., et al. 2018, ApJ,
+ Avelino, A. 2020, arXiv e-prints, arXiv:2008.07538.
+                                                                   859, 101, doi: 10.3847/1538-4357/aab9bb
+ https://arxiv.org/abs/2008.07538
+                                                                 Scovacricchi, D., Nichol, R. C., Bacon, D., Sullivan, M., &
+Martı́nez-Galarza, J. R., Bianco, F. B., Crake, D., et al.
+                                                                   Prajs, S. 2016, MNRAS, 456, 1700,
+ 2021, MNRAS, doi: 10.1093/mnras/stab2588
+                                                                   doi: 10.1093/mnras/stv2752
+Martı́nez-Palomera, J., Bloom, J. S., & Abrahams, E. S.
+                                                                 Shivvers, I., Filippenko, A. V., Silverman, J. M., et al.
+ 2020, arXiv e-prints, arXiv:2005.07773.
+                                                                   2019, MNRAS, 482, 1545, doi: 10.1093/mnras/sty2719
+ https://arxiv.org/abs/2005.07773
+                                                                 Smartt, S. J., Valenti, S., Fraser, M., et al. 2015, A&A, 579,
+Möller, A., & de Boissière, T. 2020, MNRAS, 491, 4277,           A40, doi: 10.1051/0004-6361/201425237
+ doi: 10.1093/mnras/stz3312                                      Spergel, D., Gehrels, N., Baltay, C., et al. 2015, arXiv
+Muthukrishna, D., Narayan, G., Mandel, K. S., Biswas, R.,          e-prints, arXiv:1503.03757.
+ & Hložek, R. 2019, PASP, 131, 118002,                            https://arxiv.org/abs/1503.03757
+ doi: 10.1088/1538-3873/ab1609                                   Swann, E., Sullivan, M., Carrick, J., et al. 2019, The
+Naul, B., Bloom, J. S., Pérez, F., & van der Walt, S. 2018,       Messenger, 175, 58, doi: 10.18727/0722-6691/5129
+  Nature Astronomy, 2, 151,                                      Tschannen, M., Bachem, O., & Lucic, M. 2018, arXiv
+  doi: 10.1038/s41550-017-0321-z                                   e-prints, arXiv:1812.05069.
+Pasquet, J., Pasquet, J., Chaumont, M., & Fouchez, D.              https://arxiv.org/abs/1812.05069
+  2019, A&A, 627, A21, doi: 10.1051/0004-6361/201834473          van der Walt, S., Colbert, S. C., & Varoquaux, G. 2011,
+Paszke, A., Gross, S., Massa, F., et al. 2019, in Advances in      Computing in Science and Engineering, 13, 22,
+  Neural Information Processing Systems, ed. H. Wallach,           doi: 10.1109/MCSE.2011.37
+  H. Larochelle, A. Beygelzimer, F. d'Alché-Buc, E. Fox, &      Villar, V. A., Cranmer, M., Berger, E., et al. 2021, ApJS,
+  R. Garnett, Vol. 32 (Curran Associates, Inc.).                   255, 24, doi: 10.3847/1538-4365/ac0893
+  https://proceedings.neurips.cc/paper/2019/file/                Villar, V. A., Nicholl, M., & Berger, E. 2018, ApJ, 869, 166,
+                                                                   doi: 10.3847/1538-4357/aaee6a
+  bdbca288fee7f92f2bfa9f7012727740-Paper.pdf
+                                                                 Villar, V. A., Hosseinzadeh, G., Berger, E., et al. 2020,
+Pedregosa, F., Varoquaux, G., Gramfort, A., et al. 2011,
+                                                                   ApJ, 905, 94, doi: 10.3847/1538-4357/abc6fd
+  Journal of Machine Learning Research, 12, 2825
+
