@@ -1,0 +1,49 @@
+{
+ "banner": "PRE-RATIFICATION PILOT (harness check only); not a score record",
+ "graded_utc": "2026-09-17T18:15:06.309602+00:00",
+ "protocol_sha256": "ef58005482a049e5d58131267b0758ab0bfae3bb1c674650d6302f545fa709bc",
+ "forward_models_sha256": "302586fd569997382bd9d46a564722c0d91410a79cad6ebef556a665d677d36f",
+ "grade_py_sha256": "52f12faa901225c22090743783158fdac20bbbe4d42e973c1e4b1905a15e10b5",
+ "item_id": "CTRL-SALT3",
+ "item_meta_sha256": "0418900b7bfef7b616c9f299bbe88dabe2c15d3557c113e099d3a5d045f296cf",
+ "held_out_sha256": "5735583904f2b0146a0cd9c1abca5d76d04c261dca48dfc8a75092ab39e12958",
+ "submission_path": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/tool_cards/controls/items/CTRL-SALT3/subs/perturbed.json",
+ "submission_sha256": "b67be11a4f622443a967d7790f00c8f188e10d6aef699ea338ca00dc5f1a412d",
+ "family": "SALT3",
+ "parameters": {
+  "z": 0.05000000005000001,
+  "t0": 59800.000000001,
+  "x0": 0.0012000000012,
+  "x1": 0.5000000005,
+  "c": 0.05000000005000001
+ },
+ "rejected_rivals_families": [
+  "Bazin"
+ ],
+ "asset_hashes": {
+  "salt3/salt3_color_correction.dat": "92caf54c0adedb6aa95add602022508cac4ee99324668686c94769103da9339b",
+  "salt3/salt3_color_dispersion.dat": "537a2807a1d0ac923630a5461901596ab1fe61cfda3640e21eb8d92e0c99f2bc",
+  "salt3/salt3_lc_covariance_01.dat": "58dade9a3480304567c1df10000d806d50e5ab863bbb6e5f4f1a432ebecf7f51",
+  "salt3/salt3_lc_variance_0.dat": "3637f1093732a15ac1254ccefdd304e46740228407649bd36b6cb330d6fa8e8b",
+  "salt3/salt3_lc_variance_1.dat": "b5267e57b7c8cc11b76b1ddfa4fb723a74183995f0f914331a188ff1e74ee75b",
+  "salt3/salt3_template_0.dat": "f09df51e2567a9b4e00c4846723c7b640dcbda06a4bc2f0d4bc559915f334813",
+  "salt3/salt3_template_1.dat": "46a11e7c9915159496741599b3f55c2eda98c2058aec32e8300281bc1eab3bf9"
+ },
+ "bands_excluded_lt5": {},
+ "status": "SCORED",
+ "S": 0.5317033832262894,
+ "Q": 0.6528679187831127,
+ "per_band": {
+  "ztfg": {
+   "N": 13,
+   "chi2_per_point": 0.4875676922224739,
+   "median_abs_resid": 0.7486323263148615
+  },
+  "ztfr": {
+   "N": 14,
+   "chi2_per_point": 0.5758390742301049,
+   "median_abs_resid": 0.42430963621433415
+  }
+ },
+ "diagnostic_pre_cut_chi2_per_point": 0.03752565702300441
+}

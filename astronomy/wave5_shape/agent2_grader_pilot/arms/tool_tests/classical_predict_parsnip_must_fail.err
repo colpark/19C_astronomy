@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/arms/tools/classical/predict.py", line 41, in <module>
+    main()
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/arms/tools/classical/predict.py", line 30, in main
+    out = {"family": fam, "parameters": params, "pre_cut_chi2_per_point": tk.pre_cut_chi2(m, fam, params, det, meta),
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/arms/tools/classical/_toolkit.py", line 36, in pre_cut_chi2
+    pred = m.predict(family, params, det.mjd.values, det.band.values, meta["mwebv"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/arms/tools/classical/forward_models.py", line 156, in predict
+    m = self.sn_model(family, mwebv)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/arms/tools/classical/forward_models.py", line 136, in sn_model
+    src = self._salt3() if family == "SALT3" else self._parsnip()
+                                                  ^^^^^^^^^^^^^^^
+  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/arms/tools/classical/forward_models.py", line 111, in _parsnip
+    raise AssetError("ParSNIP assets not supplied to this toolset")
+forward_models.AssetError: ParSNIP assets not supplied to this toolset

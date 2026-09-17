@@ -1,0 +1,106 @@
+{
+ "family": "Bazin",
+ "parameters": {
+  "ztfg": {
+   "A": 849.6248362975778,
+   "t0": 59791.071840574645,
+   "tau_rise": 3.0605284753987694,
+   "tau_fall": 22.604123994978547,
+   "B": -18.00253958687652
+  },
+  "ztfr": {
+   "A": 956.6841491326038,
+   "t0": 59792.92566081285,
+   "tau_rise": 3.455657989997356,
+   "tau_fall": 45.17637976855117,
+   "B": 18.309740490455763
+  }
+ },
+ "fit": {
+  "ztfg": {
+   "n_points": 3,
+   "status": 3,
+   "message": "`xtol` termination condition is satisfied.",
+   "nfev": 66,
+   "p0": {
+    "A": 777.1051425,
+    "t0": 59788.876377,
+    "tau_rise": 3.0,
+    "tau_fall": 20.0,
+    "B": 0.0
+   },
+   "bounds": {
+    "A": [
+     0.0,
+     Infinity
+    ],
+    "t0": [
+     -Infinity,
+     Infinity
+    ],
+    "tau_rise": [
+     0.001,
+     500.0
+    ],
+    "tau_fall": [
+     0.001,
+     500.0
+    ],
+    "B": [
+     -Infinity,
+     Infinity
+    ]
+   },
+   "n_params_gt_n_points": true
+  },
+  "ztfr": {
+   "n_points": 3,
+   "status": 3,
+   "message": "`xtol` termination condition is satisfied.",
+   "nfev": 29,
+   "p0": {
+    "A": 814.7305934999999,
+    "t0": 59788.739047,
+    "tau_rise": 3.0,
+    "tau_fall": 20.0,
+    "B": 0.0
+   },
+   "bounds": {
+    "A": [
+     0.0,
+     Infinity
+    ],
+    "t0": [
+     -Infinity,
+     Infinity
+    ],
+    "tau_rise": [
+     0.001,
+     500.0
+    ],
+    "tau_fall": [
+     0.001,
+     500.0
+    ],
+    "B": [
+     -Infinity,
+     Infinity
+    ]
+   },
+   "n_params_gt_n_points": true
+  }
+ },
+ "pre_cut_chi2_per_point": {
+  "all": 5.74698407920385e-16,
+  "per_band": {
+   "ztfg": {
+    "N": 3,
+    "chi2_per_point": 1.1312553278768998e-15
+   },
+   "ztfr": {
+    "N": 3,
+    "chi2_per_point": 1.8141487963870107e-17
+   }
+  }
+ }
+}

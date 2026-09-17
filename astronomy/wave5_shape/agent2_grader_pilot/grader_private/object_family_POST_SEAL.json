@@ -1,0 +1,5 @@
+{"item_id": "PILOT-001", "ZTFID": "ZTF18aasyjhd", "IAUID": "SN2022lvm",
+ "bts_type_read_after_seal": "SN II", "bts_redshift_read_after_seal": 0.143,
+ "source": "astronomy/data/raw/ztf_bts_all_2026-09-16.csv sha256 61415979b75f96bcf2532439109b35f923c5fa1aadfacc5d6013235187ebe570, read after selection_SEALED.json",
+ "salt3_renderable_family": false,
+ "rule": "AM-2: SALT3 renders the SN Ia family only; type not starting with 'SN Ia' -> OUT_OF_SCOPE:NON_IA_OBJECT"}

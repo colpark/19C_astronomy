@@ -1,0 +1,14 @@
+{
+ "item_id": "PILOT-001",
+ "pre_cut_sha256": "0f6ab10dc266e6528cccc475a4d3877d12851c76567d5cade01c8944684e9e72",
+ "forward_models_sha256": "302586fd569997382bd9d46a564722c0d91410a79cad6ebef556a665d677d36f",
+ "fit_info": {
+  "success": true,
+  "message": "Minimization exited successfully.",
+  "ncall": 219,
+  "sncosmo_chisq": 5.902811721205095,
+  "ndof": 11
+ },
+ "pre_cut_chi2_per_point": 0.36892573257531847,
+ "submission_sha256": "b0371f50d3a6e27f1a9caad761fa1b1a0075be493cc7ba884924bc1ae1952126"
+}

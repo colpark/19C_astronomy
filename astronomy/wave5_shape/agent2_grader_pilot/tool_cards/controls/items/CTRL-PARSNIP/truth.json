@@ -1,0 +1,33 @@
+{
+ "truth": {
+  "family": "ParSNIP",
+  "parameters": {
+   "z": 0.05,
+   "t0": 59800.0,
+   "amplitude": 1.0462251590752956e-15,
+   "color": 0.0,
+   "s1": 0.0,
+   "s2": 0.0,
+   "s3": 0.0
+  },
+  "mwebv": 0.03,
+  "seed": 4015521879,
+  "n_visits": 54,
+  "n_detections": 54
+ },
+ "counts": {
+  "pre_cut_detections": {
+   "ztfg": 4,
+   "ztfr": 4
+  },
+  "held_out_detections": {
+   "ztfg": 13,
+   "ztfr": 14
+  }
+ },
+ "hashes": {
+  "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/tool_cards/controls/items/CTRL-PARSNIP/item/pre_cut.csv": "8c88fdd3b51ff44dbb0b07084a366c94b9c41c1d14cd96c67623cd339b2ac6d2",
+  "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/tool_cards/controls/items/CTRL-PARSNIP/item/item_meta.json": "595aecedee3e1600fb765064deaecda8bb34e3b84a02f3ff83870ebab1d52bd6",
+  "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/tool_cards/controls/items/CTRL-PARSNIP/grader_private/held_out.csv": "bdfcfd520f56c1330e61edff74e88b60e6276224a350012115b2c0aa75e02956"
+ }
+}

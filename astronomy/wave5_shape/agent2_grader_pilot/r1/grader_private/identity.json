@@ -1,0 +1,16 @@
+{
+ "truth": {
+  "family": "SALT3",
+  "parameters": {
+   "z": 0.05,
+   "t0": 59800.0,
+   "x0": 0.0012,
+   "x1": 0.5,
+   "c": 0.05
+  },
+  "mwebv": 0.03,
+  "seed": 4015521876,
+  "n_visits": 48,
+  "n_detections": 32
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "name": "G-PARAM: frozen Bazin / Villar parametric forward-model grader (numpy) for generate / inverse problem",
+ "role": "scorer",
+ "roles_all_from_code": [
+  "scorer (forward_models.bazin / villar via ForwardModels.predict, then score_points)",
+  "generator (same functions, used by arm parametric_fit.py and simulate.py)"
+ ],
+ "written_from": "code",
+ "code_pin": "grader_private/forward_models.py sha256 302586fd569997382bd9d46a564722c0d91410a79cad6ebef556a665d677d36f (functions bazin, villar, _clip); written this wave, no upstream package",
+ "quantity_returned": "Per band b, flux at ZP 25 AB. Bazin: A exp(-(t-t0)/tau_fall) / (1 + exp(-(t-t0)/tau_rise)) + B. Villar: t1 = t0+gamma, D = 1+exp(-(t-t0)/tau_rise); (A + beta (t-t0))/D for t<t1, (A + beta gamma) exp(-(t-t1)/tau_fall)/D for t>=t1; + B. Exponent arguments clipped to [-700, 700]. No dust, no redshift. Scored with the same S and Q as G-SALT3.",
+ "defining_paper": "Bazin et al. 2009, A&A 499, 653, arXiv:0904.1066 Eq. 1 (pdf sha256 8ad38cfc64fce32a92792f4288ae0d95ad622db3c093977900ef94317bb09635); Villar et al. 2019, ApJ 884, 83, arXiv:1905.07422 Eq. 1 and Table 1 (pdf sha256 9288e1ac9185e6d53738fe0ee9ddfffd0d77481d67033298c0cefeffd9418305). Both read at the equation and parameter table only.",
+ "accuracy_against_scored_measurement": "Synthetic only: Villar truth on CTRL-VILLAR S = 0.380, wrong set S = 115.3; best-available Bazin (fit to all CTRL-VILLAR detections) S = 0.379, wrong set S = 117.5. No real-data measurement.",
+ "what_it_is_not": "Not physical: parameters have no mapping to explosion energy, distance or class. Not a fitter. Not coupled across bands (g and r are independent curves, so colour is unconstrained). Not a Bayesian model: Villar's priors (Table 1) and white-noise scatter term are not applied; submitted values are evaluated as given within the domain tau_rise>0, tau_fall>0, gamma>=0.",
+ "conventions": [
+  "t and t0 in MJD",
+  "both bands required for either family",
+  "clip of exp arguments at +-700 is part of the frozen definition",
+  "same error floor, band minimum and coverage codes as G-SALT3"
+ ],
+ "served_checkpoint": {
+  "identifier": "grader_private/forward_models.py functions bazin, villar",
+  "pin": "sha256 302586fd569997382bd9d46a564722c0d91410a79cad6ebef556a665d677d36f",
+  "matches_adjudicating_composition": true
+ },
+ "substitution": null,
+ "disagreements": [
+  {
+   "topic": "Bazin rise sign",
+   "paper": "arXiv:0904.1066 Eq. 1 as extracted from the pdf text layer reads f(t) = A e^{-(t-t0)/tau_fall} / (1 + e^{(t-t0)/tau_rise}) + B, a positive exponent in the denominator, which gives a falling, not rising, early light curve",
+   "code": "denominator 1 + exp(-(t-t0)/tau_rise), the form used by later implementations (and the only one that rises); not reconciled, the paper's sign is recorded as stated"
+  },
+  {
+   "topic": "Villar baseline term",
+   "paper": "Villar 2019 Eq. 1 has no additive constant; Table 1 lists a seventh parameter c, 'Baseline Flux', prior U(-3sigma, 3sigma)",
+   "code": "baseline named B, added to both branches, unbounded"
+  },
+  {
+   "topic": "Villar parameter set",
+   "paper": "Eq. 1 is written in t1; the text reparameterises t1 -> gamma = t1 - t0 for fitting",
+   "code": "submission and evaluation use gamma; t1 is internal"
+  },
+  {
+   "topic": "Villar priors and likelihood",
+   "paper": "uniform priors (tau_rise U(0.01,50), tau_fall U(1,300), beta U(-Fmax/150, 0), gamma double Gaussian) and a white-noise scatter added in quadrature",
+   "code": "grader applies no priors and a 5% error floor instead of a fitted scatter; the arm tool parametric_fit.py uses bounds tau_rise [0.01,50], tau_fall [1,300], beta <= 0 (no -Fmax/150 floor), gamma [0,300]"
+  },
+  {
+   "topic": "Bazin parameter count",
+   "paper": "Villar 2019 describes Bazin 2009 as five free parameters",
+   "code": "five per band, ten per item; grader counts per band"
+  },
+  {
+   "topic": "must-not-fire control specification",
+   "paper": "controls_spec_PRE_RUN.md p(1+1e-9) on every parameter",
+   "code": "t0 relative perturbation moved S by 5.3e-6 (Villar) and 1.6e-6 (Bazin) > tol 1e-6 at v1; AM-1 amended; v2 deltas 1.25e-08 and 1.18e-10 (PASS)"
+  }
+ ],
+ "construct_validity_I4": {
+  "question": "Does the held-out residual measure what the program scores?",
+  "scored_quantity": "generate / inverse problem: the predictive adequacy of a submitted forward model (family + parameters) for photometry the arm never saw, i.e. the oracle's verdict on whether the generated object meets the constraint 'reproduces the later light curve' (shape.md A3 row for generate).",
+  "ruling": "PASS for predictive fit on held-out ZTF g/r difference photometry in (t_first+10, t_first+60] d. FAIL as a measure of physical truth (true class, true redshift, true explosion physics): no term in S depends on whether the parameters are physically correct, only on whether the forward model reproduces the later fluxes. Any program claim must be worded as predictive fit, never as correct physical inference.",
+  "weaknesses": [
+   "Degeneracy: physically wrong parameters (wrong z with compensating x0/x1/c, or a flexible Bazin/Villar curve) can predict the held-out fluxes as well as correct ones; S cannot separate them.",
+   "Family asymmetry in model range: SALT3 returns 0 flux outside rest-frame -20..+50 d, ParSNIP is defined over +-250 d, parametric curves everywhere; late held-out points therefore penalise SALT3 by construction, a property of the family and not of the arm.",
+   "The 5% error floor down-weights high-S/N points and sets the scale at which systematic model error is forgiven; a different floor re-orders submissions near the floor.",
+   "Equal band weighting: a band with 5 points counts as much as one with 20.",
+   "Held-out residuals within a band are correlated (host subtraction residuals, calibration offsets per field/night), so N_b overstates independent information.",
+   "Horizon choice: the +60 d window mixes peak and early decline; a different horizon changes which family is favoured (e.g. Villar plateau vs SALT3 cut-off).",
+   "model covariance (SALT3 modelcov) is excluded from S, so SALT3's own stated model uncertainty is not credited.",
+   "Rejected-rival reasons are recorded but not scored; the written-rejection branch has no grader.",
+   "Near-zero or negative fluxes (pre-explosion or late) are scored like any other point; a baseline B term in parametric families can absorb them, SN families cannot.",
+   "Separation is procedural (brief constraint 3): if an arm reads grader_private/, the residual measures memorised data, not prediction."
+  ]
+ },
+ "controls": {
+  "G-PARAM-Villar": {
+   "must_fire": {
+    "rule": "S_wrong >= S_ref + 5 and S_wrong >= 3 S_ref",
+    "fired": true
+   },
+   "S_ref": 0.3803581401990121,
+   "S_wrong": 115.32083922759179,
+   "must_not_fire_v1": {
+    "rule": "|dS| <= 1e-06",
+    "deltas": {
+     "perturbed": 5.322466299306772e-06,
+     "repeat": 0.0,
+     "roundtrip": 0.0
+    },
+    "fired": true
+   },
+   "must_not_fire_v2_AM1": {
+    "rule": "|dS| <= 1e-06",
+    "deltas": {
+     "perturbed": 1.2459797249508853e-08,
+     "repeat": 0.0,
+     "roundtrip": 0.0
+    },
+    "fired": false
+   }
+  },
+  "G-PARAM-Bazin": {
+   "must_fire": {
+    "rule": "S_wrong >= S_ref + 5 and S_wrong >= 3 S_ref",
+    "fired": true
+   },
+   "S_ref": 0.3785888656813269,
+   "S_wrong": 117.4713197189244,
+   "must_not_fire_v1": {
+    "rule": "|dS| <= 1e-06",
+    "deltas": {
+     "perturbed": 1.592937561079033e-06,
+     "repeat": 0.0,
+     "roundtrip": 0.0
+    },
+    "fired": true
+   },
+   "must_not_fire_v2_AM1": {
+    "rule": "|dS| <= 1e-06",
+    "deltas": {
+     "perturbed": 1.178243058674866e-10,
+     "repeat": 0.0,
+     "roundtrip": 0.0
+    },
+    "fired": false
+   }
+  }
+ },
+ "certification_I5": "Known-input PASS (Villar truth near-ideal on synthetic Villar item), negative control PASS for both families, must-not-fire FAIL at v1 as declared and PASS at v2 (AM-1), coverage controls 8/8 (shared path). Status: CERTIFIED for the pilot on synthetic inputs only; UNDEMONSTRATED on real data.",
+ "completeness": "Covered from code: forward_models.py bazin, villar, validate_submission, score_points; Bazin 2009 Eq. 1 and Villar 2019 Eq. 1, Table 1 and fitting paragraph. Not covered: the rest of both papers; Superphot+ (the ZTF parametric generator named in SHAPE_REEVALUATION) was not read or used. Governing protocol: grader_protocol_FROZEN.md sha256 ef58005482a049e5d58131267b0758ab0bfae3bb1c674650d6302f545fa709bc.",
+ "pilot_scope_AM2": "AM-2: not an admissible grader for PILOT-001 (pilot scope restricted to SALT3-f22 after agent 1's shape record DS-11); certified on synthetic inputs only."
+}

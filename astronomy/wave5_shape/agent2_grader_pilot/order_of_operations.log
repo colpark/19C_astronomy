@@ -1,0 +1,32 @@
+2026-09-17T17:56:34Z step0 brief verified PANEL_BRIEF_WAVE5.md sha256 cd10a41c905a4914291b9976df7f3241960494e312f11e4f32171bfecd5e4c6b == BRIEF_SHA256
+2026-09-17T18:00:09Z step1 grader_protocol_FROZEN.md frozen sha256 ef58005482a049e5d58131267b0758ab0bfae3bb1c674650d6302f545fa709bc
+2026-09-17T18:00:42Z step2a pinned asset copies made: data_cache/grader_pinned, arm_assets_classical, arm_assets_fm (salt3-f22 files, parsnip@dcea62f package minus shipped plasticc/ps1 .pt, parsnip_fold0.pt 28338168...)
+2026-09-17T18:03:45Z step2b code written (no data): grader_private/forward_models.py 302586fd569997382bd9d46a564722c0d91410a79cad6ebef556a665d677d36f, grade.py bb295ae4890a288d2666ba5a2512c0bdac16b890e4e368002396a6f887cb8520, scripts/item_builder.py, scripts/floor_generators.py, arms/tools/{classical,fm}
+2026-09-17T18:04:47Z step2c controls_spec_PRE_RUN.md hashed before any control ran: 4000be5853e808b2ba279eb33def689d0eb20d754d36cb31c3d0ba0a0381f520
+2026-09-17T18:05:29Z step2d controls v1 run: must-fire fired 4/4; must-not-fire FIRED on G-SALT3, G-PARAM-Villar, G-PARAM-Bazin (t0 relative perturbation = 5 s shift); coverage 8/8. results tool_cards/control_results_v1.json 477bc7a163fe6087c740c9f09edd228cbabb63b78796560748ad7207723500ba
+2026-09-17T18:05:29Z step2e AM-1 recorded in amendments.md 9dc61ccd8ab23a7833ae4f9605c350d7704cc4528287db890ca7587dbdb871aa before v2 controls
+2026-09-17T18:05:42Z step2f controls v2 (AM-1) run: tool_cards/control_results.json ad346a3a2f88d424ea14f55ce3b745bc02b833668ea9adc1dc5173019bc4a8d9
+2026-09-17T18:08:07Z step2g tool cards written from code (validate PASS x3): tool_cards/tool_card_parametric_grader.json=4c2308a7e079d018 tool_cards/tool_card_ParSNIP_grader.json=d75b0ef2de1e9b70 tool_cards/tool_card_SALT3_grader.json=45b32899920947cb 
+2026-09-17T18:08:07Z step3a r1/dispositions_PRE_RUN.md hashed before R1 run: c003c3ccef9e2ae6a557c00ac7f0fb74b9089b0ae96c8dc25460bf676575cd1f
+2026-09-17T18:08:38Z step3b R1 attempt 1: INTERRUPTED in the result writer (TypeError: numpy bool not JSON serializable in near_ideal_detail) after grading, before r1_result.json was written -> R1-UNDEMONSTRATED for attempt 1 (per dispositions). Grade JSONs of attempt 1 exist on disk. Repair = cast to bool in r1_run.py only (no grader/builder/forward-model change); re-run as attempt 2 with the same seed.
+2026-09-17T18:08:48Z step3c R1 attempt 2 run: r1/r1_result.json 37d296ca6ea3e78ad978f3764a2d17d0148b5b0706059f515bbf079c14867605 disposition=R1-PASS
+2026-09-17T18:09:13Z step5a selection/selection_rule_SEALED.md sealed before any object fetch: 581bf68fd86e7d8fd199192444a415b8f847f132a0f8102e4d0c76f76bd5ec6d
+2026-09-17T18:10:07Z step5b selection walk done (16 examined, 16 ALeRCE fetches); selection/selection_SEALED.json sealed 5b496ff37bd1cbcd189209939a14dc3b3710a54170b9fb9c1adcff99eb495c13; selected ZTF18aasyjhd; no BTS column other than ZTFID/peakt read so far
+2026-09-17T18:10:24Z step5c pilot item built: item/pre_cut.csv 0f6ab10dc266e6528cccc475a4d3877d12851c76567d5cade01c8944684e9e72 item/item_meta.json b97dcc27cca42e0870ec5caf681c2b2b0d96f9656542b56fcbea532a4d4a2cd8 grader_private/held_out.csv bc228eee2d53993b7e6f276e984814e64038d3bbf3583b82444a57a80b49c052
+2026-09-17T18:10:31Z step5d after seal: read BTS IAUID of ZTF18aasyjhd only (type/redshift not read)
+2026-09-17T18:13:49Z step5e contamination: arXiv API 9 name queries (0 hits each; positive controls SN 2011fe 91, 2023ixf 98); WebSearch 1 query, 9 arXiv hits full-text grepped: 0 mentions; WebSearch tool summary asserted a type/z/coords for the object (coords disagree with ALeRCE position) - recorded as unverified
+2026-09-17T18:13:49Z step6-pre coordinator message received (agent1 shape_record.json sha256 b8612607ec43f308a7e8ded23b05880434cc1266151afdc117e31763e244f5ad, DS-01/03/06/10/11, ESCALATE at grader): amendment AM-2 to follow before any further pilot computation
+2026-09-17T18:13:49Z step6-pre after seal: read BTS type, redshift, RA, Dec of ZTF18aasyjhd for the AM-2 scope record
+2026-09-17T18:14:32Z step6a AM-2 recorded: amendments.md 91c9486e3960448562c396ec7e7e1c17226becb9a6acb289efc685dd26ce1454
+2026-09-17T18:15:05Z step6b AM-2 implemented: grade.py 52f12faa901225c22090743783158fdac20bbbe4d42e973c1e4b1905a15e10b5 (scope, DECLINE, OUT_OF_SCOPE); arms check_submission.py d53ca589a0dea1e7a8e057f8a3cc6cd9440c8154e94ed8d3d77021c4a22c1c9b; scripts/floor_AM2.py
+2026-09-17T18:15:10Z step6c regression after AM-2 grade.py change: controls v2 re-run ad346a3a2f88d424 and R1 attempt 3 re-run r1/r1_result.json 37d296ca6ea3e78a disposition=R1-PASS
+2026-09-17T18:15:46Z step4/5f floors run and graded: AM-2 floor SALT3 default -> OUT_OF_SCOPE:NON_IA_OBJECT (diagnostic S 28.58, not a score) grade d21874049ac47ea7 sub b0371f50d3a6e27f; frozen s9 floor chose Bazin (pre-cut chi2 0.182 vs SALT3 0.369) -> COVERAGE_FAIL:SCOPE grade 6b3dfdd0bd5c0385
+2026-09-17T18:15:46Z step5g contamination_check.json 2599ef082e0279fcd5a2bda9c501939b1bc820dc76ac0d1f9deb5b610c190cb8
+2026-09-17T18:16:47Z step6d arm prompts emitted: classical 55ce2897cb44fb4da6c1547b1506a241e3bb289c0e128fcbe5c865bfd4b987a8 fm a6d0b2182508d0853b9faee903dd6f0c09b9f78726f8ec1d1a0bd2b775747a55
+2026-09-17T18:17:18Z step6e arm tools tested: 20 runs in arms/tool_tests/ (10 per toolset incl. 3 check_submission scope cases); 2 intended negative checks failed as designed (classical toolset raises AssetError on ParSNIP params and has no parsnip_run.py)
+2026-09-17T18:18:06Z step6f r8_symmetry.json 6446fa1861b16a4c8027aa05bf2ece60759a094ac2b3b35941054ba1d4335e84
+2026-09-17T18:18:49Z step7a replay_cases.csv 78b522eededd148cbac9f3269102874b3ecfe240c284fdb6f79aca3a032b3495 replay_rulings.csv 6d570897c27a341cf61420efaf6293fb4345af3c04c53535b44c691edd30fba6
+2026-09-17T18:19:31Z step7b seed_ledger.json 78a8a2673b60aad8adf0bdf3c2b69030002c3750ec4f865b7529616d19e9202f
+2026-09-17T18:19:45Z step8 deliverables hashed: HASH_MANIFEST.sha256 913426550ff194701649273d33ad22cf92d39863eefe8f95b37a7e8da1b653af; STOP for coordinator to launch the two arms
+2026-09-17T18:20:35Z step9 disagreements.json 5ed07166736ff95456c669d386f0c1df18502fa4a02977e62769817e7bc97e1b written after the coordinator message; tool cards annotated with AM-2 scope (validate PASS x3)
+2026-09-17T18:20:35Z step10 final HASH_MANIFEST.sha256 77d06aa1b47506a15c113f99af5149585cd3cb0b6c35931fa7dd086154110302 over 190 files; data_cache/ is gitignored and hashed in ALERCE_RAW_SHA256SUMS and the cards

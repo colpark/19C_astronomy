@@ -1,0 +1,185 @@
+{
+ "banner": "PRE-RATIFICATION PILOT (harness check only)",
+ "item_id": "PILOT-001",
+ "ZTFID": "ZTF18aasyjhd",
+ "IAUID": "SN2022lvm",
+ "checked_after_seal": true,
+ "definition": "generate: the object is published and indexed, i.e. a published light-curve fit for this object exists (shape.md downstream table; grader_protocol_FROZEN.md section 11)",
+ "arxiv_api": {
+  "queries": [
+   {
+    "query": "abs:2022lvm",
+    "endpoint": "https://export.arxiv.org/api/query",
+    "totalResults": 0,
+    "role": "object_query",
+    "response_file": "data_cache/arxiv/abs_2022lvm_.xml",
+    "sha256": "5f5b775dc29ecb772343c4b8fdc4d2eaf4cd1dbae4085f7b9a344ee5b962b983"
+   },
+   {
+    "query": "all:2022lvm",
+    "endpoint": "https://export.arxiv.org/api/query",
+    "totalResults": 0,
+    "role": "object_query",
+    "response_file": "data_cache/arxiv/all_2022lvm_.xml",
+    "sha256": "80327929a277f9857816f805c93c7e9c88761c1f633a9732ca6e79553f0319d8"
+   },
+   {
+    "query": "all:\"2022lvm\"",
+    "endpoint": "https://export.arxiv.org/api/query",
+    "totalResults": 0,
+    "role": "object_query",
+    "response_file": "data_cache/arxiv/all__222022lvm_22_.xml",
+    "sha256": "9bd7b7d60a2746736a77491c03c59956107fe1434370ad88fff16ccb1dd492d1"
+   },
+   {
+    "query": "all:\"AT2022lvm\"",
+    "endpoint": "https://export.arxiv.org/api/query",
+    "totalResults": 0,
+    "role": "object_query",
+    "response_file": "data_cache/arxiv/all__22AT2022lvm_22_.xml",
+    "sha256": "ee1d3e78e157731fde1c6c4018f8102ff649509818d068b81d67bc461298df47"
+   },
+   {
+    "query": "all:\"AT 2022lvm\"",
+    "endpoint": "https://export.arxiv.org/api/query",
+    "totalResults": 0,
+    "role": "object_query",
+    "response_file": "data_cache/arxiv/all__22AT_202022lvm_22_.xml",
+    "sha256": "0d7ff5595eaaccc719a424be2bddbc9104c02f6f42616455552cd13a32ed3810"
+   },
+   {
+    "query": "all:\"SN2022lvm\"",
+    "endpoint": "https://export.arxiv.org/api/query",
+    "totalResults": 0,
+    "role": "object_query",
+    "response_file": "data_cache/arxiv/all__22SN2022lvm_22_.xml",
+    "sha256": "664d35512615abe77c3d2f2ea6c6726ff8202fbebc48f6791847529d635cc5b0"
+   },
+   {
+    "query": "all:\"SN 2022lvm\"",
+    "endpoint": "https://export.arxiv.org/api/query",
+    "totalResults": 0,
+    "role": "object_query",
+    "response_file": "data_cache/arxiv/all__22SN_202022lvm_22_.xml",
+    "sha256": "1aff4612ce8a8d5b28754699f06513a2358e4eaf3067dfd5d104adb8625821c1"
+   },
+   {
+    "query": "all:\"ZTF18aasyjhd\"",
+    "endpoint": "https://export.arxiv.org/api/query",
+    "totalResults": 0,
+    "role": "object_query",
+    "response_file": "data_cache/arxiv/all__22ZTF18aasyjhd_22_.xml",
+    "sha256": "7538a26c9d1e269c0269897bd1e50b4d37bcc84157269f77a337ce12a45262f4"
+   },
+   {
+    "query": "co:2022lvm",
+    "endpoint": "https://export.arxiv.org/api/query",
+    "totalResults": 0,
+    "role": "object_query",
+    "response_file": "data_cache/arxiv/co_2022lvm_.xml",
+    "sha256": "549b27a582dc4f4fa7e3fe8d30e5829035a3ef2326ee080f78656fcca98ad223"
+   },
+   {
+    "query": "all:\"2023ixf\"",
+    "endpoint": "https://export.arxiv.org/api/query",
+    "totalResults": 98,
+    "role": "positive_control",
+    "response_file": "data_cache/arxiv/control_all__222023ixf_22_.xml",
+    "sha256": "55778bf01e3ef25e9ca12bfd93ec8a8d046e9263004f5c88a63953b272c9ff62"
+   },
+   {
+    "query": "all:\"SN 2011fe\"",
+    "endpoint": "https://export.arxiv.org/api/query",
+    "totalResults": 91,
+    "role": "positive_control",
+    "response_file": "data_cache/arxiv/control_all__22SN_202011fe_22_.xml",
+    "sha256": "c8b6048e623cba8afce337830e792af5e1f31574c97a209e30da41d7913d5c1b"
+   },
+   {
+    "query": "all:\"ZTF18aaqeasu\"",
+    "endpoint": "https://export.arxiv.org/api/query",
+    "totalResults": 0,
+    "role": "positive_control",
+    "response_file": "data_cache/arxiv/control_all__22ZTF18aaqeasu_22_.xml",
+    "sha256": "25679a4233258fc018e41d18dc07cb65ce702b20ef0735e9b2d96dba0a718b13"
+   }
+  ],
+  "limit": "the arXiv API search_query indexes title, abstract, authors, comments, journal ref and categories; it does NOT index full text. A zero here does not show absence from full text."
+ },
+ "web_search": {
+  "tool": "WebSearch (Claude Code)",
+  "query": "\"SN 2022lvm\" OR \"SN2022lvm\" OR \"ZTF18aasyjhd\"",
+  "returned_urls": [
+   "https://arxiv.org/pdf/2308.06319",
+   "https://arxiv.org/pdf/2309.09213",
+   "https://arxiv.org/pdf/2211.10544",
+   "https://arxiv.org/pdf/1912.10354",
+   "https://arxiv.org/pdf/2508.11559",
+   "https://arxiv.org/pdf/2507.03822",
+   "https://arxiv.org/pdf/2407.07946",
+   "https://arxiv.org/pdf/2308.06334",
+   "https://arxiv.org/pdf/2309.12750",
+   "https://www.wis-tns.org/astronotes?page=2&keywords%5Bvalue_field%5D=+++Supernova&format=html"
+  ],
+  "fulltext_check_of_arxiv_hits": [
+   {
+    "arxiv_id": "1912.10354",
+    "pdf_sha256": "2811c3a7e90d16b3885a02913447931ca13805d59534fbea726f095b6b7d0d9c",
+    "fulltext_mentions_2022lvm": 0,
+    "fulltext_mentions_ZTF18aasyjhd": 0
+   },
+   {
+    "arxiv_id": "2211.10544",
+    "pdf_sha256": "73933cbd97edc5bf2e5912badcd4dda58b0c8cc3964a7c05405aee20de4946dc",
+    "fulltext_mentions_2022lvm": 0,
+    "fulltext_mentions_ZTF18aasyjhd": 0
+   },
+   {
+    "arxiv_id": "2308.06319",
+    "pdf_sha256": "e99b2ac9add8241d5a52154ef19ab81a53a14f719a23c8a852566e741bfe41c6",
+    "fulltext_mentions_2022lvm": 0,
+    "fulltext_mentions_ZTF18aasyjhd": 0
+   },
+   {
+    "arxiv_id": "2308.06334",
+    "pdf_sha256": "9903234f4ea971d62313f1cd7e0200d29cee4d994af7480216a9eafcf337fc65",
+    "fulltext_mentions_2022lvm": 0,
+    "fulltext_mentions_ZTF18aasyjhd": 0
+   },
+   {
+    "arxiv_id": "2309.09213",
+    "pdf_sha256": "0a2e88df8835194747b57011e4fe18e084b82c7f761a44350deb5fac0ac2fd86",
+    "fulltext_mentions_2022lvm": 0,
+    "fulltext_mentions_ZTF18aasyjhd": 0
+   },
+   {
+    "arxiv_id": "2309.12750",
+    "pdf_sha256": "65e7a80a49b4a36c1dfe234629dc9d2d18e823d65aee7bcfdd1112d74f13871d",
+    "fulltext_mentions_2022lvm": 0,
+    "fulltext_mentions_ZTF18aasyjhd": 0
+   },
+   {
+    "arxiv_id": "2407.07946",
+    "pdf_sha256": "2801934ab26c69f1688b5988b48f76b1f0b8b08259ff0380b93e123cb687e548",
+    "fulltext_mentions_2022lvm": 0,
+    "fulltext_mentions_ZTF18aasyjhd": 0
+   },
+   {
+    "arxiv_id": "2507.03822",
+    "pdf_sha256": "a6e6a4d9b5cb3c81ba61123c5f7938bb63f78e5ef03471747a205e2be9ebe6af",
+    "fulltext_mentions_2022lvm": 0,
+    "fulltext_mentions_ZTF18aasyjhd": 0
+   },
+   {
+    "arxiv_id": "2508.11559",
+    "pdf_sha256": "2646191000b3d5a561d490463d667503153d2f090795f3eeee230a946ec79849",
+    "fulltext_mentions_2022lvm": 0,
+    "fulltext_mentions_ZTF18aasyjhd": 0
+   }
+  ],
+  "tool_summary_claim": "the search tool's generated summary asserted SN 2022lvm = ZTF18aasyjhd, RA 18:19:11.493 Dec +41:01:02.49, z 0.154, Type IIn. Not supported by any returned document (0 full-text mentions in the 9 arXiv pdfs; TNS AstroNotes page not fetched). Its coordinates disagree with ALeRCE (RA 222.3235 deg = 14:49:17.6, Dec +27.28) and with BTS (14:49:17.63 +27:16:47.9); its type/z disagree with BTS (SN II, 0.143). Recorded as unverified, not used."
+ },
+ "published_catalogues_named_by_agent1": "DS-07: ZTF SN Ia DR2 publishes SALT2 fits for SNe Ia to Dec 2020 (object peaks 2022-06, outside DR2 window; not checked against the DR2 tables); Superphot+ Table 5 / Zenodo per-object fits (not checked).",
+ "ruling": "NO PUBLISHED FIT FOUND in arXiv metadata (9 name queries, positive controls return hits) or in the full text of the 9 web-search arXiv hits. Full-text coverage of the literature (ADS full text, TNS AstroNotes/classification reports, Superphot+ Zenodo table, ANTARES saved fits) is UNDEMONSTRATED. Contamination under generate: UNDEMONSTRATED-leaning-clean, not CLEAN.",
+ "separate_exposure_note": "independent of published fits, the held-out photometry itself is public (ALeRCE/Fink/IRSA); see AM-2 item 5 and DS-06."
+}

@@ -1,0 +1,19 @@
+{
+ "item_id": "CTRL-PARSNIP",
+ "family": "ParSNIP",
+ "parameters": {
+  "z": 0.05000000005000001,
+  "t0": 59800.000000001,
+  "amplitude": 1.0462251601215208e-15,
+  "color": 1e-12,
+  "s1": 1e-12,
+  "s2": 1e-12,
+  "s3": 1e-12
+ },
+ "rejected_rivals": [
+  {
+   "family": "Bazin",
+   "reason": "control submission"
+  }
+ ]
+}

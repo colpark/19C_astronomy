@@ -1,0 +1,193 @@
+{
+ "protocol_sha256": "ef58005482a049e5d58131267b0758ab0bfae3bb1c674650d6302f545fa709bc",
+ "controls_spec_sha256": "4000be5853e808b2ba279eb33def689d0eb20d754d36cb31c3d0ba0a0381f520",
+ "seed_base": 4015521876,
+ "graders": {
+  "G-SALT3": {
+   "grader_family": "SALT3",
+   "S_ref": 0.5317033924001794,
+   "Q_ref": 0.6528679148728658,
+   "per_band_ref": {
+    "ztfg": {
+     "N": 13,
+     "chi2_per_point": 0.4875677005692308,
+     "median_abs_resid": 0.7486323471783874
+    },
+    "ztfr": {
+     "N": 14,
+     "chi2_per_point": 0.575839084231128,
+     "median_abs_resid": 0.42430963477217976
+    }
+   },
+   "S_wrong": 223.6278531538639,
+   "Q_wrong": 0.004451807671932062,
+   "must_fire": {
+    "rule": "S_wrong >= S_ref + 5 and S_wrong >= 3 S_ref",
+    "fired": true
+   },
+   "must_not_fire": {
+    "rule": "|dS| <= 1e-06",
+    "deltas": {
+     "perturbed": 3.237893239926848e-05,
+     "repeat": 0.0,
+     "roundtrip": 0.0
+    },
+    "fired": true
+   },
+   "disposition": "FAIL"
+  },
+  "G-PARAM-Villar": {
+   "grader_family": "Villar",
+   "S_ref": 0.3803581401990121,
+   "Q_ref": 0.7244496706165153,
+   "per_band_ref": {
+    "ztfg": {
+     "N": 13,
+     "chi2_per_point": 0.19801256557415517,
+     "median_abs_resid": 0.3983118181303682
+    },
+    "ztfr": {
+     "N": 12,
+     "chi2_per_point": 0.562703714823869,
+     "median_abs_resid": 0.6457336527991698
+    }
+   },
+   "S_wrong": 115.32083922759179,
+   "Q_wrong": 0.008596911840047967,
+   "must_fire": {
+    "rule": "S_wrong >= S_ref + 5 and S_wrong >= 3 S_ref",
+    "fired": true
+   },
+   "must_not_fire": {
+    "rule": "|dS| <= 1e-06",
+    "deltas": {
+     "perturbed": 5.322466299306772e-06,
+     "repeat": 0.0,
+     "roundtrip": 0.0
+    },
+    "fired": true
+   },
+   "disposition": "FAIL"
+  },
+  "G-PARAM-Bazin": {
+   "grader_family": "Bazin",
+   "S_ref": 0.3785888656813269,
+   "Q_ref": 0.7253794259434843,
+   "per_band_ref": {
+    "ztfg": {
+     "N": 13,
+     "chi2_per_point": 0.23119103587509499,
+     "median_abs_resid": 0.3436756598816202
+    },
+    "ztfr": {
+     "N": 12,
+     "chi2_per_point": 0.5259866954875587,
+     "median_abs_resid": 0.49808136836732475
+    }
+   },
+   "S_wrong": 117.4713197189244,
+   "Q_wrong": 0.008440861487594806,
+   "must_fire": {
+    "rule": "S_wrong >= S_ref + 5 and S_wrong >= 3 S_ref",
+    "fired": true
+   },
+   "must_not_fire": {
+    "rule": "|dS| <= 1e-06",
+    "deltas": {
+     "perturbed": 1.592937561079033e-06,
+     "repeat": 0.0,
+     "roundtrip": 0.0
+    },
+    "fired": true
+   },
+   "disposition": "FAIL"
+  },
+  "G-ParSNIP": {
+   "grader_family": "ParSNIP",
+   "S_ref": 0.31307483549027704,
+   "Q_ref": 0.7615712166371836,
+   "per_band_ref": {
+    "ztfg": {
+     "N": 13,
+     "chi2_per_point": 0.36045863574108034,
+     "median_abs_resid": 0.41300103412777495
+    },
+    "ztfr": {
+     "N": 14,
+     "chi2_per_point": 0.2656910352394737,
+     "median_abs_resid": 0.40906766648150084
+    }
+   },
+   "S_wrong": 238.61104232574758,
+   "Q_wrong": 0.0041734303657029095,
+   "must_fire": {
+    "rule": "S_wrong >= S_ref + 5 and S_wrong >= 3 S_ref",
+    "fired": true
+   },
+   "must_not_fire": {
+    "rule": "|dS| <= 1e-06",
+    "deltas": {
+     "perturbed": 3.571336993912766e-07,
+     "repeat": 0.0,
+     "roundtrip": 0.0
+    },
+    "fired": false
+   },
+   "disposition": "PASS",
+   "amplitude_scale_note": "noiseless ztfr peak at amplitude 1 = 6.03121e+17"
+  }
+ },
+ "coverage_controls": {
+  "cases": {
+   "1_missing": {
+    "expected": "COVERAGE_FAIL:MISSING",
+    "got": "COVERAGE_FAIL:MISSING",
+    "message": "no file at submission path",
+    "fired": true
+   },
+   "2_nonjson": {
+    "expected": "COVERAGE_FAIL:PARSE",
+    "got": "COVERAGE_FAIL:PARSE",
+    "message": "JSONDecodeError('Expecting value: line 1 column 1 (char 0)')",
+    "fired": true
+   },
+   "3_flux_key": {
+    "expected": "COVERAGE_FAIL:SCHEMA",
+    "got": "COVERAGE_FAIL:SCHEMA",
+    "message": "unknown top-level keys ['predicted_flux']",
+    "fired": true
+   },
+   "4_nan_param": {
+    "expected": "COVERAGE_FAIL:SCHEMA",
+    "got": "COVERAGE_FAIL:SCHEMA",
+    "message": "SALT3  x1 is not a finite number",
+    "fired": true
+   },
+   "5_no_rivals": {
+    "expected": "COVERAGE_FAIL:SCHEMA",
+    "got": "COVERAGE_FAIL:SCHEMA",
+    "message": "rejected_rivals must be a non-empty list",
+    "fired": true
+   },
+   "6_neg_z": {
+    "expected": "COVERAGE_FAIL:DOMAIN",
+    "got": "COVERAGE_FAIL:DOMAIN",
+    "message": "SALT3 z must satisfy 0 < z <= 1.5",
+    "fired": true
+   },
+   "7_bazin_tau0": {
+    "expected": "COVERAGE_FAIL:DOMAIN",
+    "got": "COVERAGE_FAIL:DOMAIN",
+    "message": "Bazin ztfg tau_rise and tau_fall must be > 0",
+    "fired": true
+   },
+   "8_wrong_item": {
+    "expected": "COVERAGE_FAIL:SCHEMA",
+    "got": "COVERAGE_FAIL:SCHEMA",
+    "message": "item_id 'CTRL-VILLAR' does not match 'CTRL-SALT3'",
+    "fired": true
+   }
+  },
+  "disposition": "PASS"
+ }
+}

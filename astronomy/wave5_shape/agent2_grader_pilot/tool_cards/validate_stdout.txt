@@ -1,0 +1,3 @@
+PASS tool_cards/tool_card_parametric_grader.json
+PASS tool_cards/tool_card_ParSNIP_grader.json
+PASS tool_cards/tool_card_SALT3_grader.json

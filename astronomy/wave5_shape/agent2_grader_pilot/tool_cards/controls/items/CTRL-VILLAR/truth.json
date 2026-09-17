@@ -1,0 +1,44 @@
+{
+ "truth": {
+  "family": "Villar",
+  "parameters": {
+   "ztfg": {
+    "A": 700.0,
+    "beta": -2.0,
+    "t0": 59785.0,
+    "gamma": 8.0,
+    "tau_rise": 3.0,
+    "tau_fall": 25.0,
+    "B": 0.0
+   },
+   "ztfr": {
+    "A": 650.0,
+    "beta": -1.0,
+    "t0": 59786.0,
+    "gamma": 12.0,
+    "tau_rise": 3.5,
+    "tau_fall": 35.0,
+    "B": 0.0
+   }
+  },
+  "mwebv": 0.03,
+  "seed": 4015521878,
+  "n_visits": 48,
+  "n_detections": 42
+ },
+ "counts": {
+  "pre_cut_detections": {
+   "ztfg": 2,
+   "ztfr": 4
+  },
+  "held_out_detections": {
+   "ztfg": 13,
+   "ztfr": 12
+  }
+ },
+ "hashes": {
+  "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/tool_cards/controls/items/CTRL-VILLAR/item/pre_cut.csv": "54979981f5d5fe729edd1062ae6c90b0d4458472b81c21b78b41c21ae3f161c7",
+  "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/tool_cards/controls/items/CTRL-VILLAR/item/item_meta.json": "d6ce087d7790cd8d64288e08690372202256466dbe5a94bd1ae0a00ec5365ce0",
+  "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/tool_cards/controls/items/CTRL-VILLAR/grader_private/held_out.csv": "120dc51315fa0f65594698bad94560a5dc3bee6073dde5b8bf67ee5c036c41cd"
+ }
+}

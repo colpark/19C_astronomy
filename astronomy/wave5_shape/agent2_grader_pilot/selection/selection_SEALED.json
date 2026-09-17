@@ -1,0 +1,321 @@
+{
+ "banner": "PRE-RATIFICATION PILOT (harness check only)",
+ "sealed_utc": "2026-09-17T18:09:57.651350+00:00",
+ "rule_sha256": "581bf68fd86e7d8fd199192444a415b8f847f132a0f8102e4d0c76f76bd5ec6d",
+ "bts_sha256": "61415979b75f96bcf2532439109b35f923c5fa1aadfacc5d6013235187ebe570",
+ "cohort_rows_sha256": "197e723f6afebfd98d0e7e7e39855a068c3213972f3c10a96666f3944f56075b",
+ "bts_columns_read": [
+  "ZTFID",
+  "peakt"
+ ],
+ "n_rows_peak_2022": 1308,
+ "n_after_cohort_exclusion": 1308,
+ "n_examined": 16,
+ "selected_ZTFID": "ZTF18aasyjhd",
+ "examined": [
+  {
+   "ZTFID": "ZTF17aabtvsy",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "bb1ebf0a68115d839b1d48f312ae6790b967a6c6f4fc5cd95f1c41923ee9f18c",
+   "n_pos_g": 10,
+   "n_pos_r": 12,
+   "t_first": 59850.51827549981,
+   "peak_minus_t_first_d": 19.971724500413984,
+   "pre_cut_detections": {
+    "ztfg": 0,
+    "ztfr": 2
+   },
+   "held_out_detections": {
+    "ztfg": 10,
+    "ztfr": 11
+   },
+   "result": "fail: n_pos_g or n_pos_r < 20; pre-cut detections < 3 in a band"
+  },
+  {
+   "ZTFID": "ZTF17aacldgo",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "6af8e205c328e97aaa5ea81fec9eb19a176de67cd56179f97f581a89da441950",
+   "n_pos_g": 8,
+   "n_pos_r": 9,
+   "t_first": 59893.40177079989,
+   "peak_minus_t_first_d": 3.8482292001135647,
+   "pre_cut_detections": {
+    "ztfg": 8,
+    "ztfr": 8
+   },
+   "held_out_detections": {
+    "ztfg": 0,
+    "ztfr": 0
+   },
+   "result": "fail: n_pos_g or n_pos_r < 20; held-out detections < 8 in a band"
+  },
+  {
+   "ZTFID": "ZTF18aaaonon",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "c4b35caae7ca0634640abb5eeb2714f6224e03910c7616842216563f3e68bed7",
+   "n_pos_g": 6,
+   "n_pos_r": 4,
+   "t_first": 59699.1962731001,
+   "peak_minus_t_first_d": 4.073726899921894,
+   "pre_cut_detections": {
+    "ztfg": 3,
+    "ztfr": 2
+   },
+   "held_out_detections": {
+    "ztfg": 3,
+    "ztfr": 2
+   },
+   "result": "fail: n_pos_g or n_pos_r < 20; pre-cut detections < 3 in a band; held-out detections < 8 in a band"
+  },
+  {
+   "ZTFID": "ZTF18aaixulp",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "70254bda4c77781e1a7434bbffdff63f76b7f7a5f9eedcd3c299486e64f05142",
+   "n_pos_g": 36,
+   "n_pos_r": 30,
+   "t_first": 58313.2134953998,
+   "peak_minus_t_first_d": 1545.9665046003647,
+   "pre_cut_detections": {
+    "ztfg": 1,
+    "ztfr": 10
+   },
+   "held_out_detections": {
+    "ztfg": 0,
+    "ztfr": 14
+   },
+   "result": "fail: peak - t_first outside [0, 100] d; pre-cut detections < 3 in a band; held-out detections < 8 in a band"
+  },
+  {
+   "ZTFID": "ZTF18aajkcdn",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "1758eb6953422002ceb78a35583f47d23827cddd7b0d0b9f34618c148e139433",
+   "n_pos_g": 7,
+   "n_pos_r": 4,
+   "t_first": 59904.43137730006,
+   "peak_minus_t_first_d": 5.058622700162232,
+   "pre_cut_detections": {
+    "ztfg": 6,
+    "ztfr": 2
+   },
+   "held_out_detections": {
+    "ztfg": 1,
+    "ztfr": 2
+   },
+   "result": "fail: n_pos_g or n_pos_r < 20; pre-cut detections < 3 in a band; held-out detections < 8 in a band"
+  },
+  {
+   "ZTFID": "ZTF18aajkrxi",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "293a9734bd83b4a49bb8995d7ba9ee298a985b6833a2d05a89fabb91b5ccf8ca",
+   "n_pos_g": 14,
+   "n_pos_r": 14,
+   "t_first": 59671.37361110002,
+   "peak_minus_t_first_d": 11.926388899795711,
+   "pre_cut_detections": {
+    "ztfg": 5,
+    "ztfr": 5
+   },
+   "held_out_detections": {
+    "ztfg": 9,
+    "ztfr": 9
+   },
+   "result": "fail: n_pos_g or n_pos_r < 20"
+  },
+  {
+   "ZTFID": "ZTF18aakibjv",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "48f05b8f1f493fd9f7c1b16450fca82c842b938c8acb532045416ebeeed67feb",
+   "n_pos_g": 9,
+   "n_pos_r": 2,
+   "t_first": 59840.139027799945,
+   "peak_minus_t_first_d": 0.0009722001850605011,
+   "pre_cut_detections": {
+    "ztfg": 6,
+    "ztfr": 2
+   },
+   "held_out_detections": {
+    "ztfg": 3,
+    "ztfr": 0
+   },
+   "result": "fail: n_pos_g or n_pos_r < 20; pre-cut detections < 3 in a band; held-out detections < 8 in a band"
+  },
+  {
+   "ZTFID": "ZTF18aalataf",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "d1b87afd8a61718ddad3bef13d6689d6c5a318279408442f2144fcb6b1e559ce",
+   "n_pos_g": 43,
+   "n_pos_r": 39,
+   "t_first": 58647.307187499944,
+   "peak_minus_t_first_d": 1036.1828125002794,
+   "pre_cut_detections": {
+    "ztfg": 5,
+    "ztfr": 10
+   },
+   "held_out_detections": {
+    "ztfg": 3,
+    "ztfr": 13
+   },
+   "result": "fail: peak - t_first outside [0, 100] d; held-out detections < 8 in a band"
+  },
+  {
+   "ZTFID": "ZTF18aamvfeb",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "82d6bdf580c0feaaec2b3eab7225d15c8ca36bd37317a743ab39fe81e6ba9b77",
+   "n_pos_g": 23,
+   "n_pos_r": 18,
+   "t_first": 59719.27952549979,
+   "peak_minus_t_first_d": 14.020474500022829,
+   "pre_cut_detections": {
+    "ztfg": 6,
+    "ztfr": 4
+   },
+   "held_out_detections": {
+    "ztfg": 17,
+    "ztfr": 14
+   },
+   "result": "fail: n_pos_g or n_pos_r < 20"
+  },
+  {
+   "ZTFID": "ZTF18aanhpii",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "1865ae4c3015980ef0e41184447febc2696618e06d3d9c13a6046b8676e27666",
+   "n_pos_g": 6,
+   "n_pos_r": 7,
+   "t_first": 58781.14152779989,
+   "peak_minus_t_first_d": 995.1884722001851,
+   "pre_cut_detections": {
+    "ztfg": 0,
+    "ztfr": 1
+   },
+   "held_out_detections": {
+    "ztfg": 0,
+    "ztfr": 0
+   },
+   "result": "fail: n_pos_g or n_pos_r < 20; peak - t_first outside [0, 100] d; pre-cut detections < 3 in a band; held-out detections < 8 in a band"
+  },
+  {
+   "ZTFID": "ZTF18aaqlblz",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "e1e42c7ba1a41f34f8f7952e96e8ca70d4497396db612d6d61de57fe3a619ca9",
+   "n_pos_g": 183,
+   "n_pos_r": 14,
+   "t_first": 58423.48831020016,
+   "peak_minus_t_first_d": 1275.961689800024,
+   "pre_cut_detections": {
+    "ztfg": 4,
+    "ztfr": 1
+   },
+   "held_out_detections": {
+    "ztfg": 7,
+    "ztfr": 4
+   },
+   "result": "fail: n_pos_g or n_pos_r < 20; peak - t_first outside [0, 100] d; pre-cut detections < 3 in a band; held-out detections < 8 in a band"
+  },
+  {
+   "ZTFID": "ZTF18aaqldvl",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "781516ca383240e496f9fb73a9a0a06d51bbd2ad023e4a706d06e74b6424ec60",
+   "n_pos_g": 35,
+   "n_pos_r": 7,
+   "t_first": 59713.27686339989,
+   "peak_minus_t_first_d": 9.02313659992069,
+   "pre_cut_detections": {
+    "ztfg": 8,
+    "ztfr": 3
+   },
+   "held_out_detections": {
+    "ztfg": 27,
+    "ztfr": 4
+   },
+   "result": "fail: n_pos_g or n_pos_r < 20; held-out detections < 8 in a band"
+  },
+  {
+   "ZTFID": "ZTF18aaqpeoq",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "a0334aa9665f6534285e20514b4578843e73f3d91d8b1d85e8de20481c3a26a0",
+   "n_pos_g": 9,
+   "n_pos_r": 14,
+   "t_first": 59707.30504629994,
+   "peak_minus_t_first_d": 6.124953700229526,
+   "pre_cut_detections": {
+    "ztfg": 2,
+    "ztfr": 7
+   },
+   "held_out_detections": {
+    "ztfg": 7,
+    "ztfr": 7
+   },
+   "result": "fail: n_pos_g or n_pos_r < 20; pre-cut detections < 3 in a band; held-out detections < 8 in a band"
+  },
+  {
+   "ZTFID": "ZTF18aaqwbsq",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "0aec09807ffed09ac5586f545eaf369371d8928c31302b723cff999e4a170c19",
+   "n_pos_g": 6,
+   "n_pos_r": 7,
+   "t_first": 59682.34431710001,
+   "peak_minus_t_first_d": 6.965682900045067,
+   "pre_cut_detections": {
+    "ztfg": 3,
+    "ztfr": 4
+   },
+   "held_out_detections": {
+    "ztfg": 3,
+    "ztfr": 3
+   },
+   "result": "fail: n_pos_g or n_pos_r < 20; held-out detections < 8 in a band"
+  },
+  {
+   "ZTFID": "ZTF18aarzojc",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "fdc91d3c41e67b94719147c6de5c427e26a314c7d1bbe6729c14507ff40b839b",
+   "n_pos_g": 10,
+   "n_pos_r": 13,
+   "t_first": 59675.3277083002,
+   "peak_minus_t_first_d": 12.012291699647903,
+   "pre_cut_detections": {
+    "ztfg": 5,
+    "ztfr": 4
+   },
+   "held_out_detections": {
+    "ztfg": 5,
+    "ztfr": 9
+   },
+   "result": "fail: n_pos_g or n_pos_r < 20; held-out detections < 8 in a band"
+  },
+  {
+   "ZTFID": "ZTF18aasyjhd",
+   "fetch": "ok",
+   "http_attempts": 1,
+   "raw_sha256": "aecb21d7bca11152c46bf3a4075da46769684754c4462ddb1da13b9bc601b7fe",
+   "n_pos_g": 45,
+   "n_pos_r": 46,
+   "t_first": 59732.27694439981,
+   "peak_minus_t_first_d": 41.05305560026318,
+   "pre_cut_detections": {
+    "ztfg": 9,
+    "ztfr": 7
+   },
+   "held_out_detections": {
+    "ztfg": 35,
+    "ztfr": 35
+   },
+   "result": "PASS"
+  }
+ ]
+}

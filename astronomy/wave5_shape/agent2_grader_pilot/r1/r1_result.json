@@ -1,0 +1,71 @@
+{
+ "protocol_sha256": "ef58005482a049e5d58131267b0758ab0bfae3bb1c674650d6302f545fa709bc",
+ "dispositions_sha256": "c003c3ccef9e2ae6a557c00ac7f0fb74b9089b0ae96c8dc25460bf676575cd1f",
+ "seed": 4015521876,
+ "truth": {
+  "family": "SALT3",
+  "parameters": {
+   "z": 0.05,
+   "t0": 59800.0,
+   "x0": 0.0012,
+   "x1": 0.5,
+   "c": 0.05
+  },
+  "mwebv": 0.03,
+  "seed": 4015521876,
+  "n_visits": 48,
+  "n_detections": 32
+ },
+ "counts": {
+  "pre_cut_detections": {
+   "ztfg": 3,
+   "ztfr": 3
+  },
+  "held_out_detections": {
+   "ztfg": 13,
+   "ztfr": 10
+  }
+ },
+ "item_hashes_at_build": {
+  "r1/item/pre_cut.csv": "1c1df9f953b0ea61d3fad794017dbe988f7d727d83c33bc558357e4cbcb772e6",
+  "r1/item/item_meta.json": "03f073f75432ce63d5933520f60b8e6daddd6c9113bf311b5028c420882707a3",
+  "r1/grader_private/held_out.csv": "7bec2732511b447a612c729036b0bd71d4accd42f1e597e7bad23dd697b2890b"
+ },
+ "criteria": {
+  "P1_scoreable": true,
+  "P2_true_near_ideal": true,
+  "near_ideal_detail": {
+   "ztfg": {
+    "chi2_per_point": 0.8711554387424638,
+    "threshold": 2.2938054787425552,
+    "ok": true
+   },
+   "ztfr": {
+    "chi2_per_point": 0.2955036568363496,
+    "threshold": 2.5188179571971174,
+    "ok": true
+   }
+  },
+  "P3_wrong_family_worse": true,
+  "P4_hashes": true
+ },
+ "S_true": 0.5833295477894067,
+ "Q_true": 0.6315804573950935,
+ "S_wrong_family": 49.16855162477332,
+ "Q_wrong_family": 0.019932805863707617,
+ "statuses": {
+  "true_params": "SCORED",
+  "wrong_family": "SCORED"
+ },
+ "floor_recorded_only": {
+  "choice": "Bazin",
+  "status": "SCORED",
+  "S": 49.16855162477332,
+  "Q": 0.019932805863707617,
+  "generators": {
+   "SALT3": 0.16672066539648348,
+   "Bazin": 5.74698407920385e-16
+  }
+ },
+ "disposition": "R1-PASS"
+}

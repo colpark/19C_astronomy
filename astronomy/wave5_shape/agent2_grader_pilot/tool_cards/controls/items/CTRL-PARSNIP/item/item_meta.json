@@ -1,0 +1,16 @@
+{
+ "item_id": "CTRL-PARSNIP",
+ "t_first_mjd": 59772.852362,
+ "t_cut_mjd": 59782.852362,
+ "horizon_mjd": 59832.852362,
+ "bands": [
+  "ztfg",
+  "ztfr"
+ ],
+ "zp": 25.0,
+ "zpsys": "ab",
+ "flux_convention": "flux = s*10^(-0.4*(magpsf-25)), fluxerr = 0.921034*|flux|*sigmapsf, s=isdiffpos sign; nondetection rows carry diffmaglim (5-sigma limiting mag)",
+ "mwebv": 0.03,
+ "mwebv_note": "SFD E(B-V) at the object position; the grader applies F99Dust(r_v=3.1) at this value to SALT3 and ParSNIP submissions",
+ "scoring": "held-out detections in (t_cut, horizon]; per-band chi2 per point with sigma_eff = max(fluxerr, 0.05|flux|); S = mean over bands with >= 5 points; Q = 1/(1+S)"
+}

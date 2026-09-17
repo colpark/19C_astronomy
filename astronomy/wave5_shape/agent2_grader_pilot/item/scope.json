@@ -1,0 +1,4 @@
+{"item_id": "PILOT-001", "amendment": "AM-2",
+ "submittable_families": ["SALT3", "DECLINE"],
+ "decline": "family DECLINE with parameters {} states that no SALT3 parameter set is an adequate forward model for this object; it must reject SALT3 with a written reason; recorded as coverage (DECLINED), never scored",
+ "rival_families_that_may_be_named": ["SALT3", "Bazin", "Villar", "ParSNIP"]}

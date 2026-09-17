@@ -1,0 +1,130 @@
+{
+ "family": "Villar",
+ "parameters": {
+  "ztfg": {
+   "A": 650.2178208155549,
+   "beta": -3.923349277242761,
+   "t0": 59789.58680866392,
+   "gamma": 4.999999999999997,
+   "tau_rise": 2.9026622360727616,
+   "tau_fall": 20.0,
+   "B": 2.3394693485162614
+  },
+  "ztfr": {
+   "A": 789.5966919680943,
+   "beta": -0.006302299918030829,
+   "t0": 59791.78836670576,
+   "gamma": 4.999999999999997,
+   "tau_rise": 3.280474778416665,
+   "tau_fall": 20.0,
+   "B": 34.32376231007548
+  }
+ },
+ "fit": {
+  "ztfg": {
+   "n_points": 3,
+   "status": 3,
+   "message": "`xtol` termination condition is satisfied.",
+   "nfev": 24,
+   "p0": {
+    "A": 777.1051425,
+    "beta": -1.7269003166666668,
+    "t0": 59788.876377,
+    "gamma": 5.0,
+    "tau_rise": 3.0,
+    "tau_fall": 20.0,
+    "B": 0.0
+   },
+   "bounds": {
+    "A": [
+     0.0,
+     Infinity
+    ],
+    "beta": [
+     -Infinity,
+     0.0
+    ],
+    "t0": [
+     -Infinity,
+     Infinity
+    ],
+    "gamma": [
+     0.0,
+     50.0
+    ],
+    "tau_rise": [
+     0.01,
+     50.0
+    ],
+    "tau_fall": [
+     1.0,
+     300.0
+    ],
+    "B": [
+     -Infinity,
+     Infinity
+    ]
+   },
+   "n_params_gt_n_points": true
+  },
+  "ztfr": {
+   "n_points": 3,
+   "status": 3,
+   "message": "`xtol` termination condition is satisfied.",
+   "nfev": 37,
+   "p0": {
+    "A": 814.7305934999999,
+    "beta": -1.81051243,
+    "t0": 59788.739047,
+    "gamma": 5.0,
+    "tau_rise": 3.0,
+    "tau_fall": 20.0,
+    "B": 0.0
+   },
+   "bounds": {
+    "A": [
+     0.0,
+     Infinity
+    ],
+    "beta": [
+     -Infinity,
+     0.0
+    ],
+    "t0": [
+     -Infinity,
+     Infinity
+    ],
+    "gamma": [
+     0.0,
+     300.0
+    ],
+    "tau_rise": [
+     0.01,
+     50.0
+    ],
+    "tau_fall": [
+     1.0,
+     300.0
+    ],
+    "B": [
+     -Infinity,
+     Infinity
+    ]
+   },
+   "n_params_gt_n_points": true
+  }
+ },
+ "pre_cut_chi2_per_point": {
+  "all": 2.6308824105104503e-18,
+  "per_band": {
+   "ztfg": {
+    "N": 3,
+    "chi2_per_point": 3.141579166443542e-18
+   },
+   "ztfr": {
+    "N": 3,
+    "chi2_per_point": 2.1201856545773593e-18
+   }
+  }
+ }
+}

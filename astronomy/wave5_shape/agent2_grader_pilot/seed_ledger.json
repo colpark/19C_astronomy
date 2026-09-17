@@ -1,0 +1,151 @@
+{
+ "agent": "wave5_shape/agent2_grader_pilot",
+ "date": "2026-09-17",
+ "banner": "PRE-RATIFICATION PILOT (harness check only); no score record, no directional claim, not an I1 record",
+ "random_seeds": [
+  {
+   "name": "R1 synthetic item",
+   "value": 4015521876,
+   "derivation": "int(sha256(grader_protocol_FROZEN.md)[:8], 16), protocol sha256 ef58005482a049e5d58131267b0758ab0bfae3bb1c674650d6302f545fa709bc",
+   "used_by": "scripts/simulate.py via scripts/r1_run.py"
+  },
+  {
+   "name": "CTRL-SALT3 item",
+   "value": 4015521877,
+   "derivation": "seed+1",
+   "used_by": "scripts/controls_i4.py"
+  },
+  {
+   "name": "CTRL-VILLAR item",
+   "value": 4015521878,
+   "derivation": "seed+2",
+   "used_by": "scripts/controls_i4.py"
+  },
+  {
+   "name": "CTRL-PARSNIP item",
+   "value": 4015521879,
+   "derivation": "seed+3",
+   "used_by": "scripts/controls_i4.py"
+  },
+  {
+   "name": "torch/numpy at grading",
+   "value": "none drawn",
+   "derivation": "the grader is deterministic: ParSNIP runs on CPU with threads=1 and no sampling (predict_sncosmo sample=False); repeat and JSON round-trip control deltas are exactly 0.0",
+   "used_by": "grade.py"
+  }
+ ],
+ "seeds_read_in_full": [
+  {
+   "id": "PANEL_BRIEF_WAVE5.md",
+   "sha256": "cd10a41c905a4914291b9976df7f3241960494e312f11e4f32171bfecd5e4c6b",
+   "read_in_full": true,
+   "contribution": "ordering constraints 2 and 3; assignment"
+  },
+  {
+   "id": "SHAPE_REEVALUATION.md",
+   "sha256": "4ca403a00c5acd47dc2e6e6a06061aa6f9e540533ab7a622d2de8915b4ab7f3e",
+   "read_in_full": true,
+   "contribution": "generate/inverse problem framing, sections 3 and 4"
+  },
+  {
+   "id": "references/shape.md",
+   "sha256": "46617c6ad648f0a7f0c3337e21a67978f6d8feedffe55a02d3f94d2c95652da9",
+   "read_in_full": true,
+   "contribution": "generate rows, gate 2, downstream table (I1 floor, A3 coverage)"
+  },
+  {
+   "id": "references/stages/instrument.md",
+   "sha256": "1a681c09ff80a1d768acec07bb8f6238541a6cdd61f9139c7a15111c65de1cb9",
+   "read_in_full": true,
+   "contribution": "I3 card contents and the non-optional disagreement list; I4 construct validity; I5 four criteria"
+  },
+  {
+   "id": "references/stages/runtime.md",
+   "sha256": "e109a57f1b8114d8f920806c1d40ed42457e50509b588d438e2acf0704172019",
+   "read_in_full": true,
+   "contribution": "R1 three dispositions; R4 grant; R6 emitted hashes; R8 symmetry table"
+  },
+  {
+   "id": "arxiv_0904.1066 (Bazin et al. 2009)",
+   "sha256": "8ad38cfc64fce32a92792f4288ae0d95ad622db3c093977900ef94317bb09635",
+   "read_in_full": false,
+   "contribution": "Eq. 1 functional form and its sign convention (G-PARAM card disagreement)",
+   "note": "equation and selection paragraph only"
+  },
+  {
+   "id": "arxiv_1905.07422 (Villar et al. 2019)",
+   "sha256": "9288e1ac9185e6d53738fe0ee9ddfffd0d77481d67033298c0cefeffd9418305",
+   "read_in_full": false,
+   "contribution": "Eq. 1, Table 1 priors, gamma reparameterisation (G-PARAM card disagreements)",
+   "note": "section 3 and Table 1 only"
+  },
+  {
+   "id": "astronomy/wave5_shape/agent1_census_shape/shape_record.json",
+   "sha256": "b8612607ec43f308a7e8ded23b05880434cc1266151afdc117e31763e244f5ad",
+   "read_in_full": false,
+   "contribution": "DS-01, DS-03, DS-06, DS-10, DS-11 and the ESCALATE disposition; cause of AM-2",
+   "note": "decision_shape value fields read; census files not read"
+  }
+ ],
+ "prior_records_used": [
+  {
+   "id": "astronomy/agent4_tools_instrument/tool_cards/tool_card_SALT3_sncosmo.json",
+   "sha256": "8fa6fb38530f3eccbe21f2bf9a1897afecea48e1424ae910edfdeaa5713867a3",
+   "contribution": "SALT3 conventions and disagreements carried into the G-SALT3 card"
+  },
+  {
+   "id": "astronomy/wave2/agent4_instrument/compositions_FROZEN.md",
+   "sha256": "b2f72948de0b39682ff8bc01c3c3f13f931a0a96966ede90c50466a9d045427c",
+   "contribution": "ParSNIP fold definition and training truncation (DS-01)"
+  },
+  {
+   "id": "astronomy/wave4/agent3_freeze_v3/domain_manifest_v3.json",
+   "sha256": "0bdf229e9e57ea1699bfd2b70eecbbd0ce58a27895f14f62af87320833e63b6c",
+   "contribution": "ratified decision epochs E1/E3, the baseline the cut epoch departs from"
+  }
+ ],
+ "assets": [
+  {
+   "id": "salt3-f22 tarball",
+   "sha256": "c7de53438761aeaacb5b28347fb0e9b00b5f5b1036843688e3d5d5edd4f7a37e",
+   "copies": [
+    "data_cache/grader_pinned/salt3-f22",
+    "data_cache/arm_assets_classical/salt3-f22",
+    "data_cache/arm_assets_fm/salt3-f22"
+   ]
+  },
+  {
+   "id": "parsnip_fold0.pt",
+   "sha256": "283381682be5d5212e5502256549cc153450168bc9f9c66d4e36aa03e2bdd705",
+   "copies": [
+    "data_cache/grader_pinned/parsnip_fold0.pt",
+    "data_cache/arm_assets_fm/parsnip_fold0.pt"
+   ]
+  },
+  {
+   "id": "ALeRCE raw light curves (16 objects examined, 1 selected)",
+   "sha256_list": "data_cache/ALERCE_RAW_SHA256SUMS",
+   "endpoint": "https://api.alerce.online/ztf/v1/objects/{oid}/lightcurve"
+  },
+  {
+   "id": "SFD dust maps (wave-2 copy)",
+   "sha256": {
+    "SFD_dust_4096_ngp.fits": "50b6aaad0b880762d0fd081177802dcc17c39d7044a410dd5649e2dfd0503e97",
+    "SFD_dust_4096_sgp.fits": "84891a59054adab44a7be54051e4dcf0e66e3f13eee0d845ce3739242f553b83"
+   }
+  }
+ ],
+ "environment": {
+  "python": "3.12.3 venv at /tmp/claude-1000/.../scratchpad/venv",
+  "sncosmo": "2.13.1",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "astropy": "8.0.1",
+  "torch": "2.14.0 (CPU for the grader)",
+  "lcdata": "1.1.2",
+  "extinction": "0.4.9",
+  "dustmaps": "1.0.14",
+  "pandas": "3.0.5"
+ },
+ "completeness": "Every random draw in this agent's work is listed with its derivation from the frozen protocol hash. Not covered: the subject-side sampling parameters of the two arms (the coordinator launches them) and any seed inside sncosmo or torch initialisation, which the deterministic-repeat control (delta exactly 0.0) shows do not enter the score."
+}

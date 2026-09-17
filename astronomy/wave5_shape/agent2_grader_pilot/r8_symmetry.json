@@ -1,0 +1,166 @@
+{
+ "banner": "PRE-RATIFICATION PILOT (harness check only); R8 arm symmetry table, printed before any scored cell",
+ "protocol_sha256": "ef58005482a049e5d58131267b0758ab0bfae3bb1c674650d6302f545fa709bc",
+ "amendments_sha256": "91c9486e3960448562c396ec7e7e1c17226becb9a6acb289efc685dd26ce1454",
+ "item_id": "PILOT-001",
+ "rows": [
+  {
+   "attribute": "prompt bytes (declared)",
+   "classical": 6321,
+   "fm": 7061,
+   "difference": true,
+   "ruling": "ACCEPTED. The two prompts are byte-identical for the first 4699 bytes (task, inputs, scope, scoring, submission schema, forbidden paths, limits); every differing byte is inside '## Your tools and output path'. runtime.md R8: reference file paths are necessary for a tool-using arm, so prompt symmetry is not prompt neutrality; the difference is exactly the extra tool and the two directory paths."
+  },
+  {
+   "attribute": "prompt sha256 (declared)",
+   "classical": "55ce2897cb44fb4da6c1547b1506a241e3bb289c0e128fcbe5c865bfd4b987a8",
+   "fm": "a6d0b2182508d0853b9faee903dd6f0c09b9f78726f8ec1d1a0bd2b775747a55",
+   "difference": true,
+   "ruling": "ACCEPTED, same cause. R6: the coordinator must hash the prompt it actually emits and record it beside these declared hashes; a mismatch voids the cell."
+  },
+  {
+   "attribute": "identical prompt prefix bytes",
+   "classical": 4699,
+   "fm": 4699,
+   "difference": false,
+   "ruling": "No difference (4699 bytes, identical)."
+  },
+  {
+   "attribute": "callable tools (scripts)",
+   "classical": 4,
+   "fm": 5,
+   "classical_list": [
+    "check_submission.py",
+    "parametric_fit.py",
+    "predict.py",
+    "salt3_fit.py"
+   ],
+   "fm_list": [
+    "check_submission.py",
+    "parametric_fit.py",
+    "parsnip_run.py",
+    "predict.py",
+    "salt3_fit.py"
+   ],
+   "difference": true,
+   "ruling": "ACCEPTED and intended: this is the manipulated variable (classical vs classical+FM channel). The four shared tools are byte-identical across toolsets (same sha256), so only parsnip_run.py differs."
+  },
+  {
+   "attribute": "shared tool file hashes",
+   "classical": {
+    "check_submission.py": "d53ca589a0dea1e7a8e057f8a3cc6cd9440c8154e94ed8d3d77021c4a22c1c9b",
+    "parametric_fit.py": "f962ea2b0ec6596b6ae526ba81cb2b6fce3f450953ead35ea5b0e3e9c83708ee",
+    "predict.py": "c740db07e3246b3a26cb1969d65d85bc8be0c506d2bebd149e803eaada75516b",
+    "salt3_fit.py": "0649f5504cf1cd5cb1da3839dfd4c495d135babdd1a40bf50b723607af22d878"
+   },
+   "fm": {
+    "check_submission.py": "d53ca589a0dea1e7a8e057f8a3cc6cd9440c8154e94ed8d3d77021c4a22c1c9b",
+    "parametric_fit.py": "f962ea2b0ec6596b6ae526ba81cb2b6fce3f450953ead35ea5b0e3e9c83708ee",
+    "predict.py": "c740db07e3246b3a26cb1969d65d85bc8be0c506d2bebd149e803eaada75516b",
+    "salt3_fit.py": "0649f5504cf1cd5cb1da3839dfd4c495d135babdd1a40bf50b723607af22d878"
+   },
+   "difference": false,
+   "ruling": "No difference: identical bytes, including forward_models.py (302586fd56999738...)."
+  },
+  {
+   "attribute": "FM-only tool",
+   "classical": null,
+   "fm": {
+    "file": "parsnip_run.py",
+    "sha256": "f08fc1da4fa94a7bb1a51a614459bb8fa2eb7033ef56aa4c3d7424c25850bb84",
+    "checkpoint": "parsnip_fold0.pt sha256 283381682be5d5212e5502256549cc153450168bc9f9c66d4e36aa03e2bdd705"
+   },
+   "difference": true,
+   "ruling": "MOUNTED WITH A STATED LIMITATION (AM-2 item 4, DS-01): the checkpoint was trained on BTS 2019-2021 light curves truncated at E1/E3 and has seen almost no photometry at the graded phases; its latent is not submittable under AM-2. The limitation is stated in the FM prompt, the ParSNIP grader card and here. Consequence: the FM channel is weak by construction, so a null or negative FM result in this pilot is uninformative about FM value."
+  },
+  {
+   "attribute": "model assets reachable",
+   "classical": {
+    "salt3_color_correction.dat": "92caf54c0adedb6aa95add602022508cac4ee99324668686c94769103da9339b",
+    "salt3_color_dispersion.dat": "537a2807a1d0ac923630a5461901596ab1fe61cfda3640e21eb8d92e0c99f2bc",
+    "salt3_lc_covariance_01.dat": "58dade9a3480304567c1df10000d806d50e5ab863bbb6e5f4f1a432ebecf7f51",
+    "salt3_lc_variance_0.dat": "3637f1093732a15ac1254ccefdd304e46740228407649bd36b6cb330d6fa8e8b",
+    "salt3_lc_variance_1.dat": "b5267e57b7c8cc11b76b1ddfa4fb723a74183995f0f914331a188ff1e74ee75b",
+    "salt3_template_0.dat": "f09df51e2567a9b4e00c4846723c7b640dcbda06a4bc2f0d4bc559915f334813",
+    "salt3_template_1.dat": "46a11e7c9915159496741599b3f55c2eda98c2058aec32e8300281bc1eab3bf9"
+   },
+   "fm": {
+    "salt3_color_correction.dat": "92caf54c0adedb6aa95add602022508cac4ee99324668686c94769103da9339b",
+    "salt3_color_dispersion.dat": "537a2807a1d0ac923630a5461901596ab1fe61cfda3640e21eb8d92e0c99f2bc",
+    "salt3_lc_covariance_01.dat": "58dade9a3480304567c1df10000d806d50e5ab863bbb6e5f4f1a432ebecf7f51",
+    "salt3_lc_variance_0.dat": "3637f1093732a15ac1254ccefdd304e46740228407649bd36b6cb330d6fa8e8b",
+    "salt3_lc_variance_1.dat": "b5267e57b7c8cc11b76b1ddfa4fb723a74183995f0f914331a188ff1e74ee75b",
+    "salt3_template_0.dat": "f09df51e2567a9b4e00c4846723c7b640dcbda06a4bc2f0d4bc559915f334813",
+    "salt3_template_1.dat": "46a11e7c9915159496741599b3f55c2eda98c2058aec32e8300281bc1eab3bf9",
+    "parsnip_fold0_pt": "283381682be5d5212e5502256549cc153450168bc9f9c66d4e36aa03e2bdd705"
+   },
+   "difference": true,
+   "ruling": "ACCEPTED: the SALT3-f22 files are byte-identical in both arm asset directories; the FM directory additionally holds the ParSNIP package and checkpoint. Both differ from the grader's copy in path only (same hashes), which is the separation design in protocol section 5."
+  },
+  {
+   "attribute": "output cap",
+   "classical": "final message <= 200 words; notes <= 2000 chars; <= 60 tool calls; one submission JSON",
+   "fm": "final message <= 200 words; notes <= 2000 chars; <= 60 tool calls; one submission JSON",
+   "difference": false,
+   "ruling": "No difference (identical sentences in the shared prefix)."
+  },
+  {
+   "attribute": "reference material supplied",
+   "classical": [
+    "item/pre_cut.csv",
+    "item/item_meta.json",
+    "item/scope.json"
+   ],
+   "fm": [
+    "item/pre_cut.csv",
+    "item/item_meta.json",
+    "item/scope.json"
+   ],
+   "difference": false,
+   "ruling": "No difference. Both arms get the same three files (hashes in item/ITEM_SHA256SUMS) and no identity, coordinates or catalogue row. Neither gets held-out data."
+  },
+  {
+   "attribute": "presentation mode",
+   "classical": "files on disk + CLI tools run through one pinned interpreter",
+   "fm": "files on disk + CLI tools run through one pinned interpreter",
+   "difference": false,
+   "ruling": "No difference; same interpreter path in both prompts."
+  },
+  {
+   "attribute": "submittable families",
+   "classical": [
+    "SALT3",
+    "DECLINE"
+   ],
+   "fm": [
+    "SALT3",
+    "DECLINE"
+   ],
+   "difference": false,
+   "ruling": "No difference (AM-2 scope, item/scope.json, identical for both arms)."
+  },
+  {
+   "attribute": "output path",
+   "classical": "arms/outputs/classical/submission.json",
+   "fm": "arms/outputs/fm/submission.json",
+   "difference": true,
+   "ruling": "ACCEPTED, cosmetic and necessary: identical filenames under per-arm directories so the two arms cannot overwrite one another. Classified cosmetic under R7 because the path is not instruction content; it sits inside the tool section so the shared prefix stays identical."
+  },
+  {
+   "attribute": "subject and sampling parameters",
+   "classical": "UNDEMONSTRATED at this stage",
+   "fm": "UNDEMONSTRATED at this stage",
+   "difference": null,
+   "ruling": "NOT SETTLED HERE. The coordinator launches both arms as fresh subagents and must record model id, temperature, tool grant (R4 model-side catalogue) and transcript hash per arm before grading. Brief constraint 3: R4 cannot be enforced for shell-capable subagents, only instructed and audited."
+  },
+  {
+   "attribute": "separation audit",
+   "classical": "transcript grep, AM-2 item 5",
+   "fm": "transcript grep, AM-2 item 5",
+   "difference": false,
+   "ruling": "No difference: the same forbidden-path and network greps are applied to both transcripts; a hit voids that arm's grade as VOID:SEPARATION_BREACH."
+  }
+ ],
+ "exit_condition": "runtime.md R8: every difference carries a ruling. 7 differences, 7 rulings; 1 row (subject and sampling parameters) is explicitly left to the coordinator and blocks the stage exit until recorded.",
+ "completeness": "Covers prompts, tools, assets, caps, reference material, presentation, scope, output paths, separation audit. Does not cover subject identity, sampling parameters, emitted-prompt hashes or per-arm tool grants, which only the launching session can record."
+}

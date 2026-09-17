@@ -1,0 +1,17 @@
+{
+ "item_id": "R1-SYNTH-001",
+ "family": "SALT3",
+ "parameters": {
+  "z": 0.05,
+  "t0": 59800.0,
+  "x0": 0.0012,
+  "x1": 0.5,
+  "c": 0.05
+ },
+ "rejected_rivals": [
+  {
+   "family": "Bazin",
+   "reason": "R1 stub: true parameters of the simulator"
+  }
+ ]
+}

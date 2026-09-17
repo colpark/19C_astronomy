@@ -1,0 +1,22 @@
+{
+ "item_id": "PILOT-001",
+ "ZTFID": "ZTF18aasyjhd",
+ "raw_sha256": "aecb21d7bca11152c46bf3a4075da46769684754c4462ddb1da13b9bc601b7fe",
+ "ra_mean_pos_det": 222.3234984516483,
+ "dec_mean_pos_det": 27.279993409890107,
+ "mwebv_sfd": 0.02979479916393757,
+ "sfd_files_sha256": {
+  "SFD_dust_4096_ngp.fits": "50b6aaad0b880762d0fd081177802dcc17c39d7044a410dd5649e2dfd0503e97",
+  "SFD_dust_4096_sgp.fits": "84891a59054adab44a7be54051e4dcf0e66e3f13eee0d845ce3739242f553b83"
+ },
+ "counts": {
+  "pre_cut_detections": {
+   "ztfg": 9,
+   "ztfr": 7
+  },
+  "held_out_detections": {
+   "ztfg": 35,
+   "ztfr": 35
+  }
+ }
+}

@@ -1,0 +1,66 @@
+{
+ "banner": "PRE-RATIFICATION PILOT (harness check only). This agent's disagreements, listed and not reconciled.",
+ "against_agent1_shape_record": {
+  "file": "astronomy/wave5_shape/agent1_census_shape/shape_record.json",
+  "sha256": "b8612607ec43f308a7e8ded23b05880434cc1266151afdc117e31763e244f5ad"
+ },
+ "items": [
+  {
+   "id": "DS-01",
+   "agent1": "wave-2 ZTF ParSNIP folds cannot act as a grader; an FM tool on them has never seen post-cut photometry",
+   "effect": "ACCEPTED. G-ParSNIP is certified only for the arithmetic of its path on a decoder-generated synthetic item and is NOT an admissible pilot grader (AM-2). The ParSNIP family is not submittable for PILOT-001. parsnip_run.py stays mounted for the FM arm as evidence only, with the truncation stated in the prompt, the card and r8_symmetry.json.",
+   "residual_disagreement": "The protocol as frozen (section 7) listed ParSNIP as a submittable family; AM-2 removes it. The frozen text is not edited, so section 7 and AM-2 disagree on paper: AM-2 governs."
+  },
+  {
+   "id": "DS-03",
+   "agent1": "SALT3-f22 covers the SN Ia family only, phase -20..+50 d, no ZTF training data",
+   "effect": "ACCEPTED and now binding: it is the whole pilot grader. The pilot object's family, read after the seal, is SN II, so the pilot returns OUT_OF_SCOPE:NON_IA_OBJECT and no score. The zero-flux-outside-phase-range convention is recorded in the G-SALT3 card as a disagreement with K21."
+  },
+  {
+   "id": "DS-04",
+   "agent1": "held-out residuals share one parameter vector, so gate 3 counts 1 scalar per unit",
+   "effect": "ACCEPTED. The protocol reports per-band chi2 but scores one scalar S per item, so the yield claim in SHAPE_REEVALUATION section 3 ('several scalars per object') does not hold for this grader."
+  },
+  {
+   "id": "DS-06",
+   "agent1": "scored only on held-out photometry the task is a forecast (infer), and the held-out points are public",
+   "effect": "PARTLY ACCEPTED. The answer object here is a model instance rendered by the frozen grader, never fluxes: a submission containing a flux array fails schema (coverage control 3, fired). That keeps the answer object on the generate side. The exposure point is accepted in full: the held-out epochs are public, the arms have shell access, so separation is procedural. AM-2 item 5 declares the transcript audit (forbidden paths and network hosts) and records R4 as UNDEMONSTRATED.",
+   "residual_disagreement": "Whether an item whose answer object is a model instance but whose grading data are public is generate or infer is a shape ruling this agent does not own. Both readings are recorded."
+  },
+  {
+   "id": "DS-07",
+   "agent1": "published fits exist in bulk (ZTF SN Ia DR2 to Dec 2020, Superphot+ Table 5)",
+   "effect": "ACCEPTED as a P3 counting problem, not run here (refusal 1). For PILOT-001, peaking 2022-06, the DR2 window does not cover it; contamination_check.json records that neither the DR2 tables nor the Superphot+ Zenodo table were checked, so the ruling is UNDEMONSTRATED-leaning-clean, not CLEAN."
+  },
+  {
+   "id": "DS-10",
+   "agent1": "'first detection +10 d' and '>= 20 epochs' are conventional; derive them or mark UNDEMONSTRATED",
+   "effect": "ACCEPTED. AM-2 item 6 marks the cut (+10 d), the horizon (+60 d), the 5% error floor, the 5-point band minimum and every selection threshold UNDEMONSTRATED as derived quantities. Counted for PILOT-001: E1 gives 1 detection, E3 gives 5, equal to the SALT3 parameter count (0 dof), which is the cause recorded in protocol section 1 for not using the ratified epochs.",
+   "residual_disagreement": "The cause (a fit needs more points than parameters) is recorded; the particular value 10 d is not derived from any recorded quantity and needs PI ratification or replacement."
+  },
+  {
+   "id": "DS-11",
+   "agent1": "the floor may use only families the grader can render; Bazin/Villar have no frozen grader; ParSNIP default encoding needs a redshift",
+   "effect": "PARTLY ACCEPTED. The floor of record for the pilot is SALT3 at defaults only (AM-2 item 3).",
+   "residual_disagreement": "A frozen Bazin/Villar grader now exists: G-PARAM, written this wave from code, hashed inside forward_models.py, with must-fire and must-not-fire controls run (tool_cards/tool_card_parametric_grader.json). So 'no frozen grader for Bazin/Villar' is no longer true as a fact about the inventory; it remains true that G-PARAM is not certified on real data and that AM-2 keeps it out of the pilot. On ParSNIP: the wave-2 folds do not need a redshift (predict_redshift=True with a neutralised photo-z prior), so the redshift objection does not apply to this checkpoint; the training-truncation objection (DS-01) does."
+  }
+ ],
+ "other_disagreements": [
+  {
+   "topic": "must-not-fire control",
+   "detail": "The declared float-noise perturbation was a 5.2 s shift in t0 and fired on three graders; the grader was right and the control was wrong (AM-1, replay case AST2W5-01). Recorded as a v1 FAIL, not reconciled away."
+  },
+  {
+   "topic": "mechanical floor metric",
+   "detail": "Pre-cut chi2 per point rewards in-sample fit: on the R1 synthetic item the Bazin floor reached chi2/pt 6e-16 on 3 points per band and then scored S = 49.2 on held-out epochs against 0.58 for the truth. The metric is kept as declared (replay case AST2W5-02)."
+  },
+  {
+   "topic": "web search summary vs catalogue",
+   "detail": "A web search tool summary asserted the pilot object is Type IIn at z 0.154 at RA 18:19:11 Dec +41:01:02; BTS and ALeRCE both place it at 14:49:17.6 +27:16:48 and BTS types it SN II at z 0.143. The summary is recorded as unverified and was not used."
+  },
+  {
+   "topic": "ZTF bandpasses",
+   "detail": "The grader pins the SALT3 and ParSNIP files but not the sncosmo ztfg/ztfr transmission curves, which are downloaded into an astropy cache; their hashes are recorded in the G-SALT3 card but not enforced at load."
+  }
+ ]
+}

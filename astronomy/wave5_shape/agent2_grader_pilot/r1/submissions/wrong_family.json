@@ -1,0 +1,26 @@
+{
+ "item_id": "R1-SYNTH-001",
+ "family": "Bazin",
+ "parameters": {
+  "ztfg": {
+   "A": 849.6248362975778,
+   "t0": 59791.071840574645,
+   "tau_rise": 3.0605284753987694,
+   "tau_fall": 22.604123994978547,
+   "B": -18.00253958687652
+  },
+  "ztfr": {
+   "A": 956.6841491326038,
+   "t0": 59792.92566081285,
+   "tau_rise": 3.455657989997356,
+   "tau_fall": 45.17637976855117,
+   "B": 18.309740490455763
+  }
+ },
+ "rejected_rivals": [
+  {
+   "family": "SALT3",
+   "reason": "R1 stub: deliberately wrong family (floor Bazin generator on pre-cut)"
+  }
+ ]
+}

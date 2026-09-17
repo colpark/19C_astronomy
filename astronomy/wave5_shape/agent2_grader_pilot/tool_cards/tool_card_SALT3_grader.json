@@ -1,0 +1,109 @@
+{
+ "name": "G-SALT3: frozen SALT3-f22 forward-model grader (sncosmo 2.13.1) for generate / inverse problem",
+ "role": "scorer",
+ "roles_all_from_code": [
+  "scorer (grade.py -> forward_models.ForwardModels.predict('SALT3') -> score_points)",
+  "generator (the same predict path, used by simulate.py and arm tools)"
+ ],
+ "written_from": "code",
+ "code_pin": "grader_private/forward_models.py sha256 302586fd569997382bd9d46a564722c0d91410a79cad6ebef556a665d677d36f; grade.py; sncosmo 2.13.1 (venv site-packages): models.py SALT2Source._flux L809-813, Model._flux L1546+, F99Dust L2018-2033, _bandflux L122-168; builtins.py L452 ztfg/ztfr -> bandpasses/ztf/P48_g.dat, P48_R.dat",
+ "quantity_returned": "Model.bandflux(b, mjd, zp=25, zpsys='ab') for b in ztfg/ztfr: synthetic photometry of F(t,lambda) = (1/(1+z)) x0 (M0 + x1 M1)(restphase, restwave) 10^(-0.4 CL(restwave) c), propagated through F99Dust(r_v=3.1, ebv=item mwebv) in the observer frame, integrated through the ZTF P48 transmission curves and normalised to AB at ZP 25. grade.py turns it into S = mean over bands (>=5 held-out points) of mean((f - m)/max(sigma, 0.05|f|))^2 and Q = 1/(1+S).",
+ "defining_paper": "Kenworthy et al. 2021, ApJ 923, 265 (SALT3.K21; read in full by wave-1 agent 4, sources/arxiv_2104.07795.txt); served source is the F22 recalibration (Brout et al. 2022, not read). Score formula: grader_protocol_FROZEN.md section 3 (this wave).",
+ "accuracy_against_scored_measurement": "Synthetic only (tool_cards/control_results.json, AM-1 v2): truth on CTRL-SALT3 scores S = 0.532 (ztfg chi2/pt 0.488 N=13, ztfr 0.576 N=14); wrong set (t0+15 d, x1=-3) scores S = 223.6. No measurement on real ZTF held-out photometry exists yet.",
+ "what_it_is_not": "Not a classifier and not a judge of physical correctness: it scores whatever SALT3 parameters are submitted by how well they predict later fluxes. Not a fitter: it never adjusts parameters. Not valid outside rest-frame phase -20..+50 d, where it predicts 0 flux. Not trained on ZTF photometry (K21 compilation has none). Not including SALT3 model covariance. Not the arm's copy: the grader loads data_cache/grader_pinned/salt3-f22 and hash-checks all seven files at every load.",
+ "conventions": [
+  "flux ZP 25 AB from ALeRCE magpsf with isdiffpos sign; fluxerr = 0.921034 |flux| sigmapsf",
+  "MW dust: sncosmo.F99Dust(r_v=3.1), effect name 'mw', frame 'obs', parameter mwebv fixed from item_meta.json (not submitted)",
+  "error floor sigma_eff = max(sigma, 0.05|f|); bands with < 5 held-out detections are excluded",
+  "z domain 0 < z <= 1.5; any non-finite parameter is COVERAGE_FAIL:SCHEMA",
+  "outside the source time range sncosmo returns 0 flux (verified by probe: bandflux at obs +60 and +100 d for z=0.05 returned 0.0); no special handling",
+  "bandpasses ztfg/ztfr are sncosmo built-ins downloaded to ~/.cache/astropy/sncosmo/bandpasses/ztf (P48_g.dat sha256 cb233f2aa195709dfd91cdb89b9744b247aaeeba412ec56efa15a7256259213a, P48_R.dat sha256 838d332ce90372753a13fbe4975f4ea93de2e1b6f48c0198797fb80283ff02a7); not re-pinned inside the grader"
+ ],
+ "served_checkpoint": {
+  "identifier": "salt3-f22 v2.0 files in data_cache/grader_pinned/salt3-f22 (copied from astronomy/agent4_tools_instrument/code/_downloaded_artifacts/salt3-f22)",
+  "pin": "tarball sha256 c7de53438761aeaacb5b28347fb0e9b00b5f5b1036843688e3d5d5edd4f7a37e; per-file pins in forward_models.SALT3_PINS, checked at load",
+  "matches_adjudicating_composition": true
+ },
+ "substitution": null,
+ "disagreements": [
+  {
+   "topic": "time-range behaviour",
+   "paper": "K21 defines the model over -20..+50 d rest frame and says nothing about predictions outside it",
+   "code": "sncosmo returns 0 flux outside the range rather than raising; the grader scores that 0 as the prediction (protocol section 3), which a light-curve fitter would never do"
+  },
+  {
+   "topic": "chi2 covariance",
+   "paper": "K21 Eqs. 4, 11: Sigma_Total = diag(sigma_phot^2) + Sigma_Model including colour scatter",
+   "code": "the grader residual uses photometric sigma with a 5% floor and no Sigma_Model; the floor is a substitute for model uncertainty, not the K21 model covariance"
+  },
+  {
+   "topic": "dust law",
+   "paper": "ParSNIP (the rival SN family) corrects MW extinction with FM07 R_V=3.1 on input",
+   "code": "the grader applies Fitzpatrick 1999 (sncosmo.F99Dust via extinction.Fitzpatrick99) forward on the model for both SALT3 and ParSNIP"
+  },
+  {
+   "topic": "served model vs defining paper",
+   "paper": "SALT3.K21",
+   "code": "salt3-f22 v2.0 (Fragilistic recalibration); inherited from the wave-1 card, still unreconciled"
+  },
+  {
+   "topic": "must-not-fire control specification",
+   "paper": "controls_spec_PRE_RUN.md declared a p(1+1e-9) perturbation on every parameter as float noise",
+   "code": "on t0 (MJD 59800) that is a 5.2 s shift and moved S by 3.24e-5 > tol 1e-6 (v1 FAIL, control_results_v1.json); amended AM-1 to t0 + 1e-9 d; v2 |dS| = 9.17e-09 (PASS)"
+  },
+  {
+   "topic": "ZTF applicability",
+   "paper": "K21 training contains no ZTF photometry",
+   "code": "ztfg/ztfr are registered and evaluated with no training-sample support"
+  }
+ ],
+ "construct_validity_I4": {
+  "question": "Does the held-out residual measure what the program scores?",
+  "scored_quantity": "generate / inverse problem: the predictive adequacy of a submitted forward model (family + parameters) for photometry the arm never saw, i.e. the oracle's verdict on whether the generated object meets the constraint 'reproduces the later light curve' (shape.md A3 row for generate).",
+  "ruling": "PASS for predictive fit on held-out ZTF g/r difference photometry in (t_first+10, t_first+60] d. FAIL as a measure of physical truth (true class, true redshift, true explosion physics): no term in S depends on whether the parameters are physically correct, only on whether the forward model reproduces the later fluxes. Any program claim must be worded as predictive fit, never as correct physical inference.",
+  "weaknesses": [
+   "Degeneracy: physically wrong parameters (wrong z with compensating x0/x1/c, or a flexible Bazin/Villar curve) can predict the held-out fluxes as well as correct ones; S cannot separate them.",
+   "Family asymmetry in model range: SALT3 returns 0 flux outside rest-frame -20..+50 d, ParSNIP is defined over +-250 d, parametric curves everywhere; late held-out points therefore penalise SALT3 by construction, a property of the family and not of the arm.",
+   "The 5% error floor down-weights high-S/N points and sets the scale at which systematic model error is forgiven; a different floor re-orders submissions near the floor.",
+   "Equal band weighting: a band with 5 points counts as much as one with 20.",
+   "Held-out residuals within a band are correlated (host subtraction residuals, calibration offsets per field/night), so N_b overstates independent information.",
+   "Horizon choice: the +60 d window mixes peak and early decline; a different horizon changes which family is favoured (e.g. Villar plateau vs SALT3 cut-off).",
+   "model covariance (SALT3 modelcov) is excluded from S, so SALT3's own stated model uncertainty is not credited.",
+   "Rejected-rival reasons are recorded but not scored; the written-rejection branch has no grader.",
+   "Near-zero or negative fluxes (pre-explosion or late) are scored like any other point; a baseline B term in parametric families can absorb them, SN families cannot.",
+   "Separation is procedural (brief constraint 3): if an arm reads grader_private/, the residual measures memorised data, not prediction."
+  ]
+ },
+ "controls": {
+  "must_fire": {
+   "rule": "S_wrong >= S_ref + 5 and S_wrong >= 3 S_ref",
+   "fired": true
+  },
+  "S_ref": 0.5317033924001794,
+  "S_wrong": 223.6278531538639,
+  "must_not_fire_v1": {
+   "rule": "|dS| <= 1e-06",
+   "deltas": {
+    "perturbed": 3.237893239926848e-05,
+    "repeat": 0.0,
+    "roundtrip": 0.0
+   },
+   "fired": true
+  },
+  "must_not_fire_v2_AM1": {
+   "rule": "|dS| <= 1e-06",
+   "deltas": {
+    "perturbed": 9.173889981006766e-09,
+    "repeat": 0.0,
+    "roundtrip": 0.0
+   },
+   "fired": false
+  },
+  "coverage_controls": "PASS",
+  "results_file": "tool_cards/control_results.json",
+  "spec": "tool_cards/controls_spec_PRE_RUN.md"
+ },
+ "certification_I5": "Known-input test PASS (synthetic truth near-ideal); negative control PASS (wrong set fires); must-not-fire FAIL at v1 as declared, PASS at v2 after AM-1; coverage controls 8/8. Agent reachability: arms reach an identical forward_models.py copy via arms/tools/*/predict.py, not the grader. Receipt resolution: every grade JSON carries protocol, forward_models, grade.py, item_meta, held_out, submission and asset hashes. Status: CERTIFIED for the pilot on synthetic inputs only; UNDEMONSTRATED on real held-out ZTF data.",
+ "completeness": "Covered from code: forward_models.py, grade.py, sncosmo models.py SALT2Source._flux, Model._flux, F99Dust, _bandflux, builtins ztf bandpasses. Not covered: compiled BicubicInterpolator source (behaviour outside grid checked by probe only), F22 paper, ZTF bandpass provenance beyond the sncosmo download. Governing protocol: grader_protocol_FROZEN.md sha256 ef58005482a049e5d58131267b0758ab0bfae3bb1c674650d6302f545fa709bc.",
+ "pilot_scope_AM2": "AM-2: the only admissible grader for PILOT-001. Renders the SN Ia family only (DS-03); an item whose family is not SN Ia is graded OUT_OF_SCOPE:NON_IA_OBJECT, a scope failure and not a score."
+}

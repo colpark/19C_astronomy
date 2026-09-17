@@ -1,0 +1,17 @@
+{
+ "item_id": "CTRL-SALT3",
+ "family": "SALT3",
+ "parameters": {
+  "z": 0.05000000005000001,
+  "t0": 59800.000000001,
+  "x0": 0.0012000000012,
+  "x1": 0.5000000005,
+  "c": 0.05000000005000001
+ },
+ "rejected_rivals": [
+  {
+   "family": "Bazin",
+   "reason": "control submission"
+  }
+ ]
+}

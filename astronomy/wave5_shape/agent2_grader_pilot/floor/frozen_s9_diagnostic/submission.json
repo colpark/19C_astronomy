@@ -1,0 +1,27 @@
+{
+ "item_id": "PILOT-001",
+ "family": "Bazin",
+ "parameters": {
+  "ztfg": {
+   "A": 180.03256821640565,
+   "t0": 59736.06438984953,
+   "tau_rise": 1.9748403809885207,
+   "tau_fall": 499.9999999999571,
+   "B": 42.24064771891731
+  },
+  "ztfr": {
+   "A": 238.8610141245045,
+   "t0": 59740.78488996632,
+   "tau_rise": 1.572557354581032,
+   "tau_fall": 499.99999995930364,
+   "B": 83.21603376778198
+  }
+ },
+ "rejected_rivals": [
+  {
+   "family": "SALT3",
+   "reason": "mechanical floor: pre-cut chi2 per point 0.3689 >= chosen 0.1819"
+  }
+ ],
+ "notes": "mechanical floor (grader_protocol_FROZEN.md section 9); no agent"
+}

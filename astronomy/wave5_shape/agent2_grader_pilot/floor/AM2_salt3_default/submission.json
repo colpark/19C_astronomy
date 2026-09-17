@@ -1,0 +1,26 @@
+{
+ "item_id": "PILOT-001",
+ "family": "SALT3",
+ "parameters": {
+  "z": 0.1850179660101875,
+  "t0": 59747.553629213435,
+  "x0": 0.00037787279791547004,
+  "x1": 0.9005427778030011,
+  "c": -0.17369195623164832
+ },
+ "rejected_rivals": [
+  {
+   "family": "Bazin",
+   "reason": "mechanical floor under AM-2: not a grader-renderable submittable family"
+  },
+  {
+   "family": "Villar",
+   "reason": "mechanical floor under AM-2: not a grader-renderable submittable family"
+  },
+  {
+   "family": "ParSNIP",
+   "reason": "mechanical floor under AM-2: not a grader-renderable submittable family"
+  }
+ ],
+ "notes": "AM-2 mechanical floor: sncosmo fit_lc SALT3 at defaults (z bounds 0.005-0.3), no agent"
+}

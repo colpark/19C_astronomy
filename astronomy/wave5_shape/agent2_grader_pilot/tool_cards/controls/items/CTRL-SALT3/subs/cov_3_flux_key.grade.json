@@ -1,0 +1,14 @@
+{
+ "banner": "PRE-RATIFICATION PILOT (harness check only); not a score record",
+ "graded_utc": "2026-09-17T18:15:08.343969+00:00",
+ "protocol_sha256": "ef58005482a049e5d58131267b0758ab0bfae3bb1c674650d6302f545fa709bc",
+ "forward_models_sha256": "302586fd569997382bd9d46a564722c0d91410a79cad6ebef556a665d677d36f",
+ "grade_py_sha256": "52f12faa901225c22090743783158fdac20bbbe4d42e973c1e4b1905a15e10b5",
+ "item_id": "CTRL-SALT3",
+ "item_meta_sha256": "0418900b7bfef7b616c9f299bbe88dabe2c15d3557c113e099d3a5d045f296cf",
+ "held_out_sha256": "5735583904f2b0146a0cd9c1abca5d76d04c261dca48dfc8a75092ab39e12958",
+ "submission_path": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/tool_cards/controls/items/CTRL-SALT3/subs/cov_3_flux_key.json",
+ "submission_sha256": "bb9e9dfc4142b4a46e69dac6c6101b196bc4669889407aae9e9caccb11dbd2de",
+ "status": "COVERAGE_FAIL:SCHEMA",
+ "message": "unknown top-level keys ['predicted_flux']"
+}

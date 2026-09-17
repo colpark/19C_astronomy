@@ -1,0 +1,52 @@
+{
+ "banner": "PRE-RATIFICATION PILOT (harness check only); not a score record",
+ "graded_utc": "2026-09-17T18:15:08.328212+00:00",
+ "protocol_sha256": "ef58005482a049e5d58131267b0758ab0bfae3bb1c674650d6302f545fa709bc",
+ "forward_models_sha256": "302586fd569997382bd9d46a564722c0d91410a79cad6ebef556a665d677d36f",
+ "grade_py_sha256": "52f12faa901225c22090743783158fdac20bbbe4d42e973c1e4b1905a15e10b5",
+ "item_id": "CTRL-PARSNIP",
+ "item_meta_sha256": "595aecedee3e1600fb765064deaecda8bb34e3b84a02f3ff83870ebab1d52bd6",
+ "held_out_sha256": "bdfcfd520f56c1330e61edff74e88b60e6276224a350012115b2c0aa75e02956",
+ "submission_path": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/tool_cards/controls/items/CTRL-PARSNIP/subs/ref_roundtrip.json",
+ "submission_sha256": "8b6477f8c6c9712a204c8181a6d61f9c1c9a66c20005091b7cca73c941c71658",
+ "family": "ParSNIP",
+ "parameters": {
+  "z": 0.05,
+  "t0": 59800.0,
+  "amplitude": 1.0462251590752956e-15,
+  "color": 0.0,
+  "s1": 0.0,
+  "s2": 0.0,
+  "s3": 0.0
+ },
+ "rejected_rivals_families": [
+  "Bazin"
+ ],
+ "asset_hashes": {
+  "parsnip_fold0.pt": "283381682be5d5212e5502256549cc153450168bc9f9c66d4e36aa03e2bdd705",
+  "parsnip_code/parsnip/__init__.py": "03e0a28ec76f9b45ef588524f329fb647c98f16768d6d76711b5526220725d27",
+  "parsnip_code/parsnip/instruments.py": "554255596f858357179527bf1b71680c8ccda1325d9df71ad4420ce0da20a76f",
+  "parsnip_code/parsnip/light_curve.py": "4d31fec667adec92997da0b8bcdb076e5eb1b7cd400f3cda6d9a2361904f3d9f",
+  "parsnip_code/parsnip/parsnip.py": "391174659f097a1ae6db3980dc271e036446f3f096b8fdd6a41115a0791631ad",
+  "parsnip_code/parsnip/settings.py": "5ee455dc620bb1f43c104c940e30c48ba7ce5e26f2de4784d2b2d71789d0329a",
+  "parsnip_code/parsnip/sncosmo.py": "67c73b2d23d01a2eb78378327ba9f5f43f8242ba6dc81a249a3579f08ceaccad",
+  "parsnip_code/parsnip/utils.py": "085bc872b740b6dc2d19d184da81a05e58665089303e3ba9ee7a1f12bd2bdff1"
+ },
+ "bands_excluded_lt5": {},
+ "status": "SCORED",
+ "S": 0.31307483549027704,
+ "Q": 0.7615712166371836,
+ "per_band": {
+  "ztfg": {
+   "N": 13,
+   "chi2_per_point": 0.36045863574108034,
+   "median_abs_resid": 0.41300103412777495
+  },
+  "ztfr": {
+   "N": 14,
+   "chi2_per_point": 0.2656910352394737,
+   "median_abs_resid": 0.40906766648150084
+  }
+ },
+ "diagnostic_pre_cut_chi2_per_point": 0.15996657798842456
+}

@@ -1,0 +1,50 @@
+{
+ "banner": "PRE-RATIFICATION PILOT (harness check only); not a score record",
+ "graded_utc": "2026-09-17T18:15:06.768849+00:00",
+ "protocol_sha256": "ef58005482a049e5d58131267b0758ab0bfae3bb1c674650d6302f545fa709bc",
+ "forward_models_sha256": "302586fd569997382bd9d46a564722c0d91410a79cad6ebef556a665d677d36f",
+ "grade_py_sha256": "52f12faa901225c22090743783158fdac20bbbe4d42e973c1e4b1905a15e10b5",
+ "item_id": "CTRL-VILLAR",
+ "item_meta_sha256": "d6ce087d7790cd8d64288e08690372202256466dbe5a94bd1ae0a00ec5365ce0",
+ "held_out_sha256": "120dc51315fa0f65594698bad94560a5dc3bee6073dde5b8bf67ee5c036c41cd",
+ "submission_path": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/tool_cards/controls/items/CTRL-VILLAR/subs/ref.json",
+ "submission_sha256": "ca8d473003c1cadc7c7620ab2824209127063c6d4528d3dee70949e1a27f6b89",
+ "family": "Bazin",
+ "parameters": {
+  "ztfg": {
+   "A": 895.2018396880925,
+   "t0": 59786.71026547901,
+   "tau_rise": 2.971936847391314,
+   "tau_fall": 23.44650917152813,
+   "B": 10.533482330971042
+  },
+  "ztfr": {
+   "A": 858.6641553338654,
+   "t0": 59787.57924871145,
+   "tau_rise": 3.9312363316723444,
+   "tau_fall": 39.851508472372686,
+   "B": -39.07918896861052
+  }
+ },
+ "rejected_rivals_families": [
+  "SALT3"
+ ],
+ "asset_hashes": {},
+ "bands_excluded_lt5": {},
+ "status": "SCORED",
+ "S": 0.3785888656813269,
+ "Q": 0.7253794259434843,
+ "per_band": {
+  "ztfg": {
+   "N": 13,
+   "chi2_per_point": 0.23119103587509499,
+   "median_abs_resid": 0.3436756598816202
+  },
+  "ztfr": {
+   "N": 12,
+   "chi2_per_point": 0.5259866954875587,
+   "median_abs_resid": 0.49808136836732475
+  }
+ },
+ "diagnostic_pre_cut_chi2_per_point": 0.1602773987394798
+}

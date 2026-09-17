@@ -1,0 +1,59 @@
+{
+ "item_id": "PILOT-001",
+ "pre_cut_sha256": "0f6ab10dc266e6528cccc475a4d3877d12851c76567d5cade01c8944684e9e72",
+ "forward_models_sha256": "302586fd569997382bd9d46a564722c0d91410a79cad6ebef556a665d677d36f",
+ "generators": {
+  "SALT3": {
+   "status": "ok",
+   "pre_cut_chi2_per_point": 0.36892573257531847,
+   "parameters": {
+    "z": 0.1850179660101875,
+    "t0": 59747.553629213435,
+    "x0": 0.00037787279791547004,
+    "x1": 0.9005427778030011,
+    "c": -0.17369195623164832
+   },
+   "info": {
+    "success": true,
+    "message": "Minimization exited successfully.",
+    "ncall": 219,
+    "sncosmo_chisq": 5.902811721205095,
+    "ndof": 11
+   }
+  },
+  "Bazin": {
+   "status": "ok",
+   "pre_cut_chi2_per_point": 0.18194300191656454,
+   "parameters": {
+    "ztfg": {
+     "A": 180.03256821640565,
+     "t0": 59736.06438984953,
+     "tau_rise": 1.9748403809885207,
+     "tau_fall": 499.9999999999571,
+     "B": 42.24064771891731
+    },
+    "ztfr": {
+     "A": 238.8610141245045,
+     "t0": 59740.78488996632,
+     "tau_rise": 1.572557354581032,
+     "tau_fall": 499.99999995930364,
+     "B": 83.21603376778198
+    }
+   },
+   "info": {
+    "ztfg": {
+     "status": 2,
+     "nfev": 59,
+     "n_points": 9
+    },
+    "ztfr": {
+     "status": 2,
+     "nfev": 18,
+     "n_points": 7
+    }
+   }
+  }
+ },
+ "floor": "Bazin",
+ "submission_sha256": "f78d205c129c09013029d218873e57a9b49de5e669e22d01f37d248f790e9f1b"
+}

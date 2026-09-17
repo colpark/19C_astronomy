@@ -1,0 +1,23 @@
+{
+ "banner": "PRE-RATIFICATION PILOT (harness check only); not a score record",
+ "graded_utc": "2026-09-17T18:15:21.761558+00:00",
+ "protocol_sha256": "ef58005482a049e5d58131267b0758ab0bfae3bb1c674650d6302f545fa709bc",
+ "forward_models_sha256": "302586fd569997382bd9d46a564722c0d91410a79cad6ebef556a665d677d36f",
+ "grade_py_sha256": "52f12faa901225c22090743783158fdac20bbbe4d42e973c1e4b1905a15e10b5",
+ "item_id": "PILOT-001",
+ "item_meta_sha256": "b97dcc27cca42e0870ec5caf681c2b2b0d96f9656542b56fcbea532a4d4a2cd8",
+ "held_out_sha256": "bc228eee2d53993b7e6f276e984814e64038d3bbf3583b82444a57a80b49c052",
+ "submission_path": "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave5_shape/agent2_grader_pilot/floor/frozen_s9_diagnostic/submission.json",
+ "submission_sha256": "f78d205c129c09013029d218873e57a9b49de5e669e22d01f37d248f790e9f1b",
+ "scope": {
+  "file_sha256": "849cf432c4d419bdb0862c325cf9be4082e6598a4af7b1dd32bc4d4306129aa6",
+  "amendment": "AM-2",
+  "submittable_families": [
+   "SALT3"
+  ],
+  "decline_allowed": true,
+  "object_family_file": "object_family_POST_SEAL.json"
+ },
+ "status": "COVERAGE_FAIL:SCOPE",
+ "message": "family Bazin not submittable under AM-2"
+}
