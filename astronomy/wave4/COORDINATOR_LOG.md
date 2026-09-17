@@ -1,0 +1,1 @@
+2026-09-17T13:15:24Z | coordinator | wave-4 agents launched in parallel: agent 2 (resumed, price of truth + WISeREP), agent 4 module V (FRESH session, independent of all producers), agent 5 (resumed, integrity close-out). Agent 3 (freeze v3) waits on V records; agent 1 (P4 package) waits on v3 + V.
