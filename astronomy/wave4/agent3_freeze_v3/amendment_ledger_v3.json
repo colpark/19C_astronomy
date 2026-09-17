@@ -1,0 +1,1080 @@
+{
+ "record": "amendment_ledger_v3",
+ "append_only": true,
+ "carried_from": {
+  "path": "astronomy/wave3/agent3_manifest_freeze/amendment_ledger.json",
+  "sha256": "3158967eb835f79af44095cb5ce77d06da31c2205bed94432e9c435c72b2049f"
+ },
+ "entry_kinds": "RATIFICATION, OVERRIDE, UNDEMONSTRATED supply field, ESCALATION, SLOT UPDATE (supersession), PENDING input. Only RATIFICATION and OVERRIDE are PI acts on a slot; the others are recorded so no slot changes without a ledger line. Wave 4 adds NAMING DISAGREEMENT and RULE E marking.",
+ "v1_entries": [
+  {
+   "id": "AMD-V1-01",
+   "manifest_version": "v1",
+   "slot": "k",
+   "kind": "RATIFICATION",
+   "before": {
+    "value": 8,
+    "status": "DERIVED"
+   },
+   "after": {
+    "value": 8,
+    "status": "RATIFIED"
+   },
+   "note": "rounding noted: k_exact = 327/41 = 7.9756 unique sources triggered per night (arXiv:2401.15167 sec 4.1-4.2); 8 is the nearest integer",
+   "cause": "PI ruling: 'k = 8 per night: RATIFIED, rounding noted.'",
+   "source": {
+    "path": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+    "sha256": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+    "locator": "PI-supplied D5 inputs, line 14"
+   },
+   "recorded_utc": "2026-09-17T00:12:58Z"
+  },
+  {
+   "id": "AMD-V1-02",
+   "manifest_version": "v1",
+   "slot": "decision_epoch",
+   "kind": "RATIFICATION (new D4 slot)",
+   "before": null,
+   "after": {
+    "value": {
+     "primary": "first alert",
+     "secondary": "night 3"
+    },
+    "status": "RATIFIED"
+   },
+   "note": "declared in the hashed brief before any composition ran; wave-2 agent 4 operationalised it for ZTF in compositions_FROZEN.md section 1 citing the brief hash; this freeze re-checks that operationalisation against the ratified value (MATCH, see manifest decision_epoch.recheck)",
+   "cause": "PI ruling: 'Decision epoch: new D4 slot. Primary = first alert. Secondary = night 3. Declared now, before any composition runs.'",
+   "source": {
+    "path": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+    "sha256": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+    "locator": "PI-supplied D5 inputs, line 15"
+   },
+   "recorded_utc": "2026-09-17T00:12:58Z"
+  },
+  {
+   "id": "AMD-V1-03",
+   "manifest_version": "v1",
+   "slot": "tool_inventory",
+   "kind": "OVERRIDE (approved amendment)",
+   "before": {
+    "rubin_counterparts": {
+     "ATAT": [
+      "ALeRCE_BHRF"
+     ],
+     "Astromer1": [
+      "ALeRCE_BHRF"
+     ],
+     "Astromer2": [
+      "ALeRCE_BHRF"
+     ]
+    },
+    "status": "DERIVED"
+   },
+   "after": {
+    "rubin_counterparts": {
+     "ATAT": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ],
+     "Astromer1": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ],
+     "Astromer2": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ]
+    },
+    "status": "OVERRIDDEN"
+   },
+   "not_changed": "wave-1 counts (summary.ztf/rubin status counts, condition_a_detail as counted, per-tool ztf/rubin statuses) and the ZTF counterpart mapping; the wave-1 'counterparts' field is kept verbatim and the amended Rubin mapping is added beside it",
+   "cause_of_amendment": "wave-1 agent 4: check (a) FAILS on Rubin for ATAT, Astromer 1 and Astromer 2 because the mapped classical counterpart ALeRCE_BHRF has no Rubin weights (ATAT results_rf_paper.zip holds predictions only); re-mapping to Fink's RFs (the two Fink RF rows in the inventory, both AVAILABLE_UNVERIFIED on Rubin) was proposed for D5 and deliberately not applied after the count, since that would widen a definition",
+   "cause_locator": {
+    "path": "astronomy/agent4_tools_instrument/REPORT.md",
+    "sha256": "f00eb338362e42388875d80b1e0ed484bb0ec073df2adab7260bc390107ea7c2",
+    "locator": "Headline bullet 'Check (a)' lines 22-25; section 2 line 85"
+   },
+   "cause": "PI ruling: 'Fink RF remapping (agent 4 proposal): APPROVED as a D5 amendment with cause. Record it, then apply it. Do not touch the wave 1 counts.'",
+   "source": {
+    "path": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+    "sha256": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+    "locator": "PI-supplied D5 inputs, line 16"
+   },
+   "recorded_utc": "2026-09-17T00:12:58Z"
+  },
+  {
+   "id": "AMD-V1-04",
+   "manifest_version": "v1",
+   "slot": "supplied_by_human.budget",
+   "kind": "UNDEMONSTRATED (SUPPLY placeholder unfilled)",
+   "before": null,
+   "after": {
+    "value": null,
+    "status": "UNDEMONSTRATED"
+   },
+   "cause": "brief field arrived as '[SUPPLY: arm cells or hours]'; coordinator preamble item 1 records it UNDEMONSTRATED",
+   "source": {
+    "path": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+    "sha256": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+    "locator": "line 12; coordinator preamble item 1, line 57"
+   },
+   "recorded_utc": "2026-09-17T00:12:58Z"
+  },
+  {
+   "id": "AMD-V1-05",
+   "manifest_version": "v1",
+   "slot": "supplied_by_human.cost_of_action -> delta",
+   "kind": "UNDEMONSTRATED (SUPPLY placeholder unfilled); delta not overridden",
+   "before": {
+    "delta": 0.018,
+    "status": "DERIVED"
+   },
+   "after": {
+    "delta": 0.018,
+    "status": "DERIVED",
+    "resolution_warning": "attached"
+   },
+   "cause": "brief: 'Cost of action: [SUPPLY: ...]. Until supplied, delta stays 0.018 with its resolution warning attached.'",
+   "source": {
+    "path": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+    "sha256": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+    "locator": "line 13; coordinator preamble item 1, line 57"
+   },
+   "recorded_utc": "2026-09-17T00:12:58Z"
+  },
+  {
+   "id": "AMD-V1-06",
+   "manifest_version": "v1",
+   "slot": "S",
+   "kind": "UNDEMONSTRATED (consequence)",
+   "before": {
+    "value": null,
+    "status": "UNDEMONSTRATED"
+   },
+   "after": {
+    "value": null,
+    "status": "UNDEMONSTRATED"
+   },
+   "cause": "S = budget / measured hours per workflow (references/manifest.md); budget unfilled and R1 not run; coordinator preamble item 1: 'S and the P7 ruling stay UNDEMONSTRATED'",
+   "source": {
+    "path": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+    "sha256": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+    "locator": "coordinator preamble item 1, lines 57-58"
+   },
+   "recorded_utc": "2026-09-17T00:12:58Z"
+  },
+  {
+   "id": "AMD-V1-07",
+   "manifest_version": "v1",
+   "slot": "supplied_by_human.rulings_holder",
+   "kind": "UNDEMONSTRATED (SUPPLY placeholder unfilled)",
+   "before": null,
+   "after": {
+    "value": null,
+    "status": "UNDEMONSTRATED",
+    "transfer": "BLOCKED"
+   },
+   "cause": "brief field arrived as '[SUPPLY: a person who wrote neither the skill nor any case]'; preamble item 1: rulings transfer blocked; wave-2 agent 5 transfer_record.json status BLOCKED",
+   "source": {
+    "path": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+    "sha256": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+    "locator": "line 17; coordinator preamble item 1, line 59"
+   },
+   "corroboration": {
+    "path": "astronomy/wave2/agent5_skill_maintenance/transfer_record.json",
+    "sha256": "5dbb32a7b3342f84288eaf3aa68ad401d7e31a3587134414fe0ca9f7be47c82b",
+    "locator": "status BLOCKED"
+   },
+   "recorded_utc": "2026-09-17T00:12:58Z"
+  },
+  {
+   "id": "AMD-V1-08",
+   "manifest_version": "v1",
+   "slot": "supplied_by_human.tns_credentials",
+   "kind": "UNDEMONSTRATED (SUPPLY placeholder unfilled)",
+   "before": null,
+   "after": {
+    "value": null,
+    "status": "UNDEMONSTRATED"
+   },
+   "cause": "brief field arrived as '[SUPPLY: bot or user account, else agent 2 marks UNDEMONSTRATED]'; preamble item 1: agent 2 works without TNS credentials; wave-2 agent 2 records HTTP 403 on every wis-tns.org path",
+   "source": {
+    "path": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+    "sha256": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+    "locator": "line 18; coordinator preamble item 1, line 60"
+   },
+   "recorded_utc": "2026-09-17T00:12:58Z"
+  },
+  {
+   "id": "ESC-V1-01",
+   "manifest_version": "v1",
+   "slot": "graph (R1 -> I1, D5 -> R1)",
+   "kind": "ESCALATION recorded, not an amendment",
+   "before": null,
+   "after": {
+    "state": "ESCALATED to PI (ladder rung 2)",
+    "compositions": "PRE-I1 CALIBRATION"
+   },
+   "cause": "coordinator preamble item 2: the brief asks for I1 compositions while R1 has not run and D5 cannot close; agent 4 builds compositions as PRE-I1 CALIBRATION, not I1 records, pending PI ruling; 'not as an amendment the coordinator granted itself'",
+   "source": {
+    "path": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+    "sha256": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+    "locator": "coordinator preamble item 2, lines 61-65"
+   },
+   "recorded_utc": "2026-09-17T00:12:58Z"
+  },
+  {
+   "id": "SU-V1-01",
+   "manifest_version": "v1",
+   "slot": "label_source",
+   "kind": "SLOT UPDATE (supersession under the brief's assignment; not a PI ruling)",
+   "before": {
+    "record": {
+     "path": "astronomy/agent3_labels_exposure/label_source_slot.json",
+     "sha256": "09e8dff5ac6f246629feb77c6689b4b0d443ef1595f8dcf2553d08e3ad28bc82"
+    },
+    "sniascore_bound": [
+     0,
+     3131
+    ],
+    "status": "UNDEMONSTRATED"
+   },
+   "after": {
+    "record": {
+     "path": "astronomy/wave2/agent2_label_source/label_source_slot.json",
+     "sha256": "01ef18a98fcfd59fcb75853bbee2f6dd4e3b2d15dd3d80583535699850ce00ce"
+    },
+    "sniascore_bound": [
+     803,
+     2247
+    ],
+    "unresolved": 6156,
+    "status": "UNDEMONSTRATED"
+   },
+   "cause": "wave-2 brief assigns agent 2 to tighten the SNIascore bound and update label_source_slot.json; preamble item 3: agent 3's freeze reads agent 2's updated slot",
+   "source": {
+    "path": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+    "sha256": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+    "locator": "Assignments, Agent 2, lines 26-30; coordinator preamble item 3, line 66"
+   },
+   "recorded_utc": "2026-09-17T00:12:58Z"
+  }
+ ],
+ "v1_entries_canonical_sha256": "9643f2d47f458e02a213f1e8ef28d1b0305ccd8814571ff2fdc269e389c6192d",
+ "v2_entries": [
+  {
+   "id": "AMD-V2-01",
+   "slot": "supplied_by_human.budget",
+   "kind": "SUPPLIED by PI",
+   "before": {
+    "value": null,
+    "status": "UNDEMONSTRATED",
+    "ledger": "AMD-V1-04"
+   },
+   "after": {
+    "value": {
+     "agent_arm_cells_hard_cap": 1000,
+     "engineering_hours": 200,
+     "phase": "calibration"
+    }
+   },
+   "condition": "No Rubin-era paid work starts without a re-ratification against the measured label supply from this wave.",
+   "cause": "PI ruling 1",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "PI rulings (D5), ruling 1, line 13"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T00:16:50Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
+  },
+  {
+   "id": "AMD-V2-02",
+   "slot": "S",
+   "kind": "UNDEMONSTRATED (PI: computed at R1)",
+   "before": {
+    "value": null,
+    "status": "UNDEMONSTRATED",
+    "ledger": "AMD-V1-06"
+   },
+   "after": {
+    "value": null,
+    "status": "UNDEMONSTRATED",
+    "resolves_at": "R1 (measured hours or cells per workflow)"
+   },
+   "cause": "PI ruling 1: 'S is computed at R1.'",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "ruling 1, line 13"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T00:16:50Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
+  },
+  {
+   "id": "AMD-V2-03",
+   "slot": "supplied_by_human.cost_of_action",
+   "kind": "SUPPLIED by PI",
+   "before": {
+    "value": null,
+    "status": "UNDEMONSTRATED",
+    "ledger": "AMD-V1-05"
+   },
+   "after": {
+    "value": {
+     "one_spectrum": "0.5 h P60-class time",
+     "wrong_routine_commitment": "1 slot",
+     "missed_rare_event": ">= 100 slots",
+     "asymmetric": true
+    }
+   },
+   "cause": "PI ruling 2",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "ruling 2, lines 14-17"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T00:16:50Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
+  },
+  {
+   "id": "AMD-V2-04",
+   "slot": "delta",
+   "kind": "OVERRIDE",
+   "before": {
+    "value": 0.018,
+    "status": "DERIVED"
+   },
+   "after": {
+    "value": 0.05,
+    "status": "OVERRIDDEN",
+    "literature_prior": 0.018,
+    "carry_both": "every P7 table"
+   },
+   "cause": "PI ruling 2: 'Delta override: 0.018 becomes 0.05. Cause: switching a production selector costs engineer weeks, and 0.018 sits below its own unpaired resolution. Keep 0.018 as the literature prior, and carry both values through every P7 table.'",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "ruling 2, lines 18-19"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T00:16:50Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
+  },
+  {
+   "id": "AMD-V2-05",
+   "slot": "graph_escalations (R1 -> I1)",
+   "kind": "RATIFICATION of escalation",
+   "before": {
+    "state": "ESCALATED, unruled",
+    "ledger": "ESC-V1-01"
+   },
+   "after": {
+    "state": "RATIFIED as staged",
+    "compositions": "PRE-I1 CALIBRATION",
+    "I1_designation": "waits for R1 plus PI ratification",
+    "edges": "unweakened"
+   },
+   "cause": "PI ruling 3",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "ruling 3, line 20"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T00:16:50Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
+  },
+  {
+   "id": "AMD-V2-06",
+   "slot": "supplied_by_human.rulings_holder",
+   "kind": "SUPPLIED by PI (by role); transfer PENDING_RECEIPT",
+   "before": {
+    "value": null,
+    "status": "UNDEMONSTRATED",
+    "ledger": "AMD-V1-07"
+   },
+   "after": {
+    "value": {
+     "role": "19C program coordinator",
+     "name": null,
+     "non_authorship": "asserted by PI, verified by neither coordinator nor agent"
+    },
+    "transfer": "PENDING_RECEIPT",
+    "receipt_hash": ""
+   },
+   "cause": "PI ruling 4; coordinator preamble item 2 (handover is out of band, PENDING RECEIPT until the holder's receipt hash is written)",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "ruling 4, line 21; preamble item 2, line 65"
+   },
+   "corroboration": {
+    "path": "astronomy/wave3/agent5_integrity/transfer_record.json",
+    "sha256": "945c1ca436e7bfbf4660b59f4d1031649eb4356b74c127fbe2e1d21e5fe2084a",
+    "locator": "status, receipt_hash, holder.authorship_check"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T00:16:50Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
+  },
+  {
+   "id": "AMD-V2-07",
+   "slot": "supplied_by_human.tns_credentials",
+   "kind": "BLOCKED",
+   "before": {
+    "value": null,
+    "status": "UNDEMONSTRATED",
+    "ledger": "AMD-V1-08"
+   },
+   "after": {
+    "value": null,
+    "status": "BLOCKED",
+    "request_date": "2026-09-16",
+    "checked_utc": "2026-09-16T20:13:38Z (presence test only)"
+   },
+   "cause": "PI ruling 5 (use TNS_API_KEY if present, else BLOCKED with request date); coordinator preamble item 1: key absent",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "ruling 5, line 22; preamble item 1, line 64"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T00:16:50Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
+  },
+  {
+   "id": "AMD-V2-08",
+   "slot": "decision_epoch",
+   "kind": "RATIFICATION (reaffirmed) with strata",
+   "before": {
+    "value": {
+     "primary": "first alert",
+     "secondary": "night 3"
+    },
+    "status": "RATIFIED",
+    "ledger": "AMD-V1-02"
+   },
+   "after": {
+    "value": {
+     "primary": "first alert",
+     "secondary": "night 3"
+    },
+    "status": "RATIFIED",
+    "strata": "S0, S1, S2 reported and excluded"
+   },
+   "disagreement": "bands_FROZEN.md section 3 declares S2 (cohort objects with pre-boundary forced flux) 'counted and reported ... not removed from the cohort'; ruling 6 says S0, S1 and S2 'stay reported and excluded'. S0 and S1 are outside the cohort by definition; S2 is not. Not reconciled: excluding S2 changes a frozen definition and would need a new hashed band registration (bands section 8). S2 is currently uncountable (needs PPDB), so no count moves today.",
+   "cause": "PI ruling 6",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "ruling 6, line 23"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T00:16:50Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
+  },
+  {
+   "id": "SU-V2-01",
+   "slot": "tool_inventory (fold-in)",
+   "kind": "SLOT UPDATE: wave-3 functional recount on real Rubin alerts",
+   "before": {
+    "rubin_verified": "0 of 25 (structural census, wave 1)"
+   },
+   "after": {
+    "rubin_functional": {
+     "PASS": 2,
+     "FAIL": 14,
+     "UNDEMONSTRATED": 9
+    },
+    "qualifier": "Fink LSST API JSON rows with v11_1 field names, not Avro packets"
+   },
+   "cause": "wave-3 brief agent 4 assignment (recount after the band, apply the ratified Fink remapping); rule D",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "Assignments, Agent 4"
+   },
+   "record": {
+    "path": "astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json",
+    "sha256": "dab4ec1baaa8d3ead3300ed2e4d29c57edb212405a1ee134161777921648a1e0"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T00:16:50Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
+  },
+  {
+   "id": "SU-V2-02",
+   "slot": "candidates / exposure_key (fold-in)",
+   "kind": "SLOT UPDATE: wave-3 cohort counts",
+   "after": {
+    "O_merged": 1937669,
+    "S1": 521920,
+    "U": 0,
+    "ppdb": "NOT RELEASED",
+    "antares_prior_position_leak": "193/9000"
+   },
+   "cause": "wave-3 brief agent 1 assignment (finish the cohort)",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "Assignments, Agent 1"
+   },
+   "record": {
+    "path": "astronomy/wave3/agent1_cohort_finish/rubin_cohort_count.json",
+    "sha256": "57cf41895fac0f5493d6cdb1efb8aea6499daa935479bf500cd031543c79ddde"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T00:16:50Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
+  },
+  {
+   "id": "PENDING-V2-01",
+   "slot": "label_source; positive_supply; negative_supply; PI re-ratification (ruling 1)",
+   "kind": "PENDING input: RESOLVED",
+   "what": "wave-3 agent 2: track one BLOCKED (TNS); track two census of 2026 TNS spectroscopic classifiers (monthly throughput P per programme) and the truth cost (nights and spectra per night to reach 485 labelled cohort objects at each plausible purity)",
+   "cause": "wave-3 brief agent 2 assignment; coordinator has not delivered results",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "Assignments, Agent 2"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T00:16:50Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT",
+   "resolved_utc": "2026-09-17T04:00:55Z",
+   "resolved_by": [
+    "SU-V2-03",
+    "SU-V2-04",
+    "SU-V2-05"
+   ],
+   "resolution": "agent 2 handoff (commit 74d012c per coordinator), 5 file hashes verified by agent 3"
+  },
+  {
+   "id": "SU-V2-03",
+   "slot": "label_source",
+   "kind": "SLOT UPDATE (supersession; not a PI ruling)",
+   "before": {
+    "record": {
+     "path": "astronomy/wave2/agent2_label_source/label_source_slot.json",
+     "sha256": "01ef18a98fcfd59fcb75853bbee2f6dd4e3b2d15dd3d80583535699850ce00ce"
+    },
+    "sniascore_bound": [
+     803,
+     2247
+    ],
+    "unresolved": 6156,
+    "status": "UNDEMONSTRATED"
+   },
+   "after": {
+    "record": {
+     "path": "astronomy/wave3/agent2_measured_labels/label_source_slot.json",
+     "sha256": "fdae64921d6749e466932d13ffd0aa4e14359b0a946a31b32bacf9a97ce83719"
+    },
+    "sniascore_bound": [
+     954,
+     2057
+    ],
+    "unresolved": 5815,
+    "rubin_cohort_measured_nonbot": "UNDEMONSTRATED (0 STRONG on 13 readable of 627; 13 existence, classifier unknown)",
+    "status": "UNDEMONSTRATED"
+   },
+   "cause": "wave-3 brief agent 2 assignment (track one BLOCKED, public-archive resume under AMW3-2) and agent 3 assignment 'fold in the wave 2 label slot'",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "Assignments, Agent 2 and Agent 3"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T04:00:55Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN)"
+  },
+  {
+   "id": "SU-V2-04",
+   "slot": "candidates[0].prospective_label_supply_w3",
+   "kind": "SLOT UPDATE: supply P per month recorded as LOWER BOUNDS",
+   "after": {
+    "totals_Jan_Sep": {
+     "spectroscopic_units": 181,
+     "nonbot_units": 161
+    },
+    "exact": "UNDEMONSTRATED"
+   },
+   "cause": "wave-3 brief agent 2 track two (census)",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "Assignments, Agent 2, track two"
+   },
+   "record": {
+    "path": "astronomy/wave3/agent2_measured_labels/supply_P_per_month.json",
+    "sha256": "b028de4a80b30d875358f1594c4a2b6fc3ceda7e4bfadb958debc56c4527b2ce"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T04:00:55Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN)"
+  },
+  {
+   "id": "SU-V2-05",
+   "slot": "pi_reratification_inputs.truth_cost",
+   "kind": "INPUT ATTACHED for PI re-ratification (ruling 1); not a ruling",
+   "after": {
+    "delta_0.018_N_485": {
+     "spectra": [
+      502,
+      644
+     ],
+     "hours": [
+      251.0,
+      322.0
+     ],
+     "nights": [
+      51,
+      144
+     ],
+     "wrong_commitments": [
+      17,
+      122
+     ]
+    },
+    "delta_0.05_N_63": {
+     "spectra": [
+      66,
+      84
+     ],
+     "hours": [
+      33.0,
+      42.0
+     ],
+     "nights": [
+      7,
+      19
+     ],
+     "wrong_commitments": [
+      3,
+      16
+     ]
+    },
+    "delta_0.05_N_1666": {
+     "spectra": [
+      1723,
+      2212
+     ],
+     "hours": [
+      861.5,
+      1106.0
+     ],
+     "nights": [
+      173,
+      492
+     ],
+     "wrong_commitments": [
+      57,
+      420
+     ]
+    }
+   },
+   "cause": "wave-3 brief agent 2 track two ('That number is what truth costs, and it feeds my re-ratification')",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "Assignments, Agent 2, track two"
+   },
+   "record": {
+    "path": "astronomy/wave3/agent2_measured_labels/truth_cost.json",
+    "sha256": "53f229b3deb4137781ce06c80016bdf54dde506e80f06024d129d4feb0b81c6e"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T04:00:55Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN)"
+  },
+  {
+   "id": "FRZ-V2",
+   "slot": "manifest",
+   "kind": "FREEZE v2",
+   "cause": "coordinator finalize instruction after agent 2 handoff; wave-3 brief agent 3 'freeze and hash'",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "Assignments, Agent 3"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T04:00:55Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN)"
+  }
+ ],
+ "v2_entries_canonical_sha256": "a1feebcb49883284c27d2a10d5313f21d64f1950085fb1f572d7f2975eb87c49",
+ "v3_entries": [
+  {
+   "id": "NAME-V3-01",
+   "slot": "manifest version",
+   "kind": "NAMING DISAGREEMENT (recorded, not a silent substitution)",
+   "before": {
+    "brief_text": "Agent 3: freeze v2 ... v2 is the manifest P4 reads"
+   },
+   "after": {
+    "freeze": "v3",
+    "reason": "v2 already frozen (fba4259b...edd5, commit be1254b per preamble) and cannot be amended in place"
+   },
+   "cause": "wave-4 brief assignment vs coordinator preamble item 1",
+   "source": {
+    "path": "astronomy/wave4/PANEL_BRIEF_WAVE4.md",
+    "sha256": "8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58",
+    "locator": "Assignments 'Agent 3: freeze v2' line 44; preamble item 1 lines 91-97"
+   },
+   "manifest_version": "v3",
+   "recorded_utc": "2026-09-17T14:14:16Z",
+   "applied_to": "domain_manifest_v3.json (FROZEN)"
+  },
+  {
+   "id": "AMD-V3-01",
+   "slot": "delta",
+   "kind": "RATIFICATION",
+   "before": {
+    "value": 0.05,
+    "status": "OVERRIDDEN",
+    "literature_prior": 0.018,
+    "ledger": "AMD-V2-04"
+   },
+   "after": {
+    "value": 0.05,
+    "status": "RATIFIED",
+    "literature_prior": 0.018,
+    "carry_both": "every table"
+   },
+   "cause_check": {
+    "v_record": {
+     "v_record": "V-O01",
+     "verdict": "MATCH_WITHIN_TOL",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "43530793e34e1375ebcf14dd07098267a6681416429499d65fde368f59000d3f"
+    },
+    "ordering_utc": "override 2026-09-16T20:14:03Z < first decision-time MDE file mtime 20:44:29Z (earliest wave-2 power output 20:43:28Z; commit f898294 20:46Z quoted) < resolvability at 0.05 20:48:29Z",
+    "timezone_note": "the PI's 15:14 and 15:46 are local -0500 (20:14Z, 20:46Z); '20:48' is UTC (preamble item 2)",
+    "caveats": [
+     "git not run by V or agent 3: commit times are quoted from the preamble, not read",
+     "mtime shows only the last write; an earlier overwritten power file before 20:14Z cannot be excluded",
+     "host clock trust not established; timestamps are self-logged on one host",
+     "the wave-1 planning bracket and the practitioners' unpaired MDE ~0.045 predate the override, and the override's stated cause cites the latter"
+    ]
+   },
+   "cause": "PI ruling 1: 'Delta 0.05: RATIFIED ... Both deltas ride through every table: 0.018 as the literature prior, 0.05 as the ratified cost of action.'",
+   "source": {
+    "path": "astronomy/wave4/PANEL_BRIEF_WAVE4.md",
+    "sha256": "8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58",
+    "locator": "ruling 1, lines 9-14"
+   },
+   "manifest_version": "v3",
+   "recorded_utc": "2026-09-17T14:14:16Z",
+   "applied_to": "domain_manifest_v3.json (FROZEN)"
+  },
+  {
+   "id": "AMD-V3-02",
+   "slot": "label_source",
+   "kind": "RATIFICATION WITH CONDITIONS",
+   "before": {
+    "status": "UNDEMONSTRATED",
+    "ledger": "SU-V2-03"
+   },
+   "after": {
+    "status": "RATIFIED",
+    "conditions_verbatim": [
+     "Labels are TNS-reported spectroscopic classifications, with a model-annotation fraction bounded at [803, 2247] of 7843.",
+     "For calibration, the SNIascore-flagged subset stays in, stratified.",
+     "For any future paid claim, measured truth means human-classifier-confirmed only. Model-annotated labels are excluded, and a sensitivity row shows the result both ways.",
+     "Precondition (c) clears under these conditions."
+    ]
+   },
+   "cause": "PI ruling 4",
+   "source": {
+    "path": "astronomy/wave4/PANEL_BRIEF_WAVE4.md",
+    "sha256": "8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58",
+    "locator": "ruling 4, lines 17-20"
+   },
+   "manifest_version": "v3",
+   "recorded_utc": "2026-09-17T14:14:16Z",
+   "applied_to": "domain_manifest_v3.json (FROZEN)"
+  },
+  {
+   "id": "RE-V3-01",
+   "slot": "label_source numeric fields",
+   "kind": "RULE E: V_PENDING",
+   "fields": {
+    "sniascore_bound": [
+     954,
+     2057
+    ],
+    "MEASURED": 1074,
+    "MODEL_ANNOTATION": 954,
+    "UNRESOLVED": 5815,
+    "upper_noE5_sensitivity": 2654
+   },
+   "v_records": [
+    "V-L01",
+    "V-L02",
+    "V-L03",
+    "V-L04",
+    "V-L05"
+   ],
+   "why": "module V verdict DISCREPANCY (cause resolved); cleared_for_P4_under_rule_E false. The ruled [803, 2247] was reproduced by V only in its non-blind reconciled parse.",
+   "readings_needing_ruling": [
+    "(i) E5 cut: literal frozen text 1259.5 vs its own arithmetic 1289.5 (JD 2459319.5 - 2458000 = 1319.5; minus 30), which the producer implemented",
+    "(ii) twin IAU-name rows (SN2024led, SN2025oxy): evidence keyed per fetched ZTFID (producer) vs per IAU name"
+   ],
+   "reading_check": {
+    "source": {
+     "path": "astronomy/wave4/agent4_module_v/sealed/V-L-r1.json",
+     "sha256": "8414d780b45ede281be395732e5d7cbe91a9819993bc5746c85a249e35bf5e85",
+     "blindness": "POST-DISCLOSURE, not blind"
+    },
+    "current_captures_all_four_readings": {
+     "key=ztfid|E5cut=1259.5": {
+      "L": 954,
+      "U": 2139,
+      "cats": {
+       "UNRESOLVED": 5815,
+       "MODEL_ANNOTATION": 954,
+       "MEASURED": 1074
+      },
+      "inside_ruled_interval": true
+     },
+     "key=ztfid|E5cut=1289.5": {
+      "L": 954,
+      "U": 2057,
+      "cats": {
+       "UNRESOLVED": 5815,
+       "MODEL_ANNOTATION": 954,
+       "MEASURED": 1074
+      },
+      "inside_ruled_interval": true
+     },
+     "key=iau|E5cut=1259.5": {
+      "L": 955,
+      "U": 2138,
+      "cats": {
+       "UNRESOLVED": 5813,
+       "MODEL_ANNOTATION": 955,
+       "MEASURED": 1075
+      },
+      "inside_ruled_interval": true
+     },
+     "key=iau|E5cut=1289.5": {
+      "L": 955,
+      "U": 2056,
+      "cats": {
+       "UNRESOLVED": 5813,
+       "MODEL_ANNOTATION": 955,
+       "MEASURED": 1075
+      },
+      "inside_ruled_interval": true
+     }
+    },
+    "all_current_readings_inside_[803,2247]": true,
+    "verified_by": "agent 3 from the sealed per-reading file, not from V's report text",
+    "reading_not_listed_in_V_report": "key=iau|E5cut=1259.5 -> [955, 2138]: inside",
+    "wave2_captures_only_readings": {
+     "key=ztfid|E5cut=1259.5|w2only": {
+      "L": 803,
+      "U": 2329,
+      "cats": {
+       "UNRESOLVED": 6156,
+       "MODEL_ANNOTATION": 803,
+       "MEASURED": 884
+      },
+      "inside_ruled_interval": false
+     },
+     "key=ztfid|E5cut=1289.5|w2only": {
+      "L": 803,
+      "U": 2247,
+      "cats": {
+       "UNRESOLVED": 6156,
+       "MODEL_ANNOTATION": 803,
+       "MEASURED": 884
+      },
+      "inside_ruled_interval": true
+     },
+     "key=iau|E5cut=1259.5|w2only": {
+      "L": 804,
+      "U": 2328,
+      "cats": {
+       "UNRESOLVED": 6154,
+       "MODEL_ANNOTATION": 804,
+       "MEASURED": 885
+      },
+      "inside_ruled_interval": false
+     },
+     "key=iau|E5cut=1289.5|w2only": {
+      "L": 804,
+      "U": 2246,
+      "cats": {
+       "UNRESOLVED": 6154,
+       "MODEL_ANNOTATION": 804,
+       "MEASURED": 885
+      },
+      "inside_ruled_interval": true
+     }
+    },
+    "finding": "ruling 4's own interval [803, 2247] is reproduced only under E5 cut 1289.5 with ZTFID keying (and [804, 2246] under IAU keying); under the literal 1259.5 cut the wave-2-only bound is [803, 2329] (ZTFID) or [804, 2328] (IAU). The condition 'current bound inside [803, 2247]' holds under every reading; the ruled interval itself depends on the E5 reading. Listed for the PI, not reconciled."
+   },
+   "cause": "wave-4 rule E; module V discrepancy reports D-L01..D-L05",
+   "source": {
+    "path": "astronomy/wave4/PANEL_BRIEF_WAVE4.md",
+    "sha256": "8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58",
+    "locator": "rule E, line 5"
+   },
+   "records": [
+    {
+     "path": "astronomy/wave4/agent4_module_v/discrepancies/D-L01.md",
+     "sha256": "934b887d670512d2549916f9dc185815505f0b828af23562d71cd58e87d5d5e9"
+    },
+    {
+     "path": "astronomy/wave4/agent4_module_v/discrepancies/D-L02.md",
+     "sha256": "2edf68d3ae6fb16d18a1cbb7712632e940f0786b22974ec90162dd3dcfafbd01"
+    }
+   ],
+   "manifest_version": "v3",
+   "recorded_utc": "2026-09-17T14:14:16Z",
+   "applied_to": "domain_manifest_v3.json (FROZEN)"
+  },
+  {
+   "id": "AMD-V3-03",
+   "slot": "P4 precondition (c)",
+   "kind": "CLEARS under ruling 4 conditions",
+   "before": {
+    "state": "UNMET"
+   },
+   "after": {
+    "state": "CLEARED"
+   },
+   "independence": "clears by the PI's ratification of the label-source definition and its conditions, not by any count; every current reading of the bound lies inside [803, 2247] (RE-V3-01 reading_check), so no V_PENDING number can reverse it",
+   "cause": "PI ruling 4 'Precondition (c) clears under these conditions.'",
+   "source": {
+    "path": "astronomy/wave4/PANEL_BRIEF_WAVE4.md",
+    "sha256": "8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58",
+    "locator": "ruling 4, line 20"
+   },
+   "manifest_version": "v3",
+   "recorded_utc": "2026-09-17T14:14:16Z",
+   "applied_to": "domain_manifest_v3.json (FROZEN)"
+  },
+  {
+   "id": "AMD-V3-04",
+   "slot": "supplied_by_human.tns_credentials",
+   "kind": "BLOCKED (second record); sanctioned WISeREP check BLOCKED",
+   "before": {
+    "status": "BLOCKED",
+    "request_dates": [
+     "2026-09-16"
+    ],
+    "ledger": "AMD-V2-07"
+   },
+   "after": {
+    "status": "BLOCKED",
+    "request_dates": [
+     "2026-09-16",
+     "2026-09-17"
+    ],
+    "presence_check_utc": "2026-09-17T13:13:17Z",
+    "wiserep": {
+     "status": "BLOCKED",
+     "record": {
+      "path": "astronomy/wave4/agent2_price_of_truth/wiserep_check.json",
+      "sha256": "0e79d37f98a952026dae9cff90b05e16f2119329b1e9911d12edffbfcb324b1c"
+     }
+    }
+   },
+   "cause": "PI ruling 3 (SUPPLY: key or second BLOCKED record; WISeREP sanctioned if blocked); preamble item 4",
+   "source": {
+    "path": "astronomy/wave4/PANEL_BRIEF_WAVE4.md",
+    "sha256": "8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58",
+    "locator": "ruling 3, line 16; preamble item 4, line 110"
+   },
+   "manifest_version": "v3",
+   "recorded_utc": "2026-09-17T14:14:16Z",
+   "applied_to": "domain_manifest_v3.json (FROZEN)"
+  },
+  {
+   "id": "AMD-V3-05",
+   "slot": "supplied_by_human.rulings_holder (custody)",
+   "kind": "STILL PENDING_RECEIPT",
+   "before": {
+    "transfer": "PENDING_RECEIPT",
+    "ledger": "AMD-V2-06"
+   },
+   "after": {
+    "transfer": "PENDING_RECEIPT",
+    "receipt_hash": "",
+    "procedural": "the word 'procedural' stays attached to every blind result",
+    "record": {
+     "path": "astronomy/wave4/agent5_integrity_closeout/custody_status.json",
+     "sha256": "930fc3c9a06ec1329de0c99b8aa61d6d499b975e1be75f75cc0015f3524355a8"
+    }
+   },
+   "cause": "PI ruling 2 (closes only when the holder's receipt hash is in transfer_record.json); preamble item 5",
+   "source": {
+    "path": "astronomy/wave4/PANEL_BRIEF_WAVE4.md",
+    "sha256": "8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58",
+    "locator": "ruling 2, line 15; preamble item 5, line 111"
+   },
+   "manifest_version": "v3",
+   "recorded_utc": "2026-09-17T14:14:16Z",
+   "applied_to": "domain_manifest_v3.json (FROZEN)"
+  },
+  {
+   "id": "AMD-V3-06",
+   "slot": "module V",
+   "kind": "CHARTERED; overhead cap EXCEEDED (interim)",
+   "after": {
+    "charter": {
+     "path": "astronomy/wave4/agent4_module_v/V_CHARTER.md",
+     "sha256": "f4bca84045ae13c2aeb86ade1fc4a204bc21260fc49b02179167c1ec2a6ca251"
+    },
+    "cap": "15% of wave effort",
+    "interim_share": {
+     "wall_time": "47% (52.4 of 110.7 min)",
+     "tool_calls": "59% (122 of 207)"
+    },
+    "disposition": "FAIL (interim)",
+    "arithmetic_checked_by_agent3": "52.4/110.7 = 0.473; 122/207 = 0.589; to reach 15%: +238.6 min, +606 calls",
+    "record": {
+     "path": "astronomy/wave4/COORDINATOR_LOG.md",
+     "sha256": "2c5f83782ee2f39e5ecebf673f18666e675e649ad737243b1a0819cc0b1b3b29"
+    },
+    "disagreement": "V self-report 51.4 min / ~125 calls (overhead.json) vs harness 52.4 min / 122 calls (coordinator log)"
+   },
+   "cause": "PI ruling 5",
+   "source": {
+    "path": "astronomy/wave4/PANEL_BRIEF_WAVE4.md",
+    "sha256": "8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58",
+    "locator": "ruling 5, lines 21-24"
+   },
+   "manifest_version": "v3",
+   "recorded_utc": "2026-09-17T14:14:16Z",
+   "applied_to": "domain_manifest_v3.json (FROZEN)"
+  },
+  {
+   "id": "RE-V3-02",
+   "slot": "all slots",
+   "kind": "RULE E marking",
+   "what": "every ruling-bearing number in v3 carries its V record id (CLEARED) or V_PENDING; PI-supplied values marked PI_RULED",
+   "cause": "wave-4 rule E",
+   "source": {
+    "path": "astronomy/wave4/PANEL_BRIEF_WAVE4.md",
+    "sha256": "8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58",
+    "locator": "rule E, line 5"
+   },
+   "record": {
+    "path": "astronomy/wave4/agent4_module_v/v_records.json",
+    "sha256": "462286d6b4c474091f4e03e0f7587352c4a793e73d17030627d5759cb1ea3a9a"
+   },
+   "manifest_version": "v3",
+   "recorded_utc": "2026-09-17T14:14:16Z",
+   "applied_to": "domain_manifest_v3.json (FROZEN)"
+  }
+ ],
+ "v3_entries_canonical_sha256": "43550720a5c0abe22d25d4087a4b7c8077702224a7f68fcc7319b5c2b5339110",
+ "completeness": "v1 and v2 entries copied verbatim (canonical hashes re-verified). v3: one entry per wave-4 ruling 1-5 (ruling 4 split into ratification, rule-E V_PENDING and precondition (c)), naming disagreement, rule E marking, freeze. No entry ratifies tau, exposure_key or subject_set."
+}

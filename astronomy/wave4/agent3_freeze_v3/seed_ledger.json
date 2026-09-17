@@ -1,0 +1,179 @@
+{
+ "agent": "wave4/agent3_freeze_v3",
+ "date": "2026-09-17",
+ "seeds": [
+  {
+   "id": "PANEL_BRIEF_WAVE4.md",
+   "file": "astronomy/wave4/PANEL_BRIEF_WAVE4.md",
+   "sha256": "8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58",
+   "read_in_full": true,
+   "contribution": "rules A-E, PI rulings 1-5, assignments, preamble items 1-7; hash verified"
+  },
+  {
+   "id": "REPORT.md",
+   "file": "astronomy/wave4/agent4_module_v/REPORT.md",
+   "sha256": "437667273b855133551b36c078b1c7485dfe6e569235f0d76fc2d92b2668dfb3",
+   "read_in_full": true,
+   "contribution": "verdicts, causes, O01 caveats, sqrt(q) note, overhead"
+  },
+  {
+   "id": "v_records.json",
+   "file": "astronomy/wave4/agent4_module_v/v_records.json",
+   "sha256": "462286d6b4c474091f4e03e0f7587352c4a793e73d17030627d5759cb1ea3a9a",
+   "read_in_full": false,
+   "contribution": "all 38 records parsed programmatically (id, claim, comparisons, verdict, cleared, finding, sealed hash); O01, O02, N02 read in full"
+  },
+  {
+   "id": "D-L01.md",
+   "file": "astronomy/wave4/agent4_module_v/discrepancies/D-L01.md",
+   "sha256": "934b887d670512d2549916f9dc185815505f0b828af23562d71cd58e87d5d5e9",
+   "read_in_full": true,
+   "contribution": "cause table, readings"
+  },
+  {
+   "id": "D-L02.md",
+   "file": "astronomy/wave4/agent4_module_v/discrepancies/D-L02.md",
+   "sha256": "2edf68d3ae6fb16d18a1cbb7712632e940f0786b22974ec90162dd3dcfafbd01",
+   "read_in_full": true,
+   "contribution": "cause table, readings, U consequence"
+  },
+  {
+   "id": "D-L03.md",
+   "file": "astronomy/wave4/agent4_module_v/discrepancies/D-L03.md",
+   "sha256": "79883036abc44cc67f01614bd0d04f5c411a47326cab78b86b9fbab504d82f12",
+   "read_in_full": false,
+   "contribution": "grep for readings and status; identical cause block to D-L01"
+  },
+  {
+   "id": "D-L04.md",
+   "file": "astronomy/wave4/agent4_module_v/discrepancies/D-L04.md",
+   "sha256": "0594ab0800ae89a6f23b820a07606a20aca9652e41924c22edd2227675852167",
+   "read_in_full": false,
+   "contribution": "grep for readings and status; identical cause block to D-L01"
+  },
+  {
+   "id": "D-L05.md",
+   "file": "astronomy/wave4/agent4_module_v/discrepancies/D-L05.md",
+   "sha256": "a89c4e080d088cbfb43a1cd5eb8922a58b7dda28a59e8db3a4dffc10f387e9e0",
+   "read_in_full": false,
+   "contribution": "grep for readings and status; identical cause block to D-L01"
+  },
+  {
+   "id": "SHA256SUMS",
+   "file": "astronomy/wave4/agent4_module_v/discrepancies/SHA256SUMS",
+   "sha256": "efa36d6889608d47b5dbde8a641c0d5a57a5f596bcf2bc629542c92255d16fec",
+   "read_in_full": true,
+   "contribution": "5/5 OK"
+  },
+  {
+   "id": "V-L-r1.json",
+   "file": "astronomy/wave4/agent4_module_v/sealed/V-L-r1.json",
+   "sha256": "8414d780b45ede281be395732e5d7cbe91a9819993bc5746c85a249e35bf5e85",
+   "read_in_full": true,
+   "contribution": "eight per-reading derivations; basis of agent 3's reading check"
+  },
+  {
+   "id": "SEALED_SHA256SUMS",
+   "file": "astronomy/wave4/agent4_module_v/sealed/SEALED_SHA256SUMS",
+   "sha256": "98d9a8dd28dec42cd635cdc9d7729aea7e53fde8a39bcbfa58e72c3c17bf1211",
+   "read_in_full": true,
+   "contribution": "39/39 OK"
+  },
+  {
+   "id": "V_TARGETS.json",
+   "file": "astronomy/wave4/agent4_module_v/V_TARGETS.json",
+   "sha256": "4f9594a158771b41d9ad3e27a461389ed9eb9b1a4a13ea5abba0d351bdded017",
+   "read_in_full": false,
+   "contribution": "target ids only; hash verified"
+  },
+  {
+   "id": "overhead.json",
+   "file": "astronomy/wave4/agent4_module_v/overhead.json",
+   "sha256": "44fb87500e4cd1b8cf8628bc95cb25f1dcd16f84e3dd055bcb54bf5beaf5d8e8",
+   "read_in_full": true,
+   "contribution": "V self-reported overhead"
+  },
+  {
+   "id": "REPORT.md",
+   "file": "astronomy/wave4/agent2_price_of_truth/REPORT.md",
+   "sha256": "36f3de293ca97025312fe2c8abaf70f918e223dff5971d2e1f31e0e523a5aeab",
+   "read_in_full": true,
+   "contribution": "monthly pricing, WISeREP BLOCKED, TNS second record"
+  },
+  {
+   "id": "wiserep_check.json",
+   "file": "astronomy/wave4/agent2_price_of_truth/wiserep_check.json",
+   "sha256": "0e79d37f98a952026dae9cff90b05e16f2119329b1e9911d12edffbfcb324b1c",
+   "read_in_full": false,
+   "contribution": "status field and keys"
+  },
+  {
+   "id": "custody_status.json",
+   "file": "astronomy/wave4/agent5_integrity_closeout/custody_status.json",
+   "sha256": "930fc3c9a06ec1329de0c99b8aa61d6d499b975e1be75f75cc0015f3524355a8",
+   "read_in_full": true,
+   "contribution": "PENDING_RECEIPT, checks"
+  },
+  {
+   "id": "COORDINATOR_LOG.md",
+   "file": "astronomy/wave4/COORDINATOR_LOG.md",
+   "sha256": "2c5f83782ee2f39e5ecebf673f18666e675e649ad737243b1a0819cc0b1b3b29",
+   "read_in_full": true,
+   "contribution": "module V overhead interim share"
+  },
+  {
+   "id": "transfer_record.json",
+   "file": "astronomy/wave3/agent5_integrity/transfer_record.json",
+   "sha256": "945c1ca436e7bfbf4660b59f4d1031649eb4356b74c127fbe2e1d21e5fe2084a",
+   "read_in_full": false,
+   "contribution": "status and receipt_hash only"
+  },
+  {
+   "id": "domain_manifest_v1.json",
+   "file": "astronomy/wave3/agent3_manifest_freeze/domain_manifest_v1.json",
+   "sha256": "a0d9dec77bb38341d2c194d7ef6ee16ccf2d97d361695dbf8456e8035c9e89c0",
+   "read_in_full": true,
+   "contribution": "base lineage; hash verified"
+  },
+  {
+   "id": "domain_manifest_v2.json",
+   "file": "astronomy/wave3/agent3_manifest_freeze/domain_manifest_v2.json",
+   "sha256": "dcbaa4fd8cc7d934e82eb3179eb8c67eb946b719fd22230405936d44c4cf119b",
+   "read_in_full": true,
+   "contribution": "base for v3; hash verified"
+  },
+  {
+   "id": "amendment_ledger.json",
+   "file": "astronomy/wave3/agent3_manifest_freeze/amendment_ledger.json",
+   "sha256": "3158967eb835f79af44095cb5ce77d06da31c2205bed94432e9c435c72b2049f",
+   "read_in_full": true,
+   "contribution": "v1 and v2 entries copied verbatim; canonical hashes verified"
+  },
+  {
+   "id": "axis_ledger_v2_final_against_frozen_bands.json",
+   "file": "astronomy/wave3/agent3_manifest_freeze/axis_ledger_v2_final_against_frozen_bands.json",
+   "sha256": "d20b69607bb6adfc1011b3e3b956cf1510ab41353c4cdd1a7966ff65491c8e60",
+   "read_in_full": true,
+   "contribution": "axes and preconditions carried into v3 ledger"
+  },
+  {
+   "id": "tns_census_2026.json",
+   "file": "astronomy/wave3/agent2_measured_labels/tns_census_2026.json",
+   "sha256": "c7b035f04fa77b41386555ba1258fcc6624f9fc1b5354aa913fd20a78b7eeaa9",
+   "read_in_full": false,
+   "contribution": "cohort measured-strong record only"
+  },
+  {
+   "id": "bands_FROZEN.md",
+   "file": "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md",
+   "sha256": "8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2",
+   "read_in_full": true,
+   "contribution": "frozen bands (read in wave 3); hash re-verified"
+  }
+ ],
+ "not_read": [
+  "RULINGS_SEALED.csv (never opened)",
+  "module V data_cache, property_tests, invariance_runs (not needed for the freeze)"
+ ],
+ "completeness": "24 files; partial reads name the part used and block nothing in v3"
+}

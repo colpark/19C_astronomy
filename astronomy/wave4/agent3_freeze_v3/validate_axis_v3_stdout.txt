@@ -1,0 +1,4 @@
+== validate.py ledger --kind axis_ledger (v3) ==
+FAIL astronomy/wave4/agent3_freeze_v3/axis_ledger_v3_against_frozen_bands.json
+  - missing or empty 'ruling'
+exit=1

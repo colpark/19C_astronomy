@@ -1,0 +1,3848 @@
+{
+ "manifest": "domain_manifest",
+ "manifest_version": "v3",
+ "governing_brief": {
+  "path": "astronomy/wave4/PANEL_BRIEF_WAVE4.md",
+  "sha256": "8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58"
+ },
+ "inputs_state": "v2 plus wave-4 PI rulings 1-5, module V records (38), agent 2 wave-4 WISeREP check, agent 5 custody status",
+ "frozen_utc": "2026-09-17T14:14:16Z",
+ "hash_method": "sha256 over json.dumps(manifest with frozen_hash set to \"\", sort_keys=True, separators=(',', ':'), ensure_ascii=False) encoded UTF-8; file on disk is indent=1 pretty print, which is not hashed; verify with scripts/verify_hash.py",
+ "candidates": [
+  {
+   "id": "astronomy-tda-rubin-lsst",
+   "name": "live time-domain astronomy: Rubin LSST alert stream, ZTF BTS as calibration",
+   "branch": "prediction",
+   "decision_governed": "spectroscopic follow-up allocation: k candidates committed per night",
+   "cohorts": {
+    "calibration_only": "ZTF BTS (11,183 objects at 1 arcsec); contamination FAIL (agent3 wave 1); addition B: no claim rests on it",
+    "prospective": "Rubin LSST objects first detected >= 2026-07-01T00:00 UTC (bands_FROZEN.md section 1); counts in wave2/agent1_rubin_bands/axis_ledger_rubin.json (P4 unruled)",
+    "prospective_counts_w3": {
+     "O_merged": 1937669,
+     "alerce_oids": 1937720,
+     "S1": 521920,
+     "one_detection_share": 0.8082,
+     "U": 0,
+     "cohort_nights": 9,
+     "record": {
+      "path": "astronomy/wave3/agent1_cohort_finish/rubin_cohort_count.json",
+      "sha256": "57cf41895fac0f5493d6cdb1efb8aea6499daa935479bf500cd031543c79ddde"
+     },
+     "rule_E": {
+      "O_merged": {
+       "value": 1937669,
+       "v_record": "V-C01",
+       "verdict": "MATCH",
+       "cleared_for_P4_under_rule_E": true,
+       "sealed_sha256": "8f5262daef8930d8e21ac46d14268c365f8d172ba5bd2726cf1cb63f89c8c463",
+       "rule_E": "CLEARED"
+      },
+      "alerce_oids": {
+       "value": 1937720,
+       "v_record": "V-C02",
+       "verdict": "MATCH",
+       "cleared_for_P4_under_rule_E": true,
+       "sealed_sha256": "667e1e2daa5a8640127bdc4b483da070f86294f62e8e3ce3f2bed94914bdf5b9",
+       "rule_E": "CLEARED"
+      },
+      "S1": {
+       "value": 521920,
+       "v_record": "V-C03",
+       "verdict": "MATCH",
+       "cleared_for_P4_under_rule_E": true,
+       "sealed_sha256": "8a5e0127ab4f0aa541cb52b231c613d06fa5889b089a3f7cedb984679d21eae9",
+       "rule_E": "CLEARED"
+      },
+      "one_detection_share": {
+       "value": 0.8082,
+       "v_record": "V-C04",
+       "verdict": "MATCH",
+       "cleared_for_P4_under_rule_E": true,
+       "sealed_sha256": "9ed3d5ea214aabb1b1c56acbde859d455329ea678ff178b244465948a8d2a47a",
+       "rule_E": "CLEARED"
+      },
+      "U": {
+       "value": 0,
+       "v_record": null,
+       "rule_E": "V_PENDING",
+       "note": "no V record"
+      },
+      "cohort_nights": {
+       "value": 9,
+       "v_record": null,
+       "rule_E": "V_PENDING",
+       "note": "no V record"
+      }
+     }
+    }
+   },
+   "source_records": [
+    {
+     "path": "astronomy/wave2/agent1_rubin_bands/axis_ledger_rubin.json",
+     "sha256": "b06cd5fe32b2567a789343fa2013c934ecfb3ec313e3c3ae1cf140e1ddb3100d"
+    },
+    {
+     "path": "astronomy/SYNTHESIS.md",
+     "sha256": "fd749aec24839f6c668350119c96932c6ef5127753661f254e4287c471459137",
+     "locator": "sections 2, 4"
+    },
+    {
+     "path": "astronomy/wave3/agent3_manifest_freeze/axis_ledger_v2_against_frozen_bands.json",
+     "sha256": "9b616bc4cd8d7b6e30b504c4ac65fd1221267c07009d028ce1ebebb2604484b8"
+    },
+    {
+     "path": "astronomy/wave3/agent3_manifest_freeze/axis_ledger_v2_final_against_frozen_bands.json",
+     "sha256": "d20b69607bb6adfc1011b3e3b956cf1510ab41353c4cdd1a7966ff65491c8e60"
+    }
+   ],
+   "prospective_label_supply_w3": {
+    "status": "LOWER BOUNDS ONLY (exact monthly counts UNDEMONSTRATED; TNS BLOCKED, archived stats pages are 403 copies)",
+    "unit": "object x program classification report, earliest report, readable Internet Archive captures (214 of 2,244 enumerated objects)",
+    "per_month_lower_bound": {
+     "2026-01": {
+      "spectroscopic_units": 24,
+      "nonbot_measured_units": 17,
+      "objects_first_classified": 23,
+      "rubin_cohort_strong": "n/a (cohort starts 2026-07-01)"
+     },
+     "2026-02": {
+      "spectroscopic_units": 2,
+      "nonbot_measured_units": 2,
+      "objects_first_classified": 2,
+      "rubin_cohort_strong": "n/a (cohort starts 2026-07-01)"
+     },
+     "2026-03": {
+      "spectroscopic_units": 20,
+      "nonbot_measured_units": 19,
+      "objects_first_classified": 18,
+      "rubin_cohort_strong": "n/a (cohort starts 2026-07-01)"
+     },
+     "2026-04": {
+      "spectroscopic_units": 13,
+      "nonbot_measured_units": 10,
+      "objects_first_classified": 13,
+      "rubin_cohort_strong": "n/a (cohort starts 2026-07-01)"
+     },
+     "2026-05": {
+      "spectroscopic_units": 90,
+      "nonbot_measured_units": 84,
+      "objects_first_classified": 85,
+      "rubin_cohort_strong": "n/a (cohort starts 2026-07-01)"
+     },
+     "2026-06": {
+      "spectroscopic_units": 22,
+      "nonbot_measured_units": 20,
+      "objects_first_classified": 19,
+      "rubin_cohort_strong": "n/a (cohort starts 2026-07-01)"
+     },
+     "2026-07": {
+      "spectroscopic_units": 3,
+      "nonbot_measured_units": 3,
+      "objects_first_classified": 3,
+      "rubin_cohort_strong": 0
+     },
+     "2026-08": {
+      "spectroscopic_units": 5,
+      "nonbot_measured_units": 5,
+      "objects_first_classified": 4,
+      "rubin_cohort_strong": 0
+     },
+     "2026-09": {
+      "spectroscopic_units": 2,
+      "nonbot_measured_units": 1,
+      "objects_first_classified": 2,
+      "rubin_cohort_strong": 0
+     }
+    },
+    "totals_Jan_Sep_lower_bound": {
+     "spectroscopic_units": 181,
+     "nonbot_units": 161
+    },
+    "programs_top_lower_bound": {
+     "ZTF": 63,
+     "ePESSTO+": 55,
+     "GeminiClass": 9,
+     "SCAT": 8,
+     "UCSC": 6,
+     "BlackGEM": 5
+    },
+    "automation_2026": "20 of 181 spectroscopic units SNIascore (all ZTF); 0 CCSNscore; 0 Syncatto",
+    "rubin_cohort": {
+     "measured_nonbot_strong": 0,
+     "on_readable_captures": "13 of 627 tier-A cohort-matched objects",
+     "status": "UNDEMONSTRATED (not zero)",
+     "existence_typed_moderate": 13,
+     "existence_classifier": "UNDEMONSTRATED"
+    },
+    "reachability": {
+     "f19": {
+      "k": 8,
+      "n": 2000,
+      "point": 0.004,
+      "cp95": [
+       0.001728,
+       0.007866
+      ]
+     },
+     "f185": {
+      "k": 7,
+      "n": 2000,
+      "point": 0.0035,
+      "cp95": [
+       0.001408,
+       0.007198
+      ]
+     },
+     "A_per_night_10nights": {
+      "point": 775.0676000000001,
+      "cp95_hi": 1524.1704353999999,
+      "cp95_lo": 334.8292032
+     },
+     "A_per_night_9dates": {
+      "point": 861.1862222222222,
+      "cp95_hi": 1693.522706,
+      "cp95_lo": 372.032448
+     }
+    },
+    "records": [
+     {
+      "path": "astronomy/wave3/agent2_measured_labels/supply_P_per_month.json",
+      "sha256": "b028de4a80b30d875358f1594c4a2b6fc3ceda7e4bfadb958debc56c4527b2ce"
+     },
+     {
+      "path": "astronomy/wave3/agent2_measured_labels/tns_census_2026.json",
+      "sha256": "c7b035f04fa77b41386555ba1258fcc6624f9fc1b5354aa913fd20a78b7eeaa9"
+     }
+    ],
+    "rule_E": "all census lower bounds, reachability and cohort existence counts V_PENDING (no V record)"
+   },
+   "p4_state_v3": "no ruling; see axis_ledger_v3_against_frozen_bands.json: (a) UNMET, (b) CLEARED (V-O02), (c) CLEARED (ruling 4)"
+  }
+ ],
+ "tau": {
+  "value": {
+   "radius_arcsec": 1.0,
+   "cut": 1.0,
+   "unit_bts": "distinct astrophysical object: positional friends-of-friends at 1 arcsec plus amendment A1 re-trigger clause (same IAU name, |dpeak| <= 60 d)",
+   "unit_rubin": "diaObjectId with crossmatch rules X1-X4 (1 arcsec and first detections <= 60 d apart), bands_FROZEN.md section 2",
+   "n_clusters_bts": 11183,
+   "plateau_arcsec": [
+    0.5,
+    1.5
+   ],
+   "sensitivity": {
+    "looser": 0.6666666666666666,
+    "looser_radius_arcsec": 1.5,
+    "looser_n_clusters": 11183,
+    "tighter": 2.0,
+    "tighter_radius_arcsec": 0.5,
+    "tighter_n_clusters": 11183,
+    "at_2arcsec_n_clusters": 11179,
+    "at_3arcsec_n_clusters": 11174
+   },
+   "tau_py_choice_refused": {
+    "radius_arcsec": 30.0,
+    "why": "flat curve; merges 39 distinct-SN pairs (must-not-join control)"
+   }
+  },
+  "provenance": {
+   "referent": "similarity cut that defines the independent unit (distinct astrophysical object) for clustering and every count",
+   "source": "astronomy/agent1_supply_corpus/cut_curve.json sha256 32a666c8aae6b48e4ce5c69cec4749935d58f0d8bfb6f8491f9839aaf4078ceb (scripts/build_corpus.py::fof, 10 radii 0.5-60 arcsec, must-join and must-not-join controls); Rubin application bands_FROZEN.md sha256 8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2 section 2",
+   "population": "11193 included BTS corpus rows (11183 clusters); Rubin cohort diaObjectIds",
+   "adjudicator": "tau.py choice at 30 arcsec (11116 clusters, 39 must-not-join violations); IAU-name join 11,204 (agents 3 and 5)",
+   "falsifier": "a re-trigger pair (same object, |dpeak|<=60 d) measured at >1.5 arcsec, or two distinct SNe measured at <=1.5 arcsec, or an I1 separation curve that collapses at 1 arcsec"
+  },
+  "status": "DERIVED",
+  "status_note": "Not ruled on in PANEL_BRIEF_WAVE2.md. The separation-collapse bound (the second D3 signal) is UNDEMONSTRATED until I1 compositions exist.",
+  "disagreements": [
+   "distinct-object count 11,183 (agent 1, 1 arcsec + A1) vs 11,204 (agents 3 and 5, IAU-name join) vs 11,198 groups (agent 2, 3 arcsec + IAU): listed, not reconciled (SYNTHESIS.md section 8)"
+  ],
+  "source_records": [
+   {
+    "path": "astronomy/agent1_supply_corpus/cut_curve.json",
+    "sha256": "32a666c8aae6b48e4ce5c69cec4749935d58f0d8bfb6f8491f9839aaf4078ceb"
+   },
+   {
+    "path": "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md",
+    "sha256": "8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2",
+    "locator": "section 2"
+   }
+  ],
+  "override_invitation": "Override invitation: accept, or replace the value and give a reason; the reason enters amendment_ledger.json.",
+  "rule_E": {
+   "radius_arcsec": {
+    "value": 1.0,
+    "v_record": null,
+    "rule_E": "V_PENDING",
+    "note": "no V record"
+   },
+   "n_clusters_bts": {
+    "value": 11183,
+    "v_record": null,
+    "rule_E": "V_PENDING",
+    "note": "BTS calibration only"
+   }
+  }
+ },
+ "k": {
+  "value": 8,
+  "rounding": {
+   "k_exact": 7.9756,
+   "numerator": 327,
+   "denominator_nights": 41,
+   "rule": "nearest integer"
+  },
+  "candidates_per_round": 46.41,
+  "chance_stated": 0.1718,
+  "provenance": {
+   "referent": "number of candidate transients committed to spectroscopic follow-up (unique sources with an SEDM IFU request created by BTS scanners) per round, where a round is one observing night of the ZTF Bright Transient Survey under its post-2020 alert filter",
+   "source": "arXiv:2401.15167v1 section 4.1, sources/2401.15167.txt lines 757-766 (327 unique sources triggered by scanners with 2460175.5 < JD < 2460216.5) and section 4.2 lines 883-887, 953-958 (the same window is 41 nights); k_exact = 327/41 computed in scripts/build_slots.py; integer proposal by nearest-integer rounding of k_exact, recorded here as an amendment candidate for D5; RATIFIED at PANEL_BRIEF_WAVE2.md sha256 31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb line 14",
+   "population": "rounds = 41 consecutive calendar nights (JD 2460175.5 to 2460216.5, 2023-08-19 to 2023-09-29); 327 unique sources committed; not candidates, not alerts",
+   "adjudicator": "the other seed statements of per-night commitment: 5-15 assigned per night in 2018 (arXiv:1910.12973 section 2.2, lines 258-265), 5-10 saved on an average clear night (arXiv:2009.01242 section 2.1, lines 147-148), median 4.5 per night for the automated bts_p1 policy (arXiv:2401.15167 section 4.2, lines 953-958), about 10 SEDM spectra per night capacity (arXiv:1710.02917 section 7, line 1076)",
+   "falsifier": "a BTS trigger log (Fritz SEDM request timestamps) for any other contiguous window of 30 or more nights whose unique-source triggers per night fall outside 4.5 to 10, or a window where more than half of the triggered sources are not in that window's candidate list, would show k differs from 8 or is not a per-round commitment"
+  },
+  "status": "RATIFIED",
+  "status_note": "Ratified with the rounding noted (AMD-V1-01). ZTF-era value; Rubin-era k is UNDEMONSTRATED (k_slot.json undemonstrated[0]).",
+  "disagreements": [
+   "per-night commitment differs across seeds and eras: 5-15 (2018 filter), 5-10 saved on clear nights (2019-2020), 7.98 triggered per calendar night (2023 window), median 4.5 (automated policy), about 10 spectra per night (SEDM, 2016-2017, iPTF). Not reconciled.",
+   "candidates per round: 46.4 measured sources per night (window) versus 'about 50 new candidates per night' stated; the measured figure counts sources active in the window, the stated one counts new sources.",
+   "chance: 0.172 (window counts) versus 0.14 (stated per-night figures).",
+   "k is not fixed per round in practice: 30.9% of calendar nights in 2019-2025 have zero peaks in the BTS file, and weather dominates (arXiv:1910.12973 footnote 9, lines 308-311).",
+   "Rubin era: TiDES does not select k of n within a round; 4MOST fibres are not binding (about 12 live transients per field pass selection versus 30-35 LRS fibres per pointing; arXiv:2501.16311 section 3.5 lines 559-565 and footnote 20 line 630, section 2 lines 138-140) and it cannot operate target-of-opportunity. The k-of-candidates decision shape holds for single-object robotic spectrographs (SEDM), not for TiDES.",
+   "the local BTS file has 11,217 data rows; data/raw/FETCH.md and PANEL_BRIEF.md state 11,218.",
+   "the explorer documentation names the column 'time'; the CSV header names it 'peakt'.",
+   "wave-2 calibration (astronomy/wave2/agent4_instrument/REPORT.md 'Disagreements' 1): stated chance 0.172 vs measured 0.225-0.230 on the BTS file, which holds saved sources only; 518 of 579 nights have <= 8 candidates, so k binds on 61 nights"
+  ],
+  "undemonstrated": [
+   {
+    "what": "k and candidates per round for the Rubin LSST alert stream",
+    "why": "no seed read in full reports a per-night commitment or candidate count for LSST-era spectroscopic follow-up; TiDES reports a 5-year total and per-field selection counts from simulation",
+    "blocks": [
+     "P6 chance for any LSST-stream item",
+     "P7 N_min for an LSST-stream cohort"
+    ]
+   },
+   {
+    "what": "ePESSTO+ per-night commitment",
+    "why": "no arXiv survey paper for ePESSTO+ found by arXiv API query (abs:ePESSTO+); PESSTO/ePESSTO night allocations are stated in arXiv:1812.07401 line 94 but not per-night target counts",
+    "blocks": []
+   },
+   {
+    "what": "SOXS per-night commitment",
+    "why": "arXiv:1812.07401 read in full states 900 NTT nights over 5 years (line 126) and a pipeline sized for 'one typical night (series of 15-30 min exposures)' (line 392) but no target count",
+    "blocks": []
+   }
+  ],
+  "source_records": [
+   {
+    "path": "astronomy/agent5_resolution_replay/k_slot.json",
+    "sha256": "8980cc629123f0feee6e6c7cb98acaa67f2e20ef5c063bbc92e74706ddbb4611"
+   },
+   {
+    "path": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+    "sha256": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+    "locator": "line 14"
+   },
+   {
+    "path": "astronomy/wave2/agent4_instrument/REPORT.md",
+    "sha256": "42b2442b373d891ce7f70e5f04a6327105d4a93e17ec9096870f4ca7ab5970f8",
+    "locator": "Disagreements 1-2"
+   }
+  ],
+  "override_invitation": "Override invitation: accept, or replace the value and give a reason; the reason enters amendment_ledger.json.",
+  "rule_E": {
+   "k": {
+    "value": 8,
+    "v_record": null,
+    "rule_E": "V_PENDING",
+    "note": "RATIFIED at v1; no V record"
+   },
+   "candidates_per_round": {
+    "value": 46.41,
+    "v_record": null,
+    "rule_E": "V_PENDING"
+   },
+   "chance_stated": {
+    "value": 0.1718,
+    "v_record": null,
+    "rule_E": "V_PENDING"
+   },
+   "k_binding_nights": {
+    "value": 61,
+    "v_record": "V-K01",
+    "verdict": "MATCH",
+    "cleared_for_P4_under_rule_E": true,
+    "sealed_sha256": "e58f6798e0621fd375c9cc79e4c08780653be711a25ad7c91b545a7944c5a5d3",
+    "rule_E": "CLEARED"
+   },
+   "nights_k_not_binding": {
+    "value": 518,
+    "v_record": "V-K02",
+    "verdict": "MATCH",
+    "cleared_for_P4_under_rule_E": true,
+    "sealed_sha256": "469ab291d8a9c6d6b34ca5b3eab2bcb151132ec7364aeadd88805b8f9ede58ce",
+    "rule_E": "CLEARED"
+   }
+  }
+ },
+ "label_source": {
+  "value": {
+   "bts": {
+    "population": 7843,
+    "category_counts": {
+     "MEASURED": {
+      "claimed": 1074,
+      "blind_V": 1070,
+      "v_record": "V-L03",
+      "verdict": "DISCREPANCY",
+      "cleared_for_P4_under_rule_E": false,
+      "sealed_sha256": "4d49bf3fa25d364ab61326bb08af4dc1235c3bcf96a0a9747e996c4e00dac472",
+      "rule_E": "V_PENDING"
+     },
+     "MODEL_ANNOTATION": {
+      "claimed": 954,
+      "blind_V": 948,
+      "v_record": "V-L04",
+      "verdict": "DISCREPANCY",
+      "cleared_for_P4_under_rule_E": false,
+      "sealed_sha256": "8e0a8063982edba2dae1a60b1dbf0b1684a8d9334ea60a0f558ab75b374bbc0f",
+      "rule_E": "V_PENDING"
+     },
+     "PHOTOMETRIC_ONLY": {
+      "claimed": 0,
+      "blind_V": 0,
+      "v_record": "V-L03",
+      "verdict": "DISCREPANCY",
+      "cleared_for_P4_under_rule_E": false,
+      "sealed_sha256": "4d49bf3fa25d364ab61326bb08af4dc1235c3bcf96a0a9747e996c4e00dac472",
+      "rule_E": "V_PENDING",
+      "note": "field matched; record V-L03 not cleared"
+     },
+     "UNRESOLVED_UNDEMONSTRATED": {
+      "claimed": 5815,
+      "blind_V": 5825,
+      "v_record": "V-L05",
+      "verdict": "DISCREPANCY",
+      "cleared_for_P4_under_rule_E": false,
+      "sealed_sha256": "a8ecc4289183e2852b3f7b9459818df679a6aaa43056380ed569bf37b8ddc184",
+      "rule_E": "V_PENDING"
+     }
+    },
+    "sniascore_bound": {
+     "status_rule_E": "V_PENDING",
+     "lower": {
+      "claimed": 954,
+      "blind_V": 953,
+      "v_record": "V-L01",
+      "verdict": "DISCREPANCY",
+      "cleared_for_P4_under_rule_E": false,
+      "sealed_sha256": "3162ce50d0d99afc8586f387f8ff0622dea0b34ddfc9d74c925481ece43ddd7b",
+      "rule_E": "V_PENDING"
+     },
+     "upper": {
+      "claimed": 2057,
+      "blind_V": 2143,
+      "v_record": "V-L02",
+      "verdict": "DISCREPANCY",
+      "cleared_for_P4_under_rule_E": false,
+      "sealed_sha256": "97227a2c53d4b97da632f35e65cc4427a13bbbbd1e20b2ba78752513bee5dcb4",
+      "rule_E": "V_PENDING"
+     },
+     "upper_noE5_sensitivity_not_slot_value": {
+      "claimed": 2654,
+      "blind_V": 2658,
+      "rule_E": "V_PENDING",
+      "v_record": "V-L02"
+     },
+     "ruled_interval_ruling_4": {
+      "value": [
+       803,
+       2247
+      ],
+      "rule_E": "PI_RULED",
+      "note": "reproduced by V only in its non-blind reconciled parse (V-L-r1), and only under E5 cut 1289.5"
+     },
+     "previous": [
+      803,
+      2247
+     ],
+     "wave1": [
+      0,
+      3131
+     ],
+     "rule": "L' = 803 + new E1 SNIascore placements; U' = 2247 - new E1 non-SNIascore placements among plain SN Ia not already excluded by E4/E5; never widened",
+     "readings_needing_ruling": [
+      "(i) E5 cut: literal frozen text 1259.5 vs its own arithmetic 1289.5 (JD 2459319.5 - 2458000 = 1319.5; minus 30), which the producer implemented",
+      "(ii) twin IAU-name rows (SN2024led, SN2025oxy): evidence keyed per fetched ZTFID (producer) vs per IAU name"
+     ],
+     "reading_check": {
+      "source": {
+       "path": "astronomy/wave4/agent4_module_v/sealed/V-L-r1.json",
+       "sha256": "8414d780b45ede281be395732e5d7cbe91a9819993bc5746c85a249e35bf5e85",
+       "blindness": "POST-DISCLOSURE, not blind"
+      },
+      "current_captures_all_four_readings": {
+       "key=ztfid|E5cut=1259.5": {
+        "L": 954,
+        "U": 2139,
+        "cats": {
+         "UNRESOLVED": 5815,
+         "MODEL_ANNOTATION": 954,
+         "MEASURED": 1074
+        },
+        "inside_ruled_interval": true
+       },
+       "key=ztfid|E5cut=1289.5": {
+        "L": 954,
+        "U": 2057,
+        "cats": {
+         "UNRESOLVED": 5815,
+         "MODEL_ANNOTATION": 954,
+         "MEASURED": 1074
+        },
+        "inside_ruled_interval": true
+       },
+       "key=iau|E5cut=1259.5": {
+        "L": 955,
+        "U": 2138,
+        "cats": {
+         "UNRESOLVED": 5813,
+         "MODEL_ANNOTATION": 955,
+         "MEASURED": 1075
+        },
+        "inside_ruled_interval": true
+       },
+       "key=iau|E5cut=1289.5": {
+        "L": 955,
+        "U": 2056,
+        "cats": {
+         "UNRESOLVED": 5813,
+         "MODEL_ANNOTATION": 955,
+         "MEASURED": 1075
+        },
+        "inside_ruled_interval": true
+       }
+      },
+      "all_current_readings_inside_[803,2247]": true,
+      "verified_by": "agent 3 from the sealed per-reading file, not from V's report text",
+      "reading_not_listed_in_V_report": "key=iau|E5cut=1259.5 -> [955, 2138]: inside",
+      "wave2_captures_only_readings": {
+       "key=ztfid|E5cut=1259.5|w2only": {
+        "L": 803,
+        "U": 2329,
+        "cats": {
+         "UNRESOLVED": 6156,
+         "MODEL_ANNOTATION": 803,
+         "MEASURED": 884
+        },
+        "inside_ruled_interval": false
+       },
+       "key=ztfid|E5cut=1289.5|w2only": {
+        "L": 803,
+        "U": 2247,
+        "cats": {
+         "UNRESOLVED": 6156,
+         "MODEL_ANNOTATION": 803,
+         "MEASURED": 884
+        },
+        "inside_ruled_interval": true
+       },
+       "key=iau|E5cut=1259.5|w2only": {
+        "L": 804,
+        "U": 2328,
+        "cats": {
+         "UNRESOLVED": 6154,
+         "MODEL_ANNOTATION": 804,
+         "MEASURED": 885
+        },
+        "inside_ruled_interval": false
+       },
+       "key=iau|E5cut=1289.5|w2only": {
+        "L": 804,
+        "U": 2246,
+        "cats": {
+         "UNRESOLVED": 6154,
+         "MODEL_ANNOTATION": 804,
+         "MEASURED": 885
+        },
+        "inside_ruled_interval": true
+       }
+      },
+      "finding": "ruling 4's own interval [803, 2247] is reproduced only under E5 cut 1289.5 with ZTFID keying (and [804, 2246] under IAU keying); under the literal 1259.5 cut the wave-2-only bound is [803, 2329] (ZTFID) or [804, 2328] (IAU). The condition 'current bound inside [803, 2247]' holds under every reading; the ruled interval itself depends on the E5 reading. Listed for the PI, not reconciled."
+     }
+    }
+   },
+   "rubin_cohort": {
+    "measured_nonbot_T1_strong": 0,
+    "measured_nonbot_status": "UNDEMONSTRATED",
+    "existence_classified_moderate": 13,
+    "existence_transients_moderate": 12,
+    "leak_older_SN_at_cohort_positions": 7,
+    "automation_share_2026_T1": "20 of 181 spectroscopic 2026 units carry SNIascore (all ZTF); 0 CCSNscore; 0 Syncatto",
+    "rule_E": "all rubin_cohort numbers (0 STRONG, 13 existence, 7 leak) V_PENDING: no V record"
+   },
+   "track_one": {
+    "status": "BLOCKED",
+    "reason": "TNS_API_KEY absent (coordinator presence test 2026-09-16T20:13:38Z; agent re-test ABSENT 2026-09-17T00:06Z)",
+    "request_date": "2026-09-16"
+   }
+  },
+  "provenance": {
+   "referent": "basis of BTS type labels (measured vs model annotation) with the SNIascore bound, and the count of measured non-bot spectroscopic labels on Rubin cohort objects",
+   "source": "astronomy/wave3/agent2_measured_labels/scripts/track1_bound.py (imports wave-2 common.py/tns_parse.py read-only; definitions_FROZEN.md sha256 4f89ff6718a14ad4e45a6d33d6bde848448ba6a66d895bd970330efe397b37cf); out/track1_bound.json sha256 8148b5430716be4a2895f378feb60d457d05d1763fb650ccd521100014da30fe; supply_P_per_month.json sha256 b028de4a80b30d875358f1594c4a2b6fc3ceda7e4bfadb958debc56c4527b2ce; scripts/census.py; RATIFIED WITH CONDITIONS at PANEL_BRIEF_WAVE4.md sha256 8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58 ruling 4 lines 17-20; numeric fields V_PENDING per astronomy/wave4/agent4_module_v/v_records.json V-L01..V-L05",
+   "population": "7,843 labeled BTS rows (pre-clustering) and Rubin cohort objects first detected >= 2026-07-01 (agent-1 slices, 1,937,720 oids)",
+   "adjudicator": "authenticated TNS classification reports per object (TNS_API_KEY BLOCKED)",
+   "falsifier": "an authenticated report list returning more than 2057 or fewer than 954 BTS plain SN Ia labels with a SNIascore latest report, or any non-bot classification report found for a Rubin cohort object, or a rerun of track1_bound.py returning a different bound"
+  },
+  "status": "RATIFIED",
+  "status_note": "RATIFIED WITH CONDITIONS (PI ruling 4). The definition and conditions are frozen; the SNIascore bound [954, 2057] and counts 1,074 / 954 / 5,815 are V_PENDING under rule E until the E5-cut and twin-keying readings are ruled.",
+  "banner": "calibration only, contamination FAIL on this cohort",
+  "supersedes": {
+   "file": "astronomy/wave2/agent2_label_source/label_source_slot.json",
+   "sha256": "01ef18a98fcfd59fcb75853bbee2f6dd4e3b2d15dd3d80583535699850ce00ce",
+   "what_changes": "BTS SNIascore bound tightened from [803, 2247] to [954, 2057] by 345 further public archived TNS captures under the unchanged wave-2 frozen definitions; Rubin-era measured-label supply added (track two); track one (credentials) BLOCKED"
+  },
+  "wave3": {
+   "tns_track_one": "BLOCKED (AMD-V2-07)",
+   "resolved_pending": "PENDING-V2-01 resolved by SU-V2-03..05",
+   "ratification_gate": "ruling 1: re-ratification against this wave's measured label supply before any Rubin-era paid work; OPEN (inputs in PI_rerat_packet.md)",
+   "observation": "the brief prices truth at 485 labelled cohort objects, the lower object bracket at delta 0.018; at the overridden delta 0.05 the planning lower bracket is 63 (upper 1,666). Listed, not reconciled."
+  },
+  "source_records": [
+   {
+    "path": "astronomy/wave3/agent2_measured_labels/label_source_slot.json",
+    "sha256": "fdae64921d6749e466932d13ffd0aa4e14359b0a946a31b32bacf9a97ce83719"
+   },
+   {
+    "path": "astronomy/wave3/agent2_measured_labels/REPORT.md",
+    "sha256": "934b7fba7579676947bd0d2edab5a78d7fd431908e62d1cdc69414fa9ba74333"
+   },
+   {
+    "path": "astronomy/wave2/agent2_label_source/label_source_slot.json",
+    "sha256": "01ef18a98fcfd59fcb75853bbee2f6dd4e3b2d15dd3d80583535699850ce00ce",
+    "locator": "superseded"
+   }
+  ],
+  "ratification": {
+   "ledger": "AMD-V3-02",
+   "conditions_verbatim": [
+    "Labels are TNS-reported spectroscopic classifications, with a model-annotation fraction bounded at [803, 2247] of 7843.",
+    "For calibration, the SNIascore-flagged subset stays in, stratified.",
+    "For any future paid claim, measured truth means human-classifier-confirmed only. Model-annotated labels are excluded, and a sensitivity row shows the result both ways.",
+    "Precondition (c) clears under these conditions."
+   ],
+   "numbers": "numeric fields frozen as V_PENDING (RE-V3-01), not cleared values",
+   "condition_holds_under_all_readings": true
+  },
+  "wave4": {
+   "tns": "BLOCKED second record (AMD-V3-04)",
+   "wiserep": "BLOCKED (agent 2 wave 4)",
+   "measured_cohort_labels": "UNDEMONSTRATED: TNS and WISeREP both BLOCKED"
+  },
+  "override_invitation": "Ratified with conditions. Open for the PI: rule readings (i) E5 cut and (ii) twin keying so V can clear L01-L05."
+ },
+ "exposure_key": {
+  "value": {
+   "key_definition": {
+    "input_public_date": {
+     "ztf": "alert issuance: ZTF alerts public in real time, public distribution began 2018-06-04 (sources/ztf_public_releases.txt lines 104, 301)",
+     "rubin": "alert issuance: alerts world-public (sources/RTN-011.txt lines 554, 2773); first Rubin alerts 2026-02-24 (line 2468); PPDB not public at alert start, expected Sep-Oct 2026 (lines 2471, 2597); no PPDB release post in the Rubin News category through 2026-09-15 (sources/rubin_community/news_category_topic_list_2026-09-16.json)"
+    },
+    "label_public_date": {
+     "lower_bound": "TNS discovery date (a classification report attaches to an existing TNS object)",
+     "upper_bound": "earliest archived public explorer capture showing the same type string; otherwise the fetch date 2026-09-16",
+     "exact": "TNS classification report date, UNDEMONSTRATED (TNS 403/401 without credentials)"
+    },
+    "peakt_zero_point": {
+     "value": "JD - 2458000",
+     "derivation": [
+      "sources/bts_explorer_info.txt line 79 'Time of peak, expressed as JD-2458000'",
+      "sources/1910.12973.raw.txt line 854 'JD0 = JD - 2,458,000'",
+      "sources/2009.01242.raw.txt line 3154 axis 'Observed peak time (JD-2458000)'",
+      {
+       "ZTF18aaxmhvk": {
+        "iau": "SN2018cne",
+        "paper_max_light": "2018-06-14",
+        "in_file": true,
+        "peakt": 290.83,
+        "date_if_jd_minus_2458000": "2018-06-21",
+        "date_if_days_since_2018_01_01": "2018-10-18",
+        "file_type": "SN Ia",
+        "paper_official_type": "SN Ic (arXiv:2104.12980 sec 6, Fremling & Sharma 2018 TNS report 2018-886)"
+       },
+       "ZTF20aatxryt": {
+        "iau": "SN2020eyj",
+        "paper_max_light": "2020-04-02",
+        "in_file": false
+       }
+      },
+      {
+       "JD-2458000 (explorer_info.txt line 79; Fremling+2020 Table 1 note d)": {
+        "n": 11110,
+        "peak_year_equals_iau_year_or_next": 0.9627,
+        "median_peak_minus_discdate_days": 11.0,
+        "share_peak_within_minus30_plus200_days_of_discdate": 0.9626
+       },
+       "days since 2018-01-01 (panel brief guess)": {
+        "n": 11110,
+        "peak_year_equals_iau_year_or_next": 0.9614,
+        "median_peak_minus_discdate_days": 130.0,
+        "share_peak_within_minus30_plus200_days_of_discdate": 0.9562
+       }
+      }
+     ],
+     "disagreement": "panel brief suggested days since 2018-01-01; that offset puts SN2018cne peak on 2018-10-18 against a stated maximum-light spectrum on 2018-06-14 and gives a median peak-minus-discovery lag of 130 d instead of 11 d"
+    }
+   },
+   "subject_cutoffs": [
+    {
+     "subject": "Claude Fable 5.1",
+     "published": "Jun 2026",
+     "first_day": "2026-06-01",
+     "last_day": "2026-06-30",
+     "kind": "reliable knowledge cutoff",
+     "locator": "sources/anthropic_models_overview.txt line 49",
+     "status": "DERIVED",
+     "note": "Transparency Hub (sources/anthropic_transparency.txt) has no Fable 5.1 entry; lists Claude Fable 5 at January 2026 (line 104). Disagreement listed, not reconciled."
+    },
+    {
+     "subject": "Claude Opus 5",
+     "published": "May 2026",
+     "first_day": "2026-05-01",
+     "last_day": "2026-05-31",
+     "kind": "reliable knowledge cutoff",
+     "locator": "sources/anthropic_models_overview.txt line 49; sources/anthropic_transparency.txt line 34",
+     "status": "DERIVED",
+     "note": "two Anthropic pages agree"
+    },
+    {
+     "subject": "Claude Sonnet 5",
+     "published": "Jan 2026",
+     "first_day": "2026-01-01",
+     "last_day": "2026-01-31",
+     "kind": "reliable knowledge cutoff",
+     "locator": "sources/anthropic_models_overview.txt line 49; sources/anthropic_transparency.txt line 69",
+     "status": "DERIVED",
+     "note": "two Anthropic pages agree"
+    },
+    {
+     "subject": "Claude Haiku 4.5",
+     "published": "Feb 2025",
+     "first_day": "2025-02-01",
+     "last_day": "2025-02-28",
+     "kind": "reliable knowledge cutoff",
+     "locator": "sources/anthropic_models_overview.txt line 49; sources/anthropic_transparency.txt line 348",
+     "status": "DERIVED",
+     "note": "two Anthropic pages agree"
+    },
+    {
+     "subject": "GPT-6 Astra",
+     "published": "Apr 30, 2026",
+     "first_day": "2026-04-30",
+     "last_day": "2026-04-30",
+     "kind": "knowledge cutoff",
+     "locator": "sources/openai_models.txt lines 660-673",
+     "status": "DERIVED",
+     "note": ""
+    },
+    {
+     "subject": "GPT-5.6 Sol",
+     "published": "Feb 16, 2026",
+     "first_day": "2026-02-16",
+     "last_day": "2026-02-16",
+     "kind": "knowledge cutoff",
+     "locator": "sources/openai_models.txt lines 678-693",
+     "status": "DERIVED",
+     "note": ""
+    },
+    {
+     "subject": "GPT-5.6 Terra",
+     "published": "Feb 16, 2026",
+     "first_day": "2026-02-16",
+     "last_day": "2026-02-16",
+     "kind": "knowledge cutoff",
+     "locator": "sources/openai_models.txt lines 698-711",
+     "status": "DERIVED",
+     "note": ""
+    },
+    {
+     "subject": "GPT-5.6 Luna",
+     "published": "Feb 16, 2026",
+     "first_day": "2026-02-16",
+     "last_day": "2026-02-16",
+     "kind": "knowledge cutoff",
+     "locator": "sources/openai_models.txt lines 716-729",
+     "status": "DERIVED",
+     "note": ""
+    },
+    {
+     "subject": "Gemini 3.8 Flash",
+     "published": "March 2026",
+     "first_day": "2026-03-01",
+     "last_day": "2026-03-31",
+     "kind": "knowledge cutoff",
+     "locator": "sources/deepmind_modelcard_gemini-3-8-flash.txt line 243",
+     "status": "DERIVED",
+     "note": "card adds that some domains are limited to January 2025"
+    },
+    {
+     "subject": "Gemini 3.1 Pro (preview)",
+     "published": null,
+     "first_day": null,
+     "last_day": null,
+     "kind": "none published on the pages read",
+     "locator": "sources/google_gemini-3.1-pro-preview.txt lines 244-245 (only 'Latest update February 2026'); sources/deepmind_modelcard_gemini-3-1-pro.txt (defers to Gemini 3 Pro card, not fetched)",
+     "status": "UNDEMONSTRATED",
+     "note": "no cutoff read from a primary page"
+    }
+   ],
+   "cutoff_bounds": {
+    "earliest_first_day": "2025-02-01",
+    "latest_last_day": "2026-06-30",
+    "earliest_first_day_excluding_haiku45": "2026-01-01",
+    "subjects_undemonstrated": [
+     "Gemini 3.1 Pro (preview)"
+    ]
+   },
+   "cutoff_caveats": [
+    "Anthropic pages state 'reliable knowledge cutoff'; no training-data cutoff was readable from a primary page, so 'after every cutoff' is an upper-bound claim on exposure, not proof of absence from training data",
+    "OpenAI 'knowledge cutoff' is not defined on the page read as a training-data end",
+    "Claude Fable 5.1 (Jun 2026) appears on the models overview but not in the Transparency Hub, which lists Claude Fable 5 at Jan 2026",
+    "Gemini 3.1 Pro has no cutoff on the pages read; any claim over 'every subject' that includes it is UNDEMONSTRATED",
+    "subjects with web search at inference read TNS directly; exposure then depends on the grant (R4), not the cutoff"
+   ],
+   "split_all_demonstrated_subjects": {
+    "capture": "2024-12-08T23:13:31",
+    "cutoff_window": [
+     "2025-02-01",
+     "2026-06-30"
+    ],
+    "labeled_objects": 7843,
+    "label_public_before_every_cutoff": 6166,
+    "label_public_after_every_cutoff": 0,
+    "unresolved": 1677,
+    "unresolved_breakdown": {
+     "absent_from_capture": 1647,
+     "unlabeled_in_capture": 25,
+     "label_changed_since_capture": 5,
+     "absent_and_discovered_after_capture": 902,
+     "absent_and_discovered_before_capture": 745
+    },
+    "unresolved_by_discovery_year": {
+     "2016": 19,
+     "2017": 16,
+     "2018": 143,
+     "2019": 232,
+     "2020": 130,
+     "2021": 86,
+     "2022": 44,
+     "2023": 14,
+     "2024": 157,
+     "2025": 834,
+     "2026": 2
+    },
+    "after_by_type": {},
+    "discovered_after_latest_cutoff_all_objects": 20,
+    "discovered_before_earliest_cutoff_labeled": 7072,
+    "discovered_inside_cutoff_window_labeled": 771
+   },
+   "split_excluding_claude_haiku_4_5": {
+    "capture": "2025-08-10T06:50:56",
+    "cutoff_window": [
+     "2026-01-01",
+     "2026-06-30"
+    ],
+    "labeled_objects": 7843,
+    "label_public_before_every_cutoff": 6729,
+    "label_public_after_every_cutoff": 0,
+    "unresolved": 1114,
+    "unresolved_breakdown": {
+     "absent_from_capture": 1065,
+     "unlabeled_in_capture": 45,
+     "label_changed_since_capture": 4,
+     "absent_and_discovered_after_capture": 346,
+     "absent_and_discovered_before_capture": 719
+    },
+    "unresolved_by_discovery_year": {
+     "2016": 19,
+     "2017": 16,
+     "2018": 143,
+     "2019": 231,
+     "2020": 129,
+     "2021": 82,
+     "2022": 41,
+     "2023": 14,
+     "2024": 12,
+     "2025": 425,
+     "2026": 2
+    },
+    "after_by_type": {},
+    "discovered_after_latest_cutoff_all_objects": 20,
+    "discovered_before_earliest_cutoff_labeled": 7841,
+    "discovered_inside_cutoff_window_labeled": 2
+   },
+   "rubin_dates": {
+    "first_alerts": "2026-02-24 (sources/RTN-011.txt line 2468)",
+    "lsst_start": "night of 2026-06-29 (sources/RTN-011.txt line 1288; sources/rubin_community/2026-07-10_2026-07-10-early-operations-update-start-of-lsst.md), announced 2026-06-30 (sources/rubin_community/2026-06-30_the-lsst-has-started.md)",
+    "off_sky": "summit evacuated 2026-07-14/15 for a winter storm; still off sky with no return-to-sky date as of 2026-09-11 (sources/rubin_community/2026-07-24_lsst-update-2026-07-24.md; 2026-09-11_summit-technical-progress-week-ending-2026-09-11.md)"
+   }
+  },
+  "provenance": {
+   "referent": "per-object date on which the BTS label became publicly readable, bracketed, compared with each candidate subject's published knowledge cutoff",
+   "source": "astronomy/agent3_labels_exposure/scripts/labels_exposure.py::main split(); lower bound = TNS discovery date (sources/bts_all_extracols_2026-09-16.csv sha256 7c08daf489bbf648cb798ceba9f5ecbf56abc9f94dc6b2e320f5aaa84ad35b63, 'discdate'); upper bound = Internet Archive capture of the public explorer showing the same type string (sources/wayback_bts_explorer_20241208231331.html sha256 96b9fe72714a7e3af4e9f2cc8e22b4b60b7a5078dd488e0c9b06c05bd6d2fc43, sources/wayback_bts_explorer_20250810065056.html sha256 ec0152effff8b3e4dfb538566ad998ab5e4dd33749c229c9f7518cefcbb373d6); input-data release: sources/ztf_public_releases.txt lines 104, 301; sources/RTN-011.txt lines 2468, 2773, 1288; cutoffs: sources/anthropic_models_overview.txt line 49, sources/anthropic_transparency.txt lines 34, 69, 104, 348, sources/openai_models.txt lines 660-729, sources/deepmind_modelcard_gemini-3-8-flash.txt line 243",
+   "population": "7843 labeled objects out of 11217 unique ZTFID (pre-clustering); subjects: 10 candidate models, 1 without a published cutoff",
+   "adjudicator": "TNS classification report dates per object (exact public date of each label), which would collapse the bracket to a point; not reachable without credentials",
+   "falsifier": "a TNS classification report dated after 2024-12-08 for an object counted 'before' with an unchanged type, or a subject whose training data (not reliable-knowledge cutoff) is documented to end before the object's label date, or a rerun on the same hashed files returning different counts"
+  },
+  "status": "DERIVED",
+  "status_note": "key definition and brackets are derived from release metadata; exact classification-report dates are UNDEMONSTRATED for the unresolved objects listed; one candidate subject has no published cutoff. Not ruled on in PANEL_BRIEF_WAVE2.md.",
+  "wave2_cross_references": {
+   "rubin_admission_boundary": "first detection >= 2026-07-01T00:00:00 UTC (MJD TAI 61222.000428) = max(survey start 2026-06-29T12:00, latest demonstrated cutoff last day + 1 d); stratum S0 = nights 20260629-20260630 (bands_FROZEN.md section 1 and 3)",
+   "tns_discovery_date_not_a_safe_lower_bound": "SN2017bde discovered 2017 but classified by SNIascore in 2023; AT2019czs likewise (wave-2 agent 2 REPORT.md Disagreements 7). The exposure key uses TNS discovery date as the label-public lower bound, and that bound is contradicted for these objects. Listed, not reconciled."
+  },
+  "source_records": [
+   {
+    "path": "astronomy/agent3_labels_exposure/exposure_key_slot.json",
+    "sha256": "01eaef9f098bd8e21c12001985eb1c0649fdb658b48fea7ce3aa5bd7eca2fe90"
+   },
+   {
+    "path": "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md",
+    "sha256": "8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2",
+    "locator": "sections 1, 3"
+   },
+   {
+    "path": "astronomy/wave2/agent2_label_source/REPORT.md",
+    "sha256": "6243de564fd77f28322e77948ce0a7c50c880d588ca832e22b6fab4627f95ad1",
+    "locator": "section 6 item 7"
+   }
+  ],
+  "override_invitation": "Override invitation: accept, or replace the value and give a reason; the reason enters amendment_ledger.json.",
+  "wave3_additions": {
+   "prior_position_leak": "193 of 9,000 sampled cohort ids have an ANTARES alert at the same position before the boundary (gaps 12-2,943 d; 3 within 60 d): public position history before the cutoff; listed as a leak",
+   "ppdb": "NOT RELEASED as of 2026-09-16; cohort O = 1,937,669 is an upper bound (PPDB-only detections could only lower it)",
+   "rubin_first_detection_field": "Fink serves r:firstDiaSourceMjdTai as null for 8,986/8,986 sampled ids; Rubin-side first time not publicly obtainable (agent 1 AM7)",
+   "tns": "BLOCKED; label public dates remain bracketed",
+   "record": {
+    "path": "astronomy/wave3/agent1_cohort_finish/rubin_cohort_count.json",
+    "sha256": "57cf41895fac0f5493d6cdb1efb8aea6499daa935479bf500cd031543c79ddde",
+    "locator": "w3-07, w3-08"
+   },
+   "agent2_position_leak": "ANTARES matches 7 supernovae discovered 2025-02..2026-04 at cohort positions (agent 2 disagreement 3); listed",
+   "tns_discovery_proxy": "SN2017bde and AT2019czs remain counterexamples to the discovery-date lower bound"
+  },
+  "rule_E": {
+   "cohort_after_every_cutoff": {
+    "value": 1937669,
+    "v_record": "V-C01",
+    "verdict": "MATCH",
+    "cleared_for_P4_under_rule_E": true,
+    "sealed_sha256": "8f5262daef8930d8e21ac46d14268c365f8d172ba5bd2726cf1cb63f89c8c463",
+    "rule_E": "CLEARED"
+   },
+   "antares_prior_position_leak_193_of_9000": {
+    "value": [
+     193,
+     9000
+    ],
+    "v_record": null,
+    "rule_E": "V_PENDING"
+   },
+   "bts_capture_split_6166_0_1677": {
+    "value": [
+     6166,
+     0,
+     1677
+    ],
+    "v_record": null,
+    "rule_E": "V_PENDING",
+    "note": "BTS calibration only"
+   }
+  }
+ },
+ "tool_inventory": {
+  "value": {
+   "tools": [
+    {
+     "id": "ATAT",
+     "family": "deep_supervised_transformer",
+     "fm_channel": true,
+     "repo": "alercebroker/ATAT@0db532f2",
+     "roles": [
+      "predictor"
+     ],
+     "input_from_code": "ELAsTiCC SNANA FITS -> h5: FLUXCAL/FLUXCALERR in 6 bands, 65-epoch padded grid, masks; optional 64 ELAsTiCC header fields (HOSTGAL_* photo-z quantiles, REDSHIFT_HELIO, MWEBV) and 429 features (src/data/get_lc_md.py::feat_dict; datasets.py channel_dict={'ELASTICC':6})",
+     "output_from_code": "20-class log-softmax over ELAsTiCC taxonomy (datasets.py::classes_names; layers/classifier.py LogSoftmax)",
+     "weights": "Google Drive id 1teIi3GfPbYOZXaIHRAa_OCPTY9QYXTU1 (results_paper.zip, 10G per Drive page 2026-09-16) via get_important_files.sh; not downloaded (>500MB), no hash taken",
+     "trained_on": "ELAsTiCC v1 simulated training set only (README 'Get data'; paper Sec 2.1)",
+     "ztf": "UNAVAILABLE",
+     "ztf_why": "no ZTF dataset entry in the ATAT repo (datasets.py channel_dict/seq_dict only ELASTICC, ELASTICC_STREAM); a ZTF ATAT training/inference path exists in alercebroker/pipeline@b58b866b training/lc_classifier_ztf/ATAT_ALeRCE but ships no weights",
+     "rubin": "AVAILABLE_UNVERIFIED",
+     "rubin_why": "LC branch consumes 6-band difference flux, mappable from DIASource psfFlux; metadata branch needs HOSTGAL_*/REDSHIFT_HELIO absent from lsst.v11_1 diaObject/diaSource; trained only on simulation; weights unpinned",
+     "counterparts": [
+      "ALeRCE_BHRF"
+     ],
+     "counterparts_by_survey": {
+      "ztf": [
+       "ALeRCE_BHRF"
+      ],
+      "rubin": [
+       "Fink_EarlySNIa_RF",
+       "Fink_SLSN_RF"
+      ],
+      "rubin_amendment": "AMD-V1-03 (was [\"ALeRCE_BHRF\"])"
+     }
+    },
+    {
+     "id": "ORACLE",
+     "family": "deep_supervised_rnn",
+     "fm_channel": true,
+     "repo": "uiucsn/Astro-ORACLE@876e0339",
+     "roles": [
+      "predictor"
+     ],
+     "input_from_code": "FLUXCAL, FLUXCALERR, MJD, BAND(u,g,r,i,z,Y), PHOTFLAG + 23 static features incl. REDSHIFT_HELIO, HOSTGAL_PHOTOZ/SPECZ, HOSTGAL_MAG_* (src/astroOracle/dataloader.py::static_feature_list)",
+     "output_from_code": "conditional probabilities over a 26-node hierarchy (pretrained_models.py; paper Fig 3)",
+     "weights": "models/lsst_alpha_0.5/best_model.h5 sha256 4643e84f...53bc3f; models/lsst_alpha_0.5_no_md/best_model.h5 sha256 5be1ae62...fa698 (in-repo)",
+     "trained_on": "ELAsTiCC2 simulated training sample (README 'Convert Elasticc 2 train dataset'; paper Sec 3)",
+     "ztf": "UNAVAILABLE",
+     "ztf_why": "bands u..Y only; no ZTF model",
+     "rubin": "AVAILABLE_UNVERIFIED",
+     "rubin_why": "ORACLE-lite (no_md) needs only time-series columns mappable from DIASource/DIAForcedSource; full model needs static host/redshift features absent from the Rubin alert packet; simulation-trained",
+     "counterparts": [
+      "ALeRCE_BHRF",
+      "Fink_EarlySNIa_RF"
+     ],
+     "counterparts_by_survey": {
+      "ztf": [
+       "ALeRCE_BHRF",
+       "Fink_EarlySNIa_RF"
+      ],
+      "rubin": [
+       "ALeRCE_BHRF",
+       "Fink_EarlySNIa_RF"
+      ]
+     }
+    },
+    {
+     "id": "SuperNNova",
+     "family": "deep_supervised_rnn",
+     "fm_channel": true,
+     "repo": "supernnova/SuperNNova@ac2aff73 + astrolabsoftware/fink-science@591e75ce",
+     "roles": [
+      "predictor"
+     ],
+     "input_from_code": "Rubin: midpointMjdTai, band, psfFlux, psfFluxErr converted to FLUXCAL zp27.5 (fink_science/rubin/snn/processor.py L114); ZTF: fink_science/ztf/snn",
+     "output_from_code": "class probabilities (Ia vs rest, broad 5-way) per alert",
+     "weights": "fink data/models/snn_models/elasticc_ia/model.pt sha256 614179b9...5cbe; elasticc_broad 7109780...daf8ee; snn_snia_vs_nonia 28daec3d...913b (in-repo)",
+     "trained_on": "ELAsTiCC for Rubin models (fink data/models/README.md 'Elasticc/Rubin' table; paper 2404.08798 Sec 5.2); ZTF model training set not established from a source read",
+     "ztf": "AVAILABLE_UNVERIFIED",
+     "ztf_why": "ZTF science module and model exist; training data provenance of snn_snia_vs_nonia not established",
+     "rubin": "AVAILABLE_UNVERIFIED",
+     "rubin_why": "code ingests Rubin DIASource columns; doctest input is datasim/rubin_test_data_10_0.parquet (simulated); ELAsTiCC-trained",
+     "counterparts": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ],
+     "counterparts_by_survey": {
+      "ztf": [
+       "Fink_EarlySNIa_RF",
+       "Fink_SLSN_RF"
+      ],
+      "rubin": [
+       "Fink_EarlySNIa_RF",
+       "Fink_SLSN_RF"
+      ]
+     }
+    },
+    {
+     "id": "CATS",
+     "family": "deep_supervised_lstm",
+     "fm_channel": true,
+     "repo": "astrolabsoftware/fink-science@591e75ce (rubin/cats)",
+     "roles": [
+      "predictor"
+     ],
+     "input_from_code": "midpointMjdTai, psfFlux, psfFluxErr, band (rubin/cats/processor.py::predict_nn); model 'cats_small_nometa' (no metadata)",
+     "output_from_code": "5 broad-class scores (SN-like, Fast, Long, Periodic, Non-periodic)",
+     "weights": "cats_small_nometa_serial.keras sha256 e51239df...c8f (pruned after hashing, see code/PRUNED_LARGE_FILES.tsv)",
+     "trained_on": "ELAsTiCC v1 streamed alerts (paper 2404.08798 Sec 2, 5.1)",
+     "ztf": "UNAVAILABLE",
+     "ztf_why": "Rubin-only module",
+     "rubin": "AVAILABLE_UNVERIFIED",
+     "rubin_why": "ingests Rubin schema columns; simulation-trained; deployed model drops the metadata branch described in the paper",
+     "counterparts": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ],
+     "counterparts_by_survey": {
+      "ztf": [
+       "Fink_EarlySNIa_RF",
+       "Fink_SLSN_RF"
+      ],
+      "rubin": [
+       "Fink_EarlySNIa_RF",
+       "Fink_SLSN_RF"
+      ]
+     }
+    },
+    {
+     "id": "RAPID",
+     "family": "deep_supervised_rnn",
+     "fm_channel": true,
+     "repo": "daniel-muthukrishna/astrorapid@7f28499f",
+     "roles": [
+      "predictor"
+     ],
+     "input_from_code": "mjd, flux, fluxerr, passband ('g','r'), photflag, ra, dec, objid, redshift, mwebv (README example; classify.py L38 passbands=('g','r'))",
+     "output_from_code": "time-resolved class probabilities over 12 transient classes + Pre-explosion",
+     "weights": "ZTF_known_redshift.hdf5 sha256 96ce0762...cc9c; ZTF_unknown_redshift.hdf5 d68ed438...d967 (in-repo, pruned after hashing)",
+     "trained_on": "SNANA simulations with PLAsTiCC models and a ZTF MSIP observing-conditions library (paper 1904.00014 Sec 2.1; section read, paper not read in full)",
+     "ztf": "AVAILABLE_UNVERIFIED",
+     "ztf_why": "native g/r input; simulation-trained; known-redshift model needs a redshift not in the ZTF alert",
+     "rubin": "UNAVAILABLE",
+     "rubin_why": "no ugrizy weights",
+     "counterparts": [
+      "ALeRCE_BHRF",
+      "Superphot_plus"
+     ],
+     "counterparts_by_survey": {
+      "ztf": [
+       "ALeRCE_BHRF",
+       "Superphot_plus"
+      ],
+      "rubin": [
+       "ALeRCE_BHRF",
+       "Superphot_plus"
+      ]
+     }
+    },
+    {
+     "id": "SCONE",
+     "family": "deep_supervised_cnn",
+     "fm_channel": true,
+     "repo": "helenqu/scone@9b72001b",
+     "roles": [
+      "predictor"
+     ],
+     "input_from_code": "SNANA HEAD/PHOT FITS (SNID, MJD, FLT, FLUXCAL, FLUXCAL_ERR, PEAKMJD, MWEBV) -> GP heatmaps (README 'Input Data')",
+     "output_from_code": "Ia vs non-Ia or categorical probabilities",
+     "weights": "none released in repo (no *.h5/*.keras/*.pt found); training required",
+     "trained_on": "n/a (no weights)",
+     "ztf": "UNAVAILABLE",
+     "ztf_why": "no weights; input requires PEAKMJD from SNANA truth header",
+     "rubin": "UNAVAILABLE",
+     "rubin_why": "no weights; PEAKMJD not in the alert packet",
+     "counterparts": [
+      "SALT3_sncosmo",
+      "ALeRCE_BHRF"
+     ],
+     "counterparts_by_survey": {
+      "ztf": [
+       "SALT3_sncosmo",
+       "ALeRCE_BHRF"
+      ],
+      "rubin": [
+       "SALT3_sncosmo",
+       "ALeRCE_BHRF"
+      ]
+     }
+    },
+    {
+     "id": "BTSbot",
+     "family": "deep_supervised_multimodal_cnn",
+     "fm_channel": true,
+     "repo": "nabeelre/BTSbot@f4281202; HF nabeelr/BTSbot-convnext-pico-galaxyzoo-metadata@d1014759",
+     "roles": [
+      "predictor"
+     ],
+     "input_from_code": "ZTF alert triplet cutouts + 25 ZTF candidate fields incl. sgscore1, distpsnr1, nmtchps, new_drb, chinr, sharpnr, scorr (train_config.json metadata_cols)",
+     "output_from_code": "unit-interval bright-transient score per alert",
+     "weights": "pytorch_model.bin sha256 c30f3202...4592 (downloaded, matches HF LFS oid)",
+     "trained_on": "ZTF BTS scanning decisions: positives = BTS-saved bright SNe, negatives = sources rejected by BTS (paper 2307.07618 Sec 2.1)",
+     "ztf": "AVAILABLE_VERIFIED",
+     "ztf_why": "real ZTF alerts; label is the BTS follow-up decision itself (exposure/leakage flag)",
+     "rubin": "UNAVAILABLE",
+     "rubin_why": "sgscore1, distpsnr1, nmtchps, drb, chinr, sharpnr, scorr absent from lsst.v11_1 schema",
+     "counterparts": [
+      "ALeRCE_BHRF"
+     ],
+     "counterparts_by_survey": {
+      "ztf": [
+       "ALeRCE_BHRF"
+      ],
+      "rubin": [
+       "ALeRCE_BHRF"
+      ]
+     }
+    },
+    {
+     "id": "AppleCiDEr",
+     "family": "deep_supervised_multimodal",
+     "fm_channel": true,
+     "repo": "skyportal/applecider@48148937",
+     "roles": [
+      "predictor"
+     ],
+     "input_from_code": "ZTF photometry, metadata, image cutouts, spectra (README; src/applecider)",
+     "output_from_code": "transient class probabilities",
+     "weights": "none in repo; default_config.toml pretrained_weights_path_='./pretrained_weights.pth' placeholder",
+     "trained_on": "not established (paper 2507.16088 not read in full)",
+     "ztf": "UNAVAILABLE",
+     "ztf_why": "no pinned weights",
+     "rubin": "UNAVAILABLE",
+     "rubin_why": "ZTF-specific inputs; no weights",
+     "counterparts": [
+      "ALeRCE_BHRF"
+     ],
+     "counterparts_by_survey": {
+      "ztf": [
+       "ALeRCE_BHRF"
+      ],
+      "rubin": [
+       "ALeRCE_BHRF"
+      ]
+     }
+    },
+    {
+     "id": "Maven",
+     "family": "foundation_model_contrastive",
+     "fm_channel": true,
+     "repo": "ThomasHelfer/multimodal-supernovae@1f571aa9",
+     "roles": [
+      "encoder"
+     ],
+     "input_from_code": "ZTF light curves in bands ['R','g'] as (time, mag, magerr) with MW extinction correction (src/dataloader.py L482-509) + SEDM spectra",
+     "output_from_code": "contrastive embedding; downstream kNN/SVC/linear heads",
+     "weights": "models/clip_noiselesssimpretrain_clipreal/gallant-sweep-1/epoch=30-step=3627.ckpt sha256 0fc75ccc...cd880 (one of 5 folds; pruned after hashing)",
+     "trained_on": "0.5M SNANA ZTF-like simulations, fine-tuned on 4,702 ZTF BTS SNe (paper 2408.16829 Sec 2.1-2.2); train_filenames.txt lists BTS objects",
+     "ztf": "AVAILABLE_VERIFIED",
+     "ztf_why": "real ZTF BTS photometry; fine-tuned on the BTS label base itself (exposure flag); spectral branch unavailable before follow-up",
+     "rubin": "UNAVAILABLE",
+     "rubin_why": "band embedding covers only ZTF r/g",
+     "counterparts": [
+      "Superphot_plus",
+      "ALeRCE_BHRF",
+      "SALT3_sncosmo"
+     ],
+     "counterparts_by_survey": {
+      "ztf": [
+       "Superphot_plus",
+       "ALeRCE_BHRF",
+       "SALT3_sncosmo"
+      ],
+      "rubin": [
+       "Superphot_plus",
+       "ALeRCE_BHRF",
+       "SALT3_sncosmo"
+      ]
+     }
+    },
+    {
+     "id": "Astromer1",
+     "family": "foundation_model_masked",
+     "fm_channel": true,
+     "repo": "astromer-science/python-library@75262739 + astromer-science/weights@649eda47",
+     "roles": [
+      "encoder"
+     ],
+     "input_from_code": "single-band L x 3 arrays (time, magnitude, magnitude std), 200-epoch windows (python-library README)",
+     "output_from_code": "attention vectors (embeddings)",
+     "weights": "macho_a0.zip sha256 76a204a3...158b; macho_a1.zip 1da01909...ec6c (in weights repo; README also advertises 'atlas' weights not present in the weights repo)",
+     "trained_on": "MACHO light curves (weights names; README)",
+     "ztf": "AVAILABLE_UNVERIFIED",
+     "ztf_why": "per-band magnitude series mappable; variable-star pretraining, no transient validation",
+     "rubin": "AVAILABLE_UNVERIFIED",
+     "rubin_why": "per-band series mappable from psfFlux; same caveat",
+     "counterparts": [
+      "ALeRCE_BHRF"
+     ],
+     "counterparts_by_survey": {
+      "ztf": [
+       "ALeRCE_BHRF"
+      ],
+      "rubin": [
+       "Fink_EarlySNIa_RF",
+       "Fink_SLSN_RF"
+      ],
+      "rubin_amendment": "AMD-V1-03 (was [\"ALeRCE_BHRF\"])"
+     }
+    },
+    {
+     "id": "Astromer2",
+     "family": "foundation_model_masked",
+     "fm_channel": true,
+     "repo": "astromer-science/main-code@009634c8 (sparse checkout, output weights excluded)",
+     "roles": [
+      "encoder"
+     ],
+     "input_from_code": "single-band magnitude time series (README)",
+     "output_from_code": "embeddings",
+     "weights": "Zenodo 10.5281/zenodo.18207945 (README); not downloaded, no hash taken",
+     "trained_on": "1.5M MACHO light curves (README 'Key Features')",
+     "ztf": "AVAILABLE_UNVERIFIED",
+     "ztf_why": "format mappable; unpinned; variable-star domain",
+     "rubin": "AVAILABLE_UNVERIFIED",
+     "rubin_why": "format mappable; unpinned; variable-star domain",
+     "counterparts": [
+      "ALeRCE_BHRF"
+     ],
+     "counterparts_by_survey": {
+      "ztf": [
+       "ALeRCE_BHRF"
+      ],
+      "rubin": [
+       "Fink_EarlySNIa_RF",
+       "Fink_SLSN_RF"
+      ],
+      "rubin_amendment": "AMD-V1-03 (was [\"ALeRCE_BHRF\"])"
+     }
+    },
+    {
+     "id": "MultibandAstromer",
+     "family": "foundation_model_masked",
+     "fm_channel": true,
+     "repo": "astromer-science/multiband-astromer@7228548b",
+     "roles": [
+      "encoder"
+     ],
+     "input_from_code": "multiband windows of 200 (README get_MBAstromer)",
+     "output_from_code": "embeddings",
+     "weights": "none found in repo",
+     "trained_on": "MACHO / Alcock / ATLAS per README",
+     "ztf": "UNAVAILABLE",
+     "ztf_why": "no weights",
+     "rubin": "UNAVAILABLE",
+     "rubin_why": "no weights",
+     "counterparts": [
+      "ALeRCE_BHRF"
+     ],
+     "counterparts_by_survey": {
+      "ztf": [
+       "ALeRCE_BHRF"
+      ],
+      "rubin": [
+       "ALeRCE_BHRF"
+      ]
+     }
+    },
+    {
+     "id": "AstroCLIP",
+     "family": "foundation_model_contrastive",
+     "fm_channel": true,
+     "repo": "PolymathicAI/AstroCLIP@e129576a; HF polymathic-ai/astroclip@4af71e52",
+     "roles": [
+      "encoder"
+     ],
+     "input_from_code": "galaxy image cutouts (Legacy Survey g,r,z) and DESI spectra (README Pretrained Models; configs/astroclip.yaml)",
+     "output_from_code": "shared galaxy embedding (host-galaxy channel)",
+     "weights": "astroclip.ckpt 1,680,929,841 bytes, HF-reported LFS sha256 e1689395...6d56 (not downloaded: >500MB; not locally verified)",
+     "trained_on": "DESI Legacy Survey images x DESI spectra (README)",
+     "ztf": "UNAVAILABLE",
+     "ztf_why": "not in the alert; needs host association plus external Legacy Survey cutouts (footprint-limited)",
+     "rubin": "UNAVAILABLE",
+     "rubin_why": "same; Rubin alert carries no host identification",
+     "counterparts": [
+      "GHOST",
+      "Blast"
+     ],
+     "counterparts_by_survey": {
+      "ztf": [
+       "GHOST",
+       "Blast"
+      ],
+      "rubin": [
+       "GHOST",
+       "Blast"
+      ]
+     }
+    },
+    {
+     "id": "AstroM3",
+     "family": "foundation_model_contrastive",
+     "fm_channel": true,
+     "repo": "MeriDK/AstroM3@7f296c22",
+     "roles": [
+      "encoder"
+     ],
+     "input_from_code": "ASAS-SN photometry + LAMOST spectra + metadata for variable stars (README Data; src/model.py)",
+     "output_from_code": "trimodal embedding / variable-star class",
+     "weights": "none found in repo; paper 2411.08842 'made available upon acceptance'",
+     "trained_on": "AstroM3Dataset (variable stars)",
+     "ztf": "UNAVAILABLE",
+     "ztf_why": "domain and inputs differ; no weights",
+     "rubin": "UNAVAILABLE",
+     "rubin_why": "same",
+     "counterparts": [
+      "ALeRCE_BHRF"
+     ],
+     "counterparts_by_survey": {
+      "ztf": [
+       "ALeRCE_BHRF"
+      ],
+      "rubin": [
+       "ALeRCE_BHRF"
+      ]
+     }
+    },
+    {
+     "id": "ParSNIP",
+     "family": "deep_generative_physics_vae",
+     "fm_channel": true,
+     "repo": "kboone/parsnip@dcea62fe",
+     "roles": [
+      "encoder",
+      "generator",
+      "scorer"
+     ],
+     "input_from_code": "encode: gridded flux + weights per model band + redshift (or photo-z) channel (parsnip.py::_get_data); decode/decode_spectra: agent-set latent s1..s3, color, amplitude, ref time, redshift (parsnip.py L856-949); predict_redshift_distribution: NLL over an agent-chosen redshift grid (L1719); ParsnipSncosmoSource exposes (amplitude,color,s1..s3) to sncosmo fitting (sncosmo.py)",
+     "output_from_code": "latent posteriors; model spectra/photometry; per-redshift NLL",
+     "weights": "plasticc.pt sha256 a164aefe...7366 (bands lsstu..lssty); ps1.pt 9ebf0a6e...1968 (ps1::g..z); plasticc_photoz.pt f41d06ce...2452 (in-repo)",
+     "trained_on": "PLAsTiCC simulation; PS1-MDS real (paper Sec 2)",
+     "ztf": "UNAVAILABLE",
+     "ztf_why": "no pretrained model with ztfg/ztfr encoder bands; internal decode restricted to model bands (sncosmo-source route can integrate any registered bandpass)",
+     "rubin": "AVAILABLE_UNVERIFIED",
+     "rubin_why": "plasticc model uses sncosmo 'lsst' v1.1 2016 throughputs; encoder needs redshift or hostgal_photoz not in the packet, but generator/scorer paths accept an agent-supplied redshift",
+     "counterparts": [
+      "SALT3_sncosmo",
+      "Superphot_plus"
+     ],
+     "counterparts_by_survey": {
+      "ztf": [
+       "SALT3_sncosmo",
+       "Superphot_plus"
+      ],
+      "rubin": [
+       "SALT3_sncosmo",
+       "Superphot_plus"
+      ]
+     }
+    },
+    {
+     "id": "ALeRCE_BHRF",
+     "family": "classical_balanced_hierarchical_rf",
+     "fm_channel": false,
+     "repo": "alercebroker/lc_classifier@b8a85200",
+     "roles": [
+      "predictor"
+     ],
+     "input_from_code": "ZTF detections (fid 1/2, magpsf(_corr), sigmapsf, rb>=0.55), non-detections diffmaglim, sgscore1, AllWISE W1-W3 -> 152 features (features_RF_model.pkl list); ElasticcRandomForest class for ELAsTiCC features",
+     "output_from_code": "15-class probabilities = top-level x bottom-level (classifier/models.py::predict_proba)",
+     "weights": "https://assets.alerce.online/pipeline/hierarchical_rf_1.1.1/ sha256 features_RF_model.pkl 1e4d15cd...00d3, top_level d160264a...e88, transient_level b77ca8cc...0e29, periodic_level 8cb2f994...091b, stochastic_level 56b647a0...013e (code/_downloaded_artifacts/alerce_hrf_1.1.1/SHA256SUMS; downloaded, hashed, large pickles deleted); no ELAsTiCC/Rubin weight URL in code",
+     "trained_on": "ZTF labelled set cross-matched to catalogues (paper 2008.03311 Sec 2.2.1)",
+     "ztf": "AVAILABLE_VERIFIED",
+     "ztf_why": "real ZTF alerts; needs AllWISE cross-match and >5 detections",
+     "rubin": "UNAVAILABLE",
+     "rubin_why": "no Rubin/ELAsTiCC weights: ElasticcRandomForest has no download URL, and the ATAT repo's results_rf_paper.zip (sha256 07ef884a...684b) holds predictions and stats only, no model; the ZTF model needs sgscore1, rb and g/r magnitudes",
+     "counterparts": []
+    },
+    {
+     "id": "SALT3_sncosmo",
+     "family": "classical_empirical_sed_template",
+     "fm_channel": false,
+     "repo": "sncosmo/sncosmo@a42c9363 (+ djones1040/SALTShaker@5183c2dc training code)",
+     "roles": [
+      "scorer",
+      "generator"
+     ],
+     "input_from_code": "photometry table in any registered bandpass (ztfg/ztfr/ztfi; lsstu..lssty v1.1 2016) + agent-set or fitted z, t0, x0, x1, c (builtins.py L372-381, L448-457, L1033-1040; models.py::SALT3Source)",
+     "output_from_code": "model band fluxes and relative model variance; fit_lc chi2 and parameter posteriors under the SN Ia hypothesis",
+     "weights": "salt3-f22 v2.0 tarball sha256 c7de5343...a37e (downloaded)",
+     "trained_on": "SALT3.K21 compilation, recalibrated 'Fragilistic' F22 (builtins.py meta note)",
+     "ztf": "AVAILABLE_UNVERIFIED",
+     "ztf_why": "ZTF bandpasses registered; K21 training compilation contains no ZTF data (paper Table 4)",
+     "rubin": "AVAILABLE_UNVERIFIED",
+     "rubin_why": "LSST bandpasses are 2016 baseline v1.1 throughputs, not as-built",
+     "counterparts": []
+    },
+    {
+     "id": "Superphot_plus",
+     "family": "classical_parametric_fit_plus_classifier",
+     "fm_channel": false,
+     "repo": "VTDA-Group/superphot-plus@973e2a80",
+     "roles": [
+      "predictor",
+      "generator"
+     ],
+     "input_from_code": "ZTF g/r photometry (priors_ZTF_g.csv, priors_ZTF_r.csv; data_generation/alerce.py); data_generation/make_fake_spp_data.py simulates light curves",
+     "output_from_code": "fitted 14-parameter model posteriors; 5-class SN probabilities",
+     "weights": "data/tutorial/model_superphot_full.pt sha256 a9536ff1...5a88 (tutorial model; training set not established)",
+     "trained_on": "not established (paper 2403.07975 not read in full)",
+     "ztf": "AVAILABLE_UNVERIFIED",
+     "ztf_why": "ZTF priors and import path; model provenance unread",
+     "rubin": "UNAVAILABLE",
+     "rubin_why": "no LSST-band priors or model in repo",
+     "counterparts": []
+    },
+    {
+     "id": "Superphot",
+     "family": "classical_parametric_fit_plus_classifier",
+     "fm_channel": false,
+     "repo": "griffin-h/superphot@eb3e31be",
+     "roles": [
+      "predictor"
+     ],
+     "input_from_code": "PS1-MDS griz photometry",
+     "output_from_code": "class probabilities after training",
+     "weights": "none",
+     "trained_on": "n/a",
+     "ztf": "UNAVAILABLE",
+     "ztf_why": "no weights",
+     "rubin": "UNAVAILABLE",
+     "rubin_why": "no weights",
+     "counterparts": []
+    },
+    {
+     "id": "Fink_EarlySNIa_RF",
+     "family": "classical_rainbow_features_rf",
+     "fm_channel": false,
+     "repo": "astrolabsoftware/fink-science@591e75ce (rubin/random_forest_snia, ztf/random_forest_snia)",
+     "roles": [
+      "predictor"
+     ],
+     "input_from_code": "Rubin DIASource time series -> Rainbow multiband fit features (rubin/random_forest_snia/processor.py)",
+     "output_from_code": "P(early SN Ia)",
+     "weights": "sklearn_1.7.2/elasticc_rainbow_earlyIa_nometa-1.7.2.obj sha256 089bc049...3a38 (pruned after hashing)",
+     "trained_on": "ELAsTiCC v1 alerts (paper 2404.08798 Sec 5.3)",
+     "ztf": "AVAILABLE_UNVERIFIED",
+     "ztf_why": "ZTF module and default-model_sigmoid.obj exist; training provenance not read",
+     "rubin": "AVAILABLE_UNVERIFIED",
+     "rubin_why": "ingests Rubin columns; simulation-trained",
+     "counterparts": []
+    },
+    {
+     "id": "Fink_SLSN_RF",
+     "family": "classical_rainbow_features_rf",
+     "fm_channel": false,
+     "repo": "astrolabsoftware/fink-science@591e75ce (rubin/slsn)",
+     "roles": [
+      "predictor"
+     ],
+     "input_from_code": "Rubin DIASource series + optional metadata (rubin/slsn/kernel.py)",
+     "output_from_code": "P(SLSN)",
+     "weights": "SLSN_rainbow_no_MD.joblib sha256 855e55d0...8df4 (pruned after hashing); kernel.py also references SLSN_rainbow_MD.joblib, absent on disk",
+     "trained_on": "ELAsTiCC v1 alerts (paper 2404.08798 Sec 5.4)",
+     "ztf": "AVAILABLE_UNVERIFIED",
+     "ztf_why": "ztf/superluminous module exists; provenance not read",
+     "rubin": "AVAILABLE_UNVERIFIED",
+     "rubin_why": "no-MD model ingests Rubin columns; simulation-trained",
+     "counterparts": []
+    },
+    {
+     "id": "Sherlock",
+     "family": "classical_contextual_crossmatch",
+     "fm_channel": false,
+     "repo": "thespacedoctor/sherlock@37ef9298",
+     "roles": [
+      "predictor"
+     ],
+     "input_from_code": "transient coordinates + local catalogue database (transient_classifier.py association types AGN, CV, NT, SN, VS, BS, ORPHAN)",
+     "output_from_code": "contextual classification and matched source",
+     "weights": "no weights; catalogue database not public/provisioned",
+     "trained_on": "rule-based",
+     "ztf": "UNAVAILABLE",
+     "ztf_why": "catalogue DB not provisioned locally (runs as a Lasair service)",
+     "rubin": "UNAVAILABLE",
+     "rubin_why": "same; Rubin page (sources/rubin_for-scientists_data-products_alerts-and-brokers.txt) states Lasair runs Sherlock",
+     "counterparts": []
+    },
+    {
+     "id": "GHOST",
+     "family": "classical_host_association",
+     "fm_channel": false,
+     "repo": "uiucsn/astro_ghost@d7a1dec6",
+     "roles": [
+      "predictor"
+     ],
+     "input_from_code": "transient name/coordinates -> PS1 queries; north/south split at dec=-30 (ghostHelperFunctions.py L761); MLP_lupton.hdf5 photo-z",
+     "output_from_code": "host galaxy match, PS1 photometry, photo-z",
+     "weights": "MLP_lupton.hdf5 sha256 13ac27c2...c1dc (pruned after hashing)",
+     "trained_on": "PS1 / SDSS (paper 2008.09630 not read in full)",
+     "ztf": "AVAILABLE_UNVERIFIED",
+     "ztf_why": "PS1 covers ZTF sky; external queries at runtime",
+     "rubin": "AVAILABLE_UNVERIFIED",
+     "rubin_why": "coordinates available; PS1 coverage limited for southern LSST fields",
+     "counterparts": []
+    },
+    {
+     "id": "Blast",
+     "family": "classical_host_sed_service",
+     "fm_channel": false,
+     "repo": "scimma/blast@614ace3b",
+     "roles": [
+      "predictor"
+     ],
+     "input_from_code": "transient coordinates -> host match and SED fit (Django app; data/sbipp SBI models)",
+     "output_from_code": "host galaxy properties (mass, SFR, redshift)",
+     "weights": "data/sbipp/SBI_model.pt sha256 ac2d9d3b...fac5b72 (pruned after hashing)",
+     "trained_on": "not established (paper 2410.17322 not read in full)",
+     "ztf": "AVAILABLE_UNVERIFIED",
+     "ztf_why": "service-style; external survey queries",
+     "rubin": "AVAILABLE_UNVERIFIED",
+     "rubin_why": "same",
+     "counterparts": []
+    },
+    {
+     "id": "SNANA",
+     "family": "classical_simulator",
+     "fm_channel": false,
+     "repo": "RickKessler/SNANA@74dfb2c5 (+ LSSTDESC/elasticc@818ae71e configs)",
+     "roles": [
+      "simulator"
+     ],
+     "input_from_code": "agent-chosen SED models (genmag_*.c), rates, redshift range, SIMLIB cadence/noise",
+     "output_from_code": "simulated light curves in survey format (FITS HEAD/PHOT)",
+     "weights": "n/a; requires SNDATA_ROOT model libraries and survey SIMLIBs, not in the clone and not pinned",
+     "trained_on": "n/a",
+     "ztf": "UNDEMONSTRATED",
+     "ztf_why": "ZTF SIMLIB used by RAPID/Maven not public in the clones",
+     "rubin": "UNDEMONSTRATED",
+     "rubin_why": "ELAsTiCC inputs at NERSC not pinned",
+     "counterparts": []
+    }
+   ],
+   "non_channels": [
+    {
+     "id": "MultimodalUniverse",
+     "repo": "MultimodalUniverse/MultimodalUniverse@4e53d93d",
+     "why": "dataset collection (includes BTS, PLAsTiCC, YSE, Foundation, PS1 SNe Ia subsets); baselines/plasticc/pretrained_model/pytorch_model.bin sha256 d4499e51...344d is a baseline, not a channel"
+    },
+    {
+     "id": "ALeRCE_pipeline_lc_classification_step",
+     "repo": "alercebroker/pipeline@b58b866b",
+     "why": "deployment wrapper for ALeRCE production classifiers (balto, messi, barney, toretto, mbappe, squidward, anomaly; lc_classification_step/models_settings.py) whose weights come from env MODEL_PATH and are not pinned in code; its libs/survey_parser_plugins LSSTParser maps pre-v11 field names (alertId, filterName, midPointTai, decl, psFlux) with TODO comments, while lsst.v11_1 uses diaSourceId, band, midpointMjdTai, dec, psfFlux"
+    },
+    {
+     "id": "SALTShaker",
+     "repo": "djones1040/SALTShaker@5183c2dc",
+     "why": "trains SALT3 surfaces; not a decision-time tool"
+    },
+    {
+     "id": "ELAsTiCC",
+     "repo": "LSSTDESC/elasticc@818ae71e",
+     "why": "simulation configs/schemas; folded into SNANA row"
+    },
+    {
+     "id": "lsst_alert_packet",
+     "repo": "lsst/alert_packet@1362a8d7",
+     "why": "Rubin alert schema lsst.v11_1 (latest.txt)"
+    },
+    {
+     "id": "lsst_sdm_schemas",
+     "repo": "lsst/sdm_schemas@5499df17",
+     "why": "APDB schema v10.0.0 (yml/apdb.yaml)"
+    },
+    {
+     "id": "ztf_avro_alert",
+     "repo": "ZwickyTransientFacility/ztf-avro-alert@75a9831c",
+     "why": "ZTF alert schema"
+    }
+   ],
+   "summary": {
+    "n_channels": 25,
+    "n_fm_or_deep": 15,
+    "n_classical": 10,
+    "role_counts": {
+     "predictor": 16,
+     "encoder": 7,
+     "generator": 3,
+     "scorer": 2,
+     "simulator": 1
+    },
+    "ztf": {
+     "fm_or_deep": {
+      "AVAILABLE_VERIFIED": 2,
+      "AVAILABLE_UNVERIFIED": 4,
+      "UNAVAILABLE": 9,
+      "UNDEMONSTRATED": 0
+     },
+     "classical": {
+      "AVAILABLE_VERIFIED": 1,
+      "AVAILABLE_UNVERIFIED": 6,
+      "UNAVAILABLE": 2,
+      "UNDEMONSTRATED": 1
+     },
+     "all": {
+      "AVAILABLE_VERIFIED": 3,
+      "AVAILABLE_UNVERIFIED": 10,
+      "UNAVAILABLE": 11,
+      "UNDEMONSTRATED": 1
+     }
+    },
+    "rubin": {
+     "fm_or_deep": {
+      "AVAILABLE_VERIFIED": 0,
+      "AVAILABLE_UNVERIFIED": 7,
+      "UNAVAILABLE": 8,
+      "UNDEMONSTRATED": 0
+     },
+     "classical": {
+      "AVAILABLE_VERIFIED": 0,
+      "AVAILABLE_UNVERIFIED": 5,
+      "UNAVAILABLE": 4,
+      "UNDEMONSTRATED": 1
+     },
+     "all": {
+      "AVAILABLE_VERIFIED": 0,
+      "AVAILABLE_UNVERIFIED": 12,
+      "UNAVAILABLE": 12,
+      "UNDEMONSTRATED": 1
+     }
+    },
+    "condition_a_every_fm_has_classical_counterpart_in_code": true,
+    "condition_a_every_fm_structurally_available_on_rubin_has_available_counterpart": false,
+    "condition_a_every_fm_structurally_available_on_ztf_has_available_counterpart": true,
+    "condition_b_tools_below_line": [
+     "ParSNIP",
+     "SALT3_sncosmo",
+     "Superphot_plus",
+     "SNANA"
+    ],
+    "condition_b_below_line_available_rubin": [
+     "ParSNIP",
+     "SALT3_sncosmo"
+    ],
+    "condition_b_below_line_available_ztf": [
+     "SALT3_sncosmo",
+     "Superphot_plus"
+    ],
+    "fm_channels_verified_on_real_rubin_alerts": [],
+    "fm_channels_verified_on_real_ztf": [
+     "BTSbot",
+     "Maven"
+    ],
+    "condition_a_every_fm_structurally_available_on_rubin_has_available_counterpart_after_AMD-V1-03": true,
+    "amendment_note": "wave-1 counts above are unchanged; the after-AMD-V1-03 flag is structural only (Fink RFs are AVAILABLE_UNVERIFIED on Rubin: code and weights exist, no run on real Rubin alerts)"
+   },
+   "condition_a_detail": [
+    {
+     "fm_channel": "ATAT",
+     "counterparts": [
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_ztf": [
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_rubin": [],
+     "counterpart_available_rubin_after_AMD-V1-03": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ]
+    },
+    {
+     "fm_channel": "ORACLE",
+     "counterparts": [
+      "ALeRCE_BHRF",
+      "Fink_EarlySNIa_RF"
+     ],
+     "counterpart_available_ztf": [
+      "ALeRCE_BHRF",
+      "Fink_EarlySNIa_RF"
+     ],
+     "counterpart_available_rubin": [
+      "Fink_EarlySNIa_RF"
+     ]
+    },
+    {
+     "fm_channel": "SuperNNova",
+     "counterparts": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ],
+     "counterpart_available_ztf": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ],
+     "counterpart_available_rubin": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ]
+    },
+    {
+     "fm_channel": "CATS",
+     "counterparts": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ],
+     "counterpart_available_ztf": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ],
+     "counterpart_available_rubin": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ]
+    },
+    {
+     "fm_channel": "RAPID",
+     "counterparts": [
+      "ALeRCE_BHRF",
+      "Superphot_plus"
+     ],
+     "counterpart_available_ztf": [
+      "ALeRCE_BHRF",
+      "Superphot_plus"
+     ],
+     "counterpart_available_rubin": []
+    },
+    {
+     "fm_channel": "SCONE",
+     "counterparts": [
+      "SALT3_sncosmo",
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_ztf": [
+      "SALT3_sncosmo",
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_rubin": [
+      "SALT3_sncosmo"
+     ]
+    },
+    {
+     "fm_channel": "BTSbot",
+     "counterparts": [
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_ztf": [
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_rubin": []
+    },
+    {
+     "fm_channel": "AppleCiDEr",
+     "counterparts": [
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_ztf": [
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_rubin": []
+    },
+    {
+     "fm_channel": "Maven",
+     "counterparts": [
+      "Superphot_plus",
+      "ALeRCE_BHRF",
+      "SALT3_sncosmo"
+     ],
+     "counterpart_available_ztf": [
+      "Superphot_plus",
+      "ALeRCE_BHRF",
+      "SALT3_sncosmo"
+     ],
+     "counterpart_available_rubin": [
+      "SALT3_sncosmo"
+     ]
+    },
+    {
+     "fm_channel": "Astromer1",
+     "counterparts": [
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_ztf": [
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_rubin": [],
+     "counterpart_available_rubin_after_AMD-V1-03": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ]
+    },
+    {
+     "fm_channel": "Astromer2",
+     "counterparts": [
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_ztf": [
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_rubin": [],
+     "counterpart_available_rubin_after_AMD-V1-03": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ]
+    },
+    {
+     "fm_channel": "MultibandAstromer",
+     "counterparts": [
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_ztf": [
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_rubin": []
+    },
+    {
+     "fm_channel": "AstroCLIP",
+     "counterparts": [
+      "GHOST",
+      "Blast"
+     ],
+     "counterpart_available_ztf": [
+      "GHOST",
+      "Blast"
+     ],
+     "counterpart_available_rubin": [
+      "GHOST",
+      "Blast"
+     ]
+    },
+    {
+     "fm_channel": "AstroM3",
+     "counterparts": [
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_ztf": [
+      "ALeRCE_BHRF"
+     ],
+     "counterpart_available_rubin": []
+    },
+    {
+     "fm_channel": "ParSNIP",
+     "counterparts": [
+      "SALT3_sncosmo",
+      "Superphot_plus"
+     ],
+     "counterpart_available_ztf": [
+      "SALT3_sncosmo",
+      "Superphot_plus"
+     ],
+     "counterpart_available_rubin": [
+      "SALT3_sncosmo"
+     ]
+    }
+   ],
+   "condition_b_detail": [
+    {
+     "tool": "ParSNIP",
+     "roles_below_line": [
+      "generator",
+      "scorer"
+     ],
+     "fm_channel": true,
+     "ztf": "UNAVAILABLE",
+     "rubin": "AVAILABLE_UNVERIFIED"
+    },
+    {
+     "tool": "SALT3_sncosmo",
+     "roles_below_line": [
+      "generator",
+      "scorer"
+     ],
+     "fm_channel": false,
+     "ztf": "AVAILABLE_UNVERIFIED",
+     "rubin": "AVAILABLE_UNVERIFIED"
+    },
+    {
+     "tool": "Superphot_plus",
+     "roles_below_line": [
+      "generator"
+     ],
+     "fm_channel": false,
+     "ztf": "AVAILABLE_UNVERIFIED",
+     "rubin": "UNAVAILABLE"
+    },
+    {
+     "tool": "SNANA",
+     "roles_below_line": [
+      "simulator"
+     ],
+     "fm_channel": false,
+     "ztf": "UNDEMONSTRATED",
+     "rubin": "UNDEMONSTRATED"
+    }
+   ]
+  },
+  "provenance": {
+   "referent": "which decision-time tools exist for early classification / spectroscopic follow-up allocation of transients, what role each plays by its code-level input and output, and whether it can process ZTF alert/BTS inputs and Rubin lsst.v11_1 alert packets",
+   "source": "scripts/build_inventory.py rows; code/CLONE_PINS.tsv commits; weight sha256 in code/PRUNED_LARGE_FILES.tsv and code/_downloaded_artifacts/*/SHA256SUMS; schema lsst/alert_packet@1362a8d7 python/lsst/alert/packet/schema/11/1/*.avsc; papers in sources/ with section locators in seed_ledger.json",
+   "population": "25 decision-time tool channels (15 FM or deep, 10 classical), one row per tool, not per variant or checkpoint; 7 repositories excluded as non-channels (datasets, schemas, training code)",
+   "adjudicator": "the classical counterparts in the same inventory (ALeRCE_BHRF 1.1.1 on ZTF; SALT3-f22, Fink rainbow RFs on Rubin); the strongest existing deployed alternative on ZTF is BTSbot + human BTS scanning, which is itself an FM-side channel",
+   "falsifier": "a released checkpoint for any row marked UNAVAILABLE that runs on the stated input format, or a source read showing a row marked AVAILABLE_UNVERIFIED was validated on real Rubin alerts, or a rerun of this script against newer commits that changes any status"
+  },
+  "status": "OVERRIDDEN",
+  "override_reason": "AMD-V1-03: PI approved agent 4's Fink RF remapping (PANEL_BRIEF_WAVE2.md line 16). Cause: check (a) failed on Rubin for ATAT, Astromer 1 and Astromer 2 because ALeRCE_BHRF has no Rubin weights. Rubin classical counterpart for those three is now Fink_EarlySNIa_RF and Fink_SLSN_RF; ZTF mapping and all wave-1 counts unchanged.",
+  "status_note": "The override covers the Rubin counterpart mapping of three rows only. The rest of the inventory (roles, readiness census, 25 channels) is as derived and was not ratified; readiness is a census, not certification (I5 UNDEMONSTRATED).",
+  "wave2_tool_card_updates": {
+   "path": "astronomy/wave2/agent4_instrument/tool_cards/",
+   "note": "3 new Fink cards and an updated ParSNIP card with code defects (ParSNIP input_redshift=False crash, NaN on single-detection light curves; Fink SLSN zp 25 vs FLUXCAL 27.5; Fink fast-transient rate depends on batch); listed, statuses above not changed",
+   "report": {
+    "path": "astronomy/wave2/agent4_instrument/REPORT.md",
+    "sha256": "42b2442b373d891ce7f70e5f04a6327105d4a93e17ec9096870f4ca7ab5970f8",
+    "locator": "Headline, four new code defects"
+   }
+  },
+  "source_records": [
+   {
+    "path": "astronomy/agent4_tools_instrument/tool_inventory_slot.json",
+    "sha256": "c7d8e0c3e028898361218f20453964b355c0c3269cedb3b7dc2b4cfd32aed8dc"
+   },
+   {
+    "path": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+    "sha256": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+    "locator": "line 16"
+   },
+   {
+    "path": "astronomy/agent4_tools_instrument/REPORT.md",
+    "sha256": "f00eb338362e42388875d80b1e0ed484bb0ec073df2adab7260bc390107ea7c2",
+    "locator": "lines 22-25, 85"
+   },
+   {
+    "path": "astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json",
+    "sha256": "dab4ec1baaa8d3ead3300ed2e4d29c57edb212405a1ee134161777921648a1e0"
+   }
+  ],
+  "override_invitation": "Override invitation: accept, or replace the value and give a reason; the reason enters amendment_ledger.json.",
+  "rubin_functional_recount_w3": {
+   "record": {
+    "path": "astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json",
+    "sha256": "dab4ec1baaa8d3ead3300ed2e4d29c57edb212405a1ee134161777921648a1e0"
+   },
+   "counts": {
+    "FM/deep": {
+     "PASS": 1,
+     "FAIL": 9,
+     "UNDEMONSTRATED": 5
+    },
+    "classical": {
+     "PASS": 1,
+     "FAIL": 5,
+     "UNDEMONSTRATED": 4
+    },
+    "all": {
+     "PASS": 2,
+     "FAIL": 14,
+     "UNDEMONSTRATED": 9
+    }
+   },
+   "per_tool": {
+    "ATAT": {
+     "disposition": "UNDEMONSTRATED",
+     "passes": 0,
+     "alerts_run": 0,
+     "rubin_counterparts_after_remap": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ]
+    },
+    "ORACLE": {
+     "disposition": "FAIL",
+     "passes": 0,
+     "alerts_run": 10,
+     "rubin_counterparts_after_remap": [
+      "ALeRCE_BHRF",
+      "Fink_EarlySNIa_RF"
+     ]
+    },
+    "SuperNNova": {
+     "disposition": "FAIL",
+     "passes": 0,
+     "alerts_run": 10,
+     "rubin_counterparts_after_remap": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ]
+    },
+    "CATS": {
+     "disposition": "PASS",
+     "passes": 5,
+     "alerts_run": 10,
+     "rubin_counterparts_after_remap": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ]
+    },
+    "RAPID": {
+     "disposition": "FAIL",
+     "passes": 0,
+     "alerts_run": 10,
+     "rubin_counterparts_after_remap": [
+      "ALeRCE_BHRF",
+      "Superphot_plus"
+     ]
+    },
+    "SCONE": {
+     "disposition": "UNDEMONSTRATED",
+     "passes": 0,
+     "alerts_run": 0,
+     "rubin_counterparts_after_remap": [
+      "SALT3_sncosmo",
+      "ALeRCE_BHRF"
+     ]
+    },
+    "BTSbot": {
+     "disposition": "FAIL",
+     "passes": 0,
+     "alerts_run": 10,
+     "rubin_counterparts_after_remap": [
+      "ALeRCE_BHRF"
+     ]
+    },
+    "AppleCiDEr": {
+     "disposition": "UNDEMONSTRATED",
+     "passes": 0,
+     "alerts_run": 0,
+     "rubin_counterparts_after_remap": [
+      "ALeRCE_BHRF"
+     ]
+    },
+    "Maven": {
+     "disposition": "FAIL",
+     "passes": 0,
+     "alerts_run": 10,
+     "rubin_counterparts_after_remap": [
+      "Superphot_plus",
+      "ALeRCE_BHRF",
+      "SALT3_sncosmo"
+     ]
+    },
+    "Astromer1": {
+     "disposition": "FAIL",
+     "passes": 0,
+     "alerts_run": 10,
+     "rubin_counterparts_after_remap": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ]
+    },
+    "Astromer2": {
+     "disposition": "FAIL",
+     "passes": 0,
+     "alerts_run": 10,
+     "rubin_counterparts_after_remap": [
+      "Fink_EarlySNIa_RF",
+      "Fink_SLSN_RF"
+     ]
+    },
+    "MultibandAstromer": {
+     "disposition": "UNDEMONSTRATED",
+     "passes": 0,
+     "alerts_run": 0,
+     "rubin_counterparts_after_remap": [
+      "ALeRCE_BHRF"
+     ]
+    },
+    "AstroCLIP": {
+     "disposition": "UNDEMONSTRATED",
+     "passes": 0,
+     "alerts_run": 0,
+     "rubin_counterparts_after_remap": [
+      "GHOST",
+      "Blast"
+     ]
+    },
+    "AstroM3": {
+     "disposition": "FAIL",
+     "passes": 0,
+     "alerts_run": 10,
+     "rubin_counterparts_after_remap": [
+      "ALeRCE_BHRF"
+     ]
+    },
+    "ParSNIP": {
+     "disposition": "FAIL",
+     "passes": 0,
+     "alerts_run": 10,
+     "rubin_counterparts_after_remap": [
+      "SALT3_sncosmo",
+      "Superphot_plus"
+     ]
+    },
+    "ALeRCE_BHRF": {
+     "disposition": "FAIL",
+     "passes": 0,
+     "alerts_run": 10,
+     "rubin_counterparts_after_remap": []
+    },
+    "SALT3_sncosmo": {
+     "disposition": "FAIL",
+     "passes": 0,
+     "alerts_run": 10,
+     "rubin_counterparts_after_remap": []
+    },
+    "Superphot_plus": {
+     "disposition": "FAIL",
+     "passes": 0,
+     "alerts_run": 10,
+     "rubin_counterparts_after_remap": []
+    },
+    "Superphot": {
+     "disposition": "UNDEMONSTRATED",
+     "passes": 0,
+     "alerts_run": 0,
+     "rubin_counterparts_after_remap": []
+    },
+    "Fink_EarlySNIa_RF": {
+     "disposition": "FAIL",
+     "passes": 0,
+     "alerts_run": 10,
+     "rubin_counterparts_after_remap": []
+    },
+    "Fink_SLSN_RF": {
+     "disposition": "FAIL",
+     "passes": 0,
+     "alerts_run": 10,
+     "rubin_counterparts_after_remap": []
+    },
+    "Sherlock": {
+     "disposition": "UNDEMONSTRATED",
+     "passes": 0,
+     "alerts_run": 0,
+     "rubin_counterparts_after_remap": []
+    },
+    "GHOST": {
+     "disposition": "PASS",
+     "passes": 3,
+     "alerts_run": 8,
+     "rubin_counterparts_after_remap": []
+    },
+    "Blast": {
+     "disposition": "UNDEMONSTRATED",
+     "passes": 0,
+     "alerts_run": 0,
+     "rubin_counterparts_after_remap": []
+    },
+    "SNANA": {
+     "disposition": "UNDEMONSTRATED",
+     "passes": 0,
+     "alerts_run": 0,
+     "rubin_counterparts_after_remap": []
+    }
+   },
+   "packet_format_qualifier": "No public endpoint served lsst v11_1 Avro packets (Fink /api/v1/sources output-format=avro -> HTTP 400 'Output format avro is not supported. Choose among json, csv, votable, or parquet'). Every run used public Fink LSST API JSON rows carrying lsst v11_1 field names (r: columns), values unchanged. No tool was run on v11_1 Avro packets.",
+   "remap_consistency": "agent 4's recount protocol applies exactly AMD-V1-03 (ATAT, Astromer1, Astromer2 -> Fink_EarlySNIa_RF, Fink_SLSN_RF; no other row) - MATCH",
+   "note": "wave-1 structural counts (value.summary) are unchanged; the recount is functional and sits beside them. Both Fink RFs FAIL at emit (default output on 10/10), so the structural check (a) after AMD-V1-03 does not hold functionally.",
+   "disagreements": [
+    "AstroM3: wave-1 UNAVAILABLE (no weights) vs weights public on HF rev 8904ed33 (agent 4 w3 disagreement 1)",
+    "preamble item 5 'no substitute format is improvised' vs runs on JSON rows (listed in axis ledger v2)"
+   ],
+   "rule_E": {
+    "counts_all": {
+     "value": {
+      "PASS": 2,
+      "FAIL": 14,
+      "UNDEMONSTRATED": 9
+     },
+     "v_record": "V-T01",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "3c5a69425b1d4f8df62a8818a9cdfb003502b7cd88458a8a4570ff092c7ba399",
+     "rule_E": "CLEARED"
+    },
+    "CATS": {
+     "value": "5/10",
+     "v_record": "V-T02",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "ee836bd17e9976bd9a5018771554f1a4b9003d87e6f3a1413b82993886fb3792",
+     "rule_E": "CLEARED"
+    },
+    "GHOST": {
+     "value": "3/8",
+     "v_record": "V-T02",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "ee836bd17e9976bd9a5018771554f1a4b9003d87e6f3a1413b82993886fb3792",
+     "rule_E": "CLEARED"
+    },
+    "alert_runs": {
+     "value": 160,
+     "v_record": "V-T03",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "261e5c37f77f1866c0f53d626c66eb17b0e07d302e04e4c0f51faf3a5dd26c17",
+     "rule_E": "CLEARED"
+    }
+   },
+   "invariance_V": "CATS and GHOST invariant within float tolerance, not bit-identical (module V invariance.json)"
+  },
+  "rule_E_structural_census": "wave-1 structural counts in value.summary: V_PENDING (no V record); P4 tool_coverage reads T01-T03"
+ },
+ "delta": {
+  "value": 0.05,
+  "literature_prior": {
+   "value": 0.018,
+   "status": "DERIVED (literature prior, carried)",
+   "provenance": {
+    "referent": "absolute difference in purity (precision) of the set of sources selected for SEDM follow-up, between two candidate selection models evaluated on the same test split, that practitioners acted on by choosing the production model",
+    "source": "arXiv:2401.15167v1 Appendix B Table 6, sources/2401.15167.txt lines 1323-1335 (bts_p2 purity MM-CNN 93.0%, NN 91.2%, UM-CNN 92.5%) and lines 1360-1364 ('advantage is ~0.5-2% ... even small boosts in purity are valuable'); production choice section 4.1 lines 655-662; difference 0.930-0.912 computed in scripts/build_slots.py; kept by PANEL_BRIEF_WAVE2.md sha256 31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb line 13 until cost of action is supplied",
+    "population": "BTSbot test split: 512 bright-transient sources and 1,489 other sources (Figure 4, line 420), less 70 junk and 59 single-alert sources (lines 704-714); paired over the same sources, discordant selections not published",
+    "adjudicator": "the fully-connected metadata-only network (NN) on the same test split, the strongest of the two alternatives on bts_p2 purity after the production model",
+    "falsifier": "a rerun of the three published architectures (github.com/nabeelre/BTSbot) on a fresh contiguous window in which the MM-CNN minus NN purity difference falls outside 0 to 0.036, or a statement from BTS that the architecture choice was made on a criterion other than purity"
+   },
+   "resolution_warning": "0.018 is below the unpaired MDE of about 0.045 of the very comparison it comes from (agent5 REPORT.md line 48); practitioners acted below their own resolution. Wave-2 PRE-I1 calibration on BTS binding nights gives MDE 0.032 > 0.018 (CLOSE_UNRESOLVABLE, calibration only, not P7).",
+   "candidates_listed": [
+    {
+     "id": "delta-candidate-btsbot-vs-scanners",
+     "value": -0.037,
+     "referent": "difference in follow-up purity between the adopted automated selector and human scanners",
+     "source": "arXiv:2401.15167v1 section 4.1 lines 757-766 (scanner triggering purity 96.7%, 316 of 327) and Figure 7 lines 739-742 (bts_p2 purity 93.0%); summary line 1132 ('93% vs ~97%'); adoption date line 886",
+     "population": "unequal: test-split sources for BTSbot versus a 41-night window of scanner triggers, with bright-transient purity on one side and extragalactic-transient purity on the other",
+     "adjudicator": "human scanners, the incumbent",
+     "falsifier": "the same paper states scanner triggering purity as 95.6% at line 806 and 96.7% at line 766; a paired rerun of both selectors on one window would replace this number",
+     "disposition": "REFUSED as a delta: an aggregate across unequal denominators (SKILL.md global refusal 4). It shows practitioners adopting at a purity deficit, not acting on a gain."
+    },
+    {
+     "id": "delta-candidate-sniascore-vs-snid",
+     "value": 0.37,
+     "referent": "difference in true-positive rate at false-positive rate below 1% for SN Ia classification of SEDM spectra, SNIascore versus SNID, which led to deployment on 2021-04-15",
+     "source": "arXiv:2104.12980v2 Table 2, sources/2104.12980.txt lines 387-407 (TPR 0.90 versus 0.53); deployment section 7 lines 523-529; hard FPR requirement section 4.1 lines 298-299",
+     "population": "BTS18 validation sample, 1,016 SEDM spectra of 648 SNe (lines 190-196), paired on the same spectra",
+     "adjudicator": "SNID, the incumbent template matcher, on the same spectra",
+     "falsifier": "a rerun on the 2020 testing set (1,011 spectra of 632 transients) giving a TPR gap below 0.30",
+     "disposition": "adjacent referent: classification of a spectrum already taken, not selection of which candidates receive a spectrum. Listed, not adopted."
+    },
+    {
+     "id": "delta-candidate-fink-us-vs-rs",
+     "value": 0.3,
+     "referent": "difference in SN Ia efficiency at similar purity between uncertainty sampling and random sampling training for the Fink early SN Ia module, which Fink deployed",
+     "source": "arXiv:2111.11438v2 Table 2, sources/2111.11438.txt lines 437-460 (efficiency 0.54 versus 0.24, purity 0.89 versus 0.87); deployment section 5 lines 606-615",
+     "population": "test sample counted in alerts: 23,530 (abstract line 40), 23,425 (line 540) and 23,465 (line 679); 15,751 unique objects after feature extraction (line 376), 1,021 SN Ia objects (line 130)",
+     "adjudicator": "random sampling, same pool, 100 realizations",
+     "falsifier": "a per-object (not per-alert) recount whose efficiency gap falls below 0.15",
+     "disposition": "population FAIL: counted over alerts, with three different test-set sizes in one paper. Listed, not adopted."
+    }
+   ],
+   "disagreements": [
+    "an order of magnitude separates the values practitioners acted on: 0.018 (selection purity, architecture choice), 0.30 (Fink efficiency, alerts), 0.37 (SNIascore TPR). Not reconciled.",
+    "the adoption of BTSbot over scanners happened at a purity deficit (93.0% versus 95.6% or 96.7%, both in one paper), i.e. practitioners traded purity for labour; the seeds show no adoption driven by a purity gain alone.",
+    "practitioners acted on 0.018 while an unpaired MDE for that comparison is about 0.045 (own_resolution_note); the seeds act below their own resolution, which SKILL.md refusal 5 forbids for a directional claim."
+   ],
+   "rule_E": {
+    "value": 0.018,
+    "v_record": null,
+    "rule_E": "V_PENDING",
+    "note": "no V record (literature value, arXiv:2401.15167 Table 6)"
+   }
+  },
+  "carry_both": "every table reports 0.05 (ratified cost of action) and 0.018 (literature prior) side by side (ruling 1)",
+  "provenance": {
+   "referent": "smallest improvement in committed-set purity (precision at k) that would change which selector the programme runs, set from the PI's cost of action",
+   "source": "PANEL_BRIEF_WAVE3.md sha256 a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6 ruling 2 lines 14-19 (cost of switching a production selector = engineer weeks; 0.018 below its own unpaired resolution); RATIFIED at PANEL_BRIEF_WAVE4.md sha256 8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58 ruling 1 lines 9-14 (cause check astronomy/wave4/agent4_module_v/v_records.json V-O01)",
+   "population": "the programme's follow-up allocation decision, one committed set of k=8 per night; applies on the purity scale only if A1 fixes precision at k as primary (delta_slot metric_caveat)",
+   "adjudicator": "literature prior 0.018 (arXiv:2401.15167 Table 6), carried beside; its unpaired MDE about 0.045; wave-2 PRE-I1 calibration MDE 0.032 on BTS binding nights",
+   "falsifier": "a PI restatement of the switching cost, or a P7 power record whose MDE at the budgeted N exceeds 0.05 (closes at P7), or A1 preregistering a primary metric other than committed-set purity, which would require restating 0.05 on that scale"
+  },
+  "status": "RATIFIED",
+  "calibration_context": {
+   "record": {
+    "path": "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json",
+    "sha256": "0258c82e68c51cb3f764f4c00d992a580627939142422f4ad17391e6e00f5fa2"
+   },
+   "primary_E1_binding_nights": {
+    "mde": 0.0322,
+    "n_min_at_0.05": 26,
+    "ruling_at_0.05": "RESOLVABLE",
+    "n_min_at_0.018": 196,
+    "ruling_at_0.018": "CLOSE_UNRESOLVABLE"
+   },
+   "status": "PRE-I1 CALIBRATION on BTS (contamination FAIL); not P7",
+   "power_table_both_deltas_rule_E": {
+    "P01": {
+     "row": "E1_N pooled (REFUSED, refusal 4)",
+     "n": 579,
+     "sigma_d": 0.029361,
+     "mde": 0.003419,
+     "n_min_0.05": 3,
+     "n_min_0.018": 21,
+     "v_record": "V-P01",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "6afffdedf690fd323601cbc77d05667fbc0ffbd98abb1d69aee08db5f094f427"
+    },
+    "P02": {
+     "row": "E1_N k_binding=True (primary)",
+     "n": 61,
+     "sigma_d": 0.089778,
+     "mde": 0.032204,
+     "n_min_0.05": 26,
+     "n_min_0.018": 196,
+     "v_record": "V-P02",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "3216b5221a9ffc60e302c7ae24c6ea2fb8acfbb3c90970bec885e3e545b9b1ce"
+    },
+    "P03": {
+     "row": "E1_N k_binding=False",
+     "n": 518,
+     "sigma_d": 0.0,
+     "mde": 0.0,
+     "n_min_0.05": 0,
+     "n_min_0.018": 0,
+     "v_record": "V-P03",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "57eaf78d56ad143294cb552718d3a384cecf7487b1fedcd702d6f3a73c18e299"
+    },
+    "P04": {
+     "row": "E1_R round-46",
+     "n": 55,
+     "sigma_d": 0.14568,
+     "mde": 0.055033,
+     "n_min_0.05": 67,
+     "n_min_0.018": 515,
+     "v_record": "V-P04",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "1e60646d207e60559ef8879421c121f0a0dc2566a36325c8ea62917a82727243"
+    },
+    "P05": {
+     "row": "E3_N pooled (REFUSED, refusal 4)",
+     "n": 579,
+     "sigma_d": 0.027458,
+     "mde": 0.003197,
+     "n_min_0.05": 3,
+     "n_min_0.018": 19,
+     "v_record": "V-P05",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "a31e3a5c2054803ba935c01e3727d7dc33b14be7347a88a52ac9cbf85c949af7"
+    },
+    "P06": {
+     "row": "E3_N k_binding=True",
+     "n": 61,
+     "sigma_d": 0.083776,
+     "mde": 0.030051,
+     "n_min_0.05": 23,
+     "n_min_0.018": 171,
+     "v_record": "V-P06",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "b7bd798202673050895e9ddd305ed5024708c0a4d66489b61b1a23547752959e"
+    },
+    "P07": {
+     "row": "E3_N k_binding=False",
+     "n": 518,
+     "sigma_d": 0.0,
+     "mde": 0.0,
+     "n_min_0.05": 0,
+     "n_min_0.018": 0,
+     "v_record": "V-P07",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "591ddb18619b64c6a9825af523a45e04e5579cc5adc8368c6e67325788d93204"
+    },
+    "P08": {
+     "row": "E3_R round-46",
+     "n": 55,
+     "sigma_d": 0.165622,
+     "mde": 0.062567,
+     "n_min_0.05": 87,
+     "n_min_0.018": 665,
+     "v_record": "V-P08",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "d2a324a49e8916e017defba89bf4e9aed4b59e5db33847e9545f81a6835910bc"
+    }
+   },
+   "k_binding_nights": {
+    "k_binding": {
+     "value": 61,
+     "v_record": "V-K01",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "e58f6798e0621fd375c9cc79e4c08780653be711a25ad7c91b545a7944c5a5d3",
+     "rule_E": "CLEARED",
+     "note": "of 579 E1 nights (same for E3)"
+    },
+    "not_binding": {
+     "value": 518,
+     "v_record": "V-K02",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "469ab291d8a9c6d6b34ca5b3eab2bcb151132ec7364aeadd88805b8f9ede58ce",
+     "rule_E": "CLEARED"
+    }
+   },
+   "composition_auc": {
+    "A01": {
+     "value": 0.5996251272075266,
+     "v_record": "V-A01",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "c2a8290596061b4e8c2746172b554efa84d7ed86b863f4c66bb44d5104366c76"
+    },
+    "A02": {
+     "value": 0.5968101198346822,
+     "v_record": "V-A02",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "940b9a8b017c89e8684a5368c7aa734b3e41ea8fd416e2ee674ba0f022128c34"
+    },
+    "A03": {
+     "value": 0.6373746097238473,
+     "v_record": "V-A03",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "41fb67f37d36c748e1ad0c7ecde7e2086d048b99da068b0651e180a15c3ac15f"
+    },
+    "A04": {
+     "value": 0.6184103039827205,
+     "v_record": "V-A04",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "b949b607b0fa6f4d33010958cd51921affa169c6d9456215f9d8bada4bab2b81"
+    }
+   }
+  },
+  "planning_thresholds": {
+   "objects_N_min_range": {
+    "0.018": [
+     485,
+     12855
+    ],
+    "0.05": [
+     63,
+     1666
+    ]
+   },
+   "nights_N_min_range": {
+    "0.018": [
+     40,
+     1515
+    ],
+    "0.05": [
+     6,
+     197
+    ]
+   },
+   "source": "astronomy/wave3/agent1_cohort_finish/rubin_cohort_count.json w3-09 (PLANNING-ONLY)",
+   "rule_E": {
+    "objects_0.018": {
+     "value": [
+      485,
+      12855
+     ],
+     "v_record": "V-N01",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "422fe2859781b641fc74e666979344ba4544dd44022c623c5e1d0374b9b21f33",
+     "rule_E": "CLEARED",
+     "note": "hi depends on the finite-sample realised sigma of the n=50 synthetic binary column (0.728431 vs sqrt(q)=0.7071): theoretical sqrt(q) gives hi 12113 not 12855. Not a discrepancy (the frozen definition is min/max over the bracket rows as computed); recorded for agent 3 and the PI"
+    },
+    "objects_0.05": {
+     "value": [
+      63,
+      1666
+     ],
+     "v_record": "V-N02",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "ab094276e33013e16f93ae52ba085afbc1a99a4d6ff8417cd3bec418d84f1cb5",
+     "rule_E": "CLEARED",
+     "note": "hi depends on the finite-sample realised sigma of the n=50 synthetic binary column (0.728431 vs sqrt(q)=0.7071): theoretical sqrt(q) gives hi 1570 not 1666. Not a discrepancy (the frozen definition is min/max over the bracket rows as computed); recorded for agent 3 and the PI"
+    },
+    "nights_0.018": {
+     "value": [
+      40,
+      1515
+     ],
+     "v_record": null,
+     "rule_E": "V_PENDING",
+     "note": "family-A night N_min: no V record"
+    },
+    "nights_0.05": {
+     "value": [
+      6,
+      197
+     ],
+     "v_record": null,
+     "rule_E": "V_PENDING",
+     "note": "family-A night N_min: no V record"
+    },
+    "sqrtq_note": "12,855 and 1,666 follow the sample SD 0.728431 of the n=50 synthetic binary column; theoretical sqrt(q)=0.7071 would give 12,113 and 1,570. Not a discrepancy: the frozen definition is min/max over the bracket rows as computed (V-N01, V-N02 finding)."
+   }
+  },
+  "open_questions": [
+   "cost of action is asymmetric (missed rare event >= 100 slots vs wrong routine commitment 1 slot); precision at k on the committed set does not price misses. The A1 primary metric is not preregistered. Listed for A1, not reconciled here."
+  ],
+  "source_records": [
+   {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "ruling 2"
+   },
+   {
+    "path": "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json",
+    "sha256": "0258c82e68c51cb3f764f4c00d992a580627939142422f4ad17391e6e00f5fa2"
+   },
+   {
+    "path": "astronomy/wave3/agent1_cohort_finish/planning_mde_bracket_w3.csv",
+    "sha256": "362130b15d4fe093052b16fcbbe300d391e5b977007bd8f917d893f5cc687667"
+   }
+  ],
+  "override_invitation": "Override invitation: accept 0.05, or state a different value with its cause; the literature prior 0.018 stays carried either way.",
+  "override_history": {
+   "ledger": "AMD-V2-04",
+   "reason": "AMD-V2-04, PI ruling 2: switching a production selector costs engineer weeks, and 0.018 sits below its own unpaired resolution; 0.018 kept as literature prior and carried through every P7 table."
+  },
+  "ratification": {
+   "ledger": "AMD-V3-01",
+   "ruling": {
+    "path": "astronomy/wave4/PANEL_BRIEF_WAVE4.md",
+    "sha256": "8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58",
+    "locator": "ruling 1"
+   },
+   "cause_check": {
+    "v_record": {
+     "v_record": "V-O01",
+     "verdict": "MATCH_WITHIN_TOL",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "43530793e34e1375ebcf14dd07098267a6681416429499d65fde368f59000d3f"
+    },
+    "ordering_utc": "override 2026-09-16T20:14:03Z < first decision-time MDE file mtime 20:44:29Z (earliest wave-2 power output 20:43:28Z; commit f898294 20:46Z quoted) < resolvability at 0.05 20:48:29Z",
+    "timezone_note": "the PI's 15:14 and 15:46 are local -0500 (20:14Z, 20:46Z); '20:48' is UTC (preamble item 2)",
+    "caveats": [
+     "git not run by V or agent 3: commit times are quoted from the preamble, not read",
+     "mtime shows only the last write; an earlier overwritten power file before 20:14Z cannot be excluded",
+     "host clock trust not established; timestamps are self-logged on one host",
+     "the wave-1 planning bracket and the practitioners' unpaired MDE ~0.045 predate the override, and the override's stated cause cites the latter"
+    ]
+   },
+   "value_rule_E": "PI_RULED (a cost-of-action value, not a measurement); its cause check is V-O01"
+  }
+ },
+ "S": {
+  "value": null,
+  "provenance": {
+   "referent": "survivor target S = budget / measured hours per workflow",
+   "source": "references/manifest.md ('S, the survivor target, is budget divided by measured hours per workflow'); references/graph.md D5 -> R1; UNDEMONSTRATED per PANEL_BRIEF_WAVE2.md sha256 31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb coordinator preamble item 1; PANEL_BRIEF_WAVE3.md sha256 a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6 ruling 1 line 13 ('S is computed at R1')",
+   "population": "workflows (one scored item through all arms)",
+   "adjudicator": "none until hours per workflow are measured at R1; the source record repriced its cohort from about 17 to 37 hours (references/manifest.md)",
+   "falsifier": "a measured hours-per-workflow figure from an R1 control run that, divided into the supplied budget, disagrees with any S used earlier"
+  },
+  "status": "UNDEMONSTRATED",
+  "status_note": "Budget now SUPPLIED (1,000 arm cells hard cap + 200 engineering hours, AMD-V2-01). S stays UNDEMONSTRATED until R1 measures cost per workflow (AMD-V2-02).",
+  "blocks": [
+   "P5 escape condition",
+   "cohort sizing",
+   "the choice among N rows in planning_mde_bracket.csv"
+  ],
+  "source_records": [
+   {
+    "path": "astronomy/agent5_resolution_replay/d5_inputs.json",
+    "sha256": "31543e811b7ae621f4f8d1231342944d839774b49edfbf00d36d407bfc12fd77",
+    "locator": "id d5-S"
+   },
+   {
+    "path": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+    "sha256": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+    "locator": "preamble item 1"
+   },
+   {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "ruling 1"
+   }
+  ],
+  "override_invitation": "Not overridable by ratification: S follows from a supplied budget and an R1 measurement.",
+  "planning_arithmetic_not_S": {
+   "cell_definition": "one cell = one subject x one arm x one round (astronomy/agent5_resolution_replay/d5_inputs.json d5-budget human_must_supply)",
+   "r1_reserve_cells": "3 (r1_spec.md section 6)",
+   "rounds_affordable_if_7_subjects_x_2_agent_arms": "floor((1000-3)/14) = 71",
+   "rounds_affordable_if_1_subject_x_2_agent_arms": "floor((1000-3)/2) = 498",
+   "compare": "planning N_min at delta 0.05: 6-197 nights or 63-1,666 objects; calibration N_min 26 binding nights",
+   "status": "PLANNING-ONLY; the mechanical composition arm consumes no subject cells; hours per workflow unmeasured"
+  },
+  "gates": [
+   "ruling 1: no Rubin-era paid work starts without re-ratification against this wave's measured label supply. OPEN: measured cohort supply UNDEMONSTRATED; inputs in PI_rerat_packet.md"
+  ],
+  "rule_E": {
+   "budget_arm_cells": {
+    "value": 1000,
+    "v_record": null,
+    "rule_E": "PI_RULED"
+   },
+   "engineering_hours": {
+    "value": 200,
+    "v_record": null,
+    "rule_E": "PI_RULED"
+   },
+   "planning_rounds_71_498": {
+    "value": [
+     71,
+     498
+    ],
+    "v_record": null,
+    "rule_E": "V_PENDING",
+    "note": "PLANNING-ONLY arithmetic, no V record"
+   }
+  }
+ },
+ "subject_set": {
+  "value": [
+   "claude-fable-5-1",
+   "claude-opus-5",
+   "claude-sonnet-5",
+   "gpt-6-astra",
+   "gpt-5.6-sol",
+   "gemini-3.8-flash",
+   "gemini-3.1-pro-preview"
+  ],
+  "members": [
+   {
+    "model": "Claude Fable 5.1",
+    "api_id": "claude-fable-5-1",
+    "cutoff": "2026-06",
+    "cutoff_kind": "reliable knowledge cutoff",
+    "cutoff_status": "DERIVED (reliable-knowledge only); training-data cutoff UNDEMONSTRATED",
+    "source": "https://platform.claude.com/docs/en/models/overview fetched 2026-09-16, sources/anthropic_models_overview.txt lines 37 and 77-78",
+    "note": "Anthropic Transparency Hub (sources/anthropic_transparency.txt line 20) lists Claude Fable 5, not 5.1; no training-data cutoff for 5.1 found"
+   },
+   {
+    "model": "Claude Opus 5",
+    "api_id": "claude-opus-5",
+    "cutoff": "2026-05",
+    "cutoff_kind": "reliable knowledge cutoff / knowledge cutoff date",
+    "cutoff_status": "DERIVED",
+    "source": "sources/anthropic_models_overview.txt lines 38 and 77-79; sources/anthropic_transparency.txt lines 41-42",
+    "note": "same model family as the agents running this panel"
+   },
+   {
+    "model": "Claude Sonnet 5",
+    "api_id": "claude-sonnet-5",
+    "cutoff": "2026-01",
+    "cutoff_kind": "reliable knowledge cutoff / knowledge cutoff date",
+    "cutoff_status": "DERIVED",
+    "source": "sources/anthropic_models_overview.txt lines 39 and 77-80; sources/anthropic_transparency.txt lines 88-89",
+    "note": ""
+   },
+   {
+    "model": "GPT-6 Astra",
+    "api_id": "gpt-6-astra",
+    "cutoff": "2026-04-30",
+    "cutoff_kind": "knowledge cutoff",
+    "cutoff_status": "DERIVED",
+    "source": "https://developers.openai.com/api/docs/models fetched 2026-09-16, sources/openai_models.txt lines 658-674; sources/openai_gpt-6-astra.txt line 673",
+    "note": ""
+   },
+   {
+    "model": "GPT-5.6 Sol",
+    "api_id": "gpt-5.6-sol",
+    "cutoff": "2026-02-16",
+    "cutoff_kind": "knowledge cutoff",
+    "cutoff_status": "DERIVED",
+    "source": "sources/openai_models.txt lines 676-694",
+    "note": ""
+   },
+   {
+    "model": "Gemini 3.8 Flash",
+    "api_id": "gemini-3.8-flash",
+    "cutoff": "2026-03 (some domains 2025-01)",
+    "cutoff_kind": "knowledge cutoff date, stated with a domain-dependent earlier limit",
+    "cutoff_status": "DERIVED with internal disagreement",
+    "source": "https://deepmind.google/models/model-cards/gemini-3-8-flash/ fetched 2026-09-16, sources/deepmind_modelcard_gemini-3-8-flash.txt line 352",
+    "note": "the API model page (sources/google_gemini-3.8-flash.txt lines 241-243) gives only 'Latest update September 2026', which is not a cutoff"
+   },
+   {
+    "model": "Gemini 3.1 Pro (preview)",
+    "api_id": "gemini-3.1-pro-preview",
+    "cutoff": null,
+    "cutoff_kind": null,
+    "cutoff_status": "UNDEMONSTRATED",
+    "source": "sources/google_gemini-3.1-pro-preview.txt lines 242-245 (Latest update February 2026, not a cutoff); sources/deepmind_modelcard_gemini-3-1-pro.txt (no cutoff statement; defers training data to Gemini 3 Pro card line 197); sources/deepmind_modelcard_gemini-3-pro.txt (no cutoff statement found by search)",
+    "note": "preview status; Gemini API models page lists no stable Pro model in the Gemini 3 family (sources/google_gemini_models.txt lines 234-242)"
+   }
+  ],
+  "provenance": {
+   "referent": "frontier general-purpose models available through first-party APIs on 2026-09-16, with the training cutoff each provider states, for use as agent subjects",
+   "source": "first-party documentation fetched 2026-09-16: sources/anthropic_models_overview.txt, sources/anthropic_transparency.txt, sources/openai_models.txt, sources/openai_gpt-6-astra.txt, sources/google_gemini_models.txt, sources/deepmind_modelcard_gemini-3-8-flash.txt, sources/deepmind_modelcard_gemini-3-7-flash.txt, sources/deepmind_modelcard_gemini-3-1-pro.txt, sources/deepmind_modelcard_gemini-3-pro.txt (raw HTML beside each .txt)",
+   "population": "7 models from 3 providers (flagship and next tier per provider as each provider's own models page ranks them); open-weight models not surveyed",
+   "adjudicator": "no required rung is stated by any seed or by the panel brief, so availability is the only criterion; the strongest alternative subject is the best classical-tool arm, which is a composition, not a model",
+   "falsifier": "a first-party page, model card or system card dated on or before 2026-09-16 stating a different cutoff for any member, or listing a more capable generally available model from these providers that is missing here"
+  },
+  "status": "DERIVED",
+  "status_note": "Not ruled on in PANEL_BRIEF_WAVE2.md. Training-data ends UNDEMONSTRATED for all members; Gemini 3.1 Pro has no published cutoff.",
+  "disagreements": [
+   "cutoff referent differs by provider: Anthropic states 'reliable knowledge cutoff', OpenAI 'knowledge cutoff', Google a 'knowledge cutoff date' with an earlier domain-dependent limit. None states the last date of training data, which is what an exposure key needs.",
+   "Claude Fable 5.1 appears on the models overview with a June 2026 reliable-knowledge cutoff, but the Transparency Hub lists only Claude Fable 5 (January 2026).",
+   "Gemini 3.8 Flash: March 2026 and January 2025 in one sentence of its model card.",
+   "membership: agent 5's subject set has 7 models; agent 3's exposure-key cutoff table carries 10 (adds Claude Haiku 4.5, GPT-5.6 Terra, GPT-5.6 Luna). Listed, not reconciled.",
+   "bands_FROZEN.md section 1: the Rubin admission boundary 2026-07-01 is set by Claude Fable 5.1 (Jun 2026); dropping Fable 5.1 would admit June objects, and that relaxation is reserved for the human at D5."
+  ],
+  "undemonstrated": [
+   {
+    "what": "training-data cutoff (as opposed to knowledge cutoff) for every member",
+    "blocks": [
+     "exposure key ruling at D2/P3 for items peaking between a member's knowledge cutoff and its true training-data end"
+    ]
+   },
+   {
+    "what": "Gemini 3.1 Pro cutoff",
+    "blocks": [
+     "including Gemini 3.1 Pro in any contamination-controlled arm"
+    ]
+   },
+   {
+    "what": "open-weight frontier models",
+    "blocks": [
+     "subject-set completeness claim; recorded as an inventory of three providers only"
+    ]
+   }
+  ],
+  "source_records": [
+   {
+    "path": "astronomy/agent5_resolution_replay/subject_set_slot.json",
+    "sha256": "b954fc499a883c801ec711b6c7844ff4da65576826b7169655f5ef8f165ca114"
+   },
+   {
+    "path": "astronomy/agent3_labels_exposure/exposure_key_slot.json",
+    "sha256": "01eaef9f098bd8e21c12001985eb1c0649fdb658b48fea7ce3aa5bd7eca2fe90",
+    "locator": "value.subject_cutoffs"
+   },
+   {
+    "path": "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md",
+    "sha256": "8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2",
+    "locator": "section 1"
+   }
+  ],
+  "override_invitation": "Override invitation: accept, or replace the value and give a reason; the reason enters amendment_ledger.json. The subject set governs the admission boundary and the contamination band (a subject without a cutoff forces ESCALATE).",
+  "rule_E": "no numbers bear on a ruling except cutoff dates (V_PENDING, no V record)"
+ },
+ "decision_epoch": {
+  "value": {
+   "primary": "first alert",
+   "secondary": "night 3"
+  },
+  "operationalisation": {
+   "ztf_calibration": {
+    "E1": "detections with mjd <= t0 + 1e-5 plus prior detections and non-detections in [t0-30 d, t0) (prv_candidates window); decision night n0",
+    "E3": "all photometry with mjd >= t0-30 d and night(mjd) <= n0+3; night(mjd) = floor(mjd - 0.8333)",
+    "t0": "min mjd over positive g/r ALeRCE detections",
+    "source": {
+     "path": "astronomy/wave2/agent4_instrument/compositions_FROZEN.md",
+     "sha256": "b2f72948de0b39682ff8bc01c3c3f13f931a0a96966ede90c50466a9d045427c",
+     "locator": "section 1"
+    }
+   },
+   "rubin": "UNDEMONSTRATED as a composition input: no Rubin composition is declared. First detection is defined in bands_FROZEN.md section 3 (min midpointMjdTai over non-forced DIASources); forced photometry is not a detection."
+  },
+  "recheck": {
+   "what": "wave-2 agent 4 cited the brief for its epochs and must re-check against the frozen manifest (preamble item 3)",
+   "result": "MATCH",
+   "method": "compositions_FROZEN.md section 1 declares primary E1 'first alert' and secondary E3 'night 3', equal to this slot's value"
+  },
+  "provenance": {
+   "referent": "the moment at which the governed follow-up decision is taken, which fixes the inputs any composition or arm may see",
+   "source": "PANEL_BRIEF_WAVE2.md sha256 31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb line 15 (PI declaration); ZTF operationalisation astronomy/wave2/agent4_instrument/compositions_FROZEN.md sha256 b2f72948de0b39682ff8bc01c3c3f13f931a0a96966ede90c50466a9d045427c section 1; reaffirmed PANEL_BRIEF_WAVE3.md sha256 a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6 ruling 6 line 23",
+   "population": "one decision per candidate transient per round (observing night); units are 1 arcsec clusters (BTS) or diaObjectIds (Rubin)",
+   "adjudicator": "later epochs in the record: peak (SN Ia AUC 0.798) and post-spectroscopy (0.967) vs first alert (0.537), agent2_floor_headroom/REPORT.md table lines 73-77; the declared epochs are the decision-time ones",
+   "falsifier": "a composition input file containing photometry after the epoch cutoff (a rerun of the compositions_FROZEN.md section 5 forbidden-input check that fails), or a PI statement that differs from brief line 15"
+  },
+  "status": "RATIFIED",
+  "status_note": "Ratified at v1 (AMD-V1-02) and reaffirmed by PI ruling 6 (AMD-V2-08) with strata S0, S1, S2 reported and excluded.",
+  "source_records": [
+   {
+    "path": "astronomy/wave2/PANEL_BRIEF_WAVE2.md",
+    "sha256": "31a36617f0c6ae4179bb95ec134a6db7717ae7073f52f48b4272dde6a7a0f4eb",
+    "locator": "line 15"
+   },
+   {
+    "path": "astronomy/wave2/agent4_instrument/compositions_FROZEN.md",
+    "sha256": "b2f72948de0b39682ff8bc01c3c3f13f931a0a96966ede90c50466a9d045427c",
+    "locator": "section 1"
+   },
+   {
+    "path": "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md",
+    "sha256": "8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2",
+    "locator": "section 3"
+   },
+   {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "ruling 6"
+   }
+  ],
+  "override_invitation": "Override invitation: accept, or replace the value and give a reason; the reason enters amendment_ledger.json.",
+  "strata": {
+   "S0": {
+    "definition": "first detection in [survey start 2026-06-29T12:00, admission boundary 2026-07-01T00:00) (bands section 3)",
+    "count": "112,990 ANTARES loci (wave 2 C2)",
+    "in_cohort": false,
+    "rule_E": {
+     "value": 112990,
+     "v_record": null,
+     "rule_E": "V_PENDING",
+     "note": "ANTARES loci, no V record"
+    }
+   },
+   "S1": {
+    "definition": "straddlers: a DIASource detection before the boundary and one at or after it",
+    "count": 521920,
+    "in_cohort": false,
+    "rule_E": {
+     "value": 521920,
+     "v_record": "V-C03",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "8a5e0127ab4f0aa541cb52b231c613d06fa5889b089a3f7cedb984679d21eae9",
+     "rule_E": "CLEARED"
+    }
+   },
+   "S2": {
+    "definition": "cohort objects with pre-boundary forced flux S/N >= 5",
+    "count": "UNDEMONSTRATED (needs PPDB, not released)",
+    "in_cohort_per_frozen_bands": true,
+    "per_ruling_6": "excluded"
+   },
+   "disagreement": "bands_FROZEN.md section 3 declares S2 (cohort objects with pre-boundary forced flux) 'counted and reported ... not removed from the cohort'; ruling 6 says S0, S1 and S2 'stay reported and excluded'. S0 and S1 are outside the cohort by definition; S2 is not. Not reconciled: excluding S2 changes a frozen definition and would need a new hashed band registration (bands section 8). S2 is currently uncountable (needs PPDB), so no count moves today."
+  }
+ },
+ "supplied_by_human": {
+  "budget": "SUPPLIED (AMD-V2-01): 1,000 agent arm cells for the calibration phase, hard cap, plus 200 engineering hours; no Rubin-era paid work without re-ratification against this wave's measured label supply",
+  "cost_of_action": "SUPPLIED (AMD-V2-03): one spectrum = 0.5 h P60-class time; wrong routine commitment = 1 slot; missed rare event >= 100 slots, asymmetric; delta override 0.05 (AMD-V2-04)",
+  "rulings_holder": "SUPPLIED by role (AMD-V2-06): 19C program coordinator, non-authorship asserted by PI and unverified; transfer PENDING_RECEIPT, receipt_hash empty; wave 4: still PENDING_RECEIPT, receipt_hash empty; 'procedural' stays on every blind result (AMD-V3-05)",
+  "tns_credentials": "BLOCKED, second record (AMD-V3-04): request dates 2026-09-16 and 2026-09-17; sanctioned WISeREP check BLOCKED (HTTP 403 live, archive 404)"
+ },
+ "d5_inputs": [
+  {
+   "id": "d5-budget",
+   "value": {
+    "agent_arm_cells_hard_cap": 1000,
+    "engineering_hours": 200
+   },
+   "status": "SUPPLIED",
+   "provenance": {
+    "referent": "hours or cells the programme can spend on this benchmark (calibration phase)",
+    "source": "PANEL_BRIEF_WAVE3.md sha256 a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6 ruling 1 line 13",
+    "population": "the human programme; arm cells = subject x arm x round",
+    "adjudicator": "the unfilled wave-2 placeholder (AMD-V1-04)",
+    "falsifier": "a cell ledger at R1 onward that exceeds 1,000 cells, or any Rubin-era paid run logged before re-ratification, would show the cap was not held"
+   }
+  },
+  {
+   "id": "d5-cost-of-action",
+   "value": {
+    "one_spectrum_h_P60": 0.5,
+    "wrong_routine_commitment_slots": 1,
+    "missed_rare_event_slots_min": 100,
+    "asymmetric": true
+   },
+   "status": "SUPPLIED",
+   "provenance": {
+    "referent": "cost of a follow-up slot, of a wrong commitment and of a missed rare event",
+    "source": "PANEL_BRIEF_WAVE3.md sha256 a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6 ruling 2 lines 14-17",
+    "population": "the programme's own follow-up allocation",
+    "adjudicator": "the delta prior 0.018 that this overrides (AMD-V2-04)",
+    "falsifier": "a PI restatement that differs, or an A1 metric whose loss weights differ from 1 vs >= 100 slots"
+   }
+  },
+  {
+   "id": "d5-rulings-holder",
+   "value": {
+    "role": "19C program coordinator",
+    "name": null
+   },
+   "status": "SUPPLIED (role); custody PENDING_RECEIPT",
+   "provenance": {
+    "referent": "a person who wrote neither the skill nor any case and holds RULINGS_SEALED.csv and the polarity maps",
+    "source": "PANEL_BRIEF_WAVE3.md sha256 a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6 ruling 4 line 21; astronomy/wave3/agent5_integrity/transfer_record.json sha256 945c1ca436e7bfbf4660b59f4d1031649eb4356b74c127fbe2e1d21e5fe2084a",
+    "population": "the two replay suites (20 and 38 cases)",
+    "adjudicator": "procedural seal held by the orchestrating party (SYNTHESIS.md section 10)",
+    "falsifier": "transfer_record.json receipt_hash filled and matching sha256 of the returned RECEIPT_TEMPLATE.txt would resolve custody; an authorship record naming the holder would falsify eligibility"
+   }
+  },
+  {
+   "id": "d5-tns-credentials",
+   "value": null,
+   "status": "BLOCKED",
+   "provenance": {
+    "referent": "an authenticated TNS account for per-object classification reports",
+    "source": "PANEL_BRIEF_WAVE3.md sha256 a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6 ruling 5 line 22; preamble item 1 line 64; second BLOCKED record PANEL_BRIEF_WAVE4.md sha256 8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58 ruling 3 line 16, preamble item 4",
+    "population": "7,843 BTS labels and all Rubin-era classifications",
+    "adjudicator": "public archived TNS pages (partial)",
+    "falsifier": "a TNS_API_KEY present in the environment on a later presence test would unblock track one"
+   },
+   "request_dates": [
+    "2026-09-16",
+    "2026-09-17"
+   ],
+   "wiserep": "BLOCKED"
+  }
+ ],
+ "graph_escalations": [
+  {
+   "edge": "R1 -> I1 (and D5 -> R1)",
+   "state": "RATIFIED as staged (PI ruling 3)",
+   "consequence": "wave-2 compositions stay PRE-I1 CALIBRATION; the I1 designation waits for R1 plus PI ratification; graph edges unweakened",
+   "ledger": [
+    "ESC-V1-01",
+    "AMD-V2-05"
+   ],
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "ruling 3"
+   },
+   "module_v": "ruling 5 chartered module V; overhead cap exceeded (interim), AMD-V3-06"
+  }
+ ],
+ "amendment_ledger": {
+  "path": "astronomy/wave4/agent3_freeze_v3/amendment_ledger_v3.json",
+  "v1_entries_canonical_sha256": "9643f2d47f458e02a213f1e8ef28d1b0305ccd8814571ff2fdc269e389c6192d",
+  "v2_entries_canonical_sha256": "a1feebcb49883284c27d2a10d5313f21d64f1950085fb1f572d7f2975eb87c49",
+  "v3_entries": [
+   "NAME-V3-01",
+   "AMD-V3-01",
+   "AMD-V3-02",
+   "RE-V3-01",
+   "AMD-V3-03",
+   "AMD-V3-04",
+   "AMD-V3-05",
+   "AMD-V3-06",
+   "RE-V3-02"
+  ],
+  "v3_entries_canonical_sha256": "43550720a5c0abe22d25d4087a4b7c8077702224a7f68fcc7319b5c2b5339110"
+ },
+ "d5_disposition": {
+  "stage": "D5 ratification",
+  "frozen_and_hashed": "PASS",
+  "every_slot_ratified_or_overridden": "FAIL",
+  "per_slot": {
+   "tau": "DERIVED (no PI ruling)",
+   "k": "RATIFIED",
+   "label_source": "RATIFIED WITH CONDITIONS (numeric fields V_PENDING)",
+   "exposure_key": "DERIVED (no PI ruling)",
+   "tool_inventory": "OVERRIDDEN (three Rubin counterpart rows)",
+   "delta": "RATIFIED (0.05; prior 0.018 carried)",
+   "S": "UNDEMONSTRATED (computed at R1)",
+   "subject_set": "DERIVED (no PI ruling)",
+   "decision_epoch": "RATIFIED"
+  },
+  "disposition": "UNDEMONSTRATED: D5 does not advance. tau, exposure_key and subject_set still carry no PI ruling (the wave-4 brief rules on none of them); S awaits R1. Not ratified on the PI's behalf."
+ },
+ "completeness": "v3: v2 plus wave-4 rulings 1-5 (AMD-V3-01..06), naming disagreement NAME-V3-01, rule E marks from 38 module V records (RE-V3-01, RE-V3-02). Not covered: PI rulings on tau, exposure_key, subject_set, S2 and the two label readings; R1 (S); measured Rubin cohort labels (TNS and WISeREP BLOCKED).",
+ "frozen_hash": "bd0fa4c67cdbbfb0b8eea9822f536bed4bf934ee1bc81a02606ed6d5ee9585bc",
+ "derived_from": {
+  "v2": {
+   "path": "astronomy/wave3/agent3_manifest_freeze/domain_manifest_v2.json",
+   "frozen_hash": "fba4259b1d5931ff8b74a3db2f438706ce29263ef7ca373a2cb5c5fd7f2cedd5"
+  },
+  "v1": {
+   "path": "astronomy/wave3/agent3_manifest_freeze/domain_manifest_v1.json",
+   "frozen_hash": "ca00efe05b7562237839259a50597e7c2825292e3f4ccf84444607c50c3cbae8"
+  }
+ },
+ "disagreements_v2": [
+  "bands_FROZEN.md section 3 declares S2 (cohort objects with pre-boundary forced flux) 'counted and reported ... not removed from the cohort'; ruling 6 says S0, S1 and S2 'stay reported and excluded'. S0 and S1 are outside the cohort by definition; S2 is not. Not reconciled: excluding S2 changes a frozen definition and would need a new hashed band registration (bands section 8). S2 is currently uncountable (needs PPDB), so no count moves today.",
+  "wave-3 preamble item 5 vs agent 4's JSON-row runs (tool_inventory, axis ledger v2)",
+  "truth cost priced at 485 objects (delta 0.018 bracket) while delta is overridden to 0.05 (label_source.wave3.observation)",
+  "tool_coverage_axis.json population '158 alert runs' vs run_log 160 (158 + 2 voided)",
+  "agent 2 sealed prediction non-bot share 0.7 [0.5, 0.85] vs observed 0.89 (outside); listed",
+  "13 typed cohort objects (existence) vs 0 measured non-bot on readable captures: not the same quantity; neither is P",
+  "night count: brief 10 on-sky nights vs agent 1's 9 alert dates (agent 2 reach 775 vs 861 per night)",
+  "BTS trigger purity 0.967 vs 0.956 within arXiv:2401.15167 (truth-cost grid carries both)",
+  "Rochester 2026 totals 17,562 (CSV) vs 19,448 (page)"
+ ],
+ "pi_reratification_inputs": {
+  "ruling": {
+   "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+   "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+   "locator": "ruling 1, line 13"
+  },
+  "state": "OPEN: ruling 4 ratified the label source; the ruling-1 (wave 3) go/no-go on Rubin-era paid work is not given in the wave-4 brief",
+  "measured_supply_rubin_cohort": "none demonstrated: 0 STRONG on 13 readable captures of 627; 13 typed, classifier unknown; P and Ng uncomputable",
+  "supply_P_per_month": "lower bounds only (see candidates[0].prospective_label_supply_w3)",
+  "truth_cost": {
+   "role": "input to the PI re-ratification required by ruling 1; not a ruling, not S",
+   "formula": "N_need=max(0,N-L); S=ceil(N_need/(p*s)); H=0.5*S; W=S-ceil(N_need/s); nights=ceil(S/min(c,A)); +100 slots per missed rare event (M UNDEMONSTRATED)",
+   "L_used": {
+    "L_measured_T1": 0,
+    "L_existence_T8_T9_not_used_as_offset": 13
+   },
+   "ranges_over_grid_L0": {
+    "delta_0.018_N_485": {
+     "spectra": [
+      502,
+      644
+     ],
+     "hours": [
+      251.0,
+      322.0
+     ],
+     "nights": [
+      51,
+      144
+     ],
+     "wrong_commitments": [
+      17,
+      122
+     ]
+    },
+    "delta_0.018_N_12855": {
+     "spectra": [
+      13294,
+      17065
+     ],
+     "hours": [
+      6647.0,
+      8532.5
+     ],
+     "nights": [
+      1330,
+      3793
+     ],
+     "wrong_commitments": [
+      439,
+      3242
+     ]
+    },
+    "delta_0.05_N_63": {
+     "spectra": [
+      66,
+      84
+     ],
+     "hours": [
+      33.0,
+      42.0
+     ],
+     "nights": [
+      7,
+      19
+     ],
+     "wrong_commitments": [
+      3,
+      16
+     ]
+    },
+    "delta_0.05_N_1666": {
+     "spectra": [
+      1723,
+      2212
+     ],
+     "hours": [
+      861.5,
+      1106.0
+     ],
+     "nights": [
+      173,
+      492
+     ],
+     "wrong_commitments": [
+      57,
+      420
+     ]
+    }
+   },
+   "by_delta": {
+    "0.05 (override)": {
+     "N_63": {
+      "spectra": [
+       66,
+       84
+      ],
+      "hours": [
+       33.0,
+       42.0
+      ],
+      "nights": [
+       7,
+       19
+      ],
+      "wrong_commitments": [
+       3,
+       16
+      ]
+     },
+     "N_1666": {
+      "spectra": [
+       1723,
+       2212
+      ],
+      "hours": [
+       861.5,
+       1106.0
+      ],
+      "nights": [
+       173,
+       492
+      ],
+      "wrong_commitments": [
+       57,
+       420
+      ]
+     }
+    },
+    "0.018 (literature prior; frozen bands)": {
+     "N_485": {
+      "spectra": [
+       502,
+       644
+      ],
+      "hours": [
+       251.0,
+       322.0
+      ],
+      "nights": [
+       51,
+       144
+      ],
+      "wrong_commitments": [
+       17,
+       122
+      ]
+     },
+     "N_12855": {
+      "spectra": [
+       13294,
+       17065
+      ],
+      "hours": [
+       6647.0,
+       8532.5
+      ],
+      "nights": [
+       1330,
+       3793
+      ],
+      "wrong_commitments": [
+       439,
+       3242
+      ]
+     }
+    }
+   },
+   "missed_rare_event": "+100 slots per miss on every row; miss rate UNDEMONSTRATED",
+   "constraints": [
+    "Rubin off sky since 2026-07-14: no new cohort objects; calendar time to reach N UNDEMONSTRATED",
+    "existing cohort objects aged >=60 d since last detection: not credited as reachable today",
+    "P60 (Palomar, +33 deg) vs Rubin (Cerro Pachon, -30 deg) sky overlap fraction UNDEMONSTRATED; not applied (nights are a lower bound)",
+    "f19 counts difference-flux brightness; genuineness of bright cohort objects is carried by purity p, not by f19"
+   ],
+   "records": [
+    {
+     "path": "astronomy/wave3/agent2_measured_labels/truth_cost.json",
+     "sha256": "53f229b3deb4137781ce06c80016bdf54dde506e80f06024d129d4feb0b81c6e"
+    },
+    {
+     "path": "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv",
+     "sha256": "8eee9f94b55d5ccad10e32cf721073d729865c442aff662661117a0f703b09a3"
+    }
+   ],
+   "rule_E": {
+    "formula_rows_288": {
+     "value": 288,
+     "v_record": "V-R01",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "417df4bb3e09b4410be0fe04b635f3a33a4bec1f374fbd696e295290348a1e46",
+     "rule_E": "CLEARED"
+    },
+    "N63": {
+     "value": {
+      "spectra": [
+       66,
+       84
+      ],
+      "hours": [
+       33.0,
+       42.0
+      ],
+      "nights": [
+       7,
+       19
+      ],
+      "wrong_commitments": [
+       3,
+       16
+      ]
+     },
+     "v_record": "V-R02",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "77954c73c1385cc23c5c9680929d2bb8c6e56dd00736df3fd5b14b3a89da4ad7",
+     "rule_E": "CLEARED"
+    },
+    "N485": {
+     "value": {
+      "spectra": [
+       502,
+       644
+      ],
+      "hours": [
+       251.0,
+       322.0
+      ],
+      "nights": [
+       51,
+       144
+      ],
+      "wrong_commitments": [
+       17,
+       122
+      ]
+     },
+     "v_record": "V-R03",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "ca104ac9f46236f694bcb809a8dfc003361cb72b33e9ffa218ffa395d3faea59",
+     "rule_E": "CLEARED"
+    },
+    "N1666_and_N12855": {
+     "value": "see ranges_over_grid_L0",
+     "v_record": "V-R04",
+     "verdict": "MATCH",
+     "cleared_for_P4_under_rule_E": true,
+     "sealed_sha256": "dcd8c05fff8e35d8c08438909e382d9872fc1c77197bab94451f295e626d5996",
+     "rule_E": "CLEARED"
+    },
+    "N_brackets": {
+     "N01": {
+      "v_record": "V-N01",
+      "verdict": "MATCH",
+      "cleared_for_P4_under_rule_E": true,
+      "sealed_sha256": "422fe2859781b641fc74e666979344ba4544dd44022c623c5e1d0374b9b21f33"
+     },
+     "N02": {
+      "v_record": "V-N02",
+      "verdict": "MATCH",
+      "cleared_for_P4_under_rule_E": true,
+      "sealed_sha256": "ab094276e33013e16f93ae52ba085afbc1a99a4d6ff8417cd3bec418d84f1cb5"
+     }
+    }
+   },
+   "wave4_monthly_pricing": {
+    "record": {
+     "path": "astronomy/wave4/agent2_price_of_truth/truth_cost_monthly.json",
+     "sha256": "2f6791483340e48e52803bc9977eb74faef3e8d5aa6f62dc1f3c4634188d52bf"
+    },
+    "rule_E": "V_PENDING (no V record)",
+    "months_after_return": {
+     "N63": "1-2",
+     "N485": "2-9",
+     "N1666": "8-28",
+     "N12855": "70-115"
+    }
+   }
+  },
+  "p4_readings": {
+   "ledger": {
+    "path": "astronomy/wave3/agent3_manifest_freeze/axis_ledger_v2_final_against_frozen_bands.json",
+    "sha256": "d20b69607bb6adfc1011b3e3b956cf1510ab41353c4cdd1a7966ff65491c8e60"
+   },
+   "ruling": null,
+   "preconditions": {
+    "a": "UNMET",
+    "b": "CLEARED",
+    "c": "UNMET"
+   },
+   "escalate_axes": [
+    "contamination_exposure",
+    "tool_coverage"
+   ]
+  },
+  "packet": "astronomy/wave3/agent3_manifest_freeze/PI_rerat_packet.md"
+ },
+ "naming_disagreement": "wave-4 brief says 'freeze v2'; v2 was already frozen (fba4259b...edd5), so this is v3 (NAME-V3-01, preamble item 1). 'The manifest P4 reads' is v3.",
+ "module_v": {
+  "records": {
+   "path": "astronomy/wave4/agent4_module_v/v_records.json",
+   "sha256": "462286d6b4c474091f4e03e0f7587352c4a793e73d17030627d5759cb1ea3a9a"
+  },
+  "charter": {
+   "path": "astronomy/wave4/agent4_module_v/V_CHARTER.md",
+   "sha256": "f4bca84045ae13c2aeb86ade1fc4a204bc21260fc49b02179167c1ec2a6ca251"
+  },
+  "cleared": 33,
+  "not_cleared": [
+   "L01",
+   "L02",
+   "L03",
+   "L04",
+   "L05"
+  ]
+ },
+ "rule_E_index": {
+  "entries": [
+   {
+    "path": "$.candidates[0].cohorts.prospective_counts_w3.rule_E.O_merged",
+    "value": 1937669,
+    "rule_E": "CLEARED",
+    "v_record": "V-C01"
+   },
+   {
+    "path": "$.candidates[0].cohorts.prospective_counts_w3.rule_E.alerce_oids",
+    "value": 1937720,
+    "rule_E": "CLEARED",
+    "v_record": "V-C02"
+   },
+   {
+    "path": "$.candidates[0].cohorts.prospective_counts_w3.rule_E.S1",
+    "value": 521920,
+    "rule_E": "CLEARED",
+    "v_record": "V-C03"
+   },
+   {
+    "path": "$.candidates[0].cohorts.prospective_counts_w3.rule_E.one_detection_share",
+    "value": 0.8082,
+    "rule_E": "CLEARED",
+    "v_record": "V-C04"
+   },
+   {
+    "path": "$.candidates[0].cohorts.prospective_counts_w3.rule_E.U",
+    "value": 0,
+    "rule_E": "V_PENDING",
+    "v_record": null
+   },
+   {
+    "path": "$.candidates[0].cohorts.prospective_counts_w3.rule_E.cohort_nights",
+    "value": 9,
+    "rule_E": "V_PENDING",
+    "v_record": null
+   },
+   {
+    "path": "$.tau.rule_E.radius_arcsec",
+    "value": 1.0,
+    "rule_E": "V_PENDING",
+    "v_record": null
+   },
+   {
+    "path": "$.tau.rule_E.n_clusters_bts",
+    "value": 11183,
+    "rule_E": "V_PENDING",
+    "v_record": null
+   },
+   {
+    "path": "$.k.rule_E.k",
+    "value": 8,
+    "rule_E": "V_PENDING",
+    "v_record": null
+   },
+   {
+    "path": "$.k.rule_E.candidates_per_round",
+    "value": 46.41,
+    "rule_E": "V_PENDING",
+    "v_record": null
+   },
+   {
+    "path": "$.k.rule_E.chance_stated",
+    "value": 0.1718,
+    "rule_E": "V_PENDING",
+    "v_record": null
+   },
+   {
+    "path": "$.k.rule_E.k_binding_nights",
+    "value": 61,
+    "rule_E": "CLEARED",
+    "v_record": "V-K01"
+   },
+   {
+    "path": "$.k.rule_E.nights_k_not_binding",
+    "value": 518,
+    "rule_E": "CLEARED",
+    "v_record": "V-K02"
+   },
+   {
+    "path": "$.label_source.value.bts.category_counts.MEASURED",
+    "value": 1074,
+    "rule_E": "V_PENDING",
+    "v_record": "V-L03"
+   },
+   {
+    "path": "$.label_source.value.bts.category_counts.MODEL_ANNOTATION",
+    "value": 954,
+    "rule_E": "V_PENDING",
+    "v_record": "V-L04"
+   },
+   {
+    "path": "$.label_source.value.bts.category_counts.PHOTOMETRIC_ONLY",
+    "value": 0,
+    "rule_E": "V_PENDING",
+    "v_record": "V-L03"
+   },
+   {
+    "path": "$.label_source.value.bts.category_counts.UNRESOLVED_UNDEMONSTRATED",
+    "value": 5815,
+    "rule_E": "V_PENDING",
+    "v_record": "V-L05"
+   },
+   {
+    "path": "$.label_source.value.bts.sniascore_bound.lower",
+    "value": 954,
+    "rule_E": "V_PENDING",
+    "v_record": "V-L01"
+   },
+   {
+    "path": "$.label_source.value.bts.sniascore_bound.upper",
+    "value": 2057,
+    "rule_E": "V_PENDING",
+    "v_record": "V-L02"
+   },
+   {
+    "path": "$.label_source.value.bts.sniascore_bound.upper_noE5_sensitivity_not_slot_value",
+    "value": 2654,
+    "rule_E": "V_PENDING",
+    "v_record": "V-L02"
+   },
+   {
+    "path": "$.exposure_key.rule_E.cohort_after_every_cutoff",
+    "value": 1937669,
+    "rule_E": "CLEARED",
+    "v_record": "V-C01"
+   },
+   {
+    "path": "$.exposure_key.rule_E.antares_prior_position_leak_193_of_9000",
+    "value": [
+     193,
+     9000
+    ],
+    "rule_E": "V_PENDING",
+    "v_record": null
+   },
+   {
+    "path": "$.exposure_key.rule_E.bts_capture_split_6166_0_1677",
+    "value": [
+     6166,
+     0,
+     1677
+    ],
+    "rule_E": "V_PENDING",
+    "v_record": null
+   },
+   {
+    "path": "$.tool_inventory.rubin_functional_recount_w3.rule_E.counts_all",
+    "value": {
+     "PASS": 2,
+     "FAIL": 14,
+     "UNDEMONSTRATED": 9
+    },
+    "rule_E": "CLEARED",
+    "v_record": "V-T01"
+   },
+   {
+    "path": "$.tool_inventory.rubin_functional_recount_w3.rule_E.CATS",
+    "value": "5/10",
+    "rule_E": "CLEARED",
+    "v_record": "V-T02"
+   },
+   {
+    "path": "$.tool_inventory.rubin_functional_recount_w3.rule_E.GHOST",
+    "value": "3/8",
+    "rule_E": "CLEARED",
+    "v_record": "V-T02"
+   },
+   {
+    "path": "$.tool_inventory.rubin_functional_recount_w3.rule_E.alert_runs",
+    "value": 160,
+    "rule_E": "CLEARED",
+    "v_record": "V-T03"
+   },
+   {
+    "path": "$.delta.literature_prior.rule_E",
+    "value": 0.018,
+    "rule_E": "V_PENDING",
+    "v_record": null
+   },
+   {
+    "path": "$.delta.calibration_context.k_binding_nights.k_binding",
+    "value": 61,
+    "rule_E": "CLEARED",
+    "v_record": "V-K01"
+   },
+   {
+    "path": "$.delta.calibration_context.k_binding_nights.not_binding",
+    "value": 518,
+    "rule_E": "CLEARED",
+    "v_record": "V-K02"
+   },
+   {
+    "path": "$.delta.planning_thresholds.rule_E.objects_0.018",
+    "value": [
+     485,
+     12855
+    ],
+    "rule_E": "CLEARED",
+    "v_record": "V-N01"
+   },
+   {
+    "path": "$.delta.planning_thresholds.rule_E.objects_0.05",
+    "value": [
+     63,
+     1666
+    ],
+    "rule_E": "CLEARED",
+    "v_record": "V-N02"
+   },
+   {
+    "path": "$.delta.planning_thresholds.rule_E.nights_0.018",
+    "value": [
+     40,
+     1515
+    ],
+    "rule_E": "V_PENDING",
+    "v_record": null
+   },
+   {
+    "path": "$.delta.planning_thresholds.rule_E.nights_0.05",
+    "value": [
+     6,
+     197
+    ],
+    "rule_E": "V_PENDING",
+    "v_record": null
+   },
+   {
+    "path": "$.S.rule_E.budget_arm_cells",
+    "value": 1000,
+    "rule_E": "PI_RULED",
+    "v_record": null
+   },
+   {
+    "path": "$.S.rule_E.engineering_hours",
+    "value": 200,
+    "rule_E": "PI_RULED",
+    "v_record": null
+   },
+   {
+    "path": "$.S.rule_E.planning_rounds_71_498",
+    "value": [
+     71,
+     498
+    ],
+    "rule_E": "V_PENDING",
+    "v_record": null
+   },
+   {
+    "path": "$.decision_epoch.strata.S0.rule_E",
+    "value": 112990,
+    "rule_E": "V_PENDING",
+    "v_record": null
+   },
+   {
+    "path": "$.decision_epoch.strata.S1.rule_E",
+    "value": 521920,
+    "rule_E": "CLEARED",
+    "v_record": "V-C03"
+   },
+   {
+    "path": "$.pi_reratification_inputs.truth_cost.rule_E.formula_rows_288",
+    "value": 288,
+    "rule_E": "CLEARED",
+    "v_record": "V-R01"
+   },
+   {
+    "path": "$.pi_reratification_inputs.truth_cost.rule_E.N63",
+    "value": {
+     "spectra": [
+      66,
+      84
+     ],
+     "hours": [
+      33.0,
+      42.0
+     ],
+     "nights": [
+      7,
+      19
+     ],
+     "wrong_commitments": [
+      3,
+      16
+     ]
+    },
+    "rule_E": "CLEARED",
+    "v_record": "V-R02"
+   },
+   {
+    "path": "$.pi_reratification_inputs.truth_cost.rule_E.N485",
+    "value": {
+     "spectra": [
+      502,
+      644
+     ],
+     "hours": [
+      251.0,
+      322.0
+     ],
+     "nights": [
+      51,
+      144
+     ],
+     "wrong_commitments": [
+      17,
+      122
+     ]
+    },
+    "rule_E": "CLEARED",
+    "v_record": "V-R03"
+   },
+   {
+    "path": "$.pi_reratification_inputs.truth_cost.rule_E.N1666_and_N12855",
+    "value": "see ranges_over_grid_L0",
+    "rule_E": "CLEARED",
+    "v_record": "V-R04"
+   },
+   {
+    "path": "$.delta.calibration_context.power_table_both_deltas_rule_E.P01",
+    "value": {
+     "sigma_d": 0.029361,
+     "mde": 0.003419,
+     "n_min_0.05": 3,
+     "n_min_0.018": 21
+    },
+    "rule_E": "CLEARED",
+    "v_record": "V-P01"
+   },
+   {
+    "path": "$.delta.calibration_context.power_table_both_deltas_rule_E.P02",
+    "value": {
+     "sigma_d": 0.089778,
+     "mde": 0.032204,
+     "n_min_0.05": 26,
+     "n_min_0.018": 196
+    },
+    "rule_E": "CLEARED",
+    "v_record": "V-P02"
+   },
+   {
+    "path": "$.delta.calibration_context.power_table_both_deltas_rule_E.P03",
+    "value": {
+     "sigma_d": 0.0,
+     "mde": 0.0,
+     "n_min_0.05": 0,
+     "n_min_0.018": 0
+    },
+    "rule_E": "CLEARED",
+    "v_record": "V-P03"
+   },
+   {
+    "path": "$.delta.calibration_context.power_table_both_deltas_rule_E.P04",
+    "value": {
+     "sigma_d": 0.14568,
+     "mde": 0.055033,
+     "n_min_0.05": 67,
+     "n_min_0.018": 515
+    },
+    "rule_E": "CLEARED",
+    "v_record": "V-P04"
+   },
+   {
+    "path": "$.delta.calibration_context.power_table_both_deltas_rule_E.P05",
+    "value": {
+     "sigma_d": 0.027458,
+     "mde": 0.003197,
+     "n_min_0.05": 3,
+     "n_min_0.018": 19
+    },
+    "rule_E": "CLEARED",
+    "v_record": "V-P05"
+   },
+   {
+    "path": "$.delta.calibration_context.power_table_both_deltas_rule_E.P06",
+    "value": {
+     "sigma_d": 0.083776,
+     "mde": 0.030051,
+     "n_min_0.05": 23,
+     "n_min_0.018": 171
+    },
+    "rule_E": "CLEARED",
+    "v_record": "V-P06"
+   },
+   {
+    "path": "$.delta.calibration_context.power_table_both_deltas_rule_E.P07",
+    "value": {
+     "sigma_d": 0.0,
+     "mde": 0.0,
+     "n_min_0.05": 0,
+     "n_min_0.018": 0
+    },
+    "rule_E": "CLEARED",
+    "v_record": "V-P07"
+   },
+   {
+    "path": "$.delta.calibration_context.power_table_both_deltas_rule_E.P08",
+    "value": {
+     "sigma_d": 0.165622,
+     "mde": 0.062567,
+     "n_min_0.05": 87,
+     "n_min_0.018": 665
+    },
+    "rule_E": "CLEARED",
+    "v_record": "V-P08"
+   },
+   {
+    "path": "$.delta.calibration_context.composition_auc.A01",
+    "value": 0.5996251272075266,
+    "rule_E": "CLEARED",
+    "v_record": "V-A01"
+   },
+   {
+    "path": "$.delta.calibration_context.composition_auc.A02",
+    "value": 0.5968101198346822,
+    "rule_E": "CLEARED",
+    "v_record": "V-A02"
+   },
+   {
+    "path": "$.delta.calibration_context.composition_auc.A03",
+    "value": 0.6373746097238473,
+    "rule_E": "CLEARED",
+    "v_record": "V-A03"
+   },
+   {
+    "path": "$.delta.calibration_context.composition_auc.A04",
+    "value": 0.6184103039827205,
+    "rule_E": "CLEARED",
+    "v_record": "V-A04"
+   },
+   {
+    "path": "$.candidates[0].p4_state_v3 (precondition b)",
+    "value": true,
+    "rule_E": "CLEARED",
+    "v_record": "V-O02"
+   },
+   {
+    "path": "$.delta.ratification.cause_check",
+    "value": "ordering",
+    "rule_E": "CLEARED (MATCH_WITHIN_TOL)",
+    "v_record": "V-O01"
+   }
+  ],
+  "counts": {
+   "CLEARED": 34,
+   "V_PENDING": 21,
+   "PI_RULED": 2
+  },
+  "scope_note": "the brief scopes rule E to the ruling-bearing numbers listed by agent 4 (V_TARGETS, 38) and says everything else proceeds unverified; this manifest also marks ruling-adjacent numbers outside that list V_PENDING, as instructed. V_PENDING outside V_TARGETS blocks nothing by the brief's rule.",
+  "not_in_manifest_but_cleared": {
+   "Q01": {
+    "v_record": "V-Q01",
+    "verdict": "MATCH_WITHIN_TOL",
+    "cleared_for_P4_under_rule_E": true,
+    "sealed_sha256": "36ce24a171f7364b2096999d58d120503fddcfc79808152662760c9c844742d6"
+   },
+   "Q02": {
+    "v_record": "V-Q02",
+    "verdict": "MATCH_WITHIN_TOL",
+    "cleared_for_P4_under_rule_E": true,
+    "sealed_sha256": "ef2a08af59dd83978cbef9f1ffdb7f61460b96f5932b70317e76575a9f0654c3"
+   },
+   "Q03": {
+    "v_record": "V-Q03",
+    "verdict": "MATCH_WITHIN_TOL",
+    "cleared_for_P4_under_rule_E": true,
+    "sealed_sha256": "2116d1e32d57d416a73e7159b1eb0e339d6aa540f65584d8717e7cfa3272f9d7"
+   },
+   "Q04": {
+    "v_record": "V-Q04",
+    "verdict": "MATCH_WITHIN_TOL",
+    "cleared_for_P4_under_rule_E": true,
+    "sealed_sha256": "5dbf309a17f97f0ac0d055584c4578d96a02dd1abd5ea7a8976ee20e5d38ca70"
+   }
+  }
+ },
+ "disagreements_v3": [
+  "naming: brief 'freeze v2' vs frozen v2 -> v3 (NAME-V3-01)",
+  "ruling 4 cites [803, 2247]; current producer bound [954, 2057] is V_PENDING; [803, 2247] is reproduced by V only non-blind and only under E5 cut 1289.5 (literal 1259.5 on wave-2 captures gives [803, 2329])",
+  "V report lists three bound readings; the fourth combination (IAU keying + literal E5) [955, 2138] is unlisted; agent 3 verified it inside [803, 2247]",
+  "ruling 1 times mix -0500 local (15:14, 15:46) and UTC (20:48); PI's 15:46 = commit f898294 20:46Z vs power_calibration.json mtime 20:44:29Z vs V's earliest wave-2 power output 20:43:28Z; ordering holds in every reading",
+  "rule E scope: brief limits it to V_TARGETS; instruction marks all other numbers V_PENDING (scope_note)",
+  "module V overhead: self-report 51.4 min / ~125 calls vs harness 52.4 min / 122 calls",
+  "Rubin on-sky fraction 10/15 (scheduler) vs 11/16 (Fink alert nights) in agent 2 wave-4 monthly pricing",
+  "power.py (vendored, unpatched) crashes with AttributeError on a ragged row instead of refusing (module V property tests); not a manifest number"
+ ],
+ "open_items_carried": [
+  "tau, exposure_key, subject_set: no PI ruling; D5 does not advance on them",
+  "S2 stratum: ruling 6 (wave 3) 'reported and excluded' vs bands_FROZEN.md section 3 'not removed'; unresolved",
+  "all disagreements_v2 entries unchanged"
+ ]
+}
