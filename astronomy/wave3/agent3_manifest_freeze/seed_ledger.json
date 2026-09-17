@@ -351,11 +351,66 @@
    "sha256": "945c1ca436e7bfbf4660b59f4d1031649eb4356b74c127fbe2e1d21e5fe2084a",
    "read_in_full": false,
    "contribution": "first 60 lines (status, receipt_hash, holder, package head)"
+  },
+  {
+   "id": "REPORT.md",
+   "file": "astronomy/wave3/agent2_measured_labels/REPORT.md",
+   "sha256": "934b7fba7579676947bd0d2edab5a78d7fd431908e62d1cdc69414fa9ba74333",
+   "read_in_full": true,
+   "contribution": "headline, census, truth cost, disagreements"
+  },
+  {
+   "id": "tns_census_2026.json",
+   "file": "astronomy/wave3/agent2_measured_labels/tns_census_2026.json",
+   "sha256": "c7b035f04fa77b41386555ba1258fcc6624f9fc1b5354aa913fd20a78b7eeaa9",
+   "read_in_full": true,
+   "contribution": "cohort measured STRONG 0 on 627 tier-A; existence 13; monthly lower bounds"
+  },
+  {
+   "id": "supply_P_per_month.json",
+   "file": "astronomy/wave3/agent2_measured_labels/supply_P_per_month.json",
+   "sha256": "b028de4a80b30d875358f1594c4a2b6fc3ceda7e4bfadb958debc56c4527b2ce",
+   "read_in_full": false,
+   "contribution": "months, programs, automation mix, fetch status read; exact_blocked_by lists skimmed"
+  },
+  {
+   "id": "truth_cost.json",
+   "file": "astronomy/wave3/agent2_measured_labels/truth_cost.json",
+   "sha256": "53f229b3deb4137781ce06c80016bdf54dde506e80f06024d129d4feb0b81c6e",
+   "read_in_full": true,
+   "contribution": "ranges over grid, constraints, reachability"
+  },
+  {
+   "id": "truth_cost_table.csv",
+   "file": "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv",
+   "sha256": "8eee9f94b55d5ccad10e32cf721073d729865c442aff662661117a0f703b09a3",
+   "read_in_full": false,
+   "contribution": "header, first rows, distinct delta/N/L cases checked"
+  },
+  {
+   "id": "label_source_slot.json",
+   "file": "astronomy/wave3/agent2_measured_labels/label_source_slot.json",
+   "sha256": "fdae64921d6749e466932d13ffd0aa4e14359b0a946a31b32bacf9a97ce83719",
+   "read_in_full": true,
+   "contribution": "label_source slot for v2"
+  },
+  {
+   "id": "order_of_operations.log",
+   "file": "astronomy/wave3/agent2_measured_labels/order_of_operations.log",
+   "sha256": "7b5786577055fdc47ca79d58eb7cd8b51e8905f0351e3bb1eb3cdfc473ee3525",
+   "read_in_full": true,
+   "contribution": "seal before classification read; protocol hash"
+  },
+  {
+   "id": "census_protocol_FROZEN.md",
+   "file": "astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md",
+   "sha256": "9fac85524f28b5e3874a0d43a2c089915d20814b7996c18a0c77cc230b3c95fb",
+   "read_in_full": false,
+   "contribution": "hash verified only"
   }
  ],
  "not_read": [
-  "astronomy/wave3/agent2_measured_labels/* (running; listed only)",
   "RULINGS_SEALED.csv (never opened)"
  ],
- "completeness": "50 files; 41 read in full; partial reads name the part used and block nothing in the manifest"
+ "completeness": "58 files; 46 read in full; partial reads name the part used and block nothing in the manifests"
 }

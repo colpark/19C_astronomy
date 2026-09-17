@@ -6,6 +6,9 @@ import json, os, re, sys, datetime
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import *  # noqa
 import oplog
+FINAL = "--final" in sys.argv
+A2W3 = "astronomy/wave3/agent2_measured_labels"
+HANDOFF = {"tns_census_2026.json": "c7b035f04fa77b41386555ba1258fcc6624f9fc1b5354aa913fd20a78b7eeaa9", "supply_P_per_month.json": "b028de4a80b30d875358f1594c4a2b6fc3ceda7e4bfadb958debc56c4527b2ce", "truth_cost.json": "53f229b3deb4137781ce06c80016bdf54dde506e80f06024d129d4feb0b81c6e", "truth_cost_table.csv": "8eee9f94b55d5ccad10e32cf721073d729865c442aff662661117a0f703b09a3", "label_source_slot.json": "fdae64921d6749e466932d13ffd0aa4e14359b0a946a31b32bacf9a97ce83719"}
 
 A1W3 = "astronomy/wave3/agent1_cohort_finish"
 A4W3 = "astronomy/wave3/agent4_tool_recount"
@@ -98,9 +101,9 @@ def carry(name, extra):
 
 axes = [
  carry("positive_supply", {"thresholds_reported_beside_delta_0p05_PLANNING_ONLY": {"CLOSE_if": "O < 63 and M_obs < 6", "PROCEED_if": "P >= 1 and (L >= 1666 or M_sc >= 197)", "not_a_band": True},
-       "pending": "wave-3 agent 2 (census of 2026 TNS spectroscopic classifiers and truth cost) has not landed; TNS track one BLOCKED (wave-3 preamble item 1). The census gives programme throughput, not per-object measured labels, unless it also delivers cohort crossmatches."}),
+       **({"agent2_wave3": "landed and verified: cohort measured non-bot STRONG 0 on 13 readable of 627 captures (UNDEMONSTRATED, not zero); 13 typed cohort objects, classifier unknown; 2026 TNS throughput lower bounds only (non-bot spectroscopic units Jan-Sep >= 161, all objects, not cohort); P remains uncomputable"} if FINAL else {"pending": "wave-3 agent 2 (census of 2026 TNS spectroscopic classifiers and truth cost) has not landed; TNS track one BLOCKED (wave-3 preamble item 1). The census gives programme throughput, not per-object measured labels, unless it also delivers cohort crossmatches."})}),
  carry("negative_supply", {"thresholds_reported_beside_delta_0p05_PLANNING_ONLY": {"CLOSE_if": "O < 63 and M_obs < 6", "PROCEED_if": "Ng >= 1 and (L >= 1666 or M_sc >= 197)", "not_a_band": True},
-       "pending": "as positive_supply"}),
+       **({"agent2_wave3": "no negative-class (CV/AGN) measured count on cohort objects; 1 typed CV among the 13 existence matches, classifier unknown; Ng uncomputable"} if FINAL else {"pending": "as positive_supply"})}),
  carry("contamination_exposure", {"thresholds_reported_beside_delta_0p05_PLANNING_ONLY": {"PROCEED_if": "every subject has a published cutoff and E-labelled >= 1666 (or 197 usable nights)", "not_a_band": True},
        "band_note_agent3": "ESCALATE holds at either delta: Gemini 3.1 Pro (preview) has no published cutoff and the subject set is unratified (manifest subject_set DERIVED)."}),
  {
@@ -130,21 +133,42 @@ axes = [
  carry("unprocessable_units", {"thresholds_reported_beside_delta_0p05_PLANNING_ONLY": "same band at 0.05 (U = 0)"}),
 ]
 
+a2 = None
+if FINAL:
+    for f, h in HANDOFF.items():
+        assert sha(f"{A2W3}/{f}") == h, f"handoff hash mismatch {f}"
+    cen = {r["id"]: r for r in load(f"{A2W3}/tns_census_2026.json")}
+    sup = load(f"{A2W3}/supply_P_per_month.json")
+    lab = load(f"{A2W3}/label_source_slot.json")
+    rc = lab["value"]["rubin_cohort"]
+    tierA_ok = sup["fetch"]["status_by_tier"].get("A:ok"); tierA_err = sup["fetch"]["status_by_tier"].get("A:http_error")
+    class_split = any(k in json.dumps(cen["w3a2-c-cohort-measured-strong"]).lower() for k in ("posa", "posb", "\"neg\""))
+    a2 = {"handoff_hashes_verified": True, "handoff": HANDOFF,
+          "cohort_measured_nonbot_strong": cen["w3a2-c-cohort-measured-strong"]["value"],
+          "cohort_measured_population": cen["w3a2-c-cohort-measured-strong"]["population"],
+          "tier_A_cohort_captures_readable": tierA_ok, "tier_A_cohort_captures_http_error": tierA_err,
+          "cohort_existence_typed_moderate": cen["w3a2-c-cohort-existence"]["value"], "existence_classifier": "UNDEMONSTRATED (12 archived pages 404, 1 403)",
+          "slot_measured_nonbot_status": rc["measured_nonbot_status"],
+          "posA_neg_class_split_present": class_split,
+          "track_one": lab["value"]["track_one"]["status"],
+          "reading": ("P and Ng are not computable: 0 STRONG measured non-bot reports on cohort objects rests on 13 readable captures out of 627 tier-A cohort-matched objects (614 HTTP errors), "
+                      "so it is UNDEMONSTRATED, not zero (global refusal 11); the 13 typed cohort objects have unknown classifiers and fail the bands section 4 non-bot-reporter requirement; "
+                      "no posA/neg split exists. Monthly 2026 throughput is lower bounds over all TNS objects, not cohort labels.")}
 pre = {
  "a": {"text": "every one of the seven axes carries a number for the Rubin cohort (bands_FROZEN.md section 7)",
-       "state": "UNMET", "why": "positive_supply and negative_supply: measured P and Ng UNDEMONSTRATED (TNS BLOCKED; wave-3 agent 2 pending)"},
+       "state": "UNMET", "why": ("positive_supply and negative_supply: measured P and Ng UNDEMONSTRATED (TNS BLOCKED; agent 2 wave 3: 0 STRONG on 13 readable of 627 cohort captures, 13 typed with classifier unknown, no class split; verified by agent 3 from the handoff files)" if FINAL else "positive_supply and negative_supply: measured P and Ng UNDEMONSTRATED (TNS BLOCKED; wave-3 agent 2 pending)")},
  "b": {"text": "each axis's band hashed before its count; for tool_coverage a recount after the band hash",
        "state": "CLEARED" if b_ok else "UNMET",
        "verified_by": "agent 3 from logs, file hashes and run_log.jsonl timestamps (see precondition_b_verification)",
        "limits": "timestamps are self-logged by the agents and file mtimes are from the same host; consistency is verified, independent notarisation is not. The supply axes have no count, so (b) is vacuous for them and they fall under (a)."},
  "c": {"text": "label source ratified at D5, or P and Ng computed from measured labels (section 4)",
-       "state": "UNMET", "why": "label_source slot UNDEMONSTRATED in v1 and not ratified by any wave-3 ruling (ruling 1 requires re-ratification against this wave's measured label supply, which is agent 2's pending output); P and Ng not computed"},
+       "state": "UNMET", "why": ("label_source slot UNDEMONSTRATED (agent 2 wave 3: BTS SNIascore bound [954, 2057], 5,815 unresolved; Rubin cohort measured supply UNDEMONSTRATED); no PI ratification yet; the re-ratification ruling 1 requires is open, with its inputs now in PI_rerat_packet.md; P and Ng not computed" if FINAL else "label_source slot UNDEMONSTRATED in v1 and not ratified by any wave-3 ruling (ruling 1 requires re-ratification against this wave's measured label supply, which is agent 2's pending output); P and Ng not computed")},
 }
 unmet = [k for k, v in pre.items() if v["state"] != "CLEARED"]
 ledger = {
  "candidate": led1["candidate"],
  "branch": "prediction",
- "version": "v2 against frozen bands (agent 3, wave 3)",
+ "version": ("v2 FINAL against frozen bands (agent 3, wave 3, after agent 2 handoff)" if FINAL else "v2 against frozen bands (agent 3, wave 3)"),
  "bands": f"{BANDS} sha256 {BANDS_SHA} (delta 0.018; never re-banded here)",
  "delta_note": "bands frozen at delta 0.018 (literature prior); PI override 0.05 thresholds reported beside each axis as PLANNING-ONLY (agent 1 w3-09, planning_mde_bracket_w3.csv). Re-banding at 0.05 would be a new hashed registration.",
  "planning_thresholds": {"delta_0.018_frozen": T018, "delta_0.05_beside": T05, "source": f"{A1W3}/rubin_cohort_count.json id w3-09"},
@@ -153,6 +177,7 @@ ledger = {
  "ruling_refused_because": [f"precondition ({k}) {pre[k]['state']}: {pre[k].get('why', '')}" for k in unmet],
  "p4_preconditions": pre,
  "precondition_b_verification": chk,
+ "precondition_a_verification_agent2": a2,
  "binding_axis": ("positive_supply at measured labels (the unmet precondition needing an external input and survey time): frozen bands need "
                   "L >= 12,855 or M_sc >= 1,515; beside, at delta 0.05, 1,666 or 197; measured labels unread (TNS BLOCKED), Rubin off sky since 2026-07-14"),
  "combination_preview_not_a_ruling": ("with the present readings no axis is in CLOSE (O = 1,937,669 >= 485), and contamination_exposure and tool_coverage "
@@ -165,7 +190,8 @@ ledger = {
                   "unprocessable_units (agent 1 w3). UNDEMONSTRATED: positive and negative measured supply (agent 2 wave 3 pending; TNS BLOCKED). "
                   "P4 refused; ruling null by design; preconditions " + ", ".join(f"({k})" for k in unmet) + " unmet."),
 }
-dump(ledger, f"{OUT}/axis_ledger_v2_against_frozen_bands.json")
-oplog.log("8", f"axis_ledger_v2_against_frozen_bands.json built; precondition (b) {'CLEARED' if b_ok else 'UNMET'} by own verification; unmet {unmet}; no re-band",
-          [f"{OUT}/axis_ledger_v2_against_frozen_bands.json", BANDS, f"{A4W3}/run_log.jsonl", f"{A4W3}/tool_coverage_axis.json", f"{A1W3}/axis_ledger_rubin_v2.json"])
+OUTF = f"{OUT}/axis_ledger_v2_final_against_frozen_bands.json" if FINAL else f"{OUT}/axis_ledger_v2_against_frozen_bands.json"
+dump(ledger, OUTF)
+oplog.log("14" if FINAL else "8", f"axis_ledger_v2_against_frozen_bands.json built; precondition (b) {'CLEARED' if b_ok else 'UNMET'} by own verification; unmet {unmet}; no re-band",
+          [OUTF, BANDS, f"{A4W3}/run_log.jsonl", f"{A4W3}/tool_coverage_axis.json", f"{A1W3}/axis_ledger_rubin_v2.json"])
 print(json.dumps({"b_ok": b_ok, "unmet": unmet, "mism": mism, "rows_before_band": tr["rows_starting_at_or_before_band_hash"], "alert_runs": tr["alert_runs"]}, indent=1))

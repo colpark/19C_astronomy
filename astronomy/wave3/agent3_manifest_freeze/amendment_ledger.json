@@ -284,7 +284,7 @@
    },
    "manifest_version": "v2",
    "recorded_utc": "2026-09-17T00:16:50Z",
-   "applied_to": "domain_manifest_v2_DRAFT.json (NOT FROZEN)"
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
   },
   {
    "id": "AMD-V2-02",
@@ -308,7 +308,7 @@
    },
    "manifest_version": "v2",
    "recorded_utc": "2026-09-17T00:16:50Z",
-   "applied_to": "domain_manifest_v2_DRAFT.json (NOT FROZEN)"
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
   },
   {
    "id": "AMD-V2-03",
@@ -335,7 +335,7 @@
    },
    "manifest_version": "v2",
    "recorded_utc": "2026-09-17T00:16:50Z",
-   "applied_to": "domain_manifest_v2_DRAFT.json (NOT FROZEN)"
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
   },
   {
    "id": "AMD-V2-04",
@@ -359,7 +359,7 @@
    },
    "manifest_version": "v2",
    "recorded_utc": "2026-09-17T00:16:50Z",
-   "applied_to": "domain_manifest_v2_DRAFT.json (NOT FROZEN)"
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
   },
   {
    "id": "AMD-V2-05",
@@ -383,7 +383,7 @@
    },
    "manifest_version": "v2",
    "recorded_utc": "2026-09-17T00:16:50Z",
-   "applied_to": "domain_manifest_v2_DRAFT.json (NOT FROZEN)"
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
   },
   {
    "id": "AMD-V2-06",
@@ -416,7 +416,7 @@
    },
    "manifest_version": "v2",
    "recorded_utc": "2026-09-17T00:16:50Z",
-   "applied_to": "domain_manifest_v2_DRAFT.json (NOT FROZEN)"
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
   },
   {
    "id": "AMD-V2-07",
@@ -441,7 +441,7 @@
    },
    "manifest_version": "v2",
    "recorded_utc": "2026-09-17T00:16:50Z",
-   "applied_to": "domain_manifest_v2_DRAFT.json (NOT FROZEN)"
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
   },
   {
    "id": "AMD-V2-08",
@@ -472,7 +472,7 @@
    },
    "manifest_version": "v2",
    "recorded_utc": "2026-09-17T00:16:50Z",
-   "applied_to": "domain_manifest_v2_DRAFT.json (NOT FROZEN)"
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
   },
   {
    "id": "SU-V2-01",
@@ -501,7 +501,7 @@
    },
    "manifest_version": "v2",
    "recorded_utc": "2026-09-17T00:16:50Z",
-   "applied_to": "domain_manifest_v2_DRAFT.json (NOT FROZEN)"
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
   },
   {
    "id": "SU-V2-02",
@@ -526,12 +526,12 @@
    },
    "manifest_version": "v2",
    "recorded_utc": "2026-09-17T00:16:50Z",
-   "applied_to": "domain_manifest_v2_DRAFT.json (NOT FROZEN)"
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT"
   },
   {
    "id": "PENDING-V2-01",
    "slot": "label_source; positive_supply; negative_supply; PI re-ratification (ruling 1)",
-   "kind": "PENDING input",
+   "kind": "PENDING input: RESOLVED",
    "what": "wave-3 agent 2: track one BLOCKED (TNS); track two census of 2026 TNS spectroscopic classifiers (monthly throughput P per programme) and the truth cost (nights and spectra per night to reach 485 labelled cohort objects at each plausible purity)",
    "cause": "wave-3 brief agent 2 assignment; coordinator has not delivered results",
    "source": {
@@ -541,9 +541,169 @@
    },
    "manifest_version": "v2",
    "recorded_utc": "2026-09-17T00:16:50Z",
-   "applied_to": "domain_manifest_v2_DRAFT.json (NOT FROZEN)"
+   "applied_to": "domain_manifest_v2.json (FROZEN); first applied to v2 DRAFT",
+   "resolved_utc": "2026-09-17T04:00:55Z",
+   "resolved_by": [
+    "SU-V2-03",
+    "SU-V2-04",
+    "SU-V2-05"
+   ],
+   "resolution": "agent 2 handoff (commit 74d012c per coordinator), 5 file hashes verified by agent 3"
+  },
+  {
+   "id": "SU-V2-03",
+   "slot": "label_source",
+   "kind": "SLOT UPDATE (supersession; not a PI ruling)",
+   "before": {
+    "record": {
+     "path": "astronomy/wave2/agent2_label_source/label_source_slot.json",
+     "sha256": "01ef18a98fcfd59fcb75853bbee2f6dd4e3b2d15dd3d80583535699850ce00ce"
+    },
+    "sniascore_bound": [
+     803,
+     2247
+    ],
+    "unresolved": 6156,
+    "status": "UNDEMONSTRATED"
+   },
+   "after": {
+    "record": {
+     "path": "astronomy/wave3/agent2_measured_labels/label_source_slot.json",
+     "sha256": "fdae64921d6749e466932d13ffd0aa4e14359b0a946a31b32bacf9a97ce83719"
+    },
+    "sniascore_bound": [
+     954,
+     2057
+    ],
+    "unresolved": 5815,
+    "rubin_cohort_measured_nonbot": "UNDEMONSTRATED (0 STRONG on 13 readable of 627; 13 existence, classifier unknown)",
+    "status": "UNDEMONSTRATED"
+   },
+   "cause": "wave-3 brief agent 2 assignment (track one BLOCKED, public-archive resume under AMW3-2) and agent 3 assignment 'fold in the wave 2 label slot'",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "Assignments, Agent 2 and Agent 3"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T04:00:55Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN)"
+  },
+  {
+   "id": "SU-V2-04",
+   "slot": "candidates[0].prospective_label_supply_w3",
+   "kind": "SLOT UPDATE: supply P per month recorded as LOWER BOUNDS",
+   "after": {
+    "totals_Jan_Sep": {
+     "spectroscopic_units": 181,
+     "nonbot_units": 161
+    },
+    "exact": "UNDEMONSTRATED"
+   },
+   "cause": "wave-3 brief agent 2 track two (census)",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "Assignments, Agent 2, track two"
+   },
+   "record": {
+    "path": "astronomy/wave3/agent2_measured_labels/supply_P_per_month.json",
+    "sha256": "b028de4a80b30d875358f1594c4a2b6fc3ceda7e4bfadb958debc56c4527b2ce"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T04:00:55Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN)"
+  },
+  {
+   "id": "SU-V2-05",
+   "slot": "pi_reratification_inputs.truth_cost",
+   "kind": "INPUT ATTACHED for PI re-ratification (ruling 1); not a ruling",
+   "after": {
+    "delta_0.018_N_485": {
+     "spectra": [
+      502,
+      644
+     ],
+     "hours": [
+      251.0,
+      322.0
+     ],
+     "nights": [
+      51,
+      144
+     ],
+     "wrong_commitments": [
+      17,
+      122
+     ]
+    },
+    "delta_0.05_N_63": {
+     "spectra": [
+      66,
+      84
+     ],
+     "hours": [
+      33.0,
+      42.0
+     ],
+     "nights": [
+      7,
+      19
+     ],
+     "wrong_commitments": [
+      3,
+      16
+     ]
+    },
+    "delta_0.05_N_1666": {
+     "spectra": [
+      1723,
+      2212
+     ],
+     "hours": [
+      861.5,
+      1106.0
+     ],
+     "nights": [
+      173,
+      492
+     ],
+     "wrong_commitments": [
+      57,
+      420
+     ]
+    }
+   },
+   "cause": "wave-3 brief agent 2 track two ('That number is what truth costs, and it feeds my re-ratification')",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "Assignments, Agent 2, track two"
+   },
+   "record": {
+    "path": "astronomy/wave3/agent2_measured_labels/truth_cost.json",
+    "sha256": "53f229b3deb4137781ce06c80016bdf54dde506e80f06024d129d4feb0b81c6e"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T04:00:55Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN)"
+  },
+  {
+   "id": "FRZ-V2",
+   "slot": "manifest",
+   "kind": "FREEZE v2",
+   "cause": "coordinator finalize instruction after agent 2 handoff; wave-3 brief agent 3 'freeze and hash'",
+   "source": {
+    "path": "astronomy/wave3/PANEL_BRIEF_WAVE3.md",
+    "sha256": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+    "locator": "Assignments, Agent 3"
+   },
+   "manifest_version": "v2",
+   "recorded_utc": "2026-09-17T04:00:55Z",
+   "applied_to": "domain_manifest_v2.json (FROZEN)"
   }
  ],
- "completeness": "v1: every PI decision in PANEL_BRIEF_WAVE2.md 'PI-supplied D5 inputs' (7 bullets) has one entry, plus S (consequence), the graph escalation and the label_source supersession. Slots the brief did not rule on (tau, exposure_key, subject_set, the rest of tool_inventory) have no ratification entry because none was given. v2: wave-3 PI rulings 1-6 each have an entry (budget, S, cost of action, delta override, graph ratification, rulings holder, TNS, decision epoch), plus two fold-ins and one PENDING input (agent 2). v2 entries are DRAFT until v2 freezes.",
- "v2_entries_state": "DRAFT: applied to v2 DRAFT; v2 not frozen; PENDING-V2-01 open"
+ "completeness": "v1: every PI decision in PANEL_BRIEF_WAVE2.md 'PI-supplied D5 inputs' (7 bullets) has one entry, plus S (consequence), the graph escalation and the label_source supersession. Slots the brief did not rule on (tau, exposure_key, subject_set, the rest of tool_inventory) have no ratification entry because none was given. v2: wave-3 PI rulings 1-6 each have an entry (budget, S, cost of action, delta override, graph ratification, rulings holder, TNS, decision epoch), plus fold-ins SU-V2-01..05, PENDING-V2-01 (resolved) and FRZ-V2. Slots with no PI ruling (tau, exposure_key, subject_set) have no ratification entry.",
+ "v2_entries_state": "FINAL: applied to frozen domain_manifest_v2.json",
+ "v2_entries_canonical_sha256": "a1feebcb49883284c27d2a10d5313f21d64f1950085fb1f572d7f2975eb87c49"
 }

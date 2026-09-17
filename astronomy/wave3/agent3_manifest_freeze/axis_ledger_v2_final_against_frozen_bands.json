@@ -1,0 +1,350 @@
+{
+ "candidate": "live time-domain astronomy: Rubin LSST prospective cohort (first detection >= 2026-07-01T00:00 UTC)",
+ "branch": "prediction",
+ "version": "v2 FINAL against frozen bands (agent 3, wave 3, after agent 2 handoff)",
+ "bands": "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md sha256 8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2 (delta 0.018; never re-banded here)",
+ "delta_note": "bands frozen at delta 0.018 (literature prior); PI override 0.05 thresholds reported beside each axis as PLANNING-ONLY (agent 1 w3-09, planning_mde_bracket_w3.csv). Re-banding at 0.05 would be a new hashed registration.",
+ "planning_thresholds": {
+  "delta_0.018_frozen": {
+   "objects": [
+    485,
+    12855
+   ],
+   "nights": [
+    40,
+    1515
+   ]
+  },
+  "delta_0.05_beside": {
+   "objects": [
+    63,
+    1666
+   ],
+   "nights": [
+    6,
+    197
+   ]
+  },
+  "source": "astronomy/wave3/agent1_cohort_finish/rubin_cohort_count.json id w3-09"
+ },
+ "sealed_counts": "sealed/rubin_counts_w3_SEALED.json sha256 737fc0be68d70c32d9a1b548aac0c8ba441f435e0cec33c2c1903916485df4c7",
+ "ruling": null,
+ "ruling_refused_because": [
+  "precondition (a) UNMET: positive_supply and negative_supply: measured P and Ng UNDEMONSTRATED (TNS BLOCKED; agent 2 wave 3: 0 STRONG on 13 readable of 627 cohort captures, 13 typed with classifier unknown, no class split; verified by agent 3 from the handoff files)",
+  "precondition (c) UNMET: label_source slot UNDEMONSTRATED (agent 2 wave 3: BTS SNIascore bound [954, 2057], 5,815 unresolved; Rubin cohort measured supply UNDEMONSTRATED); no PI ratification yet; the re-ratification ruling 1 requires is open, with its inputs now in PI_rerat_packet.md; P and Ng not computed"
+ ],
+ "p4_preconditions": {
+  "a": {
+   "text": "every one of the seven axes carries a number for the Rubin cohort (bands_FROZEN.md section 7)",
+   "state": "UNMET",
+   "why": "positive_supply and negative_supply: measured P and Ng UNDEMONSTRATED (TNS BLOCKED; agent 2 wave 3: 0 STRONG on 13 readable of 627 cohort captures, 13 typed with classifier unknown, no class split; verified by agent 3 from the handoff files)"
+  },
+  "b": {
+   "text": "each axis's band hashed before its count; for tool_coverage a recount after the band hash",
+   "state": "CLEARED",
+   "verified_by": "agent 3 from logs, file hashes and run_log.jsonl timestamps (see precondition_b_verification)",
+   "limits": "timestamps are self-logged by the agents and file mtimes are from the same host; consistency is verified, independent notarisation is not. The supply axes have no count, so (b) is vacuous for them and they fall under (a)."
+  },
+  "c": {
+   "text": "label source ratified at D5, or P and Ng computed from measured labels (section 4)",
+   "state": "UNMET",
+   "why": "label_source slot UNDEMONSTRATED (agent 2 wave 3: BTS SNIascore bound [954, 2057], 5,815 unresolved; Rubin cohort measured supply UNDEMONSTRATED); no PI ratification yet; the re-ratification ruling 1 requires is open, with its inputs now in PI_rerat_packet.md; P and Ng not computed"
+  }
+ },
+ "precondition_b_verification": {
+  "band_hash": {
+   "sha256_now": "8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2",
+   "sha256_logged": "8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2",
+   "logged_utc": "2026-09-16T18:51:26.922781Z",
+   "file_mtime_utc": "2026-09-16T18:51:19.528496+00:00",
+   "file_mode": "0o444",
+   "match": true
+  },
+  "tool_recount": {
+   "protocol_sha256_now": "f32cf288f1fed6be54ed7c4c44fa0ec8012829945a20eedddf3e439ef5df52e6",
+   "protocol_logged": [
+    [
+     "2026-09-16T20:52:25.088956Z",
+     "f32cf288f1fed6be54ed7c4c44fa0ec8012829945a20eedddf3e439ef5df52e6"
+    ],
+    [
+     "2026-09-16T21:40:57.566399Z",
+     "f32cf288f1fed6be54ed7c4c44fa0ec8012829945a20eedddf3e439ef5df52e6"
+    ]
+   ],
+   "sealed_ids_v2_sha256_now": "94c01ce119e68ba38ad420e1bc23aa5199426fe491fcb96828f8fbcef81a50aa",
+   "sealed_ids_v2_logged": [
+    [
+     "2026-09-16T20:53:26.279094Z",
+     "94c01ce119e68ba38ad420e1bc23aa5199426fe491fcb96828f8fbcef81a50aa"
+    ],
+    [
+     "2026-09-16T21:40:57.566399Z",
+     "94c01ce119e68ba38ad420e1bc23aa5199426fe491fcb96828f8fbcef81a50aa"
+    ]
+   ],
+   "run_log_sha256_now": "e97ac1f3bb0df6484d2a3f0c0b0bbc0dc73889378c9678b150731b92f2cf9f56",
+   "run_log_last_logged": [
+    "2026-09-16T21:40:57.566399Z",
+    "e97ac1f3bb0df6484d2a3f0c0b0bbc0dc73889378c9678b150731b92f2cf9f56"
+   ],
+   "axis_sha256_now": "dab4ec1baaa8d3ead3300ed2e4d29c57edb212405a1ee134161777921648a1e0",
+   "axis_logged": [
+    [
+     "2026-09-16T21:40:57.566399Z",
+     "dab4ec1baaa8d3ead3300ed2e4d29c57edb212405a1ee134161777921648a1e0"
+    ]
+   ],
+   "run_log_rows": 198,
+   "alert_runs": 160,
+   "load_rows": 29,
+   "precheck_rows": 9,
+   "earliest_run_start_utc": "2026-09-16T20:55:49.571947+00:00",
+   "latest_run_start_utc": "2026-09-16T21:26:40.754128+00:00",
+   "rows_starting_at_or_before_band_hash": 0,
+   "rows_starting_at_or_before_protocol_freeze": 0,
+   "rows_with_after_band_hash_not_true": 0,
+   "rule_D_cap_250_respected": true,
+   "ghost_voided_runs_AM2": 2,
+   "per_tool_passes_recomputed_vs_axis_mismatches": [],
+   "tools_with_disposition": 25
+  },
+  "cohort_counts_w3": {
+   "count_protocol_logged": [
+    [
+     "2026-09-16T20:16:53.951329Z",
+     "de241fc93a0568af2c0d26634b1d5d4e2b198ebf40ddbe59b27ec9a7acd1b649"
+    ]
+   ],
+   "count_protocol_sha256_now": "de241fc93a0568af2c0d26634b1d5d4e2b198ebf40ddbe59b27ec9a7acd1b649",
+   "sealed_counts_logged": [
+    [
+     "2026-09-16T21:26:13.934353Z",
+     "737fc0be68d70c32d9a1b548aac0c8ba441f435e0cec33c2c1903916485df4c7"
+    ]
+   ],
+   "sealed_counts_sha256_now": "737fc0be68d70c32d9a1b548aac0c8ba441f435e0cec33c2c1903916485df4c7",
+   "protocol_after_band_hash": true,
+   "match": true
+  }
+ },
+ "precondition_a_verification_agent2": {
+  "handoff_hashes_verified": true,
+  "handoff": {
+   "tns_census_2026.json": "c7b035f04fa77b41386555ba1258fcc6624f9fc1b5354aa913fd20a78b7eeaa9",
+   "supply_P_per_month.json": "b028de4a80b30d875358f1594c4a2b6fc3ceda7e4bfadb958debc56c4527b2ce",
+   "truth_cost.json": "53f229b3deb4137781ce06c80016bdf54dde506e80f06024d129d4feb0b81c6e",
+   "truth_cost_table.csv": "8eee9f94b55d5ccad10e32cf721073d729865c442aff662661117a0f703b09a3",
+   "label_source_slot.json": "fdae64921d6749e466932d13ffd0aa4e14359b0a946a31b32bacf9a97ce83719"
+  },
+  "cohort_measured_nonbot_strong": 0,
+  "cohort_measured_population": "627 tier-A cohort-matched objects in sealed enumeration E",
+  "tier_A_cohort_captures_readable": 13,
+  "tier_A_cohort_captures_http_error": 614,
+  "cohort_existence_typed_moderate": 13,
+  "existence_classifier": "UNDEMONSTRATED (12 archived pages 404, 1 403)",
+  "slot_measured_nonbot_status": "UNDEMONSTRATED",
+  "posA_neg_class_split_present": false,
+  "track_one": "BLOCKED",
+  "reading": "P and Ng are not computable: 0 STRONG measured non-bot reports on cohort objects rests on 13 readable captures out of 627 tier-A cohort-matched objects (614 HTTP errors), so it is UNDEMONSTRATED, not zero (global refusal 11); the 13 typed cohort objects have unknown classifiers and fail the bands section 4 non-bot-reporter requirement; no posA/neg split exists. Monthly 2026 throughput is lower bounds over all TNS objects, not cohort labels."
+ },
+ "binding_axis": "positive_supply at measured labels (the unmet precondition needing an external input and survey time): frozen bands need L >= 12,855 or M_sc >= 1,515; beside, at delta 0.05, 1,666 or 197; measured labels unread (TNS BLOCKED), Rubin off sky since 2026-07-14",
+ "combination_preview_not_a_ruling": "with the present readings no axis is in CLOSE (O = 1,937,669 >= 485), and contamination_exposure and tool_coverage are in ESCALATE, so section 7 cannot yield PROCEED even if (a) and (c) clear with the subject set unchanged; stated for the PI, not ruled",
+ "definition_widened": false,
+ "axes": [
+  {
+   "axis": "positive_supply",
+   "disposition": "UNDEMONSTRATED",
+   "at_delta_0p05_planning_only": "PROCEED would need P >= 1 and L >= 1666 or M_sc >= 197; CLOSE would need O < 63 and M_obs < 6; not a band",
+   "value": {
+    "P_measured": "UNDEMONSTRATED (labels are agent 2's; TNS BLOCKED per coordinator preamble)",
+    "O_optimistic_bound": 1937669,
+    "M_obs": 10,
+    "cohort_nights": 9,
+    "M_sc": "UNDEMONSTRATED",
+    "PROCEED_threshold_frozen": {
+     "L": 12855,
+     "M_sc": 1515
+    }
+   },
+   "provenance": [
+    "w3-02",
+    "w3-09"
+   ],
+   "band_frozen_delta_0p018": "UNDEMONSTRATED (P unread); CLOSE excluded (O >= 485)",
+   "thresholds_reported_beside_delta_0p05_PLANNING_ONLY": {
+    "CLOSE_if": "O < 63 and M_obs < 6",
+    "PROCEED_if": "P >= 1 and (L >= 1666 or M_sc >= 197)",
+    "not_a_band": true
+   },
+   "agent2_wave3": "landed and verified: cohort measured non-bot STRONG 0 on 13 readable of 627 captures (UNDEMONSTRATED, not zero); 13 typed cohort objects, classifier unknown; 2026 TNS throughput lower bounds only (non-bot spectroscopic units Jan-Sep >= 161, all objects, not cohort); P remains uncomputable",
+   "source_ledger": "astronomy/wave3/agent1_cohort_finish/axis_ledger_rubin_v2.json sha256 eb0c91624237cba497b8434d2d914c5eef10be9e73380f402fbdae86a6752969"
+  },
+  {
+   "axis": "negative_supply",
+   "disposition": "UNDEMONSTRATED",
+   "value": {
+    "Ng_measured": "UNDEMONSTRATED",
+    "unlabelled_counted_as_negative": 0
+   },
+   "provenance": [
+    "w3-02"
+   ],
+   "band_frozen_delta_0p018": "UNDEMONSTRATED (Ng unread); CLOSE excluded (O >= 485)",
+   "thresholds_reported_beside_delta_0p05_PLANNING_ONLY": {
+    "CLOSE_if": "O < 63 and M_obs < 6",
+    "PROCEED_if": "Ng >= 1 and (L >= 1666 or M_sc >= 197)",
+    "not_a_band": true
+   },
+   "agent2_wave3": "no negative-class (CV/AGN) measured count on cohort objects; 1 typed CV among the 13 existence matches, classifier unknown; Ng uncomputable",
+   "source_ledger": "astronomy/wave3/agent1_cohort_finish/axis_ledger_rubin_v2.json sha256 eb0c91624237cba497b8434d2d914c5eef10be9e73380f402fbdae86a6752969"
+  },
+  {
+   "axis": "contamination_exposure",
+   "disposition": "PASS (counted)",
+   "value": {
+    "E_first_detected_after_every_demonstrated_cutoff": 1937669,
+    "S0_excluded_loci": 112990,
+    "S1_excluded": 521920,
+    "sample_loci_with_alert_history_before_T0_at_position_ANTARES": "193/9000 (gaps 11.97-2942.82 d; 3 within 60 d)"
+   },
+   "note": "the ANTARES older-alert loci are a listed leak (public alerts at the position before the cutoff), not S1 under the Rubin-diaObject definition",
+   "provenance": [
+    "w3-02",
+    "w3-05",
+    "w3-07"
+   ],
+   "band_frozen_delta_0p018": "ESCALATE (a subject lacks a published cutoff: Gemini 3.1 Pro)",
+   "thresholds_reported_beside_delta_0p05_PLANNING_ONLY": {
+    "PROCEED_if": "every subject has a published cutoff and E-labelled >= 1666 (or 197 usable nights)",
+    "not_a_band": true
+   },
+   "band_note_agent3": "ESCALATE holds at either delta: Gemini 3.1 Pro (preview) has no published cutoff and the subject set is unratified (manifest subject_set DERIVED).",
+   "source_ledger": "astronomy/wave3/agent1_cohort_finish/axis_ledger_rubin_v2.json sha256 eb0c91624237cba497b8434d2d914c5eef10be9e73380f402fbdae86a6752969"
+  },
+  {
+   "axis": "tool_coverage",
+   "disposition": "PASS (counted after the band hash; verified by agent 3)",
+   "band_frozen_delta_0p018": "ESCALATE",
+   "band_derivation": "bands_FROZEN.md section 6 tool_coverage. CLOSE needs no FM/deep channel accepting inputs the v11.1 packet carries: CATS accepted them (5/10 non-default) -> not CLOSE. PROCEED needs >= 1 FM/deep channel verified on Rubin alerts AND >= 1 classical counterpart verified for each such channel: CATS's Rubin counterparts (Fink_EarlySNIa_RF, Fink_SLSN_RF; unchanged by AMD-V1-03, which re-mapped ATAT/Astromer1/Astromer2) both FAIL at emit on 10/10 -> not PROCEED. Hence ESCALATE. The reading is the same whether or not JSON rows count as 'verified on Rubin alerts' (if they do not, no FM channel is verified, and CLOSE still does not fire because CATS accepts the inputs).",
+   "thresholds_reported_beside_delta_0p05_PLANNING_ONLY": "tool_coverage band has no delta-dependent threshold; identical at 0.05",
+   "value": {
+    "counts_by_group_and_disposition": {
+     "FM/deep": {
+      "PASS": 1,
+      "FAIL": 9,
+      "UNDEMONSTRATED": 5
+     },
+     "classical": {
+      "PASS": 1,
+      "FAIL": 5,
+      "UNDEMONSTRATED": 4
+     },
+     "all": {
+      "PASS": 2,
+      "FAIL": 14,
+      "UNDEMONSTRATED": 9
+     }
+    },
+    "pass_tools": {
+     "CATS (FM/deep)": "5/10",
+     "GHOST (classical, counterpart of AstroCLIP which is UNDEMONSTRATED)": "3/8 valid (2 voided under AM2)"
+    },
+    "packet_format_qualifier": "No public endpoint served lsst v11_1 Avro packets (Fink /api/v1/sources output-format=avro -> HTTP 400 'Output format avro is not supported. Choose among json, csv, votable, or parquet'). Every run used public Fink LSST API JSON rows carrying lsst v11_1 field names (r: columns), values unchanged. No tool was run on v11_1 Avro packets.",
+    "remapped_rows_after_AMD-V1-03": {
+     "ATAT": {
+      "rubin_counterparts": [
+       "Fink_EarlySNIa_RF",
+       "Fink_SLSN_RF"
+      ],
+      "disposition": "UNDEMONSTRATED"
+     },
+     "Astromer1": {
+      "rubin_counterparts": [
+       "Fink_EarlySNIa_RF",
+       "Fink_SLSN_RF"
+      ],
+      "disposition": "FAIL"
+     },
+     "Astromer2": {
+      "rubin_counterparts": [
+       "Fink_EarlySNIa_RF",
+       "Fink_SLSN_RF"
+      ],
+      "disposition": "FAIL"
+     }
+    }
+   },
+   "disagreements": [
+    "wave-3 coordinator preamble item 5: 'If lsst v11_1 packets cannot be retrieved publicly ... no substitute format is improvised'. Agent 4 ran on Fink LSST API JSON rows carrying v11_1 field names (Avro returns HTTP 400) and carries a qualifier. Whether JSON rows are an improvised substitute format is listed, not reconciled; the band reading does not depend on it.",
+    "agent 4 disagreement 12: Rubin off sky since 2026-07-14, cohort objects have 1-3 diaSources, so the Fink RF FAIL at emit measures the stream as much as the tools.",
+    "tool_coverage_axis.json population says 158 alert runs logged; run_log.jsonl has 160 alert-run rows (158 plus 2 voided GHOST runs); REPORT.md says 160.",
+    "AstroM3: wave-1 inventory UNAVAILABLE (no weights); weights now public on HF (AstroMLCore rev 8904ed33). Wave-1 count not changed."
+   ],
+   "provenance": [
+    "astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json sha256 dab4ec1baaa8d3ead3300ed2e4d29c57edb212405a1ee134161777921648a1e0",
+    "astronomy/wave3/agent4_tool_recount/run_log.jsonl sha256 e97ac1f3bb0df6484d2a3f0c0b0bbc0dc73889378c9678b150731b92f2cf9f56"
+   ]
+  },
+  {
+   "axis": "cluster_structure",
+   "disposition": "PASS",
+   "value": {
+    "alerce_oids": 1937720,
+    "merged_objects": 1937669,
+    "raw_detections": 2418954,
+    "detections_overstatement_pct": 24.84,
+    "fink_raw_alerts": 3511022,
+    "fink_first_detection_bracket": [
+     1773044,
+     2018299
+    ],
+    "antares_loci": 1908703
+   },
+   "note": "every broker count lies in the same band (O >= 485 and >= 12,855)",
+   "provenance": [
+    "w3-01",
+    "w3-02",
+    "w3-03"
+   ],
+   "band_frozen_delta_0p018": "PROCEED",
+   "thresholds_reported_beside_delta_0p05_PLANNING_ONLY": "same band at 0.05: every broker count >= 1666 and >= 63",
+   "source_ledger": "astronomy/wave3/agent1_cohort_finish/axis_ledger_rubin_v2.json sha256 eb0c91624237cba497b8434d2d914c5eef10be9e73380f402fbdae86a6752969"
+  },
+  {
+   "axis": "split_integrity",
+   "disposition": "PASS",
+   "value": {
+    "S1_total": 521920,
+    "S1_merge": 1,
+    "fink_alert_history_first_before_T0_sample": "0/8986",
+    "O_minus_all_listed_worst_case": 1896117
+   },
+   "note": "S1 objects are outside O by definition; O minus the sample-scaled ANTARES older-locus share is still >= 12,855, so the band is unchanged. PPDB-only DIASources UNDEMONSTRATED (can only lower O; >= 99.34 percent would be needed to change band)",
+   "provenance": [
+    "w3-05",
+    "w3-07",
+    "w3-08"
+   ],
+   "band_frozen_delta_0p018": "PROCEED",
+   "thresholds_reported_beside_delta_0p05_PLANNING_ONLY": "same band at 0.05: O minus listed objects >= 1666",
+   "source_ledger": "astronomy/wave3/agent1_cohort_finish/axis_ledger_rubin_v2.json sha256 eb0c91624237cba497b8434d2d914c5eef10be9e73380f402fbdae86a6752969"
+  },
+  {
+   "axis": "unprocessable_units",
+   "disposition": "PASS",
+   "value": {
+    "U": 0,
+    "rows_checked": 3527572,
+    "coverage_limit_non_fink_dates": "UNDEMONSTRATED (HTTP 504), independent sources show no observations"
+   },
+   "provenance": [
+    "w3-06"
+   ],
+   "band_frozen_delta_0p018": "PROCEED",
+   "thresholds_reported_beside_delta_0p05_PLANNING_ONLY": "same band at 0.05 (U = 0)",
+   "source_ledger": "astronomy/wave3/agent1_cohort_finish/axis_ledger_rubin_v2.json sha256 eb0c91624237cba497b8434d2d914c5eef10be9e73380f402fbdae86a6752969"
+  }
+ ],
+ "completeness": "Seven axes for the Rubin cohort against bands_FROZEN.md (delta 0.018) with 0.05 thresholds beside. Numbers: contamination (E 1,937,669), tool_coverage (2 PASS / 14 FAIL / 9 UNDEMONSTRATED, recount after band hash, verified), cluster_structure, split_integrity, unprocessable_units (agent 1 w3). UNDEMONSTRATED: positive and negative measured supply (agent 2 wave 3 pending; TNS BLOCKED). P4 refused; ruling null by design; preconditions (a), (c) unmet."
+}

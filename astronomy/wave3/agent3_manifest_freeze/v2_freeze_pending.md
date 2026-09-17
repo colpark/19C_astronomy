@@ -1,3 +1,5 @@
+> **RESOLVED 2026-09-17 (log step 15):** the agent 2 handoff arrived, hashes verified. v2 FROZEN as domain_manifest_v2.json (fba4259b...2cedd5). This file is kept as the pre-handoff record.
+
 # v2 freeze: pending
 
 **v2 is NOT frozen.** `domain_manifest_v2_DRAFT.json` has `frozen_hash: ""`, and validate.py FAILs on that field alone (by design). v1 is frozen and unchanged: `ca00efe05b7562237839259a50597e7c2825292e3f4ccf84444607c50c3cbae8`.
