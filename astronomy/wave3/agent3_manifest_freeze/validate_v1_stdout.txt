@@ -1,0 +1,9 @@
+== validate.py ledger --kind domain_manifest (v1) ==
+PASS astronomy/wave3/agent3_manifest_freeze/domain_manifest_v1.json
+exit=0
+== schema_check (v1) ==
+PASS astronomy/wave3/agent3_manifest_freeze/domain_manifest_v1.json
+exit=0
+== verify_hash (v1) ==
+MATCH astronomy/wave3/agent3_manifest_freeze/domain_manifest_v1.json stored=ca00efe05b7562237839259a50597e7c2825292e3f4ccf84444607c50c3cbae8 recomputed=ca00efe05b7562237839259a50597e7c2825292e3f4ccf84444607c50c3cbae8
+exit=0
