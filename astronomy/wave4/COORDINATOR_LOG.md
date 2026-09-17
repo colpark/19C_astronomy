@@ -6,4 +6,4 @@
 - agent5_integrity_closeout: 13.5 min, 44 tool calls
 - agent4_module_v: 52.4 min, 122 tool calls
 - V share so far: 47% of wall time, 59% of tool calls. Cap is 15% (ruling 5).
-- Interim disposition: **cap exceeded (FAIL)** on both measures. Agents 1 and 3 still have to run and will dilute the share, but they cannot bring it under 15% unless they cost more than about 5.5 times the wave so far. Rework inside V: about 22 tool calls (the label parse defects and the invariance comparator). The source is the harness usage records, not agent self-report.
+- Interim disposition: **cap exceeded (FAIL)** on both measures. Agents 1 and 3 still have to run and will dilute the share, but they cannot bring it under 15% unless together they add at least about 2.2 times the wave so far in wall time (about 239 more minutes) and 2.9 times in tool calls (about 606 more calls). [Corrected: an earlier line said about 5.5 times, which was an arithmetic error.]. Rework inside V: about 22 tool calls (the label parse defects and the invariance comparator). The source is the harness usage records, not agent self-report.
