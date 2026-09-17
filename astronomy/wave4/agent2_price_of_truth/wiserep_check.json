@@ -1,0 +1,96 @@
+{
+ "banner": "Ruling 3 sanctioned channel; rule C sealed before read; calibration/planning only",
+ "status": "BLOCKED",
+ "status_reason": "live www.wiserep.org returns HTTP 403 (server awselb/2.0) on /, /search, /object/2026uxs, /robots.txt, /api/objects; wiserep.org (no www) no response; Internet Archive has no capture of any of the 43 sealed object pages (HTTP 404 after AMW4-1 retries), including all 10 non-cohort positive controls; archived home pages 2025-05-22, 2026-06-06, 2026-09-04 are the site's own 403 page (118 bytes)",
+ "sealed": {
+  "lookup": {
+   "file": "sealed/wiserep_lookup_SEALED.json",
+   "sha256": "ea8fffefb9c48ce5ccd2f9ef305e43212f9dae506de30df4fe29315f0bc31818"
+  },
+  "predictions": {
+   "file": "sealed/wiserep_predictions_SEALED.json",
+   "sha256": "1442bcdb62ac633d90646845a103e67b362055ef6be70a16b989ef1a62d872e4"
+  }
+ },
+ "live_responses": [
+  "2026-09-17T13:22:39Z WISEREP 403 118 https://www.wiserep.org/ server: awselb/2.0",
+  "2026-09-17T13:22:42Z WISEREP 000 0 https://wiserep.org/",
+  "2026-09-17T13:22:44Z WISEREP 403 118 https://www.wiserep.org/search server: awselb/2.0",
+  "2026-09-17T13:22:47Z WISEREP 403 118 https://www.wiserep.org/object/2026uxs server: awselb/2.0",
+  "2026-09-17T13:22:49Z WISEREP 403 118 https://www.wiserep.org/robots.txt server: awselb/2.0",
+  "2026-09-17T13:22:52Z WISEREP 403 118 https://www.wiserep.org/api/objects server: awselb/2.0",
+  "2026-09-17T13:22:55Z WISEREP 302 0 https://web.archive.org/web/20260916id_/https://www.wiserep.org/ server: nginx location: https://web.archive.org/web/20260904211343id_/https://www.wiserep.org/ server-timing: captures_list;dur=0.464907, exclusion.robots;dur=0.032593, exclusion.robots.policy;dur=0.021964, esindex;dur=0.006992, cdx.remote;dur=89.238050, LoadShardBlock;dur=658.076204, PetaboxLoader3.resolve;dur=291.422367, PetaboxLoader3.datanode;dur=266.846775 server-timing: TR;dur=0,Tw;dur=0,Tc;dur=2 server-timing: MISS",
+  "2026-09-17T13:22:57Z WISEREP 404 4615 https://web.archive.org/web/20260916id_/https://www.wiserep.org/object/2026uxs server: nginx server-timing: captures_list;dur=0.570810, exclusion.robots;dur=0.042352, exclusion.robots.policy;dur=0.031206, esindex;dur=0.009803, cdx.remote;dur=24.640552, LoadShardBlock;dur=200.616087, PetaboxLoader3.datanode;dur=87.456681, PetaboxLoader3.resolve;dur=29.984417 server-timing: TR;dur=0,Tw;dur=0,Tc;dur=1",
+  "2026-09-17T13:23:08Z WISEREP-ARCHIVE 20260904211343 -> 403 https://web.archive.org/web/20260904211343id_/https://www.wiserep.org/ 118",
+  "2026-09-17T13:23:12Z WISEREP-ARCHIVE 20260601 -> 403 https://web.archive.org/web/20260606133141id_/https://www.wiserep.org/ 118",
+  "2026-09-17T13:23:16Z WISEREP-ARCHIVE 20260101 -> 200 https://web.archive.org/web/20260101215128id_/https://www.wiserep.org/ 13166",
+  "2026-09-17T13:23:20Z WISEREP-ARCHIVE 20250601 -> 403 https://web.archive.org/web/20250522124955id_/https://www.wiserep.org/ 118"
+ ],
+ "archive_object_pages": {
+  "counts_by_group": {
+   "typed_cohort": {
+    "404": 13
+   },
+   "untyped_cohort_sample": {
+    "404": 20
+   },
+   "positive_controls_noncohort": {
+    "404": 10
+   }
+  },
+  "detail_file": "out/wiserep_archive_probe.json",
+  "detail_sha256": "309782b31f4612313d823a837d2bc403402f445f34550e6c665916f16700f0c1"
+ },
+ "republication_provenance": {
+  "source": "Internet Archive capture 20260101215128 of https://www.wiserep.org/ (sources/wiserep/home_20260101.html sha256 2d808343f3cbd1f34c0f5dba7e1712e47d0daba9ae63e64d60498c643f7fd1a6; read in full)",
+  "stated": [
+   "WISeREP 'serves as an archive of SN spectra and photometry, including both historical (legacy) data and data that are accumulated by ongoing modern surveys and programs'",
+   "'In the new WISeREP v2, everyone can contribute and upload data (spectra / photometry / related-files) directly, either via the Report webpage or via the Bulk APIs' (registered accounts; groups = survey/program)",
+   "counts at capture: No. of Spectra 70387; No. of Objects 28278; Obj. w. Spectra 26838; Public Spectra 57771"
+  ],
+  "hosts_own_spectra": "YES per the capture (uploaded by registered users/groups)",
+  "mirrors_TNS_classifications": "UNDEMONSTRATED (the capture does not state whether object types are taken from TNS; no object page readable)",
+  "uploader_identity": "UNDEMONSTRATED (no object page readable)"
+ },
+ "can_establish_if_reachable": [
+  "existence of a public spectrum for an object",
+  "the uploading user/group and instrument, as displayed",
+  "the object type as displayed (not its provenance)"
+ ],
+ "cannot_establish_even_if_reachable": [
+  "classifier identity for the TNS classification report",
+  "human vs bot classification (upload by a group account does not identify who or what classified)",
+  "correctness of the TNS label",
+  "absence of a spectrum (no page != no spectrum)"
+ ],
+ "established_this_wave": "nothing per object: existence of a spectrum UNDEMONSTRATED for all 13 typed cohort objects, 20 sampled cohort objects and 10 controls",
+ "premise_check": "the check cannot fire positive on the 10 non-cohort controls that TNS/Rochester show as classified in 2026, so its silence on cohort objects carries no information (would-it-fail-if-false: yes, it fails regardless)",
+ "predictions_vs_outcome": {
+  "live_reachable": "predicted 403 (p reachable 0.2) -> 403",
+  "wayback_typed_captures": "predicted 2 [0,13] -> 0",
+  "conditional_predictions": "not adjudicable (unreachable)"
+ },
+ "undemonstrated_and_blocks": [
+  {
+   "item": "measured-label existence (public spectrum) for Rubin cohort objects",
+   "blocks": "P3 positive_supply at measured labels; P4 precondition (a); agent-1 escalation option 1 price offset L"
+  },
+  {
+   "item": "human vs bot classifier for the 13 typed cohort objects",
+   "blocks": "ruling-4 human-confirmed-only count on the cohort; any future paid claim"
+  }
+ ],
+ "track_one": {
+  "status": "BLOCKED (second record)",
+  "request_dates": [
+   "2026-09-16",
+   "2026-09-17"
+  ],
+  "presence_checks": [
+   "coordinator 2026-09-16T20:13:38Z ABSENT",
+   "agent 2026-09-17T00:06Z ABSENT",
+   "coordinator 2026-09-17T13:13:17Z ABSENT",
+   "agent 2026-09-17T13:15Z ABSENT"
+  ]
+ }
+}

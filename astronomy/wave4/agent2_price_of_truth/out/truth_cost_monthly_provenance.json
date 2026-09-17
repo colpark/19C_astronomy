@@ -1,0 +1,131 @@
+[
+ {
+  "id": "w4a2-monthly-delta_0.05_N_63",
+  "value": {
+   "months_after_return": [
+    1,
+    2
+   ],
+   "spectra": [
+    66,
+    84
+   ],
+   "P60_hours": [
+    33.0,
+    42.0
+   ],
+   "p60_usable_nights": [
+    7,
+    19
+   ],
+   "wrong_commitments": [
+    3,
+    16
+   ]
+  },
+  "referent": "calendar months after Rubin return (and spectra, hours, P60 usable nights, wrong commitments) to reach delta 0.05 N 63 correctly labelled positive cohort objects",
+  "source": "astronomy/wave4/agent2_price_of_truth/scripts/price_monthly.py; calendar_model_FROZEN.md sha256 a681d81a8c0e25fa6885096e9ad01bd114fbfa768f67c8a683182b23629227e6; out/irsa_nights.jsonl sha256 d432b1edfb2ff4408c883e54946bf6acfe092b11bab9f1253109a77add36f724; wave3 truth_cost_table.csv sha256 8eee9f94b55d5ccad10e32cf721073d729865c442aff662661117a0f703b09a3",
+  "population": "Rubin cohort (agent-1 O=1,937,669 merged objects, first detection >= 2026-07-01); grids p {0.81..0.967}, s {0.93,1.0}, c {4.5,8,10}; return months 2026-10..2027-09; L=0",
+  "adjudicator": "a dedicated P60-class program's measured spectra per calendar month on Rubin-selected targets, and the actual Rubin return date (neither exists)",
+  "falsifier": "a rerun of price_monthly.py on the same frozen inputs returning different ranges, or a measured P60 usable-night fraction per month outside the 2021-2024 P48 year range"
+ },
+ {
+  "id": "w4a2-monthly-delta_0.05_N_1666",
+  "value": {
+   "months_after_return": [
+    8,
+    28
+   ],
+   "spectra": [
+    1723,
+    2212
+   ],
+   "P60_hours": [
+    861.5,
+    1106.0
+   ],
+   "p60_usable_nights": [
+    173,
+    492
+   ],
+   "wrong_commitments": [
+    57,
+    420
+   ]
+  },
+  "referent": "calendar months after Rubin return (and spectra, hours, P60 usable nights, wrong commitments) to reach delta 0.05 N 1666 correctly labelled positive cohort objects",
+  "source": "astronomy/wave4/agent2_price_of_truth/scripts/price_monthly.py; calendar_model_FROZEN.md sha256 a681d81a8c0e25fa6885096e9ad01bd114fbfa768f67c8a683182b23629227e6; out/irsa_nights.jsonl sha256 d432b1edfb2ff4408c883e54946bf6acfe092b11bab9f1253109a77add36f724; wave3 truth_cost_table.csv sha256 8eee9f94b55d5ccad10e32cf721073d729865c442aff662661117a0f703b09a3",
+  "population": "Rubin cohort (agent-1 O=1,937,669 merged objects, first detection >= 2026-07-01); grids p {0.81..0.967}, s {0.93,1.0}, c {4.5,8,10}; return months 2026-10..2027-09; L=0",
+  "adjudicator": "a dedicated P60-class program's measured spectra per calendar month on Rubin-selected targets, and the actual Rubin return date (neither exists)",
+  "falsifier": "a rerun of price_monthly.py on the same frozen inputs returning different ranges, or a measured P60 usable-night fraction per month outside the 2021-2024 P48 year range"
+ },
+ {
+  "id": "w4a2-monthly-delta_0.018_N_485",
+  "value": {
+   "months_after_return": [
+    2,
+    9
+   ],
+   "spectra": [
+    502,
+    644
+   ],
+   "P60_hours": [
+    251.0,
+    322.0
+   ],
+   "p60_usable_nights": [
+    51,
+    144
+   ],
+   "wrong_commitments": [
+    17,
+    122
+   ]
+  },
+  "referent": "calendar months after Rubin return (and spectra, hours, P60 usable nights, wrong commitments) to reach delta 0.018 N 485 correctly labelled positive cohort objects",
+  "source": "astronomy/wave4/agent2_price_of_truth/scripts/price_monthly.py; calendar_model_FROZEN.md sha256 a681d81a8c0e25fa6885096e9ad01bd114fbfa768f67c8a683182b23629227e6; out/irsa_nights.jsonl sha256 d432b1edfb2ff4408c883e54946bf6acfe092b11bab9f1253109a77add36f724; wave3 truth_cost_table.csv sha256 8eee9f94b55d5ccad10e32cf721073d729865c442aff662661117a0f703b09a3",
+  "population": "Rubin cohort (agent-1 O=1,937,669 merged objects, first detection >= 2026-07-01); grids p {0.81..0.967}, s {0.93,1.0}, c {4.5,8,10}; return months 2026-10..2027-09; L=0",
+  "adjudicator": "a dedicated P60-class program's measured spectra per calendar month on Rubin-selected targets, and the actual Rubin return date (neither exists)",
+  "falsifier": "a rerun of price_monthly.py on the same frozen inputs returning different ranges, or a measured P60 usable-night fraction per month outside the 2021-2024 P48 year range"
+ },
+ {
+  "id": "w4a2-monthly-delta_0.018_N_12855",
+  "value": {
+   "months_after_return": [
+    70,
+    115
+   ],
+   "spectra": [
+    13294,
+    17065
+   ],
+   "P60_hours": [
+    6647.0,
+    8532.5
+   ],
+   "p60_usable_nights": [
+    1330,
+    3793
+   ],
+   "wrong_commitments": [
+    439,
+    3242
+   ]
+  },
+  "referent": "calendar months after Rubin return (and spectra, hours, P60 usable nights, wrong commitments) to reach delta 0.018 N 12855 correctly labelled positive cohort objects",
+  "source": "astronomy/wave4/agent2_price_of_truth/scripts/price_monthly.py; calendar_model_FROZEN.md sha256 a681d81a8c0e25fa6885096e9ad01bd114fbfa768f67c8a683182b23629227e6; out/irsa_nights.jsonl sha256 d432b1edfb2ff4408c883e54946bf6acfe092b11bab9f1253109a77add36f724; wave3 truth_cost_table.csv sha256 8eee9f94b55d5ccad10e32cf721073d729865c442aff662661117a0f703b09a3",
+  "population": "Rubin cohort (agent-1 O=1,937,669 merged objects, first detection >= 2026-07-01); grids p {0.81..0.967}, s {0.93,1.0}, c {4.5,8,10}; return months 2026-10..2027-09; L=0",
+  "adjudicator": "a dedicated P60-class program's measured spectra per calendar month on Rubin-selected targets, and the actual Rubin return date (neither exists)",
+  "falsifier": "a rerun of price_monthly.py on the same frozen inputs returning different ranges, or a measured P60 usable-night fraction per month outside the 2021-2024 P48 year range"
+ },
+ {
+  "id": "w4a2-U-annual-mean",
+  "value": 0.6169,
+  "referent": "mean fraction of calendar nights per month usable at Palomar (P48 science-exposure proxy, usable = >=0.5 x monthly p90 nightly rows)",
+  "source": "astronomy/wave4/agent2_price_of_truth/scripts/irsa_nights.py; IRSA TAP ztf.ztf_current_meta_sci; out/irsa_nights.jsonl sha256 d432b1edfb2ff4408c883e54946bf6acfe092b11bab9f1253109a77add36f724",
+  "population": "1,461 calendar nights 2021-01-01..2024-12-31 (48 month queries, all HTTP 200)",
+  "adjudicator": "P60/SEDM observing logs (not public)",
+  "falsifier": "a rerun of the declared IRSA queries returning different nightly counts, or P60/SEDM logs showing a usable fraction outside the P48 year-to-year range"
+ }
+]

@@ -1,0 +1,48 @@
+{
+ "calendar_model_sha256": "a681d81a8c0e25fa6885096e9ad01bd114fbfa768f67c8a683182b23629227e6",
+ "written": "before any WISeREP content read",
+ "predictions": {
+  "wiserep_live_reachable": {
+   "p": 0.2,
+   "point": "HTTP 403 (as wave 3)"
+  },
+  "wayback_captures_exist_for_typed_cohort_object_pages": {
+   "point": 2,
+   "range": [
+    0,
+    13
+   ]
+  },
+  "if_reachable_typed_cohort_with_public_spectrum": {
+   "point": 8,
+   "range": [
+    0,
+    13
+   ]
+  },
+  "if_reachable_positive_controls_with_spectrum": {
+   "point": 8,
+   "range": [
+    3,
+    10
+   ]
+  },
+  "if_reachable_uploader_shows_classifier_human_vs_bot": {
+   "point": "no (group only)"
+  },
+  "IRSA_U_annual_mean": {
+   "point": 0.7,
+   "range": [
+    0.5,
+    0.85
+   ]
+  },
+  "months_to_N485_at_c8_p0.93_s0.93": {
+   "point": 3,
+   "range": [
+    2,
+    6
+   ]
+  }
+ }
+}

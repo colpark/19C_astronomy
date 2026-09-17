@@ -1,0 +1,88 @@
+{
+ "owner": "wave4/agent2_price_of_truth",
+ "stage": "P7-adjacent planning price per month (both deltas); P3 measured-label existence (WISeREP, ruling 3); D4 label_source track one (BLOCKED)",
+ "completeness": "Inventory, not a completeness claim. READ IN FULL: Cenko+2006 astro-ph/0608323 (text; tables not extractable), WISeREP home capture 2026-01-01. PARSED BY SCRIPT: IRSA TAP nightly P48 science-row counts for 48 months 2021-2024; 43 archived WISeREP object-page probes (all 404). GREPPED ONLY, not decision inputs: Bellm+2019 arXiv:1905.02209 (no weather statistics found), Blagorodnova+2018 arXiv:1710.02917 (no monthly weather statistics; 'average rate of 10 spectra per night' line 1833 seen, not used). BLOCKED: live www.wiserep.org (HTTP 403 awselb on 5 paths), TNS API (no TNS_API_KEY; second BLOCKED record). REUSED READ-ONLY: wave-3 truth_cost_table.csv, supply_P_per_month.json, reachability.json, enumeration_E_SEALED.json; agent-1 nights_observed.json. Unresolved: P60/SEDM-specific downtime; Palomar/Cerro Pachon sky overlap; Rubin return date; WISeREP TNS-mirroring and uploader identity; rare-event miss rate M.",
+ "seeds": [
+  {
+   "id": "Cenko et al. 2006, The Automated Palomar 60-Inch Telescope (arXiv:astro-ph/0608323)",
+   "file": "sources/astro-ph_0608323.pdf (sha256 09bc2735734edb63735bfcbb705a6f0b3b7076fc0ca3a8fee0e1f530cf4aa71c), text .raw.txt",
+   "read_in_full": true,
+   "contribution": "qualitative seasonality of Palomar usable nights (supports seasonal U(m)); no numbers used",
+   "facts": [
+    {
+     "fact": "Observing conditions at Palomar are highly seasonally dependent. In the summer months, it is rare to lose an entire night due to weather ... the P60 was closed for 15 full nights in January 2005",
+     "locator": "sec 4.2, raw lines 819-822"
+    },
+    {
+     "fact": "P60 devotes on average ~50% of the time the dome is open to science exposures",
+     "locator": "sec 4.3, raw line 848"
+    }
+   ]
+  },
+  {
+   "id": "IRSA TAP ztf.ztf_current_meta_sci (ZTF P48 science exposure metadata)",
+   "file": "out/irsa_nights.jsonl (sha256 d432b1edfb2ff4408c883e54946bf6acfe092b11bab9f1253109a77add36f724); query text per month inside",
+   "read_in_full": true,
+   "contribution": "U(m): usable-night fraction per calendar month, Palomar site proxy (MODERATE)",
+   "facts": [
+    {
+     "fact": "U by month (mean 2021-2024): Jan 0.339, Feb 0.470, Mar 0.298, Apr 0.700, May 0.742, Jun 0.842, Jul 0.831, Aug 0.750, Sep 0.750, Oct 0.669, Nov 0.617, Dec 0.395; annual mean 0.617",
+     "locator": "truth_cost_monthly.json inputs.U_by_calendar_month"
+    },
+    {
+     "fact": "2021-12, 2022-01, 2022-03 have 2, 2, 4 nights with rows (likely P48 downtime, not only weather)",
+     "locator": "truth_cost_monthly.json inputs.irsa_detail"
+    }
+   ]
+  },
+  {
+   "id": "WISeREP home page, Internet Archive capture 20260101215128",
+   "file": "sources/wiserep/home_20260101.html (sha256 2d808343f3cbd1f34c0f5dba7e1712e47d0daba9ae63e64d60498c643f7fd1a6), .txt",
+   "read_in_full": true,
+   "contribution": "republication provenance: hosts own spectra uploaded by registered users/groups via Report page or Bulk APIs; 70,387 spectra, 57,771 public; TNS mirroring not stated",
+   "facts": [
+    {
+     "fact": "everyone can contribute and upload data (spectra / photometry / related-files) directly, either via the Report webpage or via the Bulk APIs",
+     "locator": "home_20260101.txt, Getting started paragraph"
+    },
+    {
+     "fact": "No. of Spectra 70387; No. of Objects 28278; Obj. w. Spectra 26838; Public Spectra 57771",
+     "locator": "home_20260101.txt counts block"
+    }
+   ]
+  },
+  {
+   "id": "Bellm et al. 2019, ZTF Surveys and Scheduler (arXiv:1905.02209)",
+   "file": "sources/1905.02209.pdf (sha256 2552af99611b3772efbec5208643500069bce0f060f4650b541121364db5118a)",
+   "read_in_full": false,
+   "contribution": "zero (grep for weather statistics found none); blocks nothing",
+   "facts": []
+  },
+  {
+   "id": "Blagorodnova et al. 2018, The SED Machine (arXiv:1710.02917)",
+   "file": "sources/1710.02917.pdf (sha256 2ab0c0cc3d1921928d942f7299e4889f57f404678ff34763d85ee32de56e9fed)",
+   "read_in_full": false,
+   "contribution": "zero as decision input; corroborating statement 'average rate of 10 spectra per night' (line 1833) not used because not read in full",
+   "facts": []
+  },
+  {
+   "id": "agent-1 wave-3 nights_observed.json",
+   "file": "astronomy/wave3/agent1_cohort_finish/out/nights_observed.json",
+   "read_in_full": true,
+   "contribution": "f_R = 10/15 scheduler science nights 2026-06-29..07-13 (alt 11/16 Fink)",
+   "facts": [
+    {
+     "fact": "nights_with_science_visits_scheduler: 10 nights between 2026-06-29 and 2026-07-13",
+     "locator": "key nights_with_science_visits_scheduler"
+    }
+   ]
+  },
+  {
+   "id": "wave-3 agent-2 outputs (read-only)",
+   "file": "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv, supply_P_per_month.json, out/reachability.json, sealed/enumeration_E_SEALED.json",
+   "read_in_full": true,
+   "contribution": "grids, spectra counts (asserted equal), lower-bound TNS rates, A_night CP95 lower 335, lookup names",
+   "facts": []
+  }
+ ]
+}

@@ -1,0 +1,53 @@
+{
+ "calendar_model_sha256": "a681d81a8c0e25fa6885096e9ad01bd114fbfa768f67c8a683182b23629227e6",
+ "typed_cohort": [
+  "2026rwk",
+  "2026srp",
+  "2026stj",
+  "2026stu",
+  "2026tim",
+  "2026trp",
+  "2026tzm",
+  "2026uii",
+  "2026uvw",
+  "2026uwo",
+  "2026uxs",
+  "2026uyc",
+  "2026vpl"
+ ],
+ "untyped_cohort_sample": [
+  "2026tur",
+  "2026tkt",
+  "2026urn",
+  "2026uiu",
+  "2026ryt",
+  "2026tkh",
+  "2026vkm",
+  "2026ujp",
+  "2026teq",
+  "2026upc",
+  "2026tif",
+  "2026tgv",
+  "2026usd",
+  "2026rwa",
+  "2026ryb",
+  "2026rvy",
+  "2026tew",
+  "2026voj",
+  "2026uqx",
+  "2026tgp"
+ ],
+ "positive_controls_noncohort": [
+  "2026fsw",
+  "2026mkv",
+  "2026qbk",
+  "2026zkv",
+  "2026jrc",
+  "2026oyq",
+  "2026eaq",
+  "2026fdj",
+  "2026aawj",
+  "2026llu"
+ ],
+ "rule": "calendar_model_FROZEN.md sec 7"
+}

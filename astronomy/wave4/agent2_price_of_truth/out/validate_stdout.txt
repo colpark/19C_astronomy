@@ -1,0 +1,1 @@
+PASS out/truth_cost_monthly_provenance.json

@@ -1,0 +1,48 @@
+
+Home | WISeREP
+Skip to main content
+ MENU
+Main menu
+Search
+Aux
+Bots
+Conversions
+Atels
+?
+✉
+Login
+      Home    
+    Home  
+Search by name or coordinates 
+Coordinates, e.g.: 23:19:44.664 +10:11:04.56 OR: 349.9361 +10.1846
+Please make sure to update your WISeREP URL to: www.wiserep.org
+              Getting started: If new to WISeREP v2, begin by acquiring a personal account 
+here
+.
+              Then you may request to join an existing group (survey / program) or either initiate a new group if relevant.
+              In the new WISeREP v2, everyone can contribute and upload data (spectra / photometry / related-files) directly,
+ either via the Report webpage or via the Bulk APIs.
+              Please 
+contact us
+ if you encounter any problems or if you have any questions.
+No. of Spectra:
+70387
+No. of Objects:
+28278
+Obj. w. Spectra:
+26838
+Public Spectra:
+57771
+The Weizmann Interactive Supernova Data Repository (WISeREP) serves as an archive of SN spectra and photometry,
+    including both historical (legacy) data and data that are accumulated by ongoing modern surveys and programs.
+    The archive provides information about objects, their spectra, photometry and related metadata.
+    The redeveloped WISeREP v2 includes highly improved functionalities, as well as additional ones,
+    related to the displaying and manipulating of data (interactive analysis utilities),
+    self-maintaining of users/groups, reporting of data (directly by registered users)
+    and efficient bulk-downloading options of metadata and physical files.
+    If making use of this database in your research, please cite:
+2012PASP..124..668Y
+    and acknowledge WISeREP - https://www.wiserep.org
+Copyright © 2011
+Built by 
+klido.net

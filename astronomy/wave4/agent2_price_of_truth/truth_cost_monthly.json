@@ -1,0 +1,1416 @@
+{
+ "banner": "PLANNING price of measured labels per month; not a P7 record; BTS seeds calibration only (contamination FAIL on BTS); rule E: enters kill-band pricing only through module V records",
+ "calendar_model_sha256": "a681d81a8c0e25fa6885096e9ad01bd114fbfa768f67c8a683182b23629227e6",
+ "wave3_truth_cost_table_sha256": "8eee9f94b55d5ccad10e32cf721073d729865c442aff662661117a0f703b09a3",
+ "consistency_check": "spectra_S for every L=0 row asserted equal to wave-3 truth_cost_table.csv (same formula)",
+ "inputs": {
+  "U_by_calendar_month": {
+   "Jan": 0.3387,
+   "Feb": 0.4698,
+   "Mar": 0.2984,
+   "Apr": 0.7,
+   "May": 0.7419,
+   "Jun": 0.8417,
+   "Jul": 0.8306,
+   "Aug": 0.75,
+   "Sep": 0.75,
+   "Oct": 0.6694,
+   "Nov": 0.6167,
+   "Dec": 0.3952
+  },
+  "U_by_year": {
+   "Jan": {
+    "2021": 0.6129,
+    "2022": 0.0645,
+    "2023": 0.2903,
+    "2024": 0.3871
+   },
+   "Feb": {
+    "2021": 0.8214,
+    "2022": 0.3929,
+    "2023": 0.2857,
+    "2024": 0.3793
+   },
+   "Mar": {
+    "2021": 0.5484,
+    "2022": 0.0968,
+    "2023": 0.2581,
+    "2024": 0.2903
+   },
+   "Apr": {
+    "2021": 0.7333,
+    "2022": 0.7667,
+    "2023": 0.7333,
+    "2024": 0.5667
+   },
+   "May": {
+    "2021": 0.7742,
+    "2022": 0.6774,
+    "2023": 0.6774,
+    "2024": 0.8387
+   },
+   "Jun": {
+    "2021": 0.8667,
+    "2022": 0.7667,
+    "2023": 0.8333,
+    "2024": 0.9
+   },
+   "Jul": {
+    "2021": 0.8387,
+    "2022": 0.871,
+    "2023": 0.8065,
+    "2024": 0.8065
+   },
+   "Aug": {
+    "2021": 0.6774,
+    "2022": 0.7742,
+    "2023": 0.6452,
+    "2024": 0.9032
+   },
+   "Sep": {
+    "2021": 0.8,
+    "2022": 0.7,
+    "2023": 0.7333,
+    "2024": 0.7667
+   },
+   "Oct": {
+    "2021": 0.4516,
+    "2022": 0.871,
+    "2023": 0.7419,
+    "2024": 0.6129
+   },
+   "Nov": {
+    "2021": 0.5333,
+    "2022": 0.7,
+    "2023": 0.5,
+    "2024": 0.7333
+   },
+   "Dec": {
+    "2021": 0.0323,
+    "2022": 0.3548,
+    "2023": 0.4516,
+    "2024": 0.7419
+   }
+  },
+  "U_any_by_calendar_month": {
+   "Jan": 0.5081,
+   "Feb": 0.674,
+   "Mar": 0.4839,
+   "Apr": 0.9167,
+   "May": 0.879,
+   "Jun": 0.9417,
+   "Jul": 0.9274,
+   "Aug": 0.9677,
+   "Sep": 0.9417,
+   "Oct": 0.9032,
+   "Nov": 0.7833,
+   "Dec": 0.5645
+  },
+  "U_annual_mean": 0.6169,
+  "irsa_months_missing": [],
+  "irsa_detail": {
+   "2021-01": {
+    "nights_with_rows": 22,
+    "p90_rows": 60602.2,
+    "usable": 19,
+    "days": 31,
+    "U": 0.6129,
+    "U_any": 0.7097,
+    "query_seconds": 160.7
+   },
+   "2021-02": {
+    "nights_with_rows": 27,
+    "p90_rows": 55664.00000000001,
+    "usable": 23,
+    "days": 28,
+    "U": 0.8214,
+    "U_any": 0.9643,
+    "query_seconds": 288.8
+   },
+   "2021-03": {
+    "nights_with_rows": 25,
+    "p90_rows": 49179.8,
+    "usable": 17,
+    "days": 31,
+    "U": 0.5484,
+    "U_any": 0.8065,
+    "query_seconds": 175.6
+   },
+   "2021-04": {
+    "nights_with_rows": 29,
+    "p90_rows": 49179.6,
+    "usable": 22,
+    "days": 30,
+    "U": 0.7333,
+    "U_any": 0.9667,
+    "query_seconds": 151.1
+   },
+   "2021-05": {
+    "nights_with_rows": 29,
+    "p90_rows": 44121.0,
+    "usable": 24,
+    "days": 31,
+    "U": 0.7742,
+    "U_any": 0.9355,
+    "query_seconds": 210.9
+   },
+   "2021-06": {
+    "nights_with_rows": 28,
+    "p90_rows": 39193.2,
+    "usable": 26,
+    "days": 30,
+    "U": 0.8667,
+    "U_any": 0.9333,
+    "query_seconds": 115.0
+   },
+   "2021-07": {
+    "nights_with_rows": 27,
+    "p90_rows": 40047.8,
+    "usable": 26,
+    "days": 31,
+    "U": 0.8387,
+    "U_any": 0.871,
+    "query_seconds": 79.6
+   },
+   "2021-08": {
+    "nights_with_rows": 29,
+    "p90_rows": 44900.0,
+    "usable": 21,
+    "days": 31,
+    "U": 0.6774,
+    "U_any": 0.9355,
+    "query_seconds": 94.6
+   },
+   "2021-09": {
+    "nights_with_rows": 30,
+    "p90_rows": 45876.3,
+    "usable": 24,
+    "days": 30,
+    "U": 0.8,
+    "U_any": 1.0,
+    "query_seconds": 69.6
+   },
+   "2021-10": {
+    "nights_with_rows": 23,
+    "p90_rows": 44262.6,
+    "usable": 14,
+    "days": 31,
+    "U": 0.4516,
+    "U_any": 0.7419,
+    "query_seconds": 102.3
+   },
+   "2021-11": {
+    "nights_with_rows": 22,
+    "p90_rows": 48882.3,
+    "usable": 16,
+    "days": 30,
+    "U": 0.5333,
+    "U_any": 0.7333,
+    "query_seconds": 101.4
+   },
+   "2021-12": {
+    "nights_with_rows": 2,
+    "p90_rows": 40537.2,
+    "usable": 1,
+    "days": 31,
+    "U": 0.0323,
+    "U_any": 0.0645,
+    "query_seconds": 119.2
+   },
+   "2022-01": {
+    "nights_with_rows": 2,
+    "p90_rows": 14463.7,
+    "usable": 2,
+    "days": 31,
+    "U": 0.0645,
+    "U_any": 0.0645,
+    "query_seconds": 44.1
+   },
+   "2022-02": {
+    "nights_with_rows": 15,
+    "p90_rows": 46623.2,
+    "usable": 11,
+    "days": 28,
+    "U": 0.3929,
+    "U_any": 0.5357,
+    "query_seconds": 167.5
+   },
+   "2022-03": {
+    "nights_with_rows": 4,
+    "p90_rows": 42111.4,
+    "usable": 3,
+    "days": 31,
+    "U": 0.0968,
+    "U_any": 0.129,
+    "query_seconds": 96.6
+   },
+   "2022-04": {
+    "nights_with_rows": 29,
+    "p90_rows": 37638.0,
+    "usable": 23,
+    "days": 30,
+    "U": 0.7667,
+    "U_any": 0.9667,
+    "query_seconds": 219.9
+   },
+   "2022-05": {
+    "nights_with_rows": 26,
+    "p90_rows": 35636.5,
+    "usable": 21,
+    "days": 31,
+    "U": 0.6774,
+    "U_any": 0.8387,
+    "query_seconds": 135.4
+   },
+   "2022-06": {
+    "nights_with_rows": 28,
+    "p90_rows": 33172.8,
+    "usable": 23,
+    "days": 30,
+    "U": 0.7667,
+    "U_any": 0.9333,
+    "query_seconds": 183.0
+   },
+   "2022-07": {
+    "nights_with_rows": 31,
+    "p90_rows": 33950.0,
+    "usable": 27,
+    "days": 31,
+    "U": 0.871,
+    "U_any": 1.0,
+    "query_seconds": 94.8
+   },
+   "2022-08": {
+    "nights_with_rows": 32,
+    "p90_rows": 35270.0,
+    "usable": 24,
+    "days": 31,
+    "U": 0.7742,
+    "U_any": 1.0323,
+    "query_seconds": 79.6
+   },
+   "2022-09": {
+    "nights_with_rows": 25,
+    "p90_rows": 44780.8,
+    "usable": 21,
+    "days": 30,
+    "U": 0.7,
+    "U_any": 0.8333,
+    "query_seconds": 94.6
+   },
+   "2022-10": {
+    "nights_with_rows": 32,
+    "p90_rows": 46747.0,
+    "usable": 27,
+    "days": 31,
+    "U": 0.871,
+    "U_any": 1.0323,
+    "query_seconds": 69.4
+   },
+   "2022-11": {
+    "nights_with_rows": 26,
+    "p90_rows": 47901.5,
+    "usable": 21,
+    "days": 30,
+    "U": 0.7,
+    "U_any": 0.8667,
+    "query_seconds": 102.4
+   },
+   "2022-12": {
+    "nights_with_rows": 18,
+    "p90_rows": 45861.4,
+    "usable": 11,
+    "days": 31,
+    "U": 0.3548,
+    "U_any": 0.5806,
+    "query_seconds": 101.4
+   },
+   "2023-01": {
+    "nights_with_rows": 15,
+    "p90_rows": 39247.2,
+    "usable": 9,
+    "days": 31,
+    "U": 0.2903,
+    "U_any": 0.4839,
+    "query_seconds": 131.1
+   },
+   "2023-02": {
+    "nights_with_rows": 19,
+    "p90_rows": 28156.399999999998,
+    "usable": 8,
+    "days": 28,
+    "U": 0.2857,
+    "U_any": 0.6786,
+    "query_seconds": 103.5
+   },
+   "2023-03": {
+    "nights_with_rows": 11,
+    "p90_rows": 31717.0,
+    "usable": 8,
+    "days": 31,
+    "U": 0.2581,
+    "U_any": 0.3548,
+    "query_seconds": 90.9
+   },
+   "2023-04": {
+    "nights_with_rows": 25,
+    "p90_rows": 38328.200000000004,
+    "usable": 22,
+    "days": 30,
+    "U": 0.7333,
+    "U_any": 0.8333,
+    "query_seconds": 183.7
+   },
+   "2023-05": {
+    "nights_with_rows": 25,
+    "p90_rows": 31255.0,
+    "usable": 21,
+    "days": 31,
+    "U": 0.6774,
+    "U_any": 0.8065,
+    "query_seconds": 106.3
+   },
+   "2023-06": {
+    "nights_with_rows": 27,
+    "p90_rows": 30541.2,
+    "usable": 25,
+    "days": 30,
+    "U": 0.8333,
+    "U_any": 0.9,
+    "query_seconds": 210.9
+   },
+   "2023-07": {
+    "nights_with_rows": 28,
+    "p90_rows": 31411.5,
+    "usable": 25,
+    "days": 31,
+    "U": 0.8065,
+    "U_any": 0.9032,
+    "query_seconds": 114.9
+   },
+   "2023-08": {
+    "nights_with_rows": 29,
+    "p90_rows": 36162.4,
+    "usable": 20,
+    "days": 31,
+    "U": 0.6452,
+    "U_any": 0.9355,
+    "query_seconds": 69.2
+   },
+   "2023-09": {
+    "nights_with_rows": 28,
+    "p90_rows": 41060.8,
+    "usable": 22,
+    "days": 30,
+    "U": 0.7333,
+    "U_any": 0.9333,
+    "query_seconds": 82.8
+   },
+   "2023-10": {
+    "nights_with_rows": 30,
+    "p90_rows": 45021.1,
+    "usable": 23,
+    "days": 31,
+    "U": 0.7419,
+    "U_any": 0.9677,
+    "query_seconds": 76.1
+   },
+   "2023-11": {
+    "nights_with_rows": 18,
+    "p90_rows": 47429.3,
+    "usable": 15,
+    "days": 30,
+    "U": 0.5,
+    "U_any": 0.6,
+    "query_seconds": 78.4
+   },
+   "2023-12": {
+    "nights_with_rows": 19,
+    "p90_rows": 50765.2,
+    "usable": 14,
+    "days": 31,
+    "U": 0.4516,
+    "U_any": 0.6129,
+    "query_seconds": 101.6
+   },
+   "2024-01": {
+    "nights_with_rows": 24,
+    "p90_rows": 53773.49999999999,
+    "usable": 12,
+    "days": 31,
+    "U": 0.3871,
+    "U_any": 0.7742,
+    "query_seconds": 194.0
+   },
+   "2024-02": {
+    "nights_with_rows": 15,
+    "p90_rows": 39849.6,
+    "usable": 11,
+    "days": 29,
+    "U": 0.3793,
+    "U_any": 0.5172,
+    "query_seconds": 155.3
+   },
+   "2024-03": {
+    "nights_with_rows": 20,
+    "p90_rows": 34034.7,
+    "usable": 9,
+    "days": 31,
+    "U": 0.2903,
+    "U_any": 0.6452,
+    "query_seconds": 94.6
+   },
+   "2024-04": {
+    "nights_with_rows": 27,
+    "p90_rows": 28823.4,
+    "usable": 17,
+    "days": 30,
+    "U": 0.5667,
+    "U_any": 0.9,
+    "query_seconds": 116.2
+   },
+   "2024-05": {
+    "nights_with_rows": 29,
+    "p90_rows": 29191.2,
+    "usable": 26,
+    "days": 31,
+    "U": 0.8387,
+    "U_any": 0.9355,
+    "query_seconds": 155.3
+   },
+   "2024-06": {
+    "nights_with_rows": 30,
+    "p90_rows": 28623.1,
+    "usable": 27,
+    "days": 30,
+    "U": 0.9,
+    "U_any": 1.0,
+    "query_seconds": 186.0
+   },
+   "2024-07": {
+    "nights_with_rows": 29,
+    "p90_rows": 30170.6,
+    "usable": 25,
+    "days": 31,
+    "U": 0.8065,
+    "U_any": 0.9355,
+    "query_seconds": 94.7
+   },
+   "2024-08": {
+    "nights_with_rows": 30,
+    "p90_rows": 31927.8,
+    "usable": 28,
+    "days": 31,
+    "U": 0.9032,
+    "U_any": 0.9677,
+    "query_seconds": 85.2
+   },
+   "2024-09": {
+    "nights_with_rows": 30,
+    "p90_rows": 37172.9,
+    "usable": 23,
+    "days": 30,
+    "U": 0.7667,
+    "U_any": 1.0,
+    "query_seconds": 88.2
+   },
+   "2024-10": {
+    "nights_with_rows": 27,
+    "p90_rows": 41981.4,
+    "usable": 19,
+    "days": 31,
+    "U": 0.6129,
+    "U_any": 0.871,
+    "query_seconds": 98.0
+   },
+   "2024-11": {
+    "nights_with_rows": 28,
+    "p90_rows": 42749.8,
+    "usable": 22,
+    "days": 30,
+    "U": 0.7333,
+    "U_any": 0.9333,
+    "query_seconds": 146.0
+   },
+   "2024-12": {
+    "nights_with_rows": 31,
+    "p90_rows": 40120.0,
+    "usable": 23,
+    "days": 31,
+    "U": 0.7419,
+    "U_any": 1.0,
+    "query_seconds": 117.9
+   }
+  },
+  "f_R": 0.6666666666666666,
+  "f_R_alt": 0.6875,
+  "A_night_cp95_lo": 334.8292032,
+  "sky_overlap_o": "UNDEMONSTRATED, applied as 1 (months are lower bounds)",
+  "rates": {
+   "r_b_human_confirmed": 20.0,
+   "r_a_incl_model_annotated": 22.375,
+   "r_c_cohort_existence_moderate": 5.138,
+   "r_c_cohort_measured_strong": 0
+  }
+ },
+ "summary_L0": {
+  "delta_0.05_N_63": {
+   "spectra": [
+    66,
+    84
+   ],
+   "P60_hours": [
+    33.0,
+    42.0
+   ],
+   "p60_usable_nights": [
+    7,
+    19
+   ],
+   "wrong_commitments": [
+    3,
+    16
+   ],
+   "months_after_return": [
+    1,
+    2
+   ],
+   "months_over_120": 0,
+   "months_aggregate_Ubar": [
+    0.35,
+    0.99
+   ]
+  },
+  "delta_0.05_N_1666": {
+   "spectra": [
+    1723,
+    2212
+   ],
+   "P60_hours": [
+    861.5,
+    1106.0
+   ],
+   "p60_usable_nights": [
+    173,
+    492
+   ],
+   "wrong_commitments": [
+    57,
+    420
+   ],
+   "months_after_return": [
+    8,
+    28
+   ],
+   "months_over_120": 0,
+   "months_aggregate_Ubar": [
+    9.18,
+    26.17
+   ]
+  },
+  "delta_0.018_N_485": {
+   "spectra": [
+    502,
+    644
+   ],
+   "P60_hours": [
+    251.0,
+    322.0
+   ],
+   "p60_usable_nights": [
+    51,
+    144
+   ],
+   "wrong_commitments": [
+    17,
+    122
+   ],
+   "months_after_return": [
+    2,
+    9
+   ],
+   "months_over_120": 0,
+   "months_aggregate_Ubar": [
+    2.67,
+    7.62
+   ]
+  },
+  "delta_0.018_N_12855": {
+   "spectra": [
+    13294,
+    17065
+   ],
+   "P60_hours": [
+    6647.0,
+    8532.5
+   ],
+   "p60_usable_nights": [
+    1330,
+    3793
+   ],
+   "wrong_commitments": [
+    439,
+    3242
+   ],
+   "months_after_return": [
+    70,
+    115
+   ],
+   "months_over_120": 144,
+   "months_aggregate_Ubar": [
+    70.8,
+    201.96
+   ]
+  }
+ },
+ "summary_L13_sensitivity": {
+  "delta_0.05_N_63": {
+   "spectra": [
+    52,
+    67
+   ],
+   "P60_hours": [
+    26.0,
+    33.5
+   ],
+   "p60_usable_nights": [
+    6,
+    15
+   ],
+   "wrong_commitments": [
+    2,
+    13
+   ],
+   "months_after_return": [
+    1,
+    2
+   ],
+   "months_over_120": 0,
+   "months_aggregate_Ubar": [
+    0.28,
+    0.79
+   ]
+  },
+  "delta_0.05_N_1666": {
+   "spectra": [
+    1710,
+    2195
+   ],
+   "P60_hours": [
+    855.0,
+    1097.5
+   ],
+   "p60_usable_nights": [
+    171,
+    488
+   ],
+   "wrong_commitments": [
+    57,
+    417
+   ],
+   "months_after_return": [
+    8,
+    28
+   ],
+   "months_over_120": 0,
+   "months_aggregate_Ubar": [
+    9.1,
+    25.97
+   ]
+  },
+  "delta_0.018_N_485": {
+   "spectra": [
+    489,
+    627
+   ],
+   "P60_hours": [
+    244.5,
+    313.5
+   ],
+   "p60_usable_nights": [
+    49,
+    140
+   ],
+   "wrong_commitments": [
+    17,
+    119
+   ],
+   "months_after_return": [
+    2,
+    9
+   ],
+   "months_over_120": 0,
+   "months_aggregate_Ubar": [
+    2.6,
+    7.42
+   ]
+  },
+  "delta_0.018_N_12855": {
+   "spectra": [
+    13281,
+    17048
+   ],
+   "P60_hours": [
+    6640.5,
+    8524.0
+   ],
+   "p60_usable_nights": [
+    1329,
+    3789
+   ],
+   "wrong_commitments": [
+    439,
+    3239
+   ],
+   "months_after_return": [
+    70,
+    115
+   ],
+   "months_over_120": 144,
+   "months_aggregate_Ubar": [
+    70.72,
+    201.75
+   ]
+  }
+ },
+ "months_after_return_by_R_L0": {
+  "delta_0.05_N_63": {
+   "2026-10": [
+    1,
+    1
+   ],
+   "2026-11": [
+    1,
+    2
+   ],
+   "2026-12": [
+    1,
+    2
+   ],
+   "2027-01": [
+    1,
+    2
+   ],
+   "2027-02": [
+    1,
+    2
+   ],
+   "2027-03": [
+    1,
+    2
+   ],
+   "2027-04": [
+    1,
+    1
+   ],
+   "2027-05": [
+    1,
+    1
+   ],
+   "2027-06": [
+    1,
+    1
+   ],
+   "2027-07": [
+    1,
+    1
+   ],
+   "2027-08": [
+    1,
+    1
+   ],
+   "2027-09": [
+    1,
+    1
+   ]
+  },
+  "delta_0.05_N_1666": {
+   "2026-10": [
+    10,
+    27
+   ],
+   "2026-11": [
+    10,
+    27
+   ],
+   "2026-12": [
+    10,
+    28
+   ],
+   "2027-01": [
+    9,
+    28
+   ],
+   "2027-02": [
+    9,
+    27
+   ],
+   "2027-03": [
+    9,
+    27
+   ],
+   "2027-04": [
+    8,
+    26
+   ],
+   "2027-05": [
+    9,
+    26
+   ],
+   "2027-06": [
+    9,
+    26
+   ],
+   "2027-07": [
+    10,
+    26
+   ],
+   "2027-08": [
+    10,
+    26
+   ],
+   "2027-09": [
+    10,
+    26
+   ]
+  },
+  "delta_0.018_N_485": {
+   "2026-10": [
+    3,
+    9
+   ],
+   "2026-11": [
+    4,
+    9
+   ],
+   "2026-12": [
+    5,
+    9
+   ],
+   "2027-01": [
+    4,
+    8
+   ],
+   "2027-02": [
+    4,
+    8
+   ],
+   "2027-03": [
+    3,
+    7
+   ],
+   "2027-04": [
+    3,
+    7
+   ],
+   "2027-05": [
+    3,
+    7
+   ],
+   "2027-06": [
+    2,
+    7
+   ],
+   "2027-07": [
+    3,
+    8
+   ],
+   "2027-08": [
+    3,
+    9
+   ],
+   "2027-09": [
+    3,
+    9
+   ]
+  },
+  "delta_0.018_N_12855": {
+   "2026-10": [
+    71,
+    115
+   ],
+   "2026-11": [
+    71,
+    115
+   ],
+   "2026-12": [
+    71,
+    115
+   ],
+   "2027-01": [
+    71,
+    115
+   ],
+   "2027-02": [
+    71,
+    114
+   ],
+   "2027-03": [
+    71,
+    114
+   ],
+   "2027-04": [
+    70,
+    113
+   ],
+   "2027-05": [
+    71,
+    113
+   ],
+   "2027-06": [
+    72,
+    113
+   ],
+   "2027-07": [
+    72,
+    113
+   ],
+   "2027-08": [
+    72,
+    114
+   ],
+   "2027-09": [
+    72,
+    115
+   ]
+  }
+ },
+ "reference_point_p093_s093_c8_R2027_01": {
+  "delta_0.05_N_63": {
+   "spectra_S": 73,
+   "P60_hours": 36.5,
+   "p60_usable_nights_needed": 10,
+   "spectra_per_month_first": 84.0,
+   "months_after_R": 1,
+   "completion_month": "2027-01",
+   "months_aggregate_Ubar": 0.48,
+   "wrong_routine_commitments": 5
+  },
+  "delta_0.05_N_1666": {
+   "spectra_S": 1927,
+   "P60_hours": 963.5,
+   "p60_usable_nights_needed": 241,
+   "spectra_per_month_first": 84.0,
+   "months_after_R": 14,
+   "completion_month": "2028-02",
+   "months_aggregate_Ubar": 12.82,
+   "wrong_routine_commitments": 135
+  },
+  "delta_0.018_N_485": {
+   "spectra_S": 561,
+   "P60_hours": 280.5,
+   "p60_usable_nights_needed": 71,
+   "spectra_per_month_first": 84.0,
+   "months_after_R": 5,
+   "completion_month": "2027-05",
+   "months_aggregate_Ubar": 3.73,
+   "wrong_routine_commitments": 39
+  },
+  "delta_0.018_N_12855": {
+   "spectra_S": 14863,
+   "P60_hours": 7431.5,
+   "p60_usable_nights_needed": 1858,
+   "spectra_per_month_first": 84.0,
+   "months_after_R": 101,
+   "completion_month": "2035-05",
+   "months_aggregate_Ubar": 98.94,
+   "wrong_routine_commitments": 1040
+  }
+ },
+ "waiting_on_existing_supply": [
+  {
+   "delta": 0.05,
+   "N": 63,
+   "purity_p": 0.81,
+   "months_upper_bound_human_confirmed_r_b": 3.9,
+   "months_upper_bound_incl_model_annotated_r_a": 3.5,
+   "months_cohort_existence_rate_moderate": 15.1,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.05,
+   "N": 63,
+   "purity_p": 0.846,
+   "months_upper_bound_human_confirmed_r_b": 3.7,
+   "months_upper_bound_incl_model_annotated_r_a": 3.3,
+   "months_cohort_existence_rate_moderate": 14.5,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.05,
+   "N": 63,
+   "purity_p": 0.92,
+   "months_upper_bound_human_confirmed_r_b": 3.4,
+   "months_upper_bound_incl_model_annotated_r_a": 3.1,
+   "months_cohort_existence_rate_moderate": 13.3,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.05,
+   "N": 63,
+   "purity_p": 0.93,
+   "months_upper_bound_human_confirmed_r_b": 3.4,
+   "months_upper_bound_incl_model_annotated_r_a": 3.0,
+   "months_cohort_existence_rate_moderate": 13.2,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.05,
+   "N": 63,
+   "purity_p": 0.956,
+   "months_upper_bound_human_confirmed_r_b": 3.3,
+   "months_upper_bound_incl_model_annotated_r_a": 2.9,
+   "months_cohort_existence_rate_moderate": 12.8,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.05,
+   "N": 63,
+   "purity_p": 0.967,
+   "months_upper_bound_human_confirmed_r_b": 3.3,
+   "months_upper_bound_incl_model_annotated_r_a": 2.9,
+   "months_cohort_existence_rate_moderate": 12.7,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.05,
+   "N": 1666,
+   "purity_p": 0.81,
+   "months_upper_bound_human_confirmed_r_b": 102.8,
+   "months_upper_bound_incl_model_annotated_r_a": 91.9,
+   "months_cohort_existence_rate_moderate": 400.3,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.05,
+   "N": 1666,
+   "purity_p": 0.846,
+   "months_upper_bound_human_confirmed_r_b": 98.5,
+   "months_upper_bound_incl_model_annotated_r_a": 88.0,
+   "months_cohort_existence_rate_moderate": 383.2,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.05,
+   "N": 1666,
+   "purity_p": 0.92,
+   "months_upper_bound_human_confirmed_r_b": 90.5,
+   "months_upper_bound_incl_model_annotated_r_a": 80.9,
+   "months_cohort_existence_rate_moderate": 352.4,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.05,
+   "N": 1666,
+   "purity_p": 0.93,
+   "months_upper_bound_human_confirmed_r_b": 89.6,
+   "months_upper_bound_incl_model_annotated_r_a": 80.1,
+   "months_cohort_existence_rate_moderate": 348.6,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.05,
+   "N": 1666,
+   "purity_p": 0.956,
+   "months_upper_bound_human_confirmed_r_b": 87.1,
+   "months_upper_bound_incl_model_annotated_r_a": 77.9,
+   "months_cohort_existence_rate_moderate": 339.2,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.05,
+   "N": 1666,
+   "purity_p": 0.967,
+   "months_upper_bound_human_confirmed_r_b": 86.1,
+   "months_upper_bound_incl_model_annotated_r_a": 77.0,
+   "months_cohort_existence_rate_moderate": 335.3,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.018,
+   "N": 485,
+   "purity_p": 0.81,
+   "months_upper_bound_human_confirmed_r_b": 29.9,
+   "months_upper_bound_incl_model_annotated_r_a": 26.8,
+   "months_cohort_existence_rate_moderate": 116.5,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.018,
+   "N": 485,
+   "purity_p": 0.846,
+   "months_upper_bound_human_confirmed_r_b": 28.7,
+   "months_upper_bound_incl_model_annotated_r_a": 25.6,
+   "months_cohort_existence_rate_moderate": 111.6,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.018,
+   "N": 485,
+   "purity_p": 0.92,
+   "months_upper_bound_human_confirmed_r_b": 26.4,
+   "months_upper_bound_incl_model_annotated_r_a": 23.6,
+   "months_cohort_existence_rate_moderate": 102.6,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.018,
+   "N": 485,
+   "purity_p": 0.93,
+   "months_upper_bound_human_confirmed_r_b": 26.1,
+   "months_upper_bound_incl_model_annotated_r_a": 23.3,
+   "months_cohort_existence_rate_moderate": 101.5,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.018,
+   "N": 485,
+   "purity_p": 0.956,
+   "months_upper_bound_human_confirmed_r_b": 25.4,
+   "months_upper_bound_incl_model_annotated_r_a": 22.7,
+   "months_cohort_existence_rate_moderate": 98.7,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.018,
+   "N": 485,
+   "purity_p": 0.967,
+   "months_upper_bound_human_confirmed_r_b": 25.1,
+   "months_upper_bound_incl_model_annotated_r_a": 22.4,
+   "months_cohort_existence_rate_moderate": 97.6,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.018,
+   "N": 12855,
+   "purity_p": 0.81,
+   "months_upper_bound_human_confirmed_r_b": 793.5,
+   "months_upper_bound_incl_model_annotated_r_a": 709.3,
+   "months_cohort_existence_rate_moderate": 3088.6,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.018,
+   "N": 12855,
+   "purity_p": 0.846,
+   "months_upper_bound_human_confirmed_r_b": 759.8,
+   "months_upper_bound_incl_model_annotated_r_a": 679.1,
+   "months_cohort_existence_rate_moderate": 2957.2,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.018,
+   "N": 12855,
+   "purity_p": 0.92,
+   "months_upper_bound_human_confirmed_r_b": 698.6,
+   "months_upper_bound_incl_model_annotated_r_a": 624.5,
+   "months_cohort_existence_rate_moderate": 2719.3,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.018,
+   "N": 12855,
+   "purity_p": 0.93,
+   "months_upper_bound_human_confirmed_r_b": 691.1,
+   "months_upper_bound_incl_model_annotated_r_a": 617.8,
+   "months_cohort_existence_rate_moderate": 2690.1,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.018,
+   "N": 12855,
+   "purity_p": 0.956,
+   "months_upper_bound_human_confirmed_r_b": 672.3,
+   "months_upper_bound_incl_model_annotated_r_a": 601.0,
+   "months_cohort_existence_rate_moderate": 2616.9,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  },
+  {
+   "delta": 0.018,
+   "N": 12855,
+   "purity_p": 0.967,
+   "months_upper_bound_human_confirmed_r_b": 664.7,
+   "months_upper_bound_incl_model_annotated_r_a": 594.1,
+   "months_cohort_existence_rate_moderate": 2587.2,
+   "months_cohort_measured_strong": "unbounded (rate 0 STRONG; UNDEMONSTRATED)",
+   "note": "r_a/r_b are all-sky all-survey TNS lower-bound rates, not cohort rates; months are upper bounds on waiting time only if every report counted toward N"
+  }
+ ],
+ "ruling4_sensitivity": {
+  "existing_supply": {
+   "human_confirmed_only_rate": 20.0,
+   "including_model_annotated_rate": 22.375,
+   "cohort": "STRONG split UNDEMONSTRATED (0 archived reports)"
+  },
+  "dedicated_program": "spectra, hours, nights identical in both cases; human confirmation adds classifier effort not priced (UNDEMONSTRATED); including model-annotated, an automated classifier (SNIascore-class) counts without human hours",
+  "bts_calibration_pool": {
+   "human_confirmed_placed": 1074,
+   "including_model_annotated_placed": 2028,
+   "model_annotation_bound": [
+    954,
+    2057
+   ],
+   "note": "calibration only; wave-3 track one"
+  }
+ },
+ "cost_of_action": "0.5 h P60 per spectrum; 1 slot per wrong routine commitment (W); >=100 slots per missed rare event (asymmetric; M UNDEMONSTRATED; add-on)",
+ "constraints": [
+  "Rubin off sky since 2026-07-14 with no return date: months are a function of R, calendar completion UNDEMONSTRATED",
+  "sky overlap Palomar/Cerro Pachon UNDEMONSTRATED (o=1): months are lower bounds on program duration",
+  "U from P48 site data (MODERATE); P60/SEDM-specific downtime not included"
+ ],
+ "provenance": [
+  {
+   "id": "w4a2-monthly-delta_0.05_N_63",
+   "value": {
+    "months_after_return": [
+     1,
+     2
+    ],
+    "spectra": [
+     66,
+     84
+    ],
+    "P60_hours": [
+     33.0,
+     42.0
+    ],
+    "p60_usable_nights": [
+     7,
+     19
+    ],
+    "wrong_commitments": [
+     3,
+     16
+    ]
+   },
+   "referent": "calendar months after Rubin return (and spectra, hours, P60 usable nights, wrong commitments) to reach delta 0.05 N 63 correctly labelled positive cohort objects",
+   "source": "astronomy/wave4/agent2_price_of_truth/scripts/price_monthly.py; calendar_model_FROZEN.md sha256 a681d81a8c0e25fa6885096e9ad01bd114fbfa768f67c8a683182b23629227e6; out/irsa_nights.jsonl sha256 d432b1edfb2ff4408c883e54946bf6acfe092b11bab9f1253109a77add36f724; wave3 truth_cost_table.csv sha256 8eee9f94b55d5ccad10e32cf721073d729865c442aff662661117a0f703b09a3",
+   "population": "Rubin cohort (agent-1 O=1,937,669 merged objects, first detection >= 2026-07-01); grids p {0.81..0.967}, s {0.93,1.0}, c {4.5,8,10}; return months 2026-10..2027-09; L=0",
+   "adjudicator": "a dedicated P60-class program's measured spectra per calendar month on Rubin-selected targets, and the actual Rubin return date (neither exists)",
+   "falsifier": "a rerun of price_monthly.py on the same frozen inputs returning different ranges, or a measured P60 usable-night fraction per month outside the 2021-2024 P48 year range"
+  },
+  {
+   "id": "w4a2-monthly-delta_0.05_N_1666",
+   "value": {
+    "months_after_return": [
+     8,
+     28
+    ],
+    "spectra": [
+     1723,
+     2212
+    ],
+    "P60_hours": [
+     861.5,
+     1106.0
+    ],
+    "p60_usable_nights": [
+     173,
+     492
+    ],
+    "wrong_commitments": [
+     57,
+     420
+    ]
+   },
+   "referent": "calendar months after Rubin return (and spectra, hours, P60 usable nights, wrong commitments) to reach delta 0.05 N 1666 correctly labelled positive cohort objects",
+   "source": "astronomy/wave4/agent2_price_of_truth/scripts/price_monthly.py; calendar_model_FROZEN.md sha256 a681d81a8c0e25fa6885096e9ad01bd114fbfa768f67c8a683182b23629227e6; out/irsa_nights.jsonl sha256 d432b1edfb2ff4408c883e54946bf6acfe092b11bab9f1253109a77add36f724; wave3 truth_cost_table.csv sha256 8eee9f94b55d5ccad10e32cf721073d729865c442aff662661117a0f703b09a3",
+   "population": "Rubin cohort (agent-1 O=1,937,669 merged objects, first detection >= 2026-07-01); grids p {0.81..0.967}, s {0.93,1.0}, c {4.5,8,10}; return months 2026-10..2027-09; L=0",
+   "adjudicator": "a dedicated P60-class program's measured spectra per calendar month on Rubin-selected targets, and the actual Rubin return date (neither exists)",
+   "falsifier": "a rerun of price_monthly.py on the same frozen inputs returning different ranges, or a measured P60 usable-night fraction per month outside the 2021-2024 P48 year range"
+  },
+  {
+   "id": "w4a2-monthly-delta_0.018_N_485",
+   "value": {
+    "months_after_return": [
+     2,
+     9
+    ],
+    "spectra": [
+     502,
+     644
+    ],
+    "P60_hours": [
+     251.0,
+     322.0
+    ],
+    "p60_usable_nights": [
+     51,
+     144
+    ],
+    "wrong_commitments": [
+     17,
+     122
+    ]
+   },
+   "referent": "calendar months after Rubin return (and spectra, hours, P60 usable nights, wrong commitments) to reach delta 0.018 N 485 correctly labelled positive cohort objects",
+   "source": "astronomy/wave4/agent2_price_of_truth/scripts/price_monthly.py; calendar_model_FROZEN.md sha256 a681d81a8c0e25fa6885096e9ad01bd114fbfa768f67c8a683182b23629227e6; out/irsa_nights.jsonl sha256 d432b1edfb2ff4408c883e54946bf6acfe092b11bab9f1253109a77add36f724; wave3 truth_cost_table.csv sha256 8eee9f94b55d5ccad10e32cf721073d729865c442aff662661117a0f703b09a3",
+   "population": "Rubin cohort (agent-1 O=1,937,669 merged objects, first detection >= 2026-07-01); grids p {0.81..0.967}, s {0.93,1.0}, c {4.5,8,10}; return months 2026-10..2027-09; L=0",
+   "adjudicator": "a dedicated P60-class program's measured spectra per calendar month on Rubin-selected targets, and the actual Rubin return date (neither exists)",
+   "falsifier": "a rerun of price_monthly.py on the same frozen inputs returning different ranges, or a measured P60 usable-night fraction per month outside the 2021-2024 P48 year range"
+  },
+  {
+   "id": "w4a2-monthly-delta_0.018_N_12855",
+   "value": {
+    "months_after_return": [
+     70,
+     115
+    ],
+    "spectra": [
+     13294,
+     17065
+    ],
+    "P60_hours": [
+     6647.0,
+     8532.5
+    ],
+    "p60_usable_nights": [
+     1330,
+     3793
+    ],
+    "wrong_commitments": [
+     439,
+     3242
+    ]
+   },
+   "referent": "calendar months after Rubin return (and spectra, hours, P60 usable nights, wrong commitments) to reach delta 0.018 N 12855 correctly labelled positive cohort objects",
+   "source": "astronomy/wave4/agent2_price_of_truth/scripts/price_monthly.py; calendar_model_FROZEN.md sha256 a681d81a8c0e25fa6885096e9ad01bd114fbfa768f67c8a683182b23629227e6; out/irsa_nights.jsonl sha256 d432b1edfb2ff4408c883e54946bf6acfe092b11bab9f1253109a77add36f724; wave3 truth_cost_table.csv sha256 8eee9f94b55d5ccad10e32cf721073d729865c442aff662661117a0f703b09a3",
+   "population": "Rubin cohort (agent-1 O=1,937,669 merged objects, first detection >= 2026-07-01); grids p {0.81..0.967}, s {0.93,1.0}, c {4.5,8,10}; return months 2026-10..2027-09; L=0",
+   "adjudicator": "a dedicated P60-class program's measured spectra per calendar month on Rubin-selected targets, and the actual Rubin return date (neither exists)",
+   "falsifier": "a rerun of price_monthly.py on the same frozen inputs returning different ranges, or a measured P60 usable-night fraction per month outside the 2021-2024 P48 year range"
+  },
+  {
+   "id": "w4a2-U-annual-mean",
+   "value": 0.6169,
+   "referent": "mean fraction of calendar nights per month usable at Palomar (P48 science-exposure proxy, usable = >=0.5 x monthly p90 nightly rows)",
+   "source": "astronomy/wave4/agent2_price_of_truth/scripts/irsa_nights.py; IRSA TAP ztf.ztf_current_meta_sci; out/irsa_nights.jsonl sha256 d432b1edfb2ff4408c883e54946bf6acfe092b11bab9f1253109a77add36f724",
+   "population": "1,461 calendar nights 2021-01-01..2024-12-31 (48 month queries, all HTTP 200)",
+   "adjudicator": "P60/SEDM observing logs (not public)",
+   "falsifier": "a rerun of the declared IRSA queries returning different nightly counts, or P60/SEDM logs showing a usable fraction outside the P48 year-to-year range"
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+2026-09-17T13:16:37Z GET https://arxiv.org/pdf/1905.02209
+2026-09-17T13:16:38Z GET https://arxiv.org/pdf/1710.02917
+2026-09-17T13:16:38Z GET https://arxiv.org/pdf/astro-ph/0608323
+2026-09-17T13:18:59Z IRSA TAP probe: SELECT TOP 3 * FROM ztf.ztf_current_meta_sci
+2026-09-17T13:20:17Z IRSA TAP probe: SELECT COUNT(*) FROM ztf.ztf_current_meta_sci WHERE obsjd BETWEEN 2459000.5 AND 2459001.5
+2026-09-17T13:22:39Z WISEREP 403 118 https://www.wiserep.org/ server: awselb/2.0 
+2026-09-17T13:22:42Z WISEREP 000 0 https://wiserep.org/ 
+2026-09-17T13:22:44Z WISEREP 403 118 https://www.wiserep.org/search server: awselb/2.0 
+2026-09-17T13:22:47Z WISEREP 403 118 https://www.wiserep.org/object/2026uxs server: awselb/2.0 
+2026-09-17T13:22:49Z WISEREP 403 118 https://www.wiserep.org/robots.txt server: awselb/2.0 
+2026-09-17T13:22:52Z WISEREP 403 118 https://www.wiserep.org/api/objects server: awselb/2.0 
+2026-09-17T13:22:55Z WISEREP 302 0 https://web.archive.org/web/20260916id_/https://www.wiserep.org/ server: nginx location: https://web.archive.org/web/20260904211343id_/https://www.wiserep.org/ server-timing: captures_list;dur=0.464907, exclusion.robots;dur=0.032593, exclusion.robots.policy;dur=0.021964, esindex;dur=0.006992, cdx.remote;dur=89.238050, LoadShardBlock;dur=658.076204, PetaboxLoader3.resolve;dur=291.422367, PetaboxLoader3.datanode;dur=266.846775 server-timing: TR;dur=0,Tw;dur=0,Tc;dur=2 server-timing: MISS 
+2026-09-17T13:22:57Z WISEREP 404 4615 https://web.archive.org/web/20260916id_/https://www.wiserep.org/object/2026uxs server: nginx server-timing: captures_list;dur=0.570810, exclusion.robots;dur=0.042352, exclusion.robots.policy;dur=0.031206, esindex;dur=0.009803, cdx.remote;dur=24.640552, LoadShardBlock;dur=200.616087, PetaboxLoader3.datanode;dur=87.456681, PetaboxLoader3.resolve;dur=29.984417 server-timing: TR;dur=0,Tw;dur=0,Tc;dur=1 
+2026-09-17T13:23:08Z WISEREP-ARCHIVE 20260904211343 -> 403 https://web.archive.org/web/20260904211343id_/https://www.wiserep.org/ 118
+2026-09-17T13:23:12Z WISEREP-ARCHIVE 20260601 -> 403 https://web.archive.org/web/20260606133141id_/https://www.wiserep.org/ 118
+2026-09-17T13:23:16Z WISEREP-ARCHIVE 20260101 -> 200 https://web.archive.org/web/20260101215128id_/https://www.wiserep.org/ 13166
+2026-09-17T13:23:20Z WISEREP-ARCHIVE 20250601 -> 403 https://web.archive.org/web/20250522124955id_/https://www.wiserep.org/ 118
