@@ -1,0 +1,23 @@
+{
+ "operands": 24,
+ "all_cited": true,
+ "failures": [],
+ "controls": {
+  "must_fire": {
+   "input": "U = 0 with v_record None (V_PENDING)",
+   "gate_accepts": false,
+   "fired": true
+  },
+  "must_not_fire": {
+   "input": "O = 1937669 with V-C01",
+   "gate_accepts": true,
+   "fired": false
+  }
+ },
+ "armed": true,
+ "pending_numbers_outside_comparisons": [
+  "cluster_structure PROCEED needs Fink/ANTARES counts (V_PENDING)",
+  "split_integrity PROCEED needs the cross-broker sample (V_PENDING)",
+  "unprocessable_units PROCEED rests on U = 0 (V_PENDING)"
+ ]
+}

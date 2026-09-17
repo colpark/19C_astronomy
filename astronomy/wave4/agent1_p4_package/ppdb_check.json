@@ -1,0 +1,21 @@
+{
+ "checked_utc": "2026-09-17T14:19:29Z to 14:19:44Z",
+ "ppdb_status": "NOT RELEASED (no primary Rubin source read announces a release as of the check)",
+ "evidence": [
+  {"source": "https://rtn-011.lsst.io/", "file": "sources/ppdb/rtn-011.lsst.io_", "finding": "current revision '2026-07-01 v9.0' (unchanged since the wave-3 check); v9.0 gives PPDB 'expected to become publicly available in the Sep - Oct 2026 time range' (astronomy/agent3_labels_exposure/sources/RTN-011.txt line 2597)"},
+  {"source": "https://rubinobservatory.org/for-scientists/resources/early-science", "file": "sources/ppdb/early_science.txt", "finding": "'Prompt Products Database (PPDB) Target: Sep-Oct 2026. The catalogs that result from Prompt processing are stored in the PPDB. These contents are very similar to the cumulative content in all released alerts.' (target, not a release)"},
+  {"source": "https://community.lsst.org/c/news/7.json", "file": "sources/ppdb/community.lsst.org_c_news_7.json", "finding": "newest News topics 12695 (2026-09-15T22:17, forum migration) and 12676 (2026-09-11, summit progress); no PPDB release topic"},
+  {"source": "https://community.lsst.org/latest.json", "file": "sources/ppdb/community.lsst.org_latest.json", "finding": "newest topic 12701 created 2026-09-16T17:54; no PPDB release topic. The listing served no topic created after 2026-09-16T17:54 at 2026-09-17T14:19Z (possible caching; recorded, not interpreted)"},
+  {"source": "https://community.lsst.org/search.json?q=PPDB after:2026-09-10", "file": "sources/ppdb/community.lsst.org_search.json_q_PPDB_20after_3A2026-09-10", "finding": "0 topics"},
+  {"source": "https://www.rubin.community/ (announced new forum domain, migration 2026-09-24 per topic 12695)", "file": "sources/ppdb/www.rubin.community_*", "finding": "HTML landing HTTP 200; latest.json, c/news/7.json and search.json each HTTP 403 with body {\"errors\":[\"You need to be logged in to do that.\"],\"error_type\":\"not_logged_in\"}; contents UNDEMONSTRATED"}
+ ],
+ "limits": "The check covers the sources listed. The new forum domain's listings returned HTTP 403, so a release post there cannot be excluded; 'NOT RELEASED' rests on RTN-011 revision, Early Science page wording, and the community.lsst.org News listing.",
+ "consequence_restated_from_wave3": {
+  "cohort_O": 1937669,
+  "O_v_record": "V-C01 (MATCH, cleared_for_P4_under_rule_E true, sealed sha256 8f5262daef8930d8e21ac46d14268c365f8d172ba5bd2726cf1cb63f89c8c463)",
+  "statement": "O = 1,937,669 is an upper bound. Under bands_FROZEN.md section 3 forced photometry is not detection, so PPDB forced-only precovery cannot move any object into S1. Detections that exist only in the PPDB are not documented by any primary source read (Rubin: 'all DIASources become alerts and appear in the PPDB', community topic 11546 post #2); if any exist they can only lower O. Crossing the 12,855 band edge (V-N01) would need removal of at least 1,924,815 of 1,937,669 objects (99.34 percent).",
+  "arithmetic": "1937669 - 12855 = 1924814 objects may be removed without crossing; 1924815 / 1937669 = 0.99337",
+  "source_record": "astronomy/wave3/agent1_cohort_finish/out/w3_ppdb.json (sha256 3a09658445dc18c50797c5ab779651aa5211062c64b576a1d0d8c29fc4deffe9)",
+  "recount": "none performed; a recount after a PPDB release requires a new frozen protocol"
+ }
+}

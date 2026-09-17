@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rubin Observatory LSST Community forum</title>
+    <meta name="description" content="Online community for the Vera C. Rubin Observatory Legacy Survey of Space and Time.">
+    <meta name="generator" content="Discourse 2026.9.0-latest - https://github.com/discourse/discourse version dcdc04cd0f8372e7a89b81d0afd1e081ff6feada">
+<link rel="icon" type="image/png" href="https://us1.discourse-cdn.com/flex002/uploads/rubin/optimized/2X/8/84d08e4dd8342e42bc714686071775f3489e80f7_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="https://us1.discourse-cdn.com/flex002/uploads/rubin/optimized/2X/5/5080ceeb7cd64e0d499685cd5dbab160a2a07c76_2_180x180.png">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#1f2121">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1f2121">
+
+<meta name="color-scheme" content="light dark">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+<link rel="canonical" href="https://www.rubin.community/" />
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebSite","url":"https://www.rubin.community","name":"Rubin Observatory LSST Community forum","potentialAction":{"@type":"SearchAction","target":"https://www.rubin.community/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<meta name="discourse-track-view-session-id" content="J8ndwx9HEIRfqDK4mQzsHqFEiODTcmgR">
+  <link rel="search" type="application/opensearchdescription+xml" href="https://www.rubin.community/opensearch.xml" title="Rubin Observatory LSST Community forum Search">
+
+    
+    <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/color_definitions_rubin-light_3_10_af04ed2d6ea12e3b7ce88ffe4c1acb3ae1c37a7b.css?__ws=www.rubin.community" media="(prefers-color-scheme: light)" rel="stylesheet" class="light-scheme" data-scheme-id="3"/><link href="https://sea2.discourse-cdn.com/flex002/stylesheets/color_definitions_rubin-dark_4_10_4e4914657bfc6eb794d985076db962dd84da4372.css?__ws=www.rubin.community" media="(prefers-color-scheme: dark)" rel="stylesheet" class="dark-scheme" data-scheme-id="4"/>
+
+<link href="https://sea2.discourse-cdn.com/flex002/stylesheets/common_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="common"  />
+
+
+
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/boards_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="boards"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/chat_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="chat"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/checklist_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="checklist"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-ai_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="discourse-ai"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-assign_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="discourse-assign"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-chat-integration_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="discourse-chat-integration"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-data-explorer_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="discourse-data-explorer"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-details_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="discourse-details"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-events_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="discourse-events"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-lazy-videos_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="discourse-lazy-videos"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-local-dates_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="discourse-local-dates"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-narrative-bot_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="discourse-narrative-bot"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-presence_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="discourse-presence"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-reactions_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="discourse-reactions"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-solved_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="discourse-solved"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-templates_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="discourse-templates"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-topic-voting_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="discourse-topic-voting"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-workflows_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="discourse-workflows"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/footnote_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="footnote"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/hosted-site_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="hosted-site"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/poll_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="poll"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/spoiler-alert_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="spoiler-alert"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/chat_mobile_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="(width < 40rem)" rel="stylesheet" data-target="chat_mobile"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-ai_mobile_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="(width < 40rem)" rel="stylesheet" data-target="discourse-ai_mobile"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-assign_mobile_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="(width < 40rem)" rel="stylesheet" data-target="discourse-assign_mobile"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-events_mobile_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="(width < 40rem)" rel="stylesheet" data-target="discourse-events_mobile"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-reactions_mobile_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="(width < 40rem)" rel="stylesheet" data-target="discourse-reactions_mobile"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/chat_desktop_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="(width >= 40rem)" rel="stylesheet" data-target="chat_desktop"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-ai_desktop_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="(width >= 40rem)" rel="stylesheet" data-target="discourse-ai_desktop"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-events_desktop_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="(width >= 40rem)" rel="stylesheet" data-target="discourse-events_desktop"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/discourse-reactions_desktop_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="(width >= 40rem)" rel="stylesheet" data-target="discourse-reactions_desktop"  />
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/poll_desktop_87ecaea341eaae62909e0e695d7169b9c8119209.css?__ws=www.rubin.community" media="(width >= 40rem)" rel="stylesheet" data-target="poll_desktop"  />
+
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/common_theme_12_4edf7d2422d2e91304224e577a1c6dd550101659.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="12" data-theme-name="rubin footer"/>
+<link href="https://sea2.discourse-cdn.com/flex002/stylesheets/common_theme_15_e3fec63a30491a2410c539705c6eb2ae6fc75fd9.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="15" data-theme-name="rubin header"/>
+<link href="https://sea2.discourse-cdn.com/flex002/stylesheets/common_theme_13_6d620d7b3d197f3e66fbbde7be52d8bd91869967.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="13" data-theme-name="versatile banner"/>
+<link href="https://sea2.discourse-cdn.com/flex002/stylesheets/common_theme_10_99849fe5193ab3b7c35ecc30d41738656bef768c.css?__ws=www.rubin.community" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="10" data-theme-name="rubin observatory"/>
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/mobile_theme_12_405aae44e4bc04741f5d8689d3b20e694f1ed541.css?__ws=www.rubin.community" media="(width < 40rem)" rel="stylesheet" data-target="mobile_theme" data-theme-id="12" data-theme-name="rubin footer"/>
+  <link href="https://sea2.discourse-cdn.com/flex002/stylesheets/desktop_theme_10_f5e2ba441db25888b2c431299f76c4cfa19becf8.css?__ws=www.rubin.community" media="(width >= 40rem)" rel="stylesheet" data-target="desktop_theme" data-theme-id="10" data-theme-name="rubin observatory"/>
+
+    <script type="text/x-handlebars" data-template-name="/connectors/below-footer/rubin-footer" nonce="RmT8HCXxXnnfT97mdL4H3AsID">
+  <footer class="rubin-footer">
+    <div class="rubin-footer-notice">
+      <p>Any opinions, statements (including statements about LSST and what it will deliver), or recommendations expressed on this forum are those of the author and do not necessarily reflect the views of Rubin Observatory.</p>
+    </div>
+
+    <div class="rubin-footer-financing">
+      <p>The U.S. National Science Foundation (<a href="https://www.nsf.gov/">NSF</a>) and the U.S. Department of Energy (<a href="https://www.energy.gov/">DOE</a>) Office of Science will support Rubin Observatory in its operations phase to carry out the Legacy Survey of Space and Time. They will also provide support for scientific research with the data. During operations, NSF funding is managed by the Association of Universities for Research in Astronomy (<a href="https://www.aura-astronomy.org/">AURA</a>) under a cooperative agreement with NSF, and DOE funding is managed by SLAC National Accelerator Laboratory (<a href="https://www6.slac.stanford.edu/">SLAC</a>), under contract by DOE. Rubin Observatory is operated by <a href="https://noirlab.edu/public/">NSF NOIRLab</a> and SLAC.</p>
+
+      <p>NSF is an independent federal agency created by Congress in 1950 to promote the progress of science. NSF supports basic research and people to create knowledge that transforms the future.</p>
+
+      <p>The DOE Office of Science is the single largest supporter of basic research in the physical sciences in the United States and is working to address some of the most pressing challenges of our time.</p>
+    </div>
+
+    <!-- Disabled because Discourse cannot load the uploaded image. -->
+    <!-- <div class="rubin-footer-partners">
+      <img src="{{theme-setting "theme_uploads.agencies"}}">
+    </div> -->
+  </footer>
+</script>
+
+<script type="text/x-handlebars" data-template-name="/connectors/above-site-header/rubin-header" nonce="RmT8HCXxXnnfT97mdL4H3AsID">
+  <div class="rubin-header">
+    <div class="rubin-triad-logo">
+      <a href="/" aria-label="Rubin Observatory home page">
+        <img src="{{theme-setting "theme_uploads.logo"}}" alt="Rubin Observatory logo">
+      </a>
+    </div>
+  </div>
+</script>
+
+    
+    
+    
+  </head>
+  <body class="crawler ">
+    <script type="text/discourse-plugin" version="0.8" nonce="RmT8HCXxXnnfT97mdL4H3AsID">
+  api.replaceIcon('lock', 'unlock-alt');
+</script>
+
+    <header>
+  <a href="/">Rubin Observatory LSST Community forum</a>
+    <p>Online community for the Vera C. Rubin Observatory Legacy Survey of Space and Time.</p>
+</header>
+
+    <div id="main-outlet" class="wrap" role="main">
+      
+    </div>
+    <footer class="container wrap">
+  <nav class='crawler-nav'>
+    <ul>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/' itemprop="url">Home </a>
+        </span>
+      </li>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/categories' itemprop="url">Categories </a>
+        </span>
+      </li>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/guidelines' itemprop="url">Guidelines </a>
+        </span>
+      </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='/tos' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='/privacy' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+    </ul>
+  </nav>
+  <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+</footer>
+
+    
+    
+  </body>
+  
+</html>

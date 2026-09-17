@@ -1,0 +1,473 @@
+{
+ "candidate": "live time-domain astronomy: Rubin LSST prospective cohort (first detection >= 2026-07-01T00:00 UTC)",
+ "branch": "prediction",
+ "version": "P4 ruling package (agent 1, wave 4)",
+ "manifest": {
+  "path": "astronomy/wave4/agent3_freeze_v3/domain_manifest_v3.json",
+  "file_sha256": "0bdf229e9e57ea1699bfd2b70eecbbd0ce58a27895f14f62af87320833e63b6c",
+  "frozen_hash": "bd0fa4c67cdbbfb0b8eea9822f536bed4bf934ee1bc81a02606ed6d5ee9585bc",
+  "frozen_hash_recomputed": "MATCH (out/input_verification.json)"
+ },
+ "bands": {
+  "path": "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md",
+  "sha256": "8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2",
+  "delta": "0.018 (frozen); 0.05 ratified (ruling 1), reported beside; no re-banding"
+ },
+ "inputs": {
+  "v_records": "462286d6b4c474091f4e03e0f7587352c4a793e73d17030627d5759cb1ea3a9a",
+  "axis_ledger_v3": "83e757570159ef18dabc23bf649bd364e6898f098ab2296b3ae1086b70ef1a50",
+  "truth_cost_monthly": "2f6791483340e48e52803bc9977eb74faef3e8d5aa6f62dc1f3c4634188d52bf"
+ },
+ "ruling": null,
+ "ruling_decision": "REFUSE (no P4 ruling). references/stages/supply.md line 37: P4 'Refuses to rule at all when any of the seven axes in P3 is missing a number'; bands_FROZEN.md section 7 line 184: 'Each one unmet means no ruling; name it.' positive_supply and negative_supply carry no number, so PROCEED, CLOSE and ESCALATE are all unavailable. No axis reads CLOSE on cleared numbers either, so no CLOSE is being suppressed.",
+ "preconditions": {
+  "a": {
+   "state": "UNMET",
+   "why": "measured P and Ng UNDEMONSTRATED: TNS BLOCKED (second record, 2026-09-16 and 2026-09-17); WISeREP BLOCKED (HTTP 403 live; 43/43 archived 404 incl. classified controls)"
+  },
+  "b": {
+   "state": "CLEARED",
+   "v": "V-O02"
+  },
+  "c": {
+   "state": "CLEARED",
+   "basis": "PI ruling 4 (definition ratified, not a count; L01-L05 V_PENDING and not used)"
+  }
+ },
+ "binding_axis": "positive_supply (with negative_supply) at measured labels: the unmet precondition needing an external input (label access or a funded follow-up program) and survey time (Rubin off sky since 2026-07-14, no return date); bands_FROZEN.md section 7 refusal rule",
+ "combination_preview_not_a_ruling": "if (a) cleared with no other change: no axis is in CLOSE on cleared numbers (comparisons below); contamination_exposure and tool_coverage read ESCALATE, so section 7 could not yield PROCEED",
+ "kill_band_comparisons": [
+  {
+   "axis": "positive_supply",
+   "delta": "0.018 (frozen band)",
+   "test": "CLOSE requires O < N_B,lo (and M_obs < N_A,lo)",
+   "expression": "1937669 < 485",
+   "lhs_v": "V-C01",
+   "rhs_v": "V-N01",
+   "result": false
+  },
+  {
+   "axis": "negative_supply",
+   "delta": "0.018 (frozen band)",
+   "test": "CLOSE requires O < N_B,lo (and M_obs < N_A,lo)",
+   "expression": "1937669 < 485",
+   "lhs_v": "V-C01",
+   "rhs_v": "V-N01",
+   "result": false
+  },
+  {
+   "axis": "contamination_exposure",
+   "delta": "0.018 (frozen band)",
+   "test": "CLOSE requires E == 0 with O > 0",
+   "expression": "1937669 == 0",
+   "lhs_v": "V-C01",
+   "rhs_v": "literal",
+   "result": false
+  },
+  {
+   "axis": "cluster_structure",
+   "delta": "0.018 (frozen band)",
+   "test": "ALeRCE distinct and merged counts in the same O band (>= N_B,hi)",
+   "expression": "1937669 >= 12855",
+   "lhs_v": "V-C01",
+   "rhs_v": "V-N01",
+   "result": true
+  },
+  {
+   "axis": "cluster_structure",
+   "delta": "0.018 (frozen band)",
+   "test": "ALeRCE distinct oids >= N_B,hi",
+   "expression": "1937720 >= 12855",
+   "lhs_v": "V-C02",
+   "rhs_v": "V-N01",
+   "result": true
+  },
+  {
+   "axis": "tool_coverage",
+   "delta": "0.018 (frozen band)",
+   "test": "CLOSE requires no FM/deep channel accepting v11.1-carried inputs: CATS passes > 0",
+   "expression": "5 > 0",
+   "lhs_v": "V-T02",
+   "rhs_v": "literal",
+   "result": true
+  },
+  {
+   "axis": "positive_supply",
+   "delta": "0.05 (ratified, reported beside, not a band)",
+   "test": "CLOSE requires O < N_B,lo (and M_obs < N_A,lo)",
+   "expression": "1937669 < 63",
+   "lhs_v": "V-C01",
+   "rhs_v": "V-N02",
+   "result": false
+  },
+  {
+   "axis": "negative_supply",
+   "delta": "0.05 (ratified, reported beside, not a band)",
+   "test": "CLOSE requires O < N_B,lo (and M_obs < N_A,lo)",
+   "expression": "1937669 < 63",
+   "lhs_v": "V-C01",
+   "rhs_v": "V-N02",
+   "result": false
+  },
+  {
+   "axis": "contamination_exposure",
+   "delta": "0.05 (ratified, reported beside, not a band)",
+   "test": "CLOSE requires E == 0 with O > 0",
+   "expression": "1937669 == 0",
+   "lhs_v": "V-C01",
+   "rhs_v": "literal",
+   "result": false
+  },
+  {
+   "axis": "cluster_structure",
+   "delta": "0.05 (ratified, reported beside, not a band)",
+   "test": "ALeRCE distinct and merged counts in the same O band (>= N_B,hi)",
+   "expression": "1937669 >= 1666",
+   "lhs_v": "V-C01",
+   "rhs_v": "V-N02",
+   "result": true
+  },
+  {
+   "axis": "cluster_structure",
+   "delta": "0.05 (ratified, reported beside, not a band)",
+   "test": "ALeRCE distinct oids >= N_B,hi",
+   "expression": "1937720 >= 1666",
+   "lhs_v": "V-C02",
+   "rhs_v": "V-N02",
+   "result": true
+  },
+  {
+   "axis": "tool_coverage",
+   "delta": "0.05 (ratified, reported beside, not a band)",
+   "test": "CLOSE requires no FM/deep channel accepting v11.1-carried inputs: CATS passes > 0",
+   "expression": "5 > 0",
+   "lhs_v": "V-T02",
+   "rhs_v": "literal",
+   "result": true
+  }
+ ],
+ "definition_widened": false,
+ "axes": [
+  {
+   "axis": "positive_supply",
+   "disposition": "UNDEMONSTRATED",
+   "number": null,
+   "band_reading": {
+    "delta_0.018_frozen": "UNDEMONSTRATED (P unread); CLOSE excluded because O >= N_B,lo",
+    "delta_0.05_beside": "UNDEMONSTRATED; CLOSE excluded because O >= 63; not a band"
+   },
+   "rule_E": {
+    "O": {
+     "value": 1937669,
+     "v": "V-C01"
+    },
+    "N_B 0.018": {
+     "value": [
+      485,
+      12855
+     ],
+     "v": "V-N01"
+    },
+    "N_B 0.05": {
+     "value": [
+      63,
+      1666
+     ],
+     "v": "V-N02"
+    },
+    "M_obs": {
+     "value": 10,
+     "rule_E": "V_PENDING",
+     "use": "context only; not in any ruling or kill-band comparison",
+     "what": "survey nights"
+    },
+    "N_A nights 0.018 / 0.05": {
+     "value": [
+      [
+       40,
+       1515
+      ],
+      [
+       6,
+       197
+      ]
+     ],
+     "rule_E": "V_PENDING",
+     "use": "context only; not in any ruling or kill-band comparison",
+     "what": "night-family thresholds"
+    },
+    "P": "UNDEMONSTRATED (no number)"
+   },
+   "why": "measured positive labels unread: TNS BLOCKED (2026-09-16, 2026-09-17), WISeREP BLOCKED (live HTTP 403; archive 404 on 43/43 incl. controls)"
+  },
+  {
+   "axis": "negative_supply",
+   "disposition": "UNDEMONSTRATED",
+   "number": null,
+   "band_reading": {
+    "delta_0.018_frozen": "UNDEMONSTRATED (Ng unread); CLOSE excluded because O >= N_B,lo",
+    "delta_0.05_beside": "UNDEMONSTRATED; not a band"
+   },
+   "rule_E": {
+    "O": {
+     "value": 1937669,
+     "v": "V-C01"
+    },
+    "Ng": "UNDEMONSTRATED (no number)",
+    "unlabelled_counted_as_negative": 0
+   }
+  },
+  {
+   "axis": "contamination_exposure",
+   "disposition": "PASS (counted)",
+   "number": 1937669,
+   "band_reading": {
+    "delta_0.018_frozen": "ESCALATE",
+    "delta_0.05_beside": "ESCALATE (no delta-dependent term decides it)"
+   },
+   "reason": "not CLOSE: E = O > 0 (V-C01). Not PROCEED: a subject lacks a published cutoff (Gemini 3.1 Pro preview; manifest subject_set, DERIVED, not a number) and E-labelled is UNDEMONSTRATED",
+   "rule_E": {
+    "E": {
+     "value": 1937669,
+     "v": "V-C01"
+    },
+    "S1_excluded": {
+     "value": 521920,
+     "v": "V-C03"
+    },
+    "S0_excluded": {
+     "value": 112990,
+     "rule_E": "V_PENDING",
+     "use": "context only; not in any ruling or kill-band comparison",
+     "what": "S0 loci"
+    },
+    "ANTARES leak": {
+     "value": [
+      193,
+      9000
+     ],
+     "rule_E": "V_PENDING",
+     "use": "context only; not in any ruling or kill-band comparison",
+     "what": "prior-position alerts"
+    }
+   }
+  },
+  {
+   "axis": "tool_coverage",
+   "disposition": "PASS (counted after the band hash; precondition b via V-O02)",
+   "number": {
+    "PASS": 2,
+    "FAIL": 14,
+    "UNDEMONSTRATED": 9
+   },
+   "band_reading": {
+    "delta_0.018_frozen": "ESCALATE",
+    "delta_0.05_beside": "ESCALATE (no delta-dependent threshold)"
+   },
+   "reason": "not CLOSE: CATS accepted Rubin v11.1-named inputs, 5/10 (V-T02). Not PROCEED: CATS's Rubin counterparts (Fink_EarlySNIa_RF, Fink_SLSN_RF) FAIL at emit on 10/10; those per-tool dispositions sit inside the V-T01 retally of all 25 tools (2/14/9) and have no separate V record",
+   "rule_E": {
+    "tally": {
+     "value": [
+      2,
+      14,
+      9
+     ],
+     "v": "V-T01"
+    },
+    "CATS": {
+     "value": "5/10",
+     "v": "V-T02"
+    },
+    "recount after band hash": {
+     "value": "2026-09-16T18:51:26.922781Z",
+     "v": "V-O02"
+    }
+   },
+   "packet_qualifier": "runs used public Fink LSST API JSON rows carrying v11.1 field names; Avro not served (HTTP 400); listed as a disagreement in v3, band reading unchanged"
+  },
+  {
+   "axis": "cluster_structure",
+   "disposition": "PASS",
+   "number": {
+    "merged_objects": 1937669,
+    "alerce_oids": 1937720
+   },
+   "band_reading": {
+    "delta_0.018_frozen": "PROCEED (leans on V_PENDING numbers)",
+    "delta_0.05_beside": "PROCEED (leans on V_PENDING numbers)"
+   },
+   "rule_E": {
+    "O": {
+     "value": 1937669,
+     "v": "V-C01"
+    },
+    "O_A": {
+     "value": 1937720,
+     "v": "V-C02"
+    },
+    "fink_first_detections": {
+     "value": [
+      1773044,
+      2018299
+     ],
+     "rule_E": "V_PENDING",
+     "use": "context only; not in any ruling or kill-band comparison",
+     "what": "Fink aggregate"
+    },
+    "antares_loci": {
+     "value": 1908703,
+     "rule_E": "V_PENDING",
+     "use": "context only; not in any ruling or kill-band comparison",
+     "what": "ANTARES loci"
+    },
+    "raw_detections": {
+     "value": 2418954,
+     "rule_E": "V_PENDING",
+     "use": "context only; not in any ruling or kill-band comparison",
+     "what": "ALeRCE n_det sum"
+    },
+    "fink_raw_alerts": {
+     "value": 3511022,
+     "rule_E": "V_PENDING",
+     "use": "context only; not in any ruling or kill-band comparison",
+     "what": "Fink alerts"
+    }
+   },
+   "lean": "the band's 'every broker in the same band' clause needs the Fink and ANTARES counts, which are V_PENDING; with cleared numbers only, the ALeRCE counts (V-C01, V-C02) clear 12,855 and 1,666"
+  },
+  {
+   "axis": "split_integrity",
+   "disposition": "PASS",
+   "number": {
+    "S1": 521920
+   },
+   "band_reading": {
+    "delta_0.018_frozen": "PROCEED (leans on V_PENDING numbers)",
+    "delta_0.05_beside": "PROCEED (leans on V_PENDING numbers)"
+   },
+   "rule_E": {
+    "S1": {
+     "value": 521920,
+     "v": "V-C03"
+    },
+    "O": {
+     "value": 1937669,
+     "v": "V-C01"
+    },
+    "cross-broker before T0 sample": {
+     "value": "0/8986",
+     "rule_E": "V_PENDING",
+     "use": "context only; not in any ruling or kill-band comparison",
+     "what": "Fink alert-history first before T0"
+    },
+    "O minus listed worst case": {
+     "value": 1896117,
+     "rule_E": "V_PENDING",
+     "use": "context only; not in any ruling or kill-band comparison",
+     "what": "sample-scaled"
+    }
+   },
+   "lean": "S1 is outside O by definition (V-C03); the band also subtracts cohort objects another broker places before T0, measured only on a V_PENDING 9,000-oid sample"
+  },
+  {
+   "axis": "unprocessable_units",
+   "disposition": "PASS",
+   "number": null,
+   "band_reading": {
+    "delta_0.018_frozen": "PROCEED (rests entirely on a V_PENDING number)",
+    "delta_0.05_beside": "PROCEED (rests entirely on a V_PENDING number)"
+   },
+   "rule_E": {
+    "U": {
+     "value": 0,
+     "rule_E": "V_PENDING",
+     "use": "context only; not in any ruling or kill-band comparison",
+     "what": "unprocessable rows"
+    },
+    "O": {
+     "value": 1937669,
+     "v": "V-C01"
+    }
+   },
+   "lean": "U = 0 has no V record; under rule E this PROCEED reading cannot enter a ruling"
+  }
+ ],
+ "rule_E_citations": {
+  "V-C01": {
+   "verdict": "MATCH",
+   "sealed_sha256": "8f5262daef8930d8e21ac46d14268c365f8d172ba5bd2726cf1cb63f89c8c463",
+   "fields": [
+    "O_merged"
+   ]
+  },
+  "V-C02": {
+   "verdict": "MATCH",
+   "sealed_sha256": "667e1e2daa5a8640127bdc4b483da070f86294f62e8e3ce3f2bed94914bdf5b9",
+   "fields": [
+    "O_A"
+   ]
+  },
+  "V-C03": {
+   "verdict": "MATCH",
+   "sealed_sha256": "8a5e0127ab4f0aa541cb52b231c613d06fa5889b089a3f7cedb984679d21eae9",
+   "fields": [
+    "S1_total"
+   ]
+  },
+  "V-C04": {
+   "verdict": "MATCH",
+   "sealed_sha256": "9ed3d5ea214aabb1b1c56acbde859d455329ea678ff178b244465948a8d2a47a",
+   "fields": [
+    "S3_one_detection_share_oids"
+   ]
+  },
+  "V-N01": {
+   "verdict": "MATCH",
+   "sealed_sha256": "422fe2859781b641fc74e666979344ba4544dd44022c623c5e1d0374b9b21f33",
+   "fields": [
+    "w3-09 objects_family_B 0.018 lo",
+    "w3-09 objects_family_B 0.018 hi"
+   ]
+  },
+  "V-N02": {
+   "verdict": "MATCH",
+   "sealed_sha256": "ab094276e33013e16f93ae52ba085afbc1a99a4d6ff8417cd3bec418d84f1cb5",
+   "fields": [
+    "w3-09 objects_family_B 0.05 lo",
+    "w3-09 objects_family_B 0.05 hi"
+   ]
+  },
+  "V-T01": {
+   "verdict": "MATCH",
+   "sealed_sha256": "3c5a69425b1d4f8df62a8818a9cdfb003502b7cd88458a8a4570ff092c7ba399",
+   "fields": [
+    "all.PASS",
+    "all.FAIL",
+    "all.UNDEMONSTRATED"
+   ]
+  },
+  "V-T02": {
+   "verdict": "MATCH",
+   "sealed_sha256": "ee836bd17e9976bd9a5018771554f1a4b9003d87e6f3a1413b82993886fb3792",
+   "fields": [
+    "CATS.passes",
+    "CATS.alerts_run"
+   ]
+  },
+  "V-O02": {
+   "verdict": "MATCH",
+   "sealed_sha256": "7f90669cb3e5be321ee4f2955077ce4ae709f29d7ba78dd614db291b8ea3c609",
+   "fields": [
+    "band_hash_utc"
+   ]
+  }
+ },
+ "rule_E_leans": [
+  "cluster_structure PROCEED needs Fink/ANTARES counts (V_PENDING)",
+  "split_integrity PROCEED needs the cross-broker sample (V_PENDING)",
+  "unprocessable_units PROCEED rests on U = 0 (V_PENDING)"
+ ],
+ "escalation": "escalation_memo.md: loop-ladder rung 2 escalation to the PI (NOT a P4 ruling)",
+ "ppdb": "ppdb_check.json: NOT RELEASED; O (V-C01) upper bound",
+ "completeness": "All seven axes listed against bands_FROZEN.md at 0.018 with 0.05 beside. Ruling-bearing numbers read from V records (V-C01, V-C02, V-C03, V-C04, V-N01, V-N02, V-T01, V-T02, V-O02) with verdict and clearance asserted by scripts/build_package.py; V_PENDING numbers tagged context-only. positive_supply and negative_supply UNDEMONSTRATED (precondition a UNMET) so P4 refuses; ruling null by design and the validator FAIL stands. No label field read."
+}

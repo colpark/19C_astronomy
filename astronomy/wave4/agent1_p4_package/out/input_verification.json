@@ -1,0 +1,38 @@
+{
+ "domain_manifest_v3.json": {
+  "path": "astronomy/wave4/agent3_freeze_v3/domain_manifest_v3.json",
+  "sha256": "0bdf229e9e57ea1699bfd2b70eecbbd0ce58a27895f14f62af87320833e63b6c",
+  "matches_coordinator_prefix": true
+ },
+ "axis_ledger_v3": {
+  "path": "astronomy/wave4/agent3_freeze_v3/axis_ledger_v3_against_frozen_bands.json",
+  "sha256": "83e757570159ef18dabc23bf649bd364e6898f098ab2296b3ae1086b70ef1a50",
+  "matches_coordinator_prefix": true
+ },
+ "v_records.json": {
+  "path": "astronomy/wave4/agent4_module_v/v_records.json",
+  "sha256": "462286d6b4c474091f4e03e0f7587352c4a793e73d17030627d5759cb1ea3a9a",
+  "matches_coordinator_prefix": true
+ },
+ "truth_cost_monthly.json": {
+  "path": "astronomy/wave4/agent2_price_of_truth/truth_cost_monthly.json",
+  "sha256": "2f6791483340e48e52803bc9977eb74faef3e8d5aa6f62dc1f3c4634188d52bf",
+  "matches_coordinator_prefix": true
+ },
+ "bands_FROZEN.md": {
+  "path": "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md",
+  "sha256": "8825ef8048b733b66e12f31ce16e67270de171f52f20f40ca8f21e5780e500d2",
+  "matches_coordinator_prefix": true
+ },
+ "PANEL_BRIEF_WAVE4.md": {
+  "path": "astronomy/wave4/PANEL_BRIEF_WAVE4.md",
+  "sha256": "8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58",
+  "matches_coordinator_prefix": null
+ },
+ "frozen_hash": {
+  "stored": "bd0fa4c67cdbbfb0b8eea9822f536bed4bf934ee1bc81a02606ed6d5ee9585bc",
+  "recomputed": "bd0fa4c67cdbbfb0b8eea9822f536bed4bf934ee1bc81a02606ed6d5ee9585bc",
+  "match": true,
+  "coordinator_prefix_match": true
+ }
+}

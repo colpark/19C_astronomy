@@ -1,0 +1,4 @@
+== validate.py ledger --kind axis_ledger p4_ruling_package.json
+FAIL p4_ruling_package.json
+  - missing or empty 'ruling'
+exit=1
