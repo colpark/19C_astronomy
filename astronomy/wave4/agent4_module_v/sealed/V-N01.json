@@ -1,0 +1,36 @@
+{
+ "id": "N01",
+ "sealed_utc": "2026-09-17T13:25:40Z",
+ "derived": {
+  "planning_mde_bracket.csv|delta=0.018": {
+   "n_rows": 16,
+   "realised_sigma_lo_hi": [
+    485,
+    12855
+   ],
+   "theoretical_sqrt_q_lo_hi": [
+    485,
+    12113
+   ]
+  },
+  "planning_mde_bracket_w3.csv|delta=0.018": {
+   "n_rows": 16,
+   "realised_sigma_lo_hi": [
+    485,
+    12855
+   ],
+   "theoretical_sqrt_q_lo_hi": [
+    485,
+    12113
+   ]
+  }
+ },
+ "method": "own N_min=ceil((1.96+0.8416)^2 sigma^2/delta^2) over the 16 family-B rows; realised sigma column (what power.py saw, 6 dp) and theoretical sqrt(q)",
+ "inputs": {
+  "bracket": "c00718b7440664c6c41c90d93645d5fb68cb397414a7822c29897fe28031ad43",
+  "bracket_w3": "362130b15d4fe093052b16fcbbe300d391e5b977007bd8f917d893f5cc687667"
+ },
+ "premise": {
+  "perturb_last_row_sigma_x1.01_hi_0.018": 12855
+ }
+}

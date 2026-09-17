@@ -1,0 +1,51 @@
+{
+ "id": "Q03",
+ "sealed_utc": "2026-09-17T13:26:46Z",
+ "derived": {
+  "n_included": 387,
+  "excluded_no_reference": 0,
+  "excluded_negative_age": 0,
+  "observed_labelled": 41,
+  "expected": 268.84317420881393,
+  "P_lower_tail": 2.693680051068542e-131,
+  "log10_P": -130.56965399001885,
+  "pmf_total_check": 1.0,
+  "premise_P_at_X_equal_expectation": 0.526235550236833,
+  "premise_dp_vs_scipy_binom": [
+   0.022803683528489195,
+   0.022803683528488817
+  ],
+  "sensitivity_age_from_date_midnight": {
+   "n_included": 387,
+   "excluded_no_reference": 0,
+   "excluded_negative_age": 0,
+   "observed_labelled": 41,
+   "expected": 268.2290163750706,
+   "P_lower_tail": 1.9526012128338165e-130,
+   "log10_P": -129.70938644526834,
+   "pmf_total_check": 0.9999999999999885
+  },
+  "capture_sizes": {
+   "2024-12-08T23:13:31": {
+    "rows": 8696,
+    "duplicate_rows": 0
+   },
+   "2025-08-10T06:50:56": {
+    "rows": 9585,
+    "duplicate_rows": 0
+   },
+   "2026-07-25T03:35:57": {
+    "rows": 10535,
+    "duplicate_rows": 0
+   }
+  },
+  "ruling_derived": "POLICY"
+ },
+ "method": "own regex/html parse of explorer captures (cells: ZTFID..type at index 11), age=capture timestamp JD - (peakt+2458000), bins bands \u00a79, f_C over age>=0, exact log-space Poisson-binomial CDF",
+ "inputs": {
+  "raw": "61415979b75f96bcf2532439109b35f923c5fa1aadfacc5d6013235187ebe570",
+  "2024-12-08T23:13:31": "96b9fe72714a7e3af4e9f2cc8e22b4b60b7a5078dd488e0c9b06c05bd6d2fc43",
+  "2025-08-10T06:50:56": "ec0152effff8b3e4dfb538566ad998ab5e4dd33749c229c9f7518cefcbb373d6",
+  "2026-07-25T03:35:57": "9e1ad100af9e0c14d524cc12640542cee226f123e76996fe9714f8341b230748"
+ }
+}

@@ -1,0 +1,36 @@
+{
+ "id": "N02",
+ "sealed_utc": "2026-09-17T13:25:40Z",
+ "derived": {
+  "planning_mde_bracket.csv|delta=0.05": {
+   "n_rows": 16,
+   "realised_sigma_lo_hi": [
+    63,
+    1666
+   ],
+   "theoretical_sqrt_q_lo_hi": [
+    63,
+    1570
+   ]
+  },
+  "planning_mde_bracket_w3.csv|delta=0.05": {
+   "n_rows": 16,
+   "realised_sigma_lo_hi": [
+    63,
+    1666
+   ],
+   "theoretical_sqrt_q_lo_hi": [
+    63,
+    1570
+   ]
+  }
+ },
+ "method": "as N01 at delta 0.05",
+ "inputs": {
+  "bracket": "c00718b7440664c6c41c90d93645d5fb68cb397414a7822c29897fe28031ad43",
+  "bracket_w3": "362130b15d4fe093052b16fcbbe300d391e5b977007bd8f917d893f5cc687667"
+ },
+ "premise": {
+  "perturb_last_row_sigma_x1.01_hi_0.018": 12855
+ }
+}

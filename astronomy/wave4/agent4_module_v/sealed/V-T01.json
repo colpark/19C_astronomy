@@ -1,0 +1,53 @@
+{
+ "id": "T01",
+ "sealed_utc": "2026-09-17T13:25:01Z",
+ "derived": {
+  "counts": {
+   "UNDEMONSTRATED": 9,
+   "FAIL": 14,
+   "PASS": 2
+  },
+  "n_tools": 25,
+  "dispositions": {
+   "ATAT": "UNDEMONSTRATED",
+   "AstroCLIP": "UNDEMONSTRATED",
+   "SCONE": "UNDEMONSTRATED",
+   "AppleCiDEr": "UNDEMONSTRATED",
+   "MultibandAstromer": "UNDEMONSTRATED",
+   "Superphot": "UNDEMONSTRATED",
+   "Sherlock": "UNDEMONSTRATED",
+   "Blast": "UNDEMONSTRATED",
+   "SNANA": "UNDEMONSTRATED",
+   "Fink_EarlySNIa_RF": "FAIL",
+   "Fink_SLSN_RF": "FAIL",
+   "SuperNNova": "FAIL",
+   "CATS": "PASS",
+   "ORACLE": "FAIL",
+   "ParSNIP": "FAIL",
+   "SALT3_sncosmo": "FAIL",
+   "GHOST": "PASS",
+   "RAPID": "FAIL",
+   "Astromer1": "FAIL",
+   "Astromer2": "FAIL",
+   "AstroM3": "FAIL",
+   "BTSbot": "FAIL",
+   "Maven": "FAIL",
+   "ALeRCE_BHRF": "FAIL",
+   "Superphot_plus": "FAIL"
+  }
+ },
+ "method": "own tally over run_log.jsonl: PASS if >=1 valid alert run status ok and non_default true; FAIL if LOAD ok and no pass; UNDEMONSTRATED if no successful load; GHOST alerts 1-2 voided per AM2 only when FileNotFound present",
+ "inputs": {
+  "run_log.jsonl": "e97ac1f3bb0df6484d2a3f0c0b0bbc0dc73889378c9678b150731b92f2cf9f56",
+  "recount_protocol_FROZEN.md": "f32cf288f1fed6be54ed7c4c44fa0ec8012829945a20eedddf3e439ef5df52e6",
+  "amendments.md": "1c78072009113075ca638dcd8ce0e2e728df94f46d9c0aa42e2611c300e00763"
+ },
+ "premise": {
+  "flip_CATS_non_default_false_counts": {
+   "UNDEMONSTRATED": 9,
+   "FAIL": 15,
+   "PASS": 1
+  },
+  "fires": true
+ }
+}

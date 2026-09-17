@@ -1,0 +1,36 @@
+{
+ "id": "P04",
+ "sealed_utc": "2026-09-17T13:22:13Z",
+ "derived": {
+  "n": 55,
+  "mean_paired_difference_a_minus_b": 0.03636363636363636,
+  "sigma_d": 0.14567993375081928,
+  "var_exact_fraction": "2017/95040",
+  "mde_doc_z": 0.05503316869235119,
+  "n_min_doc_z_delta_0.018": 515,
+  "n_min_unceiled_doc_z_delta_0.018": 514.1226268445776,
+  "n_min_doc_z_delta_0.05": 67,
+  "n_min_unceiled_doc_z_delta_0.05": 66.63029243905723,
+  "mde_exact_z": 0.05503287832467465,
+  "n_min_exact_z_delta_0.018": 515,
+  "n_min_unceiled_exact_z_delta_0.018": 514.1172016000447,
+  "n_min_exact_z_delta_0.05": 67,
+  "n_min_unceiled_exact_z_delta_0.05": 66.62958932736578,
+  "premise_pairing_shuffle": {
+   "sigma_d_orig": 0.14567993375081928,
+   "sigma_d_pairing_shuffled": 0.25421530417231153,
+   "changed": true
+  },
+  "crosscheck_per_run_file_sigma_d": 0.14567993375081928,
+  "crosscheck_per_run_file_sha256": "890d710e93bb54203c2fe1930d6745e7f5429e4e17089fd0ff5bf2f68b13ca89",
+  "premise_nmin_consistent_with_mde": true,
+  "premise_mde_at_nmin_le_delta": {
+   "0.018": 0.01798466072932213,
+   "0.05": 0.04986185858705897
+  }
+ },
+ "method": "own exact-rational paired sd (ddof=1) over paired_scores.csv rows filtered by epoch/item_type/k_binding; MDE=z*sd/sqrt(n); N_min=ceil(z^2 var/delta^2); z doc=1.96+0.8416 (power.py documented constants) and exact scipy z reported",
+ "inputs": {
+  "paired_scores.csv": "d93b31e2fea53ef00f4711cd7e5281fedbf68095d34fcfa62c7c00a60ad01816"
+ }
+}

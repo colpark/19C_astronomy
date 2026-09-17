@@ -1,0 +1,60 @@
+{
+ "id": "O01",
+ "sealed_utc": "2026-09-17T13:25:01Z",
+ "derived": {
+  "wave3_brief_mtime_utc": "2026-09-16T20:14:03.472013+00:00",
+  "wave3_brief_sha256_now": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+  "wave3_brief_contains_override_text": true,
+  "earliest_self_logged_brief_hash_verification_utc": "2026-09-16T20:15:13.113509+00:00",
+  "brief_verifications": [
+   [
+    "wave3/agent2_measured_labels/order_of_operations.log",
+    "2026-09-17T00:06:37.066307Z",
+    true
+   ],
+   [
+    "wave3/agent5_integrity/order_of_operations.log",
+    "2026-09-16T20:15:49.834219Z",
+    true
+   ],
+   [
+    "wave3/agent1_cohort_finish/order_of_operations.log",
+    "2026-09-16T20:15:13.113509Z",
+    true
+   ],
+   [
+    "wave3/agent3_manifest_freeze/order_of_operations.log",
+    "2026-09-17T00:09:28.149501Z",
+    true
+   ],
+   [
+    "wave3/agent4_tool_recount/order_of_operations.log",
+    "2026-09-16T20:47:57.489300Z",
+    true
+   ]
+  ],
+  "power_calibration_json_mtime_utc": "2026-09-16T20:44:29.633312+00:00",
+  "earliest_wave2_power_output_mtime_utc": "2026-09-16T20:43:28.176123+00:00",
+  "w3a4_step1_log_utc": "2026-09-16T20:48:29.628997+00:00",
+  "w3a4_step1_logged_hash_equals_current_delta005_file": true,
+  "delta005_file_mtime_utc": "2026-09-16T20:48:29.586013+00:00",
+  "order_override_lt_first_MDE_mtime": true,
+  "order_first_MDE_lt_resolvability": true,
+  "order_holds_in_UTC": true,
+  "gap_override_to_first_power_output_min": 29.411735166666666,
+  "cannot_establish_without_git": [
+   "commit times 32229e3 15:14:03-0500 and f898294 15:46 -0500 (quoted in preamble, not independently read)",
+   "whether an earlier, overwritten version of power_calibration.json or any MDE print existed before 20:14Z (mtime is last-modification only)",
+   "clock integrity: all mtimes and logs are self-reported on one host"
+  ]
+ },
+ "method": "file mtimes (os.stat, UTC), first lines of wave-3 order_of_operations logs, hash of delta005 file vs step-1 log line",
+ "inputs": {
+  "brief": "a618d9114ec7c937cf6115a67be188a16a69856949bde33bf6fa9c8e8981c4b6",
+  "power_calibration.json": "e02fd0f2a9d608abb7f814d321d3caa1669767318a16886da04b126c63937f8d",
+  "delta005": "0258c82e68c51cb3f764f4c00d992a580627939142422f4ad17391e6e00f5fa2"
+ },
+ "premise": {
+  "swap_brief_and_power_times_breaks_order": true
+ }
+}

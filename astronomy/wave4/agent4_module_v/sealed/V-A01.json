@@ -1,0 +1,33 @@
+{
+ "id": "A01",
+ "sealed_utc": "2026-09-17T13:23:13Z",
+ "derived": {
+  "epoch": "E1",
+  "composition": "C-1",
+  "n_scored": 2558,
+  "n_posB": 586,
+  "auc_posB": 0.5996251272075266,
+  "ci95_percentile_default_rng0": [
+   0.5741779466807663,
+   0.6260135344631271
+  ],
+  "ci95_percentile_RandomState0_sensitivity": [
+   0.5741539694145487,
+   0.6261190195364993
+  ],
+  "bootstrap_B_used": 1000,
+  "premise": {
+   "label_permutation_seed1_auc": 0.5246090315613123,
+   "negated_scores_auc": 0.40037487279247347,
+   "one_minus_auc": 0.4003748727924734,
+   "producer_perm_prediction_file_auc_under_our_labels": 0.5141053243705391,
+   "sklearn_crosscheck": 0.5996251272075266
+  }
+ },
+ "method": "own midrank Mann-Whitney AUC over scored pool (posA or neg by corpus type map, unit=object_cluster_1arcsec), posB positive; 1000 object-bootstrap percentile CI seeded 0",
+ "inputs": {
+  "pred": "4d412a752ea813ec8848351c8006ce7d7b3ca1695c75e40fead891f7591e3fea",
+  "corpus": "b059acf0656ed79fc743944b560aa3fd358096963067d96e144850403c3d8442",
+  "manifest_mismatches": []
+ }
+}

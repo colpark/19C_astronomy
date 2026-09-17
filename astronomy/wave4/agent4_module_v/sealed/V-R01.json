@@ -1,0 +1,21 @@
+{
+ "id": "R01",
+ "sealed_utc": "2026-09-17T13:25:40Z",
+ "derived": {
+  "n_rows": 288,
+  "rows_mismatching_formula": 0,
+  "first_mismatches": [],
+  "L_values_seen": [
+   "0"
+  ]
+ },
+ "method": "own rational-arithmetic reimplementation of census_protocol_FROZEN \u00a710 over input columns; compared row-wise to the output columns",
+ "inputs": {
+  "truth_cost_table.csv": "8eee9f94b55d5ccad10e32cf721073d729865c442aff662661117a0f703b09a3",
+  "census_protocol": "9fac85524f28b5e3874a0d43a2c089915d20814b7996c18a0c77cc230b3c95fb"
+ },
+ "premise": {
+  "row0_S_with_p=0.5": 1044,
+  "row0_S_orig": 644
+ }
+}

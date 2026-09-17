@@ -1,0 +1,18 @@
+{
+ "id": "C02",
+ "sealed_utc": "2026-09-17T13:23:37Z",
+ "derived": {
+  "O_A": 1937720
+ },
+ "method": "own pandas+cKDTree chord-distance (<=2sin(0.5arcsec)) pairs, |dfirstmjd|<=60 d edges, scipy connected_components; X1 dedupe on oid; union C3+P60; S1-direct from P60 and C5 lastmjd>=T0; T0=61222.000428",
+ "inputs": {
+  "SLICES_SHA256SUMS": "d7c131808b5db1569a271627a348f4ef4fedd118f20955757c8b1ffa872f9599",
+  "slice_hash_check": "3501/3501 OK (sha256sum -c) at 13:3xZ",
+  "bands_FROZEN": "8825ef80...00d2",
+  "count_protocol_w3": "de241fc9...b649"
+ },
+ "premise": {
+  "duplicate_5000_rows_O_A": 1937720,
+  "drop_largest_slice_O_A": 1807391
+ }
+}

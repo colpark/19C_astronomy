@@ -1,0 +1,48 @@
+.......................F..................F.                             [100%]
+=================================== FAILURES ===================================
+______________________ test_mde_scales_inverse_sqrt_n[10] ______________________
+
+i = 10
+
+    @pytest.mark.parametrize("i",range(12))
+    def test_mde_scales_inverse_sqrt_n(i):
+        sd=GRID.uniform(0.01,0.8); n=GRID.randint(10,400); rng=random.Random(1000+i)
+        _,r1,_=run_power(*cols_with_sd(n,sd,rng),0.05); _,r4,_=run_power(*cols_with_sd(4*n,sd,rng),0.05)
+>       assert abs(r1["mde"]-Z*sd/math.sqrt(n))<=2e-6 and abs(r4["mde"]/r1["mde"]-0.5)<=1e-4
+E       assert (2.792398949608317e-07 <= 2e-06 and 0.00013119916032533485 <= 0.0001)
+E        +  where 2.792398949608317e-07 = abs((0.003811 - ((2.8016 * 0.026518956983078247) / 19.493588689617926)))
+E        +    where 19.493588689617926 = <built-in function sqrt>(380)
+E        +      where <built-in function sqrt> = math.sqrt
+E        +  and   0.00013119916032533485 = abs(((0.001906 / 0.003811) - 0.5))
+
+test_properties.py:62: AssertionError
+_____________ test_power_ragged_row_is_refused_not_silently_paired _____________
+
+    def test_power_ragged_row_is_refused_not_silently_paired():
+        # mismatched column lengths are only expressible as a short row; csv.DictReader fills None, power.py calls .strip() on None
+        fd,p=tempfile.mkstemp(suffix=".csv"); os.close(fd); open(p,"w").write("a,b\n1,2\n3\n5,6\n")
+        r=subprocess.run([PY,VEND,"--scores",p,"--col-a","a","--col-b","b","--k","8","--candidates-per-item","46","--delta","0.05"],capture_output=True,text=True); os.unlink(p)
+>       assert r.returncode!=0 and "Traceback" not in r.stderr, r.stderr[-300:]
+E       AssertionError:      ^^^^^^^^^^^^^^^^^^^^^^
+E           File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave4/agent4_module_v/property_tests/../../../../fm-advantage-benchmark/scripts/power.py", line 20, in col
+E             v = r[name].strip()
+E                 ^^^^^^^^^^^^^
+E         AttributeError: 'NoneType' object has no attribute 'strip'
+E         
+E       assert (1 != 0 and 'Traceback' not in "Traceback (...te 'strip'\n"
+E        +  where 1 = CompletedProcess(args=['/tmp/claude-1000/-home-aid1-Documents-4-19C-astronomy/addb1fc3-63d3-4989-8753-aa4c400b100e/scr...col\n    v = r[name].strip()\n        ^^^^^^^^^^^^^\nAttributeError: \'NoneType\' object has no attribute \'strip\'\n').returncode
+E         
+E         'Traceback' is contained here:
+E           Traceback (most recent call last):
+E         ? +++++++++
+E             File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave4/agent4_module_v/property_tests/../../../../fm-advantage-benchmark/scripts/power.py", line 79, in <module>
+E               if __name__ == "__main__": raise SystemExit(main())
+E                                                           ^^^^^^...
+E         
+E         ...Full output truncated (7 lines hidden), use '-vv' to show)
+
+test_properties.py:92: AssertionError
+=========================== short test summary info ============================
+FAILED test_properties.py::test_mde_scales_inverse_sqrt_n[10] - assert (2.792...
+FAILED test_properties.py::test_power_ragged_row_is_refused_not_silently_paired
+2 failed, 42 passed in 5.79s

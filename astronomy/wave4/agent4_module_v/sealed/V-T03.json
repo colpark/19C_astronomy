@@ -1,0 +1,18 @@
+{
+ "id": "T03",
+ "sealed_utc": "2026-09-17T13:25:01Z",
+ "derived": {
+  "alert_runs": 160,
+  "all_log_lines": 198
+ },
+ "method": "count run_log lines whose alert_id not in PRECHECK/LOAD",
+ "inputs": {
+  "run_log.jsonl": "e97ac1f3bb0df6484d2a3f0c0b0bbc0dc73889378c9678b150731b92f2cf9f56",
+  "recount_protocol_FROZEN.md": "f32cf288f1fed6be54ed7c4c44fa0ec8012829945a20eedddf3e439ef5df52e6",
+  "amendments.md": "1c78072009113075ca638dcd8ce0e2e728df94f46d9c0aa42e2611c300e00763"
+ },
+ "premise": {
+  "including_precheck_load": 198,
+  "fires": true
+ }
+}

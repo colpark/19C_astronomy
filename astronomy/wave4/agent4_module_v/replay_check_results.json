@@ -1,0 +1,80 @@
+[
+ {
+  "case_id": "V-01",
+  "polarity": "must_fire",
+  "verdict": "DISCREPANCY",
+  "fired": true,
+  "pass": true,
+  "comparison": {
+   "field": "O_merged",
+   "claimed": 1938669,
+   "derived": 1937669,
+   "abs_diff": 1000,
+   "rel_diff": 0.0005158178110858532,
+   "tol": "exact",
+   "verdict": "DISCREPANCY"
+  }
+ },
+ {
+  "case_id": "V-02",
+  "polarity": "must_not_fire",
+  "verdict": "MATCH_WITHIN_TOL",
+  "fired": false,
+  "pass": true,
+  "comparison": {
+   "field": "sigma_d",
+   "claimed": 0.0897781563061349,
+   "derived": 0.0897781114170792,
+   "abs_diff": 4.4889055708652315e-08,
+   "rel_diff": 4.999997500013805e-07,
+   "tol": {
+    "declared_abs": 1e-09,
+    "declared_rel": 1e-06,
+    "recorded_decimals": 16,
+    "rounding_allowance": 0.0,
+    "effective_abs": 8.977815630613491e-08
+   },
+   "verdict": "MATCH_WITHIN_TOL"
+  }
+ },
+ {
+  "case_id": "V-03",
+  "polarity": "must_fire",
+  "verdict": "DISCREPANCY",
+  "fired": true,
+  "pass": true,
+  "comparison": {
+   "field": "P_lower_tail",
+   "claimed": 6.6e-146,
+   "derived": 5.199601375735901e-146,
+   "log10_claimed": -145.18045606445813,
+   "log10_derived": -145.28402995001022,
+   "abs_diff_log10": 0.10357388555209468,
+   "rel_diff": 0.21218160973698463,
+   "tol": "abs 0.05 in log10",
+   "verdict": "DISCREPANCY"
+  }
+ },
+ {
+  "case_id": "V-04",
+  "polarity": "must_not_fire",
+  "verdict": "MATCH_WITHIN_TOL",
+  "fired": false,
+  "pass": true,
+  "comparison": {
+   "field": "ci95[1]",
+   "claimed": 0.6221,
+   "derived": 0.6242,
+   "abs_diff": 0.0020999999999999908,
+   "rel_diff": 0.003375663076675761,
+   "tol": {
+    "declared_abs": 0.01,
+    "declared_rel": 0.0,
+    "recorded_decimals": 4,
+    "rounding_allowance": 5e-05,
+    "effective_abs": 0.01
+   },
+   "verdict": "MATCH_WITHIN_TOL"
+  }
+ }
+]

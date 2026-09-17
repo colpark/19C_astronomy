@@ -1,0 +1,82 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /tmp/claude-1000/-home-aid1-Documents-4-19C-astronomy/addb1fc3-63d3-4989-8753-aa4c400b100e/scratchpad/venv/bin/python
+hypothesis profile 'default'
+rootdir: /home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave4/agent4_module_v/property_tests
+plugins: anyio-4.15.1, hypothesis-6.168.0
+collecting ... collected 44 items
+
+test_properties.py::test_interval_contains_point PASSED                  [  2%]
+test_properties.py::test_monotone_in_n PASSED                            [  4%]
+test_properties.py::test_agrees_with_scipy_beta_ppf PASSED               [  6%]
+test_properties.py::test_no_crash_large_n[1] PASSED                      [  9%]
+test_properties.py::test_no_crash_large_n[2] PASSED                      [ 11%]
+test_properties.py::test_no_crash_large_n[1071] PASSED                   [ 13%]
+test_properties.py::test_no_crash_large_n[1072] PASSED                   [ 15%]
+test_properties.py::test_no_crash_large_n[1073] PASSED                   [ 18%]
+test_properties.py::test_no_crash_large_n[10000] PASSED                  [ 20%]
+test_properties.py::test_no_crash_large_n[100000] PASSED                 [ 22%]
+test_properties.py::test_no_crash_large_n[1000000] PASSED                [ 25%]
+test_properties.py::test_queue_refuses_non_nesting_counts PASSED         [ 27%]
+test_properties.py::test_unpatched_queue_crashes_at_1072_control PASSED  [ 29%]
+test_properties.py::test_mde_scales_inverse_sqrt_n[0] PASSED             [ 31%]
+test_properties.py::test_mde_scales_inverse_sqrt_n[1] PASSED             [ 34%]
+test_properties.py::test_mde_scales_inverse_sqrt_n[2] PASSED             [ 36%]
+test_properties.py::test_mde_scales_inverse_sqrt_n[3] PASSED             [ 38%]
+test_properties.py::test_mde_scales_inverse_sqrt_n[4] PASSED             [ 40%]
+test_properties.py::test_mde_scales_inverse_sqrt_n[5] PASSED             [ 43%]
+test_properties.py::test_mde_scales_inverse_sqrt_n[6] PASSED             [ 45%]
+test_properties.py::test_mde_scales_inverse_sqrt_n[7] PASSED             [ 47%]
+test_properties.py::test_mde_scales_inverse_sqrt_n[8] PASSED             [ 50%]
+test_properties.py::test_mde_scales_inverse_sqrt_n[9] PASSED             [ 52%]
+test_properties.py::test_mde_scales_inverse_sqrt_n[10] PASSED            [ 54%]
+test_properties.py::test_mde_scales_inverse_sqrt_n[11] PASSED            [ 56%]
+test_properties.py::test_nmin_consistent_with_mde[0] PASSED              [ 59%]
+test_properties.py::test_nmin_consistent_with_mde[1] PASSED              [ 61%]
+test_properties.py::test_nmin_consistent_with_mde[2] PASSED              [ 63%]
+test_properties.py::test_nmin_consistent_with_mde[3] PASSED              [ 65%]
+test_properties.py::test_nmin_consistent_with_mde[4] PASSED              [ 68%]
+test_properties.py::test_nmin_consistent_with_mde[5] PASSED              [ 70%]
+test_properties.py::test_nmin_consistent_with_mde[6] PASSED              [ 72%]
+test_properties.py::test_nmin_consistent_with_mde[7] PASSED              [ 75%]
+test_properties.py::test_nmin_consistent_with_mde[8] PASSED              [ 77%]
+test_properties.py::test_nmin_consistent_with_mde[9] PASSED              [ 79%]
+test_properties.py::test_nmin_consistent_with_mde[10] PASSED             [ 81%]
+test_properties.py::test_nmin_consistent_with_mde[11] PASSED             [ 84%]
+test_properties.py::test_mde_decreases_with_n_one_seed PASSED            [ 86%]
+test_properties.py::test_power_refuses_empty_file PASSED                 [ 88%]
+test_properties.py::test_power_refuses_missing_column PASSED             [ 90%]
+test_properties.py::test_power_refuses_mismatched_columns_blank_cell PASSED [ 93%]
+test_properties.py::test_power_refuses_single_unit PASSED                [ 95%]
+test_properties.py::test_power_ragged_row_is_refused_not_silently_paired FAILED [ 97%]
+test_properties.py::test_power_large_n_no_crash PASSED                   [100%]
+
+=================================== FAILURES ===================================
+_____________ test_power_ragged_row_is_refused_not_silently_paired _____________
+
+    def test_power_ragged_row_is_refused_not_silently_paired():
+        # mismatched column lengths are only expressible as a short row; csv.DictReader fills None, power.py calls .strip() on None
+        fd,p=tempfile.mkstemp(suffix=".csv"); os.close(fd); open(p,"w").write("a,b\n1,2\n3\n5,6\n")
+        r=subprocess.run([PY,VEND,"--scores",p,"--col-a","a","--col-b","b","--k","8","--candidates-per-item","46","--delta","0.05"],capture_output=True,text=True); os.unlink(p)
+>       assert r.returncode!=0 and "Traceback" not in r.stderr, r.stderr[-300:]
+E       AssertionError:      ^^^^^^^^^^^^^^^^^^^^^^
+E           File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave4/agent4_module_v/property_tests/../../../../fm-advantage-benchmark/scripts/power.py", line 20, in col
+E             v = r[name].strip()
+E                 ^^^^^^^^^^^^^
+E         AttributeError: 'NoneType' object has no attribute 'strip'
+E         
+E       assert (1 != 0 and 'Traceback' not in "Traceback (...te 'strip'\n"
+E        +  where 1 = CompletedProcess(args=['/tmp/claude-1000/-home-aid1-Documents-4-19C-astronomy/addb1fc3-63d3-4989-8753-aa4c400b100e/scratchpad/venv/bin/python', '/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave4/agent4_module_v/property_tests/../../../../fm-advantage-benchmark/scripts/power.py', '--scores', '/tmp/tmp3qybagy8.csv', '--col-a', 'a', '--col-b', 'b', '--k', '8', '--candidates-per-item', '46', '--delta', '0.05'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave4/agent4_module_v/property_tests/../../../../fm-advantage-benchmark/scripts/power.py", line 79, in <module>\n    if __name__ == "__main__": raise SystemExit(main())\n                                                ^^^^^^\n  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave4/agent4_module_v/property_tests/../../../../fm-advantage-benchmark/scripts/power.py", line 37, in main\n    A, B = col(a.scores, a.col_a), col(a.scores, a.col_b)\n                                   ^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave4/agent4_module_v/property_tests/../../../../fm-advantage-benchmark/scripts/power.py", line 20, in col\n    v = r[name].strip()\n        ^^^^^^^^^^^^^\nAttributeError: \'NoneType\' object has no attribute \'strip\'\n').returncode
+E         
+E         'Traceback' is contained here:
+E           Traceback (most recent call last):
+E         ? +++++++++
+E             File "/home/aid1/Documents/4_19C_astronomy/repo/astronomy/wave4/agent4_module_v/property_tests/../../../../fm-advantage-benchmark/scripts/power.py", line 79, in <module>
+E               if __name__ == "__main__": raise SystemExit(main())
+E                                                           ^^^^^^...
+E         
+E         ...Full output truncated (7 lines hidden), use '-vv' to show)
+
+test_properties.py:93: AssertionError
+=========================== short test summary info ============================
+FAILED test_properties.py::test_power_ragged_row_is_refused_not_silently_paired
+========================= 1 failed, 43 passed in 5.76s =========================

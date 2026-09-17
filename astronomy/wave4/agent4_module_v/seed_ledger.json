@@ -1,0 +1,16 @@
+{
+ "agent": "wave4/agent4_module_v",
+ "date": "2026-09-17",
+ "seeds": [
+  {"use": "AUC object bootstrap 95% CI (A01-A04), B=1000, percentile", "generator": "numpy.random.default_rng", "seed": 0, "script": "scripts/derive_auc_nights.py", "note": "compositions_FROZEN.md §4 declares seed 0; the verifier's own resampling loop"},
+  {"use": "AUC bootstrap sensitivity (legacy stream)", "generator": "numpy.random.RandomState", "seed": 0, "script": "scripts/derive_auc_nights.py"},
+  {"use": "AUC premise: posB label permutation", "generator": "numpy.random.default_rng", "seed": 1, "script": "scripts/derive_auc_nights.py"},
+  {"use": "power premise: shuffle pairing of col b", "generator": "random.Random", "seed": 20260917, "script": "scripts/derive_power.py"},
+  {"use": "property tests: hypothesis strategies", "generator": "hypothesis settings(derandomize=True), max_examples=300", "seed": "derandomized (hypothesis 6.168.0)", "script": "property_tests/test_properties.py"},
+  {"use": "property tests: seeded random grid for power.py (sd, n, delta)", "generator": "random.Random", "seed": 20260917, "script": "property_tests/test_properties.py"},
+  {"use": "property tests: synthetic paired columns", "generator": "random.Random", "seed": "1000+i, 2000+i (i=0..11), 7, 11", "script": "property_tests/test_properties.py"},
+  {"use": "invariance comparator controls (synthetic)", "generator": "random.Random", "seed": 20260917, "script": "scripts/inv_controls.py"}
+ ],
+ "unseeded_deterministic": ["cohort recount and perturbations (derive_cohort.py, premise_extra.py)", "label parse (derive_labels.py, labels_lib_r1.py)", "Poisson-binomial DP (derive_accrual.py)", "truth-cost and N bracket (derive_cost.py)", "tool tally and timestamps (derive_tools_time.py)", "CATS inference (TensorFlow CPU; repeat-alone bitwise stable)", "GHOST host association (network catalog queries; see invariance.json)"],
+ "completeness": "every random draw in module V scripts is listed; no other RNG is called by verifier code"
+}

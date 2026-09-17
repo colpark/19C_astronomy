@@ -1,0 +1,14 @@
+{
+ "agent": "wave4/agent4_module_v",
+ "session_start_utc": "2026-09-17T13:14:53Z",
+ "session_end_utc": "2026-09-17T14:06:16Z",
+ "wall_time_minutes": 51.4,
+ "tool_calls": 125,
+ "tool_calls_method": "counted by the agent from its own transcript at close (approximate to +/-3; the harness transcript is authoritative)",
+ "background_compute": ["cohort recount ~1.5 min", "premise perturbations ~3 min", "GHOST invariance run ~9 min plus control ~9 min (network catalog queries)"],
+ "alert_runs_used": 38,
+ "alert_run_cap": 90,
+ "cap": "15% of wave-4 effort (ruling 5)",
+ "share_of_wave": "not computable by this agent: the wave total (agents 1, 2, 3, 5 tool calls and wall time) is not visible here; the coordinator computes share = this / wave total",
+ "rework_inside_overhead": ["label parse defects found after sealing (double gzip, E2 placement) and cause tracing ~12 tool calls", "invariance comparator NaN-masking defect and GHOST rerun (8 alert runs, ~10 tool calls)", "one property test tolerance amendment", "one validator wording fix"]
+}

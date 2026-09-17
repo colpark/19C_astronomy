@@ -1,0 +1,44 @@
+{
+ "id": "T02",
+ "sealed_utc": "2026-09-17T13:25:01Z",
+ "derived": {
+  "CATS": {
+   "alerts_logged": 10,
+   "valid": 10,
+   "passes": 5
+  },
+  "GHOST": {
+   "alerts_logged": 10,
+   "valid": 8,
+   "passes": 3
+  },
+  "voided_rows": [
+   [
+    "GHOST",
+    "170609056632799366",
+    "error:infer",
+    true
+   ],
+   [
+    "GHOST",
+    "170609056632800306",
+    "error:infer",
+    true
+   ]
+  ]
+ },
+ "method": "as T01",
+ "inputs": {
+  "run_log.jsonl": "e97ac1f3bb0df6484d2a3f0c0b0bbc0dc73889378c9678b150731b92f2cf9f56",
+  "recount_protocol_FROZEN.md": "f32cf288f1fed6be54ed7c4c44fa0ec8012829945a20eedddf3e439ef5df52e6",
+  "amendments.md": "1c78072009113075ca638dcd8ce0e2e728df94f46d9c0aa42e2611c300e00763"
+ },
+ "premise": {
+  "unvoided_GHOST": {
+   "alerts_logged": 10,
+   "valid": 10,
+   "passes": 3
+  },
+  "fires": true
+ }
+}

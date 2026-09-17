@@ -1,0 +1,123 @@
+{
+ "id": "L-r1",
+ "sealed_utc": "2026-09-17T13:32:43Z",
+ "derived": {
+  "key=ztfid|E5cut=1259.5": {
+   "cats": {
+    "UNRESOLVED": 5815,
+    "MODEL_ANNOTATION": 954,
+    "MEASURED": 1074
+   },
+   "P": 5067,
+   "L": 954,
+   "U": 2139,
+   "U_noE5": 2654,
+   "nE1": 1074,
+   "nE4": 1340,
+   "nE5": 1854
+  },
+  "key=ztfid|E5cut=1259.5|w2only": {
+   "cats": {
+    "UNRESOLVED": 6156,
+    "MODEL_ANNOTATION": 803,
+    "MEASURED": 884
+   },
+   "P": 5067,
+   "L": 803,
+   "U": 2329,
+   "U_noE5": 2844,
+   "nE1": 884,
+   "nE4": 1340,
+   "nE5": 1854
+  },
+  "key=ztfid|E5cut=1289.5": {
+   "cats": {
+    "UNRESOLVED": 5815,
+    "MODEL_ANNOTATION": 954,
+    "MEASURED": 1074
+   },
+   "P": 5067,
+   "L": 954,
+   "U": 2057,
+   "U_noE5": 2654,
+   "nE1": 1074,
+   "nE4": 1340,
+   "nE5": 1936
+  },
+  "key=ztfid|E5cut=1289.5|w2only": {
+   "cats": {
+    "UNRESOLVED": 6156,
+    "MODEL_ANNOTATION": 803,
+    "MEASURED": 884
+   },
+   "P": 5067,
+   "L": 803,
+   "U": 2247,
+   "U_noE5": 2844,
+   "nE1": 884,
+   "nE4": 1340,
+   "nE5": 1936
+  },
+  "key=iau|E5cut=1259.5": {
+   "cats": {
+    "UNRESOLVED": 5813,
+    "MODEL_ANNOTATION": 955,
+    "MEASURED": 1075
+   },
+   "P": 5067,
+   "L": 955,
+   "U": 2138,
+   "U_noE5": 2653,
+   "nE1": 1075,
+   "nE4": 1340,
+   "nE5": 1854
+  },
+  "key=iau|E5cut=1259.5|w2only": {
+   "cats": {
+    "UNRESOLVED": 6154,
+    "MODEL_ANNOTATION": 804,
+    "MEASURED": 885
+   },
+   "P": 5067,
+   "L": 804,
+   "U": 2328,
+   "U_noE5": 2843,
+   "nE1": 885,
+   "nE4": 1340,
+   "nE5": 1854
+  },
+  "key=iau|E5cut=1289.5": {
+   "cats": {
+    "UNRESOLVED": 5813,
+    "MODEL_ANNOTATION": 955,
+    "MEASURED": 1075
+   },
+   "P": 5067,
+   "L": 955,
+   "U": 2056,
+   "U_noE5": 2653,
+   "nE1": 1075,
+   "nE4": 1340,
+   "nE5": 1936
+  },
+  "key=iau|E5cut=1289.5|w2only": {
+   "cats": {
+    "UNRESOLVED": 6154,
+    "MODEL_ANNOTATION": 804,
+    "MEASURED": 885
+   },
+   "P": 5067,
+   "L": 804,
+   "U": 2246,
+   "U_noE5": 2843,
+   "nE1": 885,
+   "nE4": 1340,
+   "nE5": 1936
+  }
+ },
+ "method": "POST-DISCLOSURE re-derivation (not blind): sealed after the claimed values were opened, to establish discrepancy causes. Fixes: (a) decode double-gzipped captures (5 wave-2 pages logged 'invalid'); (b) E2 places MODEL_ANNOTATION per definitions \u00a75 table; (c) evidence keyed per fetched ZTFID vs per IAU name (\u00a71 ambiguity, 2 shared-name rows); (d) E5 cut literal 1259.5 vs semantic 1289.5 (\u00a75 arithmetic: JD 2459319.5-2458000=1319.5)",
+ "inputs": {
+  "script": "025876fa73acc694fb1956f695ad542e52710b918fb7d7c6f8c6f8c4b8fc92a5",
+  "diff_bound_e5": "1992f440288336ea5c2b099da7687df11393314cc9597aa6b315a97afde851a0"
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "id": "K01",
+ "sealed_utc": "2026-09-17T13:23:14Z",
+ "derived": {
+  "E1_nights_gt8": 61,
+  "E1_nights_total": 579,
+  "E3": {
+   "scored_pool_units": 2558,
+   "units_conflicting_class": 0,
+   "nights_total": 579,
+   "nights_gt8": 61,
+   "nights_le8": 518
+  }
+ },
+ "method": "distinct decision_night over scored-pool units in pred_E1_C.csv; count >8 units",
+ "inputs": {
+  "pred_E1_C": "d56e45304c9754205ce956771747d549b26c054bd08e94fcd1eab27826b30772",
+  "corpus": "b059acf0656ed79fc743944b560aa3fd358096963067d96e144850403c3d8442"
+ },
+ "premise": {
+  "plant_60_detected": true
+ }
+}

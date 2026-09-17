@@ -1,0 +1,139 @@
+{
+ "id": "L02",
+ "sealed_utc": "2026-09-17T13:28:42Z",
+ "derived": {
+  "U": 2143,
+  "U_noE5": 2658,
+  "bound_wave3_rule": [
+   953,
+   2143
+  ],
+  "bound_wave2_rule": [
+   953,
+   2143
+  ],
+  "P": 5067
+ },
+ "method": "own regex parser of archived TNS pages (class-fieldset / spectra-fieldset, cell-* classes), latest report by time received, \u00a73 markers on Classifier/s, \u00a74 match, \u00a72 categories (marker before spectrum rule; variants recorded), \u00a76 bound with E2 (15 names from 2104.12980/2401.15167), E4 (2021-01-28 explorer capture type SN Ia), E5 (peakt<1259.5)",
+ "inputs": {
+  "definitions": "4f89ff6718a14ad4e45a6d33d6bde848448ba6a66d895bd970330efe397b37cf",
+  "raw": "61415979b75f96bcf2532439109b35f923c5fa1aadfacc5d6013235187ebe570",
+  "w2_fetch_log": "34f1311a8def62c93d5dd46f53a3944a996c8bc718111c9412736478f5db519d",
+  "w3_fetch_log": "3fa3f078cd9d27141a11a03837aa8c4fe6ca34636d6c84ba12d15d552822a85a",
+  "E4_capture": "30dbb78bd2d6379e3f3e5355ccd3eb50517e3bc2d597c396d46187f704dd47f1"
+ },
+ "variants": {
+  "phot_first": {
+   "population": 7843,
+   "categories": {
+    "UNRESOLVED": 5825,
+    "MODEL_ANNOTATION": 948,
+    "MEASURED": 1070
+   },
+   "reasons": {
+    "no_valid_E1": 5792,
+    "marker": 948,
+    "no_reports": 31,
+    "human+spectrum": 1070,
+    "mismatch": 2
+   },
+   "P_plain_SN_Ia": 5067,
+   "L_strong": 948,
+   "L": 953,
+   "U": 2143,
+   "U_noE5": 2658,
+   "bound_wave2_rule": [
+    953,
+    2143
+   ],
+   "bound_wave3_rule": [
+    953,
+    2143
+   ],
+   "E4_objects": 1340
+  },
+  "spec_cell_rule": {
+   "population": 7843,
+   "categories": {
+    "UNRESOLVED": 5825,
+    "MODEL_ANNOTATION": 948,
+    "MEASURED": 1070
+   },
+   "reasons": {
+    "no_valid_E1": 5792,
+    "marker": 948,
+    "no_reports": 31,
+    "human+spectrum": 1070,
+    "mismatch": 2
+   },
+   "P_plain_SN_Ia": 5067,
+   "L_strong": 948,
+   "L": 953,
+   "U": 2143,
+   "U_noE5": 2658,
+   "bound_wave2_rule": [
+    953,
+    2143
+   ],
+   "bound_wave3_rule": [
+    953,
+    2143
+   ],
+   "E4_objects": 1340
+  },
+  "wave2_sources_only": {
+   "population": 7843,
+   "categories": {
+    "UNRESOLVED": 6163,
+    "MODEL_ANNOTATION": 798,
+    "MEASURED": 882
+   },
+   "reasons": {
+    "no_valid_E1": 5744,
+    "marker": 798,
+    "source_excluded": 390,
+    "human+spectrum": 882,
+    "mismatch": 2,
+    "no_reports": 27
+   },
+   "P_plain_SN_Ia": 5067,
+   "L_strong": 798,
+   "L": 803,
+   "U": 2331,
+   "U_noE5": 2846,
+   "bound_wave2_rule": [
+    803,
+    2331
+   ],
+   "bound_wave3_rule": [
+    803,
+    2247
+   ],
+   "E4_objects": 1340
+  }
+ },
+ "fetch_status": {
+  "w2:failed_retries": 22,
+  "w2:ok": 1706,
+  "w2:http_error": 200,
+  "w2:invalid": 5,
+  "w3:ok": 345,
+  "w3:http_error": 38,
+  "w3:failed_retries": 7
+ },
+ "premise": {
+  "marker_rename": {
+   "object": "ZTF20aakyqlh",
+   "after": {
+    "categories": {
+     "UNRESOLVED": 5825,
+     "MEASURED": 1071,
+     "MODEL_ANNOTATION": 947
+    },
+    "L": 952,
+    "U": 2142
+   }
+  }
+ },
+ "input_disagreement": "no label_basis_per_object CSV exists under wave3/agent2_measured_labels; wave-3 evidence taken from out/track1_captures"
+}

@@ -1,0 +1,30 @@
+{
+ "id": "O02",
+ "sealed_utc": "2026-09-17T13:25:01Z",
+ "derived": {
+  "band_hash_utc": "2026-09-16T18:51:26.922781+00:00",
+  "band_hash_logged_equals_current_file": true,
+  "protocol_frozen_utc": "2026-09-16T20:52:25.088956+00:00",
+  "first_run_start_utc": "2026-09-16T20:55:49.571947+00:00",
+  "last_run_end_utc": "2026-09-16T21:28:04.390104+00:00",
+  "all_runs_after_band_hash": true,
+  "all_runs_after_protocol_freeze": true,
+  "n_tools_with_disposition": 25,
+  "all_25_dispositioned": true,
+  "precondition_b_clears": true,
+  "mtime_bands_FROZEN": "2026-09-16T18:51:19.528496+00:00",
+  "mtime_recount_protocol": "2026-09-16T20:52:21.198650+00:00",
+  "precheck_rows_timestamps_after_band": true
+ },
+ "method": "own parse of run_log start/end vs band-hash log line and protocol-freeze log line; mtimes as secondary",
+ "inputs": {
+  "run_log.jsonl": "e97ac1f3bb0df6484d2a3f0c0b0bbc0dc73889378c9678b150731b92f2cf9f56",
+  "recount_protocol_FROZEN.md": "f32cf288f1fed6be54ed7c4c44fa0ec8012829945a20eedddf3e439ef5df52e6",
+  "amendments.md": "1c78072009113075ca638dcd8ce0e2e728df94f46d9c0aa42e2611c300e00763",
+  "w2a1_oplog": "3e2d7aabeae48370b08ce7b8e62e97381ed46a734a3fee11e91de1b10d332c37",
+  "w3a4_oplog": "ffdcd7ece4011cb17d9231cd7be79ee8c5eed3bcedf84cb7867c0864ba9048f9"
+ },
+ "premise": {
+  "planted_early_run_detected": true
+ }
+}

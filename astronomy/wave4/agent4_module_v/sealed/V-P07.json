@@ -1,0 +1,36 @@
+{
+ "id": "P07",
+ "sealed_utc": "2026-09-17T13:22:13Z",
+ "derived": {
+  "n": 518,
+  "mean_paired_difference_a_minus_b": 0.0,
+  "sigma_d": 0.0,
+  "var_exact_fraction": "0/1",
+  "mde_doc_z": 0.0,
+  "n_min_doc_z_delta_0.018": 0,
+  "n_min_unceiled_doc_z_delta_0.018": 0.0,
+  "n_min_doc_z_delta_0.05": 0,
+  "n_min_unceiled_doc_z_delta_0.05": 0.0,
+  "mde_exact_z": 0.0,
+  "n_min_exact_z_delta_0.018": 0,
+  "n_min_unceiled_exact_z_delta_0.018": 0.0,
+  "n_min_exact_z_delta_0.05": 0,
+  "n_min_unceiled_exact_z_delta_0.05": 0.0,
+  "premise_pairing_shuffle": {
+   "sigma_d_orig": 0.0,
+   "sigma_d_pairing_shuffled": 0.3983140440471974,
+   "changed": true
+  },
+  "crosscheck_per_run_file_sigma_d": 0.0,
+  "crosscheck_per_run_file_sha256": "bf1adc591a471834da7862a41519517f28f9f6cb106af127d62c67e5fc7e3b66",
+  "premise_nmin_consistent_with_mde": true,
+  "premise_mde_at_nmin_le_delta": {
+   "0.018": 0,
+   "0.05": 0
+  }
+ },
+ "method": "own exact-rational paired sd (ddof=1) over paired_scores.csv rows filtered by epoch/item_type/k_binding; MDE=z*sd/sqrt(n); N_min=ceil(z^2 var/delta^2); z doc=1.96+0.8416 (power.py documented constants) and exact scipy z reported",
+ "inputs": {
+  "paired_scores.csv": "d93b31e2fea53ef00f4711cd7e5281fedbf68095d34fcfa62c7c00a60ad01816"
+ }
+}

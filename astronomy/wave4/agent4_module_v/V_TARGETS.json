@@ -1,0 +1,709 @@
+{
+ "module": "V (wave 4, agent 4)",
+ "charter_sha256": "f4bca84045ae13c2aeb86ade1fc4a204bc21260fc49b02179167c1ec2a6ca251",
+ "written_utc": "2026-09-17T13:20:51.464332+00:00",
+ "note": "Claimed values intentionally omitted. The launching prompt quoted several claimed values (see charter \u00a72 blinding limit).",
+ "n_targets": 38,
+ "targets": [
+  {
+   "id": "C01",
+   "claim": "Cohort total O: merged objects after X1-X3 with every member firstmjd >= T0",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent1_cohort_finish/rubin_cohort_count.json",
+    "field": "[id=w3-02].value"
+   },
+   "inputs": [
+    "astronomy/wave3/agent1_cohort_finish/out/w3_c3_slices/*.csv (450, verified against astronomy/wave3/agent1_cohort_finish/out/SLICES_SHA256SUMS)",
+    "astronomy/wave3/agent1_cohort_finish/out/w3_p60_slices/*.csv and w3_c5_slices/*.csv (verified against SLICES_SHA256SUMS)",
+    "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a72 X1-X3, \u00a73 (sha256 8825ef80...00d2)",
+    "astronomy/wave3/agent1_cohort_finish/count_protocol_w3_FROZEN.md W3-M (sha256 de241fc9...b649)",
+    "astronomy/wave3/agent1_cohort_finish/amendments_w3.md AM6-AM7"
+   ],
+   "premise_check": "Perturb one slice (drop it / duplicate rows / shift one oid across T0) and confirm the count moves by the expected amount; planted +1000 claim must fire (replay V-01)",
+   "number_type": "integer_count",
+   "feeds": "positive_supply axis O; manifest cohort slot; truth-cost A"
+  },
+  {
+   "id": "C02",
+   "claim": "Distinct ALeRCE/LSST oids with firstmjd >= T0 before merge (O_A)",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent1_cohort_finish/rubin_cohort_count.json",
+    "field": "[id=w3-01].value"
+   },
+   "inputs": [
+    "astronomy/wave3/agent1_cohort_finish/out/w3_c3_slices/*.csv (450, verified against astronomy/wave3/agent1_cohort_finish/out/SLICES_SHA256SUMS)",
+    "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a72 X1-X3, \u00a73 (sha256 8825ef80...00d2)",
+    "astronomy/wave3/agent1_cohort_finish/count_protocol_w3_FROZEN.md W3-M (sha256 de241fc9...b649)",
+    "astronomy/wave3/agent1_cohort_finish/amendments_w3.md AM6-AM7"
+   ],
+   "premise_check": "Duplicate a slice file and confirm dedupe on oid holds the count; remove a slice and confirm the count drops",
+   "number_type": "integer_count",
+   "feeds": "cluster_structure axis"
+  },
+  {
+   "id": "C03",
+   "claim": "Straddlers S1 = S1-direct (pre-T0 oids with lastmjd >= T0) + S1-merge (cohort oids merged with a pre-T0 oid)",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent1_cohort_finish/rubin_cohort_count.json",
+    "field": "[id=w3-05].value"
+   },
+   "inputs": [
+    "astronomy/wave3/agent1_cohort_finish/out/w3_c3_slices/*.csv (450, verified against astronomy/wave3/agent1_cohort_finish/out/SLICES_SHA256SUMS)",
+    "astronomy/wave3/agent1_cohort_finish/out/w3_p60_slices/*.csv and w3_c5_slices/*.csv (verified against SLICES_SHA256SUMS)",
+    "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a72 X1-X3, \u00a73 (sha256 8825ef80...00d2)",
+    "astronomy/wave3/agent1_cohort_finish/count_protocol_w3_FROZEN.md W3-M (sha256 de241fc9...b649)",
+    "astronomy/wave3/agent1_cohort_finish/amendments_w3.md AM6-AM7"
+   ],
+   "premise_check": "Set one pre-T0 row's lastmjd below T0 and confirm S1 drops by one; plant a pre-T0 twin 0.5 arcsec from a cohort oid and confirm S1-merge rises",
+   "number_type": "integer_count",
+   "feeds": "split_integrity axis"
+  },
+  {
+   "id": "C04",
+   "claim": "One-detection share S3/(S3+S4) over the cohort",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent1_cohort_finish/rubin_cohort_count.json",
+    "field": "[id=w3-04].value (and any merged-level variant in the record)"
+   },
+   "inputs": [
+    "astronomy/wave3/agent1_cohort_finish/out/w3_c3_slices/*.csv (450, verified against astronomy/wave3/agent1_cohort_finish/out/SLICES_SHA256SUMS)",
+    "astronomy/wave3/agent1_cohort_finish/out/w3_p60_slices/*.csv and w3_c5_slices/*.csv (verified against SLICES_SHA256SUMS)",
+    "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a72 X1-X3, \u00a73 (sha256 8825ef80...00d2)",
+    "astronomy/wave3/agent1_cohort_finish/count_protocol_w3_FROZEN.md W3-M (sha256 de241fc9...b649)",
+    "astronomy/wave3/agent1_cohort_finish/amendments_w3.md AM6-AM7"
+   ],
+   "premise_check": "Flip n_det of k cohort rows from 1 to 2 and confirm the share falls by k/N",
+   "number_type": "share",
+   "feeds": "stratum S3/S4 report (BTS two-detection comparison)"
+  },
+  {
+   "id": "P01",
+   "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E1_N pooled (all 579 night items) (col a=prec_classical, col b=prec_instrument)",
+   "recorded_at": {
+    "file": [
+     "astronomy/wave2/agent4_instrument/power_calibration.json",
+     "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+    ],
+    "field": [
+     "runs.E1_N.{n,sigma_d,mde,n_min} (delta 0.018)",
+     "runs.E1_N.delta_0.05|delta_0.018.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+    ]
+   },
+   "inputs": [
+    "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+    "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+    "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+    "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+   ],
+   "premise_check": "Permute the pairing (shuffle col b against col a) and confirm sigma_d changes; plant sd*1.1 and confirm N_min changes by the predicted ratio; check N_min*delta^2 ~ z^2 sd^2",
+   "number_type": "float_statistic + ceil_integer",
+   "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands"
+  },
+  {
+   "id": "P02",
+   "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E1_N k_binding=True (col a=prec_classical, col b=prec_instrument)",
+   "recorded_at": {
+    "file": [
+     "astronomy/wave2/agent4_instrument/power_calibration.json",
+     "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+    ],
+    "field": [
+     "runs.E1_N.strata.True.{n,sigma_d,mde,n_min} (delta 0.018)",
+     "runs.E1_N.delta_0.05|delta_0.018.strata.True.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+    ]
+   },
+   "inputs": [
+    "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+    "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+    "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+    "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+   ],
+   "premise_check": "Permute the pairing (shuffle col b against col a) and confirm sigma_d changes; plant sd*1.1 and confirm N_min changes by the predicted ratio; check N_min*delta^2 ~ z^2 sd^2",
+   "number_type": "float_statistic + ceil_integer",
+   "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands"
+  },
+  {
+   "id": "P03",
+   "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E1_N k_binding=False (col a=prec_classical, col b=prec_instrument)",
+   "recorded_at": {
+    "file": [
+     "astronomy/wave2/agent4_instrument/power_calibration.json",
+     "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+    ],
+    "field": [
+     "runs.E1_N.strata.False.{n,sigma_d,mde,n_min} (delta 0.018)",
+     "runs.E1_N.delta_0.05|delta_0.018.strata.False.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+    ]
+   },
+   "inputs": [
+    "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+    "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+    "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+    "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+   ],
+   "premise_check": "Permute the pairing (shuffle col b against col a) and confirm sigma_d changes; plant sd*1.1 and confirm N_min changes by the predicted ratio; check N_min*delta^2 ~ z^2 sd^2",
+   "number_type": "float_statistic + ceil_integer",
+   "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands"
+  },
+  {
+   "id": "P04",
+   "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E1_R round-46 items (col a=prec_classical, col b=prec_instrument)",
+   "recorded_at": {
+    "file": [
+     "astronomy/wave2/agent4_instrument/power_calibration.json",
+     "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+    ],
+    "field": [
+     "runs.E1_R.{n,sigma_d,mde,n_min} (delta 0.018)",
+     "runs.E1_R.delta_0.05|delta_0.018.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+    ]
+   },
+   "inputs": [
+    "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+    "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+    "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+    "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+   ],
+   "premise_check": "Permute the pairing (shuffle col b against col a) and confirm sigma_d changes; plant sd*1.1 and confirm N_min changes by the predicted ratio; check N_min*delta^2 ~ z^2 sd^2",
+   "number_type": "float_statistic + ceil_integer",
+   "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands"
+  },
+  {
+   "id": "P05",
+   "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E3_N pooled (col a=prec_classical, col b=prec_instrument)",
+   "recorded_at": {
+    "file": [
+     "astronomy/wave2/agent4_instrument/power_calibration.json",
+     "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+    ],
+    "field": [
+     "runs.E3_N.{n,sigma_d,mde,n_min} (delta 0.018)",
+     "runs.E3_N.delta_0.05|delta_0.018.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+    ]
+   },
+   "inputs": [
+    "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+    "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+    "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+    "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+   ],
+   "premise_check": "Permute the pairing (shuffle col b against col a) and confirm sigma_d changes; plant sd*1.1 and confirm N_min changes by the predicted ratio; check N_min*delta^2 ~ z^2 sd^2",
+   "number_type": "float_statistic + ceil_integer",
+   "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands"
+  },
+  {
+   "id": "P06",
+   "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E3_N k_binding=True (col a=prec_classical, col b=prec_instrument)",
+   "recorded_at": {
+    "file": [
+     "astronomy/wave2/agent4_instrument/power_calibration.json",
+     "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+    ],
+    "field": [
+     "runs.E3_N.strata.True.{n,sigma_d,mde,n_min} (delta 0.018)",
+     "runs.E3_N.delta_0.05|delta_0.018.strata.True.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+    ]
+   },
+   "inputs": [
+    "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+    "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+    "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+    "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+   ],
+   "premise_check": "Permute the pairing (shuffle col b against col a) and confirm sigma_d changes; plant sd*1.1 and confirm N_min changes by the predicted ratio; check N_min*delta^2 ~ z^2 sd^2",
+   "number_type": "float_statistic + ceil_integer",
+   "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands"
+  },
+  {
+   "id": "P07",
+   "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E3_N k_binding=False (col a=prec_classical, col b=prec_instrument)",
+   "recorded_at": {
+    "file": [
+     "astronomy/wave2/agent4_instrument/power_calibration.json",
+     "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+    ],
+    "field": [
+     "runs.E3_N.strata.False.{n,sigma_d,mde,n_min} (delta 0.018)",
+     "runs.E3_N.delta_0.05|delta_0.018.strata.False.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+    ]
+   },
+   "inputs": [
+    "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+    "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+    "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+    "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+   ],
+   "premise_check": "Permute the pairing (shuffle col b against col a) and confirm sigma_d changes; plant sd*1.1 and confirm N_min changes by the predicted ratio; check N_min*delta^2 ~ z^2 sd^2",
+   "number_type": "float_statistic + ceil_integer",
+   "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands"
+  },
+  {
+   "id": "P08",
+   "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E3_R round-46 items (col a=prec_classical, col b=prec_instrument)",
+   "recorded_at": {
+    "file": [
+     "astronomy/wave2/agent4_instrument/power_calibration.json",
+     "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+    ],
+    "field": [
+     "runs.E3_R.{n,sigma_d,mde,n_min} (delta 0.018)",
+     "runs.E3_R.delta_0.05|delta_0.018.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+    ]
+   },
+   "inputs": [
+    "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+    "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+    "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+    "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+   ],
+   "premise_check": "Permute the pairing (shuffle col b against col a) and confirm sigma_d changes; plant sd*1.1 and confirm N_min changes by the predicted ratio; check N_min*delta^2 ~ z^2 sd^2",
+   "number_type": "float_statistic + ceil_integer",
+   "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands"
+  },
+  {
+   "id": "K01",
+   "claim": "k-binding night count: E1 night items with more than k=8 scored candidates, out of all E1 decision nights",
+   "recorded_at": {
+    "file": [
+     "astronomy/wave2/agent4_instrument/power_calibration.json",
+     "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+    ],
+    "field": "runs.E1_N strata.True.n and n (pooled); primary_run text"
+   },
+   "inputs": [
+    "astronomy/wave2/agent4_instrument/compositions/predictions/pred_E1_C.csv (decision_night per unit; MANIFEST.sha256)",
+    "astronomy/agent1_supply_corpus/corpus.csv (sha256 b059acf0...8442; type -> posA/neg scored pool via bands_FROZEN \u00a74 map)",
+    "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a72,\u00a74"
+   ],
+   "premise_check": "Plant a wrong night count (60) and confirm the comparison fires; move one unit to a night with 8 candidates and confirm the count rises by one",
+   "number_type": "integer_count",
+   "feeds": "binding-night stratum for MDE; P7"
+  },
+  {
+   "id": "K02",
+   "claim": "Nights with <= 8 scored candidates (k not binding), E1",
+   "recorded_at": {
+    "file": [
+     "astronomy/wave2/agent4_instrument/power_calibration.json",
+     "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+    ],
+    "field": "runs.E1_N strata.False.n"
+   },
+   "inputs": [
+    "astronomy/wave2/agent4_instrument/compositions/predictions/pred_E1_C.csv (decision_night per unit; MANIFEST.sha256)",
+    "astronomy/agent1_supply_corpus/corpus.csv (sha256 b059acf0...8442; type -> posA/neg scored pool via bands_FROZEN \u00a74 map)",
+    "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a72,\u00a74"
+   ],
+   "premise_check": "K01+K02 must equal total nights; plant 517 and confirm fire",
+   "number_type": "integer_count",
+   "feeds": "P7 stratum"
+  },
+  {
+   "id": "A01",
+   "claim": "Per-object ROC AUC for posB over the scored pool, epoch E1, composition C-1, with 95% bootstrap CI",
+   "recorded_at": {
+    "file": "astronomy/wave2/agent4_instrument/i2_channels.json",
+    "field": "epochs.E1.measured_C_minus_1.auc_posB and .auc_ci95"
+   },
+   "inputs": [
+    "astronomy/wave2/agent4_instrument/compositions/predictions/pred_<E>_<C|C-1>.csv (verified against compositions/MANIFEST.sha256)",
+    "astronomy/agent1_supply_corpus/corpus.csv posB map (compositions_FROZEN \u00a74) keyed by object_cluster_1arcsec",
+    "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (1000-resample object bootstrap, seed 0)"
+   ],
+   "premise_check": "Permute posB labels (seeded) and confirm AUC moves into ~[0.45,0.55]; negate scores and confirm AUC -> 1-AUC; the producer's own __perm prediction file must sit near 0.5",
+   "number_type": "auc + bootstrap_ci",
+   "feeds": "I2 channel measurement; instrument vs classical floor reading"
+  },
+  {
+   "id": "A02",
+   "claim": "Per-object ROC AUC for posB over the scored pool, epoch E1, composition C, with 95% bootstrap CI",
+   "recorded_at": {
+    "file": "astronomy/wave2/agent4_instrument/i2_channels.json",
+    "field": "epochs.E1.measured_C.auc_posB and .auc_ci95"
+   },
+   "inputs": [
+    "astronomy/wave2/agent4_instrument/compositions/predictions/pred_<E>_<C|C-1>.csv (verified against compositions/MANIFEST.sha256)",
+    "astronomy/agent1_supply_corpus/corpus.csv posB map (compositions_FROZEN \u00a74) keyed by object_cluster_1arcsec",
+    "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (1000-resample object bootstrap, seed 0)"
+   ],
+   "premise_check": "Permute posB labels (seeded) and confirm AUC moves into ~[0.45,0.55]; negate scores and confirm AUC -> 1-AUC; the producer's own __perm prediction file must sit near 0.5",
+   "number_type": "auc + bootstrap_ci",
+   "feeds": "I2 channel measurement; instrument vs classical floor reading"
+  },
+  {
+   "id": "A03",
+   "claim": "Per-object ROC AUC for posB over the scored pool, epoch E3, composition C-1, with 95% bootstrap CI",
+   "recorded_at": {
+    "file": "astronomy/wave2/agent4_instrument/i2_channels.json",
+    "field": "epochs.E3.measured_C_minus_1.auc_posB and .auc_ci95"
+   },
+   "inputs": [
+    "astronomy/wave2/agent4_instrument/compositions/predictions/pred_<E>_<C|C-1>.csv (verified against compositions/MANIFEST.sha256)",
+    "astronomy/agent1_supply_corpus/corpus.csv posB map (compositions_FROZEN \u00a74) keyed by object_cluster_1arcsec",
+    "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (1000-resample object bootstrap, seed 0)"
+   ],
+   "premise_check": "Permute posB labels (seeded) and confirm AUC moves into ~[0.45,0.55]; negate scores and confirm AUC -> 1-AUC; the producer's own __perm prediction file must sit near 0.5",
+   "number_type": "auc + bootstrap_ci",
+   "feeds": "I2 channel measurement; instrument vs classical floor reading"
+  },
+  {
+   "id": "A04",
+   "claim": "Per-object ROC AUC for posB over the scored pool, epoch E3, composition C, with 95% bootstrap CI",
+   "recorded_at": {
+    "file": "astronomy/wave2/agent4_instrument/i2_channels.json",
+    "field": "epochs.E3.measured_C.auc_posB and .auc_ci95"
+   },
+   "inputs": [
+    "astronomy/wave2/agent4_instrument/compositions/predictions/pred_<E>_<C|C-1>.csv (verified against compositions/MANIFEST.sha256)",
+    "astronomy/agent1_supply_corpus/corpus.csv posB map (compositions_FROZEN \u00a74) keyed by object_cluster_1arcsec",
+    "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (1000-resample object bootstrap, seed 0)"
+   ],
+   "premise_check": "Permute posB labels (seeded) and confirm AUC moves into ~[0.45,0.55]; negate scores and confirm AUC -> 1-AUC; the producer's own __perm prediction file must sit near 0.5",
+   "number_type": "auc + bootstrap_ci",
+   "feeds": "I2 channel measurement; instrument vs classical floor reading"
+  },
+  {
+   "id": "L01",
+   "claim": "SNIascore bound lower L (E1 MODEL_ANNOTATION SNIascore on plain SN Ia, union E2)",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent2_measured_labels/label_source_slot.json",
+    "field": "value.bts.sniascore_bound.lower"
+   },
+   "inputs": [
+    "astronomy/wave2/agent2_label_source/label_basis_per_object_detail.csv (per-object evidence flags E2-E6, fetch_status; used only for fetch-attempt status and cross-check)",
+    "astronomy/wave2/agent2_label_source/sources/tns_captures/html/*.html(.gz) + fetch_log.jsonl (wave-2 E1 captures)",
+    "astronomy/wave3/agent2_measured_labels/out/track1_captures/html/*.html.gz + fetch_log.jsonl (wave-3 archive resume)",
+    "astronomy/data/raw/ztf_bts_all_2026-09-16.csv (sha256 61415979...e570)",
+    "astronomy/wave2/agent2_label_source/definitions_FROZEN.md \u00a72-\u00a76 (sha256 4f89ff67...37cf); astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a711 bound rule",
+    "NOTE: task names label_basis_per_object CSVs in wave3/agent2_measured_labels; none exists there (only out/track1_bound.json + captures). Recorded as input disagreement."
+   ],
+   "premise_check": "Rename the SNIascore marker in one parsed classifier field and confirm L drops by one; plant a wrong L and confirm fire",
+   "number_type": "integer_count",
+   "feeds": "label_source slot (ruling 4 condition: bound inside [803,2247])"
+  },
+  {
+   "id": "L02",
+   "claim": "SNIascore bound upper U (plain SN Ia not excluded by E1 non-SNIascore, E4, E5), min with 3131 / never widened",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent2_measured_labels/label_source_slot.json",
+    "field": "value.bts.sniascore_bound.upper"
+   },
+   "inputs": [
+    "astronomy/wave2/agent2_label_source/label_basis_per_object_detail.csv (per-object evidence flags E2-E6, fetch_status; used only for fetch-attempt status and cross-check)",
+    "astronomy/wave2/agent2_label_source/sources/tns_captures/html/*.html(.gz) + fetch_log.jsonl (wave-2 E1 captures)",
+    "astronomy/wave3/agent2_measured_labels/out/track1_captures/html/*.html.gz + fetch_log.jsonl (wave-3 archive resume)",
+    "astronomy/data/raw/ztf_bts_all_2026-09-16.csv (sha256 61415979...e570)",
+    "astronomy/wave2/agent2_label_source/definitions_FROZEN.md \u00a72-\u00a76 (sha256 4f89ff67...37cf); astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a711 bound rule",
+    "NOTE: task names label_basis_per_object CSVs in wave3/agent2_measured_labels; none exists there (only out/track1_bound.json + captures). Recorded as input disagreement."
+   ],
+   "premise_check": "Disable E5 and confirm U rises (U_noE5 >= U); remove one E1 MEASURED exclusion and confirm U rises by one",
+   "number_type": "integer_count",
+   "feeds": "label_source slot"
+  },
+  {
+   "id": "L03",
+   "claim": "BTS label category count MEASURED over the 7,843 labelled rows",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent2_measured_labels/label_source_slot.json",
+    "field": "value.bts.category_counts.MEASURED"
+   },
+   "inputs": [
+    "astronomy/wave2/agent2_label_source/label_basis_per_object_detail.csv (per-object evidence flags E2-E6, fetch_status; used only for fetch-attempt status and cross-check)",
+    "astronomy/wave2/agent2_label_source/sources/tns_captures/html/*.html(.gz) + fetch_log.jsonl (wave-2 E1 captures)",
+    "astronomy/wave3/agent2_measured_labels/out/track1_captures/html/*.html.gz + fetch_log.jsonl (wave-3 archive resume)",
+    "astronomy/data/raw/ztf_bts_all_2026-09-16.csv (sha256 61415979...e570)",
+    "astronomy/wave2/agent2_label_source/definitions_FROZEN.md \u00a72-\u00a76 (sha256 4f89ff67...37cf); astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a711 bound rule",
+    "NOTE: task names label_basis_per_object CSVs in wave3/agent2_measured_labels; none exists there (only out/track1_bound.json + captures). Recorded as input disagreement."
+   ],
+   "premise_check": "Categories must partition 7,843; plant a human classifier as 'SNIascore bot' and confirm MEASURED-1/MODEL+1",
+   "number_type": "integer_count",
+   "feeds": "label_source slot; ruling 4 measured-truth condition"
+  },
+  {
+   "id": "L04",
+   "claim": "BTS label category count MODEL_ANNOTATION over the 7,843 labelled rows",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent2_measured_labels/label_source_slot.json",
+    "field": "value.bts.category_counts.MODEL_ANNOTATION"
+   },
+   "inputs": [
+    "astronomy/wave2/agent2_label_source/label_basis_per_object_detail.csv (per-object evidence flags E2-E6, fetch_status; used only for fetch-attempt status and cross-check)",
+    "astronomy/wave2/agent2_label_source/sources/tns_captures/html/*.html(.gz) + fetch_log.jsonl (wave-2 E1 captures)",
+    "astronomy/wave3/agent2_measured_labels/out/track1_captures/html/*.html.gz + fetch_log.jsonl (wave-3 archive resume)",
+    "astronomy/data/raw/ztf_bts_all_2026-09-16.csv (sha256 61415979...e570)",
+    "astronomy/wave2/agent2_label_source/definitions_FROZEN.md \u00a72-\u00a76 (sha256 4f89ff67...37cf); astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a711 bound rule",
+    "NOTE: task names label_basis_per_object CSVs in wave3/agent2_measured_labels; none exists there (only out/track1_bound.json + captures). Recorded as input disagreement."
+   ],
+   "premise_check": "Categories must partition 7,843; plant a human classifier as 'SNIascore bot' and confirm MEASURED-1/MODEL+1",
+   "number_type": "integer_count",
+   "feeds": "label_source slot; ruling 4 measured-truth condition"
+  },
+  {
+   "id": "L05",
+   "claim": "BTS label category count UNRESOLVED_UNDEMONSTRATED over the 7,843 labelled rows",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent2_measured_labels/label_source_slot.json",
+    "field": "value.bts.category_counts.UNRESOLVED_UNDEMONSTRATED"
+   },
+   "inputs": [
+    "astronomy/wave2/agent2_label_source/label_basis_per_object_detail.csv (per-object evidence flags E2-E6, fetch_status; used only for fetch-attempt status and cross-check)",
+    "astronomy/wave2/agent2_label_source/sources/tns_captures/html/*.html(.gz) + fetch_log.jsonl (wave-2 E1 captures)",
+    "astronomy/wave3/agent2_measured_labels/out/track1_captures/html/*.html.gz + fetch_log.jsonl (wave-3 archive resume)",
+    "astronomy/data/raw/ztf_bts_all_2026-09-16.csv (sha256 61415979...e570)",
+    "astronomy/wave2/agent2_label_source/definitions_FROZEN.md \u00a72-\u00a76 (sha256 4f89ff67...37cf); astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a711 bound rule",
+    "NOTE: task names label_basis_per_object CSVs in wave3/agent2_measured_labels; none exists there (only out/track1_bound.json + captures). Recorded as input disagreement."
+   ],
+   "premise_check": "Categories must partition 7,843; plant a human classifier as 'SNIascore bot' and confirm MEASURED-1/MODEL+1",
+   "number_type": "integer_count",
+   "feeds": "label_source slot; ruling 4 measured-truth condition"
+  },
+  {
+   "id": "Q01",
+   "claim": "POLICY lower-tail p-value, comparison (i) capture_2026-07-25 vs reference 2024-12-08T23:13:31",
+   "recorded_at": {
+    "file": "astronomy/wave2/agent1_rubin_bands/label_accrual.json",
+    "field": "lag_tests['(i) capture_2026-07-25 vs ref 2024-12-08T23:13:31'].P_lower_tail (and decision.P_i/P_ii, decision.ruling)"
+   },
+   "inputs": [
+    "astronomy/wave2/agent1_rubin_bands/label_accrual.json inputs block (paths+sha256 only): astronomy/data/raw/ztf_bts_all_2026-09-16.csv; astronomy/agent3_labels_exposure/sources/wayback_bts_explorer_{20241208231331,20250810065056,20260725033557}.html",
+    "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a79 (age bins, reference accrual, exact Poisson-binomial lower tail)",
+    "own Poisson-binomial (log-space DP) implementation"
+   ],
+   "premise_check": "Replace observed labelled count X by its LAG expectation E and confirm p rises to ~0.5; check DP against scipy binom when all p_i equal",
+   "number_type": "log10_pvalue",
+   "feeds": "POLICY vs LAG ruling (label-accrual wait expectation)"
+  },
+  {
+   "id": "Q02",
+   "claim": "POLICY lower-tail p-value, comparison (i) capture_2026-07-25 vs reference 2025-08-10T06:50:56",
+   "recorded_at": {
+    "file": "astronomy/wave2/agent1_rubin_bands/label_accrual.json",
+    "field": "lag_tests['(i) capture_2026-07-25 vs ref 2025-08-10T06:50:56'].P_lower_tail (and decision.P_i/P_ii, decision.ruling)"
+   },
+   "inputs": [
+    "astronomy/wave2/agent1_rubin_bands/label_accrual.json inputs block (paths+sha256 only): astronomy/data/raw/ztf_bts_all_2026-09-16.csv; astronomy/agent3_labels_exposure/sources/wayback_bts_explorer_{20241208231331,20250810065056,20260725033557}.html",
+    "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a79 (age bins, reference accrual, exact Poisson-binomial lower tail)",
+    "own Poisson-binomial (log-space DP) implementation"
+   ],
+   "premise_check": "Replace observed labelled count X by its LAG expectation E and confirm p rises to ~0.5; check DP against scipy binom when all p_i equal",
+   "number_type": "log10_pvalue",
+   "feeds": "POLICY vs LAG ruling (label-accrual wait expectation)"
+  },
+  {
+   "id": "Q03",
+   "claim": "POLICY lower-tail p-value, comparison (ii) file_2026-09-16 vs reference 2024-12-08T23:13:31",
+   "recorded_at": {
+    "file": "astronomy/wave2/agent1_rubin_bands/label_accrual.json",
+    "field": "lag_tests['(ii) file_2026-09-16 vs ref 2024-12-08T23:13:31'].P_lower_tail (and decision.P_i/P_ii, decision.ruling)"
+   },
+   "inputs": [
+    "astronomy/wave2/agent1_rubin_bands/label_accrual.json inputs block (paths+sha256 only): astronomy/data/raw/ztf_bts_all_2026-09-16.csv; astronomy/agent3_labels_exposure/sources/wayback_bts_explorer_{20241208231331,20250810065056,20260725033557}.html",
+    "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a79 (age bins, reference accrual, exact Poisson-binomial lower tail)",
+    "own Poisson-binomial (log-space DP) implementation"
+   ],
+   "premise_check": "Replace observed labelled count X by its LAG expectation E and confirm p rises to ~0.5; check DP against scipy binom when all p_i equal",
+   "number_type": "log10_pvalue",
+   "feeds": "POLICY vs LAG ruling (label-accrual wait expectation)"
+  },
+  {
+   "id": "Q04",
+   "claim": "POLICY lower-tail p-value, comparison (ii) file_2026-09-16 vs reference 2025-08-10T06:50:56",
+   "recorded_at": {
+    "file": "astronomy/wave2/agent1_rubin_bands/label_accrual.json",
+    "field": "lag_tests['(ii) file_2026-09-16 vs ref 2025-08-10T06:50:56'].P_lower_tail (and decision.P_i/P_ii, decision.ruling)"
+   },
+   "inputs": [
+    "astronomy/wave2/agent1_rubin_bands/label_accrual.json inputs block (paths+sha256 only): astronomy/data/raw/ztf_bts_all_2026-09-16.csv; astronomy/agent3_labels_exposure/sources/wayback_bts_explorer_{20241208231331,20250810065056,20260725033557}.html",
+    "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a79 (age bins, reference accrual, exact Poisson-binomial lower tail)",
+    "own Poisson-binomial (log-space DP) implementation"
+   ],
+   "premise_check": "Replace observed labelled count X by its LAG expectation E and confirm p rises to ~0.5; check DP against scipy binom when all p_i equal",
+   "number_type": "log10_pvalue",
+   "feeds": "POLICY vs LAG ruling (label-accrual wait expectation)"
+  },
+  {
+   "id": "T01",
+   "claim": "Tool coverage dispositions over 25 tools: PASS / FAIL / UNDEMONSTRATED counts",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json",
+    "field": "value.counts_by_group_and_disposition.all"
+   },
+   "inputs": [
+    "astronomy/wave3/agent4_tool_recount/run_log.jsonl (198 lines)",
+    "astronomy/wave3/agent4_tool_recount/recount_protocol_FROZEN.md \u00a71,\u00a72,\u00a75,\u00a76 (sha256 f32cf288...52e6)",
+    "astronomy/wave3/agent4_tool_recount/amendments.md AM1-AM2 (GHOST runs 1-2 voided)"
+   ],
+   "premise_check": "Flip one CATS non_default to false for all runs and confirm PASS count drops; plant 3 PASS and confirm fire",
+   "number_type": "integer_count",
+   "feeds": "tool_coverage axis (P4)"
+  },
+  {
+   "id": "T02",
+   "claim": "Per-tool pass fractions for the passing tools: CATS passes/alerts run, GHOST passes/valid alerts run",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json",
+    "field": "value.per_tool[tool=CATS|GHOST] pass counts"
+   },
+   "inputs": [
+    "astronomy/wave3/agent4_tool_recount/run_log.jsonl (198 lines)",
+    "astronomy/wave3/agent4_tool_recount/recount_protocol_FROZEN.md \u00a71,\u00a72,\u00a75,\u00a76 (sha256 f32cf288...52e6)",
+    "astronomy/wave3/agent4_tool_recount/amendments.md AM1-AM2 (GHOST runs 1-2 voided)"
+   ],
+   "premise_check": "Un-void GHOST runs 1-2 and confirm denominator becomes 10",
+   "number_type": "integer_count",
+   "feeds": "tool_coverage axis"
+  },
+  {
+   "id": "T03",
+   "claim": "Alert runs logged against the rule D cap of 250",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json",
+    "field": "value.alert_runs_logged"
+   },
+   "inputs": [
+    "astronomy/wave3/agent4_tool_recount/run_log.jsonl (198 lines)",
+    "astronomy/wave3/agent4_tool_recount/recount_protocol_FROZEN.md \u00a71,\u00a72,\u00a75,\u00a76 (sha256 f32cf288...52e6)",
+    "astronomy/wave3/agent4_tool_recount/amendments.md AM1-AM2 (GHOST runs 1-2 voided)"
+   ],
+   "premise_check": "Count must exclude PRECHECK/LOAD lines; including them must change the count",
+   "number_type": "integer_count",
+   "feeds": "rule D budget (module V gets 250 - this)"
+  },
+  {
+   "id": "N01",
+   "claim": "Family-B N_min lo and hi at delta 0.018 (485, 12,855 per bands \u00a75)",
+   "recorded_at": {
+    "file": [
+     "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv (N column)",
+     "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a75"
+    ],
+    "field": "N where delta=0.018"
+   },
+   "inputs": [
+    "astronomy/agent5_resolution_replay/planning_mde_bracket.csv (sha256 c00718b7...ad43; inputs sigma_d_target, sigma_d_realised_by_power_py, family)",
+    "astronomy/wave3/agent1_cohort_finish/planning_mde_bracket_w3.csv (inputs sigma_d columns only)",
+    "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a75 definition N_B,lo/hi = min/max family-B N_min",
+    "own N_min=ceil(z^2 sigma^2/delta^2)"
+   ],
+   "premise_check": "Recompute with sigma of one row x1.01 and confirm min/max shift; plant 486 and confirm fire",
+   "number_type": "integer_count",
+   "feeds": "positive_supply bands; truth-cost N"
+  },
+  {
+   "id": "N02",
+   "claim": "Family-B N_min lo and hi at delta 0.05",
+   "recorded_at": {
+    "file": [
+     "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv (N column)",
+     "astronomy/wave3/agent1_cohort_finish/rubin_cohort_count.json [id=w3-09]"
+    ],
+    "field": "N where delta=0.05"
+   },
+   "inputs": [
+    "astronomy/agent5_resolution_replay/planning_mde_bracket.csv (sha256 c00718b7...ad43; inputs sigma_d_target, sigma_d_realised_by_power_py, family)",
+    "astronomy/wave3/agent1_cohort_finish/planning_mde_bracket_w3.csv (inputs sigma_d columns only)",
+    "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a75 definition N_B,lo/hi = min/max family-B N_min",
+    "own N_min=ceil(z^2 sigma^2/delta^2)"
+   ],
+   "premise_check": "As N01",
+   "number_type": "integer_count",
+   "feeds": "kill-band pricing at ratified delta 0.05"
+  },
+  {
+   "id": "R01",
+   "claim": "Truth-cost table arithmetic: spectra S, hours H, wrong commitments W, nights for every row",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv",
+    "field": "spectra_S, P60_hours_H, wrong_routine_commitments_W, rubin_on_sky_nights per row"
+   },
+   "inputs": [
+    "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv input columns (delta,N,L,purity_p,success_s,capacity_c,A_reachable_arrivals_per_night_cp95_lo)",
+    "astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a710 formulas (sha256 9fac8552...95fb)"
+   ],
+   "premise_check": "Perturb p in one row and confirm S changes; count rows mismatching formula (must be 0 if claim true)",
+   "number_type": "integer_count (rows)",
+   "feeds": "kill-band pricing"
+  },
+  {
+   "id": "R02",
+   "claim": "Truth-cost range at N=63 (delta 0.05), L=0: spectra [lo,hi], nights [lo,hi]",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent2_measured_labels/truth_cost.json",
+    "field": "ranges_over_grid_L0.delta_0.05_N_63.{spectra,nights}"
+   },
+   "inputs": [
+    "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv input columns (delta,N,L,purity_p,success_s,capacity_c,A_reachable_arrivals_per_night_cp95_lo)",
+    "astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a710 formulas (sha256 9fac8552...95fb)"
+   ],
+   "premise_check": "Plant a wrong range and confirm fire",
+   "number_type": "integer_count",
+   "feeds": "ESCALATE option 1 price"
+  },
+  {
+   "id": "R03",
+   "claim": "Truth-cost range at N=485 (delta 0.018), L=0: spectra [lo,hi], nights [lo,hi]",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent2_measured_labels/truth_cost.json",
+    "field": "ranges_over_grid_L0.delta_0.018_N_485.{spectra,nights}"
+   },
+   "inputs": [
+    "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv input columns (delta,N,L,purity_p,success_s,capacity_c,A_reachable_arrivals_per_night_cp95_lo)",
+    "astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a710 formulas (sha256 9fac8552...95fb)"
+   ],
+   "premise_check": "Plant a wrong range and confirm fire",
+   "number_type": "integer_count",
+   "feeds": "ESCALATE option 1 price"
+  },
+  {
+   "id": "R04",
+   "claim": "Truth-cost ranges at N=1,666 (delta 0.05) and N=12,855 (delta 0.018), L=0",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent2_measured_labels/truth_cost.json",
+    "field": "ranges_over_grid_L0.delta_0.05_N_1666 and delta_0.018_N_12855"
+   },
+   "inputs": [
+    "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv input columns (delta,N,L,purity_p,success_s,capacity_c,A_reachable_arrivals_per_night_cp95_lo)",
+    "astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a710 formulas (sha256 9fac8552...95fb)"
+   ],
+   "premise_check": "Plant a wrong range and confirm fire",
+   "number_type": "integer_count",
+   "feeds": "kill-band pricing upper rows"
+  },
+  {
+   "id": "O01",
+   "claim": "Ruling-1 ordering: override declared (wave-3 brief) < first decision-time MDE (power_calibration.json) < resolvability at 0.05 (wave-3 agent 4 step 1)",
+   "recorded_at": {
+    "file": [
+     "astronomy/wave4/PANEL_BRIEF_WAVE4.md coordinator preamble item 2"
+    ],
+    "field": "20:14Z < 20:44:29Z (mtime) / 20:46Z (commit f898294) < 20:48:29Z"
+   },
+   "inputs": [
+    "file mtimes: astronomy/wave3/PANEL_BRIEF_WAVE3.md, astronomy/wave2/agent4_instrument/power_calibration.json, astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json",
+    "astronomy/wave3/*/order_of_operations.log first lines (brief-verified times)",
+    "commit times as quoted in the preamble (git not run; cannot be independently established)",
+    "power_calibration.json content hash vs agent-4 w3 step-1 log line"
+   ],
+   "premise_check": "Plant a reversed timestamp pair and confirm ordering check fires; check that mtime of a file rewritten after the fact would break the chain (hash in step-1 log vs current file)",
+   "number_type": "timestamp_ordering",
+   "feeds": "ruling 1 cause check (delta 0.05 ratified)"
+  },
+  {
+   "id": "O02",
+   "claim": "P4 precondition (b): every tool-recount run timestamp after the band hash 2026-09-16T18:51:26.922781Z, protocol frozen before first run, and all 25 tools carry a disposition",
+   "recorded_at": {
+    "file": "astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json",
+    "field": "recount_timestamps.* and all_runs_after_band_hash"
+   },
+   "inputs": [
+    "astronomy/wave3/agent4_tool_recount/run_log.jsonl start_utc/end_utc",
+    "astronomy/wave2/agent1_rubin_bands/order_of_operations.log (band hash step)",
+    "astronomy/wave3/agent4_tool_recount/order_of_operations.log (protocol freeze step)",
+    "file mtimes of bands_FROZEN.md and recount_protocol_FROZEN.md"
+   ],
+   "premise_check": "Plant one run with start_utc before the band hash and confirm the check fires",
+   "number_type": "timestamp_ordering",
+   "feeds": "P4 precondition (b)"
+  }
+ ]
+}

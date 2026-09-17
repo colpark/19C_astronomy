@@ -1,0 +1,46 @@
+{
+ "id": "R04",
+ "sealed_utc": "2026-09-17T13:25:40Z",
+ "derived": {
+  "delta_0.05_N_1666": {
+   "spectra": [
+    1723,
+    2212
+   ],
+   "nights": [
+    173,
+    492
+   ],
+   "hours": [
+    861.5,
+    1106.0
+   ],
+   "wrong": [
+    57,
+    420
+   ]
+  },
+  "delta_0.018_N_12855": {
+   "spectra": [
+    13294,
+    17065
+   ],
+   "nights": [
+    1330,
+    3793
+   ],
+   "hours": [
+    6647.0,
+    8532.5
+   ],
+   "wrong": [
+    439,
+    3242
+   ]
+  }
+ },
+ "method": "min/max over the L=0 grid rows of own recomputed S and nights",
+ "inputs": {
+  "truth_cost_table.csv": "8eee9f94b55d5ccad10e32cf721073d729865c442aff662661117a0f703b09a3"
+ }
+}

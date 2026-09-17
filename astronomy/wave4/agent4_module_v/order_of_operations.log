@@ -1,0 +1,53 @@
+2026-09-17T13:15:12Z | session start; brief hash verified 8f101811...b58 matches BRIEF_SHA256 | sha256:8f10181154219048bed3e8fa973c35d71d3a038cc98323fde76f509363511b58 ../PANEL_BRIEF_WAVE4.md
+2026-09-17T13:16:19Z | V_CHARTER.md written and hashed, before target listing or any derivation | sha256:f4bca84045ae13c2aeb86ade1fc4a204bc21260fc49b02179167c1ec2a6ca251 V_CHARTER.md
+2026-09-17T13:20:51Z | V_TARGETS.json written and hashed before any re-derivation (36 targets, no claimed values) | sha256:4f9594a158771b41d9ad3e27a461389ed9eb9b1a4a13ea5abba0d351bdded017 V_TARGETS.json
+2026-09-17T13:20:58Z | correction: V_TARGETS.json holds 38 targets (previous line said 36); file unchanged
+2026-09-17T13:22:13Z | sealed V-P01 before opening claimed value | sha256:6afffdedf690fd323601cbc77d05667fbc0ffbd98abb1d69aee08db5f094f427 sealed/V-P01.json
+2026-09-17T13:22:13Z | sealed V-P02 before opening claimed value | sha256:3216b5221a9ffc60e302c7ae24c6ea2fb8acfbb3c90970bec885e3e545b9b1ce sealed/V-P02.json
+2026-09-17T13:22:13Z | sealed V-P03 before opening claimed value | sha256:57eaf78d56ad143294cb552718d3a384cecf7487b1fedcd702d6f3a73c18e299 sealed/V-P03.json
+2026-09-17T13:22:13Z | sealed V-P04 before opening claimed value | sha256:1e60646d207e60559ef8879421c121f0a0dc2566a36325c8ea62917a82727243 sealed/V-P04.json
+2026-09-17T13:22:13Z | sealed V-P05 before opening claimed value | sha256:a31e3a5c2054803ba935c01e3727d7dc33b14be7347a88a52ac9cbf85c949af7 sealed/V-P05.json
+2026-09-17T13:22:13Z | sealed V-P06 before opening claimed value | sha256:b7bd798202673050895e9ddd305ed5024708c0a4d66489b61b1a23547752959e sealed/V-P06.json
+2026-09-17T13:22:13Z | sealed V-P07 before opening claimed value | sha256:591ddb18619b64c6a9825af523a45e04e5579cc5adc8368c6e67325788d93204 sealed/V-P07.json
+2026-09-17T13:22:13Z | sealed V-P08 before opening claimed value | sha256:d2a324a49e8916e017defba89bf4e9aed4b59e5db33847e9545f81a6835910bc sealed/V-P08.json
+2026-09-17T13:23:13Z | sealed V-A01 before opening claimed value | sha256:c2a8290596061b4e8c2746172b554efa84d7ed86b863f4c66bb44d5104366c76 sealed/V-A01.json
+2026-09-17T13:23:13Z | sealed V-A02 before opening claimed value | sha256:940b9a8b017c89e8684a5368c7aa734b3e41ea8fd416e2ee674ba0f022128c34 sealed/V-A02.json
+2026-09-17T13:23:14Z | sealed V-A03 before opening claimed value | sha256:41fb67f37d36c748e1ad0c7ecde7e2086d048b99da068b0651e180a15c3ac15f sealed/V-A03.json
+2026-09-17T13:23:14Z | sealed V-A04 before opening claimed value | sha256:b949b607b0fa6f4d33010958cd51921affa169c6d9456215f9d8bada4bab2b81 sealed/V-A04.json
+2026-09-17T13:23:14Z | sealed V-K01 before opening claimed value | sha256:e58f6798e0621fd375c9cc79e4c08780653be711a25ad7c91b545a7944c5a5d3 sealed/V-K01.json
+2026-09-17T13:23:14Z | sealed V-K02 before opening claimed value | sha256:469ab291d8a9c6d6b34ca5b3eab2bcb151132ec7364aeadd88805b8f9ede58ce sealed/V-K02.json
+2026-09-17T13:23:37Z | sealed V-C01 before opening claimed value | sha256:8f5262daef8930d8e21ac46d14268c365f8d172ba5bd2726cf1cb63f89c8c463 sealed/V-C01.json
+2026-09-17T13:23:37Z | sealed V-C02 before opening claimed value | sha256:667e1e2daa5a8640127bdc4b483da070f86294f62e8e3ce3f2bed94914bdf5b9 sealed/V-C02.json
+2026-09-17T13:23:37Z | sealed V-C03 before opening claimed value | sha256:8a5e0127ab4f0aa541cb52b231c613d06fa5889b089a3f7cedb984679d21eae9 sealed/V-C03.json
+2026-09-17T13:23:37Z | sealed V-C04 before opening claimed value | sha256:9ed3d5ea214aabb1b1c56acbde859d455329ea678ff178b244465948a8d2a47a sealed/V-C04.json
+2026-09-17T13:25:01Z | sealed V-T01 before opening claimed value | sha256:3c5a69425b1d4f8df62a8818a9cdfb003502b7cd88458a8a4570ff092c7ba399 sealed/V-T01.json
+2026-09-17T13:25:01Z | sealed V-T02 before opening claimed value | sha256:ee836bd17e9976bd9a5018771554f1a4b9003d87e6f3a1413b82993886fb3792 sealed/V-T02.json
+2026-09-17T13:25:01Z | sealed V-T03 before opening claimed value | sha256:261e5c37f77f1866c0f53d626c66eb17b0e07d302e04e4c0f51faf3a5dd26c17 sealed/V-T03.json
+2026-09-17T13:25:01Z | sealed V-O02 before opening claimed value | sha256:7f90669cb3e5be321ee4f2955077ce4ae709f29d7ba78dd614db291b8ea3c609 sealed/V-O02.json
+2026-09-17T13:25:01Z | sealed V-O01 before opening claimed value | sha256:43530793e34e1375ebcf14dd07098267a6681416429499d65fde368f59000d3f sealed/V-O01.json
+2026-09-17T13:25:40Z | sealed V-N01 before opening claimed value | sha256:422fe2859781b641fc74e666979344ba4544dd44022c623c5e1d0374b9b21f33 sealed/V-N01.json
+2026-09-17T13:25:40Z | sealed V-N02 before opening claimed value | sha256:ab094276e33013e16f93ae52ba085afbc1a99a4d6ff8417cd3bec418d84f1cb5 sealed/V-N02.json
+2026-09-17T13:25:40Z | sealed V-R01 before opening claimed value | sha256:417df4bb3e09b4410be0fe04b635f3a33a4bec1f374fbd696e295290348a1e46 sealed/V-R01.json
+2026-09-17T13:25:40Z | sealed V-R02 before opening claimed value | sha256:77954c73c1385cc23c5c9680929d2bb8c6e56dd00736df3fd5b14b3a89da4ad7 sealed/V-R02.json
+2026-09-17T13:25:40Z | sealed V-R03 before opening claimed value | sha256:ca104ac9f46236f694bcb809a8dfc003361cb72b33e9ffa218ffa395d3faea59 sealed/V-R03.json
+2026-09-17T13:25:40Z | sealed V-R04 before opening claimed value | sha256:dcd8c05fff8e35d8c08438909e382d9872fc1c77197bab94451f295e626d5996 sealed/V-R04.json
+2026-09-17T13:26:46Z | sealed V-Q01 before opening claimed value | sha256:36ce24a171f7364b2096999d58d120503fddcfc79808152662760c9c844742d6 sealed/V-Q01.json
+2026-09-17T13:26:46Z | sealed V-Q02 before opening claimed value | sha256:ef2a08af59dd83978cbef9f1ffdb7f61460b96f5932b70317e76575a9f0654c3 sealed/V-Q02.json
+2026-09-17T13:26:46Z | sealed V-Q03 before opening claimed value | sha256:2116d1e32d57d416a73e7159b1eb0e339d6aa540f65584d8717e7cfa3272f9d7 sealed/V-Q03.json
+2026-09-17T13:26:46Z | sealed V-Q04 before opening claimed value | sha256:5dbf309a17f97f0ac0d055584c4578d96a02dd1abd5ea7a8976ee20e5d38ca70 sealed/V-Q04.json
+2026-09-17T13:28:42Z | sealed V-L01 before opening claimed value | sha256:3162ce50d0d99afc8586f387f8ff0622dea0b34ddfc9d74c925481ece43ddd7b sealed/V-L01.json
+2026-09-17T13:28:42Z | sealed V-L02 before opening claimed value | sha256:97227a2c53d4b97da632f35e65cc4427a13bbbbd1e20b2ba78752513bee5dcb4 sealed/V-L02.json
+2026-09-17T13:28:42Z | sealed V-L03 before opening claimed value | sha256:4d49bf3fa25d364ab61326bb08af4dc1235c3bcf96a0a9747e996c4e00dac472 sealed/V-L03.json
+2026-09-17T13:28:42Z | sealed V-L04 before opening claimed value | sha256:8e0a8063982edba2dae1a60b1dbf0b1684a8d9334ea60a0f558ab75b374bbc0f sealed/V-L04.json
+2026-09-17T13:28:42Z | sealed V-L05 before opening claimed value | sha256:a8ecc4289183e2852b3f7b9459818df679a6aaa43056380ed569bf37b8ddc184 sealed/V-L05.json
+2026-09-17T13:29:04Z | all 38 derivations sealed; claimed values opened only from this point | sha256:c884fe2a857337ea555bb0a01f4046fa57693df0e4124e5f086b199fa0870d7f sealed/SEALED_SHA256SUMS
+2026-09-17T13:32:43Z | sealed V-L-r1 before opening claimed value | sha256:8414d780b45ede281be395732e5d7cbe91a9819993bc5746c85a249e35bf5e85 sealed/V-L-r1.json
+2026-09-17T13:41:20Z | discrepancy reports D-L01..D-L05 written (causes resolved) | sha256:3c5fa3712ccbe0f1e0b48faaf408fa24c3dc3508cfb11db595f0dab1cc096106 discrepancies/SHA256SUMS
+2026-09-17T13:41:49Z | discrepancy reports corrected: per-stage cause attribution recounted (double-gzip also affects 2 wave-3 pages) | sha256:9b0517661e3fead583d74dfda9dcd0cb25283c12f3f1ca7c11e68c91fd970556 discrepancies/SHA256SUMS
+2026-09-17T13:43:06Z | replay controls V-01..V-04 run (verdict function ARMED, 4/4); v_records.json rebuilt after arming (deterministic, verdicts unchanged) | sha256:d7b47fced4202c35f86f413bfca6f71da2a5bb32d2df68950a876c10a61f6231 replay_check_results.json | sha256:2a023d089a367d17731ccf6330ff691af43992c2fe3c9ec715fda62f2118fb7d v_records.json
+2026-09-17T13:43:17Z | validate.py provenance: run1 FAIL (V-O02 falsifier wording, no observation verb) -> wording fixed -> run2 result in validate_stdout.txt | sha256:92faf1e8e2552214eaef10b752ab5b5f46e23554b75c2cdb8b8d47019db03621 validate_stdout_run1.txt | sha256:7b2d7b16a3d6c566cb708dc698b83022b9da0670736b792bbeedb5bcf6460a3e validate_stdout.txt | sha256:76ef04713fe91145f8d4567a7b414398115f8ed45f339748551bc0eb9169902c v_records.json
+2026-09-17T13:54:14Z | invariance.json built; alert content and GHOST per-run outputs deleted (hashes retained) | sha256:1d0ff61b6441c7c3b7911f92c2afdaebfa42c323fc624ca9bf99533627c50c8a invariance.json | sha256:a43b7b886649f29c7b7710f47c7eb4e7620123179518e78ff0752e47dc965985 invariance_runs.jsonl
+2026-09-17T13:54:40Z | DEFECT: inv_common.compare masks NaN differences (max(0,nan)=0); GHOST verdict INVARIANT_WITHIN_FLOAT_TOL for 372829/373061 unsupported (hashes differ, diff reported 0). Outputs already deleted; rerunning a targeted GHOST control with NaN-aware, column-naming comparator | sha256:1d0ff61b6441c7c3b7911f92c2afdaebfa42c323fc624ca9bf99533627c50c8a invariance.json
+2026-09-17T13:55:02Z | inv_common.compare fixed (NaN vs value -> inf); comparator controls rerun incl. new NaN must-fire control | sha256:32dbe7d18112b57a0f3a958ae11360ca53b74a0c0f6cb711c2238e2c87ec91b8 scripts/inv_common.py | sha256:1ff13d6bdc7865158dca521e62e8e5a5c63d7475e5a00f6d75ba13dfa7a4c93a data_cache/inv_controls.json
+2026-09-17T14:06:02Z | invariance.json built; alert content and GHOST per-run outputs deleted (hashes retained) | sha256:6aa16174994315f84c3c633971c09e24610f49a225cfe407626664f32c4d798a invariance.json | sha256:c48c21a0ac2d9118b38cce966df9f758c69baa698ae371d552b0bc7277a82790 invariance_runs.jsonl
+2026-09-17T14:06:29Z | close: v_records annotated (L clearance recommendation), validator PASS, MANIFEST.sha256 written | sha256:f57eb821c9213772eceb5f19431ae1019aa51eb6a9ea348b349c42458b401aba MANIFEST.sha256 | sha256:462286d6b4c474091f4e03e0f7587352c4a793e73d17030627d5759cb1ea3a9a v_records.json

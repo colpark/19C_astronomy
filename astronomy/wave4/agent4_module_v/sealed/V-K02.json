@@ -1,0 +1,22 @@
+{
+ "id": "K02",
+ "sealed_utc": "2026-09-17T13:23:14Z",
+ "derived": {
+  "E1_nights_le8": 518,
+  "sum_check": true,
+  "E3": {
+   "scored_pool_units": 2558,
+   "units_conflicting_class": 0,
+   "nights_total": 579,
+   "nights_gt8": 61,
+   "nights_le8": 518
+  }
+ },
+ "method": "as K01, count <=8",
+ "inputs": {
+  "pred_E1_C": "d56e45304c9754205ce956771747d549b26c054bd08e94fcd1eab27826b30772"
+ },
+ "premise": {
+  "plant_517_detected": true
+ }
+}

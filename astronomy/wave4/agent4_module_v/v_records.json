@@ -1,0 +1,4415 @@
+[
+ {
+  "id": "V-C01",
+  "target": "C01",
+  "claim": "Cohort total O: merged objects after X1-X3 with every member firstmjd >= T0",
+  "referent": "merged Rubin cohort objects O after X1-X3 with every member first detected at or after T0",
+  "source": "wave3/agent1_cohort_finish/rubin_cohort_count.json::w3-02; verifier astronomy/wave4/agent4_module_v/scripts/derive_cohort.py",
+  "population": "3,527,572 distinct ALeRCE oids (450 C3 + 1,551 P60 slice files, hashes verified)",
+  "adjudicator": "independent KD-tree/connected-components recount on the same hashed slices: 1937669",
+  "falsifier": "a slice perturbation that leaves the count unchanged, or a recount that differs from the claim",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent1_cohort_finish/rubin_cohort_count.json",
+   "field": "[id=w3-02].value"
+  },
+  "inputs": [
+   "astronomy/wave3/agent1_cohort_finish/out/w3_c3_slices/*.csv (450, verified against astronomy/wave3/agent1_cohort_finish/out/SLICES_SHA256SUMS)",
+   "astronomy/wave3/agent1_cohort_finish/out/w3_p60_slices/*.csv and w3_c5_slices/*.csv (verified against SLICES_SHA256SUMS)",
+   "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a72 X1-X3, \u00a73 (sha256 8825ef80...00d2)",
+   "astronomy/wave3/agent1_cohort_finish/count_protocol_w3_FROZEN.md W3-M (sha256 de241fc9...b649)",
+   "astronomy/wave3/agent1_cohort_finish/amendments_w3.md AM6-AM7"
+  ],
+  "number_type": "integer_count",
+  "feeds": "positive_supply axis O; manifest cohort slot; truth-cost A",
+  "sealed_file": "sealed/V-C01.json",
+  "sealed_sha256": "8f5262daef8930d8e21ac46d14268c365f8d172ba5bd2726cf1cb63f89c8c463",
+  "sealed_utc": "2026-09-17T13:23:37Z",
+  "comparisons": [
+   {
+    "field": "O_merged",
+    "claimed": 1937669,
+    "derived": 1937669,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "drop the largest C3 slice; duplicate 5,000 rows; plant 100 pre-T0 twins 0.5 arcsec from cohort oids",
+   "result": {
+    "drop_largest_slice": {
+     "slice": "61234.180428_61234.200428.csv",
+     "O_merged": 1807340,
+     "O_A": 1807391
+    },
+    "duplicate_5000_rows": {
+     "O_merged": 1937669,
+     "O_A": 1937720
+    },
+    "plant_100_twins": {
+     "O_merged": 1937569,
+     "S1_merge": 101,
+     "S1_direct": 521919
+    }
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-C02",
+  "target": "C02",
+  "claim": "Distinct ALeRCE/LSST oids with firstmjd >= T0 before merge (O_A)",
+  "referent": "distinct ALeRCE/LSST oids with firstmjd >= T0",
+  "source": "wave3/agent1_cohort_finish/rubin_cohort_count.json::w3-01; astronomy/wave4/agent4_module_v/scripts/derive_cohort.py",
+  "population": "450 C3 slice files",
+  "adjudicator": "independent dedupe recount 1937720",
+  "falsifier": "a recount on the hashed slices that differs from the claim",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent1_cohort_finish/rubin_cohort_count.json",
+   "field": "[id=w3-01].value"
+  },
+  "inputs": [
+   "astronomy/wave3/agent1_cohort_finish/out/w3_c3_slices/*.csv (450, verified against astronomy/wave3/agent1_cohort_finish/out/SLICES_SHA256SUMS)",
+   "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a72 X1-X3, \u00a73 (sha256 8825ef80...00d2)",
+   "astronomy/wave3/agent1_cohort_finish/count_protocol_w3_FROZEN.md W3-M (sha256 de241fc9...b649)",
+   "astronomy/wave3/agent1_cohort_finish/amendments_w3.md AM6-AM7"
+  ],
+  "number_type": "integer_count",
+  "feeds": "cluster_structure axis",
+  "sealed_file": "sealed/V-C02.json",
+  "sealed_sha256": "667e1e2daa5a8640127bdc4b483da070f86294f62e8e3ce3f2bed94914bdf5b9",
+  "sealed_utc": "2026-09-17T13:23:37Z",
+  "comparisons": [
+   {
+    "field": "O_A",
+    "claimed": 1937720,
+    "derived": 1937720,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "duplicate 5,000 rows (must not change), drop largest slice (must drop)",
+   "result": {
+    "duplicate_5000_rows_O_A": 1937720,
+    "drop_largest_slice_O_A": 1807391
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open; exposure before seal: cohort_protocol disclosure lines only",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-C03",
+  "target": "C03",
+  "claim": "Straddlers S1 = S1-direct (pre-T0 oids with lastmjd >= T0) + S1-merge (cohort oids merged with a pre-T0 oid)",
+  "referent": "stratum S1 straddlers: pre-T0 oids with lastmjd >= T0 plus cohort oids merged with pre-T0 oids",
+  "source": "wave3/agent1_cohort_finish/rubin_cohort_count.json::w3-05; astronomy/wave4/agent4_module_v/scripts/derive_cohort.py",
+  "population": "1,551 P60 + 1,500 C5 slice files and the merged union",
+  "adjudicator": "independent recount 521920",
+  "falsifier": "a straddler whose lastmjd is moved below T0 that leaves S1 unchanged, or a recount that differs",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent1_cohort_finish/rubin_cohort_count.json",
+   "field": "[id=w3-05].value"
+  },
+  "inputs": [
+   "astronomy/wave3/agent1_cohort_finish/out/w3_c3_slices/*.csv (450, verified against astronomy/wave3/agent1_cohort_finish/out/SLICES_SHA256SUMS)",
+   "astronomy/wave3/agent1_cohort_finish/out/w3_p60_slices/*.csv and w3_c5_slices/*.csv (verified against SLICES_SHA256SUMS)",
+   "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a72 X1-X3, \u00a73 (sha256 8825ef80...00d2)",
+   "astronomy/wave3/agent1_cohort_finish/count_protocol_w3_FROZEN.md W3-M (sha256 de241fc9...b649)",
+   "astronomy/wave3/agent1_cohort_finish/amendments_w3.md AM6-AM7"
+  ],
+  "number_type": "integer_count",
+  "feeds": "split_integrity axis",
+  "sealed_file": "sealed/V-C03.json",
+  "sealed_sha256": "8a5e0127ab4f0aa541cb52b231c613d06fa5889b089a3f7cedb984679d21eae9",
+  "sealed_utc": "2026-09-17T13:23:37Z",
+  "comparisons": [
+   {
+    "field": "S1_total",
+    "claimed": 521920,
+    "derived": 521920,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "S1_direct_first_in_T0-60d_to_T0",
+    "claimed": 521448,
+    "derived": 521448,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "S1_direct_first_2026-02-24_to_T0-60d",
+    "claimed": 471,
+    "derived": 471,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "S1_merge",
+    "claimed": 1,
+    "derived": 1,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "set one straddler lastmjd below T0 (S1 must fall by 1); plant 100 pre-T0 twins (S1-merge must rise by 100)",
+   "result": {
+    "lastmjd": {
+     "S1_before": 521920,
+     "S1_after": 521919
+    },
+    "twins_S1_merge": {
+     "plant_100_preT0_twins_S1_merge": 101
+    }
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-C04",
+  "target": "C04",
+  "claim": "One-detection share S3/(S3+S4) over the cohort",
+  "referent": "share of cohort oids with exactly one detection (S3)",
+  "source": "wave3/agent1_cohort_finish/rubin_cohort_count.json::w3-04; astronomy/wave4/agent4_module_v/scripts/derive_cohort.py",
+  "population": "1,937,720 cohort oids; 1,937,669 merged objects",
+  "adjudicator": "independent recount 1,566,024/1,937,720",
+  "falsifier": "flipping detections that leaves the share unchanged, or a recount outside 0.80815-0.80825",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent1_cohort_finish/rubin_cohort_count.json",
+   "field": "[id=w3-04].value (and any merged-level variant in the record)"
+  },
+  "inputs": [
+   "astronomy/wave3/agent1_cohort_finish/out/w3_c3_slices/*.csv (450, verified against astronomy/wave3/agent1_cohort_finish/out/SLICES_SHA256SUMS)",
+   "astronomy/wave3/agent1_cohort_finish/out/w3_p60_slices/*.csv and w3_c5_slices/*.csv (verified against SLICES_SHA256SUMS)",
+   "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a72 X1-X3, \u00a73 (sha256 8825ef80...00d2)",
+   "astronomy/wave3/agent1_cohort_finish/count_protocol_w3_FROZEN.md W3-M (sha256 de241fc9...b649)",
+   "astronomy/wave3/agent1_cohort_finish/amendments_w3.md AM6-AM7"
+  ],
+  "number_type": "share",
+  "feeds": "stratum S3/S4 report (BTS two-detection comparison)",
+  "sealed_file": "sealed/V-C04.json",
+  "sealed_sha256": "9ed3d5ea214aabb1b1c56acbde859d455329ea678ff178b244465948a8d2a47a",
+  "sealed_utc": "2026-09-17T13:23:37Z",
+  "comparisons": [
+   {
+    "field": "S3_one_detection_share_oids",
+    "claimed": 0.8082,
+    "derived": 0.8081786842268233,
+    "abs_diff": 2.1315773176766584e-05,
+    "rel_diff": 2.637437908533356e-05,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 0.0,
+     "recorded_decimals": 4,
+     "rounding_allowance": 5e-05,
+     "effective_abs": 5e-05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "S3_one_detection_oids",
+    "claimed": 1566024,
+    "derived": 1566024,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "S3_share_merged",
+    "claimed": 0.8082,
+    "derived": 0.8081504116544157,
+    "abs_diff": 4.958834558432823e-05,
+    "rel_diff": 6.13565275727892e-05,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 0.0,
+     "recorded_decimals": 4,
+     "rounding_allowance": 5e-05,
+     "effective_abs": 5e-05
+    },
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "flip n_det of 1,000 one-detection cohort oids to 2; share must fall by 1000/O_A",
+   "result": {
+    "share_before": 0.8081786842268233,
+    "share_after": 0.8076626137935305,
+    "expected_drop": 0.0005160704332927358,
+    "observed_drop": 0.0005160704332927146
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-P01",
+  "target": "P01",
+  "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E1_N pooled (all 579 night items) (col a=prec_classical, col b=prec_instrument)",
+  "referent": "paired sigma_d, MDE (alpha 0.05, power 0.80) and N_min at delta 0.018 and 0.05 for E1_N all items",
+  "source": "wave2/agent4_instrument/power_calibration.json::runs.E1_N and wave3/agent4_tool_recount/power_calibration_delta005.json::runs.E1_N; verifier astronomy/wave4/agent4_module_v/scripts/derive_power.py (exact rationals, not power.py)",
+  "population": "579 paired items from wave2/agent4_instrument/paired_scores.csv (sha256 d93b31e2...)",
+  "adjudicator": "independent exact-rational recomputation sigma_d=0.029361",
+  "falsifier": "a pairing shuffle that leaves sigma_d unchanged, or a recomputation that differs beyond the recorded 6 dp",
+  "recorded_at": {
+   "file": [
+    "astronomy/wave2/agent4_instrument/power_calibration.json",
+    "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+   ],
+   "field": [
+    "runs.E1_N.{n,sigma_d,mde,n_min} (delta 0.018)",
+    "runs.E1_N.delta_0.05|delta_0.018.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+   ]
+  },
+  "inputs": [
+   "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+   "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+   "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+   "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+  ],
+  "number_type": "float_statistic + ceil_integer",
+  "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands",
+  "sealed_file": "sealed/V-P01.json",
+  "sealed_sha256": "6afffdedf690fd323601cbc77d05667fbc0ffbd98abb1d69aee08db5f094f427",
+  "sealed_utc": "2026-09-17T13:22:13Z",
+  "comparisons": [
+   {
+    "field": "w2 runs.E1_N.n",
+    "claimed": 579,
+    "derived": 579,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .sigma_d",
+    "claimed": 0.029361,
+    "derived": 0.029360923242276214,
+    "abs_diff": 7.67577237881234e-08,
+    "rel_diff": 2.6142748471824323e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .mde",
+    "claimed": 0.003419,
+    "derived": 0.003418507637705905,
+    "abs_diff": 4.923622940952721e-07,
+    "rel_diff": 0.0001440076905806587,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .n_min (delta 0.018)",
+    "claimed": 21,
+    "derived": 21,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E1_N.delta_0.05.sigma_d",
+    "claimed": 0.029361,
+    "derived": 0.029360923242276214,
+    "abs_diff": 7.67577237881234e-08,
+    "rel_diff": 2.6142748471824323e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.mde",
+    "claimed": 0.003419,
+    "derived": 0.003418507637705905,
+    "abs_diff": 4.923622940952721e-07,
+    "rel_diff": 0.0001440076905806587,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.n_min",
+    "claimed": 3,
+    "derived": 3,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E1_N.delta_0.018.sigma_d",
+    "claimed": 0.029361,
+    "derived": 0.029360923242276214,
+    "abs_diff": 7.67577237881234e-08,
+    "rel_diff": 2.6142748471824323e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.mde",
+    "claimed": 0.003419,
+    "derived": 0.003418507637705905,
+    "abs_diff": 4.923622940952721e-07,
+    "rel_diff": 0.0001440076905806587,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.n_min",
+    "claimed": 21,
+    "derived": 21,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 pooled_night_runs_refused.mde",
+    "claimed": 0.003419,
+    "derived": 0.003418507637705905,
+    "abs_diff": 4.923622940952721e-07,
+    "rel_diff": 0.0001440076905806587,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 pooled_E1_N_refused.mde",
+    "claimed": 0.003419,
+    "derived": 0.003418507637705905,
+    "abs_diff": 4.923622940952721e-07,
+    "rel_diff": 0.0001440076905806587,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "shuffle the pairing of col b against col a (seed 20260917) and require sigma_d to change; require N_min*delta^2 >= z^2 sd^2 > (N_min-1)*delta^2 at both deltas; cross-check against the per-run paired file",
+   "result": {
+    "shuffle": {
+     "sigma_d_orig": 0.029360923242276214,
+     "sigma_d_pairing_shuffled": 0.388690762734162,
+     "changed": true
+    },
+    "nmin_consistent": true,
+    "per_run_file_sigma_d": 0.029360923242276214
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-P02",
+  "target": "P02",
+  "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E1_N k_binding=True (col a=prec_classical, col b=prec_instrument)",
+  "referent": "paired sigma_d, MDE (alpha 0.05, power 0.80) and N_min at delta 0.018 and 0.05 for E1_N k_binding=True",
+  "source": "wave2/agent4_instrument/power_calibration.json::runs.E1_N and wave3/agent4_tool_recount/power_calibration_delta005.json::runs.E1_N; verifier astronomy/wave4/agent4_module_v/scripts/derive_power.py (exact rationals, not power.py)",
+  "population": "61 paired items from wave2/agent4_instrument/paired_scores.csv (sha256 d93b31e2...)",
+  "adjudicator": "independent exact-rational recomputation sigma_d=0.089778",
+  "falsifier": "a pairing shuffle that leaves sigma_d unchanged, or a recomputation that differs beyond the recorded 6 dp",
+  "recorded_at": {
+   "file": [
+    "astronomy/wave2/agent4_instrument/power_calibration.json",
+    "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+   ],
+   "field": [
+    "runs.E1_N.strata.True.{n,sigma_d,mde,n_min} (delta 0.018)",
+    "runs.E1_N.delta_0.05|delta_0.018.strata.True.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+   ]
+  },
+  "inputs": [
+   "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+   "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+   "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+   "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+  ],
+  "number_type": "float_statistic + ceil_integer",
+  "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands",
+  "sealed_file": "sealed/V-P02.json",
+  "sealed_sha256": "3216b5221a9ffc60e302c7ae24c6ea2fb8acfbb3c90970bec885e3e545b9b1ce",
+  "sealed_utc": "2026-09-17T13:22:13Z",
+  "comparisons": [
+   {
+    "field": "w2 runs.E1_N.strata.True.n",
+    "claimed": 61,
+    "derived": 61,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .sigma_d",
+    "claimed": 0.089778,
+    "derived": 0.0897781114170792,
+    "abs_diff": 1.1141707920159227e-07,
+    "rel_diff": 1.241028750936669e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .mde",
+    "claimed": 0.032204,
+    "derived": 0.032204137816745415,
+    "abs_diff": 1.3781674541163413e-07,
+    "rel_diff": 4.2794915355742805e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .n_min (delta 0.018)",
+    "claimed": 196,
+    "derived": 196,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E1_N.delta_0.05.strata.True.sigma_d",
+    "claimed": 0.089778,
+    "derived": 0.0897781114170792,
+    "abs_diff": 1.1141707920159227e-07,
+    "rel_diff": 1.241028750936669e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.mde",
+    "claimed": 0.032204,
+    "derived": 0.032204137816745415,
+    "abs_diff": 1.3781674541163413e-07,
+    "rel_diff": 4.2794915355742805e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.n_min",
+    "claimed": 26,
+    "derived": 26,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E1_N.0.05.n_min",
+    "claimed": 26,
+    "derived": 26,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E1_N.0.05.mde",
+    "claimed": 0.032204,
+    "derived": 0.032204137816745415,
+    "abs_diff": 1.3781674541163413e-07,
+    "rel_diff": 4.2794915355742805e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E1_N.delta_0.018.strata.True.sigma_d",
+    "claimed": 0.089778,
+    "derived": 0.0897781114170792,
+    "abs_diff": 1.1141707920159227e-07,
+    "rel_diff": 1.241028750936669e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.mde",
+    "claimed": 0.032204,
+    "derived": 0.032204137816745415,
+    "abs_diff": 1.3781674541163413e-07,
+    "rel_diff": 4.2794915355742805e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.n_min",
+    "claimed": 196,
+    "derived": 196,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E1_N.0.018.n_min",
+    "claimed": 196,
+    "derived": 196,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E1_N.0.018.mde",
+    "claimed": 0.032204,
+    "derived": 0.032204137816745415,
+    "abs_diff": 1.3781674541163413e-07,
+    "rel_diff": 4.2794915355742805e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 top-level sigma_d",
+    "claimed": 0.089778,
+    "derived": 0.0897781114170792,
+    "abs_diff": 1.1141707920159227e-07,
+    "rel_diff": 1.241028750936669e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 top-level mde",
+    "claimed": 0.032204,
+    "derived": 0.032204137816745415,
+    "abs_diff": 1.3781674541163413e-07,
+    "rel_diff": 4.2794915355742805e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 top-level n_min",
+    "claimed": 196,
+    "derived": 196,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 top-level n_min (0.05)",
+    "claimed": 26,
+    "derived": 26,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 at_literature_prior_0.018.n_min",
+    "claimed": 196,
+    "derived": 196,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "shuffle the pairing of col b against col a (seed 20260917) and require sigma_d to change; require N_min*delta^2 >= z^2 sd^2 > (N_min-1)*delta^2 at both deltas; cross-check against the per-run paired file",
+   "result": {
+    "shuffle": {
+     "sigma_d_orig": 0.0897781114170792,
+     "sigma_d_pairing_shuffled": 0.22531853590628273,
+     "changed": true
+    },
+    "nmin_consistent": true,
+    "per_run_file_sigma_d": 0.0897781114170792
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open; exposure before seal: binding-night MDE 0.032 (wave3/STATUS.md, read for orientation before sealing)",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-P03",
+  "target": "P03",
+  "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E1_N k_binding=False (col a=prec_classical, col b=prec_instrument)",
+  "referent": "paired sigma_d, MDE (alpha 0.05, power 0.80) and N_min at delta 0.018 and 0.05 for E1_N k_binding=False",
+  "source": "wave2/agent4_instrument/power_calibration.json::runs.E1_N and wave3/agent4_tool_recount/power_calibration_delta005.json::runs.E1_N; verifier astronomy/wave4/agent4_module_v/scripts/derive_power.py (exact rationals, not power.py)",
+  "population": "518 paired items from wave2/agent4_instrument/paired_scores.csv (sha256 d93b31e2...)",
+  "adjudicator": "independent exact-rational recomputation sigma_d=0.000000",
+  "falsifier": "a pairing shuffle that leaves sigma_d unchanged, or a recomputation that differs beyond the recorded 6 dp",
+  "recorded_at": {
+   "file": [
+    "astronomy/wave2/agent4_instrument/power_calibration.json",
+    "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+   ],
+   "field": [
+    "runs.E1_N.strata.False.{n,sigma_d,mde,n_min} (delta 0.018)",
+    "runs.E1_N.delta_0.05|delta_0.018.strata.False.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+   ]
+  },
+  "inputs": [
+   "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+   "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+   "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+   "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+  ],
+  "number_type": "float_statistic + ceil_integer",
+  "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands",
+  "sealed_file": "sealed/V-P03.json",
+  "sealed_sha256": "57eaf78d56ad143294cb552718d3a384cecf7487b1fedcd702d6f3a73c18e299",
+  "sealed_utc": "2026-09-17T13:22:13Z",
+  "comparisons": [
+   {
+    "field": "w2 runs.E1_N.strata.False.n",
+    "claimed": 518,
+    "derived": 518,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .sigma_d",
+    "claimed": 0.0,
+    "derived": 0.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .mde",
+    "claimed": 0.0,
+    "derived": 0.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .n_min (delta 0.018)",
+    "claimed": 0,
+    "derived": 0,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E1_N.delta_0.05.strata.False.sigma_d",
+    "claimed": 0.0,
+    "derived": 0.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.mde",
+    "claimed": 0.0,
+    "derived": 0.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.n_min",
+    "claimed": 0,
+    "derived": 0,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E1_N.delta_0.018.strata.False.sigma_d",
+    "claimed": 0.0,
+    "derived": 0.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.mde",
+    "claimed": 0.0,
+    "derived": 0.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.n_min",
+    "claimed": 0,
+    "derived": 0,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "shuffle the pairing of col b against col a (seed 20260917) and require sigma_d to change; require N_min*delta^2 >= z^2 sd^2 > (N_min-1)*delta^2 at both deltas; cross-check against the per-run paired file",
+   "result": {
+    "shuffle": {
+     "sigma_d_orig": 0.0,
+     "sigma_d_pairing_shuffled": 0.3983140440471974,
+     "changed": true
+    },
+    "nmin_consistent": true,
+    "per_run_file_sigma_d": 0.0
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-P04",
+  "target": "P04",
+  "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E1_R round-46 items (col a=prec_classical, col b=prec_instrument)",
+  "referent": "paired sigma_d, MDE (alpha 0.05, power 0.80) and N_min at delta 0.018 and 0.05 for E1_R all items",
+  "source": "wave2/agent4_instrument/power_calibration.json::runs.E1_R and wave3/agent4_tool_recount/power_calibration_delta005.json::runs.E1_R; verifier astronomy/wave4/agent4_module_v/scripts/derive_power.py (exact rationals, not power.py)",
+  "population": "55 paired items from wave2/agent4_instrument/paired_scores.csv (sha256 d93b31e2...)",
+  "adjudicator": "independent exact-rational recomputation sigma_d=0.145680",
+  "falsifier": "a pairing shuffle that leaves sigma_d unchanged, or a recomputation that differs beyond the recorded 6 dp",
+  "recorded_at": {
+   "file": [
+    "astronomy/wave2/agent4_instrument/power_calibration.json",
+    "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+   ],
+   "field": [
+    "runs.E1_R.{n,sigma_d,mde,n_min} (delta 0.018)",
+    "runs.E1_R.delta_0.05|delta_0.018.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+   ]
+  },
+  "inputs": [
+   "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+   "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+   "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+   "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+  ],
+  "number_type": "float_statistic + ceil_integer",
+  "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands",
+  "sealed_file": "sealed/V-P04.json",
+  "sealed_sha256": "1e60646d207e60559ef8879421c121f0a0dc2566a36325c8ea62917a82727243",
+  "sealed_utc": "2026-09-17T13:22:13Z",
+  "comparisons": [
+   {
+    "field": "w2 runs.E1_R.n",
+    "claimed": 55,
+    "derived": 55,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .sigma_d",
+    "claimed": 0.14568,
+    "derived": 0.14567993375081928,
+    "abs_diff": 6.624918072462016e-08,
+    "rel_diff": 4.5475824220634374e-07,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 5,
+     "rounding_allowance": 5e-06,
+     "effective_abs": 5e-06
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .mde",
+    "claimed": 0.055033,
+    "derived": 0.05503316869235119,
+    "abs_diff": 1.6869235119204573e-07,
+    "rel_diff": 3.0652944813483862e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .n_min (delta 0.018)",
+    "claimed": 515,
+    "derived": 515,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E1_R.delta_0.05.sigma_d",
+    "claimed": 0.14568,
+    "derived": 0.14567993375081928,
+    "abs_diff": 6.624918072462016e-08,
+    "rel_diff": 4.5475824220634374e-07,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 5,
+     "rounding_allowance": 5e-06,
+     "effective_abs": 5e-06
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.mde",
+    "claimed": 0.055033,
+    "derived": 0.05503316869235119,
+    "abs_diff": 1.6869235119204573e-07,
+    "rel_diff": 3.0652944813483862e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.n_min",
+    "claimed": 67,
+    "derived": 67,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E1_R.0.05.n_min",
+    "claimed": 67,
+    "derived": 67,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E1_R.0.05.mde",
+    "claimed": 0.055033,
+    "derived": 0.05503316869235119,
+    "abs_diff": 1.6869235119204573e-07,
+    "rel_diff": 3.0652944813483862e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E1_R.delta_0.018.sigma_d",
+    "claimed": 0.14568,
+    "derived": 0.14567993375081928,
+    "abs_diff": 6.624918072462016e-08,
+    "rel_diff": 4.5475824220634374e-07,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 5,
+     "rounding_allowance": 5e-06,
+     "effective_abs": 5e-06
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.mde",
+    "claimed": 0.055033,
+    "derived": 0.05503316869235119,
+    "abs_diff": 1.6869235119204573e-07,
+    "rel_diff": 3.0652944813483862e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.n_min",
+    "claimed": 515,
+    "derived": 515,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E1_R.0.018.n_min",
+    "claimed": 515,
+    "derived": 515,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E1_R.0.018.mde",
+    "claimed": 0.055033,
+    "derived": 0.05503316869235119,
+    "abs_diff": 1.6869235119204573e-07,
+    "rel_diff": 3.0652944813483862e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "shuffle the pairing of col b against col a (seed 20260917) and require sigma_d to change; require N_min*delta^2 >= z^2 sd^2 > (N_min-1)*delta^2 at both deltas; cross-check against the per-run paired file",
+   "result": {
+    "shuffle": {
+     "sigma_d_orig": 0.14567993375081928,
+     "sigma_d_pairing_shuffled": 0.25421530417231153,
+     "changed": true
+    },
+    "nmin_consistent": true,
+    "per_run_file_sigma_d": 0.14567993375081928
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-P05",
+  "target": "P05",
+  "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E3_N pooled (col a=prec_classical, col b=prec_instrument)",
+  "referent": "paired sigma_d, MDE (alpha 0.05, power 0.80) and N_min at delta 0.018 and 0.05 for E3_N all items",
+  "source": "wave2/agent4_instrument/power_calibration.json::runs.E3_N and wave3/agent4_tool_recount/power_calibration_delta005.json::runs.E3_N; verifier astronomy/wave4/agent4_module_v/scripts/derive_power.py (exact rationals, not power.py)",
+  "population": "579 paired items from wave2/agent4_instrument/paired_scores.csv (sha256 d93b31e2...)",
+  "adjudicator": "independent exact-rational recomputation sigma_d=0.027458",
+  "falsifier": "a pairing shuffle that leaves sigma_d unchanged, or a recomputation that differs beyond the recorded 6 dp",
+  "recorded_at": {
+   "file": [
+    "astronomy/wave2/agent4_instrument/power_calibration.json",
+    "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+   ],
+   "field": [
+    "runs.E3_N.{n,sigma_d,mde,n_min} (delta 0.018)",
+    "runs.E3_N.delta_0.05|delta_0.018.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+   ]
+  },
+  "inputs": [
+   "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+   "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+   "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+   "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+  ],
+  "number_type": "float_statistic + ceil_integer",
+  "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands",
+  "sealed_file": "sealed/V-P05.json",
+  "sealed_sha256": "a31e3a5c2054803ba935c01e3727d7dc33b14be7347a88a52ac9cbf85c949af7",
+  "sealed_utc": "2026-09-17T13:22:13Z",
+  "comparisons": [
+   {
+    "field": "w2 runs.E3_N.n",
+    "claimed": 579,
+    "derived": 579,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .sigma_d",
+    "claimed": 0.027458,
+    "derived": 0.027457828132420856,
+    "abs_diff": 1.7186757914414152e-07,
+    "rel_diff": 6.259289793289443e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .mde",
+    "claimed": 0.003197,
+    "derived": 0.0031969292794697506,
+    "abs_diff": 7.072053024963221e-08,
+    "rel_diff": 2.212090405055746e-05,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .n_min (delta 0.018)",
+    "claimed": 19,
+    "derived": 19,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E3_N.delta_0.05.sigma_d",
+    "claimed": 0.027458,
+    "derived": 0.027457828132420856,
+    "abs_diff": 1.7186757914414152e-07,
+    "rel_diff": 6.259289793289443e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.mde",
+    "claimed": 0.003197,
+    "derived": 0.0031969292794697506,
+    "abs_diff": 7.072053024963221e-08,
+    "rel_diff": 2.212090405055746e-05,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.n_min",
+    "claimed": 3,
+    "derived": 3,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E3_N.delta_0.018.sigma_d",
+    "claimed": 0.027458,
+    "derived": 0.027457828132420856,
+    "abs_diff": 1.7186757914414152e-07,
+    "rel_diff": 6.259289793289443e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.mde",
+    "claimed": 0.003197,
+    "derived": 0.0031969292794697506,
+    "abs_diff": 7.072053024963221e-08,
+    "rel_diff": 2.212090405055746e-05,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.n_min",
+    "claimed": 19,
+    "derived": 19,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 pooled_night_runs_refused.mde",
+    "claimed": 0.003197,
+    "derived": 0.0031969292794697506,
+    "abs_diff": 7.072053024963221e-08,
+    "rel_diff": 2.212090405055746e-05,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "shuffle the pairing of col b against col a (seed 20260917) and require sigma_d to change; require N_min*delta^2 >= z^2 sd^2 > (N_min-1)*delta^2 at both deltas; cross-check against the per-run paired file",
+   "result": {
+    "shuffle": {
+     "sigma_d_orig": 0.027457828132420856,
+     "sigma_d_pairing_shuffled": 0.3905633997311098,
+     "changed": true
+    },
+    "nmin_consistent": true,
+    "per_run_file_sigma_d": 0.027457828132420856
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-P06",
+  "target": "P06",
+  "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E3_N k_binding=True (col a=prec_classical, col b=prec_instrument)",
+  "referent": "paired sigma_d, MDE (alpha 0.05, power 0.80) and N_min at delta 0.018 and 0.05 for E3_N k_binding=True",
+  "source": "wave2/agent4_instrument/power_calibration.json::runs.E3_N and wave3/agent4_tool_recount/power_calibration_delta005.json::runs.E3_N; verifier astronomy/wave4/agent4_module_v/scripts/derive_power.py (exact rationals, not power.py)",
+  "population": "61 paired items from wave2/agent4_instrument/paired_scores.csv (sha256 d93b31e2...)",
+  "adjudicator": "independent exact-rational recomputation sigma_d=0.083776",
+  "falsifier": "a pairing shuffle that leaves sigma_d unchanged, or a recomputation that differs beyond the recorded 6 dp",
+  "recorded_at": {
+   "file": [
+    "astronomy/wave2/agent4_instrument/power_calibration.json",
+    "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+   ],
+   "field": [
+    "runs.E3_N.strata.True.{n,sigma_d,mde,n_min} (delta 0.018)",
+    "runs.E3_N.delta_0.05|delta_0.018.strata.True.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+   ]
+  },
+  "inputs": [
+   "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+   "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+   "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+   "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+  ],
+  "number_type": "float_statistic + ceil_integer",
+  "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands",
+  "sealed_file": "sealed/V-P06.json",
+  "sealed_sha256": "b7bd798202673050895e9ddd305ed5024708c0a4d66489b61b1a23547752959e",
+  "sealed_utc": "2026-09-17T13:22:13Z",
+  "comparisons": [
+   {
+    "field": "w2 runs.E3_N.strata.True.n",
+    "claimed": 61,
+    "derived": 61,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .sigma_d",
+    "claimed": 0.083776,
+    "derived": 0.08377614590652174,
+    "abs_diff": 1.4590652173962493e-07,
+    "rel_diff": 1.7416267396345603e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .mde",
+    "claimed": 0.030051,
+    "derived": 0.030051184035222958,
+    "abs_diff": 1.8403522295679098e-07,
+    "rel_diff": 6.124096467897606e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .n_min (delta 0.018)",
+    "claimed": 171,
+    "derived": 171,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E3_N.delta_0.05.strata.True.sigma_d",
+    "claimed": 0.083776,
+    "derived": 0.08377614590652174,
+    "abs_diff": 1.4590652173962493e-07,
+    "rel_diff": 1.7416267396345603e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.mde",
+    "claimed": 0.030051,
+    "derived": 0.030051184035222958,
+    "abs_diff": 1.8403522295679098e-07,
+    "rel_diff": 6.124096467897606e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.n_min",
+    "claimed": 23,
+    "derived": 23,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E3_N.0.05.n_min",
+    "claimed": 23,
+    "derived": 23,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E3_N.0.05.mde",
+    "claimed": 0.030051,
+    "derived": 0.030051184035222958,
+    "abs_diff": 1.8403522295679098e-07,
+    "rel_diff": 6.124096467897606e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E3_N.delta_0.018.strata.True.sigma_d",
+    "claimed": 0.083776,
+    "derived": 0.08377614590652174,
+    "abs_diff": 1.4590652173962493e-07,
+    "rel_diff": 1.7416267396345603e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.mde",
+    "claimed": 0.030051,
+    "derived": 0.030051184035222958,
+    "abs_diff": 1.8403522295679098e-07,
+    "rel_diff": 6.124096467897606e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.n_min",
+    "claimed": 171,
+    "derived": 171,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E3_N.0.018.n_min",
+    "claimed": 171,
+    "derived": 171,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E3_N.0.018.mde",
+    "claimed": 0.030051,
+    "derived": 0.030051184035222958,
+    "abs_diff": 1.8403522295679098e-07,
+    "rel_diff": 6.124096467897606e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "shuffle the pairing of col b against col a (seed 20260917) and require sigma_d to change; require N_min*delta^2 >= z^2 sd^2 > (N_min-1)*delta^2 at both deltas; cross-check against the per-run paired file",
+   "result": {
+    "shuffle": {
+     "sigma_d_orig": 0.08377614590652174,
+     "sigma_d_pairing_shuffled": 0.2616806755499614,
+     "changed": true
+    },
+    "nmin_consistent": true,
+    "per_run_file_sigma_d": 0.08377614590652174
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-P07",
+  "target": "P07",
+  "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E3_N k_binding=False (col a=prec_classical, col b=prec_instrument)",
+  "referent": "paired sigma_d, MDE (alpha 0.05, power 0.80) and N_min at delta 0.018 and 0.05 for E3_N k_binding=False",
+  "source": "wave2/agent4_instrument/power_calibration.json::runs.E3_N and wave3/agent4_tool_recount/power_calibration_delta005.json::runs.E3_N; verifier astronomy/wave4/agent4_module_v/scripts/derive_power.py (exact rationals, not power.py)",
+  "population": "518 paired items from wave2/agent4_instrument/paired_scores.csv (sha256 d93b31e2...)",
+  "adjudicator": "independent exact-rational recomputation sigma_d=0.000000",
+  "falsifier": "a pairing shuffle that leaves sigma_d unchanged, or a recomputation that differs beyond the recorded 6 dp",
+  "recorded_at": {
+   "file": [
+    "astronomy/wave2/agent4_instrument/power_calibration.json",
+    "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+   ],
+   "field": [
+    "runs.E3_N.strata.False.{n,sigma_d,mde,n_min} (delta 0.018)",
+    "runs.E3_N.delta_0.05|delta_0.018.strata.False.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+   ]
+  },
+  "inputs": [
+   "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+   "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+   "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+   "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+  ],
+  "number_type": "float_statistic + ceil_integer",
+  "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands",
+  "sealed_file": "sealed/V-P07.json",
+  "sealed_sha256": "591ddb18619b64c6a9825af523a45e04e5579cc5adc8368c6e67325788d93204",
+  "sealed_utc": "2026-09-17T13:22:13Z",
+  "comparisons": [
+   {
+    "field": "w2 runs.E3_N.strata.False.n",
+    "claimed": 518,
+    "derived": 518,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .sigma_d",
+    "claimed": 0.0,
+    "derived": 0.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .mde",
+    "claimed": 0.0,
+    "derived": 0.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .n_min (delta 0.018)",
+    "claimed": 0,
+    "derived": 0,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E3_N.delta_0.05.strata.False.sigma_d",
+    "claimed": 0.0,
+    "derived": 0.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.mde",
+    "claimed": 0.0,
+    "derived": 0.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.n_min",
+    "claimed": 0,
+    "derived": 0,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E3_N.delta_0.018.strata.False.sigma_d",
+    "claimed": 0.0,
+    "derived": 0.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.mde",
+    "claimed": 0.0,
+    "derived": 0.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.n_min",
+    "claimed": 0,
+    "derived": 0,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "shuffle the pairing of col b against col a (seed 20260917) and require sigma_d to change; require N_min*delta^2 >= z^2 sd^2 > (N_min-1)*delta^2 at both deltas; cross-check against the per-run paired file",
+   "result": {
+    "shuffle": {
+     "sigma_d_orig": 0.0,
+     "sigma_d_pairing_shuffled": 0.3983140440471974,
+     "changed": true
+    },
+    "nmin_consistent": true,
+    "per_run_file_sigma_d": 0.0
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-P08",
+  "target": "P08",
+  "claim": "sigma_d, MDE, N_min at delta 0.018 and 0.05 for power row E3_R round-46 items (col a=prec_classical, col b=prec_instrument)",
+  "referent": "paired sigma_d, MDE (alpha 0.05, power 0.80) and N_min at delta 0.018 and 0.05 for E3_R all items",
+  "source": "wave2/agent4_instrument/power_calibration.json::runs.E3_R and wave3/agent4_tool_recount/power_calibration_delta005.json::runs.E3_R; verifier astronomy/wave4/agent4_module_v/scripts/derive_power.py (exact rationals, not power.py)",
+  "population": "55 paired items from wave2/agent4_instrument/paired_scores.csv (sha256 d93b31e2...)",
+  "adjudicator": "independent exact-rational recomputation sigma_d=0.165622",
+  "falsifier": "a pairing shuffle that leaves sigma_d unchanged, or a recomputation that differs beyond the recorded 6 dp",
+  "recorded_at": {
+   "file": [
+    "astronomy/wave2/agent4_instrument/power_calibration.json",
+    "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+   ],
+   "field": [
+    "runs.E3_R.{n,sigma_d,mde,n_min} (delta 0.018)",
+    "runs.E3_R.delta_0.05|delta_0.018.{n,sigma_d,mde,n_min}; table_both_deltas; top-level sigma_d/mde/n_min for the primary run; pooled_*_refused.mde"
+   ]
+  },
+  "inputs": [
+   "astronomy/wave2/agent4_instrument/paired_scores.csv (sha256 in astronomy/wave2/agent4_instrument/HASH_MANIFEST.sha256)",
+   "astronomy/wave2/agent4_instrument/data_cache/power/paired_<run>.csv (sha256 scores_file_sha256 in the power records)",
+   "fm-advantage-benchmark/scripts/power.py documented math: d=a-b, sd ddof=1, MDE=(z_{1-a/2}+z_power)*sd/sqrt(n), N_min=ceil(z^2 sd^2/delta^2), z table 1.9600+0.8416; own implementation",
+   "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (items N, R; k_binding stratum)"
+  ],
+  "number_type": "float_statistic + ceil_integer",
+  "feeds": "P7 resolution; binding-night MDE vs delta in P4 and kill bands",
+  "sealed_file": "sealed/V-P08.json",
+  "sealed_sha256": "d2a324a49e8916e017defba89bf4e9aed4b59e5db33847e9545f81a6835910bc",
+  "sealed_utc": "2026-09-17T13:22:13Z",
+  "comparisons": [
+   {
+    "field": "w2 runs.E3_R.n",
+    "claimed": 55,
+    "derived": 55,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .sigma_d",
+    "claimed": 0.165622,
+    "derived": 0.16562172428626493,
+    "abs_diff": 2.7571373506507513e-07,
+    "rel_diff": 1.6647168556416124e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .mde",
+    "claimed": 0.062567,
+    "derived": 0.062566532377441,
+    "abs_diff": 4.676225589944627e-07,
+    "rel_diff": 7.47394887072199e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w2 .n_min (delta 0.018)",
+    "claimed": 665,
+    "derived": 665,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E3_R.delta_0.05.sigma_d",
+    "claimed": 0.165622,
+    "derived": 0.16562172428626493,
+    "abs_diff": 2.7571373506507513e-07,
+    "rel_diff": 1.6647168556416124e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.mde",
+    "claimed": 0.062567,
+    "derived": 0.062566532377441,
+    "abs_diff": 4.676225589944627e-07,
+    "rel_diff": 7.47394887072199e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.05.n_min",
+    "claimed": 87,
+    "derived": 87,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E3_R.0.05.n_min",
+    "claimed": 87,
+    "derived": 87,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E3_R.0.05.mde",
+    "claimed": 0.062567,
+    "derived": 0.062566532377441,
+    "abs_diff": 4.676225589944627e-07,
+    "rel_diff": 7.47394887072199e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 runs.E3_R.delta_0.018.sigma_d",
+    "claimed": 0.165622,
+    "derived": 0.16562172428626493,
+    "abs_diff": 2.7571373506507513e-07,
+    "rel_diff": 1.6647168556416124e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.mde",
+    "claimed": 0.062567,
+    "derived": 0.062566532377441,
+    "abs_diff": 4.676225589944627e-07,
+    "rel_diff": 7.47394887072199e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 ...delta_0.018.n_min",
+    "claimed": 665,
+    "derived": 665,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E3_R.0.018.n_min",
+    "claimed": 665,
+    "derived": 665,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3 table_both_deltas.E3_R.0.018.mde",
+    "claimed": 0.062567,
+    "derived": 0.062566532377441,
+    "abs_diff": 4.676225589944627e-07,
+    "rel_diff": 7.47394887072199e-06,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 6,
+     "rounding_allowance": 5e-07,
+     "effective_abs": 5e-07
+    },
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "shuffle the pairing of col b against col a (seed 20260917) and require sigma_d to change; require N_min*delta^2 >= z^2 sd^2 > (N_min-1)*delta^2 at both deltas; cross-check against the per-run paired file",
+   "result": {
+    "shuffle": {
+     "sigma_d_orig": 0.16562172428626493,
+     "sigma_d_pairing_shuffled": 0.28706690406141805,
+     "changed": true
+    },
+    "nmin_consistent": true,
+    "per_run_file_sigma_d": 0.16562172428626493
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-K01",
+  "target": "K01",
+  "claim": "k-binding night count: E1 night items with more than k=8 scored candidates, out of all E1 decision nights",
+  "referent": "E1 decision nights with more than k=8 scored candidates, of all E1 decision nights",
+  "source": "wave2/agent4_instrument/power_calibration.json::runs.E1_N.strata.True.n; verifier astronomy/wave4/agent4_module_v/scripts/derive_auc_nights.py",
+  "population": "2,558 scored-pool units (posA or neg by corpus type) in pred_E1_C.csv",
+  "adjudicator": "independent count from predictions + corpus: 61 of 579",
+  "falsifier": "moving one unit into an 8-candidate night that leaves the count unchanged, or a recount that differs",
+  "recorded_at": {
+   "file": [
+    "astronomy/wave2/agent4_instrument/power_calibration.json",
+    "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+   ],
+   "field": "runs.E1_N strata.True.n and n (pooled); primary_run text"
+  },
+  "inputs": [
+   "astronomy/wave2/agent4_instrument/compositions/predictions/pred_E1_C.csv (decision_night per unit; MANIFEST.sha256)",
+   "astronomy/agent1_supply_corpus/corpus.csv (sha256 b059acf0...8442; type -> posA/neg scored pool via bands_FROZEN \u00a74 map)",
+   "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a72,\u00a74"
+  ],
+  "number_type": "integer_count",
+  "feeds": "binding-night stratum for MDE; P7",
+  "sealed_file": "sealed/V-K01.json",
+  "sealed_sha256": "e58f6798e0621fd375c9cc79e4c08780653be711a25ad7c91b545a7944c5a5d3",
+  "sealed_utc": "2026-09-17T13:23:14Z",
+  "comparisons": [
+   {
+    "field": "runs.E1_N.strata.True.n",
+    "claimed": 61,
+    "derived": 61,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "runs.E1_N.n",
+    "claimed": 579,
+    "derived": 579,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "runs.E3_N.strata.True.n",
+    "claimed": 61,
+    "derived": 61,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "plant 60 (must fire); move one unit into an 8-candidate night (count must rise by 1)",
+   "result": {
+    "planted": {
+     "plant_60_detected": true
+    },
+    "move": {
+     "gt8_before": 61,
+     "gt8_after": 62,
+     "le8_after": 516,
+     "nights_after": 578
+    }
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-K02",
+  "target": "K02",
+  "claim": "Nights with <= 8 scored candidates (k not binding), E1",
+  "referent": "E1 decision nights with <= 8 scored candidates",
+  "source": "wave2/agent4_instrument/power_calibration.json::runs.E1_N.strata.False.n; astronomy/wave4/agent4_module_v/scripts/derive_auc_nights.py",
+  "population": "2,558 scored-pool units",
+  "adjudicator": "independent count 518",
+  "falsifier": "a recount that differs or K01+K02 not equal to 579",
+  "recorded_at": {
+   "file": [
+    "astronomy/wave2/agent4_instrument/power_calibration.json",
+    "astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json"
+   ],
+   "field": "runs.E1_N strata.False.n"
+  },
+  "inputs": [
+   "astronomy/wave2/agent4_instrument/compositions/predictions/pred_E1_C.csv (decision_night per unit; MANIFEST.sha256)",
+   "astronomy/agent1_supply_corpus/corpus.csv (sha256 b059acf0...8442; type -> posA/neg scored pool via bands_FROZEN \u00a74 map)",
+   "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a72,\u00a74"
+  ],
+  "number_type": "integer_count",
+  "feeds": "P7 stratum",
+  "sealed_file": "sealed/V-K02.json",
+  "sealed_sha256": "469ab291d8a9c6d6b34ca5b3eab2bcb151132ec7364aeadd88805b8f9ede58ce",
+  "sealed_utc": "2026-09-17T13:23:14Z",
+  "comparisons": [
+   {
+    "field": "runs.E1_N.strata.False.n",
+    "claimed": 518,
+    "derived": 518,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "runs.E3_N.strata.False.n",
+    "claimed": 518,
+    "derived": 518,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "plant 517 (must fire); K01+K02 must equal total",
+   "result": {
+    "planted": {
+     "plant_517_detected": true
+    },
+    "sum_check": true
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-A01",
+  "target": "A01",
+  "claim": "Per-object ROC AUC for posB over the scored pool, epoch E1, composition C-1, with 95% bootstrap CI",
+  "referent": "per-object ROC AUC for posB, epoch E1, composition measured_C_minus_1, with 1000-resample bootstrap 95% CI",
+  "source": "wave2/agent4_instrument/i2_channels.json::epochs.E1.measured_C_minus_1; verifier astronomy/wave4/agent4_module_v/scripts/derive_auc_nights.py (own midrank Mann-Whitney)",
+  "population": "2558 scored-pool units, 586 posB, predictions verified against compositions/MANIFEST.sha256",
+  "adjudicator": "independent rank AUC 0.599625; sklearn cross-check equal",
+  "falsifier": "a label permutation that leaves AUC away from 0.5, or a recomputation that differs beyond 1e-6",
+  "recorded_at": {
+   "file": "astronomy/wave2/agent4_instrument/i2_channels.json",
+   "field": "epochs.E1.measured_C_minus_1.auc_posB and .auc_ci95"
+  },
+  "inputs": [
+   "astronomy/wave2/agent4_instrument/compositions/predictions/pred_<E>_<C|C-1>.csv (verified against compositions/MANIFEST.sha256)",
+   "astronomy/agent1_supply_corpus/corpus.csv posB map (compositions_FROZEN \u00a74) keyed by object_cluster_1arcsec",
+   "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (1000-resample object bootstrap, seed 0)"
+  ],
+  "number_type": "auc + bootstrap_ci",
+  "feeds": "I2 channel measurement; instrument vs classical floor reading",
+  "sealed_file": "sealed/V-A01.json",
+  "sealed_sha256": "c2a8290596061b4e8c2746172b554efa84d7ed86b863f4c66bb44d5104366c76",
+  "sealed_utc": "2026-09-17T13:23:13Z",
+  "comparisons": [
+   {
+    "field": "auc_posB",
+    "claimed": 0.5996251272075266,
+    "derived": 0.5996251272075266,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 16,
+     "rounding_allowance": 0.0,
+     "effective_abs": 5.996251272075266e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "auc_ci95[0]",
+    "claimed": 0.5741779466807664,
+    "derived": 0.5741779466807663,
+    "abs_diff": 1.1102230246251565e-16,
+    "rel_diff": 1.9335870195697755e-16,
+    "tol": {
+     "declared_abs": 0.01,
+     "declared_rel": 0.0,
+     "recorded_decimals": 16,
+     "rounding_allowance": 0.0,
+     "effective_abs": 0.01
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "auc_ci95[1]",
+    "claimed": 0.6260135344631271,
+    "derived": 0.6260135344631271,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 0.01,
+     "declared_rel": 0.0,
+     "recorded_decimals": 16,
+     "rounding_allowance": 0.0,
+     "effective_abs": 0.01
+    },
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "permute posB labels (seed 1): AUC must move into [0.45,0.55]; negate scores: AUC must equal 1-AUC; producer __perm prediction file must sit near 0.5",
+   "result": {
+    "label_permutation_seed1_auc": 0.5246090315613123,
+    "negated_scores_auc": 0.40037487279247347,
+    "one_minus_auc": 0.4003748727924734,
+    "producer_perm_prediction_file_auc_under_our_labels": 0.5141053243705391,
+    "sklearn_crosscheck": 0.5996251272075266
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-A02",
+  "target": "A02",
+  "claim": "Per-object ROC AUC for posB over the scored pool, epoch E1, composition C, with 95% bootstrap CI",
+  "referent": "per-object ROC AUC for posB, epoch E1, composition measured_C, with 1000-resample bootstrap 95% CI",
+  "source": "wave2/agent4_instrument/i2_channels.json::epochs.E1.measured_C; verifier astronomy/wave4/agent4_module_v/scripts/derive_auc_nights.py (own midrank Mann-Whitney)",
+  "population": "2558 scored-pool units, 586 posB, predictions verified against compositions/MANIFEST.sha256",
+  "adjudicator": "independent rank AUC 0.596810; sklearn cross-check equal",
+  "falsifier": "a label permutation that leaves AUC away from 0.5, or a recomputation that differs beyond 1e-6",
+  "recorded_at": {
+   "file": "astronomy/wave2/agent4_instrument/i2_channels.json",
+   "field": "epochs.E1.measured_C.auc_posB and .auc_ci95"
+  },
+  "inputs": [
+   "astronomy/wave2/agent4_instrument/compositions/predictions/pred_<E>_<C|C-1>.csv (verified against compositions/MANIFEST.sha256)",
+   "astronomy/agent1_supply_corpus/corpus.csv posB map (compositions_FROZEN \u00a74) keyed by object_cluster_1arcsec",
+   "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (1000-resample object bootstrap, seed 0)"
+  ],
+  "number_type": "auc + bootstrap_ci",
+  "feeds": "I2 channel measurement; instrument vs classical floor reading",
+  "sealed_file": "sealed/V-A02.json",
+  "sealed_sha256": "940b9a8b017c89e8684a5368c7aa734b3e41ea8fd416e2ee674ba0f022128c34",
+  "sealed_utc": "2026-09-17T13:23:13Z",
+  "comparisons": [
+   {
+    "field": "auc_posB",
+    "claimed": 0.5968101198346822,
+    "derived": 0.5968101198346821,
+    "abs_diff": 1.1102230246251565e-16,
+    "rel_diff": 1.8602617276876788e-16,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 16,
+     "rounding_allowance": 0.0,
+     "effective_abs": 5.968101198346822e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "auc_ci95[0]",
+    "claimed": 0.5696968843710999,
+    "derived": 0.5696968843711,
+    "abs_diff": 1.1102230246251565e-16,
+    "rel_diff": 1.9487960265936062e-16,
+    "tol": {
+     "declared_abs": 0.01,
+     "declared_rel": 0.0,
+     "recorded_decimals": 16,
+     "rounding_allowance": 0.0,
+     "effective_abs": 0.01
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "auc_ci95[1]",
+    "claimed": 0.6220604028868679,
+    "derived": 0.6220604028868678,
+    "abs_diff": 1.1102230246251565e-16,
+    "rel_diff": 1.7847511583647114e-16,
+    "tol": {
+     "declared_abs": 0.01,
+     "declared_rel": 0.0,
+     "recorded_decimals": 16,
+     "rounding_allowance": 0.0,
+     "effective_abs": 0.01
+    },
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "permute posB labels (seed 1): AUC must move into [0.45,0.55]; negate scores: AUC must equal 1-AUC; producer __perm prediction file must sit near 0.5",
+   "result": {
+    "label_permutation_seed1_auc": 0.49284089886395893,
+    "negated_scores_auc": 0.40318988016531787,
+    "one_minus_auc": 0.40318988016531787,
+    "producer_perm_prediction_file_auc_under_our_labels": 0.5152060588858351,
+    "sklearn_crosscheck": 0.5968101198346822
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-A03",
+  "target": "A03",
+  "claim": "Per-object ROC AUC for posB over the scored pool, epoch E3, composition C-1, with 95% bootstrap CI",
+  "referent": "per-object ROC AUC for posB, epoch E3, composition measured_C_minus_1, with 1000-resample bootstrap 95% CI",
+  "source": "wave2/agent4_instrument/i2_channels.json::epochs.E3.measured_C_minus_1; verifier astronomy/wave4/agent4_module_v/scripts/derive_auc_nights.py (own midrank Mann-Whitney)",
+  "population": "2558 scored-pool units, 586 posB, predictions verified against compositions/MANIFEST.sha256",
+  "adjudicator": "independent rank AUC 0.637375; sklearn cross-check equal",
+  "falsifier": "a label permutation that leaves AUC away from 0.5, or a recomputation that differs beyond 1e-6",
+  "recorded_at": {
+   "file": "astronomy/wave2/agent4_instrument/i2_channels.json",
+   "field": "epochs.E3.measured_C_minus_1.auc_posB and .auc_ci95"
+  },
+  "inputs": [
+   "astronomy/wave2/agent4_instrument/compositions/predictions/pred_<E>_<C|C-1>.csv (verified against compositions/MANIFEST.sha256)",
+   "astronomy/agent1_supply_corpus/corpus.csv posB map (compositions_FROZEN \u00a74) keyed by object_cluster_1arcsec",
+   "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (1000-resample object bootstrap, seed 0)"
+  ],
+  "number_type": "auc + bootstrap_ci",
+  "feeds": "I2 channel measurement; instrument vs classical floor reading",
+  "sealed_file": "sealed/V-A03.json",
+  "sealed_sha256": "41fb67f37d36c748e1ad0c7ecde7e2086d048b99da068b0651e180a15c3ac15f",
+  "sealed_utc": "2026-09-17T13:23:14Z",
+  "comparisons": [
+   {
+    "field": "auc_posB",
+    "claimed": 0.6373746097238473,
+    "derived": 0.6373746097238472,
+    "abs_diff": 1.1102230246251565e-16,
+    "rel_diff": 1.7418689224319404e-16,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 16,
+     "rounding_allowance": 0.0,
+     "effective_abs": 6.373746097238473e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "auc_ci95[0]",
+    "claimed": 0.6129709645515835,
+    "derived": 0.6129709645515835,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 0.01,
+     "declared_rel": 0.0,
+     "recorded_decimals": 16,
+     "rounding_allowance": 0.0,
+     "effective_abs": 0.01
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "auc_ci95[1]",
+    "claimed": 0.6629819183923673,
+    "derived": 0.6629819183923673,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 0.01,
+     "declared_rel": 0.0,
+     "recorded_decimals": 16,
+     "rounding_allowance": 0.0,
+     "effective_abs": 0.01
+    },
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "permute posB labels (seed 1): AUC must move into [0.45,0.55]; negate scores: AUC must equal 1-AUC; producer __perm prediction file must sit near 0.5",
+   "result": {
+    "label_permutation_seed1_auc": 0.5005642129748216,
+    "negated_scores_auc": 0.3626253902761528,
+    "one_minus_auc": 0.3626253902761528,
+    "producer_perm_prediction_file_auc_under_our_labels": 0.4898484932398286,
+    "sklearn_crosscheck": 0.6373746097238473
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-A04",
+  "target": "A04",
+  "claim": "Per-object ROC AUC for posB over the scored pool, epoch E3, composition C, with 95% bootstrap CI",
+  "referent": "per-object ROC AUC for posB, epoch E3, composition measured_C, with 1000-resample bootstrap 95% CI",
+  "source": "wave2/agent4_instrument/i2_channels.json::epochs.E3.measured_C; verifier astronomy/wave4/agent4_module_v/scripts/derive_auc_nights.py (own midrank Mann-Whitney)",
+  "population": "2558 scored-pool units, 586 posB, predictions verified against compositions/MANIFEST.sha256",
+  "adjudicator": "independent rank AUC 0.618410; sklearn cross-check equal",
+  "falsifier": "a label permutation that leaves AUC away from 0.5, or a recomputation that differs beyond 1e-6",
+  "recorded_at": {
+   "file": "astronomy/wave2/agent4_instrument/i2_channels.json",
+   "field": "epochs.E3.measured_C.auc_posB and .auc_ci95"
+  },
+  "inputs": [
+   "astronomy/wave2/agent4_instrument/compositions/predictions/pred_<E>_<C|C-1>.csv (verified against compositions/MANIFEST.sha256)",
+   "astronomy/agent1_supply_corpus/corpus.csv posB map (compositions_FROZEN \u00a74) keyed by object_cluster_1arcsec",
+   "astronomy/wave2/agent4_instrument/compositions_FROZEN.md \u00a74 (1000-resample object bootstrap, seed 0)"
+  ],
+  "number_type": "auc + bootstrap_ci",
+  "feeds": "I2 channel measurement; instrument vs classical floor reading",
+  "sealed_file": "sealed/V-A04.json",
+  "sealed_sha256": "b949b607b0fa6f4d33010958cd51921affa169c6d9456215f9d8bada4bab2b81",
+  "sealed_utc": "2026-09-17T13:23:14Z",
+  "comparisons": [
+   {
+    "field": "auc_posB",
+    "claimed": 0.6184103039827205,
+    "derived": 0.6184103039827206,
+    "abs_diff": 1.1102230246251565e-16,
+    "rel_diff": 1.795285456071861e-16,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 16,
+     "rounding_allowance": 0.0,
+     "effective_abs": 6.184103039827204e-07
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "auc_ci95[0]",
+    "claimed": 0.5932842404633774,
+    "derived": 0.5932842404633775,
+    "abs_diff": 1.1102230246251565e-16,
+    "rel_diff": 1.8713172353238821e-16,
+    "tol": {
+     "declared_abs": 0.01,
+     "declared_rel": 0.0,
+     "recorded_decimals": 16,
+     "rounding_allowance": 0.0,
+     "effective_abs": 0.01
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "auc_ci95[1]",
+    "claimed": 0.6428340140358577,
+    "derived": 0.6428340140358578,
+    "abs_diff": 1.1102230246251565e-16,
+    "rel_diff": 1.7270757308794609e-16,
+    "tol": {
+     "declared_abs": 0.01,
+     "declared_rel": 0.0,
+     "recorded_decimals": 16,
+     "rounding_allowance": 0.0,
+     "effective_abs": 0.01
+    },
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "permute posB labels (seed 1): AUC must move into [0.45,0.55]; negate scores: AUC must equal 1-AUC; producer __perm prediction file must sit near 0.5",
+   "result": {
+    "label_permutation_seed1_auc": 0.5020647425735034,
+    "negated_scores_auc": 0.38158969601727943,
+    "one_minus_auc": 0.38158969601727943,
+    "producer_perm_prediction_file_auc_under_our_labels": 0.4959985877368483,
+    "sklearn_crosscheck": 0.6184103039827205
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-L01",
+  "target": "L01",
+  "claim": "SNIascore bound lower L (E1 MODEL_ANNOTATION SNIascore on plain SN Ia, union E2)",
+  "referent": "SNIascore model-annotation lower bound L over plain SN Ia",
+  "source": "wave3/agent2_measured_labels/label_source_slot.json::value.bts; verifier astronomy/wave4/agent4_module_v/scripts/derive_labels.py (own TNS page parser), post-disclosure astronomy/wave4/agent4_module_v/scripts/labels_lib_r1.py + diff_bound_e5.py",
+  "population": "7,843 labelled BTS rows (5,067 plain SN Ia); 2,051 archived TNS captures (1,706+5 wave 2, 345 wave 3)",
+  "adjudicator": "independent parse of the same captures under definitions_FROZEN.md; blind values differ, causes in discrepancies/",
+  "falsifier": "a re-parse that places a different count under the stated reading, or a marker rename that leaves the count unchanged",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent2_measured_labels/label_source_slot.json",
+   "field": "value.bts.sniascore_bound.lower"
+  },
+  "inputs": [
+   "astronomy/wave2/agent2_label_source/label_basis_per_object_detail.csv (per-object evidence flags E2-E6, fetch_status; used only for fetch-attempt status and cross-check)",
+   "astronomy/wave2/agent2_label_source/sources/tns_captures/html/*.html(.gz) + fetch_log.jsonl (wave-2 E1 captures)",
+   "astronomy/wave3/agent2_measured_labels/out/track1_captures/html/*.html.gz + fetch_log.jsonl (wave-3 archive resume)",
+   "astronomy/data/raw/ztf_bts_all_2026-09-16.csv (sha256 61415979...e570)",
+   "astronomy/wave2/agent2_label_source/definitions_FROZEN.md \u00a72-\u00a76 (sha256 4f89ff67...37cf); astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a711 bound rule",
+   "NOTE: task names label_basis_per_object CSVs in wave3/agent2_measured_labels; none exists there (only out/track1_bound.json + captures). Recorded as input disagreement."
+  ],
+  "number_type": "integer_count",
+  "feeds": "label_source slot (ruling 4 condition: bound inside [803,2247])",
+  "sealed_file": "sealed/V-L01.json",
+  "sealed_sha256": "3162ce50d0d99afc8586f387f8ff0622dea0b34ddfc9d74c925481ece43ddd7b",
+  "sealed_utc": "2026-09-17T13:28:42Z",
+  "comparisons": [
+   {
+    "field": "sniascore_bound.lower",
+    "claimed": 954,
+    "derived": 953,
+    "abs_diff": 1,
+    "rel_diff": 0.0010482180293501049,
+    "tol": "exact",
+    "verdict": "DISCREPANCY"
+   }
+  ],
+  "verdict": "DISCREPANCY",
+  "premise_check": {
+   "test": "rename 'SNIascore' in one SNIascore-placed object's classifier field to a human name: MODEL must fall by 1, MEASURED or PHOT rise by 1, L fall by 1, U fall by 1; categories must partition 7,843",
+   "result": {
+    "object": "ZTF20aakyqlh",
+    "after": {
+     "categories": {
+      "UNRESOLVED": 5825,
+      "MEASURED": 1071,
+      "MODEL_ANNOTATION": 947
+     },
+     "L": 952,
+     "U": 2142
+    }
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind); exposure before seal: [954, 2,057] also in STATUS.md",
+  "post_disclosure_rederivation": {
+   "sealed_file": "sealed/V-L-r1.json",
+   "sealed_sha256": "8414d780b45ede281be395732e5d7cbe91a9819993bc5746c85a249e35bf5e85",
+   "producer_reading(key=ztfid,E5cut=1289.5)": {
+    "cats": {
+     "UNRESOLVED": 5815,
+     "MODEL_ANNOTATION": 954,
+     "MEASURED": 1074
+    },
+    "L": 954,
+    "U": 2057,
+    "U_noE5": 2654
+   },
+   "literal_E5_reading(key=ztfid,E5cut=1259.5)": {
+    "cats": {
+     "UNRESOLVED": 5815,
+     "MODEL_ANNOTATION": 954,
+     "MEASURED": 1074
+    },
+    "L": 954,
+    "U": 2139
+   },
+   "iau_key_reading(key=iau,E5cut=1289.5)": {
+    "cats": {
+     "UNRESOLVED": 5813,
+     "MODEL_ANNOTATION": 955,
+     "MEASURED": 1075
+    },
+    "L": 955,
+    "U": 2056
+   }
+  },
+  "cleared_for_P4_under_rule_E": false,
+  "discrepancy_report": "discrepancies/D-L01.md",
+  "discrepancy_status": "RESOLVED (causes: verifier double-gzip decoding; verifier E2 placement; definitional twin-row keying; arithmetic slip in definitions_FROZEN.md \u00a75 E5 text)",
+  "clearance_recommendation": "Not cleared under the charter as written (blind verdict DISCREPANCY). Every unit of difference is attributed, and the corrected independent parse reproduces the claim exactly under the producer's readings. Clear once agent 3 or the PI rules on (i) E5 cut 1289.5 (semantic, implemented) vs 1259.5 (literal) and (ii) twin-row keying. Every reading keeps the bound inside [803, 2247]",
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-L02",
+  "target": "L02",
+  "claim": "SNIascore bound upper U (plain SN Ia not excluded by E1 non-SNIascore, E4, E5), min with 3131 / never widened",
+  "referent": "SNIascore upper bound U over plain SN Ia",
+  "source": "wave3/agent2_measured_labels/label_source_slot.json::value.bts; verifier astronomy/wave4/agent4_module_v/scripts/derive_labels.py (own TNS page parser), post-disclosure astronomy/wave4/agent4_module_v/scripts/labels_lib_r1.py + diff_bound_e5.py",
+  "population": "7,843 labelled BTS rows (5,067 plain SN Ia); 2,051 archived TNS captures (1,706+5 wave 2, 345 wave 3)",
+  "adjudicator": "independent parse of the same captures under definitions_FROZEN.md; blind values differ, causes in discrepancies/",
+  "falsifier": "a re-parse that places a different count under the stated reading, or a marker rename that leaves the count unchanged",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent2_measured_labels/label_source_slot.json",
+   "field": "value.bts.sniascore_bound.upper"
+  },
+  "inputs": [
+   "astronomy/wave2/agent2_label_source/label_basis_per_object_detail.csv (per-object evidence flags E2-E6, fetch_status; used only for fetch-attempt status and cross-check)",
+   "astronomy/wave2/agent2_label_source/sources/tns_captures/html/*.html(.gz) + fetch_log.jsonl (wave-2 E1 captures)",
+   "astronomy/wave3/agent2_measured_labels/out/track1_captures/html/*.html.gz + fetch_log.jsonl (wave-3 archive resume)",
+   "astronomy/data/raw/ztf_bts_all_2026-09-16.csv (sha256 61415979...e570)",
+   "astronomy/wave2/agent2_label_source/definitions_FROZEN.md \u00a72-\u00a76 (sha256 4f89ff67...37cf); astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a711 bound rule",
+   "NOTE: task names label_basis_per_object CSVs in wave3/agent2_measured_labels; none exists there (only out/track1_bound.json + captures). Recorded as input disagreement."
+  ],
+  "number_type": "integer_count",
+  "feeds": "label_source slot",
+  "sealed_file": "sealed/V-L02.json",
+  "sealed_sha256": "97227a2c53d4b97da632f35e65cc4427a13bbbbd1e20b2ba78752513bee5dcb4",
+  "sealed_utc": "2026-09-17T13:28:42Z",
+  "comparisons": [
+   {
+    "field": "sniascore_bound.upper",
+    "claimed": 2057,
+    "derived": 2143,
+    "abs_diff": 86,
+    "rel_diff": 0.041808458920758386,
+    "tol": "exact",
+    "verdict": "DISCREPANCY"
+   },
+   {
+    "field": "upper_noE5_sensitivity",
+    "claimed": 2654,
+    "derived": 2658,
+    "abs_diff": 4,
+    "rel_diff": 0.0015071590052750565,
+    "tol": "exact",
+    "verdict": "DISCREPANCY"
+   }
+  ],
+  "verdict": "DISCREPANCY",
+  "premise_check": {
+   "test": "rename 'SNIascore' in one SNIascore-placed object's classifier field to a human name: MODEL must fall by 1, MEASURED or PHOT rise by 1, L fall by 1, U fall by 1; categories must partition 7,843",
+   "result": {
+    "object": "ZTF20aakyqlh",
+    "after": {
+     "categories": {
+      "UNRESOLVED": 5825,
+      "MEASURED": 1071,
+      "MODEL_ANNOTATION": 947
+     },
+     "L": 952,
+     "U": 2142
+    }
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "post_disclosure_rederivation": {
+   "sealed_file": "sealed/V-L-r1.json",
+   "sealed_sha256": "8414d780b45ede281be395732e5d7cbe91a9819993bc5746c85a249e35bf5e85",
+   "producer_reading(key=ztfid,E5cut=1289.5)": {
+    "cats": {
+     "UNRESOLVED": 5815,
+     "MODEL_ANNOTATION": 954,
+     "MEASURED": 1074
+    },
+    "L": 954,
+    "U": 2057,
+    "U_noE5": 2654
+   },
+   "literal_E5_reading(key=ztfid,E5cut=1259.5)": {
+    "cats": {
+     "UNRESOLVED": 5815,
+     "MODEL_ANNOTATION": 954,
+     "MEASURED": 1074
+    },
+    "L": 954,
+    "U": 2139
+   },
+   "iau_key_reading(key=iau,E5cut=1289.5)": {
+    "cats": {
+     "UNRESOLVED": 5813,
+     "MODEL_ANNOTATION": 955,
+     "MEASURED": 1075
+    },
+    "L": 955,
+    "U": 2056
+   }
+  },
+  "cleared_for_P4_under_rule_E": false,
+  "discrepancy_report": "discrepancies/D-L02.md",
+  "discrepancy_status": "RESOLVED (causes: verifier double-gzip decoding; verifier E2 placement; definitional twin-row keying; arithmetic slip in definitions_FROZEN.md \u00a75 E5 text)",
+  "clearance_recommendation": "Not cleared under the charter as written (blind verdict DISCREPANCY). Every unit of difference is attributed, and the corrected independent parse reproduces the claim exactly under the producer's readings. Clear once agent 3 or the PI rules on (i) E5 cut 1289.5 (semantic, implemented) vs 1259.5 (literal) and (ii) twin-row keying. Every reading keeps the bound inside [803, 2247]",
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-L03",
+  "target": "L03",
+  "claim": "BTS label category count MEASURED over the 7,843 labelled rows",
+  "referent": "BTS label category count MEASURED",
+  "source": "wave3/agent2_measured_labels/label_source_slot.json::value.bts; verifier astronomy/wave4/agent4_module_v/scripts/derive_labels.py (own TNS page parser), post-disclosure astronomy/wave4/agent4_module_v/scripts/labels_lib_r1.py + diff_bound_e5.py",
+  "population": "7,843 labelled BTS rows (5,067 plain SN Ia); 2,051 archived TNS captures (1,706+5 wave 2, 345 wave 3)",
+  "adjudicator": "independent parse of the same captures under definitions_FROZEN.md; blind values differ, causes in discrepancies/",
+  "falsifier": "a re-parse that places a different count under the stated reading, or a marker rename that leaves the count unchanged",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent2_measured_labels/label_source_slot.json",
+   "field": "value.bts.category_counts.MEASURED"
+  },
+  "inputs": [
+   "astronomy/wave2/agent2_label_source/label_basis_per_object_detail.csv (per-object evidence flags E2-E6, fetch_status; used only for fetch-attempt status and cross-check)",
+   "astronomy/wave2/agent2_label_source/sources/tns_captures/html/*.html(.gz) + fetch_log.jsonl (wave-2 E1 captures)",
+   "astronomy/wave3/agent2_measured_labels/out/track1_captures/html/*.html.gz + fetch_log.jsonl (wave-3 archive resume)",
+   "astronomy/data/raw/ztf_bts_all_2026-09-16.csv (sha256 61415979...e570)",
+   "astronomy/wave2/agent2_label_source/definitions_FROZEN.md \u00a72-\u00a76 (sha256 4f89ff67...37cf); astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a711 bound rule",
+   "NOTE: task names label_basis_per_object CSVs in wave3/agent2_measured_labels; none exists there (only out/track1_bound.json + captures). Recorded as input disagreement."
+  ],
+  "number_type": "integer_count",
+  "feeds": "label_source slot; ruling 4 measured-truth condition",
+  "sealed_file": "sealed/V-L03.json",
+  "sealed_sha256": "4d49bf3fa25d364ab61326bb08af4dc1235c3bcf96a0a9747e996c4e00dac472",
+  "sealed_utc": "2026-09-17T13:28:42Z",
+  "comparisons": [
+   {
+    "field": "category_counts.MEASURED",
+    "claimed": 1074,
+    "derived": 1070,
+    "abs_diff": 4,
+    "rel_diff": 0.0037243947858473,
+    "tol": "exact",
+    "verdict": "DISCREPANCY"
+   },
+   {
+    "field": "category_counts.PHOTOMETRIC_ONLY",
+    "claimed": 0,
+    "derived": 0,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "DISCREPANCY",
+  "premise_check": {
+   "test": "rename 'SNIascore' in one SNIascore-placed object's classifier field to a human name: MODEL must fall by 1, MEASURED or PHOT rise by 1, L fall by 1, U fall by 1; categories must partition 7,843",
+   "result": {
+    "object": "ZTF20aakyqlh",
+    "after": {
+     "categories": {
+      "UNRESOLVED": 5825,
+      "MEASURED": 1071,
+      "MODEL_ANNOTATION": 947
+     },
+     "L": 952,
+     "U": 2142
+    }
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "post_disclosure_rederivation": {
+   "sealed_file": "sealed/V-L-r1.json",
+   "sealed_sha256": "8414d780b45ede281be395732e5d7cbe91a9819993bc5746c85a249e35bf5e85",
+   "producer_reading(key=ztfid,E5cut=1289.5)": {
+    "cats": {
+     "UNRESOLVED": 5815,
+     "MODEL_ANNOTATION": 954,
+     "MEASURED": 1074
+    },
+    "L": 954,
+    "U": 2057,
+    "U_noE5": 2654
+   },
+   "literal_E5_reading(key=ztfid,E5cut=1259.5)": {
+    "cats": {
+     "UNRESOLVED": 5815,
+     "MODEL_ANNOTATION": 954,
+     "MEASURED": 1074
+    },
+    "L": 954,
+    "U": 2139
+   },
+   "iau_key_reading(key=iau,E5cut=1289.5)": {
+    "cats": {
+     "UNRESOLVED": 5813,
+     "MODEL_ANNOTATION": 955,
+     "MEASURED": 1075
+    },
+    "L": 955,
+    "U": 2056
+   }
+  },
+  "cleared_for_P4_under_rule_E": false,
+  "discrepancy_report": "discrepancies/D-L03.md",
+  "discrepancy_status": "RESOLVED (causes: verifier double-gzip decoding; verifier E2 placement; definitional twin-row keying; arithmetic slip in definitions_FROZEN.md \u00a75 E5 text)",
+  "clearance_recommendation": "Not cleared under the charter as written (blind verdict DISCREPANCY). Every unit of difference is attributed, and the corrected independent parse reproduces the claim exactly under the producer's readings. Clear once agent 3 or the PI rules on (i) E5 cut 1289.5 (semantic, implemented) vs 1259.5 (literal) and (ii) twin-row keying. Every reading keeps the bound inside [803, 2247]",
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-L04",
+  "target": "L04",
+  "claim": "BTS label category count MODEL_ANNOTATION over the 7,843 labelled rows",
+  "referent": "BTS label category count MODEL_ANNOTATION",
+  "source": "wave3/agent2_measured_labels/label_source_slot.json::value.bts; verifier astronomy/wave4/agent4_module_v/scripts/derive_labels.py (own TNS page parser), post-disclosure astronomy/wave4/agent4_module_v/scripts/labels_lib_r1.py + diff_bound_e5.py",
+  "population": "7,843 labelled BTS rows (5,067 plain SN Ia); 2,051 archived TNS captures (1,706+5 wave 2, 345 wave 3)",
+  "adjudicator": "independent parse of the same captures under definitions_FROZEN.md; blind values differ, causes in discrepancies/",
+  "falsifier": "a re-parse that places a different count under the stated reading, or a marker rename that leaves the count unchanged",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent2_measured_labels/label_source_slot.json",
+   "field": "value.bts.category_counts.MODEL_ANNOTATION"
+  },
+  "inputs": [
+   "astronomy/wave2/agent2_label_source/label_basis_per_object_detail.csv (per-object evidence flags E2-E6, fetch_status; used only for fetch-attempt status and cross-check)",
+   "astronomy/wave2/agent2_label_source/sources/tns_captures/html/*.html(.gz) + fetch_log.jsonl (wave-2 E1 captures)",
+   "astronomy/wave3/agent2_measured_labels/out/track1_captures/html/*.html.gz + fetch_log.jsonl (wave-3 archive resume)",
+   "astronomy/data/raw/ztf_bts_all_2026-09-16.csv (sha256 61415979...e570)",
+   "astronomy/wave2/agent2_label_source/definitions_FROZEN.md \u00a72-\u00a76 (sha256 4f89ff67...37cf); astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a711 bound rule",
+   "NOTE: task names label_basis_per_object CSVs in wave3/agent2_measured_labels; none exists there (only out/track1_bound.json + captures). Recorded as input disagreement."
+  ],
+  "number_type": "integer_count",
+  "feeds": "label_source slot; ruling 4 measured-truth condition",
+  "sealed_file": "sealed/V-L04.json",
+  "sealed_sha256": "8e0a8063982edba2dae1a60b1dbf0b1684a8d9334ea60a0f558ab75b374bbc0f",
+  "sealed_utc": "2026-09-17T13:28:42Z",
+  "comparisons": [
+   {
+    "field": "category_counts.MODEL_ANNOTATION",
+    "claimed": 954,
+    "derived": 948,
+    "abs_diff": 6,
+    "rel_diff": 0.006289308176100629,
+    "tol": "exact",
+    "verdict": "DISCREPANCY"
+   }
+  ],
+  "verdict": "DISCREPANCY",
+  "premise_check": {
+   "test": "rename 'SNIascore' in one SNIascore-placed object's classifier field to a human name: MODEL must fall by 1, MEASURED or PHOT rise by 1, L fall by 1, U fall by 1; categories must partition 7,843",
+   "result": {
+    "object": "ZTF20aakyqlh",
+    "after": {
+     "categories": {
+      "UNRESOLVED": 5825,
+      "MEASURED": 1071,
+      "MODEL_ANNOTATION": 947
+     },
+     "L": 952,
+     "U": 2142
+    }
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "post_disclosure_rederivation": {
+   "sealed_file": "sealed/V-L-r1.json",
+   "sealed_sha256": "8414d780b45ede281be395732e5d7cbe91a9819993bc5746c85a249e35bf5e85",
+   "producer_reading(key=ztfid,E5cut=1289.5)": {
+    "cats": {
+     "UNRESOLVED": 5815,
+     "MODEL_ANNOTATION": 954,
+     "MEASURED": 1074
+    },
+    "L": 954,
+    "U": 2057,
+    "U_noE5": 2654
+   },
+   "literal_E5_reading(key=ztfid,E5cut=1259.5)": {
+    "cats": {
+     "UNRESOLVED": 5815,
+     "MODEL_ANNOTATION": 954,
+     "MEASURED": 1074
+    },
+    "L": 954,
+    "U": 2139
+   },
+   "iau_key_reading(key=iau,E5cut=1289.5)": {
+    "cats": {
+     "UNRESOLVED": 5813,
+     "MODEL_ANNOTATION": 955,
+     "MEASURED": 1075
+    },
+    "L": 955,
+    "U": 2056
+   }
+  },
+  "cleared_for_P4_under_rule_E": false,
+  "discrepancy_report": "discrepancies/D-L04.md",
+  "discrepancy_status": "RESOLVED (causes: verifier double-gzip decoding; verifier E2 placement; definitional twin-row keying; arithmetic slip in definitions_FROZEN.md \u00a75 E5 text)",
+  "clearance_recommendation": "Not cleared under the charter as written (blind verdict DISCREPANCY). Every unit of difference is attributed, and the corrected independent parse reproduces the claim exactly under the producer's readings. Clear once agent 3 or the PI rules on (i) E5 cut 1289.5 (semantic, implemented) vs 1259.5 (literal) and (ii) twin-row keying. Every reading keeps the bound inside [803, 2247]",
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-L05",
+  "target": "L05",
+  "claim": "BTS label category count UNRESOLVED_UNDEMONSTRATED over the 7,843 labelled rows",
+  "referent": "BTS label category count UNRESOLVED_UNDEMONSTRATED",
+  "source": "wave3/agent2_measured_labels/label_source_slot.json::value.bts; verifier astronomy/wave4/agent4_module_v/scripts/derive_labels.py (own TNS page parser), post-disclosure astronomy/wave4/agent4_module_v/scripts/labels_lib_r1.py + diff_bound_e5.py",
+  "population": "7,843 labelled BTS rows (5,067 plain SN Ia); 2,051 archived TNS captures (1,706+5 wave 2, 345 wave 3)",
+  "adjudicator": "independent parse of the same captures under definitions_FROZEN.md; blind values differ, causes in discrepancies/",
+  "falsifier": "a re-parse that places a different count under the stated reading, or a marker rename that leaves the count unchanged",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent2_measured_labels/label_source_slot.json",
+   "field": "value.bts.category_counts.UNRESOLVED_UNDEMONSTRATED"
+  },
+  "inputs": [
+   "astronomy/wave2/agent2_label_source/label_basis_per_object_detail.csv (per-object evidence flags E2-E6, fetch_status; used only for fetch-attempt status and cross-check)",
+   "astronomy/wave2/agent2_label_source/sources/tns_captures/html/*.html(.gz) + fetch_log.jsonl (wave-2 E1 captures)",
+   "astronomy/wave3/agent2_measured_labels/out/track1_captures/html/*.html.gz + fetch_log.jsonl (wave-3 archive resume)",
+   "astronomy/data/raw/ztf_bts_all_2026-09-16.csv (sha256 61415979...e570)",
+   "astronomy/wave2/agent2_label_source/definitions_FROZEN.md \u00a72-\u00a76 (sha256 4f89ff67...37cf); astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a711 bound rule",
+   "NOTE: task names label_basis_per_object CSVs in wave3/agent2_measured_labels; none exists there (only out/track1_bound.json + captures). Recorded as input disagreement."
+  ],
+  "number_type": "integer_count",
+  "feeds": "label_source slot; ruling 4 measured-truth condition",
+  "sealed_file": "sealed/V-L05.json",
+  "sealed_sha256": "a8ecc4289183e2852b3f7b9459818df679a6aaa43056380ed569bf37b8ddc184",
+  "sealed_utc": "2026-09-17T13:28:42Z",
+  "comparisons": [
+   {
+    "field": "category_counts.UNRESOLVED_UNDEMONSTRATED",
+    "claimed": 5815,
+    "derived": 5825,
+    "abs_diff": 10,
+    "rel_diff": 0.0017196904557179708,
+    "tol": "exact",
+    "verdict": "DISCREPANCY"
+   }
+  ],
+  "verdict": "DISCREPANCY",
+  "premise_check": {
+   "test": "rename 'SNIascore' in one SNIascore-placed object's classifier field to a human name: MODEL must fall by 1, MEASURED or PHOT rise by 1, L fall by 1, U fall by 1; categories must partition 7,843",
+   "result": {
+    "object": "ZTF20aakyqlh",
+    "after": {
+     "categories": {
+      "UNRESOLVED": 5825,
+      "MEASURED": 1071,
+      "MODEL_ANNOTATION": 947
+     },
+     "L": 952,
+     "U": 2142
+    }
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "post_disclosure_rederivation": {
+   "sealed_file": "sealed/V-L-r1.json",
+   "sealed_sha256": "8414d780b45ede281be395732e5d7cbe91a9819993bc5746c85a249e35bf5e85",
+   "producer_reading(key=ztfid,E5cut=1289.5)": {
+    "cats": {
+     "UNRESOLVED": 5815,
+     "MODEL_ANNOTATION": 954,
+     "MEASURED": 1074
+    },
+    "L": 954,
+    "U": 2057,
+    "U_noE5": 2654
+   },
+   "literal_E5_reading(key=ztfid,E5cut=1259.5)": {
+    "cats": {
+     "UNRESOLVED": 5815,
+     "MODEL_ANNOTATION": 954,
+     "MEASURED": 1074
+    },
+    "L": 954,
+    "U": 2139
+   },
+   "iau_key_reading(key=iau,E5cut=1289.5)": {
+    "cats": {
+     "UNRESOLVED": 5813,
+     "MODEL_ANNOTATION": 955,
+     "MEASURED": 1075
+    },
+    "L": 955,
+    "U": 2056
+   }
+  },
+  "cleared_for_P4_under_rule_E": false,
+  "discrepancy_report": "discrepancies/D-L05.md",
+  "discrepancy_status": "RESOLVED (causes: verifier double-gzip decoding; verifier E2 placement; definitional twin-row keying; arithmetic slip in definitions_FROZEN.md \u00a75 E5 text)",
+  "clearance_recommendation": "Not cleared under the charter as written (blind verdict DISCREPANCY). Every unit of difference is attributed, and the corrected independent parse reproduces the claim exactly under the producer's readings. Clear once agent 3 or the PI rules on (i) E5 cut 1289.5 (semantic, implemented) vs 1259.5 (literal) and (ii) twin-row keying. Every reading keeps the bound inside [803, 2247]",
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-Q01",
+  "target": "Q01",
+  "claim": "POLICY lower-tail p-value, comparison (i) capture_2026-07-25 vs reference 2024-12-08T23:13:31",
+  "referent": "exact Poisson-binomial lower-tail p for labelled 2026-peak objects, (i) capture_2026-07-25 vs ref 2024-12-08T23:13:31",
+  "source": "wave2/agent1_rubin_bands/label_accrual.json::lag_tests; verifier astronomy/wave4/agent4_module_v/scripts/derive_accrual.py (own HTML parse + log-space DP)",
+  "population": "359 2026-peak objects; reference accrual from the named explorer capture",
+  "adjudicator": "independent exact tail 5.200e-146; age-from-date sensitivity 8.881e-146",
+  "falsifier": "setting X to its expectation that does not return p near 0.5, or a recomputation differing by more than 0.05 in log10",
+  "recorded_at": {
+   "file": "astronomy/wave2/agent1_rubin_bands/label_accrual.json",
+   "field": "lag_tests['(i) capture_2026-07-25 vs ref 2024-12-08T23:13:31'].P_lower_tail (and decision.P_i/P_ii, decision.ruling)"
+  },
+  "inputs": [
+   "astronomy/wave2/agent1_rubin_bands/label_accrual.json inputs block (paths+sha256 only): astronomy/data/raw/ztf_bts_all_2026-09-16.csv; astronomy/agent3_labels_exposure/sources/wayback_bts_explorer_{20241208231331,20250810065056,20260725033557}.html",
+   "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a79 (age bins, reference accrual, exact Poisson-binomial lower tail)",
+   "own Poisson-binomial (log-space DP) implementation"
+  ],
+  "number_type": "log10_pvalue",
+  "feeds": "POLICY vs LAG ruling (label-accrual wait expectation)",
+  "sealed_file": "sealed/V-Q01.json",
+  "sealed_sha256": "36ce24a171f7364b2096999d58d120503fddcfc79808152662760c9c844742d6",
+  "sealed_utc": "2026-09-17T13:26:46Z",
+  "comparisons": [
+   {
+    "field": "P_lower_tail",
+    "claimed": 5.447065502464142e-146,
+    "derived": 5.199601375735901e-146,
+    "log10_claimed": -145.2638374021846,
+    "log10_derived": -145.28402995001022,
+    "abs_diff_log10": 0.020192547825615748,
+    "rel_diff": 0.04543072349989054,
+    "tol": "abs 0.05 in log10",
+    "verdict": "MATCH_WITHIN_TOL"
+   },
+   {
+    "field": "n_included",
+    "claimed": 359,
+    "derived": 359,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "observed_labelled",
+    "claimed": 28,
+    "derived": 28,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "excluded_no_reference",
+    "claimed": 0,
+    "derived": 0,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "expected_labelled_under_LAG",
+    "claimed": 256.8,
+    "derived": 256.8,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH_WITHIN_TOL",
+  "premise_check": {
+   "test": "set X to its LAG expectation: P must rise to about 0.5; DP must equal scipy binom.cdf when all p_i are equal",
+   "result": {
+    "P_at_X_equal_E": 0.5307091249382171,
+    "dp_vs_binom": [
+     0.022803683528489195,
+     0.022803683528488817
+    ]
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "note": "residual 1-5% relative difference in p (0.004-0.020 in log10) with identical n, X and expected count to 0.1: consistent with age-reference convention (capture timestamp vs date); within declared tolerance, so no discrepancy report",
+  "decision_check": {
+   "claimed_ruling": "POLICY",
+   "derived_ruling": "POLICY"
+  },
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-Q02",
+  "target": "Q02",
+  "claim": "POLICY lower-tail p-value, comparison (i) capture_2026-07-25 vs reference 2025-08-10T06:50:56",
+  "referent": "exact Poisson-binomial lower-tail p for labelled 2026-peak objects, (i) capture_2026-07-25 vs ref 2025-08-10T06:50:56",
+  "source": "wave2/agent1_rubin_bands/label_accrual.json::lag_tests; verifier astronomy/wave4/agent4_module_v/scripts/derive_accrual.py (own HTML parse + log-space DP)",
+  "population": "359 2026-peak objects; reference accrual from the named explorer capture",
+  "adjudicator": "independent exact tail 9.251e-105; age-from-date sensitivity 7.049e-105",
+  "falsifier": "setting X to its expectation that does not return p near 0.5, or a recomputation differing by more than 0.05 in log10",
+  "recorded_at": {
+   "file": "astronomy/wave2/agent1_rubin_bands/label_accrual.json",
+   "field": "lag_tests['(i) capture_2026-07-25 vs ref 2025-08-10T06:50:56'].P_lower_tail (and decision.P_i/P_ii, decision.ruling)"
+  },
+  "inputs": [
+   "astronomy/wave2/agent1_rubin_bands/label_accrual.json inputs block (paths+sha256 only): astronomy/data/raw/ztf_bts_all_2026-09-16.csv; astronomy/agent3_labels_exposure/sources/wayback_bts_explorer_{20241208231331,20250810065056,20260725033557}.html",
+   "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a79 (age bins, reference accrual, exact Poisson-binomial lower tail)",
+   "own Poisson-binomial (log-space DP) implementation"
+  ],
+  "number_type": "log10_pvalue",
+  "feeds": "POLICY vs LAG ruling (label-accrual wait expectation)",
+  "sealed_file": "sealed/V-Q02.json",
+  "sealed_sha256": "ef2a08af59dd83978cbef9f1ffdb7f61460b96f5932b70317e76575a9f0654c3",
+  "sealed_utc": "2026-09-17T13:26:46Z",
+  "comparisons": [
+   {
+    "field": "P_lower_tail",
+    "claimed": 9.37402657524328e-105,
+    "derived": 9.251060178282473e-105,
+    "log10_claimed": -104.02807381959487,
+    "log10_derived": -104.03380849394269,
+    "abs_diff_log10": 0.005734674347820601,
+    "rel_diff": 0.013117777720575197,
+    "tol": "abs 0.05 in log10",
+    "verdict": "MATCH_WITHIN_TOL"
+   },
+   {
+    "field": "n_included",
+    "claimed": 359,
+    "derived": 359,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "observed_labelled",
+    "claimed": 28,
+    "derived": 28,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "excluded_no_reference",
+    "claimed": 0,
+    "derived": 0,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "expected_labelled_under_LAG",
+    "claimed": 220.4,
+    "derived": 220.4,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH_WITHIN_TOL",
+  "premise_check": {
+   "test": "set X to its LAG expectation: P must rise to about 0.5; DP must equal scipy binom.cdf when all p_i are equal",
+   "result": {
+    "P_at_X_equal_E": 0.5033031405228977,
+    "dp_vs_binom": [
+     0.022803683528489195,
+     0.022803683528488817
+    ]
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "note": "residual 1-5% relative difference in p (0.004-0.020 in log10) with identical n, X and expected count to 0.1: consistent with age-reference convention (capture timestamp vs date); within declared tolerance, so no discrepancy report",
+  "decision_check": {
+   "claimed_ruling": "POLICY",
+   "derived_ruling": "POLICY"
+  },
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-Q03",
+  "target": "Q03",
+  "claim": "POLICY lower-tail p-value, comparison (ii) file_2026-09-16 vs reference 2024-12-08T23:13:31",
+  "referent": "exact Poisson-binomial lower-tail p for labelled 2026-peak objects, (ii) file_2026-09-16 vs ref 2024-12-08T23:13:31",
+  "source": "wave2/agent1_rubin_bands/label_accrual.json::lag_tests; verifier astronomy/wave4/agent4_module_v/scripts/derive_accrual.py (own HTML parse + log-space DP)",
+  "population": "387 2026-peak objects; reference accrual from the named explorer capture",
+  "adjudicator": "independent exact tail 2.694e-131; age-from-date sensitivity 1.953e-130",
+  "falsifier": "setting X to its expectation that does not return p near 0.5, or a recomputation differing by more than 0.05 in log10",
+  "recorded_at": {
+   "file": "astronomy/wave2/agent1_rubin_bands/label_accrual.json",
+   "field": "lag_tests['(ii) file_2026-09-16 vs ref 2024-12-08T23:13:31'].P_lower_tail (and decision.P_i/P_ii, decision.ruling)"
+  },
+  "inputs": [
+   "astronomy/wave2/agent1_rubin_bands/label_accrual.json inputs block (paths+sha256 only): astronomy/data/raw/ztf_bts_all_2026-09-16.csv; astronomy/agent3_labels_exposure/sources/wayback_bts_explorer_{20241208231331,20250810065056,20260725033557}.html",
+   "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a79 (age bins, reference accrual, exact Poisson-binomial lower tail)",
+   "own Poisson-binomial (log-space DP) implementation"
+  ],
+  "number_type": "log10_pvalue",
+  "feeds": "POLICY vs LAG ruling (label-accrual wait expectation)",
+  "sealed_file": "sealed/V-Q03.json",
+  "sealed_sha256": "2116d1e32d57d416a73e7159b1eb0e339d6aa540f65584d8717e7cfa3272f9d7",
+  "sealed_utc": "2026-09-17T13:26:46Z",
+  "comparisons": [
+   {
+    "field": "P_lower_tail",
+    "claimed": 2.798840482371516e-131,
+    "derived": 2.693680051068542e-131,
+    "log10_claimed": -130.55302185308796,
+    "log10_derived": -130.56965399001885,
+    "abs_diff_log10": 0.016632136930894603,
+    "rel_diff": 0.037572856318652724,
+    "tol": "abs 0.05 in log10",
+    "verdict": "MATCH_WITHIN_TOL"
+   },
+   {
+    "field": "n_included",
+    "claimed": 387,
+    "derived": 387,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "observed_labelled",
+    "claimed": 41,
+    "derived": 41,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "excluded_no_reference",
+    "claimed": 0,
+    "derived": 0,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "expected_labelled_under_LAG",
+    "claimed": 268.8,
+    "derived": 268.8,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH_WITHIN_TOL",
+  "premise_check": {
+   "test": "set X to its LAG expectation: P must rise to about 0.5; DP must equal scipy binom.cdf when all p_i are equal",
+   "result": {
+    "P_at_X_equal_E": 0.526235550236833,
+    "dp_vs_binom": [
+     0.022803683528489195,
+     0.022803683528488817
+    ]
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "note": "residual 1-5% relative difference in p (0.004-0.020 in log10) with identical n, X and expected count to 0.1: consistent with age-reference convention (capture timestamp vs date); within declared tolerance, so no discrepancy report",
+  "decision_check": {
+   "claimed_ruling": "POLICY",
+   "derived_ruling": "POLICY"
+  },
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-Q04",
+  "target": "Q04",
+  "claim": "POLICY lower-tail p-value, comparison (ii) file_2026-09-16 vs reference 2025-08-10T06:50:56",
+  "referent": "exact Poisson-binomial lower-tail p for labelled 2026-peak objects, (ii) file_2026-09-16 vs ref 2025-08-10T06:50:56",
+  "source": "wave2/agent1_rubin_bands/label_accrual.json::lag_tests; verifier astronomy/wave4/agent4_module_v/scripts/derive_accrual.py (own HTML parse + log-space DP)",
+  "population": "387 2026-peak objects; reference accrual from the named explorer capture",
+  "adjudicator": "independent exact tail 2.554e-110; age-from-date sensitivity 3.662e-110",
+  "falsifier": "setting X to its expectation that does not return p near 0.5, or a recomputation differing by more than 0.05 in log10",
+  "recorded_at": {
+   "file": "astronomy/wave2/agent1_rubin_bands/label_accrual.json",
+   "field": "lag_tests['(ii) file_2026-09-16 vs ref 2025-08-10T06:50:56'].P_lower_tail (and decision.P_i/P_ii, decision.ruling)"
+  },
+  "inputs": [
+   "astronomy/wave2/agent1_rubin_bands/label_accrual.json inputs block (paths+sha256 only): astronomy/data/raw/ztf_bts_all_2026-09-16.csv; astronomy/agent3_labels_exposure/sources/wayback_bts_explorer_{20241208231331,20250810065056,20260725033557}.html",
+   "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a79 (age bins, reference accrual, exact Poisson-binomial lower tail)",
+   "own Poisson-binomial (log-space DP) implementation"
+  ],
+  "number_type": "log10_pvalue",
+  "feeds": "POLICY vs LAG ruling (label-accrual wait expectation)",
+  "sealed_file": "sealed/V-Q04.json",
+  "sealed_sha256": "5dbf309a17f97f0ac0d055584c4578d96a02dd1abd5ea7a8976ee20e5d38ca70",
+  "sealed_utc": "2026-09-17T13:26:46Z",
+  "comparisons": [
+   {
+    "field": "P_lower_tail",
+    "claimed": 2.578515925260821e-110,
+    "derived": 2.5540896026446635e-110,
+    "log10_claimed": -109.58863018198791,
+    "log10_derived": -109.59276387087388,
+    "abs_diff_log10": 0.004133688885971765,
+    "rel_diff": 0.00947301599996395,
+    "tol": "abs 0.05 in log10",
+    "verdict": "MATCH_WITHIN_TOL"
+   },
+   {
+    "field": "n_included",
+    "claimed": 387,
+    "derived": 387,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "observed_labelled",
+    "claimed": 41,
+    "derived": 41,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "excluded_no_reference",
+    "claimed": 0,
+    "derived": 0,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "expected_labelled_under_LAG",
+    "claimed": 250.1,
+    "derived": 250.1,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH_WITHIN_TOL",
+  "premise_check": {
+   "test": "set X to its LAG expectation: P must rise to about 0.5; DP must equal scipy binom.cdf when all p_i are equal",
+   "result": {
+    "P_at_X_equal_E": 0.5139465493051836,
+    "dp_vs_binom": [
+     0.022803683528489195,
+     0.022803683528488817
+    ]
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "note": "residual 1-5% relative difference in p (0.004-0.020 in log10) with identical n, X and expected count to 0.1: consistent with age-reference convention (capture timestamp vs date); within declared tolerance, so no discrepancy report",
+  "decision_check": {
+   "claimed_ruling": "POLICY",
+   "derived_ruling": "POLICY"
+  },
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-T01",
+  "target": "T01",
+  "claim": "Tool coverage dispositions over 25 tools: PASS / FAIL / UNDEMONSTRATED counts",
+  "referent": "tool dispositions over the 25-tool inventory on Rubin alert rows",
+  "source": "wave3/agent4_tool_recount/tool_coverage_axis.json::value.counts_by_group_and_disposition.all; verifier astronomy/wave4/agent4_module_v/scripts/derive_tools_time.py",
+  "population": "198 run_log.jsonl lines, 25 tools",
+  "adjudicator": "independent tally under recount_protocol_FROZEN.md section 1 and AM2",
+  "falsifier": "a non_default flip that leaves the tally unchanged, or a retally that differs",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json",
+   "field": "value.counts_by_group_and_disposition.all"
+  },
+  "inputs": [
+   "astronomy/wave3/agent4_tool_recount/run_log.jsonl (198 lines)",
+   "astronomy/wave3/agent4_tool_recount/recount_protocol_FROZEN.md \u00a71,\u00a72,\u00a75,\u00a76 (sha256 f32cf288...52e6)",
+   "astronomy/wave3/agent4_tool_recount/amendments.md AM1-AM2 (GHOST runs 1-2 voided)"
+  ],
+  "number_type": "integer_count",
+  "feeds": "tool_coverage axis (P4)",
+  "sealed_file": "sealed/V-T01.json",
+  "sealed_sha256": "3c5a69425b1d4f8df62a8818a9cdfb003502b7cd88458a8a4570ff092c7ba399",
+  "sealed_utc": "2026-09-17T13:25:01Z",
+  "comparisons": [
+   {
+    "field": "all.PASS",
+    "claimed": 2,
+    "derived": 2,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "all.FAIL",
+    "claimed": 14,
+    "derived": 14,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "all.UNDEMONSTRATED",
+    "claimed": 9,
+    "derived": 9,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "n_tools",
+    "claimed": 25,
+    "derived": 25,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "flip CATS non_default to false on every run: PASS count must fall",
+   "result": {
+    "flip_CATS_non_default_false_counts": {
+     "UNDEMONSTRATED": 9,
+     "FAIL": 15,
+     "PASS": 1
+    },
+    "fires": true
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-T02",
+  "target": "T02",
+  "claim": "Per-tool pass fractions for the passing tools: CATS passes/alerts run, GHOST passes/valid alerts run",
+  "referent": "pass counts for the two passing tools",
+  "source": "wave3/agent4_tool_recount/tool_coverage_axis.json::value.per_tool; astronomy/wave4/agent4_module_v/scripts/derive_tools_time.py",
+  "population": "CATS 10 and GHOST 10 logged alert runs (2 voided under AM2)",
+  "adjudicator": "independent retally 5/10 and 3/8",
+  "falsifier": "un-voiding that leaves the denominator at 8, or a retally that differs",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json",
+   "field": "value.per_tool[tool=CATS|GHOST] pass counts"
+  },
+  "inputs": [
+   "astronomy/wave3/agent4_tool_recount/run_log.jsonl (198 lines)",
+   "astronomy/wave3/agent4_tool_recount/recount_protocol_FROZEN.md \u00a71,\u00a72,\u00a75,\u00a76 (sha256 f32cf288...52e6)",
+   "astronomy/wave3/agent4_tool_recount/amendments.md AM1-AM2 (GHOST runs 1-2 voided)"
+  ],
+  "number_type": "integer_count",
+  "feeds": "tool_coverage axis",
+  "sealed_file": "sealed/V-T02.json",
+  "sealed_sha256": "ee836bd17e9976bd9a5018771554f1a4b9003d87e6f3a1413b82993886fb3792",
+  "sealed_utc": "2026-09-17T13:25:01Z",
+  "comparisons": [
+   {
+    "field": "CATS.passes",
+    "claimed": 5,
+    "derived": 5,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "CATS.alerts_run",
+    "claimed": 10,
+    "derived": 10,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "GHOST.passes",
+    "claimed": 3,
+    "derived": 3,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "GHOST.alerts_run",
+    "claimed": 8,
+    "derived": 8,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "un-void GHOST runs 1-2: denominator must become 10",
+   "result": {
+    "unvoided_GHOST": {
+     "alerts_logged": 10,
+     "valid": 10,
+     "passes": 3
+    },
+    "fires": true
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-T03",
+  "target": "T03",
+  "claim": "Alert runs logged against the rule D cap of 250",
+  "referent": "alert runs consumed against the rule D cap of 250",
+  "source": "wave3/agent4_tool_recount/tool_coverage_axis.json::value.alert_runs_logged; astronomy/wave4/agent4_module_v/scripts/derive_tools_time.py",
+  "population": "198 run_log lines",
+  "adjudicator": "independent count 160 (voided GHOST runs included as consumed)",
+  "falsifier": "a count that includes load lines and still matches, or a recount that differs",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json",
+   "field": "value.alert_runs_logged"
+  },
+  "inputs": [
+   "astronomy/wave3/agent4_tool_recount/run_log.jsonl (198 lines)",
+   "astronomy/wave3/agent4_tool_recount/recount_protocol_FROZEN.md \u00a71,\u00a72,\u00a75,\u00a76 (sha256 f32cf288...52e6)",
+   "astronomy/wave3/agent4_tool_recount/amendments.md AM1-AM2 (GHOST runs 1-2 voided)"
+  ],
+  "number_type": "integer_count",
+  "feeds": "rule D budget (module V gets 250 - this)",
+  "sealed_file": "sealed/V-T03.json",
+  "sealed_sha256": "261e5c37f77f1866c0f53d626c66eb17b0e07d302e04e4c0f51faf3a5dd26c17",
+  "sealed_utc": "2026-09-17T13:25:01Z",
+  "comparisons": [
+   {
+    "field": "alert_runs_logged",
+    "claimed": 160,
+    "derived": 160,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "count including PRECHECK/LOAD lines must differ",
+   "result": {
+    "including_precheck_load": 198,
+    "fires": true
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-N01",
+  "target": "N01",
+  "claim": "Family-B N_min lo and hi at delta 0.018 (485, 12,855 per bands \u00a75)",
+  "referent": "family-B N_min lo and hi at delta 0.018 (kill-band thresholds and truth-cost N)",
+  "source": "wave3/agent2_measured_labels/truth_cost_table.csv N column; bands_FROZEN.md section 5; verifier astronomy/wave4/agent4_module_v/scripts/derive_cost.py",
+  "population": "16 family-B synthetic rows of planning_mde_bracket.csv",
+  "adjudicator": "independent ceil(z^2 sigma^2/delta^2)",
+  "falsifier": "a sigma perturbation of the max row that leaves hi unchanged, or a recomputation that differs",
+  "recorded_at": {
+   "file": [
+    "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv (N column)",
+    "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a75"
+   ],
+   "field": "N where delta=0.018"
+  },
+  "inputs": [
+   "astronomy/agent5_resolution_replay/planning_mde_bracket.csv (sha256 c00718b7...ad43; inputs sigma_d_target, sigma_d_realised_by_power_py, family)",
+   "astronomy/wave3/agent1_cohort_finish/planning_mde_bracket_w3.csv (inputs sigma_d columns only)",
+   "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a75 definition N_B,lo/hi = min/max family-B N_min",
+   "own N_min=ceil(z^2 sigma^2/delta^2)"
+  ],
+  "number_type": "integer_count",
+  "feeds": "positive_supply bands; truth-cost N",
+  "sealed_file": "sealed/V-N01.json",
+  "sealed_sha256": "422fe2859781b641fc74e666979344ba4544dd44022c623c5e1d0374b9b21f33",
+  "sealed_utc": "2026-09-17T13:25:40Z",
+  "comparisons": [
+   {
+    "field": "truth_cost_table N lo (delta 0.018)",
+    "claimed": 485,
+    "derived": 485,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "truth_cost_table N hi (delta 0.018)",
+    "claimed": 12855,
+    "derived": 12855,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3-09 objects_family_B 0.018 lo",
+    "claimed": 485,
+    "derived": 485,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3-09 objects_family_B 0.018 hi",
+    "claimed": 12855,
+    "derived": 12855,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "scale the sigma of the max row by 1.01: hi must rise; plant 486: must fire",
+   "result": {
+    "row": 12,
+    "hi_0.018_before": 12855,
+    "hi_0.018_after": 13113,
+    "planted_486_fires": true
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "finding": "hi depends on the finite-sample realised sigma of the n=50 synthetic binary column (0.728431 vs sqrt(q)=0.7071): theoretical sqrt(q) gives hi 12113 not 12855. Not a discrepancy (the frozen definition is min/max over the bracket rows as computed); recorded for agent 3 and the PI",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-N02",
+  "target": "N02",
+  "claim": "Family-B N_min lo and hi at delta 0.05",
+  "referent": "family-B N_min lo and hi at delta 0.05 (kill-band thresholds and truth-cost N)",
+  "source": "wave3/agent2_measured_labels/truth_cost_table.csv N column; bands_FROZEN.md section 5; verifier astronomy/wave4/agent4_module_v/scripts/derive_cost.py",
+  "population": "16 family-B synthetic rows of planning_mde_bracket.csv",
+  "adjudicator": "independent ceil(z^2 sigma^2/delta^2)",
+  "falsifier": "a sigma perturbation of the max row that leaves hi unchanged, or a recomputation that differs",
+  "recorded_at": {
+   "file": [
+    "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv (N column)",
+    "astronomy/wave3/agent1_cohort_finish/rubin_cohort_count.json [id=w3-09]"
+   ],
+   "field": "N where delta=0.05"
+  },
+  "inputs": [
+   "astronomy/agent5_resolution_replay/planning_mde_bracket.csv (sha256 c00718b7...ad43; inputs sigma_d_target, sigma_d_realised_by_power_py, family)",
+   "astronomy/wave3/agent1_cohort_finish/planning_mde_bracket_w3.csv (inputs sigma_d columns only)",
+   "astronomy/wave2/agent1_rubin_bands/bands_FROZEN.md \u00a75 definition N_B,lo/hi = min/max family-B N_min",
+   "own N_min=ceil(z^2 sigma^2/delta^2)"
+  ],
+  "number_type": "integer_count",
+  "feeds": "kill-band pricing at ratified delta 0.05",
+  "sealed_file": "sealed/V-N02.json",
+  "sealed_sha256": "ab094276e33013e16f93ae52ba085afbc1a99a4d6ff8417cd3bec418d84f1cb5",
+  "sealed_utc": "2026-09-17T13:25:40Z",
+  "comparisons": [
+   {
+    "field": "truth_cost_table N lo (delta 0.05)",
+    "claimed": 63,
+    "derived": 63,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "truth_cost_table N hi (delta 0.05)",
+    "claimed": 1666,
+    "derived": 1666,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3-09 objects_family_B 0.05 lo",
+    "claimed": 63,
+    "derived": 63,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "w3-09 objects_family_B 0.05 hi",
+    "claimed": 1666,
+    "derived": 1666,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "scale the sigma of the max row by 1.01: hi must rise; plant 486: must fire",
+   "result": {
+    "row": 12,
+    "hi_0.018_before": 12855,
+    "hi_0.018_after": 13113,
+    "planted_486_fires": true
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "finding": "hi depends on the finite-sample realised sigma of the n=50 synthetic binary column (0.728431 vs sqrt(q)=0.7071): theoretical sqrt(q) gives hi 1570 not 1666. Not a discrepancy (the frozen definition is min/max over the bracket rows as computed); recorded for agent 3 and the PI",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-R01",
+  "target": "R01",
+  "claim": "Truth-cost table arithmetic: spectra S, hours H, wrong commitments W, nights for every row",
+  "referent": "truth-cost table arithmetic: S, H, W, nights per row",
+  "source": "wave3/agent2_measured_labels/truth_cost_table.csv; census_protocol_FROZEN.md section 10; verifier astronomy/wave4/agent4_module_v/scripts/derive_cost.py (exact rationals)",
+  "population": "288 rows",
+  "adjudicator": "independent rational recomputation, 0 mismatching rows",
+  "falsifier": "a purity perturbation that leaves S unchanged, or any row whose recomputation differs",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv",
+   "field": "spectra_S, P60_hours_H, wrong_routine_commitments_W, rubin_on_sky_nights per row"
+  },
+  "inputs": [
+   "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv input columns (delta,N,L,purity_p,success_s,capacity_c,A_reachable_arrivals_per_night_cp95_lo)",
+   "astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a710 formulas (sha256 9fac8552...95fb)"
+  ],
+  "number_type": "integer_count (rows)",
+  "feeds": "kill-band pricing",
+  "sealed_file": "sealed/V-R01.json",
+  "sealed_sha256": "417df4bb3e09b4410be0fe04b635f3a33a4bec1f374fbd696e295290348a1e46",
+  "sealed_utc": "2026-09-17T13:25:40Z",
+  "comparisons": [
+   {
+    "field": "rows_mismatching_formula (claim: 0)",
+    "claimed": 0,
+    "derived": 0,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "n_rows",
+    "claimed": 288,
+    "derived": 288,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "set purity 0.5 in row 0: S must change",
+   "result": {
+    "row0_S_with_p=0.5": 1044,
+    "row0_S_orig": 644
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open; exposure before seal: two table rows shown by a structural head before sealing",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-R02",
+  "target": "R02",
+  "claim": "Truth-cost range at N=63 (delta 0.05), L=0: spectra [lo,hi], nights [lo,hi]",
+  "referent": "truth-cost ranges over the p, s, c grid at L=0",
+  "source": "wave3/agent2_measured_labels/truth_cost.json::ranges_over_grid_L0; verifier astronomy/wave4/agent4_module_v/scripts/derive_cost.py",
+  "population": "L=0 grid rows of truth_cost_table.csv",
+  "adjudicator": "independent recomputation from input columns",
+  "falsifier": "a planted range that is not caught, or a recomputation that differs",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent2_measured_labels/truth_cost.json",
+   "field": "ranges_over_grid_L0.delta_0.05_N_63.{spectra,nights}"
+  },
+  "inputs": [
+   "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv input columns (delta,N,L,purity_p,success_s,capacity_c,A_reachable_arrivals_per_night_cp95_lo)",
+   "astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a710 formulas (sha256 9fac8552...95fb)"
+  ],
+  "number_type": "integer_count",
+  "feeds": "ESCALATE option 1 price",
+  "sealed_file": "sealed/V-R02.json",
+  "sealed_sha256": "77954c73c1385cc23c5c9680929d2bb8c6e56dd00736df3fd5b14b3a89da4ad7",
+  "sealed_utc": "2026-09-17T13:25:40Z",
+  "comparisons": [
+   {
+    "field": "delta_0.05_N_63.spectra[0]",
+    "claimed": 66,
+    "derived": 66,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.05_N_63.spectra[1]",
+    "claimed": 84,
+    "derived": 84,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.05_N_63.nights[0]",
+    "claimed": 7,
+    "derived": 7,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.05_N_63.nights[1]",
+    "claimed": 19,
+    "derived": 19,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.05_N_63.hours[0]",
+    "claimed": 33.0,
+    "derived": 33.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.05_N_63.hours[1]",
+    "claimed": 42.0,
+    "derived": 42.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.05_N_63.wrong_commitments[0]",
+    "claimed": 3,
+    "derived": 3,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.05_N_63.wrong_commitments[1]",
+    "claimed": 16,
+    "derived": 16,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "planted wrong range (lo+1) must fire",
+   "result": {
+    "planted_fires": true
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open; exposure before seal: 66-84 spectra, 7-19 nights (STATUS.md)",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-R03",
+  "target": "R03",
+  "claim": "Truth-cost range at N=485 (delta 0.018), L=0: spectra [lo,hi], nights [lo,hi]",
+  "referent": "truth-cost ranges over the p, s, c grid at L=0",
+  "source": "wave3/agent2_measured_labels/truth_cost.json::ranges_over_grid_L0; verifier astronomy/wave4/agent4_module_v/scripts/derive_cost.py",
+  "population": "L=0 grid rows of truth_cost_table.csv",
+  "adjudicator": "independent recomputation from input columns",
+  "falsifier": "a planted range that is not caught, or a recomputation that differs",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent2_measured_labels/truth_cost.json",
+   "field": "ranges_over_grid_L0.delta_0.018_N_485.{spectra,nights}"
+  },
+  "inputs": [
+   "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv input columns (delta,N,L,purity_p,success_s,capacity_c,A_reachable_arrivals_per_night_cp95_lo)",
+   "astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a710 formulas (sha256 9fac8552...95fb)"
+  ],
+  "number_type": "integer_count",
+  "feeds": "ESCALATE option 1 price",
+  "sealed_file": "sealed/V-R03.json",
+  "sealed_sha256": "ca104ac9f46236f694bcb809a8dfc003361cb72b33e9ffa218ffa395d3faea59",
+  "sealed_utc": "2026-09-17T13:25:40Z",
+  "comparisons": [
+   {
+    "field": "delta_0.018_N_485.spectra[0]",
+    "claimed": 502,
+    "derived": 502,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.018_N_485.spectra[1]",
+    "claimed": 644,
+    "derived": 644,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.018_N_485.nights[0]",
+    "claimed": 51,
+    "derived": 51,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.018_N_485.nights[1]",
+    "claimed": 144,
+    "derived": 144,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.018_N_485.hours[0]",
+    "claimed": 251.0,
+    "derived": 251.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.018_N_485.hours[1]",
+    "claimed": 322.0,
+    "derived": 322.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.018_N_485.wrong_commitments[0]",
+    "claimed": 17,
+    "derived": 17,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.018_N_485.wrong_commitments[1]",
+    "claimed": 122,
+    "derived": 122,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "planted wrong range (lo+1) must fire",
+   "result": {
+    "planted_fires": true
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open; exposure before seal: 502-644 spectra, 51-144 nights (STATUS.md); also two table rows (spectra 644, nights 144) shown by a structural head of truth_cost_table.csv before sealing",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-R04",
+  "target": "R04",
+  "claim": "Truth-cost ranges at N=1,666 (delta 0.05) and N=12,855 (delta 0.018), L=0",
+  "referent": "truth-cost ranges over the p, s, c grid at L=0",
+  "source": "wave3/agent2_measured_labels/truth_cost.json::ranges_over_grid_L0; verifier astronomy/wave4/agent4_module_v/scripts/derive_cost.py",
+  "population": "L=0 grid rows of truth_cost_table.csv",
+  "adjudicator": "independent recomputation from input columns",
+  "falsifier": "a planted range that is not caught, or a recomputation that differs",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent2_measured_labels/truth_cost.json",
+   "field": "ranges_over_grid_L0.delta_0.05_N_1666 and delta_0.018_N_12855"
+  },
+  "inputs": [
+   "astronomy/wave3/agent2_measured_labels/truth_cost_table.csv input columns (delta,N,L,purity_p,success_s,capacity_c,A_reachable_arrivals_per_night_cp95_lo)",
+   "astronomy/wave3/agent2_measured_labels/census_protocol_FROZEN.md \u00a710 formulas (sha256 9fac8552...95fb)"
+  ],
+  "number_type": "integer_count",
+  "feeds": "kill-band pricing upper rows",
+  "sealed_file": "sealed/V-R04.json",
+  "sealed_sha256": "dcd8c05fff8e35d8c08438909e382d9872fc1c77197bab94451f295e626d5996",
+  "sealed_utc": "2026-09-17T13:25:40Z",
+  "comparisons": [
+   {
+    "field": "delta_0.05_N_1666.spectra[0]",
+    "claimed": 1723,
+    "derived": 1723,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.05_N_1666.spectra[1]",
+    "claimed": 2212,
+    "derived": 2212,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.05_N_1666.nights[0]",
+    "claimed": 173,
+    "derived": 173,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.05_N_1666.nights[1]",
+    "claimed": 492,
+    "derived": 492,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.05_N_1666.hours[0]",
+    "claimed": 861.5,
+    "derived": 861.5,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.05_N_1666.hours[1]",
+    "claimed": 1106.0,
+    "derived": 1106.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.05_N_1666.wrong_commitments[0]",
+    "claimed": 57,
+    "derived": 57,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.05_N_1666.wrong_commitments[1]",
+    "claimed": 420,
+    "derived": 420,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.018_N_12855.spectra[0]",
+    "claimed": 13294,
+    "derived": 13294,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.018_N_12855.spectra[1]",
+    "claimed": 17065,
+    "derived": 17065,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.018_N_12855.nights[0]",
+    "claimed": 1330,
+    "derived": 1330,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.018_N_12855.nights[1]",
+    "claimed": 3793,
+    "derived": 3793,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.018_N_12855.hours[0]",
+    "claimed": 6647.0,
+    "derived": 6647.0,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.018_N_12855.hours[1]",
+    "claimed": 8532.5,
+    "derived": 8532.5,
+    "abs_diff": 0.0,
+    "rel_diff": 0.0,
+    "tol": {
+     "declared_abs": 1e-09,
+     "declared_rel": 1e-06,
+     "recorded_decimals": 1,
+     "rounding_allowance": 0.05,
+     "effective_abs": 0.05
+    },
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.018_N_12855.wrong_commitments[0]",
+    "claimed": 439,
+    "derived": 439,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "delta_0.018_N_12855.wrong_commitments[1]",
+    "claimed": 3242,
+    "derived": 3242,
+    "abs_diff": 0,
+    "rel_diff": 0.0,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "planted wrong range (lo+1) must fire",
+   "result": {
+    "planted_fires": true
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-O01",
+  "target": "O01",
+  "claim": "Ruling-1 ordering: override declared (wave-3 brief) < first decision-time MDE (power_calibration.json) < resolvability at 0.05 (wave-3 agent 4 step 1)",
+  "referent": "ruling-1 order: delta override declared before the first decision-time MDE, which precedes resolvability at 0.05",
+  "source": "file mtimes (os.stat) of wave3/PANEL_BRIEF_WAVE3.md, wave2/agent4_instrument/power_calibration.json and data_cache/power/*; wave3/*/order_of_operations.log; verifier astronomy/wave4/agent4_module_v/scripts/derive_tools_time.py",
+  "population": "3 events on one host clock",
+  "adjudicator": "independent mtimes and log lines; earliest wave-2 power output mtime 20:43:28Z, 29.4 min after the brief",
+  "falsifier": "a swapped timestamp pair that the check does not catch, or an mtime that differs from the quoted time by more than 1 s",
+  "recorded_at": {
+   "file": [
+    "astronomy/wave4/PANEL_BRIEF_WAVE4.md coordinator preamble item 2"
+   ],
+   "field": "20:14Z < 20:44:29Z (mtime) / 20:46Z (commit f898294) < 20:48:29Z"
+  },
+  "inputs": [
+   "file mtimes: astronomy/wave3/PANEL_BRIEF_WAVE3.md, astronomy/wave2/agent4_instrument/power_calibration.json, astronomy/wave3/agent4_tool_recount/power_calibration_delta005.json",
+   "astronomy/wave3/*/order_of_operations.log first lines (brief-verified times)",
+   "commit times as quoted in the preamble (git not run; cannot be independently established)",
+   "power_calibration.json content hash vs agent-4 w3 step-1 log line"
+  ],
+  "number_type": "timestamp_ordering",
+  "feeds": "ruling 1 cause check (delta 0.05 ratified)",
+  "sealed_file": "sealed/V-O01.json",
+  "sealed_sha256": "43530793e34e1375ebcf14dd07098267a6681416429499d65fde368f59000d3f",
+  "sealed_utc": "2026-09-17T13:25:01Z",
+  "comparisons": [
+   {
+    "field": "wave-3 brief (override) time vs commit 32229e3 15:14:03-0500 quoted",
+    "claimed": "2026-09-16T20:14:03Z",
+    "derived": "2026-09-16T20:14:03.472013+00:00",
+    "abs_diff_s": 0.472013,
+    "tol": "abs 1 s",
+    "verdict": "MATCH_WITHIN_TOL"
+   },
+   {
+    "field": "power_calibration.json mtime 20:44:29Z quoted",
+    "claimed": "2026-09-16T20:44:29Z",
+    "derived": "2026-09-16T20:44:29.633312+00:00",
+    "abs_diff_s": 0.633312,
+    "tol": "abs 1 s",
+    "verdict": "MATCH_WITHIN_TOL"
+   },
+   {
+    "field": "wave-3 agent 4 step 1 20:48:29Z quoted",
+    "claimed": "2026-09-16T20:48:29Z",
+    "derived": "2026-09-16T20:48:29.628997+00:00",
+    "abs_diff_s": 0.628997,
+    "tol": "abs 1 s",
+    "verdict": "MATCH_WITHIN_TOL"
+   },
+   {
+    "field": "ordering override < first MDE < resolvability at 0.05",
+    "claimed": true,
+    "derived": true,
+    "abs_diff": null,
+    "rel_diff": null,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "step-1 logged hash equals current delta005 file",
+    "claimed": true,
+    "derived": true,
+    "abs_diff": null,
+    "rel_diff": null,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH_WITHIN_TOL",
+  "premise_check": {
+   "test": "swap the brief and power timestamps, and the power and step-1 timestamps: the ordering check must fail on both",
+   "result": {
+    "real": true,
+    "swap_brief_power": false,
+    "swap_power_step1": false,
+    "fires_on_planted": true
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind; claimed value quoted in the launching prompt (reader not blind)",
+  "cannot_establish_without_git": [
+   "commit times 32229e3 15:14:03-0500 and f898294 15:46 -0500 (quoted in preamble, not independently read)",
+   "whether an earlier, overwritten version of power_calibration.json or any MDE print existed before 20:14Z (mtime is last-modification only)",
+   "clock integrity: all mtimes and logs are self-reported on one host"
+  ],
+  "note": "The 15:14:03-0500 commit time and the 20:46Z commit f898294 are quoted from the preamble and are not independently read (no git). Mtimes are last-modification times; an earlier overwritten version of a power file cannot be excluded. The wave-3 brief content hash a618d911... was self-logged by wave-3 agent 1 at 20:15:13Z and equals the current file, which contains the override text.",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ },
+ {
+  "id": "V-O02",
+  "target": "O02",
+  "claim": "P4 precondition (b): every tool-recount run timestamp after the band hash 2026-09-16T18:51:26.922781Z, protocol frozen before first run, and all 25 tools carry a disposition",
+  "referent": "P4 precondition (b) for tool_coverage: every recount run after the band hash, protocol frozen before the first run, all 25 tools dispositioned",
+  "source": "wave3/agent4_tool_recount/tool_coverage_axis.json::recount_timestamps; run_log.jsonl; wave2/agent1_rubin_bands/order_of_operations.log step 1; verifier astronomy/wave4/agent4_module_v/scripts/derive_tools_time.py",
+  "population": "198 run_log lines",
+  "adjudicator": "independent parse; band hash logged equals current bands_FROZEN.md",
+  "falsifier": "a planted early run that the check fails to flag, or any run start measured before 18:51:26.922781Z",
+  "recorded_at": {
+   "file": "astronomy/wave3/agent4_tool_recount/tool_coverage_axis.json",
+   "field": "recount_timestamps.* and all_runs_after_band_hash"
+  },
+  "inputs": [
+   "astronomy/wave3/agent4_tool_recount/run_log.jsonl start_utc/end_utc",
+   "astronomy/wave2/agent1_rubin_bands/order_of_operations.log (band hash step)",
+   "astronomy/wave3/agent4_tool_recount/order_of_operations.log (protocol freeze step)",
+   "file mtimes of bands_FROZEN.md and recount_protocol_FROZEN.md"
+  ],
+  "number_type": "timestamp_ordering",
+  "feeds": "P4 precondition (b)",
+  "sealed_file": "sealed/V-O02.json",
+  "sealed_sha256": "7f90669cb3e5be321ee4f2955077ce4ae709f29d7ba78dd614db291b8ea3c609",
+  "sealed_utc": "2026-09-17T13:25:01Z",
+  "comparisons": [
+   {
+    "field": "band_hash_utc",
+    "claimed": "2026-09-16T18:51:26.922781Z",
+    "derived": "2026-09-16T18:51:26.922781+00:00",
+    "abs_diff_s": 0.0,
+    "tol": "abs 1 s",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "protocol_frozen_utc",
+    "claimed": "2026-09-16T20:52:25.088956Z",
+    "derived": "2026-09-16T20:52:25.088956+00:00",
+    "abs_diff_s": 0.0,
+    "tol": "abs 1 s",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "first_run_utc",
+    "claimed": "2026-09-16T20:55:49.571947Z",
+    "derived": "2026-09-16T20:55:49.571947+00:00",
+    "abs_diff_s": 0.0,
+    "tol": "abs 1 s",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "last_run_utc",
+    "claimed": "2026-09-16T21:28:04.390104Z",
+    "derived": "2026-09-16T21:28:04.390104+00:00",
+    "abs_diff_s": 0.0,
+    "tol": "abs 1 s",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "all_runs_after_band_hash",
+    "claimed": true,
+    "derived": true,
+    "abs_diff": null,
+    "rel_diff": null,
+    "tol": "exact",
+    "verdict": "MATCH"
+   },
+   {
+    "field": "precondition (b) clears (all runs after band hash and protocol freeze, 25 tools dispositioned)",
+    "claimed": true,
+    "derived": true,
+    "abs_diff": null,
+    "rel_diff": null,
+    "tol": "exact",
+    "verdict": "MATCH"
+   }
+  ],
+  "verdict": "MATCH",
+  "premise_check": {
+   "test": "plant one run starting at 18:00Z: the check must fire",
+   "result": {
+    "planted_early_run_detected": true
+   },
+   "ran": true,
+   "behaved_as_required": true
+  },
+  "blinding": "code-path blind and seal-before-open",
+  "cleared_for_P4_under_rule_E": true,
+  "verdict_function_armed_note": "replay controls V-01..V-04 ran after the first comparison pass; records were rebuilt after arming with identical verdicts"
+ }
+]
